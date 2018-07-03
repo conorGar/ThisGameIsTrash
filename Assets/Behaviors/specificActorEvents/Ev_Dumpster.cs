@@ -1,0 +1,21 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Ev_Dumpster : MonoBehaviour {
+	//if activate when close, dumpster check. If carrying a piece of l trash, activate Return in LargeTrashBahvior,
+	//otherwise, bring up end day popup.
+
+	public GameObject endDayPopUp;
+	GameObject thisHud;
+	// Use this for initialization
+	void Start () {
+		thisHud = GameObject.Find("HUD");
+	}
+
+
+	public void Activate(){
+		
+		thisHud.GetComponent<Ev_HUD>().Create(endDayPopUp);
+	}
+}
