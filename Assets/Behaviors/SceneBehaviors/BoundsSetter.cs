@@ -1,4 +1,4 @@
-﻿ thusing System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -121,8 +121,8 @@ public class BoundsSetter : MonoBehaviour {
 			}
 
 
-			//mycam.SetMinMax(minX,maxX,minY,maxY);
-			//sceneChanger.SetLimits(minX,(maxX+32f),minY,(maxY+19f));
+			mycam.SetMinMax(minX,maxX,minY,maxY);
+			sceneChanger.SetLimits(minX,(maxX+32f),minY,(maxY+19f));
 			sceneChanger.SetRooms(lRoom,rRoom,tRoom,bRoom);
 		}
 	}//end of setBounds()

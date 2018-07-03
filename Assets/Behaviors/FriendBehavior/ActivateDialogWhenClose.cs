@@ -34,11 +34,11 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 					player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		
 					dialogCanvas.SetActive(true);
-					dialogCanvas.transform.GetChild(3).GetComponent<DialogBehaviorManager>().SetIcon(myDialogIcon);
-					dialogCanvas.transform.GetChild(3).GetComponent<DialogBehaviorManager>().SetDialogName(GlobalVariableManager.Instance.FRIEND_LIST[myPosInFriendList]);
-					//dialogCanvas.transform.GetChild(0).GetComponent<Image>().sprite = myDialogIcon;
-					//dialogCanvas.transform.GetChild(0).GetComponent<GUIEffects>().Start();//Icon flies in
-					//dialogCanvas.transform.GetChild(1).GetComponent<GUIEffects>().Start();//textbox flies in
+					//dialogCanvas.transform.GetChild(3).GetComponent<DialogBehaviorManager>().SetIcon(myDialogIcon);
+					//dialogCanvas.transform.GetChild(3).GetComponent<DialogBehaviorManager>().SetDialogName(GlobalVariableManager.Instance.FRIEND_LIST[myPosInFriendList]);
+						//dialogCanvas.transform.GetChild(0).GetComponent<Image>().sprite = myDialogIcon;
+						//dialogCanvas.transform.GetChild(0).GetComponent<GUIEffects>().Start();//Icon flies in
+						//dialogCanvas.transform.GetChild(1).GetComponent<GUIEffects>().Start();//textbox flies in
 
 				}
 			}

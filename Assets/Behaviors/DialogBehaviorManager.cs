@@ -7,7 +7,7 @@ using I2.TextAnimation;
 
 public class DialogBehaviorManager : MonoBehaviour {
 
-	public TextAsset csvFile;
+	/*public TextAsset csvFile;
 	List<string> dialogLines = new List<string>();
 
 	public TextMeshProUGUI currentDisplayedText;
@@ -154,5 +154,5 @@ public class DialogBehaviorManager : MonoBehaviour {
 		mydialogName = name;
 	}
 
-
+	*/
 }

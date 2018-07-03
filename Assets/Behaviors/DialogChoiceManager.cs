@@ -5,7 +5,7 @@ using TMPro;
 
 public class DialogChoiceManager : MonoBehaviour {
 
-	public TextAsset csvFile;
+	/*public TextAsset csvFile;
 	List<DialogChoice> dialogChoices= new List<DialogChoice>();
 
 	string mydialogName;
@@ -66,6 +66,7 @@ public class DialogChoiceManager : MonoBehaviour {
 		}
 
 	}
+	*/
 }
 
 

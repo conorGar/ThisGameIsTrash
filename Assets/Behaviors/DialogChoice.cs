@@ -5,7 +5,7 @@ using UnityEngine;
 public class DialogChoice : MonoBehaviour {
 
 	string choiceTitle;
-	List<int> choiceLinks = new List<>();
+	List<int> choiceLinks = new List<int>();
 	List<string> dialogChoices;
 
 	public DialogChoice(string title, List<int> links, List<string> choices){
