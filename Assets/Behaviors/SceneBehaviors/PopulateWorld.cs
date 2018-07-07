@@ -18,6 +18,10 @@ public class PopulateWorld : MonoBehaviour
 	int enemy3;
 
 
+	void Awake(){
+		FriendList();
+	}
+
 	void Start ()
 	{
 		if(GlobalVariableManager.Instance.WORLD_NUM == 1){
@@ -134,7 +138,7 @@ public class PopulateWorld : MonoBehaviour
 			//Hp Bonus with Cassie(set back at 'return events'
 			GlobalVariableManager.Instance.characterUpgradeArray[3] = (GlobalVariableManager.Instance.characterUpgradeArray[3] + 1);
 		}
-		FriendList();
+
 		EnemyList();
 		if(GlobalVariableManager.Instance.WORLD_NUM == 2) 
 			BeachFriendUpdates();
@@ -145,7 +149,7 @@ public class PopulateWorld : MonoBehaviour
 	public void FriendList(){
 		if(GlobalVariableManager.Instance.FRIEND_LIST.Count < 2){
 			GlobalVariableManager.Instance.FRIEND_LIST.Add("coon1");//coonelius
-			GlobalVariableManager.Instance.FRIEND_LIST.Add("0a5efghijklmnpqrstuvwxy?!,/>(){}<");
+			GlobalVariableManager.Instance.FRIEND_LIST.Add("rock1");//rock/stone/slab
 			GlobalVariableManager.Instance.FRIEND_LIST.Add("05-bq1,(chijkl");//Jumbo
 			GlobalVariableManager.Instance.FRIEND_LIST.Add("abcdefgh");
 			GlobalVariableManager.Instance.FRIEND_LIST.Add("a9");
@@ -232,10 +236,7 @@ public class PopulateWorld : MonoBehaviour
 
 	public void OtherFriendUpdates(){
 		//-----------Iggy--------------//
-		if(GlobalVariableManager.Instance.FRIEND_LIST[1].Substring(1,2).CompareTo("a") != 0 && GlobalVariableManager.Instance.FRIEND_LIST[1].Substring(1,2).CompareTo(":") != 0){
-		//resets Iggy if you talked to him today or won/lost a trivia game today
-			GlobalVariableManager.Instance.FRIEND_LIST[1] = GlobalVariableManager.Instance.FRIEND_LIST[1].Replace(GlobalVariableManager.Instance.FRIEND_LIST[1][1], 'a');
-		}
+	
 		//----------------------------//
 
 
@@ -252,11 +253,7 @@ public class PopulateWorld : MonoBehaviour
 		}*/
 		//-------------------------//
 
-		//--------Rock-----------//
-		if(	GlobalVariableManager.Instance.FRIEND_LIST[16].Substring(0,1).CompareTo("z") == 0){
-			GlobalVariableManager.Instance.FRIEND_LIST[16] = GlobalVariableManager.Instance.FRIEND_LIST[16].Replace(GlobalVariableManager.Instance.FRIEND_LIST[16][0], 'x');
-		}
-		//----------------------//
+
 
 
 		//------------****** WORLD 3 *****------------------//
