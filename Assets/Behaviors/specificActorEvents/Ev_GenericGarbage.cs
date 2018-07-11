@@ -123,7 +123,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 		//myCollecion behaior --------------------//
 		if(thisRoom == 101){
 			if(GlobalVariableManager.Instance.MENU_SELECT_STAGE != 4){
-				Destroy(gameObject);
+				ObjectPool.Instance.ReturnPooledObject(gameObject);
 			}
 		}
 
@@ -170,9 +170,9 @@ public class Ev_GenericGarbage : MonoBehaviour {
 	IEnumerator Kill(){
 
 		yield return new WaitForSeconds(.2f);
-		Destroy(gameObject);
+        ObjectPool.Instance.ReturnPooledObject(gameObject);
 
-	}//end of Kill()
+    }//end of Kill()
 
 	void OnTriggerEnter2D(Collider2D collider){
 		Debug.Log("Collided");
