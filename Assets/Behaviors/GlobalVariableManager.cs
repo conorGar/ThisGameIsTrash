@@ -85,7 +85,30 @@ public class GlobalVariableManager : MonoBehaviour {
 												"abcdefghijklmn",
 												};		
 
-	public string WORLDS_UNLOCKED = "obcd";
+    public WORLDS WORLDS_UNLOCKED = WORLDS.WORLD_NONE;
+
+    public enum WORLDS : int
+    {
+        WORLD_NONE =      0,
+        WORLD_1 =    1 << 0,
+        WORLD_2 =    1 << 1,
+        WORLD_3 =    1 << 2,
+        WORLD_4 =    1 << 3
+    }
+
+    // Returns the index of the World.
+    // Probably best to use only with the defined enum values above.
+    public int WorldIndex(WORLDS world)
+    {
+        for (int i=0; i < sizeof(WORLDS); ++i)
+        {
+            if ((int)world == 1 << i)
+                return i;
+        }
+        return 0; 
+    }
+
+
 
 	//---------------------------------------------------------------------//
 
@@ -101,5 +124,17 @@ public class GlobalVariableManager : MonoBehaviour {
 				pinsEquipped.Add(0);
 			}
 		}
-	}
+
+#if DEBUG
+        TestWorldIndex();
+#endif
+    }
+
+    private void TestWorldIndex()
+    {
+        Debug.Log("World Index 1 == " + WorldIndex(WORLDS.WORLD_1));
+        Debug.Log("World Index 2 == " + WorldIndex(WORLDS.WORLD_2));
+        Debug.Log("World Index 3 == " + WorldIndex(WORLDS.WORLD_3));
+        Debug.Log("World Index 4 == " + WorldIndex(WORLDS.WORLD_4));
+    }
 }
