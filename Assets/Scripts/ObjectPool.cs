@@ -18,7 +18,7 @@ public class ObjectPool : MonoBehaviour {
     public List<ObjectPoolDefinition> itemsToPool;
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
         Instance = this;
         pooledObjects = new ObjectPoolDictionary();
