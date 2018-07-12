@@ -8,7 +8,7 @@ public class Ev_WorldSelect : MonoBehaviour {
 	public float XofStar = 0;
 	public int largeTrashListStartIndex = 0;
 	public int myMenuSelectStage = 0;
-	public GlobalVariableManager.WORLDS worldPosition = GlobalVariableManager.WORLDS.WORLD_1;
+	public GlobalVariableManager.WORLDS worldPosition = GlobalVariableManager.WORLDS.ONE;
 	public int position = 0;
 	//p = 0 = front; = 1-right; =2-back; = 3 -left
 
@@ -108,8 +108,12 @@ public class Ev_WorldSelect : MonoBehaviour {
 		Debug.Log("Spawn Stars Activate");
 		float tempXStar = XofStar;
 		for(int i = 0; i < numberOfStars; i++){
-				GameObject tempStar = Instantiate(star, new Vector2(tempXStar,5f), Quaternion.identity);
-			if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[3][i] != 'o' && GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[3][i] != 'z' ){
+		    GameObject tempStar = Instantiate(star, new Vector2(tempXStar,5f), Quaternion.identity);
+
+            GlobalVariableManager.LARGETRASH largeTrashType = GlobalVariableManager.Instance.LargeTrashByIndex(i);
+            
+            // Black out any stars for large trash that hasn't been both discovered and viewed.
+            if ((GlobalVariableManager.Instance.LARGE_TRASH_DISCOVERY_LIST & largeTrashType) != largeTrashType && (GlobalVariableManager.Instance.LARGE_TRASH_VIEWED_LIST & largeTrashType) != largeTrashType) {
 				tempStar.GetComponent<SpriteRenderer>().color = Color.black;
 			}
 				starlist.Add(tempStar);

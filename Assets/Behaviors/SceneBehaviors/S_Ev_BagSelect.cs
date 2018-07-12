@@ -75,7 +75,10 @@ public class S_Ev_BagSelect : MonoBehaviour {
 	void NextBag(string direction){
 		GameObject currentBag = GameObject.FindGameObjectWithTag("Trash");
 		currentBag.GetComponent<Ev_BagSelect>().StartCoroutine("LeaveScreen");
-		if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[GlobalVariableManager.Instance.MENU_SELECT_STAGE][0] != 'o'){
+
+        // if the paper trash was not collected.
+        // TODO: I probably don't understand this code entirely.  Please review! - steve
+		if((GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[GlobalVariableManager.Instance.MENU_SELECT_STAGE] & GlobalVariableManager.GARBAGE.PAPER) != GlobalVariableManager.GARBAGE.PAPER){
 			bagTitle.GetComponent<SpriteRenderer>().sprite = unknownTitle;
 			perk1.text = "";
 			perk2.text = "";

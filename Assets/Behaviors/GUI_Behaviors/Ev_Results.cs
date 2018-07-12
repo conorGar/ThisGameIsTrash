@@ -46,12 +46,12 @@ public class Ev_Results : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.Space)){
 			if(phase == 2){
-				if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.Count > 4 && GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[4].Length > 0){
+				if(GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count > 0){
 					if(spawnLargeTrashOnce == 0){
 						//spawn large trash collected display
 						Instantiate(largeTrashTextDisplay, transform.position, Quaternion.identity);
 						GameObject tempDisplay = Instantiate(treasureCollectedDisplay,transform.position,Quaternion.identity);
-						tempDisplay.GetComponent<tk2dSprite>().SetSprite(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[4][GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[4].Length -1]);
+						tempDisplay.GetComponent<tk2dSprite>().SetSprite(GlobalVariableManager.Instance.LARGE_TRASH_LIST[0].spriteIndex);
 						spawnLargeTrashOnce = 1;
 					}
 				}else{

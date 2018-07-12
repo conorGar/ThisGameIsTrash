@@ -90,14 +90,14 @@ public class PopulateWorld : MonoBehaviour
 				amntTrashHere += 5;
 			}
 			*/
-			Debug.Log("Styart of first for loop");
+			Debug.Log("Start of first for loop");
 			for(int i = 0; i < numberOfRoomsInWorld; i++){
 				GlobalVariableManager.Instance.WORLD_LIST.Add("0");
 			}
-			if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.Count > 4){
-				//resets Large Trash found in this are this day
-				GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.RemoveAt(4);
-			}
+
+            //resets Large Trash found in this are this day
+            GlobalVariableManager.Instance.LARGE_TRASH_LIST.Clear();
+
 			int amountOfGarbageInRoom;
 			int populateWhichRoomNext;
 

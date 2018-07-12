@@ -12,9 +12,8 @@ public class S_Ev_Hub : MonoBehaviour {
 		//create jim
 		GlobalVariableManager.Instance.ROOM_NUM = 101;
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-		if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.Count > 4){
-			GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.RemoveAt(4);
-		}
+
+        GlobalVariableManager.Instance.LARGE_TRASH_LIST.Clear();
 
 		if(GlobalVariableManager.Instance.characterUpgradeArray[1][13] == '-'){//**was originall '\' but wouldnt work with code so had to be switched
 		//resets pin button at shop(pin perk 3)
@@ -41,18 +40,18 @@ public class S_Ev_Hub : MonoBehaviour {
 
 	void LargeTrashSpawn(){
 
-	//all large trash is already placed in hun but deactivated. Maybe each large trash in hub(hub large trash
+	//all large trash is already placed in hub but deactivated. Maybe each large trash in hub(hub large trash
 	//should  maybe be its own object..) has a number as its name. Com runs through all positions in
 	//unlocked string and if = 'o' then searches scene for gameobject with a name = the index it's currently
 	//at and enables it...
-
-
-		string largeTrashSpawnList = GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[3];
-
-		for(int i = 0; i < largeTrashSpawnList.Length; i++){
-			if(largeTrashSpawnList[i] == 'o'){
-				GameObject.Find(i.ToString()).SetActive(true);
-			}
-		}
+        
+        for (int i=0; i < sizeof(GlobalVariableManager.LARGETRASH); ++i)
+        {
+            GlobalVariableManager.LARGETRASH largeTrashType = GlobalVariableManager.Instance.LargeTrashByIndex(i);
+            if ((GlobalVariableManager.Instance.LARGE_TRASH_DISCOVERY_LIST & largeTrashType) == largeTrashType)
+            {
+                GameObject.Find(i.ToString()).SetActive(true);
+            }
+        }
 	}
 }
