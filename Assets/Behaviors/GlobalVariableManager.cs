@@ -37,8 +37,18 @@ public class GlobalVariableManager : MonoBehaviour {
 	public float SPAWN_POS_X;
 	public float SPAWN_POS_Y;
 	public int[] shopPins = new int[]{0,0,0};
-	//-------------Enemy Global Variables------------//
-	public string BOSSES_KILLED = "abcd";
+    //-------------Enemy Global Variables------------//
+    public enum BOSSES : int
+    {
+        NONE =           0,
+        ONE =       1 << 0,
+        TWO =       1 << 1,
+        THREE =     1 << 2,
+        FOUR =      1 << 3,
+    }
+
+    public BOSSES BOSSES_KILLED = BOSSES.NONE;
+
 	public List<string> GLOBAL_ENEMY_HP = new List<string>();
 	public List<int> STATUE_LIST = new List<int>(); //for w2 statue spawning
                                                     //public int RACOON_LOCATION = 16;
