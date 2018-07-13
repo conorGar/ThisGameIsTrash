@@ -9,7 +9,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 	public GameObject newDiscoveryDisplay;
 	public GameObject displayTrash;
 	public GameObject tempEffectsActor;
-	public Vector2 position;
+    public Vector2 position;
 
 	bool isFalling = false;
 	bool justDisplay = false;
@@ -20,91 +20,46 @@ public class Ev_GenericGarbage : MonoBehaviour {
 	int grabbedPhase = 0;
 	int whatNumberGarbageAmI;
 	int bagSizeBonus;
-	int myPositionInString;
+	public GlobalVariableManager.GARBAGE garbageType;
 	int whichTrash;
 	float Speed = 20;
 	float xSpeedWhenCollected;
 	string whatTextStartsAs;
 	tk2dSprite trashAni;
-	GameObject myShadowBuddy;
 	Transform playerPos;
 	private Vector3 smoothVelocity = Vector3.zero;
 
-	// Use this for initialization
-	void Start () {
-		trashAni = gameObject.GetComponent<tk2dSprite>();
-		thisRoom = GlobalVariableManager.Instance.ROOM_NUM;
-		if(GlobalVariableManager.Instance.ROOM_NUM == 101){
+    // Use this for initialization
+    void OnEnable() {
+        smallShadow.SetActive(false);
+        smallTextDisplay.SetActive(false);
 
-			if(!isFalling && !justDisplay){
-				myShadowBuddy = Instantiate(smallShadow, transform.position, Quaternion.identity);
-			}
+        trashAni = gameObject.GetComponent<tk2dSprite>();
+        thisRoom = GlobalVariableManager.Instance.ROOM_NUM;
+        if (GlobalVariableManager.Instance.ROOM_NUM == 101) {
 
-			whatNumberGarbageAmI = GlobalVariableManager.Instance.MY_NUM_IN_ROOM;
+            if (!isFalling && !justDisplay) {
+                smallShadow.SetActive(true);
+                smallShadow.transform.position = transform.position;
+            }
 
-			if(GlobalVariableManager.Instance.pinsEquipped[39] == 1){
-				magnetic = true;
-			}
+            whatNumberGarbageAmI = GlobalVariableManager.Instance.MY_NUM_IN_ROOM;
 
-			Setup();
-		}else{
+            if (GlobalVariableManager.Instance.pinsEquipped[39] == 1) {
+                magnetic = true;
+            }
 
-			if(trashAni.CurrentSprite.name.CompareTo("trash_paper2") == 0){
-				myPositionInString = 0;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_ipod2") == 0){
-				myPositionInString = 1;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_book2") == 0){
-				myPositionInString = 2;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_artSupplies") == 0){
-				myPositionInString = 3;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_bagSpicy2") == 0){
-				myPositionInString = 4;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_chips") == 0){
-				myPositionInString = 5;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_bagBBQ2") == 0){
-				myPositionInString = 6;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_casette2") == 0){
-				myPositionInString = 7;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_chinese2") == 0){
-				myPositionInString = 8;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_juice2") == 0){
-				myPositionInString = 9;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_lightbulb2") == 0){
-				myPositionInString = 10;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_mug2") == 0){
-				myPositionInString = 11;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_party") == 0){
-				myPositionInString = 12;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_sock2") == 0){
-				myPositionInString = 13;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_tissue2") == 0){
-				myPositionInString = 14;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_toilet2") == 0){
-				myPositionInString = 15;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_hair2") == 0){
-				myPositionInString = 16;
-			}
-			else if(trashAni.CurrentSprite.name.CompareTo("trash_fish2") == 0){
-				myPositionInString = 17;
-			}
-			else if(trashAni.CurrentSprite.name.CompareTo("trash_needle2") == 0){
-				myPositionInString = 18;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_baby2") == 0){
-				myPositionInString = 20;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_arm2") == 0){
-				myPositionInString = 21;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_childhood2") == 0){
-				myPositionInString = 22;
-			}else if(trashAni.CurrentSprite.name.CompareTo("trash_momPres2") == 0){
-				myPositionInString = 23;
-			}
-
-			if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[0][myPositionInString].CompareTo('o') == 0 ||GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[0][myPositionInString].CompareTo('z') == 0){
+            Setup();
+        } else {
+            // if the garbage has been discovered or not viewed yet.
+            if ((GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[0] & garbageType) == garbageType || (GlobalVariableManager.Instance.GARBAGE_VIEWED_LIST[0] & garbageType) != garbageType)
+            {
 				gameObject.GetComponent<Renderer>().material.SetColor("_Color", Color.black);
 			}
-			if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[0][myPositionInString].CompareTo('z') == 0){
-				GameObject newDisplayInstance;
-				newDisplayInstance = Instantiate(smallTextDisplay,transform.position, Quaternion.identity);
+            // display the new text if it hasn't been viewed yet.
+			if((GlobalVariableManager.Instance.GARBAGE_VIEWED_LIST[0] & garbageType) != garbageType)
+            {
+                smallTextDisplay.SetActive(true);
 			}
 
 		}//end of else
@@ -116,14 +71,14 @@ public class Ev_GenericGarbage : MonoBehaviour {
 			}
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 
 		//myCollecion behaior --------------------//
 		if(thisRoom == 101){
 			if(GlobalVariableManager.Instance.MENU_SELECT_STAGE != 4){
-				Destroy(gameObject);
+				ObjectPool.Instance.ReturnPooledObject(gameObject);
 			}
 		}
 
@@ -154,9 +109,10 @@ public class Ev_GenericGarbage : MonoBehaviour {
 	void Fall(){
 		isFalling = true;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,Random.Range(14,20));
-		myPositionInString = 0;
+		garbageType = GlobalVariableManager.GARBAGE.NONE;
 
-		myShadowBuddy = Instantiate(smallShadow, new Vector2(gameObject.transform.position.x,gameObject.transform.position.y + Random.Range(64,370)), Quaternion.identity);
+        smallShadow.SetActive(true);
+        smallShadow.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + Random.Range(64, 370));
 	}//end of Fall()
 
 	void Squish(){
@@ -170,9 +126,9 @@ public class Ev_GenericGarbage : MonoBehaviour {
 	IEnumerator Kill(){
 
 		yield return new WaitForSeconds(.2f);
-		Destroy(gameObject);
+        ObjectPool.Instance.ReturnPooledObject(gameObject);
 
-	}//end of Kill()
+    }//end of Kill()
 
 	void OnTriggerEnter2D(Collider2D collider){
 		Debug.Log("Collided");
@@ -183,14 +139,16 @@ public class Ev_GenericGarbage : MonoBehaviour {
 				if(!GlobalVariableManager.Instance.SCENE_IS_TRANSITIONING && player.GetComponent<tk2dSpriteAnimator>().CurrentClip.name.CompareTo("hit") != 0){
 					if(!justDisplay && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] < (10 + bagSizeBonus) && !isFalling){
 						if(grabbedPhase <= 0){
-							if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[0][myPositionInString].CompareTo('o') == 0 && GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[0][myPositionInString].CompareTo('z') == 0){
+							if((GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[0] & garbageType) == garbageType && (GlobalVariableManager.Instance.GARBAGE_VIEWED_LIST[0] & garbageType) != garbageType)
+                        {
 								GameObject discoveryDisplay = GameObject.Find("new discovery display");
 								if(discoveryDisplay != null)//if there is already a new discovery display on screen
 									discoveryDisplay.GetComponent<Ev_newDiscoveryDisplay>().KillMyTrash();
 								else{
 									discoveryDisplay = Instantiate(newDiscoveryDisplay, GetComponent<tk2dCamera>().ScreenCamera.ViewportToWorldPoint(new Vector3(-14f,4f,0f)), Quaternion.identity);
 									discoveryDisplay.GetComponent<Ev_newDiscoveryDisplay>().SetWhichTrash(whichTrash,trashAni.CurrentSprite.name);
-									GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[0].Replace(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[0][myPositionInString], 'z');
+
+                                    GlobalVariableManager.Instance.GARBAGE_VIEWED_LIST[0] |= garbageType;
 									GlobalVariableManager.Instance.MY_NUM_IN_ROOM = whatNumberGarbageAmI;
 									GameObject displayTrashInstance = Instantiate(displayTrash,GetComponent<tk2dCamera>().ScreenCamera.ViewportToWorldPoint(new Vector3(-15f,4f,0f)),Quaternion.identity);
 									discoveryDisplay.GetComponent<Ev_newDiscoveryDisplay>().SetMyTrash(displayTrashInstance);
@@ -216,8 +174,8 @@ public class Ev_GenericGarbage : MonoBehaviour {
 							GlobalVariableManager.Instance.pinsEquipped[6]++;
 							player.GetComponent<EightWayMovement>().UpdateSpeed();*/
 						}
-						if(myShadowBuddy != null)
-							Destroy(myShadowBuddy);
+
+                        smallShadow.SetActive(false);
 
 						if(GlobalVariableManager.Instance.characterUpgradeArray[1][32].CompareTo('o') == 0){
 							//3rd bag perk - 10% chance to heal
@@ -273,7 +231,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 			//for dropped trash(Only spawns paper and vanishes if leave room)
 			trashAni.SetSprite("trash_paper2");
 			whatTextStartsAs = "9";
-			myPositionInString = 0;
+			garbageType = GlobalVariableManager.GARBAGE.PAPER;
 		}
 		string worldListRoomString = GlobalVariableManager.Instance.WORLD_LIST[thisRoom];
 		whichTrash = Random.Range(1,24);
@@ -281,255 +239,278 @@ public class Ev_GenericGarbage : MonoBehaviour {
 		if(whichTrash == 1){
 			if(worldListRoomString[0].CompareTo('d') != 0){
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'d');
-				myPositionInString = 0;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.PAPER;
+            }
+            else{
 				whichTrash ++;
 				trashAni.SetSprite("trash_ipod2");
-				myPositionInString = 1;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.IPOD;
+            }
 		}else if(whichTrash ==2){
 			if(worldListRoomString[0].CompareTo('e') != 0){
 				trashAni.SetSprite("trash_ipod2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'e');
-				myPositionInString = 1;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.IPOD;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_book2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'f');
-				myPositionInString = 2;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.BOOK;
+            }
 
 		}else if(whichTrash ==3){
 			if(worldListRoomString[0].CompareTo('f') != 0){
 				trashAni.SetSprite("trash_book2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'f');
-				myPositionInString = 2;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.BOOK;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_artSupplies");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'g');
-				myPositionInString = 3;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.ART_SUPPLIES;
+            }
 		}else if(whichTrash ==4){
 			if(worldListRoomString[0].CompareTo('g') != 0){
 				trashAni.SetSprite("trash_artSupplies");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'g');
-				myPositionInString = 3;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.ART_SUPPLIES;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_bagSpicy2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'h');
-				myPositionInString = 4;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.BAG_SPICY;
+            }
 		}else if(whichTrash ==5){
 			if(worldListRoomString[0].CompareTo('h') != 0){
 				trashAni.SetSprite("trash_bagSpicy2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'h');
-				myPositionInString = 4;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.BAG_SPICY;
+            }
+            else{
 				whichTrash++;
-				trashAni.SetSprite("trash_bag");
+				trashAni.SetSprite("trash_chips");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'i');
-				myPositionInString = 5;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.CHIPS;
+            }
 		}else if(whichTrash ==6){
 			if(worldListRoomString[0].CompareTo('i') != 0){
-				trashAni.SetSprite("trash_bag");
+				trashAni.SetSprite("trash_chips");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'i');
-				myPositionInString = 5;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.CHIPS;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_bbqBag2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'j');
-				myPositionInString = 6;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.BAG_BBQ;
+            }
 		}else if(whichTrash ==7){
 			if(worldListRoomString[0].CompareTo('j') != 0){
 				trashAni.SetSprite("trash_bbqBag2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'j');
-				myPositionInString = 6;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.BAG_BBQ;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_casette2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'k');
-				myPositionInString = 7;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.CASETTE;
+            }
 		}else if(whichTrash ==8){
 			if(worldListRoomString[0].CompareTo('k') != 0){
 				trashAni.SetSprite("trash_casette2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'k');
-				myPositionInString = 7;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.CASETTE;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_chinese2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'l');
-				myPositionInString = 8;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.CHINESE;
+            }
 		}else if(whichTrash ==9){
 			if(worldListRoomString[0].CompareTo('l') != 0){
 				trashAni.SetSprite("trash_chinese2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'l');
-				myPositionInString = 8;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.CHINESE;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_juice2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'m');
-				myPositionInString = 9;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.JUICE;
+            }
 		}else if(whichTrash ==10){
 			if(worldListRoomString[0].CompareTo('m') != 0){
 				trashAni.SetSprite("trash_juice2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'m');
-				myPositionInString = 9;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.JUICE;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_lightbulb2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'n');
-				myPositionInString = 10;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.LIGHTBULB;
+            }
 		}else if(whichTrash ==11){
 			if(worldListRoomString[0].CompareTo('n') != 0){
 				trashAni.SetSprite("trash_lightbulb2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'n');
-				myPositionInString = 10;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.LIGHTBULB;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_mug2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'p');
-				myPositionInString = 11;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.MUG;
+            }
 		}else if(whichTrash ==12){
 			if(worldListRoomString[0].CompareTo('p') != 0){
 				trashAni.SetSprite("trash_mug2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'p');
-				myPositionInString = 11;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.MUG;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_party");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'q');
-				myPositionInString = 12;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.PARTY;
+            }
 		}else if(whichTrash ==13){
 			if(worldListRoomString[0].CompareTo('q') != 0){
 				trashAni.SetSprite("trash_party");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'q');
-				myPositionInString = 12;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.PARTY;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_sock2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'r');
-				myPositionInString = 13;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.SOCK;
+            }
 		}else if(whichTrash ==14){
 			if(worldListRoomString[0].CompareTo('r') != 0){
 				trashAni.SetSprite("trash_sock2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'r');
-				myPositionInString = 13;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.SOCK;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_tissue2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'s');
-				myPositionInString = 14;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.TISSUE;
+            }
 		}else if(whichTrash ==15){
 			if(worldListRoomString[0].CompareTo('s') != 0){
 				trashAni.SetSprite("trash_tissue2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'s');
-				myPositionInString = 14;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.TISSUE;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_toilet2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'t');
-				myPositionInString = 15;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.TOILET;
+            }
 		}else if(whichTrash ==16){
 			if(worldListRoomString[0].CompareTo('t') != 0){
 				trashAni.SetSprite("trash_toilet2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'t');
-				myPositionInString = 15;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.TOILET;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_hair2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'u');
-				myPositionInString = 16;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.HAIR;
+            }
 		}else if(whichTrash ==17){
 			if(worldListRoomString[0].CompareTo('u') != 0){
 				trashAni.SetSprite("trash_hair2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'u');
-				myPositionInString = 16;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.HAIR;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_toilet2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'t');
-				myPositionInString = 15;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.TOILET;
+            }
 		}else if(whichTrash ==18){
 			if(worldListRoomString[0].CompareTo('v') != 0){
 				trashAni.SetSprite("trash_fish2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'v');
-				myPositionInString = 17;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.FISH;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_hair2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'u');
-				myPositionInString = 16;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.HAIR;
+            }
 		}else if(whichTrash ==19){
 			if(worldListRoomString[0].CompareTo('u') != 0){
 				trashAni.SetSprite("trash_needle2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'w');
-				myPositionInString = 18;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.NEEDLE;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_hair2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'u');
-				myPositionInString = 15;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.HAIR;
+            }
 		}else if(whichTrash ==20){
 			if(worldListRoomString[0].CompareTo('y') != 0){
 				trashAni.SetSprite("trash_baby2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'y');
-				myPositionInString = 20;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.BABY;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_arm2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'z');
-				myPositionInString = 21;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.ARM;
+            }
 		}else if(whichTrash ==21){
 			if(worldListRoomString[0].CompareTo('z') != 0){
 				trashAni.SetSprite("trash_arm2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'z');
-				myPositionInString = 21;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.ARM;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_childhood2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'1');
-				myPositionInString = 22;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.CHILDHOOD;
+            }
 		}else if(whichTrash ==22){
 			if(worldListRoomString[0].CompareTo('1') != 0){
 				trashAni.SetSprite("trash_childhood2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'1');
-				myPositionInString = 22;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.CHILDHOOD;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_momPres2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'2');
-				myPositionInString = 23;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.MOM_PRES;
+            }
 		}else if(whichTrash ==23){
 			if(worldListRoomString[0].CompareTo('2') != 0){
 				trashAni.SetSprite("trash_momPres2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'2');
-				myPositionInString = 23;
-			}else{
+                garbageType = GlobalVariableManager.GARBAGE.MOM_PRES;
+            }
+            else{
 				whichTrash++;
 				trashAni.SetSprite("trash_childhood2");
 				worldListRoomString.Replace(worldListRoomString[whatNumberGarbageAmI],'1');
-				myPositionInString = 22;
-			}
+                garbageType = GlobalVariableManager.GARBAGE.CHILDHOOD;
+            }
 		}
 
 		GlobalVariableManager.Instance.WORLD_LIST[thisRoom] = worldListRoomString;

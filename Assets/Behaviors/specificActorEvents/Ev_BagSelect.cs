@@ -12,8 +12,8 @@ public class Ev_BagSelect : MonoBehaviour {
 	int phase = 0;
 	// Use this for initialization
 	void Start () {
-		
-		if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[GlobalVariableManager.Instance.MENU_SELECT_STAGE][0] != 'o'){
+        // if paper is not discovered.
+		if((GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[GlobalVariableManager.Instance.MENU_SELECT_STAGE] & GlobalVariableManager.GARBAGE.PAPER) != GlobalVariableManager.GARBAGE.PAPER) {
 			gameObject.GetComponent<tk2dSprite>().color = Color.black;
 		}
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();

@@ -41,16 +41,113 @@ public class GlobalVariableManager : MonoBehaviour {
 	public string BOSSES_KILLED = "abcd";
 	public List<string> GLOBAL_ENEMY_HP = new List<string>();
 	public List<int> STATUE_LIST = new List<int>(); //for w2 statue spawning
-	//public int RACOON_LOCATION = 16;
-	//public int RACOON_TRASH_AQUIRED = 0;
-	//-----------Garbage-related variables------------//
-	public List<string> GARBAGE_DISCOVERY_LIST = new List<string>{
-																"obcdefghijklmnpqrstuvwxy1?",
-																"abcdefghijklmnpqrstuvwxy1?",
-																"abcdefghijklmnpqrstuvwxy1?",
-																"abcdefghijklmnpqrstuvwxy1}3456789"
-																};
-	public int GARBAGE_HAD = 0;
+                                                    //public int RACOON_LOCATION = 16;
+                                                    //public int RACOON_TRASH_AQUIRED = 0;
+                                                    //-----------Garbage-related variables------------//
+
+    public struct LargeTrashItem
+    {
+        public LARGETRASH type;
+        public int spriteIndex;
+        public bool isViewed;
+
+        public LargeTrashItem(LARGETRASH p_type)
+        {
+            type = p_type;
+            spriteIndex = 0;
+            isViewed = false;
+        }
+    };
+
+    public List<LargeTrashItem> LARGE_TRASH_LIST = new List<LargeTrashItem>();
+
+    public LARGETRASH LARGE_TRASH_DISCOVERY_LIST = LARGETRASH.NONE;
+    public LARGETRASH LARGE_TRASH_VIEWED_LIST = LARGETRASH.NONE;
+
+    public enum LARGETRASH : int
+    {
+        NONE = 0,
+        CHAIR =         1 << 0,
+        TESTTRASH2 =    1 << 1,
+        TESTTRASH3 =    1 << 2,
+        TESTTRASH4 =    1 << 3,     
+    }
+
+    // Returns the index of the garbage.
+    public int LargeTrashIndex(LARGETRASH largeTrash)
+    {
+        for (int i = 0; i < sizeof(LARGETRASH); ++i)
+        {
+            if ((int)largeTrash == 1 << i)
+                return i;
+        }
+        return 0;
+    }
+
+    public LARGETRASH LargeTrashByIndex(int index)
+    {
+        return (LARGETRASH)(1 << index);
+    }
+
+	public List<GARBAGE> GARBAGE_DISCOVERY_LIST = new List<GARBAGE>{
+																GARBAGE.PAPER,
+																GARBAGE.NONE,
+                                                                GARBAGE.NONE,
+                                                                GARBAGE.NONE
+                                                                };
+
+    public List<GARBAGE> GARBAGE_VIEWED_LIST = new List<GARBAGE>{
+                                                                GARBAGE.PAPER,
+                                                                GARBAGE.NONE,
+                                                                GARBAGE.NONE,
+                                                                GARBAGE.NONE
+                                                                };
+    public enum GARBAGE : int
+    {
+        NONE =               0,
+        PAPER =         1 << 0,
+        IPOD =          1 << 1,
+        BOOK =          1 << 2,
+        ART_SUPPLIES =  1 << 3,
+        BAG_SPICY =     1 << 4,
+        CHIPS =         1 << 5,
+        BAG_BBQ =       1 << 6,
+        CASETTE =       1 << 7,
+        CHINESE =       1 << 8,
+        JUICE =         1 << 9,
+        LIGHTBULB =     1 << 10,
+        MUG =           1 << 11,
+        PARTY =         1 << 12,
+        SOCK =          1 << 13,
+        TISSUE =        1 << 14,
+        TOILET =        1 << 15,
+        HAIR =          1 << 16,
+        FISH =          1 << 17,
+        NEEDLE =        1 << 18,
+        BABY =          1 << 19,
+        ARM =           1 << 20,
+        CHILDHOOD =     1 << 21,
+        MOM_PRES =      1 << 22
+    }
+
+    // Returns the index of the garbage.
+    public int GarbageIndex(GARBAGE garbage)
+    {
+        for (int i = 0; i < sizeof(GARBAGE); ++i)
+        {
+            if ((int)garbage == 1 << i)
+                return i;
+        }
+        return 0;
+    }
+
+    public GARBAGE GarbageByIndex(int index)
+    {
+        return (GARBAGE)(1 << index);
+    }
+
+
+    public int GARBAGE_HAD = 0;
 	public int LARGE_TRASH_COLLECTED = 0;
 	public List<Vector2> LARGE_TRASH_LOCATIONS = new List<Vector2>();
 	public int MY_NUM_IN_ROOM = 0;
@@ -85,11 +182,37 @@ public class GlobalVariableManager : MonoBehaviour {
 												"abcdefghijklmn",
 												};		
 
-	public string WORLDS_UNLOCKED = "obcd";
+    public WORLDS WORLDS_UNLOCKED = WORLDS.NONE;
 
-	//---------------------------------------------------------------------//
+    public enum WORLDS : int
+    {
+        NONE =               0,
+        ONE =           1 << 0,
+        TWO =           1 << 1,
+        THREE =         1 << 2,
+        FOUR =          1 << 3
+    }
 
-	private void Awake(){
+    // Returns the index of the World.
+    // Probably best to use only with the defined enum values above.
+    public int WorldIndex(WORLDS world)
+    {
+        for (int i=0; i < sizeof(WORLDS); ++i)
+        {
+            if ((int)world == 1 << i)
+                return i;
+        }
+        return 0; 
+    }
+
+    public WORLDS WorldByIndex(int index)
+    {
+        return (WORLDS)(1 << index);
+    }
+
+    //---------------------------------------------------------------------//
+
+    private void Awake(){
 		if(Instance == null){
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
@@ -101,5 +224,20 @@ public class GlobalVariableManager : MonoBehaviour {
 				pinsEquipped.Add(0);
 			}
 		}
-	}
+
+#if DEBUG
+        TestWorldIndex();
+#endif
+    }
+
+    private void TestWorldIndex()
+    {
+        Debug.Log("World Index 1 == " + WorldIndex(WORLDS.ONE) + " enum from index: " + WorldByIndex(0));
+        Debug.Log("World Index 2 == " + WorldIndex(WORLDS.TWO) + " enum from index: " + WorldByIndex(1));
+        Debug.Log("World Index 3 == " + WorldIndex(WORLDS.THREE) + " enum from index: " + WorldByIndex(2));
+        Debug.Log("World Index 4 == " + WorldIndex(WORLDS.FOUR) + " enum from index: " + WorldByIndex(3));
+
+        WORLDS world = WORLDS.NONE;
+        world |= WORLDS.ONE;
+    }
 }

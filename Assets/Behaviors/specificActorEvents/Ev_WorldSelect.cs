@@ -8,7 +8,7 @@ public class Ev_WorldSelect : MonoBehaviour {
 	public float XofStar = 0;
 	public int largeTrashListStartIndex = 0;
 	public int myMenuSelectStage = 0;
-	public int myPositionInWorldsUnlocked = 0;
+	public GlobalVariableManager.WORLDS worldPosition = GlobalVariableManager.WORLDS.ONE;
 	public int position = 0;
 	//p = 0 = front; = 1-right; =2-back; = 3 -left
 
@@ -27,7 +27,7 @@ public class Ev_WorldSelect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(GlobalVariableManager.Instance.WORLDS_UNLOCKED[myPositionInWorldsUnlocked] != 'o'){
+		if((GlobalVariableManager.Instance.WORLDS_UNLOCKED & worldPosition) != worldPosition){
 			gameObject.GetComponent<SpriteRenderer>().color = Color.black;
 			//if(GlobalVariableManager.Instance.PROGRESS_LV >= myPositionInWorldsUnlocked){
 			if(myMenuSelectStage == 1){ //just for testing, remove
@@ -108,8 +108,12 @@ public class Ev_WorldSelect : MonoBehaviour {
 		Debug.Log("Spawn Stars Activate");
 		float tempXStar = XofStar;
 		for(int i = 0; i < numberOfStars; i++){
-				GameObject tempStar = Instantiate(star, new Vector2(tempXStar,5f), Quaternion.identity);
-			if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[3][i] != 'o' && GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[3][i] != 'z' ){
+		    GameObject tempStar = Instantiate(star, new Vector2(tempXStar,5f), Quaternion.identity);
+
+            GlobalVariableManager.LARGETRASH largeTrashType = GlobalVariableManager.Instance.LargeTrashByIndex(i);
+            
+            // Black out any stars for large trash that hasn't been both discovered and viewed.
+            if ((GlobalVariableManager.Instance.LARGE_TRASH_DISCOVERY_LIST & largeTrashType) != largeTrashType && (GlobalVariableManager.Instance.LARGE_TRASH_VIEWED_LIST & largeTrashType) != largeTrashType) {
 				tempStar.GetComponent<SpriteRenderer>().color = Color.black;
 			}
 				starlist.Add(tempStar);
@@ -170,7 +174,7 @@ public class Ev_WorldSelect : MonoBehaviour {
 	IEnumerator Unlock(){
 		GameObject manager = GameObject.Find("manager");
 		GameObject camera = GameObject.Find("tk2dCamera");
-		manager.GetComponent<S_Ev_WorldSelect>().TriggeredMovement(myPositionInWorldsUnlocked);
+		manager.GetComponent<S_Ev_WorldSelect>().TriggeredMovement(GlobalVariableManager.Instance.WorldIndex(worldPosition));
 		camera.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",2f);
 		yield return new WaitForSeconds(2.5f);
 		manager.GetComponent<Ev_FadeHelper>().WhiteFlash();

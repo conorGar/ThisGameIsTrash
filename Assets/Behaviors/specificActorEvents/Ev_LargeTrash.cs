@@ -12,6 +12,7 @@ public class Ev_LargeTrash : MonoBehaviour {
 	//public int myWorld;
 	//public string myString;
 	public char myCharValue; //only used to set up string for use when showing today's collected large trash at day end
+    public GlobalVariableManager.LARGETRASH trashType = GlobalVariableManager.LARGETRASH.NONE;
 
 	public GameObject collisionBox;
 	public GameObject largeShadow;
@@ -286,30 +287,20 @@ public class Ev_LargeTrash : MonoBehaviour {
 		phase = 0;
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 
-		//each large trash has a position in the ltlocations list. When trash is dropped,
-		//position number in list is updated with large trash's coordinates. When Large trash
-		//is created, it checks for its position and jumps there(at world load)
+        // Add this trash item to the large trash list.
+        var largeTrashItem = new GlobalVariableManager.LargeTrashItem(trashType);
+        GlobalVariableManager.Instance.LARGE_TRASH_LIST.Add(largeTrashItem);
 
-
-		if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.Count == 4){
-			//adds an additiona; item to list(tdays big items) if this is the first l trash collected today.
-			GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.Add(myCharValue.ToString());
-		}else{
-			if(doOnce == 0){
-				GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[4] = GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[4] + myCharValue;
-				doOnce = 1;
-			}
+		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
+			//play trash pickup on channel 2
 		}
-			if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
-				//play trash pickup on channel 2
-			}
-			myBody.velocity = new Vector2(-40f,0f);
+		myBody.velocity = new Vector2(-40f,0f);
 		
-			pickUpYSpeed = 40f; //just use pickUp YSpeed for return arch movement
-			returning = true;
-			GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[myPositionInList].Set(0,0);
-			player = GameObject.Find("Dumpster");
-			InvokeRepeating("PickUpArc", 0.1f,0.1f);
+		pickUpYSpeed = 40f; //just use pickUp YSpeed for return arch movement
+		returning = true;
+		GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[myPositionInList].Set(0,0);
+		player = GameObject.Find("Dumpster");
+		InvokeRepeating("PickUpArc", 0.1f,0.1f);
 		
 	}// end of Return()
 

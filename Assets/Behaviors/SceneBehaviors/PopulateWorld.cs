@@ -94,14 +94,14 @@ public class PopulateWorld : MonoBehaviour
 				amntTrashHere += 5;
 			}
 			*/
-			Debug.Log("Styart of first for loop");
+			Debug.Log("Start of first for loop");
 			for(int i = 0; i < numberOfRoomsInWorld; i++){
 				GlobalVariableManager.Instance.WORLD_LIST.Add("0");
 			}
-			if(GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.Count > 4){
-				//resets Large Trash found in this are this day
-				GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.RemoveAt(4);
-			}
+
+            //resets Large Trash found in this are this day
+            GlobalVariableManager.Instance.LARGE_TRASH_LIST.Clear();
+
 			int amountOfGarbageInRoom;
 			int populateWhichRoomNext;
 
@@ -311,15 +311,20 @@ public class PopulateWorld : MonoBehaviour
 		//populating world with trash....
 		for(int j = 0; j < amntTrashHere; j++){
 			whichSpawner = Random.Range(0,trashSpawnPositions.Count);
-			//Debug.Log("Which Spawner Value:" + whichSpawner);
-			//Debug.Log("Items in trash spawn positions" +trashSpawnPositions.Count);
-			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 3){
-				Instantiate(trash, trashSpawnPositions[whichSpawner], Quaternion.identity);
-			}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4){
-				Instantiate(recyclables, trashSpawnPositions[whichSpawner], Quaternion.identity);
-			}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 5){
-				Instantiate(compost, trashSpawnPositions[whichSpawner], Quaternion.identity);
-			}
+            GameObject go = null;
+            switch (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count)
+            {
+                case 3:
+                    ObjectPool.Instance.GetPooledObject("generic_garbage", trashSpawnPositions[whichSpawner]);
+                    break;
+                case 4:
+                    ObjectPool.Instance.GetPooledObject("generic_garbage", trashSpawnPositions[whichSpawner]);
+                    break;
+                case 5:
+                    ObjectPool.Instance.GetPooledObject("generic_garbage", trashSpawnPositions[whichSpawner]);
+                    break;
+            }
+
 			trashSpawnPositions.RemoveAt(whichSpawner);
 		}
 

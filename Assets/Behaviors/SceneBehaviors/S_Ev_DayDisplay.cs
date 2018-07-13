@@ -35,10 +35,9 @@ public class S_Ev_DayDisplay : MonoBehaviour {
 			CursePin();
 		}
 
-
-		for(int i = 0; i <GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.Count; i++){
-			//repleace trash 'newly discovered' values
-			GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[i].Replace("z","o");
+        //replace trash 'newly discovered' values.  Anything that has been discovered will be considered as viewed. 
+        for (int i = 0; i < GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.Count; i++){
+            GlobalVariableManager.Instance.GARBAGE_VIEWED_LIST[i] = GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[i];
 		}
 
 		numberDisplay.text = GlobalVariableManager.Instance.DAY_NUMBER.ToString();
