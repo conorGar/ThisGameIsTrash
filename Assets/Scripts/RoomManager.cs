@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour {
     public tk2dCamera mainCamera;
+    public GameObject player;
     public bool isTransitioning = false;
     public float lerpCamera = 0.0f;
     public float lerpCameraSpeed = 0.1f;
 
     public Room startRoom;
 
-    [SerializeField]
     public Room currentRoom;
     public Room previousRoom;
 
