@@ -17,6 +17,8 @@ public class Ev_Results : MonoBehaviour {
 	int trashCollectedValue;
 	int phase = 0;
 	int spawnLargeTrashOnce = 0;
+	int displayIndex = 0;
+
 
 	void Start () {
 		/*for(int i = 0; i<GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER[4].Length; i++){
@@ -46,14 +48,27 @@ public class Ev_Results : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.Space)){
 			if(phase == 2){
-				if(GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count > 0){
+				if(GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count > displayIndex){
+
 					if(spawnLargeTrashOnce == 0){
 						//spawn large trash collected display
-						Instantiate(largeTrashTextDisplay, transform.position, Quaternion.identity);
-						GameObject tempDisplay = Instantiate(treasureCollectedDisplay,transform.position,Quaternion.identity);
-						tempDisplay.GetComponent<tk2dSprite>().SetSprite(GlobalVariableManager.Instance.LARGE_TRASH_LIST[0].spriteIndex);
+						largeTrashTextDisplay.SetActive(true);
 						spawnLargeTrashOnce = 1;
+					}else{
+						treasureCollectedDisplay.GetComponent<GUIEffects>().Start();
 					}
+
+					//change sprite of the large trash display
+					treasureCollectedDisplay.GetComponent<Image>().sprite = (GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedDisplaySprite);
+
+
+					//add to large trash discovery list
+					GlobalVariableManager.Instance.LARGE_TRASH_DISCOVERY_LIST |= GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].type;
+
+
+					displayIndex++;
+
+
 				}else{
 					GlobalVariableManager.Instance.ENEMIES_DEFEATED = 0;
 					for(int i = 0; i<GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count; i++){

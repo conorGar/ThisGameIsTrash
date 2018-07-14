@@ -50,12 +50,14 @@ public class GlobalVariableManager : MonoBehaviour {
         public LARGETRASH type;
         public int spriteIndex;
         public bool isViewed;
+        public Sprite collectedDisplaySprite;
 
         public LargeTrashItem(LARGETRASH p_type)
         {
             type = p_type;
             spriteIndex = 0;
             isViewed = false;
+            collectedDisplaySprite = null;
         }
     };
 

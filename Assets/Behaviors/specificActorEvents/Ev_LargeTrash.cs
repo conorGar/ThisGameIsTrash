@@ -7,18 +7,21 @@ public class Ev_LargeTrash : MonoBehaviour {
 	
 	public int myPositionInList;
 	public bool isRewardForBoss;
+
 	//public int myRoomNumber;
 	//public int position;
 	//public int myWorld;
 	//public string myString;
-	public char myCharValue; //only used to set up string for use when showing today's collected large trash at day end
+	//public char myCharValue; //only used to set up string for use when showing today's collected large trash at day end
     public GlobalVariableManager.LARGETRASH trashType = GlobalVariableManager.LARGETRASH.NONE;
+    public Sprite collectedDisplaySprite;
 
 	public GameObject collisionBox;
 	public GameObject largeShadow;
 	public GameObject cloudEffect;
 	public GameObject sparkle;
 	public GameObject smokePuff;
+
 
 	int phase = 0;
 	int bounce = 0;
@@ -289,6 +292,9 @@ public class Ev_LargeTrash : MonoBehaviour {
 
         // Add this trash item to the large trash list.
         var largeTrashItem = new GlobalVariableManager.LargeTrashItem(trashType);
+        largeTrashItem.spriteIndex = myPositionInList;
+        largeTrashItem.type = trashType;
+        largeTrashItem.collectedDisplaySprite = collectedDisplaySprite;
         GlobalVariableManager.Instance.LARGE_TRASH_LIST.Add(largeTrashItem);
 
 		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
