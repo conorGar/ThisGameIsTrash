@@ -9,8 +9,15 @@ public class Room : MonoBehaviour
 
     public int roomNum;
     public List<EnemySpawn> enemySpawns;
+
+    public GameObject leftPortal;
+    public GameObject rightPortal;
+    public GameObject topPortal;
+    public GameObject botPortal;
+
+
     List<Enemy> enemies;
-    public List<Friend> friends;
+    //public List<Friend> friends;
     
 
     [System.Serializable]
@@ -19,9 +26,12 @@ public class Room : MonoBehaviour
         public List<Enemy> enemies;
     }
 
-    private void ActivateRoom()
+    public void ActivateRoom()
     {
+    	Debug.Log("ActivateRoom....activated");
         roomManager.mainCamera.ScreenCamera.ViewportToWorldPoint(transform.position);
+        roomManager.SetCamFollowBounds(leftPortal.transform.position.x,rightPortal.transform.position.x,
+        								topPortal.transform.position.y,botPortal.transform.position.y);
     }
 
 

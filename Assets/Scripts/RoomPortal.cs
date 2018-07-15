@@ -76,7 +76,8 @@ public class RoomPortal : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
-    {
+    {	
+    	Debug.Log("Collided with roomPortal");
         if (player == null)
         {
             if (collider.gameObject.CompareTag("Player"))
@@ -96,6 +97,7 @@ public class RoomPortal : MonoBehaviour {
                     roomManager.previousRoom = negativeRoom;
                     player = collider.gameObject;
                     playerCollider2d = player.GetComponent<Collider2D>();
+                    roomManager.mainCamera.GetComponent<Ev_MainCamera>().enabled = false; //disable camera following for transition. Enabled uner RoomManager: SetCamBOunds
                     roomManager.isTransitioning = true;
                     roomManager.lerpCamera = 0.0f;
                 }

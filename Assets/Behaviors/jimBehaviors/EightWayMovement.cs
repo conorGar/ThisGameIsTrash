@@ -12,26 +12,31 @@ public class EightWayMovement : MonoBehaviour {
     bool isDiagonal = false;
     bool noDelayStarted = false;
     public float delay = 0.05f;
-    private int directionFacing = 1; //1 = right, 2 = left, 3 = up, 4 = down
+    private int directionFacing = 2; //1 = right, 2 = left, 3 = up, 4 = down
     private float momentum = 0f;
-	public GameObject legs;
-	public GameObject shadow;
+ 
+	//public GameObject legs;
+	//public GameObject shadow;
 	public GameObject walkCloud;
 
-	GameObject myLegs;
+	public GameObject myLegs;
 	private tk2dSpriteAnimator legAnim;
 	private int setOnce = 0;
+	Vector3 transformScale; // used for facing different directions
  
     // Use this for initialization
     void Start () {
-		myLegs = Instantiate(legs, transform.position, Quaternion.identity) as GameObject;
-		myLegs.GetComponent<AttatchSelfToObject>().objectToSnapTo = this.gameObject;
+
+
         legAnim = myLegs.GetComponent<tk2dSpriteAnimator>();
         anim = GetComponent<tk2dSpriteAnimator>();
 
-		GameObject myShadow;
-		myShadow = Instantiate(shadow, transform.position, Quaternion.identity) as GameObject;
-		myShadow.GetComponent<AttatchSelfToObject>().objectToSnapTo = this.gameObject;
+
+        transformScale = gameObject.transform.localScale;
+
+		//GameObject myShadow;
+		//myShadow = Instantiate(shadow, transform.position, Quaternion.identity) as GameObject;
+		//myShadow.GetComponent<AttatchSelfToObject>().objectToSnapTo = this.gameObject;
 
 		
         //GetComponent<Rigidbody2D>().velocity = movement;
@@ -55,21 +60,19 @@ public class EightWayMovement : MonoBehaviour {
             isDiagonal = true;
             if (movement.y == 1 && movement.x == -1) {
             	if(directionFacing == 1){
-				 	//anim.Play("ani_jimTurnLR");
-					//StartCoroutine (TurnDelay());
-					anim.Play("ani_jimWalkL");
+				 	anim.Play("ani_jimTurn");
+					StartCoroutine ("TurnDelay");
 				 }else{
-					anim.Play("ani_jimWalkL");
+					anim.Play("ani_jimWalk");
 				 }
             }
  
             if (movement.y == 1 && movement.x == 1) {
 				if(directionFacing == 2){
-				 	//anim.Play("ani_jimTurnLR");
-					//StartCoroutine (TurnDelay());
-					anim.Play("ani_jimWalkL");
+				 	anim.Play("ani_jimTurn");
+					StartCoroutine ("TurnDelay");
 				 }else{
-					anim.Play("ani_jimWalkR");
+					anim.Play("ani_jimWalk");
 				 }
             }
  
@@ -88,21 +91,21 @@ public class EightWayMovement : MonoBehaviour {
                 //left/right/up/down
                 if (movement.x == -1) {
 				if(directionFacing == 1){
-				 	//anim.Play("ani_jimTurnLR");
-					//StartCoroutine (TurnDelay());
-					anim.Play("ani_jimWalkL");
+				 	anim.Play("ani_jimTurn");
+					StartCoroutine (TurnDelay());
+
 				 }else{
-					anim.Play("ani_jimWalkL");
+					anim.Play("ani_jimWalk");
 				 }
                 }
  
                 if (movement.x == 1) {
 				if(directionFacing == 1){
-				 	//anim.Play("ani_jimTurnLR");
-					//StartCoroutine (TurnDelay());
-					anim.Play("ani_jimWalkR");
+				 	anim.Play("ani_jimTurn");
+					StartCoroutine ("TurnDelay");
+
 				 }else{
-					anim.Play("ani_jimWalkR");
+					anim.Play("ani_jimWalk");
 				 }
                 }
  
@@ -117,10 +120,8 @@ public class EightWayMovement : MonoBehaviour {
                 }
 
                 if(movement.x == 0 && movement.y == 0){
-					if(anim.CurrentClip.name == "ani_jimWalkR"){
+					if(anim.CurrentClip.name == "ani_jimWalk"){
 						anim.Play("ani_jimIdle");
-					}else if(anim.CurrentClip.name == "ani_jimWalkL"){
-						anim.Play("ani_jimIdleL");
 					}else if(anim.CurrentClip.name == "ani_jimWalkDown"){
 						anim.Play("ani_jimIdleDown");
 					}else if(anim.CurrentClip.name == "ani_jimWalkUp"){
@@ -141,26 +142,25 @@ public class EightWayMovement : MonoBehaviour {
 			CancelInvoke("SpawnClouds");
 
 
-			if(	myLegs && myLegs.GetComponent<MeshRenderer>().enabled)
-				myLegs.GetComponent<MeshRenderer>().enabled = false;
+
 
 			//not instant stop
-			if(anim.CurrentClip.name == "ani_jimIdle" ){
-				transform.Translate(new Vector2(momentum,0)*Time.deltaTime);
-			}else if(anim.CurrentClip.name == "ani_jimIdleL"){
-				transform.Translate(new Vector2(momentum*-1,0)*Time.deltaTime);
-			}else if(anim.CurrentClip.name == "ani_jimIdleUp"){
+			if(anim.CurrentClip.name == "ani_jimIdleUp"){
 				transform.Translate(new Vector2(0,momentum)*Time.deltaTime);
 			}else if(anim.CurrentClip.name == "ani_jimIdleDown"){
 				transform.Translate(new Vector2(0,momentum*-1)*Time.deltaTime);
+			}else if (gameObject.transform.localScale.x > 0 ){
+				transform.Translate(new Vector2(momentum,0)*Time.deltaTime);
+			}else if(gameObject.transform.localScale.x < 0 ){
+				transform.Translate(new Vector2(momentum*-1,0)*Time.deltaTime);
 			}
-		}else if(GlobalVariableManager.Instance.PLAYER_CAN_MOVE){
+		}
+		if(GlobalVariableManager.Instance.PLAYER_CAN_MOVE){
 
 	        	transform.Translate(movement * speed * Time.deltaTime);
 	        	//show legs and change to current animation of Jim
 	        	legAnim.Play(anim.CurrentClip.name);
-				if(	myLegs && !myLegs.GetComponent<MeshRenderer>().enabled)
-					myLegs.GetComponent<MeshRenderer>().enabled = true;
+				
 			
         }
     }
@@ -182,12 +182,14 @@ public class EightWayMovement : MonoBehaviour {
     }
 	IEnumerator TurnDelay() {
         yield return new WaitForSeconds (.3f);
-		if(directionFacing == 1){
-			anim.Play("ani_jimWalkL");
-			directionFacing = 2;
-		}else if(directionFacing == 2){
-			anim.Play("ani_jimWalkR");
-			directionFacing = 1;
+		if(directionFacing == 1 || directionFacing == 2){
+			anim.Play("ani_jimWalk");
+			gameObject.transform.localScale = new Vector3(transformScale.x*-1,transformScale.y,transformScale.z);
+				if(directionFacing == 1){
+					directionFacing = 2;
+				}else{
+					directionFacing = 1;
+				}
 		}else if(directionFacing == 3){
 			anim.Play("ani_jimWalkDown");
 			directionFacing = 4;

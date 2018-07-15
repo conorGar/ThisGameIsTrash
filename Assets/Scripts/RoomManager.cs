@@ -30,10 +30,18 @@ public class RoomManager : MonoBehaviour {
                                         Mathf.Lerp(previousRoom.transform.position.y, currentRoom.transform.position.y, lerpCamera),
                                         mainCamera.transform.position.z);
 
-            if (lerpCamera >= 1.0f)
+            if (lerpCamera >= 1.0f){
+          		currentRoom.ActivateRoom();
                 isTransitioning = false;
-            else
+            }else
                 lerpCamera += lerpCameraSpeed;
         }
+    }
+
+    public void SetCamFollowBounds(float leftLimit, float rightLimit, float topLimit, float botLimit){
+    	//Activated by Room.cs under 'ActivateRoom()'
+    	Debug.Log("SetCamFollowBounds Activated properly");
+    	mainCamera.GetComponent<Ev_MainCamera>().enabled = true; //renable following camera after transition
+    	mainCamera.GetComponent<Ev_MainCamera>().SetMinMax(leftLimit,rightLimit,topLimit,botLimit);
     }
 }

@@ -17,11 +17,14 @@ public class Ev_MainCamera : MonoBehaviour {
 	float screenShake;
 	float startShakeX;
 	float startShakeY;
-	int hitbounds = 0;
+	//int hitbounds = 0;
 	GameObject player;
 	Vector3 offset;
+
 	void Start(){
 		player = GameObject.Find("Jim");
+
+
 		/*offset = transform.position - player.transform.position;
 		Debug.Log(offset);*/
 
@@ -32,7 +35,7 @@ public class Ev_MainCamera : MonoBehaviour {
 			if(!transitioning){
 				if(screenShake == 0){
 					if(stableCamera == false){
-						transform.position = new Vector3(player.transform.position.x - 11.75f,player.transform.position.y-9f,-10f); // follows only when player is in center of screen
+						transform.position = new Vector3(player.transform.position.x,player.transform.position.y,-10f); // follows only when player is in center of screen
 						transform.position = new Vector3(
 							Mathf.Clamp(transform.position.x, MIN_X, MAX_X),
 							Mathf.Clamp(transform.position.y, MIN_Y, MAX_Y),
@@ -100,6 +103,7 @@ public class Ev_MainCamera : MonoBehaviour {
 		Debug.Log(MAX_X);
 		Debug.Log(MAX_Y);
 	}
+	/*
 	public void SetMax_X(float max){
 		MAX_X = max;
 	}
@@ -112,7 +116,7 @@ public class Ev_MainCamera : MonoBehaviour {
 	public void SetMin_Y(float min){
 		MIN_Y = min;
 	}
-
+	*/
 
 	IEnumerator StopTransition(){
 		yield return new WaitForSeconds(.5f);

@@ -40,7 +40,7 @@ public class TransitionTriggersBehavior : MonoBehaviour {
 		
 	}
 
-	public void EnableAgain(){
+	/*public void EnableAgain(){
 
 		if(rightTransition){
 			mainCam.SetMax_X(gameObject.transform.position.x);
@@ -52,7 +52,7 @@ public class TransitionTriggersBehavior : MonoBehaviour {
 			mainCam.SetMin_Y(gameObject.transform.position.y);
 		}
 
-	}
+	}*/
 
 	void OnTriggerEnter2D(Collider2D collision){
 		if(rightTransition){
