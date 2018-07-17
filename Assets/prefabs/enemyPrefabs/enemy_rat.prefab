@@ -27,11 +27,12 @@ GameObject:
   - component: {fileID: 114051663132886186}
   - component: {fileID: 114033225531502752}
   - component: {fileID: 50025277033186906}
+  - component: {fileID: 114006073405854798}
   - component: {fileID: 114403236987013624}
   - component: {fileID: 61841911532167534}
   m_Layer: 9
   m_Name: enemy_rat
-  m_TagString: Untagged
+  m_TagString: enemy_rat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,6 +161,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7, y: 1.14}
   m_EdgeRadius: 0
+--- !u!114 &114006073405854798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1098292903033816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsArmored: 0
 --- !u!114 &114033225531502752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,13 +198,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87e66f397c6ae134782c4022379cbba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftLimit: 0
+  rightLimit: 0
+  topLimit: 0
+  botLimit: 0
 --- !u!114 &114061048850949760
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1098292903033816}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7465d3cf6dc723459be3e518ac51b0a, type: 3}
   m_Name: 
@@ -275,3 +292,4 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   scrapDrop: {fileID: 1335921923726912, guid: 17b968109e0b361498d14444ff4db4a0, type: 2}
+  landingDustParticle: {fileID: 0}

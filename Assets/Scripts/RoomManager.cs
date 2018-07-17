@@ -23,7 +23,7 @@ public class RoomManager : MonoBehaviour {
         playerCollider2D = player.GetComponent<Collider2D>();
         currentRoom = startRoom;
         previousRoom = null;
-        SetCamFollowBounds(currentRoom);
+        currentRoom.ActivateRoom();
 	}
 	
 	// Update is called once per frame
@@ -38,6 +38,7 @@ public class RoomManager : MonoBehaviour {
             if (lerpCamera >= 1.0f)
             {
                 isTransitioning = false;
+                previousRoom.DeactivateRoom();
                 currentRoom.ActivateRoom();
             }
             else

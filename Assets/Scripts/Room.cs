@@ -8,48 +8,55 @@ public class Room : MonoBehaviour
     public RoomManager roomManager;
 
     public int roomNum;
-    public List<EnemySpawn> enemySpawns;
+    public List<EnemySpawner> enemySpawners;
     public GameObject player;
     public BoxCollider2D roomCollider2D;
     
-    List<Enemy> enemies;
+    private List<GameObject> enemies;
     public List<Friend> friends;
-    
-
-    [System.Serializable]
-    public class EnemySpawn
-    {
-        public List<Enemy> enemies;
-    }
 
     public void ActivateRoom()
     {
         roomManager.mainCamera.ScreenCamera.ViewportToWorldPoint(transform.position);
         roomManager.SetCamFollowBounds(this);
+
+        // enemy spawns
+        bool allowArmoredEnemies = false;
+        if (GlobalVariableManager.Instance.DAY_NUMBER < 2)
+            allowArmoredEnemies = true;
+
+        for (int i=0; i < enemySpawners.Count; ++i)
+        {
+            // get a random enemy from the enemy spawn list
+            Enemy enemy = enemySpawners[i].enemies.RandomElement();
+
+            // ignore armored enemies if they aren't allowed to spawn yet.
+            if (enemy.IsArmored && !allowArmoredEnemies)
+                continue;
+
+            GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
+
+            if (spawnedEnemy != null)
+            {
+                enemies.Add(spawnedEnemy);
+                spawnedEnemy.transform.position = enemySpawners[i].transform.position;
+            }
+        }
+    }
+
+    public void DeactivateRoom()
+    {
+        for (int i=0; i < enemies.Count; ++i)
+            enemies[i].SetActive(false);
+
+        enemies.Clear();
     }
 
 
     // Use this for initialization
     void Start ()
     {
-        var enemies = new List<Enemy>();
-        bool allowArmoredEnemies = false;
-        if (GlobalVariableManager.Instance.DAY_NUMBER < 2)
-            allowArmoredEnemies = true;
-
-        // enemy spawns
-        for (int i=0; i < enemySpawns.Count; ++i)
-        {
-            // get a random enemy from the enemy spawn list
-            Enemy enemy = enemySpawns[i].enemies.RandomElement();
-
-            // ignore armored enemies if they aren't allowed to spawn yet.
-            if (enemy.IsArmored && !allowArmoredEnemies)
-                continue;
-
-            enemies.Add(enemy);  
-        }
-
+        enemies = new List<GameObject>();
         Physics2D.IgnoreCollision(roomCollider2D, player.GetComponent<Collider2D>());
     }
 	
