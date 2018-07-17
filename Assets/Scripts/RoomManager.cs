@@ -33,36 +33,37 @@ public class RoomManager : MonoBehaviour {
                                         Mathf.Lerp(previousCameraPosition.y, targetCameraPosition.y, lerpCamera),
                                         mainCamera.transform.position.z);
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
             if (lerpCamera >= 1.0f){
           		currentRoom.ActivateRoom();
                 isTransitioning = false;
             }else
-=======
+//=======
             if (lerpCamera >= 1.0f)
             {
                 isTransitioning = false;
                 currentRoom.ActivateRoom();
             }
             else
->>>>>>> refs/remotes/origin/digital_smash
+//>>>>>>> refs/remotes/origin/digital_smash
                 lerpCamera += lerpCameraSpeed;
         }
     }
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
     public void SetCamFollowBounds(float leftLimit, float rightLimit, float topLimit, float botLimit){
     	//Activated by Room.cs under 'ActivateRoom()'
     	Debug.Log("SetCamFollowBounds Activated properly");
     	mainCamera.GetComponent<Ev_MainCamera>().enabled = true; //renable following camera after transition
     	mainCamera.GetComponent<Ev_MainCamera>().SetMinMax(leftLimit,rightLimit,topLimit,botLimit);
-=======
+//=======
+	}
     public void SetCamFollowBounds(Room room)
     {
         //Activated by Room.cs under 'ActivateRoom()'
         Debug.Log("SetCamFollowBounds Activated properly");
         mainCamera.GetComponent<Ev_MainCamera>().enabled = true; //renable following camera after transition
         mainCamera.GetComponent<Ev_MainCamera>().SetMinMax(room);
->>>>>>> refs/remotes/origin/digital_smash
+//>>>>>>> refs/remotes/origin/digital_smash
     }
 }

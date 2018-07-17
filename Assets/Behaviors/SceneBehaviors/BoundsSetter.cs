@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoundsSetter : MonoBehaviour {
 
-	Ev_MainCamera mycam;
+	/*Ev_MainCamera mycam;
 	SwitchScene sceneChanger;
 
 	float minX;
@@ -129,5 +129,5 @@ public class BoundsSetter : MonoBehaviour {
 
 	public string GetRoomName(){
 		return roomName;
-	}
+	}*/
 }

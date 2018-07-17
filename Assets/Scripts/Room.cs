@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
 
     public int roomNum;
     public List<EnemySpawn> enemySpawns;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
     public GameObject leftPortal;
     public GameObject rightPortal;
@@ -17,11 +17,11 @@ public class Room : MonoBehaviour
     public GameObject botPortal;
 
 
-=======
+//=======
     public GameObject player;
     public BoxCollider2D roomCollider2D;
     
->>>>>>> refs/remotes/origin/digital_smash
+//>>>>>>> refs/remotes/origin/digital_smash
     List<Enemy> enemies;
     //public List<Friend> friends;
     
@@ -36,12 +36,12 @@ public class Room : MonoBehaviour
     {
     	Debug.Log("ActivateRoom....activated");
         roomManager.mainCamera.ScreenCamera.ViewportToWorldPoint(transform.position);
-<<<<<<< HEAD
+//<<<<<<< HEAD
         roomManager.SetCamFollowBounds(leftPortal.transform.position.x,rightPortal.transform.position.x,
         								topPortal.transform.position.y,botPortal.transform.position.y);
-=======
+//=======
         roomManager.SetCamFollowBounds(this);
->>>>>>> refs/remotes/origin/digital_smash
+//>>>>>>> refs/remotes/origin/digital_smash
     }
 
 

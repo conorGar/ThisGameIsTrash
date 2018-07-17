@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour {
 
-	public float leftLimit = -15f;
+	/*public float leftLimit = -15f;
 	public float rightLimit = 15f;
 	public float upLimit = 7f;
 	public float botLimit = -7f;
@@ -114,7 +114,7 @@ public class SwitchScene : MonoBehaviour {
 		}
 		SceneManager.LoadScene(sceneToSwitchTo);
 	}*/
-
+	/*
 	public void SetLimits(float leftLim, float rightLim, float topLim, float botLim){
 		//activted by BoundsSetter
 		leftLimit = leftLim;
@@ -143,4 +143,5 @@ public class SwitchScene : MonoBehaviour {
 	//new room.
 	//There probably needs to be some sort of 'Boundary Setter' Gameobject that sets the boundary depending
 	//on what the room number is(boundary for both this switch scene and for camera...)
+	*/
 }
