@@ -11,11 +11,11 @@ public class Room : MonoBehaviour
     public List<EnemySpawn> enemySpawns;
 //<<<<<<< HEAD
 
-    public GameObject leftPortal;
+    /*public GameObject leftPortal;
     public GameObject rightPortal;
     public GameObject topPortal;
     public GameObject botPortal;
-
+    */
 
 //=======
     public GameObject player;
@@ -36,12 +36,17 @@ public class Room : MonoBehaviour
     {
     	Debug.Log("ActivateRoom....activated");
         roomManager.mainCamera.ScreenCamera.ViewportToWorldPoint(transform.position);
+<<<<<<< HEAD
 //<<<<<<< HEAD
         roomManager.SetCamFollowBounds(leftPortal.transform.position.x,rightPortal.transform.position.x,
         								topPortal.transform.position.y,botPortal.transform.position.y);
 //=======
         roomManager.SetCamFollowBounds(this);
 //>>>>>>> refs/remotes/origin/digital_smash
+=======
+        //roomManager.SetCamFollowBounds(leftPortal.transform.position.x,rightPortal.transform.position.x,
+        							//	topPortal.transform.position.y,botPortal.transform.position.y);
+>>>>>>> refs/heads/MeleeSystemImprovements
     }
 
 

@@ -7,15 +7,16 @@ public class MeleeAttack : MonoBehaviour {
 
 	public AudioClip swing;
 	public AudioSource audioSource;
-	public GameObject meleeWeaponSwing;
-	public GameObject meleeWeapon;
+	public GameObject meleeWeaponRightSwing;
+	public GameObject meleeWeaponLeftSwing;
+	public GameObject meleeWeaponTopSwing;
+	public GameObject meleeWeaponBotSwing;
 
 	bool cantAttack = false;
-	GameObject weapon;
 	bool isSwinging = false;
 	int swingDirection;
 	float turningSpeed;
-
+	private float playerMomentum; // a little 'bounce' when swing
 
 	void Start () {
 
@@ -33,16 +34,19 @@ public class MeleeAttack : MonoBehaviour {
 	}
 
 	void Update () {
-		if(weapon && isSwinging){
+		if(isSwinging){
 			if(swingDirection ==1){
-				weapon.transform.position = new Vector2(gameObject.transform.position.x + 1f,gameObject.transform.position.y+ 1.4f);
+				//weapon.transform.position = new Vector2(gameObject.transform.position.x + 4f,gameObject.transform.position.y+ 1.4f);
+				transform.Translate(new Vector2(playerMomentum,0)*Time.deltaTime);
 			}else if(swingDirection ==2){
-				weapon.transform.position = new Vector2(gameObject.transform.position.x,gameObject.transform.position.y + 1.4f);
+				//weapon.transform.position = new Vector2(gameObject.transform.position.x,gameObject.transform.position.y + 1.4f);
+				transform.Translate(new Vector2(playerMomentum*-1,0)*Time.deltaTime);
 			}else if(swingDirection == 3){
-				weapon.transform.position = new Vector2(gameObject.transform.position.x -.5f,gameObject.transform.position.y + 2f);
+				//weapon.transform.position = new Vector2(gameObject.transform.position.x -.5f,gameObject.transform.position.y + 2f);
 			}else if(swingDirection == 4){
-				weapon.transform.position = new Vector2(gameObject.transform.position.x + 2f,gameObject.transform.position.y + 2f);
+				//weapon.transform.position = new Vector2(gameObject.transform.position.x + 2f,gameObject.transform.position.y + 2f);
 			}
+			playerMomentum -= .5f;
 		}
 		if(!cantAttack && Time.timeScale != 0f){
 			//timescale part = if game isnt paused
@@ -50,14 +54,18 @@ public class MeleeAttack : MonoBehaviour {
 				&& !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtL") && !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtR")){
 
 				if(Input.GetKeyDown(KeyCode.A)){
-					StartCoroutine("Left");
+					playerMomentum = 6f;
+					StartCoroutine("Swing",2);
 				}else if(Input.GetKeyDown(KeyCode.D)){
-					Debug.Log(" D IS PRESSED");
-					StartCoroutine("Right");
+					playerMomentum = 6f;
+					StartCoroutine("Swing",1);
 				}else if(Input.GetKeyDown(KeyCode.S)){
-					StartCoroutine("Down");
-				}else if(Input.GetKeyDown(KeyCode.W))
-					StartCoroutine("Up");
+					playerMomentum = 6f;
+					StartCoroutine("Swing",4);
+				}else if(Input.GetKeyDown(KeyCode.W)){
+					playerMomentum = 6f;
+					StartCoroutine("Swing",3);
+				}
 			}else{
 				//Debug.Log("something wrong with global var checks");
 				//Debug.Log(GlobalVariableManager.Instance.TRASH_TYPE_SELECTED);
@@ -68,202 +76,73 @@ public class MeleeAttack : MonoBehaviour {
 			//Debug.Log("Something wrong at MeleeAttack script, prob with pausing");
 		}
 
+
+
 	}//end of update method
 
-	IEnumerator Right(){
-		Debug.Log(" RIGHT IS ACTIVATED ");
+	IEnumerator Swing(int direction){
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
+		GameObject meleeDirectionEnabled = null;
+		swingDirection = direction;
+		if(direction == 1){
+			meleeDirectionEnabled = meleeWeaponRightSwing;
+			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
+		}else if(direction == 2){
+			meleeDirectionEnabled = meleeWeaponLeftSwing;
+			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
+		}else if(direction == 3){
+			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingUp");
+			meleeDirectionEnabled = meleeWeaponTopSwing;
+
+		}else if(direction == 4){
+			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingDown");
+			meleeDirectionEnabled = meleeWeaponBotSwing;
+
+		}
+
+		meleeDirectionEnabled.SetActive(true);
+
+
+		meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
+
+
 		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0 && audioSource){
 			audioSource.clip = swing;
 			audioSource.Play();
 		}
-		gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
-		GameObject meleeWeaponSwingInstance;
-		meleeWeaponSwingInstance = Instantiate(meleeWeapon, transform.position, Quaternion.identity);
-		meleeWeaponSwingInstance.GetComponent<tk2dSpriteAnimator>().Play("plankSwing");
-		//meleeWeaponSwingInstance.transform.localScale = new Vector2(-1,0);
 
-		weapon = Instantiate(meleeWeapon, transform.position, Quaternion.identity);
-		weapon.GetComponent<tk2dSpriteAnimator>().Play("plankR");
-		//weapon.transform.localScale = new Vector2(-1,0);
-		weapon.transform.Rotate(0f,90f,0f);
+		isSwinging = true;
+		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
-		swingDirection = 1;
 		if(GlobalVariableManager.Instance.pinsEquipped[49] != 0 && GlobalVariableManager.Instance.CURRENT_HP == int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
 		//Hero of Grime pin - shoots beam at max hp
 			GameObject bullet = Instantiate(GameObject.Find("bullet"), new Vector2(transform.position.x +.3f, transform.position.y), Quaternion.identity);
 			bullet.GetComponent<tk2dSpriteAnimator>().Play("beam");
 			bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10f,0f);
 		}
-		isSwinging = true;
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);//player stops moving
-		Debug.Log(GlobalVariableManager.Instance.pinsEquipped[32]);
+
+		yield return new WaitForSeconds(.1f);
+		meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
+
 		if(GlobalVariableManager.Instance.pinsEquipped[32] == 0 ){
 			//Scrappy Shinobi
-			Debug.Log("got here 2");
-			turningSpeed = 640;
-			weapon.transform.Rotate(Vector2.right, turningSpeed*Time.deltaTime); // set rotation soeed
-			Debug.Log("Melee wait now");
-			yield return new WaitForSeconds(.3f);
-			Debug.Log("Melee wait success");
-			Destroy(weapon);
-			Destroy(meleeWeaponSwingInstance);
-			weapon.transform.Rotate(Vector2.right, 0*Time.deltaTime);
+			yield return new WaitForSeconds(.1f);
+			meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
+			yield return new WaitForSeconds(.1f);
 			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 			isSwinging = false;
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
+			meleeDirectionEnabled.SetActive(false);
 		}else{
-			turningSpeed = 940;
-			Debug.Log("Melee wait now");
-			yield return new WaitForSeconds(.1f);
-			Debug.Log("Melee wait success 2");
-			Destroy(weapon);
-			Destroy(meleeWeaponSwingInstance);
+			
 			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
 			isSwinging = false;
+			meleeDirectionEnabled.SetActive(false);
 		}
 
+	}
 
-
-	}//end of right()
-	IEnumerator Left(){
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0 && audioSource){
-			audioSource.clip = swing;
-			audioSource.Play();
-		}
-		gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingL");
-		GameObject meleeWeaponSwingInstance;
-		meleeWeaponSwingInstance = Instantiate(meleeWeapon, new Vector2(transform.position.x - .5f, transform.position.y), Quaternion.identity);
-		meleeWeaponSwingInstance.GetComponent<tk2dSpriteAnimator>().Play("plankSwing");
-		weapon = Instantiate(meleeWeapon, transform.position, Quaternion.identity);
-		meleeWeaponSwingInstance.transform.localScale = new Vector2(-1f,1f);
-		//weapon.transform.localScale = new Vector2(-1,0);
-		weapon.transform.Rotate(0f,90f,0f);
-		swingDirection = 2;
-		if(GlobalVariableManager.Instance.pinsEquipped[49] != 0 && GlobalVariableManager.Instance.CURRENT_HP == int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
-		//Hero of Grime pin - shoots beam at max hp
-			GameObject bullet = Instantiate(GameObject.Find("bullet"), new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-			bullet.GetComponent<tk2dSpriteAnimator>().Play("beam");
-			bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,-10f);
-		}
-		isSwinging = true;
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);//player stops moving
-		if(GlobalVariableManager.Instance.pinsEquipped[32] ==0){
-			//Scrappy Shinobi
-			turningSpeed = -640;
-			weapon.transform.Rotate(Vector2.left, turningSpeed*Time.deltaTime); // set rotation soeed
-			yield return new WaitForSeconds(.3f);
-			Destroy(weapon);
-			Destroy(meleeWeaponSwingInstance);
-
-			weapon.transform.Rotate(Vector2.left, 0*Time.deltaTime);
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-			isSwinging = false;
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdleL");
-		}else{
-			turningSpeed = -940;
-			yield return new WaitForSeconds(.1f);
-			Destroy(weapon);
-			Destroy(meleeWeaponSwingInstance);
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdleL");
-			isSwinging = false;
-		}
-
-	}//end of Left()
-	IEnumerator Down(){
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0 && audioSource){
-			audioSource.clip = swing;
-			audioSource.Play();
-		}
-		gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingDown");
-		GameObject meleeWeaponSwingInstance;
-		meleeWeaponSwingInstance = Instantiate(meleeWeaponSwing, transform.position, Quaternion.identity);
-		meleeWeaponSwingInstance.GetComponent<tk2dSpriteAnimator>().Play("plankL");
-		weapon = Instantiate(meleeWeapon, transform.position, Quaternion.identity);
-		weapon.GetComponent<tk2dSpriteAnimator>().Play("plankDown");
-		weapon.transform.Rotate(0f,-90f,0f);
-		swingDirection = 4;
-		if(GlobalVariableManager.Instance.pinsEquipped[49] != 0 && GlobalVariableManager.Instance.CURRENT_HP == int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
-		//Hero of Grime pin - shoots beam at max hp
-			GameObject bullet = Instantiate(GameObject.Find("bullet"), new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-			bullet.GetComponent<tk2dSpriteAnimator>().Play("beam");
-			bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,-10f);
-		}
-		isSwinging = true;
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);//player stops moving
-		if(GlobalVariableManager.Instance.pinsEquipped[32] ==0){
-			//Scrappy Shinobi
-			turningSpeed = 340;
-			weapon.transform.Rotate(Vector2.left, turningSpeed*Time.deltaTime); // set rotation soeed
-			yield return new WaitForSeconds(.5f);
-			Destroy(weapon);
-			Destroy(meleeWeaponSwingInstance);
-
-			weapon.transform.Rotate(Vector2.left, 0*Time.deltaTime);
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-			isSwinging = false;
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdleL");
-		}else{
-			turningSpeed = 540;
-			yield return new WaitForSeconds(.3f);
-			Destroy(weapon);
-			Destroy(meleeWeaponSwingInstance);
-
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdleL");
-			isSwinging = false;
-			}
-	}//end of Down()
-
-	IEnumerator Up(){
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0 && audioSource){
-			audioSource.clip = swing;
-			audioSource.Play();
-		}
-		gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingUp");
-		GameObject meleeWeaponSwingInstance;
-		meleeWeaponSwingInstance = Instantiate(meleeWeaponSwing, transform.position, Quaternion.identity);
-		meleeWeaponSwingInstance.GetComponent<tk2dSpriteAnimator>().Play("stickUp");
-		weapon = Instantiate(meleeWeapon, transform.position, Quaternion.identity);
-		weapon.GetComponent<tk2dSpriteAnimator>().Play("stickUp");
-		weapon.transform.Rotate(0f,-90f,0f);
-		swingDirection = 3;
-		if(GlobalVariableManager.Instance.pinsEquipped[49] != 0 && GlobalVariableManager.Instance.CURRENT_HP == int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
-		//Hero of Grime pin - shoots beam at max hp
-			GameObject bullet = Instantiate(GameObject.Find("bullet"), new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-			bullet.GetComponent<tk2dSpriteAnimator>().Play("beam");
-			bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,10f);
-		}
-		isSwinging = true;
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);//player stops moving
-		if(GlobalVariableManager.Instance.pinsEquipped[32] ==0){
-			//Scrappy Shinobi
-			turningSpeed = -440;
-			weapon.transform.Rotate(Vector2.left, turningSpeed*Time.deltaTime); // set rotation soeed
-			yield return new WaitForSeconds(.5f);
-			Destroy(weapon);
-			Destroy(meleeWeaponSwingInstance);
-
-			weapon.transform.Rotate(Vector2.left, 0*Time.deltaTime);
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-			isSwinging = false;
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdleL");
-		}else{
-			turningSpeed = -740;
-			yield return new WaitForSeconds(.3f);
-			Destroy(weapon);
-			Destroy(meleeWeaponSwingInstance);
-
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdleL");
-			isSwinging = false;
-		}
-	} //end of Up()
 
 	public void SetCanAttack(bool val){
 		cantAttack = val;
