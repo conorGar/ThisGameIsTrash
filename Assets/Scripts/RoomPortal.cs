@@ -33,14 +33,14 @@ public class RoomPortal : MonoBehaviour {
             // moving positively
             if (roomManager.currentRoom == positiveRoom)
             {
-                // moving through the portal on the x-axis
+                // moving through the portal on the +x-axis
                 if (direction == Direction.HORIZONTAL)
                 {
                     player.transform.position = new Vector3(Mathf.Lerp(collider2d.bounds.min.x - playerCollider2d.bounds.extents.x, collider2d.bounds.max.x + playerCollider2d.bounds.extents.x + 0.5f, roomManager.lerpCamera),
                                                             player.transform.position.y,
                                                             player.transform.position.z);
                 }
-                // moving through the portal on the y-axis
+                // moving through the portal on the +y-axis
                 else
                 {
                     player.transform.position = new Vector3(player.transform.position.x,
@@ -51,14 +51,14 @@ public class RoomPortal : MonoBehaviour {
             // moving negatively
             else if (roomManager.currentRoom == negativeRoom)
             {
-                // moving through the portal on the x-axis
+                // moving through the portal on the -x-axis
                 if (direction == Direction.HORIZONTAL)
                 {
                     player.transform.position = new Vector3(Mathf.Lerp(collider2d.bounds.max.x + playerCollider2d.bounds.extents.x, collider2d.bounds.min.x - playerCollider2d.bounds.extents.x - 0.5f, roomManager.lerpCamera),
                                                             player.transform.position.y,
                                                             player.transform.position.z);
                 }
-                // moving through the portal on the y-axis
+                // moving through the portal on the -y-axis
                 else
                 {
                     player.transform.position = new Vector3(player.transform.position.x,
@@ -80,6 +80,7 @@ public class RoomPortal : MonoBehaviour {
     	Debug.Log("Collided with roomPortal");
         if (player == null)
         {
+            // TODO: Clean this up!
             if (collider.gameObject.CompareTag("Player"))
             {
                 if (roomManager.currentRoom == positiveRoom)
@@ -88,8 +89,22 @@ public class RoomPortal : MonoBehaviour {
                     roomManager.previousRoom = positiveRoom;
                     player = collider.gameObject;
                     playerCollider2d = player.GetComponent<Collider2D>();
+                    roomManager.mainCamera.GetComponent<Ev_MainCamera>().enabled = false; //disable camera following for transition. Enabled uner RoomManager: SetCamBOunds
+                    roomManager.previousCameraPosition = roomManager.mainCamera.GetComponent<Ev_MainCamera>().transform.position;
                     roomManager.isTransitioning = true;
                     roomManager.lerpCamera = 0.0f;
+
+                    Rect roomBoundaries = roomManager.currentRoom.GetRoomCameraBoundaries();
+                    if (direction == Direction.VERTICAL)
+                    {
+                        // moving y-
+                        roomManager.targetCameraPosition = new Vector3(Mathf.Clamp(player.transform.position.x, roomBoundaries.xMin, roomBoundaries.xMax), roomBoundaries.yMax, roomManager.previousCameraPosition.z);
+                    }
+                    else
+                    {
+                        // moving x-
+                        roomManager.targetCameraPosition = new Vector3(roomBoundaries.xMax, Mathf.Clamp(player.transform.position.y, roomBoundaries.yMin, roomBoundaries.yMax), roomManager.previousCameraPosition.z);
+                    }
                 }
                 else if (roomManager.currentRoom == negativeRoom)
                 {
@@ -98,8 +113,24 @@ public class RoomPortal : MonoBehaviour {
                     player = collider.gameObject;
                     playerCollider2d = player.GetComponent<Collider2D>();
                     roomManager.mainCamera.GetComponent<Ev_MainCamera>().enabled = false; //disable camera following for transition. Enabled uner RoomManager: SetCamBOunds
+<<<<<<< HEAD
+=======
+                    roomManager.previousCameraPosition = roomManager.mainCamera.GetComponent<Ev_MainCamera>().transform.position;
+>>>>>>> refs/remotes/origin/digital_smash
                     roomManager.isTransitioning = true;
                     roomManager.lerpCamera = 0.0f;
+
+                    Rect roomBoundaries = roomManager.currentRoom.GetRoomCameraBoundaries();
+                    if (direction == Direction.VERTICAL)
+                    {
+                        // moving y+
+                        roomManager.targetCameraPosition = new Vector3(Mathf.Clamp(player.transform.position.x, roomBoundaries.xMin, roomBoundaries.xMax), roomBoundaries.yMin, roomManager.previousCameraPosition.z);
+                    }
+                    else
+                    {
+                        // moving x+
+                        roomManager.targetCameraPosition = new Vector3(roomBoundaries.xMin, Mathf.Clamp(player.transform.position.y, roomBoundaries.yMin, roomBoundaries.yMax), roomManager.previousCameraPosition.z);
+                    }
                 }
                 else
                 {

@@ -9,8 +9,10 @@ public class Ev_MainCamera : MonoBehaviour {
 	public float MIN_Y = -9.08f;
 	public float MAX_Y = -9.08f;
 	public bool stableCamera = false;//set true in scenes where the camera doesnt move
+    public float cameraSpeed = 10.0f;
 
-	Vector3 targetPos;
+
+    Vector3 targetPos;
 	bool transitioning;
 	Vector3 velocity = Vector3.zero;
 	List<GameObject> activeEnemies = new List<GameObject>();
@@ -28,14 +30,21 @@ public class Ev_MainCamera : MonoBehaviour {
 		/*offset = transform.position - player.transform.position;
 		Debug.Log(offset);*/
 
-	}
+    }
 
 	void Update () {
 		
 			if(!transitioning){
 				if(screenShake == 0){
 					if(stableCamera == false){
+<<<<<<< HEAD
 						transform.position = new Vector3(player.transform.position.x,player.transform.position.y,-10f); // follows only when player is in center of screen
+=======
+						transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, player.transform.position.x, Time.deltaTime * cameraSpeed),
+                                                         Mathf.SmoothStep(transform.position.y, player.transform.position.y, Time.deltaTime * cameraSpeed),
+                                                         -10f); // follows only when player is in center of screen
+
+>>>>>>> refs/remotes/origin/digital_smash
 						transform.position = new Vector3(
 							Mathf.Clamp(transform.position.x, MIN_X, MAX_X),
 							Mathf.Clamp(transform.position.y, MIN_Y, MAX_Y),
@@ -76,7 +85,7 @@ public class Ev_MainCamera : MonoBehaviour {
 		ActivateEnemies(rName);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		if(direction.CompareTo("left") == 0){
-			targetPos = gameObject.transform.TransformPoint(new Vector3(MIN_X - transform.position.x,0f,0f));
+			targetPos = transform.TransformPoint(new Vector3(MIN_X - transform.position.x,0f,0f));
 			Debug.Log("TARGET POSITION:" + targetPos.x);
 		}else if(direction.CompareTo("right") == 0){
 			targetPos = gameObject.transform.TransformPoint(new Vector3(MIN_X - transform.position.x,0f,0f));
@@ -92,6 +101,7 @@ public class Ev_MainCamera : MonoBehaviour {
 		StartCoroutine("StopTransition");
 	}
 
+<<<<<<< HEAD
 	public void SetMinMax(float minX, float maxX, float minY, float maxY){
 	//activated by BoundSetter script
 		MIN_X = minX;
@@ -104,6 +114,31 @@ public class Ev_MainCamera : MonoBehaviour {
 		Debug.Log(MAX_Y);
 	}
 	/*
+=======
+    public void SetMinMax(Room room)
+    {
+        Rect rect = room.GetRoomCameraBoundaries();
+        MIN_X = rect.xMin;
+        MAX_X = rect.xMax;
+        MIN_Y = rect.yMin;
+        MAX_Y = rect.yMax;
+    }
+
+    public void SetMinMax(float minX, float maxX, float minY, float maxY)
+    {
+        //activated by BoundSetter script
+        MIN_X = minX;
+        MIN_Y = minY;
+        MAX_X = maxX;
+        MAX_Y = maxY;
+        Debug.Log(MIN_X);
+        Debug.Log(MIN_Y);
+        Debug.Log(MAX_X);
+        Debug.Log(MAX_Y);
+    }
+
+    /*
+>>>>>>> refs/remotes/origin/digital_smash
 	public void SetMax_X(float max){
 		MAX_X = max;
 	}
@@ -115,10 +150,15 @@ public class Ev_MainCamera : MonoBehaviour {
 	}
 	public void SetMin_Y(float min){
 		MIN_Y = min;
+<<<<<<< HEAD
 	}
 	*/
+=======
+	}*/
 
-	IEnumerator StopTransition(){
+>>>>>>> refs/remotes/origin/digital_smash
+
+    IEnumerator StopTransition(){
 		yield return new WaitForSeconds(.5f);
 		transitioning = false;
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
