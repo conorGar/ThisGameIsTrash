@@ -21,11 +21,13 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public bool doesNotArcWhenHit = false;
 	public bool respawnEnemy = false;
 	public AudioClip hitSqueal;
-	public AudioClip bounce;
+	//public AudioClip bounce;
 	public AudioSource audioSource;
-	public GameObject deathShadow;
-	public GameObject hitStar;
-	public GameObject smokePuff;
+	//public GameObject deathShadow;
+	//public GameObject hitStar;
+	//public GameObject smokePuff;
+	public GameObject objectPool;
+
 	public GameObject gar_trash;
 	public GameObject gar_rec;
 	public GameObject gar_comp;
@@ -33,21 +35,22 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject healthDrop;
 	public GameObject pinDrop;
 	public GameObject scrapDrop;
-	public GameObject landingDustParticle;
+	public GameObject hitStarPS;
+	//public GameObject landingDustParticle;
 
-	GameObject deathShadowInstance;
+	//GameObject deathShadowInstance;
 	Ev_MainCamera currentCam;
-	private bool arcMovement = false;
-	private float bounceCounter = 30f;
+	//private bool hitPushBack = false;
+	//private float bounceCounter = 30f;
 	float swingDirectionSide; // uses scale to see if swinging left or right
-	private int numberOfBounces = 0;
+	//private int numberOfBounces = 0;
 	int changeAliveOrDeadCharValueAtPos = 0;
 	bool piercingPin = false;
 	int maxHp; //just used for Vitality Vision pin
 	bool showHealth = false;
 	int sharingUpgrade = 0;
 	int damageOnce = 0;
-	private float landY;
+	//private float landY;
 	private float ySpeed = 0;//gameObject.GetComponent<Rigidbody2D>().velocity.y;
 	private float xSpeed = 0f;
 	tk2dSpriteAnimator myAnim;
@@ -57,10 +60,12 @@ public class EnemyTakeDamage : MonoBehaviour {
 	int dropsTrash = 0;
 	int scrapDropped = 0;
 	int roomNum;
-	//float direction;
-
+	//Color lerpColor = Color.white;
+	bool takingDamage = false;
+	GameObject player;
 
 	void Start () {
+		player = GameObject.FindGameObjectWithTag("Player");
 		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		currentCam = GameObject.Find("tk2dCamera").GetComponent<Ev_MainCamera>();
 		myAnim = this.gameObject.GetComponent<tk2dSpriteAnimator>();
@@ -121,33 +126,37 @@ public class EnemyTakeDamage : MonoBehaviour {
 			currentCamera.transform.localPosition = Random.insideUnitSphere * 0.7f;
 		}
 
-		if(arcMovement && !doesNotArcWhenHit){
-			Debug.Log("Arc movement active");
+		if(takingDamage && !doesNotArcWhenHit){
+
+		
+
+
+			//Debug.Log("Arc movement active");
 			//Debug.Log("Number of bounces:" + numberOfBounces);
 			//Debug.Log("Yspeed" + ySpeed);
 			//Debug.Log("BOUNCE COUNTER: " + bounceCounter);
-			if(numberOfBounces != 0){
+			//if(numberOfBounces != 0){
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, bounceCounter);
 				//Debug.Log("********Applying force here 2*******");
 				//gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-7f,31f), ForceMode2D.Impulse);
 
-				}
-			else{
-				if(currentHp > 0){
-					ySpeed = ySpeed + 2;
+				//}
+			//else{
+				//if(currentHp > 0){
+				///	ySpeed = ySpeed + 2;
 					//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, ySpeed);
-				}else{
-					myAnim.Play("hit");
+				//}else{
+					//myAnim.Play("hit");
 					//gameObject.transform.Rotate(Vector3.right*Time.deltaTime);
-				}
+				//}
 
-			}
-			if(-30 < bounceCounter){
-			bounceCounter = bounceCounter - 1;
-			}
+			//}
+			//if(-30 < bounceCounter){
+			//bounceCounter = bounceCounter - 1;
+			//}
 
 
-		if(landY > gameObject.transform.position.y && currentHp > 0){
+		/*if(landY > gameObject.transform.position.y && currentHp > 0){
 			if(numberOfBounces != 2){
 				Debug.Log("********Applying force here*******");
 
@@ -157,7 +166,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				bounceCounter = 30f;
 				numberOfBounces++;
 				//Debug.Log("Number of bounces:" + numberOfBounces);
-				Instantiate(landingDustParticle, transform.position,Quaternion.identity);
+				//Instantiate(landingDustParticle, transform.position,Quaternion.identity);
 				arcMovement = false;
 				if(currentHp > 0){
 					StartCoroutine("ArcStop");
@@ -170,26 +179,28 @@ public class EnemyTakeDamage : MonoBehaviour {
 					}
 				arcMovement = false;
 			}*/
-			if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0 && audioSource != null){
+			/*if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0 && audioSource != null){
 				audioSource.pitch = Random.Range(1,3);
 				AudioSource.PlayClipAtPoint(bounce, transform.position);
 			}
-			if(deathShadowInstance){
+			/*if(deathShadowInstance){
 				GameObject landingSmoke;
 				landingSmoke = Instantiate(GameObject.Find("smoke_land"),transform.position, Quaternion.identity);
-			}
-		}
+			}*/
+		//}
 			
 		}//end of arch movement
 
-		if(deathShadowInstance) // shadow follows enemy flying back on x axis
+		/*if(deathShadowInstance) // shadow follows enemy flying back on x axis
 				deathShadowInstance.transform.position = new Vector2(gameObject.transform.position.x,deathShadowInstance.transform.position.y );
+				*/
+
+		
 
 	}
 	void OnTriggerEnter2D(Collider2D melee){
 		Debug.Log("Collision with weapon");
-		//Debug.Log(myAnim.IsPlaying);
-		if(melee.name.CompareTo("melee_plank(Clone)")==0||melee.name.CompareTo("bullet")==0)
+		if(melee.tag == "Weapon")
 			TakeDamage(melee.gameObject);
 	}
 
@@ -197,7 +208,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 		Debug.Log("--------TAKE DAMAGE ACTIVATE ----------");
 		Debug.Log(damageOnce);
 			if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
-				if(!myAnim.IsPlaying("hit")){
+				if(!takingDamage){
+					takingDamage = true;
 					damageOnce = 1;
 					meleeDmgBonus = 0;
 					if(GlobalVariableManager.Instance.characterUpgradeArray[1].Substring(3,4).CompareTo("o") == 0 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 6 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] <= 12){
@@ -228,32 +240,29 @@ public class EnemyTakeDamage : MonoBehaviour {
 						Destroy(melee.gameObject);
 
 					if(GlobalVariableManager.Instance.MASTER_SFX_VOL >0){
-						//play hit squel
+						//play hit squeal
 					}
 
-					GameObject player = GameObject.FindGameObjectWithTag("Player");
 
 
+					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
+					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
+					damageCounter.transform.position = new Vector3((transform.position.x + 2), transform.position.y - 1, transform.position.z);
 					if(gameObject.transform.position.x < player.transform.position.x){
-						GameObject damageCounter;
-						damageCounter = Instantiate(hitStar, new Vector3((transform.position.x + 2), transform.position.y - 1, transform.position.z) , Quaternion.identity);
+						hitStarPS.SetActive(true);
+						hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
+
 						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
 					}else{
-						GameObject damageCounter;
-						damageCounter = Instantiate(hitStar, new Vector2(transform.position.x, transform.position.y - 1), Quaternion.identity);
-						//damageCounter.GetComponent<Rigidbody2D>().velocity = new Vector2(-1f, -.5f);
+						hitStarPS.SetActive(true);
+						hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
 						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
 					}
 
 					Debug.Log("current cam shake activate here ******* VVVV");
 					currentCam.StartCoroutine("ScreenShake",.2f);
-					/*if(meleeDmgBonus == 1)
-						hitStar.GetComponent<tk2dSpriteAnimator>().Play("b");
-					else if(meleeDmgBonus == 2){
-						hitStar.GetComponent<tk2dSpriteAnimator>().Play("c");
-					}
-					*/
+
 					if(!moveWhenHit){
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 					}
@@ -272,7 +281,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 					if(spawnShadow && moveWhenHit){
 						
-						deathShadowInstance = Instantiate(deathShadow,new Vector2(transform.position.x, (transform.position.y - transform.lossyScale.y)),Quaternion.identity);
+						//deathShadowInstance = Instantiate(deathShadow,new Vector2(transform.position.x, (transform.position.y - transform.lossyScale.y)),Quaternion.identity);
 					}
 					camShake = 1;
 					StartCoroutine("ContinueHit"); // just needed to seperate here for IEnumerator stuff
@@ -280,98 +289,48 @@ public class EnemyTakeDamage : MonoBehaviour {
 			}
 
 	}
-	IEnumerator ArcStop(){
+	IEnumerator StopKnockback(){
+		
 		yield return new WaitForSeconds(.3f);
-		if(deathShadowInstance != null)
-			Destroy(deathShadowInstance);
-		bounceCounter = -30f;
-		//myAnim.Play(aniToSwitchBackTo);
-		gameObject.GetComponent<Rigidbody2D>().MoveRotation(0f); 
+		Debug.Log("STOP KNOCKBACK ACTIVATE");
 		damageOnce = 0;
-		Instantiate(landingDustParticle,transform.position,Quaternion.identity);
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 		if(aniToSwitchBackTo != null)
-				myAnim.Play(aniToSwitchBackTo);
+				myAnim.Play("idleR");
 			else
 				myAnim.Play("IdleR");
+		takingDamage = false;
 
 	}
 
 	IEnumerator ContinueHit(){
 		yield return new WaitForSeconds(.1f);
 		//remove effects from self
+		this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
+
 		Debug.Log("**Continue Hit activation***");
 		if(moveWhenHit){
-			bounceCounter = 1;
+			takingDamage = true;
 			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawR") == 0||meleeSwingDirection.CompareTo("poleR") == 0){
-				if(currentHp <= 0){
-					xSpeed = 2f;
+				if(swingDirectionSide < 0){
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-17f,0f), ForceMode2D.Impulse);
 				}else{
-					xSpeed = 3.5f;
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,0f), ForceMode2D.Impulse);	
 				}
-				Debug.Log("hit by correct swing *******");
-				gameObject.GetComponent<Rigidbody2D>().MoveRotation(30f); 
-				landY = gameObject.transform.position.y - 1;
-				if(!doesNotArcWhenHit){
-					//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,11f);
-					gameObject.GetComponent<Rigidbody2D>().gravityScale = 10;
-					if(swingDirectionSide < 0){
-						
-					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-7f,21f), ForceMode2D.Impulse);
-					}else{
-					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(7f,21f), ForceMode2D.Impulse);
-						
-					}
-
-					arcMovement = true;
-
-					yield return new WaitForSeconds(.7f);
-					if(arcMovement)
-						ArcStop();
-				}
-				//yield return new WaitForSeconds(.3f);
-				//gameObject.GetComponent<Rigidbody2D>().MoveRotation(0f);  
-
 			}else if(meleeSwingDirection.CompareTo("stickUp") == 0||meleeSwingDirection.CompareTo("clawUp") == 0||meleeSwingDirection.CompareTo("poleUp") == 0){
-				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,2f);
-				landY = gameObject.transform.position.y  - 5;
-				if(deathShadowInstance)
-					deathShadowInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(0,1f);
-				if(!doesNotArcWhenHit){
-					yield return new WaitForSeconds(.2f);
-					arcMovement = true;
-					//makes sure returns to proper ani in case arc is blocked
-				yield return new WaitForSeconds(.7f);
-					if(myAnim.IsPlaying("hit")){
-						if(aniToSwitchBackTo != null)
-							myAnim.Play(aniToSwitchBackTo);
-						else
-							myAnim.Play("IdleR");
-					}
-				}
-
-			
-			 
+				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,-17f), ForceMode2D.Impulse);
 			}else if(meleeSwingDirection.CompareTo("stickDown") == 0||meleeSwingDirection.CompareTo("clawDown") == 0||meleeSwingDirection.CompareTo("poleDown") == 0){
-				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,-2f);
-				landY = gameObject.transform.position.y  + 5;
-				if(deathShadowInstance)
-					deathShadowInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,-1f);
-				if(!doesNotArcWhenHit){
-					yield return new WaitForSeconds(.2f);
-					arcMovement = true;
-					//makes sure returns to proper ani in case arc is blocked
-				yield return new WaitForSeconds(.7f);
-					if(myAnim.IsPlaying("hit")){
-						if(aniToSwitchBackTo != null)
-							myAnim.Play(aniToSwitchBackTo);
-						else
-							myAnim.Play("IdleR");
-					}
-				}
-			
+				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,17f), ForceMode2D.Impulse);
 			}
+			Debug.Log("**GOT THIS FAR***");
+
+				yield return new WaitForSeconds(.2f);
+				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+				Debug.Log("**AND HERE!!!!!!!!***");
+				yield return new WaitForSeconds(.4f);
+				StartCoroutine( "StopKnockback");
+
 		} // end of movement functions
 		if(!globalEnemy){
 			if(currentHp >0){
@@ -385,7 +344,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				}
 
 				//****SFX PLAY - 'hit2' on ch4
-				yield return new WaitForSeconds(.9f);
+				yield return new WaitForSeconds(.5f);
 				//***grow/shrink scale back to normal on all fronts
 
 				if(gameObject.GetComponent<FollowPlayer>()){
@@ -394,20 +353,13 @@ public class EnemyTakeDamage : MonoBehaviour {
 				}else if(gameObject.GetComponent<RandomDirectionMovement>()){
 					gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
 				}
-				arcMovement = false;
-				gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-				gameObject.GetComponent<Rigidbody2D>().MoveRotation(0f);
 				damageOnce = 0;
 			
 			}else{ //if hp is NOT > 0
 				if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
 				//**SFX PLAY- 'hit_final'
 				}
-				/*if(this.gameObject.GetComponent<FollowPlayer>() as FollowPlayer != null){
-					this.gameObject.GetComponent<FollowPlayer>().StopSound();
-					this.gameObject.GetComponent<FollowPlayer>().enabled = false;
-				}*/
-				//disable follow player after notice behavior if end up having thta in game
+
 				if(gameObject.GetComponent<RandomDirectionMovement>().enabled){
 					gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
 				}
@@ -436,72 +388,17 @@ public class EnemyTakeDamage : MonoBehaviour {
 					//**SFX PLAY 'secret discovered'
 					GameObject hole =  Instantiate(GameObject.Find("hiddenHole"), transform.position, Quaternion.identity) as GameObject;
 				}else{
-					GameObject droppedTrash;
-					if(dropsPin !=22){
-						if(dropsTrash <=2){
-							GlobalVariableManager.Instance.MY_NUM_IN_ROOM = 3;
-							if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 3)
-								droppedTrash = Instantiate(gar_trash, transform.position, Quaternion.identity);
-							else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)
-								droppedTrash = Instantiate(gar_rec, transform.position, Quaternion.identity);
-							else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 5)
-								droppedTrash = Instantiate(gar_comp, transform.position, Quaternion.identity);
-						}else if(dropsTrash == 3 && timeDrop != null){
-							droppedTrash = Instantiate(timeDrop, transform.position, Quaternion.identity);
-						}else if(dropsTrash >= 4 && dropsTrash <= (4+sharingUpgrade)&& healthDrop != null){
-							droppedTrash = Instantiate(healthDrop, transform.position, Quaternion.identity);
-
-						}
-					}else if(pinDrop != null){
-						droppedTrash = Instantiate(pinDrop, transform.position, Quaternion.identity);
-					}
-					if(GlobalVariableManager.Instance.WORLD_NUM ==2){
-					//DJKK/Lil' Krill 2nd missions
-						if(gameObject.name.CompareTo("enemy_w2_moleCrab") == 0){
-							if(GlobalVariableManager.Instance.FRIEND_LIST[8].Substring(3,4).CompareTo("j") == 0 &&GlobalVariableManager.Instance.FRIEND_LIST[8].Substring(6,7).CompareTo("f") == 0){
-								GlobalVariableManager.Instance.FRIEND_LIST[8] = GlobalVariableManager.Instance.FRIEND_LIST[8].Replace(GlobalVariableManager.Instance.FRIEND_LIST[8][0],(char)(int.Parse(GlobalVariableManager.Instance.FRIEND_LIST[8].Substring(0,1)) +1));
-							}
-						}else if(gameObject.name.CompareTo("hermitCrab") == 0){
-							if(GlobalVariableManager.Instance.FRIEND_LIST[8].Substring(3,4).CompareTo("k") == 0 && GlobalVariableManager.Instance.FRIEND_LIST[9].Substring(5,6).CompareTo("g") == 0){
-
-								GlobalVariableManager.Instance.FRIEND_LIST[9] = GlobalVariableManager.Instance.FRIEND_LIST[9].Replace(GlobalVariableManager.Instance.FRIEND_LIST[9][0],(char)(int.Parse(GlobalVariableManager.Instance.FRIEND_LIST[9].Substring(0,1)) +1));
-
-							}
-						}else if(gameObject.name.CompareTo("boss_Dudley") == 0){
-							//GameObject.FindGameObjectWithTag("boss").GetComponent<Ev_boss_dudleyV2>().minionDied();
-						}else if(roomNum == 48 ||roomNum == 46 || roomNum == 44 || roomNum == 58){
-							//blocked whale rooms/ (58) one blocked dock room
-							//GameObject.Find("sceneManager").GetComponent<sEv_blockedRooms>().kill();
-						}
-
-					}
+					DropThings();
 				}
-				/*
-				A bunch of code for 'direction' was here, but I don't think it's actually needed?
 
-				*/
 
-				//gameObject.GetComponent<Renderer>().sortingLayerName = "front";
 				yield return new WaitForSeconds(.4f);
-				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-				if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < (13 + (GlobalVariableManager.Instance.pinsEquipped[20]*5))){
-				// get #20*5 thing is for 'Waste Warrior' adjustment
-					if(GlobalVariableManager.Instance.pinsEquipped[22] != 1){
-						//^ Scrap City - more scrap dropped
-						scrapDropped = Random.Range(1,3);
-					}else{
-						scrapDropped = Random.Range(2,5);
-					}
-					for(int i = 0; i < scrapDropped; i++){
-						GameObject droppedScrap;
-						droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
-					}
-				}
-				if(deathShadowInstance)
-					Destroy(deathShadowInstance);
+
+				DropScrap();
+			
 
 				GameObject deathSmoke;
-				deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
+				//deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
 
 				if(changeAliveOrDeadCharValueAtPos != 0){
 					if(GlobalVariableManager.Instance.WORLD_NUM == 3){
@@ -514,8 +411,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 						//GameObject.Find("sceneManager").GetComponent<sEv_kakedaRoom>().kill();
 					}
 				}
-				arcMovement = false;
-				gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+
 				gameObject.GetComponent<Rigidbody2D>().MoveRotation(0f);
 				Destroy(gameObject);
 
@@ -538,26 +434,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 			}else{ //if hp = 0/dead
 				GlobalVariableManager.Instance.ENEMIES_DEFEATED++;
 				GlobalVariableManager.Instance.MY_NUM_IN_ROOM = 3;
-				GameObject droppedTrash;
-				if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 3)
-					droppedTrash = Instantiate(gar_trash, transform.position, Quaternion.identity);
-				else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)
-					droppedTrash = Instantiate(gar_rec, transform.position, Quaternion.identity);
-				else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 5)
-					droppedTrash = Instantiate(gar_comp, transform.position, Quaternion.identity);
-				if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < (13 + (GlobalVariableManager.Instance.pinsEquipped[20]*5))){
-				// get #20*5 thing is for 'Waste Warrior' adjustment
-					if(GlobalVariableManager.Instance.pinsEquipped[22] != 1){
-						//^ Scrap City - more scrap dropped
-						scrapDropped = Random.Range(2,4);
-					}else{
-						scrapDropped = Random.Range(3,7);
-					}
-					for(int i = 0; i < scrapDropped; i++){
-						GameObject droppedScrap;
-						droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
-					}
-				}
+				DropThings();
+				DropScrap();
+
 				if(GlobalVariableManager.Instance.WORLD_NUM == 3){
 				//maskedOni
 					GameObject droppedMask;
@@ -567,45 +446,88 @@ public class EnemyTakeDamage : MonoBehaviour {
 					//GameObject.Find("sceneManager").GetComponent<sEv_quietMoundRooms>().kill();
 				}
 				GameObject deathSmoke;
-				deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
+				//deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
 				if(GlobalVariableManager.Instance.MASTER_SFX_VOL >0){
 					if(hitSqueal != null){
 						//play hitSqueal at ch 5
 					}
 				}
-				if(deathShadowInstance)
-					Destroy(deathShadowInstance);
+				//if(deathShadowInstance)
+				//	Destroy(deathShadowInstance);
 				Destroy(gameObject);
 		}
 
 			yield return new WaitForSeconds(.2f);
 		if(currentHp > 0 || (globalEnemy && int.Parse(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList]) > 1)){
-			gameObject.GetComponent<Rigidbody2D>().MoveRotation(0f); 
-			//disable rotation here if needed
-			if(moveWhenHit){
-				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-			}
-			yield return new WaitForSeconds(.2f);
-			if(aniToSwitchBackTo != null)
-				myAnim.Play(aniToSwitchBackTo);
-			else
-				myAnim.Play("IdleR");
-			arcMovement = false;
-			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-			gameObject.GetComponent<Rigidbody2D>().MoveRotation(0f);
-			if(moveWhenHit)
-				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-			if(deathShadowInstance){
-				Destroy(deathShadowInstance);
-			}
-			if(!doesNotArcWhenHit && arcMovement)
-				gameObject.transform.position = new Vector2(transform.position.x,landY);
-			bounceCounter = -30;
+			StartCoroutine( "StopKnockback");
+			//if(deathShadowInstance){
+			//	Destroy(deathShadowInstance);
+			//}
+			//if(!doesNotArcWhenHit && arcMovement)
+				//gameObject.transform.position = new Vector2(transform.position.x,landY);
+			//hitPushBack = -30;
 			//Debug.Log("REACHED THIS PART");
 			damageOnce = 0;
 		}
+
 		}
 
+	}
 
+
+	void DropThings(){
+		GameObject droppedTrash;
+		if(dropsPin !=22){
+			if(dropsTrash <=2){
+					GlobalVariableManager.Instance.MY_NUM_IN_ROOM = 3;
+					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 3)
+							droppedTrash = Instantiate(gar_trash, transform.position, Quaternion.identity);
+					else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)
+							droppedTrash = Instantiate(gar_rec, transform.position, Quaternion.identity);
+					else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 5)
+								droppedTrash = Instantiate(gar_comp, transform.position, Quaternion.identity);
+					}else if(dropsTrash == 3 && timeDrop != null){
+							droppedTrash = Instantiate(timeDrop, transform.position, Quaternion.identity);
+					}else if(dropsTrash >= 4 && dropsTrash <= (4+sharingUpgrade)&& healthDrop != null){
+							droppedTrash = Instantiate(healthDrop, transform.position, Quaternion.identity);
+
+					}
+		}else if(pinDrop != null){
+			droppedTrash = Instantiate(pinDrop, transform.position, Quaternion.identity);
+		}
+		if(GlobalVariableManager.Instance.WORLD_NUM ==2){
+		//DJKK/Lil' Krill 2nd missions
+			if(gameObject.name.CompareTo("enemy_w2_moleCrab") == 0){
+				if(GlobalVariableManager.Instance.FRIEND_LIST[8].Substring(3,4).CompareTo("j") == 0 &&GlobalVariableManager.Instance.FRIEND_LIST[8].Substring(6,7).CompareTo("f") == 0){
+						GlobalVariableManager.Instance.FRIEND_LIST[8] = GlobalVariableManager.Instance.FRIEND_LIST[8].Replace(GlobalVariableManager.Instance.FRIEND_LIST[8][0],(char)(int.Parse(GlobalVariableManager.Instance.FRIEND_LIST[8].Substring(0,1)) +1));
+				}
+			}else if(gameObject.name.CompareTo("hermitCrab") == 0){
+				if(GlobalVariableManager.Instance.FRIEND_LIST[8].Substring(3,4).CompareTo("k") == 0 && GlobalVariableManager.Instance.FRIEND_LIST[9].Substring(5,6).CompareTo("g") == 0){
+					GlobalVariableManager.Instance.FRIEND_LIST[9] = GlobalVariableManager.Instance.FRIEND_LIST[9].Replace(GlobalVariableManager.Instance.FRIEND_LIST[9][0],(char)(int.Parse(GlobalVariableManager.Instance.FRIEND_LIST[9].Substring(0,1)) +1));
+				}
+			}else if(gameObject.name.CompareTo("boss_Dudley") == 0){
+							//GameObject.FindGameObjectWithTag("boss").GetComponent<Ev_boss_dudleyV2>().minionDied();
+			}else if(roomNum == 48 ||roomNum == 46 || roomNum == 44 || roomNum == 58){
+				//blocked whale rooms/ (58) one blocked dock room
+				//GameObject.Find("sceneManager").GetComponent<sEv_blockedRooms>().kill();
+			}
+
+		}
+	}
+
+	void DropScrap(){
+		if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < (13 + (GlobalVariableManager.Instance.pinsEquipped[20]*5))){
+		// get #20*5 thing is for 'Waste Warrior' adjustment
+			if(GlobalVariableManager.Instance.pinsEquipped[22] != 1){
+				//^ Scrap City - more scrap dropped
+				scrapDropped = Random.Range(1,3);
+			}else{
+				scrapDropped = Random.Range(2,5);
+			}
+		for(int i = 0; i < scrapDropped; i++){
+			GameObject droppedScrap;
+			droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
+		}
+		}
 	}
 }

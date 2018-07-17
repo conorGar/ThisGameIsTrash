@@ -10,11 +10,11 @@ public class Room : MonoBehaviour
     public int roomNum;
     public List<EnemySpawn> enemySpawns;
 
-    public GameObject leftPortal;
+    /*public GameObject leftPortal;
     public GameObject rightPortal;
     public GameObject topPortal;
     public GameObject botPortal;
-
+    */
 
     List<Enemy> enemies;
     //public List<Friend> friends;
@@ -30,8 +30,8 @@ public class Room : MonoBehaviour
     {
     	Debug.Log("ActivateRoom....activated");
         roomManager.mainCamera.ScreenCamera.ViewportToWorldPoint(transform.position);
-        roomManager.SetCamFollowBounds(leftPortal.transform.position.x,rightPortal.transform.position.x,
-        								topPortal.transform.position.y,botPortal.transform.position.y);
+        //roomManager.SetCamFollowBounds(leftPortal.transform.position.x,rightPortal.transform.position.x,
+        							//	topPortal.transform.position.y,botPortal.transform.position.y);
     }
 
 
