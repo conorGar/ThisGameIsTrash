@@ -14,11 +14,14 @@ public class RoomManager : MonoBehaviour {
     public Room currentRoom;
     public Room previousRoom;
 
+    public Vector3 previousCameraPosition;
+    public Vector3 targetCameraPosition;
 
 	// Use this for initialization
 	void Start () {
         currentRoom = startRoom;
         previousRoom = null;
+        SetCamFollowBounds(currentRoom);
 	}
 	
 	// Update is called once per frame
@@ -26,14 +29,25 @@ public class RoomManager : MonoBehaviour {
         // lerpin'
         if (isTransitioning)
         {
-            mainCamera.transform.position = new Vector3(Mathf.Lerp(previousRoom.transform.position.x, currentRoom.transform.position.x, lerpCamera),
-                                        Mathf.Lerp(previousRoom.transform.position.y, currentRoom.transform.position.y, lerpCamera),
+            mainCamera.transform.position = new Vector3(Mathf.Lerp(previousCameraPosition.x, targetCameraPosition.x, lerpCamera),
+                                        Mathf.Lerp(previousCameraPosition.y, targetCameraPosition.y, lerpCamera),
                                         mainCamera.transform.position.z);
 
             if (lerpCamera >= 1.0f)
+            {
                 isTransitioning = false;
+                currentRoom.ActivateRoom();
+            }
             else
                 lerpCamera += lerpCameraSpeed;
         }
+    }
+
+    public void SetCamFollowBounds(Room room)
+    {
+        //Activated by Room.cs under 'ActivateRoom()'
+        Debug.Log("SetCamFollowBounds Activated properly");
+        mainCamera.GetComponent<Ev_MainCamera>().enabled = true; //renable following camera after transition
+        mainCamera.GetComponent<Ev_MainCamera>().SetMinMax(room);
     }
 }

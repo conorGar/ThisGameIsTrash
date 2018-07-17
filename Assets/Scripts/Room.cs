@@ -9,6 +9,9 @@ public class Room : MonoBehaviour
 
     public int roomNum;
     public List<EnemySpawn> enemySpawns;
+    public GameObject player;
+    public BoxCollider2D roomCollider2D;
+    
     List<Enemy> enemies;
     public List<Friend> friends;
     
@@ -19,9 +22,10 @@ public class Room : MonoBehaviour
         public List<Enemy> enemies;
     }
 
-    private void ActivateRoom()
+    public void ActivateRoom()
     {
         roomManager.mainCamera.ScreenCamera.ViewportToWorldPoint(transform.position);
+        roomManager.SetCamFollowBounds(this);
     }
 
 
@@ -45,11 +49,29 @@ public class Room : MonoBehaviour
 
             enemies.Add(enemy);  
         }
-	}
+
+        Physics2D.IgnoreCollision(roomCollider2D, player.GetComponent<Collider2D>());
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
 		
 	}
+
+    public Rect GetRoomCameraBoundaries()
+    {
+        var vertExtent = roomManager.mainCamera.ScreenExtents.yMax;
+        var horzExtent = roomManager.mainCamera.ScreenExtents.xMax;
+        Rect rect = new Rect();
+
+        // TODO: There's a Mathf.Max call in here to handle situations where the room is smaller than the size of the camera (the max_x or max_y become smaller than the min_x or min_y in this case).
+        // Maybe there's a better way to handle this kind of issue?  If careful, will this come up much?
+        rect.xMin = -roomCollider2D.bounds.size.x / 2.0f + horzExtent + transform.position.x;
+        rect.xMax = Mathf.Max(rect.xMin, roomCollider2D.bounds.size.x / 2.0f - horzExtent + transform.position.x);
+        rect.yMin = -roomCollider2D.bounds.size.y / 2.0f + vertExtent + transform.position.y;
+        rect.yMax = Mathf.Max(rect.yMin, roomCollider2D.bounds.size.y / 2.0f - vertExtent + transform.position.y);
+
+        return rect;
+    }
 }
