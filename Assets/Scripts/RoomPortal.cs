@@ -113,10 +113,7 @@ public class RoomPortal : MonoBehaviour {
                     player = collider.gameObject;
                     playerCollider2d = player.GetComponent<Collider2D>();
                     roomManager.mainCamera.GetComponent<Ev_MainCamera>().enabled = false; //disable camera following for transition. Enabled uner RoomManager: SetCamBOunds
-//<<<<<<< HEAD
-//=======
                     roomManager.previousCameraPosition = roomManager.mainCamera.GetComponent<Ev_MainCamera>().transform.position;
-//>>>>>>> refs/remotes/origin/digital_smash
                     roomManager.isTransitioning = true;
                     roomManager.lerpCamera = 0.0f;
 

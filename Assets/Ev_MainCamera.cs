@@ -37,14 +37,10 @@ public class Ev_MainCamera : MonoBehaviour {
 			if(!transitioning){
 				if(screenShake == 0){
 					if(stableCamera == false){
-//<<<<<<< HEAD
-						transform.position = new Vector3(player.transform.position.x,player.transform.position.y,-10f); // follows only when player is in center of screen
-//=======
 						transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, player.transform.position.x, Time.deltaTime * cameraSpeed),
                                                          Mathf.SmoothStep(transform.position.y, player.transform.position.y, Time.deltaTime * cameraSpeed),
                                                          -10f); // follows only when player is in center of screen
 
-//>>>>>>> refs/remotes/origin/digital_smash
 						transform.position = new Vector3(
 							Mathf.Clamp(transform.position.x, MIN_X, MAX_X),
 							Mathf.Clamp(transform.position.y, MIN_Y, MAX_Y),
@@ -101,7 +97,7 @@ public class Ev_MainCamera : MonoBehaviour {
 		StartCoroutine("StopTransition");
 	}
 
-//<<<<<<< HEAD
+
 	/*public void SetMinMax(float minX, float maxX, float minY, float maxY){
 	//activated by BoundSetter script
 		MIN_X = minX;
@@ -114,7 +110,6 @@ public class Ev_MainCamera : MonoBehaviour {
 		Debug.Log(MAX_Y);
 	}*/
 
-//=======
     public void SetMinMax(Room room)
     {
         Rect rect = room.GetRoomCameraBoundaries();
@@ -124,21 +119,8 @@ public class Ev_MainCamera : MonoBehaviour {
         MAX_Y = rect.yMax;
     }
 
-    public void SetMinMax(float minX, float maxX, float minY, float maxY)
-    {
-        //activated by BoundSetter script
-        MIN_X = minX;
-        MIN_Y = minY;
-        MAX_X = maxX;
-        MAX_Y = maxY;
-        Debug.Log(MIN_X);
-        Debug.Log(MIN_Y);
-        Debug.Log(MAX_X);
-        Debug.Log(MAX_Y);
-    }
 
     /*
->>>>>>> refs/remotes/origin/digital_smash
 	public void SetMax_X(float max){
 		MAX_X = max;
 	}
@@ -150,13 +132,8 @@ public class Ev_MainCamera : MonoBehaviour {
 	}
 	public void SetMin_Y(float min){
 		MIN_Y = min;
-<<<<<<< HEAD
 	}
 	*/
-///=======
-	//}
-
-//>>>>>>> refs/remotes/origin/digital_smash
 
     IEnumerator StopTransition(){
 		yield return new WaitForSeconds(.5f);
