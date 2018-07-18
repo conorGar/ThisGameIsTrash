@@ -37,6 +37,7 @@ public class Ev_MainCamera : MonoBehaviour {
 			if(!transitioning){
 				if(screenShake == 0){
 					if(stableCamera == false){
+<<<<<<< HEAD
 //<<<<<<< HEAD
 						transform.position = new Vector3(player.transform.position.x,player.transform.position.y,-10f); // follows only when player is in center of screen
 //=======
@@ -50,6 +51,12 @@ public class Ev_MainCamera : MonoBehaviour {
 							Mathf.Clamp(transform.position.y, MIN_Y, MAX_Y),
 							-10f);
 
+=======
+						transform.position = new Vector3(Mathf.Clamp(Mathf.SmoothStep(transform.position.x, player.transform.position.x, Time.deltaTime * cameraSpeed), MIN_X, MAX_X),
+                                                         Mathf.Clamp(Mathf.SmoothStep(transform.position.y, player.transform.position.y, Time.deltaTime * cameraSpeed), MIN_Y, MAX_Y),
+                                                         -10f); // follows only when player is in center of screen
+
+>>>>>>> refs/remotes/origin/digital_smash
 						/*if(transform.position.x >= MAX_X || transform.position.x <= MIN_X ){
 							hitbounds = 1; //=1:no x movement, =2: no y movement
 						}else if(transform.position.y >= MAX_Y || transform.position.y <= MIN_Y ){
