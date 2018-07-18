@@ -8,7 +8,6 @@ public class Room : MonoBehaviour
     public RoomManager roomManager;
 
     public int roomNum;
-<<<<<<< HEAD
     public List<EnemySpawn> enemySpawns;
 //<<<<<<< HEAD
 
@@ -32,14 +31,6 @@ public class Room : MonoBehaviour
     {
         public List<Enemy> enemies;
     }
-=======
-    public List<EnemySpawner> enemySpawners;
-    public GameObject player;
-    public BoxCollider2D roomCollider2D;
-    
-    private List<GameObject> enemies;
-    public List<Friend> friends;
->>>>>>> refs/remotes/origin/digital_smash
 
     public void ActivateRoom()
     {
@@ -51,7 +42,6 @@ public class Room : MonoBehaviour
        // 								topPortal.transform.position.y,botPortal.transform.position.y);
 //=======
         roomManager.SetCamFollowBounds(this);
-<<<<<<< HEAD
 //>>>>>>> refs/remotes/origin/digital_smash
 //=======
         //roomManager.SetCamFollowBounds(leftPortal.transform.position.x,rightPortal.transform.position.x,
@@ -59,46 +49,28 @@ public class Room : MonoBehaviour
 //>>>>>>> refs/heads/MeleeSystemImprovements
     }
 
-=======
->>>>>>> refs/remotes/origin/digital_smash
 
-        // enemy spawns
+    // Use this for initialization
+    void Start ()
+    {
+        var enemies = new List<Enemy>();
         bool allowArmoredEnemies = false;
         if (GlobalVariableManager.Instance.DAY_NUMBER < 2)
             allowArmoredEnemies = true;
 
-        for (int i=0; i < enemySpawners.Count; ++i)
+        // enemy spawns
+        for (int i=0; i < enemySpawns.Count; ++i)
         {
             // get a random enemy from the enemy spawn list
-            Enemy enemy = enemySpawners[i].enemies.RandomElement();
+            Enemy enemy = enemySpawns[i].enemies.RandomElement();
 
             // ignore armored enemies if they aren't allowed to spawn yet.
             if (enemy.IsArmored && !allowArmoredEnemies)
                 continue;
 
-            GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
-
-            if (spawnedEnemy != null)
-            {
-                enemies.Add(spawnedEnemy);
-                spawnedEnemy.transform.position = enemySpawners[i].transform.position;
-            }
+            enemies.Add(enemy);  
         }
-    }
 
-    public void DeactivateRoom()
-    {
-        for (int i=0; i < enemies.Count; ++i)
-            enemies[i].SetActive(false);
-
-        enemies.Clear();
-    }
-
-
-    // Use this for initialization
-    void Start ()
-    {
-        enemies = new List<GameObject>();
         Physics2D.IgnoreCollision(roomCollider2D, player.GetComponent<Collider2D>());
     }
 	

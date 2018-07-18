@@ -5,7 +5,6 @@ using UnityEngine;
 public class RoomManager : MonoBehaviour {
     public tk2dCamera mainCamera;
     public GameObject player;
-    public Collider2D playerCollider2D;
     public bool isTransitioning = false;
     public float lerpCamera = 0.0f;
     public float lerpCameraSpeed = 0.1f;
@@ -20,10 +19,9 @@ public class RoomManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        playerCollider2D = player.GetComponent<Collider2D>();
         currentRoom = startRoom;
         previousRoom = null;
-        currentRoom.ActivateRoom();
+        SetCamFollowBounds(currentRoom);
 	}
 	
 	// Update is called once per frame
@@ -44,27 +42,11 @@ public class RoomManager : MonoBehaviour {
             if (lerpCamera >= 1.0f)
             {
                 isTransitioning = false;
-                previousRoom.DeactivateRoom();
                 currentRoom.ActivateRoom();
             }
             else
 //>>>>>>> refs/remotes/origin/digital_smash
                 lerpCamera += lerpCameraSpeed;
-        }
-        else
-        {
-            if (player != null && currentRoom != null)
-            {
-                Vector3 pos = player.transform.position;
-
-                // if the player is out of the bounds of the room, clamp everything down.
-                if (pos.x < currentRoom.roomCollider2D.bounds.min.x || pos.x > currentRoom.roomCollider2D.bounds.max.x ||
-                    pos.y < currentRoom.roomCollider2D.bounds.min.y || pos.y > currentRoom.roomCollider2D.bounds.max.y)
-
-                player.transform.position = new Vector3(Mathf.Clamp(pos.x, currentRoom.roomCollider2D.bounds.min.x, currentRoom.roomCollider2D.bounds.max.x),
-                                                        Mathf.Clamp(pos.y, currentRoom.roomCollider2D.bounds.min.y, currentRoom.roomCollider2D.bounds.max.y),
-                                                        pos.z);
-            }
         }
     }
 

@@ -25,12 +25,11 @@ GameObject:
   - component: {fileID: 61906788192166136}
   - component: {fileID: 114380913922092040}
   - component: {fileID: 114298551362366922}
-  - component: {fileID: 114829513583918610}
   - component: {fileID: 114833213622145292}
   - component: {fileID: 114022559911531030}
   m_Layer: 9
   m_Name: enemy_brownMole
-  m_TagString: enemy_brownMole
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,17 +151,6 @@ MonoBehaviour:
   hitSqueal: {fileID: 0}
   bounce: {fileID: 0}
   audioSource: {fileID: 0}
-  deathShadow: {fileID: 0}
-  hitStar: {fileID: 0}
-  smokePuff: {fileID: 0}
-  gar_trash: {fileID: 0}
-  gar_rec: {fileID: 0}
-  gar_comp: {fileID: 0}
-  timeDrop: {fileID: 0}
-  healthDrop: {fileID: 0}
-  pinDrop: {fileID: 0}
-  scrapDrop: {fileID: 0}
-  landingDustParticle: {fileID: 0}
 --- !u!114 &114298551362366922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,18 +203,6 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
---- !u!114 &114829513583918610
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1092592193999108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsArmored: 0
 --- !u!114 &114833213622145292
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -24,12 +24,11 @@ GameObject:
   - component: {fileID: 114205331028232734}
   - component: {fileID: 61161049283421296}
   - component: {fileID: 114331454502037192}
-  - component: {fileID: 114355658259309398}
   - component: {fileID: 114916655749127940}
   - component: {fileID: 114823613773519374}
   m_Layer: 9
   m_Name: enemy_bird
-  m_TagString: enemy_bird
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,18 +150,6 @@ MonoBehaviour:
   library: {fileID: 114393213261838372, guid: edbe600f33da2a24facc4cee355fd9fc, type: 2}
   defaultClipId: 0
   playAutomatically: 0
---- !u!114 &114355658259309398
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1776742418842668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsArmored: 0
 --- !u!114 &114823613773519374
 MonoBehaviour:
   m_ObjectHideFlags: 1
