@@ -259,7 +259,6 @@ MonoBehaviour:
   - {fileID: 1600320654}
   player: {fileID: 1324332375}
   roomCollider2D: {fileID: 63428140}
-  friends: []
 --- !u!4 &63428139
 Transform:
   m_ObjectHideFlags: 0
@@ -1414,24 +1413,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da57cc0ed90ce2841b5d2346d3f5df8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftLimit: -15
-  rightLimit: 15
-  upLimit: -11
-  botLimit: 11
-  xSpawnLeftScene: 14
-  ySpawnLeftScene: 0
-  xSpawnRightScene: -14
-  ySpawnRightScene: 0
-  xSpawnTop: 0
-  ySpawnTop: -7
-  xSpawnBot: 0
-  ySpawnBot: 7
-  numLeftRoom: 0
-  numRightRoom: 0
-  numTopRoom: 0
-  numBotRoom: 0
-  roomName: 
-  worldStartingRoomNum: 0
 --- !u!114 &579702298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2278,6 +2259,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b211ab476a8c77f478ff5fc5e5192f3d, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &920341153 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1368969930877664, guid: 2348fa2f26462e741bff40654371f25c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1348205459}
 --- !u!1001 &937712895
 Prefab:
   m_ObjectHideFlags: 0
@@ -3783,6 +3769,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.08, y: 3.1799998}
   m_EdgeRadius: 0
+--- !u!4 &1324332385 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4128606448609264, guid: 53a29d08915c9364bb2a63652d18f8d9,
+    type: 2}
+  m_PrefabInternal: {fileID: 2094739781}
 --- !u!1001 &1329862348
 Prefab:
   m_ObjectHideFlags: 0
@@ -3847,6 +3838,53 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b211ab476a8c77f478ff5fc5e5192f3d, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1348205459
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1324332385}
+    m_Modifications:
+    - target: {fileID: 4672110257621852, guid: 2348fa2f26462e741bff40654371f25c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.04456883
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672110257621852, guid: 2348fa2f26462e741bff40654371f25c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.4235783
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672110257621852, guid: 2348fa2f26462e741bff40654371f25c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672110257621852, guid: 2348fa2f26462e741bff40654371f25c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672110257621852, guid: 2348fa2f26462e741bff40654371f25c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672110257621852, guid: 2348fa2f26462e741bff40654371f25c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672110257621852, guid: 2348fa2f26462e741bff40654371f25c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4672110257621852, guid: 2348fa2f26462e741bff40654371f25c, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 33737417856035172, guid: 2348fa2f26462e741bff40654371f25c,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2348fa2f26462e741bff40654371f25c, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1348532778
 Prefab:
@@ -4543,7 +4581,6 @@ MonoBehaviour:
   enemySpawners: []
   player: {fileID: 1324332375}
   roomCollider2D: {fileID: 1618326859}
-  friends: []
 --- !u!4 &1618326858
 Transform:
   m_ObjectHideFlags: 0
@@ -5346,7 +5383,6 @@ MonoBehaviour:
   enemySpawners: []
   player: {fileID: 1324332375}
   roomCollider2D: {fileID: 2053621089}
-  friends: []
 --- !u!4 &2053621088
 Transform:
   m_ObjectHideFlags: 0
@@ -5526,6 +5562,11 @@ Prefab:
       propertyPath: playAutomatically
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114693407956446074, guid: 53a29d08915c9364bb2a63652d18f8d9,
+        type: 2}
+      propertyPath: myLegs
+      value: 
+      objectReference: {fileID: 920341153}
     m_RemovedComponents:
     - {fileID: 61116733901593266, guid: 53a29d08915c9364bb2a63652d18f8d9, type: 2}
     - {fileID: 61857212249555410, guid: 53a29d08915c9364bb2a63652d18f8d9, type: 2}
@@ -5684,7 +5725,6 @@ MonoBehaviour:
   enemySpawners: []
   player: {fileID: 1324332375}
   roomCollider2D: {fileID: 2135170684}
-  friends: []
 --- !u!61 &2135170684
 BoxCollider2D:
   m_ObjectHideFlags: 0
