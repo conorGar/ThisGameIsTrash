@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
-    public List<Enemy> enemies;
+public class GarbageSpawner : EditorMonoBehaviour
+{
+    public bool spawned = false;
 
-    // Use this for initialization
-    void Start () {
+	// Use this for initialization
+	void Start () {
 		
 	}
 	

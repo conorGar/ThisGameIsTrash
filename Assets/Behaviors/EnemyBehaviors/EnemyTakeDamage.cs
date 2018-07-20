@@ -247,6 +247,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
 					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
+                    damageCounter.SetActive(true);
 					damageCounter.transform.position = new Vector3((transform.position.x + 2), transform.position.y - 1, transform.position.z);
 					if(gameObject.transform.position.x < player.transform.position.x){
 						hitStarPS.SetActive(true);

@@ -4,16 +4,14 @@ using UnityEngine;
 
 
 public class Ev_BagSelect : MonoBehaviour {
-
-	
-
-	tk2dSpriteAnimator myAnim;
+    // MENU_SELECT_STAGE is the bag selected.
+    tk2dSpriteAnimator myAnim;
 
 	int phase = 0;
 	// Use this for initialization
 	void Start () {
-        // if paper is not discovered.
-		if((GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[GlobalVariableManager.Instance.MENU_SELECT_STAGE] & GlobalVariableManager.GARBAGE.PAPER) != GlobalVariableManager.GARBAGE.PAPER) {
+        // If the bag is locked.
+		if(GlobalVariableManager.Instance.IsBagLocked(GlobalVariableManager.Instance.MENU_SELECT_STAGE)) {
 			gameObject.GetComponent<tk2dSprite>().color = Color.black;
 		}
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();

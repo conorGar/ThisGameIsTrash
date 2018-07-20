@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour {
+    public static RoomManager Instance;
     public tk2dCamera mainCamera;
     public GameObject player;
     public Collider2D playerCollider2D;
@@ -11,15 +12,17 @@ public class RoomManager : MonoBehaviour {
     public float lerpCameraSpeed = 0.1f;
 
     public Room startRoom;
-
     public Room currentRoom;
     public Room previousRoom;
+
+    public List<Room> rooms;
 
     public Vector3 previousCameraPosition;
     public Vector3 targetCameraPosition;
 
 	// Use this for initialization
 	void Start () {
+        Instance = this;
         playerCollider2D = player.GetComponent<Collider2D>();
         currentRoom = startRoom;
         previousRoom = null;

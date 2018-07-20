@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomPortal : MonoBehaviour {
+public class RoomPortal : EditorMonoBehaviour {
     public RoomManager roomManager;
 
     public enum Direction

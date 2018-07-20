@@ -110,10 +110,10 @@ public class Ev_WorldSelect : MonoBehaviour {
 		for(int i = 0; i < numberOfStars; i++){
 		    GameObject tempStar = Instantiate(star, new Vector2(tempXStar,5f), Quaternion.identity);
 
-            GlobalVariableManager.LARGETRASH largeTrashType = GlobalVariableManager.Instance.LargeTrashByIndex(i);
+            LARGEGARBAGE largeGarbageType = LargeGarbage.ByIndex(i);
             
             // Black out any stars for large trash that hasn't been both discovered and viewed.
-            if ((GlobalVariableManager.Instance.LARGE_TRASH_DISCOVERY_LIST & largeTrashType) != largeTrashType && (GlobalVariableManager.Instance.LARGE_TRASH_VIEWED_LIST & largeTrashType) != largeTrashType) {
+            if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeGarbageType) != largeGarbageType && (GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED & largeGarbageType) != largeGarbageType) {
 				tempStar.GetComponent<SpriteRenderer>().color = Color.black;
 			}
 				starlist.Add(tempStar);

@@ -45,10 +45,10 @@ public class S_Ev_Hub : MonoBehaviour {
 	//unlocked string and if = 'o' then searches scene for gameobject with a name = the index it's currently
 	//at and enables it...
         
-        for (int i=0; i < sizeof(GlobalVariableManager.LARGETRASH); ++i)
+        for (int i=0; i < sizeof(LARGEGARBAGE); ++i)
         {
-            GlobalVariableManager.LARGETRASH largeTrashType = GlobalVariableManager.Instance.LargeTrashByIndex(i);
-            if ((GlobalVariableManager.Instance.LARGE_TRASH_DISCOVERY_LIST & largeTrashType) == largeTrashType)
+            LARGEGARBAGE largeGarbageType = LargeGarbage.ByIndex(i);
+            if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeGarbageType) == largeGarbageType)
             {
                 GameObject.Find(i.ToString()).SetActive(true);
             }

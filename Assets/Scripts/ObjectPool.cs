@@ -58,7 +58,6 @@ public class ObjectPool : MonoBehaviour {
                 {
                     if (!objects[i].activeInHierarchy)
                     {
-                        objects[i].SetActive(true);
                         return objects[i];
                     }
                 }
@@ -66,7 +65,6 @@ public class ObjectPool : MonoBehaviour {
                 if (poolDefinition.IsExpandable)
                 {
                     GameObject obj = Instantiate(poolDefinition.poolObject) as GameObject;
-                    obj.SetActive(true);
                     pooledObjects[poolDefinition].Add(obj);
                     return obj;
                 }

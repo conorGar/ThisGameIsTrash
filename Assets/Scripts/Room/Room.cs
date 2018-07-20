@@ -9,6 +9,7 @@ public class Room : MonoBehaviour
 
     public int roomNum;
     public List<EnemySpawner> enemySpawners;
+    public List<GarbageSpawner> garbageSpawners;
     public GameObject player;
     public BoxCollider2D roomCollider2D;
     
@@ -36,6 +37,7 @@ public class Room : MonoBehaviour
                 continue;
 
             GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
+            spawnedEnemy.SetActive(true);
 
             if (spawnedEnemy != null)
             {
@@ -58,7 +60,7 @@ public class Room : MonoBehaviour
     void Start ()
     {
         enemies = new List<GameObject>();
-        Physics2D.IgnoreCollision(roomCollider2D, player.GetComponent<Collider2D>());
+        //Physics2D.IgnoreCollision(roomCollider2D, player.GetComponent<Collider2D>());
     }
 	
 	// Update is called once per frame

@@ -63,7 +63,7 @@ public class Ev_Results : MonoBehaviour {
 
 
 					//add to large trash discovery list
-					GlobalVariableManager.Instance.LARGE_TRASH_DISCOVERY_LIST |= GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].type;
+					GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED |= GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].type;
 
 
 					displayIndex++;
@@ -93,7 +93,6 @@ public class Ev_Results : MonoBehaviour {
 						GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2).ToString();
 						GlobalVariableManager.Instance.pinsEquipped[10] = 1;
 					}
-					GlobalVariableManager.Instance.WORLD_LIST.Clear();
 
 					//-------Reset today's trash collected---------//
 					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 3){
