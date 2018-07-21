@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour {
     public List<Enemy> enemies;
-
+    public bool isMyEnemyDead = false;
+    public EnemyInstance myEnemyInstance;
+    string spawnerID;
     // Use this for initialization
     void Start () {
-		
+    	spawnerID = gameObject.name;
+		if(!GlobalVariableManager.Instance.BASIC_ENEMY_LIST.ContainsValue(myEnemyInstance)){
+			GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID] = myEnemyInstance;
+		}
+		if(GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID].dayOfRevival > GlobalVariableManager.Instance.DAY_NUMBER){
+			isMyEnemyDead = true;
+		}
+
+
+
+
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public bool CheckIfEnemyDead(){
+		if(GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID].dayOfRevival > GlobalVariableManager.Instance.DAY_NUMBER){
+			isMyEnemyDead = true;
+		}
+		return isMyEnemyDead;
 	}
 }

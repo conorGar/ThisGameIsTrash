@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1065235061817632}
+  m_IsPrefabParent: 1
+--- !u!1 &1065235061817632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4279878936172466}
+  - component: {fileID: 114341364034221468}
+  m_Layer: 9
+  m_Name: objectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4279878936172466
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1065235061817632}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.1320298, y: -2.4893105, z: 0.2109375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114341364034221468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1065235061817632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0385704977d9c98438848cd0c364a40d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToPool:
+  - IsExpandable: 1
+    poolObject: {fileID: 1251092639416312, guid: 9a669602bab671e429a69c0516acadca,
+      type: 2}
+    poolSize: 3
+  - IsExpandable: 1
+    poolObject: {fileID: 1098292903033816, guid: f022babc9a89a0c4aaa1878b847dad42,
+      type: 2}
+    poolSize: 3
+  - IsExpandable: 1
+    poolObject: {fileID: 1205062528465246, guid: 87d6b92d1a4607f44ac833c48414bf13,
+      type: 2}
+    poolSize: 3
+  - IsExpandable: 1
+    poolObject: {fileID: 1776742418842668, guid: 891fdeaef25dc474a9f0c19dad6d4704,
+      type: 2}
+    poolSize: 3

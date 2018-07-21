@@ -172,7 +172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsArmored: 0
+  health: 0
+  attkPower: 0
+  moveWhenHit: 0
+  respawningEnemyType: 0
 --- !u!114 &114033225531502752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,14 +257,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armoredEnemy: 0
-  globalEnemy: 0
   moveWhenHit: 1
   secretHider: 0
-  spawnShadow: 1
   currentHp: 3
   meleeDmgBonus: 0
   myPositionInList: 0
-  myPosInBasicEnemyStr: 0
   invincibleAni:
     name: Default
     frames: []
@@ -276,15 +276,10 @@ MonoBehaviour:
     wrapMode: 0
   currentCamera: {fileID: 114911326877479794, guid: ed6dbd2afaf985146a8eda13f2278a1c,
     type: 2}
-  doesNotArcWhenHit: 0
   respawnEnemy: 0
   hitSqueal: {fileID: 0}
-  bounce: {fileID: 0}
   audioSource: {fileID: 0}
-  deathShadow: {fileID: 1678658953621782, guid: a4147b4cf59301e47890dcdb73eef6dd,
-    type: 2}
-  hitStar: {fileID: 1668545548691396, guid: b54d50a792c37814da6fd565de561601, type: 2}
-  smokePuff: {fileID: 1283276921881662, guid: db528b844f179cd44b47a18627d12908, type: 2}
+  objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   gar_trash: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   gar_rec: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   gar_comp: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
@@ -292,4 +287,4 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   scrapDrop: {fileID: 1335921923726912, guid: 17b968109e0b361498d14444ff4db4a0, type: 2}
-  landingDustParticle: {fileID: 0}
+  hitStarPS: {fileID: 1132011452005398, guid: bce5b344fb258224f864e09dd5e54e24, type: 2}
