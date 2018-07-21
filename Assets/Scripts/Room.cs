@@ -11,8 +11,7 @@ public class Room : MonoBehaviour
     public List<EnemySpawner> enemySpawners;
     public GameObject player;
     public BoxCollider2D roomCollider2D;
-    public GameObject objectPool; //given to enemy, who needs it for EnemyTakeDamage hitStar spawn
-
+    
     private List<GameObject> enemies;
     //public List<Friend> friends;
 
@@ -33,39 +32,25 @@ public class Room : MonoBehaviour
             Enemy enemy = enemySpawners[i].enemies.RandomElement();
 
             // ignore armored enemies if they aren't allowed to spawn yet.
-          //  if (enemy.IsArmored && !allowArmoredEnemies)
-              //  continue;
+            if (enemy.IsArmored && !allowArmoredEnemies)
+                continue;
 
-             //ignore if enemy for this spawner has been killed
-             if(enemySpawners[i].CheckIfEnemyDead()){
-             	Debug.Log("MY ENEMY IS DEAD!!!");
-             	continue;
-             }else{
-            	Debug.Log("*** MY ENEMY IS NOT DEAD ***");
-				GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
+            GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
 
-	            if (spawnedEnemy != null)
-	            {
-	                enemies.Add(spawnedEnemy);
-	                spawnedEnemy.transform.position = enemySpawners[i].transform.position;
-	                spawnedEnemy.GetComponent<EnemyTakeDamage>().SetSpawnerID(enemySpawners[i].name);
-	                spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
-	                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
-	            }
-             }
-
-            
+            if (spawnedEnemy != null)
+            {
+                enemies.Add(spawnedEnemy);
+                spawnedEnemy.transform.position = enemySpawners[i].transform.position;
+            }
         }
     }
 
     public void DeactivateRoom()
-    {	
-    	if(enemies.Count > 0){
-	        for (int i=0; i < enemies.Count; ++i)
-	            enemies[i].SetActive(false);
+    {
+        for (int i=0; i < enemies.Count; ++i)
+            enemies[i].SetActive(false);
 
-	        enemies.Clear();
-        }
+        enemies.Clear();
     }
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PopulateSelf : MonoBehaviour {
-/*
+
 	public int myRoomNum;
 	public int pos1x;
 	public int pos1y;
@@ -69,7 +69,6 @@ public class PopulateSelf : MonoBehaviour {
 		} // end of for loop that spawns trash */
 
 		//V changes room discover string for this world
-		/*
 		if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER[(GlobalVariableManager.Instance.WORLD_NUM -1)].Substring(myRoomNum, myRoomNum+1).CompareTo("o") != 0){
 			if(GlobalVariableManager.Instance.pinsEquipped[25] != 0){
 				//Call of The Wild pin
@@ -174,7 +173,5 @@ public class PopulateSelf : MonoBehaviour {
 		Debug.Log("SpawnPlayer Activated");
 		GameObject playerInstance = Instantiate(player, new Vector2(GlobalVariableManager.Instance.SPAWN_POS_X, GlobalVariableManager.Instance.SPAWN_POS_Y), Quaternion.identity);
 	}
-	*/
-
 }
 

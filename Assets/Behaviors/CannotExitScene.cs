@@ -9,11 +9,6 @@ public class CannotExitScene : MonoBehaviour {
 	public float topLimit;
 	public float botLimit;
 	// Update is called once per frame
-
-	void Start(){
-
-	}
-
 	void Update () {
 
 		//use 'local position' because it's based on roomname gameobject, nbd if needs to be changed, but will have to go back
@@ -29,13 +24,10 @@ public class CannotExitScene : MonoBehaviour {
 		}
 	}
 
-	public void SetLimits(Room room){
-		Rect rect = room.GetRoomCameraBoundaries();
-        leftLimit = rect.xMin;
-        rightLimit = rect.xMax;
-        botLimit = rect.yMin;
-        topLimit = rect.yMax;
-	}
-
-
+	/*public void SetLimits(float lLimit, float rLimit, float tLimit, float bLimit){
+		leftLimit = lLimit;
+		rightLimit = rLimit;
+		topLimit = tLimit;
+		botLimit = bLimit;
+	}*/ // just set by hand in scene editor
 }

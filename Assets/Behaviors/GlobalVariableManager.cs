@@ -71,8 +71,6 @@ public class GlobalVariableManager : MonoBehaviour {
         }
     };
 
-	public Dictionary<string,EnemyInstance> BASIC_ENEMY_LIST = new Dictionary<string,EnemyInstance>();
-
     public List<LargeTrashItem> LARGE_TRASH_LIST = new List<LargeTrashItem>();
 
     public LARGETRASH LARGE_TRASH_DISCOVERY_LIST = LARGETRASH.NONE;

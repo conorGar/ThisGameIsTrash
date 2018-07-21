@@ -34,31 +34,15 @@ public class SpecialEffectsBehavior : MonoBehaviour
 	}
 	public IEnumerator FadeOut(){
 		float counter = 0;
-		Color myColor = new Color(0f,0f,0f);
-		yield return new WaitForSeconds(fadeDelay);
-		if(gameObject.GetComponent<SpriteRenderer>() != null){
-			SpriteRenderer myRenderer = gameObject.GetComponent<SpriteRenderer>();
-			myColor = myRenderer.color;
-				while(counter < fadeDuration){
-					counter += Time.deltaTime;
-					float alpha = Mathf.Lerp(1,0, counter/fadeDuration);
+		SpriteRenderer myRenderer = gameObject.GetComponent<SpriteRenderer>();
+		Color myColor = myRenderer.color;
+		while(counter < fadeDuration){
+			counter += Time.deltaTime;
+			float alpha = Mathf.Lerp(1,0, counter/fadeDuration);
 
-					myRenderer.color = new Color(myColor.r,myColor.g,myColor.b,alpha);
-					yield return null;
-				}
-		}else{
-			tk2dSprite myRenderer = gameObject.GetComponent<tk2dSprite>();
-			myColor = myRenderer.color;
-				while(counter < fadeDuration){
-					counter += Time.deltaTime;
-					float alpha = Mathf.Lerp(1,0, counter/fadeDuration);
-
-					myRenderer.color = new Color(myColor.r,myColor.g,myColor.b,alpha);
-					yield return null;
-				}
+			myRenderer.color = new Color(myColor.r,myColor.g,myColor.b,alpha);
+			yield return null;
 		}
-	
-
 
 	}
 

@@ -7,18 +7,18 @@ public class EnemyTakeDamage : MonoBehaviour {
 	//4/26/18 - still need to add drawing stuff, but looked as though maybe that should be its own script
 
 	public bool armoredEnemy = false;
-	//public bool globalEnemy = false;
+	public bool globalEnemy = false;
 	public bool moveWhenHit = true;
 	public bool secretHider = false;
-	//public bool spawnShadow = true;
+	public bool spawnShadow = true;
 	public int currentHp;
 	public int meleeDmgBonus = 0;
 	public int myPositionInList = 0;
-	//public int myPosInBasicEnemyStr = 0; // should be set by 'populateSelf'
+	public int myPosInBasicEnemyStr = 0; // should be set by 'populateSelf'
 	public tk2dSpriteAnimationClip invincibleAni = null;
 	public tk2dSpriteAnimationClip aniToSwitchBackTo = null;
 	public tk2dCamera currentCamera; //set in inspector
-	//public bool doesNotArcWhenHit = false;
+	public bool doesNotArcWhenHit = false;
 	public bool respawnEnemy = false;
 	public AudioClip hitSqueal;
 	//public AudioClip bounce;
@@ -35,7 +35,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject healthDrop;
 	public GameObject pinDrop;
 	public GameObject scrapDrop;
-	//public GameObject hitStarPS;
+	public GameObject hitStarPS;
 	//public GameObject landingDustParticle;
 
 	//GameObject deathShadowInstance;
@@ -63,7 +63,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 	//Color lerpColor = Color.white;
 	bool takingDamage = false;
 	GameObject player;
-	string mySpawnerID;
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
@@ -108,16 +107,16 @@ public class EnemyTakeDamage : MonoBehaviour {
 			moveWhenHit = false;
 		}
 
-		//if(globalEnemy){
-			//int i = int.Parse(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList]);
-				//if(i == 0|| i > 49)
-				//	Destroy(gameObject);
-		//}/*else if(GlobalVariableManager.Instance.WORLD_ENEMY_LIST[GlobalVariableManager.Instance.ROOM_NUM].Substring(myPosInBasicEnemyStr,myPosInBasicEnemyStr +1 ).CompareTo("o")){
-			//if(secretHider){
-				//GameObject hole =  Instantiate(GameObject.Find("hiddenHole"), transform.position, Quaternion.identity) as GameObject;
-				//Destroy(gameObject);
-			//}
-		//}*/
+		if(globalEnemy){
+			int i = int.Parse(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList]);
+				if(i == 0|| i > 49)
+					Destroy(gameObject);
+		}/*else if(GlobalVariableManager.Instance.WORLD_ENEMY_LIST[GlobalVariableManager.Instance.ROOM_NUM].Substring(myPosInBasicEnemyStr,myPosInBasicEnemyStr +1 ).CompareTo("o")){
+			if(secretHider){
+				GameObject hole =  Instantiate(GameObject.Find("hiddenHole"), transform.position, Quaternion.identity) as GameObject;
+				Destroy(gameObject);
+			}
+		}*/
 	}
 	
 
@@ -127,13 +126,82 @@ public class EnemyTakeDamage : MonoBehaviour {
 			currentCamera.transform.localPosition = Random.insideUnitSphere * 0.7f;
 		}
 
+		if(takingDamage && !doesNotArcWhenHit){
+
+		
+
+
+			//Debug.Log("Arc movement active");
+			//Debug.Log("Number of bounces:" + numberOfBounces);
+			//Debug.Log("Yspeed" + ySpeed);
+			//Debug.Log("BOUNCE COUNTER: " + bounceCounter);
+			//if(numberOfBounces != 0){
+				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, bounceCounter);
+				//Debug.Log("********Applying force here 2*******");
+				//gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-7f,31f), ForceMode2D.Impulse);
+
+				//}
+			//else{
+				//if(currentHp > 0){
+				///	ySpeed = ySpeed + 2;
+					//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, ySpeed);
+				//}else{
+					//myAnim.Play("hit");
+					//gameObject.transform.Rotate(Vector3.right*Time.deltaTime);
+				//}
+
+			//}
+			//if(-30 < bounceCounter){
+			//bounceCounter = bounceCounter - 1;
+			//}
+
+
+		/*if(landY > gameObject.transform.position.y && currentHp > 0){
+			if(numberOfBounces != 2){
+				Debug.Log("********Applying force here*******");
+
+				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2f,41f), ForceMode2D.Impulse);
+
+				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(xSpeed, 32f);
+				bounceCounter = 30f;
+				numberOfBounces++;
+				//Debug.Log("Number of bounces:" + numberOfBounces);
+				//Instantiate(landingDustParticle, transform.position,Quaternion.identity);
+				arcMovement = false;
+				if(currentHp > 0){
+					StartCoroutine("ArcStop");
+				}
+			}
+			/*else{
+				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+					if(currentHp > 0){
+					StartCoroutine("ArcStop");
+					}
+				arcMovement = false;
+			}*/
+			/*if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0 && audioSource != null){
+				audioSource.pitch = Random.Range(1,3);
+				AudioSource.PlayClipAtPoint(bounce, transform.position);
+			}
+			/*if(deathShadowInstance){
+				GameObject landingSmoke;
+				landingSmoke = Instantiate(GameObject.Find("smoke_land"),transform.position, Quaternion.identity);
+			}*/
+		//}
+			
+		}//end of arch movement
+
+		/*if(deathShadowInstance) // shadow follows enemy flying back on x axis
+				deathShadowInstance.transform.position = new Vector2(gameObject.transform.position.x,deathShadowInstance.transform.position.y );
+				*/
+
+		
+
 	}
 	void OnTriggerEnter2D(Collider2D melee){
 		Debug.Log("Collision with weapon");
-		if(melee.tag == "Weapon"){
+		if(melee.tag == "Weapon")
 			TakeDamage(melee.gameObject);
-
-		}
 	}
 
 	void TakeDamage(GameObject melee){
@@ -165,7 +233,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 					meleeDmgBonus = meleeDmgBonus + int.Parse(dmgBonus);
 
 					meleeSwingDirection = melee.GetComponent<tk2dSpriteAnimator>().CurrentClip.name;
-					swingDirectionSide = player.transform.localScale.x;
+					swingDirectionSide = melee.transform.localScale.x;
 					Debug.Log("MELEE SWING DIRECTION: " + meleeSwingDirection);
 
 					if(secretHider)
@@ -179,18 +247,15 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
 					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
-					GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
-					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-					littleStars.transform.position = new Vector3((transform.position.x + 2), transform.position.y, transform.position.z);
-
+					damageCounter.transform.position = new Vector3((transform.position.x + 2), transform.position.y - 1, transform.position.z);
 					if(gameObject.transform.position.x < player.transform.position.x){
-						//hitStarPS.SetActive(true);
-						//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
+						hitStarPS.SetActive(true);
+						hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
 
 						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
 					}else{
-						//hitStarPS.SetActive(true);
-						//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
+						hitStarPS.SetActive(true);
+						hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
 						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
 					}
@@ -201,9 +266,12 @@ public class EnemyTakeDamage : MonoBehaviour {
 					if(!moveWhenHit){
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 					}
-
-					currentHp = currentHp - 1 - meleeDmgBonus;
-					
+					if(!globalEnemy){
+						currentHp = currentHp - 1 - meleeDmgBonus;
+					}else{
+					GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList] = GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList].Replace(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList],(int.Parse(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList]) -1 -meleeDmgBonus).ToString());
+						//GlobalVariableManager.Instance.GLOBAL_ENEMY_HP = GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList].Remove
+					}
 
 					myAnim.Play("hit");
 					if(gameObject.transform.position.x < player.transform.position.x)
@@ -211,6 +279,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 					else
 						gameObject.transform.localScale = new Vector2(1f,1f);
 
+					if(spawnShadow && moveWhenHit){
+						
+						//deathShadowInstance = Instantiate(deathShadow,new Vector2(transform.position.x, (transform.position.y - transform.lossyScale.y)),Quaternion.identity);
+					}
 					camShake = 1;
 					StartCoroutine("ContinueHit"); // just needed to seperate here for IEnumerator stuff
 				}
@@ -233,15 +305,14 @@ public class EnemyTakeDamage : MonoBehaviour {
 	}
 
 	IEnumerator ContinueHit(){
-
+		yield return new WaitForSeconds(.1f);
 		//remove effects from self
-
+		this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 
 		Debug.Log("**Continue Hit activation***");
 		if(moveWhenHit){
 			takingDamage = true;
 			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawR") == 0||meleeSwingDirection.CompareTo("poleR") == 0){
-				Debug.Log(swingDirectionSide);
 				if(swingDirectionSide < 0){
 						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-17f,0f), ForceMode2D.Impulse);
 				}else{
@@ -255,14 +326,13 @@ public class EnemyTakeDamage : MonoBehaviour {
 			Debug.Log("**GOT THIS FAR***");
 
 				yield return new WaitForSeconds(.2f);
-				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				Debug.Log("**AND HERE!!!!!!!!***");
 				yield return new WaitForSeconds(.4f);
 				StartCoroutine( "StopKnockback");
 
 		} // end of movement functions
-
+		if(!globalEnemy){
 			if(currentHp >0){
 				if(gameObject.GetComponent<FollowPlayer>() != null){
 					gameObject.GetComponent<FollowPlayer>().StopSound();
@@ -274,7 +344,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				}
 
 				//****SFX PLAY - 'hit2' on ch4
-				yield return new WaitForSeconds(.4f);
+				yield return new WaitForSeconds(.5f);
 				//***grow/shrink scale back to normal on all fronts
 
 				if(gameObject.GetComponent<FollowPlayer>()){
@@ -308,12 +378,12 @@ public class EnemyTakeDamage : MonoBehaviour {
 				GlobalVariableManager.Instance.ENEMIES_DEFEATED++;
 
 				string thisRoomsEnemyList = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum];
-				//if(!respawnEnemy){
+				if(!respawnEnemy){
 					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Substring(myPosInBasicEnemyStr,myPosInBasicEnemyStr+1) = "o";
 					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Remove(myPosInBasicEnemyStr);
 					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Insert(myPosInBasicEnemyStr, "o")
-					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum] = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Replace(thisRoomsEnemyList[myPosInBasicEnemyStr], 'o');
-				//}
+					GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum] = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Replace(thisRoomsEnemyList[myPosInBasicEnemyStr], 'o');
+				}
 				if(secretHider){
 					//**SFX PLAY 'secret discovered'
 					GameObject hole =  Instantiate(GameObject.Find("hiddenHole"), transform.position, Quaternion.identity) as GameObject;
@@ -327,9 +397,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 				DropScrap();
 			
 
-				//GameObject deathSmoke;
+				GameObject deathSmoke;
 				//deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
-
 
 				if(changeAliveOrDeadCharValueAtPos != 0){
 					if(GlobalVariableManager.Instance.WORLD_NUM == 3){
@@ -343,9 +412,65 @@ public class EnemyTakeDamage : MonoBehaviour {
 					}
 				}
 
-				Death();
+				gameObject.GetComponent<Rigidbody2D>().MoveRotation(0f);
+				Destroy(gameObject);
+
 			}//end of (if hp is not > 0)
-		
+		}else{ //end of(if! globalEnemy)
+			if(int.Parse(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList]) > 0){
+				if(gameObject.GetComponent<FollowPlayer>().enabled){
+					//gameObject.GetComponent<FollowPlayer>().stopSound();
+					gameObject.GetComponent<FollowPlayer>().enabled = false;
+				}
+				//**SFX PLAY - HIT2 ch 4
+				gameObject.GetComponent<Renderer>().sortingLayerName = "front";
+				yield return new WaitForSeconds(1.4f);
+				if(moveWhenHit){
+					gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+				}
+				if(gameObject.GetComponent<FollowPlayer>()){
+					gameObject.GetComponent<FollowPlayer>().enabled = true;
+				}
+			}else{ //if hp = 0/dead
+				GlobalVariableManager.Instance.ENEMIES_DEFEATED++;
+				GlobalVariableManager.Instance.MY_NUM_IN_ROOM = 3;
+				DropThings();
+				DropScrap();
+
+				if(GlobalVariableManager.Instance.WORLD_NUM == 3){
+				//maskedOni
+					GameObject droppedMask;
+					droppedMask = Instantiate(GameObject.Find("drop_enemyMask"), transform.position, Quaternion.identity);
+				}else if(GlobalVariableManager.Instance.WORLD_NUM == 4){
+					//Quiet Mound (west rooms)
+					//GameObject.Find("sceneManager").GetComponent<sEv_quietMoundRooms>().kill();
+				}
+				GameObject deathSmoke;
+				//deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
+				if(GlobalVariableManager.Instance.MASTER_SFX_VOL >0){
+					if(hitSqueal != null){
+						//play hitSqueal at ch 5
+					}
+				}
+				//if(deathShadowInstance)
+				//	Destroy(deathShadowInstance);
+				Destroy(gameObject);
+		}
+
+			yield return new WaitForSeconds(.2f);
+		if(currentHp > 0 || (globalEnemy && int.Parse(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[myPositionInList]) > 1)){
+			StartCoroutine( "StopKnockback");
+			//if(deathShadowInstance){
+			//	Destroy(deathShadowInstance);
+			//}
+			//if(!doesNotArcWhenHit && arcMovement)
+				//gameObject.transform.position = new Vector2(transform.position.x,landY);
+			//hitPushBack = -30;
+			//Debug.Log("REACHED THIS PART");
+			damageOnce = 0;
+		}
+
+		}
 
 	}
 
@@ -404,24 +529,5 @@ public class EnemyTakeDamage : MonoBehaviour {
 			droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
 		}
 		}
-	}
-
-
-	public void SetSpawnerID(string id){
-		mySpawnerID = id;
-	}
-
-	void Death(){
-		GameObject deathSmoke = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_SmokePuff");
-		deathSmoke.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-
-		GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
-		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-		Debug.Log("My spawner ID: "+mySpawnerID);
-		GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival = GlobalVariableManager.Instance.DAY_NUMBER +3;
-		Debug.Log("Day of revival: "+ GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival);
-
-		gameObject.SetActive(false);
-
 	}
 }
