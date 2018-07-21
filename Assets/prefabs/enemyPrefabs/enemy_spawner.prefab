@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114930916381765832}
   - component: {fileID: 23465296152729120}
   - component: {fileID: 33000787830370448}
+  - component: {fileID: 114680921304954852}
   m_Layer: 13
   m_Name: enemy_spawner
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1053900122411524}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -8.329998, y: -1.04, z: -0.5}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,6 +84,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1053900122411524}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114680921304954852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1053900122411524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7fb42e8d3d37354aabf4bed1f222296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerId: spawner1
+  dayOfRevival: 0
 --- !u!114 &114930916381765832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,3 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f287a1b739c2a48845b883bd35a66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 114006073405854798, guid: f022babc9a89a0c4aaa1878b847dad42, type: 2}
+  isMyEnemyDead: 0
+  myEnemyInstance: {fileID: 114680921304954852}

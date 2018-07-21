@@ -17,9 +17,10 @@ public class MeleeAttack : MonoBehaviour {
 	int swingDirection;
 	float turningSpeed;
 	private float playerMomentum; // a little 'bounce' when swing
+	Vector3 startingScale;
 
 	void Start () {
-
+		startingScale = this.gameObject.transform.localScale;
 		if(GlobalVariableManager.Instance.pinsEquipped[4] == 12 || GlobalVariableManager.Instance.CARRYING_SOMETHING == true){
 			//Cursed pin- can't attack || carrying large trash- can't attack
 			Debug.Log("Cant attack because of here");
@@ -41,9 +42,11 @@ public class MeleeAttack : MonoBehaviour {
 			}else if(swingDirection ==2){
 				//weapon.transform.position = new Vector2(gameObject.transform.position.x,gameObject.transform.position.y + 1.4f);
 				transform.Translate(new Vector2(playerMomentum*-1,0)*Time.deltaTime);
-			}else if(swingDirection == 3){
+			}else if(swingDirection == 3){//swing up
+				transform.Translate(new Vector2(0,playerMomentum)*Time.deltaTime);
 				//weapon.transform.position = new Vector2(gameObject.transform.position.x -.5f,gameObject.transform.position.y + 2f);
-			}else if(swingDirection == 4){
+			}else if(swingDirection == 4){//swing down
+				transform.Translate(new Vector2(0,playerMomentum*-1)*Time.deltaTime);
 				//weapon.transform.position = new Vector2(gameObject.transform.position.x + 2f,gameObject.transform.position.y + 2f);
 			}
 			playerMomentum -= .5f;
@@ -55,14 +58,18 @@ public class MeleeAttack : MonoBehaviour {
 
 				if(Input.GetKeyDown(KeyCode.A)){
 					playerMomentum = 6f;
+					this.gameObject.transform.localScale = new Vector3(startingScale.x*-1,startingScale.y, startingScale.z);
 					StartCoroutine("Swing",2);
 				}else if(Input.GetKeyDown(KeyCode.D)){
+					this.gameObject.transform.localScale = startingScale;
 					playerMomentum = 6f;
 					StartCoroutine("Swing",1);
 				}else if(Input.GetKeyDown(KeyCode.S)){
+					this.gameObject.transform.localScale = startingScale;
 					playerMomentum = 6f;
 					StartCoroutine("Swing",4);
 				}else if(Input.GetKeyDown(KeyCode.W)){
+					this.gameObject.transform.localScale = startingScale;
 					playerMomentum = 6f;
 					StartCoroutine("Swing",3);
 				}
@@ -99,11 +106,12 @@ public class MeleeAttack : MonoBehaviour {
 			meleeDirectionEnabled = meleeWeaponBotSwing;
 
 		}
-
-		meleeDirectionEnabled.SetActive(true);
-
-
 		meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
+
+		//meleeDirectionEnabled.SetActive(true);
+
+
+		//meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
 
 
 		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0 && audioSource){
@@ -122,6 +130,8 @@ public class MeleeAttack : MonoBehaviour {
 		}
 
 		yield return new WaitForSeconds(.1f);
+		meleeDirectionEnabled.SetActive(true);
+
 		meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
 
 		if(GlobalVariableManager.Instance.pinsEquipped[32] == 0 ){
