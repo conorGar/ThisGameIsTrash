@@ -83,9 +83,9 @@ public class Ev_FadeHelper : MonoBehaviour {
 		if(specialFade != 1){
 			specialFade = 1;
 			//player.GetComponent<Ev_Jim>().CantPause();
-			if(GlobalVariableManager.Instance.CURRENT_HP > 0){
-				GlobalVariableManager.Instance.ROOM_PLAYER_DIED_IN = 99;
-			}
+//			if(GlobalVariableManager.Instance.CURRENT_HP > 0){
+				//GlobalVariableManager.Instance.ROOM_PLAYER_DIED_IN = 99;
+		//	}
 		
 			GameObject truckInstance = Instantiate(smallTruck,new Vector2(myCam.transform.position.x - 5, player.transform.position.y), Quaternion.identity);
 

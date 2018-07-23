@@ -63,7 +63,7 @@ public class Ev_WorldSelect : MonoBehaviour {
 					}
 					//------------------------------------------------//
 				}
-				gameObject.GetComponent<SpecialEffectsBehavior>().Grow(.1f,1f,.2f);
+				//gameObject.GetComponent<SpecialEffectsBehavior>().Grow(.1f,1f,.2f);
 				active = true;
 			}else{
 				if(active){
@@ -77,12 +77,12 @@ public class Ev_WorldSelect : MonoBehaviour {
 						gameObject.transform.GetChild(i).gameObject.SetActive(false);
 					}
 					//------------------------------------------------/
-					gameObject.GetComponent<SpecialEffectsBehavior>().Grow(.1f,.75f,.2f);
+					//gameObject.GetComponent<SpecialEffectsBehavior>().Grow(.1f,.75f,.2f);
 				}else{ //if not active
 					if(gameObject.transform.localScale.y == .75f){
-						gameObject.GetComponent<SpecialEffectsBehavior>().Grow(.1f,.5f,.2f);//if grow doesnt work try coroutine start
+						//gameObject.GetComponent<SpecialEffectsBehavior>().Grow(.1f,.5f,.2f);//if grow doesnt work try coroutine start
 					}else{
-						gameObject.GetComponent<SpecialEffectsBehavior>().Grow(.1f,.75f,.2f);
+						//gameObject.GetComponent<SpecialEffectsBehavior>().Grow(.1f,.75f,.2f);
 					}
 				}
 			}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowPlayerAfterNotice : MonoBehaviour {
 
-	float noticeThreshold;
+	public float noticeThreshold;
 	GameObject player;
 
 	// Use this for initialization
@@ -20,6 +20,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 			if((player.transform.position.x < gameObject.transform.position.x && gameObject.transform.localScale.x < 0) || (player.transform.position.x > gameObject.transform.position.x && gameObject.transform.localScale.x > 0)){//make sure is facing the direction of the player..
 				this.gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
 				this.gameObject.GetComponent<FollowPlayer>().enabled = true;
+				this.enabled = false;
 			}
 		}
 	}

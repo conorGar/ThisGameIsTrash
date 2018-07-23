@@ -10,13 +10,18 @@ public class RandomDirectionMovement : MonoBehaviour {
 	public GameObject walkCloud;
 	public float walkCloudYadjust = 0.8f;
 
+
 	private Vector3 direction;
 	private bool moving = false;
 	private tk2dSpriteAnimator anim;
+	int bounceOffObject;
+	Vector3 startingScale;
+	int turnOnce = 0;
 
 	// Use this for initialization
 	void Start () {
 		//walkCloud  = GameObject.Find("effect_WalkCloud");
+		startingScale = gameObject.transform.localScale;
 		anim = GetComponent<tk2dSpriteAnimator>();
 		GoAgain();
 	}
@@ -26,30 +31,62 @@ public class RandomDirectionMovement : MonoBehaviour {
 		if(moving && !anim.IsPlaying("hit")){
 			transform.position += direction*movementSpeed*Time.deltaTime;
 			if(direction.x > 0 ){
-				if(!anim.IsPlaying("runR")){
-					anim.Play("runR");
+				if(gameObject.transform.localScale.x < 0){
+					if(turnOnce == 0){
+					StartCoroutine("Turn");
 					}
+				}else if(!anim.IsPlaying("run")){
+						anim.Play("run");
+				}
 			}else{
-				if(!anim.IsPlaying("runL"))
-					anim.Play("runL");
+				if(gameObject.transform.localScale.x > 0){
+					if(turnOnce == 0){
+					StartCoroutine("Turn");
+					}
+				}else{
+					if(!anim.IsPlaying("run")){
+						anim.Play("run");
+					}
+				}
 			}
 		}
 	}
+	IEnumerator Turn(){
+		Debug.Log("Turn activated");
+		turnOnce = 1;
+		if(!anim.IsPlaying("turn")){
+			anim.Play("turn");
+		}
 
+		yield return new WaitForSeconds(.2f);
+		anim.Play("run");
+
+		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
+		//Debug.Log("Turn activated");
+		turnOnce = 0;
+	}
 	IEnumerator Pause(){
 		yield return new WaitForSeconds(Random.Range(minMoveTime,maxMoveTime));
+		bounceOffObject = 0;
 		CancelInvoke("SpawnClouds");
 		moving = false;
-		if(anim.IsPlaying("runR")){
-			anim.Play("idleR");
-		} else if(anim.IsPlaying("runL"))
-			anim.Play("idleL");
+		anim.Play("idle");
+		//if(anim.IsPlaying("run")){
+			//anim.Play("idleR");
+		//} else if(anim.IsPlaying("runL"))
+			//anim.Play("idleL");
 		yield return new WaitForSeconds(2);
 		GoAgain();
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
-		print("Collided");
+		//go a different direction when bump into something
+		//if(collision.gameObject.transform.position.y> this.gameObject.transform.position.y);
+		if(bounceOffObject == 0){
+			GoAgain();
+			bounceOffObject = 1;
+		}
+		//print("Collided");
 	}
 	void SpawnClouds(){
 		GameObject newestCloud;

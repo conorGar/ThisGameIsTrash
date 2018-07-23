@@ -100,12 +100,12 @@ public class Ev_DayMeter : MonoBehaviour {
 					triggerOnce = 1;
 				}
 		}
-		if(GlobalVariableManager.Instance.TIME_IN_DAY > 2 && GlobalVariableManager.Instance.characterUpgradeArray[1][26].CompareTo('o') == 0 && GlobalVariableManager.Instance.CURRENT_HP < int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
+		//if(GlobalVariableManager.Instance.TIME_IN_DAY > 2 && GlobalVariableManager.Instance.characterUpgradeArray[1][26].CompareTo('o') == 0 && GlobalVariableManager.Instance.CURRENT_HP < int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
 			//Fitness perk 5 - hp regen
-			if(GlobalVariableManager.Instance.TIME_IN_DAY % 15 ==0){
-				GlobalVariableManager.Instance.CURRENT_HP++;
-			}
-		}
+			//if(GlobalVariableManager.Instance.TIME_IN_DAY % 15 ==0){
+				//GlobalVariableManager.Instance.CURRENT_HP++;
+			//}
+		//}
 		if(GlobalVariableManager.Instance.MASTER_MUSIC_VOL > 0){
 			//adjust volumne
 		}

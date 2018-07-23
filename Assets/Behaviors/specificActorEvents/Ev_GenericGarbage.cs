@@ -160,13 +160,13 @@ public class Ev_GenericGarbage : MonoBehaviour {
 						if(GlobalVariableManager.Instance.pinsEquipped[10] == 1){
 							//Mo Garbage Mo' Problems - changes max HP bac if collect more than 5 trash
 							if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 4){
-								if(GlobalVariableManager.Instance.CURRENT_HP > int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2){
-									GlobalVariableManager.Instance.CURRENT_HP = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2);
+								//if(GlobalVariableManager.Instance.CURRENT_HP > int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2){
+									//GlobalVariableManager.Instance.CURRENT_HP = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2);
 								}
 								GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1)) + 2).ToString();
 								GlobalVariableManager.Instance.pinsEquipped[10] = 2;
 							}
-						}//mo garbage mo problems check end
+						//mo garbage mo problems check end
 						if(GlobalVariableManager.Instance.pinsEquipped[6] != 0){
 						//Passive Pillage
 							/*GameObject passivePillageEffect = Instantiate(tempEffectsActor, new Vector2(0f,0f),Quaternion.identity);
@@ -177,13 +177,13 @@ public class Ev_GenericGarbage : MonoBehaviour {
 
                         smallShadow.SetActive(false);
 
-						if(GlobalVariableManager.Instance.characterUpgradeArray[1][32].CompareTo('o') == 0){
+						//if(GlobalVariableManager.Instance.characterUpgradeArray[1][32].CompareTo('o') == 0){
 							//3rd bag perk - 10% chance to heal
-							int randomHealChance = Random.Range(1,11);
-							if(randomHealChance == 3 && GlobalVariableManager.Instance.CURRENT_HP < int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1))){
-								GlobalVariableManager.Instance.CURRENT_HP++;
-							}
-						}
+							//int randomHealChance = Random.Range(1,11);
+							//if(randomHealChance == 3 && GlobalVariableManager.Instance.CURRENT_HP < int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1))){
+								//GlobalVariableManager.Instance.CURRENT_HP++;
+							//}
+						//}
 						if(GlobalVariableManager.Instance.pinsEquipped[40] != 0){
 							//Trash Power pin
 							GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] += 2;
@@ -202,9 +202,10 @@ public class Ev_GenericGarbage : MonoBehaviour {
 						grabbedPhase = 1;
 
 						}//end of grabbedPhase > 0 check
+						}
 					}
 				}
-		}
+		
 	}//end of trigger enter 2d
 
 	void Setup(){

@@ -10,18 +10,18 @@ public class GlobalVariableManager : MonoBehaviour {
 	public static GlobalVariableManager Instance {get; private set;}
 
 	public int value;
-	public string[] characterUpgradeArray = new string[8]{
+	public string[] characterUpgradeArray = new string[7]{
 											"abcdefghijolmnpqrstuvwxy1234567890,./;'*[]-<>?:(){}!^",
 											"abcdefghijklmnpqrstuvwxy1234567890,./;'",
 											"0",
-											"5",
+											//"5",  <- removed, not needed, respresented player's HP, but now 'MAX_HP' does.
 											"0",
 											"0",
 											"0",
 											"0"};
 	public List<int> pinsEquipped = new List<int>{3}; 
 	public int ARROW_POSITION = 1;
-	public int CURRENT_HP = 1;
+	public int Max_HP = 5;
 	public int DAY_NUMBER = 1;
 	public int IS_HIDDEN = 0;
 	public int MASTER_MUSIC_VOL = 30;

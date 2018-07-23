@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class SpecialEffectsBehavior : MonoBehaviour
-{
+{	
+	
 
 	//-----Variables for smooth movement to point -------//
 	bool smoothMovement = false;
@@ -14,8 +15,17 @@ public class SpecialEffectsBehavior : MonoBehaviour
 	float fadeDelay;
 	float fadeDuration;
 	bool shake;
+	bool growing;
 	float shakeIntensity;
 	float startYShake;
+
+	//grow/shrink
+	bool shrinking;
+	float currentScale;
+	float amountToAdd;
+	float targetSize;
+
+
 
 	void Update(){
 		if(smoothMovement){
@@ -26,6 +36,20 @@ public class SpecialEffectsBehavior : MonoBehaviour
 		if(shake){
 			Debug.Log("shaking");
 			transform.position = new Vector2(transform.position.x,startYShake + Random.Range(shakeIntensity*-1,shakeIntensity));
+		}
+		if(growing){
+			currentScale += amountToAdd;
+			if(currentScale > targetSize){
+				growing = false;
+			}
+			gameObject.transform.localScale = Vector3.one * currentScale;
+
+		}else if(shrinking){
+			currentScale -= amountToAdd;
+			if(currentScale < targetSize){
+				shrinking = false;
+			}
+			gameObject.transform.localScale = Vector3.one * currentScale;
 		}
 	}
 	public void SetFadeVariables(float afterTime, float fd){
@@ -69,22 +93,26 @@ public class SpecialEffectsBehavior : MonoBehaviour
 
 	}
 
-	public IEnumerator Grow(float afterTime, float targetSize, float duration){
-		float currentScale = gameObject.transform.lossyScale.x;
-		bool growing = true;
+	public void SetGrowValues( float tSize, float duration){
+		duration = duration;
+		targetSize = tSize;
+		amountToAdd = (targetSize - currentScale)/duration;
+	}
 
-		float amountToAdd = (targetSize - currentScale)/duration;
-		float repeatWait = duration/60; //time divided by frame count
+	public IEnumerator Grow(float afterTime){
 		yield return new WaitForSeconds(afterTime);
-		while(growing){
 
-			currentScale += amountToAdd;
-			if(currentScale > targetSize){
-				growing = false;
-			}
-			gameObject.transform.localScale = Vector3.one * currentScale;
-			yield return new WaitForSeconds(repeatWait);
-		}
+		currentScale = gameObject.transform.lossyScale.x;
+		growing = true;
+
+	}
+	public IEnumerator Shrink(float afterTime){
+		yield return new WaitForSeconds(afterTime);
+
+		currentScale = gameObject.transform.lossyScale.x;
+
+		shrinking = true;
+
 	}
 
 	public IEnumerator Squish(){

@@ -122,12 +122,12 @@ public class MeleeAttack : MonoBehaviour {
 		isSwinging = true;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
-		if(GlobalVariableManager.Instance.pinsEquipped[49] != 0 && GlobalVariableManager.Instance.CURRENT_HP == int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
+	/*	if(GlobalVariableManager.Instance.pinsEquipped[49] != 0 && GlobalVariableManager.Instance.CURRENT_HP == int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
 		//Hero of Grime pin - shoots beam at max hp
 			GameObject bullet = Instantiate(GameObject.Find("bullet"), new Vector2(transform.position.x +.3f, transform.position.y), Quaternion.identity);
 			bullet.GetComponent<tk2dSpriteAnimator>().Play("beam");
 			bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10f,0f);
-		}
+		}*/
 
 		yield return new WaitForSeconds(.1f);
 		meleeDirectionEnabled.SetActive(true);

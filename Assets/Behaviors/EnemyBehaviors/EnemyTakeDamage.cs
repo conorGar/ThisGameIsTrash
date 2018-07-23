@@ -156,10 +156,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 						//bonus dmg with pole
 						meleeDmgBonus++;
 					}
-					if(GlobalVariableManager.Instance.pinsEquipped[21] == 1 && GlobalVariableManager.Instance.CURRENT_HP == 1){
+					//if(GlobalVariableManager.Instance.pinsEquipped[21] == 1 && GlobalVariableManager.Instance.CURRENT_HP == 1){
 						//STAY BACK pin
-						meleeDmgBonus++;
-					}
+						//meleeDmgBonus++;
+					//}
 					string dmgBonus = GlobalVariableManager.Instance.characterUpgradeArray[5][0].ToString();
 					Debug.Log(dmgBonus);
 					meleeDmgBonus = meleeDmgBonus + int.Parse(dmgBonus);
@@ -179,6 +179,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
 					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
+					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
+
 					GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
 					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.transform.position = new Vector3((transform.position.x + 2), transform.position.y, transform.position.z);

@@ -74,7 +74,7 @@ public class Ev_Results : MonoBehaviour {
 					for(int i = 0; i<GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count; i++){
 						GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[i] = 0;
 					}
-					GlobalVariableManager.Instance.CURRENT_HP = 0;
+					//GlobalVariableManager.Instance.CURRENT_HP = 0;
 					if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 4)
 						GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(4); // remove temporary room discover string
 					GlobalVariableManager.Instance.MENU_SELECT_STAGE = 1;
@@ -87,9 +87,9 @@ public class Ev_Results : MonoBehaviour {
 
 					if(GlobalVariableManager.Instance.pinsEquipped[10] ==2){
 						//Mo' Garbage Mo' Problems
-						if(GlobalVariableManager.Instance.CURRENT_HP > int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2){
-							GlobalVariableManager.Instance.CURRENT_HP = int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2;
-						}
+						//if(GlobalVariableManager.Instance.CURRENT_HP > int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2){
+						//	GlobalVariableManager.Instance.CURRENT_HP = int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2;
+						//}
 						GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2).ToString();
 						GlobalVariableManager.Instance.pinsEquipped[10] = 1;
 					}

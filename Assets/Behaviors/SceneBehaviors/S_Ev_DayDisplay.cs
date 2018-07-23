@@ -13,7 +13,7 @@ public class S_Ev_DayDisplay : MonoBehaviour {
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		GlobalVariableManager.Instance.IS_HIDDEN = 0;//set back to 0 after it has been changed by shop
 		GlobalVariableManager.Instance.ROOM_NUM = 112;
-		GlobalVariableManager.Instance.CURRENT_HP = 0; //needs to be set for player to spawn
+		//GlobalVariableManager.Instance.CURRENT_HP = 0; //needs to be set for player to spawn
 		GlobalVariableManager.Instance.MENU_SELECT_STAGE =1;
 		GlobalVariableManager.Instance.ENEMIES_DEFEATED = 0;
 		GlobalVariableManager.Instance.TIME_IN_DAY = -90;

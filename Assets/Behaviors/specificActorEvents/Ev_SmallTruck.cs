@@ -74,7 +74,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 
 		//play world music again
 		
-		GlobalVariableManager.Instance.CURRENT_HP = int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString());
+		//GlobalVariableManager.Instance.CURRENT_HP = int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString());
 
 		yield return new WaitForSeconds(.5f);
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(60f,0f);

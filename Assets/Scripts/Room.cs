@@ -30,7 +30,7 @@ public class Room : MonoBehaviour
         for (int i=0; i < enemySpawners.Count; ++i)
         {
             // get a random enemy from the enemy spawn list
-            Enemy enemy = enemySpawners[i].enemies.RandomElement();
+            Enemy enemy = enemySpawners[i].enemies[0];
 
             // ignore armored enemies if they aren't allowed to spawn yet.
           //  if (enemy.IsArmored && !allowArmoredEnemies)
