@@ -10,6 +10,7 @@ public class Ev_Scrap : MonoBehaviour {
 	int turningSpeed = 0;
 	bool isFollowingPlayer = false;
 	GameObject meleeMeter;
+	public AudioClip pickUp;
 	public Sprite spr1;
 	public Sprite spr2;
 	public Sprite spr3;
@@ -46,19 +47,19 @@ public class Ev_Scrap : MonoBehaviour {
 
 
 
-		if(isFollowingPlayer){
+		/*if(isFollowingPlayer){
 			gameObject.transform.localPosition = Vector3.zero;
 		}else if(canBeGrabbed){
 			if(Mathf.Abs(GameObject.FindGameObjectWithTag("Player").transform.position.x - gameObject.transform.position.x) < 1 && Mathf.Abs(GameObject.FindGameObjectWithTag("Player").transform.position.y - gameObject.transform.position.y) < 1){
 				gameObject.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
 				isFollowingPlayer = true;
 			}
-		}
+		}*/
 
 	}
-	void OnTriggerEnter2D(){
-		if(!isFollowingPlayer){
-			gameObject.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
+	void OnTriggerEnter2D(Collider2D collision){
+		/*if(!isFollowingPlayer){
+			//gameObject.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
 			isFollowingPlayer = true;
 		}else if(isFollowingPlayer && canBeGrabbed){
 			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 17 || (GlobalVariableManager.Instance.pinsEquipped[20] != 0 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 19)){
@@ -71,7 +72,13 @@ public class Ev_Scrap : MonoBehaviour {
 				Destroy(gameObject);
 				StartCoroutine("Kill");
 			}
-		}
+		}*/
+		if(canBeGrabbed && collision.gameObject.tag == "Player"){
+				SoundManager.instance.PlaySingle(pickUp);
+				meleeMeter.GetComponent<Ev_CurrentWeapon>().UpdateMelee();
+				gameObject.SetActive(false);
+				//StartCoroutine("Kill");
+			}
 	}
 
 	IEnumerator WaitForGrab(){
@@ -79,6 +86,7 @@ public class Ev_Scrap : MonoBehaviour {
 		canBeGrabbed = true;
 		yield return new WaitForSeconds(.2f);
 		arc = false;
+		gameObject.transform.GetChild(0).gameObject.SetActive(true);
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
 

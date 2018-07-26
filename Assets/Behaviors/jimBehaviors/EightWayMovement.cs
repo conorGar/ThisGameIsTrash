@@ -20,10 +20,16 @@ public class EightWayMovement : MonoBehaviour {
 	public GameObject walkCloud;
 
 	public GameObject myLegs;
+
+	public AudioClip footsteps1;
+	public AudioClip footsteps2;
+
+
+
 	private tk2dSpriteAnimator legAnim;
-	private int setOnce = 0;
 	Vector3 transformScale; // used for facing different directions
- 
+
+	public bool clipOverride;
     // Use this for initialization
     void Start () {
 
@@ -34,12 +40,6 @@ public class EightWayMovement : MonoBehaviour {
 
         transformScale = gameObject.transform.localScale;
 
-		//GameObject myShadow;
-		//myShadow = Instantiate(shadow, transform.position, Quaternion.identity) as GameObject;
-		//myShadow.GetComponent<AttatchSelfToObject>().objectToSnapTo = this.gameObject;
-
-		
-        //GetComponent<Rigidbody2D>().velocity = movement;
     }
  
     // Update is called once per frame
@@ -49,7 +49,24 @@ public class EightWayMovement : MonoBehaviour {
         float inputY = Input.GetAxisRaw("Vertical");
         movement = new Vector2(inputX, inputY);
         //Debug.Log(inputX);
- 
+ 		if(Input.GetKeyDown(KeyCode.LeftArrow)){
+			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
+			}
+		}else if(Input.GetKeyDown(KeyCode.RightArrow)){
+			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
+			}
+		}else if(Input.GetKeyDown(KeyCode.DownArrow)){
+			if(anim.CurrentClip.name != "ani_jimWalkDown" && !clipOverride){
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkDown",false);
+			}
+		}else if(Input.GetKeyDown(KeyCode.DownArrow)){
+			if(anim.CurrentClip.name != "ani_jimWalkUp" && !clipOverride){
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkUp",false);
+			}
+ 		}
+		
         //Diagonals
  
         if (inputX != 0 && inputY != 0) {
@@ -60,76 +77,91 @@ public class EightWayMovement : MonoBehaviour {
             isDiagonal = true;
             if (movement.y == 1 && movement.x == -1) {
             	if(directionFacing == 1){
-				 	anim.Play("ani_jimTurn");
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimTurn",false);
 					StartCoroutine ("TurnDelay");
 				 }else{
-					anim.Play("ani_jimWalk");
+				 	//if(setAniOnce == 0){
+				 	//setAniOnce = 1;
+					//gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
+					//}
 				 }
             }
  
             if (movement.y == 1 && movement.x == 1) {
 				if(directionFacing == 2){
-				 	anim.Play("ani_jimTurn");
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimTurn",false);
 					StartCoroutine ("TurnDelay");
 				 }else{
-					anim.Play("ani_jimWalk");
+					/*if(setAniOnce == 0){
+				 	setAniOnce = 1;
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
+					}*/
 				 }
             }
  
             if (movement.y == -1 && movement.x == -1) {
-				anim.Play("ani_jimWalkUp");
+				/*if(setAniOnce == 0){
+				 	setAniOnce = 1;
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkUp",false);
+				}*/
             }
  
             if (movement.y == -1 && movement.x == 1) {
-                anim.Play("ani_jimWalkDown");
+
+				//gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkDown",false);
             }
-		} else {   if (isDiagonal && !noDelayStarted) {
+		} else {   
+			if (isDiagonal && !noDelayStarted) {
                 StartCoroutine (NoMoreDiagonal ());
                 noDelayStarted = true;
             } else if(anim != null) {
- 
+ 				/*
                 //left/right/up/down
                 if (movement.x == -1) {
-				if(directionFacing == 1){
-				 	anim.Play("ani_jimTurn");
+				/*if(directionFacing == 1){
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimTurn",false);
 					StartCoroutine (TurnDelay());
 
 				 }else{
-					anim.Play("ani_jimWalk");
-				 }
-                }
- 
+					//gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
+				 }*/
+             //   }
+ /*
                 if (movement.x == 1) {
 				if(directionFacing == 1){
-				 	anim.Play("ani_jimTurn");
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimTurn",false);
 					StartCoroutine ("TurnDelay");
 
 				 }else{
-					anim.Play("ani_jimWalk");
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
 				 }
                 }
  
  
                 if (movement.y == 1) {
-                    anim.Play("ani_jimWalkUp");
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
                 }
  
  
                 if (movement.y == -1) {
                     anim.Play("ani_jimWalkDown");
                 }
-
+                */
                 if(movement.x == 0 && movement.y == 0){
-					if(anim.CurrentClip.name == "ani_jimWalk"){
-						anim.Play("ani_jimIdle");
-					}else if(anim.CurrentClip.name == "ani_jimWalkDown"){
-						anim.Play("ani_jimIdleDown");
-					}else if(anim.CurrentClip.name == "ani_jimWalkUp"){
-						anim.Play("ani_jimIdleUp");
+                	
+                	if(!clipOverride){
+						if(anim.CurrentClip.name == "ani_jimWalk"){
+							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
+						}else if(anim.CurrentClip.name == "ani_jimWalkDown"){
+							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdleDown",false);
+						}else if(anim.CurrentClip.name == "ani_jimWalkUp"){
+							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdleUp",false);
+						}else if(anim.CurrentClip.name != "ani_jimIdle"){
+							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);//set to normal idle when return from override clip(hurt, pickup,etc)
+						}
 					}
-
 					//not instant stop
-				if(momentum > 0)
+					if(momentum > 0)
 						momentum = momentum - .2f;
 				}else if(momentum != 4){
 					momentum = 4f;
@@ -159,7 +191,8 @@ public class EightWayMovement : MonoBehaviour {
 
 	        	transform.Translate(movement * speed * Time.deltaTime);
 	        	//show legs and change to current animation of Jim
-	        	legAnim.Play(anim.CurrentClip.name);
+				if(!clipOverride)
+	        		legAnim.Play(anim.CurrentClip.name);
 				
 			
         }
@@ -177,7 +210,8 @@ public class EightWayMovement : MonoBehaviour {
 			newestCloud.GetComponent<Ev_WalkCloud>().MoveRight();
 		}else {
 			newestCloud.GetComponent<Ev_WalkCloud>().MoveLeft();
-			}
+		}
+		SoundManager.instance.RandomizeSfx(footsteps1,footsteps2);
 
     }
 	IEnumerator TurnDelay() {

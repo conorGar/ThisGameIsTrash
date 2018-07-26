@@ -9,9 +9,6 @@ public class PopulateWorld : MonoBehaviour
 	public GameObject recyclables;
 	public GameObject compost;
 
-
-	int numberOfRoomsInWorld;
-	int amntTrashHere;
 	int armoredEnemySpawn;
 	int enemy1;
 	int enemy2;
@@ -19,28 +16,14 @@ public class PopulateWorld : MonoBehaviour
 
 
 	void Awake(){
-		FriendList();
+		
 	}
 
 	void Start ()
 	{
-		if(GlobalVariableManager.Instance.WORLD_NUM == 1){
-			numberOfRoomsInWorld = 42;
-			amntTrashHere = 49;
-		}else if(GlobalVariableManager.Instance.WORLD_NUM == 2){
-			numberOfRoomsInWorld = 60;
-			amntTrashHere = 65;
-		}else if(GlobalVariableManager.Instance.WORLD_NUM == 3){
-			numberOfRoomsInWorld = 49;
-			amntTrashHere = 70;
-		}else if(GlobalVariableManager.Instance.WORLD_NUM == 4){
-			numberOfRoomsInWorld = 22;
-			amntTrashHere = 70;
-		}
-		Debug.Log("World list count check");
-		Debug.Log(GlobalVariableManager.Instance.WORLD_LIST.Count);
+        FriendList();
 
-		if(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Count < 6){
+        if (GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Count < 6){
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("4");
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("22");//boss 1
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("6");
@@ -70,7 +53,7 @@ public class PopulateWorld : MonoBehaviour
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("17");//noodle ghost start
 		}
 
-		if(GlobalVariableManager.Instance.WORLD_LIST.Count < 2){
+		//if(GlobalVariableManager.Instance.WORLD_LIST.Count < 2){
 			Debug.Log("World list count check After");
 			if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count < 5){
 			//assigns string so com knows how many new rooms were discovered at result screen
@@ -78,8 +61,8 @@ public class PopulateWorld : MonoBehaviour
 			}
 			Debug.Log(GlobalVariableManager.Instance.characterUpgradeArray[1].Length);
 			if(GlobalVariableManager.Instance.characterUpgradeArray[1][28].CompareTo('o') == 0){
-				//2nd gathering perk: amount of trash in world increased by 25%
-				amntTrashHere = amntTrashHere + Mathf.RoundToInt(amntTrashHere/4);
+                //2nd gathering perk: amount of trash in world increased by 25%
+                WorldManager.Instance.amountTrashHere += Mathf.RoundToInt(WorldManager.Instance.amountTrashHere/ 4);
 			}
 			/*if(GlobalVariableManager.Instance.pinsEquipped[24] == 1){
 				//Hungry For More pin
@@ -94,16 +77,9 @@ public class PopulateWorld : MonoBehaviour
 				amntTrashHere += 5;
 			}
 			*/
-			Debug.Log("Start of first for loop");
-			for(int i = 0; i < numberOfRoomsInWorld; i++){
-				GlobalVariableManager.Instance.WORLD_LIST.Add("0");
-			}
 
             //resets Large Trash found in this are this day
             GlobalVariableManager.Instance.LARGE_TRASH_LIST.Clear();
-
-			int amountOfGarbageInRoom;
-			int populateWhichRoomNext;
 
 			/*for(int i = 0; i < numberOfRoomsInWorld; i++){
 				amountOfGarbageInRoom = Random.Range(1,2);
@@ -124,15 +100,11 @@ public class PopulateWorld : MonoBehaviour
 			Debug.Log("End of For loop");
 			*/
 
-			TrashSetUp();
-
 			if(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[0].CompareTo("7") == 0){
 				//needed for coon to spawn after being defeated by him the previous day
 				GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[0] = "8";
 			}
-		}
-		Debug.Log("World list count:  " + GlobalVariableManager.Instance.WORLD_LIST.Count);
-
+		//}
 
 		if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 5){
 			//Hp Bonus with Cassie(set back at 'return events'
@@ -187,7 +159,7 @@ public class PopulateWorld : MonoBehaviour
 
 	public void EnemyList(){
 		if(GlobalVariableManager.Instance.WORLD_ENEMY_LIST.Count < 2){
-			for(int i = 0; i < numberOfRoomsInWorld; i++){
+			/*for(int i = 0; i < RoomManager.Instance.rooms.Count; i++){
 				if(GlobalVariableManager.Instance.DAY_NUMBER < 2){
 					armoredEnemySpawn = Random.Range(10,14);
 				}else{
@@ -222,7 +194,7 @@ public class PopulateWorld : MonoBehaviour
 						GlobalVariableManager.Instance.WORLD_ENEMY_LIST.Add(en1Str + en2Str + en3Str);
 					}
 				}
-			}//end of for loop
+			}//end of for loop*/
 		}
 
 	}//end of EnemyList()
@@ -288,46 +260,6 @@ public class PopulateWorld : MonoBehaviour
 			//Claw Pin
 			GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 7;
 		}
-	}
-
-	public void TrashSetUp(){
-
-	//takes the position of each 'trashSpawner' gameobject in the scene and stores it in a list. Then, for each
-	// item in the list, it will randomly select an item in the list and spawn a piece of trash there and replace
-	//that list's item maybe with '999' or some value to show that trash has already spawned there, then will go
-	//throught the list again, pick a random spot, see if the value != 999, and if not then place a trash there,
-	//etc until the world's trash limit is reached!
-
-		GameObject[] trashSpawns = GameObject.FindGameObjectsWithTag("Trash");
-		List<Vector3> trashSpawnPositions = new List<Vector3>();
-
-		//getting all the spawner positions...
-		for(int i = 0; i < trashSpawns.Length; i++){
-			trashSpawnPositions.Add(trashSpawns[i].transform.position);
-		}
-
-		int whichSpawner;
-
-		//populating world with trash....
-		for(int j = 0; j < amntTrashHere; j++){
-			whichSpawner = Random.Range(0,trashSpawnPositions.Count);
-            GameObject go = null;
-            switch (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count)
-            {
-                case 3:
-                    ObjectPool.Instance.GetPooledObject("generic_garbage", trashSpawnPositions[whichSpawner]);
-                    break;
-                case 4:
-                    ObjectPool.Instance.GetPooledObject("generic_garbage", trashSpawnPositions[whichSpawner]);
-                    break;
-                case 5:
-                    ObjectPool.Instance.GetPooledObject("generic_garbage", trashSpawnPositions[whichSpawner]);
-                    break;
-            }
-
-			trashSpawnPositions.RemoveAt(whichSpawner);
-		}
-
 	}
 }
 

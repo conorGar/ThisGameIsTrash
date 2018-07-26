@@ -6,7 +6,7 @@ public class MeleeAttack : MonoBehaviour {
 
 
 	public AudioClip swing;
-	public AudioSource audioSource;
+	//public AudioSource audioSource;
 	public GameObject meleeWeaponRightSwing;
 	public GameObject meleeWeaponLeftSwing;
 	public GameObject meleeWeaponTopSwing;
@@ -88,21 +88,26 @@ public class MeleeAttack : MonoBehaviour {
 	}//end of update method
 
 	IEnumerator Swing(int direction){
+		SoundManager.instance.RandomizeSfx(swing);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		GameObject meleeDirectionEnabled = null;
 		swingDirection = direction;
 		if(direction == 1){
 			meleeDirectionEnabled = meleeWeaponRightSwing;
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
+			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingR",true);
+			//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
 		}else if(direction == 2){
 			meleeDirectionEnabled = meleeWeaponLeftSwing;
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
+			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingR",true);
+			//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
 		}else if(direction == 3){
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingUp");
+			//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingUp");
+			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingUp",true);
 			meleeDirectionEnabled = meleeWeaponTopSwing;
 
 		}else if(direction == 4){
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingDown");
+			//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingDown");
+			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingDown",true);
 			meleeDirectionEnabled = meleeWeaponBotSwing;
 
 		}
@@ -112,12 +117,6 @@ public class MeleeAttack : MonoBehaviour {
 
 
 		//meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
-
-
-		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0 && audioSource){
-			audioSource.clip = swing;
-			audioSource.Play();
-		}
 
 		isSwinging = true;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);

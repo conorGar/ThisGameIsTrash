@@ -14,7 +14,7 @@ public class GlobalVariableManager : MonoBehaviour {
 											"abcdefghijolmnpqrstuvwxy1234567890,./;'*[]-<>?:(){}!^",
 											"abcdefghijklmnpqrstuvwxy1234567890,./;'",
 											"0",
-											//"5",  <- removed, not needed, respresented player's HP, but now 'MAX_HP' does.
+											//"5",
 											"0",
 											"0",
 											"0",
@@ -57,12 +57,12 @@ public class GlobalVariableManager : MonoBehaviour {
 
     public struct LargeTrashItem
     {
-        public LARGETRASH type;
+        public LARGEGARBAGE type;
         public int spriteIndex;
         public bool isViewed;
         public Sprite collectedDisplaySprite;
 
-        public LargeTrashItem(LARGETRASH p_type)
+        public LargeTrashItem(LARGEGARBAGE p_type)
         {
             type = p_type;
             spriteIndex = 0;
@@ -72,100 +72,42 @@ public class GlobalVariableManager : MonoBehaviour {
     };
 
 	public Dictionary<string,EnemyInstance> BASIC_ENEMY_LIST = new Dictionary<string,EnemyInstance>();
-
     public List<LargeTrashItem> LARGE_TRASH_LIST = new List<LargeTrashItem>();
 
-    public LARGETRASH LARGE_TRASH_DISCOVERY_LIST = LARGETRASH.NONE;
-    public LARGETRASH LARGE_TRASH_VIEWED_LIST = LARGETRASH.NONE;
+	public STANDARDGARBAGE STANDARD_GARBAGE_DISCOVERED = STANDARDGARBAGE.NONE;
+    public STANDARDGARBAGE STANDARD_GARBAGE_VIEWED = STANDARDGARBAGE.NONE;
 
-    public enum LARGETRASH : int
-    {
-        NONE = 0,
-        CHAIR =         1 << 0,
-        TESTTRASH2 =    1 << 1,
-        TESTTRASH3 =    1 << 2,
-        TESTTRASH4 =    1 << 3,     
-    }
+    public COMPOSTGARBAGE COMPOST_GARBAGE_DISCOVERED = COMPOSTGARBAGE.NONE;
+    public COMPOSTGARBAGE COMPOST_GARBAGE_VIEWED = COMPOSTGARBAGE.NONE;
 
-    // Returns the index of the garbage.
-    public int LargeTrashIndex(LARGETRASH largeTrash)
+    public RECYCLABLEGARBAGE RECYCLABLE_GARBAGE_DISCOVERED = RECYCLABLEGARBAGE.NONE;
+    public RECYCLABLEGARBAGE RECYCLABLE_GARBAGE_VIEWED = RECYCLABLEGARBAGE.NONE;
+
+    public LARGEGARBAGE LARGE_GARBAGE_DISCOVERED = LARGEGARBAGE.NONE;
+    public LARGEGARBAGE LARGE_GARBAGE_VIEWED = LARGEGARBAGE.NONE;
+
+    // Not super excited about this but I can't make a generic enum and I'm not clever enough to code this better. -Steve
+    // bag is locked if they haven't gathered the first garbage item.
+    public bool IsBagLocked(int bagIndex)
     {
-        for (int i = 0; i < sizeof(LARGETRASH); ++i)
+        switch (bagIndex)
         {
-            if ((int)largeTrash == 1 << i)
-                return i;
+            case 0:
+                return (STANDARD_GARBAGE_DISCOVERED & STANDARDGARBAGE.PAPER) != STANDARDGARBAGE.PAPER;
+            case 1:
+                return (COMPOST_GARBAGE_DISCOVERED & COMPOSTGARBAGE.COMPOST_TEST_1) != COMPOSTGARBAGE.COMPOST_TEST_1;
+            case 2:
+                return (RECYCLABLE_GARBAGE_DISCOVERED & RECYCLABLEGARBAGE.RECYCLABLE_TEST_1) != RECYCLABLEGARBAGE.RECYCLABLE_TEST_1;
+            default:
+                return true;
         }
-        return 0;
     }
-
-    public LARGETRASH LargeTrashByIndex(int index)
-    {
-        return (LARGETRASH)(1 << index);
-    }
-
-	public List<GARBAGE> GARBAGE_DISCOVERY_LIST = new List<GARBAGE>{
-																GARBAGE.PAPER,
-																GARBAGE.NONE,
-                                                                GARBAGE.NONE,
-                                                                GARBAGE.NONE
-                                                                };
-
-    public List<GARBAGE> GARBAGE_VIEWED_LIST = new List<GARBAGE>{
-                                                                GARBAGE.PAPER,
-                                                                GARBAGE.NONE,
-                                                                GARBAGE.NONE,
-                                                                GARBAGE.NONE
-                                                                };
-    public enum GARBAGE : int
-    {
-        NONE =               0,
-        PAPER =         1 << 0,
-        IPOD =          1 << 1,
-        BOOK =          1 << 2,
-        ART_SUPPLIES =  1 << 3,
-        BAG_SPICY =     1 << 4,
-        CHIPS =         1 << 5,
-        BAG_BBQ =       1 << 6,
-        CASETTE =       1 << 7,
-        CHINESE =       1 << 8,
-        JUICE =         1 << 9,
-        LIGHTBULB =     1 << 10,
-        MUG =           1 << 11,
-        PARTY =         1 << 12,
-        SOCK =          1 << 13,
-        TISSUE =        1 << 14,
-        TOILET =        1 << 15,
-        HAIR =          1 << 16,
-        FISH =          1 << 17,
-        NEEDLE =        1 << 18,
-        BABY =          1 << 19,
-        ARM =           1 << 20,
-        CHILDHOOD =     1 << 21,
-        MOM_PRES =      1 << 22
-    }
-
-    // Returns the index of the garbage.
-    public int GarbageIndex(GARBAGE garbage)
-    {
-        for (int i = 0; i < sizeof(GARBAGE); ++i)
-        {
-            if ((int)garbage == 1 << i)
-                return i;
-        }
-        return 0;
-    }
-
-    public GARBAGE GarbageByIndex(int index)
-    {
-        return (GARBAGE)(1 << index);
-    }
-
 
     public int GARBAGE_HAD = 0;
 	public int LARGE_TRASH_COLLECTED = 0;
 	public List<Vector2> LARGE_TRASH_LOCATIONS = new List<Vector2>();
 	public int MY_NUM_IN_ROOM = 0;
-	public int ROOM_PLAYER_DIED_IN = 0;
+	public Vector3 DROPPED_TRASH_LOCATION = Vector3.zero;
 	public List<int> TODAYS_TRASH_AQUIRED = new List<int>{0,0,0};
 	public int TRASH_TYPE_SELECTED = 3;
 	public int TRASH_AQUIRED = 0;
@@ -178,7 +120,6 @@ public class GlobalVariableManager : MonoBehaviour {
 	public List<string> CALENDAR = new List<string>(); //put as string for now, not sure if it can be int
 	public List<string> FRIEND_LIST = new List<string>();
 	public List<string> WORLD_ENEMY_LIST = new List<string>();
-	public List<string> WORLD_LIST = new List<string>();
 	public int ROOM_NUM = 0;
 	public int TIME_IN_DAY = -90;
 	public int WORLD_NUM = 1;

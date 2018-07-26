@@ -14,6 +14,7 @@ public class SE_GlowWhenClose : MonoBehaviour {
 	public Sprite glowSprite;
 	public Sprite spawnedObjectSprite;
 	public GameObject objectToSpawn;
+	public AudioClip highlightSound;
 
 	Sprite startSprite;
 	GameObject player;
@@ -39,6 +40,7 @@ public class SE_GlowWhenClose : MonoBehaviour {
 							tempSpawnedObject.GetComponent<SpriteRenderer>().sprite = spawnedObjectSprite;
 						}
 					}
+					SoundManager.instance.PlaySingle(highlightSound);
 					glowCheck = 1;
 				}else if(activateSomethingWithSpace){
 					if(Input.GetKeyDown(KeyCode.Space)){

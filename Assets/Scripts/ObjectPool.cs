@@ -58,7 +58,9 @@ public class ObjectPool : MonoBehaviour {
                 {
                     if (!objects[i].activeInHierarchy)
                     {
-                        objects[i].SetActive(true);
+                    	objects[i].SetActive(true);
+                    	if(objects[i].GetComponent<tk2dSpriteAnimator>() != null)
+                    		objects[i].GetComponent<tk2dSpriteAnimator>().Play();
                         return objects[i];
                     }
                 }
@@ -66,7 +68,6 @@ public class ObjectPool : MonoBehaviour {
                 if (poolDefinition.IsExpandable)
                 {
                     GameObject obj = Instantiate(poolDefinition.poolObject) as GameObject;
-                    obj.SetActive(true);
                     pooledObjects[poolDefinition].Add(obj);
                     return obj;
                 }

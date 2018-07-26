@@ -20,9 +20,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public tk2dCamera currentCamera; //set in inspector
 	//public bool doesNotArcWhenHit = false;
 	public bool respawnEnemy = false;
+	public AudioClip hitSound;
 	public AudioClip hitSqueal;
 	//public AudioClip bounce;
-	public AudioSource audioSource;
+	//public AudioSource audioSource;
 	//public GameObject deathShadow;
 	//public GameObject hitStar;
 	//public GameObject smokePuff;
@@ -132,6 +133,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 		Debug.Log("Collision with weapon");
 		if(melee.tag == "Weapon"){
 			TakeDamage(melee.gameObject);
+			SoundManager.instance.PlaySingle(hitSound);
+			SoundManager.instance.PlaySingle(hitSqueal);
+
 
 		}
 	}
@@ -180,11 +184,12 @@ public class EnemyTakeDamage : MonoBehaviour {
 					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
 					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
 					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
-
+					damageCounter.SetActive(true);
+					Debug.Log("Object pool size: " + objectPool.GetComponent<ObjectPool>().pooledObjects.Count);
 					GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
 					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-					littleStars.transform.position = new Vector3((transform.position.x + 2), transform.position.y, transform.position.z);
-
+					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+					littleStars.SetActive(true);
 					if(gameObject.transform.position.x < player.transform.position.x){
 						//hitStarPS.SetActive(true);
 						//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
@@ -197,7 +202,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 					}
 
-					Debug.Log("current cam shake activate here ******* VVVV");
 					currentCam.StartCoroutine("ScreenShake",.2f);
 
 					if(!moveWhenHit){
@@ -226,10 +230,11 @@ public class EnemyTakeDamage : MonoBehaviour {
 		damageOnce = 0;
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-		if(aniToSwitchBackTo != null)
-				myAnim.Play("idleR");
-			else
-				myAnim.Play("IdleR");
+		//if(aniToSwitchBackTo != null)
+		if(currentHp >0)
+			myAnim.Play("idle");
+			//else
+				//myAnim.Play("IdleR");
 		takingDamage = false;
 
 	}
@@ -288,6 +293,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				damageOnce = 0;
 			
 			}else{ //if hp is NOT > 0
+				Debug.Log("HP IS NOT ABOVE ZEROOOOOOOOO");
 				if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
 				//**SFX PLAY- 'hit_final'
 				}
@@ -306,10 +312,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 						dropsTrash = Random.Range(1, (12-sharingUpgrade));
 					}
 				}
-				gameObject.transform.Rotate(Vector3.right*Time.deltaTime);
+				//gameObject.transform.Rotate(Vector3.right*Time.deltaTime);
 				GlobalVariableManager.Instance.ENEMIES_DEFEATED++;
 
-				string thisRoomsEnemyList = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum];
+				//string thisRoomsEnemyList = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum];
 				//if(!respawnEnemy){
 					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Substring(myPosInBasicEnemyStr,myPosInBasicEnemyStr+1) = "o";
 					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Remove(myPosInBasicEnemyStr);
@@ -324,7 +330,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				}
 
 
-				yield return new WaitForSeconds(.4f);
+				yield return new WaitForSeconds(.2f);
 
 				DropScrap();
 			
@@ -401,9 +407,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 			}else{
 				scrapDropped = Random.Range(2,5);
 			}
+			//Debug.Log("dropped scrap:" + scrapDropped);
 		for(int i = 0; i < scrapDropped; i++){
-			GameObject droppedScrap;
-			droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
+			GameObject droppedScrap= objectPool.GetComponent<ObjectPool>().GetPooledObject("Scrap",gameObject.transform.position);
+			//droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
 		}
 		}
 	}
@@ -414,6 +421,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 	}
 
 	void Death(){
+		Debug.Log("Death Activate!!!");
+
 		GameObject deathSmoke = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_SmokePuff");
 		deathSmoke.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 
@@ -423,7 +432,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 		GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival = GlobalVariableManager.Instance.DAY_NUMBER +3;
 		Debug.Log("Day of revival: "+ GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival);
 
-		gameObject.SetActive(false);
+
+		this.gameObject.SetActive(false);
 
 	}
 }

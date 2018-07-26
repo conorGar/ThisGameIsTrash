@@ -7,27 +7,31 @@ public class Ev_FadeHelper : MonoBehaviour {
 
 	public GameObject smallTruck;
 	public GameObject upgradeActorTempEffects;
-	public GameObject whiteFlash;
+	public GameObject fader;
+	public GameObject currentCanvas;
 	public Texture2D fadeOutTexture; //texture that will overlay screen(black image)
 	public float fadeSpeed;
 
 	float alpha = 0f;
 	int specialFade = 0;
 	int signFade = 0;
-	bool showFadeIn = false;
+
 	int fadeColor = 0;
 	int whiteFlashOpacity = 0;
 	int opacity = 0;
 	float fadeMaxStrength = .7f;
 	Color alphaColor;
-
+	public bool fading;
+	public bool fadeBack;
 	GameObject tempFlash;
 	GameObject player;
 	GameObject myCam;
+	Image faderImage;
 
 	void Start(){
 		player = GameObject.FindGameObjectWithTag("Player");
 		myCam = GameObject.Find("tk2dCamera");
+		faderImage = fader.GetComponent<Image>();
 		//FadeToScene("IntroCredits");
 	}
 
@@ -48,20 +52,27 @@ public class Ev_FadeHelper : MonoBehaviour {
 		}else{
 			Destroy(tempFlash);
 		}
+
+		if(fading){
+			faderImage.color = Color.Lerp(faderImage.color,alphaColor,5f*Time.deltaTime);
+		}else if(fadeBack){
+			faderImage.color = Color.Lerp(faderImage.color,alphaColor,5f*Time.deltaTime);
+
+		}
 	}
 
-	public void ShowFadeIn(){
-		opacity = 0;
-		showFadeIn = true;
+	public void FadeIn(){
+		fading = false;
+		alphaColor = faderImage.color;
+		alphaColor.a = 0f;
+		fadeBack = true;
 	}
 
-	public void ShowFadeBack(){
-		showFadeIn = false;
-	}
+
 
 	public void WhiteFlash(){
-		GameObject currentCanvas = GameObject.Find("Canvas").gameObject;
-		tempFlash = Instantiate(whiteFlash,currentCanvas.transform.position,Quaternion.identity);
+		//GameObject currentCanvas = GameObject.Find("Canvas").gameObject;
+		//tempFlash = Instantiate(whiteFlash,currentCanvas.transform.position,Quaternion.identity);
 		tempFlash.transform.parent = currentCanvas.transform;
 		alphaColor = tempFlash.GetComponent<Image>().color;
 		alphaColor.a = 0f;
@@ -69,7 +80,11 @@ public class Ev_FadeHelper : MonoBehaviour {
 	}
 
 	public void BlackFade(){
-		fadeColor = 1;
+		
+		fading = true;
+		alphaColor = faderImage.color;
+		alphaColor.a = 1f;
+		fader.SetActive(true);
 	}
 
 	public IEnumerator Fade(){

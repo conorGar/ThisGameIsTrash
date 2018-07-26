@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class SpecialEffectsBehavior : MonoBehaviour
 {	
 	
@@ -70,8 +70,18 @@ public class SpecialEffectsBehavior : MonoBehaviour
 					myRenderer.color = new Color(myColor.r,myColor.g,myColor.b,alpha);
 					yield return null;
 				}
-		}else{
+		}else if(gameObject.GetComponent<tk2dSprite>() != null){
 			tk2dSprite myRenderer = gameObject.GetComponent<tk2dSprite>();
+			myColor = myRenderer.color;
+				while(counter < fadeDuration){
+					counter += Time.deltaTime;
+					float alpha = Mathf.Lerp(1,0, counter/fadeDuration);
+
+					myRenderer.color = new Color(myColor.r,myColor.g,myColor.b,alpha);
+					yield return null;
+				}
+		}else if(gameObject.GetComponent<Image>() != null){
+			Image myRenderer = gameObject.GetComponent<Image>();
 			myColor = myRenderer.color;
 				while(counter < fadeDuration){
 					counter += Time.deltaTime;

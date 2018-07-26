@@ -13,7 +13,7 @@ public class Ev_LargeTrash : MonoBehaviour {
 	//public int myWorld;
 	//public string myString;
 	//public char myCharValue; //only used to set up string for use when showing today's collected large trash at day end
-    public GlobalVariableManager.LARGETRASH trashType = GlobalVariableManager.LARGETRASH.NONE;
+    public LargeGarbage garbage;
     public Sprite collectedDisplaySprite;
 
 	public GameObject collisionBox;
@@ -291,9 +291,8 @@ public class Ev_LargeTrash : MonoBehaviour {
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 
         // Add this trash item to the large trash list.
-        var largeTrashItem = new GlobalVariableManager.LargeTrashItem(trashType);
+        var largeTrashItem = new GlobalVariableManager.LargeTrashItem(garbage.type);
         largeTrashItem.spriteIndex = myPositionInList;
-        largeTrashItem.type = trashType;
         largeTrashItem.collectedDisplaySprite = collectedDisplaySprite;
         GlobalVariableManager.Instance.LARGE_TRASH_LIST.Add(largeTrashItem);
 

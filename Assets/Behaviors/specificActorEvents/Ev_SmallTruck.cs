@@ -13,6 +13,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 	int roomNum;
 	float delayTillSpawn;
 	// Use this for initialization
+	bool endDayTruck;
 	void Awake(){
 		if(player == null)//if not already set
 			player = GameObject.FindGameObjectWithTag("Player");
@@ -50,7 +51,13 @@ public class Ev_SmallTruck : MonoBehaviour {
 			if(this.gameObject.transform.position.x > player.transform.position.x){
 				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 				phase = 2;
-				EndDay();
+				if(endDayTruck){
+					EndDay();
+				}else{
+					Debug.Log("PLAYER SPRITE DISABLED HERE");
+					player.GetComponent<tk2dSprite>().enabled = false;
+					//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
+				}
 			}
 		}
 	}
@@ -86,7 +93,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 		Debug.Log("Truck End Day Activate");
 
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-
+		endDayTruck = true;
 		if(phase == 0){
 			//player = GameObject.FindGameObjectWithTag("Player");
 			if(GlobalVariableManager.Instance.WORLD_NUM == 4){
@@ -122,6 +129,16 @@ public class Ev_SmallTruck : MonoBehaviour {
 
 	public void ReturnToDumpster(){
 
+
+		if(phase == 0){
+			
+			if(GlobalVariableManager.Instance.CARRYING_SOMETHING == true){
+				GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
+			}
+
+			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
+			phase = 1;
+		}
 	}
 
 	IEnumerator SpawnPlayer(){

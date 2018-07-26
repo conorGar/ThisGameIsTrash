@@ -13,13 +13,19 @@ public class Ev_HitStars : MonoBehaviour {
 	void Start () {
 		gameObject.GetComponent<SpecialEffectsBehavior>().SetGrowValues(.1f,.5f);
 		gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Shrink",1f);
+		Debug.Log(">>>>>>>Hit Star Created!<<<<<<");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
+	void OnEnable(){
+		gameObject.GetComponent<SpecialEffectsBehavior>().StopCoroutine("Shrink");
+		transform.localScale = new Vector3(1,1,1);
+		gameObject.GetComponent<SpecialEffectsBehavior>().SetGrowValues(.1f,.5f);
+		gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Shrink",1f);
+	}
 	public void ShowProperDamage(int damageDealt){
 		if(damageDealt == 2){
 			this.gameObject.GetComponent<SpriteRenderer>().sprite = TwoDamage;

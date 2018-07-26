@@ -89,13 +89,17 @@ public class RandomDirectionMovement : MonoBehaviour {
 		//print("Collided");
 	}
 	void SpawnClouds(){
-		GameObject newestCloud;
-		newestCloud = Instantiate(walkCloud, new Vector3(transform.position.x,transform.position.y - walkCloudYadjust, transform.position.z), Quaternion.identity) as GameObject;
-		if(direction.x <0){
-			newestCloud.GetComponent<Ev_WalkCloud>().MoveRight();
-		}else {
-			newestCloud.GetComponent<Ev_WalkCloud>().MoveLeft();
-			}
+		if(this.gameObject.activeInHierarchy == true){
+			GameObject newestCloud;
+			newestCloud = Instantiate(walkCloud, new Vector3(transform.position.x,transform.position.y - walkCloudYadjust, transform.position.z), Quaternion.identity) as GameObject;
+			if(direction.x <0){
+				newestCloud.GetComponent<Ev_WalkCloud>().MoveRight();
+			}else {
+				newestCloud.GetComponent<Ev_WalkCloud>().MoveLeft();
+				}
+		}else{
+			CancelInvoke();
+		}
 	}
 
 	void GoAgain(){

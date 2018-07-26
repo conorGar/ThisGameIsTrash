@@ -35,10 +35,11 @@ public class S_Ev_DayDisplay : MonoBehaviour {
 			CursePin();
 		}
 
-        //replace trash 'newly discovered' values.  Anything that has been discovered will be considered as viewed. 
-        for (int i = 0; i < GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST.Count; i++){
-            GlobalVariableManager.Instance.GARBAGE_VIEWED_LIST[i] = GlobalVariableManager.Instance.GARBAGE_DISCOVERY_LIST[i];
-		}
+        //replace trash 'newly discovered' values.  Anything that has been discovered will be considered as viewed.
+        GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED = GlobalVariableManager.Instance.STANDARD_GARBAGE_VIEWED;
+        GlobalVariableManager.Instance.COMPOST_GARBAGE_DISCOVERED = GlobalVariableManager.Instance.COMPOST_GARBAGE_VIEWED;
+        GlobalVariableManager.Instance.RECYCLABLE_GARBAGE_DISCOVERED = GlobalVariableManager.Instance.RECYCLABLE_GARBAGE_VIEWED;
+        GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED = GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED;
 
 		numberDisplay.text = GlobalVariableManager.Instance.DAY_NUMBER.ToString();
 		if(GlobalVariableManager.Instance.FRIEND_LIST[14][0] == 1 && GlobalVariableManager.Instance.FRIEND_LIST[14][1] != 'x'){

@@ -111,7 +111,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeUntilDeath: 0.5
-  deactivateInsteadOfKill: 0
+  deactivateInsteadOfKill: 1
+  playSoundAtStart: 1
+  mySound: {fileID: 8300000, guid: 3e6fa054a16dbe74eba5460f777222da, type: 3}
 --- !u!114 &114149350523737340
 MonoBehaviour:
   m_ObjectHideFlags: 1

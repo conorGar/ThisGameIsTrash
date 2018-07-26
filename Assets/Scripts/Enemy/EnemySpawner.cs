@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
+public class EnemySpawner : EditorMonoBehaviour {
     public List<Enemy> enemies;
     public bool isMyEnemyDead = false;
     public EnemyInstance myEnemyInstance;
