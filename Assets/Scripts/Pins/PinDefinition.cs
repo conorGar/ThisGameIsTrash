@@ -84,6 +84,7 @@ public class PinDefinition : ScriptableObject
         get { return (PIN)pinValue; }
     }
 
+    [HideInInspector]
     public ulong pinValue;
 
     public string displayName = "New Pin";
