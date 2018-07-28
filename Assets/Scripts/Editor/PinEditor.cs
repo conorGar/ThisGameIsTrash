@@ -16,5 +16,6 @@ public class PinEditor : Editor {
         pinDefinition.pinValue = (ulong)pinDefinition.Type;
 
         base.OnInspectorGUI();
+        EditorUtility.SetDirty(target);
     }
 }
