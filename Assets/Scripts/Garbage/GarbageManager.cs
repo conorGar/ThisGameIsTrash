@@ -55,6 +55,24 @@ public class GarbageManager : MonoBehaviour {
                     go.SetActive(true);
                 }
                 break;
+            case GARBAGETYPE.COMPOST:
+
+
+
+
+                break;
+            case GARBAGETYPE.RECYCLABLE:
+
+
+
+
+                break;
+            case GARBAGETYPE.LARGE:
+
+
+
+
+                break;
             default:
                 break;
         }

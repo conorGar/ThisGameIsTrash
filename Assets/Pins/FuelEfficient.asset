@@ -11,11 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b020940cd6e0194ca35aca35e57454e, type: 3}
   m_Name: FuelEfficient
   m_EditorClassIdentifier: 
-  pinValue: 4294967296
+  pinValue: 0
   displayName: Fuel Efficient
   description: Ending the day at the Dumpster today increases the length of the day
     tomorrow.
   sprite: pin_fuelEfficient
+  titleSprite: pinTitle_fuelEfficient
   ppValue: 1
   price: 11
   displayPriority: 23

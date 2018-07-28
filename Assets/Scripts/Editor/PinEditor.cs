@@ -12,9 +12,8 @@ public class PinEditor : Editor {
         // Well I don't like Unity's face.
         // This kanoodles it so the inspector properly displays an enum dropdown while serializing a 64 bit number (long).
         PinDefinition pinDefinition = (PinDefinition)target;
-        pinDefinition.Type = (PIN)pinDefinition.pinValue;
         pinDefinition.Type = (PIN)EditorGUILayout.EnumPopup(pinDefinition.Type);
-        pinDefinition.pinValue = (long)pinDefinition.Type;
+        pinDefinition.pinValue = (ulong)pinDefinition.Type;
 
         base.OnInspectorGUI();
     }

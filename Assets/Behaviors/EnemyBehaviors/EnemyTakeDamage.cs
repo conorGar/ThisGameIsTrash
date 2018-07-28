@@ -83,22 +83,22 @@ public class EnemyTakeDamage : MonoBehaviour {
 			}
 		}
 		//----------------Pins----------------//
-		if(GlobalVariableManager.Instance.pinsEquipped[31] == 1) //Piercing Pin
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PIERCINGPIN)) //Piercing Pin
 			piercingPin = true;
-		if(GlobalVariableManager.Instance.pinsEquipped[28] == 1){ //'Vitality Vision' pin
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.VITALITYVISION)){ //'Vitality Vision' pin
 			maxHp = currentHp;
 			showHealth = true;
 		}
-		if(GlobalVariableManager.Instance.pinsEquipped[4] == 5){//Cursed Pin- toughness change
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.CURSED)){//Cursed Pin- toughness change
 			currentHp--;
-		} else if(GlobalVariableManager.Instance.pinsEquipped[4] == 4)
+		} else if(GlobalVariableManager.Instance.IsPinEquipped(PIN.BLISTERINGBOND))
 			currentHp++;
 
-		if(GlobalVariableManager.Instance.pinsEquipped[29] == GlobalVariableManager.Instance.ROOM_NUM &&GlobalVariableManager.Instance.ROOM_NUM != 0){
+		/*if(GlobalVariableManager.Instance.pinsEquipped[29] == GlobalVariableManager.Instance.ROOM_NUM &&GlobalVariableManager.Instance.ROOM_NUM != 0){
 			GameObject waifu =  Instantiate(GameObject.Find("upgradeActor_japWoman"), transform.position, Quaternion.identity) as GameObject;
 			Destroy(gameObject);
-		}
-		if(GlobalVariableManager.Instance.pinsEquipped[9] == 1){//Sharing Pin
+		}*/
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SHARING)){//Sharing Pin
 			sharingUpgrade = 2;
 		}
 		//----------------------------//
@@ -224,7 +224,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 						//bonus dmg with pole
 						meleeDmgBonus++;
 					}
-					if(GlobalVariableManager.Instance.pinsEquipped[21] == 1 && GlobalVariableManager.Instance.CURRENT_HP == 1){
+					if(GlobalVariableManager.Instance.IsPinEquipped(PIN.STAYBACK) && GlobalVariableManager.Instance.CURRENT_HP == 1){
 						//STAY BACK pin
 						meleeDmgBonus++;
 					}
@@ -517,18 +517,19 @@ public class EnemyTakeDamage : MonoBehaviour {
 	}
 
 	void DropScrap(){
-		if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < (13 + (GlobalVariableManager.Instance.pinsEquipped[20]*5))){
-		// get #20*5 thing is for 'Waste Warrior' adjustment
-			if(GlobalVariableManager.Instance.pinsEquipped[22] != 1){
+        // 'Waste Warrior' pin ups the scrap cap by 5.
+        int wasteWarriorAdjust = (GlobalVariableManager.Instance.IsPinEquipped(PIN.WASTEWARRIOR) ? 1 : 0) * 5;
+        if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < (13 + wasteWarriorAdjust)){
+			if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.SCRAPCITY)){
 				//^ Scrap City - more scrap dropped
 				scrapDropped = Random.Range(1,3);
 			}else{
 				scrapDropped = Random.Range(2,5);
 			}
-		for(int i = 0; i < scrapDropped; i++){
-			GameObject droppedScrap;
-			droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
-		}
+	        for(int i = 0; i < scrapDropped; i++){
+		        GameObject droppedScrap;
+		        droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
+	        }
 		}
 	}
 }

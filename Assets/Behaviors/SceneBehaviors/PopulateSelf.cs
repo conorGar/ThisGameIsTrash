@@ -70,7 +70,7 @@ public class PopulateSelf : MonoBehaviour {
 
 		//V changes room discover string for this world
 		if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER[(GlobalVariableManager.Instance.WORLD_NUM -1)].Substring(myRoomNum, myRoomNum+1).CompareTo("o") != 0){
-			if(GlobalVariableManager.Instance.pinsEquipped[25] != 0){
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.CALLOFTHEWILD)){
 				//Call of The Wild pin
 				GlobalVariableManager.Instance.TOTAL_TRASH++;
 				GameObject callWildPopup;
@@ -87,10 +87,10 @@ public class PopulateSelf : MonoBehaviour {
 	IEnumerator enemySpawn(){ // obsulete!!!!****
 		//Debug.Log("Enemy Spawn Activated");
 		yield return new WaitForSeconds(.3f);
-			if(GlobalVariableManager.Instance.pinsEquipped[30] != 0){
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.WAIFUWANTED)){
 			//waifu wanted pin
 				int waifuChance;
-				if(GlobalVariableManager.Instance.pinsEquipped[34] != 0){
+				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.FORTUNESFRIEND)){
 					//Fortune's Friend pin
 					waifuChance = Random.Range(3,10);
 				}else{

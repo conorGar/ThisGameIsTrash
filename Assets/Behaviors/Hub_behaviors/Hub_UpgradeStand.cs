@@ -112,7 +112,7 @@ public class Hub_UpgradeStand : MonoBehaviour {
 				GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) + 1).ToString();
 			}else if(arrowPos == 2){
 				//increase PP
-				GlobalVariableManager.Instance.pinsEquipped[0] += 3;
+				GlobalVariableManager.Instance.PPVALUE += 3;
 			}
 
 			GlobalVariableManager.Instance.characterUpgradeArray[7] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[7]) - 1).ToString();

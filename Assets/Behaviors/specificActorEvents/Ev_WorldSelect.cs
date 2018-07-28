@@ -8,7 +8,6 @@ public class Ev_WorldSelect : MonoBehaviour {
 	public float XofStar = 0;
 	public int largeTrashListStartIndex = 0;
 	public int myMenuSelectStage = 0;
-	public GlobalVariableManager.WORLDS worldPosition = GlobalVariableManager.WORLDS.ONE;
 	public int position = 0;
 	//p = 0 = front; = 1-right; =2-back; = 3 -left
 
@@ -27,7 +26,8 @@ public class Ev_WorldSelect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if((GlobalVariableManager.Instance.WORLDS_UNLOCKED & worldPosition) != worldPosition){
+		if((GlobalVariableManager.Instance.WORLDS_UNLOCKED & WorldManager.Instance.world.type) != WorldManager.Instance.world.type)
+        {
 			gameObject.GetComponent<SpriteRenderer>().color = Color.black;
 			//if(GlobalVariableManager.Instance.PROGRESS_LV >= myPositionInWorldsUnlocked){
 			if(myMenuSelectStage == 1){ //just for testing, remove
@@ -174,7 +174,7 @@ public class Ev_WorldSelect : MonoBehaviour {
 	IEnumerator Unlock(){
 		GameObject manager = GameObject.Find("manager");
 		GameObject camera = GameObject.Find("tk2dCamera");
-		manager.GetComponent<S_Ev_WorldSelect>().TriggeredMovement(GlobalVariableManager.Instance.WorldIndex(worldPosition));
+		manager.GetComponent<S_Ev_WorldSelect>().TriggeredMovement(WorldManager.Instance.world.WorldIndex());
 		camera.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",2f);
 		yield return new WaitForSeconds(2.5f);
 		manager.GetComponent<Ev_FadeHelper>().WhiteFlash();

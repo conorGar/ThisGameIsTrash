@@ -11,13 +11,10 @@ public class S_Ev_StartScreen : MonoBehaviour {
 	}
 	void Start () {
 
-		if(GlobalVariableManager.Instance.pinsEquipped.Count < 2){
-			for(int i = 0; i < 49; i++){
-				GlobalVariableManager.Instance.pinsEquipped.Add(0);
-			}
+        // TODO: Waste Warrior stuff?  How do we handle this?
+		/*if(GlobalVariableManager.Instance.pinsEquipped.Count < 2){
 			GlobalVariableManager.Instance.pinsEquipped[19] = 2;
-
-		}
+		}*/
 
 		if(GlobalVariableManager.Instance.CALENDAR.Count < 2){
 			for(int i = 0; i < 30; i++){

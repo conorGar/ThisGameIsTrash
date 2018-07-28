@@ -11,11 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b020940cd6e0194ca35aca35e57454e, type: 3}
   m_Name: PassivePillage
   m_EditorClassIdentifier: Assembly-CSharp::PinDefinition
-  pinValue: 32
+  pinValue: 0
   displayName: Passive Pillage
   description: Speed increase for every Trash collected. Resets when take damage.
     It's supposed to be Ghandi.
   sprite: pin_passivePillage
+  titleSprite: pinTitle_passivePillage
   ppValue: 3
   price: 10
   displayPriority: 11

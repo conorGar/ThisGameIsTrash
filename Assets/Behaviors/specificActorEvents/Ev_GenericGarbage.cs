@@ -42,7 +42,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
                 smallShadow.transform.position = transform.position;
             }
 
-            if (GlobalVariableManager.Instance.pinsEquipped[39] == 1) {
+            if (GlobalVariableManager.Instance.IsPinEquipped(PIN.MAGNETICPIN)) {
                 magnetic = true;
             }
 
@@ -152,17 +152,17 @@ public class Ev_GenericGarbage : MonoBehaviour {
 							}//end of new discover code
 						player.GetComponent<tk2dSpriteAnimator>().Play("ani_jimPickUp");
 
-						if(GlobalVariableManager.Instance.pinsEquipped[10] == 1){
-							//Mo Garbage Mo' Problems - changes max HP bac if collect more than 5 trash
-							if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 4){
+						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.MOGARBAGEMOPROBLEMS)){
+                            //Mo Garbage Mo' Problems - changes max HP bac if collect more than 5 trash
+                            // TODO: Review and figure this out.
+                            /*if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 4){
 								if(GlobalVariableManager.Instance.CURRENT_HP > int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2){
 									GlobalVariableManager.Instance.CURRENT_HP = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2);
 								}
 								GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1)) + 2).ToString();
-								GlobalVariableManager.Instance.pinsEquipped[10] = 2;
-							}
+							}*/
 						}//mo garbage mo problems check end
-						if(GlobalVariableManager.Instance.pinsEquipped[6] != 0){
+						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
 						//Passive Pillage
 							/*GameObject passivePillageEffect = Instantiate(tempEffectsActor, new Vector2(0f,0f),Quaternion.identity);
 							passivePillageEffect.GetComponent<Ev_upgradeActorTempEffects>().Follow();
@@ -179,7 +179,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 								GlobalVariableManager.Instance.CURRENT_HP++;
 							}
 						}
-						if(GlobalVariableManager.Instance.pinsEquipped[40] != 0){
+						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.TRASHPOWER)){
 							//Trash Power pin
 							GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] += 2;
 							GameObject currentWeaponHUD = GameObject.Find("current weapon");
@@ -208,7 +208,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
     }
 
 	void Setup(){
-		if(GlobalVariableManager.Instance.pinsEquipped[1] == 1){
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.BULKYBAG)){
 		//Bulky Bag pin
 			bagSizeBonus = bagSizeBonus + 3;
 		}

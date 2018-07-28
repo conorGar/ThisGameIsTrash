@@ -36,7 +36,7 @@ public class ObjectPool : MonoBehaviour {
             }
         }
 	}
-	
+
     public GameObject GetPooledObject (string tag)
     {
         ObjectPoolDefinition poolDefinition = null;
@@ -73,6 +73,15 @@ public class ObjectPool : MonoBehaviour {
 
         Debug.Log("Requested a pooled object [" + tag + "] but could not retrieve it.");
         return null;
+    }
+
+    public GameObject GetPooledObject(string tag, Vector3 pos, bool setActive = false)
+    {
+        GameObject obj = GetPooledObject(tag, pos);
+        if (obj != null && setActive)
+            obj.SetActive(true);
+
+        return obj;
     }
 
     public GameObject GetPooledObject (string tag, Vector3 pos)

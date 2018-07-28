@@ -31,7 +31,7 @@ public class S_Ev_DayDisplay : MonoBehaviour {
 		}
 		//-------------------------------------------------//
 
-		if(GlobalVariableManager.Instance.pinsEquipped[4] > 0){
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.CURSED)){
 			CursePin();
 		}
 
@@ -86,7 +86,7 @@ public class S_Ev_DayDisplay : MonoBehaviour {
 		}else if(whichCurse == 9){
 			curseDisplay.text = "SLOW PROJECTILES";
 		}
-		GlobalVariableManager.Instance.pinsEquipped[4] = whichCurse;
+		GlobalVariableManager.Instance.CURSEVALUE = whichCurse;
 
 
 	}
