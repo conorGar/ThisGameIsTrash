@@ -32,7 +32,11 @@ public class PlayerTakeDamage : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D enemy){
 		if(enemy.gameObject.layer == 9 && !currentlyTakingDamage){ //layer 9 = enemies
 			SoundManager.instance.PlaySingle(hurt);
+			if(enemy.gameObject.tag == "Enemy"){
 			damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
+			}else if(enemy.gameObject.tag == "Boss"){
+				damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
+			}
 			currentlyTakingDamage = true;
 			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 			currentHp -= damageDealt;

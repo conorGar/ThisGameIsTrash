@@ -49,11 +49,23 @@ public class GlobalVariableManager : MonoBehaviour {
 
     public BOSSES BOSSES_KILLED = BOSSES.NONE;
 
-	public List<string> GLOBAL_ENEMY_HP = new List<string>();
+	public List<int> BOSS_HP_LIST = new List<int>{
+													99, //Stuart
+													99,
+													99,
+													99,
+													99,
+													99,
+													99,
+													99,
+													99,
+													99
+
+												 };
 	public List<int> STATUE_LIST = new List<int>(); //for w2 statue spawning
-                                                    //public int RACOON_LOCATION = 16;
-                                                    //public int RACOON_TRASH_AQUIRED = 0;
-                                                    //-----------Garbage-related variables------------//
+                                                    
+                                                   
+             //-----------Garbage-related variables------------//
 
     public struct LargeTrashItem
     {

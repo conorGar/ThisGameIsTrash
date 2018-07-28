@@ -23,7 +23,7 @@ public class PopulateWorld : MonoBehaviour
 	{
         FriendList();
 
-        if (GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Count < 6){
+       /* if (GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Count < 6){
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("4");
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("22");//boss 1
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("6");
@@ -51,7 +51,7 @@ public class PopulateWorld : MonoBehaviour
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("36");//OGSS
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("70");//death / final boss
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("17");//noodle ghost start
-		}
+		}*/
 
 		//if(GlobalVariableManager.Instance.WORLD_LIST.Count < 2){
 			Debug.Log("World list count check After");
@@ -100,10 +100,10 @@ public class PopulateWorld : MonoBehaviour
 			Debug.Log("End of For loop");
 			*/
 
-			if(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[0].CompareTo("7") == 0){
+			/*if(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[0].CompareTo("7") == 0){
 				//needed for coon to spawn after being defeated by him the previous day
 				GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[0] = "8";
-			}
+			}*/
 		//}
 
 		if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 5){
@@ -201,9 +201,9 @@ public class PopulateWorld : MonoBehaviour
 
 	public void BeachFriendUpdates(){
 		//Necklace crab room number reset
-		if(GlobalVariableManager.Instance.FRIEND_LIST[12].Substring(3,4).CompareTo("o") == 0){
+		/*if(GlobalVariableManager.Instance.FRIEND_LIST[12].Substring(3,4).CompareTo("o") == 0){
 			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[10] = GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[10].Replace(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[10][0],(char)Random.Range(1,10));
-		}
+		}*/
 	}
 
 	public void OtherFriendUpdates(){

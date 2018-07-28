@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Room : MonoBehaviour
 {
     public RoomManager roomManager;
-
+    public bool bossRoom;
     public int roomNum;
     public List<EnemySpawner> enemySpawners;
     public List<GarbageSpawner> garbageSpawners;
@@ -61,6 +61,14 @@ public class Room : MonoBehaviour
 
 
             
+        }
+        if(bossRoom){
+        	for(int i = 0; i< transform.childCount;i++){
+        		if(transform.GetChild(i).tag == "Boss"){
+        			transform.GetChild(i).gameObject.SetActive(true);
+					transform.GetChild(i).GetComponent<Boss>().ActivateBoss();
+        		}
+        	}
         }
     }
 

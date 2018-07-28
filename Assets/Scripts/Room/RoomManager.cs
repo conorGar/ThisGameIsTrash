@@ -28,7 +28,11 @@ public class RoomManager : MonoBehaviour {
         previousRoom = null;
         currentRoom.ActivateRoom();
 	}
-	
+	public void Restart(){//called at player death in PlayerTakedamage
+		currentRoom = startRoom;
+        previousRoom = null;
+        currentRoom.ActivateRoom();
+	}
 	// Update is called once per frame
 	void Update () {
         // lerpin'

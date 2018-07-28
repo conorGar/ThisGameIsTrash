@@ -13,7 +13,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	//public bool spawnShadow = true;
 	public int currentHp;
 	public int meleeDmgBonus = 0;
-	public int myPositionInList = 0;
+	//public int myPositionInList = 0;
 	//public int myPosInBasicEnemyStr = 0; // should be set by 'populateSelf'
 	public tk2dSpriteAnimationClip invincibleAni = null;
 	public tk2dSpriteAnimationClip aniToSwitchBackTo = null;
@@ -22,6 +22,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public bool respawnEnemy = false;
 	public AudioClip hitSound;
 	public AudioClip hitSqueal;
+	public bool bossEnemy;
 	//public AudioClip bounce;
 	//public AudioSource audioSource;
 	//public GameObject deathShadow;
@@ -35,7 +36,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject timeDrop;
 	public GameObject healthDrop;
 	public GameObject pinDrop;
-	public GameObject scrapDrop;
+	//public GameObject scrapDrop;
 	//public GameObject hitStarPS;
 	//public GameObject landingDustParticle;
 
@@ -44,16 +45,12 @@ public class EnemyTakeDamage : MonoBehaviour {
 	//private bool hitPushBack = false;
 	//private float bounceCounter = 30f;
 	float swingDirectionSide; // uses scale to see if swinging left or right
-	//private int numberOfBounces = 0;
-	int changeAliveOrDeadCharValueAtPos = 0;
+
 	bool piercingPin = false;
 	int maxHp; //just used for Vitality Vision pin
-	bool showHealth = false;
 	int sharingUpgrade = 0;
 	int damageOnce = 0;
-	//private float landY;
-	private float ySpeed = 0;//gameObject.GetComponent<Rigidbody2D>().velocity.y;
-	private float xSpeed = 0f;
+
 	tk2dSpriteAnimator myAnim;
 	int camShake = 0;
 	string meleeSwingDirection;
@@ -66,30 +63,20 @@ public class EnemyTakeDamage : MonoBehaviour {
 	GameObject player;
 	string mySpawnerID;
 
+
+
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		currentCam = GameObject.Find("tk2dCamera").GetComponent<Ev_MainCamera>();
 		myAnim = this.gameObject.GetComponent<tk2dSpriteAnimator>();
-		if(changeAliveOrDeadCharValueAtPos != 0){
-			if(GlobalVariableManager.Instance.WORLD_NUM == 3){
-			//onsen towel oni
-				if(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[18].Substring(changeAliveOrDeadCharValueAtPos,changeAliveOrDeadCharValueAtPos + 1) == "o"){
-					Destroy(gameObject);
-				}
-			}else if(GlobalVariableManager.Instance.WORLD_NUM == 2){
-			//w2 pelican guards
-				if(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[19].Substring(changeAliveOrDeadCharValueAtPos,changeAliveOrDeadCharValueAtPos + 1) == "o"){
-					Destroy(gameObject);
-				}
-			}
-		}
+
+
 		//----------------Pins----------------//
 		if(GlobalVariableManager.Instance.pinsEquipped[31] == 1) //Piercing Pin
 			piercingPin = true;
 		if(GlobalVariableManager.Instance.pinsEquipped[28] == 1){ //'Vitality Vision' pin
 			maxHp = currentHp;
-			showHealth = true;
 		}
 		if(GlobalVariableManager.Instance.pinsEquipped[4] == 5){//Cursed Pin- toughness change
 			currentHp--;
@@ -124,9 +111,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 	void Update () {
 		//for when camera shake is activated
-		if(camShake >0){
+		/*if(camShake >0){
 			currentCamera.transform.localPosition = Random.insideUnitSphere * 0.7f;
-		}
+		}*/ //took out because messy when hitting boss and didnt think it was needed because of camera's ScreenShake()
 
 	}
 	void OnTriggerEnter2D(Collider2D melee){
@@ -190,25 +177,34 @@ public class EnemyTakeDamage : MonoBehaviour {
 					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.SetActive(true);
-					if(gameObject.transform.position.x < player.transform.position.x){
-						//hitStarPS.SetActive(true);
-						//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
 
-						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
-					}else{
-						//hitStarPS.SetActive(true);
-						//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
-						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
+						if(gameObject.transform.position.x < player.transform.position.x){
+							//hitStarPS.SetActive(true);
+							//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
 
-					}
+							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
+						}else{
+							//hitStarPS.SetActive(true);
+							//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
+							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
+						}
+					
+					Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
 					currentCam.StartCoroutine("ScreenShake",.2f);
-
+				
 					if(!moveWhenHit){
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 					}
 
 					currentHp = currentHp - 1 - meleeDmgBonus;
+					Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
+					if(bossEnemy){
+						gameObject.GetComponent<Boss>().hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(currentHp);
+						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
+						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
+					}
+
 					
 
 					myAnim.Play("hit");
@@ -217,7 +213,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 					else
 						gameObject.transform.localScale = new Vector2(1f,1f);
 
-					camShake = 1;
+					//camShake = 1;
 					StartCoroutine("ContinueHit"); // just needed to seperate here for IEnumerator stuff
 				}
 			}
@@ -231,7 +227,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 		//if(aniToSwitchBackTo != null)
-		if(currentHp >0)
+		if(currentHp >0 && myAnim.GetClipByName("idle") != null)
 			myAnim.Play("idle");
 			//else
 				//myAnim.Play("IdleR");
@@ -259,7 +255,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 			}else if(meleeSwingDirection.CompareTo("stickDown") == 0||meleeSwingDirection.CompareTo("clawDown") == 0||meleeSwingDirection.CompareTo("poleDown") == 0){
 				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,17f), ForceMode2D.Impulse);
 			}
-			Debug.Log("**GOT THIS FAR***");
 
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
@@ -268,6 +263,11 @@ public class EnemyTakeDamage : MonoBehaviour {
 				yield return new WaitForSeconds(.4f);
 				StartCoroutine( "StopKnockback");
 
+		}else{
+			yield return new WaitForSeconds(.2f);
+			this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
+			damageOnce = 0;
+			takingDamage = false;
 		} // end of movement functions
 
 			if(currentHp >0){
@@ -276,7 +276,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 					gameObject.GetComponent<FollowPlayer>().enabled = false;
 				}
 				//disable follow player after notice behavior if end up having thta in game
-				if(gameObject.GetComponent<RandomDirectionMovement>().enabled){
+				if(gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled){
 					gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
 				}
 
@@ -293,12 +293,11 @@ public class EnemyTakeDamage : MonoBehaviour {
 				damageOnce = 0;
 			
 			}else{ //if hp is NOT > 0
-				Debug.Log("HP IS NOT ABOVE ZEROOOOOOOOO");
 				if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
 				//**SFX PLAY- 'hit_final'
 				}
 
-				if(gameObject.GetComponent<RandomDirectionMovement>().enabled){
+				if(gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled){
 					gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
 				}
 
@@ -334,24 +333,11 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 				DropScrap();
 			
-
-				//GameObject deathSmoke;
-				//deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
-
-
-				if(changeAliveOrDeadCharValueAtPos != 0){
-					if(GlobalVariableManager.Instance.WORLD_NUM == 3){
-						//Onsen Towel Oni
-						GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[18] = GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[18].Replace(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[18][changeAliveOrDeadCharValueAtPos],'o');
-					}else if(GlobalVariableManager.Instance.WORLD_NUM == 2){
-						//w2 Pelican Guards
-						GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[19] = GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[19].Replace(GlobalVariableManager.Instance.GLOBAL_ENEMY_HP[19][changeAliveOrDeadCharValueAtPos],'o');
-					}else if(GlobalVariableManager.Instance.WORLD_NUM == 5){
-						//GameObject.Find("sceneManager").GetComponent<sEv_kakedaRoom>().kill();
-					}
+				if(!bossEnemy){
+					Death();
+				}else{
+					gameObject.GetComponent<Boss>().BossDeath();
 				}
-
-				Death();
 			}//end of (if hp is not > 0)
 		
 

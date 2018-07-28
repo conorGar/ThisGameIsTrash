@@ -22,8 +22,8 @@ public class FollowPlayer : MonoBehaviour {
 		if(distance < walkDistance){
 			transform.position = Vector3.SmoothDamp(transform.position, player.position, ref smoothVelocity, chaseSpeed);
 
-			if(!anim.IsPlaying("chaseR"))
-					anim.Play("chaseR");
+			if(!anim.IsPlaying("walk"))
+					anim.Play("walk");
 
 			if(player.transform.position.x < transform.position.x){
 				transform.localScale = new Vector3(-1,1,1);
