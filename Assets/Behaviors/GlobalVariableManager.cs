@@ -37,6 +37,19 @@ public class GlobalVariableManager : MonoBehaviour {
 	public float SPAWN_POS_X;
 	public float SPAWN_POS_Y;
 	public int[] shopPins = new int[]{0,0,0};
+
+
+	public enum TUTORIALPOPUPS{
+
+	NONE = 		0,
+	LARGETRASH =		1<<0,
+	ARMOREDENEMIES = 	1<<1,
+	DAYNIGHT = 			1<<2,
+
+	}
+
+	public TUTORIALPOPUPS TUT_POPUPS_SHOWN = TUTORIALPOPUPS.NONE;
+
     //-------------Enemy Global Variables------------//
     public enum BOSSES : int
     {

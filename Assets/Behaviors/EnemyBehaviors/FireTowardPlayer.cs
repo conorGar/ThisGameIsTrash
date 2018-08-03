@@ -7,7 +7,7 @@ public class FireTowardPlayer : MonoBehaviour {
 	public float projectileSpeed;
 	public float fireRate;
 
-	GameObject player;
+	public GameObject player;
 	public GameObject projectile;
 
 
@@ -16,7 +16,7 @@ public class FireTowardPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<tk2dSpriteAnimator>();
-		player  = GameObject.Find("enemy_rat");
+
 		InvokeRepeating("Fire",2.0f,fireRate);
 	}
 	

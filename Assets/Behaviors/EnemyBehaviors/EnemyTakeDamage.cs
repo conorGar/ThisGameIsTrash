@@ -29,6 +29,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	//public GameObject hitStar;
 	//public GameObject smokePuff;
 	public GameObject objectPool;
+	public GameObject tutPopup;
 
 	public GameObject gar_trash;
 	public GameObject gar_rec;
@@ -94,6 +95,11 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 		if(armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count != 4){
 			moveWhenHit = false;
+		}
+
+		if(armoredEnemy && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES) != GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES){
+			tutPopup.SetActive(true);
+			tutPopup.GetComponent<GUI_TutPopup>().SetData("ArmoredEnemies");
 		}
 
 		//if(globalEnemy){
@@ -172,7 +178,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
 					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
 					damageCounter.SetActive(true);
-					Debug.Log("Object pool size: " + objectPool.GetComponent<ObjectPool>().pooledObjects.Count);
 					GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
 					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);

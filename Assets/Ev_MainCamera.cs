@@ -23,9 +23,10 @@ public class Ev_MainCamera : MonoBehaviour {
 	GameObject player;
 	Vector3 offset;
 
+
+
 	void Start(){
 		player = GameObject.Find("Jim");
-
 
 		/*offset = transform.position - player.transform.position;
 		Debug.Log(offset);*/
@@ -74,6 +75,8 @@ public class Ev_MainCamera : MonoBehaviour {
 			}
 
 
+
+
 	}//end of update
 
 	public void Transition(string direction, string rName){
@@ -120,20 +123,6 @@ public class Ev_MainCamera : MonoBehaviour {
     }
 
 
-    /*
-	public void SetMax_X(float max){
-		MAX_X = max;
-	}
-	public void SetMin_X(float min){
-		MIN_X = min;
-	}
-	public void SetMax_Y(float max){
-		MAX_Y = max;
-	}
-	public void SetMin_Y(float min){
-		MIN_Y = min;
-	}
-	*/
 
     IEnumerator StopTransition(){
 		yield return new WaitForSeconds(.5f);

@@ -21,6 +21,12 @@ public class Ev_LargeTrash : MonoBehaviour {
 	public GameObject cloudEffect;
 	public GameObject sparkle;
 	public GameObject smokePuff;
+	public GameObject mainCamera;
+	public Room myCurrentRoom;//for now only needed for tutorial popup proper function.
+	//^
+	//large trash is aware f the current room it is in. This room is given by roomManger.currentoom at start and when large trash
+	//is dropped. If myCurrentRoom = RoomManager.currentRoom, deactivate self. (In update method?) check if the roomManager.room =
+	//current room and if so, activate the large trash
 
 
 	int phase = 0;
@@ -47,6 +53,7 @@ public class Ev_LargeTrash : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerAni = player.GetComponent<tk2dSpriteAnimator>();
 		myBody  = gameObject.GetComponent<Rigidbody2D>();
@@ -109,16 +116,11 @@ public class Ev_LargeTrash : MonoBehaviour {
 		}
 
 
-		// If in starting room check to see if it should be...
-		/*if(currentRoomNumber == myRoomNumber){
-			for(int i = 0; i< GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS.Count; i++){
+		if(RoomManager.Instance.currentRoom == myCurrentRoom && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.LARGETRASH ) != GlobalVariableManager.TUTORIALPOPUPS.LARGETRASH){
+				ActivateTutorial();//TODO:Test properly
+		}
 
-			//for now didnt add because not sure if it will be needed anymore.. 6/2/18
 
-			}
-		}*/
-
-		//gameObject.GetComponent<tk2dSprite>().SetSprite(myCharValue);
 	}// end of Start()
 	
 	// Update is called once per frame
@@ -151,9 +153,13 @@ public class Ev_LargeTrash : MonoBehaviour {
 
 	}
 
-	void Sparkle(){
+	void ActivateTutorial(){
+		Debug.Log("Large Trash tutorial activated xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+		mainCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position);
 
 	}
+
+
 
 	void Drop(){
 		gameObject.transform.position = new Vector2(transform.position.x + 1f, transform.position.y -1f);

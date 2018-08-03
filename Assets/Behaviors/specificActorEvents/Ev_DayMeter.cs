@@ -7,6 +7,8 @@ public class Ev_DayMeter : MonoBehaviour {
 	public GameObject dayIcon;
 	public GameObject countdownNumber;
 	public GameObject fadeHelper;
+	public GameObject tutPopup;
+
 
 	float delayBonus;
 	GameObject dayIconInstance;
@@ -81,6 +83,10 @@ public class Ev_DayMeter : MonoBehaviour {
 					if(GlobalVariableManager.Instance.TIME_IN_DAY >= 100 && GlobalVariableManager.Instance.TIME_IN_DAY%2 ==0){
 						if(GlobalVariableManager.Instance.TIME_IN_DAY < 102){
 						//initially spawn the countdown
+							if((GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.DAYNIGHT) != GlobalVariableManager.TUTORIALPOPUPS.DAYNIGHT){
+								tutPopup.SetActive(true);
+								tutPopup.GetComponent<GUI_TutPopup>().SetData("DayNight");
+							}
 							tempNum = Instantiate(countdownNumber,new Vector3(300f,74f,0f),Quaternion.identity);
 							tempNum.transform.parent = this.gameObject.transform;
 						}else{

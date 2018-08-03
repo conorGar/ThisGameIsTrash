@@ -1,0 +1,416 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1239086880465964}
+  m_IsPrefabParent: 1
+--- !u!1 &1239086880465964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4534373664877682}
+  - component: {fileID: 114748616939082100}
+  m_Layer: 0
+  m_Name: MiscellaneousWorldObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4534373664877682
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239086880465964}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114748616939082100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1239086880465964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: trashcan7
+    boundsData:
+    - {x: -0.38461542, y: -1.5256414, z: 0}
+    - {x: 11.589744, y: 4.6923075, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820721, z: 0}
+    - {x: 12.384616, y: 8.179487, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -6.179487, y: -3.8717952, z: 0}
+    - {x: 5.4102564, y: -3.8717952, z: 0}
+    - {x: -6.179487, y: 0.82051235, z: 0}
+    - {x: 5.4102564, y: 0.82051235, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.0019541015}
+    - {x: 0.4433584, y: 0.0019541015}
+    - {x: 0.0019541015, y: 0.18066308}
+    - {x: 0.4433584, y: 0.18066308}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: cffa35c500e0e30408777db72d3381ac, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: dc41e05e5186f834ea657c48ea9626f8
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: trashCan3
+    boundsData:
+    - {x: -3.3333333, y: -0.32051313, z: 0}
+    - {x: 5.692308, y: 6.230769, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820721, z: 0}
+    - {x: 12.384616, y: 8.179487, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -6.179487, y: -3.4358976, z: 0}
+    - {x: -0.48717928, y: -3.4358976, z: 0}
+    - {x: -6.179487, y: 2.7948713, z: 0}
+    - {x: -0.48717928, y: 2.7948713, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.24218848, y: 0.73730564}
+    - {x: 0.4589834, y: 0.73730564}
+    - {x: 0.24218848, y: 0.9746084}
+    - {x: 0.4589834, y: 0.9746084}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: cffa35c500e0e30408777db72d3381ac, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 0f5581f55710fd345bb21d4c7a17f0e6
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: trashCan5
+    boundsData:
+    - {x: -2.7564101, y: -0.6153847, z: 0}
+    - {x: 6.846154, y: 5.6410255, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820721, z: 0}
+    - {x: 12.384616, y: 8.179487, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -6.179487, y: -3.4358976, z: 0}
+    - {x: 0.66666716, y: -3.4358976, z: 0}
+    - {x: -6.179487, y: 2.2051282, z: 0}
+    - {x: 0.66666716, y: 2.2051282, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.22851661, y: 0.47265723}
+    - {x: 0.22851661, y: 0.7333975}
+    - {x: 0.4433584, y: 0.47265723}
+    - {x: 0.4433584, y: 0.7333975}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: cffa35c500e0e30408777db72d3381ac, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: c6979a52563d0bb4d9c9238d3a2e2df2
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: trashcan6
+    boundsData:
+    - {x: -0.6666665, y: -1.5256414, z: 0}
+    - {x: 11.025641, y: 4.6923075, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820721, z: 0}
+    - {x: 12.384616, y: 8.179487, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -6.179487, y: -3.8717952, z: 0}
+    - {x: 4.846154, y: -3.8717952, z: 0}
+    - {x: -6.179487, y: 0.82051235, z: 0}
+    - {x: 4.846154, y: 0.82051235, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.4472666, y: 0.0019541015}
+    - {x: 0.86718655, y: 0.0019541015}
+    - {x: 0.4472666, y: 0.18066308}
+    - {x: 0.86718655, y: 0.18066308}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: cffa35c500e0e30408777db72d3381ac, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: b5081634ab9ba3845a19d438ae047712
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: trashCan1
+    boundsData:
+    - {x: -2.8589742, y: 0.34615362, z: 0}
+    - {x: 5.923077, y: 7.4615383, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820721, z: 0}
+    - {x: 12.384616, y: 8.179487, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -5.820513, y: -3.3846157, z: 0}
+    - {x: 0.10256429, y: -3.3846157, z: 0}
+    - {x: -5.820513, y: 4.076923, z: 0}
+    - {x: 0.10256429, y: 4.076923, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.1845713}
+    - {x: 0.22753808, y: 0.1845713}
+    - {x: 0.0019541015, y: 0.46874902}
+    - {x: 0.22753808, y: 0.46874902}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: cffa35c500e0e30408777db72d3381ac, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 5a1c6b1570d49f04c941663243147a74
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: trashCan2
+    boundsData:
+    - {x: -3.2307692, y: 0.20512807, z: 0}
+    - {x: 5.846154, y: 7.282051, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820721, z: 0}
+    - {x: 12.384616, y: 8.179487, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -6.1538463, y: -3.4358976, z: 0}
+    - {x: -0.30769214, y: -3.4358976, z: 0}
+    - {x: -6.1538463, y: 3.8461537, z: 0}
+    - {x: -0.30769214, y: 3.8461537, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.47265723}
+    - {x: 0.22460839, y: 0.47265723}
+    - {x: 0.0019541015, y: 0.74999905}
+    - {x: 0.22460839, y: 0.74999905}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: cffa35c500e0e30408777db72d3381ac, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: cfb0ccac0b64a0d43add90b8cd888dec
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: trashCan4
+    boundsData:
+    - {x: -3.0384614, y: -0.3333335, z: 0}
+    - {x: 6.2820516, y: 6.205128, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820721, z: 0}
+    - {x: 12.384616, y: 8.179487, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -6.179487, y: -3.4358976, z: 0}
+    - {x: 0.10256429, y: -3.4358976, z: 0}
+    - {x: -6.179487, y: 2.7692306, z: 0}
+    - {x: 0.10256429, y: 2.7692306, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.7539072}
+    - {x: 0.0019541015, y: 0.9931631}
+    - {x: 0.23828027, y: 0.7539072}
+    - {x: 0.23828027, y: 0.9931631}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: cffa35c500e0e30408777db72d3381ac, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 56a03ee4b98ba3e41b071e0440149f24
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: cffa35c500e0e30408777db72d3381ac, type: 2}
+  textures:
+  - {fileID: 2800000, guid: afb8fbff862f21a449d68b7dd7070301, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: 3061967ba333c4443883c8845b53700f
+  spriteCollectionName: MiscellaneousWorldObjects
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 1955400278
+  dataGuid: 2b16b69270624934b84f76d8e35e7e97
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

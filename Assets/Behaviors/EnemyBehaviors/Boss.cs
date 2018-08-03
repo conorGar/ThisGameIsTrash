@@ -7,15 +7,16 @@ public class Boss : MonoBehaviour {
 	public int bossNumber;
 	public int hp;
 	public int attkDmg;
+	public bool displayHealth;
 	public GameObject hpDisplay;
 	public GameObject objectPool;
-
+	public bool vanishAtDeath;
+	public MonoBehaviour myBossScript;
 
 	int deathSmokeNumber;
 	void Start () {
 //jumbo- "How am I suppossed to know if the path I'm on is the right one?!? What if, by the time I realise my mistake...it'll be too late for me to turn back?		
 
-//Activate boss when enter proper room and test Stuart so far
 
 //Stuart Follow and knockback/Take damage properly
 //stuart death
@@ -44,9 +45,11 @@ public class Boss : MonoBehaviour {
 	public void ActivateBoss(){
 		gameObject.GetComponent<EnemyTakeDamage>().currentHp = GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber];
 		gameObject.GetComponent<EnemyTakeDamage>().bossEnemy = true;
-		hpDisplay.SetActive(true);
-		hpDisplay.GetComponent<GUI_BossHpDisplay>().maxHp = hp;
-		hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]);
+		if(displayHealth){
+			hpDisplay.SetActive(true);
+			hpDisplay.GetComponent<GUI_BossHpDisplay>().maxHp = hp;
+			hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]);
+		}
 	}
 
 	public IEnumerator BossDeath(){
@@ -56,7 +59,12 @@ public class Boss : MonoBehaviour {
 		yield return new WaitForSeconds(1.5f);
 		GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
 		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-		this.gameObject.SetActive(false);
+		if(vanishAtDeath){
+			this.gameObject.SetActive(false);
+		}else{
+			gameObject.GetComponent<tk2dSpriteAnimator>().Play("Death");
+			myBossScript.enabled = false;
+		}
 	}
 
 	void DeathSmoke(){

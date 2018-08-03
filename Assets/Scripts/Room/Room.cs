@@ -13,8 +13,13 @@ public class Room : MonoBehaviour
     public GameObject player;
     public BoxCollider2D roomCollider2D;
     public GameObject objectPool; //given to enemy, who needs it for EnemyTakeDamage hitStar spawn
+    public GameObject cam; // used for cam zoom when enter boss room, can probably find a better way
+    public GameObject tutPopup;
+    public bool activateTutpopWhenEnter;
+    public string tutPopUpToActivate;
 
     private List<GameObject> enemies;
+
     //public List<Friend> friends;
 
     public void ActivateRoom()
@@ -69,7 +74,9 @@ public class Room : MonoBehaviour
 					transform.GetChild(i).GetComponent<Boss>().ActivateBoss();
         		}
         	}
+        	cam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1f,5f); //for debug testing
         }
+ 
     }
 
     public void DeactivateRoom()
