@@ -14,6 +14,7 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 	public GameObject choicesBox;
 	public GameObject backCam;
 	public GameObject fadeHelper;
+	public GameObject GUIcam;
 
 	public GameObject playOption;
 	public GameObject optionsOption;
@@ -50,7 +51,13 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 		}else if(phase == 0){
 			if(Input.GetKeyDown(KeyCode.Space)){
 				Debug.Log(title.GetComponent<SpecialEffectsBehavior>() == null);
-				title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.position.y+110f,.2f);
+				Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x,Screen.height*-1,0));
+
+				Debug.Log(topLimit);
+				Debug.Log(topLimit*-1);
+
+				title.transform.localPosition = topLimit*-1;
+				//title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
 				choicesBox.SetActive(true);
 				phase = 1;
 
@@ -89,7 +96,7 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 
 	void UpdateSelected(){
 		currentSelected.GetComponent<SpecialEffectsBehavior>().SetGrowValues(new Vector3(.5f,.5f,.5f),10f);//need new Grow function that takes two different values
-		currentSelected.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Grow",.1f);
+		currentSelected.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Grow",.01f);
 		currentSelected.GetComponent<Image>().color = new Color(currentSelected.GetComponent<Image>().color.r,currentSelected.GetComponent<Image>().color.g,currentSelected.GetComponent<Image>().color.b,.7f);
 		currentSelected.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(255f,255f,255f,.7f);
 		if(navigationPosition == 1){
@@ -102,7 +109,7 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 		Debug.Log(navigationPosition);
 
 		currentSelected.GetComponent<SpecialEffectsBehavior>().SetGrowValues(new Vector3(1.5f,1.5f,1.5f),10f);
-		currentSelected.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Grow",.1f);
+		currentSelected.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Grow",.01f);
 		currentSelected.GetComponent<Image>().color = new Color(currentSelected.GetComponent<Image>().color.r,currentSelected.GetComponent<Image>().color.g,currentSelected.GetComponent<Image>().color.b,1f);
 		currentSelected.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(255f,255f,255f,1f);
 
