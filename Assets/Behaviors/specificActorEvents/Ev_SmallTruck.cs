@@ -69,15 +69,16 @@ public class Ev_SmallTruck : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		Instantiate(player, transform.position, Quaternion.identity);
 
-		if(GlobalVariableManager.Instance.pinsEquipped[37] != 0){
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEATHSDEAL)){
 			//Death's Deal
 			GlobalVariableManager.Instance.characterUpgradeArray[3] = (Mathf.Round((int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])-1))).ToString();
 		}
 
-		if(GlobalVariableManager.Instance.pinsEquipped[10] != 0){
+        // TODO: Review and figure this out
+		/*if(GlobalVariableManager.Instance.IsPinEquipped(PIN.MOGARBAGEMOPROBLEMS)){
 			//Mo' Garbage Mo' Problems
 			GlobalVariableManager.Instance.characterUpgradeArray[3] = (Mathf.Round(int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])+ 2)).ToString();
-		}
+		}*/
 
 		//play world music again
 		

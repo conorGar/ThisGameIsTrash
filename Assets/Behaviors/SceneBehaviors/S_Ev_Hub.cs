@@ -21,9 +21,9 @@ public class S_Ev_Hub : MonoBehaviour {
 		}
 
 		//cursed pin health effects
-		if(GlobalVariableManager.Instance.pinsEquipped[4] == 3){
+		if(GlobalVariableManager.Instance.CURSEVALUE == 3){
 			GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) - 1).ToString();
-		}else if (GlobalVariableManager.Instance.pinsEquipped[4] ==2){
+		}else if (GlobalVariableManager.Instance.CURSEVALUE == 2){
 			GlobalVariableManager.Instance.characterUpgradeArray[3] =	(int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) + 1).ToString();
 		}
 

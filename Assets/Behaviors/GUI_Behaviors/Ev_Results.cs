@@ -78,24 +78,25 @@ public class Ev_Results : MonoBehaviour {
 					if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 4)
 						GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(4); // remove temporary room discover string
 					GlobalVariableManager.Instance.MENU_SELECT_STAGE = 1;
-					if(GlobalVariableManager.Instance.pinsEquipped[19] - 3 <= 0){
+					if(GlobalVariableManager.Instance.DEJAVUCOUNT - 3 <= 0){
 						//Deja Vu pin
 						GlobalVariableManager.Instance.DAY_NUMBER++;
 					}else{
-						GlobalVariableManager.Instance.pinsEquipped[19]--;
+						GlobalVariableManager.Instance.DEJAVUCOUNT--;
 					}
 
-					if(GlobalVariableManager.Instance.pinsEquipped[10] ==2){
+                    // TODO: Review and figure this out
+                    /*if(GlobalVariableManager.Instance.pinsEquipped[10] ==2){
 						//Mo' Garbage Mo' Problems
 						//if(GlobalVariableManager.Instance.CURRENT_HP > int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2){
 						//	GlobalVariableManager.Instance.CURRENT_HP = int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2;
 						//}
 						GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2).ToString();
 						GlobalVariableManager.Instance.pinsEquipped[10] = 1;
-					}
+					}*/
 
-					//-------Reset today's trash collected---------//
-					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 3){
+                    //-------Reset today's trash collected---------//
+                    if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 3){
 						if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 4){
 							//resets hp after cassie gives you bonus
 							GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) - 1).ToString();

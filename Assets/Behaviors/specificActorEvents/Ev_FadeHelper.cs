@@ -112,7 +112,7 @@ public class Ev_FadeHelper : MonoBehaviour {
 		Debug.Log("Truck- return to dumpster activated");
 		GameObject truckInstance = Instantiate(smallTruck,new Vector2(myCam.transform.position.x - 5, player.transform.position.y), Quaternion.identity);
 
-		if(GlobalVariableManager.Instance.pinsEquipped[47] != 0){
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
 				//'Devil's Deal' Pin equipped
 					GameObject effectInstance;
 					effectInstance = Instantiate(upgradeActorTempEffects,new Vector2(0f,0f),Quaternion.identity);

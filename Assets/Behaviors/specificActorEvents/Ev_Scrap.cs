@@ -62,7 +62,8 @@ public class Ev_Scrap : MonoBehaviour {
 			//gameObject.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
 			isFollowingPlayer = true;
 		}else if(isFollowingPlayer && canBeGrabbed){
-			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 17 || (GlobalVariableManager.Instance.pinsEquipped[20] != 0 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 19)){
+            // TODO: Double check which pin this was supposed to be.  It was index 20.
+			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 17 || (GlobalVariableManager.Instance.IsPinEquipped(PIN.HUNGRYFORMORE) && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 19)){
 				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1]++;
 
 			}

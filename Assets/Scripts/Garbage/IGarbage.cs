@@ -2,12 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IGarbage
-{
-    int GarbageIndex();
-    string GarbageSprite();
-}
-
 public enum GARBAGETYPE
 {
     STANDARD,
@@ -73,6 +67,17 @@ public enum LARGEGARBAGE : int
     SIZE =                  1 << 3
 }
 
+
+
+
+public interface IGarbage
+{
+    int GarbageIndex();
+    string GarbageSprite();
+}
+
+
+
 public class StandardGarbage : IGarbage
 {
     public STANDARDGARBAGE type;
@@ -106,7 +111,7 @@ public class StandardGarbage : IGarbage
 
     public int GarbageIndex()
     {
-        for (int i = 0; i < sizeof(STANDARDGARBAGE); ++i)
+        for (int i = 0; i < sizeof(STANDARDGARBAGE) * 8; ++i)
         {
             if ((int)type == 1 << i)
                 return i;
@@ -135,6 +140,9 @@ public class StandardGarbage : IGarbage
     }
 }
 
+
+
+
 public class CompostGarbage : IGarbage
 {
     public COMPOSTGARBAGE type;
@@ -148,7 +156,7 @@ public class CompostGarbage : IGarbage
 
     public int GarbageIndex()
     {
-        for (int i = 0; i < sizeof(COMPOSTGARBAGE); ++i)
+        for (int i = 0; i < sizeof(COMPOSTGARBAGE) * 8; ++i)
         {
             if ((int)type == 1 << i)
                 return i;
@@ -176,6 +184,9 @@ public class CompostGarbage : IGarbage
         return 0;
     }
 }
+
+
+
 
 public class RecyclableGarbage : IGarbage
 {
@@ -218,6 +229,9 @@ public class RecyclableGarbage : IGarbage
         return 0;
     }
 }
+
+
+
 
 public class LargeGarbage : IGarbage
 {

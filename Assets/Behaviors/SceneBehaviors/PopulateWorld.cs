@@ -256,7 +256,7 @@ public class PopulateWorld : MonoBehaviour
 	}//end of OtherFriendUpdates()
 
 	public void PinEffects(){
-		if(GlobalVariableManager.Instance.pinsEquipped[29] != 0){
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.CLAWPIN)){
 			//Claw Pin
 			GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 7;
 		}

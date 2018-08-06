@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,26 @@ public class GlobalVariableManager : MonoBehaviour {
 	public static GlobalVariableManager Instance {get; private set;}
 
 	public int value;
+
+    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG | PIN.TALKYTIME | PIN.CURSED | PIN.PIERCINGPIN);
+    public PIN PINS_DISCOVERED
+    {
+        set { pinsDiscoveredValue = (ulong)value; }
+        get { return (PIN)pinsDiscoveredValue; }
+    }
+
+    private ulong pinsEquippedValue = (ulong)(PIN.NONE);
+    public PIN PINS_EQUIPPED
+    {
+        set { pinsEquippedValue = (ulong)value; }
+        get { return (PIN)pinsEquippedValue; }
+    }
+
+    public int PPVALUE = 5;
+    public int DEJAVUCOUNT = 0;
+    public int CURSEVALUE = 0;
+    public int MOMONEYVALUE = 0;
+
 	public string[] characterUpgradeArray = new string[7]{
 											"abcdefghijolmnpqrstuvwxy1234567890,./;'*[]-<>?:(){}!^",
 											"abcdefghijklmnpqrstuvwxy1234567890,./;'",
@@ -19,7 +40,6 @@ public class GlobalVariableManager : MonoBehaviour {
 											"0",
 											"0",
 											"0"};
-	public List<int> pinsEquipped = new List<int>{3}; 
 	public int ARROW_POSITION = 1;
 	public int Max_HP = 5;
 	public int DAY_NUMBER = 1;
@@ -36,10 +56,10 @@ public class GlobalVariableManager : MonoBehaviour {
 	public float Y_SELF = 0;
 	public float SPAWN_POS_X;
 	public float SPAWN_POS_Y;
-	public int[] shopPins = new int[]{0,0,0};
 
+    public List<PinDefinition> shopPins = new List<PinDefinition> { null, null, null };
 
-	public enum TUTORIALPOPUPS{
+    public enum TUTORIALPOPUPS{
 
 	NONE = 		0,
 	LARGETRASH =		1<<0,
@@ -148,6 +168,7 @@ public class GlobalVariableManager : MonoBehaviour {
 	public int ROOM_NUM = 0;
 	public int TIME_IN_DAY = -90;
 	public int WORLD_NUM = 1;
+
 	public List<string> WORLD_ROOM_DISCOVER = new List<string>{
 												"obcdefghijklmnpqrstuvwxyz123456789;',.",
 												"abcdefghijklmnpqrstuvwxyz123",
@@ -162,62 +183,28 @@ public class GlobalVariableManager : MonoBehaviour {
 												"abcdefghijklmn",
 												};		
 
-    public WORLDS WORLDS_UNLOCKED = WORLDS.NONE;
-
-    public enum WORLDS : int
-    {
-        NONE =               0,
-        ONE =           1 << 0,
-        TWO =           1 << 1,
-        THREE =         1 << 2,
-        FOUR =          1 << 3
-    }
-
-    // Returns the index of the World.
-    // Probably best to use only with the defined enum values above.
-    public int WorldIndex(WORLDS world)
-    {
-        for (int i=0; i < sizeof(WORLDS); ++i)
-        {
-            if ((int)world == 1 << i)
-                return i;
-        }
-        return 0; 
-    }
-
-    public WORLDS WorldByIndex(int index)
-    {
-        return (WORLDS)(1 << index);
-    }
+    public WORLD WORLDS_UNLOCKED = WORLD.NONE;
 
     //---------------------------------------------------------------------//
 
     private void Awake(){
 		if(Instance == null){
 			Instance = this;
+            Instance.PPVALUE = 5;
 			DontDestroyOnLoad(gameObject);
 		}else{
 			Destroy(gameObject);
 		}
-		if(pinsEquipped.Count < 2){
-			for(int i = 0; i < 53; i++){
-				pinsEquipped.Add(0);
-			}
-		}
-
-#if DEBUG
-        TestWorldIndex();
-#endif
     }
 
-    private void TestWorldIndex()
+    // helpers
+    public bool IsPinDiscovered(PIN p_type)
     {
-        Debug.Log("World Index 1 == " + WorldIndex(WORLDS.ONE) + " enum from index: " + WorldByIndex(0));
-        Debug.Log("World Index 2 == " + WorldIndex(WORLDS.TWO) + " enum from index: " + WorldByIndex(1));
-        Debug.Log("World Index 3 == " + WorldIndex(WORLDS.THREE) + " enum from index: " + WorldByIndex(2));
-        Debug.Log("World Index 4 == " + WorldIndex(WORLDS.FOUR) + " enum from index: " + WorldByIndex(3));
+        return (GlobalVariableManager.Instance.PINS_DISCOVERED & p_type) == p_type;
+    }
 
-        WORLDS world = WORLDS.NONE;
-        world |= WORLDS.ONE;
+    public bool IsPinEquipped(PIN p_type)
+    {
+        return (GlobalVariableManager.Instance.PINS_EQUIPPED & p_type) == p_type;
     }
 }

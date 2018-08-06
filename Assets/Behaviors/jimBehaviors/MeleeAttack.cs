@@ -20,13 +20,13 @@ public class MeleeAttack : MonoBehaviour {
 	Vector3 startingScale;
 
 	void Start () {
-		startingScale = this.gameObject.transform.localScale;
-		if(GlobalVariableManager.Instance.pinsEquipped[4] == 12 || GlobalVariableManager.Instance.CARRYING_SOMETHING == true){
-			//Cursed pin- can't attack || carrying large trash- can't attack
-			Debug.Log("Cant attack because of here");
+        startingScale = this.gameObject.transform.localScale;
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.CURSED) || GlobalVariableManager.Instance.CARRYING_SOMETHING == true){
+            //Cursed pin- can't attack || carrying large trash- can't attack
+            Debug.Log("Cant attack because of here");
 			cantAttack = true;
 		}
-		if(GlobalVariableManager.Instance.pinsEquipped[45] == 1){
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUCKSFX)){
 			//duck sfx pin
 			swing = (AudioClip)Resources.Load("sfx_duckSwing", typeof(AudioClip));
 			Debug.Log("Cant attack because of HHHHEEEERRREE");
@@ -121,8 +121,8 @@ public class MeleeAttack : MonoBehaviour {
 		isSwinging = true;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
-	/*	if(GlobalVariableManager.Instance.pinsEquipped[49] != 0 && GlobalVariableManager.Instance.CURRENT_HP == int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
-		//Hero of Grime pin - shoots beam at max hp
+	    /*if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HEROOFGRIME) && GlobalVariableManager.Instance.CURRENT_HP == int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
+		    //Hero of Grime pin - shoots beam at max hp
 			GameObject bullet = Instantiate(GameObject.Find("bullet"), new Vector2(transform.position.x +.3f, transform.position.y), Quaternion.identity);
 			bullet.GetComponent<tk2dSpriteAnimator>().Play("beam");
 			bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10f,0f);
@@ -133,7 +133,7 @@ public class MeleeAttack : MonoBehaviour {
 
 		meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
 
-		if(GlobalVariableManager.Instance.pinsEquipped[32] == 0 ){
+		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.SCRAPPYSHINOBI)){
 			//Scrappy Shinobi
 			yield return new WaitForSeconds(.1f);
 			meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
