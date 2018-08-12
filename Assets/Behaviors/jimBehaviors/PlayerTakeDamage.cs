@@ -14,7 +14,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 	public AudioClip hurt;
 	int maxHP;
-	int currentHp;
+	public int currentHp;
 	int damageDealt;
 
 	bool currentlyTakingDamage = false;
@@ -32,10 +32,12 @@ public class PlayerTakeDamage : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D enemy){
 		if(enemy.gameObject.layer == 9 && !currentlyTakingDamage){ //layer 9 = enemies
 			SoundManager.instance.PlaySingle(hurt);
-			if(enemy.gameObject.tag == "Enemy"){
-			damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
-			}else if(enemy.gameObject.tag == "Boss"){
+
+			if(enemy.gameObject.tag == "Boss"){
 				damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
+			}else{
+				damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
+
 			}
 			currentlyTakingDamage = true;
 			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
@@ -59,7 +61,9 @@ public class PlayerTakeDamage : MonoBehaviour {
 			}
 
 			if(currentHp <= 0){
+				
 				StartCoroutine("Death");
+			
 			}else{
 				StartCoroutine("RegainControl");
 			}
@@ -89,7 +93,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 	IEnumerator Death(){
 		
 
-		//TODO: Play death animation
+		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
 		DropTrash();
 		GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION = gameObject.transform.position;
 		GlobalVariableManager.Instance.GARBAGE_HAD = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0];
@@ -101,7 +105,11 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		currentCam.GetComponent<Ev_MainCamera>().enabled = false;
 		//GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().WhiteFlash();
-
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
+			gameObject.GetComponent<PinFunctionsManager>().DevilsDeal();
+			yield return new WaitForSeconds(1f);
+			fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
+		}else{
 		yield return new WaitForSeconds(1f);
 		fadeHelper.GetComponent<Ev_FadeHelper>().BlackFade(); //fade to black
 		GameObject truck = objectPool.GetComponent<ObjectPool>().GetPooledObject("GarbageTruck",new Vector3(gameObject.transform.position.x - 20, gameObject.transform.position.y,0f));
@@ -145,7 +153,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		yield return new WaitForSeconds(.5f);
 		truck.SetActive(false);
 		fadeHelper.GetComponent<Ev_FadeHelper>().fadeBack = false;
-
+		}
 
 	}
 }

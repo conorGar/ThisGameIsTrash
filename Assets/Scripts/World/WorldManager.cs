@@ -8,6 +8,8 @@ public class WorldManager : MonoBehaviour
     public WORLD worldType = WORLD.ONE;
     public GARBAGETYPE garbageType = GARBAGETYPE.STANDARD; 
     public int amountTrashHere = 0;
+	public PinFunctionsManager playersPFM;
+
 
     public World world = new World(WORLD.ONE);
 
@@ -19,7 +21,10 @@ public class WorldManager : MonoBehaviour
     private void Start()
     {
         world.type = worldType;
-
+		//if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HUNGRYFORMORE)){
+				//Hungry For More pin
+				playersPFM.HungryForMore();
+		//}
         // TODO: Base this on bag type whether they are going for standard, compost, recyclable, etc.
         GarbageManager.Instance.PopulateGarbage(garbageType, amountTrashHere);
     }

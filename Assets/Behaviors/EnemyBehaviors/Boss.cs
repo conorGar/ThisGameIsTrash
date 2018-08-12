@@ -15,7 +15,6 @@ public class Boss : MonoBehaviour {
 
 	int deathSmokeNumber;
 	void Start () {
-//jumbo- "How am I suppossed to know if the path I'm on is the right one?!? What if, by the time I realise my mistake...it'll be too late for me to turn back?		
 
 
 //Stuart Follow and knockback/Take damage properly

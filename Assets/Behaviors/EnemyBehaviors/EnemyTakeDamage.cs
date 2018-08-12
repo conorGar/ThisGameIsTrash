@@ -391,14 +391,15 @@ public class EnemyTakeDamage : MonoBehaviour {
 	}
 
 	void DropScrap(){
-        // 'Waste Warrior' pin ups the scrap cap by 5.
+        // 'Waste Warrior' pin ups the scrap cap by 5, due to the additional upgrade.
         int wasteWarriorAdjust = (GlobalVariableManager.Instance.IsPinEquipped(PIN.WASTEWARRIOR) ? 1 : 0) * 5;
         if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < (13 + wasteWarriorAdjust)){
 			if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.SCRAPCITY)){
 				//^ Scrap City - more scrap dropped
 				scrapDropped = Random.Range(1,3);
 			}else{
-				scrapDropped = Random.Range(2,5);
+				scrapDropped = Random.Range(2,6);
+				player.GetComponent<PinFunctionsManager>().StartCoroutine("DisplayEffectsHud",PinManager.Instance.GetPin(PIN.SCRAPCITY).sprite);
 			}
 			//Debug.Log("dropped scrap:" + scrapDropped);
 		    for(int i = 0; i < scrapDropped; i++){

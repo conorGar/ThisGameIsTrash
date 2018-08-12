@@ -12,7 +12,7 @@ public class Ev_HitStars : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameObject.GetComponent<SpecialEffectsBehavior>().SetGrowValues(.1f,.5f);
-		gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Shrink",1f);
+		gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Grow",1f);
 		Debug.Log(">>>>>>>Hit Star Created!<<<<<<");
 	}
 	
@@ -24,7 +24,7 @@ public class Ev_HitStars : MonoBehaviour {
 		gameObject.GetComponent<SpecialEffectsBehavior>().StopCoroutine("Shrink");
 		transform.localScale = new Vector3(1,1,1);
 		gameObject.GetComponent<SpecialEffectsBehavior>().SetGrowValues(.1f,.5f);
-		gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Shrink",1f);
+		gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Grow",1f);
 	}
 	public void ShowProperDamage(int damageDealt){
 		if(damageDealt == 2){

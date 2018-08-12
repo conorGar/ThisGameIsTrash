@@ -26,14 +26,14 @@ public class Ev_PinBehavior : MonoBehaviour {
 	GameObject myEquippedBox;
 
 	void Start () {
-		if(GlobalVariableManager.Instance.characterUpgradeArray[1][18] == 'o'){
+		/*if(GlobalVariableManager.Instance.characterUpgradeArray[1][18] == 'o'){
 			//pin perk 5 - every pin costs one less pp to equip
 			if(pinData.price > 1){
                 pinData.price -= 1;
 			}else{
                 pinData.price = 1;
 			}
-		}
+		}*/
 
 		mySFX = gameObject.GetComponent<SpecialEffectsBehavior>();
 		player = GameObject.Find("Jim");

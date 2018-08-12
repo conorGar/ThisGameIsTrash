@@ -8,6 +8,7 @@ public class PopulateWorld : MonoBehaviour
 	public GameObject trash;
 	public GameObject recyclables;
 	public GameObject compost;
+	public PinFunctionsManager playersPFM;
 
 	int armoredEnemySpawn;
 	int enemy1;
@@ -23,51 +24,23 @@ public class PopulateWorld : MonoBehaviour
 	{
         FriendList();
 
-       /* if (GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Count < 6){
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("4");
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("22");//boss 1
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("6");
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("7");
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("abcdefghijklmnpqrstuvwxyz1234567");
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("25");//Boppy
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("12");//Questio
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("abcdefghijklmnpqrstuvwxyz");
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("15");//ex
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("10");//hash
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("0aefghijkl");//necklace crab
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("26");//Dudley(11) 26 for intro, switches to 17 after
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("17");
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("17");
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("13");//mask oni
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("13");//mask oni
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("13");//mask oni
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("4");//oniSama - starts 4, switched to 3 after end of intro
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("abcdefg");//onsen towel oni alive/dead
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("abcdefg");//w2 pelican guard string
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("29");//noodle ghost
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("30");//noodle ghost
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("30");//noodle ghost
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("34");//west noodle ghost(set up different because of previous room enemy spawns)
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("36");//OGSS
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("70");//death / final boss
-			GlobalVariableManager.Instance.GLOBAL_ENEMY_HP.Add("17");//noodle ghost start
-		}*/
+       
 
-		//if(GlobalVariableManager.Instance.WORLD_LIST.Count < 2){
+		
 			Debug.Log("World list count check After");
 			if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count < 5){
 			//assigns string so com knows how many new rooms were discovered at result screen
 				GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Add(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER[GlobalVariableManager.Instance.WORLD_NUM - 1]);
 			}
 			Debug.Log(GlobalVariableManager.Instance.characterUpgradeArray[1].Length);
-			if(GlobalVariableManager.Instance.characterUpgradeArray[1][28].CompareTo('o') == 0){
+			/*if(GlobalVariableManager.Instance.characterUpgradeArray[1][28].CompareTo('o') == 0){
                 //2nd gathering perk: amount of trash in world increased by 25%
                 WorldManager.Instance.amountTrashHere += Mathf.RoundToInt(WorldManager.Instance.amountTrashHere/ 4);
-			}
-			/*if(GlobalVariableManager.Instance.pinsEquipped[24] == 1){
+			}*/
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HUNGRYFORMORE)){
 				//Hungry For More pin
-				amntTrashHere += 5;
-			}
+				playersPFM.HungryForMore();
+			}/*
 			if(GlobalVariableManager.Instance.pinsEquipped[4] == 8){
 				//cursed pin - less trash
 				amntTrashHere -= 5;

@@ -1235,9 +1235,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallTruck: {fileID: 0}
   upgradeActorTempEffects: {fileID: 0}
-  whiteFlash: {fileID: 0}
+  fader: {fileID: 0}
+  currentCanvas: {fileID: 0}
   fadeOutTexture: {fileID: 0}
   fadeSpeed: 0
+  fading: 0
+  fadeBack: 0
 --- !u!114 &794649368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1297,7 +1300,7 @@ MonoBehaviour:
   - 0
   - 0
   ARROW_POSITION: 1
-  CURRENT_HP: 1
+  Max_HP: 5
   DAY_NUMBER: 1
   IS_HIDDEN: 0
   MASTER_MUSIC_VOL: 30
@@ -1313,8 +1316,9 @@ MonoBehaviour:
   SPAWN_POS_X: 0
   SPAWN_POS_Y: 0
   shopPins: []
+  TUT_POPUPS_SHOWN: 0
   BOSSES_KILLED: 0
-  GLOBAL_ENEMY_HP: []
+  BOSS_HP_LIST: 63000000630000006300000063000000630000006300000063000000630000006300000063000000
   STATUE_LIST: 
   STANDARD_GARBAGE_DISCOVERED: 0
   STANDARD_GARBAGE_VIEWED: 0
@@ -1328,7 +1332,7 @@ MonoBehaviour:
   LARGE_TRASH_COLLECTED: 0
   LARGE_TRASH_LOCATIONS: []
   MY_NUM_IN_ROOM: 0
-  ROOM_PLAYER_DIED_IN: 0
+  DROPPED_TRASH_LOCATION: {x: 0, y: 0, z: 0}
   TODAYS_TRASH_AQUIRED: 000000000000000000000000
   TRASH_TYPE_SELECTED: 3
   TRASH_AQUIRED: 0
@@ -2372,7 +2376,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swing: {fileID: 0}
-  audioSource: {fileID: 0}
   meleeWeaponRightSwing: {fileID: 1717373713}
   meleeWeaponLeftSwing: {fileID: 1717373713}
   meleeWeaponTopSwing: {fileID: 1204604006}
@@ -2393,6 +2396,9 @@ MonoBehaviour:
   delay: 0.01
   walkCloud: {fileID: 1309290074767292, guid: 5980c00b310786a4ba63ed94f12e7a00, type: 2}
   myLegs: {fileID: 776909323}
+  footsteps1: {fileID: 0}
+  footsteps2: {fileID: 0}
+  clipOverride: 0
 --- !u!50 &1314465151
 Rigidbody2D:
   serializedVersion: 4

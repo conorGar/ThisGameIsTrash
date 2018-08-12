@@ -8,9 +8,16 @@ public class Ev_TrashCan : MonoBehaviour {
 	tk2dSpriteAnimator myAnim;
 	tk2dSprite startSprite;
 
+
+	public AudioClip hit;
+	public AudioClip finalHit;
+	public GameObject pinUnlockHud;
 	public GameObject objectPool;
 	public AudioClip hitSound;
-
+	public PinDefinition myPin;
+	public Sprite pinSprite;//given to dropped pin, which gives it to pin unlock display
+	GameObject spawnedPin;
+	int spawnOnce = 0;
 
 	void Start () {
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
@@ -21,23 +28,30 @@ public class Ev_TrashCan : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter2D(Collision2D collision){
+	void OnTriggerEnter2D(Collider2D collision){
+		Debug.Log("Trash can hit collision detected");
 		if(collision.gameObject.tag == "Weapon"){
+			Debug.Log("Trash can WEAPON collision detected");
 			hp--;
+			SoundManager.instance.RandomizeSfx(hitSound);
 			if(hp>0){
 				myAnim.Play("hit");
 				SoundManager.instance.PlaySingle(hitSound);
 				GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
 				damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1);
 				damageCounter.SetActive(true);
+				damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
+
 				GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
 				damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.SetActive(true);
 			}else{
+				SoundManager.instance.PlaySingle(finalHit);
 				myAnim.Play("fall");
 				SoundManager.instance.PlaySingle(hitSound);
 			}
+			StartCoroutine("ContinueHit");
 
 
 		}
@@ -47,8 +61,11 @@ public class Ev_TrashCan : MonoBehaviour {
 		if(hp > 0){
 			yield return new WaitForSeconds(.2f);
 			myAnim.Stop();
-		}else{
-		//spawn pin
+		}else if(spawnOnce == 0){
+			spawnedPin = objectPool.GetComponent<ObjectPool>().GetPooledObject("Pin",gameObject.transform.position);
+			spawnedPin.name = myPin.name;
+			spawnedPin.GetComponent<tk2dSprite>().SetSprite(myPin.sprite);
+			spawnedPin.GetComponent<Ev_DroppedPin>().SetPinData(myPin,pinUnlockHud, pinSprite);
 		}
 	}
 }
