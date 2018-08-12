@@ -9,6 +9,7 @@ public class Room : MonoBehaviour
     public bool bossRoom;
     public int roomNum;
     public List<EnemySpawner> enemySpawners;
+    public List<FriendSpawner> friendSpawners;
     public List<GarbageSpawner> garbageSpawners;
     public GameObject player;
     public BoxCollider2D roomCollider2D;
@@ -19,8 +20,7 @@ public class Room : MonoBehaviour
     public string tutPopUpToActivate;
 
     private List<GameObject> enemies;
-
-    //public List<Friend> friends;
+    private List<GameObject> friends;
 
     public void ActivateRoom()
     {
@@ -39,17 +39,17 @@ public class Room : MonoBehaviour
             Enemy enemy = enemySpawners[i].enemies[0];
 
             // ignore armored enemies if they aren't allowed to spawn yet.
-          //  if (enemy.IsArmored && !allowArmoredEnemies)
-              //  continue;
+            //  if (enemy.IsArmored && !allowArmoredEnemies)
+            //    continue;
 
-             //ignore if enemy for this spawner has been killed
-             if(enemySpawners[i].CheckIfEnemyDead()){
-             	Debug.Log("MY ENEMY IS DEAD!!!");
-             	continue;
-             }else{
-            	Debug.Log("*** MY ENEMY IS NOT DEAD ***");
-				GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
-				spawnedEnemy.SetActive(true);
+            //ignore if enemy for this spawner has been killed
+            if(enemySpawners[i].CheckIfEnemyDead()){
+                Debug.Log("MY ENEMY IS DEAD!!!");
+                continue;
+            }else{
+                Debug.Log("*** MY ENEMY IS NOT DEAD ***");
+			    GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
+			    spawnedEnemy.SetActive(true);
 
 	            if (spawnedEnemy != null)
 	            {
@@ -59,14 +59,24 @@ public class Room : MonoBehaviour
 	                spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
 	                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
 	            }
-             }
-
-            //GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
-           // spawnedEnemy.SetActive(true);
-
-
-            
+            }   
         }
+
+        for (int i=0; i < friendSpawners.Count; ++i)
+        {
+            if (friendSpawners[i].friend.IsVisiting)
+            {
+                var spawnedFriend = FriendManager.Instance.GetFriendObject(friendSpawners[i].friend);
+
+                if (spawnedFriend != null)
+                {
+                    spawnedFriend.transform.position = friendSpawners[i].transform.position;
+                    spawnedFriend.SetActive(true);
+                    friends.Add(spawnedFriend);
+                }
+            }
+        }
+
         if(bossRoom){
         	for(int i = 0; i< transform.childCount;i++){
         		if(transform.GetChild(i).tag == "Boss"){
@@ -81,20 +91,22 @@ public class Room : MonoBehaviour
 
     public void DeactivateRoom()
     {	
-    	if(enemies.Count > 0){
-	        for (int i=0; i < enemies.Count; ++i)
-	            enemies[i].SetActive(false);
+	    for (int i=0; i < enemies.Count; ++i)
+	        enemies[i].SetActive(false);
 
-	        enemies.Clear();
-        }
+        for (int i = 0; i < friends.Count; ++i)
+            friends[i].SetActive(false);
+
+        friends.Clear();
+	    enemies.Clear();
     }
 
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
         enemies = new List<GameObject>();
-        //Physics2D.IgnoreCollision(roomCollider2D, player.GetComponent<Collider2D>());
+        friends = new List<GameObject>();
     }
 	
 	// Update is called once per frame

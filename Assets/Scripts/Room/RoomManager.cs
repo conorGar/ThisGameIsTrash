@@ -20,9 +20,13 @@ public class RoomManager : MonoBehaviour {
     public Vector3 previousCameraPosition;
     public Vector3 targetCameraPosition;
 
-	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
         Instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
         playerCollider2D = player.GetComponent<Collider2D>();
         currentRoom = startRoom;
         previousRoom = null;
