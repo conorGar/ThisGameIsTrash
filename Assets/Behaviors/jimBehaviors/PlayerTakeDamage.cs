@@ -20,6 +20,10 @@ public class PlayerTakeDamage : MonoBehaviour {
 	bool currentlyTakingDamage = false;
 	// Use this for initialization
 	void Start () {
+
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.APPLEPLUS)){
+			gameObject.GetComponent<PinFunctionsManager>().ApplePlus();
+		}
 		maxHP = GlobalVariableManager.Instance.Max_HP;	
 		currentHp = maxHP;
 	}
@@ -39,6 +43,13 @@ public class PlayerTakeDamage : MonoBehaviour {
 				damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
 
 			}
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.QUENPINTARANTINO)){
+				gameObject.GetComponent<PinFunctionsManager>().QuenpinTarantino();
+			}
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
+				gameObject.GetComponent<PinFunctionsManager>().PassivePillage(false);
+			}
+
 			currentlyTakingDamage = true;
 			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 			currentHp -= damageDealt;
@@ -105,10 +116,11 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		currentCam.GetComponent<Ev_MainCamera>().enabled = false;
 		//GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().WhiteFlash();
-		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
+		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
+			yield return new WaitForSeconds(.5f);
 			gameObject.GetComponent<PinFunctionsManager>().DevilsDeal();
-			yield return new WaitForSeconds(1f);
-			fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
+			yield return new WaitForSeconds(2f);
+			fadeHelper.GetComponent<Ev_FadeHelper>().EndOfDayFade();
 		}else{
 		yield return new WaitForSeconds(1f);
 		fadeHelper.GetComponent<Ev_FadeHelper>().BlackFade(); //fade to black
@@ -143,6 +155,11 @@ public class PlayerTakeDamage : MonoBehaviour {
 			droppedTrashPile.transform.position = GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION;
 		}
 		GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] = 0;
+		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
+				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 0;//reset scrap value
+		}else{
+			gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();
+		}
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
 		trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;

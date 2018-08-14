@@ -6,7 +6,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 
 	public GameObject player;
 	public GameObject resultsDisplay;
-	public GameObject backPaper;
+	//public GameObject backPaper;
 
 
 	int phase = 0;
@@ -114,9 +114,10 @@ public class Ev_SmallTruck : MonoBehaviour {
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
 			phase = 1;
 		}else if(phase == 2){
-			Destroy(player);
+			//Destroy(player);
 			StartCoroutine("StartMovement");
-			GameObject tempPaper = Instantiate(backPaper,transform.position,Quaternion.identity);
+			resultsDisplay.SetActive(true); //gets value from ev_fadeHelper
+			//GameObject tempPaper = Instantiate(backPaper,transform.position,Quaternion.identity);
 			//GameObject tempResults = Instantiate(resultsDisplay,transform.position,Quaternion.identity);
 			//tempResults.transform.parent = tempPaper.transform.parent;
 			//^ for now the prefab had results already attatched as child

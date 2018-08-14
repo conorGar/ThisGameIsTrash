@@ -233,6 +233,11 @@ public class EightWayMovement : MonoBehaviour {
 		SoundManager.instance.RandomizeSfx(footsteps1,footsteps2);
 
     }
+
+    public void UpdateSpeed(float updatedSpeed){
+    	speed += updatedSpeed;
+    }
+
 	IEnumerator TurnDelay() {
         yield return new WaitForSeconds (.1f);
 		if(directionFacing == 1 || directionFacing == 2){

@@ -123,13 +123,72 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 	}
 	void OnTriggerEnter2D(Collider2D melee){
-		Debug.Log("Collision with weapon");
 		if(melee.tag == "Weapon"){
 			TakeDamage(melee.gameObject);
+			Debug.Log("Collision with weapon: ");
 			SoundManager.instance.PlaySingle(hitSound);
 			SoundManager.instance.PlaySingle(hitSqueal);
+		}else if(melee.tag == "pObj_bullet"){
+			if(!takingDamage){
+				StartCoroutine("NonMeleeHit");
+				melee.GetComponent<Ev_FallingProjectile>().Fell();
+			}
+			Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
+			SoundManager.instance.PlaySingle(hitSound);
+			SoundManager.instance.PlaySingle(hitSqueal);
+		}
+	}
 
+	IEnumerator NonMeleeHit(){
+		if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
+			if(!takingDamage){
+				takingDamage = true;
+				this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
+					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
+					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
+					damageCounter.SetActive(true);
+					GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
+					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+					littleStars.SetActive(true);
 
+						if(gameObject.transform.position.x < player.transform.position.x){
+							//hitStarPS.SetActive(true);
+							//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
+
+							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
+						}else{
+							//hitStarPS.SetActive(true);
+							//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
+							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
+
+						}
+				if(!moveWhenHit){
+						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+				}
+
+				currentHp = currentHp - 1 - meleeDmgBonus;
+				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
+					if(bossEnemy){
+						gameObject.GetComponent<Boss>().hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(currentHp);
+						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
+						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
+					}
+				myAnim.Play("hit");
+				if(gameObject.transform.position.x < player.transform.position.x)
+					gameObject.transform.localScale = new Vector2(-1f,1f);
+				else
+					gameObject.transform.localScale = new Vector2(1f,1f);
+
+				yield return new WaitForSeconds(.2f);
+				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
+				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+				Debug.Log("**AND HERE!!!!!!!!***");
+				yield return new WaitForSeconds(.4f);
+				StartCoroutine( "StopKnockback");
+				StartCoroutine("AfterHit");
+
+			}
 		}
 	}
 
@@ -168,12 +227,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 					if(secretHider)
 						Destroy(melee.gameObject);
-
-					if(GlobalVariableManager.Instance.MASTER_SFX_VOL >0){
-						//play hit squeal
-					}
-
-
 
 					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
 					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
@@ -276,7 +329,14 @@ public class EnemyTakeDamage : MonoBehaviour {
 			takingDamage = false;
 		} // end of movement functions
 
-			if(currentHp >0){
+		StartCoroutine("AfterHit");
+			
+		
+
+	}
+
+	IEnumerator AfterHit(){
+		if(currentHp >0){
 				if(gameObject.GetComponent<FollowPlayer>() != null){
 					gameObject.GetComponent<FollowPlayer>().StopSound();
 					gameObject.GetComponent<FollowPlayer>().enabled = false;
@@ -345,7 +405,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 					gameObject.GetComponent<Boss>().BossDeath();
 				}
 			}//end of (if hp is not > 0)
-		
 
 	}
 

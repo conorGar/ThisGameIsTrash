@@ -10,6 +10,7 @@ public class Ev_CurrentWeapon : MonoBehaviour {
 
 	public GameObject  meleeDisplay;
 	public GameObject player;
+	public GameObject upgradePS;
 	//public GameObject meleeMeter;
 	public Image meleeMeterDraw;
 	public Sprite plankSprite;
@@ -49,11 +50,14 @@ public class Ev_CurrentWeapon : MonoBehaviour {
 			meleeDisplay.GetComponent<Image>().sprite = poleSprite;
 			player.GetComponent<MeleeAttack>().UpdateWeapon();
 
-		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] >= 18 && meleeDisplay.GetComponent<Image>().sprite != broomSprite){ //&& GlobalVariableManager.Instance.IsPinEquipped(PIN.WASTEWARRIOR)){
+		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] >= 18 && meleeDisplay.GetComponent<Image>().sprite != broomSprite && GlobalVariableManager.Instance.IsPinEquipped(PIN.WASTEWARRIOR)){
 			meleeDisplay.GetComponent<Image>().sprite = broomSprite;
 			player.GetComponent<MeleeAttack>().UpdateWeapon();
 
 		}
+		meleeDisplay.GetComponent<GUIEffects>().Start(); // makes meleeDisplay do a little bounce
+		upgradePS.SetActive(true);
+		upgradePS.GetComponent<ParticleSystem>().Play();
 	}
 
 	public void Test(){

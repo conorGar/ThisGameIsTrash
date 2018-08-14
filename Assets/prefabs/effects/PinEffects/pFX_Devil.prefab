@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23377323995099446}
   - component: {fileID: 114384465461173442}
   - component: {fileID: 114159518034873224}
+  - component: {fileID: 50478968932286396}
   m_Layer: 9
   m_Name: pFX_Devil
   m_TagString: Untagged
@@ -37,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1448657158167314}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.31695, y: 0.18000004, z: 0}
-  m_LocalScale: {x: 0.8601876, y: 0.8601876, z: 0.8601876}
+  m_LocalPosition: {x: -2.824, y: -0.781, z: 0}
+  m_LocalScale: {x: 0.4859157, y: 0.4859157, z: 0.4859157}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,6 +85,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1448657158167314}
   m_Mesh: {fileID: 0}
+--- !u!50 &50478968932286396
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1448657158167314}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &114159518034873224
 MonoBehaviour:
   m_ObjectHideFlags: 1

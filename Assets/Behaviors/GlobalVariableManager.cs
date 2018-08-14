@@ -6,7 +6,6 @@ using UnityEngine;
 public class GlobalVariableManager : MonoBehaviour {
 
 
-	//Note that many of the lists are given items in 'PopulateWorld' behavior.
 
 	public static GlobalVariableManager Instance {get; private set;}
 

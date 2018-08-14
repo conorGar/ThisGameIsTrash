@@ -37,10 +37,7 @@ public class PopulateWorld : MonoBehaviour
                 //2nd gathering perk: amount of trash in world increased by 25%
                 WorldManager.Instance.amountTrashHere += Mathf.RoundToInt(WorldManager.Instance.amountTrashHere/ 4);
 			}*/
-			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HUNGRYFORMORE)){
-				//Hungry For More pin
-				playersPFM.HungryForMore();
-			}/*
+			/*
 			if(GlobalVariableManager.Instance.pinsEquipped[4] == 8){
 				//cursed pin - less trash
 				amntTrashHere -= 5;
