@@ -8,7 +8,7 @@ public class IsometricSorting : MonoBehaviour {
 	public bool hastk2dSprite = true;
 	public bool movingObject;
 	GameObject player;
-	public float yPositionMark;
+	//public float yPositionMark;
 	float myY;
 	tk2dSprite mytk2dSprite;
 	SpriteRenderer mySprite;
