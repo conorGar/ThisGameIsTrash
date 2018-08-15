@@ -116,7 +116,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		currentCam.GetComponent<Ev_MainCamera>().enabled = false;
 		//GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().WhiteFlash();
-		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
 			yield return new WaitForSeconds(.5f);
 			gameObject.GetComponent<PinFunctionsManager>().DevilsDeal();
 			yield return new WaitForSeconds(2f);
@@ -157,6 +157,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] = 0;
 		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
 				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 0;//reset scrap value
+				gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();//just used to update weapon HUD in this scenario
 		}else{
 			gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();
 		}
