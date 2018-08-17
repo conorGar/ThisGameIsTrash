@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ev_FallingProjectile : MonoBehaviour {
 	public GameObject myShadow;
 	public float gravityScaleDelay;
-	bool falling;
+	public bool falling;
 	// Use this for initialization
 
 
