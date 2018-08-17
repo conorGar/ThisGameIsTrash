@@ -28,6 +28,9 @@ public class DialogEditorWindow : EditorWindow {
 
     static List<SerializableGuid> guidList = null;
 
+    static Vector2 scrollPos;
+    static Vector2 lastMousePos;
+
     [MenuItem ("Window/TGIT/Dialog Editor")]
     static void Init()
     {
@@ -35,6 +38,7 @@ public class DialogEditorWindow : EditorWindow {
         dialogs = new List<DialogDefinition>();
         ClearDialogs();
         RefreshDialogs();
+
         DialogEditorWindow window = (DialogEditorWindow)EditorWindow.GetWindow(typeof(DialogEditorWindow));
         window.Show();
     }
@@ -59,7 +63,8 @@ public class DialogEditorWindow : EditorWindow {
         {
             guidList.Add(nodePair.Key);
         }
-        //ReadNodes(currentDialog.rootNode);
+
+        scrollPos = new Vector2(currentDialog.nodes[currentDialog.rootNodeId].x - 10, currentDialog.nodes[currentDialog.rootNodeId].y - 10);
     }
 
     static void RefreshDialogs()
@@ -82,25 +87,6 @@ public class DialogEditorWindow : EditorWindow {
         AssetDatabase.Refresh();
     }
 
-    // Recursive Node reader to propagate
-    /*static void ReadNodes(DialogNode node)
-    {
-        if (node == null)
-            return;
-
-        switch (node.type)
-        {
-            case DIALOGNODETYPE.STATEMENT:
-                for (int i = 0; i < node.responses.Count; i++)
-                {
-                    ReadNodes(node.responses[.children[i]);
-                }
-                break;
-            case DIALOGNODETYPE.QUESTION:
-                break;
-        }
-    }*/
-
     // MAIN WINDOW RENDER
 	void OnGUI () {
         if (currentDialog != null)
@@ -122,6 +108,10 @@ public class DialogEditorWindow : EditorWindow {
         RefreshDialogsButton();
         GUILayout.EndHorizontal();
 
+        Rect workArea = GUILayoutUtility.GetRect(10, 10000, 10, 10000);
+        scrollPos = GUI.BeginScrollView(workArea, scrollPos, new Rect(0, 0, 10000, 10000));
+        GUILayout.BeginArea(new Rect(0, 0, 10000, 10000));
+
         BeginWindows();
         if (currentDialog != null)
         {
@@ -139,7 +129,10 @@ public class DialogEditorWindow : EditorWindow {
                         {
                             if (!node.responses[j].node_id.IsNullOrEmpty())
                             {
-                                DrawNodeCurve(node.window, currentDialog.nodes[node.responses[j].node_id].window, j);
+                                if (node.isCollapsed)
+                                    DrawNodeCurve(node.window, currentDialog.nodes[node.responses[j].node_id].window);
+                                else
+                                    DrawNodeCurve(node.window, currentDialog.nodes[node.responses[j].node_id].window, j);
                             }
                         }
                         break;
@@ -149,6 +142,28 @@ public class DialogEditorWindow : EditorWindow {
             }
         }
         EndWindows();
+        GUILayout.EndArea();
+        GUI.EndScrollView();
+
+        // Update scrolling with mouse clicks
+        //if (workArea.Contains(Event.current.mousePosition))
+        //{
+            if (Event.current.type == EventType.MouseDrag)
+            {
+                Vector2 currPos = Event.current.mousePosition;
+
+                if (Vector2.Distance(currPos, lastMousePos) < 50)
+                {
+                    float x = lastMousePos.x - currPos.x;
+                    float y = lastMousePos.y - currPos.y;
+
+                    scrollPos.x += x;
+                    scrollPos.y += y;
+                    Event.current.Use();
+                }
+                lastMousePos = currPos;
+            }
+        //}
     }
 
     // NODE WINDOW RENDER
