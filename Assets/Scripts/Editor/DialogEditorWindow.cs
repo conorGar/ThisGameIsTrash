@@ -146,24 +146,21 @@ public class DialogEditorWindow : EditorWindow {
         GUI.EndScrollView();
 
         // Update scrolling with mouse clicks
-        //if (workArea.Contains(Event.current.mousePosition))
-        //{
-            if (Event.current.type == EventType.MouseDrag)
+        if (Event.current.type == EventType.MouseDrag)
+        {
+            Vector2 currPos = Event.current.mousePosition;
+
+            if (Vector2.Distance(currPos, lastMousePos) < 50)
             {
-                Vector2 currPos = Event.current.mousePosition;
+                float x = lastMousePos.x - currPos.x;
+                float y = lastMousePos.y - currPos.y;
 
-                if (Vector2.Distance(currPos, lastMousePos) < 50)
-                {
-                    float x = lastMousePos.x - currPos.x;
-                    float y = lastMousePos.y - currPos.y;
-
-                    scrollPos.x += x;
-                    scrollPos.y += y;
-                    Event.current.Use();
-                }
-                lastMousePos = currPos;
+                scrollPos.x += x;
+                scrollPos.y += y;
+                Event.current.Use();
             }
-        //}
+            lastMousePos = currPos;
+        }
     }
 
     // NODE WINDOW RENDER
@@ -225,9 +222,12 @@ public class DialogEditorWindow : EditorWindow {
                             if (GUILayout.Button("Delete Dialog"))
                             {
                                 guidList.Remove(node.id);
-                                DialogNode parent = currentDialog.nodes[node.parent_id];
+                                if (!node.parent_id.IsNullOrEmpty())
+                                {
+                                    DialogNode parent = currentDialog.nodes[node.parent_id];
+                                    parent.child_id.Value = null;
+                                }
                                 currentDialog.nodes.Remove(node.id);
-                                parent.child_id.Value = null;
                             }
                         }
                     }
@@ -309,7 +309,7 @@ public class DialogEditorWindow : EditorWindow {
     {
         if (GUILayout.Button("Create New Dialog Node"))
         {
-            DialogNode new_node = new DialogNode(currentDialog, "NewDialog", "Child Dialog", DIALOGNODETYPE.STATEMENT, null, 110f, 110f);
+            DialogNode new_node = new DialogNode(currentDialog, "NewDialog", "Child Dialog", DIALOGNODETYPE.STATEMENT, null, scrollPos.x + 10f, scrollPos.y + 10f);
             currentDialog.nodes[new_node.id] = new_node;
             guidList.Add(new_node.id);
         }
