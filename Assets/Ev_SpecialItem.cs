@@ -17,7 +17,7 @@ public class Ev_SpecialItem : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(playerIsMovingToward){
-			transform.position = Vector3.SmoothDamp(player.transform.position, gameobject.transform.position, ref smoothVelocity, 5f);
+			transform.position = Vector3.SmoothDamp(player.transform.position,gameObject.transform.position, ref smoothVelocity, 5f);
 
 				if(player.transform.position.x < transform.position.x){
 					transform.localScale = new Vector3(-1,1,1);
