@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Friend))]
 public class ActivateDialogWhenClose : MonoBehaviour {
+    public Friend friend;
 
-	public int myPosInFriendList;
 	public string introDialogName;
 
 	public float xDistanceThreshold;
@@ -25,15 +26,13 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		Debug.Log("my value at friends list" + GlobalVariableManager.Instance.FRIEND_LIST[myPosInFriendList]);
 		Debug.Log(introDialogName);
-		Debug.Log(introDialogName == GlobalVariableManager.Instance.FRIEND_LIST[myPosInFriendList]);
 	}
 	
 	void Update () {
 		if(GlobalVariableManager.Instance.CARRYING_SOMETHING == false){
 			
-			if(GlobalVariableManager.Instance.FRIEND_LIST[myPosInFriendList] == introDialogName){
+			if(introDialogName.Length > 0){
 				
 				if(Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold &&Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold){
 					//INITIAL DIALOG ACTIVATED WHEN CLOSE
@@ -42,7 +41,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 					player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 					if(dialogCanvas.activeInHierarchy == false){
 						dialogCanvas.SetActive(true);
-						dialogManager.GetComponent<DialogBehaviorManager>().SetDialogName(GlobalVariableManager.Instance.FRIEND_LIST[myPosInFriendList]);
+						dialogManager.GetComponent<DialogBehaviorManager>().SetDialogName(introDialogName);
 						myDialogIcon.SetActive(true);
 						if(myDialogIcon.transform.childCount>0){//if more than one icon
 							List<GameObject> dialogIcons = new List<GameObject>();

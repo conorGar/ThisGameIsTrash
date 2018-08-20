@@ -1,0 +1,162 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: JumboTest
+  m_EditorClassIdentifier: 
+  title: JumboTest
+  nodeStore:
+    keys:
+    - Value: 795cc605-3108-4cac-8593-1e5d45b72da9
+    - Value: 53695d9f-16bc-4890-a8d9-e7664b3d95c2
+    - Value: f235ed95-607a-4d33-aa20-1326da443437
+    - Value: db1319f0-e65c-41d0-9615-c247c64a0512
+    - Value: 7c1993c7-fcec-42c9-957f-5026324968eb
+    - Value: b34d75ee-0e7a-498d-9c0c-50e9f6390e06
+    - Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
+    values:
+    - window:
+        serializedVersion: 2
+        x: 13
+        y: 50
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start
+      id:
+        Value: 795cc605-3108-4cac-8593-1e5d45b72da9
+      x: 13
+      y: 50
+      text: Gee, what a surprise.  Yet again, nobody shows up to one of my movies...
+      type: 1
+      parent_id:
+        Value: 
+      child_id:
+        Value: 53695d9f-16bc-4890-a8d9-e7664b3d95c2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 335
+        y: 56
+        width: 270
+        height: 42
+      isCollapsed: 1
+      title: Start1
+      id:
+        Value: 53695d9f-16bc-4890-a8d9-e7664b3d95c2
+      x: 335
+      y: 56
+      text: Ok.  Welp.  Here we go ladies and gentlemen.  The latest film from visionary
+        Dog director.. <c=g>Jumbo</c>.
+      type: 1
+      parent_id:
+        Value: 795cc605-3108-4cac-8593-1e5d45b72da9
+      child_id:
+        Value: f235ed95-607a-4d33-aa20-1326da443437
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 637
+        y: 56
+        width: 270
+        height: 42
+      isCollapsed: 1
+      title: Start2
+      id:
+        Value: f235ed95-607a-4d33-aa20-1326da443437
+      x: 637
+      y: 56
+      text: woooooooooooooo.
+      type: 1
+      parent_id:
+        Value: 53695d9f-16bc-4890-a8d9-e7664b3d95c2
+      child_id:
+        Value: db1319f0-e65c-41d0-9615-c247c64a0512
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 924
+        y: 56
+        width: 270
+        height: 42
+      isCollapsed: 1
+      title: Start3
+      id:
+        Value: db1319f0-e65c-41d0-9615-c247c64a0512
+      x: 924
+      y: 56
+      text: Oh! OH MY GOD! Wh-where you behind me that whole time?!? D-did you see
+        my movie?!?
+      type: 1
+      parent_id:
+        Value: f235ed95-607a-4d33-aa20-1326da443437
+      child_id:
+        Value: 7c1993c7-fcec-42c9-957f-5026324968eb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 14
+        y: 307
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start4
+      id:
+        Value: 7c1993c7-fcec-42c9-957f-5026324968eb
+      x: 14
+      y: 307
+      text: I mean, I-I dont wanna, like, put you on the spot here, but...wha...what'd
+        you think of it?
+      type: 1
+      parent_id:
+        Value: db1319f0-e65c-41d0-9615-c247c64a0512
+      child_id:
+        Value: b34d75ee-0e7a-498d-9c0c-50e9f6390e06
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 337
+        y: 305
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start5
+      id:
+        Value: b34d75ee-0e7a-498d-9c0c-50e9f6390e06
+      x: 337
+      y: 305
+      text: You can be honest.  I'm not insecure.  I'm doing this to learn.
+      type: 1
+      parent_id:
+        Value: 7c1993c7-fcec-42c9-957f-5026324968eb
+      child_id:
+        Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 641
+        y: 304
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start6
+      id:
+        Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
+      x: 641
+      y: 304
+      text: Wow. Well, I wish you weren't the only one with that opinion.
+      type: 1
+      parent_id:
+        Value: b34d75ee-0e7a-498d-9c0c-50e9f6390e06
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 795cc605-3108-4cac-8593-1e5d45b72da9
