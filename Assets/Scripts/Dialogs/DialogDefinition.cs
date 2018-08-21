@@ -37,28 +37,27 @@ public class DialogNode
 
     public bool isCollapsed;
     public string title;
+    public string action;
     public SerializableGuid id;
     public float x;
     public float y;
     public string text;
     public DIALOGNODETYPE type;
 
-    public SerializableGuid parent_id;
     // For statement linking
     public SerializableGuid child_id;
 
     // For question linking
     public List<DialogResponse> responses;
 
-    public DialogNode(DialogDefinition definition, string p_title, string p_text, DIALOGNODETYPE p_type, DialogNode p_parent, float p_x, float p_y)
+    public DialogNode(DialogDefinition definition, string p_title, string p_text, DIALOGNODETYPE p_type, float p_x, float p_y)
     {
         isCollapsed = false;
         title = p_title;
+        action = "";
         id = Guid.NewGuid();
         text = p_text;
         type = p_type;
-        if (p_parent != null)
-            parent_id = p_parent.id;
 
         responses = new List<DialogResponse>();
         x = p_x;
@@ -85,7 +84,7 @@ public class DialogDefinition : ScriptableObject {
 
         if (rootNodeId.IsNullOrEmpty())
         {
-            DialogNode rootNode = new DialogNode(this, "DialogRoot", "Default Text", DIALOGNODETYPE.STATEMENT, null, 110, 110);
+            DialogNode rootNode = new DialogNode(this, "DialogRoot", "Default Text", DIALOGNODETYPE.STATEMENT, 110, 110);
             rootNodeId = rootNode.id;
             nodes[rootNode.id] = rootNode;
         }

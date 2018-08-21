@@ -11,12 +11,23 @@ public struct NodeResponseMenuLink
         parent_node_id = p_parent_node_id;
         node_id = p_node_id;
         response_id = p_response_id;
-
     }
 
     public SerializableGuid parent_node_id;
     public SerializableGuid node_id;
     public int response_id;
+}
+
+public struct NodeMenuLink
+{
+    public NodeMenuLink(SerializableGuid p_parent_node_id, SerializableGuid p_node_id)
+    {
+        parent_node_id = p_parent_node_id;
+        node_id = p_node_id;
+    }
+
+    public SerializableGuid parent_node_id;
+    public SerializableGuid node_id;
 }
 
 public class DialogEditorWindow : EditorWindow {
@@ -209,7 +220,7 @@ public class DialogEditorWindow : EditorWindow {
                         // Create
                         if (GUILayout.Button("Create Next Dialog"))
                         {
-                            DialogNode new_node = new DialogNode(currentDialog, "NewDialog", "Child Dialog", DIALOGNODETYPE.STATEMENT, node, node.window.x + 110f, node.window.y + 110f);
+                            DialogNode new_node = new DialogNode(currentDialog, "NewDialog", "Child Dialog", DIALOGNODETYPE.STATEMENT, node.window.x + 110f, node.window.y + 110f);
                             currentDialog.nodes[new_node.id] = new_node;
                             node.child_id = new_node.id;
 
@@ -221,16 +232,36 @@ public class DialogEditorWindow : EditorWindow {
                         {
                             if (GUILayout.Button("Delete Dialog"))
                             {
-                                guidList.Remove(node.id);
-                                if (!node.parent_id.IsNullOrEmpty())
+                                // clear any child links to the node that's about to be deleted.
+                                for (int i = 0; i < guidList.Count; i++)
                                 {
-                                    DialogNode parent = currentDialog.nodes[node.parent_id];
-                                    parent.child_id.Value = null;
+                                    DialogNode check_node = currentDialog.nodes[guidList[i]];
+                                    if (check_node.child_id.Equals(node.id))
+                                        check_node.child_id.Value = null;
                                 }
+                                guidList.Remove(node.id);
                                 currentDialog.nodes.Remove(node.id);
                             }
                         }
                     }
+                    if (GUILayout.Button("Link"))
+                    {
+                        // create the menu and add items to it
+                        GenericMenu menu = new GenericMenu();
+
+                        for (int j = 0; j < guidList.Count; j++)
+                        {
+                            DialogNode menu_node = currentDialog.nodes[guidList[j]];
+                            menu.AddItem(new GUIContent(menu_node.title), menu_node.id.Equals(node.child_id), OnLinkSelected, new NodeMenuLink(node.id, menu_node.id));
+                        }
+
+                        menu.ShowAsContext();
+                    }
+                    GUILayout.EndHorizontal();
+
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label("Action: ");
+                    node.action = GUILayout.TextField(node.action);
                     GUILayout.EndHorizontal();
                     break;
                 case DIALOGNODETYPE.QUESTION:
@@ -309,7 +340,7 @@ public class DialogEditorWindow : EditorWindow {
     {
         if (GUILayout.Button("Create New Dialog Node"))
         {
-            DialogNode new_node = new DialogNode(currentDialog, "NewDialog", "Child Dialog", DIALOGNODETYPE.STATEMENT, null, scrollPos.x + 10f, scrollPos.y + 10f);
+            DialogNode new_node = new DialogNode(currentDialog, "NewDialog", "Child Dialog", DIALOGNODETYPE.STATEMENT, scrollPos.x + 10f, scrollPos.y + 10f);
             currentDialog.nodes[new_node.id] = new_node;
             guidList.Add(new_node.id);
         }
@@ -359,5 +390,16 @@ public class DialogEditorWindow : EditorWindow {
         DialogNode parent_node = currentDialog.nodes[link.parent_node_id];
         DialogNode node = currentDialog.nodes[link.node_id];
         parent_node.responses[link.response_id].node_id = node.id;
+    }
+
+    void OnLinkSelected(object obj)
+    {
+        // When the menu item is chosen, link up the parent node to the child node selected.
+        var link = (NodeMenuLink)obj;
+        DialogNode parent_node = currentDialog.nodes[link.parent_node_id];
+        DialogNode node = currentDialog.nodes[link.node_id];
+        parent_node.child_id = node.id;
+
+        Debug.Log("Parent_node.id : " + parent_node.id + "\nChild_node.id : " + node.id);
     }
 }
