@@ -76,6 +76,7 @@ public class DialogManager : MonoBehaviour {
 			finishedDisplayingText = false;
 			textBox.SetActive(false);
 			currentlySpeakingIcon.transform.position = guiCamera.ViewportToWorldPoint(new Vector3(0f,0f,0f));
+			CancelInvoke();
 		}else{
 			
 			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
@@ -106,15 +107,16 @@ public class DialogManager : MonoBehaviour {
 				}
 			finishedDisplayingText = false;
 			displayedText.text = currentNode.text;
+			InvokeRepeating("TalkSound",0.1f,.05f);
 	}
 
 
 	public void FinishedDisplay(){
 		Debug.Log("Finished Display activated");
-		//if(currentlySpeakingIcon.GetComponent<Animator>().isActiveAndEnabled)
-			//currentlySpeakingIcon.GetComponent<Animator>().StopPlayback();
+		if(currentlySpeakingIcon.GetComponent<Animator>().isActiveAndEnabled)
+			currentlySpeakingIcon.GetComponent<Animator>().StopPlayback();
 
-		//continueIcon.enabled = true;
+		continueIcon.enabled = true;
 		CancelInvoke();
 		finishedDisplayingText = true;
 	}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using I2.TextAnimation;
 
 public class DialogChoiceManager : MonoBehaviour {
 
@@ -80,17 +80,29 @@ public class DialogChoiceManager : MonoBehaviour {
 	}*/
 
 	void NavigateOptions(string direction){
-		gameObject.transform.GetChild(arrowPos+1).GetComponent<SpriteRenderer>().color = unhighlightedColor; 
-		gameObject.transform.GetChild(arrowPos+1).transform.position = new Vector2(4f,this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
+
+
+		dialogChoiceBoxes[arrowPos+1].GetComponent<SpriteRenderer>().color = unhighlightedColor; 
+		dialogChoiceBoxes[arrowPos+1].transform.position = new Vector2(4f,dialogChoiceBoxes[arrowPos+1].transform.position.y);
+		dialogChoiceBoxes[arrowPos+1].transform.GetChild(0).gameObject.GetComponent<TextAnimation>().enabled = false;
+		dialogChoiceBoxes[arrowPos+1].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
+
+
 		Debug.Log(arrowPos);
-		Debug.Log(this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
+
+		//Debug.Log(this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
 		if(direction == "up"){
 		 	arrowPos--;
 		}else if(direction == "down"){
 			arrowPos++;
 		} 
-		gameObject.transform.GetChild(arrowPos+1).GetComponent<SpriteRenderer>().color = highlightedColor;
-		gameObject.transform.GetChild(arrowPos+1).transform.position = new Vector2(5.8f,this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
+		dialogChoiceBoxes[arrowPos+1].GetComponent<SpriteRenderer>().color = highlightedColor;
+		dialogChoiceBoxes[arrowPos+1].transform.position = new Vector2(5.8f,this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
+
+		//text change
+		dialogChoiceBoxes[arrowPos+1].transform.GetChild(0).gameObject.GetComponent<TextAnimation>().enabled = true;
+		dialogChoiceBoxes[arrowPos+1].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.green;
+
 		Debug.Log(arrowPos);
 		Debug.Log(gameObject.transform.GetChild(arrowPos+1).name);
 		Debug.Log(this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
