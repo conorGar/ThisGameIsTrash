@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using I2.TextAnimation;
 using UnityEngine.UI;
+using UnityEngine.PostProcessing;
 
 public class DialogManager : MonoBehaviour {
 
@@ -13,14 +14,48 @@ public class DialogManager : MonoBehaviour {
 	string currentSpeaker;
 	public GameObject currentlySpeakingIcon;
 	public Image continueIcon;
+	public string dialogTitle;
 	public TextMeshProUGUI displayedText;
+	public List<GameObject> dialogIcons = new List<GameObject>();
+	public GameObject dialogOptions;
+	public GameObject textBox;
+	public AudioClip typeSound;
+
+	public Camera guiCamera; //needed for icon to corner at dialog choice
+	//------------Screen Blur stuff---------------//
+	public PostProcessingProfile dialogBlur;
+	public GameObject mainCam;
+	//------------------------------------------//
 
 	bool finishedDisplayingText = false; // set true when the text animation is done
 	bool hasWavingText; 
 
 	void Start () {
-		currentNode = myDialogDefiniton.nodes[myDialogDefiniton.rootNodeId];
+		//currentNode = myDialogDefiniton.nodes[myDialogDefiniton.rootNodeId];
+
+		foreach(var node in myDialogDefiniton.nodes){
+			string nodeTitle = node.Value.title;
+			if(nodeTitle == dialogTitle){
+				currentNode = node.Value;
+				break;
+			}
+		}
+
+		//currentNode = myDialogDefiniton.nodes[currentDialogTitle];
 		displayedText.text = currentNode.text;
+	}
+
+	void OnEnable(){
+		//currentNode = myDialogDefiniton.nodes[myDialogDefiniton.rootNodeId];
+		foreach(var node in myDialogDefiniton.nodes){
+			string nodeTitle = node.Value.title;
+			if(nodeTitle == dialogTitle){
+				currentNode = node.Value;
+				break;
+			}
+		}
+		displayedText.text = currentNode.text;
+		mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogBlur;
 	}
 	
 	// Update is called once per frame
@@ -33,15 +68,44 @@ public class DialogManager : MonoBehaviour {
 	}
 
 	void NextNode(){
-		currentNode = myDialogDefiniton.nodes[currentNode.child_id];
-		if(currentNode.text.Contains("<c")){
-				Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
-				HighLightText();
-			}
-			if(currentNode.text.Contains("<w")){
-				WaveyText();
-			}
-		displayedText.text = currentNode.text;
+
+		if(currentNode.type == DIALOGNODETYPE.QUESTION){
+			Debug.Log("Question Dialog Node Properly Read");
+			dialogOptions.SetActive(true);
+			dialogOptions.GetComponent<DialogChoiceManager>().SetDialogChoices(currentNode);
+			finishedDisplayingText = false;
+			textBox.SetActive(false);
+			currentlySpeakingIcon.transform.position = guiCamera.ViewportToWorldPoint(new Vector3(0f,0f,0f));
+		}else{
+			
+			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
+			if(currentNode.text.Contains("<c")){
+					Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
+					HighLightText();
+				}
+				if(currentNode.text.Contains("<w")){
+					WaveyText();
+				}
+			finishedDisplayingText = false;
+			displayedText.text = currentNode.text;
+			displayedText.GetComponent<TextAnimation>().StartAgain();
+			InvokeRepeating("TalkSound",0.1f,.05f);
+		}
+	}
+
+	public void ReturnFromChoice(SerializableGuid link){
+			textBox.SetActive(true);
+			dialogOptions.SetActive(false);
+			currentNode = myDialogDefiniton.nodes[link];
+			if(currentNode.text.Contains("<c")){
+					Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
+					HighLightText();
+				}
+				if(currentNode.text.Contains("<w")){
+					WaveyText();
+				}
+			finishedDisplayingText = false;
+			displayedText.text = currentNode.text;
 	}
 
 
@@ -51,6 +115,7 @@ public class DialogManager : MonoBehaviour {
 			//currentlySpeakingIcon.GetComponent<Animator>().StopPlayback();
 
 		//continueIcon.enabled = true;
+		CancelInvoke();
 		finishedDisplayingText = true;
 	}
 
@@ -88,5 +153,10 @@ public class DialogManager : MonoBehaviour {
 		hasWavingText = true;
 		//Debug.Log("Target Range start:" + currentDisplayedText.GetComponent<TextAnimation>()._AnimationSlots[2]._Animation._Sequences[0]._TargetRangeStart);
 
+	}
+
+	public void TalkSound(){
+		Debug.Log("TalkSound Activate");
+		SoundManager.instance.RandomizeSfx(typeSound,.8f,1.2f);
 	}
 }

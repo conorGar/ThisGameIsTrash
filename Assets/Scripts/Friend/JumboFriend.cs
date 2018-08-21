@@ -9,7 +9,7 @@ public class JumboFriend : Friend {
     public int maxDays = 1;
     public List<int> films;
     private List<Friend> friendsAskedToWatch = new List<Friend>();
-    public DialogDefinition myDialogDefinition;
+    //public DialogDefinition myDialogDefinition;
     public override void GenerateEventData()
     {
         films.Shuffle();

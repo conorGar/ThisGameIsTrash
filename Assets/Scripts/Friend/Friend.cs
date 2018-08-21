@@ -5,13 +5,20 @@ using UnityEngine;
 public class Friend : MonoBehaviour {
     public string friendName = "Unknown Friend";
     public int day = 0;
-
+    public bool activateDialogWhenClose = true;
     // Is the friend visiting the level on this day.
     public bool IsVisiting = false;
+    public string nextDialog;
+	public DialogDefinition myDialogDefiniton;
 
     // Use this for initialization
     void Start() {
-
+    	if(activateDialogWhenClose){
+    		gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
+    	}
+		gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
+		gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
+		//Debug.Log("Dialog Definition Name:"+ gameObject.GetComponent<ActivateDialogWhenClose>().dialogDefiniton.name);
     }
 
     // Update is called once per frame

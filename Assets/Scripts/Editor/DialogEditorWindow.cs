@@ -216,6 +216,8 @@ public class DialogEditorWindow : EditorWindow {
                             guidList.Add(new_node.id);
                         }
 
+
+
                         // Delete
                         if (!node.id.Equals(currentDialog.rootNodeId))
                         {

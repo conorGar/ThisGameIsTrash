@@ -167,7 +167,7 @@ public class DialogBehaviorManager : MonoBehaviour {
 				dialogIcons[i].GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-11f,7f,.3f);//move to corner of the screen
 			}
 			dialogOptions.SetActive(true);
-			dialogOptions.GetComponent<DialogChoiceManager>().SetDialogChoices(mydialogName,1);//mydialogName,optionIDCodes[0]);
+			//dialogOptions.GetComponent<DialogChoiceManager>().SetDialogChoices(mydialogName,1);//mydialogName,optionIDCodes[0]);
 			lineNumbersThatActivateOptions.RemoveAt(0);// ******just removes 1st index, again, wont work if complex dialogs jump around, probably needs to be changed
 			optionIDCodes.RemoveAt(0);				  // ******just removes 1st index, again, wont work if complex dialogs jump around, probably needs to be changed
 			currentDisplayedText.enabled = false;
