@@ -7,9 +7,11 @@ public class JumboFriend : Friend {
 
     public int minDays = 0;
     public int maxDays = 1;
-    public List<int> films;
+    public List<string> films;//should be defined in inspector
     private List<Friend> friendsAskedToWatch = new List<Friend>();
+    public string movieEnhancement;
     //public DialogDefinition myDialogDefinition;
+
     public override void GenerateEventData()
     {
         films.Shuffle();
@@ -23,7 +25,7 @@ public class JumboFriend : Friend {
     }
 
     // current film is just the first element in the shuffled list.
-    public int GetCurrentFilm()
+    public string GetCurrentFilm()
     {
         if (films.Count > 0)
         {
@@ -31,7 +33,7 @@ public class JumboFriend : Friend {
         }
         else
         {
-            return -1;
+            return null;
         }
     }
 

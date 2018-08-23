@@ -14,6 +14,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	//public GameObject myDialogIcon;
 	public GameObject dialogCanvas;
 	public GameObject dialogManager;
+	public DialogActionManager dialogActionManager;
 	public bool autoStart;//start dialog when player gets close(without player hitting space)
 	public GameObject myDialogIcon;
 
@@ -49,6 +50,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 							dialogManager.GetComponent<DialogManager>().myDialogDefiniton = dialogDefiniton;
 							dialogManager.GetComponent<DialogManager>().dialogTitle = dialogName;
+							dialogActionManager.friend = friend;
 							dialogCanvas.SetActive(true);
 							myDialogIcon.SetActive(true);
 							if(myDialogIcon.transform.childCount>0){//if more than one icon

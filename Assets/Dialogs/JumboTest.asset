@@ -27,6 +27,16 @@ MonoBehaviour:
     - Value: 8e7164e6-1407-4b61-87c8-783d4b93c9bd
     - Value: 7a341f41-a857-4279-842e-db294ae7bd91
     - Value: fd259c4b-3cff-4b57-9387-527d5a8335ee
+    - Value: afe72c63-cdd9-40d0-8007-a2248e7a3caa
+    - Value: 3a4f7d70-8149-4deb-91ae-5d8490233227
+    - Value: 778f7a04-0b35-4bd1-a7e4-c6fc77f9a0e1
+    - Value: 88cf4ce3-42c4-4302-af4f-329db10c6884
+    - Value: f7b0d119-4fad-4153-a37b-69382708c5a9
+    - Value: 7ba82fa2-d2b1-490a-8581-140bdc09d712
+    - Value: 6b27253b-ef06-4dc0-aa71-6a351f88d283
+    - Value: c875b94f-2e77-4308-92ac-5820a19e1c53
+    - Value: 610b00e4-de57-43eb-87b2-c7e5ab5ceb3d
+    - Value: 2c5bf1d5-deb5-4249-8b21-4ec0f1fd1759
     values:
     - window:
         serializedVersion: 2
@@ -36,14 +46,13 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start
+      action: 
       id:
         Value: 795cc605-3108-4cac-8593-1e5d45b72da9
       x: 13
       y: 50
       text: Gee, what a surprise.  Yet again, nobody shows up to one of my movies...
       type: 1
-      parent_id:
-        Value: 
       child_id:
         Value: 53695d9f-16bc-4890-a8d9-e7664b3d95c2
       responses: []
@@ -52,9 +61,10 @@ MonoBehaviour:
         x: 335
         y: 56
         width: 270
-        height: 42
-      isCollapsed: 1
+        height: 250
+      isCollapsed: 0
       title: Start1
+      action: 
       id:
         Value: 53695d9f-16bc-4890-a8d9-e7664b3d95c2
       x: 335
@@ -62,8 +72,6 @@ MonoBehaviour:
       text: Ok.  Welp.  Here we go ladies and gentlemen.  The latest film from visionary
         Dog director.. <c=g>Jumbo</c>.
       type: 1
-      parent_id:
-        Value: 795cc605-3108-4cac-8593-1e5d45b72da9
       child_id:
         Value: f235ed95-607a-4d33-aa20-1326da443437
       responses: []
@@ -72,76 +80,72 @@ MonoBehaviour:
         x: 637
         y: 56
         width: 270
-        height: 42
-      isCollapsed: 1
+        height: 250
+      isCollapsed: 0
       title: Start2
+      action: JumboMoviePlay
       id:
         Value: f235ed95-607a-4d33-aa20-1326da443437
       x: 637
       y: 56
       text: woooooooooooooo.
       type: 1
-      parent_id:
-        Value: 53695d9f-16bc-4890-a8d9-e7664b3d95c2
       child_id:
         Value: db1319f0-e65c-41d0-9615-c247c64a0512
       responses: []
     - window:
         serializedVersion: 2
-        x: 924
-        y: 56
+        x: 973
+        y: 49
         width: 270
-        height: 42
-      isCollapsed: 1
+        height: 250
+      isCollapsed: 0
       title: Start3
+      action: 
       id:
         Value: db1319f0-e65c-41d0-9615-c247c64a0512
-      x: 924
-      y: 56
+      x: 973
+      y: 49
       text: Oh! OH MY GOD! Wh-where you behind me that whole time?!? D-did you see
         my movie?!?
       type: 1
-      parent_id:
-        Value: f235ed95-607a-4d33-aa20-1326da443437
       child_id:
         Value: 7c1993c7-fcec-42c9-957f-5026324968eb
       responses: []
     - window:
         serializedVersion: 2
-        x: 14
-        y: 307
+        x: 27
+        y: 327
         width: 270
         height: 250
       isCollapsed: 0
       title: Start4
+      action: 
       id:
         Value: 7c1993c7-fcec-42c9-957f-5026324968eb
-      x: 14
-      y: 307
+      x: 27
+      y: 327
       text: I mean, I-I dont wanna, like, put you on the spot here, but...wha...what'd
         you think of it?
       type: 1
-      parent_id:
-        Value: db1319f0-e65c-41d0-9615-c247c64a0512
       child_id:
         Value: b34d75ee-0e7a-498d-9c0c-50e9f6390e06
       responses: []
     - window:
         serializedVersion: 2
-        x: 438
-        y: 332
+        x: 422
+        y: 361
         width: 270
         height: 250
       isCollapsed: 0
       title: Start5
+      action: 
       id:
         Value: b34d75ee-0e7a-498d-9c0c-50e9f6390e06
-      x: 438
-      y: 332
+      x: 422
+      y: 361
       text: You can be honest.  I'm not insecure.  I'm doing this to learn.
       type: 2
-      parent_id:
-        Value: 7c1993c7-fcec-42c9-957f-5026324968eb
       child_id:
         Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
       responses:
@@ -159,58 +163,55 @@ MonoBehaviour:
           Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
     - window:
         serializedVersion: 2
-        x: 842
-        y: 199
+        x: 809
+        y: 330
         width: 270
         height: 250
       isCollapsed: 0
       title: Start6
+      action: 
       id:
         Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
-      x: 842
-      y: 199
+      x: 809
+      y: 330
       text: Wow. Well, I wish you weren't the only one with that opinion.
       type: 1
-      parent_id:
-        Value: b34d75ee-0e7a-498d-9c0c-50e9f6390e06
       child_id:
-        Value: 
+        Value: 7d4ca720-2a26-4d6a-a81f-99b7a654f46b
       responses: []
     - window:
         serializedVersion: 2
-        x: 846
-        y: 490
+        x: 810
+        y: 596
         width: 270
         height: 250
       isCollapsed: 0
       title: Start7
+      action: 
       id:
         Value: f566d180-188d-4efe-9457-704bfccc2ee1
-      x: 846
-      y: 490
+      x: 810
+      y: 596
       text: Ya, that's fair to say.
       type: 1
-      parent_id:
-        Value: 
       child_id:
-        Value: 
+        Value: 7d4ca720-2a26-4d6a-a81f-99b7a654f46b
       responses: []
     - window:
         serializedVersion: 2
-        x: 1244
-        y: 273
+        x: 1195
+        y: 473
         width: 270
         height: 250
       isCollapsed: 0
       title: Start8
+      action: 
       id:
         Value: 7d4ca720-2a26-4d6a-a81f-99b7a654f46b
-      x: 1244
-      y: 273
+      x: 1195
+      y: 473
       text: Whatever the case, this is my third film, man. My THIRD.
       type: 1
-      parent_id:
-        Value: 
       child_id:
         Value: 00e4cd45-570a-444b-ac89-677baddd6768
       responses: []
@@ -222,6 +223,7 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start9
+      action: 
       id:
         Value: 00e4cd45-570a-444b-ac89-677baddd6768
       x: 1562
@@ -229,8 +231,6 @@ MonoBehaviour:
       text: I've been making movies forever...and nobody has ever shown up to any
         of them.
       type: 1
-      parent_id:
-        Value: 7d4ca720-2a26-4d6a-a81f-99b7a654f46b
       child_id:
         Value: 8e7164e6-1407-4b61-87c8-783d4b93c9bd
       responses: []
@@ -242,14 +242,13 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start10
+      action: 
       id:
         Value: 8e7164e6-1407-4b61-87c8-783d4b93c9bd
       x: 1889
       y: 275
       text: I really thought I could make it work. I'm trying so hard.
       type: 1
-      parent_id:
-        Value: 00e4cd45-570a-444b-ac89-677baddd6768
       child_id:
         Value: 7a341f41-a857-4279-842e-db294ae7bd91
       responses: []
@@ -261,14 +260,13 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start11
+      action: 
       id:
         Value: 7a341f41-a857-4279-842e-db294ae7bd91
       x: 2270
       y: 270
       text: '...But nobody ever shows up. So I guess it''s not enough.'
       type: 1
-      parent_id:
-        Value: 8e7164e6-1407-4b61-87c8-783d4b93c9bd
       child_id:
         Value: fd259c4b-3cff-4b57-9387-527d5a8335ee
       responses: []
@@ -280,28 +278,208 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start12
+      action: 
       id:
         Value: fd259c4b-3cff-4b57-9387-527d5a8335ee
       x: 2651
       y: 276
       text: I'm just too stupid and untalented to make it in the movie industry.
       type: 2
-      parent_id:
-        Value: 7a341f41-a857-4279-842e-db294ae7bd91
       child_id:
         Value: 
       responses:
       - text: Maybe you can add some color...
         node_id:
-          Value: 
+          Value: afe72c63-cdd9-40d0-8007-a2248e7a3caa
       - text: Maybe if you worked a little on the marketing...
         node_id:
-          Value: 
-      - text: Maybe it needs sound effects?
+          Value: 610b00e4-de57-43eb-87b2-c7e5ab5ceb3d
+      - text: Maybe adding sound effects will help?
         node_id:
-          Value: 
-      - text: I wouldn't give up yet. I believe in you Jumbo.
-        node_id:
-          Value: 
+          Value: 2c5bf1d5-deb5-4249-8b21-4ec0f1fd1759
+    - window:
+        serializedVersion: 2
+        x: 3022.192
+        y: 67
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start13
+      action: JumboMovieColor
+      id:
+        Value: afe72c63-cdd9-40d0-8007-a2248e7a3caa
+      x: 3022.192
+      y: 67
+      text: Hmm. Ya. Maybe you're on to something. I suppose it's worth a shot.
+      type: 1
+      child_id:
+        Value: 3a4f7d70-8149-4deb-91ae-5d8490233227
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3415.2192
+        y: 220
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start14
+      action: 
+      id:
+        Value: 3a4f7d70-8149-4deb-91ae-5d8490233227
+      x: 3415.2192
+      y: 220
+      text: I got this idea for a film called [film]. Its got heart. Character. I
+        think it might be my best story yet.
+      type: 1
+      child_id:
+        Value: 778f7a04-0b35-4bd1-a7e4-c6fc77f9a0e1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3753.2192
+        y: 220
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start15
+      action: CalendarMark
+      id:
+        Value: 778f7a04-0b35-4bd1-a7e4-c6fc77f9a0e1
+      x: 3753.2192
+      y: 220
+      text: I'll premiere it here in [num] days. I'll go ahead and mark it on your
+        <c=g>calendar</c> there so you don't forget.
+      type: 1
+      child_id:
+        Value: 88cf4ce3-42c4-4302-af4f-329db10c6884
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4137.219
+        y: 220
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start16
+      action: 
+      id:
+        Value: 88cf4ce3-42c4-4302-af4f-329db10c6884
+      x: 4137.219
+      y: 220
+      text: ..p...please don't forget.
+      type: 1
+      child_id:
+        Value: f7b0d119-4fad-4153-a37b-69382708c5a9
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4502.219
+        y: 226
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start17
+      action: 
+      id:
+        Value: f7b0d119-4fad-4153-a37b-69382708c5a9
+      x: 4502.219
+      y: 226
+      text: '...and maybe, if you wanna <c=g>tell any of your friends about it</c>
+        that''d be...cool.'
+      type: 1
+      child_id:
+        Value: 7ba82fa2-d2b1-490a-8581-140bdc09d712
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4877.219
+        y: 215
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start18
+      action: 
+      id:
+        Value: 7ba82fa2-d2b1-490a-8581-140bdc09d712
+      x: 4877.219
+      y: 215
+      text: My dream is to <c=g>fill up all four seats in this theatre</c>. So if
+        you have enough friends, maybe we can do that.
+      type: 1
+      child_id:
+        Value: 6b27253b-ef06-4dc0-aa71-6a351f88d283
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5328.219
+        y: 224
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start19
+      action: 
+      id:
+        Value: 6b27253b-ef06-4dc0-aa71-6a351f88d283
+      x: 5328.219
+      y: 224
+      text: '...but I''m getting ahead of myself. Sorry. Anyway, see you then, garbageman.'
+      type: 1
+      child_id:
+        Value: c875b94f-2e77-4308-92ac-5820a19e1c53
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5733.219
+        y: 230
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start20
+      action: finish
+      id:
+        Value: c875b94f-2e77-4308-92ac-5820a19e1c53
+      x: 5733.219
+      y: 230
+      text: '...please come back.'
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3020.918
+        y: 318
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start13_2
+      action: JumboMovieMarketing
+      id:
+        Value: 610b00e4-de57-43eb-87b2-c7e5ab5ceb3d
+      x: 3020.918
+      y: 318
+      text: Hmm. Ya. Maybe you're on to something. I suppose it's worth a shot.
+      type: 1
+      child_id:
+        Value: 3a4f7d70-8149-4deb-91ae-5d8490233227
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3019.918
+        y: 569
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start13_3
+      action: JumboMovieSound
+      id:
+        Value: 2c5bf1d5-deb5-4249-8b21-4ec0f1fd1759
+      x: 3019.918
+      y: 569
+      text: Child Dialog
+      type: 1
+      child_id:
+        Value: 3a4f7d70-8149-4deb-91ae-5d8490233227
+      responses: []
   rootNodeId:
     Value: 795cc605-3108-4cac-8593-1e5d45b72da9

@@ -20,12 +20,15 @@ public class DialogManager : MonoBehaviour {
 	public GameObject dialogOptions;
 	public GameObject textBox;
 	public AudioClip typeSound;
-
+	public DialogActionManager dialogActionManager;
 	public Camera guiCamera; //needed for icon to corner at dialog choice
+	public GameObject dialogCanvas;
 	//------------Screen Blur stuff---------------//
 	public PostProcessingProfile dialogBlur;
 	public GameObject mainCam;
 	//------------------------------------------//
+
+	public string variableText; //For any variable that is displayed(ex: day of return)
 
 	bool finishedDisplayingText = false; // set true when the text animation is done
 	bool hasWavingText; 
@@ -77,6 +80,12 @@ public class DialogManager : MonoBehaviour {
 			textBox.SetActive(false);
 			currentlySpeakingIcon.transform.position = guiCamera.ViewportToWorldPoint(new Vector3(0f,0f,0f));
 			CancelInvoke();
+		}else if(currentNode.action != null){
+			if(currentNode.action == "finish"){
+				FinishDialog();
+			}else{
+				dialogActionManager.Invoke(currentNode.action,.1f);
+			}
 		}else{
 			
 			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
@@ -107,6 +116,20 @@ public class DialogManager : MonoBehaviour {
 				}
 			finishedDisplayingText = false;
 			displayedText.text = currentNode.text;
+			InvokeRepeating("TalkSound",0.1f,.05f);
+	}
+	public void ReturnFromAction(){
+			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
+			if(currentNode.text.Contains("<c")){
+					Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
+					HighLightText();
+				}
+				if(currentNode.text.Contains("<w")){
+					WaveyText();
+				}
+			finishedDisplayingText = false;
+			displayedText.text = currentNode.text;
+			displayedText.GetComponent<TextAnimation>().StartAgain();
 			InvokeRepeating("TalkSound",0.1f,.05f);
 	}
 
@@ -160,5 +183,14 @@ public class DialogManager : MonoBehaviour {
 	public void TalkSound(){
 		Debug.Log("TalkSound Activate");
 		SoundManager.instance.RandomizeSfx(typeSound,.8f,1.2f);
+	}
+
+	void FinishDialog(){
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+		mainCam.GetComponent<PostProcessingBehaviour>().profile = null; //TODO: returns to NO effect, not sure if you want this, future Conor
+		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
+		player.GetComponent<EightWayMovement>().enabled = true;
+		dialogCanvas.SetActive(false);
 	}
 }
