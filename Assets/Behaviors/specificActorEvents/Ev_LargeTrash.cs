@@ -155,7 +155,7 @@ public class Ev_LargeTrash : MonoBehaviour {
 
 	void ActivateTutorial(){
 		Debug.Log("Large Trash tutorial activated xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-		mainCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position);
+		mainCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,"tutorial");
 
 	}
 

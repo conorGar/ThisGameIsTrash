@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogChoice : MonoBehaviour {
+public class DialogChoice : MonoBehaviour { /// <summary>
+/// ** xxxxxxxxxxxxxxxxxx OBSOLETE xxxxxxxxxxxxxxxxxxxxxx****
+/// </summary>
 
 	string choiceTitle;
 	List<int> choiceLinks = new List<int>();
 	List<string> dialogChoices;
 
-	public DialogChoice(string title, List<int> links, List<string> choices){
+	/*public DialogChoice(string title, List<int> links, List<string> choices){
 	 this.choiceTitle = title;
 	 this.choiceLinks = links;
 	 this.dialogChoices = choices;
@@ -27,5 +29,10 @@ public class DialogChoice : MonoBehaviour {
 	}
 	public int GetNumberOfChoices(){
 		return dialogChoices.Count;
-	}
+	}*/
+
+
+
+
+
 }

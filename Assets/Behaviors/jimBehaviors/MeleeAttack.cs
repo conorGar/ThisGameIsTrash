@@ -87,6 +87,55 @@ public class MeleeAttack : MonoBehaviour {
 
 	}//end of update method
 
+	public void UpdateWeapon(){//activated by Ev_currentWeapon
+		meleeWeaponRightSwing.transform.localPosition = new Vector2(meleeWeaponRightSwing.transform.localPosition.x+1.1f,meleeWeaponRightSwing.transform.localPosition.y);
+
+		meleeWeaponLeftSwing.transform.localPosition = new Vector2(meleeWeaponLeftSwing.transform.localPosition.x-1.1f,meleeWeaponLeftSwing.transform.localPosition.y);
+
+		meleeWeaponTopSwing.transform.localPosition = new Vector2(meleeWeaponTopSwing.transform.localPosition.x,meleeWeaponTopSwing.transform.localPosition.y+1.1f);
+
+		meleeWeaponBotSwing.transform.localPosition = new Vector2(meleeWeaponBotSwing.transform.localPosition.x,meleeWeaponBotSwing.transform.localPosition.y-1.1f);
+
+		if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "plankSwing"){ //check what animation to change to based on current ani, just check one of the directions
+				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("clawSwing");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("clawDown");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("clawUp");
+		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "clawSwing"){
+				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("poleSwing");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("poleDown");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
+		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "poleSwing"){
+				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("broomSwing");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("broomDown");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("broomUp");
+		}
+
+	}
+	public void DemoteWeapon(){//activated by PlayerTakeDamage
+		meleeWeaponRightSwing.transform.localPosition = new Vector2(meleeWeaponRightSwing.transform.localPosition.x-1.1f,meleeWeaponRightSwing.transform.localPosition.y);
+
+		meleeWeaponLeftSwing.transform.localPosition = new Vector2(meleeWeaponLeftSwing.transform.localPosition.x+1.1f,meleeWeaponLeftSwing.transform.localPosition.y);
+
+		meleeWeaponTopSwing.transform.localPosition = new Vector2(meleeWeaponTopSwing.transform.localPosition.x,meleeWeaponTopSwing.transform.localPosition.y-1.1f);
+
+		meleeWeaponBotSwing.transform.localPosition = new Vector2(meleeWeaponBotSwing.transform.localPosition.x,meleeWeaponBotSwing.transform.localPosition.y+1.1f);
+
+		if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "poleSwing"){ //check what animation to change to based on current ani, just check one of the directions
+				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("clawSwing");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("clawDown");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("clawUp");
+		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "clawSwing"){
+				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("plankSwing");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("plankDown");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("plankUp");
+		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "broomSwing"){
+				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("poleSwing");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("poleDown");
+				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
+		}
+
+	}
+
 	IEnumerator Swing(int direction){
 		SoundManager.instance.RandomizeSfx(swing);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
@@ -121,12 +170,9 @@ public class MeleeAttack : MonoBehaviour {
 		isSwinging = true;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
-	    /*if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HEROOFGRIME) && GlobalVariableManager.Instance.CURRENT_HP == int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
-		    //Hero of Grime pin - shoots beam at max hp
-			GameObject bullet = Instantiate(GameObject.Find("bullet"), new Vector2(transform.position.x +.3f, transform.position.y), Quaternion.identity);
-			bullet.GetComponent<tk2dSpriteAnimator>().Play("beam");
-			bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(10f,0f);
-		}*/
+	    if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HEROOFGRIME) && gameObject.GetComponent<PlayerTakeDamage>().currentHp == GlobalVariableManager.Instance.Max_HP){
+			gameObject.GetComponent<PinFunctionsManager>().HeroOfGrime(swingDirection,meleeDirectionEnabled.transform.position);
+		}
 
 		yield return new WaitForSeconds(.1f);
 		meleeDirectionEnabled.SetActive(true);

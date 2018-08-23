@@ -1,0 +1,416 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1911466446686536}
+  m_IsPrefabParent: 1
+--- !u!1 &1911466446686536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4455651426134318}
+  - component: {fileID: 114787242908370734}
+  m_Layer: 0
+  m_Name: SC_Fiends_Jumbo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4455651426134318
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911466446686536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114787242908370734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1911466446686536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: Jumbo_idle1
+    boundsData:
+    - {x: 0.07692325, y: -0.05128205, z: 0}
+    - {x: 8.051282, y: 6, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820482, z: 0}
+    - {x: 9.769231, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.9487178, y: -3.051282, z: 0}
+    - {x: 4.1025643, y: -3.051282, z: 0}
+    - {x: -3.9487178, y: 2.9487178, z: 0}
+    - {x: 4.1025643, y: 2.9487178, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6269541, y: 0.0019541015}
+    - {x: 0.9335928, y: 0.0019541015}
+    - {x: 0.6269541, y: 0.23046777}
+    - {x: 0.9335928, y: 0.23046777}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d2def96f43f986649b7245eb6db04c72, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 5d6c88c80a9665043bf07b8040ac0ccb
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Jumbo_idle5
+    boundsData:
+    - {x: 0.1410259, y: -0.089743495, z: 0}
+    - {x: 8.179487, y: 5.9230766, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820482, z: 0}
+    - {x: 9.769231, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.9487178, y: -3.051282, z: 0}
+    - {x: 4.2307696, y: -3.051282, z: 0}
+    - {x: -3.9487178, y: 2.871795, z: 0}
+    - {x: 4.2307696, y: 2.871795, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.0019541015}
+    - {x: 0.31347558, y: 0.0019541015}
+    - {x: 0.0019541015, y: 0.22753808}
+    - {x: 0.31347558, y: 0.22753808}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d2def96f43f986649b7245eb6db04c72, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 7faa7e942511faf4298516d9effcd7ad
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Jumbo_idle2
+    boundsData:
+    - {x: 0.06410277, y: -0.038461328, z: 0}
+    - {x: 8.025641, y: 6.0256414, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820482, z: 0}
+    - {x: 9.769231, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.9487178, y: -3.051282, z: 0}
+    - {x: 4.0769234, y: -3.051282, z: 0}
+    - {x: -3.9487178, y: 2.9743593, z: 0}
+    - {x: 4.0769234, y: 2.9743593, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3173838, y: 0.0019541015}
+    - {x: 0.6230459, y: 0.0019541015}
+    - {x: 0.3173838, y: 0.23144433}
+    - {x: 0.6230459, y: 0.23144433}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d2def96f43f986649b7245eb6db04c72, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 5f1536a21e3da7149a2ea7c820185a11
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Jumbo_idle7
+    boundsData:
+    - {x: 0.16666663, y: -0.11538458, z: 0}
+    - {x: 8.230769, y: 5.8717947, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820482, z: 0}
+    - {x: 9.769231, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.9487178, y: -3.051282, z: 0}
+    - {x: 4.282051, y: -3.051282, z: 0}
+    - {x: -3.9487178, y: 2.8205128, z: 0}
+    - {x: 4.282051, y: 2.8205128, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.2314463}
+    - {x: 0.0019541015, y: 0.5449209}
+    - {x: 0.22558495, y: 0.2314463}
+    - {x: 0.22558495, y: 0.5449209}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d2def96f43f986649b7245eb6db04c72, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 7845c85d280e6f84fb9eca2e8eab72de
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Jumbo_idle3
+    boundsData:
+    - {x: 0.05128205, y: -0.089743495, z: 0}
+    - {x: 8, y: 5.9230766, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820482, z: 0}
+    - {x: 9.769231, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.9487178, y: -3.051282, z: 0}
+    - {x: 4.051282, y: -3.051282, z: 0}
+    - {x: -3.9487178, y: 2.871795, z: 0}
+    - {x: 4.051282, y: 2.871795, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.53906345, y: 0.4628916}
+    - {x: 0.84374905, y: 0.4628916}
+    - {x: 0.53906345, y: 0.6884756}
+    - {x: 0.84374905, y: 0.6884756}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d2def96f43f986649b7245eb6db04c72, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 387115b2558832443b3db2a4e1475bc2
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Jumbo_idle6
+    boundsData:
+    - {x: 0.1410259, y: -0.10256398, z: 0}
+    - {x: 8.179487, y: 5.897436, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820482, z: 0}
+    - {x: 9.769231, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.9487178, y: -3.051282, z: 0}
+    - {x: 4.2307696, y: -3.051282, z: 0}
+    - {x: -3.9487178, y: 2.846154, z: 0}
+    - {x: 4.2307696, y: 2.846154, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6269541, y: 0.23437598}
+    - {x: 0.9384756, y: 0.23437598}
+    - {x: 0.6269541, y: 0.4589834}
+    - {x: 0.9384756, y: 0.4589834}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d2def96f43f986649b7245eb6db04c72, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: c5018d0e6caa9e74a9951ad6c62d2f97
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Jumbo_idle4
+    boundsData:
+    - {x: 0.06410277, y: -0.089743495, z: 0}
+    - {x: 8.025641, y: 5.9230766, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820721, y: -0.012820482, z: 0}
+    - {x: 9.769231, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.9487178, y: -3.051282, z: 0}
+    - {x: 4.0769234, y: -3.051282, z: 0}
+    - {x: -3.9487178, y: 2.871795, z: 0}
+    - {x: 4.0769234, y: 2.871795, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.22949317, y: 0.23535255}
+    - {x: 0.5351553, y: 0.23535255}
+    - {x: 0.22949317, y: 0.46093652}
+    - {x: 0.5351553, y: 0.46093652}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d2def96f43f986649b7245eb6db04c72, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 8b482b7a90c233843bb70b2f851ef506
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: d2def96f43f986649b7245eb6db04c72, type: 2}
+  textures:
+  - {fileID: 2800000, guid: 8439738bde9ad70439529c8779996648, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: 9d3bb0dbcba92da47a864f52e27093f0
+  spriteCollectionName: SC_Fiends_Jumbo
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 999760706
+  dataGuid: 3d3f0fd70b36a464c8ce381029eaf902
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

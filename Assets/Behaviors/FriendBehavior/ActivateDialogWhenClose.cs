@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class ActivateDialogWhenClose : MonoBehaviour {
     public Friend friend;
 
-	public string introDialogName;
-
+	public string dialogName;
+	public DialogDefinition dialogDefiniton;
 	public float xDistanceThreshold;
 	public float yDistanceThreshold;
 	//public GameObject myDialogIcon;
 	public GameObject dialogCanvas;
 	public GameObject dialogManager;
-
+	public bool autoStart;//start dialog when player gets close(without player hitting space)
 	public GameObject myDialogIcon;
 
 
@@ -26,35 +26,57 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		Debug.Log(introDialogName);
+		//Debug.Log(introDialogName);
 	}
 	
 	void Update () {
-		if(GlobalVariableManager.Instance.CARRYING_SOMETHING == false){
-			
-			if(introDialogName.Length > 0){
-				
-				if(Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold &&Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold){
-					//INITIAL DIALOG ACTIVATED WHEN CLOSE
 
-					GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-					player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-					if(dialogCanvas.activeInHierarchy == false){
-						dialogCanvas.SetActive(true);
-						dialogManager.GetComponent<DialogBehaviorManager>().SetDialogName(introDialogName);
-						myDialogIcon.SetActive(true);
-						if(myDialogIcon.transform.childCount>0){//if more than one icon
-							List<GameObject> dialogIcons = new List<GameObject>();
-							for(int i = 0; i< myDialogIcon.transform.childCount; i++){
-								dialogIcons.Add(myDialogIcon.transform.GetChild(i).gameObject);
+		if(autoStart){
+			//Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
+
+			if(GlobalVariableManager.Instance.CARRYING_SOMETHING == false){
+				
+				if(dialogName.Length > 0){
+					
+					if(Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold &&Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold){
+						//INITIAL DIALOG ACTIVATED WHEN CLOSE
+
+						GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
+						player.GetComponent<EightWayMovement>().enabled = false;
+						player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+						if(dialogCanvas.activeInHierarchy == false){
+							Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
+
+							dialogManager.GetComponent<DialogManager>().myDialogDefiniton = dialogDefiniton;
+							dialogManager.GetComponent<DialogManager>().dialogTitle = dialogName;
+							dialogCanvas.SetActive(true);
+							myDialogIcon.SetActive(true);
+							if(myDialogIcon.transform.childCount>0){//if more than one icon
+								List<GameObject> dialogIcons = new List<GameObject>();
+								for(int i = 0; i< myDialogIcon.transform.childCount; i++){
+									dialogIcons.Add(myDialogIcon.transform.GetChild(i).gameObject);
+								}
+								dialogManager.GetComponent<DialogManager>().dialogIcons = dialogIcons;
+							}else{
+								dialogManager.GetComponent<DialogManager>().dialogIcons = new List<GameObject>{myDialogIcon};//one icon
 							}
-							dialogManager.GetComponent<DialogBehaviorManager>().SetIcon(dialogIcons);
-						}else{
-							dialogManager.GetComponent<DialogBehaviorManager>().SetIcon(new List<GameObject>{myDialogIcon});//one icon
 						}
 					}
 				}
-			}
-		}//end of carry something check
+			}//end of carry something check
+		}else{
+		// TODO: create space bar icon and wait for player to hit space
+		}
+	}
+
+	public void SetDialog(DialogDefinition dd){
+		dialogDefiniton = dd;
+		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
+		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
+		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
+		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
+
+
+
 	}
 }

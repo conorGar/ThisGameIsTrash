@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1134642424335164
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4583631276482752}
   - component: {fileID: 114963583809782440}
+  - component: {fileID: 114783469736056558}
   m_Layer: 0
   m_Name: dialogManager
   m_TagString: Untagged
@@ -934,7 +935,7 @@ MonoBehaviour:
   _OnAnimation_Finished:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114963583809782440}
+      - m_Target: {fileID: 114783469736056558}
         m_MethodName: FinishedDisplay
         m_Mode: 1
         m_Arguments:
@@ -1083,6 +1084,21 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &114783469736056558
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1844013043923268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d2e58d149b48d41a086bf059ea21f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDialogDefiniton: {fileID: 11400000, guid: 72ff0c4aa033ed149824bdd747aaab4f, type: 2}
+  currentlySpeakingIcon: {fileID: 0}
+  continueIcon: {fileID: 0}
+  displayedText: {fileID: 114069864520936580}
 --- !u!114 &114785746655026174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1198,16 +1214,19 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1844013043923268}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b965157df8747c040b9675daa85b1d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   csvFile: {fileID: 4900000, guid: 808c9f0b2941f814695300e364c210c8, type: 3}
   currentDisplayedText: {fileID: 114069864520936580}
-  dialogIcon: {fileID: 0}
-  dialogName: {fileID: 114364196711989028}
+  speakerName: {fileID: 0}
   continueIcon: {fileID: 114946373725824600}
+  currentWorldNumber: 
+  textBox: {fileID: 0}
+  dialogIcons: []
+  dialogOptions: {fileID: 0}
 --- !u!212 &212785343298640156
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1335,7 +1354,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.8000245, y: 2.7999935}
+  m_AnchoredPosition: {x: 1.8000913, y: 2.7998753}
   m_SizeDelta: {x: 586, y: 366}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224415335465249782

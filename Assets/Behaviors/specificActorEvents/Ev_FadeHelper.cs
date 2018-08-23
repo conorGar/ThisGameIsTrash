@@ -11,6 +11,9 @@ public class Ev_FadeHelper : MonoBehaviour {
 	public GameObject currentCanvas;
 	public Texture2D fadeOutTexture; //texture that will overlay screen(black image)
 	public float fadeSpeed;
+	public PinFunctionsManager pfm;
+	public GameObject resultsDisplay;
+
 
 	float alpha = 0f;
 	int specialFade = 0;
@@ -101,9 +104,9 @@ public class Ev_FadeHelper : MonoBehaviour {
 //			if(GlobalVariableManager.Instance.CURRENT_HP > 0){
 				//GlobalVariableManager.Instance.ROOM_PLAYER_DIED_IN = 99;
 		//	}
-		
+			pfm.ReturnPinValues();
 			GameObject truckInstance = Instantiate(smallTruck,new Vector2(myCam.transform.position.x - 5, player.transform.position.y), Quaternion.identity);
-
+			truckInstance.GetComponent<Ev_SmallTruck>().resultsDisplay = resultsDisplay;
 			truckInstance.GetComponent<Ev_SmallTruck>().EndDay();
 		}
 	}

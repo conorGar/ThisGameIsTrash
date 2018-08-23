@@ -76,6 +76,7 @@ public class Ev_Scrap : MonoBehaviour {
 		}*/
 		if(canBeGrabbed && collision.gameObject.tag == "Player"){
 				SoundManager.instance.PlaySingle(pickUp);
+				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1]++;
 				meleeMeter.GetComponent<Ev_CurrentWeapon>().UpdateMelee();
 				gameObject.SetActive(false);
 				//StartCoroutine("Kill");

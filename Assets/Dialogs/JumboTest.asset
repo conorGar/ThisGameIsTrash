@@ -21,6 +21,12 @@ MonoBehaviour:
     - Value: 7c1993c7-fcec-42c9-957f-5026324968eb
     - Value: b34d75ee-0e7a-498d-9c0c-50e9f6390e06
     - Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
+    - Value: f566d180-188d-4efe-9457-704bfccc2ee1
+    - Value: 7d4ca720-2a26-4d6a-a81f-99b7a654f46b
+    - Value: 00e4cd45-570a-444b-ac89-677baddd6768
+    - Value: 8e7164e6-1407-4b61-87c8-783d4b93c9bd
+    - Value: 7a341f41-a857-4279-842e-db294ae7bd91
+    - Value: fd259c4b-3cff-4b57-9387-527d5a8335ee
     values:
     - window:
         serializedVersion: 2
@@ -122,35 +128,47 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 337
-        y: 305
+        x: 438
+        y: 332
         width: 270
         height: 250
       isCollapsed: 0
       title: Start5
       id:
         Value: b34d75ee-0e7a-498d-9c0c-50e9f6390e06
-      x: 337
-      y: 305
+      x: 438
+      y: 332
       text: You can be honest.  I'm not insecure.  I'm doing this to learn.
-      type: 1
+      type: 2
       parent_id:
         Value: 7c1993c7-fcec-42c9-957f-5026324968eb
       child_id:
         Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
-      responses: []
+      responses:
+      - text: It's definately a little...ruff...around the edges.
+        node_id:
+          Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
+      - text: I thought it was great. You're doing a great job.
+        node_id:
+          Value: f566d180-188d-4efe-9457-704bfccc2ee1
+      - text: There are certainly ways you can improve...
+        node_id:
+          Value: f566d180-188d-4efe-9457-704bfccc2ee1
+      - text: It was pretty good.
+        node_id:
+          Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
     - window:
         serializedVersion: 2
-        x: 641
-        y: 304
+        x: 842
+        y: 199
         width: 270
         height: 250
       isCollapsed: 0
       title: Start6
       id:
         Value: 38203000-758f-4b5d-83ce-2e417e80d8ba
-      x: 641
-      y: 304
+      x: 842
+      y: 199
       text: Wow. Well, I wish you weren't the only one with that opinion.
       type: 1
       parent_id:
@@ -158,5 +176,132 @@ MonoBehaviour:
       child_id:
         Value: 
       responses: []
+    - window:
+        serializedVersion: 2
+        x: 846
+        y: 490
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start7
+      id:
+        Value: f566d180-188d-4efe-9457-704bfccc2ee1
+      x: 846
+      y: 490
+      text: Ya, that's fair to say.
+      type: 1
+      parent_id:
+        Value: 
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1244
+        y: 273
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start8
+      id:
+        Value: 7d4ca720-2a26-4d6a-a81f-99b7a654f46b
+      x: 1244
+      y: 273
+      text: Whatever the case, this is my third film, man. My THIRD.
+      type: 1
+      parent_id:
+        Value: 
+      child_id:
+        Value: 00e4cd45-570a-444b-ac89-677baddd6768
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1562
+        y: 259
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start9
+      id:
+        Value: 00e4cd45-570a-444b-ac89-677baddd6768
+      x: 1562
+      y: 259
+      text: I've been making movies forever...and nobody has ever shown up to any
+        of them.
+      type: 1
+      parent_id:
+        Value: 7d4ca720-2a26-4d6a-a81f-99b7a654f46b
+      child_id:
+        Value: 8e7164e6-1407-4b61-87c8-783d4b93c9bd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1889
+        y: 275
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start10
+      id:
+        Value: 8e7164e6-1407-4b61-87c8-783d4b93c9bd
+      x: 1889
+      y: 275
+      text: I really thought I could make it work. I'm trying so hard.
+      type: 1
+      parent_id:
+        Value: 00e4cd45-570a-444b-ac89-677baddd6768
+      child_id:
+        Value: 7a341f41-a857-4279-842e-db294ae7bd91
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2270
+        y: 270
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start11
+      id:
+        Value: 7a341f41-a857-4279-842e-db294ae7bd91
+      x: 2270
+      y: 270
+      text: '...But nobody ever shows up. So I guess it''s not enough.'
+      type: 1
+      parent_id:
+        Value: 8e7164e6-1407-4b61-87c8-783d4b93c9bd
+      child_id:
+        Value: fd259c4b-3cff-4b57-9387-527d5a8335ee
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2651
+        y: 276
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start12
+      id:
+        Value: fd259c4b-3cff-4b57-9387-527d5a8335ee
+      x: 2651
+      y: 276
+      text: I'm just too stupid and untalented to make it in the movie industry.
+      type: 2
+      parent_id:
+        Value: 7a341f41-a857-4279-842e-db294ae7bd91
+      child_id:
+        Value: 
+      responses:
+      - text: Maybe you can add some color...
+        node_id:
+          Value: 
+      - text: Maybe if you worked a little on the marketing...
+        node_id:
+          Value: 
+      - text: Maybe it needs sound effects?
+        node_id:
+          Value: 
+      - text: I wouldn't give up yet. I believe in you Jumbo.
+        node_id:
+          Value: 
   rootNodeId:
     Value: 795cc605-3108-4cac-8593-1e5d45b72da9

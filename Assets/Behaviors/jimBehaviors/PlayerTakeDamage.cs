@@ -14,12 +14,16 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 	public AudioClip hurt;
 	int maxHP;
-	int currentHp;
+	public int currentHp;
 	int damageDealt;
 
 	bool currentlyTakingDamage = false;
 	// Use this for initialization
 	void Start () {
+
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.APPLEPLUS)){
+			gameObject.GetComponent<PinFunctionsManager>().ApplePlus();
+		}
 		maxHP = GlobalVariableManager.Instance.Max_HP;	
 		currentHp = maxHP;
 	}
@@ -32,11 +36,20 @@ public class PlayerTakeDamage : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D enemy){
 		if(enemy.gameObject.layer == 9 && !currentlyTakingDamage){ //layer 9 = enemies
 			SoundManager.instance.PlaySingle(hurt);
-			if(enemy.gameObject.tag == "Enemy"){
-			damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
-			}else if(enemy.gameObject.tag == "Boss"){
+
+			if(enemy.gameObject.tag == "Boss"){
 				damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
+			}else{
+				damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
+
 			}
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.QUENPINTARANTINO)){
+				gameObject.GetComponent<PinFunctionsManager>().QuenpinTarantino();
+			}
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
+				gameObject.GetComponent<PinFunctionsManager>().PassivePillage(false);
+			}
+
 			currentlyTakingDamage = true;
 			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 			currentHp -= damageDealt;
@@ -59,7 +72,9 @@ public class PlayerTakeDamage : MonoBehaviour {
 			}
 
 			if(currentHp <= 0){
+				
 				StartCoroutine("Death");
+			
 			}else{
 				StartCoroutine("RegainControl");
 			}
@@ -89,7 +104,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 	IEnumerator Death(){
 		
 
-		//TODO: Play death animation
+		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
 		DropTrash();
 		GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION = gameObject.transform.position;
 		GlobalVariableManager.Instance.GARBAGE_HAD = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0];
@@ -101,7 +116,12 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		currentCam.GetComponent<Ev_MainCamera>().enabled = false;
 		//GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().WhiteFlash();
-
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
+			yield return new WaitForSeconds(.5f);
+			gameObject.GetComponent<PinFunctionsManager>().DevilsDeal();
+			yield return new WaitForSeconds(2f);
+			fadeHelper.GetComponent<Ev_FadeHelper>().EndOfDayFade();
+		}else{
 		yield return new WaitForSeconds(1f);
 		fadeHelper.GetComponent<Ev_FadeHelper>().BlackFade(); //fade to black
 		GameObject truck = objectPool.GetComponent<ObjectPool>().GetPooledObject("GarbageTruck",new Vector3(gameObject.transform.position.x - 20, gameObject.transform.position.y,0f));
@@ -135,6 +155,12 @@ public class PlayerTakeDamage : MonoBehaviour {
 			droppedTrashPile.transform.position = GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION;
 		}
 		GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] = 0;
+		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
+				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 0;//reset scrap value
+				gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();//just used to update weapon HUD in this scenario
+		}else{
+			gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();
+		}
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
 		trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
@@ -145,7 +171,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		yield return new WaitForSeconds(.5f);
 		truck.SetActive(false);
 		fadeHelper.GetComponent<Ev_FadeHelper>().fadeBack = false;
-
+		}
 
 	}
 }

@@ -24,7 +24,8 @@ public class KillSelfAfterTime : MonoBehaviour {
 
 	void OnEnable(){
 		Invoke("Kill",timeUntilDeath);
-		if(playSoundAtStart)
+		if(playSoundAtStart){
 			SoundManager.instance.PlaySingle(mySound);
+		}
 	}
 }

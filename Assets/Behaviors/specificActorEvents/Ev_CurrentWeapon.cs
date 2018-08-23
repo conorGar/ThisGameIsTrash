@@ -9,6 +9,8 @@ public class Ev_CurrentWeapon : MonoBehaviour {
 	float fillAmount = 0;
 
 	public GameObject  meleeDisplay;
+	public GameObject player;
+	public GameObject upgradePS;
 	//public GameObject meleeMeter;
 	public Image meleeMeterDraw;
 	public Sprite plankSprite;
@@ -39,15 +41,23 @@ public class Ev_CurrentWeapon : MonoBehaviour {
 		if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] <= 6 && meleeDisplay.GetComponent<Image>().sprite != plankSprite ){
 			//Debug.Log("PLANK");
 			meleeDisplay.GetComponent<Image>().sprite = plankSprite;
+			player.GetComponent<MeleeAttack>().UpdateWeapon();
 		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 6 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] <= 12 && meleeDisplay.GetComponent<Image>().sprite != clawSprite ){
 			meleeDisplay.GetComponent<Image>().sprite = clawSprite;
-			//Debug.Log("claw");
+			player.GetComponent<MeleeAttack>().UpdateWeapon();
+
 		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 18 && meleeDisplay.GetComponent<Image>().sprite != poleSprite){
 			meleeDisplay.GetComponent<Image>().sprite = poleSprite;
-			//Debug.Log("POLE");
-		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] >= 18 && meleeDisplay.GetComponent<Image>().sprite != broomSprite){
+			player.GetComponent<MeleeAttack>().UpdateWeapon();
+
+		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] >= 18 && meleeDisplay.GetComponent<Image>().sprite != broomSprite && GlobalVariableManager.Instance.IsPinEquipped(PIN.WASTEWARRIOR)){
 			meleeDisplay.GetComponent<Image>().sprite = broomSprite;
+			player.GetComponent<MeleeAttack>().UpdateWeapon();
+
 		}
+		meleeDisplay.GetComponent<GUIEffects>().Start(); // makes meleeDisplay do a little bounce
+		upgradePS.SetActive(true);
+		upgradePS.GetComponent<ParticleSystem>().Play();
 	}
 
 	public void Test(){

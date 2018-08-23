@@ -115,8 +115,6 @@ public class Ev_GenericGarbage : MonoBehaviour {
 			SoundManager.instance.PlaySingle(pickUpTrash);
 				playerPos = collider.gameObject.transform;
 				this.gameObject.transform.parent = playerPos;
-				//GameObject player = collider.gameObject as GameObject;
-				//if(!GlobalVariableManager.Instance.SCENE_IS_TRANSITIONING && player.GetComponent<tk2dSpriteAnimator>().CurrentClip.name.CompareTo("hit") != 0){
 					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] < (10 + bagSizeBonus) && !isFalling){
 						if(grabbedPhase <= 0){
 							//trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().NewDiscoveryShow(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name, "myNameTest");
@@ -140,14 +138,11 @@ public class Ev_GenericGarbage : MonoBehaviour {
 								GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1)) + 2).ToString();
 							}*/
 						}//mo garbage mo problems check end
-						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
+						//if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
 
-                        //Passive Pillage
-                        /*GameObject passivePillageEffect = Instantiate(tempEffectsActor, new Vector2(0f,0f),Quaternion.identity);
-                        passivePillageEffect.GetComponent<Ev_upgradeActorTempEffects>().Follow();
-                        GlobalVariableManager.Instance.pinsEquipped[6]++;
-                        player.GetComponent<EightWayMovement>().UpdateSpeed();*/
-                    }
+							collider.gameObject.GetComponent<PinFunctionsManager>().PassivePillage(true);
+                        
+                    	//}
 
                         smallShadow.SetActive(false);
 

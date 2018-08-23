@@ -58,4 +58,8 @@ public class CalendarManager : MonoBehaviour {
 
         friendEvents.Add(friendEvent);
     }
+
+    public List<FriendEvent> GetFriendEvents(){
+    	return friendEvents;
+    }
 }

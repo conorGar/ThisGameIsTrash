@@ -18,7 +18,7 @@ public class Room : MonoBehaviour
     public GameObject tutPopup;
     public bool activateTutpopWhenEnter;
     public string tutPopUpToActivate;
-
+	int waifuChance;
     private List<GameObject> enemies;
     private List<GameObject> friends;
 
@@ -38,26 +38,44 @@ public class Room : MonoBehaviour
             // get a random enemy from the enemy spawn list
             Enemy enemy = enemySpawners[i].enemies[0];
 
+
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.WAIFUWANTED)){
+				//TODO: For now, waifu chance happens every time enter room, waifu isnt permanently set for that day.(players can keep entering room until waifu)
+				waifuChance = Random.Range(1,3);
+				Debug.Log("Waifu Chance: " + waifuChance);
+
+				//enemySpawners[i].enemies.Add(waifu);
+				//enemy = enemySpawners[i].enemies[1];
+
+			}
             // ignore armored enemies if they aren't allowed to spawn yet.
-            //  if (enemy.IsArmored && !allowArmoredEnemies)
-            //    continue;
+          //  if (enemy.IsArmored && !allowArmoredEnemies)
+              //  continue;
 
-            //ignore if enemy for this spawner has been killed
-            if(enemySpawners[i].CheckIfEnemyDead()){
-                Debug.Log("MY ENEMY IS DEAD!!!");
-                continue;
-            }else{
-                Debug.Log("*** MY ENEMY IS NOT DEAD ***");
-			    GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
-			    spawnedEnemy.SetActive(true);
+             //ignore if enemy for this spawner has been killed
+             if(enemySpawners[i].CheckIfEnemyDead()){
+             	Debug.Log("MY ENEMY IS DEAD!!!");
+             	continue;
+             }else{
+            	Debug.Log("*** MY ENEMY IS NOT DEAD ***");
+            	GameObject spawnedEnemy;
+				if(waifuChance == 2){
+					spawnedEnemy = ObjectPool.Instance.GetPooledObject("pObj_Waifu");
 
+				}else{
+					spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
+				}
+				spawnedEnemy.SetActive(true);
+            
 	            if (spawnedEnemy != null)
 	            {
 	                enemies.Add(spawnedEnemy);
 	                spawnedEnemy.transform.position = enemySpawners[i].transform.position;
-	                spawnedEnemy.GetComponent<EnemyTakeDamage>().SetSpawnerID(enemySpawners[i].name);
-	                spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
-	                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
+					if(spawnedEnemy.GetComponent<EnemyTakeDamage>() != null){
+		                spawnedEnemy.GetComponent<EnemyTakeDamage>().SetSpawnerID(enemySpawners[i].name);
+		                spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
+		                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
+	                }
 	            }
             }   
         }
