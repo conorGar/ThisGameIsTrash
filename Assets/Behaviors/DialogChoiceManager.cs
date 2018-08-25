@@ -1,23 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using I2.TextAnimation;
 
 public class DialogChoiceManager : MonoBehaviour {
 
-	public TextAsset csvFile;
-	public int currentWorldNumber;
+	//public TextAsset csvFile;
+	//public int currentWorldNumber;
 	public GameObject dialogManager; // just needed for SelectOption()
 
 	//List<DialogChoice> dialogChoices= new List<DialogChoice>();
 	public List<GameObject> dialogChoiceBoxes = new List<GameObject>();
 	List<DialogResponse> dialogResponses = new List<DialogResponse>();
+	public TextMeshProUGUI choiceTitle;
 	DialogChoice currentDialogChoice;
 
 	string mydialogName;
 	int numberOfOptions;
-	string csvText;
+	//string csvText;
 	string thisDialogText = null;
 	List<int> myLinks = new List<int>(); //needed up here for proper function of SelectOption()
 
@@ -53,8 +55,9 @@ public class DialogChoiceManager : MonoBehaviour {
 	}
 
 	public void SetDialogChoices(DialogNode currentNode){//activated from DialogBehaviorManager.NextText()
-		
 
+		arrowPos = 0;
+		dialogResponses.Clear();
 		numberOfOptions = currentNode.responses.Count;
 		for(int i = 0; i < numberOfOptions; i++){
 			dialogResponses.Add(currentNode.responses[i]);
@@ -82,35 +85,41 @@ public class DialogChoiceManager : MonoBehaviour {
 	void NavigateOptions(string direction){
 
 
-		dialogChoiceBoxes[arrowPos+1].GetComponent<SpriteRenderer>().color = unhighlightedColor; 
-		dialogChoiceBoxes[arrowPos+1].transform.position = new Vector2(4f,dialogChoiceBoxes[arrowPos+1].transform.position.y);
-		dialogChoiceBoxes[arrowPos+1].transform.GetChild(0).gameObject.GetComponent<TextAnimation>().enabled = false;
-		dialogChoiceBoxes[arrowPos+1].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
+		dialogChoiceBoxes[arrowPos].GetComponent<Image>().color = unhighlightedColor; 
+		dialogChoiceBoxes[arrowPos].transform.position = new Vector2(4.6f,dialogChoiceBoxes[arrowPos].transform.position.y);
+		dialogChoiceBoxes[arrowPos].transform.GetChild(0).gameObject.GetComponent<TextAnimation>().enabled = false;
+		dialogChoiceBoxes[arrowPos].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
 
 
 		Debug.Log(arrowPos);
 
 		//Debug.Log(this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
-		if(direction == "up"){
+		if(direction == "up" && arrowPos > 0){
 		 	arrowPos--;
-		}else if(direction == "down"){
+		}else if(direction == "down" && arrowPos < (numberOfOptions-1)){
 			arrowPos++;
 		} 
-		dialogChoiceBoxes[arrowPos+1].GetComponent<SpriteRenderer>().color = highlightedColor;
-		dialogChoiceBoxes[arrowPos+1].transform.position = new Vector2(5.8f,this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
+		dialogChoiceBoxes[arrowPos].GetComponent<Image>().color = highlightedColor;
+		dialogChoiceBoxes[arrowPos].transform.position = new Vector2(5.8f,dialogChoiceBoxes[arrowPos].transform.position.y);
 
 		//text change
-		dialogChoiceBoxes[arrowPos+1].transform.GetChild(0).gameObject.GetComponent<TextAnimation>().enabled = true;
-		dialogChoiceBoxes[arrowPos+1].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.green;
+		dialogChoiceBoxes[arrowPos].transform.GetChild(0).gameObject.GetComponent<TextAnimation>().enabled = true;
+		dialogChoiceBoxes[arrowPos].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.green;
 
 		Debug.Log(arrowPos);
-		Debug.Log(gameObject.transform.GetChild(arrowPos+1).name);
-		Debug.Log(this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
+		//Debug.Log(gameObject.transform.GetChild(arrowPos+1).name);
+		//Debug.Log(this.gameObject.transform.GetChild(arrowPos+1).transform.position.y);
 
 	}
 
 	void SelectOption(int optionNumber){
-		dialogManager.GetComponent<DialogManager>().ReturnFromChoice(dialogResponses[optionNumber -1].node_id);
+		//deactivate dialog boxes
+		for(int i = 0; i < dialogChoiceBoxes.Count; i++){
+			dialogChoiceBoxes[i].SetActive(false);
+		}
+
+
+		dialogManager.GetComponent<DialogManager>().ReturnFromChoice(dialogResponses[optionNumber].node_id);
 	}
 
 }

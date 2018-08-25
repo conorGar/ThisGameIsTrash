@@ -13,11 +13,12 @@ public class HUD_Calendar : MonoBehaviour {
 
 	void Start () {
 		currentEvents = CalendarManager.Instance.friendEvents;
-		for(int i = 0; i < currentEvents.Count; i++){
-			if(!transform.GetChild(currentEvents[i].day).gameObject.activeInHierarchy){
-				transform.GetChild(currentEvents[i].day).gameObject.SetActive(true);
+		/*for(int i = 0; i < currentEvents.Count; i++){
+			Debug.Log(currentEvents[i].day);
+			if(!gameObject.transform.GetChild(currentEvents[i].day -1).gameObject.activeInHierarchy){
+				transform.GetChild(currentEvents[i].day -1).gameObject.SetActive(true);
 			}
-		}
+		}*/
 
 	}
 
@@ -26,7 +27,11 @@ public class HUD_Calendar : MonoBehaviour {
 	}
 
 	public void NewMarkSequence(int day, string friendName){
-		GameObject daySquare = transform.GetChild(day).gameObject;
+
+		gameObject.transform.localPosition = new Vector2(-23f,-1f);
+		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);
+
+		GameObject daySquare = transform.GetChild(day-1).gameObject;
 		if(!daySquare.activeInHierarchy){
 				daySquare.SetActive(true);
 		}
@@ -46,8 +51,12 @@ public class HUD_Calendar : MonoBehaviour {
 			}else if(friendName == "Coonelius"){
 				newIcon.GetComponent<Image>().sprite = coonSprite;
 			}
-			newIcon.GetComponent<GUIEffects>().Start();//marker shrinks into position
+			//newIcon.GetComponent<GUIEffects>().Start();//marker shrinks into position
 			SoundManager.instance.PlaySingle(calendaMarkSfx);
 		
+	}
+
+	public void LeaveScreen(){
+		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(24f,0f,.5f,true);
 	}
 }

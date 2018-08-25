@@ -17,8 +17,8 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	public DialogActionManager dialogActionManager;
 	public bool autoStart;//start dialog when player gets close(without player hitting space)
 	public GameObject myDialogIcon;
-
-
+	public bool cameraPanToFriendAtStart = true;
+	bool canTalkTo = true;
 
 	GameObject player;
 
@@ -37,7 +37,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 			if(GlobalVariableManager.Instance.CARRYING_SOMETHING == false){
 				
-				if(dialogName.Length > 0){
+				if(dialogName.Length > 0 && canTalkTo){
 					
 					if(Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold &&Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold){
 						//INITIAL DIALOG ACTIVATED WHEN CLOSE
@@ -46,12 +46,16 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 						player.GetComponent<EightWayMovement>().enabled = false;
 						player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 						if(dialogCanvas.activeInHierarchy == false){
+							if(cameraPanToFriendAtStart){
+								dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position, "");
+							}
 							Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
 
 							dialogManager.GetComponent<DialogManager>().myDialogDefiniton = dialogDefiniton;
 							dialogManager.GetComponent<DialogManager>().dialogTitle = dialogName;
 							dialogActionManager.friend = friend;
 							dialogCanvas.SetActive(true);
+							dialogManager.GetComponent<DialogManager>().characterName.text = friend.name;
 							myDialogIcon.SetActive(true);
 							if(myDialogIcon.transform.childCount>0){//if more than one icon
 								List<GameObject> dialogIcons = new List<GameObject>();
@@ -62,6 +66,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 							}else{
 								dialogManager.GetComponent<DialogManager>().dialogIcons = new List<GameObject>{myDialogIcon};//one icon
 							}
+							canTalkTo = false;
 						}
 					}
 				}

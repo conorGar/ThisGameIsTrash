@@ -16,8 +16,8 @@ MonoBehaviour:
     _Backwards=\"false\" _PlaybackTimes=\"-1\" _ExtraTimeFinal=\"0\" _ExtraTimePerLoop=\"0\">\r\n
     \ <_Sequences>\r\n    <SE_AnimSequence xsi:type=\"SE_AnimSequence_Position\">\r\n
     \     <_Name />\r\n      <_StartType>OnAnimStart</_StartType>\r\n      <_StartDelay>0</_StartDelay>\r\n
-    \     <_Separation>0.18</_Separation>\r\n      <_RandomStart>0</_RandomStart>\r\n
-    \     <_DurationType>PerElement</_DurationType>\r\n      <_Duration>0.2</_Duration>\r\n
+    \     <_Separation>0.06</_Separation>\r\n      <_RandomStart>0</_RandomStart>\r\n
+    \     <_DurationType>PerElement</_DurationType>\r\n      <_Duration>0.4</_Duration>\r\n
     \     <_DurationRandom_Slower>0</_DurationRandom_Slower>\r\n      <_DurationRandom_Faster>0</_DurationRandom_Faster>\r\n
     \     <_Playback>Single</_Playback>\r\n      <_Backwards>false</_Backwards>\r\n
     \     <_PlaybackTimes>1</_PlaybackTimes>\r\n      <_EasingCurve>\r\n        <keys>\r\n
@@ -33,7 +33,7 @@ MonoBehaviour:
     \       <preWrapMode>ClampForever</preWrapMode>\r\n        <postWrapMode>ClampForever</postWrapMode>\r\n
     \     </_EasingCurve>\r\n      <_TargetType>Letters</_TargetType>\r\n      <_TargetRangeType>All</_TargetRangeType>\r\n
     \     <_TargetRangeStart>23</_TargetRangeStart>\r\n      <_TargetRangeAmount>9</_TargetRangeAmount>\r\n
-    \     <_InitAllElements>false</_InitAllElements>\r\n      <_Enabled>true</_Enabled>\r\n
+    \     <_InitAllElements>false</_InitAllElements>\r\n      <_Enabled>false</_Enabled>\r\n
     \     <_From>\r\n        <x>0</x>\r\n        <y>0</y>\r\n        <z>0</z>\r\n
     \     </_From>\r\n      <_To>\r\n        <x>0</x>\r\n        <y>0.2</y>\r\n        <z>0</z>\r\n
     \     </_To>\r\n      <_FromRandom>\r\n        <x>0</x>\r\n        <y>0</y>\r\n
@@ -57,8 +57,8 @@ MonoBehaviour:
     \       <postWrapMode>ClampForever</postWrapMode>\r\n      </_EasingCurveZ>\r\n
     \   </SE_AnimSequence>\r\n    <SE_AnimSequence xsi:type=\"SE_AnimSequence_Scale\">\r\n
     \     <_Name />\r\n      <_StartType>OnAnimStart</_StartType>\r\n      <_StartDelay>0</_StartDelay>\r\n
-    \     <_Separation>0.18</_Separation>\r\n      <_RandomStart>0</_RandomStart>\r\n
-    \     <_DurationType>PerElement</_DurationType>\r\n      <_Duration>0.2</_Duration>\r\n
+    \     <_Separation>0.06</_Separation>\r\n      <_RandomStart>0</_RandomStart>\r\n
+    \     <_DurationType>PerElement</_DurationType>\r\n      <_Duration>0.4</_Duration>\r\n
     \     <_DurationRandom_Slower>0</_DurationRandom_Slower>\r\n      <_DurationRandom_Faster>0</_DurationRandom_Faster>\r\n
     \     <_Playback>Single</_Playback>\r\n      <_Backwards>false</_Backwards>\r\n
     \     <_PlaybackTimes>1</_PlaybackTimes>\r\n      <_EasingCurve>\r\n        <keys>\r\n
@@ -74,7 +74,7 @@ MonoBehaviour:
     \       <postWrapMode>ClampForever</postWrapMode>\r\n      </_EasingCurve>\r\n
     \     <_TargetType>Letters</_TargetType>\r\n      <_TargetRangeType>All</_TargetRangeType>\r\n
     \     <_TargetRangeStart>43</_TargetRangeStart>\r\n      <_TargetRangeAmount>9</_TargetRangeAmount>\r\n
-    \     <_InitAllElements>false</_InitAllElements>\r\n      <_Enabled>true</_Enabled>\r\n
+    \     <_InitAllElements>false</_InitAllElements>\r\n      <_Enabled>false</_Enabled>\r\n
     \     <_From>\r\n        <x>1</x>\r\n        <y>1</y>\r\n        <z>1</z>\r\n
     \     </_From>\r\n      <_To>\r\n        <x>1</x>\r\n        <y>1.3</y>\r\n        <z>1</z>\r\n
     \     </_To>\r\n      <_FromRandom>\r\n        <x>0</x>\r\n        <y>0</y>\r\n

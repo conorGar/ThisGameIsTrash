@@ -50,4 +50,6 @@ public class Friend : MonoBehaviour {
     {
         IsVisiting = true;
     }
+
+   
 }

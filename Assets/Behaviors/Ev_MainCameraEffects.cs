@@ -44,7 +44,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 		if(camPan){
 			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,targetPanPosition, 3*Time.deltaTime);
 			if(gameObject.transform.position == targetPanPosition){
-				if(triggerEventName != null){
+				if(triggerEventName != null && triggerEventName.Length > 2){ //length check to make sure it's not just "" or something
 					StartCoroutine("CamPanTriggerEvent");
 				}
 				camPan = false;
