@@ -165,7 +165,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 				}
 
 				myEquippedBox = Instantiate(equippedBox,transform.position,Quaternion.identity);
-				if(pinData.Type == PIN.APPLEPLUS){
+				/*if(pinData.Type == PIN.APPLEPLUS){
 				//Apple Plus pin
 					GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) + 1).ToString();
 				}else if(pinData.Type == PIN.ROTTENAPPLEPLUS){
@@ -177,7 +177,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 				}else if(pinData.Type == PIN.DEFUP1){
 				//Defense Pin
 					GlobalVariableManager.Instance.characterUpgradeArray[6] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[6]) + 1).ToString();
-				}
+				}*/
 			}else if(IsPinEquipped()){//Unequip pin
                 GlobalVariableManager.Instance.PPVALUE += pinData.ppValue;
                 GlobalVariableManager.Instance.PINS_EQUIPPED &= ~pinData.Type;
@@ -196,22 +196,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 				}
 				Destroy(myEquippedBox);
 
-				if(pinData.Type == PIN.APPLEPLUS){
-				//Apple Plus pin
-					GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 1).ToString();
-				}else if(pinData.Type == PIN.ROTTENAPPLEPLUS){
-				//Rotten Apple Plus
-					GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2).ToString();
-				}else if(pinData.Type == PIN.ATTKUP1){
-				//Attack Pin
-					GlobalVariableManager.Instance.characterUpgradeArray[5] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[5]) - 1).ToString();
-				}else if(pinData.Type == PIN.DEFUP1){
-				//Defense Pin
-					GlobalVariableManager.Instance.characterUpgradeArray[6] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[6]) - 1).ToString();
-				}else if(pinData.Type == PIN.CURSED){
-                //Cursed Pin
-                    GlobalVariableManager.Instance.CURSEVALUE = 0;
-                }
+			
 			}//end of unequip part
 		}
 

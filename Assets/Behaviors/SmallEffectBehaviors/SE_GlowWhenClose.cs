@@ -72,9 +72,6 @@ public class SE_GlowWhenClose : MonoBehaviour {
 				Debug.Log("Dumpster activate() activated here");
 			}
 
-		}else if(this.gameObject.name == "upgradeStandButton"){
-				Debug.Log("Upgrade stand activate");
-				GameObject.Find("upgradeStand").GetComponent<Hub_UpgradeStand>().Activate();
 		}
 	}//end of Activate()
 

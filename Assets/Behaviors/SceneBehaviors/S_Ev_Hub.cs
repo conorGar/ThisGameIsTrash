@@ -15,17 +15,8 @@ public class S_Ev_Hub : MonoBehaviour {
 
         GlobalVariableManager.Instance.LARGE_TRASH_LIST.Clear();
 
-		if(GlobalVariableManager.Instance.characterUpgradeArray[1][13] == '-'){//**was originall '\' but wouldnt work with code so had to be switched
-		//resets pin button at shop(pin perk 3)
-		GlobalVariableManager.Instance.characterUpgradeArray[1].Replace("-","z");
-		}
+		
 
-		//cursed pin health effects
-		if(GlobalVariableManager.Instance.CURSEVALUE == 3){
-			GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) - 1).ToString();
-		}else if (GlobalVariableManager.Instance.CURSEVALUE == 2){
-			GlobalVariableManager.Instance.characterUpgradeArray[3] =	(int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) + 1).ToString();
-		}
 
 		//disable melee swing at hub
 		GameObject.Find("Jim").GetComponent<MeleeAttack>().enabled = false;

@@ -10,15 +10,36 @@ public class Friend : MonoBehaviour {
     public bool IsVisiting = false;
     public string nextDialog;
 	public DialogDefinition myDialogDefiniton;
+	public string missedDialog;
 
     // Use this for initialization
     void Start() {
-    	if(activateDialogWhenClose){
-    		gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
-    	}
-		gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
-		gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
-		//Debug.Log("Dialog Definition Name:"+ gameObject.GetComponent<ActivateDialogWhenClose>().dialogDefiniton.name);
+    	int currentDayNumber = GlobalVariableManager.Instance.DAY_NUMBER;
+
+    	//Enable ability to enter dialog on proper day
+    	if(nextDialog != "Start" && nextDialog != missedDialog ){
+    		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false;
+    		for(int i = 0; i < CalendarManager.Instance.friendEvents.Count; i++){
+				if(CalendarManager.Instance.friendEvents[i].day == currentDayNumber ){
+					if(CalendarManager.Instance.friendEvents[i].friend.name == friendName){
+						gameObject.GetComponent<ActivateDialogWhenClose>().enabled = true;
+						if(activateDialogWhenClose){
+	    					gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
+	    				}
+						gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
+						gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
+						break;
+					}
+				}
+    		}
+    	}else{
+	    	if(activateDialogWhenClose){
+	    		gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
+	    	}
+			gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
+			gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
+			//Debug.Log("Dialog Definition Name:"+ gameObject.GetComponent<ActivateDialogWhenClose>().dialogDefiniton.name);
+		}
     }
 
     // Update is called once per frame
@@ -49,6 +70,10 @@ public class Friend : MonoBehaviour {
     public virtual void Execute()
     {
         IsVisiting = true;
+    }
+
+    public void MissedEvent(){
+    	nextDialog = missedDialog;
     }
 
    

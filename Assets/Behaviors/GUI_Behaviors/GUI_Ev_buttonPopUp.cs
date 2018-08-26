@@ -21,7 +21,7 @@ public class GUI_Ev_buttonPopUp : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == myPosition && myImage.sprite != highlightSprite){
+		/*if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == myPosition && myImage.sprite != highlightSprite){
 			transform.position = new Vector2(transform.position.x +6f, transform.position.y);
 			myImage.color = new Color(255f,255f,255f);
 			myImage.sprite = highlightSprite;
@@ -29,6 +29,16 @@ public class GUI_Ev_buttonPopUp : MonoBehaviour {
 			transform.position = new Vector2(transform.position.x -6f, transform.position.y);
 			myImage.color = new Color(180f,180f,180f);
 			myImage.sprite = startSprite;
-		}
+		}*/
+	}
+
+	public void HighlightButton(){
+		myImage.color = new Color(255f,255f,255f);
+		myImage.sprite = highlightSprite;
+	}
+
+	public void UnhighlightButton(){
+		myImage.color = new Color(180f,180f,180f);
+		myImage.sprite = startSprite;
 	}
 }

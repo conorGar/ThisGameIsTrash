@@ -25,10 +25,7 @@ public class Ev_DayMeter : MonoBehaviour {
 		dayIconInstance = Instantiate(dayIcon, new Vector3(transform.position.x - 50f, transform.position.y, transform.position.z),Quaternion.identity);
 		dayIconInstance.transform.parent = this.gameObject.transform;
 
-		if(GlobalVariableManager.Instance.characterUpgradeArray[1][31].CompareTo('o') == 0){
-			//3rd gathering perk - more time in day
-			delayBonus = delayBonus + .1f;
-		}
+
 		/*if(GlobalVariableManager.Instance.pinsEquipped[36] == 2){
 			//Fuel Efficient Pin
 			delayBonus += .1f;

@@ -99,7 +99,7 @@ public class Ev_Results : MonoBehaviour {
                     if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 3){
 						if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 4){
 							//resets hp after cassie gives you bonus
-							GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) - 1).ToString();
+							GlobalVariableManager.Instance.Max_HP -=1;
 							GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.RemoveAt(4);
 						}
 						GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.RemoveAt(3);

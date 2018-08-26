@@ -19,7 +19,7 @@ public class CalendarManager : MonoBehaviour {
     void Start () {
         // TESTING EVENTS!  Go through the list of friends and let them generate any friend events they'd like to have.
         FriendManager.Instance.GenerateEvents();
-        StartDay();
+       // StartDay();
 
         IsDayStarted = true;
     }
@@ -28,15 +28,16 @@ public class CalendarManager : MonoBehaviour {
 	void Update () {
 	}
 
-    void StartDay ()
+    void EndDay ()
     {
         for (int i=0; i < friendEvents.Count; ++i)
         {
             if (friendEvents[i].day == currentDay)
             {
-                friendEvents[i].Execute();
+               // friendEvents[i].Execute();
 
                 // remove and update the iterator as to not mess things up. MUST BE THE LAST OPERATION.
+                friendEvents[i].friend.MissedEvent();
                 friendEvents.RemoveAt(i--);
             }
         }
@@ -62,4 +63,13 @@ public class CalendarManager : MonoBehaviour {
     public List<FriendEvent> GetFriendEvents(){
     	return friendEvents;
     }
+
+    /*public void MissFriendEventCheck(){ //checked at end of day
+    	int currentDayNumber = GlobalVariableManager.Instance.DAY_NUMBER;
+    	for(int i = 0; i < friendEvents.Count; i++){
+			if(friendEvents[i].day == currentDayNumber){
+
+			}
+    	}
+    }*/
 }

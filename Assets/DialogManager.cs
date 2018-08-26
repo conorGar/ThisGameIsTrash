@@ -35,6 +35,7 @@ public class DialogManager : MonoBehaviour {
 	bool finishedDisplayingText = false; // set true when the text animation is done
 	bool hasWavingText; 
 	bool canContinueDialog = true;
+	Friend friend;//needed for finish();
 
 	void Start () {
 
@@ -223,6 +224,7 @@ public class DialogManager : MonoBehaviour {
 
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = null; //TODO: returns to NO effect, not sure if you want this, future Conor
 		mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+		friend.nextDialog = myDialogDefiniton.nodes[currentNode.child_id].title; //sets up dialog for next interaction
 		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
 		player.GetComponent<EightWayMovement>().enabled = true;
@@ -232,4 +234,9 @@ public class DialogManager : MonoBehaviour {
 	public void ChangeIcon(string aniName){
 		currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SwitchAni(aniName);
 	}
+
+	public void SetFriend(Friend thisFriend){//set by activateDialogWhenClose
+		friend = thisFriend;
+	}
+
 }

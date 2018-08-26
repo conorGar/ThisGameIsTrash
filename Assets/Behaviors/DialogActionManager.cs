@@ -10,7 +10,7 @@ public class DialogActionManager : MonoBehaviour {
 	public GameObject mainCam;
 	public GameObject calendar;
 	public DialogManager dialogManager;
-
+	int numberOfActivation;
 
 	FriendEvent newestAddedEvent;
 
@@ -22,6 +22,27 @@ public class DialogActionManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void CurrentDialogAction(){
+		numberOfActivation++;
+		dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
+		if(friend.nextDialog == "Jumbo2"){
+			if(numberOfActivation == 1){//pan to jumbo hiding in bush...
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(friend.transform.position,"JumboMovie");
+				dialogManager.textBox.SetActive(false);
+				dialogManager.currentlySpeakingIcon.SetActive(false);
+				dialogManager.Invoke("ReturnFromAction",5f);//10= length of each movie 
+			}else if(numberOfActivation == 2){//dead rat zoom in...
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(friend.transform.position,"JumboMovie");
+				mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(2f,.1f);
+			}else if(numberOfActivation == 3){//return to jumbo after dead rat
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(friend.transform.position,"JumboMovie");
+				mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1.15f,4f);
+				dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogManager.dialogBlur;
+
+			}
+		}
 	}
 
 	public void JumboMoviePlay(){
@@ -48,9 +69,12 @@ public class DialogActionManager : MonoBehaviour {
 		Debug.Log("***SET VARIABLE TEXT TO: " + friend.GetComponent<JumboFriend>().GetCurrentFilm());
 
 
-		StartCoroutine("AfterFirstMovie");
+		if(friend.nextDialog == "Start"){
+			StartCoroutine("AfterFirstMovie");
+		}else{
+			dialogManager.Invoke("ReturnFromAction",10f);//10= length of each movie 
+		}
 
-		//dialogManager.Invoke("ReturnFromAction",10f);//10= length of each movie TODO:check for if this is the first movie or not, if not activate this line of code
 	}
 
 	IEnumerator AfterFirstMovie(){
@@ -103,9 +127,7 @@ public class DialogActionManager : MonoBehaviour {
 	}
 
 
-	/*public void NewEventAdded(int dayOfEvent){
-		CalendarManager.Instance.AddFriendEvent(new FriendEvent(dayOfEvent,friend));
-	}*/
+
 
 
 }

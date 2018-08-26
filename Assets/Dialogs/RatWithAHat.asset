@@ -1,0 +1,192 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: RatWithAHat
+  m_EditorClassIdentifier: 
+  title: RatWithAHat
+  nodeStore:
+    keys:
+    - Value: 0700ab38-1992-4228-a392-531f1806dd89
+    - Value: 07af14f5-f324-427a-859a-6a4f17646e25
+    - Value: 0c079812-771d-49df-b80c-2359c5bc4993
+    - Value: af0fabe0-699b-4043-9112-7151a7c0103c
+    - Value: a097f46e-b398-4f8f-9cc6-9b51b28924a5
+    - Value: 2486d530-0987-467e-9564-1bd025cfb048
+    - Value: 4264e6fa-2a8d-49e1-8b1c-ca519db958f3
+    - Value: 958953e7-3ff5-4b65-b5b1-65780785d77e
+    - Value: c13358a9-a5e6-40de-bf92-1500d16a294e
+    values:
+    - window:
+        serializedVersion: 2
+        x: 171
+        y: 171
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start
+      action: finish
+      id:
+        Value: 0700ab38-1992-4228-a392-531f1806dd89
+      x: 171
+      y: 171
+      text: Come one come all! Rat With A Hat's upgrade stand is now open for business!
+      type: 1
+      child_id:
+        Value: 07af14f5-f324-427a-859a-6a4f17646e25
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 174
+        y: 519
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: RatHat1
+      action: 
+      id:
+        Value: 07af14f5-f324-427a-859a-6a4f17646e25
+      x: 174
+      y: 519
+      text: Welcome! Welcome!
+      type: 1
+      child_id:
+        Value: 0c079812-771d-49df-b80c-2359c5bc4993
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 542
+        y: 519
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: RatHat2
+      action: 
+      id:
+        Value: 0c079812-771d-49df-b80c-2359c5bc4993
+      x: 542
+      y: 519
+      text: I am a rat. But, as you can see, I am wearing a hat.
+      type: 1
+      child_id:
+        Value: af0fabe0-699b-4043-9112-7151a7c0103c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 876
+        y: 519
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: RatHat3
+      action: 
+      id:
+        Value: af0fabe0-699b-4043-9112-7151a7c0103c
+      x: 876
+      y: 519
+      text: 'Therefore, my name is: Rat With A Hat. '
+      type: 1
+      child_id:
+        Value: a097f46e-b398-4f8f-9cc6-9b51b28924a5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1211
+        y: 520
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: RatHat4
+      action: 
+      id:
+        Value: a097f46e-b398-4f8f-9cc6-9b51b28924a5
+      x: 1211
+      y: 520
+      text: It's not exactly genius character design, but it'll do.
+      type: 1
+      child_id:
+        Value: 2486d530-0987-467e-9564-1bd025cfb048
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1547
+        y: 521
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: RatHat5
+      action: 
+      id:
+        Value: 2486d530-0987-467e-9564-1bd025cfb048
+      x: 1547
+      y: 521
+      text: 'If you have any <c=b>Star Points</c> I''ll happily take some! '
+      type: 1
+      child_id:
+        Value: 4264e6fa-2a8d-49e1-8b1c-ca519db958f3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1883
+        y: 522
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: RatHat6
+      action: 
+      id:
+        Value: 4264e6fa-2a8d-49e1-8b1c-ca519db958f3
+      x: 1883
+      y: 522
+      text: In return I will tell you <c=g> a sentence of positive reinforcement</c>
+        to make you feel good about yourself.
+      type: 1
+      child_id:
+        Value: 958953e7-3ff5-4b65-b5b1-65780785d77e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2236
+        y: 521
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: RatHat7
+      action: 
+      id:
+        Value: 958953e7-3ff5-4b65-b5b1-65780785d77e
+      x: 2236
+      y: 521
+      text: All of us need <c=g>positive reinforcement</c> sometimes.
+      type: 1
+      child_id:
+        Value: c13358a9-a5e6-40de-bf92-1500d16a294e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2589
+        y: 521
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: RatHat8
+      action: finish
+      id:
+        Value: c13358a9-a5e6-40de-bf92-1500d16a294e
+      x: 2589
+      y: 521
+      text: You, specifically, can use <c=g>positice reinforcement</c> to <c=g>upgrade
+        your base stats</c>.
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 0700ab38-1992-4228-a392-531f1806dd89
