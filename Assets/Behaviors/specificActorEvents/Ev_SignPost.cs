@@ -37,7 +37,8 @@ public class Ev_SignPost : MonoBehaviour {
 		}
 
 
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+        {
 			if(glowCheck == 1){
 				signPostHUD.SetActive(true);
 				signPostHUD.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = myText;

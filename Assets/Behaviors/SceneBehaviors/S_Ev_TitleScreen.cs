@@ -53,23 +53,27 @@ public class S_Ev_TitleScreen : MonoBehaviour {
         if (isInteractable)
         {
             if (phase == 1) {
-                if (Input.GetKeyDown(KeyCode.UpArrow)) {
+                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
                     if (navigationPosition > 1) {
                         navigationPosition--;
                         UpdateSelected();
                     }
-                } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
                     if (navigationPosition < 3) {
                         navigationPosition++;
                         UpdateSelected();
                     }
-                } else if (Input.GetKeyDown(KeyCode.Space)) {
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
+                      || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
                     if (navigationPosition == 1) {
                         StartCoroutine(LoadUserData());
                     }
                 }
             } else if (phase == 0) {
-                if (Input.GetKeyDown(KeyCode.Space)) {
+                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
+                 || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
                     Debug.Log(title.GetComponent<SpecialEffectsBehavior>() == null);
                     Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x, Screen.height * -1, 0));
 

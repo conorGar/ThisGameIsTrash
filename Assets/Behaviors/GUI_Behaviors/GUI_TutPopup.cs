@@ -50,7 +50,8 @@ public class GUI_TutPopup : MonoBehaviour {
 
 	void Update(){
 
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+        {
 			if(phase == 1){
 				StartCoroutine("Delays");
 			}

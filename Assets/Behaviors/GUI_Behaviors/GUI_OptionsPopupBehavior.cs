@@ -25,19 +25,24 @@ public class GUI_OptionsPopupBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.RightArrow)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
+        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
+        {
 			if(arrowPos < howManyOptions){
 				arrowPos++;
 				option1.GetComponent<Text>().color = new Color(startColor.r,startColor.b,startColor.g, .3f);
 				option2.GetComponent<Text>().color = new Color(startColor.r,startColor.b,startColor.g, 1f);
 			}
-		}else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
+              || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
+        {
 			if(1 < arrowPos){
 				arrowPos--;
 				option1.GetComponent<Text>().color = new Color(startColor.r,startColor.b,startColor.g, 1f);;
 				option2.GetComponent<Text>().color = new Color(startColor.r,startColor.b,startColor.g, .3f);
 			}
-		}else if(Input.GetKeyDown(KeyCode.Space)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+        {
 			if(arrowPos == closeOptionNumber){
 				Close();
 			}else{

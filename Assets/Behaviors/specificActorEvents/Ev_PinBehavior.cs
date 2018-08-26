@@ -116,7 +116,7 @@ public class Ev_PinBehavior : MonoBehaviour {
                     PinManager.Instance.DescriptionText.text = pinData.description;
 				}
 
-				if(Input.GetKeyDown(KeyCode.Space) && popupOnce == 0){
+				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && popupOnce == 0){
 					ShopPurchase();
 				}
 			}

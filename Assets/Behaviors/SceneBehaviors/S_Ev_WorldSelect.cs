@@ -24,21 +24,26 @@ public class S_Ev_WorldSelect : MonoBehaviour {
 	
 	void Update () {
 		if(canNavigate){
-			if(Input.GetKeyDown(KeyCode.RightArrow)){
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
+            || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
+            {
 				if(GlobalVariableManager.Instance.MENU_SELECT_STAGE < 3){
 					GlobalVariableManager.Instance.MENU_SELECT_STAGE++;
 				}else{
 					GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
 				}
 				MoveIcons("right");
-			}else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
+                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
+            {
 				if(GlobalVariableManager.Instance.MENU_SELECT_STAGE > 0){
 					GlobalVariableManager.Instance.MENU_SELECT_STAGE--;
 				}else{
 					GlobalVariableManager.Instance.MENU_SELECT_STAGE = 3;
 				}
 				MoveIcons("left");
-			}else if(Input.GetKeyDown(KeyCode.Space)){
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+            {
 				Select();
 			}
 		}

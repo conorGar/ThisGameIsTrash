@@ -20,7 +20,8 @@ public class GUI_PinUnlockDisplay : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+        {
 			if(phase == 1){
 				Time.timeScale = 1;
 				StartCoroutine("Delays");

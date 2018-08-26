@@ -44,7 +44,9 @@ public class GUI_PauseMenu : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.RightArrow)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
+        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
+        {
 			if(arrowpos < 2){
 				Time.timeScale = 1.0f- Time.timeScale;
 				arrowpos++;
@@ -53,7 +55,9 @@ public class GUI_PauseMenu : MonoBehaviour {
 				optionsOption.GetComponent<Image>().sprite = optionStartSpr;
 				Time.timeScale = 0.0f;
 			}
-		}else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
+              || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
+        {
 			if(arrowpos > 1){
 				Time.timeScale = 1.0f- Time.timeScale;
 				arrowpos--;
@@ -62,7 +66,8 @@ public class GUI_PauseMenu : MonoBehaviour {
 				optionsOption.GetComponent<Image>().sprite = optionsHLspr;
 				Time.timeScale = 0.0f;
 			}
-		}else if (Input.GetKeyDown(KeyCode.Space)){
+		}else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+        {
 			if(arrowpos == 1){
 				Time.timeScale = 1.0f- Time.timeScale;
 				optionsMenu.SetActive(true);
@@ -70,7 +75,9 @@ public class GUI_PauseMenu : MonoBehaviour {
 				Time.timeScale = 0;
 			}
 		}
-		if(Input.GetKeyDown(KeyCode.Return)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)
+        || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
+        {
 			arrowpos = 1;
 			gameObject.transform.localPosition = startPos;
 			Time.timeScale = 1;

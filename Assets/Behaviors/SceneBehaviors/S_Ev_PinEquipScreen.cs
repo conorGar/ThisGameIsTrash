@@ -90,7 +90,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
         {
             MoveArrow();
 
@@ -111,22 +111,26 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
         else
         {
             bool isNewPin = false;
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
+             || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
             {
                 arrowPos--;
                 isNewPin = true;
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
+                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
             {
                 arrowPos++;
                 isNewPin = true;
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
+                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN))
             {
                 arrowPos += PinManager.Instance.PinCol;
                 isNewPin = true;
             }
-            else if (Input.GetKeyDown(KeyCode.UpArrow))
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
+                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP))
             {
                 arrowPos -= PinManager.Instance.PinCol;
                 isNewPin = true;

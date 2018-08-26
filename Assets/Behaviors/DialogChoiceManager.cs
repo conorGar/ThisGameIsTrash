@@ -43,11 +43,13 @@ public class DialogChoiceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.UpArrow) && arrowPos > 0){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
+        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 0){
 			NavigateOptions("up");
-		}else if(Input.GetKeyDown(KeyCode.DownArrow) && arrowPos <= (numberOfOptions - 1)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
+        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos <= (numberOfOptions - 1)){
 			NavigateOptions("down");
-		}else if(Input.GetKeyDown(KeyCode.Space)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 			SelectOption(arrowPos);
 		}
 	}

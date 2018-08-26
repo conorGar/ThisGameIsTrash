@@ -30,26 +30,31 @@ public class Hub_UpgradeStand : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.RightArrow) && arrowPos < 2){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
+        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT) && arrowPos < 2){
 			arrowPos++;
 			Debug.Log(arrowPos);
 			MoveArrowPos();
-		}else if(Input.GetKeyDown(KeyCode.LeftArrow) && arrowPos > 0){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
+              || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT) && arrowPos > 0){
 			arrowPos--;
 			Debug.Log(arrowPos);
 			MoveArrowPos();
-		}else if(Input.GetKeyDown(KeyCode.DownArrow) && arrowPos < 3){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
+              || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos < 3){
 			if(currentHighlightedImage != null){
 				currentHighlightedImage.sprite = normalPaper;
 			}
 			returnButton.sprite = returnButtonHLspr;
 			previousArrowPos = arrowPos;
 			arrowPos = 3;
-		}else if(Input.GetKeyDown(KeyCode.UpArrow) && arrowPos == 3){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
+              || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos == 3){
 			arrowPos = previousArrowPos;
 			returnButton.sprite = returnButtonSpr;
 			MoveArrowPos();
-		}else if(Input.GetKeyDown(KeyCode.Space)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+        {
 			SelectUpgrade();
 		}
 	}

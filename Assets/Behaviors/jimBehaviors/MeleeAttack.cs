@@ -56,19 +56,19 @@ public class MeleeAttack : MonoBehaviour {
 			if(GlobalVariableManager.Instance.TRASH_TYPE_SELECTED == 3 && !isSwinging && GlobalVariableManager.Instance.PLAYER_CAN_MOVE && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 11
 				&& !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtL") && !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtR")){
 
-				if(Input.GetKeyDown(KeyCode.A)){
+				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)){
 					playerMomentum = 6f;
 					this.gameObject.transform.localScale = new Vector3(startingScale.x*-1,startingScale.y, startingScale.z);
 					StartCoroutine("Swing",2);
-				}else if(Input.GetKeyDown(KeyCode.D)){
+				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)){
 					this.gameObject.transform.localScale = startingScale;
 					playerMomentum = 6f;
 					StartCoroutine("Swing",1);
-				}else if(Input.GetKeyDown(KeyCode.S)){
+				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)){
 					this.gameObject.transform.localScale = startingScale;
 					playerMomentum = 6f;
 					StartCoroutine("Swing",4);
-				}else if(Input.GetKeyDown(KeyCode.W)){
+				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)){
 					this.gameObject.transform.localScale = startingScale;
 					playerMomentum = 6f;
 					StartCoroutine("Swing",3);
