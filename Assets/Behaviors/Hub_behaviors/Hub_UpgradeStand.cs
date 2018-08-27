@@ -23,6 +23,7 @@ public class Hub_UpgradeStand : MonoBehaviour {
 		if(Mathf.Abs(transform.position.x - player.transform.position.x) < 4f &&Mathf.Abs(transform.position.y - player.transform.position.y) < 7f){
 			spaceIcon.SetActive(true);
 			if(Input.GetKeyDown(KeyCode.Space) && upgradeHUD.activeInHierarchy != true){
+				player.GetComponent<EightWayMovement>().enabled = false;
 				upgradeHUD.SetActive(true);
 				this.enabled = false;
 			}
@@ -30,6 +31,10 @@ public class Hub_UpgradeStand : MonoBehaviour {
 
 
 		
+	}
+
+	public void ReturnFromDisplay(){
+		player.GetComponent<EightWayMovement>().enabled = true;
 	}
 
 

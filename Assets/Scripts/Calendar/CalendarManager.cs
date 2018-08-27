@@ -18,7 +18,7 @@ public class CalendarManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         // TESTING EVENTS!  Go through the list of friends and let them generate any friend events they'd like to have.
-        FriendManager.Instance.GenerateEvents();
+        //FriendManager.Instance.GenerateEvents();
        // StartDay();
 
         IsDayStarted = true;

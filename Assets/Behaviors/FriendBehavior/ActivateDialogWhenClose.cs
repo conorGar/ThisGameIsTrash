@@ -12,7 +12,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
     public Friend friend;
 
-	public string dialogName;
+	
 	public DialogDefinition dialogDefiniton;
 	public float xDistanceThreshold;
 	public float yDistanceThreshold;
@@ -23,36 +23,51 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	public bool autoStart;//start dialog when player gets close(without player hitting space)
 	public GameObject myDialogIcon;
 	public bool cameraPanToFriendAtStart = true;
+	public GameObject speechBubbleIcon;
+	[HideInInspector]
+	public string dialogName;
+
 	bool canTalkTo = true;
 
 	GameObject player;
 
 
 
-
-	void Start () {
+	void Awake(){
 		player = GameObject.FindGameObjectWithTag("Player");
-		//Debug.Log(introDialogName);
+
 	}
+
 	
 	void Update () {
 
-		if(autoStart){
+		
 			//Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
 
 			if(GlobalVariableManager.Instance.CARRYING_SOMETHING == false){
 				
-				if(dialogName.Length > 0 && canTalkTo){
+				if(dialogName.Length > 0){
 					
 					if(Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold &&Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold){
-						//INITIAL DIALOG ACTIVATED WHEN CLOSE
-						ActivateDialog();
+						
+						if(autoStart && canTalkTo){
+							ActivateDialog();
+						}else{
+							if(speechBubbleIcon.activeInHierarchy == false){
+								speechBubbleIcon.SetActive(true);
+							}
+							if(Input.GetKeyDown(KeyCode.Space)){
+								dialogManager.GetComponent<DialogManager>().canContinueDialog = true;
+								dialogName = friend.nextDialog;
+								ActivateDialog();
+							}
+						}
+					}else if(!autoStart && speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy){
+						speechBubbleIcon.SetActive(false);//disable speech bubble icon when far away
 					}
 				}
 			}//end of carry something check
-		}else{
-		// TODO: create space bar icon and wait for player to hit space
-		}
+		
 	}
 
 	public void SetDialog(DialogDefinition dd){
@@ -79,6 +94,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 			dialogManager.GetComponent<DialogManager>().myDialogDefiniton = dialogDefiniton;
 			dialogManager.GetComponent<DialogManager>().dialogTitle = dialogName;
 			dialogActionManager.friend = friend;
+			dialogManager.GetComponent<DialogManager>().SetFriend(friend);
 			dialogCanvas.SetActive(true);
 			dialogManager.GetComponent<DialogManager>().characterName.text = friend.name;
 			myDialogIcon.SetActive(true);

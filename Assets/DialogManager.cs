@@ -34,7 +34,7 @@ public class DialogManager : MonoBehaviour {
 
 	bool finishedDisplayingText = false; // set true when the text animation is done
 	bool hasWavingText; 
-	bool canContinueDialog = true;
+	public bool canContinueDialog = true;
 	Friend friend;//needed for finish();
 
 	void Start () {
@@ -219,12 +219,15 @@ public class DialogManager : MonoBehaviour {
 		SoundManager.instance.RandomizeSfx(typeSound,.8f,1.2f);
 	}
 
-	void FinishDialog(){
+	public void FinishDialog(){//public because of rat with a hat
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
-
+		//TODO: maybe need some way to set activateDialog's 'canTalk' to true again depending on character
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = null; //TODO: returns to NO effect, not sure if you want this, future Conor
 		mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
-		friend.nextDialog = myDialogDefiniton.nodes[currentNode.child_id].title; //sets up dialog for next interaction
+		Debug.Log(friend.nextDialog);
+		//Debug.Log(currentNode.child_id.ToString());
+		friend.nextDialog = myDialogDefiniton.nodes[currentNode.child_id].title;
+		 //sets up dialog for next interaction
 		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
 		player.GetComponent<EightWayMovement>().enabled = true;

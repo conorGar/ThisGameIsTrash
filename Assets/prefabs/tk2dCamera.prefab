@@ -25,6 +25,8 @@ GameObject:
   - component: {fileID: 92500417088449398}
   - component: {fileID: 81538182513662854}
   - component: {fileID: 114415944749106750}
+  - component: {fileID: 114649234317195944}
+  - component: {fileID: 114429630969264318}
   m_Layer: 0
   m_Name: tk2dCamera
   m_TagString: MainCamera
@@ -38,8 +40,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842708842806886}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.35124198, y: -0.35348058, z: 0.056689747}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.8, y: -0.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +65,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 76.3
   orthographic: 1
   orthographic size: 480
   m_Depth: 0
@@ -87,7 +89,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842708842806886}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!92 &92500417088449398
 Behaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +103,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842708842806886}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4badb0eb121edaf4db1916d444f27425, type: 3}
   m_Name: 
@@ -112,6 +114,32 @@ MonoBehaviour:
   MAX_Y: -9.08
   stableCamera: 0
   cameraSpeed: 10
+--- !u!114 &114429630969264318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1842708842806886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc7a407f03c8a04b80d6a42db3f4563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  tutPopup: {fileID: 0}
+  roomManager: {fileID: 0}
+--- !u!114 &114649234317195944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1842708842806886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: 29db1d8e501cb6c408936f88346ab1ff, type: 2}
 --- !u!114 &114911326877479794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,7 +155,7 @@ MonoBehaviour:
   cameraSettings:
     projection: 0
     orthographicSize: 10
-    orthographicPixelsPerMeter: 100
+    orthographicPixelsPerMeter: 39
     orthographicOrigin: 1
     orthographicType: 0
     transparencySortMode: 0
@@ -150,12 +178,12 @@ MonoBehaviour:
     autoScaleMode: 3
     fitMode: 1
   inheritSettings: {fileID: 0}
-  nativeResolutionWidth: 2560
-  nativeResolutionHeight: 1792
+  nativeResolutionWidth: 960
+  nativeResolutionHeight: 640
   _unityCamera: {fileID: 20916354690734356}
   viewportClippingEnabled: 0
   viewportRegion: {x: 0, y: 0, z: 100, w: 100}
-  zoomFactor: 1
+  zoomFactor: 1.15
   forceResolutionInEditor: 0
   forceResolution: {x: 960, y: 640}
 --- !u!124 &124719854628676816

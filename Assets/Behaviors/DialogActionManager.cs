@@ -90,7 +90,17 @@ public class DialogActionManager : MonoBehaviour {
 
 
 	}
+	public void RatWithHatIntro(){
+		friend.GetComponent<RatWithHatFriend>().hadIntroDialog = true;
+		dialogManager.ReturnFromAction();
+	}
 
+	public void RatWithHatFinish(){
+		dialogManager.FinishDialog();
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		player.GetComponent<EightWayMovement>().enabled = false;
+		friend.GetComponent<RatWithHatFriend>().baseStatHUD.SetActive(true);
+	}
 
 	public void JumboMovieColor(){
 		//set enhancement

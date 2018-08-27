@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using I2.TextAnimation;
+using UnityEngine.PostProcessing;
+
 public class GUI_BaseStatUpgrade : GUI_MenuBase {
 
 
 	public TextMeshProUGUI positiveText;
 	public Hub_UpgradeStand stand;
+	public GameObject starsAvailableHUD;
+	public ParticleSystem selectPS;
+	public GameObject baseStatUpgrade;
 
 	void Start () {
 		
+	}
+
+	void OnEnable(){
+		mainCam.GetComponent<PostProcessingBehaviour>().profile = blur;
+		starsAvailableHUD.SetActive(true);
+		Navigate("");
 	}
 	
 	// Update is called once per frame
@@ -18,22 +29,46 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 		if(Input.GetKeyDown(KeyCode.Space)){
 			SelectUpgrade();
 		}
+
+		if(Input.GetKeyDown(KeyCode.LeftArrow) && leftRightNav && arrowPos>0){
+			Navigate("left");
+		}else if(Input.GetKeyDown(KeyCode.RightArrow) && leftRightNav && arrowPos<maxArrowPos){
+			Debug.Log("Arrow RIGHT");
+			Navigate("right");
+		}else if(Input.GetKeyDown(KeyCode.UpArrow) && upDownNav && arrowPos>0){
+			Navigate("up");
+		}else if(Input.GetKeyDown(KeyCode.DownArrow) && upDownNav && arrowPos<maxArrowPos){
+			Navigate("down");
+		}
+
+		//selectionArrow.transform.position = Vector3.Lerp(currentSelectArrowPos,optionIcons[arrowPos].transform.position,2*Time.deltaTime);
+		selectionArrow.transform.position = optionIcons[arrowPos].transform.position;
 	}
 
 	void SelectUpgrade(){
-		if(GlobalVariableManager.Instance.STAR_POINTS == 0){
+		if(GlobalVariableManager.Instance.STAR_POINTS > 0){
+			selectPS.transform.position = optionIcons[arrowPos].transform.position;
+			selectPS.Play();
 			if(arrowPos == 0){
 				GlobalVariableManager.Instance.BAG_SIZE +=2;
+				starsAvailableHUD.GetComponent<GUI_StarsAvailableHUD>().UpdateDisplay();
 			}else if(arrowPos == 1){
 				GlobalVariableManager.Instance.Max_HP +=1;
+				starsAvailableHUD.GetComponent<GUI_StarsAvailableHUD>().UpdateDisplay();
 			}else if(arrowPos == 2){
 				GlobalVariableManager.Instance.PPVALUE +=3;
-			}else if(arrowPos == 3){
-				this.gameObject.SetActive(false);
-				stand.enabled = true;
+				starsAvailableHUD.GetComponent<GUI_StarsAvailableHUD>().UpdateDisplay();
 			}
 			GlobalVariableManager.Instance.STAR_POINTS--;
 			PositiveText();
+		}if(arrowPos == 3){
+			this.gameObject.SetActive(false);
+			stand.player.GetComponent<EightWayMovement>().enabled = false;
+			mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
+			stand.ReturnFromDisplay();
+			starsAvailableHUD.SetActive(false);
+			baseStatUpgrade.SetActive(false);
+			stand.enabled = true;
 		}
 	}
 

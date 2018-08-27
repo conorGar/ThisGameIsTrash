@@ -10,6 +10,10 @@ public class HUD_Calendar : MonoBehaviour {
 	public Sprite iggySprite;
 	List<FriendEvent> currentEvents;
 	public AudioClip calendaMarkSfx;
+	public OpenCalendar player;
+
+	bool newMarkSequence;
+	bool leavingScreen;
 
 	void Start () {
 		currentEvents = CalendarManager.Instance.friendEvents;
@@ -22,14 +26,29 @@ public class HUD_Calendar : MonoBehaviour {
 
 	}
 
+	void OnEnable(){
+		leavingScreen = false;
+		newMarkSequence = false;
+		gameObject.transform.localPosition = new Vector2(-23f,-1f);
+		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);//TODO: This gets faster as time passes...fix!
+
+	}
+
 	void Update () {
-		
+		if((Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.Space)) && !newMarkSequence){
+			Time.timeScale = 1f;
+			LeaveScreen();
+			Invoke("ReenableOpenCal",.5f);
+		}
+		if(!newMarkSequence && !leavingScreen){ 
+			gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition,Vector3.zero,.1f*(Time.realtimeSinceStartup - Time.deltaTime));
+		}
 	}
 
 	public void NewMarkSequence(int day, string friendName){
-
-		gameObject.transform.localPosition = new Vector2(-23f,-1f);
-		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);
+		newMarkSequence = true;
+		//gameObject.transform.localPosition = new Vector2(-23f,-1f);
+		//gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);
 
 		GameObject daySquare = transform.GetChild(day-1).gameObject;
 		if(!daySquare.activeInHierarchy){
@@ -57,6 +76,14 @@ public class HUD_Calendar : MonoBehaviour {
 	}
 
 	public void LeaveScreen(){
-		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(24f,0f,.5f,true);
+		leavingScreen = true;
+		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(24f,0f,.2f,true);
 	}
+
+	public void ReenableOpenCal(){
+		player.enabled = true;
+		this.gameObject.SetActive(false);
+	}
+
+
 }

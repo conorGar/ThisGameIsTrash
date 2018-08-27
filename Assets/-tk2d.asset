@@ -133,6 +133,14 @@ MonoBehaviour:
     dataGUID: 
     managed: 0
     loadable: 0
+  - assetGUID: 638e20cc3cd8d904b8b6656251720691
+    dataGUID: 
+    managed: 0
+    loadable: 0
+  - assetGUID: f1f34acf5950fc2439b9da9804f18d1f
+    dataGUID: 
+    managed: 0
+    loadable: 0
   fontIndex:
   - assetGUID: 063b15d80dbb4604d890600a64c79cf8
     dataGUID: e7a6b09a73c6b2b4f8060096ddbd3b5e
@@ -1696,6 +1704,9 @@ MonoBehaviour:
     - Hud_healthBarFull
     - meleeIcon_plank
     - meleeIcon_claw
+    - speechBubble1
+    - speechBubble3
+    - speechBubble2
     spriteTextureGUIDs:
     - 52049695ab6ecd1489104fbd50a04745
     - e477c2e523adaee4bb6e3b2cf2a62117
@@ -1711,6 +1722,9 @@ MonoBehaviour:
     - 31b385ebfde59cd4eb8be2414e472e27
     - 5b5d30ec1d67f324db266fec0cd78c94
     - 5046b7429ec7b1b4a88dbf07408ddfb5
+    - 173a2c972763f734cb49dfaf0b4e29a1
+    - 50668a23896f954499e6445a115ac808
+    - 9fd5178953b96404d9c3075c771a6585
     spriteTextureTimeStamps:
     - 1495420634.45452
     - 1473169917.39204
@@ -1726,6 +1740,9 @@ MonoBehaviour:
     - 1481210004.66767
     - 1473169332.61645
     - 1473169532.26701
+    - 1535243101.17489
+    - 1535243332.90149
+    - 1535243293.38325
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
@@ -3699,6 +3716,43 @@ MonoBehaviour:
     - 1535157961.94284
     - 1535158065.49435
     - 1535158131.18898
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
+  - name: SC_Friend_RatWithHat
+    spriteCollectionGUID: de22379eb4d0ad945a9f3e2f84870103
+    spriteCollectionDataGUID: 253214650d0e3d34fb3b96054d691fe9
+    spriteNames:
+    - hatWithHat3
+    - hatWithHat4
+    - hatWithHat7
+    - hatWithHat8
+    - hatWithHat9
+    - hatWithHat2
+    - hatWithHat5
+    - hatWithHat6
+    - hatWithHat1
+    spriteTextureGUIDs:
+    - fe326a395109b8841bd12e398de3f03d
+    - 800d3e951bf7acc43b1d5004184cf4e1
+    - 725c683ea90197d4cb972e1d0a295e27
+    - 197d0adec2d5631408aedd156548096c
+    - fd4b50bc5e078b34f8736de3a228a6bb
+    - 0fe1b7e15eaef0249b638b67bdd4c8c1
+    - d347faf8765d7934893a5920998a5ca0
+    - 0d573a8b4a19cab47bb128489bc53cec
+    - bd0bc6c0ec476c441b9af42a755798e8
+    spriteTextureTimeStamps:
+    - 1535227681.7249
+    - 1535227694.50815
+    - 1535227756.98957
+    - 1535227769.14923
+    - 1535227780.6495
+    - 1535227669.96832
+    - 1535227711.26333
+    - 1535227724.10071
+    - 1535227658.96734
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
