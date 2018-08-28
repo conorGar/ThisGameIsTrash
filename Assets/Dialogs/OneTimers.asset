@@ -1,0 +1,415 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: OneTimers
+  m_EditorClassIdentifier: 
+  title: OneTimers
+  nodeStore:
+    keys:
+    - Value: 32a3d734-8f3f-4d59-8c11-9fb5c81056f1
+    - Value: b1d52384-c013-4652-bfd3-8bbe952e1f91
+    - Value: d2ae9a36-f1a9-4655-978c-ad0511593419
+    - Value: f2ffc6f7-3e3e-45bc-8868-fd2232427294
+    - Value: 69fb8063-e5f6-4155-99e9-baaebcb47b0f
+    - Value: 421b76ff-35e3-4242-9e90-5bc786aed16c
+    - Value: e930d267-8eb8-44f2-8d8d-0a5497b5d3bd
+    - Value: 9a7e6925-d7bd-4e07-ae9e-f12be08e988c
+    - Value: 2873bcc3-2a2a-43b1-a633-27c0eb63477d
+    - Value: 2042eb82-9caa-4a3f-97a3-cb5987bd66ff
+    - Value: d1720634-3bac-49c5-a7e5-db549381037f
+    - Value: 2175864a-f650-4a01-9d43-e93986135a89
+    - Value: 02dd5855-9229-4213-817f-95aa5db78b17
+    - Value: b2eae8d8-0357-4911-b1fa-eaeb4ee97de7
+    - Value: 78d3b2d7-0320-4cce-a9fd-df5da86ccc9f
+    - Value: 29c80191-a081-430b-9889-e849898854d0
+    - Value: dec70cf6-a13b-406c-b465-905ffa44e7a0
+    - Value: 6643c57b-8239-452a-9d30-89263845a37f
+    - Value: f52f4e23-2ff6-41c9-8f9b-0ffedf8e508c
+    - Value: 53c5dd0e-d922-4e0c-b088-5d1ef09f7486
+    values:
+    - window:
+        serializedVersion: 2
+        x: 126
+        y: 255
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry1
+      action: 
+      id:
+        Value: 32a3d734-8f3f-4d59-8c11-9fb5c81056f1
+      x: 126
+      y: 255
+      text: Holy scrap! Dude...I think you just hit somebody!
+      type: 1
+      child_id:
+        Value: b1d52384-c013-4652-bfd3-8bbe952e1f91
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 469
+        y: 250
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry2
+      action: 
+      id:
+        Value: b1d52384-c013-4652-bfd3-8bbe952e1f91
+      x: 469
+      y: 250
+      text: Oh my god. OH MY GOD. He's not moving! This is so bad! ..wha...what should
+        we do?!?
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Let's get outta here before someone sees us
+        node_id:
+          Value: d2ae9a36-f1a9-4655-978c-ad0511593419
+      - text: Nobody saw. You clear the blood, I'll get the shovel. Nobody will ever
+          know.
+        node_id:
+          Value: f2ffc6f7-3e3e-45bc-8868-fd2232427294
+      - text: I guess we should try and help him or something.
+        node_id:
+          Value: 69fb8063-e5f6-4155-99e9-baaebcb47b0f
+    - window:
+        serializedVersion: 2
+        x: 885
+        y: 112
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry3_1
+      action: 
+      id:
+        Value: d2ae9a36-f1a9-4655-978c-ad0511593419
+      x: 885
+      y: 112
+      text: Good idea. We're in the middle of nowhere, by the time the authorities
+        find him, there'll be no trace of us.
+      type: 1
+      child_id:
+        Value: e930d267-8eb8-44f2-8d8d-0a5497b5d3bd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 879
+        y: 392
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry3_2
+      action: 
+      id:
+        Value: f2ffc6f7-3e3e-45bc-8868-fd2232427294
+      x: 879
+      y: 392
+      text: Ok. Sounds good. You can count on me, there won't be a trace of evidence!
+      type: 1
+      child_id:
+        Value: e930d267-8eb8-44f2-8d8d-0a5497b5d3bd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 884
+        y: 652
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry3_3
+      action: 
+      id:
+        Value: 69fb8063-e5f6-4155-99e9-baaebcb47b0f
+      x: 884
+      y: 652
+      text: Ok. Cool. Good. Good.
+      type: 1
+      child_id:
+        Value: 421b76ff-35e3-4242-9e90-5bc786aed16c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1208
+        y: 652
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry3_3_2
+      action: 
+      id:
+        Value: 421b76ff-35e3-4242-9e90-5bc786aed16c
+      x: 1208
+      y: 652
+      text: '...so...you have any ideas on HOW to help him?'
+      type: 1
+      child_id:
+        Value: e930d267-8eb8-44f2-8d8d-0a5497b5d3bd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1614.3152
+        y: 333
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry4
+      action: 
+      id:
+        Value: e930d267-8eb8-44f2-8d8d-0a5497b5d3bd
+      x: 1614.3152
+      y: 333
+      text: uuuuuuuuuggggghhhh
+      type: 1
+      child_id:
+        Value: 9a7e6925-d7bd-4e07-ae9e-f12be08e988c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2018.3152
+        y: 355
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry5
+      action: 
+      id:
+        Value: 9a7e6925-d7bd-4e07-ae9e-f12be08e988c
+      x: 2018.3152
+      y: 355
+      text: Wait! He's moving! H-hello sir! Are you alright?!?
+      type: 1
+      child_id:
+        Value: 2873bcc3-2a2a-43b1-a633-27c0eb63477d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2342.3152
+        y: 355
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry6
+      action: 
+      id:
+        Value: 2873bcc3-2a2a-43b1-a633-27c0eb63477d
+      x: 2342.3152
+      y: 355
+      text: Ahhhh! What a great nap! ...although my back hurts suddenly...hmmm..
+      type: 1
+      child_id:
+        Value: 2042eb82-9caa-4a3f-97a3-cb5987bd66ff
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2673.3152
+        y: 359
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry7
+      action: 
+      id:
+        Value: 2042eb82-9caa-4a3f-97a3-cb5987bd66ff
+      x: 2673.3152
+      y: 359
+      text: Now, where did I put my friend...
+      type: 1
+      child_id:
+        Value: d1720634-3bac-49c5-a7e5-db549381037f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2996.3152
+        y: 364
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry8
+      action: 
+      id:
+        Value: d1720634-3bac-49c5-a7e5-db549381037f
+      x: 2996.3152
+      y: 364
+      text: Ah! There it is!
+      type: 1
+      child_id:
+        Value: 2175864a-f650-4a01-9d43-e93986135a89
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3375.3152
+        y: 364
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry9
+      action: 
+      id:
+        Value: 2175864a-f650-4a01-9d43-e93986135a89
+      x: 3375.3152
+      y: 364
+      text: Oh! Hello there folks! Say, eh, you onna dem garbage men, aint'cha?
+      type: 1
+      child_id:
+        Value: 02dd5855-9229-4213-817f-95aa5db78b17
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3733.3152
+        y: 363
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry10
+      action: 
+      id:
+        Value: 02dd5855-9229-4213-817f-95aa5db78b17
+      x: 3733.3152
+      y: 363
+      text: Where are my manners, I'm <c=g>Harry</c>, the world-trotting <c=g>pin
+        salesman</c>!
+      type: 1
+      child_id:
+        Value: b2eae8d8-0357-4911-b1fa-eaeb4ee97de7
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4058.3152
+        y: 363
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry11
+      action: 
+      id:
+        Value: b2eae8d8-0357-4911-b1fa-eaeb4ee97de7
+      x: 4058.3152
+      y: 363
+      text: You're onna dem garbagemen, aint'cha? You know, I's always wanted to be
+        a garbageman.
+      type: 1
+      child_id:
+        Value: 78d3b2d7-0320-4cce-a9fd-df5da86ccc9f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4391.3154
+        y: 339
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry12
+      action: 
+      id:
+        Value: 78d3b2d7-0320-4cce-a9fd-df5da86ccc9f
+      x: 4391.3154
+      y: 339
+      text: 'But, eh, a little too much work for my taste. '
+      type: 1
+      child_id:
+        Value: 29c80191-a081-430b-9889-e849898854d0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4724.3154
+        y: 338
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry13
+      action: 
+      id:
+        Value: 29c80191-a081-430b-9889-e849898854d0
+      x: 4724.3154
+      y: 338
+      text: Good thing, too, because, lemme tell ya, the pin market is BOOMIN' recently.
+      type: 1
+      child_id:
+        Value: dec70cf6-a13b-406c-b465-905ffa44e7a0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5049.3154
+        y: 339
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry14
+      action: 
+      id:
+        Value: dec70cf6-a13b-406c-b465-905ffa44e7a0
+      x: 5049.3154
+      y: 339
+      text: '...small pins...big pins...o-other pin sizes,  they''re ALL getting bought
+        up.'
+      type: 1
+      child_id:
+        Value: 6643c57b-8239-452a-9d30-89263845a37f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5379.3154
+        y: 304
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry15
+      action: 
+      id:
+        Value: 6643c57b-8239-452a-9d30-89263845a37f
+      x: 5379.3154
+      y: 304
+      text: I'm just about to open up my <c=g>Pin Shop</c> over at <c=g>The Dump</c>.
+      type: 1
+      child_id:
+        Value: f52f4e23-2ff6-41c9-8f9b-0ffedf8e508c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5710.3154
+        y: 305
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry16
+      action: 
+      id:
+        Value: f52f4e23-2ff6-41c9-8f9b-0ffedf8e508c
+      x: 5710.3154
+      y: 305
+      text: I'd be happy to see ya beautiful, moustached face over der anytime ya
+        can. Might find it worthwhile.
+      type: 1
+      child_id:
+        Value: 53c5dd0e-d922-4e0c-b088-5d1ef09f7486
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6046.3154
+        y: 309
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Harry17
+      action: 
+      id:
+        Value: 53c5dd0e-d922-4e0c-b088-5d1ef09f7486
+      x: 6046.3154
+      y: 309
+      text: Anywho, was nice meetin' ya! See ya around folks!
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 32a3d734-8f3f-4d59-8c11-9fb5c81056f1

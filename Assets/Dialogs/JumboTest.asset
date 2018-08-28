@@ -74,6 +74,7 @@ MonoBehaviour:
     - Value: 3b77287c-fbe3-4f7d-868f-e8a19a4dc8b5
     - Value: 599c2436-14dd-404d-90f1-91c32c91b0b7
     - Value: 2509f38c-5fb6-4b89-8cae-2a1132be0f3a
+    - Value: 8ded7e72-0f89-4ab7-92b9-fd1c92b3532d
     values:
     - window:
         serializedVersion: 2
@@ -544,7 +545,7 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Jumbo2_2
-      action: 
+      action: CurrentDialogAction
       id:
         Value: 7562cc2f-41ef-44a8-9e75-72bb7662e56c
       x: 382
@@ -611,13 +612,13 @@ MonoBehaviour:
       responses:
       - text: It looks great. Definately gives you that director look.
         node_id:
-          Value: 
+          Value: ffc6093e-74f3-4dd4-8893-12b96086f576
       - text: Ya...it's a little...much.
         node_id:
-          Value: 
-      - text: Nobody takes directors seriously unless they're wearing a hat.
+          Value: 0af0f6e7-36b0-4097-b04e-769af06b3c8f
+      - text: Wear it. Nobody will take you seriously if you don't wear the hat.
         node_id:
-          Value: 
+          Value: 562b9f2f-7bce-4471-ad24-a1f0e3b9072f
     - window:
         serializedVersion: 2
         x: 1767.6713
@@ -685,7 +686,7 @@ MonoBehaviour:
         Value: 562b9f2f-7bce-4471-ad24-a1f0e3b9072f
       x: 1769.2329
       y: 1259
-      text: RIGHT!?! I noticed that too! All the good ones wear them!
+      text: RIGHT!?! I noticed that too! All the good directors wear them!
       type: 1
       child_id:
         Value: f2a040f9-9344-4f16-a00d-dd4d2b299a80
@@ -721,7 +722,7 @@ MonoBehaviour:
         Value: 59dd07a0-195c-48f4-aaba-09059e759f96
       x: 2846.151
       y: 995
-      text: PRESENTING! Jumbo's latest masterpiece...<c=g><var></c>!
+      text: PRESENTING! Jumbo's latest masterpiece...<color=#78FF32></color>!
       type: 1
       child_id:
         Value: ea19f73e-4c52-493c-9191-570815b85c06
@@ -904,8 +905,8 @@ MonoBehaviour:
         Value: 453105fc-c507-497d-8745-702f5747ae19
       x: 6190.151
       y: 996
-      text: It's gonna be called <c=g><var></c>. It's gonna be so good. You don't
-        wanna miss it
+      text: It's gonna be called <color=#78FF32>The Pawshank Redemption</color>. It's
+        gonna be so good. You don't wanna miss it
       type: 1
       child_id:
         Value: 418e5e05-1ec2-4667-8d7d-1c81c89a7aa4
@@ -918,7 +919,7 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Jumbo2_20
-      action: 
+      action: DayAsStringSet
       id:
         Value: 418e5e05-1ec2-4667-8d7d-1c81c89a7aa4
       x: 6517.151
@@ -941,8 +942,8 @@ MonoBehaviour:
         Value: 8c96c0d8-1497-4fb5-850c-8eda7da4ccf8
       x: 6856.151
       y: 999
-      text: It'll be playing in <var> days. I'll write it on your <c=g>calendar</c>
-        there.
+      text: It'll be playing in <color=#29B6F6>2 days</color>. I'll write it on your
+        <color=#78FF32>calendar</color> there.
       type: 1
       child_id:
         Value: 7f011956-19c2-4f32-9cbb-47dcaad536c9
@@ -997,7 +998,8 @@ MonoBehaviour:
         Value: 59ba8e90-d6f5-4a63-896a-ed11e2ef52f6
       x: 7838.151
       y: 999
-      text: So I'd like to make you an honorary member of the <c=g> Movie Mutts Club</c>.
+      text: So I'd like to make you an honorary member of the <color=#78FF32> Movie
+        Mutts Club</color>.
       type: 1
       child_id:
         Value: d408a617-47ab-4fc5-b2c4-137996eb2a10
@@ -1015,7 +1017,7 @@ MonoBehaviour:
         Value: d408a617-47ab-4fc5-b2c4-137996eb2a10
       x: 8160.151
       y: 1000
-      text: '...and award you the exclusive <c=g>club pin</c>.'
+      text: '...and award you the exclusive <color=#78FF32>club pin</color>.'
       type: 1
       child_id:
         Value: d09b4663-ba63-4623-a248-deaa5b9b93f9
@@ -1036,7 +1038,7 @@ MonoBehaviour:
       text: Thanks Mr. Garbageman. I'll see you soon.
       type: 1
       child_id:
-        Value: 
+        Value: 8ded7e72-0f89-4ab7-92b9-fd1c92b3532d
       responses: []
     - window:
         serializedVersion: 2
@@ -1196,6 +1198,24 @@ MonoBehaviour:
       x: 2762
       y: 1695
       text: '...p-please tell your friends.'
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 28.15039
+        y: 1248
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Jumbo3
+      action: 
+      id:
+        Value: 8ded7e72-0f89-4ab7-92b9-fd1c92b3532d
+      x: 28.15039
+      y: 1248
+      text: Child Dialog
       type: 1
       child_id:
         Value: 

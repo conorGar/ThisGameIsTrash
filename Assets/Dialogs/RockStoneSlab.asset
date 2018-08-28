@@ -1,0 +1,461 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: RockStoneSlab
+  m_EditorClassIdentifier: 
+  title: RockStoneSlab
+  nodeStore:
+    keys:
+    - Value: e0e12f04-6174-495a-a666-8356a335eadd
+    - Value: 6c0befcf-da23-4e15-8d8f-35b054c0514d
+    - Value: f6fe13b0-516c-4176-a463-d4c7cacae894
+    - Value: 5e086c4a-e782-4fcd-a37c-502e0f325c0f
+    - Value: ad0b5f2d-b8f3-4704-8141-08dc32f8503f
+    - Value: 0b33165c-9704-4688-b4ac-2158936976b8
+    - Value: 0850b1af-8acf-4d66-be76-fcdc4c5ff0bf
+    - Value: 6326e206-2cdc-4295-9c71-61b98794f432
+    - Value: a1a6321c-81fd-4805-81ea-4ab9e5f2be68
+    - Value: beabea17-27a1-423a-a964-1d6d4e82f690
+    - Value: 392482c7-5702-45ce-b2ec-28d4d0f86098
+    - Value: 74ed1c0c-a855-4c3f-b878-239e55900d76
+    - Value: e8cb5a99-f8a5-471f-9389-9f98d2bff131
+    - Value: ada8a573-6876-434e-bffa-610c6c0c8325
+    - Value: 6578cfbf-8ddd-4c14-9616-1abe332afd73
+    - Value: 6b27feda-359c-4d53-98f9-cc56f499adeb
+    - Value: e7809ead-3be8-44c6-b1da-27c9ac8a2278
+    - Value: c32d0367-5719-4934-9334-72cf7d1031d1
+    - Value: 8a159267-1ce9-40ed-b1a4-48ee1e104e7c
+    - Value: 9c35d666-d2ac-4db0-91c3-533755cf29da
+    - Value: 4b698f2c-c200-465d-a23d-c8c394e5bc1e
+    - Value: 185c466c-2f1e-47cc-b0fe-2e96235ab9fd
+    values:
+    - window:
+        serializedVersion: 2
+        x: 50
+        y: 118
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start
+      action: 
+      id:
+        Value: e0e12f04-6174-495a-a666-8356a335eadd
+      x: 50
+      y: 118
+      text: A traveler! It's about time!
+      type: 1
+      child_id:
+        Value: 6c0befcf-da23-4e15-8d8f-35b054c0514d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 376
+        y: 107
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start1
+      action: 
+      id:
+        Value: 6c0befcf-da23-4e15-8d8f-35b054c0514d
+      x: 376
+      y: 107
+      text: Now we can finally settle this guys.
+      type: 1
+      child_id:
+        Value: f6fe13b0-516c-4176-a463-d4c7cacae894
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 701
+        y: 76
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start2
+      action: 
+      id:
+        Value: f6fe13b0-516c-4176-a463-d4c7cacae894
+      x: 701
+      y: 76
+      text: Listen garbageman, the three of us have a question for you.
+      type: 1
+      child_id:
+        Value: 5e086c4a-e782-4fcd-a37c-502e0f325c0f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1055
+        y: 110
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start3
+      action: (Stone)
+      id:
+        Value: 5e086c4a-e782-4fcd-a37c-502e0f325c0f
+      x: 1055
+      y: 110
+      text: '...It''s a little bit of a strange question. Please don''t judge us.'
+      type: 1
+      child_id:
+        Value: ad0b5f2d-b8f3-4704-8141-08dc32f8503f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1378
+        y: 113
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start4
+      action: (Slab)
+      id:
+        Value: ad0b5f2d-b8f3-4704-8141-08dc32f8503f
+      x: 1378
+      y: 113
+      text: Alright, so, if you were INTO rocks, like...you know, <c=r>ROMANTICALLY</c>,
+        which one of us would you pick as your lover?
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Rock
+        node_id:
+          Value: 
+      - text: 'Stone '
+        node_id:
+          Value: 
+      - text: Slab
+        node_id:
+          Value: 
+      - text: I'm sorry, but I'm not into rocks that way. No offense.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 1705.801
+        y: 619
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start5_3
+      action: 
+      id:
+        Value: 0b33165c-9704-4688-b4ac-2158936976b8
+      x: 1705.801
+      y: 619
+      text: Yes. Yes. Wahmen love <c=g>Rock</c>. Wahmen love <c=g>Rock</c> for <c=g>Rock's</c>
+        charming personality.
+      type: 1
+      child_id:
+        Value: beabea17-27a1-423a-a964-1d6d4e82f690
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1697.3778
+        y: 54
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start5_1
+      action: 
+      id:
+        Value: 0850b1af-8acf-4d66-be76-fcdc4c5ff0bf
+      x: 1697.3778
+      y: 54
+      text: '...woah, really? Jeez mister, that''s really nice of you to say to me.'
+      type: 1
+      child_id:
+        Value: beabea17-27a1-423a-a964-1d6d4e82f690
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1706.3075
+        y: 327
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start5_2
+      action: 
+      id:
+        Value: 6326e206-2cdc-4295-9c71-61b98794f432
+      x: 1706.3075
+      y: 327
+      text: Ha Ha! See guys! I told you!
+      type: 1
+      child_id:
+        Value: a1a6321c-81fd-4805-81ea-4ab9e5f2be68
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2012.3076
+        y: 328
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start5_2_2
+      action: 
+      id:
+        Value: a1a6321c-81fd-4805-81ea-4ab9e5f2be68
+      x: 2012.3076
+      y: 328
+      text: The hard truth is, <c=g>The Moon</c> is gonna choose me as her man.
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2019.1431
+        y: 64
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start6
+      action: 
+      id:
+        Value: beabea17-27a1-423a-a964-1d6d4e82f690
+      x: 2019.1431
+      y: 64
+      text: Whatever. It doesn't matter what he thinks. Surely <c=g>The Moon</c> will
+        choose ME.
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2354.9785
+        y: 321
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start7
+      action: 
+      id:
+        Value: 392482c7-5702-45ce-b2ec-28d4d0f86098
+      x: 2354.9785
+      y: 321
+      text: Trust me guys, the ladies can't resist this <c=b> CHISELED CHEST</c>.
+      type: 1
+      child_id:
+        Value: 74ed1c0c-a855-4c3f-b878-239e55900d76
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2677.9785
+        y: 323
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start8
+      action: 
+      id:
+        Value: 74ed1c0c-a855-4c3f-b878-239e55900d76
+      x: 2677.9785
+      y: 323
+      text: All I need is to get rich. Once I have enough <c=g>trash</c>, forget it,
+        I won't be able to keep the girls away!
+      type: 1
+      child_id:
+        Value: e8cb5a99-f8a5-471f-9389-9f98d2bff131
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3003.9785
+        y: 321
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start9
+      action: 
+      id:
+        Value: e8cb5a99-f8a5-471f-9389-9f98d2bff131
+      x: 3003.9785
+      y: 321
+      text: <c=g>Slab</c>, I'm sorry but I just think it's sorta rude to assume that
+        all lady rocks only care about wealth.
+      type: 1
+      child_id:
+        Value: ada8a573-6876-434e-bffa-610c6c0c8325
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3333.9785
+        y: 332
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start10
+      action: 
+      id:
+        Value: ada8a573-6876-434e-bffa-610c6c0c8325
+      x: 3333.9785
+      y: 332
+      text: Like, you know I'm not really good at confrontation like this, but I just
+        think it's important for me to speak up here.
+      type: 1
+      child_id:
+        Value: 6578cfbf-8ddd-4c14-9616-1abe332afd73
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3651.9785
+        y: 347
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start11
+      action: 
+      id:
+        Value: 6578cfbf-8ddd-4c14-9616-1abe332afd73
+      x: 3651.9785
+      y: 347
+      text: You should have respect for a lady rock as beautiful as <c=b>The Moon</c>
+        is.
+      type: 1
+      child_id:
+        Value: 6b27feda-359c-4d53-98f9-cc56f499adeb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3978.9785
+        y: 343
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start12
+      action: 
+      id:
+        Value: 6b27feda-359c-4d53-98f9-cc56f499adeb
+      x: 3978.9785
+      y: 343
+      text: You'll see, I'm gonna <c=g>build a rocket</c> and fly up to her. Then
+        she'll see my intellect and love me.
+      type: 1
+      child_id:
+        Value: e7809ead-3be8-44c6-b1da-27c9ac8a2278
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4309.9785
+        y: 341
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start13
+      action: 
+      id:
+        Value: e7809ead-3be8-44c6-b1da-27c9ac8a2278
+      x: 4309.9785
+      y: 341
+      text: '...but I don''t know how I''m gonna do that yet...would sure be easier
+        if I <c=g>had hands</c> to build the rocket with...'
+      type: 1
+      child_id:
+        Value: c32d0367-5719-4934-9334-72cf7d1031d1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4660.9785
+        y: 355
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start14
+      action: 
+      id:
+        Value: c32d0367-5719-4934-9334-72cf7d1031d1
+      x: 4660.9785
+      y: 355
+      text: Rock think all wahmen are queen. <c=b>Moon</c> will love Rock because
+        Rock respect <c=b>Moon</c>
+      type: 1
+      child_id:
+        Value: 8a159267-1ce9-40ed-b1a4-48ee1e104e7c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5012.9785
+        y: 317
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start15
+      action: 
+      id:
+        Value: 8a159267-1ce9-40ed-b1a4-48ee1e104e7c
+      x: 5012.9785
+      y: 317
+      text: 'Rock just not as <c=g>pretty as other rocks</c>. '
+      type: 1
+      child_id:
+        Value: 9c35d666-d2ac-4db0-91c3-533755cf29da
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5358.9785
+        y: 341
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start16
+      action: 
+      id:
+        Value: 9c35d666-d2ac-4db0-91c3-533755cf29da
+      x: 5358.9785
+      y: 341
+      text: If only Rock was <c=g>prettier</c>, than <c=b>Moon</c> would choose Rock.
+      type: 1
+      child_id:
+        Value: 4b698f2c-c200-465d-a23d-c8c394e5bc1e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5720.9785
+        y: 347
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start17
+      action: 
+      id:
+        Value: 4b698f2c-c200-465d-a23d-c8c394e5bc1e
+      x: 5720.9785
+      y: 347
+      text: If garbageman <c=g>finds anything to make Rock look pretty</c>, please
+        give to Rock.
+      type: 1
+      child_id:
+        Value: 185c466c-2f1e-47cc-b0fe-2e96235ab9fd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6094.9785
+        y: 353
+        width: 270
+        height: 250
+      isCollapsed: 0
+      title: Start18
+      action: finish
+      id:
+        Value: 185c466c-2f1e-47cc-b0fe-2e96235ab9fd
+      x: 6094.9785
+      y: 353
+      text: Nah, listen garbageman, Rock's a lost cause, but i'd happily take <c=g>trash
+        donations</c> to my <c=g>love fund</c> if you can spare any.
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: e0e12f04-6174-495a-a666-8356a335eadd

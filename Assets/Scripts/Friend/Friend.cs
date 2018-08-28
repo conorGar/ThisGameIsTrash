@@ -17,7 +17,8 @@ public class Friend : MonoBehaviour {
     	int currentDayNumber = GlobalVariableManager.Instance.DAY_NUMBER;
 
     	//Enable ability to enter dialog on proper day
-    	if(nextDialog != "Start" && nextDialog != missedDialog ){
+    	Debug.Log("Next Dialog: " + nextDialog);
+    	if(nextDialog != "Jumbo2" && nextDialog != missedDialog ){
     		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false;
     		for(int i = 0; i < CalendarManager.Instance.friendEvents.Count; i++){
 				if(CalendarManager.Instance.friendEvents[i].day == currentDayNumber ){
@@ -40,6 +41,8 @@ public class Friend : MonoBehaviour {
 			gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
 			//Debug.Log("Dialog Definition Name:"+ gameObject.GetComponent<ActivateDialogWhenClose>().dialogDefiniton.name);
 		}
+
+		StartingEvents();
     }
 
     // Update is called once per frame
@@ -65,6 +68,11 @@ public class Friend : MonoBehaviour {
     public virtual void GenerateEventData()
     {
         // nothing to do for a basic friend.
+    }
+
+    public virtual void StartingEvents(){
+
+    	// nothing to do for a basic friend.
     }
 
     public virtual void Execute()

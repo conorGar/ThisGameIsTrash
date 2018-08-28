@@ -35,11 +35,6 @@ public class DialogChoiceManager : MonoBehaviour {
 
 
 	void Start () {
-	//- didnt define csv here because i think maybe it wasn't doing it before it was looking for the index of dialogname under SetDialogCHoices()
-		//csvText = csvFile.text;
-		//csvText = csvText.Substring(csvText.IndexOf("WorldNumber" + currentWorldNumber),Mathf.Abs(csvText.IndexOf("WorldNumber" + currentWorldNumber) - csvText.IndexOf("WorldNumber", csvText.IndexOf("WorldNumber" + currentWorldNumber) + 1)));//groups by world number
-		//Debug.Log(csvText);
-		//string[] lines = csvText.Split('\n');
 
 	}
 	

@@ -13,6 +13,7 @@ public class Ev_Results : MonoBehaviour {
 	public GameObject largeTrashTextDisplay;
 	public GameObject treasureCollectedDisplay;
 
+
 	GameObject backPaper;
 	int trashCollectedValue;
 	int phase = 0;
@@ -108,6 +109,8 @@ public class Ev_Results : MonoBehaviour {
 					GlobalVariableManager.Instance.ARROW_POSITION = 1;
 					if(GlobalVariableManager.Instance.DAY_NUMBER == 2){
 						GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");//supposed to be intro credits scene, changed for testing
+					}else if(GlobalVariableManager.Instance.DAY_NUMBER == 3){
+						StartCoroutine("HomelessHarry");
 					}else{
 						GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
 
@@ -126,4 +129,6 @@ public class Ev_Results : MonoBehaviour {
 		yield return new WaitForSeconds(1f);
 		phase = 2;
 	}
+
+
 }

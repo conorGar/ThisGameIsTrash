@@ -8,6 +8,7 @@ public class DialogActionManager : MonoBehaviour {
 	public Friend friend;
 	public GameObject movieScreen;
 	public GameObject mainCam;
+	public GameObject deadRat;
 	public GameObject calendar;
 	public DialogManager dialogManager;
 	int numberOfActivation;
@@ -29,15 +30,25 @@ public class DialogActionManager : MonoBehaviour {
 		dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
 		if(friend.nextDialog == "Jumbo2"){
 			if(numberOfActivation == 1){//pan to jumbo hiding in bush...
-				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(friend.transform.position,"JumboMovie");
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(friend.transform.position," ");
 				dialogManager.textBox.SetActive(false);
 				dialogManager.currentlySpeakingIcon.SetActive(false);
-				dialogManager.Invoke("ReturnFromAction",5f);//10= length of each movie 
-			}else if(numberOfActivation == 2){//dead rat zoom in...
-				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(friend.transform.position,"JumboMovie");
-				mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(2f,.1f);
-			}else if(numberOfActivation == 3){//return to jumbo after dead rat
-				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(friend.transform.position,"JumboMovie");
+				dialogManager.Invoke("ReturnFromAction",2f);
+			}else if(numberOfActivation == 2){//pan to audience...
+				dialogManager.textBox.SetActive(false);
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(deadRat.transform.position," ");
+				//mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(2f,.1f);
+				StartCoroutine("FilmSetPan");
+				dialogManager.Invoke("ReturnFromAction",5f);
+			}else if(numberOfActivation == 3){//dead rat zoom in...
+				dialogManager.ReturnFromAction();
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(deadRat.transform.position," ");
+				mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(3f,.1f);
+				dialogManager.currentlySpeakingIcon.SetActive(false);
+				dialogManager.variableText = friend.GetComponent<JumboFriend>().GetCurrentFilm().Replace('_',' ');
+			}else if(numberOfActivation == 4){//return to jumbo after dead rat
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(friend.transform.position," ");
+				dialogManager.Invoke("ReturnFromAction",.1f);
 				mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1.15f,4f);
 				dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogManager.dialogBlur;
 
@@ -56,6 +67,9 @@ public class DialogActionManager : MonoBehaviour {
 
 		string filmToPlay = friend.GetComponent<JumboFriend>().GetCurrentFilm();
 		movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);
+		if(movieScreen.transform.GetChild(1).gameObject.activeInHierarchy){//if film color is enabled
+			movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay + "_Color");
+		}
 		friend.GetComponent<JumboFriend>().DeleteCurrentFilm();
 
 		//determine next film
@@ -88,6 +102,12 @@ public class DialogActionManager : MonoBehaviour {
 		yield return new WaitForSeconds(.5f);
 		dialogManager.Invoke("ReturnFromAction",.1f);//10= length of each movie TODO:check for if this is the first movie or not, if not activate this line of code
 
+
+	}
+
+	IEnumerator FilmSetPan(){
+		yield return new WaitForSeconds(4f);
+		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(friend.transform.position," ");
 
 	}
 	public void RatWithHatIntro(){

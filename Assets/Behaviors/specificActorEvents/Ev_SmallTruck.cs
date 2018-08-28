@@ -7,7 +7,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 	public GameObject player;
 	public GameObject resultsDisplay;
 	//public GameObject backPaper;
-
+	public GameObject oneTimers;
 
 	int phase = 0;
 	int roomNum;
@@ -17,7 +17,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 	void Awake(){
 		if(player == null)//if not already set
 			player = GameObject.FindGameObjectWithTag("Player");
-
+		oneTimers = GameObject.Find("oneTimers");
 	}
 
 	void Start () {
@@ -43,6 +43,9 @@ public class Ev_SmallTruck : MonoBehaviour {
 			delayTillSpawn = .3f;
 			StartCoroutine("StopMovement");
 		}
+
+		EndDay(); //TODO: just here for testing homeless harry sequence
+
 	}
 	
 	// Update is called once per frame
@@ -91,6 +94,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 		Debug.Log("Truck End Day Activate");
 
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
+		player.GetComponent<EightWayMovement>().enabled = false;
 		endDayTruck = true;
 		if(phase == 0){
 			//player = GameObject.FindGameObjectWithTag("Player");
@@ -113,11 +117,11 @@ public class Ev_SmallTruck : MonoBehaviour {
 		}else if(phase == 2){
 			//Destroy(player);
 			StartCoroutine("StartMovement");
-			resultsDisplay.SetActive(true); //gets value from ev_fadeHelper
-			//GameObject tempPaper = Instantiate(backPaper,transform.position,Quaternion.identity);
-			//GameObject tempResults = Instantiate(resultsDisplay,transform.position,Quaternion.identity);
-			//tempResults.transform.parent = tempPaper.transform.parent;
-			//^ for now the prefab had results already attatched as child
+			if(GlobalVariableManager.Instance.DAY_NUMBER == 2){
+				StartCoroutine("HomelessHarry");
+			}else{
+				resultsDisplay.SetActive(true); //gets value from ev_fadeHelper
+			}
 		}
 
 
@@ -177,5 +181,14 @@ public class Ev_SmallTruck : MonoBehaviour {
 		yield return new WaitForSeconds(.6f);
 		gameObject.GetComponent<Rigidbody2D>().velocity= new Vector2(50f,0f);
 
+	}
+
+	IEnumerator HomelessHarry(){
+		yield return new WaitForSeconds(1f);
+		//shake screen
+
+		//Enable Harry dialog
+		oneTimers.GetComponent<ActivateDialogWhenClose>().dialogName = "Harry1";
+		oneTimers.GetComponent<ActivateDialogWhenClose>().ActivateDialog();
 	}
 }

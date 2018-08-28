@@ -30,7 +30,8 @@ public class HUD_Calendar : MonoBehaviour {
 		leavingScreen = false;
 		newMarkSequence = false;
 		gameObject.transform.localPosition = new Vector2(-23f,-1f);
-		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);//TODO: This gets faster as time passes...fix!
+
+			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);//TODO: This gets faster as time passes...fix!
 
 	}
 

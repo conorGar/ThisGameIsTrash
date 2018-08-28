@@ -24,7 +24,8 @@ public class DialogManager : MonoBehaviour {
 	public Camera guiCamera; //needed for icon to corner at dialog choice
 	public GameObject dialogCanvas;
 	public TextMeshProUGUI characterName;
-
+	[HideInInspector]
+	public string animationName;
 	//------------Screen Blur stuff---------------//
 	public PostProcessingProfile dialogBlur;
 	public GameObject mainCam;
@@ -226,11 +227,13 @@ public class DialogManager : MonoBehaviour {
 		mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
 		Debug.Log(friend.nextDialog);
 		//Debug.Log(currentNode.child_id.ToString());
-		friend.nextDialog = myDialogDefiniton.nodes[currentNode.child_id].title;
+		if(friend != null)//would = null for some one timers
+			friend.nextDialog = myDialogDefiniton.nodes[currentNode.child_id].title;
 		 //sets up dialog for next interaction
 		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
 		player.GetComponent<EightWayMovement>().enabled = true;
+		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 		dialogCanvas.SetActive(false);
 	}
 
