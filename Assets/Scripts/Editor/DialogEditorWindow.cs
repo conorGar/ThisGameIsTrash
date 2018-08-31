@@ -192,8 +192,18 @@ public class DialogEditorWindow : EditorWindow {
             if (node.isCollapsed)
                 node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.collapsedHeight);
             else
-                node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.defaultWindowHeight);
+            {
+                if (node.type == DIALOGNODETYPE.STATEMENT)
+                    node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.defaultWindowHeight);
+                else
+                    node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.questionWindowHeight);
+            }
         }
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Speaker: ");
+        node.speakerName = GUILayout.TextField(node.speakerName);
         GUILayout.EndHorizontal();
 
         if (!node.isCollapsed)
@@ -201,10 +211,24 @@ public class DialogEditorWindow : EditorWindow {
 
             //GUILayout.Label("Id: " + node.id.ToString());
 
+            GUI.changed = false;
             GUILayout.BeginHorizontal();
             GUILayout.Label("Type: ");
             node.type = (DIALOGNODETYPE)EditorGUILayout.EnumPopup(node.type);
             GUILayout.EndHorizontal();
+
+            if (GUI.changed)
+            {
+                if (node.isCollapsed)
+                    node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.collapsedHeight);
+                else
+                {
+                    if (node.type == DIALOGNODETYPE.STATEMENT)
+                        node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.defaultWindowHeight);
+                    else
+                        node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.questionWindowHeight);
+                }
+            }
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Text: ");
@@ -267,6 +291,11 @@ public class DialogEditorWindow : EditorWindow {
                     GUILayout.EndHorizontal();
                     break;
                 case DIALOGNODETYPE.QUESTION:
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label("Question: ");
+                    node.question = GUILayout.TextArea(node.question, GUILayout.Height(50));
+                    GUILayout.EndHorizontal();
+
                     // Create
                     if (GUILayout.Button("Create Response"))
                     {
@@ -278,7 +307,6 @@ public class DialogEditorWindow : EditorWindow {
                     {
                         GUILayout.BeginHorizontal();
                         GUILayout.Label("R" + i + ": ");
-                        node.responses[i].text = GUILayout.TextField(node.responses[i].text);
                         if (GUILayout.Button("X"))
                         {
                             node.responses.Remove(node.responses[i]);
@@ -297,6 +325,7 @@ public class DialogEditorWindow : EditorWindow {
                             menu.ShowAsContext();
                         }
                         GUILayout.EndHorizontal();
+                        node.responses[i].text = GUILayout.TextArea(node.responses[i].text);
                     }
                     break;
             }

@@ -30,13 +30,16 @@ public class DialogResponse
 public class DialogNode
 {
     public static float defaultWindowWidth = 270f;
-    public static float defaultWindowHeight = 250f;
+    public static float defaultWindowHeight = 200f;
+    public static float questionWindowHeight = 420f;
     public static float collapsedHeight = 42f;
 
     public Rect window;
 
     public bool isCollapsed;
     public string title;
+    public string speakerName;
+    public string question;
     public string action;
     public SerializableGuid id;
     public float x;
@@ -54,6 +57,8 @@ public class DialogNode
     {
         isCollapsed = false;
         title = p_title;
+        speakerName = "speakerName";
+        question = "";
         action = "";
         id = Guid.NewGuid();
         text = p_text;
