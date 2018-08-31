@@ -16,13 +16,13 @@ public class ThrowTrash : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.A)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)){
 			StartCoroutine("Throw","left");
-		}else if(Input.GetKeyDown(KeyCode.D)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)){
 			StartCoroutine("Throw","right");
-		}else if(Input.GetKeyDown(KeyCode.W)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)){
 			StartCoroutine("Throw","up");
-		}else if(Input.GetKeyDown(KeyCode.S)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)){
 			StartCoroutine("Throw","down");
 		}
 

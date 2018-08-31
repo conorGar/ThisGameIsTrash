@@ -39,14 +39,18 @@ public class S_Ev_BagSelect : MonoBehaviour {
 	void Update () {
 		if(canNavigate ){
 			if(selected != true){
-				if(Input.GetKeyDown(KeyCode.RightArrow)){
+				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
+               || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
+                {
 					if(GlobalVariableManager.Instance.MENU_SELECT_STAGE < 3){
 						GlobalVariableManager.Instance.MENU_SELECT_STAGE++;
 					}else{
 						GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
 					}
 					NextBag("right");
-				}else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
+                      || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
+                {
 					if(GlobalVariableManager.Instance.MENU_SELECT_STAGE > 0){
 						GlobalVariableManager.Instance.MENU_SELECT_STAGE--;
 					}else{
@@ -55,17 +59,21 @@ public class S_Ev_BagSelect : MonoBehaviour {
 					NextBag("left");
 				}
 			}else{//selected options
-				if(Input.GetKeyDown(KeyCode.DownArrow)){
+				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
+                || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN))
+                {
 					if(GlobalVariableManager.Instance.MENU_SELECT_STAGE < 2){
 						GlobalVariableManager.Instance.MENU_SELECT_STAGE++;
 					}
-				}else if(Input.GetKeyDown(KeyCode.UpArrow)){
+				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
+                      || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP))
+                {
 					if(GlobalVariableManager.Instance.MENU_SELECT_STAGE > 0){
 						GlobalVariableManager.Instance.MENU_SELECT_STAGE--;
 					}
 				}
 			}
-			if(Input.GetKeyDown(KeyCode.Space) && canNavigate && locked == false){
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && canNavigate && locked == false){
 				BagSelect();
 			}
 		}

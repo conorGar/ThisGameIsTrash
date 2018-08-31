@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalVariableManager : MonoBehaviour {
+public class GlobalVariableManager : UserDataItem {
 
 
 
@@ -200,6 +200,55 @@ public class GlobalVariableManager : MonoBehaviour {
 		}else{
 			Destroy(gameObject);
 		}
+    }
+
+    // User Data implementation
+    public override string UserDataKey()
+    {
+        return "GlobalVariable";
+    }
+
+    public override SimpleJSON.JSONObject Save()
+    {
+        var json_data = new SimpleJSON.JSONObject();
+        json_data["pinsDiscoveredValue"] = pinsDiscoveredValue;
+        json_data["pinsEquippedValue"] = pinsEquippedValue;
+
+        json_data["STANDARD_GARBAGE_DISCOVERED"] = (uint)STANDARD_GARBAGE_DISCOVERED;
+        json_data["STANDARD_GARBAGE_VIEWED"] = (uint)STANDARD_GARBAGE_VIEWED;
+        json_data["COMPOST_GARBAGE_DISCOVERED"] = (uint)COMPOST_GARBAGE_DISCOVERED;
+        json_data["COMPOST_GARBAGE_VIEWED"] = (uint)COMPOST_GARBAGE_VIEWED;
+        json_data["RECYCLABLE_GARBAGE_DISCOVERED"] = (uint)RECYCLABLE_GARBAGE_DISCOVERED;
+        json_data["RECYCLABLE_GARBAGE_VIEWED"] = (uint)RECYCLABLE_GARBAGE_VIEWED;
+        json_data["LARGE_GARBAGE_DISCOVERED"] = (uint)LARGE_GARBAGE_DISCOVERED;
+        json_data["LARGE_GARBAGE_VIEWED"] = (uint)LARGE_GARBAGE_VIEWED;
+
+        json_data["PPVALUE"] = PPVALUE;
+        json_data["DEJAVUCOUNT"] = DEJAVUCOUNT;
+        json_data["CURSEVALUE"] = CURSEVALUE;
+        json_data["MOMONEYVALUE"] = MOMONEYVALUE;
+
+        return json_data;
+    }
+
+    public override void Load(SimpleJSON.JSONObject json_data)
+    {
+        pinsDiscoveredValue = (ulong)json_data["pinsDiscoveredValue"].AsLong;
+        pinsEquippedValue = (ulong)json_data["pinsEquippedValue"].AsLong;
+
+        STANDARD_GARBAGE_DISCOVERED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_DISCOVERED"].AsInt;
+        STANDARD_GARBAGE_VIEWED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_VIEWED"].AsInt;
+        COMPOST_GARBAGE_DISCOVERED = (COMPOSTGARBAGE)json_data["COMPOST_GARBAGE_DISCOVERED"].AsInt;
+        COMPOST_GARBAGE_VIEWED = (COMPOSTGARBAGE)json_data["COMPOST_GARBAGE_VIEWED"].AsInt;
+        RECYCLABLE_GARBAGE_DISCOVERED = (RECYCLABLEGARBAGE)json_data["RECYCLABLE_GARBAGE_DISCOVERED"].AsInt;
+        RECYCLABLE_GARBAGE_VIEWED = (RECYCLABLEGARBAGE)json_data["RECYCLABLE_GARBAGE_VIEWED"].AsInt;
+        LARGE_GARBAGE_DISCOVERED = (LARGEGARBAGE)json_data["LARGE_GARBAGE_DISCOVERED"].AsInt;
+        LARGE_GARBAGE_VIEWED = (LARGEGARBAGE)json_data["LARGE_GARBAGE_VIEWED"].AsInt;
+
+        PPVALUE =json_data["PPVALUE"].AsInt;
+        DEJAVUCOUNT = json_data["DEJAVUCOUNT"].AsInt;
+        CURSEVALUE = json_data["CURSEVALUE"].AsInt;
+        MOMONEYVALUE = json_data["MOMONEYVALUE"].AsInt;
     }
 
     // helpers

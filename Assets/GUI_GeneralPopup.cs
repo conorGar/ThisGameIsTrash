@@ -14,7 +14,8 @@ public class GUI_GeneralPopup : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+        {
 			
 			Time.timeScale = 1;
 			gameObject.SetActive(false);

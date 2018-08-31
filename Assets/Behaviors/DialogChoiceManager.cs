@@ -42,15 +42,17 @@ public class DialogChoiceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.UpArrow) && arrowPos > 0){
-			SoundManager.instance.PlaySingle(navUpSfx);
-			NavigateOptions("up");
-		}else if(Input.GetKeyDown(KeyCode.DownArrow) && arrowPos <= (numberOfOptions - 1)){
-			SoundManager.instance.PlaySingle(navDownSfx);
-			NavigateOptions("down");
-		}else if(Input.GetKeyDown(KeyCode.Space)){
-			SoundManager.instance.PlaySingle(selectChoice);
-			SelectOption(arrowPos);
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
+        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 0){
+            SoundManager.instance.PlaySingle(navUpSfx);
+            NavigateOptions("up");
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
+        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos <= (numberOfOptions - 1)){
+            SoundManager.instance.PlaySingle(navDownSfx);
+            NavigateOptions("down");
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
+            SoundManager.instance.PlaySingle(selectChoice);
+            SelectOption(arrowPos);
 		}
 	}
 

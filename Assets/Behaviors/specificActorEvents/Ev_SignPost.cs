@@ -38,7 +38,8 @@ public class Ev_SignPost : MonoBehaviour {
 		}
 
 
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+        {
 			if(glowCheck == 1){
 				SoundManager.instance.PlaySingle(signRise);
 				signPostHUD.SetActive(true);

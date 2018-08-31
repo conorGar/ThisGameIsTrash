@@ -6,7 +6,8 @@ using TMPro;
 
 
 public class S_Ev_TitleScreen : MonoBehaviour {
-	int navigationPosition = 1;
+    bool isInteractable = true;
+    int navigationPosition = 1;
 	int phase = 0;
 	int backCamPhase = 0;
 
@@ -20,6 +21,8 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 	public GameObject optionsOption;
 	public GameObject extrasOptions;
 
+    public TextMeshProUGUI loadingGameDataVisual;
+
 	GameObject currentSelected;
 
 	// Use this for initialization
@@ -27,42 +30,64 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 		currentSelected = playOption;
 	}
 	
+    IEnumerator LoadUserData()
+    {
+        isInteractable = false;
+        loadingGameDataVisual.gameObject.SetActive(true);
+
+        // Testing data loading!
+        UserDataManager.Instance.SetSlot(0);
+        yield return UserDataManager.Instance.ReadAsync();
+
+        // Simulate async loading time for testing.
+        yield return new WaitForSeconds(2);
+
+        loadingGameDataVisual.gameObject.SetActive(false);
+
+        phase = 2;
+        fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
+    }
+
 	// Update is called once per frame
 	void Update () {
-		
-		if(phase == 1){
-			if(Input.GetKeyDown(KeyCode.UpArrow)){
-				if(navigationPosition >1){
-					navigationPosition--;
-					UpdateSelected();
-				}
-			}else if(Input.GetKeyDown(KeyCode.DownArrow)){
-				if(navigationPosition < 3){
-					navigationPosition++;
-					UpdateSelected();
-				}
-			}else if(Input.GetKeyDown(KeyCode.Space)){
-				if(navigationPosition == 1){
-					phase = 2;
-					fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
+        if (isInteractable)
+        {
+            if (phase == 1) {
+                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                    if (navigationPosition > 1) {
+                        navigationPosition--;
+                        UpdateSelected();
+                    }
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                    if (navigationPosition < 3) {
+                        navigationPosition++;
+                        UpdateSelected();
+                    }
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
+                      || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
+                    if (navigationPosition == 1) {
+                        StartCoroutine(LoadUserData());
+                    }
+                }
+            } else if (phase == 0) {
+                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
+                 || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
+                    Debug.Log(title.GetComponent<SpecialEffectsBehavior>() == null);
+                    Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x, Screen.height * -1, 0));
 
-				}
-			}
-		}else if(phase == 0){
-			if(Input.GetKeyDown(KeyCode.Space)){
-				Debug.Log(title.GetComponent<SpecialEffectsBehavior>() == null);
-				Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x,Screen.height*-1,0));
+                    Debug.Log(topLimit);
+                    Debug.Log(topLimit * -1);
 
-				Debug.Log(topLimit);
-				Debug.Log(topLimit*-1);
+                    title.transform.localPosition = topLimit * -1;
+                    //title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
+                    choicesBox.SetActive(true);
+                    phase = 1;
 
-				title.transform.localPosition = topLimit*-1;
-				//title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
-				choicesBox.SetActive(true);
-				phase = 1;
-
-			}
-		}
+                }
+            }
+        }
 
 
 

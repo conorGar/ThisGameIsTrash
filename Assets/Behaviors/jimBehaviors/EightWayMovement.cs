@@ -49,12 +49,12 @@ public class EightWayMovement : MonoBehaviour {
  
     // Update is called once per frame
     void Update () {
-    	
-        float inputX = Input.GetAxisRaw("Horizontal");
-        float inputY = Input.GetAxisRaw("Vertical");
+        float inputX = ControllerManager.Instance.GetAxis(INPUTACTION.MOVELEFT);
+        float inputY = ControllerManager.Instance.GetAxis(INPUTACTION.MOVEUP);
         movement = new Vector2(inputX, inputY);
         //Debug.Log(inputX);
- 		if(Input.GetKeyDown(KeyCode.LeftArrow)){
+ 		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT))
+        {
 			if(directionFacing != 2){
 					gameObject.transform.localScale = new Vector2(transformScale.x*-1,transformScale.y); 
 			}
@@ -62,7 +62,8 @@ public class EightWayMovement : MonoBehaviour {
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
 			}
 			directionFacing = 2;
-		}else if(Input.GetKeyDown(KeyCode.RightArrow)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT))
+        {
 			if(directionFacing != 1){
 					gameObject.transform.localScale = new Vector2(transformScale.x,transformScale.y); 
 				}
@@ -72,12 +73,14 @@ public class EightWayMovement : MonoBehaviour {
 
 			}
 			directionFacing = 1;
-		}else if(Input.GetKeyDown(KeyCode.UpArrow)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP))
+        {
 			if(anim.CurrentClip.name != "ani_jimWalkUp" && !clipOverride){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkUp",false);
 			}
 			directionFacing = 3;
-		}else if(Input.GetKeyDown(KeyCode.DownArrow)){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN))
+        {
 			if(anim.CurrentClip.name != "ani_jimWalkDown" && !clipOverride){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkDown",false);
 			}

@@ -43,7 +43,8 @@ public class SE_GlowWhenClose : MonoBehaviour {
 					SoundManager.instance.PlaySingle(highlightSound);
 					glowCheck = 1;
 				}else if(activateSomethingWithSpace){
-					if(Input.GetKeyDown(KeyCode.Space)){
+					if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+                    {
 						Activate();
 						this.enabled = false; //deactivates this behavior, should be reativated at the end of whatever method is activated
 					}

@@ -47,7 +47,7 @@ public class Ev_Results : MonoBehaviour {
 
 		
 
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 			if(phase == 2){
 				if(GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count > displayIndex){
 

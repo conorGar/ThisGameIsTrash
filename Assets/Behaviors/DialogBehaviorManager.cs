@@ -109,7 +109,7 @@ public class DialogBehaviorManager : MonoBehaviour {
 	}
 	
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 			if(finishedDisplayingText){
 				NextText();
 			}

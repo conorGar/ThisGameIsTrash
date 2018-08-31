@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1980302940960456}
+  m_IsPrefabParent: 1
+--- !u!1 &1980302940960456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4165840622999014}
+  - component: {fileID: 114421117000630938}
+  m_Layer: 0
+  m_Name: GlobalVariableManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4165840622999014
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980302940960456}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -3.74, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114421117000630938
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980302940960456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44705a02321f1ee458e07708acbae403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
+  PPVALUE: 5
+  DEJAVUCOUNT: 0
+  CURSEVALUE: 0
+  MOMONEYVALUE: 0
+  characterUpgradeArray:
+  - abcdefghijolmnpqrstuvwxy1234567890,./;'*[]-<>?:(){}!^
+  - abcdefghijklmnpqrstuvwxy1234567890,./;'
+  - 0.0
+  - 5.0
+  - 0.0
+  - 0.0
+  - 0.0
+  ARROW_POSITION: 1
+  Max_HP: 5
+  DAY_NUMBER: 1
+  IS_HIDDEN: 0
+  MASTER_MUSIC_VOL: 30
+  MASTER_SFX_VOL: 30
+  MENU_SELECT_STAGE: 1
+  PLAYER_CAN_MOVE: 1
+  TUT_POPUP_ON: 1
+  CARRYING_SOMETHING: 0
+  PROGRESS_LV: 0
+  TOTAL_TRASH: 0
+  X_SELF: 0
+  Y_SELF: 0
+  SPAWN_POS_X: 0
+  SPAWN_POS_Y: 0
+  shopPins:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  TUT_POPUPS_SHOWN: 0
+  BOSSES_KILLED: 0
+  BOSS_HP_LIST: 63000000630000006300000063000000630000006300000063000000630000006300000063000000
+  STATUE_LIST: 
+  STANDARD_GARBAGE_DISCOVERED: 0
+  STANDARD_GARBAGE_VIEWED: 0
+  COMPOST_GARBAGE_DISCOVERED: 0
+  COMPOST_GARBAGE_VIEWED: 0
+  RECYCLABLE_GARBAGE_DISCOVERED: 0
+  RECYCLABLE_GARBAGE_VIEWED: 0
+  LARGE_GARBAGE_DISCOVERED: 0
+  LARGE_GARBAGE_VIEWED: 0
+  GARBAGE_HAD: 0
+  LARGE_TRASH_COLLECTED: 0
+  LARGE_TRASH_LOCATIONS:
+  - {x: 0.00011636142, y: 0}
+  MY_NUM_IN_ROOM: 0
+  DROPPED_TRASH_LOCATION: {x: 0, y: 0, z: 0}
+  TODAYS_TRASH_AQUIRED: 000000000000000000000000
+  TRASH_TYPE_SELECTED: 3
+  TRASH_AQUIRED: 0
+  ENEMIES_DEFEATED: 0
+  SCENE_IS_TRANSITIONING: 0
+  AMOUNT_TRASH_IN_WORLD: 0
+  CALENDAR: []
+  FRIEND_LIST: []
+  WORLD_ENEMY_LIST: []
+  ROOM_NUM: 0
+  TIME_IN_DAY: 111
+  WORLD_NUM: 1
+  WORLD_ROOM_DISCOVER:
+  - obcdefghijklmnpqrstuvwxyz123456789;',.
+  - abcdefghijklmnpqrstuvwxyz123
+  - abcdefghijklmnpqrstuvwxyz123
+  - abcdefghijklmnpqrstuvwxyz123
+  WORLD_SIGNS_READ:
+  - abcdefghijklmnpqrstuvwxyz12{}
+  - abcdefghijklmn/:rstuv}xy1234567
+  - abcdefghilm
+  - 
+  - abcdefghijklmn
+  WORLDS_UNLOCKED: 0

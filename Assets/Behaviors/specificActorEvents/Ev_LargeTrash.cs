@@ -125,7 +125,8 @@ public class Ev_LargeTrash : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+        {
 			if(phase !=3){
 				if(returning != true && GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count < 6) // world room discover part for no pickup during coon. Still needs pause check***
 					PickUp();

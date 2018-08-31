@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01eb15854d4cc5e478d129df882ff9d2, type: 3}
+  m_Name: Keyboard
+  m_EditorClassIdentifier: 
+  joystickName: Keyboard
+  inputs:
+  - action: 0
+    type: 0
+    axisDirection: 0
+    keys:
+    - KeyAxisY
+  - action: 1
+    type: 0
+    axisDirection: 1
+    keys:
+    - KeyAxisY
+  - action: 2
+    type: 0
+    axisDirection: 1
+    keys:
+    - KeyAxisX
+  - action: 3
+    type: 0
+    axisDirection: 0
+    keys:
+    - KeyAxisX
+  - action: 4
+    type: 0
+    axisDirection: 0
+    keys:
+    - KeyAttackAxisY
+  - action: 5
+    type: 0
+    axisDirection: 1
+    keys:
+    - KeyAttackAxisY
+  - action: 6
+    type: 0
+    axisDirection: 1
+    keys:
+    - KeyAttackAxisX
+  - action: 7
+    type: 0
+    axisDirection: 0
+    keys:
+    - KeyAttackAxisX
+  - action: 8
+    type: 0
+    axisDirection: 0
+    keys:
+    - Interact
+  - action: 9
+    type: 0
+    axisDirection: 0
+    keys:
+    - Cancel
+  - action: 10
+    type: 0
+    axisDirection: 0
+    keys:
+    - Cancel
+  - action: 11
+    type: 0
+    axisDirection: 0
+    keys:
+    - Pause
