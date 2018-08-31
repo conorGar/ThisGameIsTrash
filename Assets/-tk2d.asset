@@ -129,6 +129,18 @@ MonoBehaviour:
     dataGUID: 
     managed: 0
     loadable: 0
+  - assetGUID: 0c2db1358ec9ba24fb47a4cef29bb8ac
+    dataGUID: 
+    managed: 0
+    loadable: 0
+  - assetGUID: 638e20cc3cd8d904b8b6656251720691
+    dataGUID: 
+    managed: 0
+    loadable: 0
+  - assetGUID: f1f34acf5950fc2439b9da9804f18d1f
+    dataGUID: 
+    managed: 0
+    loadable: 0
   fontIndex:
   - assetGUID: 063b15d80dbb4604d890600a64c79cf8
     dataGUID: e7a6b09a73c6b2b4f8060096ddbd3b5e
@@ -1692,6 +1704,9 @@ MonoBehaviour:
     - Hud_healthBarFull
     - meleeIcon_plank
     - meleeIcon_claw
+    - speechBubble1
+    - speechBubble3
+    - speechBubble2
     spriteTextureGUIDs:
     - 52049695ab6ecd1489104fbd50a04745
     - e477c2e523adaee4bb6e3b2cf2a62117
@@ -1707,6 +1722,9 @@ MonoBehaviour:
     - 31b385ebfde59cd4eb8be2414e472e27
     - 5b5d30ec1d67f324db266fec0cd78c94
     - 5046b7429ec7b1b4a88dbf07408ddfb5
+    - 173a2c972763f734cb49dfaf0b4e29a1
+    - 50668a23896f954499e6445a115ac808
+    - 9fd5178953b96404d9c3075c771a6585
     spriteTextureTimeStamps:
     - 1495420634.45452
     - 1473169917.39204
@@ -1722,6 +1740,9 @@ MonoBehaviour:
     - 1481210004.66767
     - 1473169332.61645
     - 1473169532.26701
+    - 1535243101.17489
+    - 1535243332.90149
+    - 1535243293.38325
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
@@ -3476,6 +3497,14 @@ MonoBehaviour:
     - Jumbo_idle3
     - Jumbo_idle6
     - Jumbo_idle4
+    - Jumbo_surprised
+    - jumboHat3
+    - jumboHat4
+    - jumboHat6
+    - jumboHat7
+    - jumboHat5
+    - jumboHat1
+    - jumboHat2
     spriteTextureGUIDs:
     - 5d6c88c80a9665043bf07b8040ac0ccb
     - 7faa7e942511faf4298516d9effcd7ad
@@ -3484,14 +3513,30 @@ MonoBehaviour:
     - 387115b2558832443b3db2a4e1475bc2
     - c5018d0e6caa9e74a9951ad6c62d2f97
     - 8b482b7a90c233843bb70b2f851ef506
+    - 9877bbae4183474489fc7329aa69234b
+    - 83f14b5e5f56fd846b1084b4884aa2c9
+    - b3063ae31630d6e408d1ded06fce894d
+    - bc33fd00a820a9f4abe7206735872fd2
+    - 8f9430c5249b9c04badcc0fe8730ee68
+    - cc8c76902f33ea34e85e5ae0447699e4
+    - 0f9749c9aa10c2e4eb284cbb8182cc2f
+    - 9d6f17cfe94a20f429ef0cc01d4020bc
     spriteTextureTimeStamps:
-    - 1533542281.04179
-    - 1533542332.51997
-    - 1533542290.88856
-    - 1533542357.06703
-    - 1533542302.7844
-    - 1533542344.76134
-    - 1533542312.58577
+    - 1534704145.5619
+    - 1534704146.06825
+    - 1534704145.68399
+    - 1534704146.34545
+    - 1534704145.80506
+    - 1534704146.21136
+    - 1534704145.90613
+    - 1535153347.70204
+    - 1535390154.30285
+    - 1535390166.97345
+    - 1535390190.54866
+    - 1535390201.93195
+    - 1535390178.80897
+    - 1535390128.49057
+    - 1535390139.75005
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
@@ -3541,6 +3586,194 @@ MonoBehaviour:
     - 1490359936.40924
     - 1490359801.41513
     - 1490359923.25387
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
+  - name: FriendObjects
+    spriteCollectionGUID: 17c6d5d09d9bea447aa02dcc7a3e4fed
+    spriteCollectionDataGUID: 5cd66918f4b31414aa07ea93396abf90
+    spriteNames:
+    - pupFiction6
+    - reservoir1
+    - reservoir2
+    - pupFiction3
+    - pupFiction4
+    - pupFiction5
+    - dogfather4
+    - reservoir3
+    - reservoir4
+    - reservoir5
+    - reservoir6
+    - dogfather3
+    - dogfather5
+    - dogfather6
+    - dogfather1
+    - dogfather2
+    - citizenDane6
+    - citizenDane5
+    - dogDay3
+    - pawShank2
+    - pawShank3
+    - citizenDane1
+    - dogDay1
+    - dogDay5
+    - dogDay6
+    - citizenDane3
+    - pawShank4
+    - pawShank5
+    - pawShank6
+    - citizenDane4
+    - movie borders
+    - pawShank1
+    - pupFiction1
+    - pupFiction2
+    - citizenDane2
+    - dogDay4
+    - dogDay2
+    - theEnd
+    - title_citizenDane
+    - title_pawshank
+    - title_pupFiction
+    - citizenDane1_color
+    - citizenDane2_color
+    - citizenDane3_color
+    - citizenDane4_color
+    - citizenDane5_color
+    - citizenDane6_color
+    spriteTextureGUIDs:
+    - b5a9089b1e40f4344b92f4ec0aa3c893
+    - 07f0a48daa6e3dd4cac6260bb7cee081
+    - ecab2486b758f8243a354b0e22f6bf92
+    - 7569d2dd2ef31c94984ceec42379cf25
+    - 586265f76b4c76c41b93837a822ab303
+    - 3c7fa972dc980be42bcd5e5f7503f8b0
+    - 0c0df8f384376dc488792fc6a2ebc846
+    - 45dcc5e47bd715140bda45bed5e3b8b3
+    - 2b50b00cb15b8a343ae27d292c2c1131
+    - d2278bfb25b72d54b919cc1a1e4de636
+    - ab9ff58a32bff6842b2bbb1f838dd06d
+    - a383379926c0b3b4b8dfcd912e5de23d
+    - e7cdbc5e4d56bc8499a0268d7dbfcdea
+    - da813163b04c31d4a8d80f6116935135
+    - 4f34e144a89083b4a85d66837954d8e9
+    - 4b73bba0e81266f4a88710420f598aaa
+    - d6934c09b09b7514e9fc255a671ad839
+    - 5abf6cb397617894c9b835f36e769ea6
+    - 755b00b2513a75042bef6562bdf24dc8
+    - a032c5f91aeaa4644975736088591ef8
+    - 9ec4fedaf7011be408e2925ca2e537e0
+    - fcb250985400b8446a94cc70a6ed0e69
+    - c02f3c635999d174fb85caf73058e215
+    - 60398384aca927446ad866354495407c
+    - 04361be2a4ea0b144bfc7552c3c01677
+    - 180871fb480eb354dab24fbfb4cfbabd
+    - 11a91946e52c22f448b1e62b0fff6522
+    - 8031b245f5363c34985de6fb350e120c
+    - 8891483f54cf0264a86fd80155173df0
+    - 2d2c36b7f82463e488a223ddd9806ea4
+    - 92977ddad2a25514986aa7ff2ddd9e80
+    - ab5ae3d377d45f849a9dc7c401596e7a
+    - 2f07632b1b641c740bb05e8175222761
+    - c10601bc542e79646b4c871546e899a0
+    - 880b9de1f97f67a419530d8bab177c33
+    - b47c29527d03e7241bbee2766156a5f9
+    - 3873c85831377a44dbb7e762ffa40613
+    - 23ae74822e609b049920625813edcbc6
+    - 5ef2eef183a2c214ebee87a0d22ede15
+    - 7e54270aab3b1c7479b30b6e5fc5a4d5
+    - aa6e0bc89925d7341be539c4124864bd
+    - c0eda05c01516a34095ba5b4b0b195cd
+    - 88c8688fc27f49942aea2aec4b18db98
+    - 7b3a29df765303a4a9318417ea63a90d
+    - 71d988101ef40d84dbe3c0c01db04187
+    - 7a0fa4ee5f2539f49bb992eb84f23f32
+    - 350db34195670bc43a29a7e161fa02c8
+    spriteTextureTimeStamps:
+    - 1534978777.79586
+    - 1534979554.78799
+    - 1534979598.53397
+    - 1534978974.61088
+    - 1534978966.45959
+    - 1534978790.35291
+    - 1534979435.07515
+    - 1534979592.66606
+    - 1534979587.35855
+    - 1534979567.93321
+    - 1534979562.13983
+    - 1534979441.01798
+    - 1534979427.8539
+    - 1534979421.45291
+    - 1534979457.24302
+    - 1534979447.53377
+    - 1534979010.33779
+    - 1534979020.33215
+    - 1534979241.03063
+    - 1534979139.28397
+    - 1534979131.27541
+    - 1534979001.56946
+    - 1534979355.35806
+    - 1534979195.17101
+    - 1534979187.40458
+    - 1534979036.34573
+    - 1534979104.35074
+    - 1534979096.97757
+    - 1534979088.38702
+    - 1534979028.85069
+    - 1474916248.53098
+    - 1534979149.58508
+    - 1534978765.38775
+    - 1534978983.045
+    - 1534979047.17403
+    - 1534979221.48352
+    - 1534979249.13918
+    - 1535155859.9891
+    - 1535155277.66225
+    - 1535155229.6924
+    - 1535155345.70866
+    - 1535157685.51663
+    - 1535157843.03545
+    - 1535157562.54334
+    - 1535157961.94284
+    - 1535158065.49435
+    - 1535158131.18898
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
+  - name: SC_Friend_RatWithHat
+    spriteCollectionGUID: de22379eb4d0ad945a9f3e2f84870103
+    spriteCollectionDataGUID: 253214650d0e3d34fb3b96054d691fe9
+    spriteNames:
+    - hatWithHat3
+    - hatWithHat4
+    - hatWithHat7
+    - hatWithHat8
+    - hatWithHat9
+    - hatWithHat2
+    - hatWithHat5
+    - hatWithHat6
+    - hatWithHat1
+    spriteTextureGUIDs:
+    - fe326a395109b8841bd12e398de3f03d
+    - 800d3e951bf7acc43b1d5004184cf4e1
+    - 725c683ea90197d4cb972e1d0a295e27
+    - 197d0adec2d5631408aedd156548096c
+    - fd4b50bc5e078b34f8736de3a228a6bb
+    - 0fe1b7e15eaef0249b638b67bdd4c8c1
+    - d347faf8765d7934893a5920998a5ca0
+    - 0d573a8b4a19cab47bb128489bc53cec
+    - bd0bc6c0ec476c441b9af42a755798e8
+    spriteTextureTimeStamps:
+    - 1535227681.7249
+    - 1535227694.50815
+    - 1535227756.98957
+    - 1535227769.14923
+    - 1535227780.6495
+    - 1535227669.96832
+    - 1535227711.26333
+    - 1535227724.10071
+    - 1535227658.96734
     managedSpriteCollection: 0
     loadable: 0
     assetName: 

@@ -32,7 +32,6 @@ public class PopulateWorld : MonoBehaviour
 			//assigns string so com knows how many new rooms were discovered at result screen
 				GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Add(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER[GlobalVariableManager.Instance.WORLD_NUM - 1]);
 			}
-			Debug.Log(GlobalVariableManager.Instance.characterUpgradeArray[1].Length);
 			/*if(GlobalVariableManager.Instance.characterUpgradeArray[1][28].CompareTo('o') == 0){
                 //2nd gathering perk: amount of trash in world increased by 25%
                 WorldManager.Instance.amountTrashHere += Mathf.RoundToInt(WorldManager.Instance.amountTrashHere/ 4);
@@ -78,7 +77,7 @@ public class PopulateWorld : MonoBehaviour
 
 		if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 5){
 			//Hp Bonus with Cassie(set back at 'return events'
-			GlobalVariableManager.Instance.characterUpgradeArray[3] = (GlobalVariableManager.Instance.characterUpgradeArray[3] + 1);
+			GlobalVariableManager.Instance.Max_HP += 1;
 		}
 
 		EnemyList();

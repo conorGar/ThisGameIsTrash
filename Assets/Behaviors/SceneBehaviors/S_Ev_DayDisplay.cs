@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class S_Ev_DayDisplay : MonoBehaviour {
 
+	//************************** OBSOLETE! ******************************************************//
 
 	public Text numberDisplay;
 	public Text curseDisplay;
@@ -20,7 +21,7 @@ public class S_Ev_DayDisplay : MonoBehaviour {
 		GlobalVariableManager.Instance.TRASH_TYPE_SELECTED = 3;
 
 		//-------Accountant's Day time upgrades-------------//
-		if(GlobalVariableManager.Instance.FRIEND_LIST[10][7] == 'o'){
+		/*if(GlobalVariableManager.Instance.FRIEND_LIST[10][7] == 'o'){
 			GlobalVariableManager.Instance.TIME_IN_DAY = -180;
 		}else if(GlobalVariableManager.Instance.FRIEND_LIST[10][6] == 'o'){
 			GlobalVariableManager.Instance.TIME_IN_DAY = -150;
@@ -28,7 +29,7 @@ public class S_Ev_DayDisplay : MonoBehaviour {
 			GlobalVariableManager.Instance.TIME_IN_DAY = -130;
 		}else if(GlobalVariableManager.Instance.FRIEND_LIST[10][4] == 'o'){
 			GlobalVariableManager.Instance.TIME_IN_DAY = -110;
-		}
+		}*/
 		//-------------------------------------------------//
 
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.CURSED)){
@@ -42,7 +43,7 @@ public class S_Ev_DayDisplay : MonoBehaviour {
         GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED = GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED;
 
 		numberDisplay.text = GlobalVariableManager.Instance.DAY_NUMBER.ToString();
-		if(GlobalVariableManager.Instance.FRIEND_LIST[14][0] == 1 && GlobalVariableManager.Instance.FRIEND_LIST[14][1] != 'x'){
+		/*if(GlobalVariableManager.Instance.FRIEND_LIST[14][0] == 1 && GlobalVariableManager.Instance.FRIEND_LIST[14][1] != 'x'){
 			SueSpawn();
 		}else{
 			if(GlobalVariableManager.Instance.WORLD_NUM == 1){
@@ -54,7 +55,7 @@ public class S_Ev_DayDisplay : MonoBehaviour {
 				gameObject.GetComponent<Ev_FadeHelper>().FadeToScene("World2");
 
 			}
-		}
+		}*/
 	}
 	
 	void Update () {

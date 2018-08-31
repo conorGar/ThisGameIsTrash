@@ -25,12 +25,12 @@ public class GlobalVariableManager : UserDataItem {
         get { return (PIN)pinsEquippedValue; }
     }
 
-    public int PPVALUE = 5;
+
     public int DEJAVUCOUNT = 0;
     public int CURSEVALUE = 0;
     public int MOMONEYVALUE = 0;
 
-	public string[] characterUpgradeArray = new string[7]{
+	/*public string[] characterUpgradeArray = new string[7]{
 											"abcdefghijolmnpqrstuvwxy1234567890,./;'*[]-<>?:(){}!^",
 											"abcdefghijklmnpqrstuvwxy1234567890,./;'",
 											"0",
@@ -38,9 +38,15 @@ public class GlobalVariableManager : UserDataItem {
 											"0",
 											"0",
 											"0",
-											"0"};
+											"0"};*/
 	public int ARROW_POSITION = 1;
+
+	//base stats
 	public int Max_HP = 5;
+	public int BAG_SIZE = 10;
+	public int PPVALUE = 5;
+	public int STAR_POINTS = 0;
+
 	public int DAY_NUMBER = 1;
 	public int IS_HIDDEN = 0;
 	public int MASTER_MUSIC_VOL = 30;

@@ -7,9 +7,15 @@ public class JumboFriend : Friend {
 
     public int minDays = 0;
     public int maxDays = 1;
-    public List<int> films;
+    public List<string> films;//should be defined in inspector
     private List<Friend> friendsAskedToWatch = new List<Friend>();
+    public string movieEnhancement;
+    public GameObject deadRat;
+    public GameObject moviePosters;
+    public GameObject filmColor;
+    public GameObject movieScreen;
     //public DialogDefinition myDialogDefinition;
+
     public override void GenerateEventData()
     {
         films.Shuffle();
@@ -23,7 +29,7 @@ public class JumboFriend : Friend {
     }
 
     // current film is just the first element in the shuffled list.
-    public int GetCurrentFilm()
+    public string GetCurrentFilm()
     {
         if (films.Count > 0)
         {
@@ -31,7 +37,7 @@ public class JumboFriend : Friend {
         }
         else
         {
-            return -1;
+            return null;
         }
     }
 
@@ -40,5 +46,25 @@ public class JumboFriend : Friend {
     {
         if (films.Count > 0)
             films.RemoveAt(0);
+    }
+
+
+    public override void StartingEvents(){
+    	Debug.Log("Starting Events function happened properly");
+    	if(GlobalVariableManager.Instance.DAY_NUMBER == day && nextDialog == "Jumbo2"){
+    		gameObject.transform.position = new Vector2(-40f,47.5f);
+    		deadRat.SetActive(true);
+    	}
+    	if(movieEnhancement == "marketing"){
+    		moviePosters.SetActive(true);
+    		for(int i = 0; i < moviePosters.transform.childCount; i++){
+    			moviePosters.transform.GetChild(i).GetComponent<Ev_JumboPoster>().SetSprite(films[0]);
+    		}
+    	}else if(movieEnhancement == "color"){
+    		filmColor.SetActive(true);
+    	}else if(movieEnhancement == "sound"){
+    		movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().enabled = true;
+    	}
+
     }
 }

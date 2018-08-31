@@ -200,14 +200,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 					takingDamage = true;
 					damageOnce = 1;
 					meleeDmgBonus = 0;
-					if(GlobalVariableManager.Instance.characterUpgradeArray[1].Substring(3,4).CompareTo("o") == 0 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 6 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] <= 12){
-						//3rd aggressive/warrior perk:second level melee weapon does 2 dmg
-						meleeDmgBonus++;
-					}
-					if(GlobalVariableManager.Instance.characterUpgradeArray[1].Substring(9,10).CompareTo("o") == 0){
-						//5th agressive perk: increase dmg by 1
-						meleeDmgBonus++;
-					}
+
 					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
 						//bonus dmg with pole
 						meleeDmgBonus++;
@@ -217,9 +210,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 						//STAY BACK pin
 						//meleeDmgBonus++;
 					//}
-					string dmgBonus = GlobalVariableManager.Instance.characterUpgradeArray[5][0].ToString();
-					Debug.Log(dmgBonus);
-					meleeDmgBonus = meleeDmgBonus + int.Parse(dmgBonus);
+
+					meleeDmgBonus = meleeDmgBonus;
 
 					meleeSwingDirection = melee.GetComponent<tk2dSpriteAnimator>().CurrentClip.name;
 					swingDirectionSide = player.transform.localScale.x;
@@ -368,10 +360,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 				}
 
 				if(GlobalVariableManager.Instance.ROOM_NUM != 201){
-					if(GlobalVariableManager.Instance.characterUpgradeArray[1].Substring(10,11).CompareTo("o") == 0){
+					/*if(GlobalVariableManager.Instance.characterUpgradeArray[1].Substring(10,11).CompareTo("o") == 0){
 						//pin perk 1 - enemies have chance to drop pin
 						dropsPin = Random.Range(1,30);
-					}
+					}*/
 					dropsTrash = 99;
 					if(dropsPin !=22){
 						dropsTrash = Random.Range(1, (12-sharingUpgrade));

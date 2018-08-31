@@ -13,7 +13,7 @@ public class Ev_HitStars : MonoBehaviour {
 	void Start () {
 		gameObject.GetComponent<SpecialEffectsBehavior>().SetGrowValues(.1f,.5f);
 		gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Grow",1f);
-		Debug.Log(">>>>>>>Hit Star Created!<<<<<<");
+		Debug.Log("~~~~~~~~Hit Star Created!~~~~~~~~"); // Removed the < and > here so it doesn't come up on merges :p
 	}
 	
 	// Update is called once per frame

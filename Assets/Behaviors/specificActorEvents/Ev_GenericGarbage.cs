@@ -115,7 +115,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 			SoundManager.instance.PlaySingle(pickUpTrash);
 				playerPos = collider.gameObject.transform;
 				this.gameObject.transform.parent = playerPos;
-					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] < (10 + bagSizeBonus) && !isFalling){
+					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] < (GlobalVariableManager.Instance.BAG_SIZE + bagSizeBonus) && !isFalling){
 						if(grabbedPhase <= 0){
 							//trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().NewDiscoveryShow(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name, "myNameTest");
 
@@ -192,12 +192,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 		//Bulky Bag pin
 			bagSizeBonus = bagSizeBonus + 3;
 		}
-		if(GlobalVariableManager.Instance.characterUpgradeArray[13].CompareTo('o') == 0){
-		//amount of trash available to carry is increased if you upgrade bag size stat
-		    bagSizeBonus += 2;
-		}
 
-		bagSizeBonus += int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[4].Substring(0,1));
 
 		xSpeedWhenCollected = -30f;
 	}//End of Setup()

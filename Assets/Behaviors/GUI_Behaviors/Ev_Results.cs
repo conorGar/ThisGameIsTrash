@@ -13,6 +13,7 @@ public class Ev_Results : MonoBehaviour {
 	public GameObject largeTrashTextDisplay;
 	public GameObject treasureCollectedDisplay;
 
+
 	GameObject backPaper;
 	int trashCollectedValue;
 	int phase = 0;
@@ -99,7 +100,7 @@ public class Ev_Results : MonoBehaviour {
                     if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 3){
 						if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 4){
 							//resets hp after cassie gives you bonus
-							GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) - 1).ToString();
+							GlobalVariableManager.Instance.Max_HP -=1;
 							GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.RemoveAt(4);
 						}
 						GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.RemoveAt(3);
@@ -108,6 +109,8 @@ public class Ev_Results : MonoBehaviour {
 					GlobalVariableManager.Instance.ARROW_POSITION = 1;
 					if(GlobalVariableManager.Instance.DAY_NUMBER == 2){
 						GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");//supposed to be intro credits scene, changed for testing
+					}else if(GlobalVariableManager.Instance.DAY_NUMBER == 3){
+						StartCoroutine("HomelessHarry");
 					}else{
 						GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
 
@@ -126,4 +129,6 @@ public class Ev_Results : MonoBehaviour {
 		yield return new WaitForSeconds(1f);
 		phase = 2;
 	}
+
+
 }

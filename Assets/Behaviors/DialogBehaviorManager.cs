@@ -7,7 +7,7 @@ using I2.TextAnimation;
 
 
 public class DialogBehaviorManager : MonoBehaviour {
-
+//xxxxxxxxxxxxxxxxxxxxxxxxx OBSOLETE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx//
 	public TextAsset csvFile;
 	List<string> dialogLines = new List<string>();
 

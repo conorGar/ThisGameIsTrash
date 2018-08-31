@@ -7,6 +7,7 @@ public class SpecialEffectsBehavior : MonoBehaviour
 
 	//-----Variables for smooth movement to point -------//
 	bool smoothMovement = false;
+	bool smoothMovementLocally = false;
 	Vector3 velocity;
 	Vector3 targetPos;
 	float timeOfMovement;
@@ -31,7 +32,12 @@ public class SpecialEffectsBehavior : MonoBehaviour
 
 	void Update(){
 		if(smoothMovement){
-			transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity,timeOfMovement);
+			if(!smoothMovementLocally){
+				transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity,timeOfMovement);
+			}else{
+				transform.localPosition = Vector3.SmoothDamp(transform.localPosition, targetPos, ref velocity,timeOfMovement);
+
+			}
 
 		}
 
@@ -150,6 +156,15 @@ public class SpecialEffectsBehavior : MonoBehaviour
 		targetPos = new Vector3(xDestination,yDestination, gameObject.transform.position.z);
 		timeOfMovement = duration;
 		smoothMovement = true;
+		smoothMovementLocally = false;
+	}
+	public void SmoothMovementToPoint(float xDestination, float yDestination, float duration, bool localPosition){
+		Debug.Log("smooth move activate");
+		velocity = Vector3.zero;
+		targetPos = new Vector3(xDestination,yDestination, gameObject.transform.position.z);
+		timeOfMovement = duration;
+		smoothMovement = true;
+		smoothMovementLocally = true;
 	}
 
 
