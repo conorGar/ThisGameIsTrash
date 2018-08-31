@@ -18,10 +18,10 @@ public class Friend : MonoBehaviour {
 
     	//Enable ability to enter dialog on proper day
     	Debug.Log("Next Dialog: " + nextDialog);
-    	if(nextDialog != "Jumbo2" && nextDialog != missedDialog ){
+    	if(nextDialog != "Start" && nextDialog != missedDialog ){
     		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false;
     		for(int i = 0; i < CalendarManager.Instance.friendEvents.Count; i++){
-				if(CalendarManager.Instance.friendEvents[i].day == currentDayNumber ){
+				if(CalendarManager.Instance.friendEvents[i].day == currentDayNumber ){//*********MAYBE MAKE THIS DETERMINE IF FRIEND SPAWNS RATHER THAN IF YOU CAN INTERACT...
 					if(CalendarManager.Instance.friendEvents[i].friend.name == friendName){
 						gameObject.GetComponent<ActivateDialogWhenClose>().enabled = true;
 						if(activateDialogWhenClose){

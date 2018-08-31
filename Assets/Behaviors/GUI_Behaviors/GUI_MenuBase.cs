@@ -32,7 +32,6 @@ public class GUI_MenuBase : MonoBehaviour {
 	public void Navigate(string dir){
 		Debug.Log("Arrow Pos = " + arrowPos);
 		currentSelectArrowPos = selectionArrow.transform.position;
-		optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
 		if(dir == "left"){
 			arrowPos--;
 		}else if(dir == "right"){
@@ -46,9 +45,12 @@ public class GUI_MenuBase : MonoBehaviour {
 				arrowPos = valToIncreaseWhenDown; //varies sometimes
 			}
 		}
-		optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().HighlightButton();
+		NavigateEffect();
 
 
+	}
 
+	public virtual void NavigateEffect(){
+		//nothing for base menu
 	}
 }

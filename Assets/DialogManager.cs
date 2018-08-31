@@ -37,6 +37,8 @@ public class DialogManager : MonoBehaviour {
 	bool hasWavingText; 
 	public bool canContinueDialog = true;
 	Friend friend;//needed for finish();
+	string currentSpeakerName;
+	MultipleDialogIconsManager multipleIconsManager;
 
 	void Start () {
 
@@ -64,6 +66,7 @@ public class DialogManager : MonoBehaviour {
 			}
 		}
 		displayedText.text = currentNode.text;
+		currentSpeakerName = currentNode.speakerName;
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogBlur;
 	}
 	
@@ -80,7 +83,7 @@ public class DialogManager : MonoBehaviour {
 	}
 
 	void NextNode(){
-
+		
 		if(currentNode.type == DIALOGNODETYPE.QUESTION){
 			Debug.Log("Question Dialog Node Properly Read");
 			textBox.SetActive(false);
@@ -107,6 +110,14 @@ public class DialogManager : MonoBehaviour {
 			
 			//currentlySpeakingIcon.GetComponent<Animator>().Play("JumboAnimation");
 			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
+
+			//check to see if changed speaker
+			if(currentSpeakerName != currentNode.speakerName && currentNode.speakerName.Length >2)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
+			{
+				multipleIconsManager.ChangeSpeaker(currentNode.speakerName);
+
+			}
+
 			if(currentNode.text.Contains("<c")){
 					Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
 					HighLightText();
@@ -120,6 +131,7 @@ public class DialogManager : MonoBehaviour {
 			displayedText.text = currentNode.text;
 			displayedText.GetComponent<TextAnimation>().StartAgain();
 			finishedDisplayingText = false;
+
 			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
 			InvokeRepeating("TalkSound",0.1f,.05f);
 		}
@@ -243,6 +255,16 @@ public class DialogManager : MonoBehaviour {
 
 	public void SetFriend(Friend thisFriend){//set by activateDialogWhenClose
 		friend = thisFriend;
+	}
+
+	public void JumpToNewNode(string nodeName){//for use in situations where needs to break from current dialog into a new one, such as a check to see if go the friend's final dialog(if you complete their quest)
+		foreach(var node in myDialogDefiniton.nodes){
+			string nodeTitle = node.Value.title;
+			if(nodeTitle == nodeName){
+				currentNode = node.Value;
+				break;
+			}
+		}
 	}
 
 }

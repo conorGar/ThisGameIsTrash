@@ -58,6 +58,12 @@ public class DialogChoiceManager : MonoBehaviour {
 			dialogResponses.Add(currentNode.responses[i]);
 			dialogChoiceBoxes[i].SetActive(true);
 			dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = dialogResponses[i].text;
+
+			//enable images on special image dialog choices
+			if(dialogResponses[i].text.Contains("[Image]")){
+				dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Replace("[Image]","");
+				dialogChoiceBoxes[i].transform.GetChild(1).gameObject.SetActive(true);
+			}
 		}
 					
 
@@ -110,6 +116,7 @@ public class DialogChoiceManager : MonoBehaviour {
 	void SelectOption(int optionNumber){
 		//deactivate dialog boxes
 		for(int i = 0; i < dialogChoiceBoxes.Count; i++){
+			dialogChoiceBoxes[i].transform.GetChild(1).gameObject.SetActive(false); // make sure choice images are deactivated
 			dialogChoiceBoxes[i].SetActive(false);
 		}
 

@@ -36,6 +36,31 @@ MonoBehaviour:
     - Value: 9c35d666-d2ac-4db0-91c3-533755cf29da
     - Value: 4b698f2c-c200-465d-a23d-c8c394e5bc1e
     - Value: 185c466c-2f1e-47cc-b0fe-2e96235ab9fd
+    - Value: 26ed0a49-bf14-4bbb-b1a5-eb3bc8f1b905
+    - Value: 447127d8-d41d-4146-9a5d-74eb638057eb
+    - Value: e020b3a5-d28b-4970-af57-64051adad33e
+    - Value: 37ff1489-22f8-4b08-8e55-11f3106d5c87
+    - Value: 9a946b12-c7e1-47eb-86b6-88d6c589b575
+    - Value: a44c483c-0ccf-4ee8-99ae-59302c5ad908
+    - Value: e50452d9-d521-4165-b163-724be5c602fa
+    - Value: a18af6f5-7a8e-4fb2-b7ad-c4cd1d68cc57
+    - Value: fe6a1cd3-684b-48ad-b571-e7e14b442559
+    - Value: 439735d8-99d9-4d30-9a14-92bd39c764e5
+    - Value: 37922e1d-7ad5-48f9-9288-d20b23aff377
+    - Value: 7c6dd6c5-4774-4e0a-a331-c34261ba5351
+    - Value: 9b95079f-08da-48c8-82cd-0306d393da56
+    - Value: 4089f6cb-be76-4a28-be34-382db02cc91a
+    - Value: 8e3cb23f-7ba9-4c1a-aa46-30ba6140e967
+    - Value: f4ceede0-1a09-43c4-b82e-9069451a4978
+    - Value: 83a8ce32-137c-43da-bba6-2c9ef941c3ed
+    - Value: ba88d82f-5bda-4237-a5c0-59e18b4dc966
+    - Value: 65006570-947c-461a-b627-08753b6ae2a7
+    - Value: 193e4232-93af-4fd5-9651-23d0503fadf0
+    - Value: f4b4d741-8adf-4a70-8feb-bffa9d350ded
+    - Value: 8448416a-004a-45a5-97a5-583e7623ed56
+    - Value: ff6e220a-93b8-4b15-848d-3081b4d27dcd
+    - Value: a40c316d-8a41-402d-acc8-da7eb2b849a3
+    - Value: a96a9ff0-d028-476a-87ce-6b8ffe340dd4
     values:
     - window:
         serializedVersion: 2
@@ -45,6 +70,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start
+      speakerName: Slab
+      question: 
       action: 
       id:
         Value: e0e12f04-6174-495a-a666-8356a335eadd
@@ -63,6 +90,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start1
+      speakerName: 
+      question: 
       action: 
       id:
         Value: 6c0befcf-da23-4e15-8d8f-35b054c0514d
@@ -81,6 +110,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start2
+      speakerName: 
+      question: 
       action: 
       id:
         Value: f6fe13b0-516c-4176-a463-d4c7cacae894
@@ -99,7 +130,9 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start3
-      action: (Stone)
+      speakerName: Stone
+      question: 
+      action: ' '
       id:
         Value: 5e086c4a-e782-4fcd-a37c-502e0f325c0f
       x: 1055
@@ -111,32 +144,34 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 1378
-        y: 113
+        x: 1388
+        y: 20
         width: 270
-        height: 250
+        height: 420
       isCollapsed: 0
       title: Start4
+      speakerName: 
+      question: 
       action: (Slab)
       id:
         Value: ad0b5f2d-b8f3-4704-8141-08dc32f8503f
-      x: 1378
-      y: 113
+      x: 1388
+      y: 20
       text: Alright, so, if you were INTO rocks, like...you know, <c=r>ROMANTICALLY</c>,
         which one of us would you pick as your lover?
       type: 2
       child_id:
         Value: 
       responses:
-      - text: Rock
+      - text: Rock[image]
         node_id:
-          Value: 
-      - text: 'Stone '
+          Value: 0b33165c-9704-4688-b4ac-2158936976b8
+      - text: Stone [image]
         node_id:
-          Value: 
-      - text: Slab
+          Value: 0850b1af-8acf-4d66-be76-fcdc4c5ff0bf
+      - text: Slab [image]
         node_id:
-          Value: 
+          Value: 6326e206-2cdc-4295-9c71-61b98794f432
       - text: I'm sorry, but I'm not into rocks that way. No offense.
         node_id:
           Value: 
@@ -148,7 +183,9 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start5_3
-      action: 
+      speakerName: 
+      question: 
+      action: Rock
       id:
         Value: 0b33165c-9704-4688-b4ac-2158936976b8
       x: 1705.801
@@ -167,7 +204,9 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start5_1
-      action: 
+      speakerName: Stone
+      question: 
+      action: ' '
       id:
         Value: 0850b1af-8acf-4d66-be76-fcdc4c5ff0bf
       x: 1697.3778
@@ -185,6 +224,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start5_2
+      speakerName: Slab
+      question: 
       action: 
       id:
         Value: 6326e206-2cdc-4295-9c71-61b98794f432
@@ -197,21 +238,23 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 2012.3076
-        y: 328
+        x: 2043.3076
+        y: 333
         width: 270
         height: 250
       isCollapsed: 0
       title: Start5_2_2
+      speakerName: 
+      question: 
       action: 
       id:
         Value: a1a6321c-81fd-4805-81ea-4ab9e5f2be68
-      x: 2012.3076
-      y: 328
+      x: 2043.3076
+      y: 333
       text: The hard truth is, <c=g>The Moon</c> is gonna choose me as her man.
       type: 1
       child_id:
-        Value: 
+        Value: 392482c7-5702-45ce-b2ec-28d4d0f86098
       responses: []
     - window:
         serializedVersion: 2
@@ -221,6 +264,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start6
+      speakerName: Slab
+      question: 
       action: 
       id:
         Value: beabea17-27a1-423a-a964-1d6d4e82f690
@@ -230,7 +275,7 @@ MonoBehaviour:
         choose ME.
       type: 1
       child_id:
-        Value: 
+        Value: 392482c7-5702-45ce-b2ec-28d4d0f86098
       responses: []
     - window:
         serializedVersion: 2
@@ -240,6 +285,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start7
+      speakerName: 
+      question: 
       action: 
       id:
         Value: 392482c7-5702-45ce-b2ec-28d4d0f86098
@@ -258,6 +305,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start8
+      speakerName: 
+      question: 
       action: 
       id:
         Value: 74ed1c0c-a855-4c3f-b878-239e55900d76
@@ -277,6 +326,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start9
+      speakerName: Stone
+      question: 
       action: 
       id:
         Value: e8cb5a99-f8a5-471f-9389-9f98d2bff131
@@ -296,6 +347,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start10
+      speakerName: 
+      question: 
       action: 
       id:
         Value: ada8a573-6876-434e-bffa-610c6c0c8325
@@ -315,6 +368,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start11
+      speakerName: 
+      question: 
       action: 
       id:
         Value: 6578cfbf-8ddd-4c14-9616-1abe332afd73
@@ -334,6 +389,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start12
+      speakerName: 
+      question: 
       action: 
       id:
         Value: 6b27feda-359c-4d53-98f9-cc56f499adeb
@@ -353,6 +410,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start13
+      speakerName: 
+      question: 
       action: 
       id:
         Value: e7809ead-3be8-44c6-b1da-27c9ac8a2278
@@ -372,6 +431,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start14
+      speakerName: Rock
+      question: 
       action: 
       id:
         Value: c32d0367-5719-4934-9334-72cf7d1031d1
@@ -391,6 +452,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start15
+      speakerName: 
+      question: 
       action: 
       id:
         Value: 8a159267-1ce9-40ed-b1a4-48ee1e104e7c
@@ -409,6 +472,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start16
+      speakerName: 
+      question: 
       action: 
       id:
         Value: 9c35d666-d2ac-4db0-91c3-533755cf29da
@@ -427,6 +492,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start17
+      speakerName: 
+      question: 
       action: 
       id:
         Value: 4b698f2c-c200-465d-a23d-c8c394e5bc1e
@@ -446,6 +513,8 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start18
+      speakerName: Slab
+      question: 
       action: finish
       id:
         Value: 185c466c-2f1e-47cc-b0fe-2e96235ab9fd
@@ -453,6 +522,522 @@ MonoBehaviour:
       y: 353
       text: Nah, listen garbageman, Rock's a lost cause, but i'd happily take <c=g>trash
         donations</c> to my <c=g>love fund</c> if you can spare any.
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 12
+        y: 486
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: Slab1
+      speakerName: Slab
+      question: You got any extra trash to help me get The Moon to love me?
+      action: 
+      id:
+        Value: 26ed0a49-bf14-4bbb-b1a5-eb3bc8f1b905
+      x: 12
+      y: 486
+      text: Ah, my man! Help a bro out and hook me up with some extra <c=g>trash</c>
+        if you got some to spare.
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Ya, sure, I'll give you some trash.
+        node_id:
+          Value: 447127d8-d41d-4146-9a5d-74eb638057eb
+      - text: Nah, I don't have any extra trash on me, sorry.
+        node_id:
+          Value: e020b3a5-d28b-4970-af57-64051adad33e
+    - window:
+        serializedVersion: 2
+        x: 340
+        y: 466
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Slab2
+      speakerName: ' '
+      question: 
+      action: TrashGiveHUDEnable
+      id:
+        Value: 447127d8-d41d-4146-9a5d-74eb638057eb
+      x: 340
+      y: 466
+      text: Sweet man, thanks, I owe you man. How much you willing to contribute to
+        the cause?
+      type: 1
+      child_id:
+        Value: a44c483c-0ccf-4ee8-99ae-59302c5ad908
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 408
+        y: 708
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: SlabNoTrash1
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: e020b3a5-d28b-4970-af57-64051adad33e
+      x: 408
+      y: 708
+      text: Ha Ha, notta problem man, I get it, gotta keep some for yourself, right!
+      type: 1
+      child_id:
+        Value: 37ff1489-22f8-4b08-8e55-11f3106d5c87
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 758
+        y: 714
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: SlabNoTrash2
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 37ff1489-22f8-4b08-8e55-11f3106d5c87
+      x: 758
+      y: 714
+      text: But really man, there aint' too many ways for a rock to earn trash, at
+        least not any ways I'd be proud of.
+      type: 1
+      child_id:
+        Value: 9a946b12-c7e1-47eb-86b6-88d6c589b575
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1069
+        y: 688
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: SlabNoTrash3
+      speakerName: ' '
+      question: 
+      action: finish
+      id:
+        Value: 9a946b12-c7e1-47eb-86b6-88d6c589b575
+      x: 1069
+      y: 688
+      text: So be sure to come back to me if you ever got extra.
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 642
+        y: 460
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Slab3
+      speakerName: ' '
+      question: 
+      action: EnoughTrashCheck
+      id:
+        Value: a44c483c-0ccf-4ee8-99ae-59302c5ad908
+      x: 642
+      y: 460
+      text: Hey thanks man!
+      type: 1
+      child_id:
+        Value: e50452d9-d521-4165-b163-724be5c602fa
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 966
+        y: 459
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Slab4
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: e50452d9-d521-4165-b163-724be5c602fa
+      x: 966
+      y: 459
+      text: I don't think I have quite enough wealth for women to find me attractive
+        yet though.
+      type: 1
+      child_id:
+        Value: fe6a1cd3-684b-48ad-b571-e7e14b442559
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 68
+        y: 997
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: SlabComplete
+      speakerName: Slab
+      question: 
+      action: 
+      id:
+        Value: a18af6f5-7a8e-4fb2-b7ad-c4cd1d68cc57
+      x: 68
+      y: 997
+      text: Ok. From my advanced knowledge of the way women operate, I SHOULD have
+        enough trash to be attractive now.
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1371
+        y: 469
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Slab5
+      speakerName: ' '
+      question: 
+      action: finish
+      id:
+        Value: fe6a1cd3-684b-48ad-b571-e7e14b442559
+      x: 1371
+      y: 469
+      text: But we're gettin' there! Let me know when you can spare some trash!
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 63
+        y: 1307
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone1
+      speakerName: Stone
+      question: 
+      action: 
+      id:
+        Value: 439735d8-99d9-4d30-9a14-92bd39c764e5
+      x: 63
+      y: 1307
+      text: Woah! A <c=g>rock hand</c>!
+      type: 1
+      child_id:
+        Value: 37922e1d-7ad5-48f9-9288-d20b23aff377
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 385
+        y: 1285
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone1_2
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 37922e1d-7ad5-48f9-9288-d20b23aff377
+      x: 385
+      y: 1285
+      text: Wait... sorry if this is presumptious...did you bring that here for me?!?
+      type: 1
+      child_id:
+        Value: 7c6dd6c5-4774-4e0a-a331-c34261ba5351
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 750
+        y: 1303
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone3
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 7c6dd6c5-4774-4e0a-a331-c34261ba5351
+      x: 750
+      y: 1303
+      text: That's so nice of you mister. Sorry I couldn't do much to help!
+      type: 1
+      child_id:
+        Value: 9b95079f-08da-48c8-82cd-0306d393da56
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1063
+        y: 1309
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone4
+      speakerName: ' '
+      question: 
+      action: ShowRockHand
+      id:
+        Value: 9b95079f-08da-48c8-82cd-0306d393da56
+      x: 1063
+      y: 1309
+      text: Let me try it on here
+      type: 1
+      child_id:
+        Value: 4089f6cb-be76-4a28-be34-382db02cc91a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1381
+        y: 1289
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone5
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 4089f6cb-be76-4a28-be34-382db02cc91a
+      x: 1381
+      y: 1289
+      text: You know..they're a little large. But, ya, I'll make it work.
+      type: 1
+      child_id:
+        Value: 8e3cb23f-7ba9-4c1a-aa46-30ba6140e967
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1699
+        y: 1270
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone6
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 8e3cb23f-7ba9-4c1a-aa46-30ba6140e967
+      x: 1699
+      y: 1270
+      text: Now...I don't wanna sound ungrateful..I really DO appreciate your help.
+      type: 1
+      child_id:
+        Value: f4ceede0-1a09-43c4-b82e-9069451a4978
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1988
+        y: 1254
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone7
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: f4ceede0-1a09-43c4-b82e-9069451a4978
+      x: 1988
+      y: 1254
+      text: ..but I'm just...I'm unsure if I'll be able to build the rocket with <c=g>one
+        hand</c>?
+      type: 1
+      child_id:
+        Value: 83a8ce32-137c-43da-bba6-2c9ef941c3ed
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2311
+        y: 1252
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone8
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 83a8ce32-137c-43da-bba6-2c9ef941c3ed
+      x: 2311
+      y: 1252
+      text: I mean, I'll try it for sure, but just if you come across <c=g> one more
+        rock hand</c> let me know.
+      type: 1
+      child_id:
+        Value: ba88d82f-5bda-4237-a5c0-59e18b4dc966
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2673
+        y: 1277
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone9
+      speakerName: 
+      question: 
+      action: finish
+      id:
+        Value: ba88d82f-5bda-4237-a5c0-59e18b4dc966
+      x: 2673
+      y: 1277
+      text: I'll look out too. You can be sure if a hand suddenly appears in my very
+        limited line of vision..I'll grab it and let you know.
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 62
+        y: 1577
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone2
+      speakerName: Stone
+      question: 
+      action: 
+      id:
+        Value: 65006570-947c-461a-b627-08753b6ae2a7
+      x: 62
+      y: 1577
+      text: Oh my....is that...is that what I think it is?
+      type: 1
+      child_id:
+        Value: 193e4232-93af-4fd5-9651-23d0503fadf0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 351
+        y: 1560
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone2_2
+      speakerName: ' '
+      question: 
+      action: BuildRocket
+      id:
+        Value: 193e4232-93af-4fd5-9651-23d0503fadf0
+      x: 351
+      y: 1560
+      text: Jeez. Ok. Here we go. Now I can finally build this thing.
+      type: 1
+      child_id:
+        Value: f4b4d741-8adf-4a70-8feb-bffa9d350ded
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 683
+        y: 1560
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone2_3
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: f4b4d741-8adf-4a70-8feb-bffa9d350ded
+      x: 683
+      y: 1560
+      text: Alright. This is it. Goodbye rock friends. And thank you garbageman.
+      type: 1
+      child_id:
+        Value: 8448416a-004a-45a5-97a5-583e7623ed56
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 973
+        y: 1549
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone2_4
+      speakerName: Slab
+      question: 
+      action: 
+      id:
+        Value: 8448416a-004a-45a5-97a5-583e7623ed56
+      x: 973
+      y: 1549
+      text: Ya, whatever. Tell <c=b>The Moon</c> to hit me up when she wants a REAL
+        man rock.
+      type: 1
+      child_id:
+        Value: ff6e220a-93b8-4b15-848d-3081b4d27dcd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1261
+        y: 1564
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone2_5
+      speakerName: Stone
+      question: 
+      action: 
+      id:
+        Value: ff6e220a-93b8-4b15-848d-3081b4d27dcd
+      x: 1261
+      y: 1564
+      text: No <c=g> Slab</c>, I have intellect. THAT's what it takes to get to <c=b>The
+        Moon</c>, not wealth.
+      type: 1
+      child_id:
+        Value: a40c316d-8a41-402d-acc8-da7eb2b849a3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1550
+        y: 1549
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone2_6
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: a40c316d-8a41-402d-acc8-da7eb2b849a3
+      x: 1550
+      y: 1549
+      text: Alright. Can't wait any longer. Here we go...
+      type: 1
+      child_id:
+        Value: a96a9ff0-d028-476a-87ce-6b8ffe340dd4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1862
+        y: 1559
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone2_7
+      speakerName: ' '
+      question: 
+      action: StoneEnding
+      id:
+        Value: a96a9ff0-d028-476a-87ce-6b8ffe340dd4
+      x: 1862
+      y: 1559
+      text: '...I''m coming...my love.'
       type: 1
       child_id:
         Value: 
