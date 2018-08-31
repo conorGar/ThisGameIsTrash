@@ -6,6 +6,7 @@ public class PickupableObject : MonoBehaviour
 
 	public float distanceUntilPickup =3f;
 	public GameObject player;
+	public AudioClip pickup;
 
 	int bounce = 0;
 	//int doOnce = 0;
@@ -42,7 +43,7 @@ public class PickupableObject : MonoBehaviour
 				PickUp();
 			}
 		}else{
-			Debug.Log(Vector2.Distance(player.transform.position,gameObject.transform.position));
+//			Debug.Log(Vector2.Distance(player.transform.position,gameObject.transform.position));
 		}
 
 		if(spinning){
@@ -65,9 +66,7 @@ public class PickupableObject : MonoBehaviour
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
 		//move and play the particle system
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
-		//pickUpPS.gameObject.transform.position = gameObject.transform.position;
-		//pickUpPS.gameObject.SetActive(true);
-		//pickUpPS.Play();
+		SoundManager.instance.PlaySingle(pickup);
 		//set object to follow player and push up in the sky
 		gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
 		gameObject.transform.parent = player.transform;

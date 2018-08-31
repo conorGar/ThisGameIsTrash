@@ -11,6 +11,7 @@ public class Ev_SignPost : MonoBehaviour {
 	public GameObject signPostHUD;
 	public string myText;
 	public Sprite myPicture;
+	public AudioClip signRise;
 
 	float lastRealTimeSinceStartup;
 	int glowCheck;
@@ -39,6 +40,7 @@ public class Ev_SignPost : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.Space)){
 			if(glowCheck == 1){
+				SoundManager.instance.PlaySingle(signRise);
 				signPostHUD.SetActive(true);
 				signPostHUD.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = myText;
 				if(myPicture != null){

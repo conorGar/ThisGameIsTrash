@@ -6,6 +6,9 @@ public class ThrowTrash : MonoBehaviour {
 
 	// Use this for initialization
 	//tk2dSpriteAnimator myAnim;
+	public AudioClip throwSfx;
+
+
 	JimAnimationManager myAnim;
 	void Start () {
 		

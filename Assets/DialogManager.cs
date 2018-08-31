@@ -33,6 +33,9 @@ public class DialogManager : MonoBehaviour {
 
 	public string variableText; //For any variable that is displayed(ex: day of return)
 
+
+	public AudioClip choiceBoxAppear;
+
 	bool finishedDisplayingText = false; // set true when the text animation is done
 	bool hasWavingText; 
 	public bool canContinueDialog = true;
@@ -88,6 +91,8 @@ public class DialogManager : MonoBehaviour {
 			Debug.Log("Question Dialog Node Properly Read");
 			textBox.SetActive(false);
 			dialogOptions.SetActive(true);
+
+			SoundManager.instance.PlaySingle(choiceBoxAppear);
 
 			dialogOptions.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-22f,-31f,.5f,true);
 			Debug.Log("CURRENT NODE NAME WHEN SWITCH TO DIALOG CHOICES : " + currentNode.title);

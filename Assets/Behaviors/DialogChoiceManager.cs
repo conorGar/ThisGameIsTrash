@@ -10,7 +10,9 @@ public class DialogChoiceManager : MonoBehaviour {
 	//public TextAsset csvFile;
 	//public int currentWorldNumber;
 	public GameObject dialogManager; // just needed for SelectOption()
-
+	public AudioClip navDownSfx;
+	public AudioClip navUpSfx;
+	public AudioClip selectChoice;
 	//List<DialogChoice> dialogChoices= new List<DialogChoice>();
 	public List<GameObject> dialogChoiceBoxes = new List<GameObject>();
 	List<DialogResponse> dialogResponses = new List<DialogResponse>();
@@ -41,10 +43,13 @@ public class DialogChoiceManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.UpArrow) && arrowPos > 0){
+			SoundManager.instance.PlaySingle(navUpSfx);
 			NavigateOptions("up");
 		}else if(Input.GetKeyDown(KeyCode.DownArrow) && arrowPos <= (numberOfOptions - 1)){
+			SoundManager.instance.PlaySingle(navDownSfx);
 			NavigateOptions("down");
 		}else if(Input.GetKeyDown(KeyCode.Space)){
+			SoundManager.instance.PlaySingle(selectChoice);
 			SelectOption(arrowPos);
 		}
 	}

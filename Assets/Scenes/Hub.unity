@@ -929,9 +929,11 @@ MonoBehaviour:
   guiCamera: {fileID: 97792199}
   dialogCanvas: {fileID: 40757786}
   characterName: {fileID: 1313941075}
+  animationName: 
   dialogBlur: {fileID: 11400000, guid: a40370f802c110b46900e0cd4e58998f, type: 2}
   mainCam: {fileID: 1625554773}
   variableText: 
+  choiceBoxAppear: {fileID: 0}
   canContinueDialog: 1
 --- !u!224 &40757784
 RectTransform:
@@ -7205,8 +7207,10 @@ MonoBehaviour:
   friend: {fileID: 0}
   movieScreen: {fileID: 0}
   mainCam: {fileID: 1625554773}
+  deadRat: {fileID: 0}
   calendar: {fileID: 0}
   dialogManager: {fileID: 40757783}
+  projectorPlay: {fileID: 0}
 --- !u!1001 &489590975
 Prefab:
   m_ObjectHideFlags: 0
@@ -9157,6 +9161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogManager: {fileID: 40757782}
+  navDownSfx: {fileID: 0}
+  navUpSfx: {fileID: 0}
+  selectChoice: {fileID: 0}
   dialogChoiceBoxes: []
   choiceTitle: {fileID: 0}
 --- !u!114 &663663486
@@ -9646,6 +9653,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 82473485835732088, guid: c7f81a0f08b764747b0216243c60091e,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82327134256991846, guid: c7f81a0f08b764747b0216243c60091e,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82327134256991846, guid: c7f81a0f08b764747b0216243c60091e,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 60c870a353ceb96489486fe025d8731f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7f81a0f08b764747b0216243c60091e, type: 2}
   m_IsPrefabParent: 0
@@ -11463,17 +11485,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 890020797}
-  dialogName: Start
   dialogDefiniton: {fileID: 11400000, guid: 09b9f350338526047a4837d2c5cdb368, type: 2}
   xDistanceThreshold: 4
   yDistanceThreshold: 4
   dialogCanvas: {fileID: 40757786}
   dialogManager: {fileID: 40757782}
   dialogActionManager: {fileID: 477474868}
-  autoStart: 0
   myDialogIcon: {fileID: 40757785}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 1727095900}
+  iconAnimationName: 
+  dialogName: Start
+  autoStart: 0
 --- !u!114 &890020793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28603,6 +28626,11 @@ Prefab:
         type: 2}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
         type: 2}

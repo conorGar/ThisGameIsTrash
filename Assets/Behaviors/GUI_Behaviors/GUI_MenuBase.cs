@@ -18,16 +18,8 @@ public class GUI_MenuBase : MonoBehaviour {
 
 	public Vector3 currentSelectArrowPos;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	public void Update () {
-		
 
-	}
+
 
 	public void Navigate(string dir){
 		Debug.Log("Arrow Pos = " + arrowPos);

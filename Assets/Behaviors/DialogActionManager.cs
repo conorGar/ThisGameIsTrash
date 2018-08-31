@@ -12,6 +12,7 @@ public class DialogActionManager : MonoBehaviour {
 	public GameObject calendar;
 	public DialogManager dialogManager;
 	int numberOfActivation;
+	public AudioClip projectorPlay;
 
 	FriendEvent newestAddedEvent;
 
@@ -64,7 +65,7 @@ public class DialogActionManager : MonoBehaviour {
 		dialogManager.currentlySpeakingIcon.SetActive(false);
 
 
-
+		SoundManager.instance.PlaySingle(projectorPlay);
 		string filmToPlay = friend.GetComponent<JumboFriend>().GetCurrentFilm();
 		movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);
 		if(movieScreen.transform.GetChild(1).gameObject.activeInHierarchy){//if film color is enabled
