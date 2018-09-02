@@ -11,6 +11,9 @@ public class Ev_Dumpster : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		thisHud = GameObject.Find("HUD");
+		if(GlobalVariableManager.Instance.DAY_NUMBER == 1){
+			gameObject.GetComponent<SE_GlowWhenClose>().enabled = false; // cannot instantly end day on first day.
+		}
 	}
 
 

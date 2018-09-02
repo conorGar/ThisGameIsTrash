@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ev_LargeTrash : MonoBehaviour {
+public class Ev_LargeTrash : PickupableObject {
 
 	
 	public int myPositionInList;
@@ -16,13 +16,15 @@ public class Ev_LargeTrash : MonoBehaviour {
     public LargeGarbage garbage;
     public Sprite collectedDisplaySprite;
 
-	public GameObject collisionBox;
-	public GameObject largeShadow;
-	public GameObject cloudEffect;
+
+	//public GameObject largeShadow;
+	//public GameObject cloudEffect;
 	public GameObject sparkle;
 	public GameObject smokePuff;
 	public GameObject mainCamera;
 	public Room myCurrentRoom;//for now only needed for tutorial popup proper function.
+	public GameObject myLTMManager; //large trash manager subdivision(w1,w2,etc.)
+
 	//^
 	//large trash is aware f the current room it is in. This room is given by roomManger.currentoom at start and when large trash
 	//is dropped. If myCurrentRoom = RoomManager.currentRoom, deactivate self. (In update method?) check if the roomManager.room =
@@ -30,89 +32,51 @@ public class Ev_LargeTrash : MonoBehaviour {
 
 
 	int phase = 0;
-	int bounce = 0;
+
 	int doOnce = 0;
-	float myY;
-	float xSpeedWhenCollected;
-	float pickUpYSpeed;
-	int currentRoomNumber;
-	bool falling = false;
-	bool stopBouncing = false;
+
+	//float xSpeedWhenCollected;
+	f//loat pickUpYSpeed;
+	//int currentRoomNumber;
+
 	bool returning = false;
-	bool pickingUp = false;
-	Rigidbody2D myBody;
+
 
 	//look up - find object in view
 
-
-	GameObject myCollision;
-	GameObject myShadow;
-	GameObject player;
-	GameObject mySparkles;
-	tk2dSpriteAnimator playerAni;
 
 	// Use this for initialization
 	void Start () {
 		
 		player = GameObject.FindGameObjectWithTag("Player");
-		playerAni = player.GetComponent<tk2dSpriteAnimator>();
-		myBody  = gameObject.GetComponent<Rigidbody2D>();
+		//playerAni = player.GetComponent<tk2dSpriteAnimator>();
 		currentRoomNumber = GlobalVariableManager.Instance.ROOM_NUM;
 
 		if(GlobalVariableManager.Instance.ROOM_NUM == 101){
 			MyCollectionSetUp();
 		}else{
-			Debug.Log(GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS.Count);
-			if(myPositionInList == 2){ //for now Large Sofa sets up large trash start positions, otherwise populateworld
-				GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS.Add(new Vector2(0f,0f));
-				GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS.Add(new Vector2(26.1f,-26.1f));
-				GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS.Add(new Vector2(-5.4f,1f));
-				GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS.Add(new Vector2(2f,103f));
-			}
-			Debug.Log(GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS.Count);
-			Debug.Log(GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[0].x);
-			Debug.Log(GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[1].x);
-			Debug.Log(GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[2].x);
-				if(GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[myPositionInList + 1].x == 0){ //set to 0 at return
-					//set to null when collected
-					Debug.Log("Large Trash Destroyed at start");
-					Destroy(gameObject);
-				}else{
-					//-------Check positions for this world ------------//
-					transform.position = GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[myPositionInList + 1];
-					Debug.Log("My Large Trash x "+GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[myPositionInList +1].x);
-					//------------------------------------------------//
-					myY = gameObject.transform.position.y;
-					if(isRewardForBoss){
-						if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
-							//stop sound on chanel 7
-					}
-					if(currentRoomNumber != 101){
-							GameObject myCollision;
-							myCollision = Instantiate(collisionBox,transform.position, Quaternion.identity);
-					}
 
-					}else{ //if not reward for boss
-						phase = 0;
-						if(currentRoomNumber != 101){
-							if(GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[myPositionInList].x != 0){
-								if(GlobalVariableManager.Instance.MASTER_SFX_VOL >0 && gameObject.active){
+
+					//myY = gameObject.transform.position.y;
+					phase = 0;
+					if(currentRoomNumber != 101){
+							if(GlobalVariableManager.Instance.MASTER_SFX_VOL >0 && gameObject.active){
 									//loop large trash sparkle on channel 11
 								}
 							Debug.Log("GOT HERE LARGE TRASH");
-							mySparkles = Instantiate(sparkle,transform.position,Quaternion.identity);
-							myCollision = Instantiate(collisionBox,transform.position, Quaternion.identity);
+							//mySparkles = Instantiate(sparkle,transform.position,Quaternion.identity);
+							//m//yCollision = Instantiate(collisionBox,transform.position, Quaternion.identity);
 
-							}
 
-						myShadow = Instantiate(largeShadow,new Vector2(transform.position.x - .1f,transform.position.y -.8f),Quaternion.identity);
+
+						//myShadow = Instantiate(largeShadow,new Vector2(transform.position.x - .1f,transform.position.y -.8f),Quaternion.identity);
 
 							//ShowNow();
 
 
 						}
-					}
-			}
+					
+			
 		}
 
 
@@ -125,7 +89,7 @@ public class Ev_LargeTrash : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+		/*if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
         {
 			if(phase !=3){
 				if(returning != true && GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count < 6) // world room discover part for no pickup during coon. Still needs pause check***
@@ -133,7 +97,7 @@ public class Ev_LargeTrash : MonoBehaviour {
 			}else{
 				Drop();
 			}
-		}
+		}*/
 
 		if(phase ==3){
 			gameObject.transform.position = player.transform.position;
@@ -162,7 +126,7 @@ public class Ev_LargeTrash : MonoBehaviour {
 
 
 
-	void Drop(){
+	/*void Drop(){
 		gameObject.transform.position = new Vector2(transform.position.x + 1f, transform.position.y -1f);
 		GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[myPositionInList+1] = transform.position;
 		myShadow = Instantiate(largeShadow,new Vector2(transform.position.x - .1f,transform.position.y -.8f),Quaternion.identity);
@@ -172,6 +136,10 @@ public class Ev_LargeTrash : MonoBehaviour {
 		phase = 0;
 		gameObject.tag = "LargeTrash";
 		gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02";
+	}*/
+
+	public void DropEvent(){
+		gameObject.transform.parent = myLTMManager.gameObject.transform; //goes back to largeTrashManager when drop
 	}
 
 	void ShowNow(){
@@ -182,19 +150,16 @@ public class Ev_LargeTrash : MonoBehaviour {
 	}//end of ShowNow()
 
 	IEnumerator Fall(){
-		falling = true;
 
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,20f);
 		yield return new WaitForSeconds(1.5f);
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,-20f);
 		yield return new WaitForSeconds(1.8f);
-		stopBouncing = true;
-		falling = false;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
 	}
 
-	void Bounce(){
+	/*void Bounce(){
 		bounce++;
 		if(bounce == 1){
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,-15f);
@@ -207,9 +172,9 @@ public class Ev_LargeTrash : MonoBehaviour {
 				//play drop trash3 on channel 2
 			}
 		}
-	}//end of Bouce()
+	}//end of Bouce()*/
 
-	void PickUp(){
+	/*void PickUp(){
 		if(GlobalVariableManager.Instance.PLAYER_CAN_MOVE){
 			//player can move check otherwise could pick up at dialog instances
 			if(currentRoomNumber != 101){
@@ -229,9 +194,9 @@ public class Ev_LargeTrash : MonoBehaviour {
 				}//end of phase =0 check
 			}
 		}
-	}//end of pickup();
+	}//end of pickup();*/
 
-	void QuickPickup(){
+	/*void QuickPickup(){
 		pickUpYSpeed = 30f;
 		pickingUp = true;
 		//GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -249,47 +214,18 @@ public class Ev_LargeTrash : MonoBehaviour {
 		Debug.Log("Picking up y speed:" + pickUpYSpeed);
 		InvokeRepeating("PickUpArc", 0.1f,0.1f);
 		
-	}//End of QuickPickup()
+	}//End of QuickPickup()*/
 
 	void PickUpArc(){
 		
-
-		if(pickUpYSpeed > -40){
-				
-				myBody.velocity = new Vector2((player.transform.position.x - gameObject.transform.position.x),pickUpYSpeed);
-				pickUpYSpeed -= 7;
-				//playerAni.Play("pickUp");
-			}else{
-				gameObject.transform.position = player.transform.position;
-				/*if(GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[0][0].Equals('o') != true){
-					//removes self from the dropped trash list containing all the large trash that arent in their start rooms
-
-				}*/
-				if(pickingUp){
-					GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
-					myBody.velocity = new Vector2(0f,0f);
-					//playerAni.Play("hold_idleR");
-					phase = 3;
-					CancelInvoke();
-					pickingUp = false;
-					Debug.Log("LargeTrashPhaseNum:" + phase);
-				}else if(returning){
-						/*for(int i = 0; i < 4; i++){
-							GameObject tempCloud;
-							tempCloud =Instantiate(cloudEffect,transform.position,Quaternion.identity);
-							tempCloud.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-5,6),Random.Range(-5,6)),ForceMode2D.Impulse);
-							GameObject tempSparkle;
-							tempSparkle = Instantiate(sparkle,transform.position, Quaternion.identity);
-							//tempSparkle.GetComponent<SpriteRenderer>().sprite = "upgradeSparkle";
-						}*/		
-
-						//player.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Squish");
-						GameObject deathSmoke;
-						deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
-						player.GetComponent<SE_GlowWhenClose>().enabled = true;
-						Destroy(gameObject);
-				}
-			}
+		 if(returning){
+						
+			GameObject deathSmoke;
+			deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
+			player.GetComponent<SE_GlowWhenClose>().enabled = true;
+			Destroy(gameObject); //removes from large trash holder
+		}
+			
 	}
 	public void Return(){
 		//activated by dumpster's 'SE_GlowWhenClose'
@@ -306,11 +242,9 @@ public class Ev_LargeTrash : MonoBehaviour {
 		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
 			//play trash pickup on channel 2
 		}
-		myBody.velocity = new Vector2(-40f,0f);
-		
+
 		pickUpYSpeed = 40f; //just use pickUp YSpeed for return arch movement
 		returning = true;
-		GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[myPositionInList].Set(0,0);
 		player = GameObject.Find("Dumpster");
 		InvokeRepeating("PickUpArc", 0.1f,0.1f);
 		

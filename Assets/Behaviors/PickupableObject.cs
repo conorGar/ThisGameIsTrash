@@ -8,13 +8,13 @@ public class PickupableObject : MonoBehaviour
 	public GameObject player;
 	public AudioClip pickup;
 
-	int bounce = 0;
+	//int bounce = 0;
 	//int doOnce = 0;
 	float myY;
 	//float xSpeedWhenCollected;
 	//float pickUpYSpeed;
-	int currentRoomNumber;
-	bool falling = false;
+	//int currentRoomNumber;
+	//bool falling = false;
 	//bool stopBouncing = false;
 	//bool returning = false;
 	bool pickingUp = false;
@@ -38,7 +38,7 @@ public class PickupableObject : MonoBehaviour
 	void Update ()
 	{	if(Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
 			
-			if(Input.GetKeyDown(KeyCode.Space) && !pickingUp && !GlobalVariableManager.Instance.CARRYING_SOMETHING){
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !pickingUp && !GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				Debug.Log("PickUpable object...picked up");
 				PickUp();
 			}

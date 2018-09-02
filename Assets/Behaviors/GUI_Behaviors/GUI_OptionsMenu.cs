@@ -87,9 +87,12 @@ public class GUI_OptionsMenu : MonoBehaviour {
          || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
         {
 			Time.timeScale = 1.0f- Time.timeScale;
-			PauseMenu.GetComponent<GUI_PauseMenu>().enabled = true;
+			if(PauseMenu !=null){ //it should = null on title screen
+				PauseMenu.GetComponent<GUI_PauseMenu>().enabled = true;
+				Time.timeScale = 0;
+			}
+
 			gameObject.SetActive(false);
-			Time.timeScale = 0;
 		}
 	}
 

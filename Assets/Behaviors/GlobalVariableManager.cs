@@ -155,7 +155,7 @@ public class GlobalVariableManager : UserDataItem {
 
     public int GARBAGE_HAD = 0;
 	public int LARGE_TRASH_COLLECTED = 0;
-	public List<Vector2> LARGE_TRASH_LOCATIONS = new List<Vector2>();
+	//public List<Vector2> LARGE_TRASH_LOCATIONS = new List<Vector2>();
 	public int MY_NUM_IN_ROOM = 0;
 	public Vector3 DROPPED_TRASH_LOCATION = Vector3.zero;
 	public List<int> TODAYS_TRASH_AQUIRED = new List<int>{0,0,0};

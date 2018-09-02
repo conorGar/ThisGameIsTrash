@@ -12,8 +12,8 @@ public class Ev_Results : MonoBehaviour {
 	public Text nextUnlock;
 	public GameObject largeTrashTextDisplay;
 	public GameObject treasureCollectedDisplay;
-
-
+	public LargeTrashManager ltManager;
+	public int currentWorld; //needed for largeTrashManager
 	GameObject backPaper;
 	int trashCollectedValue;
 	int phase = 0;
@@ -105,6 +105,8 @@ public class Ev_Results : MonoBehaviour {
 						}
 						GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.RemoveAt(3);
 					}
+					LargeTrashManager.Instance.DisableProperTrash(currentWorld);
+
 					//---------------------------------------------//
 					GlobalVariableManager.Instance.ARROW_POSITION = 1;
 					if(GlobalVariableManager.Instance.DAY_NUMBER == 2){

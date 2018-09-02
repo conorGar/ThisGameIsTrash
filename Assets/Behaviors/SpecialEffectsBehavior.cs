@@ -161,7 +161,7 @@ public class SpecialEffectsBehavior : MonoBehaviour
 	public void SmoothMovementToPoint(float xDestination, float yDestination, float duration, bool localPosition){
 		Debug.Log("smooth move activate");
 		velocity = Vector3.zero;
-		targetPos = new Vector3(xDestination,yDestination, gameObject.transform.position.z);
+		targetPos = new Vector3(xDestination,yDestination, gameObject.transform.localPosition.z);
 		timeOfMovement = duration;
 		smoothMovement = true;
 		smoothMovementLocally = true;

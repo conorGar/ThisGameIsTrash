@@ -7,6 +7,7 @@ public class S_Ev_Hub : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		UserDataManager.Instance.SetDirty();
 		GlobalVariableManager.Instance.MENU_SELECT_STAGE = 2;
 		GlobalVariableManager.Instance.ARROW_POSITION = 0;
 		//create jim

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mSerializedData: "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<SE_Animation xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
     xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" Name=\"Custom\" _Playback=\"Single\"
-    _Backwards=\"false\" _PlaybackTimes=\"-1\" _ExtraTimeFinal=\"0\" _ExtraTimePerLoop=\"0\">\r\n
+    _Backwards=\"false\" _PlaybackTimes=\"-1\" _ExtraTimeFinal=\"0.81\" _ExtraTimePerLoop=\"0\">\r\n
     \ <_Sequences>\r\n    <SE_AnimSequence xsi:type=\"SE_AnimSequence_Alpha\">\r\n
     \     <_Name />\r\n      <_StartType>OnAnimStart</_StartType>\r\n      <_StartDelay>0</_StartDelay>\r\n
     \     <_Separation>0.22</_Separation>\r\n      <_RandomStart>0</_RandomStart>\r\n
@@ -33,8 +33,7 @@ MonoBehaviour:
     \     <_InitAllElements>true</_InitAllElements>\r\n      <_Enabled>true</_Enabled>\r\n
     \     <_From>0</_From>\r\n      <_FromRandom>0</_FromRandom>\r\n      <_To>1</_To>\r\n
     \     <_ToRandom>0</_ToRandom>\r\n      <_AnimBlend_From>Blend</_AnimBlend_From>\r\n
-    \     <_AnimBlend_To>Blend</_AnimBlend_To>\r\n      <_Target>Global</_Target>\r\n
-    \     <_OnFinish_SetAlphaToFinalValue>true</_OnFinish_SetAlphaToFinalValue>\r\n
+    \     <_AnimBlend_To>Blend</_AnimBlend_To>\r\n      <_OnFinish_SetAlphaToFinalValue>true</_OnFinish_SetAlphaToFinalValue>\r\n
     \   </SE_AnimSequence>\r\n    <SE_AnimSequence xsi:type=\"SE_AnimSequence_Rotation\">\r\n
     \     <_Name />\r\n      <_StartType>OnAnimStart</_StartType>\r\n      <_StartDelay>0</_StartDelay>\r\n
     \     <_Separation>0.22</_Separation>\r\n      <_RandomStart>0</_RandomStart>\r\n

@@ -14,14 +14,17 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 	public GameObject title;
 	public GameObject choicesBox;
 	public GameObject backCam;
-	public GameObject fadeHelper;
 	public GameObject GUIcam;
 
 	public GameObject playOption;
 	public GameObject optionsOption;
 	public GameObject extrasOptions;
 
+	public GameObject saveFileSelectHUD;
+
     public TextMeshProUGUI loadingGameDataVisual;
+
+    public GameObject optionHud;
 
 	GameObject currentSelected;
 
@@ -45,12 +48,12 @@ public class S_Ev_TitleScreen : MonoBehaviour {
         loadingGameDataVisual.gameObject.SetActive(false);
 
         phase = 2;
-        fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
+        //fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
     }
 
 	// Update is called once per frame
 	void Update () {
-        if (isInteractable)
+        if (isInteractable && !optionHud.activeInHierarchy)
         {
             if (phase == 1) {
                 if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
@@ -68,25 +71,38 @@ public class S_Ev_TitleScreen : MonoBehaviour {
                 else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
                       || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
                     if (navigationPosition == 1) {
-                        StartCoroutine(LoadUserData());
+                    	saveFileSelectHUD.SetActive(true);
+                    	this.enabled = false;
+                        //StartCoroutine(LoadUserData());
+
+					}else if(navigationPosition == 2){
+						optionHud.SetActive(true);
+						Time.timeScale = 0;
+
                     }
                 }
             } else if (phase == 0) {
                 if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
                     Debug.Log(title.GetComponent<SpecialEffectsBehavior>() == null);
-                    Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x, Screen.height * -1, 0));
+                    //Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x, Screen.height * -1, 0));
 
-                    Debug.Log(topLimit);
-                    Debug.Log(topLimit * -1);
+                    //Debug.Log(topLimit);
+                    //Debug.Log(topLimit * -1);
 
-                    title.transform.localPosition = topLimit * -1;
+                    //title.transform.localPosition = topLimit * -1;
+                    title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,.6f,.5f, true);
                     //title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
                     choicesBox.SetActive(true);
                     phase = 1;
 
                 }
             }
+        }else if(optionHud.activeInHierarchy){
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){
+				optionHud.SetActive(false);
+				Time.timeScale = 1f;
+			}
         }
 
 

@@ -75,14 +75,14 @@ public class EightWayMovement : MonoBehaviour {
 			directionFacing = 1;
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP))
         {
-			if(anim.CurrentClip.name != "ani_jimWalkUp" && !clipOverride){
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkUp",false);
+			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
 			}
 			directionFacing = 3;
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN))
         {
-			if(anim.CurrentClip.name != "ani_jimWalkDown" && !clipOverride){
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkDown",false);
+			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
 			}
 			directionFacing = 4;
  		}
@@ -173,9 +173,9 @@ public class EightWayMovement : MonoBehaviour {
 						if(anim.CurrentClip.name == "ani_jimWalk"){
 							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
 						}else if(anim.CurrentClip.name == "ani_jimWalkDown"){
-							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdleDown",false);
+							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
 						}else if(anim.CurrentClip.name == "ani_jimWalkUp"){
-							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdleUp",false);
+							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
 						}else if(anim.CurrentClip.name != "ani_jimIdle"){
 							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);//set to normal idle when return from override clip(hurt, pickup,etc)
 						}
@@ -252,10 +252,10 @@ public class EightWayMovement : MonoBehaviour {
 					directionFacing = 1;
 				}
 		}else if(directionFacing == 3){
-			anim.Play("ani_jimWalkDown");
+			anim.Play("ani_jimWalk");
 			directionFacing = 4;
         }else{
-			anim.Play("ani_jimWalkUp");
+			anim.Play("ani_jimWalk");
 			directionFacing = 3;
         }
 	
