@@ -15,14 +15,12 @@ public class EnemyRespawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Start for respawn activated");
 		InvokeRepeating("Spawn",.4f,respawnRate);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(RoomManager.Instance.currentRoom != myRoom){//TODO: probably not the best way to keep this from going when player isnt in room but whatever
-			Debug.Log("NOT  in my room");
 			CancelInvoke();
 			for(int i = 0; i < currentEnemies.Count;i++){
 				currentEnemies[i].SetActive(false);

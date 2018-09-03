@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 50766929243263446}
   - component: {fileID: 114792160817723536}
   - component: {fileID: 114188830731903684}
+  - component: {fileID: 114052483752604988}
   m_Layer: 9
   m_Name: projectile_largeRock
   m_TagString: projectile_largeRock
@@ -73,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1245335482067604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.632261, y: 0.41030884, z: 0}
+  m_LocalPosition: {x: 17.88034, y: -55.077816, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4286588567610996}
@@ -183,6 +184,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.305
+--- !u!114 &114052483752604988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1245335482067604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64058a4de277a9f4d92fbe1247cf85e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myShadow: {fileID: 1259982954955268}
+  gravityScaleDelay: 3
+  falling: 0
 --- !u!114 &114188830731903684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -228,7 +243,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1245335482067604}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 540ccbc7391c34642b1ce44ce4b828d2, type: 3}
   m_Name: 
