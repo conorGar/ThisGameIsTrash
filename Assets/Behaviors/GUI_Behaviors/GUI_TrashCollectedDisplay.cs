@@ -29,5 +29,16 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 		//newDiscoveryDisplay.GetComponent<GUIEffects>().Start();
 		newDiscoveryDisplay.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = trashname;
 		newDiscoveryDisplay.transform.GetChild(1).GetComponent<tk2dSprite>().SetSprite(trashSprite);
+		StopCoroutine("NewDiscoveryBehavior");//makes sure no in middle of another coroutine if just appeared...
+		StartCoroutine("NewDiscoveryBehavior");
+	}
+
+	IEnumerator NewDiscoveryBehavior(){
+
+		
+		yield return new WaitForSeconds(1f);
+		newDiscoveryDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-133f,-113f,.4f,true);
+		yield return new WaitForSeconds(.4f);
+		newDiscoveryDisplay.SetActive(false);
 	}
 }

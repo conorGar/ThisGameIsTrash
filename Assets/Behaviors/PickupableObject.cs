@@ -7,16 +7,11 @@ public class PickupableObject : MonoBehaviour
 	public float distanceUntilPickup =3f;
 	public GameObject player;
 	public AudioClip pickup;
-
+	public AudioClip drop;
 	//int bounce = 0;
 	//int doOnce = 0;
 	float myY;
-	//float xSpeedWhenCollected;
-	//float pickUpYSpeed;
-	//int currentRoomNumber;
-	//bool falling = false;
-	//bool stopBouncing = false;
-	//bool returning = false;
+
 	bool pickingUp = false;
 	Rigidbody2D myBody;
 
@@ -80,6 +75,7 @@ public class PickupableObject : MonoBehaviour
 
 	public void Drop(){
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
+		SoundManager.instance.PlaySingle(drop);
 		//proper postionining 
 		DropEvent();
 	}
@@ -89,6 +85,7 @@ public class PickupableObject : MonoBehaviour
 	}
 
 	public virtual void DropEvent(){
+		
 		//nothing for base
 	}
 

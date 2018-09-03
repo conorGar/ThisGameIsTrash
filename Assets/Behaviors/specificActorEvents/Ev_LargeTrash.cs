@@ -24,7 +24,7 @@ public class Ev_LargeTrash : PickupableObject {
 	public GameObject mainCamera;
 	public Room myCurrentRoom;//for now only needed for tutorial popup proper function.
 	public GameObject myLTMManager; //large trash manager subdivision(w1,w2,etc.)
-
+	public AudioClip returnSound;
 	//^
 	//large trash is aware f the current room it is in. This room is given by roomManger.currentoom at start and when large trash
 	//is dropped. If myCurrentRoom = RoomManager.currentRoom, deactivate self. (In update method?) check if the roomManager.room =
@@ -36,10 +36,10 @@ public class Ev_LargeTrash : PickupableObject {
 	int doOnce = 0;
 
 	//float xSpeedWhenCollected;
-	f//loat pickUpYSpeed;
+	//loat pickUpYSpeed;
 	//int currentRoomNumber;
 
-	bool returning = false;
+	//bool returning = false;
 
 
 	//look up - find object in view
@@ -50,7 +50,7 @@ public class Ev_LargeTrash : PickupableObject {
 		
 		player = GameObject.FindGameObjectWithTag("Player");
 		//playerAni = player.GetComponent<tk2dSpriteAnimator>();
-		currentRoomNumber = GlobalVariableManager.Instance.ROOM_NUM;
+		//currentRoomNumber = GlobalVariableManager.Instance.ROOM_NUM;
 
 		if(GlobalVariableManager.Instance.ROOM_NUM == 101){
 			MyCollectionSetUp();
@@ -59,7 +59,7 @@ public class Ev_LargeTrash : PickupableObject {
 
 					//myY = gameObject.transform.position.y;
 					phase = 0;
-					if(currentRoomNumber != 101){
+					/*if(currentRoomNumber != 101){
 							if(GlobalVariableManager.Instance.MASTER_SFX_VOL >0 && gameObject.active){
 									//loop large trash sparkle on channel 11
 								}
@@ -74,7 +74,7 @@ public class Ev_LargeTrash : PickupableObject {
 							//ShowNow();
 
 
-						}
+						}*/
 					
 			
 		}
@@ -142,12 +142,7 @@ public class Ev_LargeTrash : PickupableObject {
 		gameObject.transform.parent = myLTMManager.gameObject.transform; //goes back to largeTrashManager when drop
 	}
 
-	void ShowNow(){
 
-			xSpeedWhenCollected = 30f;
-
-
-	}//end of ShowNow()
 
 	IEnumerator Fall(){
 
@@ -218,13 +213,13 @@ public class Ev_LargeTrash : PickupableObject {
 
 	void PickUpArc(){
 		
-		 if(returning){
+
 						
 			GameObject deathSmoke;
 			deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
 			player.GetComponent<SE_GlowWhenClose>().enabled = true;
 			Destroy(gameObject); //removes from large trash holder
-		}
+		
 			
 	}
 	public void Return(){
@@ -233,6 +228,7 @@ public class Ev_LargeTrash : PickupableObject {
 		phase = 0;
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 
+		SoundManager.instance.PlaySingle(returnSound);
         // Add this trash item to the large trash list.
         var largeTrashItem = new GlobalVariableManager.LargeTrashItem(garbage.type);
         largeTrashItem.spriteIndex = myPositionInList;
@@ -243,8 +239,7 @@ public class Ev_LargeTrash : PickupableObject {
 			//play trash pickup on channel 2
 		}
 
-		pickUpYSpeed = 40f; //just use pickUp YSpeed for return arch movement
-		returning = true;
+	
 		player = GameObject.Find("Dumpster");
 		InvokeRepeating("PickUpArc", 0.1f,0.1f);
 		

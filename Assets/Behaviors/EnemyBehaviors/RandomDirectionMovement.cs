@@ -70,7 +70,9 @@ public class RandomDirectionMovement : MonoBehaviour {
 		bounceOffObject = 0;
 		CancelInvoke("SpawnClouds");
 		moving = false;
-		anim.Play("idle");
+		if(anim.GetClipByName("idle") != null){
+			anim.Play("idle");
+		}
 		//if(anim.IsPlaying("run")){
 			//anim.Play("idleR");
 		//} else if(anim.IsPlaying("runL"))

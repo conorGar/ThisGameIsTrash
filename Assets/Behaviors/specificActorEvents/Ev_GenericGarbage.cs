@@ -138,11 +138,11 @@ public class Ev_GenericGarbage : MonoBehaviour {
 								GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1)) + 2).ToString();
 							}*/
 						}//mo garbage mo problems check end
-						//if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
+						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
 
 							collider.gameObject.GetComponent<PinFunctionsManager>().PassivePillage(true);
                         
-                    	//}
+                    	}
 
                         smallShadow.SetActive(false);
 

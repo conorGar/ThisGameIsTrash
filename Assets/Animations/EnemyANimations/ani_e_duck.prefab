@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - name: chaseR
+  - name: chase
     frames:
     - spriteCollection: {fileID: 114052127822594246, guid: 089fc0866cea7564788b472353f1f892,
         type: 2}
@@ -110,10 +110,10 @@ MonoBehaviour:
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    fps: 10
+    fps: 23.529411
     loopStart: 0
     wrapMode: 0
-  - name: idleR
+  - name: idle
     frames:
     - spriteCollection: {fileID: 114052127822594246, guid: 089fc0866cea7564788b472353f1f892,
         type: 2}
@@ -172,7 +172,7 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  - name: runR
+  - name: run
     frames:
     - spriteCollection: {fileID: 114052127822594246, guid: 089fc0866cea7564788b472353f1f892,
         type: 2}

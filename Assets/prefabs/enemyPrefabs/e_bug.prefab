@@ -32,9 +32,10 @@ GameObject:
   - component: {fileID: 61374833343893834}
   - component: {fileID: 114016192718266126}
   - component: {fileID: 114762427506534602}
+  - component: {fileID: 114108039266120802}
   m_Layer: 9
   m_Name: e_bug
-  m_TagString: enemy_rat
+  m_TagString: enemy_bug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,8 +63,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1033402762086370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.625763, y: 2.5732548, z: 0.2109375}
-  m_LocalScale: {x: 1.4713838, y: 1.4713838, z: 1.4713838}
+  m_LocalPosition: {x: -3.5378842, y: 17.333515, z: 0.2109375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4795972526875586}
   m_Father: {fileID: 0}
@@ -152,7 +153,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.11, y: 0.05}
@@ -204,7 +205,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90732f15953ee234992e7e9f73c74d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noticeThreshold: 2
+  noticeThreshold: 4
+--- !u!114 &114108039266120802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033402762086370}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  walkDistance: 10
+  chaseSpeed: 0.95
+  hasSeperateFacingAnimations: 0
 --- !u!114 &114458905907132094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,9 +274,8 @@ MonoBehaviour:
   armoredEnemy: 0
   moveWhenHit: 1
   secretHider: 0
-  currentHp: 3
+  currentHp: 4
   meleeDmgBonus: 0
-  myPositionInList: 0
   invincibleAni:
     name: Default
     frames: []
@@ -276,16 +291,19 @@ MonoBehaviour:
   currentCamera: {fileID: 114911326877479794, guid: ed6dbd2afaf985146a8eda13f2278a1c,
     type: 2}
   respawnEnemy: 0
+  hitSound: {fileID: 0}
   hitSqueal: {fileID: 0}
-  audioSource: {fileID: 0}
+  bossEnemy: 0
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
+  tutPopup: {fileID: 0}
   gar_trash: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   gar_rec: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   gar_comp: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   timeDrop: {fileID: 0}
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
-  scrapDrop: {fileID: 1335921923726912, guid: 17b968109e0b361498d14444ff4db4a0, type: 2}
+  myShadow: {fileID: 1170939172725382}
+  myCollisionBox: {fileID: 61374833343893834}
 --- !u!114 &114740205839798866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66f35be6d63b45488a499964e7a0cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceTilSwoop: 2
+  distanceTilSwoop: 4
 --- !u!114 &114849190622152430
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,31 +4,22 @@ using UnityEngine;
 
 public class EnemyTakeDamage : MonoBehaviour {
 
-	//4/26/18 - still need to add drawing stuff, but looked as though maybe that should be its own script
 
 	public bool armoredEnemy = false;
-	//public bool globalEnemy = false;
 	public bool moveWhenHit = true;
 	public bool secretHider = false;
-	//public bool spawnShadow = true;
 	public int currentHp;
 	public int meleeDmgBonus = 0;
-	//public int myPositionInList = 0;
-	//public int myPosInBasicEnemyStr = 0; // should be set by 'populateSelf'
 	public tk2dSpriteAnimationClip invincibleAni = null;
 	public tk2dSpriteAnimationClip aniToSwitchBackTo = null;
 	public tk2dCamera currentCamera; //set in inspector
-	//public bool doesNotArcWhenHit = false;
+
 	public bool respawnEnemy = false;
 	public AudioClip hitSound;
 	public AudioClip hitSqueal;
 	public bool bossEnemy;
-	//public AudioClip bounce;
-	//public AudioSource audioSource;
-	//public GameObject deathShadow;
-	//public GameObject hitStar;
-	//public GameObject smokePuff;
-	public GameObject objectPool;
+
+
 	public GameObject tutPopup;
 
 	public GameObject gar_trash;
@@ -37,14 +28,17 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject timeDrop;
 	public GameObject healthDrop;
 	public GameObject pinDrop;
-	//public GameObject scrapDrop;
-	//public GameObject hitStarPS;
-	//public GameObject landingDustParticle;
 
-	//GameObject deathShadowInstance;
+	public GameObject myShadow;
+	public BoxCollider2D myCollisionBox;
+
+	[HideInInspector]
+	public GameObject objectPool;
+	public EnemyRespawner myRespawner; //for use with respawning enemies
+
+
 	Ev_MainCamera currentCam;
-	//private bool hitPushBack = false;
-	//private float bounceCounter = 30f;
+
 	float swingDirectionSide; // uses scale to see if swinging left or right
 
 	bool piercingPin = false;
@@ -64,6 +58,12 @@ public class EnemyTakeDamage : MonoBehaviour {
 	GameObject player;
 	string mySpawnerID;
 
+	Vector2 shadowStartPos;
+	Rigidbody2D myBody;
+	bool spinning;
+	float t;
+	Quaternion startRotation;
+
 
 
 	void Start () {
@@ -71,6 +71,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		currentCam = GameObject.Find("tk2dCamera").GetComponent<Ev_MainCamera>();
 		myAnim = this.gameObject.GetComponent<tk2dSpriteAnimator>();
+		myBody = gameObject.GetComponent<Rigidbody2D>();
+		startRotation = transform.rotation;
+		shadowStartPos = myShadow.transform.localPosition;
 
 
 		//----------------Pins----------------//
@@ -120,6 +123,24 @@ public class EnemyTakeDamage : MonoBehaviour {
 		/*if(camShake >0){
 			currentCamera.transform.localPosition = Random.insideUnitSphere * 0.7f;
 		}*/ //took out because messy when hitting boss and didnt think it was needed because of camera's ScreenShake()
+
+
+		if(spinning){
+			if (t<.5f){
+				transform.rotation = startRotation * Quaternion.AngleAxis(t/.5f * 360f, Vector3.forward);
+				t += Time.deltaTime;
+				myShadow.transform.position = new Vector2(gameObject.transform.position.x,myShadow.transform.position.y);
+			}else{
+				spinning = false;
+				t = 0f;
+				myShadow.transform.parent = gameObject.transform;//shadow follows again.
+				myShadow.transform.localPosition = shadowStartPos;
+				myBody.velocity = Vector2.zero;
+				transform.rotation = startRotation;
+
+			}
+		}
+
 
 	}
 	void OnTriggerEnter2D(Collider2D melee){
@@ -221,10 +242,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 						Destroy(melee.gameObject);
 
 					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
-					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
+					GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars"); 
 					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
 					damageCounter.SetActive(true);
-					GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
+					GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars");
 					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.SetActive(true);
@@ -265,13 +286,19 @@ public class EnemyTakeDamage : MonoBehaviour {
 						gameObject.transform.localScale = new Vector2(1f,1f);
 
 					//camShake = 1;
+					if(gameObject.GetComponent<FollowPlayer>() != null){
+						gameObject.GetComponent<FollowPlayer>().StopSound();
+						gameObject.GetComponent<FollowPlayer>().enabled = false;
+					}
 					StartCoroutine("ContinueHit"); // just needed to seperate here for IEnumerator stuff
 				}
 			}
 
 	}
 	IEnumerator StopKnockback(){
-		
+		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
+		spinning = false;
+		myCollisionBox.enabled = true;
 		yield return new WaitForSeconds(.3f);
 		Debug.Log("STOP KNOCKBACK ACTIVATE");
 		damageOnce = 0;
@@ -297,21 +324,32 @@ public class EnemyTakeDamage : MonoBehaviour {
 			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawR") == 0||meleeSwingDirection.CompareTo("poleR") == 0){
 				Debug.Log(swingDirectionSide);
 				if(swingDirectionSide < 0){
-						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-17f,0f), ForceMode2D.Impulse);
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-17f,8f), ForceMode2D.Impulse);
 				}else{
-						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,0f), ForceMode2D.Impulse);	
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,8f), ForceMode2D.Impulse);	
 				}
+				myBody.gravityScale = 2;
+				myShadow.transform.parent = null; //shadow doesnt follow Y pos
+
+
+
+				myCollisionBox.enabled = false;
+
+
+
+
 			}else if(meleeSwingDirection.CompareTo("stickUp") == 0||meleeSwingDirection.CompareTo("clawUp") == 0||meleeSwingDirection.CompareTo("poleUp") == 0){
 				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,-17f), ForceMode2D.Impulse);
 			}else if(meleeSwingDirection.CompareTo("stickDown") == 0||meleeSwingDirection.CompareTo("clawDown") == 0||meleeSwingDirection.CompareTo("poleDown") == 0){
 				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,17f), ForceMode2D.Impulse);
 			}
+				spinning = true;
 
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				Debug.Log("**AND HERE!!!!!!!!***");
-				yield return new WaitForSeconds(.4f);
+				yield return new WaitForSeconds(.3f);
 				StartCoroutine( "StopKnockback");
 
 		}else{
@@ -329,17 +367,14 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 	IEnumerator AfterHit(){
 		if(currentHp >0){
-				if(gameObject.GetComponent<FollowPlayer>() != null){
-					gameObject.GetComponent<FollowPlayer>().StopSound();
-					gameObject.GetComponent<FollowPlayer>().enabled = false;
-				}
+				
 				//disable follow player after notice behavior if end up having thta in game
 				if(gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled){
 					gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
 				}
 
 				//****SFX PLAY - 'hit2' on ch4
-				yield return new WaitForSeconds(.4f);
+				yield return new WaitForSeconds(.7f);
 				//***grow/shrink scale back to normal on all fronts
 
 				if(gameObject.GetComponent<FollowPlayer>()){
@@ -454,7 +489,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 			}
 			//Debug.Log("dropped scrap:" + scrapDropped);
 		    for(int i = 0; i < scrapDropped; i++){
-			    GameObject droppedScrap= objectPool.GetComponent<ObjectPool>().GetPooledObject("Scrap",gameObject.transform.position);
+				GameObject droppedScrap=   ObjectPool.Instance.GetPooledObject("Scrap"); 
 			    //droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
 		    }
         }
@@ -468,14 +503,35 @@ public class EnemyTakeDamage : MonoBehaviour {
 	void Death(){
 		Debug.Log("Death Activate!!!");
 
-		GameObject deathSmoke = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_SmokePuff");
+		if(respawnEnemy){
+			myRespawner.currentEnemies.Remove(this.gameObject);
+			//needed to make sure enemy doesnt spawn again functioning as if it was dead
+			spinning = false;
+			myCollisionBox.enabled = true;
+			damageOnce = 0;
+			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+			if(currentHp >0 && myAnim.GetClipByName("idle") != null)
+				myAnim.Play("idle");
+			takingDamage = false;
+			if(gameObject.GetComponent<FollowPlayer>()){
+					gameObject.GetComponent<FollowPlayer>().enabled = true;
+					//***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
+			}
+			currentHp = 2; //TODO: this is just for brownmole, maybe get it from 'Enemy.cs"?
+
+		}else{
+			GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival = GlobalVariableManager.Instance.DAY_NUMBER +3;
+			Debug.Log("Day of revival: "+ GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival);
+		}
+
+		GameObject deathSmoke = ObjectPool.Instance.GetPooledObject("effect_SmokePuff"); 
 		deathSmoke.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 
-		GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
+		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost");
 		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		Debug.Log("My spawner ID: "+mySpawnerID);
-		GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival = GlobalVariableManager.Instance.DAY_NUMBER +3;
-		Debug.Log("Day of revival: "+ GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival);
+
 
 
 		this.gameObject.SetActive(false);

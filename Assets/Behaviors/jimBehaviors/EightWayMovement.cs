@@ -17,7 +17,7 @@ public class EightWayMovement : MonoBehaviour {
  
 	//public GameObject legs;
 	//public GameObject shadow;
-	public GameObject walkCloud;
+	public GameObject walkCloudPS;
 
 	public GameObject myLegs;
 
@@ -168,7 +168,7 @@ public class EightWayMovement : MonoBehaviour {
                 }
                 */
                 if(movement.x == 0 && movement.y == 0){
-                	
+					walkCloudPS.GetComponent<ParticleSystem>().Stop();
                 	if(!clipOverride){
 						if(anim.CurrentClip.name == "ani_jimWalk"){
 							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
@@ -185,7 +185,9 @@ public class EightWayMovement : MonoBehaviour {
 						momentum = momentum - .2f;
 				}else if(momentum != 4){
 					momentum = 4f;
-				InvokeRepeating("SpawnClouds",.2f, .2f); //just have this here so it only happens once
+				InvokeRepeating("SpawnClouds",.2f, .2f);
+				walkCloudPS.SetActive(true); //just have this here so it only happens once
+				walkCloudPS.GetComponent<ParticleSystem>().Play();
                 }
             }
         }
@@ -226,13 +228,13 @@ public class EightWayMovement : MonoBehaviour {
         noDelayStarted = false;
     }
     void SpawnClouds(){
-		GameObject newestCloud;
+		/*GameObject newestCloud;
 		newestCloud = Instantiate(walkCloud, new Vector3(transform.position.x,transform.position.y - 1.5f, transform.position.z), Quaternion.identity) as GameObject;
 		if(movement.x <0){
 			newestCloud.GetComponent<Ev_WalkCloud>().MoveRight();
 		}else {
 			newestCloud.GetComponent<Ev_WalkCloud>().MoveLeft();
-		}
+		}*/
 		SoundManager.instance.RandomizeSfx(footsteps1,footsteps2);
 
     }

@@ -14,6 +14,7 @@ public class FollowPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<tk2dSpriteAnimator>();
+		player = GameObject.FindGameObjectWithTag("Player").transform;
 	}
 	
 	// Update is called once per frame
@@ -22,8 +23,8 @@ public class FollowPlayer : MonoBehaviour {
 		if(distance < walkDistance){
 			transform.position = Vector3.SmoothDamp(transform.position, player.position, ref smoothVelocity, chaseSpeed);
 			if(!hasSeperateFacingAnimations){
-				if(!anim.IsPlaying("walk"))
-						anim.Play("walk");
+				if(anim.GetClipByName("chase") != null && !anim.IsPlaying("chase"))
+						anim.Play("chase");
 
 				if(player.transform.position.x < transform.position.x){
 					transform.localScale = new Vector3(-1,1,1);

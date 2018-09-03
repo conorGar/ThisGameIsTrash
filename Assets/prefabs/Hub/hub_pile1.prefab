@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4792620854975126}
   - component: {fileID: 212485618583097336}
   - component: {fileID: 61257903876730188}
+  - component: {fileID: 114292286628915530}
   m_Layer: 8
   m_Name: hub_pile1
   m_TagString: Tiles
@@ -34,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1383966355371324}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 15.7, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -31.233795, y: 9.99883, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.96, y: 2.49}
   m_EdgeRadius: 0
+--- !u!114 &114292286628915530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1383966355371324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hastk2dSprite: 1
+  movingObject: 0
 --- !u!212 &212485618583097336
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -100,7 +114,7 @@ SpriteRenderer:
   m_SortingLayerID: 962927795
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2c3ee9a26079f6b4099d81f9ec350666, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c7f51039c137934e842b97a01864ec5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
