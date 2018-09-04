@@ -13,6 +13,7 @@ public class Ev_Dumpster : MonoBehaviour {
 		thisHud = GameObject.Find("HUD");
 		if(GlobalVariableManager.Instance.DAY_NUMBER == 1){
 			gameObject.GetComponent<SE_GlowWhenClose>().enabled = false; // cannot instantly end day on first day.
+			StartCoroutine("FirstDayActivateDelay");
 		}
 	}
 
@@ -20,5 +21,10 @@ public class Ev_Dumpster : MonoBehaviour {
 	public void Activate(){
 		
 		thisHud.GetComponent<Ev_HUD>().Create(endDayPopUp);
+	}
+
+	IEnumerator FirstDayActivateDelay(){
+		yield return new WaitForSeconds(10f);
+		gameObject.GetComponent<SE_GlowWhenClose>().enabled = true;
 	}
 }

@@ -13,7 +13,7 @@ public class Ev_LargeTrash : PickupableObject {
 	//public int myWorld;
 	//public string myString;
 	//public char myCharValue; //only used to set up string for use when showing today's collected large trash at day end
-    public LargeGarbage garbage;
+    public LargeGarbage garbage = new LargeGarbage();
     public Sprite collectedDisplaySprite;
 
 
@@ -22,14 +22,14 @@ public class Ev_LargeTrash : PickupableObject {
 	public GameObject sparkle;
 	public GameObject smokePuff;
 	public GameObject mainCamera;
-	public Room myCurrentRoom;//for now only needed for tutorial popup proper function.
-	public GameObject myLTMManager; //large trash manager subdivision(w1,w2,etc.)
+	public GameObject ltmManager;//only used for drop function
 	public AudioClip returnSound;
 	//^
 	//large trash is aware f the current room it is in. This room is given by roomManger.currentoom at start and when large trash
 	//is dropped. If myCurrentRoom = RoomManager.currentRoom, deactivate self. (In update method?) check if the roomManager.room =
 	//current room and if so, activate the large trash
-
+	[HideInInspector]
+	//public GameObject dumpster; //used for return
 
 	int phase = 0;
 
@@ -39,14 +39,14 @@ public class Ev_LargeTrash : PickupableObject {
 	//loat pickUpYSpeed;
 	//int currentRoomNumber;
 
-	//bool returning = false;
+	bool returning = false;
 
 
 	//look up - find object in view
 
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		
 		player = GameObject.FindGameObjectWithTag("Player");
 		//playerAni = player.GetComponent<tk2dSpriteAnimator>();
@@ -78,31 +78,19 @@ public class Ev_LargeTrash : PickupableObject {
 					
 			
 		}
-
-
-		if(RoomManager.Instance.currentRoom == myCurrentRoom && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.LARGETRASH ) != GlobalVariableManager.TUTORIALPOPUPS.LARGETRASH){
-				ActivateTutorial();//TODO:Test properly
-		}
+		garbage.type = LargeGarbage.ByIndex(myPositionInList);
 
 
 	}// end of Start()
 	
-	// Update is called once per frame
-	void Update () {
-		/*if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
-        {
-			if(phase !=3){
-				if(returning != true && GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count < 6) // world room discover part for no pickup during coon. Still needs pause check***
-					PickUp();
-			}else{
-				Drop();
-			}
-		}*/
+	public override void PickUpEvent(){
+		gameObject.tag = "ActiveLargeTrash";
+	}
 
-		if(phase ==3){
-			gameObject.transform.position = player.transform.position;
+	public override void DropEvent(){
+		gameObject.tag = "LargeTrash";
+		gameObject.transform.parent = ltmManager.transform; //goes back to largeTrashManager when drop
 
-		}
 	}
 
 	public void Kill(){
@@ -118,13 +106,6 @@ public class Ev_LargeTrash : PickupableObject {
 
 	}
 
-	void ActivateTutorial(){
-		Debug.Log("Large Trash tutorial activated xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-		mainCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,"tutorial");
-
-	}
-
-
 
 	/*void Drop(){
 		gameObject.transform.position = new Vector2(transform.position.x + 1f, transform.position.y -1f);
@@ -138,9 +119,7 @@ public class Ev_LargeTrash : PickupableObject {
 		gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02";
 	}*/
 
-	public void DropEvent(){
-		gameObject.transform.parent = myLTMManager.gameObject.transform; //goes back to largeTrashManager when drop
-	}
+
 
 
 
@@ -169,57 +148,22 @@ public class Ev_LargeTrash : PickupableObject {
 		}
 	}//end of Bouce()*/
 
-	/*void PickUp(){
-		if(GlobalVariableManager.Instance.PLAYER_CAN_MOVE){
-			//player can move check otherwise could pick up at dialog instances
-			if(currentRoomNumber != 101){
-				if(phase == 0 && gameObject.GetComponent<SpriteRenderer>().Equals("hidden") ==  false){
-				GameObject player = GameObject.FindGameObjectWithTag("Player");
-					if(Mathf.Abs(transform.position.x - player.transform.position.x) < 3f &&Mathf.Abs(transform.position.y - player.transform.position.y) < 3f){
-						if(pickingUp == false){
-							player.GetComponent<MeleeAttack>().SetCanAttack(false);
-							if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
-								//play large trash pickup on channel 4
-							}
-							QuickPickup();
-							Debug.Log("LAGRE TRASH-  quick pickup activated");
-						}
-					}
 
-				}//end of phase =0 check
-			}
-		}
-	}//end of pickup();*/
 
-	/*void QuickPickup(){
-		pickUpYSpeed = 30f;
-		pickingUp = true;
-		//GameObject player = GameObject.FindGameObjectWithTag("Player");
-		if(myCollision != null){
-			Destroy(myCollision);
-		}
-		if(myShadow != null){
-			Destroy(myShadow);
-		}
-		if(mySparkles !=null){
-			Destroy(mySparkles);
-		}
-		gameObject.tag = "ActiveLargeTrash";
-		gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer04";
-		Debug.Log("Picking up y speed:" + pickUpYSpeed);
-		InvokeRepeating("PickUpArc", 0.1f,0.1f);
-		
-	}//End of QuickPickup()*/
 
-	void PickUpArc(){
+
+	void ReturnArc(){
 		
 
 						
-			GameObject deathSmoke;
-			deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
-			player.GetComponent<SE_GlowWhenClose>().enabled = true;
-			Destroy(gameObject); //removes from large trash holder
-		
+			//GameObject deathSmoke;
+			//deathSmoke = Instantiate(smokePuff,transform.position, Quaternion.identity);
+			Debug.Log("GOT HERE LARGE TRASH RETURN");
+			/*this.gameObject.transform.parent = null; //removes from large trash holder
+			this.gameObject.SetActive(false); // sets unactive and just waits for scene to change to destroy. For whatever reason Destroy() wasn't working
+			Debug.Log("GOT PAST DESTROY?" + this.gameObject.name);
+			*/
+			Destroy(gameObject);
 			
 	}
 	public void Return(){
@@ -239,9 +183,14 @@ public class Ev_LargeTrash : PickupableObject {
 			//play trash pickup on channel 2
 		}
 
-	
-		player = GameObject.Find("Dumpster");
-		InvokeRepeating("PickUpArc", 0.1f,0.1f);
+		gameObject.transform.parent = null;
+		myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
+		myBody.gravityScale = 2;
+		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
+		returning = true;
+		player.GetComponent<MeleeAttack>().enabled = true;
+		dumpster.GetComponent<SE_GlowWhenClose>().enabled = true;
+		ReturnArc();
 		
 	}// end of Return()
 

@@ -14,7 +14,7 @@ public class Ev_Results : MonoBehaviour {
 	public GameObject treasureCollectedDisplay;
 	public LargeTrashManager ltManager;
 	public int currentWorld; //needed for largeTrashManager
-	GameObject backPaper;
+	public GameObject backPaper;
 	int trashCollectedValue;
 	int phase = 0;
 	int spawnLargeTrashOnce = 0;
@@ -53,6 +53,8 @@ public class Ev_Results : MonoBehaviour {
 
 					if(spawnLargeTrashOnce == 0){
 						//spawn large trash collected display
+						backPaper.GetComponent<Image>().enabled = false;
+						gameObject.GetComponent<Image>().enabled = false;
 						largeTrashTextDisplay.SetActive(true);
 						spawnLargeTrashOnce = 1;
 					}else{
@@ -71,6 +73,9 @@ public class Ev_Results : MonoBehaviour {
 
 
 				}else{
+					largeTrashTextDisplay.SetActive(false);
+					backPaper.GetComponent<Image>().enabled = true;
+					gameObject.GetComponent<Image>().enabled = true;
 					GlobalVariableManager.Instance.ENEMIES_DEFEATED = 0;
 					for(int i = 0; i<GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count; i++){
 						GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[i] = 0;

@@ -28,7 +28,6 @@ public class GUI_TutPopup : MonoBehaviour {
 	}
 
 	void OnEnable(){
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,transform.position.y +2.4f,.5f);
 		StartCoroutine("Delays");
 	}
@@ -42,7 +41,10 @@ public class GUI_TutPopup : MonoBehaviour {
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,5f,.5f);
 			yield return new WaitForSeconds(.5f);
 			mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+			GameObject player = GameObject.FindGameObjectWithTag("Player");
+			player.GetComponent<EightWayMovement>().enabled = true;
+			player.GetComponent<PlayerTakeDamage>().enabled = true;
+			GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = false;
 			gameObject.SetActive(false);
 		}
 

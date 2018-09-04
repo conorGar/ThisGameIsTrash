@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+ 
 public class Ev_PinBehavior : MonoBehaviour {
 
 	public GameObject smallTextDisplay;
@@ -81,7 +82,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 				if(setArrowPosOnce == 0){
 					mySFX.SmoothMovementToPoint(transform.position.x,startingY + 2,.2f);
 					GlobalVariableManager.Instance.ARROW_POSITION = mySpotInShop;
-                    PinManager.Instance.PinTitleSprite.gameObject.SetActive(true);
+                    PinManager.Instance.PinTitle.gameObject.SetActive(true);
 					PinManager.Instance.DescriptionText.enabled = true;
 					descriptionBox.enabled = true;
 					descriptionBox.GetComponent<GUIEffects>().Start();
@@ -95,7 +96,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 				if(setArrowPosOnce == 1){
 					mySFX.SmoothMovementToPoint(transform.position.x,startingY,.2f);
 					GlobalVariableManager.Instance.ARROW_POSITION = 0;
-                    PinManager.Instance.PinTitleSprite.gameObject.SetActive(false);
+                    PinManager.Instance.PinTitle.gameObject.SetActive(false);
 					descriptionBox.enabled = false;
                     PinManager.Instance.DescriptionText.enabled = false;
                     PinManager.Instance.PPDisplay.Clear();
@@ -109,8 +110,8 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 			//------------what to do when arrow position is my position------------/
 			if(bought == false && GlobalVariableManager.Instance.ARROW_POSITION == mySpotInShop){
-				if(PinManager.Instance.PinTitleSprite.gameObject != null){
-                    PinManager.Instance.PinTitleSprite.SetSprite(pinData.titleSprite);
+				if(PinManager.Instance.PinTitle.gameObject != null){
+                    PinManager.Instance.PinTitle.text = pinData.displayName;
 				}
 				if(PinManager.Instance.DescriptionText != null){
                     PinManager.Instance.DescriptionText.text = pinData.description;
@@ -129,17 +130,17 @@ public class Ev_PinBehavior : MonoBehaviour {
 	public void AtEquipScreen(){
 		if(IsPinDiscovered()){
             PinManager.Instance.DescriptionText.text = pinData.description;
-            PinManager.Instance.PinTitleSprite.SetSprite(pinData.titleSprite);
+            PinManager.Instance.PinTitle.text = pinData.displayName;
             PinManager.Instance.PPDisplay.SetDisplayedIcons(pinData.ppValue);
 			PinManager.Instance.PinDisplaySprite.SetSprite(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name);
 
             Debug.Log("Pin Sprite Name : " + this.gameObject.GetComponent<tk2dSprite>().CurrentSprite.name
-                      + " Title Name : " + PinManager.Instance.PinTitleSprite.CurrentSprite.name
+                      + " Title Name : " + PinManager.Instance.PinTitle.text
                       + " Display Pin Sprite Name : " + PinManager.Instance.PinDisplaySprite.CurrentSprite.name);
         }
         else{
             PinManager.Instance.DescriptionText.text = "Buy or find this Pin to learn what powers it holds!";
-            PinManager.Instance.PinTitleSprite.SetSprite("pinTitle_locked");
+            PinManager.Instance.PinTitle.text = "???";
             PinManager.Instance.PPDisplay.Clear();
 		}
 	}

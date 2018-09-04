@@ -48,8 +48,10 @@ public class FireTowardPlayer : MonoBehaviour {
 		//Vector3 playerPosition = new Vector3(player.transform.position.x,player.transform.position.y,player.transform.position.z);
 
 		Debug.Log("FiredObject");
+		if(!GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING){
 		GameObject bullet = ObjectPool.Instance.GetPooledObject("projectile_largeRock",gameObject.transform.position);
 		bullet.GetComponent<Ev_ProjectileTowrdPlayer>().enabled = true; // starts off disabled only so i didnt have to make another tag for rocks that DONT follow player(like ones that spawn from boulder.) feel free to just do that if tis causes issues
+		}
 		//bullet.GetComponent<Ev_ProjectileTowrdPlayer>().speed = projectileSpeed;
 		//bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position).normalized *projectileSpeed;
 

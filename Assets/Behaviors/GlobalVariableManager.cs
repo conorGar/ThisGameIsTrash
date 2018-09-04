@@ -54,6 +54,7 @@ public class GlobalVariableManager : UserDataItem {
 	public int MENU_SELECT_STAGE = 1;
 	public bool PLAYER_CAN_MOVE = true;
 	public bool TUT_POPUP_ON = true;
+	public bool TUT_POPUP_ISSHOWING = false;//used for stopping enemies
 	public bool CARRYING_SOMETHING= false;
 	public int PROGRESS_LV = 0;
 	public int TOTAL_TRASH = 0;

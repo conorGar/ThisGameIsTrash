@@ -57,32 +57,52 @@ public class EightWayMovement : MonoBehaviour {
         {
 			if(directionFacing != 2){
 					gameObject.transform.localScale = new Vector2(transformScale.x*-1,transformScale.y); 
+					walkCloudPS.transform.localScale = new Vector3(walkCloudPS.transform.localScale.x*-1,walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
+
 			}
 			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
+				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
+				}else{
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
+				}
 			}
 			directionFacing = 2;
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT))
         {
 			if(directionFacing != 1){
 					gameObject.transform.localScale = new Vector2(transformScale.x,transformScale.y); 
+				walkCloudPS.transform.localScale = new Vector3(Mathf.Abs(walkCloudPS.transform.localScale.x),walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
+			
 				}
 			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
 				
+				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
+				}else{
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
+				}
 
 			}
 			directionFacing = 1;
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP))
         {
 			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
+				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
+				}else{
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
+				}
 			}
 			directionFacing = 3;
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN))
         {
 			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
+				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
+				}else{
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
+				}
 			}
 			directionFacing = 4;
  		}
@@ -170,14 +190,18 @@ public class EightWayMovement : MonoBehaviour {
                 if(movement.x == 0 && movement.y == 0){
 					walkCloudPS.GetComponent<ParticleSystem>().Stop();
                 	if(!clipOverride){
-						if(anim.CurrentClip.name == "ani_jimWalk"){
-							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
-						}else if(anim.CurrentClip.name == "ani_jimWalkDown"){
-							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
-						}else if(anim.CurrentClip.name == "ani_jimWalkUp"){
-							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
-						}else if(anim.CurrentClip.name != "ani_jimIdle"){
-							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);//set to normal idle when return from override clip(hurt, pickup,etc)
+						if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
+							if(anim.CurrentClip.name == "ani_jimWalk"){
+								gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
+							}else if(anim.CurrentClip.name == "ani_jimWalkDown"){
+								gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
+							}else if(anim.CurrentClip.name == "ani_jimWalkUp"){
+								gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
+							}else if(anim.CurrentClip.name != "ani_jimIdle"){
+								gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);//set to normal idle when return from override clip(hurt, pickup,etc)
+							}
+						}else{
+							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",false);
 						}
 					}
 					//not instant stop

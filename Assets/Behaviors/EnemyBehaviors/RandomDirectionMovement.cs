@@ -28,7 +28,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(moving && !anim.IsPlaying("hit")){
+		if(moving && !anim.IsPlaying("hit") && !GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING){
 			transform.position += direction*movementSpeed*Time.deltaTime;
 			if(direction.x > 0 ){
 				if(gameObject.transform.localScale.x < 0){

@@ -46,7 +46,6 @@ public class SE_GlowWhenClose : MonoBehaviour {
 					if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
                     {
 						Activate();
-						this.enabled = false; //deactivates this behavior, should be reativated at the end of whatever method is activated
 					}
 				}
 			}else{ //if further away than distance
@@ -61,15 +60,17 @@ public class SE_GlowWhenClose : MonoBehaviour {
 		}
 	}//end of update()
 
-	void Activate(){
+	public virtual void Activate(){
 		Debug.Log("activate");
 		if(gameObject.name == "Dumpster"){
 			GameObject largeTrash = GameObject.FindGameObjectWithTag("ActiveLargeTrash");
 			if(largeTrash != null){
+				largeTrash.GetComponent<Ev_LargeTrash>().dumpster = this.gameObject;
 				largeTrash.GetComponent<Ev_LargeTrash>().Return();
 				Debug.Log("Large trash return activated here");
 			}else{
 				gameObject.GetComponent<Ev_Dumpster>().Activate();
+				this.enabled = false; //deactivates this behavior, should be reativated at the end of whatever method is activated
 				Debug.Log("Dumpster activate() activated here");
 			}
 

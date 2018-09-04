@@ -9,7 +9,6 @@ public class WorldManager : MonoBehaviour
     public GARBAGETYPE garbageType = GARBAGETYPE.STANDARD; 
     public int amountTrashHere = 0;
 	public PinFunctionsManager playersPFM;
-	public LargeTrashManager lTrashManager;
 	public int worldNumber; //TODO: used temporarily for large trash manager because couldnt figure out WORLD variable system quickly
 
     public World world = new World(WORLD.ONE);
@@ -29,7 +28,7 @@ public class WorldManager : MonoBehaviour
         // TODO: Base this on bag type whether they are going for standard, compost, recyclable, etc.
         GarbageManager.Instance.PopulateGarbage(garbageType, amountTrashHere);
 
-        lTrashManager.EnableProperTrash(worldNumber);
+       LargeTrashManager.Instance.EnableProperTrash(worldNumber);
     }
 
     void Update()

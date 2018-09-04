@@ -22,6 +22,8 @@ public class Room : MonoBehaviour
     private List<GameObject> enemies;
     private List<GameObject> friends;
 
+    public List<GameObject> bosses;
+
     public void ActivateRoom()
     {
     	Debug.Log("ActivateRoom....activated");
@@ -96,11 +98,11 @@ public class Room : MonoBehaviour
         }
 
         if(bossRoom){
-        	for(int i = 0; i< transform.childCount;i++){
-        		if(transform.GetChild(i).tag == "Boss"){
-        			transform.GetChild(i).gameObject.SetActive(true);
-					transform.GetChild(i).GetComponent<Boss>().ActivateBoss();
-        		}
+        	for(int i = 0; i< bosses.Count;i++){
+        		
+        			bosses[i].gameObject.SetActive(true);
+					bosses[i].GetComponent<Boss>().ActivateBoss();
+        		
         	}
         	cam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1f,5f); //for debug testing
         }

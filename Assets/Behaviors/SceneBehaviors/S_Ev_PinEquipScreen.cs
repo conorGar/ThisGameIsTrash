@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.PostProcessing;
 
 public class S_Ev_PinEquipScreen : MonoBehaviour {
 
@@ -10,13 +12,14 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 	public GameObject pin;
 	public GameObject selectionArrow;
 	public GameObject displayPin;
-
+	public PostProcessingProfile blur;
+	public GameObject mainCam;
 	int arrowPos = 0;
 	GameObject highlightedPin;
-	public Text totalPPDisplay;
+	public TextMeshProUGUI totalPPDisplay;
     List<GameObject> pinPageList = new List<GameObject>();
 
-	void Start () {
+	void OnEnable () {
         if (PinManager.Instance.DebugPins)
         {
             GlobalVariableManager.Instance.PINS_DISCOVERED = PIN.ALL;
@@ -32,7 +35,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 			Instantiate(tutorialPopup,transform.position,Quaternion.identity);
 			GlobalVariableManager.Instance.WORLD_SIGNS_READ[0].Replace(GlobalVariableManager.Instance.WORLD_SIGNS_READ[0][9],'o');
 		}*/
-
+		mainCam.GetComponent<PostProcessingBehaviour>().profile = blur;
         totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
 
         // Set up all the pin pages.
@@ -78,6 +81,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
             pin.transform.position = new Vector3(pagePos.x + i % PinManager.Instance.PinCol * (pinSize.x + PinManager.Instance.PinOffsetX),
                                                  pagePos.y + -i / PinManager.Instance.PinCol % PinManager.Instance.PinRow * (pinSize.y + PinManager.Instance.PinOffsetY),
                                                  pagePos.z);
+            Debug.Log("Got Here Pin Spawn");
         }
 
         for (int i=0; i < pinPageList.Count; ++i)
@@ -107,7 +111,11 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                 //    highlightedPin.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 15f));
             }
             totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
-        }
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){
+			GameObject.Find("hubWorld_pinCase").GetComponent<Ev_PinDisplayOption>().enabled = true;
+			mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
+			this.gameObject.SetActive(false);
+		}
         else
         {
             bool isNewPin = false;

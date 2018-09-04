@@ -14,6 +14,8 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	public GameObject tutPopup;
 	public GameObject roomManager;//needed for proper camera panning
 
+	[HideInInspector]
+	public GameObject objectToSpawn;
 	tk2dCamera thisCam;
 
 	Vector3 targetPanPosition;
@@ -33,26 +35,28 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	void Update () {
 		if(zooming){
 				
-				thisCam.ZoomFactor = Mathf.Lerp(thisCam.ZoomFactor,targetCamZoom,zoomSpeed*Time.deltaTime);
+			thisCam.ZoomFactor = Mathf.Lerp(thisCam.ZoomFactor,targetCamZoom,zoomSpeed*(Time.deltaTime));
 				//thisCam.ZoomFactor = 1;
-				Debug.Log("zooming" + currentCamZoom + "   " + targetCamZoom);
+				//Debug.Log("zooming" + currentCamZoom + "   " + targetCamZoom);
 				if(thisCam.ZoomFactor == targetCamZoom){
 					zooming = false;
 					Debug.Log("Zoom stopped");
 				}
 		}
 		if(camPan){
-			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,targetPanPosition, 3*Time.deltaTime);
-			if(gameObject.transform.position == targetPanPosition){
+			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,targetPanPosition, 3*(Time.deltaTime));
+			Debug.Log("camPan");
+			if(Vector2.Distance(gameObject.transform.position,targetPanPosition) < 1){
+				Debug.Log("In target position!!" + triggerEventName);
 				if(triggerEventName != null && triggerEventName.Length > 2){ //length check to make sure it's not just "" or something
-					StartCoroutine("CamPanTriggerEvent");
+					CamPanTriggerEvent();
 				}
 				camPan = false;
 			}
 		}
 	}
 
-	public void ZoomInOut(float zoomAmount, float zs){
+	public void ZoomInOut(float zoomAmount, float zs){ 
    		Debug.Log("Camera zoom in out activate ##############");
    		currentCamZoom = thisCam.ZoomFactor;
    		targetCamZoom = zoomAmount;
@@ -71,13 +75,16 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    		camPan= true;
    }
 
-   IEnumerator CamPanTriggerEvent(){ //TODO: adjust for different events besaides those needed for large trash tut popup
+   void CamPanTriggerEvent(){ //TODO: adjust for different events besaides those needed for large trash tut popup
    		ZoomInOut(1.5f,10f);
-  		yield return new WaitForSeconds(.5f);
-
+  		//yield return new WaitForSeconds(.5f);
+  		Debug.Log("CAM TIGGER EVENT ACTIVATED");
   		if(triggerEventName == "tutorial"){
 			tutPopup.SetActive(true);
 			tutPopup.GetComponent<GUI_TutPopup>().SetData("LargeTrash");
+		}else if(triggerEventName == "BossItem"){
+			StartCoroutine("SpawnBossReward");
+
 		}
    }
 
@@ -90,6 +97,15 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	   	if(roomManager != null){
 	   		roomManager.SetActive(true);
 	   	}
+   }
+
+   IEnumerator SpawnBossReward(){
+   		ObjectPool.Instance.GetPooledObject("effect_SmokePuff",targetPanPosition);
+   		objectToSpawn.SetActive(true);
+   		yield return new WaitForSeconds(.5f);
+		ReturnFromCamEffect();
+		player.GetComponent<EightWayMovement>().enabled = true;
+		player.GetComponent<PlayerTakeDamage>().enabled = true;
    }
 
 }

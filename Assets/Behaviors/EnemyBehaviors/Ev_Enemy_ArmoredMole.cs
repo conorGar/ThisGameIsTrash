@@ -29,7 +29,7 @@ public class Ev_Enemy_ArmoredMole : MonoBehaviour {
 			StartCoroutine("TossRock");
 			}
 		}else{
-			Debug.Log(Vector2.Distance(gameObject.transform.position,player.transform.position));
+			//Debug.Log(Vector2.Distance(gameObject.transform.position,player.transform.position));
 			if(startThrowOnce == 1){
 			CancelInvoke();
 			startThrowOnce = 0;

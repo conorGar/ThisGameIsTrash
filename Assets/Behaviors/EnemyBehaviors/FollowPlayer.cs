@@ -8,6 +8,7 @@ public class FollowPlayer : MonoBehaviour {
 	public float walkDistance = 10.0f;
 	public float chaseSpeed = 10.0f;
 	public bool hasSeperateFacingAnimations;
+	public bool iBeLerpin;
 	private Vector3 smoothVelocity = Vector3.zero;
 	private tk2dSpriteAnimator anim;
 
@@ -20,8 +21,12 @@ public class FollowPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float distance = Vector3.Distance(transform.position, player.position);
-		if(distance < walkDistance){
+		if(distance < walkDistance && !GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING){ //TODO: 
+			if(iBeLerpin){
 			transform.position = Vector3.SmoothDamp(transform.position, player.position, ref smoothVelocity, chaseSpeed);
+			}else{
+				transform.position = Vector3.MoveTowards(transform.position, player.position, chaseSpeed*Time.deltaTime);
+			}
 			if(!hasSeperateFacingAnimations){
 				if(anim.GetClipByName("chase") != null && !anim.IsPlaying("chase"))
 						anim.Play("chase");

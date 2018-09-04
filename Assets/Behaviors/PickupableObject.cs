@@ -8,17 +8,21 @@ public class PickupableObject : MonoBehaviour
 	public GameObject player;
 	public AudioClip pickup;
 	public AudioClip drop;
+	public float carryXAdjustment = 3.3f;
 	//int bounce = 0;
 	//int doOnce = 0;
 	float myY;
 
-	bool pickingUp = false;
-	Rigidbody2D myBody;
+	bool beingCarried;
+	[HideInInspector]
+	public Rigidbody2D myBody;
+	//public bool cannotDrop; // activated by Dumpster to make sure large trash isnt dropped before 'Return()' is activated...
 
 	GameObject myCollision;
 	GameObject myShadow;
+	public GameObject dumpster;
 
-	bool spinning;
+	public bool spinning;
 	float t;
 	Quaternion startRotation;
 
@@ -27,15 +31,19 @@ public class PickupableObject : MonoBehaviour
 	{
 		myBody  = gameObject.GetComponent<Rigidbody2D>();
 		startRotation = transform.rotation;
+		dumpster = GameObject.Find("Dumpster");
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{	if(Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
-			
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !pickingUp && !GlobalVariableManager.Instance.CARRYING_SOMETHING){
+			//Debug.Log("within distance" + GlobalVariableManager.Instance.CARRYING_SOMETHING);
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				Debug.Log("PickUpable object...picked up");
 				PickUp();
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried){
+				if(Vector2.Distance(player.transform.position,dumpster.transform.position) > 15f) //TODO: temp solution for making sure trash isnt dropped before 'Return' is activated
+					Drop();
 			}
 		}else{
 //			Debug.Log(Vector2.Distance(player.transform.position,gameObject.transform.position));
@@ -48,9 +56,12 @@ public class PickupableObject : MonoBehaviour
 			}else{
 				spinning = false;
 				t = 0f;
+				beingCarried = true;
 				gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 				myBody.velocity = Vector2.zero;
-				gameObject.transform.localPosition = new Vector2(3.3f, 0f);
+				gameObject.transform.localPosition = new Vector2(carryXAdjustment, 0f);
+				player.GetComponent<MeleeAttack>().enabled = false;
+				gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02"; // makes sure in front of player
 				myBody.simulated = false; //prevents item from moving when player runs into a wall or something
 				PickUpEvent();
 			}
@@ -60,6 +71,7 @@ public class PickupableObject : MonoBehaviour
 	public void PickUp(){
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
 		//move and play the particle system
+		beingCarried = true;
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		SoundManager.instance.PlaySingle(pickup);
 		//set object to follow player and push up in the sky
@@ -74,6 +86,9 @@ public class PickupableObject : MonoBehaviour
 	}
 
 	public void Drop(){
+		beingCarried = false;
+		gameObject.transform.position = new Vector2(transform.position.x + 1f, transform.position.y -1f);
+		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		SoundManager.instance.PlaySingle(drop);
 		//proper postionining 

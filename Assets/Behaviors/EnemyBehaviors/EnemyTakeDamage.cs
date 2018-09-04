@@ -31,7 +31,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 	public GameObject myShadow;
 	public BoxCollider2D myCollisionBox;
-
+	public string returnAniName = "idle";
 	[HideInInspector]
 	public GameObject objectPool;
 	public EnemyRespawner myRespawner; //for use with respawning enemies
@@ -286,7 +286,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 						gameObject.transform.localScale = new Vector2(1f,1f);
 
 					//camShake = 1;
-					if(gameObject.GetComponent<FollowPlayer>() != null){
+					if(gameObject.GetComponent<FollowPlayer>() != null && moveWhenHit){
 						gameObject.GetComponent<FollowPlayer>().StopSound();
 						gameObject.GetComponent<FollowPlayer>().enabled = false;
 					}
@@ -305,8 +305,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 		//if(aniToSwitchBackTo != null)
-		if(currentHp >0 && myAnim.GetClipByName("idle") != null)
-			myAnim.Play("idle");
+		if(currentHp >0 && myAnim.GetClipByName(returnAniName) != null)
+			myAnim.Play(returnAniName);
 			//else
 				//myAnim.Play("IdleR");
 		takingDamage = false;
@@ -357,6 +357,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 			this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 			damageOnce = 0;
 			takingDamage = false;
+			if(currentHp >0 && myAnim.GetClipByName(returnAniName) != null)
+				myAnim.Play(returnAniName);
 		} // end of movement functions
 
 		StartCoroutine("AfterHit");
@@ -386,6 +388,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				damageOnce = 0;
 			
 			}else{ //if hp is NOT > 0
+				Debug.Log("CURRENT HP IS NOT GREATER THAN ZEROOOOOOO!");
 				if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
 				//**SFX PLAY- 'hit_final'
 				}
@@ -417,19 +420,20 @@ public class EnemyTakeDamage : MonoBehaviour {
 				if(secretHider){
 					//**SFX PLAY 'secret discovered'
 					GameObject hole =  Instantiate(GameObject.Find("hiddenHole"), transform.position, Quaternion.identity) as GameObject;
-				}else{
+				}else if(!bossEnemy){
 					DropThings();
 				}
 
 
 				yield return new WaitForSeconds(.2f);
+				Debug.Log("Got this far for boss death check");
 
-				DropScrap();
 			
 				if(!bossEnemy){
+					DropScrap();
 					Death();
 				}else{
-					gameObject.GetComponent<Boss>().BossDeath();
+					gameObject.GetComponent<Boss>().StartCoroutine("BossDeath");
 				}
 			}//end of (if hp is not > 0)
 
