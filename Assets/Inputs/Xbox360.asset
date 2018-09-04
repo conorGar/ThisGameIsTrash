@@ -9,71 +9,76 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01eb15854d4cc5e478d129df882ff9d2, type: 3}
-  m_Name: PS4
+  m_Name: Xbox360
   m_EditorClassIdentifier: 
-  joystickName: Wireless Controller
+  joystickName: Controller (XBOX 360 For Windows)
   inputs:
   - action: 0
     type: 1
     axisDirection: 0
     keys:
     - AxisY
-    - Axis8
+    - Axis7
   - action: 1
     type: 1
     axisDirection: 1
     keys:
     - AxisY
-    - Axis8
+    - Axis7
   - action: 2
     type: 1
     axisDirection: 1
     keys:
     - AxisX
-    - Axis7
+    - Axis6
   - action: 3
     type: 1
     axisDirection: 0
     keys:
     - AxisX
-    - Axis7
+    - Axis6
   - action: 4
     type: 1
     axisDirection: 1
     keys:
-    - Axis6
+    - Axis5
   - action: 5
     type: 1
     axisDirection: 0
     keys:
-    - Axis6
+    - Axis5
   - action: 6
     type: 1
     axisDirection: 1
     keys:
-    - Axis3
+    - Axis4
   - action: 7
     type: 1
     axisDirection: 0
     keys:
-    - Axis3
+    - Axis4
   - action: 8
     type: 0
     axisDirection: 0
     keys:
-    - Button1
+    - Button0
   - action: 9
     type: 0
     axisDirection: 0
     keys:
-    - Button2
+    - Button1
   - action: 10
     type: 0
     axisDirection: 0
     keys:
-    - Button2
+    - Button0
   - action: 11
     type: 0
     axisDirection: 0
     keys:
     - Button9
+  - action: 12
+    type: 0
+    axisDirection: 0
+    keys:
+    - Button6

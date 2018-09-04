@@ -36,7 +36,7 @@ public class HUD_Calendar : MonoBehaviour {
 	}
 
 	void Update () {
-		if((Input.GetKeyDown(KeyCode.C) || ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) && !newMarkSequence){
+		if((ControllerManager.Instance.GetKeyDown(INPUTACTION.CALENDAR) || ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) && !newMarkSequence){
 			Time.timeScale = 1f;
 			LeaveScreen();
 			Invoke("ReenableOpenCal",.5f);

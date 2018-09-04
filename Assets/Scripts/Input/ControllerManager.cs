@@ -42,6 +42,13 @@ public class ControllerManager : MonoBehaviour {
             {
                 inputDefLookup[inputDefinitions[i].joystickName] = inputDefinitions[i];
             }
+
+            string[] inputNames = Input.GetJoystickNames();
+            for (int i = 0; i < Input.GetJoystickNames().Length; i++)
+            {
+                Debug.Log(i + " input: " + inputNames[i]);
+            }
+            
         }
     }
 
@@ -93,7 +100,7 @@ public class ControllerManager : MonoBehaviour {
                 for (int k = 0; k<input.keys.Count; k++)
                 {
                     string key = joyName + input.keys[k];
-float rawAxis = Input.GetAxisRaw(key);
+                    float rawAxis = Input.GetAxisRaw(key);
                     switch (input.type)
                     {
                         // Quick and dirty axis detection with a deadzone
@@ -111,6 +118,10 @@ float rawAxis = Input.GetAxisRaw(key);
                                 snapshot.isPressed |= snapshot.rawAxis > 0;
                             else
                                 snapshot.isPressed |= snapshot.rawAxis < 0;
+
+                            if (snapshot.rawAxis != 0f)
+                                Debug.Log("Axis in action: " + key + " " + input.axisDirection);
+
                             break;
                         case INPUTTYPE.BUTTON:
                             if (input.axisDirection == INPUTDIRECTION.POSITIVE)

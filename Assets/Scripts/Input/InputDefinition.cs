@@ -21,7 +21,8 @@ public enum INPUTACTION
     INTERACT,
     CANCEL,
     SWITCHWEAPON,
-    PAUSE
+    PAUSE,
+    CALENDAR
 }
 
 [System.Serializable]
