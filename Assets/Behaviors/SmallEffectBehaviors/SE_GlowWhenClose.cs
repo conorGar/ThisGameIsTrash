@@ -17,7 +17,8 @@ public class SE_GlowWhenClose : MonoBehaviour {
 	public AudioClip highlightSound;
 
 	Sprite startSprite;
-	GameObject player;
+	[HideInInspector]
+	public GameObject player;
 	GameObject tempSpawnedObject;
 
 	int glowCheck = 0;

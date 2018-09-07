@@ -61,6 +61,8 @@ public class Ev_WorldSelect : MonoBehaviour {
 				if(locked == false){
 					if(myStars != null)
 						SpawnStars();
+						gameObject.transform.GetChild(0).gameObject.SetActive(true);//activate title
+
 					//-------Activates friend Icons -------------------//
 					/*for(int i = 0; i < this.gameObject.transform.childCount; i++){
 						gameObject.transform.GetChild(i).gameObject.SetActive(true);
@@ -111,12 +113,13 @@ public class Ev_WorldSelect : MonoBehaviour {
 	}//end of Navigate()
 
 	void SpawnStars(){
+		myStars.SetActive(true);
 		Debug.Log("Spawn Stars Activate");
-		float tempXStar = XofStar;
+		//float tempXStar = XofStar;
 		for(int i = startLargeTrashIndex; i < myStars.transform.childCount; i++){
-
+			Debug.Log("StarSpawn");
             LARGEGARBAGE largeGarbageType = LargeGarbage.ByIndex(i);
-            
+            Debug.Log(LargeGarbage.ByIndex(i).ToString());
             if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeGarbageType) != largeGarbageType && (GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED & largeGarbageType) != largeGarbageType) {
             	myStars.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 			}

@@ -761,6 +761,82 @@ Canvas:
   m_SortingLayerID: 237963859
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1001 &23220264
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 457817346}
+    m_Modifications:
+    - target: {fileID: 4736154580242392, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -16.334751
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736154580242392, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.5831223
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736154580242392, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736154580242392, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736154580242392, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736154580242392, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736154580242392, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4736154580242392, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: randomSeed
+      value: -1705711100
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1524912479087186, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &23220265 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4736154580242392, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+    type: 2}
+  m_PrefabInternal: {fileID: 23220264}
+--- !u!198 &23220266 stripped
+ParticleSystem:
+  m_PrefabParentObject: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+    type: 2}
+  m_PrefabInternal: {fileID: 23220264}
 --- !u!1001 &30734631
 Prefab:
   m_ObjectHideFlags: 0
@@ -2837,7 +2913,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -3813,11 +3889,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -4413,6 +4489,7 @@ MonoBehaviour:
   spawnedObjectSprite: {fileID: 0}
   objectToSpawn: {fileID: 0}
   highlightSound: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1001 &202514342
 Prefab:
   m_ObjectHideFlags: 0
@@ -5109,8 +5186,8 @@ MonoBehaviour:
   objectToSpawn: {fileID: 1700412290073994, guid: 0a47f45ea0bef8e4585d6938a76169a3,
     type: 2}
   highlightSound: {fileID: 0}
+  player: {fileID: 0}
   pinEquipHUD: {fileID: 469352366}
-  player: {fileID: 2006796135}
 --- !u!114 &270618513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5467,11 +5544,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -8621,11 +8698,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -8731,7 +8808,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 23220265}
   m_Father: {fileID: 1709774227}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8758,6 +8836,7 @@ MonoBehaviour:
   PPDisplay: {fileID: 769218958}
   PinDisplaySprite: {fileID: 743110797}
   pinConfig: {fileID: 11400000, guid: 217b14bb8e24371458ca6e36df3d1911, type: 2}
+  equipSpark: {fileID: 23220266}
 --- !u!1 &458887638
 GameObject:
   m_ObjectHideFlags: 0
@@ -8810,6 +8889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trashCollected: {fileID: 329648615}
+  maxTrashDisplay: {fileID: 0}
   newDiscoveryDisplay: {fileID: 138207387}
 --- !u!114 &458887641
 MonoBehaviour:
@@ -10015,6 +10095,7 @@ MonoBehaviour:
   objectToSpawn: {fileID: 1700412290073994, guid: 0a47f45ea0bef8e4585d6938a76169a3,
     type: 2}
   highlightSound: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1001 &531362098
 Prefab:
   m_ObjectHideFlags: 0
@@ -17376,11 +17457,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -17961,6 +18042,7 @@ MonoBehaviour:
   objectToSpawn: {fileID: 1700412290073994, guid: 0a47f45ea0bef8e4585d6938a76169a3,
     type: 2}
   highlightSound: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &841449591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27568,11 +27650,11 @@ MonoBehaviour:
     lineCount: 4
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -33203,11 +33285,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -46443,11 +46525,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -47596,6 +47678,16 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
   m_IsPrefabParent: 0
@@ -48100,6 +48192,7 @@ MonoBehaviour:
   objectToSpawn: {fileID: 1700412290073994, guid: 0a47f45ea0bef8e4585d6938a76169a3,
     type: 2}
   highlightSound: {fileID: 8300000, guid: 883f2ba59ade3f440893d5ac6c726d73, type: 3}
+  player: {fileID: 0}
   fader: {fileID: 1243261373}
 --- !u!61 &2013572682
 BoxCollider2D:
@@ -48609,6 +48702,10 @@ Prefab:
     - target: {fileID: 1918725369093558, guid: afdfee2d6e394b24387a7274bf0c7c3a, type: 2}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918725369093558, guid: afdfee2d6e394b24387a7274bf0c7c3a, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: afdfee2d6e394b24387a7274bf0c7c3a, type: 2}

@@ -22,14 +22,15 @@ public class GUI_TutPopup : MonoBehaviour {
 	public Sprite murderImage;
 	public Sprite dojoImage;
 
-
+	Vector2 startPos;
 	int phase;
 	// Use this for initialization
 	void Start () {
-
+		
 	}
 
 	void OnEnable(){
+		startPos = gameObject.transform.position;//reset position
 		dayMeter.Stop();
 		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,transform.position.y +2.4f,.5f);
 		StartCoroutine("Delays");
@@ -50,6 +51,7 @@ public class GUI_TutPopup : MonoBehaviour {
 			GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = false;
 			phase = 0;
 			dayMeter.StartAgain();
+			gameObject.transform.position = startPos;
 			gameObject.SetActive(false);
 
 		}

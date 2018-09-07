@@ -117,7 +117,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){
 			GameObject pinCase = GameObject.Find("hubWorld_pinCase");
 			pinCase.GetComponent<Ev_PinDisplayOption>().enabled = true;
-			pinCase.GetComponent<Ev_PinDisplayOption>().player.enabled = true;
+			pinCase.GetComponent<Ev_PinDisplayOption>().player.GetComponent<EightWayMovement>().enabled = true;
 			mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
 			this.gameObject.SetActive(false);
 		}
@@ -151,6 +151,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 
             if (isNewPin)
             {
+				Debug.Log("xxxNEW PAGE ACTIVATED HERE?");
                 // Wrap from 0 to pin max.
                 if (arrowPos < 0)
                     arrowPos = PinManager.Instance.pinConfig.pinList.Count - 1;
@@ -162,7 +163,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                 for (int i=0; i < pinPageList.Count; ++i)
                 {
                     if (i == arrowPos / (PinManager.Instance.PinCol * PinManager.Instance.PinRow)){
-                    	Debug.Log("NEW PAGE ACTIVATED HERE?");
+                    	
                         pinPageList[i].SetActive(true);
                     }else
                         pinPageList[i].SetActive(false);
@@ -179,6 +180,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
     }
 
 	void MoveArrow(){
+		Debug.Log("ooooooNEW PAGE ACTIVATED HERE?");
         int currentPage = arrowPos / (PinManager.Instance.PinCol * PinManager.Instance.PinRow);
         int currentPin = arrowPos % (PinManager.Instance.PinCol * PinManager.Instance.PinRow);
         GameObject pinPage = PinManager.Instance.PageRoot.transform.GetChild(currentPage).gameObject;

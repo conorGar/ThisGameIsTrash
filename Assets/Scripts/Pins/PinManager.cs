@@ -20,6 +20,7 @@ public class PinManager : MonoBehaviour {
     public Ev_PPDisplay PPDisplay;
     public tk2dSprite PinDisplaySprite;
     public PinConfig pinConfig;
+    public ParticleSystem equipSpark;
     private Dictionary<PIN, PinDefinition> PINLOOKUP = new Dictionary<PIN, PinDefinition>();
 
 	void Awake () {

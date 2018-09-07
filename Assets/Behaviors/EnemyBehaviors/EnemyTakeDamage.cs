@@ -67,10 +67,18 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 	Vector2 startScale;
 
+	void OnEnable(){
+		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
+		currentHp = gameObject.GetComponent<Enemy>().health;//enemy health reset when enter room again
+		myBody.gravityScale = 0;
+		takingDamage = false;
+		if(gameObject.GetComponent<RandomDirectionMovement>() != null)
+			gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
+	}
+
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		currentCam = GameObject.Find("tk2dCamera").GetComponent<Ev_MainCamera>();
 		myAnim = this.gameObject.GetComponent<tk2dSpriteAnimator>();
 		myBody = gameObject.GetComponent<Rigidbody2D>();

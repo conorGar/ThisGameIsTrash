@@ -47,7 +47,7 @@ public class Ev_TrashCan : MonoBehaviour {
 				damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.SetActive(true);
-			}else{
+			}else if(spawnOnce == 0){
 				smokePuff.gameObject.SetActive(true);
 				smokePuff.Play();
 				SoundManager.instance.PlaySingle(finalHit);
@@ -69,6 +69,7 @@ public class Ev_TrashCan : MonoBehaviour {
 			spawnedPin.name = myPin.name;
 			spawnedPin.GetComponent<tk2dSprite>().SetSprite(myPin.sprite);
 			spawnedPin.GetComponent<Ev_DroppedPin>().SetPinData(myPin,pinUnlockHud, pinSprite);
+			spawnOnce = 1;
 		}
 	}
 }

@@ -7,10 +7,12 @@ using I2.TextAnimation;
 
 public class GUI_TrashCollectedDisplay : MonoBehaviour {
 	public TextMeshProUGUI trashCollected;
+	public TextMeshProUGUI maxTrashDisplay;
 	public GameObject newDiscoveryDisplay;
 	// Use this for initialization
 	void Start () {
 		//TODO: adjust for different bag types
+		maxTrashDisplay.text = "/" + GlobalVariableManager.Instance.BAG_SIZE;
 		trashCollected.text = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0].ToString();
 
 	}

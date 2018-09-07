@@ -23,7 +23,7 @@ public class Ev_DayMeter : MonoBehaviour {
 	float t;
 
 	void Start () {
-		
+		GlobalVariableManager.Instance.TIME_IN_DAY = 0;
 		startIconPos = dayIcon.transform.localPosition;
 		targetPos = new Vector3(4.13f,.48f,0f);
 		dayNumberDisplay.text = "Day: "+ GlobalVariableManager.Instance.DAY_NUMBER;

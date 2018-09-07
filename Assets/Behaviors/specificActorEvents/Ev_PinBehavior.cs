@@ -8,6 +8,8 @@ public class Ev_PinBehavior : MonoBehaviour {
 	public GameObject smallTextDisplay;
 	public GameObject ppDisplayIcon; //neded for pin equip screen
 	public GameObject equippedBox;
+	public GameObject highlightBox;
+	public GameObject smallPPIcons;
 	public string soldTextSprite = "sold";
     PinDefinition pinData = null;
     //int myPositionInString = 0;
@@ -49,14 +51,6 @@ public class Ev_PinBehavior : MonoBehaviour {
 			}else{
 				float xSpawnAdjust = -.6f;
 
-				for(int i = 0; i < pinData.ppValue; i++){//little pp displays
-					GameObject icon = Instantiate(ppDisplayIcon, new Vector2(transform.position.x + xSpawnAdjust,transform.position.y - .9f),Quaternion.identity);
-					icon.transform.parent = gameObject.transform;
-					//icon.transform.position = new Vector2(transform.position.x + xSpawnAdjust,transform.position.y - 9.3f);
-					icon.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f);
-					myIcons.Add(icon);
-					xSpawnAdjust += .33f;
-				}
 			}
 		}
 
@@ -129,6 +123,15 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 	public void AtEquipScreen(){
 		if(IsPinDiscovered()){
+			for(int i = 0; i< pinData.ppValue;i++){
+				smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
+				if(IsPinEquipped()){
+				smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+				}
+			}
+			if(IsPinEquipped()){
+				highlightBox.SetActive(true);
+			}
             PinManager.Instance.DescriptionText.text = pinData.description;
             PinManager.Instance.PinTitle.text = pinData.displayName;
             PinManager.Instance.PPDisplay.SetDisplayedIcons(pinData.ppValue);
@@ -147,6 +150,8 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 	public bool EquipPin(){
         bool IsEquipped = false;
+        PinManager.Instance.equipSpark.transform.position = gameObject.transform.position;
+        PinManager.Instance.equipSpark.Play();
 		bool isDejaVuPinAndIsUnlocked = false;
 		if(GlobalVariableManager.Instance.IsPinDiscovered(PIN.THEPINTHATCANKILLTHEPAST) && pinData.Type == PIN.THEPINTHATCANKILLTHEPAST){
 			isDejaVuPinAndIsUnlocked = true;
@@ -156,7 +161,7 @@ public class Ev_PinBehavior : MonoBehaviour {
                 GlobalVariableManager.Instance.PINS_EQUIPPED |= pinData.Type; //set pin to active
                 GlobalVariableManager.Instance.PPVALUE -= pinData.ppValue;
                 IsEquipped = true;
-
+				highlightBox.SetActive(true);
                 // Equip Pin that can kill the past
                 if (pinData.Type == PIN.THEPINTHATCANKILLTHEPAST)
                     GlobalVariableManager.Instance.DEJAVUCOUNT += 4;
