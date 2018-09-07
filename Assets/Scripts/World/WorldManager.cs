@@ -10,6 +10,8 @@ public class WorldManager : MonoBehaviour
     public int amountTrashHere = 0;
 	public PinFunctionsManager playersPFM;
 	public int worldNumber; //TODO: used temporarily for large trash manager because couldnt figure out WORLD variable system quickly
+	public AudioClip worldMusic;
+
 
     public World world = new World(WORLD.ONE);
 
@@ -20,6 +22,10 @@ public class WorldManager : MonoBehaviour
 
     private void Start()
     {
+    	SoundManager.instance.musicSource.clip = worldMusic;
+    	SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+    	SoundManager.instance.musicSource.Play();
+
         world.type = worldType;
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HUNGRYFORMORE)){
 				//Hungry For More pin

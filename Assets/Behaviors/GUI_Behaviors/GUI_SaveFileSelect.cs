@@ -44,8 +44,8 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 
 	void LoadSave(){
 
-		UserDataManager.Instance.SetSlot(arrowPos);
-		StartCoroutine(UserDataManager.Instance.ReadAsync());
+		/*UserDataManager.Instance.SetSlot(arrowPos);
+		StartCoroutine(UserDataManager.Instance.ReadAsync());*/
 		fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
 
 	}

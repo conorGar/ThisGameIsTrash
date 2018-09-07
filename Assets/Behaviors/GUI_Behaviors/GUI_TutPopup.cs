@@ -10,6 +10,8 @@ public class GUI_TutPopup : MonoBehaviour {
 	public GameObject myImage;
 	public GameObject myTitle;
 	public GameObject mainCam;
+	public Ev_DayMeter dayMeter;
+
 
 	public Sprite largeTrashImage;
 	public Sprite ArmoredEnemyImage;
@@ -28,6 +30,7 @@ public class GUI_TutPopup : MonoBehaviour {
 	}
 
 	void OnEnable(){
+		dayMeter.Stop();
 		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,transform.position.y +2.4f,.5f);
 		StartCoroutine("Delays");
 	}
@@ -45,7 +48,10 @@ public class GUI_TutPopup : MonoBehaviour {
 			player.GetComponent<EightWayMovement>().enabled = true;
 			player.GetComponent<PlayerTakeDamage>().enabled = true;
 			GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = false;
+			phase = 0;
+			dayMeter.StartAgain();
 			gameObject.SetActive(false);
+
 		}
 
 	}
@@ -87,6 +93,15 @@ public class GUI_TutPopup : MonoBehaviour {
 			myImage.GetComponent<Image>().sprite = NightImage;
 			myTitle.GetComponent<TextMeshProUGUI>().text = "NIGHTFALL";
 			GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.DAYNIGHT;
+
+		}else if(tutPopup == "Pins"){
+			myDescription.GetComponent<TextMeshProUGUI>().text = "<color=#ffffb3>Pins</color> are equippable upgrades that you can " +
+																"equip using your <color=#ffffb3>Pin Points</color>. They can be "+
+																"found in each world or purchased in shops."+
+																"Mix and match them to get the most out of each day!";
+			myImage.GetComponent<Image>().sprite = PinsImage;
+			myTitle.GetComponent<TextMeshProUGUI>().text = "PINS";
+			GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.PINS;
 
 		}
 

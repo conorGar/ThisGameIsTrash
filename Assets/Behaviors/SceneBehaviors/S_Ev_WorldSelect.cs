@@ -10,6 +10,7 @@ public class S_Ev_WorldSelect : MonoBehaviour {
 	public GameObject w4Icon;
 
 
+	int arrowPos;
 	bool canNavigate = true;
 	/*
 		handles the naviagation. Every time navigate, checks what the front icon
@@ -21,27 +22,27 @@ public class S_Ev_WorldSelect : MonoBehaviour {
 	void Start () {
 		
 	}
-	
+
 	void Update () {
 		if(canNavigate){
 			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
             || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
             {
-				if(GlobalVariableManager.Instance.MENU_SELECT_STAGE < 3){
-					GlobalVariableManager.Instance.MENU_SELECT_STAGE++;
+				if(arrowPos < 3){
+					arrowPos++;
 				}else{
-					GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
+					arrowPos = 0;
 				}
-				MoveIcons("right");
+				MoveIcons("right",arrowPos);
 			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
                   || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
             {
-				if(GlobalVariableManager.Instance.MENU_SELECT_STAGE > 0){
-					GlobalVariableManager.Instance.MENU_SELECT_STAGE--;
+				if(arrowPos > 0){
+					arrowPos--;
 				}else{
-					GlobalVariableManager.Instance.MENU_SELECT_STAGE = 3;
+					arrowPos =  3;
 				}
-				MoveIcons("left");
+				MoveIcons("left",arrowPos);
 			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
             {
 				Select();
@@ -49,35 +50,35 @@ public class S_Ev_WorldSelect : MonoBehaviour {
 		}
 	}
 
-	void MoveIcons(string dir){
-		w1Icon.GetComponent<Ev_WorldSelect>().Navigate(dir);
-		w2Icon.GetComponent<Ev_WorldSelect>().Navigate(dir);
-		w3Icon.GetComponent<Ev_WorldSelect>().Navigate(dir);
-		w4Icon.GetComponent<Ev_WorldSelect>().Navigate(dir);
+	void MoveIcons(string dir, int thisArrowPos){
+		w1Icon.GetComponent<Ev_WorldSelect>().Navigate(dir,thisArrowPos);
+		w2Icon.GetComponent<Ev_WorldSelect>().Navigate(dir,thisArrowPos);
+		w3Icon.GetComponent<Ev_WorldSelect>().Navigate(dir,thisArrowPos);
+		w4Icon.GetComponent<Ev_WorldSelect>().Navigate(dir,thisArrowPos);
 	}
 
 	public void TriggeredMovement(int repeat){
 		//for unlock sequence
 		canNavigate = false;
 		for(int i = 0; i<repeat; i++){
-			if(GlobalVariableManager.Instance.MENU_SELECT_STAGE < 3){
-					GlobalVariableManager.Instance.MENU_SELECT_STAGE++;
+			if(arrowPos < 3){
+					arrowPos++;
 			}else{
-					GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
+					arrowPos = 0;
 			}
-			MoveIcons("right");
+			MoveIcons("right",arrowPos);
 		}
 	}
 
 	void Select(){
 		canNavigate = false;
-		if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 0){
+		if(arrowPos == 0){
 			w1Icon.GetComponent<Ev_WorldSelect>().Select();
-		}else if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 1){
+		}else if(arrowPos == 1){
 			w2Icon.GetComponent<Ev_WorldSelect>().Select();
-		}else if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 2){
+		}else if(arrowPos == 2){
 			w3Icon.GetComponent<Ev_WorldSelect>().Select();
-		}else if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 4){
+		}else if(arrowPos == 4){
 			w4Icon.GetComponent<Ev_WorldSelect>().Select();
 		}
 

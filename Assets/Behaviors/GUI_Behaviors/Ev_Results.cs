@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 public class Ev_Results : MonoBehaviour {
 
 	public Text trashCollected;
 	public Text largeTrashCollected;
 	public Text enemiesDefeated;
-	public Text nextUnlock;
+	public TextMeshProUGUI nextUnlockNeeded;
+	public TextMeshProUGUI currentStars;
 	public GameObject largeTrashTextDisplay;
 	public GameObject treasureCollectedDisplay;
 	public LargeTrashManager ltManager;
@@ -33,7 +34,14 @@ public class Ev_Results : MonoBehaviour {
 				trashCollectedValue += GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[i];
 			}
 		}
-
+		currentStars.text = GlobalVariableManager.Instance.STAR_POINTS.ToString();
+		if(GlobalVariableManager.Instance.PROGRESS_LV == 0){
+			nextUnlockNeeded.text = "/2";
+		}else if(GlobalVariableManager.Instance.PROGRESS_LV == 1){
+			nextUnlockNeeded.text = "/5";
+		}else if(GlobalVariableManager.Instance.PROGRESS_LV == 2){
+			nextUnlockNeeded.text = "/10";
+		}
 		if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 5){
 			//in case player dies during race
 			GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(5);

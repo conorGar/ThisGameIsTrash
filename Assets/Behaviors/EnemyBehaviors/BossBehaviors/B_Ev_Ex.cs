@@ -57,6 +57,7 @@ public class B_Ev_Ex : MonoBehaviour {
 		if(myAnim.CurrentClip.name != "hurt"){
 			myAnim.Play("cast");
 			yield return new WaitForSeconds(.3f);
+			myProjectile.transform.position = gameObject.transform.position;
 			playerPosition = new Vector3(player.transform.position.x,player.transform.position.y,player.transform.position.z);
 
 			myProjectile.SetActive(true);

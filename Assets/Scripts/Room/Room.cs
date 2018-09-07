@@ -18,6 +18,8 @@ public class Room : MonoBehaviour
     public GameObject tutPopup;
     public bool activateTutpopWhenEnter;
     public string tutPopUpToActivate;
+
+
 	int waifuChance;
     private List<GameObject> enemies;
     private List<GameObject> friends;
@@ -99,9 +101,10 @@ public class Room : MonoBehaviour
 
         if(bossRoom){
         	for(int i = 0; i< bosses.Count;i++){
-        		
+        			
         			bosses[i].gameObject.SetActive(true);
 					bosses[i].GetComponent<Boss>().ActivateBoss();
+					bosses[i].GetComponent<Boss>().currentRoom = this;
         		
         	}
         	cam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1f,5f); //for debug testing

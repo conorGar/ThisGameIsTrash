@@ -69,6 +69,9 @@ public class PickupableObject : MonoBehaviour
 	}
 
 	public void PickUp(){
+		if(gameObject.GetComponent<BoxCollider2D>()!=null){
+			gameObject.GetComponent<BoxCollider2D>().enabled = false;
+		}
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
 		//move and play the particle system
 		beingCarried = true;

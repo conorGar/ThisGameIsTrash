@@ -19,7 +19,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 	public TextMeshProUGUI totalPPDisplay;
     List<GameObject> pinPageList = new List<GameObject>();
 
-	void OnEnable () {
+	void Start () {
         if (PinManager.Instance.DebugPins)
         {
             GlobalVariableManager.Instance.PINS_DISCOVERED = PIN.ALL;
@@ -35,8 +35,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 			Instantiate(tutorialPopup,transform.position,Quaternion.identity);
 			GlobalVariableManager.Instance.WORLD_SIGNS_READ[0].Replace(GlobalVariableManager.Instance.WORLD_SIGNS_READ[0][9],'o');
 		}*/
-		mainCam.GetComponent<PostProcessingBehaviour>().profile = blur;
-        totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
+
 
         // Set up all the pin pages.
         var pinsPerPage = PinManager.Instance.PinRow * PinManager.Instance.PinCol;
@@ -92,7 +91,11 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
         }
 
 	}
-	
+	void OnEnable(){
+		mainCam.GetComponent<PostProcessingBehaviour>().profile = blur;
+        totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
+	}
+
 	void Update () {
         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
         {
@@ -112,7 +115,9 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
             }
             totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){
-			GameObject.Find("hubWorld_pinCase").GetComponent<Ev_PinDisplayOption>().enabled = true;
+			GameObject pinCase = GameObject.Find("hubWorld_pinCase");
+			pinCase.GetComponent<Ev_PinDisplayOption>().enabled = true;
+			pinCase.GetComponent<Ev_PinDisplayOption>().player.enabled = true;
 			mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
 			this.gameObject.SetActive(false);
 		}
@@ -156,9 +161,10 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                 // select the currentpage.
                 for (int i=0; i < pinPageList.Count; ++i)
                 {
-                    if (i == arrowPos / (PinManager.Instance.PinCol * PinManager.Instance.PinRow))
+                    if (i == arrowPos / (PinManager.Instance.PinCol * PinManager.Instance.PinRow)){
+                    	Debug.Log("NEW PAGE ACTIVATED HERE?");
                         pinPageList[i].SetActive(true);
-                    else
+                    }else
                         pinPageList[i].SetActive(false);
                 }
 

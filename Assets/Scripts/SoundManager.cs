@@ -10,6 +10,9 @@ public class SoundManager : MonoBehaviour {
 
 	public float lowPitchRange = .95f;
 	public float highPitchRange = 1.1f;
+
+
+	bool musicFading;
 	// Use this for initialization
 	void Awake () {
 		if(instance == null){
@@ -44,6 +47,18 @@ public class SoundManager : MonoBehaviour {
 		//sfxSource.clip = clips[randomIndex];
 		//sfxSource.Play();
 		sfxSource.PlayOneShot(clip);
+	}
+	void Update(){
+		if(musicFading){
+			if(musicSource.volume > 0f){
+				musicSource.volume -= .4f*Time.deltaTime;
+			}else{
+				musicFading = false;
+			}
+		}
+	}
+	public void FadeMusic(){
+		musicFading = true;
 	}
 
 }

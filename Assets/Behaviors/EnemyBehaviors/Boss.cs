@@ -15,6 +15,8 @@ public class Boss : MonoBehaviour {
 	public tk2dCamera mainCam;
 	public GameObject objectToPanTo;
 
+	[HideInInspector]
+	public Room currentRoom; //used to diable other bosses at main bosses' death
 	int deathSmokeNumber;
 
 
@@ -57,14 +59,15 @@ public class Boss : MonoBehaviour {
 
 	public IEnumerator BossDeath(){
 		Debug.Log("BOSS DEATH ACTIVATE ***********");
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		player.GetComponent<EightWayMovement>().enabled = false;
+		player.GetComponent<PlayerTakeDamage>().enabled = false;
 		InvokeRepeating("DeathSmoke",.1f,.2f);
 		if(gameObject.GetComponent<FollowPlayer>() != null){
 				gameObject.GetComponent<FollowPlayer>().StopSound();
 				gameObject.GetComponent<FollowPlayer>().enabled = false;
 		}
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
-		player.GetComponent<EightWayMovement>().enabled = false;
-		player.GetComponent<PlayerTakeDamage>().enabled = false;
+	
 		GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = 0;
 		yield return new WaitForSeconds(1.5f);
 		GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
@@ -73,7 +76,10 @@ public class Boss : MonoBehaviour {
 			mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(objectToPanTo.transform.position,"BossItem");
 			mainCam.GetComponent<Ev_MainCameraEffects>().objectToSpawn = objectToPanTo;
 			GlobalVariableManager.Instance.BOSSES_KILLED |= GlobalVariableManager.BOSSES.ONE; //use this as way to tell if player has upgrade
-			this.gameObject.SetActive(false);
+			for(int i = 0; i < currentRoom.bosses.Count; i++){//disable all other bosses at death
+				currentRoom.bosses[i].SetActive(false);
+			}
+			//this.gameObject.SetActive(false);
 		}else{
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("Death");
 			myBossScript.enabled = false;

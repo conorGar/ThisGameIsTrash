@@ -10,7 +10,7 @@ public class GUI_PauseMenu : MonoBehaviour {
 	public GameObject enddayOption;
 	public GameObject optionsMenu;
 	public GameObject returnToDumpsterOption;
-
+	public GameObject endDayDisplayHUD;
 
 	public Sprite optionsHLspr;
 	public Sprite endayHLspr;
@@ -71,6 +71,13 @@ public class GUI_PauseMenu : MonoBehaviour {
 			if(arrowpos == 1){
 				Time.timeScale = 1.0f- Time.timeScale;
 				optionsMenu.SetActive(true);
+				this.enabled = false;
+				Time.timeScale = 0;
+			}else if(arrowpos == 2){//end day
+				Time.timeScale = 1.0f- Time.timeScale;
+				endDayDisplayHUD.SetActive(true);
+				endDayDisplayHUD.GetComponent<GUI_OptionsPopupBehavior>().pauseMenu = this;
+				endDayDisplayHUD.GetComponent<GUI_OptionsPopupBehavior>().AtPauseScreen = true;
 				this.enabled = false;
 				Time.timeScale = 0;
 			}

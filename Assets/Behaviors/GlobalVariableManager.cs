@@ -11,7 +11,7 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int value;
 
-    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG | PIN.TALKYTIME | PIN.CURSED | PIN.PIERCINGPIN);
+    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG); //| PIN.TALKYTIME | PIN.CURSED | PIN.PIERCINGPIN);
     public PIN PINS_DISCOVERED
     {
         set { pinsDiscoveredValue = (ulong)value; }
@@ -49,8 +49,8 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int DAY_NUMBER = 1;
 	public int IS_HIDDEN = 0;
-	public int MASTER_MUSIC_VOL = 30;
-	public int MASTER_SFX_VOL = 30;
+	public float MASTER_MUSIC_VOL = .7f;
+	public float MASTER_SFX_VOL = 1f;
 	public int MENU_SELECT_STAGE = 1;
 	public bool PLAYER_CAN_MOVE = true;
 	public bool TUT_POPUP_ON = true;
@@ -71,6 +71,7 @@ public class GlobalVariableManager : UserDataItem {
 	LARGETRASH =		1<<0,
 	ARMOREDENEMIES = 	1<<1,
 	DAYNIGHT = 			1<<2,
+	PINS = 				1<<3,
 
 	}
 
@@ -189,7 +190,7 @@ public class GlobalVariableManager : UserDataItem {
 												"abcdefghijklmn",
 												};		
 
-    public WORLD WORLDS_UNLOCKED = WORLD.NONE;
+    public WORLD WORLDS_UNLOCKED = WORLD.ONE;
 
     //---------------------------------------------------------------------//
 
@@ -261,5 +262,10 @@ public class GlobalVariableManager : UserDataItem {
     public bool IsPinEquipped(PIN p_type)
     {
         return (GlobalVariableManager.Instance.PINS_EQUIPPED & p_type) == p_type;
+    }
+
+    public bool IsWorldUnlocked(WORLD world_type)
+    {
+		return (GlobalVariableManager.Instance.WORLDS_UNLOCKED & world_type) == world_type;
     }
 }

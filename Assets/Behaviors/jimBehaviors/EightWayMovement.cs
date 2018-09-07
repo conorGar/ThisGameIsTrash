@@ -57,8 +57,8 @@ public class EightWayMovement : MonoBehaviour {
         {
 			if(directionFacing != 2){
 					gameObject.transform.localScale = new Vector2(transformScale.x*-1,transformScale.y); 
-					walkCloudPS.transform.localScale = new Vector3(walkCloudPS.transform.localScale.x*-1,walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
-
+					//walkCloudPS.transform.localPosition = new Vector3(0f,-1.75f,0f);
+					//walkCloudPS.transform.localScale = new Vector3(walkCloudPS.transform.localScale.x*-1,walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
 			}
 			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
 				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
@@ -72,8 +72,8 @@ public class EightWayMovement : MonoBehaviour {
         {
 			if(directionFacing != 1){
 					gameObject.transform.localScale = new Vector2(transformScale.x,transformScale.y); 
-				walkCloudPS.transform.localScale = new Vector3(Mathf.Abs(walkCloudPS.transform.localScale.x),walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
-			
+					//walkCloudPS.transform.localPosition = new Vector3(0,-1.75f,0f);
+					//walkCloudPS.transform.localScale = new Vector3(Mathf.Abs(walkCloudPS.transform.localScale.x),walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
 				}
 			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
 				
@@ -94,6 +94,8 @@ public class EightWayMovement : MonoBehaviour {
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
 				}
 			}
+			//walkCloudPS.transform.localScale = new Vector3(2.42f,2.42f,2.42f); 
+			//walkCloudPS.transform.localPosition = new Vector3(2.5f,-3.3f,0f);
 			directionFacing = 3;
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN))
         {
@@ -104,6 +106,8 @@ public class EightWayMovement : MonoBehaviour {
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
 				}
 			}
+			//walkCloudPS.transform.localScale = new Vector3(2.42f,2.42f,2.42f); 
+			//walkCloudPS.transform.localPosition = new Vector3(2.5f,1.2f,0f);
 			directionFacing = 4;
  		}
 		

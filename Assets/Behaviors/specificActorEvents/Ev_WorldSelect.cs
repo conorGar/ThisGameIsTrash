@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class Ev_WorldSelect : MonoBehaviour {
 
 	public int numberOfStars = 0;
@@ -9,12 +9,16 @@ public class Ev_WorldSelect : MonoBehaviour {
 	public int largeTrashListStartIndex = 0;
 	public int myMenuSelectStage = 0;
 	public int position = 0;
+	public int startLargeTrashIndex;
+	public GameObject myStars;
 	//p = 0 = front; = 1-right; =2-back; = 3 -left
-
-
-	public GameObject star;
+	public int worldNumber;
+	public TextMeshProUGUI worldNumberDisplay;
+	//public GameObject star;
 	public GameObject cloudBurstEffect;
 	public GameObject selectEffect;
+	public WORLD myWorld;
+
 
 	GameObject[] worldIcons;
 	int volume = 30;
@@ -26,20 +30,20 @@ public class Ev_WorldSelect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if((GlobalVariableManager.Instance.WORLDS_UNLOCKED & WorldManager.Instance.world.type) != WorldManager.Instance.world.type)
+		if(!(GlobalVariableManager.Instance.IsWorldUnlocked(myWorld)))
         {
 			gameObject.GetComponent<SpriteRenderer>().color = Color.black;
 			//if(GlobalVariableManager.Instance.PROGRESS_LV >= myPositionInWorldsUnlocked){
-			if(myMenuSelectStage == 1){ //just for testing, remove
+			/*if(myMenuSelectStage == 1){ //just for testing, remove
 				StartCoroutine("Unlock");
-			}
+			}*/
 			locked = true;
 		}
-		GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
+		//GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
 
-		Navigate("right");
+		Navigate("right",0);
 		
-		Debug.Log(GlobalVariableManager.Instance.MENU_SELECT_STAGE);
+		//Debug.Log(GlobalVariableManager.Instance.MENU_SELECT_STAGE);
 	}
 	
 	// Update is called once per frame
@@ -47,20 +51,22 @@ public class Ev_WorldSelect : MonoBehaviour {
 		
 	}
 
-	public void Navigate(string dir){
-		Debug.Log(GlobalVariableManager.Instance.MENU_SELECT_STAGE);
+	public void Navigate(string dir,int arrowPos){
+		//Debug.Log(GlobalVariableManager.Instance.MENU_SELECT_STAGE);
 		Debug.Log("Navigate Activate");
 		//activated by S-Ev_worldSelect. (also sets menuSelectStage before activating this method.
 
-			if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == myMenuSelectStage){
+			if(arrowPos == myMenuSelectStage){
+				worldNumberDisplay.text = worldNumber.ToString();
 				if(locked == false){
-					SpawnStars();
+					if(myStars != null)
+						SpawnStars();
 					//-------Activates friend Icons -------------------//
-					for(int i = 0; i < this.gameObject.transform.childCount; i++){
+					/*for(int i = 0; i < this.gameObject.transform.childCount; i++){
 						gameObject.transform.GetChild(i).gameObject.SetActive(true);
 						if(i != 0)//if everything BUT the title child(which has to be 1st child in hieracrchy)
 							gameObject.transform.GetChild(i).gameObject.GetComponent<Ev_WorldSelectFriends>().StartCoroutine("ActivateMovement");
-					}
+					}*/
 					//------------------------------------------------//
 				}
 				//gameObject.GetComponent<SpecialEffectsBehavior>().Grow(.1f,1f,.2f);
@@ -107,20 +113,15 @@ public class Ev_WorldSelect : MonoBehaviour {
 	void SpawnStars(){
 		Debug.Log("Spawn Stars Activate");
 		float tempXStar = XofStar;
-		for(int i = 0; i < numberOfStars; i++){
-		    GameObject tempStar = Instantiate(star, new Vector2(tempXStar,5f), Quaternion.identity);
+		for(int i = startLargeTrashIndex; i < myStars.transform.childCount; i++){
 
             LARGEGARBAGE largeGarbageType = LargeGarbage.ByIndex(i);
             
-            // Black out any stars for large trash that hasn't been both discovered and viewed.
             if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeGarbageType) != largeGarbageType && (GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED & largeGarbageType) != largeGarbageType) {
-				tempStar.GetComponent<SpriteRenderer>().color = Color.black;
-			}
-				starlist.Add(tempStar);
-				tempXStar +=1;
-				Debug.Log("Star Spawned");
+            	myStars.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 			}
 
+		}
 	}//End of SpawnStars()
 
 	void Move(){
@@ -150,17 +151,17 @@ public class Ev_WorldSelect : MonoBehaviour {
 
 	public void Select(){
 		if(locked == false){
-			if(GlobalVariableManager.Instance.WORLD_NUM != myMenuSelectStage +1){
+			/*if(GlobalVariableManager.Instance.WORLD_NUM != myMenuSelectStage +1){
 				GlobalVariableManager.Instance.GARBAGE_HAD = 0;
 				GlobalVariableManager.Instance.WORLD_NUM = myMenuSelectStage+1;
-			}
+			}*/
 			gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("SelectFlash");
 			gameObject.GetComponent<SpecialEffectsBehavior>().SetFadeVariables(.1f,.5f);
 			gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("FadeOut");
 			Instantiate(selectEffect,transform.position,Quaternion.identity);
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(gameObject.transform.position.x,5.42f,1f);
 			GameObject manager = GameObject.Find("manager");
-			manager.GetComponent<Ev_FadeHelper>().FadeToScene("BagSelectScreen");
+			manager.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
 		}
 	}
 

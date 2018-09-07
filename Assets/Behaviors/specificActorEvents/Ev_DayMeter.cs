@@ -10,7 +10,8 @@ public class Ev_DayMeter : MonoBehaviour {
 	public TextMeshProUGUI countdownNumber;
 	public GameObject fadeHelper;
 	public GameObject tutPopup;
-
+	public AudioClip countdownTick;
+	public TextMeshProUGUI dayNumberDisplay;
 
 	float delayBonus;
 
@@ -25,6 +26,7 @@ public class Ev_DayMeter : MonoBehaviour {
 		
 		startIconPos = dayIcon.transform.localPosition;
 		targetPos = new Vector3(4.13f,.48f,0f);
+		dayNumberDisplay.text = "Day: "+ GlobalVariableManager.Instance.DAY_NUMBER;
 		Created();
 
 	}//end of Start()
@@ -39,6 +41,9 @@ public class Ev_DayMeter : MonoBehaviour {
 	public void Stop(){
 		CancelInvoke();
 		canGo = false;
+	}
+	public void StartAgain(){
+		Created();
 	}
 	public void Created(){
 		canGo = true;
@@ -78,6 +83,7 @@ public class Ev_DayMeter : MonoBehaviour {
 
 	void FinalCountdown(){
 		if(finalCountdownNumber > 0){
+		SoundManager.instance.RandomizeSfx(countdownTick,.7f,1.3f);
 		Debug.Log("Final COuntdown:" + finalCountdownNumber);
 		countdownNumber.text = finalCountdownNumber.ToString();
 		countdownNumber.color = new Color(152f,152f,152f,.64f);

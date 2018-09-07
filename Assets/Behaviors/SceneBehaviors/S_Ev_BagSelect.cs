@@ -24,7 +24,8 @@ public class S_Ev_BagSelect : MonoBehaviour {
 	bool locked = false;
 	bool selected = false;
 	bool canNavigate = true;
-	int selectedArrowPos = 0;//used to hold current menu select stage postion when select bag
+	int selectedArrowPos;//used to hold current menu select stage postion when select bag(to return to if leave)
+	int arrowPos = 0;
 	public GameObject currentCam;
 	GameObject bagTitle;
 	Transform shadow;
@@ -42,19 +43,19 @@ public class S_Ev_BagSelect : MonoBehaviour {
 				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
                || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
                 {
-					if(GlobalVariableManager.Instance.MENU_SELECT_STAGE < 3){
-						GlobalVariableManager.Instance.MENU_SELECT_STAGE++;
+					if(arrowPos < 3){
+						arrowPos++;
 					}else{
-						GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
+						arrowPos = 0;
 					}
 					NextBag("right");
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
                       || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
                 {
-					if(GlobalVariableManager.Instance.MENU_SELECT_STAGE > 0){
-						GlobalVariableManager.Instance.MENU_SELECT_STAGE--;
+					if(arrowPos > 0){
+						arrowPos--;
 					}else{
-						GlobalVariableManager.Instance.MENU_SELECT_STAGE = 3;
+						arrowPos = 3;
 					}
 					NextBag("left");
 				}
@@ -62,14 +63,14 @@ public class S_Ev_BagSelect : MonoBehaviour {
 				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
                 || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN))
                 {
-					if(GlobalVariableManager.Instance.MENU_SELECT_STAGE < 2){
-						GlobalVariableManager.Instance.MENU_SELECT_STAGE++;
+					if(arrowPos < 2){
+						arrowPos++;
 					}
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
                       || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP))
                 {
-					if(GlobalVariableManager.Instance.MENU_SELECT_STAGE > 0){
-						GlobalVariableManager.Instance.MENU_SELECT_STAGE--;
+					if(arrowPos > 0){
+						arrowPos--;
 					}
 				}
 			}
@@ -96,17 +97,17 @@ public class S_Ev_BagSelect : MonoBehaviour {
         // If the bag is unlocked.
 		}else{
 			locked = false;
-			if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 2){
+			if(arrowPos == 2){
 				bagTitle.GetComponent<SpriteRenderer>().sprite = cassieTitle;
 				perk1.text = "+1 Max HP";
 				perk2.text = "Compost Can destroy Styrofoam blockades";
 				perk3.text = "Compost have a chance to heal when picked up";
-			}else if(GlobalVariableManager.Instance.MENU_SELECT_STAGE  == 1){
+			}else if(arrowPos  == 1){
 				bagTitle.GetComponent<SpriteRenderer>().sprite = reggieTitle;
 				perk1.text = "Damage Armored Enemies";
 				perk2.text = "Carry Metal Blockades";
 				perk3.text = "Chance to Critical Hit";
-			}else if(GlobalVariableManager.Instance.MENU_SELECT_STAGE  == 3){
+			}else if(arrowPos  == 3){
 				bagTitle.GetComponent<SpriteRenderer>().sprite = BAGtitle;
 				perk1.text = "Bag Size + 5";
 				perk2.text = "Speed Boost When Carrying Large Trash";
@@ -139,25 +140,25 @@ public class S_Ev_BagSelect : MonoBehaviour {
 	void BagSelect(){
 
 		if(selected == false){
-			selectedArrowPos = GlobalVariableManager.Instance.MENU_SELECT_STAGE;
+			selectedArrowPos = arrowPos;
 			spawnedBag.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(13.5f,12.5f,.2f);
 			Instantiate(smokePuffEffect,new Vector2(spawnedBag.transform.position.x, spawnedBag.transform.position.y +2f),Quaternion.identity);
 			shadow  = spawnedBag.transform.GetChild(0); // get shadow
 			shadow.parent = null; //detatch shadow
 			//canNavigate = false;
 			selected = true;
-			GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
+			arrowPos = 0;
 			Buttons.SetActive(true);
 		}else{
-			if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 0){
+			if(arrowPos == 0){
 				//back button
 				spawnedBag.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(13.5f,10.5f,.2f);
 				shadow.parent = GameObject.FindGameObjectWithTag("Trash").transform;//reattatch shadow
 				//canNavigate = true;
 				selected = false;
-				GlobalVariableManager.Instance.MENU_SELECT_STAGE = selectedArrowPos;
+				arrowPos = selectedArrowPos;
 				Buttons.SetActive(false);
-			}else if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 2){
+			}else if(arrowPos == 2){
 				//start day button
 				gameObject.GetComponent<Ev_FadeHelper>().FadeToScene("DayDisplayScreen");
 			}

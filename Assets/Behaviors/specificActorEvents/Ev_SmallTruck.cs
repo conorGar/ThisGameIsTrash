@@ -186,9 +186,9 @@ public class Ev_SmallTruck : MonoBehaviour {
 	IEnumerator HomelessHarry(){
 		yield return new WaitForSeconds(1f);
 		//shake screen
-
+		/*
 		//Enable Harry dialog
 		oneTimers.GetComponent<ActivateDialogWhenClose>().dialogName = "Harry1";
-		oneTimers.GetComponent<ActivateDialogWhenClose>().ActivateDialog();
+		oneTimers.GetComponent<ActivateDialogWhenClose>().ActivateDialog();*/
 	}
 }

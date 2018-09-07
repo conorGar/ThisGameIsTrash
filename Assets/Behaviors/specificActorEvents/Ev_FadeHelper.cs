@@ -137,6 +137,7 @@ public class Ev_FadeHelper : MonoBehaviour {
 	}
 
 	public void FadeToScene(string sceneName){
+		SoundManager.instance.FadeMusic();
 		Initiate.Fade(sceneName,Color.black,0.5f);
 
 	}

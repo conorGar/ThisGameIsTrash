@@ -65,6 +65,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 	Quaternion startRotation;
 
 
+	Vector2 startScale;
+
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
@@ -74,7 +76,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 		myBody = gameObject.GetComponent<Rigidbody2D>();
 		startRotation = transform.rotation;
 		shadowStartPos = myShadow.transform.localPosition;
-
+		startScale = gameObject.transform.localPosition;
 
 		//----------------Pins----------------//
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PIERCINGPIN)) //Piercing Pin
@@ -197,9 +199,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 					}
 				myAnim.Play("hit");
 				if(gameObject.transform.position.x < player.transform.position.x)
-					gameObject.transform.localScale = new Vector2(-1f,1f);
+					gameObject.transform.localScale = new Vector2(startScale.x*-1,startScale.y);
 				else
-					gameObject.transform.localScale = new Vector2(1f,1f);
+					gameObject.transform.localScale = new Vector2(startScale.x,startScale.y);
 
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;

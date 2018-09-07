@@ -82,6 +82,12 @@ public class Ev_MainCameraEffects : MonoBehaviour {
   		if(triggerEventName == "tutorial"){
 			tutPopup.SetActive(true);
 			tutPopup.GetComponent<GUI_TutPopup>().SetData("LargeTrash");
+		}else if(triggerEventName == "tutorial_pins"){
+			tutPopup.SetActive(true);
+			tutPopup.GetComponent<GUI_TutPopup>().SetData("Pins");
+		}else if(triggerEventName == "tutorial_armored"){
+			tutPopup.SetActive(true);
+			tutPopup.GetComponent<GUI_TutPopup>().SetData("ArmoredEnemies");
 		}else if(triggerEventName == "BossItem"){
 			StartCoroutine("SpawnBossReward");
 

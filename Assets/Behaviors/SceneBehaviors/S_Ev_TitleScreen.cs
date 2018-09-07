@@ -25,12 +25,17 @@ public class S_Ev_TitleScreen : MonoBehaviour {
     public TextMeshProUGUI loadingGameDataVisual;
 
     public GameObject optionHud;
+    public AudioClip windGusts;
+
+    public AudioClip navigateSFX;
+    public AudioClip selectSFX;
 
 	GameObject currentSelected;
 
 	// Use this for initialization
 	void Start () {
 		currentSelected = playOption;
+		SoundManager.instance.PlaySingle(windGusts);
 	}
 	
     IEnumerator LoadUserData()
@@ -71,6 +76,7 @@ public class S_Ev_TitleScreen : MonoBehaviour {
                 else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
                       || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
                     if (navigationPosition == 1) {
+
                     	saveFileSelectHUD.SetActive(true);
                     	this.enabled = false;
                         //StartCoroutine(LoadUserData());
@@ -80,6 +86,8 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 						Time.timeScale = 0;
 
                     }
+					SoundManager.instance.PlaySingle(selectSFX);
+
                 }
             } else if (phase == 0) {
                 if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
@@ -91,6 +99,8 @@ public class S_Ev_TitleScreen : MonoBehaviour {
                     //Debug.Log(topLimit * -1);
 
                     //title.transform.localPosition = topLimit * -1;
+					SoundManager.instance.PlaySingle(selectSFX);
+
                     title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,.6f,.5f, true);
                     //title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
                     choicesBox.SetActive(true);
@@ -136,6 +146,7 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 	}
 
 	void UpdateSelected(){
+		SoundManager.instance.PlaySingle(navigateSFX);
 		currentSelected.GetComponent<SpecialEffectsBehavior>().SetGrowValues(new Vector3(.5f,.5f,.5f),10f);//need new Grow function that takes two different values
 		currentSelected.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Grow",.01f);
 		currentSelected.GetComponent<Image>().color = new Color(currentSelected.GetComponent<Image>().color.r,currentSelected.GetComponent<Image>().color.g,currentSelected.GetComponent<Image>().color.b,.7f);

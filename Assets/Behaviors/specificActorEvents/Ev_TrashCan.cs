@@ -16,6 +16,7 @@ public class Ev_TrashCan : MonoBehaviour {
 	public AudioClip hitSound;
 	public PinDefinition myPin;
 	public Sprite pinSprite;//given to dropped pin, which gives it to pin unlock display
+	public ParticleSystem smokePuff;
 	GameObject spawnedPin;
 	int spawnOnce = 0;
 
@@ -47,6 +48,8 @@ public class Ev_TrashCan : MonoBehaviour {
 				littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.SetActive(true);
 			}else{
+				smokePuff.gameObject.SetActive(true);
+				smokePuff.Play();
 				SoundManager.instance.PlaySingle(finalHit);
 				myAnim.Play("fall");
 				SoundManager.instance.PlaySingle(hitSound);

@@ -61,10 +61,13 @@ public enum LARGEGARBAGE : int
 {
     NONE =                  0,
     CHAIR =                 1 << 0,
-    TESTTRASH2 =            1 << 1,
-    TESTTRASH3 =            1 << 2,
-    TESTTRASH4 =            1 << 3,
-    SIZE =                  1 << 3
+    STEREO =           		1 << 1,
+    SLIDE =           		1 << 2,
+    TV =           		 	1 << 3,
+	MATTRESS =           	1 << 4,
+	TIRE =           		1 << 5,
+	PIZZABOX =           	1 << 6,
+    SIZE =                  1 << 6,
 }
 
 
@@ -240,9 +243,9 @@ public class LargeGarbage : IGarbage
     {
         { LARGEGARBAGE.NONE,                          "" },
         { LARGEGARBAGE.CHAIR,                         "" },
-        { LARGEGARBAGE.TESTTRASH2,                    "" },
-        { LARGEGARBAGE.TESTTRASH3,                    "" },
-        { LARGEGARBAGE.TESTTRASH4,                    "" }
+        { LARGEGARBAGE.STEREO,                    "" },
+        { LARGEGARBAGE.SLIDE,                    "" },
+        { LARGEGARBAGE.TIRE,                    "" }
     };
 
 

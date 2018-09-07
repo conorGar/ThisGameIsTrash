@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class S_Ev_Hub : MonoBehaviour {
 
-	
+	public AudioClip hubMusic;
+
 	// Use this for initialization
 	void Start () {
 		UserDataManager.Instance.SetDirty();
+		SoundManager.instance.musicSource.clip = hubMusic;
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+		SoundManager.instance.musicSource.Play();
 		GlobalVariableManager.Instance.MENU_SELECT_STAGE = 2;
 		GlobalVariableManager.Instance.ARROW_POSITION = 0;
 		//create jim
@@ -22,7 +26,7 @@ public class S_Ev_Hub : MonoBehaviour {
 		//disable melee swing at hub
 		GameObject.Find("Jim").GetComponent<MeleeAttack>().enabled = false;
 
-		LargeTrashSpawn();
+		//LargeTrashSpawn();
 	}
 	
 	// Update is called once per frame

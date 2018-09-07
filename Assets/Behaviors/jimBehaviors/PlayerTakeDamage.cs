@@ -35,7 +35,6 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D enemy){
 		if(enemy.gameObject.layer == 9 && !currentlyTakingDamage){ //layer 9 = enemies
-			SoundManager.instance.PlaySingle(hurt);
 
 			if(enemy.gameObject.tag == "Boss"){
 				damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
@@ -43,7 +42,24 @@ public class PlayerTakeDamage : MonoBehaviour {
 				damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
 
 			}
-			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.QUENPINTARANTINO)){
+			TakeDamage(enemy.gameObject);
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D projectile){
+		if(projectile.gameObject.layer == 10 && !currentlyTakingDamage){ //layer 10 = projectiles
+
+			damageDealt = projectile.gameObject.GetComponent<Projectile>().damageToPlayer;
+
+			TakeDamage(projectile.gameObject);
+		}
+	}
+
+	void TakeDamage(GameObject enemy){
+
+		SoundManager.instance.PlaySingle(hurt);
+
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.QUENPINTARANTINO)){
 				gameObject.GetComponent<PinFunctionsManager>().QuenpinTarantino();
 			}
 			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
@@ -78,13 +94,17 @@ public class PlayerTakeDamage : MonoBehaviour {
 			}else{
 				StartCoroutine("RegainControl");
 			}
-		}
 	}
 
 	IEnumerator RegainControl(){
 		yield return new WaitForSeconds(.2f);
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+		if(GlobalVariableManager.Instance.CARRYING_SOMETHING){
+			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",true);
+		}else{
+			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
+		}
 		yield return new WaitForSeconds(.5f); //brief period of invincibility
 		currentlyTakingDamage = false;
 		Debug.Log("Regained Control");
@@ -166,7 +186,9 @@ public class PlayerTakeDamage : MonoBehaviour {
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 		gameObject.GetComponent<BoxCollider2D>().enabled = true;
 
-
+		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
+		
+		gameObject.GetComponent<EightWayMovement>().enabled = true;
 		//----------------------------------------------------//
 		yield return new WaitForSeconds(.5f);
 		truck.SetActive(false);

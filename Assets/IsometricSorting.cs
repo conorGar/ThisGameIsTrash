@@ -7,6 +7,7 @@ public class IsometricSorting : MonoBehaviour {
 	//public int backOrderInLayer = 0;
 	public bool hastk2dSprite = true;
 	public bool movingObject;
+	public bool legs;
 	GameObject player;
 	//public float yPositionMark;
 	float myY;
@@ -47,7 +48,11 @@ public class IsometricSorting : MonoBehaviour {
 				//	mytk2dSprite.SortingOrder = frontOrderInLayer;
 
 				//}
+				if(!legs){
 				mytk2dSprite.SortingOrder = -1*(int)gameObject.transform.position.y;
+				}else{
+					mytk2dSprite.SortingOrder = -1*(int)gameObject.transform.position.y-2;
+				}
 
 			}else{
 				/*if(myY > player.transform.position.y && mySprite.sortingOrder != backOrderInLayer){
