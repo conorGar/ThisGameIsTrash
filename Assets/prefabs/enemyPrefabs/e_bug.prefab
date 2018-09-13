@@ -221,6 +221,7 @@ MonoBehaviour:
   walkDistance: 10
   chaseSpeed: 0.95
   hasSeperateFacingAnimations: 0
+  iBeLerpin: 0
 --- !u!114 &114458905907132094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -272,7 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armoredEnemy: 0
-  moveWhenHit: 1
+  moveWhenHit: 0
   secretHider: 0
   currentHp: 4
   meleeDmgBonus: 0
@@ -291,10 +292,10 @@ MonoBehaviour:
   currentCamera: {fileID: 114911326877479794, guid: ed6dbd2afaf985146a8eda13f2278a1c,
     type: 2}
   respawnEnemy: 0
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
   hitSqueal: {fileID: 0}
+  bounce: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
   bossEnemy: 0
-  objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   gar_rec: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
@@ -304,6 +305,9 @@ MonoBehaviour:
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1170939172725382}
   myCollisionBox: {fileID: 61374833343893834}
+  returnAniName: idle
+  objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
+  myRespawner: {fileID: 0}
 --- !u!114 &114740205839798866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -315,8 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  attkPower: 0
+  health: 3
+  attkPower: 1
   moveWhenHit: 0
   respawningEnemyType: 0
 --- !u!114 &114762427506534602

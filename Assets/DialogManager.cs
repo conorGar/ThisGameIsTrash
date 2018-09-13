@@ -144,12 +144,13 @@ public class DialogManager : MonoBehaviour {
 	}
 
 	public void ReturnFromChoice(SerializableGuid link){
+			currentlySpeakingIcon.SetActive(true);
 			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
+			Debug.Log("Return From Choice activated");
 			currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SwitchAni("IconSlideBack");
 			canContinueDialog = true;
 			mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogBlur;
 			textBox.SetActive(true);
-			currentlySpeakingIcon.SetActive(true);
 			dialogOptions.transform.localPosition = new Vector2(-22f,-204f); //reset choice position so it slides on screen next time.
 			dialogOptions.SetActive(false);
 			currentNode = myDialogDefiniton.nodes[link];

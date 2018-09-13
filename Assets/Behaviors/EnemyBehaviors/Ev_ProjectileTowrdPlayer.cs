@@ -22,10 +22,21 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 
 
 	void OnEnable(){
-		
+		throwPS.Play();
+		if(player == null){
+
+		player = GameObject.FindGameObjectWithTag("Player");
+		}
+		StartCoroutine("Delay");//Delay needed because this enable() was being ativated BEFORE the rock's new postion(back to thrower) was being set
+
 	}
 	// Update is called once per frame
 	void Update () {
 		
+	}
+	IEnumerator Delay(){
+		yield return new WaitForSeconds(.1f);
+		movementDir = (player.transform.position - gameObject.transform.position).normalized * 5;
+		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementDir.x,movementDir.y);
 	}
 }

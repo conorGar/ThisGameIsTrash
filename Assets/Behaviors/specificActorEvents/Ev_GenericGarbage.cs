@@ -117,12 +117,12 @@ public class Ev_GenericGarbage : MonoBehaviour {
 				this.gameObject.transform.parent = playerPos;
 					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] < (GlobalVariableManager.Instance.BAG_SIZE + bagSizeBonus) && !isFalling){
 						if(grabbedPhase <= 0){
-							//trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().NewDiscoveryShow(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name, "myNameTest");
 
 							if((GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED & garbage.type) != garbage.type && (GlobalVariableManager.Instance.STANDARD_GARBAGE_VIEWED & garbage.type) != garbage.type)
-                       		{
-                       			
-								trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().NewDiscoveryShow(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name, "myNameTest");
+                       		{//TODO: this isnt really working properly(Only shows seemingly for first trash of the day, and displays name incorrently?)
+                       			Debug.Log("New Discovery");
+								string myName = garbage.GarbageName();
+								trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().NewDiscoveryShow(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name, myName);
 								GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED |= garbage.type;
 								SoundManager.instance.PlaySingle(newDiscovery);
 							}//end of new discover code
@@ -167,7 +167,8 @@ public class Ev_GenericGarbage : MonoBehaviour {
 							//otherwise increase race collected
 							GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[2]++;
 						}
-						trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
+						if(trashCollectedDisplay != null)//TODO: dropped trash doesnt upgrade display: possibly just not have enemies drop trash...?
+							trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 						StartCoroutine("Kill");
 						Debug.Log("Got this far - Trash pickup");
 						gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;

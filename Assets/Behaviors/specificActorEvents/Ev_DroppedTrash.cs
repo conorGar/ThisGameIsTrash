@@ -18,15 +18,16 @@ public class Ev_DroppedTrash : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if(isPile && collider.gameObject.tag == "Player"){
-			droppedTrashCollectedDisplay.SetActive(true);
+		if(collider.gameObject.tag == "Player"){
+			/*droppedTrashCollectedDisplay.SetActive(true);
 			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(droppedTrashCollectedDisplay.transform.position.x, droppedTrashCollectedDisplay.transform.position.y+3,2);
 			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SetFadeVariables(.4f,1f);
-			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().FadeOut();
-			GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] += GlobalVariableManager.Instance.GARBAGE_HAD;
+			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().FadeOut();*/
+			//GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] += GlobalVariableManager.Instance.GARBAGE_HAD;
+			GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]++;
 			collider.gameObject.GetComponent<PlayerTakeDamage>().trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
-			GlobalVariableManager.Instance.GARBAGE_HAD = 0;
-			GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION = Vector3.zero;
+			//GlobalVariableManager.Instance.GARBAGE_HAD = 0;
+			//GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION = Vector3.zero;
 			gameObject.SetActive(false);
 		}
 	}

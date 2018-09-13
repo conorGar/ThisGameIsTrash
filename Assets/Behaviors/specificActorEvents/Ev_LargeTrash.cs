@@ -85,11 +85,15 @@ public class Ev_LargeTrash : PickupableObject {
 	
 	public override void PickUpEvent(){
 		gameObject.tag = "ActiveLargeTrash";
+		sparkle.SetActive(false);
+		//gameObject.GetComponent<Animator>().enabled = true;
 	}
 
 	public override void DropEvent(){
 		gameObject.tag = "LargeTrash";
+		sparkle.SetActive(true);
 		gameObject.transform.parent = ltmManager.transform; //goes back to largeTrashManager when drop
+		//gameObject.GetComponent<Animator>().enabled = false;
 
 	}
 

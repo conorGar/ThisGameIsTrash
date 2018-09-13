@@ -17,6 +17,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public bool respawnEnemy = false;
 	public AudioClip hitSound;
 	public AudioClip hitSqueal;
+	public AudioClip bounce;
 	public bool bossEnemy;
 
 
@@ -32,6 +33,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject myShadow;
 	public BoxCollider2D myCollisionBox;
 	public string returnAniName = "idle";
+	public List<MonoBehaviour> behaviorsToDeactivate = new List<MonoBehaviour>();
 	[HideInInspector]
 	public GameObject objectPool;
 	public EnemyRespawner myRespawner; //for use with respawning enemies
@@ -70,8 +72,12 @@ public class EnemyTakeDamage : MonoBehaviour {
 	void OnEnable(){
 		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		currentHp = gameObject.GetComponent<Enemy>().health;//enemy health reset when enter room again
+		if(myBody == null)
+			myBody = gameObject.GetComponent<Rigidbody2D>();
+
 		myBody.gravityScale = 0;
 		takingDamage = false;
+		damageOnce = 0;
 		if(gameObject.GetComponent<RandomDirectionMovement>() != null)
 			gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
 	}
@@ -165,7 +171,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				melee.GetComponent<Ev_FallingProjectile>().Fell();
 			}
 			Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
-			SoundManager.instance.PlaySingle(hitSound);
+			SoundManager.instance.RandomizeSfx(hitSound,.8f,1.1f);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}
 	}
@@ -250,7 +256,11 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 					if(secretHider)
 						Destroy(melee.gameObject);
-
+					if(moveWhenHit){
+						for(int i = 0; i < behaviorsToDeactivate.Count;i++){
+							behaviorsToDeactivate[i].enabled = false;
+						}
+					}
 					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
 					GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars"); 
 					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
@@ -309,9 +319,13 @@ public class EnemyTakeDamage : MonoBehaviour {
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
 		spinning = false;
 		myCollisionBox.enabled = true;
+		for(int i = 0; i < behaviorsToDeactivate.Count;i++){
+						behaviorsToDeactivate[i].enabled = true;
+		}
 		yield return new WaitForSeconds(.3f);
 		Debug.Log("STOP KNOCKBACK ACTIVATE");
 		damageOnce = 0;
+		SoundManager.instance.PlaySingle(bounce);
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 		//if(aniToSwitchBackTo != null)
@@ -333,6 +347,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 			takingDamage = true;
 			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawR") == 0||meleeSwingDirection.CompareTo("poleR") == 0){
 				Debug.Log(swingDirectionSide);
+
+				myCollisionBox.enabled = false;
+
 				if(swingDirectionSide < 0){
 						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-17f,8f), ForceMode2D.Impulse);
 				}else{
@@ -340,12 +357,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 				}
 				myBody.gravityScale = 2;
 				myShadow.transform.parent = null; //shadow doesnt follow Y pos
-
-
-
-				myCollisionBox.enabled = false;
-
-
 
 
 			}else if(meleeSwingDirection.CompareTo("stickUp") == 0||meleeSwingDirection.CompareTo("clawUp") == 0||meleeSwingDirection.CompareTo("poleUp") == 0){
@@ -451,7 +462,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 
 	void DropThings(){
-		GameObject droppedTrash;
+		//Just took out for now, not sure what im doing as far as possibility to drop trash
+
+		/*GameObject droppedTrash;
 		if(dropsPin !=22){
 			if(dropsTrash <=2){
 					GlobalVariableManager.Instance.MY_NUM_IN_ROOM = 3;
@@ -487,7 +500,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				//GameObject.Find("sceneManager").GetComponent<sEv_blockedRooms>().kill();
 			}
 
-		}
+		}*/
 	}
 
 	void DropScrap(){
@@ -496,14 +509,14 @@ public class EnemyTakeDamage : MonoBehaviour {
         if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < (13 + wasteWarriorAdjust)){
 			if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.SCRAPCITY)){
 				//^ Scrap City - more scrap dropped
-				scrapDropped = Random.Range(1,3);
+				scrapDropped = Random.Range(1,4);
 			}else{
-				scrapDropped = Random.Range(2,6);
+				scrapDropped = Random.Range(2,7);
 				player.GetComponent<PinFunctionsManager>().StartCoroutine("DisplayEffectsHud",PinManager.Instance.GetPin(PIN.SCRAPCITY).sprite);
 			}
-			//Debug.Log("dropped scrap:" + scrapDropped);
+			Debug.Log("dropped scrap:" + scrapDropped);
 		    for(int i = 0; i < scrapDropped; i++){
-				GameObject droppedScrap=   ObjectPool.Instance.GetPooledObject("Scrap"); 
+				GameObject droppedScrap=   ObjectPool.Instance.GetPooledObject("Scrap",gameObject.transform.position); 
 			    //droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
 		    }
         }
@@ -541,12 +554,15 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 		GameObject deathSmoke = ObjectPool.Instance.GetPooledObject("effect_SmokePuff"); 
 		deathSmoke.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+		AudioClip smokeSFX = deathSmoke.GetComponent<KillSelfAfterTime>().mySound;
+		SoundManager.instance.PlaySingle(smokeSFX);
 
 		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost");
 		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		Debug.Log("My spawner ID: "+mySpawnerID);
 
 
+		myAnim.Play("idle");//to fix enemies sometimes spawning in hurt animation
 
 		this.gameObject.SetActive(false);
 

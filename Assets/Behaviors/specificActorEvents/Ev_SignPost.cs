@@ -18,7 +18,7 @@ public class Ev_SignPost : MonoBehaviour {
 	float lastRealTimeSinceStartup;
 	int glowCheck;
 	tk2dSpriteAnimator myAnim;
-
+	GameObject speechIcon;
 
 	// Use this for initialization
 	void Start () {
@@ -31,10 +31,14 @@ public class Ev_SignPost : MonoBehaviour {
 		if(Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < distanceUntilGlow && Mathf.Abs(player.transform.position.y - gameObject.transform.position.y) < distanceUntilGlow){
 			if(glowCheck == 0){
 				myAnim.Play("glow");
+				speechIcon = ObjectPool.Instance.GetPooledObject("speechIcon",new Vector2(gameObject.transform.position.x+2f,gameObject.transform.position.y+1f));
 				glowCheck = 1;
 			}
 		}else{
 			if (glowCheck > 0){
+				myAnim.Play("idle");
+				if(speechIcon != null)
+					speechIcon.SetActive(false);
 				glowCheck = 0;
 			}
 		}
@@ -43,6 +47,7 @@ public class Ev_SignPost : MonoBehaviour {
 		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
         {
 			if(glowCheck == 1){
+				ObjectPool.Instance.ReturnPooledObject(speechIcon);
 				SoundManager.instance.PlaySingle(signRise);
 				mainCamera.GetComponent<PostProcessingBehaviour>().profile = blur;
 				signPostHUD.SetActive(true);
@@ -58,13 +63,13 @@ public class Ev_SignPost : MonoBehaviour {
 				Time.timeScale = 1;
 				signPostHUD.SetActive(false);
 				mainCamera.GetComponent<PostProcessingBehaviour>().profile = null;
-				signPostHUD.transform.localPosition = new Vector3(13f,-8f,10f);
+				signPostHUD.transform.localPosition = new Vector3(13f,-203f,10f);
 				glowCheck = 0;
 			}
 		}
 
 		if(signPostHUD.activeInHierarchy){
-			signPostHUD.transform.localPosition = Vector3.Lerp(signPostHUD.transform.localPosition,new Vector3(13f,7f,10f),.1f*(Time.realtimeSinceStartup - lastRealTimeSinceStartup));
+			signPostHUD.transform.localPosition = Vector3.Lerp(signPostHUD.transform.localPosition,new Vector3(13f,-1f,10f),.1f*(Time.realtimeSinceStartup - lastRealTimeSinceStartup));
 		}
 
 	}

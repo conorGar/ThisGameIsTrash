@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 50711792868243428}
   - component: {fileID: 114438980148466130}
   - component: {fileID: 114745685000741034}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: projectile_largeRock
   m_TagString: projectile_largeRock
   m_Icon: {fileID: 0}
@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 4640759553391850}
   - component: {fileID: 212758258179325434}
   - component: {fileID: 114296282029279162}
+  - component: {fileID: 114015973705993430}
   m_Layer: 10
   m_Name: projectile_Boulder
   m_TagString: projectile_boulder
@@ -100,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1892199606174250}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.51325, y: 21.751371, z: 0}
+  m_LocalPosition: {x: 17.488049, y: -58.091557, z: 0}
   m_LocalScale: {x: 1.1257739, y: 0.7725939, z: 1}
   m_Children:
   - {fileID: 4522113247455770}
@@ -184,6 +185,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.305
+--- !u!114 &114015973705993430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892199606174250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f797a1bc2de384fa586fc8ed00f08e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToPlayer: 2
 --- !u!114 &114296282029279162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,7 +216,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1482595809120132}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 540ccbc7391c34642b1ce44ce4b828d2, type: 3}
   m_Name: 
@@ -309,7 +322,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1982279126
+  randomSeed: 692413792
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -461,7 +474,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.41
+      scalar: 4.36
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -711,7 +724,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.92
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1409,7 +1422,7 @@ ParticleSystem:
     sprites:
     - sprite: {fileID: 0}
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -1454,7 +1467,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 2.52
       minScalar: 0
       maxCurve:
         serializedVersion: 2

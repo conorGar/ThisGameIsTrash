@@ -7,7 +7,9 @@ public class Ev_Enemy_ArmoredMole : MonoBehaviour {
 	tk2dSpriteAnimator myAnim;
 
 	int startThrowOnce = 0;
+	int tossRockOnce;
 	GameObject player;
+	GameObject myBoulder;
 	// Use this for initialization
 	void Start () {
 
@@ -25,14 +27,15 @@ public class Ev_Enemy_ArmoredMole : MonoBehaviour {
 	void Update () {
 		if(Vector2.Distance(gameObject.transform.position,player.transform.position) < 20f){
 		 if(startThrowOnce == 0){
+			if(!GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING)
+				StartCoroutine("TossRock");
 			startThrowOnce = 1;
-			StartCoroutine("TossRock");
 			}
 		}else{
 			//Debug.Log(Vector2.Distance(gameObject.transform.position,player.transform.position));
 			if(startThrowOnce == 1){
-			CancelInvoke();
-			startThrowOnce = 0;
+				StopAllCoroutines();
+				startThrowOnce = 0;
 			}
 
 		}
@@ -40,12 +43,20 @@ public class Ev_Enemy_ArmoredMole : MonoBehaviour {
 
 	IEnumerator TossRock(){
 		Debug.Log("TossedRock");
+		if(tossRockOnce == 0){
+		tossRockOnce = 1;
 		myAnim.Play("throw");
 		yield return new WaitForSeconds(.5f);
-		ObjectPool.Instance.GetPooledObject("projectile_boulder", gameObject.transform.position,true);
+		if(!GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING){
+			myBoulder = ObjectPool.Instance.GetPooledObject("projectile_boulder", gameObject.transform.position,true);
+			//myBoulder.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,8f),ForceMode2D.Impulse);
+
+		}
 		yield return new WaitForSeconds(.2f);
 		myAnim.Play("idle");
 		yield return new WaitForSeconds(Random.Range(3f,4.7f));
+		tossRockOnce = 0;
 		StartCoroutine("TossRock");
+		}
 	}
 }

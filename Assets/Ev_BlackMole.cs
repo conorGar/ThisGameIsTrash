@@ -13,9 +13,9 @@ public class Ev_BlackMole : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(myAnim.CurrentClip.name == "throwL" && myAnim.CurrentFrame == 30){
-			myAnim.Play("idleL");
+			myAnim.Play("idle");
 		}else if(myAnim.CurrentClip.name == "popUp" && myAnim.CurrentFrame == 13){
-			myAnim.Play("idleL");
+			myAnim.Play("idle");
 		}
 	}
 }

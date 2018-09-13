@@ -8,6 +8,9 @@ public class Ev_SmallTruck : MonoBehaviour {
 	public GameObject resultsDisplay;
 	//public GameObject backPaper;
 	public GameObject oneTimers;
+	public AudioClip truckStart;
+	public AudioClip truckDoor;
+
 
 	int phase = 0;
 	int roomNum;
@@ -47,7 +50,10 @@ public class Ev_SmallTruck : MonoBehaviour {
 		EndDay(); //TODO: just here for testing homeless harry sequence
 
 	}
-	
+
+	void OnEnable(){
+		SoundManager.instance.PlaySingle(truckStart);
+	}
 	// Update is called once per frame
 	void Update () {
 		if(phase == 1){
@@ -59,6 +65,8 @@ public class Ev_SmallTruck : MonoBehaviour {
 				}else{
 					Debug.Log("PLAYER SPRITE DISABLED HERE");
 					player.GetComponent<tk2dSprite>().enabled = false;
+					SoundManager.instance.PlaySingle(truckDoor);
+
 					//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
 				}
 			}
@@ -118,7 +126,8 @@ public class Ev_SmallTruck : MonoBehaviour {
 			//Destroy(player);
 			StartCoroutine("StartMovement");
 			if(GlobalVariableManager.Instance.DAY_NUMBER == 2){
-				StartCoroutine("HomelessHarry");
+				//StartCoroutine("HomelessHarry"); TODO: tookout for debuggin other things to do this later
+				resultsDisplay.SetActive(true); //gets value from ev_fadeHelper
 			}else{
 				resultsDisplay.SetActive(true); //gets value from ev_fadeHelper
 			}

@@ -18,7 +18,9 @@ public class Ev_WorldSelect : MonoBehaviour {
 	public GameObject cloudBurstEffect;
 	public GameObject selectEffect;
 	public WORLD myWorld;
-
+	public AudioClip selectSFX;
+	public SpriteRenderer myUnlockDisplay;
+	bool canSelect = false;
 
 	GameObject[] worldIcons;
 	int volume = 30;
@@ -42,7 +44,7 @@ public class Ev_WorldSelect : MonoBehaviour {
 		//GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
 
 		Navigate("right",0);
-		
+		StartCoroutine("SelectDelay");
 		//Debug.Log(GlobalVariableManager.Instance.MENU_SELECT_STAGE);
 	}
 	
@@ -120,7 +122,7 @@ public class Ev_WorldSelect : MonoBehaviour {
 			Debug.Log("StarSpawn");
             LARGEGARBAGE largeGarbageType = LargeGarbage.ByIndex(i);
             Debug.Log(LargeGarbage.ByIndex(i).ToString());
-            if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeGarbageType) != largeGarbageType && (GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED & largeGarbageType) != largeGarbageType) {
+            if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeGarbageType) == largeGarbageType || (GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED & largeGarbageType) == largeGarbageType) {
             	myStars.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 			}
 
@@ -149,15 +151,21 @@ public class Ev_WorldSelect : MonoBehaviour {
 				layer = "Layer03";
 				StartCoroutine("ChangeLayer");
 			}
+			if(myUnlockDisplay != null){
+				myUnlockDisplay.gameObject.SetActive(true);
+				myUnlockDisplay.sortingLayerName = layer;
+				myUnlockDisplay.sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder+1;
+			}
 		
 	}
 
 	public void Select(){
-		if(locked == false){
+		if(locked == false && canSelect){
 			/*if(GlobalVariableManager.Instance.WORLD_NUM != myMenuSelectStage +1){
 				GlobalVariableManager.Instance.GARBAGE_HAD = 0;
 				GlobalVariableManager.Instance.WORLD_NUM = myMenuSelectStage+1;
 			}*/
+			SoundManager.instance.PlaySingle(selectSFX);
 			gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("SelectFlash");
 			gameObject.GetComponent<SpecialEffectsBehavior>().SetFadeVariables(.1f,.5f);
 			gameObject.GetComponent<SpecialEffectsBehavior>().StartCoroutine("FadeOut");
@@ -191,5 +199,11 @@ public class Ev_WorldSelect : MonoBehaviour {
 		Debug.Log("menu select stage:" +GlobalVariableManager.Instance.MENU_SELECT_STAGE);
 
 
+	}
+
+	IEnumerator SelectDelay(){
+		//added to fix bug where if you select while scene is fading in player gets stuck on screen
+		yield return new WaitForSeconds(2f);
+		canSelect = true;
 	}
 }

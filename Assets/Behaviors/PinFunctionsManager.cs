@@ -13,6 +13,7 @@ public class PinFunctionsManager : MonoBehaviour {
 	int effectDisplayOverride;
 	float passivePillageBonus;
 
+	public bool inWorld; //Dont bother adding some functions in rooms outside of the worlds
 	public GameObject pinEffectDisplayHUD;
 	public GameObject pinObjectPool;
 	public GameObject devil;
@@ -22,8 +23,12 @@ public class PinFunctionsManager : MonoBehaviour {
 	Sprite displaySprite;
 	int displayHudCalledAgain;
 
-	public void Start(){
-
+	public void Awake(){
+		if(inWorld){
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.BULKYBAG)){
+				GlobalVariableManager.Instance.BAG_SIZE += 2; //subtracted again at results.cs
+			}
+		}
 	}
 
 	public void HeroOfGrime(int direction, Vector3 spawnPos){//right = 1, left = 2, up = 3, down = 4

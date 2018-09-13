@@ -13,6 +13,9 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 	public GameObject starsAvailableHUD;
 	public ParticleSystem selectPS;
 	public GameObject baseStatUpgrade;
+	public AudioClip navSFX1;
+	public AudioClip navSFX2;
+	public AudioClip selectUpgradeSFX;
 
 	void Start () {
 		
@@ -32,15 +35,19 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 
 		if(Input.GetKeyDown(KeyCode.LeftArrow) && leftRightNav && arrowPos>0){
 			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+			SoundManager.instance.PlaySingle(navSFX2);
 			Navigate("left");
 		}else if(Input.GetKeyDown(KeyCode.RightArrow) && leftRightNav && arrowPos<maxArrowPos){
 			Debug.Log("Arrow RIGHT");
 			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+			SoundManager.instance.PlaySingle(navSFX1);
 			Navigate("right");
 		}else if(Input.GetKeyDown(KeyCode.UpArrow) && upDownNav && arrowPos>0){
+			SoundManager.instance.PlaySingle(navSFX2);
 			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
 			Navigate("up");
 		}else if(Input.GetKeyDown(KeyCode.DownArrow) && upDownNav && arrowPos<maxArrowPos){
+			SoundManager.instance.PlaySingle(navSFX1);
 			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
 			Navigate("down");
 		}
@@ -51,6 +58,8 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 
 	void SelectUpgrade(){
 		if(GlobalVariableManager.Instance.STAR_POINTS > 0){
+			SoundManager.instance.PlaySingle(selectUpgradeSFX);
+
 			selectPS.transform.position = optionIcons[arrowPos].transform.position;
 			selectPS.Play();
 			if(arrowPos == 0){
@@ -66,7 +75,7 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 			GlobalVariableManager.Instance.STAR_POINTS--;
 			PositiveText();
 		}if(arrowPos == 3){
-			this.gameObject.SetActive(false);
+			//this.gameObject.SetActive(false);
 			stand.player.GetComponent<EightWayMovement>().enabled = false;
 			mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
 			stand.ReturnFromDisplay();

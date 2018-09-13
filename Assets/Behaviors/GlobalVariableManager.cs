@@ -49,8 +49,8 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int DAY_NUMBER = 1;
 	public int IS_HIDDEN = 0;
-	public float MASTER_MUSIC_VOL = .7f;
-	public float MASTER_SFX_VOL = 1f;
+	public float MASTER_MUSIC_VOL = .5f;
+	public float MASTER_SFX_VOL = .5f;
 	public int MENU_SELECT_STAGE = 1;
 	public bool PLAYER_CAN_MOVE = true;
 	public bool TUT_POPUP_ON = true;

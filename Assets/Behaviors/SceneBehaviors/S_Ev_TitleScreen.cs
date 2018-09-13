@@ -101,7 +101,7 @@ public class S_Ev_TitleScreen : MonoBehaviour {
                     //title.transform.localPosition = topLimit * -1;
 					SoundManager.instance.PlaySingle(selectSFX);
 
-                    title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,.6f,.5f, true);
+                    title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-.1f,.6f,.5f, true);
                     //title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
                     choicesBox.SetActive(true);
                     phase = 1;

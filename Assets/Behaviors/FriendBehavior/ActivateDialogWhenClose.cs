@@ -24,6 +24,8 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	public bool cameraPanToFriendAtStart = true;
 	public GameObject speechBubbleIcon;
 	public string iconAnimationName;
+	public string dialogIconName;//only needed to find object
+	public AudioClip mySpeechIconSFX;
 	[HideInInspector]
 	public string dialogName;
 	public bool autoStart;//start dialog when player gets close(without player hitting space)
@@ -38,6 +40,12 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	void Awake(){
 		player = GameObject.FindGameObjectWithTag("Player");
 
+
+	}
+	void OnEnable(){
+		player = GameObject.FindGameObjectWithTag("Player");
+
+
 	}
 
 	
@@ -48,20 +56,21 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 			if(GlobalVariableManager.Instance.CARRYING_SOMETHING == false){
 				
-				if(dialogName.Length > 0){
+				if(dialogName.Length > 0 && player != null){
 					
 					if(Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold &&Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold){
 						
 						if(autoStart && canTalkTo){
 							ActivateDialog();
 						}else{
-							Debug.Log("Autostart val:" + autoStart);
-							Debug.Log("canTalkTo val:" + canTalkTo);
+							//Debug.Log("Autostart val:" + autoStart);
+							//Debug.Log("canTalkTo val:" + canTalkTo);
 
 							if(speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy == false){
+								SoundManager.instance.PlaySingle(mySpeechIconSFX);
 								speechBubbleIcon.SetActive(true);
 							}
-							if(Input.GetKeyDown(KeyCode.Space)){
+							if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 								dialogManager.GetComponent<DialogManager>().canContinueDialog = true;
 								dialogName = friend.nextDialog;
 								ActivateDialog();
@@ -118,6 +127,14 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 			myDialogIcon.GetComponent<DialogIconAnimationManager>().SwitchAni(iconAnimationName);
 			canTalkTo = false;
 			}
+	}
+
+	public void GetData(ActivateDialogWhenClose friendActivator){ //given by DialogActivator.cs
+		Debug.Log("ActivateWhenClose Data set properly...");
+		dialogCanvas = friendActivator.dialogCanvas;
+		myDialogIcon = friendActivator.myDialogIcon;
+		dialogActionManager = friendActivator.dialogActionManager;
+		dialogManager = friendActivator.dialogManager;
 	}
 
 }

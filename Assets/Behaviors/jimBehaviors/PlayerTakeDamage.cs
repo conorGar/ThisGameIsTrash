@@ -189,6 +189,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
 		
 		gameObject.GetComponent<EightWayMovement>().enabled = true;
+		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
 		//----------------------------------------------------//
 		yield return new WaitForSeconds(.5f);
 		truck.SetActive(false);

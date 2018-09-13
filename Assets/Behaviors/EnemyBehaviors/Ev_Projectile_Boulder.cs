@@ -16,7 +16,9 @@ public class Ev_Projectile_Boulder : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		myBoulder.GetComponent<CircleCollider2D>().enabled = false;//boulder cant damage player while in the sky
-		myBoulder.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,5f),ForceMode2D.Impulse);
+		myBoulder.transform.localPosition = new Vector2(0f,4f);
+		myBoulder.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		myBoulder.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,8f),ForceMode2D.Impulse);
 	}
 	
 	// Update is called once per frame
@@ -26,19 +28,30 @@ public class Ev_Projectile_Boulder : MonoBehaviour {
 		myBoulder.GetComponent<CircleCollider2D>().enabled = false;//boulder cant damage player while in the sky
 		player = GameObject.FindGameObjectWithTag("Player");
 		myBoulder.transform.localPosition = new Vector2(0f,4f);
-		myBoulder.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,5f),ForceMode2D.Impulse);
+		myBoulder.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		myBoulder.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,8f),ForceMode2D.Impulse);
+		Debug.Log("added force!");
+
 		targetPos = player.transform.position;
 	}
 	void Update () {
 		if((Vector2)gameObject.transform.position != targetPos && !falling){
 		gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position,targetPos,(5*Time.deltaTime));//TODO: figure out time it takes for gravity to bring rock down, and have it always move there in thaat time
+
 		myBoulder.transform.position = new Vector2(this.gameObject.transform.position.x,myBoulder.transform.position.y);
+		if(myBoulder.GetComponent<Rigidbody2D>().velocity.y < 0){
+				myBoulder.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+				myBoulder.GetComponent<Rigidbody2D>().gravityScale = 0;
+		}
+
+
 		}else{
+			myBoulder.GetComponent<Rigidbody2D>().gravityScale = 2;
 			myBoulder.GetComponent<CircleCollider2D>().enabled = true;
 			falling = true;
 			//check if boulder i >=shadow y and if so trigger explode and fragment
 			if(myBoulder.transform.position.y < gameObject.transform.position.y){
-				landingPS.Play();
+				ObjectPool.Instance.GetPooledObject("effect_largeLand",gameObject.transform.position);
 				for(int i = 0; i<4;i++){
 					GameObject debris = ObjectPool.Instance.GetPooledObject("projectile_largeRock",gameObject.transform.position);
 					if(i == 0){
@@ -54,7 +67,15 @@ public class Ev_Projectile_Boulder : MonoBehaviour {
 				}
 				myBoulder.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 				gameObject.SetActive(false);
+
 			}
 		}
+
+		if(GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING){
+			gameObject.SetActive(false);
+		}
+
 	}
+
+
 }

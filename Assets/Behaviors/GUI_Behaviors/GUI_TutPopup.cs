@@ -11,7 +11,7 @@ public class GUI_TutPopup : MonoBehaviour {
 	public GameObject myTitle;
 	public GameObject mainCam;
 	public Ev_DayMeter dayMeter;
-
+	public AudioClip popupSFX;
 
 	public Sprite largeTrashImage;
 	public Sprite ArmoredEnemyImage;
@@ -22,7 +22,7 @@ public class GUI_TutPopup : MonoBehaviour {
 	public Sprite murderImage;
 	public Sprite dojoImage;
 
-	Vector2 startPos;
+	Vector3 startPos;
 	int phase;
 	// Use this for initialization
 	void Start () {
@@ -30,6 +30,7 @@ public class GUI_TutPopup : MonoBehaviour {
 	}
 
 	void OnEnable(){
+		SoundManager.instance.PlaySingle(popupSFX);
 		startPos = gameObject.transform.position;//reset position
 		dayMeter.Stop();
 		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,transform.position.y +2.4f,.5f);

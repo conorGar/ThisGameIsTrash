@@ -55,6 +55,10 @@ public class JumboFriend : Friend {
     		gameObject.transform.position = new Vector2(-40f,47.5f);
     		deadRat.SetActive(true);
     	}
+		if(nextDialog == "Start"){
+			day = GlobalVariableManager.Instance.DAY_NUMBER; 
+    	}
+
     	if(movieEnhancement == "marketing"){
     		moviePosters.SetActive(true);
     		for(int i = 0; i < moviePosters.transform.childCount; i++){

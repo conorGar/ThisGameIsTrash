@@ -17,6 +17,7 @@ public class RatWithHatFriend : Friend {
 
 		if(GlobalVariableManager.Instance.DAY_NUMBER == day && nextDialog == "Start"){
 			gameObject.GetComponent<ActivateDialogWhenClose>().ActivateDialog();
+			Debug.Log("RatWithAHat start dialog activated");
 		}
 		if(hadIntroDialog){//after the rat's intro dialog, getting close goes to upgrade HUD.
 			gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false;

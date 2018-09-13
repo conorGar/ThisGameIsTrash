@@ -7,6 +7,10 @@ using UnityEngine.PostProcessing;
 
 public class S_Ev_PinEquipScreen : MonoBehaviour {
 
+
+	public GameObject leftSide;
+	public GameObject rightSide;
+
 	public GameObject returnButton;
 	public GameObject tutorialPopup;
 	public GameObject pin;
@@ -14,6 +18,11 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 	public GameObject displayPin;
 	public PostProcessingProfile blur;
 	public GameObject mainCam;
+	public TextMeshProUGUI currentPage;
+	public AudioClip navLeftSFX;
+	public AudioClip navRightSFX;
+
+
 	int arrowPos = 0;
 	GameObject highlightedPin;
 	public TextMeshProUGUI totalPPDisplay;
@@ -92,6 +101,11 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 
 	}
 	void OnEnable(){
+		leftSide.transform.localPosition = new Vector2(-140f,0f);
+		rightSide.transform.localPosition = new Vector2(120f,0f);
+
+		leftSide.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0,0,.2f,true);
+		rightSide.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0,0,.2f,true);
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = blur;
         totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
 	}
@@ -100,8 +114,9 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
         {
             MoveArrow();
+			highlightedPin.GetComponent<Ev_PinBehavior>().EquipPin();
 
-            if (highlightedPin.GetComponent<Ev_PinBehavior>().EquipPin())
+            /*if (highlightedPin.GetComponent<Ev_PinBehavior>().EquipPin())
             {
                 // Untilt if equipped
                 //if (highlightedPin != null)
@@ -112,7 +127,8 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                 // Tilt if unequipped
                 //if (highlightedPin != null)
                 //    highlightedPin.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 15f));
-            }
+            }*/
+
             totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){
 			GameObject pinCase = GameObject.Find("hubWorld_pinCase");
@@ -127,31 +143,36 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
              || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
             {
+            	SoundManager.instance.PlaySingle(navLeftSFX);
                 arrowPos--;
                 isNewPin = true;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
                   || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
             {
+				SoundManager.instance.PlaySingle(navRightSFX);
+
                 arrowPos++;
                 isNewPin = true;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
                   || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN))
             {
+				SoundManager.instance.PlaySingle(navRightSFX);
+
                 arrowPos += PinManager.Instance.PinCol;
                 isNewPin = true;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
                   || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP))
             {
+				SoundManager.instance.PlaySingle(navLeftSFX);
                 arrowPos -= PinManager.Instance.PinCol;
                 isNewPin = true;
             }
 
             if (isNewPin)
             {
-				Debug.Log("xxxNEW PAGE ACTIVATED HERE?");
                 // Wrap from 0 to pin max.
                 if (arrowPos < 0)
                     arrowPos = PinManager.Instance.pinConfig.pinList.Count - 1;
@@ -163,8 +184,9 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                 for (int i=0; i < pinPageList.Count; ++i)
                 {
                     if (i == arrowPos / (PinManager.Instance.PinCol * PinManager.Instance.PinRow)){
-                    	
+                    	currentPage.text = (i+1).ToString();
                         pinPageList[i].SetActive(true);
+
                     }else
                         pinPageList[i].SetActive(false);
                 }
@@ -180,7 +202,6 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
     }
 
 	void MoveArrow(){
-		Debug.Log("ooooooNEW PAGE ACTIVATED HERE?");
         int currentPage = arrowPos / (PinManager.Instance.PinCol * PinManager.Instance.PinRow);
         int currentPin = arrowPos % (PinManager.Instance.PinCol * PinManager.Instance.PinRow);
         GameObject pinPage = PinManager.Instance.PageRoot.transform.GetChild(currentPage).gameObject;

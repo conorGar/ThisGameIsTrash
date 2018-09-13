@@ -248,6 +248,13 @@ public class EightWayMovement : MonoBehaviour {
 				
 			
         }
+
+
+
+        if(Input.GetKeyDown(KeyCode.V)){
+				Debug.Log(GlobalVariableManager.Instance.BASIC_ENEMY_LIST["enemy_spawner 2"].dayOfRevival);
+        }
+
     }
  
     IEnumerator NoMoreDiagonal () {

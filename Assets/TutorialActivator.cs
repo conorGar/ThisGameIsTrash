@@ -34,6 +34,11 @@ public class TutorialActivator : MonoBehaviour {
 					ActivateTutorial();
 					activatedAlready = true;
 				}
+			}else if(armoredEnemies){
+				if(!activatedAlready && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.PINS ) != GlobalVariableManager.TUTORIALPOPUPS.PINS){
+					ActivateTutorial();
+					activatedAlready = true;
+				}
 			}
 		}
 	}

@@ -35,6 +35,7 @@ public class WorldManager : MonoBehaviour
         GarbageManager.Instance.PopulateGarbage(garbageType, amountTrashHere);
 
        LargeTrashManager.Instance.EnableProperTrash(worldNumber);
+       FriendManager.Instance.EnableProperFriends(worldNumber);
     }
 
     void Update()

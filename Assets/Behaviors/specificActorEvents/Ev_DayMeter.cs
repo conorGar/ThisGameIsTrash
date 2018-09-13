@@ -15,7 +15,7 @@ public class Ev_DayMeter : MonoBehaviour {
 
 	float delayBonus;
 
-	float timeToReachTarget =120f;
+	float timeToReachTarget = 240f;
 	bool canGo;
 	int finalCountdownNumber = 10;
 	Vector3 startIconPos;
@@ -55,12 +55,12 @@ public class Ev_DayMeter : MonoBehaviour {
 		delayBonus += .1f;
 	}
 	void Count(){
-		if(GlobalVariableManager.Instance.TIME_IN_DAY < 120){
+		if(GlobalVariableManager.Instance.TIME_IN_DAY < 240){
 			if(canGo){
 
 					
 				GlobalVariableManager.Instance.TIME_IN_DAY++;
-				if(GlobalVariableManager.Instance.TIME_IN_DAY >= 100 && !countdownNumber.gameObject.activeInHierarchy){
+				if(GlobalVariableManager.Instance.TIME_IN_DAY >= 220 && !countdownNumber.gameObject.activeInHierarchy){
 
 						countdownNumber.gameObject.SetActive(true);
 						InvokeRepeating("FinalCountdown",.1f,2f +(delayBonus*2));

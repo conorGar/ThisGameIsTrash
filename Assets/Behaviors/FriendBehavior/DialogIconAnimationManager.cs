@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DialogIconAnimationManager : MonoBehaviour {
 
-	Animator myAnim;
+	public Animator myAnim;
 
-	void Start () {
+	void Awake () {
 		myAnim = gameObject.GetComponent<Animator>();
 	}
 	
@@ -18,6 +18,6 @@ public class DialogIconAnimationManager : MonoBehaviour {
 	public void SwitchAni(string triggerName){
 		int triggerHash = Animator.StringToHash(triggerName);
 		myAnim.SetTrigger(triggerHash);
-
+		Debug.Log("Switch ani activated with: " + triggerName);
 	}
 }

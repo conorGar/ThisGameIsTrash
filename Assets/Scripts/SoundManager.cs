@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour {
 	public void PlaySingle(AudioClip clip){
 		//sfxSource.clip = clip;
 		//sfxSource.Play();
+		sfxSource.pitch = 1;
 		sfxSource.PlayOneShot(clip);
 	}
 

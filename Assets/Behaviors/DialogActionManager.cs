@@ -14,6 +14,7 @@ public class DialogActionManager : MonoBehaviour {
 	int numberOfActivation;
 	public AudioClip projectorPlay;
 
+	bool movieIsPlaying;
 	FriendEvent newestAddedEvent;
 
 
@@ -58,38 +59,40 @@ public class DialogActionManager : MonoBehaviour {
 	}
 
 	public void JumboMoviePlay(){
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(new Vector3(-31.4f,70f,-10f),"JumboMovie");
+		if(!movieIsPlaying){
+			movieIsPlaying = true;
+			mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(new Vector3(-31.4f,70f,-10f),"JumboMovie");
 
-		dialogManager.textBox.SetActive(false);
-		dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = null;//TODO: returns to NO effect, not sure if you want this, future Conor
-		dialogManager.currentlySpeakingIcon.SetActive(false);
+			dialogManager.textBox.SetActive(false);
+			dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = null;//TODO: returns to NO effect, not sure if you want this, future Conor
+			dialogManager.currentlySpeakingIcon.SetActive(false);
 
 
-		SoundManager.instance.PlaySingle(projectorPlay);
-		string filmToPlay = friend.GetComponent<JumboFriend>().GetCurrentFilm();
-		movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);
-		if(movieScreen.transform.GetChild(1).gameObject.activeInHierarchy){//if film color is enabled
-			movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay + "_Color");
+			SoundManager.instance.PlaySingle(projectorPlay);
+			string filmToPlay = friend.GetComponent<JumboFriend>().GetCurrentFilm();
+			movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);
+			if(movieScreen.transform.GetChild(1).gameObject.activeInHierarchy){//if film color is enabled
+				movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay + "_Color");
+			}
+			friend.GetComponent<JumboFriend>().DeleteCurrentFilm();
+
+			//determine next film
+			friend.GetComponent<JumboFriend>().GenerateEventData();
+			FriendEvent nextMovie = friend.GenerateEvent();
+			Debug.Log("******NEXT MOVIE DAY****** = " + nextMovie.day);
+			CalendarManager.Instance.AddFriendEvent(nextMovie);
+			newestAddedEvent = nextMovie;
+			dialogManager.variableText = friend.GetComponent<JumboFriend>().GetCurrentFilm().Replace('_',' ');
+			dialogManager.ChangeIcon("SurprisedAni");
+			Debug.Log("***SET VARIABLE TEXT TO: " + friend.GetComponent<JumboFriend>().GetCurrentFilm());
+
+
+			if(friend.nextDialog == "Start"){
+				StartCoroutine("AfterFirstMovie");
+			}else{
+				dialogManager.Invoke("ReturnFromAction",10f);//10= length of each movie 
+			}
 		}
-		friend.GetComponent<JumboFriend>().DeleteCurrentFilm();
-
-		//determine next film
-		friend.GetComponent<JumboFriend>().GenerateEventData();
-		FriendEvent nextMovie = friend.GenerateEvent();
-		Debug.Log("******NEXT MOVIE DAY****** = " + nextMovie.day);
-		CalendarManager.Instance.AddFriendEvent(nextMovie);
-		newestAddedEvent = nextMovie;
-		dialogManager.variableText = friend.GetComponent<JumboFriend>().GetCurrentFilm().Replace('_',' ');
-		dialogManager.ChangeIcon("SurprisedAni");
-		Debug.Log("***SET VARIABLE TEXT TO: " + friend.GetComponent<JumboFriend>().GetCurrentFilm());
-
-
-		if(friend.nextDialog == "Start"){
-			StartCoroutine("AfterFirstMovie");
-		}else{
-			dialogManager.Invoke("ReturnFromAction",10f);//10= length of each movie 
-		}
-
 	}
 
 	IEnumerator AfterFirstMovie(){
@@ -121,6 +124,9 @@ public class DialogActionManager : MonoBehaviour {
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		player.GetComponent<EightWayMovement>().enabled = false;
 		friend.GetComponent<RatWithHatFriend>().baseStatHUD.SetActive(true);
+		friend.GetComponent<ActivateDialogWhenClose>().enabled = false;
+		friend.GetComponent<ActivateDialogWhenClose>().speechBubbleIcon.SetActive(false);
+
 	}
 
 	public void JumboMovieColor(){

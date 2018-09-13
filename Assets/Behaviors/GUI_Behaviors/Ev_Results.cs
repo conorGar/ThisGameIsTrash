@@ -71,7 +71,7 @@ public class Ev_Results : MonoBehaviour {
 
 					//change sprite of the large trash display
 					treasureCollectedDisplay.GetComponent<Image>().sprite = (GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedDisplaySprite);
-
+					treasureCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint();
 
 					//add to large trash discovery list
 					GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED |= GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].type;
@@ -99,16 +99,7 @@ public class Ev_Results : MonoBehaviour {
 						GlobalVariableManager.Instance.DEJAVUCOUNT--;
 					}
 
-                    // TODO: Review and figure this out
-                    /*if(GlobalVariableManager.Instance.pinsEquipped[10] ==2){
-						//Mo' Garbage Mo' Problems
-						//if(GlobalVariableManager.Instance.CURRENT_HP > int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2){
-						//	GlobalVariableManager.Instance.CURRENT_HP = int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2;
-						//}
-						GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3][0].ToString()) -2).ToString();
-						GlobalVariableManager.Instance.pinsEquipped[10] = 1;
-					}*/
-
+                  
                     //-------Reset today's trash collected---------//
                     if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 3){
 						if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 4){
@@ -119,13 +110,21 @@ public class Ev_Results : MonoBehaviour {
 						GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.RemoveAt(3);
 					}
 					LargeTrashManager.Instance.DisableProperTrash(currentWorld);
+					FriendManager.Instance.DisableFriends(currentWorld);
 
 					//---------------------------------------------//
 					GlobalVariableManager.Instance.ARROW_POSITION = 1;
+
+
+					if(GlobalVariableManager.Instance.IsPinEquipped(PIN.BULKYBAG)){
+						GlobalVariableManager.Instance.BAG_SIZE-=2;
+					}
+
 					if(GlobalVariableManager.Instance.DAY_NUMBER == 2){
 						GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");//supposed to be intro credits scene, changed for testing
 					}else if(GlobalVariableManager.Instance.DAY_NUMBER == 3){
-						StartCoroutine("HomelessHarry");
+						//StartCoroutine("HomelessHarry"); TODO
+						GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
 					}else{
 						GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
 

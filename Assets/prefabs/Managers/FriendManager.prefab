@@ -170,7 +170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1327311544933350
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1438742363401890
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1441971726620396
 GameObject:
   m_ObjectHideFlags: 1
@@ -356,7 +356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1794984689213058
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +370,21 @@ GameObject:
   - component: {fileID: 114223507115402976}
   m_Layer: 8
   m_Name: Stone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &1799755359581824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4447794386291676}
+  m_Layer: 0
+  m_Name: w1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,7 +426,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1888314436697074
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -429,7 +444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4018872013900256
 Transform:
   m_ObjectHideFlags: 1
@@ -437,7 +452,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1322070811844220}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.44, y: 63.11, z: 0}
+  m_LocalPosition: {x: 41.04, y: 59.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4688955333786974}
@@ -521,7 +536,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4404314513290988}
+  - {fileID: 4447794386291676}
   - {fileID: 4372733523819178}
   - {fileID: 4721231206632524}
   - {fileID: 4608559678970620}
@@ -582,7 +597,7 @@ Transform:
   m_LocalScale: {x: 0.3916406, y: 0.3916406, z: 0.3916406}
   m_Children:
   - {fileID: 4152106803801614}
-  m_Father: {fileID: 4281060172242464}
+  m_Father: {fileID: 4447794386291676}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4426865937935196
@@ -624,6 +639,20 @@ Transform:
   m_Father: {fileID: 4912100363196500}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4447794386291676
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1799755359581824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4404314513290988}
+  m_Father: {fileID: 4281060172242464}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4484504417580180
 Transform:
   m_ObjectHideFlags: 1
@@ -646,7 +675,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1438742363401890}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.29, y: 57.190002, z: 0}
+  m_LocalPosition: {x: 29.94, y: 54.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4922475720085546}
@@ -718,7 +747,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794984689213058}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 50.34, y: 59.13, z: 0}
+  m_LocalPosition: {x: 49.69, y: 55.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4086607111543572}
@@ -1089,6 +1118,7 @@ MonoBehaviour:
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
+  mySpeechIconSFX: {fileID: 0}
   dialogName: 
   autoStart: 0
 --- !u!114 &114227155766857836
@@ -1127,6 +1157,7 @@ MonoBehaviour:
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
+  mySpeechIconSFX: {fileID: 0}
   dialogName: 
   autoStart: 0
 --- !u!114 &114396183013373906
@@ -1144,7 +1175,7 @@ MonoBehaviour:
   day: 1
   activateDialogWhenClose: 1
   IsVisiting: 0
-  nextDialog: Jumbo2
+  nextDialog: Start
   myDialogDefiniton: {fileID: 11400000, guid: 72ff0c4aa033ed149824bdd747aaab4f, type: 2}
   missedDialog: 
   minDays: 2
@@ -1192,6 +1223,7 @@ MonoBehaviour:
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
+  mySpeechIconSFX: {fileID: 0}
   dialogName: 
   autoStart: 0
 --- !u!114 &114530038241317178
@@ -1216,6 +1248,7 @@ MonoBehaviour:
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
+  mySpeechIconSFX: {fileID: 0}
   dialogName: 
   autoStart: 0
 --- !u!114 &114598329284208574
@@ -1288,6 +1321,7 @@ MonoBehaviour:
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
+  mySpeechIconSFX: {fileID: 0}
   dialogName: Jumbo2
   autoStart: 0
 --- !u!114 &114702471565439574
@@ -1339,6 +1373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hastk2dSprite: 0
   movingObject: 0
+  legs: 0
 --- !u!114 &114722087488375690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1361,6 +1396,7 @@ MonoBehaviour:
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
+  mySpeechIconSFX: {fileID: 0}
   dialogName: 
   autoStart: 0
 --- !u!114 &114744886206224736
@@ -1430,6 +1466,7 @@ MonoBehaviour:
   - {fileID: 114598329284208574}
   - {fileID: 114086128107694280}
   - {fileID: 114744886206224736}
+  worlds: []
 --- !u!114 &114839294446392172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1494,6 +1531,11 @@ MonoBehaviour:
   distanceUntilPickup: 5
   player: {fileID: 0}
   pickup: {fileID: 8300000, guid: f29832392ddb4044a985e9f292a255fc, type: 3}
+  drop: {fileID: 0}
+  carryXAdjustment: 3.3
+  myBody: {fileID: 0}
+  dumpster: {fileID: 0}
+  spinning: 0
   stoneFriend: {fileID: 114744886206224736}
   rocksGatheringRoom: {fileID: 0}
 --- !u!198 &198095445194749086

@@ -12,6 +12,8 @@ public class Ev_PinBehavior : MonoBehaviour {
 	public GameObject smallPPIcons;
 	public string soldTextSprite = "sold";
     PinDefinition pinData = null;
+	public AudioClip equipSFX;
+	public AudioClip unEquipSFX;
     //int myPositionInString = 0;
 
     Image descriptionBox;
@@ -161,6 +163,7 @@ public class Ev_PinBehavior : MonoBehaviour {
                 GlobalVariableManager.Instance.PINS_EQUIPPED |= pinData.Type; //set pin to active
                 GlobalVariableManager.Instance.PPVALUE -= pinData.ppValue;
                 IsEquipped = true;
+                SoundManager.instance.PlaySingle(equipSFX);
 				highlightBox.SetActive(true);
                 // Equip Pin that can kill the past
                 if (pinData.Type == PIN.THEPINTHATCANKILLTHEPAST)
@@ -170,7 +173,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 					myIcons[i].GetComponent<SpriteRenderer>().color = new Color(255f,255f,255f,1f);
 				}
 
-				myEquippedBox = Instantiate(equippedBox,transform.position,Quaternion.identity);
+				//myEquippedBox = Instantiate(equippedBox,transform.position,Quaternion.identity);
 				/*if(pinData.Type == PIN.APPLEPLUS){
 				//Apple Plus pin
 					GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) + 1).ToString();
@@ -188,7 +191,8 @@ public class Ev_PinBehavior : MonoBehaviour {
                 GlobalVariableManager.Instance.PPVALUE += pinData.ppValue;
                 GlobalVariableManager.Instance.PINS_EQUIPPED &= ~pinData.Type;
                 IsEquipped = false;
-
+				SoundManager.instance.PlaySingle(unEquipSFX);
+				highlightBox.SetActive(false);
                 // Unequip Pin that can kill the past
                 if (pinData.Type == PIN.THEPINTHATCANKILLTHEPAST){
 					if(GlobalVariableManager.Instance.DEJAVUCOUNT != 3){
@@ -198,9 +202,9 @@ public class Ev_PinBehavior : MonoBehaviour {
 					}
 				}
 				for(int i = 0; i < myIcons.Count; i++){ //unshade the little pp icons below pin
-					myIcons[i].GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,1f);
+					myIcons[i].GetComponent<SpriteRenderer>().color = Color.black;
 				}
-				Destroy(myEquippedBox);
+				//Destroy(myEquippedBox);
 
 			
 			}//end of unequip part

@@ -13,7 +13,8 @@ public class Friend : MonoBehaviour {
 	public string missedDialog;
 
     // Use this for initialization
-    void Start() {
+    void OnEnable() {
+
     	int currentDayNumber = GlobalVariableManager.Instance.DAY_NUMBER;
 
     	//Enable ability to enter dialog on proper day
@@ -83,6 +84,8 @@ public class Friend : MonoBehaviour {
     public void MissedEvent(){
     	nextDialog = missedDialog;
     }
+
+ 
 
    
 }

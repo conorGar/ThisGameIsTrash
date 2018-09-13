@@ -50,6 +50,7 @@ public class RoomManager : MonoBehaviour {
             {        
                 previousRoom.DeactivateRoom();
                 currentRoom.ActivateRoom();
+                Debug.Log("Enabled ActivateRoom() Here");
                 isTransitioning = false;
             }
             else

@@ -123,7 +123,8 @@ public class DialogChoiceManager : MonoBehaviour {
 	void SelectOption(int optionNumber){
 		//deactivate dialog boxes
 		for(int i = 0; i < dialogChoiceBoxes.Count; i++){
-			dialogChoiceBoxes[i].transform.GetChild(1).gameObject.SetActive(false); // make sure choice images are deactivated
+			if(dialogChoiceBoxes[i].transform.childCount >1)
+				dialogChoiceBoxes[i].transform.GetChild(1).gameObject.SetActive(false); // make sure choice images are deactivated
 			dialogChoiceBoxes[i].SetActive(false);
 		}
 

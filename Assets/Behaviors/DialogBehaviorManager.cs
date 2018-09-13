@@ -160,7 +160,7 @@ public class DialogBehaviorManager : MonoBehaviour {
 
 			textToSwitchto = dialogLines[currentLineNum];
 			currentDisplayedText.text = textToSwitchto;
-			currentlySpeakingIcon.GetComponent<Animator>().StartPlayback();
+			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
 			currentDisplayedText.GetComponent<TextAnimation>().PlayAnim(0);
 		}else if(lineNumbersThatActivateOptions.Count > 0){ //if spawn dialog
 			for(int i = 0; i < dialogIcons.Count;i++){

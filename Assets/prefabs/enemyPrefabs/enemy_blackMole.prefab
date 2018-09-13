@@ -244,7 +244,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 11
   fireRate: 3
+  myProjectileFalls: 0
   projectile: {fileID: 1245335482067604, guid: 4974a6397afe35640969fde99841ffed, type: 2}
+  throwSFX: {fileID: 0}
 --- !u!114 &114560249485120280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,8 +291,9 @@ MonoBehaviour:
     wrapMode: 0
   currentCamera: {fileID: 0}
   respawnEnemy: 0
-  hitSound: {fileID: 0}
-  hitSqueal: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
+  hitSqueal: {fileID: 8300000, guid: adab9cc7eebe17b4cb22fcca45fc48f0, type: 3}
+  bounce: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
   bossEnemy: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 0}
@@ -301,6 +304,9 @@ MonoBehaviour:
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1597879471364584}
   myCollisionBox: {fileID: 61027631694113502}
+  returnAniName: idle
+  behaviorsToDeactivate:
+  - {fileID: 114459684694281314}
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
 --- !u!212 &212677220458254340

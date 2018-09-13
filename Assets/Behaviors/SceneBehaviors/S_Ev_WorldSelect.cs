@@ -9,6 +9,8 @@ public class S_Ev_WorldSelect : MonoBehaviour {
 	public GameObject w3Icon;
 	public GameObject w4Icon;
 
+	public AudioClip navRight;
+	public AudioClip navLeft;
 
 	int arrowPos;
 	bool canNavigate = true;
@@ -28,6 +30,7 @@ public class S_Ev_WorldSelect : MonoBehaviour {
 			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
             || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
             {
+            	SoundManager.instance.PlaySingle(navRight);
 				if(arrowPos < 3){
 					arrowPos++;
 				}else{
@@ -37,6 +40,7 @@ public class S_Ev_WorldSelect : MonoBehaviour {
 			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
                   || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
             {
+            	SoundManager.instance.PlaySingle(navLeft);
 				if(arrowPos > 0){
 					arrowPos--;
 				}else{
