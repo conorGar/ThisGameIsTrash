@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class MultipleDialogIconsManager : MonoBehaviour
+public class MultipleDialogIconsManager : DialogIconAnimationManager
 {
 
 	public DialogManager dialogManager;
@@ -13,9 +13,8 @@ public class MultipleDialogIconsManager : MonoBehaviour
 	int iconMoveDir;
 	//int previouslyHighlightedIcon;// Just needed for 3- character dialogs for the character in the middle
 	// Use this for initialization
-	void Start ()
-	{
-		
+	void OnEnable(){
+		dialogManager.multipleIconsManager = this;
 	}
 
 	void Update(){
@@ -32,22 +31,32 @@ public class MultipleDialogIconsManager : MonoBehaviour
 
 	public void ChangeSpeaker(string newSpeaker){
 		GameObject newIcon = null;
+		Debug.Log("ChangeSpeaker() activate --x-x-x-x-x-x-x-x-x-x-" );
 		int positionOnScreen = 0;// 0 = left, 1 = center, 2 = right
 		for(int i = 0; i < icons.Count; i++){
 			if(icons[i].name == newSpeaker){
+				Debug.Log("!!!! Names Match up !!!!" + newSpeaker +icons[i].name);
 				dialogManager.currentlySpeakingIcon = icons[i];
 				newIcon = icons[i];
 				positionOnScreen = i;
 			}else{
-				icons[i].GetComponent<Image>().color = new Color(124,124,124);//fadeIconIfNotTalking
+				Debug.Log("ICON FADE SHOULDVE HAPPENED!!!??!" + icons[i].name);
+				icons[i].GetComponent<Image>().color = new Color(.55f,.55f,.55f);//new Color(124,124,124);//fadeIconIfNotTalking
 			}
 		}
 
 		//effects
 		newIcon.GetComponent<Image>().color = Color.white;
+
 		iconMoveDir = positionOnScreen;
 		movingIcons = true;
 		StartCoroutine("MoveIcons");
+		SwitchAni(newIcon.GetComponent<MultipleIcon>().myFriend.iconAnimationName);
+	}
+
+	public override void SwitchAni(string triggerName){
+		int triggerHash = Animator.StringToHash(triggerName);
+		dialogManager.currentlySpeakingIcon.GetComponent<Animator>().SetTrigger(triggerHash);
 	}
 
 	IEnumerator MoveIcons(){

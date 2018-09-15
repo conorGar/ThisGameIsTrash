@@ -1,0 +1,342 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: BossDialog
+  m_EditorClassIdentifier: 
+  title: BossDialog
+  nodeStore:
+    keys:
+    - Value: 53bd7fc5-2741-48ed-b548-8a1f5256b84f
+    - Value: 72b1bdc0-959d-4669-91b7-df267726ced4
+    - Value: 1136b375-43fe-48be-882d-27f930c0fab6
+    - Value: db7e319c-c6c4-4b66-ad5a-5f141ef998ba
+    - Value: 625dfae2-51b3-4892-986e-ed35ada9bdfc
+    - Value: 94c12006-3a2d-4da0-b777-b4ef59de8a70
+    - Value: 0c56361f-4e9b-424f-84fa-56fb9432b31c
+    - Value: 3f631cb5-0a65-44c1-baa3-58f83100adef
+    - Value: eb8f4327-659b-4215-b337-0c91113f969a
+    - Value: 97adda7f-7ea2-46e3-8a4e-0408c9bb570c
+    - Value: e2641cfc-931a-4d7f-ad2c-94b148b1d75e
+    - Value: a8df6d5c-91f2-435d-9f7d-006266b9d61f
+    - Value: 9160cead-8d54-4d1e-bfe0-38835b13f40e
+    - Value: 1cadcf63-d08e-4336-856e-1d349862f87d
+    - Value: 2e3bfcc0-b813-45f9-ae5c-8fd64bc174f7
+    values:
+    - window:
+        serializedVersion: 2
+        x: 259
+        y: 347
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro
+      speakerName: Questio
+      question: 
+      action: 
+      id:
+        Value: 53bd7fc5-2741-48ed-b548-8a1f5256b84f
+      x: 259
+      y: 347
+      text: This is the place?
+      type: 1
+      child_id:
+        Value: 72b1bdc0-959d-4669-91b7-df267726ced4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 578
+        y: 351
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_2
+      speakerName: Ex
+      question: 
+      action: 
+      id:
+        Value: 72b1bdc0-959d-4669-91b7-df267726ced4
+      x: 578
+      y: 351
+      text: Ya, <color=#78FF32>Q</color>, <color=#78FF32>Stuart</color> should be
+        just up ahead.
+      type: 1
+      child_id:
+        Value: 1136b375-43fe-48be-882d-27f930c0fab6
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 915
+        y: 328
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_3
+      speakerName: Questio
+      question: 
+      action: 
+      id:
+        Value: 1136b375-43fe-48be-882d-27f930c0fab6
+      x: 915
+      y: 328
+      text: Ok, we have to make sure he does his job and stop that new garbageman
+        wandering around?
+      type: 1
+      child_id:
+        Value: db7e319c-c6c4-4b66-ad5a-5f141ef998ba
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1212
+        y: 350
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_4
+      speakerName: Ex
+      question: 
+      action: 
+      id:
+        Value: db7e319c-c6c4-4b66-ad5a-5f141ef998ba
+      x: 1212
+      y: 350
+      text: Uh..ya? Dude, <color=#DC3232> The Greasy Prince</color> JUST told us the
+        plan, how could you forget already?!
+      type: 1
+      child_id:
+        Value: 625dfae2-51b3-4892-986e-ed35ada9bdfc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1527
+        y: 384
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_5
+      speakerName: Questio
+      question: 
+      action: 
+      id:
+        Value: 625dfae2-51b3-4892-986e-ed35ada9bdfc
+      x: 1527
+      y: 384
+      text: Ya I remember? That wasn't a question, it was a statement?
+      type: 1
+      child_id:
+        Value: 94c12006-3a2d-4da0-b777-b4ef59de8a70
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1921
+        y: 387
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_6
+      speakerName: Ex
+      question: 
+      action: 
+      id:
+        Value: 94c12006-3a2d-4da0-b777-b4ef59de8a70
+      x: 1921
+      y: 387
+      text: Listen. Q, I'm sorry, if this trio we have here is gonna work, you HAVE
+        to get better at your tone of voice dude.
+      type: 1
+      child_id:
+        Value: 0c56361f-4e9b-424f-84fa-56fb9432b31c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2246
+        y: 374
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_7
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 0c56361f-4e9b-424f-84fa-56fb9432b31c
+      x: 2246
+      y: 374
+      text: <color=#DC3232> The Greasy Prince</color> paired us up because we were
+        the best of his <color=#DC3232>White Trash Army</color>...
+      type: 1
+      child_id:
+        Value: 3f631cb5-0a65-44c1-baa3-58f83100adef
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2593
+        y: 392
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_8
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 3f631cb5-0a65-44c1-baa3-58f83100adef
+      x: 2593
+      y: 392
+      text: '...but this isn''t gonna work if every sentence you say sounds like you''re
+        asking a question!'
+      type: 1
+      child_id:
+        Value: eb8f4327-659b-4215-b337-0c91113f969a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2883
+        y: 378
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_9
+      speakerName: Questio
+      question: 
+      action: 
+      id:
+        Value: eb8f4327-659b-4215-b337-0c91113f969a
+      x: 2883
+      y: 378
+      text: I can't stop? This is, like, my thing?
+      type: 1
+      child_id:
+        Value: 97adda7f-7ea2-46e3-8a4e-0408c9bb570c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3214
+        y: 400
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_10
+      speakerName: Ex
+      question: 
+      action: 
+      id:
+        Value: 97adda7f-7ea2-46e3-8a4e-0408c9bb570c
+      x: 3214
+      y: 400
+      text: '...'
+      type: 1
+      child_id:
+        Value: e2641cfc-931a-4d7f-ad2c-94b148b1d75e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3549
+        y: 404
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_11
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: e2641cfc-931a-4d7f-ad2c-94b148b1d75e
+      x: 3549
+      y: 404
+      text: Alright. Nevermind. Let's just move out.
+      type: 1
+      child_id:
+        Value: a8df6d5c-91f2-435d-9f7d-006266b9d61f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3844
+        y: 374
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Intro_12
+      speakerName: ' '
+      question: 
+      action: finish
+      id:
+        Value: a8df6d5c-91f2-435d-9f7d-006266b9d61f
+      x: 3844
+      y: 374
+      text: We'll make that guy regret the day he decided to stand against the great
+        <color=#DC3232>White Trash Army</color>!!
+      type: 1
+      child_id:
+        Value: 9160cead-8d54-4d1e-bfe0-38835b13f40e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 226.19177
+        y: 690
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Start
+      speakerName: speakerName
+      question: 
+      action: 
+      id:
+        Value: 9160cead-8d54-4d1e-bfe0-38835b13f40e
+      x: 226.19177
+      y: 690
+      text: Alright <c=g>Stuart</c>, there he is! Here we go, man! This is your moment!
+      type: 1
+      child_id:
+        Value: 1cadcf63-d08e-4336-856e-1d349862f87d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 589.1918
+        y: 704
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      id:
+        Value: 1cadcf63-d08e-4336-856e-1d349862f87d
+      x: 589.1918
+      y: 704
+      text: ..t-this is my moment.
+      type: 1
+      child_id:
+        Value: 2e3bfcc0-b813-45f9-ae5c-8fd64bc174f7
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 949.1918
+        y: 699
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      id:
+        Value: 2e3bfcc0-b813-45f9-ae5c-8fd64bc174f7
+      x: 949.1918
+      y: 699
+      text: We know you've been feeling a bit down recently, but you got this. Go
+        gittem', <c=g>Stuart</c>!
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 53bd7fc5-2741-48ed-b548-8a1f5256b84f

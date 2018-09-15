@@ -71,7 +71,7 @@ public class Ev_Results : MonoBehaviour {
 
 					//change sprite of the large trash display
 					treasureCollectedDisplay.GetComponent<Image>().sprite = (GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedDisplaySprite);
-					treasureCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint();
+				//	treasureCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(); //TODO: working on this..
 
 					//add to large trash discovery list
 					GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED |= GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].type;

@@ -10,6 +10,9 @@ public class Friend : MonoBehaviour {
     public bool IsVisiting = false;
     public string nextDialog;
 	public DialogDefinition myDialogDefiniton;
+	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
+
+	[HideInInspector]
 	public string missedDialog;
 
     // Use this for initialization
@@ -19,7 +22,7 @@ public class Friend : MonoBehaviour {
 
     	//Enable ability to enter dialog on proper day
     	Debug.Log("Next Dialog: " + nextDialog);
-    	if(nextDialog != "Start" && nextDialog != missedDialog ){
+    	if(nextDialog != "Start" && nextDialog != missedDialog && !tempFriend){
     		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false;
     		for(int i = 0; i < CalendarManager.Instance.friendEvents.Count; i++){
 				if(CalendarManager.Instance.friendEvents[i].day == currentDayNumber ){//*********MAYBE MAKE THIS DETERMINE IF FRIEND SPAWNS RATHER THAN IF YOU CAN INTERACT...
@@ -79,6 +82,15 @@ public class Friend : MonoBehaviour {
     public virtual void Execute()
     {
         IsVisiting = true;
+    }
+
+    public virtual void FinishDialogEvent(){
+
+    	//TODO: DEFINATELY change this...
+		gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+    	//nothing to do for basic friend
+
     }
 
     public void MissedEvent(){

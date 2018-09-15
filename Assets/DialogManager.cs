@@ -26,6 +26,7 @@ public class DialogManager : MonoBehaviour {
 	public TextMeshProUGUI characterName;
 	[HideInInspector]
 	public string animationName;
+	public MultipleDialogIconsManager multipleIconsManager;
 	//------------Screen Blur stuff---------------//
 	public PostProcessingProfile dialogBlur;
 	public GameObject mainCam;
@@ -40,8 +41,8 @@ public class DialogManager : MonoBehaviour {
 	bool hasWavingText; 
 	public bool canContinueDialog = true;
 	Friend friend;//needed for finish();
-	string currentSpeakerName;
-	MultipleDialogIconsManager multipleIconsManager;
+	//string currentSpeakerName;
+	 // set by MultipleIconsManager.cs
 
 	void Start () {
 
@@ -69,7 +70,7 @@ public class DialogManager : MonoBehaviour {
 			}
 		}
 		displayedText.text = currentNode.text;
-		currentSpeakerName = currentNode.speakerName;
+		characterName.text = currentNode.speakerName;
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogBlur;
 	}
 	
@@ -118,14 +119,16 @@ public class DialogManager : MonoBehaviour {
 			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
 
 			//check to see if changed speaker
-			if(currentSpeakerName != currentNode.speakerName && currentNode.speakerName.Length >2)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
+			Debug.Log(currentNode.speakerName + "-o-o-o-o-o-o-o-o-o-o-o-");
+			//Debug.Log(characterName.text == currentNode.speakerName);
+			if(characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
 			{
+				Debug.Log("NAMES DONT MATCHx-x-x-x--x-x-x-x-x-x-");
 				multipleIconsManager.ChangeSpeaker(currentNode.speakerName);
-
+				characterName.text = currentNode.speakerName;
 			}
 
 			if(currentNode.text.Contains("<c")){
-					Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
 					HighLightText();
 			}
 			if(currentNode.text.Contains("<w")){
@@ -243,7 +246,7 @@ public class DialogManager : MonoBehaviour {
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		//TODO: maybe need some way to set activateDialog's 'canTalk' to true again depending on character
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = null; //TODO: returns to NO effect, not sure if you want this, future Conor
-		mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+
 		Debug.Log(friend.nextDialog);
 		//Debug.Log(currentNode.child_id.ToString());
 		if(friend != null)//would = null for some one timers
@@ -252,8 +255,9 @@ public class DialogManager : MonoBehaviour {
 		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
 		player.GetComponent<EightWayMovement>().enabled = true;
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+		friend.FinishDialogEvent();
 		dialogCanvas.SetActive(false);
+
 	}
 
 	public void ChangeIcon(string aniName){

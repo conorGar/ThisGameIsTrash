@@ -13,7 +13,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
     public Friend friend;
 
 	
-	public DialogDefinition dialogDefiniton;
+
 	public float xDistanceThreshold;
 	public float yDistanceThreshold;
 	//public GameObject myDialogIcon;
@@ -29,7 +29,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	[HideInInspector]
 	public string dialogName;
 	public bool autoStart;//start dialog when player gets close(without player hitting space)
-
+	public DialogDefinition dialogDefiniton;
 
 	bool canTalkTo = true;
 
@@ -109,7 +109,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 			dialogManager.GetComponent<DialogManager>().dialogTitle = dialogName;
 			if(friend != null){ // = null for some one timers
 				dialogActionManager.friend = friend;
-				dialogManager.GetComponent<DialogManager>().characterName.text = friend.name;
+				dialogManager.GetComponent<DialogManager>().characterName.text = friend.friendName;
 
 			}
 			dialogManager.GetComponent<DialogManager>().SetFriend(friend);

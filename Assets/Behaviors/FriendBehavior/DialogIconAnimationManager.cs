@@ -15,7 +15,7 @@ public class DialogIconAnimationManager : MonoBehaviour {
 		
 	}
 
-	public void SwitchAni(string triggerName){
+	public virtual void SwitchAni(string triggerName){
 		int triggerHash = Animator.StringToHash(triggerName);
 		myAnim.SetTrigger(triggerHash);
 		Debug.Log("Switch ani activated with: " + triggerName);
