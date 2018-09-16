@@ -63,5 +63,22 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
 		yield return new WaitForSeconds(.3f);
 		movingIcons = false;
 	}
+
+	public void EnterNewIcon(string iconName, string enterDirection){
+		GameObject newIcon = null;
+		for(int i = 0; i < icons.Count; i++){
+			if(icons[i].name == iconName){
+				newIcon = icons[i];
+				break;
+			}
+		}
+		if(enterDirection == "left"){
+			newIcon.transform.localPosition = new Vector2(-50f,6f);
+		}else{
+			newIcon.transform.localPosition = new Vector2(40f,6f); //right side
+		}
+
+		newIcon.GetComponent<GUIEffects>().Start();
+	}
 }
 

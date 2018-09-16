@@ -18,7 +18,7 @@ public class ThrowableObject : PickupableObject {
 
 		if(beingThrown){
 			if(transform.position.y < landingY){
-				//ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
+				ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
 				Debug.Log("Reached Landing");
 				beingThrown = false;
 				myBody.gravityScale = 0f;
@@ -37,6 +37,7 @@ public class ThrowableObject : PickupableObject {
 		//beingCarried = false;
 		Debug.Log("Thrown");
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
+		player.GetComponent<MeleeAttack>().enabled = true;
 		spinning = true;
 		landingY = transform.position.y -3f;
 		beingThrown = true;

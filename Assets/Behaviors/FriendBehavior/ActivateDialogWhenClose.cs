@@ -29,9 +29,10 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	[HideInInspector]
 	public string dialogName;
 	public bool autoStart;//start dialog when player gets close(without player hitting space)
+	[HideInInspector]
 	public DialogDefinition dialogDefiniton;
-
-	bool canTalkTo = true;
+	[HideInInspector]
+	public bool canTalkTo = true;
 
 	GameObject player;
 
@@ -61,6 +62,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 					if(Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold &&Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold){
 						
 						if(autoStart && canTalkTo){
+							dialogName = friend.nextDialog;
 							ActivateDialog();
 						}else{
 							//Debug.Log("Autostart val:" + autoStart);

@@ -23,14 +23,6 @@ public class Boss : MonoBehaviour {
 	void Start () {
 
 
-//Stuart Follow and knockback/Take damage properly
-//stuart death
-//Boss HP display
-//------tmw--------
-//Questio Slash
-//Ex shoot
-
-//Hash protects Stuart
 		if(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] > hp){
 			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = hp;
 		}else if(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] < hp && GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] != 0 ){
@@ -40,11 +32,6 @@ public class Boss : MonoBehaviour {
 		//gameObject.SetActive(false);
 		ActivateBoss();
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 
 	public void ActivateBoss(){
@@ -85,6 +72,13 @@ public class Boss : MonoBehaviour {
 			myBossScript.enabled = false;
 		}
 	}
+
+	public virtual void BossEvent(){
+
+		//nothing for basic boss
+
+	}
+
 
 	void DeathSmoke(){
 		if(deathSmokeNumber < 15){

@@ -7,13 +7,19 @@ public class B_Ev_Questio : MonoBehaviour {
 	public GameObject mySlashR;
 	public GameObject mySlashL;
 	public GameObject player;
+	public GameObject grabbyGloves;
+	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
+	public GameObject myCamera;
 
+	EnemyTakeDamage myETD;
 	tk2dSpriteAnimator myAnim;
 	FollowPlayer fp;
 	int facingDirection = 0; //0 = left, 1 = right
 	int swingOnce;
+	int dropItemOnce;
 
 	void Start () {
+		myETD = gameObject.GetComponent<EnemyTakeDamage>();
 		fp = gameObject.GetComponent<FollowPlayer>();
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
 	}
@@ -38,6 +44,12 @@ public class B_Ev_Questio : MonoBehaviour {
 				StartCoroutine("Swing");
 				swingOnce = 1;
 			}
+		}
+
+		if(myETD.currentHp <= 12 && dropItemOnce == 0){
+			DropItem();
+			dropItemOnce = 1;
+			Dazed();
 		}
 	}
 
@@ -66,4 +78,37 @@ public class B_Ev_Questio : MonoBehaviour {
 		myAnim.Play("idleL");
 		fp.enabled = true;
 	}
+
+	void DropItem(){
+		GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = true; //stops enemy function
+		player.GetComponent<EightWayMovement>().enabled = false;
+		player.GetComponent<PlayerTakeDamage>().enabled = false;
+		grabbyGloves.SetActive(true);
+		grabbyGloves.GetComponent<Ev_SpecialItem>().Toss();
+		myCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(grabbyGloves,true);
+		Dazed();
+		Invoke("ReturnFromGloveShow",2f);
+
+	}
+
+	void ReturnFromGloveShow(){
+		myCamera.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+		player.GetComponent<EightWayMovement>().enabled = true;
+		player.GetComponent<PlayerTakeDamage>().enabled = true;
+		GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = false; //stops enemy function
+
+	}
+
+	void Dazed(){
+		gameObject.layer = 15; //switch to thrownTrash layer.
+		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
+		for(int i = 0; i < dazeDisables.Count; i++){
+			dazeDisables[i].enabled = false;
+		}
+		gameObject.GetComponent<ThrowableObject>().enabled = true;
+		myAnim.Play("dazed");
+		StopAllCoroutines();
+		//this.enabled = false;
+	}
+
 }

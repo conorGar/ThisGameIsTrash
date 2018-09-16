@@ -20,6 +20,8 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 
 	Vector3 targetPanPosition;
 	bool camPan;
+	bool continuousPanning;
+	GameObject objectToFollow;
 	string triggerEventName;
 	bool zooming;
 	float currentCamZoom;
@@ -44,14 +46,18 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 				}
 		}
 		if(camPan){
-			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,targetPanPosition, 3*(Time.deltaTime));
-			Debug.Log("camPan");
-			if(Vector2.Distance(gameObject.transform.position,targetPanPosition) < 1){
-				Debug.Log("In target position!!" + triggerEventName);
-				if(triggerEventName != null && triggerEventName.Length > 2){ //length check to make sure it's not just "" or something
-					CamPanTriggerEvent();
+			if(continuousPanning){
+				gameObject.transform.position = Vector3.Lerp(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y,-10f),objectToFollow.transform.position, 3*(Time.deltaTime));
+
+			}else{
+				gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,targetPanPosition, 3*(Time.deltaTime));
+				if(Vector2.Distance(gameObject.transform.position,targetPanPosition) < 1){
+					Debug.Log("In target position!!" + triggerEventName);
+					if(triggerEventName != null && triggerEventName.Length > 2){ //length check to make sure it's not just "" or something
+						CamPanTriggerEvent();
+					}
+					camPan = false;
 				}
-				camPan = false;
 			}
 		}
 	}
@@ -74,6 +80,16 @@ public class Ev_MainCameraEffects : MonoBehaviour {
   		targetPanPosition = new Vector3(positionToPanTo.x,positionToPanTo.y,-10);
    		camPan= true;
    }
+   public void CameraPan(GameObject objectToFollow, bool continuous){
+		gameObject.GetComponent<Ev_MainCamera>().enabled = false;
+   		if(roomManager != null){
+   			roomManager.SetActive(false);
+   		}
+		continuousPanning = continuous;
+		this.objectToFollow = objectToFollow;
+   		camPan= true;
+   }
+
 
    void CamPanTriggerEvent(){ //TODO: adjust for different events besaides those needed for large trash tut popup
    		ZoomInOut(1.5f,10f);

@@ -29,6 +29,31 @@ MonoBehaviour:
     - Value: 9160cead-8d54-4d1e-bfe0-38835b13f40e
     - Value: 1cadcf63-d08e-4336-856e-1d349862f87d
     - Value: 2e3bfcc0-b813-45f9-ae5c-8fd64bc174f7
+    - Value: acc028b6-0c29-4c5b-bae0-b92efd129d2f
+    - Value: cede4314-a294-47af-9e92-a7b58d6b9e0d
+    - Value: 21348e88-672a-4f30-8a88-2bec027d4341
+    - Value: e7ab10fe-33ae-4068-ab32-b2cda58d08ff
+    - Value: a2c4f300-ed48-4e5f-b84b-4dbcd17f41c4
+    - Value: b96c968a-81b1-43b8-a7d0-21029391ab62
+    - Value: 6a881141-0f06-4e33-b3ab-a43b3f10674c
+    - Value: c6504e15-d92a-44bb-9e3e-da16b167f8e8
+    - Value: 38423d56-25bf-414c-8a28-9fe307743a9c
+    - Value: 3c185585-a290-4f20-82fe-a5dde4c0f73d
+    - Value: 114e26d2-5381-4a86-afef-5a9ea9d99f0c
+    - Value: 2dd80d90-6d1b-407c-82e3-eeb3c110b216
+    - Value: f5c73def-1be1-4697-8bb1-d555f36b7fdc
+    - Value: 2067ee40-7223-4767-b7f2-b161baf62e47
+    - Value: a206ff06-d08b-43b4-bd2b-348e5fe7ac5f
+    - Value: 9c4394d9-f673-44c8-957a-862ebcafc800
+    - Value: a7235cc8-2ab4-4c9c-a5c7-78486449e656
+    - Value: 1a358662-fec8-43a8-b465-93f38c1eafb8
+    - Value: cd9ee903-c66c-44c1-b01b-f0fa078e0de7
+    - Value: 630294a1-d45f-4aea-9ea7-bb84e031e2c1
+    - Value: fecebfe7-1c30-444b-9928-b33c5f839182
+    - Value: f4e05046-2fb8-41fd-94d2-9ae32630b0a0
+    - Value: 4072439d-ea31-4648-b118-93d9c88d1843
+    - Value: 7924bdb4-387d-4417-9a07-96ec4c915c10
+    - Value: c68fe40a-7e0a-422f-b83e-ce949ee8eb74
     values:
     - window:
         serializedVersion: 2
@@ -285,7 +310,7 @@ MonoBehaviour:
         height: 200
       isCollapsed: 0
       title: Boss1Start
-      speakerName: speakerName
+      speakerName: Ex
       question: 
       action: 
       id:
@@ -305,7 +330,7 @@ MonoBehaviour:
         height: 200
       isCollapsed: 0
       title: NewDialog
-      speakerName: speakerName
+      speakerName: Stuart
       question: 
       action: 
       id:
@@ -325,7 +350,7 @@ MonoBehaviour:
         height: 200
       isCollapsed: 0
       title: NewDialog
-      speakerName: speakerName
+      speakerName: Ex
       question: 
       action: 
       id:
@@ -334,6 +359,511 @@ MonoBehaviour:
       y: 699
       text: We know you've been feeling a bit down recently, but you got this. Go
         gittem', <c=g>Stuart</c>!
+      type: 1
+      child_id:
+        Value: acc028b6-0c29-4c5b-bae0-b92efd129d2f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1328.1918
+        y: 705
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: Stuart
+      question: 
+      action: finish
+      id:
+        Value: acc028b6-0c29-4c5b-bae0-b92efd129d2f
+      x: 1328.1918
+      y: 705
+      text: ..o...ok Ex. Here we go....we're goin'. He..doesn't stand a chance...
+      type: 1
+      child_id:
+        Value: cede4314-a294-47af-9e92-a7b58d6b9e0d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 210.19177
+        y: 962
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle
+      speakerName: Stuart
+      question: 
+      action: 
+      id:
+        Value: cede4314-a294-47af-9e92-a7b58d6b9e0d
+      x: 210.19177
+      y: 962
+      text: Oh. Oh. Ow. Boy, this guy sure is tough...
+      type: 1
+      child_id:
+        Value: 21348e88-672a-4f30-8a88-2bec027d4341
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 528.1918
+        y: 981
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_2
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 21348e88-672a-4f30-8a88-2bec027d4341
+      x: 528.1918
+      y: 981
+      text: I'm..t-trying so hard too. His...his attacks are just so quick, just can't
+        seem to dodge them. Really trying here.
+      type: 1
+      child_id:
+        Value: e7ab10fe-33ae-4068-ab32-b2cda58d08ff
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 866.1918
+        y: 973
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_3
+      speakerName: Ex
+      question: 
+      action: 
+      id:
+        Value: e7ab10fe-33ae-4068-ab32-b2cda58d08ff
+      x: 866.1918
+      y: 973
+      text: Stuart. You're literally just running straight into him and letting him
+        hit you.
+      type: 1
+      child_id:
+        Value: a2c4f300-ed48-4e5f-b84b-4dbcd17f41c4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1224.1918
+        y: 997
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_4
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: a2c4f300-ed48-4e5f-b84b-4dbcd17f41c4
+      x: 1224.1918
+      y: 997
+      text: Come on man! Do what <c=r>Greasy Prince</c> demands! Get MEAN! Get <c=r><w>A
+        N G R Y</w></c>!!
+      type: 1
+      child_id:
+        Value: b96c968a-81b1-43b8-a7d0-21029391ab62
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1563.1918
+        y: 1037
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_5
+      speakerName: Stuart
+      question: 
+      action: 
+      id:
+        Value: b96c968a-81b1-43b8-a7d0-21029391ab62
+      x: 1563.1918
+      y: 1037
+      text: Oh. Uh...ok.
+      type: 1
+      child_id:
+        Value: 6a881141-0f06-4e33-b3ab-a43b3f10674c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1975.1918
+        y: 999
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_6
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 6a881141-0f06-4e33-b3ab-a43b3f10674c
+      x: 1975.1918
+      y: 999
+      text: <w>G-GAH</w>! I am...I am the gr-great and, uh, mighty...st...stuart.
+      type: 1
+      child_id:
+        Value: c6504e15-d92a-44bb-9e3e-da16b167f8e8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2285.192
+        y: 975
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_7
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: c6504e15-d92a-44bb-9e3e-da16b167f8e8
+      x: 2285.192
+      y: 975
+      text: 'H-Here I come. '
+      type: 1
+      child_id:
+        Value: 38423d56-25bf-414c-8a28-9fe307743a9c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2682.192
+        y: 959
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_8
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 38423d56-25bf-414c-8a28-9fe307743a9c
+      x: 2682.192
+      y: 959
+      text: I-I will, uh, stop you.
+      type: 1
+      child_id:
+        Value: 3c185585-a290-4f20-82fe-a5dde4c0f73d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3026.192
+        y: 970
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_9
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 3c185585-a290-4f20-82fe-a5dde4c0f73d
+      x: 3026.192
+      y: 970
+      text: ..with my...
+      type: 1
+      child_id:
+        Value: 114e26d2-5381-4a86-afef-5a9ea9d99f0c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3363.192
+        y: 983
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_10
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 114e26d2-5381-4a86-afef-5a9ea9d99f0c
+      x: 3363.192
+      y: 983
+      text: '...deadly...toxic....attacks....'
+      type: 1
+      child_id:
+        Value: 2dd80d90-6d1b-407c-82e3-eeb3c110b216
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3691.192
+        y: 1003
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_11
+      speakerName: speakerName
+      question: 
+      action: 
+      id:
+        Value: 2dd80d90-6d1b-407c-82e3-eeb3c110b216
+      x: 3691.192
+      y: 1003
+      text: '...'
+      type: 1
+      child_id:
+        Value: f5c73def-1be1-4697-8bb1-d555f36b7fdc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4121.286
+        y: 959
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_14
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: f5c73def-1be1-4697-8bb1-d555f36b7fdc
+      x: 4121.286
+      y: 959
+      text: AHHHHHHHHH!
+      type: 1
+      child_id:
+        Value: 2067ee40-7223-4767-b7f2-b161baf62e47
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4478.286
+        y: 1001
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_15
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 2067ee40-7223-4767-b7f2-b161baf62e47
+      x: 4478.286
+      y: 1001
+      text: I CAN'T TAKE IT ANYMORE!!! MY SKIN BURNS!!
+      type: 1
+      child_id:
+        Value: a206ff06-d08b-43b4-bd2b-348e5fe7ac5f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4779.286
+        y: 943
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_16
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: a206ff06-d08b-43b4-bd2b-348e5fe7ac5f
+      x: 4779.286
+      y: 943
+      text: MY EYES! OH GOD, MY EYES!! PERPETUALLY SIMMERING IN SOCKETS OF ACID!!!
+      type: 1
+      child_id:
+        Value: 9c4394d9-f673-44c8-957a-862ebcafc800
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5072.286
+        y: 948
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_17
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 9c4394d9-f673-44c8-957a-862ebcafc800
+      x: 5072.286
+      y: 948
+      text: EVERYDAY! MORE PAINFUL THAN THE LAST!
+      type: 1
+      child_id:
+        Value: a7235cc8-2ab4-4c9c-a5c7-78486449e656
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5360.286
+        y: 953
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_18
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: a7235cc8-2ab4-4c9c-a5c7-78486449e656
+      x: 5360.286
+      y: 953
+      text: WHY GO ON?!? WHY CONTINUE?!?
+      type: 1
+      child_id:
+        Value: 1a358662-fec8-43a8-b465-93f38c1eafb8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5638.286
+        y: 957
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_19
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 1a358662-fec8-43a8-b465-93f38c1eafb8
+      x: 5638.286
+      y: 957
+      text: PLEASE GARBAGEMAN! DEAR GOD! PLEASE KILL ME!
+      type: 1
+      child_id:
+        Value: cd9ee903-c66c-44c1-b01b-f0fa078e0de7
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5917.286
+        y: 977
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_20
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: cd9ee903-c66c-44c1-b01b-f0fa078e0de7
+      x: 5917.286
+      y: 977
+      text: KILL ME!!!
+      type: 1
+      child_id:
+        Value: 630294a1-d45f-4aea-9ea7-bb84e031e2c1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6216.286
+        y: 992
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_21
+      speakerName: Questio
+      question: 
+      action: 
+      id:
+        Value: 630294a1-d45f-4aea-9ea7-bb84e031e2c1
+      x: 6216.286
+      y: 992
+      text: This isn't good?
+      type: 1
+      child_id:
+        Value: fecebfe7-1c30-444b-9928-b33c5f839182
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6505.286
+        y: 1007
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_22
+      speakerName: Ex
+      question: 
+      action: 
+      id:
+        Value: fecebfe7-1c30-444b-9928-b33c5f839182
+      x: 6505.286
+      y: 1007
+      text: No. No it's not, Q. Ok. Alright. We're gonna have to stop this guy ourselves.
+      type: 1
+      child_id:
+        Value: f4e05046-2fb8-41fd-94d2-9ae32630b0a0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6796.286
+        y: 991
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_23
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: f4e05046-2fb8-41fd-94d2-9ae32630b0a0
+      x: 6796.286
+      y: 991
+      text: Q, you get in there close, just make sure not to lose <c=g>those gloves
+        you got</c>, obviously.
+      type: 1
+      child_id:
+        Value: 4072439d-ea31-4648-b118-93d9c88d1843
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 7085.286
+        y: 1022
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_24
+      speakerName: ' '
+      question: 
+      action: 
+      id:
+        Value: 4072439d-ea31-4648-b118-93d9c88d1843
+      x: 7085.286
+      y: 1022
+      text: <c=g>HASH</c>! You go up above and <c=g> shield Stuart</c> so he <c=g>can't
+        hurt himself</c>.
+      type: 1
+      child_id:
+        Value: 7924bdb4-387d-4417-9a07-96ec4c915c10
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 7379.286
+        y: 1058
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Boss1Middle_25
+      speakerName: ' '
+      question: 
+      action: finish
+      id:
+        Value: 7924bdb4-387d-4417-9a07-96ec4c915c10
+      x: 7379.286
+      y: 1058
+      text: White Trash Elite Trio...MOVE OUT!
+      type: 1
+      child_id:
+        Value: c68fe40a-7e0a-422f-b83e-ce949ee8eb74
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 7715.286
+        y: 1063
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: end
+      speakerName: speakerName
+      question: 
+      action: 
+      id:
+        Value: c68fe40a-7e0a-422f-b83e-ce949ee8eb74
+      x: 7715.286
+      y: 1063
+      text: end
       type: 1
       child_id:
         Value: 

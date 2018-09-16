@@ -71,7 +71,11 @@ public class PickupableObject : MonoBehaviour
 						gameObject.GetComponent<ThrowableObject>().enabled = true;
 					}
 					player.GetComponent<MeleeAttack>().enabled = false;
-					gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02"; // makes sure in front of player
+					if(gameObject.GetComponent<SpriteRenderer>() != null)
+						gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02"; // makes sure in front of player
+					else
+						gameObject.GetComponent<Renderer>().sortingLayerName= "Layer02"; // makes sure in front of player
+
 					myBody.simulated = false; //prevents item from moving when player runs into a wall or something
 					PickUpEvent();
 					pickUpSpin = false;
@@ -87,7 +91,7 @@ public class PickupableObject : MonoBehaviour
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
 		//move and play the particle system
 		beingCarried = true;
-		//ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
+		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		SoundManager.instance.PlaySingle(pickup);
 		//set object to follow player and push up in the sky
 		gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);

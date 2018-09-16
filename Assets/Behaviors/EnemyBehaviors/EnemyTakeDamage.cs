@@ -71,7 +71,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 	void OnEnable(){
 		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
-		currentHp = gameObject.GetComponent<Enemy>().health;//enemy health reset when enter room again
+		if(!bossEnemy)
+			currentHp = gameObject.GetComponent<Enemy>().health;//enemy health reset when enter room again
 		if(myBody == null)
 			myBody = gameObject.GetComponent<Rigidbody2D>();
 
@@ -173,6 +174,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 			Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
 			SoundManager.instance.RandomizeSfx(hitSound,.8f,1.1f);
 			SoundManager.instance.PlaySingle(hitSqueal);
+		}else if(melee.gameObject.layer == 15){//throwable object
+			TakeDamage(melee.gameObject);
+			SoundManager.instance.PlaySingle(hitSound);
+			SoundManager.instance.PlaySingle(hitSqueal);
 		}
 	}
 
@@ -229,7 +234,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 		}
 	}
 
-	void TakeDamage(GameObject melee){
+	public void TakeDamage(GameObject melee){ //set public for Stuart
 		Debug.Log("--------TAKE DAMAGE ACTIVATE ----------");
 		Debug.Log(damageOnce);
 			if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
@@ -400,7 +405,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				yield return new WaitForSeconds(.7f);
 				//***grow/shrink scale back to normal on all fronts
 
-				if(gameObject.GetComponent<FollowPlayer>()){
+				if(gameObject.GetComponent<FollowPlayer>() && this.enabled){ //enabled check for if other things disable follow player for whatever reason
 					gameObject.GetComponent<FollowPlayer>().enabled = true;
 					//***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
 				}else if(gameObject.GetComponent<RandomDirectionMovement>()){

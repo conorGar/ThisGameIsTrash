@@ -10,8 +10,10 @@ public class B_Ev_Hash : MonoBehaviour {
 	public AudioClip castSound;
 	public GameObject player;
 
-	bool isRunningAway;
-
+	//bool isRunningAway;
+	float landY;
+	Rigidbody2D myBody;
+	bool falling;
 	//Protects Stuart Until Hash is hit
 	//^Then Hash runs away
 
@@ -19,10 +21,14 @@ public class B_Ev_Hash : MonoBehaviour {
 
 	void Start () {
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
+		gameObject.transform.parent = stuart.transform;
+		gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
+		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+		myBody = gameObject.GetComponent<Rigidbody2D>();
 	}
 	
 	void Update () {
-		float distance = Vector3.Distance(transform.position, player.transform.position);
+		/*float distance = Vector3.Distance(transform.position, player.transform.position);
 
 		if(stuartShield.activeInHierarchy == true){//if hit while shielding Stuart, stops shield and starts runaway
 			if(myAnim.CurrentClip.name == "hurt"){
@@ -41,7 +47,17 @@ public class B_Ev_Hash : MonoBehaviour {
 				isRunningAway = false;
 				StartCoroutine("Shield");
 			}
+		}*/
+		if(falling){
+			if(gameObject.transform.position.y < landY){
+				Dazed();
+				myBody.gravityScale = 0f;
+				myBody.velocity = new Vector2(0,0f);
+				myBody.AddForce(new Vector2(4f*(Mathf.Sign(gameObject.transform.lossyScale.x)),0f),ForceMode2D.Impulse);//slide
+				falling = false;
+			}
 		}
+
 	}
 
 
@@ -51,7 +67,7 @@ public class B_Ev_Hash : MonoBehaviour {
 	Debug.Log("HASH SHIELD ACTIVATED");
 		myAnim.Play("idle");
 		yield return new WaitForSeconds(Random.Range(3f,6f));
-		if(!isRunningAway){ //if runningAway wasn't activated in the time between coroutine activate and wait till cast....
+		if(!falling){ //if runningAway wasn't activated in the time between coroutine activate and wait till cast....
 			myAnim.Play("cast");
 
 			yield return new WaitForSeconds(1f);
@@ -59,6 +75,31 @@ public class B_Ev_Hash : MonoBehaviour {
 			stuart.GetComponent<EnemyTakeDamage>().enabled = false;
 			stuart.GetComponent<FollowPlayer>().enabled = false;
 		}
+	}
+
+	public void KnockOff(){
+		gameObject.transform.parent = null;
+		landY = gameObject.transform.position.y - 4;
+		myBody.AddForce(new Vector2(4f*(Mathf.Sign(gameObject.transform.lossyScale.x)),0f),ForceMode2D.Impulse);//slide
+		myBody.gravityScale = 1;
+		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
+		falling = true;
+	}
+
+	void Dazed(){
+		gameObject.layer = 15; //switch to thrownTrash layer.
+		gameObject.GetComponent<ThrowableObject>().enabled = true;
+		myAnim.Play("dazed");
+		Invoke("Revive",10f);
+	}
+
+	void Revive(){
+		
+		gameObject.transform.parent = stuart.transform;
+		gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
+		gameObject.layer = 9; //switch to enemy layer.
+		gameObject.GetComponent<ThrowableObject>().enabled = true;
+		StartCoroutine("Shield");
 	}
 
 
