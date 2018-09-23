@@ -12,6 +12,8 @@ public class Ev_DayMeter : MonoBehaviour {
 	public GameObject tutPopup;
 	public AudioClip countdownTick;
 	public TextMeshProUGUI dayNumberDisplay;
+	public ParticleSystem halfWayDonePS;
+	public AudioClip halfWayDoneChime;
 
 	float delayBonus;
 
@@ -20,7 +22,9 @@ public class Ev_DayMeter : MonoBehaviour {
 	int finalCountdownNumber = 10;
 	Vector3 startIconPos;
 	Vector3 targetPos;
+	bool deathSpeedup;
 	float t;
+	bool halfWayMark;
 
 	void Start () {
 		GlobalVariableManager.Instance.TIME_IN_DAY = 0;
@@ -33,7 +37,11 @@ public class Ev_DayMeter : MonoBehaviour {
 
 	void Update () {
 		if(canGo){
-			t += Time.deltaTime/timeToReachTarget;
+			if(!deathSpeedup)
+				t += Time.deltaTime/timeToReachTarget;
+			else
+				t += (Time.deltaTime/timeToReachTarget)*20;//TODO: this will go past position at 220 if happens at bad time(maybe just find out exact local pos at time = 220 and set it)
+
 			dayIcon.transform.localPosition = Vector3.Lerp(startIconPos,targetPos,t);
 		}
 	}
@@ -45,6 +53,19 @@ public class Ev_DayMeter : MonoBehaviour {
 	public void StartAgain(){
 		Created();
 	}
+
+	public IEnumerator DeathIncrease(){
+		/*Time.timeScale = 20;
+		yield return new WaitForSeconds(20f);
+		Time.timeScale = 1;*/
+		Stop();
+		deathSpeedup = true;
+		canGo = true;
+		yield return new WaitForSeconds(1f);
+		deathSpeedup = false;
+		StartAgain();
+	}
+
 	public void Created(){
 		canGo = true;
 		InvokeRepeating("Count",0f,(1f +delayBonus));
@@ -76,8 +97,8 @@ public class Ev_DayMeter : MonoBehaviour {
 				
 		}
 
-		if(GlobalVariableManager.Instance.MASTER_MUSIC_VOL > 0){
-			//adjust volumne
+		if(GlobalVariableManager.Instance.TIME_IN_DAY > (timeToReachTarget/2) && !halfWayMark){
+			HalfWay();
 		}
 	}//end of Count()
 
@@ -90,6 +111,12 @@ public class Ev_DayMeter : MonoBehaviour {
 		countdownNumber.gameObject.GetComponent<TextAnimation>().PlayAnim(0);
 		finalCountdownNumber--;
 		}
+	}
+
+	void HalfWay(){
+		halfWayMark = true;
+		halfWayDonePS.Play();
+		SoundManager.instance.PlaySingle(halfWayDoneChime);
 	}
 
 }

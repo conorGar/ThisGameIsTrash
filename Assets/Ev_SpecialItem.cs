@@ -49,13 +49,13 @@ public class Ev_SpecialItem : MonoBehaviour {
 			gameObject.GetComponent<BoxCollider2D>().enabled = false;
 			player.GetComponent<tk2dSpriteAnimator>().Play("ani_jimPickUp");
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x, player.transform.position.y,2f);
-			StartCoroutine("PickUp");
+			PickUp();
 
 		}
 	}
 	
-	IEnumerator PickUp(){
-		yield return new WaitForSeconds(2f);
+	void PickUp(){
+		//yield return new WaitForSeconds(2f);
 		upgradeUnlockDisplay.SetActive(true);
 		//player.GetComponent<ThrowTrash>().enabled = true;
 		gameObject.SetActive(false);

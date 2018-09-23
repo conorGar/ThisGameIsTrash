@@ -8,6 +8,7 @@ public class StoneFriend : Friend
 	List<GameObject> handsDelivered = new List<GameObject>();//hands should be children, so that there positions are saved
 	public DialogManager dialogManager;
 
+
 	public override void GenerateEventData()
     {
         // These guys show up every day.

@@ -163,7 +163,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D melee){
 		if(melee.tag == "Weapon"){
 			TakeDamage(melee.gameObject);
-			Debug.Log("Collision with weapon: ");
+			//Debug.Log("Collision with weapon: ");
 			SoundManager.instance.PlaySingle(hitSound);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}else if(melee.tag == "pObj_bullet"){
@@ -171,7 +171,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				StartCoroutine("NonMeleeHit");
 				melee.GetComponent<Ev_FallingProjectile>().Fell();
 			}
-			Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
+			//Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
 			SoundManager.instance.RandomizeSfx(hitSound,.8f,1.1f);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}else if(melee.gameObject.layer == 15){//throwable object
@@ -210,7 +210,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				}
 
 				currentHp = currentHp - 1 - meleeDmgBonus;
-				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
+				//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
 						gameObject.GetComponent<Boss>().hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(currentHp);
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
@@ -225,7 +225,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-				Debug.Log("**AND HERE!!!!!!!!***");
+				//Debug.Log("**AND HERE!!!!!!!!***");
 				yield return new WaitForSeconds(.4f);
 				StartCoroutine( "StopKnockback");
 				StartCoroutine("AfterHit");
@@ -235,9 +235,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 	}
 
 	public void TakeDamage(GameObject melee){ //set public for Stuart
-		Debug.Log("--------TAKE DAMAGE ACTIVATE ----------");
+		//Debug.Log("--------TAKE DAMAGE ACTIVATE ----------");
 		Debug.Log(damageOnce);
-			if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
+			if(this.enabled && damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
 				if(!takingDamage){
 					takingDamage = true;
 					damageOnce = 1;
@@ -257,7 +257,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 					meleeSwingDirection = melee.GetComponent<tk2dSpriteAnimator>().CurrentClip.name;
 					swingDirectionSide = player.transform.localScale.x;
-					Debug.Log("MELEE SWING DIRECTION: " + meleeSwingDirection);
+					//Debug.Log("MELEE SWING DIRECTION: " + meleeSwingDirection);
 
 					if(secretHider)
 						Destroy(melee.gameObject);
@@ -287,7 +287,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 						}
 					
-					Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
+					//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
 					currentCam.StartCoroutine("ScreenShake",.2f);
 				
 					if(!moveWhenHit){
@@ -295,7 +295,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 					}
 
 					currentHp = currentHp - 1 - meleeDmgBonus;
-					Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
+					//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
 						gameObject.GetComponent<Boss>().hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(currentHp);
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
@@ -328,7 +328,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 						behaviorsToDeactivate[i].enabled = true;
 		}
 		yield return new WaitForSeconds(.3f);
-		Debug.Log("STOP KNOCKBACK ACTIVATE");
+		//Debug.Log("STOP KNOCKBACK ACTIVATE");
 		damageOnce = 0;
 		SoundManager.instance.PlaySingle(bounce);
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -347,7 +347,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 		//remove effects from self
 
 
-		Debug.Log("**Continue Hit activation***");
+		//Debug.Log("**Continue Hit activation***");
 		if(moveWhenHit){
 			takingDamage = true;
 			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawR") == 0||meleeSwingDirection.CompareTo("poleR") == 0){
@@ -374,7 +374,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-				Debug.Log("**AND HERE!!!!!!!!***");
+				//Debug.Log("**AND HERE!!!!!!!!***");
 				yield return new WaitForSeconds(.3f);
 				StartCoroutine( "StopKnockback");
 

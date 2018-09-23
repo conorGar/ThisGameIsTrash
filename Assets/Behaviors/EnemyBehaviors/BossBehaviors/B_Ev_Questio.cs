@@ -100,11 +100,11 @@ public class B_Ev_Questio : MonoBehaviour {
 	}
 
 	void Dazed(){
-		gameObject.layer = 15; //switch to thrownTrash layer.
 		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
 		for(int i = 0; i < dazeDisables.Count; i++){
 			dazeDisables[i].enabled = false;
 		}
+		gameObject.layer = 11;
 		gameObject.GetComponent<ThrowableObject>().enabled = true;
 		myAnim.Play("dazed");
 		StopAllCoroutines();

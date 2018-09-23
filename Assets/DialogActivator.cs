@@ -5,6 +5,10 @@ using UnityEngine;
 public class DialogActivator : MonoBehaviour {
 	public string myFriend;
 	GameObject friendInstance;
+	public GameObject dialogCanvas;
+	public GameObject dialogManager;
+	public DialogActionManager  dialogActionManager;
+	public GameObject dialogIcon;
 
 	//So this sets the local data(canvasHud and such) to the loaded friends at the start of the scene, by assigning it those values from its own 'ActivateDialogWhenClose)
 
@@ -15,7 +19,7 @@ public class DialogActivator : MonoBehaviour {
 				break;
 			}
 		}
-		friendInstance.GetComponent<ActivateDialogWhenClose>().GetData(gameObject.GetComponent<ActivateDialogWhenClose>());
+		friendInstance.GetComponent<ActivateDialogWhenClose>().GetData(this);
 	}
 	
 	// Update is called once per frame

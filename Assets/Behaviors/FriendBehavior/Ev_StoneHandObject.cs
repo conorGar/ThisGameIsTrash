@@ -11,7 +11,9 @@ public class Ev_StoneHandObject : PickupableObject
 	//^ will also activate dialog if drop the hand in the rock room
 	//cant be picked up until talk to rocks for first time
 	//
-
+	void Awake(){
+		player = GameObject.FindGameObjectWithTag("Player");
+	}
 
 	public override void PickUpEvent(){
 

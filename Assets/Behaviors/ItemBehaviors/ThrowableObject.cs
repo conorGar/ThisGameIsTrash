@@ -7,8 +7,15 @@ public class ThrowableObject : PickupableObject {
 	float landingY;
 	bool beingThrown;
 	bool canThrow;
-	// Use this for initialization
 
+	public AudioClip carrySound;
+
+	public List<MonoBehaviour> behaviorsToStop = new List<MonoBehaviour>();
+	// Use this for initialization
+	void Start(){
+		base.Start();
+		myBody.drag = 0.5f;
+	}
 	// Update is called once per frame
 	void Update () {
 		base.Update();
@@ -26,7 +33,10 @@ public class ThrowableObject : PickupableObject {
 				myBody.AddForce(new Vector2(4f*(Mathf.Sign(gameObject.transform.lossyScale.x)),0f),ForceMode2D.Impulse);//slide
 				beingCarried= false;
 				canThrow = false;
-
+				gameObject.layer = 11; //switch to item layer.
+				for(int i = 0; i < behaviorsToStop.Count; i++){
+					behaviorsToStop[i].enabled = true;
+				}
 
 			}
 		}
@@ -50,5 +60,10 @@ public class ThrowableObject : PickupableObject {
 
 	public override void PickUpEvent(){
 		canThrow = true;
+		SoundManager.instance.PlaySingle(carrySound);
+		gameObject.layer = 15; //switch to thrownTrash layer.
+		for(int i = 0; i < behaviorsToStop.Count; i++){
+			behaviorsToStop[i].enabled = false;
+		}
 	}
 }

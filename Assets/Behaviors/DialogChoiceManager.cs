@@ -61,14 +61,19 @@ public class DialogChoiceManager : MonoBehaviour {
 		arrowPos = 0;
 		dialogResponses.Clear();
 		numberOfOptions = currentNode.responses.Count;
+		choiceTitle.text = currentNode.question.ToString();
 		for(int i = 0; i < numberOfOptions; i++){
 			dialogResponses.Add(currentNode.responses[i]);
+			dialogResponses[i].text.Replace("[image]"," ");
 			dialogChoiceBoxes[i].SetActive(true);
 			dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = dialogResponses[i].text;
 
 			//enable images on special image dialog choices
-			if(dialogResponses[i].text.Contains("[Image]")){
-				dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Replace("[Image]","");
+			if(dialogResponses[i].text.Contains("[image]")){
+				Debug.Log("vvvvvv Dialog Choice Icons Activated Here vvvv");
+				int index = dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.IndexOf("[image]");
+				Debug.Log(index);
+				dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Remove(index,6);
 				dialogChoiceBoxes[i].transform.GetChild(1).gameObject.SetActive(true);
 			}
 		}
@@ -127,8 +132,9 @@ public class DialogChoiceManager : MonoBehaviour {
 				dialogChoiceBoxes[i].transform.GetChild(1).gameObject.SetActive(false); // make sure choice images are deactivated
 			dialogChoiceBoxes[i].SetActive(false);
 		}
-
-
+		Debug.Log("number of choices: " + dialogChoiceBoxes.Count);
+		Debug.Log("Option number selected:" + optionNumber);
+		Debug.Log(dialogResponses.Count);
 		dialogManager.GetComponent<DialogManager>().ReturnFromChoice(dialogResponses[optionNumber].node_id);
 	}
 

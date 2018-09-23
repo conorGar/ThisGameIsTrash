@@ -66,4 +66,10 @@ public class RockFriend : Friend {
     	itemHUD.UpdateItemsCollected(go.GetComponent<SpriteRenderer>().sprite);
     }
 
+	public override void FinishDialogEvent(){
+
+
+
+	}
+
 }

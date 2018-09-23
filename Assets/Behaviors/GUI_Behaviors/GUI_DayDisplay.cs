@@ -11,6 +11,7 @@ public class GUI_DayDisplay : MonoBehaviour
 	public GameObject player;
 	public GameObject playerDummy;
 
+
 	int phase = 0;
 
 	// Use this for initialization

@@ -61,7 +61,7 @@ public class B_Ev_Ex : MonoBehaviour {
 			playerPosition = new Vector3(player.transform.position.x,player.transform.position.y,player.transform.position.z);
 
 			myProjectile.SetActive(true);
-			Vector2 moveDirection = (playerPosition - myProjectile.transform.position).normalized *20;
+			Vector2 moveDirection = (playerPosition - myProjectile.transform.position).normalized *10;
 			myProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(moveDirection.x,moveDirection.y);
 			myAnim.Play("idle");
 			yield return new WaitForSeconds(5f);

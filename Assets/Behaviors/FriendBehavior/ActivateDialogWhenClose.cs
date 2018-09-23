@@ -106,6 +106,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 					dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position, "");
 			}
 			Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
+			myDialogIcon.GetComponent<DialogIconAnimationManager>().SwitchAni(iconAnimationName);
 			dialogManager.GetComponent<DialogManager>().animationName = iconAnimationName;
 			dialogManager.GetComponent<DialogManager>().myDialogDefiniton = dialogDefiniton;
 			dialogManager.GetComponent<DialogManager>().dialogTitle = dialogName;
@@ -124,17 +125,17 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 						}
 						dialogManager.GetComponent<DialogManager>().dialogIcons = dialogIcons;
 				}else{
-					dialogManager.GetComponent<DialogManager>().dialogIcons = new List<GameObject>{myDialogIcon};//one icon
+					//dialogManager.GetComponent<DialogManager>().dialogIcons = new List<GameObject>{myDialogIcon};//one icon
+					dialogManager.GetComponent<DialogManager>().currentlySpeakingIcon = myDialogIcon;
 				}
-			myDialogIcon.GetComponent<DialogIconAnimationManager>().SwitchAni(iconAnimationName);
 			canTalkTo = false;
 			}
 	}
 
-	public void GetData(ActivateDialogWhenClose friendActivator){ //given by DialogActivator.cs
+	public void GetData(DialogActivator friendActivator){ //given by DialogActivator.cs
 		Debug.Log("ActivateWhenClose Data set properly...");
 		dialogCanvas = friendActivator.dialogCanvas;
-		myDialogIcon = friendActivator.myDialogIcon;
+		myDialogIcon = friendActivator.dialogIcon;
 		dialogActionManager = friendActivator.dialogActionManager;
 		dialogManager = friendActivator.dialogManager;
 	}

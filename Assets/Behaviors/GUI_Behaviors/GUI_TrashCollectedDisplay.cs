@@ -9,6 +9,8 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 	public TextMeshProUGUI trashCollected;
 	public TextMeshProUGUI maxTrashDisplay;
 	public GameObject newDiscoveryDisplay;
+	public int trashDropped;
+	public GameObject deathDisplay;
 	// Use this for initialization
 	void Start () {
 		//TODO: adjust for different bag types
@@ -42,5 +44,17 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 		newDiscoveryDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-133f,-113f,.4f,true);
 		yield return new WaitForSeconds(.4f);
 		newDiscoveryDisplay.SetActive(false);
+	}
+
+	public void Deplete(){ //invoked repeatedly by GUI_DeathDisplay
+
+		if(trashDropped > 0){
+			Debug.Log("Trash deplete activate ***********");
+			trashDropped--;
+			trashCollected.text = trashDropped.ToString();
+
+		}else{
+			deathDisplay.GetComponent<GUI_DeathDisplay>().CancelInvoke();
+		}
 	}
 }

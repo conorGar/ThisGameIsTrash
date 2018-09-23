@@ -60,12 +60,13 @@ public class Boss : MonoBehaviour {
 		GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
 		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		if(vanishAtDeath){
-			mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(objectToPanTo.transform.position,"BossItem");
-			mainCam.GetComponent<Ev_MainCameraEffects>().objectToSpawn = objectToPanTo;
+			//mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(objectToPanTo.transform.position,"BossItem");
+			//mainCam.GetComponent<Ev_MainCameraEffects>().objectToSpawn = objectToPanTo;
 			GlobalVariableManager.Instance.BOSSES_KILLED |= GlobalVariableManager.BOSSES.ONE; //use this as way to tell if player has upgrade
 			for(int i = 0; i < currentRoom.bosses.Count; i++){//disable all other bosses at death
 				currentRoom.bosses[i].SetActive(false);
 			}
+			BossDeathEvent();
 			//this.gameObject.SetActive(false);
 		}else{
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("Death");
@@ -74,6 +75,12 @@ public class Boss : MonoBehaviour {
 	}
 
 	public virtual void BossEvent(){
+
+		//nothing for basic boss
+
+	}
+
+	public virtual void BossDeathEvent(){
 
 		//nothing for basic boss
 

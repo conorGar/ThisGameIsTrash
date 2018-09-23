@@ -24,6 +24,7 @@ public class DialogManager : MonoBehaviour {
 	public Camera guiCamera; //needed for icon to corner at dialog choice
 	public GameObject dialogCanvas;
 	public TextMeshProUGUI characterName;
+	public Ev_DayMeter dayMeter;
 	[HideInInspector]
 	public string animationName;
 	public MultipleDialogIconsManager multipleIconsManager;
@@ -72,6 +73,7 @@ public class DialogManager : MonoBehaviour {
 		displayedText.text = currentNode.text;
 		characterName.text = currentNode.speakerName;
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogBlur;
+		dayMeter.Stop();
 	}
 	
 	// Update is called once per frame
@@ -102,19 +104,29 @@ public class DialogManager : MonoBehaviour {
 			finishedDisplayingText = false;
 			//currentlySpeakingIcon.transform.position = guiCamera.ViewportToWorldPoint(new Vector3(0f,0f,0f));
 			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
-			currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SwitchAni("IconSlide");
+			if(currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>() != null){
+				currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SwitchAni("IconSlide");
+			}else{
+				multipleIconsManager.SwitchAni("IconSlide");
+			}
 			canContinueDialog = false;
 			CancelInvoke();
 		}else if(currentNode.action != null && currentNode.action.Length > 2){ //length check just to see if not blank
 			if(currentNode.action == "finish"){
 				canContinueDialog = false;
+				dayMeter.StartAgain();
 				FinishDialog();
+			}else if(currentNode.action == "IconLeave"){
+				currentlySpeakingIcon.SetActive(false);
+				ReturnFromAction();
 			}else{
 				canContinueDialog = false;
 				dialogActionManager.Invoke(currentNode.action,.1f);
 			}
 		}else{
-			
+			if(displayedText.fontSize != 16.5f){//return to normal font size after small text
+				displayedText.fontSize = 16.5f;
+			}
 			//currentlySpeakingIcon.GetComponent<Animator>().Play("JumboAnimation");
 			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
 
@@ -135,6 +147,10 @@ public class DialogManager : MonoBehaviour {
 					WaveyText();
 			}if(currentNode.text.Contains("<var>")){
 				currentNode.text = currentNode.text.Replace("<var>",variableText);
+			}if(currentNode.text.Contains("<s")){
+				SmallText();
+			}if(currentNode.text.Contains("<l")){
+				LargeText();
 			}
 
 			displayedText.text = currentNode.text;
@@ -147,16 +163,36 @@ public class DialogManager : MonoBehaviour {
 	}
 
 	public void ReturnFromChoice(SerializableGuid link){
-			currentlySpeakingIcon.SetActive(true);
-			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
+			//currentlySpeakingIcon.SetActive(true);
+			//currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
 			Debug.Log("Return From Choice activated");
-			currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SwitchAni("IconSlideBack");
+			if(currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>() != null){
+				currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SwitchAni("IconSlideBack");
+			}else{
+				currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
+				multipleIconsManager.SwitchAni("IconSlideBack");
+			}
+		//Debug.Log(currentlySpeakingIcon.GetComponent<Animator>().enabled);
+
 			canContinueDialog = true;
 			mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogBlur;
+		
+
 			textBox.SetActive(true);
 			dialogOptions.transform.localPosition = new Vector2(-22f,-204f); //reset choice position so it slides on screen next time.
+			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
+
 			dialogOptions.SetActive(false);
+		//Debug.Log(currentlySpeakingIcon.GetComponent<Animator>().enabled);
+
 			currentNode = myDialogDefiniton.nodes[link];
+			if(characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
+			{
+				Debug.Log("NAMES DONT MATCHx-x-x-x--x-x-x-x-x-x-");
+				multipleIconsManager.ChangeSpeaker(currentNode.speakerName);
+				characterName.text = currentNode.speakerName;
+			}
+
 			if(currentNode.text.Contains("<c")){
 					Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
 					HighLightText();
@@ -164,8 +200,11 @@ public class DialogManager : MonoBehaviour {
 				if(currentNode.text.Contains("<w")){
 					WaveyText();
 				}
+		//Debug.Log(currentlySpeakingIcon.GetComponent<Animator>().enabled);
+
 			finishedDisplayingText = false;
 			displayedText.text = currentNode.text;
+
 			InvokeRepeating("TalkSound",0.1f,.05f);
 	}
 	public void ReturnFromAction(){
@@ -173,6 +212,13 @@ public class DialogManager : MonoBehaviour {
 			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
 			currentlySpeakingIcon.SetActive(true);
 			textBox.SetActive(true);
+			if(characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
+			{
+				Debug.Log("NAMES DONT MATCHx-x-x-x--x-x-x-x-x-x-");
+				multipleIconsManager.ChangeSpeaker(currentNode.speakerName);
+				characterName.text = currentNode.speakerName;
+			}
+
 			if(currentNode.text.Contains("<c")){
 					Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
 					HighLightText();
@@ -181,6 +227,10 @@ public class DialogManager : MonoBehaviour {
 					WaveyText();
 			}if(currentNode.text.Contains("<var>")){
 				currentNode.text = currentNode.text.Replace("<var>",variableText);
+			}if(currentNode.text.Contains("<s")){
+				SmallText();
+			}if(currentNode.text.Contains("<l")){
+				LargeText();
 			}
 			finishedDisplayingText = false;
 			displayedText.text = currentNode.text;
@@ -235,6 +285,16 @@ public class DialogManager : MonoBehaviour {
 		hasWavingText = true;
 		//Debug.Log("Target Range start:" + currentDisplayedText.GetComponent<TextAnimation>()._AnimationSlots[2]._Animation._Sequences[0]._TargetRangeStart);
 
+	}
+
+	public void SmallText(){
+		//for now just makes whole speech one font size, not sure if making only certain text small is possible with TMpro
+		displayedText.fontSize = 8;
+		currentNode.text = currentNode.text.Replace("<s>","");
+	}
+	public void LargeText(){
+		displayedText.fontSize = 35;
+		currentNode.text = currentNode.text.Replace("<l>","");
 	}
 
 	public void TalkSound(){

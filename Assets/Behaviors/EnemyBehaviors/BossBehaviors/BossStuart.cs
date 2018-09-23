@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class BossStuart : Boss
 {
 	public GameObject player;
+	public MultipleDialogIconsManager mdim;
 
 	int activateEventOnce;
 	public GameObject trio;
@@ -54,9 +55,17 @@ public class BossStuart : Boss
 		player.GetComponent<EightWayMovement>().enabled = false;
 		gameObject.GetComponent<FollowPlayer>().enabled = false;
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		SoundManager.instance.musicSource.Pause();
+		mdim.icons[0].GetComponent<MultipleIcon>().positionOnScreen = 0;//change ex icon position to be on left side
+		mdim.SetStartingIcons(new string[]{"Stuart"});
 		myETD.currentHp += 10; //regain lost hp
 		trio.SetActive(true); //activate dialog
 		canDamage = false;
+	}
+
+	public override void BossDeathEvent(){
+		mdim.SetStartingIcons(new string[]{"Stuart"});
+		trio.SetActive(true);
 	}
 }
 

@@ -11,8 +11,11 @@ public class BossFriendEx : Friend
 	public GameObject stuart;
 	public GameObject player;
 	public GameObject bossTrio;
-	public GameObject stuartIcon;
+	//public GameObject stuartIcon;
+	public AudioClip smokePuff;
+	public AudioClip bossMusic;
 	int phase;
+	int enterIconPhase;
 
 
 	// Use this for initialization
@@ -27,9 +30,6 @@ public class BossFriendEx : Friend
 	
 	}
 
-	void EnterStuart(){
-
-	}
 
 	public override void FinishDialogEvent(){
 		Debug.Log("Ec finish dialog event activate");
@@ -48,6 +48,7 @@ public class BossFriendEx : Friend
 			gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 22;
 		}else if(phase ==1){
 			gameObject.GetComponent<MeshRenderer>().enabled = false;
+			SoundManager.instance.PlaySingle(smokePuff);
 			player.GetComponent<PlayerTakeDamage>().enabled = true;
 		}
 		yield return new WaitForSeconds(1f);
@@ -57,11 +58,14 @@ public class BossFriendEx : Friend
 		gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
 		if(phase == 1){//boss start
 			stuart.GetComponent<FollowPlayer>().enabled = true;
+			SoundManager.instance.musicSource.PlayOneShot(bossMusic);
 			transform.parent.gameObject.SetActive(false);
 			gameObject.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
 
 		}else if(phase ==2){
+			SoundManager.instance.musicSource.Play();
 			bossTrio.SetActive(true);
+			stuart.GetComponent<FollowPlayer>().enabled = true;
 			player.GetComponent<BoxCollider2D>().enabled = true;
 			transform.parent.gameObject.SetActive(false);
 		}

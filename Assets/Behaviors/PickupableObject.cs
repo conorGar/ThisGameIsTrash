@@ -31,7 +31,7 @@ public class PickupableObject : MonoBehaviour
 	Quaternion startRotation;
 
 	// Use this for initialization
-	void Start ()
+	public void Start ()
 	{
 		myBody  = gameObject.GetComponent<Rigidbody2D>();
 		startRotation = transform.rotation;

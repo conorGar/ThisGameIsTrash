@@ -6,12 +6,16 @@ public class Ev_DroppedTrash : MonoBehaviour {
 
 	public bool isPile;
 	public GameObject droppedTrashCollectedDisplay;
+	public AudioClip spawn;
+	public GUI_TrashCollectedDisplay trashCollectedDisplay; //given by player's DropTrash() drom DeathDisplay
 	// Use this for initialization
 	void Start () {
 		if(!isPile)
 			StartCoroutine("Land");
 	}
-	
+	void OnEnable(){
+		SoundManager.instance.RandomizeSfx(spawn,.6f,.8f);
+	}
 	// Update is called once per frame
 	void Update () {
 		
@@ -25,7 +29,7 @@ public class Ev_DroppedTrash : MonoBehaviour {
 			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().FadeOut();*/
 			//GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] += GlobalVariableManager.Instance.GARBAGE_HAD;
 			GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]++;
-			collider.gameObject.GetComponent<PlayerTakeDamage>().trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
+			trashCollectedDisplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 			//GlobalVariableManager.Instance.GARBAGE_HAD = 0;
 			//GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION = Vector3.zero;
 			gameObject.SetActive(false);

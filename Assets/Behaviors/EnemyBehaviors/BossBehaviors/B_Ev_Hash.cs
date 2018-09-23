@@ -14,6 +14,8 @@ public class B_Ev_Hash : MonoBehaviour {
 	float landY;
 	Rigidbody2D myBody;
 	bool falling;
+	bool onStuart;
+	bool returnAfterThrow;
 	//Protects Stuart Until Hash is hit
 	//^Then Hash runs away
 
@@ -24,9 +26,17 @@ public class B_Ev_Hash : MonoBehaviour {
 		gameObject.transform.parent = stuart.transform;
 		gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+		onStuart = true;
 		myBody = gameObject.GetComponent<Rigidbody2D>();
+		Shield();
 	}
-	
+
+	void OnEnable(){
+		if(returnAfterThrow){
+			Revive();
+		}
+	}
+
 	void Update () {
 		/*float distance = Vector3.Distance(transform.position, player.transform.position);
 
@@ -48,6 +58,10 @@ public class B_Ev_Hash : MonoBehaviour {
 				StartCoroutine("Shield");
 			}
 		}*/
+		if(onStuart){
+			gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
+		}
+
 		if(falling){
 			if(gameObject.transform.position.y < landY){
 				Dazed();
@@ -63,21 +77,24 @@ public class B_Ev_Hash : MonoBehaviour {
 
 
 
-	IEnumerator Shield(){
+	void Shield(){
 	Debug.Log("HASH SHIELD ACTIVATED");
-		myAnim.Play("idle");
-		yield return new WaitForSeconds(Random.Range(3f,6f));
+		//myAnim.Play("idle");
+		//yield return new WaitForSeconds(Random.Range(3f,6f));
 		if(!falling){ //if runningAway wasn't activated in the time between coroutine activate and wait till cast....
 			myAnim.Play("cast");
 
-			yield return new WaitForSeconds(1f);
+			//yield return new WaitForSeconds(1f);
 			stuartShield.SetActive(true);
 			stuart.GetComponent<EnemyTakeDamage>().enabled = false;
-			stuart.GetComponent<FollowPlayer>().enabled = false;
+			//stuart.GetComponent<FollowPlayer>().enabled = false;
 		}
 	}
 
 	public void KnockOff(){
+		Debug.Log("HASH KNOCKOFF ACTIVATE*****");
+		stuartShield.SetActive(false);
+		onStuart = false;
 		gameObject.transform.parent = null;
 		landY = gameObject.transform.position.y - 4;
 		myBody.AddForce(new Vector2(4f*(Mathf.Sign(gameObject.transform.lossyScale.x)),0f),ForceMode2D.Impulse);//slide
@@ -87,6 +104,7 @@ public class B_Ev_Hash : MonoBehaviour {
 	}
 
 	void Dazed(){
+		gameObject.GetComponent<EnemyTakeDamage>().enabled = true;
 		gameObject.layer = 15; //switch to thrownTrash layer.
 		gameObject.GetComponent<ThrowableObject>().enabled = true;
 		myAnim.Play("dazed");
@@ -94,12 +112,17 @@ public class B_Ev_Hash : MonoBehaviour {
 	}
 
 	void Revive(){
-		
-		gameObject.transform.parent = stuart.transform;
-		gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
-		gameObject.layer = 9; //switch to enemy layer.
-		gameObject.GetComponent<ThrowableObject>().enabled = true;
-		StartCoroutine("Shield");
+		if(this.enabled){
+			gameObject.GetComponent<EnemyTakeDamage>().enabled = false;//cant attack while he is riding Stuart
+			gameObject.transform.parent = stuart.transform;
+			gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
+			onStuart = true;
+			gameObject.layer = 9; //switch to enemy layer.
+			gameObject.GetComponent<ThrowableObject>().enabled = true;
+			Shield();
+		}else{
+			returnAfterThrow = true;
+		}
 	}
 
 
