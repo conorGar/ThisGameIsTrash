@@ -158,7 +158,8 @@ public class DialogManager : MonoBehaviour {
 			finishedDisplayingText = false;
 
 			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
-			InvokeRepeating("TalkSound",0.1f,.05f);
+
+            PlayTalkSounds();
 		}
 	}
 
@@ -205,7 +206,7 @@ public class DialogManager : MonoBehaviour {
 			finishedDisplayingText = false;
 			displayedText.text = currentNode.text;
 
-			InvokeRepeating("TalkSound",0.1f,.05f);
+            PlayTalkSounds();
 	}
 	public void ReturnFromAction(){
 			canContinueDialog = true;
@@ -235,7 +236,7 @@ public class DialogManager : MonoBehaviour {
 			finishedDisplayingText = false;
 			displayedText.text = currentNode.text;
 			displayedText.GetComponent<TextAnimation>().StartAgain();
-			InvokeRepeating("TalkSound",0.1f,.05f);
+            PlayTalkSounds();
 	}
 
 
@@ -297,8 +298,13 @@ public class DialogManager : MonoBehaviour {
 		currentNode.text = currentNode.text.Replace("<l>","");
 	}
 
-	public void TalkSound(){
-		//Debug.Log("TalkSound Activate");
+    private void PlayTalkSounds()
+    {
+        CancelInvoke();
+        InvokeRepeating("TalkSound", 0.1f, .05f);
+    }
+
+    private void TalkSound(){
 		SoundManager.instance.RandomizeSfx(typeSound,.8f,1.2f);
 	}
 
@@ -337,5 +343,4 @@ public class DialogManager : MonoBehaviour {
 			}
 		}
 	}
-
 }
