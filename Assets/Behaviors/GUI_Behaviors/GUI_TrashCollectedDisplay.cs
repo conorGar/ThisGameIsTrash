@@ -42,7 +42,7 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 		
 		yield return new WaitForSeconds(1f);
 		newDiscoveryDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-133f,-113f,.4f,true);
-		yield return new WaitForSeconds(.4f);
+		yield return new WaitForSeconds(3f);
 		newDiscoveryDisplay.SetActive(false);
 	}
 
