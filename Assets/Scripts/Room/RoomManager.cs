@@ -16,6 +16,7 @@ public class RoomManager : MonoBehaviour {
     public Room previousRoom;
 
     public List<Room> rooms;
+    public List<GameObject> ObjectsClearedOnLeavingRoom;
 
     public Vector3 previousCameraPosition;
     public Vector3 targetCameraPosition;

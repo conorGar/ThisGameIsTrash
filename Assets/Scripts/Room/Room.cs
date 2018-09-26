@@ -122,6 +122,11 @@ public class Room : MonoBehaviour
 
         friends.Clear();
 	    enemies.Clear();
+
+        for (int i = 0; i < RoomManager.Instance.ObjectsClearedOnLeavingRoom.Count; i++)
+        {
+            ObjectPool.Instance.ClearPooledObjects(RoomManager.Instance.ObjectsClearedOnLeavingRoom[i]);
+        }
     }
 
 

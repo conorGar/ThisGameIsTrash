@@ -98,6 +98,34 @@ public class ObjectPool : MonoBehaviour {
         return go;
     }
 
+    public void ClearPooledObjects (GameObject go)
+    {
+        ObjectPoolDefinition poolDefinition = null;
+        for (int i = 0; i < itemsToPool.Count; ++i)
+        {
+            if (itemsToPool[i].poolObject.tag == go.tag)
+            {
+                poolDefinition = itemsToPool[i];
+                break;
+            }
+        }
+
+        if (poolDefinition != null)
+        {
+            var objects = pooledObjects[poolDefinition];
+            if (objects != null)
+            {
+                for (int i = 0; i < objects.Count; ++i)
+                {
+                    if (objects[i].activeInHierarchy)
+                    {
+                        objects[i].SetActive(false);
+                    }
+                }
+            }
+        }
+    }
+
     // When active is false the object can be retrieved by another function.  It's a sort of pointless function but we can use it to mark and search the code for pooled items specifically instead of objects that are deactivating normally.
     public void ReturnPooledObject ( GameObject go)
     {
