@@ -11,6 +11,8 @@ public class Ev_SignPost : MonoBehaviour {
 	public float distanceUntilGlow;
 	public GameObject signPostHUD;
 	public string myText;
+	public string myName = "- Your Pal, Stuart";
+	public TextMeshProUGUI nameDisplay;
 	public Sprite myPicture;
 	public AudioClip signRise;
 	public GameObject mainCamera;
@@ -52,6 +54,7 @@ public class Ev_SignPost : MonoBehaviour {
 				mainCamera.GetComponent<PostProcessingBehaviour>().profile = blur;
 				signPostHUD.SetActive(true);
 				signPostHUD.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = myText;
+				nameDisplay.text = myName;
 				if(myPicture != null){
 					signPostHUD.transform.GetChild(1).GetComponent<Image>().sprite = myPicture;
 				}

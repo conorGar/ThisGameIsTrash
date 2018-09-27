@@ -16,7 +16,7 @@ public class Friend : MonoBehaviour {
 	public string missedDialog;
 
     // Use this for initialization
-    void OnEnable() {
+    protected void OnEnable() {
 
     	int currentDayNumber = GlobalVariableManager.Instance.DAY_NUMBER;
 

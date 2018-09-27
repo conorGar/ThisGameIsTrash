@@ -29,7 +29,9 @@ public class EightWayMovement : MonoBehaviour {
 	private tk2dSpriteAnimator legAnim;
 	Vector3 transformScale; // used for facing different directions
 
-	public bool clipOverride;
+	public bool clipOverride; //set by pickUpable object
+	[HideInInspector]
+	public bool carryingAbove;
     // Use this for initialization
     void Start () {
 
@@ -87,6 +89,7 @@ public class EightWayMovement : MonoBehaviour {
 			directionFacing = 1;
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP))
         {
+			//legAnim.Play("walk");
 			if(anim.CurrentClip.name != "ani_jimWalk" && !clipOverride){
 				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
@@ -103,6 +106,9 @@ public class EightWayMovement : MonoBehaviour {
 				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
 				}else{
+					if(carryingAbove)
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",true);
+					else
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
 				}
 			}
@@ -118,6 +124,8 @@ public class EightWayMovement : MonoBehaviour {
         		momentum = 4f;
 				InvokeRepeating("SpawnClouds",.2f, .2f); //just have this here so it only happens once
         	}
+			legAnim.Play("walk");
+
             isDiagonal = true;
             if (movement.y == 1 && movement.x == -1) {
             	if(directionFacing == 1){
@@ -193,6 +201,8 @@ public class EightWayMovement : MonoBehaviour {
                 */
                 if(movement.x == 0 && movement.y == 0){
 					walkCloudPS.GetComponent<ParticleSystem>().Stop();
+					//legAnim.Play("stop");
+
                 	if(!clipOverride){
 						if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 							if(anim.CurrentClip.name == "ani_jimWalk"){
@@ -205,6 +215,11 @@ public class EightWayMovement : MonoBehaviour {
 								gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);//set to normal idle when return from override clip(hurt, pickup,etc)
 							}
 						}else{
+							if(carryingAbove){
+								clipOverride = true;
+							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAboveIdle",false);
+							}
+							else
 							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",false);
 						}
 					}
@@ -242,6 +257,7 @@ public class EightWayMovement : MonoBehaviour {
 	        	transform.Translate(movement * speed * Time.deltaTime);
 	        	//show legs and change to current animation of Jim
 				if(!clipOverride){
+
 	        		legAnim.Play(anim.CurrentClip.name);
 	        		legAnim.PlayFromFrame(anim.CurrentFrame);
 	        	}

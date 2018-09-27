@@ -19,9 +19,19 @@ public class BossFriendEx : Friend
 
 
 	// Use this for initialization
-	void Start ()
+	void OnStart ()
 	{
-	
+		//dtermine set up at start of day depending on where you are in the boss 1 fight
+		if(nextDialog == "Boss1Start"){
+			gameObject.transform.parent.position = new Vector2(-29f,149f);
+			gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 22;
+			phase = 1;
+		}else if(nextDialog == "Boss1Death" ||nextDialog == "Boss1Middle"  ){
+			gameObject.transform.parent.position = new Vector2(-29f,149f);
+			transform.parent.gameObject.SetActive(false);
+		}else if(nextDialog == "end"){
+			Destroy(gameObject);
+		}
 	}
 	
 	// Update is called once per frame
@@ -73,5 +83,6 @@ public class BossFriendEx : Friend
 		//gameObject.SetActive(false);
 
 	}
+
 }
 

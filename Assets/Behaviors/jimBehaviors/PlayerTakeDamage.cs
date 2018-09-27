@@ -15,6 +15,9 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 
 	public AudioClip hurt;
+
+	[HideInInspector]
+	public GameObject currentlyCarriedObject; // set by pickupableObject.cs for use when dropping at death
 	int maxHP;
 	public int currentHp;
 	int damageDealt;
@@ -74,7 +77,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("hurt",true);
 			Debug.Log("reached this end of hp hud change" + currentHp);
 			HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
-			GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars",this.gameObject.transform.position);
+			GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars_player",this.gameObject.transform.position);
 			damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(damageDealt);
 			damageCounter.SetActive(true);
 			GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars",this.gameObject.transform.position);
@@ -125,6 +128,10 @@ public class PlayerTakeDamage : MonoBehaviour {
 	}
 
 	IEnumerator Death(){
+		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
+		if(currentlyCarriedObject != null){
+			currentlyCarriedObject.GetComponent<PickupableObject>().Drop();
+		}
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		gameObject.GetComponent<BoxCollider2D>().enabled = false;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer04";//bring player to front
@@ -138,6 +145,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 			yield return new WaitForSeconds(2f);//truck pickup
 		deathDisplay.currentTCD.gameObject.SetActive(false);
+
 		GameObject truck = objectPool.GetComponent<ObjectPool>().GetPooledObject("GarbageTruck",new Vector3(gameObject.transform.position.x - 20, gameObject.transform.position.y,0f));
 		truck.GetComponent<Ev_SmallTruck>().ReturnToDumpster();
 			yield return new WaitForSeconds(.4f);

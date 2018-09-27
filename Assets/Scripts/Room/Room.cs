@@ -59,6 +59,17 @@ public class Room : MonoBehaviour
              //ignore if enemy for this spawner has been killed
              if(enemySpawners[i].CheckIfEnemyDead()){
              	Debug.Log("MY ENEMY IS DEAD!!!");
+				int deathDate = enemySpawners[i].GetDeathDate();
+				if(deathDate != 0){//if body has not yet been spawned
+					
+	             	if(deathDate == 2){
+						GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",enemySpawners[i].transform.position);
+						body.GetComponent<ThrowableBody>().SetSpawnerID(enemySpawners[i].name);
+						body.GetComponent<tk2dSprite>().SetSprite(enemySpawners[i].enemyBodyName);
+	             		body.GetComponent<ThrowableBody>().Poison();
+	             		
+	             	}//TODO: else spawn skeleton
+             	}
              	continue;
              }else{
             	Debug.Log("*** MY ENEMY IS NOT DEAD ***");
@@ -114,6 +125,14 @@ public class Room : MonoBehaviour
 
     public void DeactivateRoom()
     {	
+    	if(bossRoom){
+			for(int i = 0; i< bosses.Count;i++){
+        			
+        			bosses[i].gameObject.SetActive(false);
+					
+        	}
+    	}
+
 	    for (int i=0; i < enemies.Count; ++i)
 	        enemies[i].SetActive(false);
 

@@ -6,7 +6,11 @@ public class EnemySpawner : EditorMonoBehaviour {
     public List<Enemy> enemies;
     public bool isMyEnemyDead = false;
     public EnemyInstance myEnemyInstance;
+    public string enemyBodyName;
+    [HideInInspector]
+    public bool bodyDestroyed;// set true by 'ThrowableBody.cs - Death()'
     string spawnerID;
+    bool spawnedBodyAlready;
 
     // Use this for initialization
     void Start () {
@@ -41,9 +45,25 @@ public class EnemySpawner : EditorMonoBehaviour {
 	public bool CheckIfEnemyDead(){
 		if(GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID].dayOfRevival > GlobalVariableManager.Instance.DAY_NUMBER){
 			isMyEnemyDead = true;
+
+		}else{
+			GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID].bodyDestroyed = false; //return back to normal if destroyed previous dead body that was spawned
 		}
 		Debug.Log("My spawner ID:" + spawnerID);
 		Debug.Log(GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID].dayOfRevival);
 		return isMyEnemyDead;
+	}
+
+	public int GetDeathDate(){
+		if(!spawnedBodyAlready && !bodyDestroyed){
+		spawnedBodyAlready = true;
+		return (GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID].dayOfRevival - GlobalVariableManager.Instance.DAY_NUMBER);
+		}else{
+			return 0;
+		}
+		//0 = respawn
+		//1 = skeleton
+		//2= rotting body
+		//3 = body
 	}
 }

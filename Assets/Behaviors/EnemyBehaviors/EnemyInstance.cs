@@ -6,6 +6,8 @@ public class EnemyInstance : MonoBehaviour {
 
 	//public string spawnerId;
 	public int dayOfRevival;//set at death of enemy by EnemyTakeDamage
+	[HideInInspector]
+	public bool bodyDestroyed;// set true by 'ThrowableBody.cs - Death()'
 
 	//attatched to an 
 

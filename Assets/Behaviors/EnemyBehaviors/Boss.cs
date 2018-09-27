@@ -14,6 +14,7 @@ public class Boss : MonoBehaviour {
 	public MonoBehaviour myBossScript;
 	public tk2dCamera mainCam;
 	public GameObject objectToPanTo;
+	public bool dazeAtDeath;
 
 	[HideInInspector]
 	public Room currentRoom; //used to diable other bosses at main bosses' death

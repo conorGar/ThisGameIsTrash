@@ -7,6 +7,15 @@ public class RatOnMatFriend : Friend
 	public ParticleSystem vanishPS;
 	public tk2dCamera mainCam;
 
+
+	void OnEnable(){
+		if(GlobalVariableManager.Instance.WORLD_NUM == 1 && nextDialog != "RatMat1"){
+			Destroy(gameObject);//onlt happens once
+		}else{
+			base.OnEnable();
+		}
+	}
+
 	public override void FinishDialogEvent(){
 		Debug.Log("Ec finish dialog event activate");
 		StartCoroutine("ReturnCam");

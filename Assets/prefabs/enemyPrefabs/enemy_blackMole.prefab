@@ -275,8 +275,7 @@ MonoBehaviour:
   armoredEnemy: 0
   moveWhenHit: 1
   secretHider: 0
-  currentHp: 3
-  meleeDmgBonus: 0
+  returnToCurrentAniAfterHit: 0
   invincibleAni:
     name: Default
     frames: []
@@ -289,7 +288,7 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  currentCamera: {fileID: 0}
+  myDeadBodyName: mole
   respawnEnemy: 0
   hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
   hitSqueal: {fileID: 8300000, guid: adab9cc7eebe17b4cb22fcca45fc48f0, type: 3}
@@ -309,6 +308,9 @@ MonoBehaviour:
   - {fileID: 114459684694281314}
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
+  currentHp: 3
+  meleeDmgBonus: 0
+  dontStopWhenHit: 0
 --- !u!212 &212677220458254340
 SpriteRenderer:
   m_ObjectHideFlags: 1
