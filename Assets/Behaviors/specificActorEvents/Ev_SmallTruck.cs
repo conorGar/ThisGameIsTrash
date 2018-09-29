@@ -153,6 +153,11 @@ public class Ev_SmallTruck : MonoBehaviour {
 		}
 	}
 
+	public void RespawnEnd(){
+		phase = 0;
+		gameObject.SetActive(false);
+	}
+
 	IEnumerator SpawnPlayer(){
 		Debug.Log("Truck - Time Before Spawn");
 		yield return new WaitForSeconds(delayTillSpawn);

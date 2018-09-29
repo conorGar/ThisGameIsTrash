@@ -171,8 +171,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		if(melee.tag == "Weapon"){
 			TakeDamage(melee.gameObject);
 			//Debug.Log("Collision with weapon: ");
-			SoundManager.instance.PlaySingle(hitSound);
-			SoundManager.instance.PlaySingle(hitSqueal);
+
 		}else if(melee.tag == "pObj_bullet"){
 			if(!takingDamage){
 				StartCoroutine("NonMeleeHit");
@@ -252,7 +251,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					takingDamage = true;
 					damageOnce = 1;
 					meleeDmgBonus = 0;
-
+					SoundManager.instance.PlaySingle(hitSound);
+					SoundManager.instance.PlaySingle(hitSqueal);
 					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
 						//bonus dmg with pole
 						meleeDmgBonus++;

@@ -10,7 +10,7 @@ public class ThrowableObject : PickupableObject {
 	public AudioClip carrySound;
 	public GameObject myShadow;
 	Room currentRoom;//for staying in bounds
-//	public BoxCollider2D physicalCollision;
+	public BoxCollider2D physicalCollision;
 
 	public List<MonoBehaviour> behaviorsToStop = new List<MonoBehaviour>();
 	// Use this for initialization
@@ -21,7 +21,7 @@ public class ThrowableObject : PickupableObject {
 
 
 	// Update is called once per frame
-	void Update () {
+	protected override void Update () {
 		base.Update();
 		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && canThrow && !GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING){
 			Invoke("Throw",.1f);
@@ -38,21 +38,38 @@ public class ThrowableObject : PickupableObject {
 				beingCarried= false;
 				canThrow = false;
 				myShadow.SetActive(true);
+				myShadow.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,.75f);
+
 			//	physicalCollision.enabled = false;
 				gameObject.layer = 11; //switch to item layer.
 				for(int i = 0; i < behaviorsToStop.Count; i++){
 					behaviorsToStop[i].enabled = true;
 				}
+				gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
+				gameObject.GetComponent<IsometricSorting>().enabled = true;
 				gameObject.GetComponent<CannotExitScene>().enabled = false;
-
-
+				if(physicalCollision != null)
+					physicalCollision.enabled = true;
 			}
 		}
 
+		Debug.Log(physicalCollision.enabled);
+
+	}
+
+	public override void PickUp(){
+		base.PickUp();
+		gameObject.GetComponent<IsometricSorting>().enabled = false;
+		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+		//if(physicalCollision != null)
+			physicalCollision.enabled = false;
+		myShadow.SetActive(false);
 	}
 
 	void Throw(){
 		//beingCarried = false;
+		gameObject.GetComponent<Animator>().enabled = false;
+
 		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
 		if(currentRoom != RoomManager.Instance.currentRoom){
 			gameObject.GetComponent<CannotExitScene>().SetLimits(RoomManager.Instance.currentRoom);
@@ -60,6 +77,7 @@ public class ThrowableObject : PickupableObject {
 	//	physicalCollision.enabled = false;
 		//gameObject.GetComponent<CannotExitScene>().enabled = true;
 		Debug.Log("Thrown");
+		myShadow.GetComponent<SpriteRenderer>().sortingLayerName = "Layer01";
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		player.GetComponent<MeleeAttack>().enabled = true;
 		if(gameObject.GetComponent<BoxCollider2D>()!=null){
@@ -71,19 +89,48 @@ public class ThrowableObject : PickupableObject {
 		beingThrown = true;
 		gameObject.transform.parent = null;
 		myBody.simulated = true;
+		gameObject.transform.position = new Vector2(transform.position.x,transform.position.y-1); //move more directly in front of player
 		myBody.velocity = new Vector2(22f*(Mathf.Sign(player.transform.lossyScale.x)),2f);
+		player.GetComponent<EightWayMovement>().myLegs.SetActive(true);
 		myBody.gravityScale = 1f;
 	
 	}
 
 	public override void PickUpEvent(){
+		Debug.Log("*******Pickup Event activate********");
+		player.GetComponent<EightWayMovement>().myLegs.SetActive(false);
+		player.GetComponent<EightWayMovement>().clipOverride = false;
+		//gameObject.GetComponent<Animator>().enabled = true;
 		canThrow = true;
-		myShadow.SetActive(false);
+		myShadow.SetActive(true);
+		myShadow.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,.5f);
+		myShadow.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02";
 		SoundManager.instance.PlaySingle(carrySound);
 		gameObject.layer = 15; //switch to thrownTrash layer.
 		for(int i = 0; i < behaviorsToStop.Count; i++){
 			behaviorsToStop[i].enabled = false;
 		}
+	}
+
+	public override void DropEvent(){
+				Debug.Log("THORWABLE OBJECT DROP() ACTIVATED----");
+				landingY = transform.position.y -3f;
+
+				beingThrown = false;
+				myBody.gravityScale = 0f;
+				myBody.velocity = new Vector2(0,0f);
+				beingCarried= false;
+				canThrow = false;
+				myShadow.SetActive(true);
+				myShadow.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,.75f);
+
+				gameObject.layer = 11; //switch to item layer.
+				for(int i = 0; i < behaviorsToStop.Count; i++){
+					behaviorsToStop[i].enabled = true;
+				}
+				gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
+				gameObject.GetComponent<IsometricSorting>().enabled = true;
+				gameObject.GetComponent<CannotExitScene>().enabled = false;
 	}
 
 

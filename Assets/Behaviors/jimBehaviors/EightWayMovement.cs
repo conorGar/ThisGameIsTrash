@@ -66,6 +66,9 @@ public class EightWayMovement : MonoBehaviour {
 				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
 				}else{
+					if(carryingAbove)
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",false);
+					else
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
 				}
 			}
@@ -82,6 +85,9 @@ public class EightWayMovement : MonoBehaviour {
 				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
 				}else{
+					if(carryingAbove)
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",false);
+					else
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
 				}
 
@@ -94,6 +100,9 @@ public class EightWayMovement : MonoBehaviour {
 				if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
 				}else{
+					if(carryingAbove)
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",false);
+					else
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
 				}
 			}
@@ -107,7 +116,7 @@ public class EightWayMovement : MonoBehaviour {
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
 				}else{
 					if(carryingAbove)
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",true);
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",false);
 					else
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk",false);
 				}
@@ -215,14 +224,17 @@ public class EightWayMovement : MonoBehaviour {
 								gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);//set to normal idle when return from override clip(hurt, pickup,etc)
 							}
 						}else{
+							Debug.Log("carrying something and carrying above = " + carryingAbove);
 							if(carryingAbove){
-								clipOverride = true;
-							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAboveIdle",false);
+								gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAboveIdle",false);
+								//clipOverride = true;
+
 							}
 							else
 							gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",false);
 						}
-					}
+						}
+
 					//not instant stop
 					if(momentum > 0)
 						momentum = momentum - .2f;
@@ -256,7 +268,7 @@ public class EightWayMovement : MonoBehaviour {
 
 	        	transform.Translate(movement * speed * Time.deltaTime);
 	        	//show legs and change to current animation of Jim
-				if(!clipOverride){
+				if(!clipOverride && myLegs.activeInHierarchy){
 
 	        		legAnim.Play(anim.CurrentClip.name);
 	        		legAnim.PlayFromFrame(anim.CurrentFrame);

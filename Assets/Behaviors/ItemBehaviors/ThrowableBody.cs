@@ -13,20 +13,21 @@ public class ThrowableBody : ThrowableObject
 
 
 	public override void PickUp(){
+		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_pickUpBig",true);
 		//gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
+		physicalCollision.enabled = false;
 		player.GetComponent<EightWayMovement>().enabled = false;
 		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
-		Invoke("PickUpWithDelay",.4f);
+		Invoke("PickUpWithDelay",.5f);
 	}
 
 	void PickUpWithDelay(){
 		movePlayerToObject = false;
-		if(gameObject.GetComponent<BoxCollider2D>()!=null){
-			gameObject.GetComponent<BoxCollider2D>().enabled = false;
-		}
+	
+		physicalCollision.enabled = false;
 
 		//move and play the particle system
 		beingCarried = true;

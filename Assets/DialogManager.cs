@@ -80,7 +80,7 @@ public class DialogManager : MonoBehaviour {
 	void Update () {
 		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && canContinueDialog)
         {
-			if(finishedDisplayingText){
+			if(finishedDisplayingText ){
 				NextNode();
 			}else{
 				displayedText.GetComponent<TextAnimation>().StopAnimation("Zoom In Front");
@@ -123,7 +123,7 @@ public class DialogManager : MonoBehaviour {
 				canContinueDialog = false;
 				dialogActionManager.Invoke(currentNode.action,.1f);
 			}
-		}else{
+		}else{ 
 			if(displayedText.fontSize != 16.5f){//return to normal font size after small text
 				displayedText.fontSize = 16.5f;
 			}

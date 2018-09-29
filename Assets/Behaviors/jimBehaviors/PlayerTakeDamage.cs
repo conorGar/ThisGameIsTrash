@@ -106,7 +106,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 		if(GlobalVariableManager.Instance.CARRYING_SOMETHING){
-			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",true);
+			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",true);
 		}else{
 			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
 		}
@@ -179,10 +179,11 @@ public class PlayerTakeDamage : MonoBehaviour {
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
 		deathDisplay.currentTCD.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+		truck.GetComponent<Ev_SmallTruck>().RespawnEnd();
 		gameObject.GetComponent<BoxCollider2D>().enabled = true;
 
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
-		
+		gameObject.GetComponent<EightWayMovement>().myLegs.SetActive(true);
 		gameObject.GetComponent<EightWayMovement>().enabled = true;
 		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
 	}

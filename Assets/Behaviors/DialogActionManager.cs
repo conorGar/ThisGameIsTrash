@@ -61,7 +61,7 @@ public class DialogActionManager : MonoBehaviour {
 	public void JumboMoviePlay(){
 		if(!movieIsPlaying){
 			movieIsPlaying = true;
-			mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(new Vector3(-31.4f,70f,-10f),"JumboMovie");
+			mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(new Vector3(-87.4f,32f,-10f),"JumboMovie");
 
 			dialogManager.textBox.SetActive(false);
 			dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = null;//TODO: returns to NO effect, not sure if you want this, future Conor

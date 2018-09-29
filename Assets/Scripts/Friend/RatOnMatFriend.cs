@@ -18,6 +18,7 @@ public class RatOnMatFriend : Friend
 
 	public override void FinishDialogEvent(){
 		Debug.Log("Ec finish dialog event activate");
+		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false; // needed to fix glitch where if player spammed continue button dialog would start again
 		StartCoroutine("ReturnCam");
 	}
 

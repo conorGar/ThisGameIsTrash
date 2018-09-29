@@ -48,11 +48,14 @@ public class JumboFriend : Friend {
             films.RemoveAt(0);
     }
 
-
+	public override void FinishDialogEvent(){
+		base.FinishDialogEvent();
+		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false; // needed to fix glitch where if player spammed continue button dialog would start again
+	}
     public override void StartingEvents(){
     	Debug.Log("Starting Events function happened properly");
     	if(GlobalVariableManager.Instance.DAY_NUMBER == day && nextDialog == "Jumbo2"){
-    		gameObject.transform.position = new Vector2(-40f,47.5f);
+    		gameObject.transform.position = new Vector2(-95f,8.5f);
     		deadRat.SetActive(true);
     	}
 		if(nextDialog == "Start"){

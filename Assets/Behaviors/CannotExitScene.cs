@@ -19,19 +19,19 @@ public class CannotExitScene : MonoBehaviour {
 
 		if(transform.position.x < leftLimit){
 			transform.localPosition = new Vector2(leftLimit, transform.localPosition.y);
-			Debug.Log("Enemy at left limit");
+		//	Debug.Log("Enemy at left limit");
 		} else if(transform.position.x > rightLimit){
 			transform.localPosition = new Vector2(rightLimit, transform.localPosition.y);
-			Debug.Log("Enemy at right limit");
+		//	Debug.Log("Enemy at right limit");
 
 		}
 		if(transform.position.y < botLimit){
 			transform.localPosition = new Vector2(transform.localPosition.x, botLimit);
-			Debug.Log("Enemy at bot limit");
+//			Debug.Log("Enemy at bot limit");
 
 		} else if(transform.position.y > topLimit){
 			transform.localPosition = new Vector2(transform.localPosition.x, topLimit);
-			Debug.Log("Enemy at top limit");
+		//	Debug.Log("Enemy at top limit");
 
 		}
 	}

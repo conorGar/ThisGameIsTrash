@@ -38,12 +38,13 @@ GameObject:
   - component: {fileID: 33532920829916968}
   - component: {fileID: 23153455324541936}
   - component: {fileID: 114102131070975514}
-  - component: {fileID: 114180677320928676}
   - component: {fileID: 61323263808919134}
   - component: {fileID: 50751830521084128}
   - component: {fileID: 114288479959162264}
-  - component: {fileID: 114732650766908830}
   - component: {fileID: 114734412795880412}
+  - component: {fileID: 61858701569415644}
+  - component: {fileID: 95229444930355414}
+  - component: {fileID: 114134658191412372}
   m_Layer: 11
   m_Name: EnemyBody
   m_TagString: enemyBody
@@ -76,7 +77,7 @@ Transform:
   m_GameObject: {fileID: 1619720335329708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.154645, y: -8.125063, z: 0}
-  m_LocalScale: {x: 0.9191795, y: 0.9191795, z: 0.9191795}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4680057974950464}
   - {fileID: 4986383298820952}
@@ -179,6 +180,31 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.028820265, y: -0.19466501}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.58, y: 1.72}
+  m_EdgeRadius: 0
+--- !u!61 &61858701569415644
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619720335329708}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -195,6 +221,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.58, y: 1.72}
   m_EdgeRadius: 0
+--- !u!95 &95229444930355414
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619720335329708}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06c501248660c52459306979c79a347a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114102131070975514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,30 +262,20 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
---- !u!114 &114180677320928676
+--- !u!114 &114134658191412372
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619720335329708}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd53d1546e6eca348979b1a227f6d6bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceUntilPickup: 3
-  player: {fileID: 0}
-  pickup: {fileID: 8300000, guid: 8df408df4bf166f409446c0742895aff, type: 3}
-  drop: {fileID: 0}
-  carryXAdjustment: 3.3
-  carryMark: {fileID: 0}
-  throwableObject: 1
-  myBody: {fileID: 0}
-  dumpster: {fileID: 0}
-  spinning: 0
-  carrySound: {fileID: 8300000, guid: 7c387fcc87d247048a42dbff91176215, type: 3}
-  myShadow: {fileID: 1322027951601578}
-  behaviorsToStop: []
+  hastk2dSprite: 0
+  movingObject: 0
+  legs: 0
 --- !u!114 &114288479959162264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,42 +299,11 @@ MonoBehaviour:
   spinning: 0
   carrySound: {fileID: 8300000, guid: 7c387fcc87d247048a42dbff91176215, type: 3}
   myShadow: {fileID: 1322027951601578}
+  physicalCollision: {fileID: 61858701569415644}
   behaviorsToStop: []
   bodyHP: 3
   fliesPS: {fileID: 1714853125770136}
   poisioned: 0
---- !u!114 &114732650766908830
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1619720335329708}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8edf2d55ca588547881b7472e926510, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TrailName: 
-  m_CurrentTrailPreset: {fileID: 11400000, guid: 656b9a0249299b74eb4102b5af4a08f1,
-    type: 2}
-  m_TrailParent: {fileID: 4453383828462210}
-  m_SpriteToDuplicate: {fileID: 0}
-  m_Layer: 0
-  m_ZMoveStep: 0.0001
-  m_ZMoveMax: 0.9999
-  m_HideTrailOnDisabled: 1
-  m_TrailActivationCondition: 0
-  m_TrailDeactivationCondition: 0
-  m_StartIfUnderVelocity: 0
-  m_VelocityStartIsLocalSpace: 0
-  m_VelocityNeededToStart: 0
-  m_StopIfOverVelocity: 0
-  m_VelocityStopIsLocalSpace: 0
-  m_VelocityNeededToStop: 0
-  m_TrailActivationDuration: 0
-  m_SortingLayerID: 1780242901
-  m_OrderInSortingLayer: 0
-  m_DisabledElementsInTrail: []
 --- !u!114 &114734412795880412
 MonoBehaviour:
   m_ObjectHideFlags: 1

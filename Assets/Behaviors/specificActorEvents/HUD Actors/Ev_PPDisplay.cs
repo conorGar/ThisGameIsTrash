@@ -10,9 +10,10 @@ public class Ev_PPDisplay : MonoBehaviour {
 	}
 	
 	public void SetDisplayedIcons(int value){
+		value += 1; // +1 because of 'PP:' text object
 		for(int i = 0; i< myTransform.childCount; i++){
             if (i < value)
-                myTransform.GetChild(i).gameObject.SetActive(true);
+                myTransform.GetChild(i).gameObject.SetActive(true); 
             else
                 myTransform.GetChild(i).gameObject.SetActive(false);
 		}

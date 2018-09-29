@@ -26,7 +26,7 @@ public class JimAnimationManager : MonoBehaviour {
 
 	public void PlayAnimation(string clip, bool overrideCurrentClip){
 		
-		//Debug.Log("Clip Play activated with clip:" + clip);
+		Debug.Log("Clip Play activated with clip:" + clip);
 		myAnimator.Play(clip);
 
 		if(overrideCurrentClip != false){

@@ -50,7 +50,7 @@ public class PickupableObject : MonoBehaviour
 		}
 	}*/
 	// Update is called once per frame
-	protected void Update ()
+	protected virtual void Update ()
 	{	
 		if(player != null && Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
 			//Debug.Log("within distance" + GlobalVariableManager.Instance.CARRYING_SOMETHING);
@@ -106,9 +106,9 @@ public class PickupableObject : MonoBehaviour
 
 	public virtual void PickUp(){
 		movePlayerToObject = false;
-		if(gameObject.GetComponent<BoxCollider2D>()!=null){
+		/*if(gameObject.GetComponent<BoxCollider2D>()!=null){
 			gameObject.GetComponent<BoxCollider2D>().enabled = false;
-		}
+		}*/
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
 		player.GetComponent<EightWayMovement>().enabled = false;
 		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -140,11 +140,14 @@ public class PickupableObject : MonoBehaviour
 	public void Drop(){
 		beingCarried = false;
 		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
-
+		Debug.Log("ITEM DROPPED");
+		gameObject.transform.parent = null; //detatch from player transform
 		gameObject.transform.position = new Vector2(transform.position.x + 1f, transform.position.y -1f);
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		SoundManager.instance.PlaySingle(drop);
+		spinning = false;
+		pickUpSpin = false;
 		//proper postionining 
 		DropEvent();
 	}
