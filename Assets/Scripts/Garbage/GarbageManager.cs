@@ -43,9 +43,9 @@ public class GarbageManager : MonoBehaviour {
         switch (type)
         {
             case GARBAGETYPE.STANDARD:
-                StandardGarbage garbage = new StandardGarbage();
                 for (int i = 0; i < garbageCount; ++i)
                 {
+                    var garbage = new StandardGarbage();
                     // Generate a random type of garbage.
                     garbage.type = StandardGarbage.GarbageByIndex(Random.Range(0, StandardGarbage.Count()));
 

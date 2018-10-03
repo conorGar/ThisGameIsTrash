@@ -25,7 +25,6 @@ public class DialogManager : MonoBehaviour {
 	public GameObject dialogCanvas;
 	public TextMeshProUGUI characterName;
 	public Ev_DayMeter dayMeter;
-	//public bool tempBoolForActionManager;
 	[HideInInspector]
 	public string animationName;
 	public MultipleDialogIconsManager multipleIconsManager;
@@ -43,7 +42,6 @@ public class DialogManager : MonoBehaviour {
 	bool hasWavingText; 
 	public bool canContinueDialog = true;
 	Friend friend;//needed for finish();
-
 	//string currentSpeakerName;
 	 // set by MultipleIconsManager.cs
 
@@ -75,7 +73,6 @@ public class DialogManager : MonoBehaviour {
 		displayedText.text = currentNode.text;
 		characterName.text = currentNode.speakerName;
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogBlur;
-		characterName.text = currentNode.speakerName;
 		dayMeter.Stop();
 	}
 	
@@ -83,14 +80,13 @@ public class DialogManager : MonoBehaviour {
 	void Update () {
 		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && canContinueDialog)
         {
-			if(finishedDisplayingText ){
+			if(finishedDisplayingText){
 				NextNode();
 			}else{
 				displayedText.GetComponent<TextAnimation>().StopAnimation("Zoom In Front");
 				//FinishedDisplay();
 			}
 		}
-	
 	}
 
 	void NextNode(){
@@ -125,22 +121,18 @@ public class DialogManager : MonoBehaviour {
 				ReturnFromAction();
 			}else{
 				if(canContinueDialog){
-					canContinueDialog = false;
-					textBox.SetActive(false);
-					for(int i = 0; i < dialogIcons.Count; i++){
-						dialogIcons[i].SetActive(false);
-					}
-					//if(tempBoolForActionManager == true){
-						dialogActionManager.Invoke(currentNode.action,.1f);
-					//}else{
-						if(friend.dialogManager == null)
-							friend.dialogManager = this;
-						friend.Invoke(currentNode.action,.1f);
-					//}
+				canContinueDialog = false;
+				textBox.SetActive(false);
+				for(int i = 0; i < dialogIcons.Count; i++){
+					dialogIcons[i].SetActive(false);
 				}
+				if(friend.dialogManager == null)
+					friend.dialogManager = this;
+				friend.Invoke(currentNode.action,.1f);
 				//dialogActionManager.Invoke(currentNode.action,.1f);
+				}
 			}
-		}else{ 
+		}else{
 			if(displayedText.fontSize != 16.5f){//return to normal font size after small text
 				displayedText.fontSize = 16.5f;
 			}
@@ -175,7 +167,8 @@ public class DialogManager : MonoBehaviour {
 			finishedDisplayingText = false;
 
 			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
-			InvokeRepeating("TalkSound",0.1f,.05f);
+
+            PlayTalkSounds();
 		}
 	}
 
@@ -191,7 +184,7 @@ public class DialogManager : MonoBehaviour {
 			}
 		//Debug.Log(currentlySpeakingIcon.GetComponent<Animator>().enabled);
 
-			
+			canContinueDialog = true;
 			mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogBlur;
 		
 
@@ -221,16 +214,13 @@ public class DialogManager : MonoBehaviour {
 
 			finishedDisplayingText = false;
 			displayedText.text = currentNode.text;
-			canContinueDialog = true;
-			InvokeRepeating("TalkSound",0.1f,.05f);
+
+            PlayTalkSounds();
 	}
 	public void ReturnFromAction(){
+			canContinueDialog = true;
 			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
-			for(int i = 0; i < dialogIcons.Count; i++){
-						dialogIcons[i].SetActive(false);
-			}
-			if( currentlySpeakingIcon != null)
-				currentlySpeakingIcon.SetActive(true);
+			currentlySpeakingIcon.SetActive(true);
 			textBox.SetActive(true);
 			if(characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
 			{
@@ -252,19 +242,17 @@ public class DialogManager : MonoBehaviour {
 			}if(currentNode.text.Contains("<l")){
 				LargeText();
 			}
-			canContinueDialog = true;
-
 			finishedDisplayingText = false;
 			displayedText.text = currentNode.text;
 			displayedText.GetComponent<TextAnimation>().StartAgain();
-			InvokeRepeating("TalkSound",0.1f,.05f);
+            PlayTalkSounds();
 	}
 
 
 	public void FinishedDisplay(){
 		if(finishedDisplayingText == false){
 			Debug.Log("Finished Display activated");
-			if(currentlySpeakingIcon != null && currentlySpeakingIcon.GetComponent<Animator>().isActiveAndEnabled)
+			if(currentlySpeakingIcon.GetComponent<Animator>().isActiveAndEnabled)
 				currentlySpeakingIcon.GetComponent<Animator>().enabled = false;
 
 			continueIcon.enabled = true;
@@ -319,8 +307,13 @@ public class DialogManager : MonoBehaviour {
 		currentNode.text = currentNode.text.Replace("<l>","");
 	}
 
-	public void TalkSound(){
-		//Debug.Log("TalkSound Activate");
+    private void PlayTalkSounds()
+    {
+        CancelInvoke();
+        InvokeRepeating("TalkSound", 0.1f, .05f);
+    }
+
+    private void TalkSound(){
 		SoundManager.instance.RandomizeSfx(typeSound,.8f,1.2f);
 	}
 
@@ -328,16 +321,13 @@ public class DialogManager : MonoBehaviour {
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		//TODO: maybe need some way to set activateDialog's 'canTalk' to true again depending on character
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = null; //TODO: returns to NO effect, not sure if you want this, future Conor
-		for(int i = 0; i < dialogIcons.Count; i++){
-						dialogIcons[i].SetActive(false);
-			}
+
 		Debug.Log(friend.nextDialog);
 		//Debug.Log(currentNode.child_id.ToString());
 		if(friend != null)//would = null for some one timers
 			friend.nextDialog = myDialogDefiniton.nodes[currentNode.child_id].title;
 		 //sets up dialog for next interaction
 		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-		friend.GetComponent<ActivateDialogWhenClose>().myDialogIcon.SetActive(false);
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
 		player.GetComponent<EightWayMovement>().enabled = true;
 		friend.FinishDialogEvent();
@@ -362,5 +352,4 @@ public class DialogManager : MonoBehaviour {
 			}
 		}
 	}
-
 }

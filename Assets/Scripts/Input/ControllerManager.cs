@@ -119,9 +119,6 @@ public class ControllerManager : MonoBehaviour {
                             else
                                 snapshot.isPressed |= snapshot.rawAxis < 0;
 
-                            if (snapshot.rawAxis != 0f)
-                                Debug.Log("Axis in action: " + key + " " + input.axisDirection);
-
                             break;
                         case INPUTTYPE.BUTTON:
                             if (input.axisDirection == INPUTDIRECTION.POSITIVE)

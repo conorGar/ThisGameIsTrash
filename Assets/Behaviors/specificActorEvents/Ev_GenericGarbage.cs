@@ -109,78 +109,74 @@ public class Ev_GenericGarbage : MonoBehaviour {
     }//end of Kill()
 
 	void OnTriggerEnter2D(Collider2D collider){
-		Debug.Log("Collided");
 		if(collider.gameObject.CompareTag("Player")){
-			Debug.Log("Collided With Player");
-			SoundManager.instance.PlaySingle(pickUpTrash);
-				playerPos = collider.gameObject.transform;
-				this.gameObject.transform.parent = playerPos;
-					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] < (GlobalVariableManager.Instance.BAG_SIZE + bagSizeBonus) && !isFalling){
-						if(grabbedPhase <= 0){
+			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] < (GlobalVariableManager.Instance.BAG_SIZE + bagSizeBonus) && !isFalling){
+                SoundManager.instance.PlaySingle(pickUpTrash);
+                playerPos = collider.gameObject.transform;
+                this.gameObject.transform.parent = playerPos;
+                if (grabbedPhase <= 0){
+                    Debug.Log("Garbage Type Collected: " + garbage.type);
+					if((GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED & garbage.type) != garbage.type && (GlobalVariableManager.Instance.STANDARD_GARBAGE_VIEWED & garbage.type) != garbage.type)
+                    {
+						string myName = garbage.GarbageName();
+						trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().NewDiscoveryShow(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name, myName);
+						GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED |= garbage.type;
+						SoundManager.instance.PlaySingle(newDiscovery);
+					}//end of new discover code
+				collider.gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
 
-							if((GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED & garbage.type) != garbage.type && (GlobalVariableManager.Instance.STANDARD_GARBAGE_VIEWED & garbage.type) != garbage.type)
-                       		{//TODO: this isnt really working properly(Only shows seemingly for first trash of the day, and displays name incorrently?)
-                       			Debug.Log("New Discovery");
-								string myName = garbage.GarbageName();
-								trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().NewDiscoveryShow(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name, myName);
-								GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED |= garbage.type;
-								SoundManager.instance.PlaySingle(newDiscovery);
-							}//end of new discover code
-						collider.gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
+				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.MOGARBAGEMOPROBLEMS)){
+                    //Mo Garbage Mo' Problems - changes max HP bac if collect more than 5 trash
+                    // TODO: Review and figure this out.
+                    /*if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 4){
+						if(GlobalVariableManager.Instance.CURRENT_HP > int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2){
+							GlobalVariableManager.Instance.CURRENT_HP = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2);
+						}
+						GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1)) + 2).ToString();
+					}*/
+				}//mo garbage mo problems check end
+				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
 
-						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.MOGARBAGEMOPROBLEMS)){
-                            //Mo Garbage Mo' Problems - changes max HP bac if collect more than 5 trash
-                            // TODO: Review and figure this out.
-                            /*if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 4){
-								if(GlobalVariableManager.Instance.CURRENT_HP > int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2){
-									GlobalVariableManager.Instance.CURRENT_HP = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) - 2);
-								}
-								GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1)) + 2).ToString();
-							}*/
-						}//mo garbage mo problems check end
-						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
-
-							collider.gameObject.GetComponent<PinFunctionsManager>().PassivePillage(true);
+					collider.gameObject.GetComponent<PinFunctionsManager>().PassivePillage(true);
                         
-                    	}
+                }
 
-                        smallShadow.SetActive(false);
+                smallShadow.SetActive(false);
 
-						//if(GlobalVariableManager.Instance.characterUpgradeArray[1][32].CompareTo('o') == 0){
-							//3rd bag perk - 10% chance to heal
-							//int randomHealChance = Random.Range(1,11);
-							//if(randomHealChance == 3 && GlobalVariableManager.Instance.CURRENT_HP < int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1))){
-								//GlobalVariableManager.Instance.CURRENT_HP++;
-							//}
-						//}
-						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.TRASHPOWER)){
-							//Trash Power pin
-							GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] += 2;
-							GameObject currentWeaponHUD = GameObject.Find("current weapon");
-							currentWeaponHUD.GetComponent<Ev_CurrentWeapon>().UpdateMelee();
-						}
-
-						if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count <= 5){
-							// (if not in race mode, trash is collected normally)
-							GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]++;
-						}else{
-							//otherwise increase race collected
-							GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[2]++;
-						}
-						if(trashCollectedDisplay != null)//TODO: dropped trash doesnt upgrade display: possibly just not have enemies drop trash...?
-							trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
-						StartCoroutine("Kill");
-						Debug.Log("Got this far - Trash pickup");
-						gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
-						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,17f), ForceMode2D.Impulse);
-
-						grabbedPhase = 1;
-
-						}//end of grabbedPhase > 0 check
-						}
+				//if(GlobalVariableManager.Instance.characterUpgradeArray[1][32].CompareTo('o') == 0){
+					//3rd bag perk - 10% chance to heal
+					//int randomHealChance = Random.Range(1,11);
+					//if(randomHealChance == 3 && GlobalVariableManager.Instance.CURRENT_HP < int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3].Substring(0,1))){
+						//GlobalVariableManager.Instance.CURRENT_HP++;
 					//}
+				//}
+				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.TRASHPOWER)){
+					//Trash Power pin
+					GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] += 2;
+					GameObject currentWeaponHUD = GameObject.Find("current weapon");
+					currentWeaponHUD.GetComponent<Ev_CurrentWeapon>().UpdateMelee();
 				}
-		
+
+				if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count <= 5){
+					// (if not in race mode, trash is collected normally)
+					GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]++;
+				}else{
+					//otherwise increase race collected
+					GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[2]++;
+				}
+				if(trashCollectedDisplay != null)//TODO: dropped trash doesnt upgrade display: possibly just not have enemies drop trash...?
+					trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
+
+                    StartCoroutine("Kill");
+				    Debug.Log("Got this far - Trash pickup");
+				    gameObject.GetComponent<Rigidbody2D>().gravityScale = 3;
+				    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,17f), ForceMode2D.Impulse);
+
+				    grabbedPhase = 1;
+
+				}//end of grabbedPhase > 0 check
+			}
+		}
 	}//end of trigger enter 2d
 
     public void SetSprite(string sprite)
