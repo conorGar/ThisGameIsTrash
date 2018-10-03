@@ -315,6 +315,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
+					if(!moveWhenHit && currentHp <= 0){
+						moveWhenHit = true; // enemy flies back at final hit
+					}
 
 					if(returnToCurrentAniAfterHit){
 						returnAniName = myAnim.CurrentClip.name;
@@ -585,10 +588,11 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost");
 		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		Debug.Log("My spawner ID: "+mySpawnerID);
-
-		GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",gameObject.transform.position);
-		body.GetComponent<tk2dSprite>().SetSprite(myDeadBodyName);
-		body.GetComponent<ThrowableBody>().SetSpawnerID(mySpawnerID);
+		if(!respawnEnemy){
+			GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",gameObject.transform.position);
+			body.GetComponent<tk2dSprite>().SetSprite(myDeadBodyName);
+			body.GetComponent<ThrowableBody>().SetSpawnerID(mySpawnerID);
+		}
 		myAnim.Play("idle");//to fix enemies sometimes spawning in hurt animation
 
 		this.gameObject.SetActive(false);

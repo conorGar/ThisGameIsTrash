@@ -18531,7 +18531,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 890020788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0eb8d5a38ad2684787e6657d568ec06, type: 3}
   m_Name: 
@@ -18638,7 +18638,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 890020788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8587147a3635714b94dc7dfef2eab47, type: 3}
   m_Name: 
@@ -18650,7 +18650,9 @@ MonoBehaviour:
   nextDialog: Start
   myDialogDefiniton: {fileID: 11400000, guid: 09b9f350338526047a4837d2c5cdb368, type: 2}
   tempFriend: 0
+  calendar: {fileID: 0}
   missedDialog: RatHat1
+  dialogManager: {fileID: 0}
   hadIntroDialog: 0
   baseStatHUD: {fileID: 22152963}
 --- !u!1 &900898029
@@ -47339,6 +47341,11 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
   m_IsPrefabParent: 0
@@ -47569,6 +47576,7 @@ MonoBehaviour:
   droppedTrashPile: {fileID: 0}
   deathDisplay: {fileID: 0}
   hurt: {fileID: 8300000, guid: 48e7ab674b36f264d9f3156eb2ef6e07, type: 3}
+  deathSound: {fileID: 0}
   currentlyCarriedObject: {fileID: 0}
   currentHp: 0
 --- !u!61 &2006796133
@@ -47990,6 +47998,7 @@ MonoBehaviour:
     type: 3}
   selectSound: {fileID: 8300000, guid: ccf38e21826c09d4e994e48ecf9abd8c, type: 3}
   paperSlide: {fileID: 8300000, guid: 0cd4a6ab01e81e24fb7d897836b8fab3, type: 3}
+  player: {fileID: 0}
 --- !u!114 &2036311008
 MonoBehaviour:
   m_ObjectHideFlags: 0

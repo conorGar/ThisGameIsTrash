@@ -55,7 +55,7 @@ public class GUI_OptionsMenu : MonoBehaviour {
 				if (SoundManager.instance.musicSource.volume < 1) {
                     SoundManager.instance.musicSource.volume += .16f;
                     musicVol.GetComponent<Image>().fillAmount += .16f;
-					GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.musicSource.volume;
+					GlobalVariableManager.Instance.MASTER_MUSIC_VOL = SoundManager.instance.musicSource.volume;
 
                 }
             } else if (arrowPos == 2) {

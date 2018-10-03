@@ -192,6 +192,7 @@ MonoBehaviour:
   rightLimit: 0
   topLimit: 0
   botLimit: 0
+  globalPos: 0
 --- !u!114 &114297173099636116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,7 +247,7 @@ MonoBehaviour:
   fireRate: 3
   myProjectileFalls: 0
   projectile: {fileID: 1245335482067604, guid: 4974a6397afe35640969fde99841ffed, type: 2}
-  throwSFX: {fileID: 0}
+  throwSFX: {fileID: 8300000, guid: 713266d78f3d8d04b90715268e3ac62c, type: 3}
 --- !u!114 &114560249485120280
 MonoBehaviour:
   m_ObjectHideFlags: 1

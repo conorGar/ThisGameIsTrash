@@ -11,9 +11,14 @@ public class Friend : MonoBehaviour {
     public string nextDialog;
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
+	protected FriendEvent newestAddedEvent;
+	public GameObject calendar;
 
 	[HideInInspector]
 	public string missedDialog;
+
+	[HideInInspector]
+	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
 
     // Use this for initialization
     protected void OnEnable() {
@@ -78,7 +83,10 @@ public class Friend : MonoBehaviour {
 
     	// nothing to do for a basic friend.
     }
+	public virtual void GiveData(List<GameObject> neededObjs){
 
+    	// nothing to do for a basic friend.
+    }
     public virtual void Execute()
     {
         IsVisiting = true;
@@ -87,7 +95,8 @@ public class Friend : MonoBehaviour {
     public virtual void FinishDialogEvent(){
 
     	//TODO: DEFINATELY change this...
-		gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+    	Debug.Log("FINISH DIALOG EVENT ACTIVATE");
+		dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
     	//nothing to do for basic friend
 
@@ -96,7 +105,25 @@ public class Friend : MonoBehaviour {
     public void MissedEvent(){
     	nextDialog = missedDialog;
     }
+	void DayAsStringSet(){
+		dialogManager.variableText = newestAddedEvent.day.ToString();
+		Debug.Log(">>>>>DAY AS STRING SET TO: " + newestAddedEvent.day.ToString());
+		dialogManager.Invoke("ReturnFromAction",.1f);
 
+	}
+
+
+	public void CalendarMark(){
+		dialogManager.textBox.SetActive(false);
+		dialogManager.currentlySpeakingIcon.SetActive(false);
+		//Debug.Log(friend.name);
+		//Debug.Log(newestAddedEvent.day);
+		calendar.SetActive(true);
+		calendar.GetComponent<HUD_Calendar>().NewMarkSequence(newestAddedEvent.day,name);
+		calendar.GetComponent<HUD_Calendar>().Invoke("LeaveScreen",4f);
+		dialogManager.Invoke("ReturnFromAction",5f);
+
+	}
  
 
    

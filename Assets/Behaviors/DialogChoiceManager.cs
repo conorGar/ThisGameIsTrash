@@ -17,7 +17,7 @@ public class DialogChoiceManager : MonoBehaviour {
 	public List<GameObject> dialogChoiceBoxes = new List<GameObject>();
 	List<DialogResponse> dialogResponses = new List<DialogResponse>();
 	public TextMeshProUGUI choiceTitle;
-	DialogChoice currentDialogChoice;
+	//DialogChoice currentDialogChoice;
 
 	string mydialogName;
 	int numberOfOptions;
@@ -61,22 +61,37 @@ public class DialogChoiceManager : MonoBehaviour {
 		arrowPos = 0;
 		dialogResponses.Clear();
 		numberOfOptions = currentNode.responses.Count;
+		//Debug.Log("Number of Options: " + numberOfOptions);
+		//Debug.Log(currentNode.responses[0].text);
+		//Debug.Log(currentNode.responses[1].text);
 		choiceTitle.text = currentNode.question.ToString();
 		for(int i = 0; i < numberOfOptions; i++){
+			//Debug.Log(currentNode.responses[i].text);
+			//currentNode.responses[i].text.Replace("image","");
+			//Debug.Log(currentNode.responses[i].text);
 			dialogResponses.Add(currentNode.responses[i]);
-			dialogResponses[i].text.Replace("[image]"," ");
+			//dialogResponses[i].text.Replace("[image]"," ");
 			dialogChoiceBoxes[i].SetActive(true);
 			dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = dialogResponses[i].text;
 
 			//enable images on special image dialog choices
-			if(dialogResponses[i].text.Contains("[image]")){
-				Debug.Log("vvvvvv Dialog Choice Icons Activated Here vvvv");
-				int index = dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.IndexOf("[image]");
-				Debug.Log(index);
-				dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Remove(index,6);
+			if(dialogResponses[i].text.Contains(":")){
+				//Debug.Log("vvvvvv Dialog Choice Icons Activated Here vvvv");
+				//int index = dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.IndexOf("[image]");
+				//Debug.Log(index);
+				//dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Replace("[image]",".");
+				//dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text.Remove(index,6);
+				//Debug.Log(dialogChoiceBoxes[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text);
 				dialogChoiceBoxes[i].transform.GetChild(1).gameObject.SetActive(true);
 			}
 		}
+
+		dialogChoiceBoxes[arrowPos].GetComponent<Image>().color = highlightedColor;
+		dialogChoiceBoxes[arrowPos].transform.position = new Vector2(5.8f,dialogChoiceBoxes[arrowPos].transform.position.y);
+
+		//text change
+		dialogChoiceBoxes[arrowPos].transform.GetChild(0).gameObject.GetComponent<TextAnimation>().enabled = true;
+		dialogChoiceBoxes[arrowPos].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.green;
 					
 
 

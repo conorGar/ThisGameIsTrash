@@ -6,8 +6,8 @@ public class StoneFriend : Friend
 {
 
 	List<GameObject> handsDelivered = new List<GameObject>();//hands should be children, so that there positions are saved
-	public DialogManager dialogManager;
-
+	public GameObject eyeBreakPS;
+    public GameObject eyeCover;
 
 	public override void GenerateEventData()
     {
@@ -28,6 +28,10 @@ public class StoneFriend : Friend
 
     }
 
+    public void BreakEyes(){
+    	Destroy(eyeCover);
+    	eyeBreakPS.SetActive(true);
+    }
 
 }
 

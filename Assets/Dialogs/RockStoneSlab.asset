@@ -70,6 +70,7 @@ MonoBehaviour:
     - Value: 789895af-f364-4efd-b40d-b9d9ba409c38
     - Value: 1fe9341a-2da3-4136-b004-327b5bbbc604
     - Value: 931b283a-6132-4ee4-985a-bbf929df1eff
+    - Value: 230be8ab-3218-42a4-b746-dcf2be14e5f3
     values:
     - window:
         serializedVersion: 2
@@ -79,9 +80,9 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start
-      speakerName: Slab
+      speakerName: ???
       question: 
-      action: 
+      action: OpeningSequence
       id:
         Value: e0e12f04-6174-495a-a666-8356a335eadd
       x: 50
@@ -99,7 +100,7 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start1
-      speakerName: 
+      speakerName: Slab
       question: 
       action: 
       id:
@@ -172,13 +173,13 @@ MonoBehaviour:
       child_id:
         Value: 
       responses:
-      - text: Rock [image]
+      - text: 'Rock:'
         node_id:
           Value: 0b33165c-9704-4688-b4ac-2158936976b8
-      - text: Stone [image]
+      - text: 'Stone:'
         node_id:
           Value: 0850b1af-8acf-4d66-be76-fcdc4c5ff0bf
-      - text: Slab [image]
+      - text: 'Slab:'
         node_id:
           Value: 6326e206-2cdc-4295-9c71-61b98794f432
       - text: I'm sorry, but I'm not into rocks that way. No offense. I wouldn't be
@@ -575,15 +576,14 @@ MonoBehaviour:
         height: 200
       isCollapsed: 0
       title: Slab2
-      speakerName: ' '
+      speakerName: 
       question: 
       action: TrashGiveHUDEnable
       id:
         Value: 447127d8-d41d-4146-9a5d-74eb638057eb
       x: 340
       y: 466
-      text: Sweet man, thanks, I owe you man. How much you willing to contribute to
-        the cause?
+      text: Sweet man, thanks,  how much you willing to contribute to the cause?
       type: 1
       child_id:
         Value: a44c483c-0ccf-4ee8-99ae-59302c5ad908
@@ -596,14 +596,14 @@ MonoBehaviour:
         height: 200
       isCollapsed: 0
       title: SlabNoTrash1
-      speakerName: ' '
+      speakerName: 
       question: 
       action: 
       id:
         Value: e020b3a5-d28b-4970-af57-64051adad33e
       x: 408
       y: 708
-      text: Ha Ha, notta problem man, I get it, gotta keep some for yourself, right!
+      text: C'mon bro. Don't mess with me like that. I really need your help.
       type: 1
       child_id:
         Value: 37ff1489-22f8-4b08-8e55-11f3106d5c87
@@ -623,8 +623,7 @@ MonoBehaviour:
         Value: 37ff1489-22f8-4b08-8e55-11f3106d5c87
       x: 758
       y: 714
-      text: But really man, there aint' too many ways for a rock to earn trash, at
-        least not any ways I'd be proud of.
+      text: This is serious. It's a crime for a slab as good looking as me to go unloved.
       type: 1
       child_id:
         Value: 9a946b12-c7e1-47eb-86b6-88d6c589b575
@@ -651,28 +650,28 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 642
-        y: 460
+        x: 628
+        y: 436
         width: 270
         height: 200
       isCollapsed: 0
       title: Slab3
       speakerName: ' '
       question: 
-      action: EnoughTrashCheck
+      action: GiveAnythingCheck
       id:
         Value: a44c483c-0ccf-4ee8-99ae-59302c5ad908
-      x: 642
-      y: 460
-      text: Hey thanks man!
+      x: 628
+      y: 436
+      text: '...'
       type: 1
       child_id:
-        Value: e50452d9-d521-4165-b163-724be5c602fa
+        Value: 230be8ab-3218-42a4-b746-dcf2be14e5f3
       responses: []
     - window:
         serializedVersion: 2
-        x: 966
-        y: 459
+        x: 1210
+        y: 455
         width: 270
         height: 200
       isCollapsed: 0
@@ -682,8 +681,8 @@ MonoBehaviour:
       action: 
       id:
         Value: e50452d9-d521-4165-b163-724be5c602fa
-      x: 966
-      y: 459
+      x: 1210
+      y: 455
       text: I don't think I have quite enough wealth for women to find me attractive
         yet though.
       type: 1
@@ -713,8 +712,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 1316
-        y: 462
+        x: 1469
+        y: 488
         width: 270
         height: 200
       isCollapsed: 0
@@ -724,8 +723,8 @@ MonoBehaviour:
       action: finish
       id:
         Value: fe6a1cd3-684b-48ad-b571-e7e14b442559
-      x: 1316
-      y: 462
+      x: 1469
+      y: 488
       text: But we're gettin' there! Let me know when you can spare some trash!
       type: 1
       child_id:
@@ -1240,6 +1239,26 @@ MonoBehaviour:
       type: 1
       child_id:
         Value: 0794c6ad-5da7-4d13-ad46-e6bd3f05d3e4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 920.57794
+        y: 409
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Slab3_2
+      speakerName: ' '
+      question: 
+      action: EnoughTrashCheck
+      id:
+        Value: 230be8ab-3218-42a4-b746-dcf2be14e5f3
+      x: 920.57794
+      y: 409
+      text: Hey, thanks bro!
+      type: 1
+      child_id:
+        Value: e50452d9-d521-4165-b163-724be5c602fa
       responses: []
   rootNodeId:
     Value: e0e12f04-6174-495a-a666-8356a335eadd

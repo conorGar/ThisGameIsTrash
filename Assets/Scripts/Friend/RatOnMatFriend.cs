@@ -9,11 +9,12 @@ public class RatOnMatFriend : Friend
 
 
 	void OnEnable(){
-		if(GlobalVariableManager.Instance.WORLD_NUM == 1 && nextDialog != "RatMat1"){
+		if(GlobalVariableManager.Instance.WORLD_NUM == 1 && nextDialog != "RatMat1" || GlobalVariableManager.Instance.DAY_NUMBER != day){
 			Destroy(gameObject);//onlt happens once
 		}else{
 			base.OnEnable();
 		}
+		StartCoroutine("DayDisplayDelay");
 	}
 
 	public override void FinishDialogEvent(){
@@ -21,7 +22,12 @@ public class RatOnMatFriend : Friend
 		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false; // needed to fix glitch where if player spammed continue button dialog would start again
 		StartCoroutine("ReturnCam");
 	}
+	IEnumerator DayDisplayDelay(){
 
+	yield return new WaitForSeconds(2f);
+		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = true; // needed to fix glitch where if player spammed continue button dialog would start again
+
+	}
 	IEnumerator ReturnCam(){
 		yield return new WaitForSeconds(.3f);
 

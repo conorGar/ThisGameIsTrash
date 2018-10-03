@@ -16,7 +16,16 @@ public class PauseGame : MonoBehaviour {
 	void Update () {
 		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
         {
+        	gameObject.GetComponent<MeleeAttack>().enabled = false;
+        	gameObject.GetComponent<ThrowTrash>().enabled = false;
+        	pauseMenu.GetComponent<GUI_PauseMenu>().player = this.gameObject;
 			pauseMenu.SetActive(true);
 		}
+	}
+
+	public void ReturnFromPause(){//Activated by GUI_PauseMenu
+		gameObject.GetComponent<MeleeAttack>().enabled = true;
+        gameObject.GetComponent<ThrowTrash>().enabled = true;
+
 	}
 }

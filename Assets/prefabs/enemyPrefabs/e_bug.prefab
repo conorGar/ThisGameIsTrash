@@ -206,6 +206,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noticeThreshold: 4
+  sleepingEnemy: 0
+  sleepingPS: {fileID: 0}
+  noticeSfx: {fileID: 0}
 --- !u!114 &114108039266120802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -261,6 +264,7 @@ MonoBehaviour:
   rightLimit: 0
   topLimit: 0
   botLimit: 0
+  globalPos: 0
 --- !u!114 &114588348518194852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,8 +279,7 @@ MonoBehaviour:
   armoredEnemy: 0
   moveWhenHit: 0
   secretHider: 0
-  currentHp: 4
-  meleeDmgBonus: 0
+  returnToCurrentAniAfterHit: 0
   invincibleAni:
     name: Default
     frames: []
@@ -289,8 +292,7 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  currentCamera: {fileID: 114911326877479794, guid: ed6dbd2afaf985146a8eda13f2278a1c,
-    type: 2}
+  myDeadBodyName: 
   respawnEnemy: 0
   hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
   hitSqueal: {fileID: 0}
@@ -306,8 +308,12 @@ MonoBehaviour:
   myShadow: {fileID: 1170939172725382}
   myCollisionBox: {fileID: 61374833343893834}
   returnAniName: idle
+  behaviorsToDeactivate: []
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   myRespawner: {fileID: 0}
+  currentHp: 4
+  meleeDmgBonus: 0
+  dontStopWhenHit: 0
 --- !u!114 &114740205839798866
 MonoBehaviour:
   m_ObjectHideFlags: 1

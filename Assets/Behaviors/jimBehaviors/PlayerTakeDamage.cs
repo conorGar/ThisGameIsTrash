@@ -15,7 +15,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 
 	public AudioClip hurt;
-
+	public AudioClip deathSound;
 	[HideInInspector]
 	public GameObject currentlyCarriedObject; // set by pickupableObject.cs for use when dropping at death
 	int maxHP;
@@ -56,6 +56,9 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 			damageDealt = projectile.gameObject.GetComponent<Projectile>().damageToPlayer;
 
+			TakeDamage(projectile.gameObject);
+		}else if(projectile.gameObject.layer == 9 && !currentlyTakingDamage){//enemy with non-solid collision(flying enemy)
+			damageDealt = projectile.gameObject.GetComponent<Enemy>().attkPower;
 			TakeDamage(projectile.gameObject);
 		}
 	}
@@ -110,6 +113,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		}else{
 			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
 		}
+		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
 		yield return new WaitForSeconds(.5f); //brief period of invincibility
 		currentlyTakingDamage = false;
 		Debug.Log("Regained Control");
@@ -128,6 +132,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 	}
 
 	IEnumerator Death(){
+		SoundManager.instance.FadeMusic();
+		SoundManager.instance.PlaySingle(deathSound);
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		if(currentlyCarriedObject != null){
 			currentlyCarriedObject.GetComponent<PickupableObject>().Drop();
@@ -158,6 +164,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 		deathDisplay.myDayMeter.gameObject.SetActive(false);
 		yield return new WaitForSeconds(.5f);
 		deathDisplay.ReturnHUD();
+		SoundManager.instance.musicSource.Play();
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 
 		//-----------Resetting of needed values----------------//
 		roomManager.GetComponent<RoomManager>().currentRoom.DeactivateRoom();

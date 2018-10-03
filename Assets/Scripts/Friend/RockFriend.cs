@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.PostProcessing;
 
 /*public enum DESIRED_OBJECT
 {
@@ -21,13 +23,22 @@ public class RockFriend : Friend {
     List<SpecialFriendObject> pickedUpObjects = new List<SpecialFriendObject>();
 
     public GUI_RockItemHUD itemHUD;
+    public GameObject mainCam;
+    public GameObject eyeBreakPS;
+    public GameObject eyeCover;
+    public GameObject slab;
+    public GameObject stone;
+
 
     public override void GenerateEventData()
     {
         // These guys show up every day.
         day = CalendarManager.Instance.currentDay;
     }
-
+    public void OnEnable(){
+    	base.OnEnable();
+    	mainCam = GameObject.Find("tk2dCamera");
+    }
     public void DeliverObject(SpecialFriendObject obj)
     {
     	for(int i = 0; i < pickedUpObjects.Count;i++){
@@ -67,8 +78,44 @@ public class RockFriend : Friend {
     }
 
 	public override void FinishDialogEvent(){
+		
+		slab.GetComponent<ActivateDialogWhenClose>().enabled = true;
+		base.FinishDialogEvent();
+		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false; // needed to fix glitch where if player spammed continue button dialog would start again
+	}
+
+	public void OpeningSequence(){
+		StartCoroutine("OpeningSequenceEvent");
+	}
 
 
+	public IEnumerator OpeningSequenceEvent(){
+		mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
+		//Rock
+		mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",.5f);
+		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,null);
+		yield return new WaitForSeconds(1f);
+		eyeBreakPS.SetActive(true);
+		Destroy(eyeCover);
+		yield return new WaitForSeconds(1f);
+		//Slab
+		mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",.5f);
+		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(slab.transform.position,null);
+		yield return new WaitForSeconds(.3f);
+		slab.GetComponent<SlabFriend>().BreakEyes();
+
+		yield return new WaitForSeconds(1f);
+		//Stone
+		mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",.5f);
+		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(stone.transform.position,null);
+		yield return new WaitForSeconds(.3f);
+
+		stone.GetComponent<StoneFriend>().BreakEyes();
+		yield return new WaitForSeconds(1f);
+		for(int i = 0; i < dialogManager.dialogIcons.Count; i++){
+			dialogManager.dialogIcons[i].GetComponent<Image>().enabled = true;
+		}
+		dialogManager.ReturnFromAction();
 
 	}
 

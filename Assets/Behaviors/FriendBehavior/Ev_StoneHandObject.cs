@@ -15,8 +15,8 @@ public class Ev_StoneHandObject : PickupableObject
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
-	public override void PickUpEvent(){
-
+	public override void PickUp(){
+		base.PickUp();
 		stoneFriend.GetComponent<ActivateDialogWhenClose>().enabled = true; // can talk to stone if carrying hand
 		gameObject.GetComponent<BoxCollider2D>().enabled = false;
 	}

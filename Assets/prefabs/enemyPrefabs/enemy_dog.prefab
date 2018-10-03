@@ -66,9 +66,10 @@ GameObject:
   - component: {fileID: 114601902577098916}
   - component: {fileID: 114416030472219150}
   - component: {fileID: 95215378861971086}
+  - component: {fileID: 114670538144705430}
   m_Layer: 9
   m_Name: enemy_dog
-  m_TagString: Untagged
+  m_TagString: enemy_dog
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,6 +281,7 @@ MonoBehaviour:
   noticeThreshold: 5
   sleepingEnemy: 1
   sleepingPS: {fileID: 1763940434667328}
+  noticeSfx: {fileID: 8300000, guid: 8648078d47b18484eb01c18cd8394427, type: 3}
 --- !u!114 &114416030472219150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,6 +361,24 @@ MonoBehaviour:
   player: {fileID: 0}
   speed: 15
   distanceTillLunge: 5
+  buildUpSound: {fileID: 8300000, guid: 2d074d21b7f063945a704f0ec50f8f16, type: 3}
+  lungeSfx: {fileID: 8300000, guid: 9f895ec1982445a41b350bb97f5d5b69, type: 3}
+--- !u!114 &114670538144705430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950723656096496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e66f397c6ae134782c4022379cbba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftLimit: 0
+  rightLimit: 0
+  topLimit: 0
+  botLimit: 0
+  globalPos: 0
 --- !u!114 &114732958232410470
 MonoBehaviour:
   m_ObjectHideFlags: 1

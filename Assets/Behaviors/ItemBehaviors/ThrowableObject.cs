@@ -11,7 +11,8 @@ public class ThrowableObject : PickupableObject {
 	public GameObject myShadow;
 	Room currentRoom;//for staying in bounds
 	public BoxCollider2D physicalCollision;
-
+	public AudioClip throwObject;
+	public AudioClip landSfx;
 	public List<MonoBehaviour> behaviorsToStop = new List<MonoBehaviour>();
 	// Use this for initialization
 	void Start(){
@@ -29,6 +30,7 @@ public class ThrowableObject : PickupableObject {
 
 		if(beingThrown){
 			if(transform.position.y < landingY){
+				SoundManager.instance.PlaySingle(landSfx);
 				ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
 				Debug.Log("Reached Landing");
 				beingThrown = false;
@@ -69,7 +71,7 @@ public class ThrowableObject : PickupableObject {
 	void Throw(){
 		//beingCarried = false;
 		gameObject.GetComponent<Animator>().enabled = false;
-
+		SoundManager.instance.PlaySingle(throwObject);
 		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
 		if(currentRoom != RoomManager.Instance.currentRoom){
 			gameObject.GetComponent<CannotExitScene>().SetLimits(RoomManager.Instance.currentRoom);

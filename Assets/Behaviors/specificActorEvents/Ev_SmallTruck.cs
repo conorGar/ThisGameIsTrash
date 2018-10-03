@@ -100,7 +100,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 
 	public void EndDay(){
 		Debug.Log("Truck End Day Activate");
-
+	
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		player.GetComponent<EightWayMovement>().enabled = false;
 		endDayTruck = true;

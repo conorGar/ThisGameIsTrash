@@ -7,6 +7,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	public float noticeThreshold;
 	public bool sleepingEnemy;
 	public GameObject sleepingPS;
+	public AudioClip noticeSfx;
 	GameObject player;
 
 	// Use this for initialization
@@ -28,6 +29,8 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 				if(this.gameObject.GetComponent<RandomDirectionMovement>() != null)
 					this.gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
 				this.gameObject.GetComponent<FollowPlayer>().enabled = true;
+				SoundManager.instance.PlaySingle(noticeSfx);
+				ObjectPool.Instance.GetPooledObject("effect_notice",gameObject.transform.position);
 				this.enabled = false;
 			}
 		}

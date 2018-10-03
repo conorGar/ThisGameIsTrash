@@ -51,6 +51,7 @@ public class EightWayMovement : MonoBehaviour {
  
     // Update is called once per frame
     void Update () {
+		
         float inputX = ControllerManager.Instance.GetAxis(INPUTACTION.MOVELEFT);
         float inputY = ControllerManager.Instance.GetAxis(INPUTACTION.MOVEUP);
         movement = new Vector2(inputX, inputY);
@@ -289,6 +290,23 @@ public class EightWayMovement : MonoBehaviour {
         yield return new WaitForSeconds (delay);
         isDiagonal = false;
         noDelayStarted = false;
+    }
+
+    public void StopMovement(){
+			if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
+						
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);//set to normal idle when return from override clip(hurt, pickup,etc)
+							
+			}else{
+				if(carryingAbove){
+				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAboveIdle",false);
+				}
+				else
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",false);
+			}
+		StopAllCoroutines();
+		legAnim.Play(anim.CurrentClip.name);
+    	this.enabled = true;
     }
     void SpawnClouds(){
 		/*GameObject newestCloud;

@@ -46,6 +46,7 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
 			}else{
 				Debug.Log("ICON FADE SHOULDVE HAPPENED!!!??!" + icons[i].name);
 				icons[i].GetComponent<Image>().color = new Color(.55f,.55f,.55f);//new Color(124,124,124);//fadeIconIfNotTalking
+				icons[i].GetComponent<MultipleIcon>().ReturnToPosition();
 			}
 		}
 
@@ -69,12 +70,13 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
 			}
 		}
 		//dialogManager.currentlySpeakingIcon.GetComponent<Animator>().StopPlayback();
-		Debug.Log("-x-x-x-x-x-x-x- SWITCHING TO ANI WITH TRIGGER NAME:" + triggerName);
-		dialogManager.currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
-		Debug.Log(		dialogManager.currentlySpeakingIcon.GetComponent<Animator>().enabled);
-		dialogManager.currentlySpeakingIcon.GetComponent<Animator>().SetTrigger(triggerHash);
-		dialogManager.currentlySpeakingIcon.GetComponent<Animator>().Play(triggerName);
-
+		if(dialogManager.currentlySpeakingIcon != null){
+			Debug.Log("-x-x-x-x-x-x-x- SWITCHING TO ANI WITH TRIGGER NAME:" + triggerName);
+			dialogManager.currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
+			Debug.Log(		dialogManager.currentlySpeakingIcon.GetComponent<Animator>().enabled);
+			dialogManager.currentlySpeakingIcon.GetComponent<Animator>().SetTrigger(triggerHash);
+			dialogManager.currentlySpeakingIcon.GetComponent<Animator>().Play(triggerName);
+		}
 		if(triggerName == "IconSlideBack"){
 			Debug.Log("ICON SLIDE BACK PROPERLY READ-x-x-x-x-x-x-x-x-x-");
 			for(int i = 0; i < icons.Count; i++){
@@ -83,7 +85,7 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
 				}
 			}
 		}
-		Debug.Log(		dialogManager.currentlySpeakingIcon.GetComponent<Animator>().enabled);
+//		Debug.Log(		dialogManager.currentlySpeakingIcon.GetComponent<Animator>().enabled);
 
 	}
 

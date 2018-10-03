@@ -268,6 +268,7 @@ MonoBehaviour:
   rightLimit: 0
   topLimit: 0
   botLimit: 0
+  globalPos: 0
 --- !u!114 &114806496429286330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,6 +283,7 @@ MonoBehaviour:
   noticeThreshold: 5
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
+  noticeSfx: {fileID: 0}
 --- !u!114 &114808193333466140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armoredEnemy: 0
-  moveWhenHit: 1
+  moveWhenHit: 0
   secretHider: 0
   returnToCurrentAniAfterHit: 0
   invincibleAni:

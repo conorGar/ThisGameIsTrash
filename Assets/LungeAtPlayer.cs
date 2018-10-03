@@ -7,7 +7,8 @@ public class LungeAtPlayer : MonoBehaviour {
 	public GameObject player;
 	public float speed = 15;
 	public float distanceTillLunge = 8;
-
+	public AudioClip  buildUpSound;
+	public AudioClip lungeSfx;
 	Vector2 movementDir;
 	int lungeOnce = 0;
 	tk2dSpriteAnimator myAnim;
@@ -32,8 +33,10 @@ public class LungeAtPlayer : MonoBehaviour {
 		gameObject.GetComponent<FollowPlayer>().enabled = false;
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		myAnim.Play("prepare");
+		SoundManager.instance.PlaySingle(buildUpSound);
 		yield return new WaitForSeconds(.5f);
 		gameObject.GetComponent<EnemyTakeDamage>().dontStopWhenHit = true;
+		SoundManager.instance.PlaySingle(lungeSfx);
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position); //dash clouds
 		myAnim.Play("chase");
 		movementDir = (player.transform.position - gameObject.transform.position).normalized * speed;

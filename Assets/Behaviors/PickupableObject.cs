@@ -54,7 +54,7 @@ public class PickupableObject : MonoBehaviour
 	{	
 		if(player != null && Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
 			//Debug.Log("within distance" + GlobalVariableManager.Instance.CARRYING_SOMETHING);
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING){
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING && GlobalVariableManager.Instance.PLAYER_CAN_MOVE){//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'
 				Debug.Log("PickUpable object...picked up");
 				movePlayerToObject = true;
 				PickUp();
@@ -144,6 +144,7 @@ public class PickupableObject : MonoBehaviour
 		gameObject.transform.parent = null; //detatch from player transform
 		gameObject.transform.position = new Vector2(transform.position.x + 1f, transform.position.y -1f);
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
+		player.GetComponent<EightWayMovement>().clipOverride = false;
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		SoundManager.instance.PlaySingle(drop);
 		spinning = false;
