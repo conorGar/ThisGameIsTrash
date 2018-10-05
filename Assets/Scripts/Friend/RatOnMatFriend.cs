@@ -7,12 +7,7 @@ public class RatOnMatFriend : Friend
 	public ParticleSystem vanishPS;
 	public tk2dCamera mainCam;
 
-	public override void FinishDialogEvent(){
-		Debug.Log("Ec finish dialog event activate");
-		StartCoroutine("ReturnCam");
-	}
-
-	IEnumerator ReturnCam(){
+	public override IEnumerator OnFinishDialogEnumerator(){
 		yield return new WaitForSeconds(.3f);
 
 

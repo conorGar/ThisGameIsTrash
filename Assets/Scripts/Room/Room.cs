@@ -86,23 +86,22 @@ public class Room : MonoBehaviour
 
         for (int i=0; i < friendSpawners.Count; ++i)
         {
-            if (friendSpawners[i].friend.IsVisiting)
+            var spawnedFriend = FriendManager.Instance.GetFriend(friendSpawners[i].friend);
+            if (spawnedFriend != null && spawnedFriend.IsVisiting)
             {
-                var spawnedFriend = FriendManager.Instance.GetFriendObject(friendSpawners[i].friend);
-
-                if (spawnedFriend != null)
+                if (spawnedFriend.IsCurrentRoom(this))
                 {
-                    spawnedFriend.transform.position = friendSpawners[i].transform.position;
-                    spawnedFriend.SetActive(true);
-                    friends.Add(spawnedFriend);
+                    spawnedFriend.gameObject.transform.position = friendSpawners[i].transform.position;
+                    spawnedFriend.gameObject.SetActive(true);
+                    friends.Add(spawnedFriend.gameObject);
+
+                    spawnedFriend.OnActivateRoom();
                 }
             }
         }
 
         if(bossRoom){
         	for(int i = 0; i< bosses.Count;i++){
-        			
-        			bosses[i].gameObject.SetActive(true);
 					bosses[i].GetComponent<Boss>().ActivateBoss();
 					bosses[i].GetComponent<Boss>().currentRoom = this;
         		
@@ -118,7 +117,10 @@ public class Room : MonoBehaviour
 	        enemies[i].SetActive(false);
 
         for (int i = 0; i < friends.Count; ++i)
+        {
+            friends[i].GetComponent<Friend>().OnDeactivateRoom();
             friends[i].SetActive(false);
+        }
 
         friends.Clear();
 	    enemies.Clear();

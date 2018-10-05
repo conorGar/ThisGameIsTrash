@@ -111,11 +111,17 @@ public class DialogManager : MonoBehaviour {
 			}
 			canContinueDialog = false;
 			CancelInvoke();
-		}else if(currentNode.action != null && currentNode.action.Length > 2){ //length check just to see if not blank
+		}else if(!string.IsNullOrEmpty(currentNode.action)){ //length check just to see if not blank
 			if(currentNode.action == "finish"){
 				canContinueDialog = false;
 				dayMeter.StartAgain();
 				FinishDialog();
+
+                if(!string.IsNullOrEmpty(currentNode.friendState))
+                {
+                    Debug.Log("Setting Friend State to: " + currentNode.friendState);
+                    friend.SetFriendState(currentNode.friendState);
+                }
 			}else if(currentNode.action == "IconLeave"){
 				currentlySpeakingIcon.SetActive(false);
 				ReturnFromAction();
@@ -321,7 +327,7 @@ public class DialogManager : MonoBehaviour {
 		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
 		player.GetComponent<EightWayMovement>().enabled = true;
-		friend.FinishDialogEvent();
+		friend.OnFinishDialog();
 		dialogCanvas.SetActive(false);
 
 	}

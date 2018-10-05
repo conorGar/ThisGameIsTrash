@@ -6,35 +6,72 @@ using System.Collections.Generic;
 public class BossStuart : Boss
 {
 	public GameObject player;
-	public MultipleDialogIconsManager mdim;
+    public Vector3 spawnPosition;
+    public Vector3 exSpawnPosition, hashSpawnPosition, questioSpawnPosition;
 
-	int activateEventOnce;
-	public GameObject trio;
+
+    public MultipleDialogIconsManager mdim;
+
+    public BossFriendEx ex;
+    public GameObject bossTrio;
+    public GameObject bossEx;
+    public GameObject bossHash;
+    public GameObject bossQuestio;
 	public B_Ev_Hash hash;
 	EnemyTakeDamage myETD;
 
 
 	bool canDamage;
-	// Use this for initialization
-	void OnEnable ()
-	{
 
+    // Use this for initialization
+    protected void Start()
+    {
+        base.Start();
+
+        canDamage = true;
+        spawnPosition = gameObject.transform.position;
+        exSpawnPosition = bossEx.transform.position;
+        hashSpawnPosition = bossHash.transform.position;
+        questioSpawnPosition = bossQuestio.transform.position;
+    }
+    void OnEnable ()
+	{
 		myETD = gameObject.GetComponent<EnemyTakeDamage>();
-		if(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] <= 10 && activateEventOnce == 0){
-			activateEventOnce = 1; // boss event already happened.
-		}
-	}
+        ex = FriendManager.Instance.GetFriend("Ex") as BossFriendEx;
+        ex.stuart = this;
+    }
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if(myETD.currentHp <= 6 && activateEventOnce == 0){
-			BossEvent();
-			activateEventOnce = 1;
-		}
-
+        switch (ex.GetFriendState())
+        {
+            // In phase one, the trio will come back when Stuart's HP dips below 7.
+            case "FIGHT_PHASE_1":
+                if (myETD.currentHp <= 6)
+                {
+                    BossEvent();
+                }
+                break;
+        }
 	}
 
+    public override void ActivateBoss()
+    {
+        ex = FriendManager.Instance.GetFriend("Ex") as BossFriendEx;
+        if (ex != null && ex.GetFriendState() != "END")
+        {
+            base.ActivateBoss();
+        }
+    }
+
+    public void ResetBossPositions()
+    {
+        gameObject.transform.position = spawnPosition;
+        bossEx.transform.position = exSpawnPosition;
+        bossHash.transform.position = hashSpawnPosition;
+        bossQuestio.transform.position = questioSpawnPosition;
+    }
 
 	void OnTriggerEnter2D(Collider2D collider){
 		if(collider.gameObject.layer == 15){ //throwable object hit
@@ -47,10 +84,17 @@ public class BossStuart : Boss
 
 	}
 
+    public void PrepPhase2()
+    {
+        SoundManager.instance.musicSource.Play();
+        bossTrio.SetActive(true);
+        GetComponent<EnemyTakeDamage>().enabled = false;
+        canDamage = false;
+        GetComponent<FollowPlayer>().enabled = true;
+    }
 
 	public override void BossEvent(){
 		//activate boss 1 middle dialog
-		gameObject.GetComponent<EnemyTakeDamage>().enabled = false;
 		player.GetComponent<BoxCollider2D>().enabled = false;
 		player.GetComponent<EightWayMovement>().enabled = false;
 		gameObject.GetComponent<FollowPlayer>().enabled = false;
@@ -59,13 +103,23 @@ public class BossStuart : Boss
 		mdim.icons[0].GetComponent<MultipleIcon>().positionOnScreen = 0;//change ex icon position to be on left side
 		mdim.SetStartingIcons(new string[]{"Stuart"});
 		myETD.currentHp += 10; //regain lost hp
-		trio.SetActive(true); //activate dialog
-		canDamage = false;
+		ex.gameObject.SetActive(true); //activate dialog
+
+        ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+        ex.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
+        ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
+        ex.SetFriendState("STUART_PEP");
 	}
 
 	public override void BossDeathEvent(){
 		mdim.SetStartingIcons(new string[]{"Stuart"});
-		trio.SetActive(true);
-	}
+
+        ex.gameObject.SetActive(true);
+        ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+        ex.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
+        ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
+        ex.SetFriendState("STUART_DEFEATED");
+        bossTrio.SetActive(false);
+    }
 }
 

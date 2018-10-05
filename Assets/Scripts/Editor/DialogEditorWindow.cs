@@ -289,6 +289,11 @@ public class DialogEditorWindow : EditorWindow {
                     GUILayout.Label("Action: ");
                     node.action = GUILayout.TextField(node.action);
                     GUILayout.EndHorizontal();
+
+                    GUILayout.BeginHorizontal();
+                    GUILayout.Label("Change Friend State: ");
+                    node.friendState = GUILayout.TextField(node.friendState);
+                    GUILayout.EndHorizontal();
                     break;
                 case DIALOGNODETYPE.QUESTION:
                     GUILayout.BeginHorizontal();

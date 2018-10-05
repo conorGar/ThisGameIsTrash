@@ -18,7 +18,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	public float yDistanceThreshold;
 	//public GameObject myDialogIcon;
 	public GameObject dialogCanvas;
-	public GameObject dialogManager;
+	public DialogManager dialogManager;
 	public DialogActionManager dialogActionManager;
 	public GameObject myDialogIcon;
 	public bool cameraPanToFriendAtStart = true;
@@ -49,52 +49,58 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 	}
 
+    // Called by other friends to test if they are close and control the dialog as it's displayed and interacted with.
+    // Moved this out of Update so it can be controlled better by the friend and what state they are in.
+    public void Execute()
+    {
+        //Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
+        if (GlobalVariableManager.Instance.CARRYING_SOMETHING == false)
+        {
+
+            if (dialogName.Length > 0 && player != null)
+            {
+
+                if (Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold && Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold)
+                {
+
+                    if (autoStart && canTalkTo)
+                    {
+                        dialogName = friend.nextDialog;
+                        ActivateDialog();
+                    }
+                    else
+                    {
+                        //Debug.Log("Autostart val:" + autoStart);
+                        //Debug.Log("canTalkTo val:" + canTalkTo);
+
+                        if (speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy == false)
+                        {
+                            SoundManager.instance.PlaySingle(mySpeechIconSFX);
+                            speechBubbleIcon.SetActive(true);
+                        }
+                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+                        {
+                            dialogManager.canContinueDialog = true;
+                            dialogName = friend.nextDialog;
+                            ActivateDialog();
+                        }
+                    }
+                }
+                else if (!autoStart && speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy)
+                {
+                    speechBubbleIcon.SetActive(false);//disable speech bubble icon when far away
+                }
+            }
+        }//end of carry something check
+    }
 	
 	void Update () {
-
-		
-			//Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
-
-			if(GlobalVariableManager.Instance.CARRYING_SOMETHING == false){
-				
-				if(dialogName.Length > 0 && player != null){
-					
-					if(Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold &&Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold){
-						
-						if(autoStart && canTalkTo){
-							dialogName = friend.nextDialog;
-							ActivateDialog();
-						}else{
-							//Debug.Log("Autostart val:" + autoStart);
-							//Debug.Log("canTalkTo val:" + canTalkTo);
-
-							if(speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy == false){
-								SoundManager.instance.PlaySingle(mySpeechIconSFX);
-								speechBubbleIcon.SetActive(true);
-							}
-							if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
-								dialogManager.GetComponent<DialogManager>().canContinueDialog = true;
-								dialogName = friend.nextDialog;
-								ActivateDialog();
-							}
-						}
-					}else if(!autoStart && speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy){
-						speechBubbleIcon.SetActive(false);//disable speech bubble icon when far away
-					}
-				}
-			}//end of carry something check
 		
 	}
 
 	public void SetDialog(DialogDefinition dd){
 		dialogDefiniton = dd;
 		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
-		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
-		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
-		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
-
-
-
 	}
 
 	public void ActivateDialog(){
@@ -103,19 +109,19 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 		player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		if(dialogCanvas.activeInHierarchy == false){
 			if(cameraPanToFriendAtStart){
-					dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position, "");
+					dialogManager.mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position, "");
 			}
 			Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
 			myDialogIcon.GetComponent<DialogIconAnimationManager>().SwitchAni(iconAnimationName);
-			dialogManager.GetComponent<DialogManager>().animationName = iconAnimationName;
-			dialogManager.GetComponent<DialogManager>().myDialogDefiniton = dialogDefiniton;
-			dialogManager.GetComponent<DialogManager>().dialogTitle = dialogName;
+			dialogManager.animationName = iconAnimationName;
+			dialogManager.myDialogDefiniton = dialogDefiniton;
+			dialogManager.dialogTitle = dialogName;
 			if(friend != null){ // = null for some one timers
 				dialogActionManager.friend = friend;
-				dialogManager.GetComponent<DialogManager>().characterName.text = friend.friendName;
+				dialogManager.characterName.text = friend.friendName;
 
 			}
-			dialogManager.GetComponent<DialogManager>().SetFriend(friend);
+			dialogManager.SetFriend(friend);
 			dialogCanvas.SetActive(true);
 			myDialogIcon.SetActive(true);
 				if(myDialogIcon.transform.childCount>0){//if more than one icon
@@ -123,10 +129,10 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 						for(int i = 0; i< myDialogIcon.transform.childCount; i++){
 							dialogIcons.Add(myDialogIcon.transform.GetChild(i).gameObject);
 						}
-						dialogManager.GetComponent<DialogManager>().dialogIcons = dialogIcons;
+						dialogManager.dialogIcons = dialogIcons;
 				}else{
-					//dialogManager.GetComponent<DialogManager>().dialogIcons = new List<GameObject>{myDialogIcon};//one icon
-					dialogManager.GetComponent<DialogManager>().currentlySpeakingIcon = myDialogIcon;
+					//dialogManager.dialogIcons = new List<GameObject>{myDialogIcon};//one icon
+					dialogManager.currentlySpeakingIcon = myDialogIcon;
 				}
 			canTalkTo = false;
 			}

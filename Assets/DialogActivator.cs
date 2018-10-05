@@ -6,7 +6,7 @@ public class DialogActivator : MonoBehaviour {
 	public string myFriend;
 	GameObject friendInstance;
 	public GameObject dialogCanvas;
-	public GameObject dialogManager;
+	public DialogManager dialogManager;
 	public DialogActionManager  dialogActionManager;
 	public GameObject dialogIcon;
 

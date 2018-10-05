@@ -41,6 +41,7 @@ public class DialogNode
     public string speakerName;
     public string question;
     public string action;
+    public string friendState;
     public SerializableGuid id;
     public float x;
     public float y;
@@ -60,6 +61,7 @@ public class DialogNode
         speakerName = "speakerName";
         question = "";
         action = "";
+        friendState = "";
         id = Guid.NewGuid();
         text = p_text;
         type = p_type;

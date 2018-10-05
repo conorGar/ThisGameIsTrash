@@ -20,22 +20,28 @@ public class IsometricSorting : MonoBehaviour {
 		//player = GameObject.FindGameObjectWithTag("Player");
 		//myY = gameObject.transform.position.y + yPositionMark;
 		if(hastk2dSprite){
-		mytk2dSprite = gameObject.GetComponent<tk2dSprite>();
+		    mytk2dSprite = gameObject.GetComponent<tk2dSprite>();
+
+            if (mytk2dSprite == null)
+            {
+                Debug.Log("Missing Sprite! " + this.GetInstanceID());
+                return;
+            }
 		}else{
-		mySprite = gameObject.GetComponent<SpriteRenderer>();
+		    mySprite = gameObject.GetComponent<SpriteRenderer>();
 		}
-			if(!movingObject){
-				if(hastk2dSprite){
-			
-				mytk2dSprite.SortingOrder = -1*(int)gameObject.transform.position.y;
 
-			}else{
+		if(!movingObject){
+			if(hastk2dSprite)
+            {
+                mytk2dSprite.SortingOrder = -1*(int)gameObject.transform.position.y;
+
+		    }else{
 				
-				mySprite.sortingOrder = -1*(int)gameObject.transform.position.y;
+			    mySprite.sortingOrder = -1*(int)gameObject.transform.position.y;
 
-			}
+		    }
 		}
-
 	}
 
 	// Update is called once per frame

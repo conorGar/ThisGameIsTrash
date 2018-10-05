@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Friend : MonoBehaviour {
+public class Friend : UserDataItem {
     public string friendName = "Unknown Friend";
     public int day = 0;
     public bool activateDialogWhenClose = true;
@@ -16,7 +16,7 @@ public class Friend : MonoBehaviour {
 	public string missedDialog;
 
     // Use this for initialization
-    void OnEnable() {
+    protected void OnEnable() {
 
     	int currentDayNumber = GlobalVariableManager.Instance.DAY_NUMBER;
 
@@ -84,20 +84,102 @@ public class Friend : MonoBehaviour {
         IsVisiting = true;
     }
 
-    public virtual void FinishDialogEvent(){
-
-    	//TODO: DEFINATELY change this...
-		gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-    	//nothing to do for basic friend
-
-    }
-
     public void MissedEvent(){
     	nextDialog = missedDialog;
     }
 
- 
+    // Useful for checking where a friend is if they like to visit different rooms.
+    public virtual bool IsCurrentRoom(Room room)
+    {
+        return true;
+    }
 
-   
+    // Configure Friend States In the Editor Inspector for the friend!
+    public List<string> friendStates;
+    public int friendState = 0;
+
+    public string GetFriendState()
+    {
+        return friendStates[friendState];
+    }
+
+    public int GetFriendStatePosition(string state_str)
+    {
+        for (int i = 0; i < friendStates.Count; i++)
+        {
+            if (friendStates[i] == state_str)
+            {
+                return i;
+            }
+        }
+
+        Debug.Log("STATE NOT FOUND!  FIX THIS: " + state_str);
+        return 0;
+    }
+
+    public void SetFriendState(string state_str)
+    {
+        for (int i = 0; i < friendStates.Count; i++)
+        {
+            if (friendStates[i] == state_str)
+            {
+                friendState = i;
+
+                // TODO: Maybe too aggressive saving here???
+                UserDataManager.Instance.SetDirty();
+                return;
+            }
+        }
+
+        Debug.Log("STATE NOT FOUND!  FIX THIS: " + state_str);
+    }
+
+    public virtual void OnUpdate()
+    {
+
+    }
+
+    public virtual void OnFinishDialog()
+    {
+
+        //TODO: DEFINATELY change this...
+        gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+        GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+        //nothing to do for basic friend
+
+        StartCoroutine(OnFinishDialogEnumerator());
+    }
+
+    public virtual IEnumerator OnFinishDialogEnumerator()
+    {
+        yield return null;
+    }
+
+    public virtual void OnActivateRoom()
+    {
+
+    }
+
+    public virtual void OnDeactivateRoom()
+    {
+
+    }
+
+    // User Data implementation
+    public override string UserDataKey()
+    {
+        return "FRIEND_DATA";
+    }
+
+    public override SimpleJSON.JSONObject Save()
+    {
+        var json_data = new SimpleJSON.JSONObject();
+
+        return json_data;
+    }
+
+    public override void Load(SimpleJSON.JSONObject json_data)
+    {
+
+    }
 }

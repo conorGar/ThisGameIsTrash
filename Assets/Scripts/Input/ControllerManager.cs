@@ -44,10 +44,10 @@ public class ControllerManager : MonoBehaviour {
             }
 
             string[] inputNames = Input.GetJoystickNames();
-            for (int i = 0; i < Input.GetJoystickNames().Length; i++)
+            /*for (int i = 0; i < Input.GetJoystickNames().Length; i++)
             {
                 Debug.Log(i + " input: " + inputNames[i]);
-            }
+            }*/
             
         }
     }

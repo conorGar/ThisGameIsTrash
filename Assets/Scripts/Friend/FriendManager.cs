@@ -13,7 +13,7 @@ public class FriendManager : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void OnEnable () {
 
     }
 	
@@ -33,12 +33,33 @@ public class FriendManager : MonoBehaviour {
         }
     }
 
-    public GameObject GetFriendObject(Friend friend)
+    public GameObject GetFriendObject(Friend p_friend)
+    {
+        var friend = GetFriend(p_friend);
+
+        if (friend != null)
+            return friend.gameObject;
+
+        return null;
+    }
+
+    public Friend GetFriend(Friend friend)
     {
         for (int i = 0; i < friends.Count; ++i)
         {
             if (friend.tag == friends[i].tag)
-                return friends[i].gameObject;
+                return friends[i];
+        }
+
+        return null;
+    }
+
+    public Friend GetFriend(string friendName)
+    {
+        for (int i = 0; i < friends.Count; ++i)
+        {
+            if (friendName == friends[i].name)
+                return friends[i];
         }
 
         return null;
@@ -46,11 +67,11 @@ public class FriendManager : MonoBehaviour {
 
     public void EnableProperFriends(int worldNum){
     	Debug.Log("World Num:" + worldNum);
-    	Debug.Log(worlds.Count);
-		Debug.Log("Enable Proper Friends activated" + worlds[worldNum-1].name);
+    	Debug.Log("World Count: " + worlds.Count);
+		Debug.Log("Enable Proper Friends For World: " + worlds[worldNum-1].name);
 		for(int i = 0; i < worlds[worldNum-1].transform.childCount; i++){
 			worlds[worldNum-1].transform.GetChild(i).gameObject.SetActive(true);
-			Debug.Log(worlds[worldNum-1].transform.GetChild(i).gameObject.name);
+			Debug.Log("Friend Game Object Activated: " + worlds[worldNum-1].transform.GetChild(i).gameObject.name);
 		}
 
     }

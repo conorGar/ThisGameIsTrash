@@ -11,7 +11,8 @@ public class CannotExitScene : MonoBehaviour {
 	// Update is called once per frame
 
 	void OnEnable(){
-		SetLimits(RoomManager.Instance.currentRoom);
+        if (RoomManager.Instance != null)
+		    SetLimits(RoomManager.Instance.currentRoom);
 	}
 
 	void Update () {
