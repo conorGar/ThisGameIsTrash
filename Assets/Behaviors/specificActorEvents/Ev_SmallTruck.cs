@@ -100,7 +100,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 
 	public void EndDay(){
 		Debug.Log("Truck End Day Activate");
-
+	
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		player.GetComponent<EightWayMovement>().enabled = false;
 		endDayTruck = true;
@@ -151,6 +151,11 @@ public class Ev_SmallTruck : MonoBehaviour {
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
 			phase = 1;
 		}
+	}
+
+	public void RespawnEnd(){
+		phase = 0;
+		gameObject.SetActive(false);
 	}
 
 	IEnumerator SpawnPlayer(){

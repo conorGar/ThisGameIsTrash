@@ -26,7 +26,7 @@ public class S_Ev_WorldSelect : MonoBehaviour {
 	}
 
 	void Update () {
-		if(canNavigate){
+		if(canNavigate && !Initiate.areWeFading){
 			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
             || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
             {

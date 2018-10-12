@@ -9,6 +9,7 @@ public class B_Ev_Ex : MonoBehaviour {
 	public GameObject myProjectile;
 	public GameObject myParticles;
 	public GameObject player;
+	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
 
 	Vector3 playerPosition;
 
@@ -86,6 +87,18 @@ public class B_Ev_Ex : MonoBehaviour {
 			}
 		}
 
+	}
+
+	void Dazed(){
+		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
+		for(int i = 0; i < dazeDisables.Count; i++){
+			dazeDisables[i].enabled = false;
+		}
+		gameObject.layer = 11;
+		gameObject.GetComponent<ThrowableObject>().enabled = true;
+		myAnim.Play("dazed");
+		StopAllCoroutines();
+		//this.enabled = false;
 	}
 
 }

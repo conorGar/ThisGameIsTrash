@@ -22,7 +22,6 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 	public AudioClip navLeftSFX;
 	public AudioClip navRightSFX;
 
-
 	int arrowPos = 0;
 	GameObject highlightedPin;
 	public TextMeshProUGUI totalPPDisplay;

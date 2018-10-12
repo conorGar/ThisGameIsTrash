@@ -11,40 +11,20 @@ public class Friend : UserDataItem {
     public string nextDialog;
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
+	protected FriendEvent newestAddedEvent;
 
 	[HideInInspector]
 	public string missedDialog;
 
+	[HideInInspector]
+	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
+
     // Use this for initialization
     protected void OnEnable() {
-
-    	int currentDayNumber = GlobalVariableManager.Instance.DAY_NUMBER;
-
-    	//Enable ability to enter dialog on proper day
     	Debug.Log("Next Dialog: " + nextDialog);
-    	if(nextDialog != "Start" && nextDialog != missedDialog && !tempFriend){
-    		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false;
-    		for(int i = 0; i < CalendarManager.Instance.friendEvents.Count; i++){
-				if(CalendarManager.Instance.friendEvents[i].day == currentDayNumber ){//*********MAYBE MAKE THIS DETERMINE IF FRIEND SPAWNS RATHER THAN IF YOU CAN INTERACT...
-					if(CalendarManager.Instance.friendEvents[i].friend.name == friendName){
-						gameObject.GetComponent<ActivateDialogWhenClose>().enabled = true;
-						if(activateDialogWhenClose){
-	    					gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
-	    				}
-						gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
-						gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
-						break;
-					}
-				}
-    		}
-    	}else{
-	    	if(activateDialogWhenClose){
-	    		gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
-	    	}
-			gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
-			gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
-			//Debug.Log("Dialog Definition Name:"+ gameObject.GetComponent<ActivateDialogWhenClose>().dialogDefiniton.name);
-		}
+        gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
+        gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
+        gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
 		StartingEvents();
     }
@@ -78,7 +58,10 @@ public class Friend : UserDataItem {
 
     	// nothing to do for a basic friend.
     }
+	public virtual void GiveData(List<GameObject> neededObjs){
 
+    	// nothing to do for a basic friend.
+    }
     public virtual void Execute()
     {
         IsVisiting = true;
@@ -93,6 +76,7 @@ public class Friend : UserDataItem {
     {
         return true;
     }
+
 
     // Configure Friend States In the Editor Inspector for the friend!
     public List<string> friendStates;
@@ -144,6 +128,7 @@ public class Friend : UserDataItem {
 
         //TODO: DEFINATELY change this...
         gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+        gameObject.GetComponent<ActivateDialogWhenClose>().myDialogIcon.gameObject.SetActive(false);
         GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
         //nothing to do for basic friend
 
@@ -153,6 +138,24 @@ public class Friend : UserDataItem {
     public virtual IEnumerator OnFinishDialogEnumerator()
     {
         yield return null;
+    }
+	void DayAsStringSet(){
+		dialogManager.variableText = newestAddedEvent.day.ToString();
+		Debug.Log(">>>>>DAY AS STRING SET TO: " + newestAddedEvent.day.ToString());
+		dialogManager.Invoke("ReturnFromAction",.1f);
+
+	}
+
+
+    public void CalendarMark()
+    {
+        dialogManager.textBox.SetActive(false);
+        dialogManager.currentlySpeakingIcon.SetActive(false);
+
+        GUIManager.Instance.CalendarHUD.gameObject.SetActive(true);
+        GUIManager.Instance.CalendarHUD.NewMarkSequence(newestAddedEvent.day, name);
+        GUIManager.Instance.CalendarHUD.Invoke("LeaveScreen", 4f);
+        dialogManager.Invoke("ReturnFromAction", 5f);
     }
 
     public virtual void OnActivateRoom()

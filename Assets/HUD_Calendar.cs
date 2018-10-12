@@ -51,7 +51,7 @@ public class HUD_Calendar : MonoBehaviour {
 		//gameObject.transform.localPosition = new Vector2(-23f,-1f);
 		//gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);
 
-		GameObject daySquare = transform.GetChild(day-1).gameObject;
+		GameObject daySquare = transform.GetChild(day).gameObject;
 		if(!daySquare.activeInHierarchy){
 				daySquare.SetActive(true);
 		}

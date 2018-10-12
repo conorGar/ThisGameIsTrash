@@ -29,24 +29,24 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 			SelectUpgrade();
 		}
 
-		if(Input.GetKeyDown(KeyCode.LeftArrow) && leftRightNav && arrowPos>0){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && leftRightNav && arrowPos>0){
 			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
 			SoundManager.instance.PlaySingle(navSFX2);
 			Navigate("left");
-		}else if(Input.GetKeyDown(KeyCode.RightArrow) && leftRightNav && arrowPos<maxArrowPos){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && leftRightNav && arrowPos<maxArrowPos){
 			Debug.Log("Arrow RIGHT");
 			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
 			SoundManager.instance.PlaySingle(navSFX1);
 			Navigate("right");
-		}else if(Input.GetKeyDown(KeyCode.UpArrow) && upDownNav && arrowPos>0){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) && upDownNav && arrowPos>0){
 			SoundManager.instance.PlaySingle(navSFX2);
 			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
 			Navigate("up");
-		}else if(Input.GetKeyDown(KeyCode.DownArrow) && upDownNav && arrowPos<maxArrowPos){
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && upDownNav && arrowPos<maxArrowPos){
 			SoundManager.instance.PlaySingle(navSFX1);
 			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
 			Navigate("down");

@@ -11,6 +11,7 @@ public class PickupableObject : MonoBehaviour
 	public float carryXAdjustment = 3.3f;
 	public GameObject carryMark;
 	public bool throwableObject;
+	protected bool movePlayerToObject;
 	//int bounce = 0;
 	//int doOnce = 0;
 	float myY;
@@ -22,10 +23,10 @@ public class PickupableObject : MonoBehaviour
 	//public bool cannotDrop; // activated by Dumpster to make sure large trash isnt dropped before 'Return()' is activated...
 
 	GameObject myCollision;
-	GameObject myShadow;
+	//GameObject myShadow;
 	public GameObject dumpster;
 
-	bool pickUpSpin;
+	protected bool pickUpSpin;
 	public bool spinning;
 	float t;
 	Quaternion startRotation;
@@ -36,14 +37,26 @@ public class PickupableObject : MonoBehaviour
 		myBody  = gameObject.GetComponent<Rigidbody2D>();
 		startRotation = transform.rotation;
 		dumpster = GameObject.Find("Dumpster");
+		if(player == null){
+			player = GameObject.FindGameObjectWithTag("Player");
+			carryMark = player.transform.GetChild(7).gameObject;//TODO: better way to do this...not good
+		}
+
 	}
-	
+	/*void OnEnable(){
+		if(player == null){
+			player = GameObject.FindGameObjectWithTag("Player");
+
+		}
+	}*/
 	// Update is called once per frame
-	protected void Update ()
-	{	if(Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
+	protected virtual void Update ()
+	{	
+		if(player != null && Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
 			//Debug.Log("within distance" + GlobalVariableManager.Instance.CARRYING_SOMETHING);
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING){
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING && GlobalVariableManager.Instance.PLAYER_CAN_MOVE){//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'
 				Debug.Log("PickUpable object...picked up");
+				movePlayerToObject = true;
 				PickUp();
 			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried && !throwableObject){
 				if(Vector2.Distance(player.transform.position,dumpster.transform.position) > 15f) //TODO: temp solution for making sure trash isnt dropped before 'Return' is activated
@@ -51,6 +64,10 @@ public class PickupableObject : MonoBehaviour
 			}
 		}else{
 //			Debug.Log(Vector2.Distance(player.transform.position,gameObject.transform.position));
+		}
+
+		if(movePlayerToObject){
+			player.transform.position = Vector2.Lerp(player.transform.position,this.gameObject.transform.position,2*Time.deltaTime);
 		}
 
 		if(spinning){
@@ -71,6 +88,9 @@ public class PickupableObject : MonoBehaviour
 						gameObject.GetComponent<ThrowableObject>().enabled = true;
 					}
 					player.GetComponent<MeleeAttack>().enabled = false;
+					player.GetComponent<EightWayMovement>().enabled = true;
+					player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",true);
+
 					if(gameObject.GetComponent<SpriteRenderer>() != null)
 						gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02"; // makes sure in front of player
 					else
@@ -84,11 +104,15 @@ public class PickupableObject : MonoBehaviour
 		}
 	}
 
-	public void PickUp(){
-		if(gameObject.GetComponent<BoxCollider2D>()!=null){
+	public virtual void PickUp(){
+		movePlayerToObject = false;
+		/*if(gameObject.GetComponent<BoxCollider2D>()!=null){
 			gameObject.GetComponent<BoxCollider2D>().enabled = false;
-		}
+		}*/
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
+		player.GetComponent<EightWayMovement>().enabled = false;
+		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
 		//move and play the particle system
 		beingCarried = true;
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
@@ -98,7 +122,11 @@ public class PickupableObject : MonoBehaviour
 		gameObject.transform.parent = player.transform;
 		if(!throwableObject){
 		myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
+			player.GetComponent<EightWayMovement>().carryingAbove = false;
+
 		}else{
+			player.GetComponent<JimAnimationManager>().PlayAnimation("ani_pickUpBig",true);
+			player.GetComponent<EightWayMovement>().carryingAbove = true;
 			myBody.AddForce(new Vector2(0,14),ForceMode2D.Impulse);
 
 		}
@@ -111,10 +139,16 @@ public class PickupableObject : MonoBehaviour
 
 	public void Drop(){
 		beingCarried = false;
+		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
+		Debug.Log("ITEM DROPPED");
+		gameObject.transform.parent = null; //detatch from player transform
 		gameObject.transform.position = new Vector2(transform.position.x + 1f, transform.position.y -1f);
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
+		player.GetComponent<EightWayMovement>().clipOverride = false;
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		SoundManager.instance.PlaySingle(drop);
+		spinning = false;
+		pickUpSpin = false;
 		//proper postionining 
 		DropEvent();
 	}

@@ -15,17 +15,9 @@ public class CalendarManager : MonoBehaviour {
         Instance = this;
     }
 
-    // Use this for initialization
-    void Start () {
-        StartDay();
-    }
-	
-	// Update is called once per frame
-	void Update () {
-	}
-
     public void StartDay()
     {
+        currentDay = GlobalVariableManager.Instance.DAY_NUMBER - 1;
         FriendManager.Instance.GenerateEvents();
         for (int i = 0; i < friendEvents.Count; ++i)
         {

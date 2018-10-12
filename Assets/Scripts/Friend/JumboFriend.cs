@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 
 public class JumboFriend : Friend {
     // "05-bq1,(chijkl"
@@ -14,12 +15,83 @@ public class JumboFriend : Friend {
     public GameObject moviePosters;
     public GameObject filmColor;
     public GameObject movieScreen;
+	public GameObject mainCam;
+	public AudioClip projectorPlay;
+	int numberOfActivation;
+	bool movieIsPlaying;
+    bool isFilmDateSet = false;
+
     //public DialogDefinition myDialogDefinition;
 
     public override void GenerateEventData()
     {
-        films.Shuffle();
-        day = CalendarManager.Instance.currentDay + Mathf.Min(Random.Range(minDays, maxDays), CalendarManager.Instance.maxDays);
+        if (!isFilmDateSet) {
+            films.Shuffle();
+
+            // Always play the first day.
+            if (CalendarManager.Instance.currentDay == 0) {
+                day = 0;
+            }
+            // Pick a date in the future to screen a new movie.
+            else {
+                day = GenerateNextFilmDay();
+            }
+
+            isFilmDateSet = true;
+        }
+    }
+
+    public int GenerateNextFilmDay()
+    {
+        return CalendarManager.Instance.currentDay + Mathf.Min(Random.Range(minDays, maxDays), CalendarManager.Instance.maxDays);
+    }
+
+    public new void OnEnable()
+    {
+        mainCam = GameObject.Find("tk2dCamera");
+
+        switch (GetFriendState()) {
+            case "START":
+                break;
+            case "END":
+                break;
+        }
+    }
+
+    private void Update()
+    {
+        OnUpdate();
+    }
+
+    public override void OnUpdate()
+    {
+        switch (GetFriendState()) {
+            case "START":
+                nextDialog = "Start";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
+            case "INVITE_TO_SECOND_SCREENING":
+                nextDialog = "Jumbo2";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
+            case "END":
+                break;
+        }
+    }
+
+    public override IEnumerator OnFinishDialogEnumerator()
+    {
+        yield return new WaitForSeconds(.3f);
+
+        switch (GetFriendState()) {
+            case "START":
+                // Jumbo gave jim an invitation to the the second film.  This event is finished so Jumbo is no longer visiting today, he's editing.
+                IsVisiting = false;
+                SetFriendState("INVITE_TO_SECOND_SCREENING");
+                break;
+            case "END":
+                break;
+        }
     }
 
     // TODO: Ugly names :(
@@ -48,11 +120,10 @@ public class JumboFriend : Friend {
             films.RemoveAt(0);
     }
 
-
     public override void StartingEvents(){
     	Debug.Log("Starting Events function happened properly");
     	if(GlobalVariableManager.Instance.DAY_NUMBER == day && nextDialog == "Jumbo2"){
-    		gameObject.transform.position = new Vector2(-40f,47.5f);
+    		gameObject.transform.position = new Vector2(-95f,8.5f);
     		deadRat.SetActive(true);
     	}
 		if(nextDialog == "Start"){
@@ -70,5 +141,142 @@ public class JumboFriend : Friend {
     		movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().enabled = true;
     	}
 
+    }
+	public void CurrentDialogAction(){
+		numberOfActivation++;
+		dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
+		if(nextDialog == "Jumbo2"){
+			if(numberOfActivation == 1){//pan to jumbo hiding in bush...
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position," ");
+				dialogManager.textBox.SetActive(false);
+				dialogManager.currentlySpeakingIcon.SetActive(false);
+				dialogManager.Invoke("ReturnFromAction",2f);
+			}else if(numberOfActivation == 2){//pan to audience...
+				dialogManager.textBox.SetActive(false);
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(deadRat.transform.position," ");
+				//mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(2f,.1f);
+				StartCoroutine("FilmSetPan");
+				dialogManager.Invoke("ReturnFromAction",5f);
+			}else if(numberOfActivation == 3){//dead rat zoom in...
+				dialogManager.ReturnFromAction();
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(deadRat.transform.position," ");
+				mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(3f,.1f);
+				dialogManager.currentlySpeakingIcon.SetActive(false);
+				dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
+			}else if(numberOfActivation == 4){//return to jumbo after dead rat
+				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position," ");
+				dialogManager.Invoke("ReturnFromAction",.1f);
+				mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1.15f,4f);
+				dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogManager.dialogBlur;
+
+			}
+		}
+	}
+
+	public void JumboMoviePlay(){
+		if(!movieIsPlaying){
+			movieIsPlaying = true;
+			mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(new Vector3(-87.4f,32f,-10f),"JumboMovie");
+
+			dialogManager.textBox.SetActive(false);
+			dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = null;//TODO: returns to NO effect, not sure if you want this, future Conor
+			dialogManager.currentlySpeakingIcon.SetActive(false);
+
+
+			SoundManager.instance.PlaySingle(projectorPlay);
+			string filmToPlay = GetCurrentFilm();
+			movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);
+			if(movieScreen.transform.GetChild(1).gameObject.activeInHierarchy){//if film color is enabled
+				movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay + "_Color");
+			}
+
+            DeleteCurrentFilm();
+
+            //determine next film
+            isFilmDateSet = false;
+            FriendEvent nextMovie = GenerateEvent();
+            day = GenerateNextFilmDay(); // readjust the day because on the first day it gets screwy.
+            nextMovie.day = day;
+
+			Debug.Log("******NEXT MOVIE DAY****** = " + nextMovie.day);
+			CalendarManager.Instance.AddFriendEvent(nextMovie);
+			newestAddedEvent = nextMovie;
+			dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
+			dialogManager.ChangeIcon("SurprisedAni");
+			Debug.Log("***SET VARIABLE TEXT TO: " + GetCurrentFilm());
+
+
+			if(nextDialog == "Start"){
+				StartCoroutine("AfterFirstMovie");
+			}else{
+				dialogManager.Invoke("ReturnFromAction",10f);//10= length of each movie 
+			}
+		}
+	}
+
+	IEnumerator AfterFirstMovie(){
+		yield return new WaitForSeconds(10f);
+		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,"JumboMovie");
+		yield return new WaitForSeconds(1f);
+		GameObject player = GameObject.FindGameObjectWithTag("Player");
+		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(player.transform.position,"JumboMovie");
+		yield return new WaitForSeconds(1f);
+		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,"JumboMovie");
+		yield return new WaitForSeconds(.5f);
+		dialogManager.Invoke("ReturnFromAction",.1f);//10= length of each movie TODO:check for if this is the first movie or not, if not activate this line of code
+
+
+	}
+
+	IEnumerator FilmSetPan(){
+		yield return new WaitForSeconds(4f);
+		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position," ");
+
+	}
+	public void JumboMovieColor(){
+		//set enhancement
+		movieEnhancement = "color";
+		dialogManager.Invoke("ReturnFromAction",.1f);
+	}public void JumboMovieSound(){
+		//set enhancement
+		movieEnhancement = "sound";
+		dialogManager.Invoke("ReturnFromAction",.1f);
+	}public void JumboMovieMarketing(){
+		//set enhancement
+		movieEnhancement = "marketing";
+		dialogManager.Invoke("ReturnFromAction",.1f);
+	}
+
+	public override void GiveData(List<GameObject> neededObjs){
+
+		deadRat = neededObjs[0];
+		moviePosters= neededObjs[1];
+		filmColor= neededObjs[2];
+		movieScreen= neededObjs[3];
+		mainCam= neededObjs[4];
+    }
+
+    // User Data implementation
+    public override string UserDataKey()
+    {
+        return "Jumbo";
+    }
+
+    public override SimpleJSON.JSONObject Save()
+    {
+        var json_data = new SimpleJSON.JSONObject();
+
+        json_data["friendState"] = friendState;
+        json_data["isFilmDateSet"] = isFilmDateSet;
+        json_data["day"] = day; // keeping hold of the day for the next film.
+
+        return json_data;
+    }
+
+    public override void Load(SimpleJSON.JSONObject json_data)
+    {
+        friendState = json_data["friendState"].AsInt;
+        isFilmDateSet = json_data["isFilmDateSet"].AsBool;
+        day = json_data["day"].AsInt;
     }
 }

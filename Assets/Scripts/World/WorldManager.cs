@@ -34,8 +34,14 @@ public class WorldManager : MonoBehaviour
         // TODO: Base this on bag type whether they are going for standard, compost, recyclable, etc.
         GarbageManager.Instance.PopulateGarbage(garbageType, amountTrashHere);
 
-       LargeTrashManager.Instance.EnableProperTrash(worldNumber);
-       FriendManager.Instance.EnableProperFriends(worldNumber);
+        LargeTrashManager.Instance.EnableProperTrash(worldNumber);
+
+        // Initializing stuff from other managers.  Maybe we should put most of that kind of thing here to preserve ordering?
+
+        CalendarManager.Instance.StartDay();
+
+        // Activate the first room!
+        RoomManager.Instance.ActivateCurrentRoom();
     }
 
     void Update()

@@ -8,12 +8,11 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public bool armoredEnemy = false;
 	public bool moveWhenHit = true;
 	public bool secretHider = false;
-	public int currentHp;
-	public int meleeDmgBonus = 0;
+	public bool returnToCurrentAniAfterHit = false;
 	public tk2dSpriteAnimationClip invincibleAni = null;
 	public tk2dSpriteAnimationClip aniToSwitchBackTo = null;
-	public tk2dCamera currentCamera; //set in inspector
-
+	//public tk2dCamera currentCamera; //set in inspector
+	public string myDeadBodyName;
 	public bool respawnEnemy = false;
 	public AudioClip hitSound;
 	public AudioClip hitSqueal;
@@ -36,8 +35,14 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public List<MonoBehaviour> behaviorsToDeactivate = new List<MonoBehaviour>();
 	[HideInInspector]
 	public GameObject objectPool;
-	public EnemyRespawner myRespawner; //for use with respawning enemies
-
+	[HideInInspector]
+public EnemyRespawner myRespawner; //for use with respawning enemies
+	[HideInInspector]
+public int currentHp;
+	[HideInInspector]
+public int meleeDmgBonus = 0;
+	[HideInInspector]
+public bool dontStopWhenHit; //usually temporary and set by other behavior, such as 'LungeAtPlayer.cs'
 
 	Ev_MainCamera currentCam;
 
@@ -47,6 +52,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	int maxHp; //just used for Vitality Vision pin
 	int sharingUpgrade = 0;
 	int damageOnce = 0;
+	bool hitByThrownObject;
 
 	tk2dSpriteAnimator myAnim;
 	int camShake = 0;
@@ -90,7 +96,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 		myAnim = this.gameObject.GetComponent<tk2dSpriteAnimator>();
 		myBody = gameObject.GetComponent<Rigidbody2D>();
 		startRotation = transform.rotation;
-		shadowStartPos = myShadow.transform.localPosition;
+		if(myShadow !=null) //if has shadow
+			shadowStartPos = myShadow.transform.localPosition;
 		startScale = gameObject.transform.localPosition;
 
 		//----------------Pins----------------//
@@ -164,8 +171,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 		if(melee.tag == "Weapon"){
 			TakeDamage(melee.gameObject);
 			//Debug.Log("Collision with weapon: ");
-			SoundManager.instance.PlaySingle(hitSound);
-			SoundManager.instance.PlaySingle(hitSqueal);
+
 		}else if(melee.tag == "pObj_bullet"){
 			if(!takingDamage){
 				StartCoroutine("NonMeleeHit");
@@ -175,6 +181,12 @@ public class EnemyTakeDamage : MonoBehaviour {
 			SoundManager.instance.RandomizeSfx(hitSound,.8f,1.1f);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}else if(melee.gameObject.layer == 15){//throwable object
+			hitByThrownObject = true;
+            // TODO: Get the boss battle to use throwable bodies???
+            var body = melee.gameObject.GetComponent<ThrowableBody>();
+            if (body)
+                melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
+			Debug.Log("Hit by thrown object!");
 			TakeDamage(melee.gameObject);
 			SoundManager.instance.PlaySingle(hitSound);
 			SoundManager.instance.PlaySingle(hitSqueal);
@@ -205,7 +217,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
 						}
-				if(!moveWhenHit){
+				if(!moveWhenHit && !dontStopWhenHit){
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 				}
 
@@ -224,7 +236,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
-				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				//Debug.Log("**AND HERE!!!!!!!!***");
 				yield return new WaitForSeconds(.4f);
 				StartCoroutine( "StopKnockback");
@@ -242,26 +254,28 @@ public class EnemyTakeDamage : MonoBehaviour {
 					takingDamage = true;
 					damageOnce = 1;
 					meleeDmgBonus = 0;
-
+					SoundManager.instance.PlaySingle(hitSound);
+					SoundManager.instance.PlaySingle(hitSqueal);
 					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
 						//bonus dmg with pole
 						meleeDmgBonus++;
 					}
-
+					if(hitByThrownObject)
+						meleeDmgBonus+=2;
 					//if(GlobalVariableManager.Instance.IsPinEquipped(PIN.STAYBACK) && GlobalVariableManager.Instance.CURRENT_HP == 1){
 						//STAY BACK pin
 						//meleeDmgBonus++;
 					//}
 
 					meleeDmgBonus = meleeDmgBonus;
-
-					meleeSwingDirection = melee.GetComponent<tk2dSpriteAnimator>().CurrentClip.name;
+					if(!hitByThrownObject)
+						meleeSwingDirection = melee.GetComponent<tk2dSpriteAnimator>().CurrentClip.name;
 					swingDirectionSide = player.transform.localScale.x;
 					//Debug.Log("MELEE SWING DIRECTION: " + meleeSwingDirection);
 
 					if(secretHider)
 						Destroy(melee.gameObject);
-					if(moveWhenHit){
+					if(moveWhenHit || hitByThrownObject){
 						for(int i = 0; i < behaviorsToDeactivate.Count;i++){
 							behaviorsToDeactivate[i].enabled = false;
 						}
@@ -289,8 +303,14 @@ public class EnemyTakeDamage : MonoBehaviour {
 					
 					//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
 					currentCam.StartCoroutine("ScreenShake",.2f);
-				
-					if(!moveWhenHit){
+					if(hitByThrownObject){
+                        // TODO: Fix the boss battle to use throwable bodies????
+                        var body = melee.gameObject.GetComponent<ThrowableBody>();
+                        if (body)
+                         body.TakeDamage();
+						meleeSwingDirection = "plankSwing";
+					}
+					if(!moveWhenHit && !dontStopWhenHit && !hitByThrownObject ){
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 					}
 
@@ -301,8 +321,13 @@ public class EnemyTakeDamage : MonoBehaviour {
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
+					if(!moveWhenHit && currentHp <= 0){
+						moveWhenHit = true; // enemy flies back at final hit
+					}
 
-					
+					if(returnToCurrentAniAfterHit){
+						returnAniName = myAnim.CurrentClip.name;
+					}
 
 					myAnim.Play("hit");
 					if(gameObject.transform.position.x < player.transform.position.x)
@@ -334,6 +359,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 		//if(aniToSwitchBackTo != null)
+	
 		if(currentHp >0 && myAnim.GetClipByName(returnAniName) != null)
 			myAnim.Play(returnAniName);
 			//else
@@ -348,8 +374,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 
 		//Debug.Log("**Continue Hit activation***");
-		if(moveWhenHit){
+		if(moveWhenHit || hitByThrownObject){
 			takingDamage = true;
+
 			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawR") == 0||meleeSwingDirection.CompareTo("poleR") == 0){
 				Debug.Log(swingDirectionSide);
 
@@ -361,7 +388,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,8f), ForceMode2D.Impulse);	
 				}
 				myBody.gravityScale = 2;
-				myShadow.transform.parent = null; //shadow doesnt follow Y pos
+				if(myShadow != null)
+					myShadow.transform.parent = null; //shadow doesnt follow Y pos
 
 
 			}else if(meleeSwingDirection.CompareTo("stickUp") == 0||meleeSwingDirection.CompareTo("clawUp") == 0||meleeSwingDirection.CompareTo("poleUp") == 0){
@@ -386,6 +414,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 			if(currentHp >0 && myAnim.GetClipByName(returnAniName) != null)
 				myAnim.Play(returnAniName);
 		} // end of movement functions
+		hitByThrownObject = false;
 
 		StartCoroutine("AfterHit");
 			
@@ -565,8 +594,11 @@ public class EnemyTakeDamage : MonoBehaviour {
 		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost");
 		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		Debug.Log("My spawner ID: "+mySpawnerID);
-
-
+		if(!respawnEnemy){
+			GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",gameObject.transform.position);
+			body.GetComponent<tk2dSprite>().SetSprite(myDeadBodyName);
+			body.GetComponent<ThrowableBody>().SetSpawnerID(mySpawnerID);
+		}
 		myAnim.Play("idle");//to fix enemies sometimes spawning in hurt animation
 
 		this.gameObject.SetActive(false);

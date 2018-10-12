@@ -36,7 +36,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1597879471364584
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +192,7 @@ MonoBehaviour:
   rightLimit: 0
   topLimit: 0
   botLimit: 0
+  globalPos: 0
 --- !u!114 &114297173099636116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,7 +247,7 @@ MonoBehaviour:
   fireRate: 3
   myProjectileFalls: 0
   projectile: {fileID: 1245335482067604, guid: 4974a6397afe35640969fde99841ffed, type: 2}
-  throwSFX: {fileID: 0}
+  throwSFX: {fileID: 8300000, guid: 713266d78f3d8d04b90715268e3ac62c, type: 3}
 --- !u!114 &114560249485120280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,8 +276,7 @@ MonoBehaviour:
   armoredEnemy: 0
   moveWhenHit: 1
   secretHider: 0
-  currentHp: 3
-  meleeDmgBonus: 0
+  returnToCurrentAniAfterHit: 0
   invincibleAni:
     name: Default
     frames: []
@@ -289,7 +289,7 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  currentCamera: {fileID: 0}
+  myDeadBodyName: mole
   respawnEnemy: 0
   hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
   hitSqueal: {fileID: 8300000, guid: adab9cc7eebe17b4cb22fcca45fc48f0, type: 3}
@@ -309,6 +309,9 @@ MonoBehaviour:
   - {fileID: 114459684694281314}
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
+  currentHp: 3
+  meleeDmgBonus: 0
+  dontStopWhenHit: 0
 --- !u!212 &212677220458254340
 SpriteRenderer:
   m_ObjectHideFlags: 1

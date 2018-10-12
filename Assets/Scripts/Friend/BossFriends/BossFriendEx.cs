@@ -18,7 +18,6 @@ public class BossFriendEx : Friend
 	public AudioClip smokePuff;
 	public AudioClip bossMusic;
 	int enterIconPhase;
-
 	
 	// Update is called once per frame
 	void Update ()
@@ -176,6 +175,9 @@ public class BossFriendEx : Friend
                 break;
             case "FIGHT_PHASE_2":
                 stuart.bossTrio.SetActive(false);
+                stuart.bossEx.SetActive(false);
+                stuart.bossHash.SetActive(false);
+                stuart.bossQuestio.SetActive(false);
                 stuart.GetComponent<FollowPlayer>().enabled = false;
                 transform.gameObject.SetActive(false);
                 stuart.ResetBossPositions();

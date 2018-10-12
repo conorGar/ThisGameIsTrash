@@ -77,6 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeUntilDeath: 1.2
   deactivateInsteadOfKill: 1
+  playSoundAtStart: 0
+  mySound: {fileID: 0}
 --- !u!114 &114305620004424102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 585c8c9e9a89f1442bd243a74caa5bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oneDamage: {fileID: 21300000, guid: 554d0eb532c8b6b49a62b994ce4fca9a, type: 3}
   TwoDamage: {fileID: 21300000, guid: 731029ea083f76f44b4a43198c8a28d5, type: 3}
   ThreeDamage: {fileID: 21300000, guid: b8a97c75ad82f5a45a96d7af84600376, type: 3}
   FourDamage: {fileID: 21300000, guid: b06a5e4a2c8f22e458bc1b906dea7587, type: 3}

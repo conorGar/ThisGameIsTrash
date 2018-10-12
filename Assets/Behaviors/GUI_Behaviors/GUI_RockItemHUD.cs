@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GUI_RockItemHUD : MonoBehaviour
 {
+    public static GUI_RockItemHUD Instance;
 	public List<Image> itemsToCollect = new List<Image>();
 	// Use this for initialization
 	void Start ()

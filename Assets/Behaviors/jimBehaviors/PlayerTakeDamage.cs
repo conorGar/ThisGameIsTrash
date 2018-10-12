@@ -15,6 +15,9 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 
 	public AudioClip hurt;
+	public AudioClip deathSound;
+	[HideInInspector]
+	public GameObject currentlyCarriedObject; // set by pickupableObject.cs for use when dropping at death
 	int maxHP;
 	public int currentHp;
 	int damageDealt;
@@ -35,6 +38,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		
 	}
 
+    // two objects collide
 	void OnCollisionEnter2D(Collision2D enemy){
 		if(enemy.gameObject.layer == 9 && !currentlyTakingDamage){ //layer 9 = enemies
 
@@ -42,18 +46,26 @@ public class PlayerTakeDamage : MonoBehaviour {
 				damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
 			}else{
 				damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
-
 			}
 			TakeDamage(enemy.gameObject);
 		}
 	}
 
+    // something entered this collider
 	void OnTriggerEnter2D(Collider2D projectile){
 		if(projectile.gameObject.layer == 10 && !currentlyTakingDamage){ //layer 10 = projectiles
 
 			damageDealt = projectile.gameObject.GetComponent<Projectile>().damageToPlayer;
 
 			TakeDamage(projectile.gameObject);
+		}else if(projectile.gameObject.layer == 9 && !currentlyTakingDamage){//enemy with non-solid collision(flying enemy)
+            if (projectile.gameObject.tag == "Boss"){
+                damageDealt = projectile.gameObject.GetComponent<Boss>().attkDmg;
+            }
+            else{
+                damageDealt = projectile.gameObject.GetComponent<Enemy>().attkPower;
+            }
+            TakeDamage(projectile.gameObject);
 		}
 	}
 
@@ -74,7 +86,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("hurt",true);
 			Debug.Log("reached this end of hp hud change" + currentHp);
 			HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
-			GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars",this.gameObject.transform.position);
+			GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars_player",this.gameObject.transform.position);
 			damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(damageDealt);
 			damageCounter.SetActive(true);
 			GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars",this.gameObject.transform.position);
@@ -103,10 +115,11 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 		if(GlobalVariableManager.Instance.CARRYING_SOMETHING){
-			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",true);
+			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",true);
 		}else{
 			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
 		}
+		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
 		yield return new WaitForSeconds(.5f); //brief period of invincibility
 		currentlyTakingDamage = false;
 		Debug.Log("Regained Control");
@@ -125,6 +138,12 @@ public class PlayerTakeDamage : MonoBehaviour {
 	}
 
 	IEnumerator Death(){
+		SoundManager.instance.FadeMusic();
+		SoundManager.instance.PlaySingle(deathSound);
+		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
+		if(currentlyCarriedObject != null){
+			currentlyCarriedObject.GetComponent<PickupableObject>().Drop();
+		}
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		gameObject.GetComponent<BoxCollider2D>().enabled = false;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer04";//bring player to front
@@ -138,6 +157,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 			yield return new WaitForSeconds(2f);//truck pickup
 		deathDisplay.currentTCD.gameObject.SetActive(false);
+
 		GameObject truck = objectPool.GetComponent<ObjectPool>().GetPooledObject("GarbageTruck",new Vector3(gameObject.transform.position.x - 20, gameObject.transform.position.y,0f));
 		truck.GetComponent<Ev_SmallTruck>().ReturnToDumpster();
 			yield return new WaitForSeconds(.4f);
@@ -150,6 +170,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 		deathDisplay.myDayMeter.gameObject.SetActive(false);
 		yield return new WaitForSeconds(.5f);
 		deathDisplay.ReturnHUD();
+		SoundManager.instance.musicSource.Play();
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 
 		//-----------Resetting of needed values----------------//
 		roomManager.GetComponent<RoomManager>().currentRoom.DeactivateRoom();
@@ -171,10 +193,11 @@ public class PlayerTakeDamage : MonoBehaviour {
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
 		deathDisplay.currentTCD.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+		truck.GetComponent<Ev_SmallTruck>().RespawnEnd();
 		gameObject.GetComponent<BoxCollider2D>().enabled = true;
 
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
-		
+		gameObject.GetComponent<EightWayMovement>().myLegs.SetActive(true);
 		gameObject.GetComponent<EightWayMovement>().enabled = true;
 		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
 	}

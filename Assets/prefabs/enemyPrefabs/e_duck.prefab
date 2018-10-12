@@ -268,6 +268,7 @@ MonoBehaviour:
   rightLimit: 0
   topLimit: 0
   botLimit: 0
+  globalPos: 0
 --- !u!114 &114806496429286330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,6 +281,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noticeThreshold: 5
+  sleepingEnemy: 0
+  sleepingPS: {fileID: 0}
+  noticeSfx: {fileID: 0}
 --- !u!114 &114808193333466140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,10 +312,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armoredEnemy: 0
-  moveWhenHit: 1
+  moveWhenHit: 0
   secretHider: 0
-  currentHp: 3
-  meleeDmgBonus: 0
+  returnToCurrentAniAfterHit: 0
   invincibleAni:
     name: Default
     frames: []
@@ -324,8 +327,7 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  currentCamera: {fileID: 114911326877479794, guid: ed6dbd2afaf985146a8eda13f2278a1c,
-    type: 2}
+  myDeadBodyName: duck
   respawnEnemy: 0
   hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
   hitSqueal: {fileID: 8300000, guid: 34a7e0879520a72449702df07bdb8ab9, type: 3}
@@ -341,8 +343,12 @@ MonoBehaviour:
   myShadow: {fileID: 1572292130659854}
   myCollisionBox: {fileID: 61787944317269882}
   returnAniName: idle
+  behaviorsToDeactivate: []
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   myRespawner: {fileID: 0}
+  currentHp: 3
+  meleeDmgBonus: 0
+  dontStopWhenHit: 0
 --- !u!114 &114897125545691324
 MonoBehaviour:
   m_ObjectHideFlags: 1

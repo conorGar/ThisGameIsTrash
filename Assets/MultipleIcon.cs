@@ -12,6 +12,7 @@ public class MultipleIcon : MonoBehaviour {
 	public int positionOnScreen; //0 = left, 1 = middle, 2 = right
 
 
+	bool movingBack;
 	// Use this for initialization
 
 	//mnEnable() here that postions icon properly based on 'positionOnScreen' value
@@ -29,6 +30,24 @@ public class MultipleIcon : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+		if(movingBack){
+			if(positionOnScreen == 0){
+				gameObject.transform.Translate(Vector2.left*Time.deltaTime);
+				if(gameObject.transform.localPosition.x < -48)
+					movingBack = false;
+			}else if(positionOnScreen == 2){
+				gameObject.transform.Translate(Vector2.right*Time.deltaTime);
+				if(gameObject.transform.localPosition.x > 45)
+					movingBack = false;
+			}
+			else{ // no change for middle icon
+				movingBack = false;
+			}
+		}
+	}
+
+	public void ReturnToPosition(){
+		Debug.Log("***RETURN TO POSITION ACTIVATED !!!!!***!!!!" + positionOnScreen);
+		movingBack = true;
 	}
 }

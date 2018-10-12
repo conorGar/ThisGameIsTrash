@@ -17,7 +17,7 @@ public class BossStuart : Boss
     public GameObject bossEx;
     public GameObject bossHash;
     public GameObject bossQuestio;
-	public B_Ev_Hash hash;
+    public B_Ev_Hash hash;
 	EnemyTakeDamage myETD;
 
 
@@ -88,6 +88,9 @@ public class BossStuart : Boss
     {
         SoundManager.instance.musicSource.Play();
         bossTrio.SetActive(true);
+        bossEx.SetActive(true);
+        bossHash.SetActive(true);
+        bossQuestio.SetActive(true);
         GetComponent<EnemyTakeDamage>().enabled = false;
         canDamage = false;
         GetComponent<FollowPlayer>().enabled = true;
@@ -98,6 +101,9 @@ public class BossStuart : Boss
 		player.GetComponent<BoxCollider2D>().enabled = false;
 		player.GetComponent<EightWayMovement>().enabled = false;
 		gameObject.GetComponent<FollowPlayer>().enabled = false;
+		/*for(int i = 0; i<bossTrio.transform.childCount;i++){//add ex and questio to bosses. This is done by BossFriendEx at start if in middle of fight
+			RoomManager.Instance.currentRoom.bosses.Add(bossTrio.transform.GetChild(i).gameObject);
+		}*/
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		SoundManager.instance.musicSource.Pause();
 		mdim.icons[0].GetComponent<MultipleIcon>().positionOnScreen = 0;//change ex icon position to be on left side

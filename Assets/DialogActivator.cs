@@ -9,7 +9,7 @@ public class DialogActivator : MonoBehaviour {
 	public DialogManager dialogManager;
 	public DialogActionManager  dialogActionManager;
 	public GameObject dialogIcon;
-
+	public List<GameObject> otherNeededObjects = new List<GameObject>();
 	//So this sets the local data(canvasHud and such) to the loaded friends at the start of the scene, by assigning it those values from its own 'ActivateDialogWhenClose)
 
 	void OnEnable(){
@@ -20,10 +20,15 @@ public class DialogActivator : MonoBehaviour {
 			}
 		}
 		friendInstance.GetComponent<ActivateDialogWhenClose>().GetData(this);
+		if(otherNeededObjects.Count>0){
+			friendInstance.GetComponent<Friend>().GiveData(otherNeededObjects);
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+
 }

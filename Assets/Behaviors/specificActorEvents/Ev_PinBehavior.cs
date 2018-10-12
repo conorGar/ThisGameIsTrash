@@ -29,7 +29,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 	GameObject shopLight;
 	List<GameObject> myIcons = new List<GameObject>();
 	GameObject myEquippedBox;
-
+	Animator myAnimator;
 	void Start () {
 		/*if(GlobalVariableManager.Instance.characterUpgradeArray[1][18] == 'o'){
 			//pin perk 5 - every pin costs one less pp to equip
@@ -39,7 +39,7 @@ public class Ev_PinBehavior : MonoBehaviour {
                 pinData.price = 1;
 			}
 		}*/
-
+		myAnimator = gameObject.GetComponent<Animator>();
 		mySFX = gameObject.GetComponent<SpecialEffectsBehavior>();
 		player = GameObject.Find("Jim");
 
@@ -127,6 +127,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 		if(IsPinDiscovered()){
 			for(int i = 0; i< pinData.ppValue;i++){
 				smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
+				myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
 				if(IsPinEquipped()){
 				smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 				}
@@ -152,6 +153,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 	public bool EquipPin(){
         bool IsEquipped = false;
+
         PinManager.Instance.equipSpark.transform.position = gameObject.transform.position;
         PinManager.Instance.equipSpark.Play();
 		bool isDejaVuPinAndIsUnlocked = false;
@@ -162,6 +164,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 			if((!IsPinEquipped() || isDejaVuPinAndIsUnlocked) && GlobalVariableManager.Instance.PPVALUE >= pinData.ppValue){ // equip unequipped pin
                 GlobalVariableManager.Instance.PINS_EQUIPPED |= pinData.Type; //set pin to active
                 GlobalVariableManager.Instance.PPVALUE -= pinData.ppValue;
+				myAnimator.Play("pinEquipAni");
                 IsEquipped = true;
                 SoundManager.instance.PlaySingle(equipSFX);
 				highlightBox.SetActive(true);
@@ -201,7 +204,10 @@ public class Ev_PinBehavior : MonoBehaviour {
                         GlobalVariableManager.Instance.DEJAVUCOUNT = 99;
 					}
 				}
+				Debug.Log("UNEQUIPPED PIN" + myIcons.Count);
+
 				for(int i = 0; i < myIcons.Count; i++){ //unshade the little pp icons below pin
+					Debug.Log("Icons should've turned black!!");
 					myIcons[i].GetComponent<SpriteRenderer>().color = Color.black;
 				}
 				//Destroy(myEquippedBox);
