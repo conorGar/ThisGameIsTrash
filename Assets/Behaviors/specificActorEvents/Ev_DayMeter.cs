@@ -14,7 +14,7 @@ public class Ev_DayMeter : MonoBehaviour {
 	public TextMeshProUGUI dayNumberDisplay;
 	public ParticleSystem halfWayDonePS;
 	public AudioClip halfWayDoneChime;
-
+	public SpriteRenderer dayColor;
 	float delayBonus;
 
 	float timeToReachTarget = 240f;
@@ -25,12 +25,17 @@ public class Ev_DayMeter : MonoBehaviour {
 	bool deathSpeedup;
 	float t;
 	bool halfWayMark;
+	Color startDayColor;
+	Color sunsetColor = new Color(.63f,.49f,.17f,.14f);
+	Color nightColor= new Color(.1f,.14f,.35f,.43f);
+
 
 	void Start () {
 		GlobalVariableManager.Instance.TIME_IN_DAY = 0;
 		startIconPos = dayIcon.transform.localPosition;
 		targetPos = new Vector3(4.13f,.48f,0f);
 		dayNumberDisplay.text = "Day: "+ GlobalVariableManager.Instance.DAY_NUMBER;
+		startDayColor = dayColor.color;
 		Created();
 
 	}//end of Start()
@@ -43,6 +48,7 @@ public class Ev_DayMeter : MonoBehaviour {
 				t += (Time.deltaTime/timeToReachTarget)*20;//TODO: this will go past position at 220 if happens at bad time(maybe just find out exact local pos at time = 220 and set it)
 
 			dayIcon.transform.localPosition = Vector3.Lerp(startIconPos,targetPos,t);
+			dayColor.color = Color.Lerp(startDayColor,nightColor,t);
 		}
 	}
 
