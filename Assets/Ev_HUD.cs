@@ -9,6 +9,12 @@ public class Ev_HUD : MonoBehaviour {
         GameStateManager.Instance.RegisterLeaveEvent(typeof(RespawnState), OnLeaveRespawnState);
     }
 
+    public void OnDestroy()
+    {
+        GameStateManager.Instance.UnregisterEnterEvent(typeof(RespawnState), OnEnterRespawnState);
+        GameStateManager.Instance.UnregisterLeaveEvent(typeof(RespawnState), OnLeaveRespawnState);
+    }
+
     void OnEnterRespawnState()
     {
         GetComponent<CanvasGroup>().alpha = 0;
