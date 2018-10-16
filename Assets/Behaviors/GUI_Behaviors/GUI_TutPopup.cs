@@ -10,7 +10,6 @@ public class GUI_TutPopup : MonoBehaviour {
 	public GameObject myImage;
 	public GameObject myTitle;
 	public GameObject mainCam;
-	public Ev_DayMeter dayMeter;
 	public AudioClip popupSFX;
 
 	public Sprite largeTrashImage;
@@ -32,7 +31,8 @@ public class GUI_TutPopup : MonoBehaviour {
 	void OnEnable(){
 		SoundManager.instance.PlaySingle(popupSFX);
 		startPos = gameObject.transform.position;//reset position
-		dayMeter.Stop();
+
+        GameStateManager.Instance.PushState(typeof(DialogState));
 		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,transform.position.y +2.4f,.5f);
 		StartCoroutine("Delays");
 	}
@@ -51,7 +51,7 @@ public class GUI_TutPopup : MonoBehaviour {
 			player.GetComponent<PlayerTakeDamage>().enabled = true;
 			GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = false;
 			phase = 0;
-			dayMeter.StartAgain();
+            GameStateManager.Instance.PopState();
 			gameObject.transform.position = startPos;
 			gameObject.SetActive(false);
 

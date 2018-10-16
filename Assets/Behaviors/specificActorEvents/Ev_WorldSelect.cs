@@ -172,7 +172,12 @@ public class Ev_WorldSelect : MonoBehaviour {
 			Instantiate(selectEffect,transform.position,Quaternion.identity);
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(gameObject.transform.position.x,5.42f,1f);
 			GameObject manager = GameObject.Find("manager");
-			manager.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
+
+            // Switch to the Gameplay State.
+            GameStateManager.Instance.PopAllStates();
+            GameStateManager.Instance.PushState(typeof(GameplayState));
+
+            manager.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
 		}
 	}
 

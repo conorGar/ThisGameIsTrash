@@ -1,118 +1,90 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using I2.TextAnimation;
 
 public class Ev_DayMeter : MonoBehaviour {
-
 	public GameObject dayIcon;
 	public TextMeshProUGUI countdownNumber;
 	public GameObject fadeHelper;
 	public GameObject tutPopup;
+    public GameObject startPos;
+    public GameObject endPos;
 	public AudioClip countdownTick;
 	public TextMeshProUGUI dayNumberDisplay;
 	public ParticleSystem halfWayDonePS;
 	public AudioClip halfWayDoneChime;
 
-	float delayBonus;
+	float delayBonus = 1.0f;
 
-	float timeToReachTarget = 240f;
-	bool canGo;
+	public float secondsInTheDay = 240f;
+    public float secondsPassed = 0f;
+    public int timeDeathIncrease = 20;
 	int finalCountdownNumber = 10;
-	Vector3 startIconPos;
-	Vector3 targetPos;
-	bool deathSpeedup;
-	float t;
 	bool halfWayMark;
 
 	void Start () {
 		GlobalVariableManager.Instance.TIME_IN_DAY = 0;
-		startIconPos = dayIcon.transform.localPosition;
-		targetPos = new Vector3(4.13f,.48f,0f);
+		dayIcon.transform.localPosition = startPos.transform.localPosition;
 		dayNumberDisplay.text = "Day: "+ GlobalVariableManager.Instance.DAY_NUMBER;
-		Created();
+        secondsPassed = 0f;
+    }//end of Start()
 
-	}//end of Start()
+    void Update()
+    {
+        Type state = GameStateManager.Instance.GetCurrentState();
+        if (state == typeof(GameplayState) || state == typeof(DethKlokState)) {
+            // Add the change in time but only in the states that are allowed to pass time.
+            // If it's the deathclock state, time moves at an accelerated rate.
+            secondsPassed += GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) ? Time.deltaTime
+                : Time.deltaTime * timeDeathIncrease;
+            secondsPassed = Mathf.Min(secondsPassed, secondsInTheDay * delayBonus);
 
-	void Update () {
-		if(canGo){
-			if(!deathSpeedup)
-				t += Time.deltaTime/timeToReachTarget;
-			else
-				t += (Time.deltaTime/timeToReachTarget)*20;//TODO: this will go past position at 220 if happens at bad time(maybe just find out exact local pos at time = 220 and set it)
+            // Update day icon position
+            dayIcon.transform.localPosition = Vector3.Lerp(startPos.transform.localPosition, endPos.transform.localPosition, secondsPassed / secondsInTheDay * delayBonus);
 
-			dayIcon.transform.localPosition = Vector3.Lerp(startIconPos,targetPos,t);
-		}
-	}
+            // Update time of day in seconds.
+            GlobalVariableManager.Instance.TIME_IN_DAY = Mathf.Min(Mathf.RoundToInt(secondsPassed), Mathf.RoundToInt(secondsInTheDay * delayBonus));
 
-	public void Stop(){
-		CancelInvoke();
-		canGo = false;
-	}
-	public void StartAgain(){
-		Created();
-	}
+            // Trigger events based on the time.
+            if (state == typeof(GameplayState)) {
+                if (secondsPassed < secondsInTheDay * delayBonus) {
+                    //Debug.Log("Seconds Passed: " + GlobalVariableManager.Instance.TIME_IN_DAY);
+                    if (secondsPassed >= secondsInTheDay * delayBonus - finalCountdownNumber) {
+                        Debug.Log("Trigger final countdown number: " + finalCountdownNumber);
+                        countdownNumber.gameObject.SetActive(true);
 
-	public IEnumerator DeathIncrease(){
-		/*Time.timeScale = 20;
-		yield return new WaitForSeconds(20f);
-		Time.timeScale = 1;*/
-		Stop();
-		deathSpeedup = true;
-		canGo = true;
-		yield return new WaitForSeconds(1f);
-		deathSpeedup = false;
-		StartAgain();
-	}
+                        SoundManager.instance.RandomizeSfx(countdownTick, .7f, 1.3f);
+                        countdownNumber.text = finalCountdownNumber.ToString();
+                        countdownNumber.color = new Color(152f, 152f, 152f, .64f);
+                        countdownNumber.gameObject.GetComponent<TextAnimation>().PlayAnim(0);
+                        finalCountdownNumber--;
 
-	public void Created(){
-		canGo = true;
-		InvokeRepeating("Count",0f,(1f +delayBonus));
-	}
+                        //InvokeRepeating("FinalCountdown", .1f, 2f + (delayBonus * 2));
+                    }
+                }
+                else {
+                    Debug.Log("*** END DAY FADE ACTIVATE ***");
+                    fadeHelper.GetComponent<Ev_FadeHelper>().EndOfDayFade();
+                    this.enabled = false;
+                }
+
+                if (secondsPassed > (secondsInTheDay * delayBonus / 2) && !halfWayMark) {
+                    Debug.Log("HALFWAY Seconds Passed: " + GlobalVariableManager.Instance.TIME_IN_DAY);
+                    HalfWay();
+                }
+            }
+        }
+    }
 
 	public void Slowdown(){
 		//For 'Workin' Hard' Pin
-		delayBonus += .1f;
-	}
-	void Count(){
-		if(GlobalVariableManager.Instance.TIME_IN_DAY < 240){
-			if(canGo){
-
-					
-				GlobalVariableManager.Instance.TIME_IN_DAY++;
-				if(GlobalVariableManager.Instance.TIME_IN_DAY >= 220 && !countdownNumber.gameObject.activeInHierarchy){
-
-						countdownNumber.gameObject.SetActive(true);
-						InvokeRepeating("FinalCountdown",.1f,2f +(delayBonus*2));
-	
-					}
-			}
-		}else{
-			
-
-					Debug.Log("*** END DAY FADE ACTIVATE ***");
-					fadeHelper.GetComponent<Ev_FadeHelper>().EndOfDayFade();
-					this.enabled = false;
-				
-		}
-
-		if(GlobalVariableManager.Instance.TIME_IN_DAY > (timeToReachTarget/2) && !halfWayMark){
-			HalfWay();
-		}
-	}//end of Count()
-
-	void FinalCountdown(){
-		if(finalCountdownNumber > 0){
-		SoundManager.instance.RandomizeSfx(countdownTick,.7f,1.3f);
-		Debug.Log("Final COuntdown:" + finalCountdownNumber);
-		countdownNumber.text = finalCountdownNumber.ToString();
-		countdownNumber.color = new Color(152f,152f,152f,.64f);
-		countdownNumber.gameObject.GetComponent<TextAnimation>().PlayAnim(0);
-		finalCountdownNumber--;
-		}
+		delayBonus = 1.1f;
 	}
 
+    // Helpers
 	void HalfWay(){
 		halfWayMark = true;
 		halfWayDonePS.Play();

@@ -24,7 +24,6 @@ public class DialogManager : MonoBehaviour {
 	public Camera guiCamera; //needed for icon to corner at dialog choice
 	public GameObject dialogCanvas;
 	public TextMeshProUGUI characterName;
-	public Ev_DayMeter dayMeter;
 	[HideInInspector]
 	public string animationName;
 	public MultipleDialogIconsManager multipleIconsManager;
@@ -73,7 +72,8 @@ public class DialogManager : MonoBehaviour {
 		displayedText.text = currentNode.text;
 		characterName.text = currentNode.speakerName;
 		mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogBlur;
-		dayMeter.Stop();
+
+        GameStateManager.Instance.PushState(typeof(DialogState));
 	}
 	
 	// Update is called once per frame
@@ -114,7 +114,6 @@ public class DialogManager : MonoBehaviour {
             // TODO: Maybe get rid of this?  We can infer the dialog as ended if it doesn't have a child node.
             if (currentNode.action == "finish"){
 				canContinueDialog = false;
-				dayMeter.StartAgain();
 				FinishDialog();
 
                 if(!currentNode.friendState.IsNullOrWhiteSpace())
@@ -146,7 +145,6 @@ public class DialogManager : MonoBehaviour {
             // No more nodes.  End Dialog.
             if (currentNode.child_id.IsNullOrEmpty()) {
                 canContinueDialog = false;
-                dayMeter.StartAgain();
                 FinishDialog();
 
                 if (!currentNode.friendState.IsNullOrWhiteSpace()) {
@@ -368,7 +366,8 @@ public class DialogManager : MonoBehaviour {
 		friend.OnFinishDialog();
 		dialogCanvas.SetActive(false);
 
-	}
+        GameStateManager.Instance.PopState();
+    }
 
 	public void ChangeIcon(string aniName){
 		currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SwitchAni(aniName);

@@ -36,6 +36,8 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 	void Start () {
 		currentSelected = playOption;
 		SoundManager.instance.PlaySingle(windGusts);
+
+        GameStateManager.Instance.PushState(typeof(TitleState));
 	}
 	
     IEnumerator LoadUserData()
@@ -53,7 +55,6 @@ public class S_Ev_TitleScreen : MonoBehaviour {
         loadingGameDataVisual.gameObject.SetActive(false);
 
         phase = 2;
-        //fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
     }
 
 	// Update is called once per frame

@@ -52,6 +52,11 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 
 		UserDataManager.Instance.SetSlot(arrowPos);
 		StartCoroutine(UserDataManager.Instance.ReadAsync());
+
+        // Switch to the Gameplay State.
+        GameStateManager.Instance.PopAllStates();
+        GameStateManager.Instance.PushState(typeof(GameplayState));
+
 		fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
 
 	}
