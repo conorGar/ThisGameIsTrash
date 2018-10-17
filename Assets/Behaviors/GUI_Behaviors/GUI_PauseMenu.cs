@@ -10,7 +10,7 @@ public class GUI_PauseMenu : MonoBehaviour {
     public GameObject enddayOption;
     public GameObject optionsMenu;
     public GameObject returnToDumpsterOption;
-    public GameObject endDayDisplayHUD;
+    public GUI_OptionsPopupBehavior endDayPopup;
 
     public Sprite optionsHLspr;
     public Sprite endayHLspr;
@@ -34,28 +34,51 @@ public class GUI_PauseMenu : MonoBehaviour {
 
         optionsOption.GetComponent<Image>().sprite = optionsHLspr;
 
-        GameStateManager.Instance.RegisterEnterEvent(typeof(OptionsState), OnEnterOptionsState);
-        GameStateManager.Instance.RegisterLeaveEvent(typeof(OptionsState), OnLeaveOptionsState);
-
         // TODO: Unity doesn't run start on disabled gameobjects because it's lame and weird.  Is there a better way to do this
         // Then starting active and disabling it immediately?
         gameObject.SetActive(false);
+
+        // Register Events
+        endDayPopup.RegisterCloseEvent(OnPopupCloseEvent);
+        endDayPopup.RegisterOptionEvent(OnPopupOptionsEvent);
+
+        GameStateManager.Instance.RegisterEnterEvent(typeof(PauseMenuState), OnEnterPauseMenuState);
+        GameStateManager.Instance.RegisterLeaveEvent(typeof(PauseMenuState), OnLeavePauseMenuState);
     }
 
     private void OnDestroy()
     {
-        GameStateManager.Instance.UnregisterEnterEvent(typeof(OptionsState), OnEnterOptionsState);
-        GameStateManager.Instance.UnregisterLeaveEvent(typeof(OptionsState), OnLeaveOptionsState);
+        // Unregister Events
+        endDayPopup.UnregisterCloseEvent(OnPopupCloseEvent);
+        endDayPopup.UnregisterOptionEvent(OnPopupOptionsEvent);
+
+        GameStateManager.Instance.UnregisterEnterEvent(typeof(PauseMenuState), OnEnterPauseMenuState);
+        GameStateManager.Instance.UnregisterLeaveEvent(typeof(PauseMenuState), OnLeavePauseMenuState);
     }
 
-    void OnEnterOptionsState()
+    void OnPopupCloseEvent()
+    {
+    }
+
+    void OnPopupOptionsEvent(int optionNum)
+    {
+        switch (optionNum) {
+            case 0:
+                GameObject fadeHelp = GameObject.Find("fadeHelper");
+                fadeHelp.GetComponent<Ev_FadeHelper>().EndOfDayFade();
+                Destroy(endDayPopup.gameObject);
+                break;
+        }
+    }
+
+    void OnEnterPauseMenuState()
     {
         gameObject.SetActive(true);
         SoundManager.instance.PlaySingle(paperSlide);
         Time.timeScale = 0;
     }
 
-    void OnLeaveOptionsState()
+    void OnLeavePauseMenuState()
     {
         gameObject.SetActive(false);
         SoundManager.instance.PlaySingle(paperSlide);
@@ -64,7 +87,7 @@ public class GUI_PauseMenu : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if (GameStateManager.Instance.GetCurrentState() == typeof(OptionsState)) {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(PauseMenuState)) {
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
             || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
                 if (arrowpos < 2) {
@@ -85,14 +108,12 @@ public class GUI_PauseMenu : MonoBehaviour {
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
                 if (arrowpos == 1) {
+                    // To the options menu.
+                    GameStateManager.Instance.PushState(typeof(OptionsState));
                     optionsMenu.SetActive(true);
-                    this.enabled = false;
                 }
                 else if (arrowpos == 2) {//end day
-                    endDayDisplayHUD.SetActive(true);
-                    endDayDisplayHUD.GetComponent<GUI_OptionsPopupBehavior>().pauseMenu = this;
-                    endDayDisplayHUD.GetComponent<GUI_OptionsPopupBehavior>().AtPauseScreen = true;
-                    this.enabled = false;
+                    endDayPopup.gameObject.SetActive(true);
                 }
             }
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)

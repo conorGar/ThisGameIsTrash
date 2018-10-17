@@ -225,7 +225,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 			if(!bought && popupOnce == 0){
                 PinManager.Instance.Shop.TogglePopupEnable();
 				Image purchasePopup = GameObject.Find("purchasePopup").GetComponent<Image>();
-				purchasePopup.GetComponent<GUI_OptionsPopupBehavior>().setGameObjectToActivate(this.gameObject);
+                PinManager.Instance.Shop.SetCurrentPin(this);
 				GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 				popupOnce = 1;
 			}else if(popupOnce == 1){

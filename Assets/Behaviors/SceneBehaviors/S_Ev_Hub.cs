@@ -26,7 +26,9 @@ public class S_Ev_Hub : MonoBehaviour {
 		//disable melee swing at hub
 		GameObject.Find("Jim").GetComponent<MeleeAttack>().enabled = false;
 
-		//LargeTrashSpawn();
+        //LargeTrashSpawn();
+        GameStateManager.Instance.PopAllStates();
+        GameStateManager.Instance.PushState(typeof(GameplayState));
 	}
 	
 	// Update is called once per frame
