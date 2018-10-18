@@ -45,9 +45,6 @@ public class Ev_SmallTruck : MonoBehaviour {
 			delayTillSpawn = .3f;
 			StartCoroutine("StopMovement");
 		}
-
-		EndDay(); //TODO: just here for testing homeless harry sequence
-
 	}
 
 	void OnEnable(){
@@ -65,9 +62,9 @@ public class Ev_SmallTruck : MonoBehaviour {
 					Debug.Log("PLAYER SPRITE DISABLED HERE");
 					player.GetComponent<tk2dSprite>().enabled = false;
 					SoundManager.instance.PlaySingle(truckDoor);
-
-					//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
-				}
+                    StartCoroutine("StartMovement");
+                    //gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
+                }
 			}
 		}
 	}
