@@ -44,6 +44,7 @@ public class GUI_PauseMenu : MonoBehaviour {
 
         GameStateManager.Instance.RegisterEnterEvent(typeof(PauseMenuState), OnEnterPauseMenuState);
         GameStateManager.Instance.RegisterLeaveEvent(typeof(PauseMenuState), OnLeavePauseMenuState);
+        GameStateManager.Instance.RegisterEnterEvent(typeof(EndDayState), OnEnterEndDayState);
     }
 
     private void OnDestroy()
@@ -54,6 +55,7 @@ public class GUI_PauseMenu : MonoBehaviour {
 
         GameStateManager.Instance.UnregisterEnterEvent(typeof(PauseMenuState), OnEnterPauseMenuState);
         GameStateManager.Instance.UnregisterLeaveEvent(typeof(PauseMenuState), OnLeavePauseMenuState);
+        GameStateManager.Instance.RegisterEnterEvent(typeof(EndDayState), OnEnterEndDayState);
     }
 
     void OnPopupCloseEvent()
@@ -83,6 +85,12 @@ public class GUI_PauseMenu : MonoBehaviour {
         gameObject.SetActive(false);
         SoundManager.instance.PlaySingle(paperSlide);
         Time.timeScale = 1;
+    }
+
+    void OnEnterEndDayState()
+    {
+        // Hide this if the day is over.
+        gameObject.SetActive(false);
     }
 
 	// Update is called once per frame

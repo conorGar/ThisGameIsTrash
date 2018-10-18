@@ -5,7 +5,6 @@ using UnityEngine;
 public class Ev_SmallTruck : MonoBehaviour {
 
 	public GameObject player;
-	public GameObject resultsDisplay;
 	//public GameObject backPaper;
 	public GameObject oneTimers;
 	public AudioClip truckStart;
@@ -102,7 +101,6 @@ public class Ev_SmallTruck : MonoBehaviour {
 		Debug.Log("Truck End Day Activate");
 	
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-		player.GetComponent<EightWayMovement>().enabled = false;
 		endDayTruck = true;
 		if(phase == 0){
 			//player = GameObject.FindGameObjectWithTag("Player");
@@ -127,11 +125,13 @@ public class Ev_SmallTruck : MonoBehaviour {
 			StartCoroutine("StartMovement");
 			if(GlobalVariableManager.Instance.DAY_NUMBER == 2){
 				//StartCoroutine("HomelessHarry"); TODO: tookout for debuggin other things to do this later
-				resultsDisplay.SetActive(true); //gets value from ev_fadeHelper
+				GameStateManager.Instance.PushState(typeof(EndDayState)); //gets value from ev_fadeHelper
 			}else{
-				resultsDisplay.SetActive(true); //gets value from ev_fadeHelper
-			}
-		}
+                GameStateManager.Instance.PushState(typeof(EndDayState)); //gets value from ev_fadeHelper
+            }
+
+            player.SetActive(false);
+        }
 
 
 	}

@@ -12,8 +12,6 @@ public class Ev_FadeHelper : MonoBehaviour {
 	public Texture2D fadeOutTexture; //texture that will overlay screen(black image)
 	public float fadeSpeed;
 	public PinFunctionsManager pfm;
-	public GameObject resultsDisplay;
-
 
 	float alpha = 0f;
 	int specialFade = 0;
@@ -106,7 +104,6 @@ public class Ev_FadeHelper : MonoBehaviour {
 		//	}
 			pfm.ReturnPinValues();
 			GameObject truckInstance = Instantiate(smallTruck,new Vector2(myCam.transform.position.x - 5, player.transform.position.y), Quaternion.identity);
-			truckInstance.GetComponent<Ev_SmallTruck>().resultsDisplay = resultsDisplay;
 			truckInstance.GetComponent<Ev_SmallTruck>().EndDay();
 		}
 	}
