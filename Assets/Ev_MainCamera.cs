@@ -161,8 +161,12 @@ public class Ev_MainCamera : MonoBehaviour {
 		//-----------------------------------------//
 	}//end of ActivateEnemies()
 
+    public void ScreenShake(float time)
+    {
+        StartCoroutine(ScreenShakeEnumerator(time));
+    }
 
-	public IEnumerator ScreenShake(float time){
+	public IEnumerator ScreenShakeEnumerator(float time){
 		Debug.Log("SCREEN SHAKE ACTIVATE----------");
 		screenShake = .2f;
 		startShakeX = transform.position.x;

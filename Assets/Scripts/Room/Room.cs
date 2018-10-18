@@ -29,7 +29,7 @@ public class Room : MonoBehaviour
     public void ActivateRoom()
     {
     	Debug.Log("ActivateRoom....activated");
-        roomManager.mainCamera.ScreenCamera.ViewportToWorldPoint(transform.position);
+        CamManager.Instance.tk2dMainCam.ScreenCamera.ViewportToWorldPoint(transform.position);
         roomManager.SetCamFollowBounds(this);
 
         // enemy spawns
@@ -117,7 +117,7 @@ public class Room : MonoBehaviour
 					bosses[i].GetComponent<Boss>().currentRoom = this;
         		
         	}
-        	cam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1f,5f); //for debug testing
+            CamManager.Instance.mainCamEffects.ZoomInOut(1f,5f); //for debug testing
         }
  
     }
@@ -166,8 +166,8 @@ public class Room : MonoBehaviour
 
     public Rect GetRoomCameraBoundaries()
     {
-        var vertExtent = roomManager.mainCamera.ScreenExtents.yMax;
-        var horzExtent = roomManager.mainCamera.ScreenExtents.xMax;
+        var vertExtent = CamManager.Instance.tk2dMainCam.ScreenExtents.yMax;
+        var horzExtent = CamManager.Instance.tk2dMainCam.ScreenExtents.xMax;
         Rect rect = new Rect();
 
         // TODO: There's a Mathf.Max call in here to handle situations where the room is smaller than the size of the camera (the max_x or max_y become smaller than the min_x or min_y in this case).

@@ -22,7 +22,7 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 	}
 
 	void OnEnable(){
-		mainCam.GetComponent<PostProcessingBehaviour>().profile = blur;
+        CamManager.Instance.mainCamPostProcessor.profile = blur;
 		starsAvailableHUD.SetActive(true);
 		Navigate("");
 	}
@@ -77,7 +77,7 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 		}if(arrowPos == 3){
 			//this.gameObject.SetActive(false);
 			stand.player.GetComponent<EightWayMovement>().enabled = false;
-			mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
+            CamManager.Instance.mainCamPostProcessor.profile = null;
 			stand.ReturnFromDisplay();
 			starsAvailableHUD.SetActive(false);
 			baseStatUpgrade.SetActive(false);

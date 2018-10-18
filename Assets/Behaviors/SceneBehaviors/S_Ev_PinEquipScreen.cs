@@ -17,7 +17,6 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 	public GameObject selectionArrow;
 	public GameObject displayPin;
 	public PostProcessingProfile blur;
-	public GameObject mainCam;
 	public TextMeshProUGUI currentPage;
 	public AudioClip navLeftSFX;
 	public AudioClip navRightSFX;
@@ -105,7 +104,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 
 		leftSide.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0,0,.2f,true);
 		rightSide.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0,0,.2f,true);
-		mainCam.GetComponent<PostProcessingBehaviour>().profile = blur;
+        CamManager.Instance.mainCamPostProcessor.profile = blur;
         totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
 	}
 
@@ -133,7 +132,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 			GameObject pinCase = GameObject.Find("hubWorld_pinCase");
 			pinCase.GetComponent<Ev_PinDisplayOption>().enabled = true;
 			pinCase.GetComponent<Ev_PinDisplayOption>().player.GetComponent<EightWayMovement>().enabled = true;
-			mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
+            CamManager.Instance.mainCamPostProcessor.profile = null;
 			this.gameObject.SetActive(false);
 		}
         else

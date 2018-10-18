@@ -125,9 +125,7 @@ public class Friend : UserDataItem {
 
     public virtual void OnFinishDialog()
     {
-
-        //TODO: DEFINATELY change this...
-        gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
         gameObject.GetComponent<ActivateDialogWhenClose>().myDialogIcon.gameObject.SetActive(false);
         GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
         //nothing to do for basic friend

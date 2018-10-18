@@ -12,7 +12,6 @@ public class Boss : MonoBehaviour {
 	public GameObject objectPool;
 	public bool vanishAtDeath;
 	public MonoBehaviour myBossScript;
-	public tk2dCamera mainCam;
 	public GameObject objectToPanTo;
 	public bool dazeAtDeath;
 
@@ -62,9 +61,9 @@ public class Boss : MonoBehaviour {
 		GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
 		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		if(vanishAtDeath){
-			//mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(objectToPanTo.transform.position,"BossItem");
-			//mainCam.GetComponent<Ev_MainCameraEffects>().objectToSpawn = objectToPanTo;
-			GlobalVariableManager.Instance.BOSSES_KILLED |= GlobalVariableManager.BOSSES.ONE; //use this as way to tell if player has upgrade
+            //CamManager.Instance.mainCamEffects.CameraPan(objectToPanTo.transform.position,"BossItem");
+            //CamManager.Instance.mainCamEffects.objectToSpawn = objectToPanTo;
+            GlobalVariableManager.Instance.BOSSES_KILLED |= GlobalVariableManager.BOSSES.ONE; //use this as way to tell if player has upgrade
 			for(int i = 0; i < currentRoom.bosses.Count; i++){//disable all other bosses at death
 				currentRoom.bosses[i].SetActive(false);
 			}

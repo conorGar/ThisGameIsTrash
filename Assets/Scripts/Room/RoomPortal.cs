@@ -89,8 +89,8 @@ public class RoomPortal : EditorMonoBehaviour {
                     roomManager.previousRoom = positiveRoom;
                     player = collider.gameObject;
                     playerCollider2d = player.GetComponent<Collider2D>();
-                    roomManager.mainCamera.GetComponent<Ev_MainCamera>().enabled = false; //disable camera following for transition. Enabled uner RoomManager: SetCamBOunds
-                    roomManager.previousCameraPosition = roomManager.mainCamera.GetComponent<Ev_MainCamera>().transform.position;
+                    CamManager.Instance.mainCam.enabled = false; //disable camera following for transition. Enabled uner RoomManager: SetCamBOunds
+                    roomManager.previousCameraPosition = CamManager.Instance.mainCam.transform.position;
                     roomManager.isTransitioning = true;
                     roomManager.lerpCamera = 0.0f;
 
@@ -112,8 +112,8 @@ public class RoomPortal : EditorMonoBehaviour {
                     roomManager.previousRoom = negativeRoom;
                     player = collider.gameObject;
                     playerCollider2d = player.GetComponent<Collider2D>();
-                    roomManager.mainCamera.GetComponent<Ev_MainCamera>().enabled = false; //disable camera following for transition. Enabled uner RoomManager: SetCamBOunds
-                    roomManager.previousCameraPosition = roomManager.mainCamera.GetComponent<Ev_MainCamera>().transform.position;
+                    CamManager.Instance.mainCam.enabled = false; //disable camera following for transition. Enabled uner RoomManager: SetCamBOunds
+                    roomManager.previousCameraPosition = CamManager.Instance.mainCam.transform.position;
                     roomManager.isTransitioning = true;
                     roomManager.lerpCamera = 0.0f;
 

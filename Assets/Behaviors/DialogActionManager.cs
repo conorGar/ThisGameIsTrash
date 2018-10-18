@@ -7,7 +7,6 @@ public class DialogActionManager : MonoBehaviour {
 
 	public Friend friend;
 	public GameObject movieScreen;
-	public GameObject mainCam;
 	public GameObject deadRat;
 	public GameObject calendar;
 	public DialogManager dialogManager;

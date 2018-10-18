@@ -64,7 +64,7 @@ public class Ev_SpecialItem : MonoBehaviour {
 	void PlayerMoveToward(){
 		player.GetComponent<EightWayMovement>().enabled = false;
 		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-		mainCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,null);
+        CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,null);
 		player.GetComponent<tk2dSpriteAnimator>().Play("ani_jimWalk");
 			if(player.transform.position.x < transform.position.x){
 					player.transform.localScale = new Vector3(1,1,1);

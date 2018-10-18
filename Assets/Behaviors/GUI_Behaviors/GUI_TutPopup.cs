@@ -9,7 +9,6 @@ public class GUI_TutPopup : MonoBehaviour {
 	public GameObject myDescription;
 	public GameObject myImage;
 	public GameObject myTitle;
-	public GameObject mainCam;
 	public AudioClip popupSFX;
 
 	public Sprite largeTrashImage;
@@ -45,7 +44,7 @@ public class GUI_TutPopup : MonoBehaviour {
 			phase = 2;
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,5f,.5f);
 			yield return new WaitForSeconds(.5f);
-			mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+            CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 			GameObject player = GameObject.FindGameObjectWithTag("Player");
 			player.GetComponent<EightWayMovement>().enabled = true;
 			player.GetComponent<PlayerTakeDamage>().enabled = true;

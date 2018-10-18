@@ -8,7 +8,6 @@ public class BossFriendEx : Friend
 
 	//*** For now using for all 3 of the trio, change if needed at any point
 	
-	public tk2dCamera mainCam;
 	public ParticleSystem myTeleportPS;
 	public BossStuart stuart;
 	public GameObject player;
@@ -27,10 +26,7 @@ public class BossFriendEx : Friend
 
     private void OnEnable()
     {
-        // TODO: Not really into this but doing it for the demo (might cause a hiccup actually).
-        // A lot of these camera variables should be part of a singleton Manager so we don't have to find all these references for every object that uses them.
         base.OnEnable();
-        mainCam = GameObject.Find("tk2dCamera").GetComponent<tk2dCamera>();
         player = GameObject.Find("Jim");
     }
 
@@ -105,7 +101,7 @@ public class BossFriendEx : Friend
                 yield return new WaitForSeconds(.1f);
                 gameObject.GetComponent<MeshRenderer>().enabled = true;
                 GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-                mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+                CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 gameObject.SetActive(false);
                 break;
@@ -116,21 +112,21 @@ public class BossFriendEx : Friend
                 yield return new WaitForSeconds(1f);
                 gameObject.GetComponent<MeshRenderer>().enabled = true;
                 GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-                mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+                CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 break;
             case "PREP_FIGHT_PHASE_2":
                 yield return new WaitForSeconds(1f);
                 gameObject.GetComponent<MeshRenderer>().enabled = true;
                 GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-                mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+                CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 break;
             case "END":
                 yield return new WaitForSeconds(1f);
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
                 GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-                mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+                CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 SetFriendState("END");
                 stuart.gameObject.SetActive(false);

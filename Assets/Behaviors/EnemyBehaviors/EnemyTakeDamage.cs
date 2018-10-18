@@ -44,8 +44,6 @@ public int meleeDmgBonus = 0;
 	[HideInInspector]
 public bool dontStopWhenHit; //usually temporary and set by other behavior, such as 'LungeAtPlayer.cs'
 
-	Ev_MainCamera currentCam;
-
 	float swingDirectionSide; // uses scale to see if swinging left or right
 
 	bool piercingPin = false;
@@ -92,7 +90,6 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		currentCam = GameObject.Find("tk2dCamera").GetComponent<Ev_MainCamera>();
 		myAnim = this.gameObject.GetComponent<tk2dSpriteAnimator>();
 		myBody = gameObject.GetComponent<Rigidbody2D>();
 		startRotation = transform.rotation;
@@ -300,9 +297,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
 						}
-					
-					//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
-					currentCam.StartCoroutine("ScreenShake",.2f);
+
+                //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
+                CamManager.Instance.mainCam.ScreenShake(.2f);
 					if(hitByThrownObject){
                         // TODO: Fix the boss battle to use throwable bodies????
                         var body = melee.gameObject.GetComponent<ThrowableBody>();

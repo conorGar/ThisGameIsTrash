@@ -29,10 +29,7 @@ public class TransitionTriggersBehavior : MonoBehaviour {
 	public GameObject currentCamera;
 	public GameObject player;
 
-	Ev_MainCamera mainCam;
-
 	void Start () {
-		mainCam = currentCamera.GetComponent<Ev_MainCamera>();
 	}
 	
 	// Update is called once per frame
@@ -56,7 +53,7 @@ public class TransitionTriggersBehavior : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collision){
 		if(rightTransition){
-			mainCam.Transition("right",myNextRoomName);
+            CamManager.Instance.mainCam.Transition("right",myNextRoomName);
 		}
 	}
 }

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class RatOnMatFriend : Friend
 {
 	public ParticleSystem vanishPS;
-	public tk2dCamera mainCam;
 
     private void Update(){
         OnUpdate();
@@ -13,7 +12,6 @@ public class RatOnMatFriend : Friend
 
     void OnEnable(){
 		base.OnEnable();
-        mainCam = GameObject.Find("tk2dCamera").GetComponent<tk2dCamera>();
         //StartCoroutine("DayDisplayDelay");
     }
 
@@ -69,7 +67,7 @@ public class RatOnMatFriend : Friend
 		yield return new WaitForSeconds(.5f);
 		gameObject.GetComponent<MeshRenderer>().enabled =true;
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-		mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 
 
 		gameObject.SetActive(false);

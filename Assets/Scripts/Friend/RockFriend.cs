@@ -22,7 +22,6 @@ public class RockFriend : Friend {
     private List<SpecialFriendObject> deliveredObjects = new List<SpecialFriendObject>();
     List<SpecialFriendObject> pickedUpObjects = new List<SpecialFriendObject>();
 
-    public GameObject mainCam;
     public GameObject eyeBreakPS;
     public GameObject eyeCover;
     public GameObject slab;
@@ -35,8 +34,6 @@ public class RockFriend : Friend {
         day = CalendarManager.Instance.currentDay;
     }
     public new void OnEnable(){
-    	mainCam = GameObject.Find("tk2dCamera");
-
         switch (GetFriendState()) {
             case "START":
                 break;
@@ -136,23 +133,23 @@ public class RockFriend : Friend {
 	}
 
     public IEnumerator OpeningSequenceEvent(){
-		mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
-		//Rock
-		mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",.5f);
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,null);
+        CamManager.Instance.mainCamPostProcessor.profile = null;
+        //Rock
+        CamManager.Instance.mainCam.ScreenShake(.5f);
+        CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,null);
 		yield return new WaitForSeconds(1f);
         BreakEyes();
 		yield return new WaitForSeconds(1f);
-		//Slab
-		mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",.5f);
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(slab.transform.position,null);
+        //Slab
+        CamManager.Instance.mainCam.ScreenShake(.5f);
+        CamManager.Instance.mainCamEffects.CameraPan(slab.transform.position,null);
 		yield return new WaitForSeconds(.3f);
 		slab.GetComponent<SlabFriend>().BreakEyes();
 
 		yield return new WaitForSeconds(1f);
-		//Stone
-		mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",.5f);
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(stone.transform.position,null);
+        //Stone
+        CamManager.Instance.mainCam.ScreenShake(.5f);
+        CamManager.Instance.mainCamEffects.CameraPan(stone.transform.position,null);
 		yield return new WaitForSeconds(.3f);
 
 		stone.GetComponent<StoneFriend>().BreakEyes();

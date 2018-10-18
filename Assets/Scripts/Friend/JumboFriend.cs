@@ -15,7 +15,6 @@ public class JumboFriend : Friend {
     public GameObject moviePosters;
     public GameObject filmColor;
     public GameObject movieScreen;
-	public GameObject mainCam;
 	public AudioClip projectorPlay;
 	int numberOfActivation;
 	bool movieIsPlaying;
@@ -48,8 +47,6 @@ public class JumboFriend : Friend {
 
     public new void OnEnable()
     {
-        mainCam = GameObject.Find("tk2dCamera");
-
         switch (GetFriendState()) {
             case "START":
                 break;
@@ -144,30 +141,30 @@ public class JumboFriend : Friend {
     }
 	public void CurrentDialogAction(){
 		numberOfActivation++;
-		dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
+        CamManager.Instance.mainCamPostProcessor.profile = null;
 		if(nextDialog == "Jumbo2"){
 			if(numberOfActivation == 1){//pan to jumbo hiding in bush...
-				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position," ");
+                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position," ");
 				dialogManager.textBox.SetActive(false);
 				dialogManager.currentlySpeakingIcon.SetActive(false);
 				dialogManager.Invoke("ReturnFromAction",2f);
 			}else if(numberOfActivation == 2){//pan to audience...
 				dialogManager.textBox.SetActive(false);
-				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(deadRat.transform.position," ");
-				//mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(2f,.1f);
-				StartCoroutine("FilmSetPan");
+                CamManager.Instance.mainCamEffects.CameraPan(deadRat.transform.position," ");
+                //CamManager.Instance.mainCamEffects.ZoomInOut(2f,.1f);
+                StartCoroutine("FilmSetPan");
 				dialogManager.Invoke("ReturnFromAction",5f);
 			}else if(numberOfActivation == 3){//dead rat zoom in...
 				dialogManager.ReturnFromAction();
-				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(deadRat.transform.position," ");
-				mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(3f,.1f);
+                CamManager.Instance.mainCamEffects.CameraPan(deadRat.transform.position," ");
+                CamManager.Instance.mainCamEffects.ZoomInOut(3f,.1f);
 				dialogManager.currentlySpeakingIcon.SetActive(false);
 				dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
 			}else if(numberOfActivation == 4){//return to jumbo after dead rat
-				mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position," ");
+                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position," ");
 				dialogManager.Invoke("ReturnFromAction",.1f);
-				mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1.15f,4f);
-				dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = dialogManager.dialogBlur;
+                CamManager.Instance.mainCamEffects.ZoomInOut(1.15f,4f);
+                CamManager.Instance.mainCamPostProcessor.profile = dialogManager.dialogBlur;
 
 			}
 		}
@@ -176,10 +173,10 @@ public class JumboFriend : Friend {
 	public void JumboMoviePlay(){
 		if(!movieIsPlaying){
 			movieIsPlaying = true;
-			mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(new Vector3(-87.4f,32f,-10f),"JumboMovie");
+            CamManager.Instance.mainCamEffects.CameraPan(new Vector3(-87.4f,32f,-10f),"JumboMovie");
 
 			dialogManager.textBox.SetActive(false);
-			dialogManager.mainCam.GetComponent<PostProcessingBehaviour>().profile = null;//TODO: returns to NO effect, not sure if you want this, future Conor
+            CamManager.Instance.mainCamPostProcessor.profile = null;//TODO: returns to NO effect, not sure if you want this, future Conor
 			dialogManager.currentlySpeakingIcon.SetActive(false);
 
 
@@ -216,12 +213,12 @@ public class JumboFriend : Friend {
 
 	IEnumerator AfterFirstMovie(){
 		yield return new WaitForSeconds(10f);
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,"JumboMovie");
+        CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"JumboMovie");
 		yield return new WaitForSeconds(1f);
 		GameObject player = GameObject.FindGameObjectWithTag("Player");
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(player.transform.position,"JumboMovie");
+        CamManager.Instance.mainCamEffects.CameraPan(player.transform.position,"JumboMovie");
 		yield return new WaitForSeconds(1f);
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,"JumboMovie");
+        CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"JumboMovie");
 		yield return new WaitForSeconds(.5f);
 		dialogManager.Invoke("ReturnFromAction",.1f);//10= length of each movie TODO:check for if this is the first movie or not, if not activate this line of code
 
@@ -230,7 +227,7 @@ public class JumboFriend : Friend {
 
 	IEnumerator FilmSetPan(){
 		yield return new WaitForSeconds(4f);
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position," ");
+        CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position," ");
 
 	}
 	public void JumboMovieColor(){
@@ -253,7 +250,6 @@ public class JumboFriend : Friend {
 		moviePosters= neededObjs[1];
 		filmColor= neededObjs[2];
 		movieScreen= neededObjs[3];
-		mainCam= neededObjs[4];
     }
 
     // User Data implementation

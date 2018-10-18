@@ -6,7 +6,6 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 	public GameObject objectPool;
 	public GameObject HPdisplay;
-	public Ev_MainCamera currentCam;
 	//public GameObject fadeHelper;//needed for Death()
 	public GameObject roomManager; //needed for Death()
 	//public GameObject trashCollectedDisplay; //needed for Death()
@@ -91,7 +90,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 			damageCounter.SetActive(true);
 			GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars",this.gameObject.transform.position);
 			littleStars.SetActive(true);
-			currentCam.StartCoroutine("ScreenShake",.2f);
+            CamManager.Instance.mainCam.ScreenShake(.2f);
 
 			if(enemy.transform.position.x < gameObject.transform.position.x){
 				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,0f), ForceMode2D.Impulse);
@@ -186,7 +185,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.transform.position = new Vector3(0f,-3f,0f); //Start at Beginning of world
 		truck.transform.position = new Vector3(-15f,-3f,0f);
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
-		currentCam.transform.position = new Vector3(0f,0f,-10f);
+        CamManager.Instance.mainCam.transform.position = new Vector3(0f,0f,-10f);
 		roomManager.GetComponent<RoomManager>().Restart();
 		currentHp = GlobalVariableManager.Instance.Max_HP;
 		currentlyTakingDamage = false;
@@ -212,7 +211,7 @@ public class PlayerTakeDamage : MonoBehaviour {
         // Pop Respawn State
         GameStateManager.Instance.PopState();
     }
-	/*
+    /*
 	IEnumerator Death(){
 		
 
@@ -226,7 +225,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<BoxCollider2D>().enabled = false;
 	
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-		currentCam.GetComponent<Ev_MainCamera>().enabled = false;
+		CamManager.Instance.mainCam.enabled = false;
 		//GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().WhiteFlash();
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
 			yield return new WaitForSeconds(.5f);

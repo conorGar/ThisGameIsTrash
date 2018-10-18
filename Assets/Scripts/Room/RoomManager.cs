@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour {
     public static RoomManager Instance;
-    public tk2dCamera mainCamera;
     public GameObject player;
     public Collider2D playerCollider2D;
     public bool isTransitioning = false;
@@ -40,9 +39,9 @@ public class RoomManager : MonoBehaviour {
         // lerpin'
         if (isTransitioning)
         {
-            mainCamera.transform.position = new Vector3(Mathf.Lerp(previousCameraPosition.x, targetCameraPosition.x, lerpCamera),
+            CamManager.Instance.mainCam.transform.position = new Vector3(Mathf.Lerp(previousCameraPosition.x, targetCameraPosition.x, lerpCamera),
                                         Mathf.Lerp(previousCameraPosition.y, targetCameraPosition.y, lerpCamera),
-                                        mainCamera.transform.position.z);
+                                        CamManager.Instance.mainCam.transform.position.z);
 
             if (lerpCamera >= 1.0f)
             {        
@@ -80,7 +79,7 @@ public class RoomManager : MonoBehaviour {
     {
         //Activated by Room.cs under 'ActivateRoom()'
         Debug.Log("SetCamFollowBounds Activated properly");
-        mainCamera.GetComponent<Ev_MainCamera>().enabled = true; //renable following camera after transition
-        mainCamera.GetComponent<Ev_MainCamera>().SetMinMax(room);
+        CamManager.Instance.mainCam.enabled = true; //renable following camera after transition
+        CamManager.Instance.mainCam.SetMinMax(room);
     }
 }

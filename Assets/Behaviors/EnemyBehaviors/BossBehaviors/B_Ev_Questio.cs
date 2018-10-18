@@ -9,7 +9,6 @@ public class B_Ev_Questio : MonoBehaviour {
 	public GameObject player;
 	public GameObject grabbyGloves;
 	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
-	public GameObject myCamera;
 
 	EnemyTakeDamage myETD;
 	tk2dSpriteAnimator myAnim;
@@ -85,14 +84,14 @@ public class B_Ev_Questio : MonoBehaviour {
 		player.GetComponent<PlayerTakeDamage>().enabled = false;
 		grabbyGloves.SetActive(true);
 		grabbyGloves.GetComponent<Ev_SpecialItem>().Toss();
-		myCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(grabbyGloves,true);
+		CamManager.Instance.mainCamEffects.CameraPan(grabbyGloves,true);
 		Dazed();
 		Invoke("ReturnFromGloveShow",2f);
 
 	}
 
 	void ReturnFromGloveShow(){
-		myCamera.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		player.GetComponent<EightWayMovement>().enabled = true;
 		player.GetComponent<PlayerTakeDamage>().enabled = true;
 		GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = false; //stops enemy function

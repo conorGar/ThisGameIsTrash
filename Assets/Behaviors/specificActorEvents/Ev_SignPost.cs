@@ -15,7 +15,6 @@ public class Ev_SignPost : MonoBehaviour {
 	public TextMeshProUGUI nameDisplay;
 	public Sprite myPicture;
 	public AudioClip signRise;
-	public GameObject mainCamera;
 	public PostProcessingProfile blur;
 	float lastRealTimeSinceStartup;
 	int glowCheck;
@@ -44,7 +43,7 @@ public class Ev_SignPost : MonoBehaviour {
                 if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
                     ObjectPool.Instance.ReturnPooledObject(speechIcon);
                     SoundManager.instance.PlaySingle(signRise);
-                    mainCamera.GetComponent<PostProcessingBehaviour>().profile = blur;
+                    CamManager.Instance.mainCamPostProcessor.profile = blur;
                     signPostHUD.SetActive(true);
                     signPostHUD.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = myText;
                     nameDisplay.text = myName;
@@ -61,7 +60,7 @@ public class Ev_SignPost : MonoBehaviour {
                     GameStateManager.Instance.PopState();
                     Time.timeScale = 1;
                     signPostHUD.SetActive(false);
-                    mainCamera.GetComponent<PostProcessingBehaviour>().profile = null;
+                    CamManager.Instance.mainCamPostProcessor.profile = null;
                     signPostHUD.transform.localPosition = new Vector3(13f, -203f, 10f);
                 }
             }

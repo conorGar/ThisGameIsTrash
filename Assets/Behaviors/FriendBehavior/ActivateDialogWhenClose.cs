@@ -138,7 +138,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 		player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		if(dialogCanvas.activeInHierarchy == false){
 			if(cameraPanToFriendAtStart){
-					dialogManager.mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position, "");
+                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position, "");
 			}
 			Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
 			myDialogIcon.GetComponent<DialogIconAnimationManager>().SwitchAni(iconAnimationName);
