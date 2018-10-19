@@ -14,7 +14,6 @@ public class GUI_MenuBase : MonoBehaviour {
 	public List<GameObject> optionIcons = new List<GameObject>();
 	public GameObject selectionArrow;
 	public PostProcessingProfile blur;
-	public GameObject mainCam;
 
 	public Vector3 currentSelectArrowPos;
 

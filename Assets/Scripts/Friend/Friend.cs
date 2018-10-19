@@ -39,8 +39,10 @@ public class Friend : UserDataItem {
     {
         var the_event = new FriendEvent();
         GenerateEventData();
+        IsVisiting = false;
         the_event.friend = this;
         the_event.day = day;
+
 
         Debug.Log("New Friend Event Generated:\n" +
                   "Friend: " + the_event.friend.name + "\n" +

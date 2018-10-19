@@ -24,6 +24,7 @@ public class FriendManager : MonoBehaviour {
 
     public void GenerateEvents()
     {
+        CalendarManager.Instance.ClearFriendEvents();
         for (int i=0; i < friends.Count; ++i)
         {
             FriendEvent the_event = friends[i].GenerateEvent();
