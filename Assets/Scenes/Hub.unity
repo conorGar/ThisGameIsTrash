@@ -1154,11 +1154,9 @@ MonoBehaviour:
   guiCamera: {fileID: 97792199}
   dialogCanvas: {fileID: 40757786}
   characterName: {fileID: 1313941075}
-  dayMeter: {fileID: 0}
   animationName: 
   multipleIconsManager: {fileID: 0}
   dialogBlur: {fileID: 11400000, guid: a40370f802c110b46900e0cd4e58998f, type: 2}
-  mainCam: {fileID: 1625554773}
   variableText: 
   choiceBoxAppear: {fileID: 0}
   canContinueDialog: 1
@@ -8571,8 +8569,6 @@ MonoBehaviour:
   myDescription: {fileID: 316318790}
   myImage: {fileID: 1611028527}
   myTitle: {fileID: 1484550348}
-  mainCam: {fileID: 0}
-  dayMeter: {fileID: 0}
   popupSFX: {fileID: 0}
   largeTrashImage: {fileID: 21300000, guid: 0b543afeb3f80924a9160af4fb1ca0e0, type: 3}
   ArmoredEnemyImage: {fileID: 21300000, guid: b64a0367c68a6f5458975fb46b49b73f, type: 3}
@@ -9400,7 +9396,6 @@ MonoBehaviour:
   selectionArrow: {fileID: 2065296528}
   displayPin: {fileID: 743110795}
   blur: {fileID: 11400000, guid: a40370f802c110b46900e0cd4e58998f, type: 2}
-  mainCam: {fileID: 1625554773}
   currentPage: {fileID: 141040191}
   navLeftSFX: {fileID: 8300000, guid: 64c875554e5d0954e964988392644a4f, type: 3}
   navRightSFX: {fileID: 8300000, guid: 867c43f5d75b7db4080b0a206a5a800f, type: 3}
@@ -9569,7 +9564,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friend: {fileID: 0}
   movieScreen: {fileID: 0}
-  mainCam: {fileID: 1625554773}
   deadRat: {fileID: 0}
   calendar: {fileID: 0}
   dialogManager: {fileID: 40757783}
@@ -11024,7 +11018,6 @@ MonoBehaviour:
   fadeOutTexture: {fileID: 2800000, guid: 9ef6965f96a1d9344a19660f4e4d74ab, type: 3}
   fadeSpeed: 0
   pfm: {fileID: 0}
-  resultsDisplay: {fileID: 5552038}
   fading: 0
   fadeBack: 0
 --- !u!224 &589200131
@@ -18540,9 +18533,9 @@ MonoBehaviour:
   xDistanceThreshold: 4
   yDistanceThreshold: 4
   dialogCanvas: {fileID: 40757786}
-  dialogManager: {fileID: 40757782}
+  dialogManager: {fileID: 0}
   dialogActionManager: {fileID: 477474868}
-  myDialogIcon: {fileID: 40757785}
+  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 1727095900}
   iconAnimationName: RatWithHat
@@ -18650,9 +18643,10 @@ MonoBehaviour:
   nextDialog: Start
   myDialogDefiniton: {fileID: 11400000, guid: 09b9f350338526047a4837d2c5cdb368, type: 2}
   tempFriend: 0
-  calendar: {fileID: 0}
   missedDialog: RatHat1
   dialogManager: {fileID: 0}
+  friendStates: []
+  friendState: 0
   hadIntroDialog: 0
   baseStatHUD: {fileID: 22152963}
 --- !u!1 &900898029
@@ -18715,6 +18709,7 @@ MonoBehaviour:
   ltManager: {fileID: 0}
   currentWorld: 0
   backPaper: {fileID: 0}
+  image: {fileID: 0}
 --- !u!114 &900898032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23196,8 +23191,6 @@ MonoBehaviour:
   option1: {fileID: 123472855}
   option2: {fileID: 1464509520}
   closeOptionNumber: 2
-  AtPauseScreen: 0
-  pauseMenu: {fileID: 0}
 --- !u!114 &928528031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23859,7 +23852,6 @@ MonoBehaviour:
   - {fileID: 536922209}
   selectionArrow: {fileID: 5867146}
   blur: {fileID: 11400000, guid: a40370f802c110b46900e0cd4e58998f, type: 2}
-  mainCam: {fileID: 1625554773}
   currentSelectArrowPos: {x: 0, y: 0, z: 0}
   positiveText: {fileID: 1924451051}
   stand: {fileID: 890020793}
@@ -29985,7 +29977,6 @@ MonoBehaviour:
   fadeOutTexture: {fileID: 2800000, guid: 9ef6965f96a1d9344a19660f4e4d74ab, type: 3}
   fadeSpeed: 0
   pfm: {fileID: 0}
-  resultsDisplay: {fileID: 0}
   fading: 0
   fadeBack: 0
 --- !u!224 &1243261374
@@ -33681,7 +33672,6 @@ MonoBehaviour:
   MENU_SELECT_STAGE: 1
   PLAYER_CAN_MOVE: 1
   TUT_POPUP_ON: 1
-  TUT_POPUP_ISSHOWING: 0
   CARRYING_SOMETHING: 0
   PROGRESS_LV: 0
   TOTAL_TRASH: 0
@@ -37173,11 +37163,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed6dbd2afaf985146a8eda13f2278a1c, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1625554773 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1842708842806886, guid: ed6dbd2afaf985146a8eda13f2278a1c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1625554772}
 --- !u!1 &1662888512
 GameObject:
   m_ObjectHideFlags: 0
@@ -45807,10 +45792,15 @@ MonoBehaviour:
   countdownNumber: {fileID: 0}
   fadeHelper: {fileID: 589200129}
   tutPopup: {fileID: 416808804}
+  startPos: {fileID: 0}
+  endPos: {fileID: 0}
   countdownTick: {fileID: 0}
   dayNumberDisplay: {fileID: 0}
   halfWayDonePS: {fileID: 0}
   halfWayDoneChime: {fileID: 0}
+  secondsInTheDay: 240
+  secondsPassed: 0
+  timeDeathIncrease: 20
 --- !u!114 &1955398177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47346,6 +47336,21 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
   m_IsPrefabParent: 0
@@ -47544,7 +47549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980373a4fde32ea4c941e93844c5e2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 2036311006}
 --- !u!114 &2006796131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47571,7 +47576,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPool: {fileID: 0}
   HPdisplay: {fileID: 0}
-  currentCam: {fileID: 0}
   roomManager: {fileID: 0}
   droppedTrashPile: {fileID: 0}
   deathDisplay: {fileID: 0}
@@ -47974,7 +47978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2036311007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47991,7 +47995,7 @@ MonoBehaviour:
   enddayOption: {fileID: 278866735}
   optionsMenu: {fileID: 543098111}
   returnToDumpsterOption: {fileID: 1343025277}
-  endDayDisplayHUD: {fileID: 0}
+  endDayPopup: {fileID: 928528030}
   optionsHLspr: {fileID: 21300000, guid: 9c186c2dbe7e4484da8c66beb573b3d0, type: 3}
   endayHLspr: {fileID: 21300000, guid: 01033f355c72ced439cec6b08440613b, type: 3}
   returnToDumpsterHlspr: {fileID: 21300000, guid: 8f912acf77eea974daa9a609a40712b1,
