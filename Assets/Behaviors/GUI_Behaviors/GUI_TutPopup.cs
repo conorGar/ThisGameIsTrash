@@ -24,14 +24,12 @@ public class GUI_TutPopup : MonoBehaviour {
 	int phase;
 	// Use this for initialization
 	void Start () {
-		
 	}
 
 	void OnEnable(){
 		SoundManager.instance.PlaySingle(popupSFX);
 		startPos = gameObject.transform.position;//reset position
 
-        GameStateManager.Instance.PushState(typeof(DialogState));
 		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,transform.position.y +2.4f,.5f);
 		StartCoroutine("Delays");
 	}
@@ -45,13 +43,9 @@ public class GUI_TutPopup : MonoBehaviour {
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,5f,.5f);
 			yield return new WaitForSeconds(.5f);
             CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-			GameObject player = GameObject.FindGameObjectWithTag("Player");
-			player.GetComponent<EightWayMovement>().enabled = true;
-			player.GetComponent<PlayerTakeDamage>().enabled = true;
-			GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = false;
 			phase = 0;
-            GameStateManager.Instance.PopState();
 			gameObject.transform.position = startPos;
+            GameStateManager.Instance.PopState();
 			gameObject.SetActive(false);
 
 		}
@@ -59,18 +53,16 @@ public class GUI_TutPopup : MonoBehaviour {
 	}
 
 	void Update(){
-
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
-        {
-			if(phase == 1){
-				StartCoroutine("Delays");
-			}
-		}
-
+        if (GameStateManager.Instance.GetCurrentState() == typeof(DialogState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
+                if (phase == 1) {
+                    StartCoroutine("Delays");
+                }
+            }
+        }
 	}
 
 	public void SetData(string tutPopup){
-
 		if(tutPopup == "LargeTrash"){
 			myDescription.GetComponent<TextMeshProUGUI>().text = "Carry <color=#ffffb3>Large Trash</color> back to the dumpster " +
 															"to earn <color=#ffffb3>Star Points</color>, which allow you to"+
@@ -107,6 +99,7 @@ public class GUI_TutPopup : MonoBehaviour {
 
 		}
 
+        UserDataManager.Instance.SetDirty();
 	}
 
 }

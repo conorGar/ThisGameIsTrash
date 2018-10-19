@@ -33,7 +33,7 @@ public class TutorialActivator : MonoBehaviour {
 					activatedAlready = true;
 				}
 			}else if(armoredEnemies){
-				if(!activatedAlready && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.PINS ) != GlobalVariableManager.TUTORIALPOPUPS.PINS){
+				if(!activatedAlready && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES ) != GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES){
 					ActivateTutorial();
 					activatedAlready = true;
 				}
@@ -42,7 +42,8 @@ public class TutorialActivator : MonoBehaviour {
 	}
 
 	void ActivateTutorial(){
-		Debug.Log("Large Trash tutorial activated xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        GameStateManager.Instance.PushState(typeof(DialogState));
+        Debug.Log("Large Trash tutorial activated xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		if(largeTrash){
             CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"tutorial");
 		}else if(pins){
@@ -50,9 +51,5 @@ public class TutorialActivator : MonoBehaviour {
 		}else if(armoredEnemies){
             CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"tutorial_armored");
 		}
-		player.GetComponent<EightWayMovement>().enabled = false;
-		player.GetComponent<PlayerTakeDamage>().enabled = false;
-		GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = true;
-
 	}
 }

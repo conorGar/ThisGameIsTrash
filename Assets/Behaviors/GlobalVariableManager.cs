@@ -54,7 +54,6 @@ public class GlobalVariableManager : UserDataItem {
 	public int MENU_SELECT_STAGE = 1;
 	public bool PLAYER_CAN_MOVE = true;
 	public bool TUT_POPUP_ON = true;
-	public bool TUT_POPUP_ISSHOWING = false;//used for stopping enemies
 	public bool CARRYING_SOMETHING= false;
 	public int PROGRESS_LV = 0;
 	public int TOTAL_TRASH = 0;
@@ -233,6 +232,8 @@ public class GlobalVariableManager : UserDataItem {
         json_data["CURSEVALUE"] = CURSEVALUE;
         json_data["MOMONEYVALUE"] = MOMONEYVALUE;
 
+        json_data["TUT_POPUPS_SHOWN"] = (uint)TUT_POPUPS_SHOWN;
+
         return json_data;
     }
 
@@ -256,6 +257,8 @@ public class GlobalVariableManager : UserDataItem {
         DEJAVUCOUNT = json_data["DEJAVUCOUNT"].AsInt;
         CURSEVALUE = json_data["CURSEVALUE"].AsInt;
         MOMONEYVALUE = json_data["MOMONEYVALUE"].AsInt;
+
+        TUT_POPUPS_SHOWN = (TUTORIALPOPUPS)json_data["TUT_POPUPS_SHOWN"].AsInt;
     }
 
     // helpers

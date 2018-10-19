@@ -126,8 +126,6 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    		objectToSpawn.SetActive(true);
    		yield return new WaitForSeconds(.5f);
 		ReturnFromCamEffect();
-		player.GetComponent<EightWayMovement>().enabled = true;
-		player.GetComponent<PlayerTakeDamage>().enabled = true;
    }
 
 }

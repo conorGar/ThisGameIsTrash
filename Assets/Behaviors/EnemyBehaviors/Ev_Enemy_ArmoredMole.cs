@@ -20,43 +20,40 @@ public class Ev_Enemy_ArmoredMole : MonoBehaviour {
 	void OnEnable(){
 		player = GameObject.FindGameObjectWithTag("Player");
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
-		//StartCoroutine("TossRock");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Vector2.Distance(gameObject.transform.position,player.transform.position) < 20f){
-		 if(startThrowOnce == 0){
-			if(!GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING)
-				StartCoroutine("TossRock");
-			startThrowOnce = 1;
-			}
-		}else{
-			//Debug.Log(Vector2.Distance(gameObject.transform.position,player.transform.position));
-			if(startThrowOnce == 1){
-				StopAllCoroutines();
-				startThrowOnce = 0;
-			}
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (Vector2.Distance(gameObject.transform.position, player.transform.position) < 20f) {
+                if (startThrowOnce == 0) {
+                    StartCoroutine("TossRock");
+                    startThrowOnce = 1;
+                }
+            } else {
+                //Debug.Log(Vector2.Distance(gameObject.transform.position,player.transform.position));
+                if (startThrowOnce == 1) {
+                    StopAllCoroutines();
+                    startThrowOnce = 0;
+                }
 
-		}
+            }
+        }
 	}
 
 	IEnumerator TossRock(){
 		Debug.Log("TossedRock");
 		if(tossRockOnce == 0){
-		tossRockOnce = 1;
-		myAnim.Play("throw");
-		yield return new WaitForSeconds(.5f);
-		if(!GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING){
-			myBoulder = ObjectPool.Instance.GetPooledObject("projectile_boulder", gameObject.transform.position,true);
-			//myBoulder.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,8f),ForceMode2D.Impulse);
-
-		}
-		yield return new WaitForSeconds(.2f);
-		myAnim.Play("idle");
-		yield return new WaitForSeconds(Random.Range(3f,4.7f));
-		tossRockOnce = 0;
-		StartCoroutine("TossRock");
+	        tossRockOnce = 1;
+	        myAnim.Play("throw");
+	        yield return new WaitForSeconds(.5f);
+	        myBoulder = ObjectPool.Instance.GetPooledObject("projectile_boulder", gameObject.transform.position,true);
+	        //myBoulder.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,8f),ForceMode2D.Impulse);
+	        yield return new WaitForSeconds(.2f);
+	        myAnim.Play("idle");
+	        yield return new WaitForSeconds(Random.Range(3f,4.7f));
+	        tossRockOnce = 0;
+	        StartCoroutine("TossRock");
 		}
 	}
 }

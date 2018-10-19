@@ -25,38 +25,40 @@ public class ThrowableObject : PickupableObject {
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update();
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && canThrow && !GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING){
-			Invoke("Throw",.1f);
-		}
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && canThrow) {
+                Invoke("Throw", .1f);
+            }
 
-		if(beingThrown){
-			if(transform.position.y < landingY){
-				SoundManager.instance.PlaySingle(landSfx);
-				ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
-				Debug.Log("Reached Landing");
-				beingThrown = false;
-				myBody.gravityScale = 0f;
-				myBody.velocity = new Vector2(0,0f);
-				myBody.AddForce(new Vector2(-4f*(Mathf.Sign(gameObject.transform.lossyScale.x)),0f),ForceMode2D.Impulse);//slide
-				beingCarried= false;
-				canThrow = false;
-                if (myShadow != null){
-                    myShadow.SetActive(true);
-                    myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
+            if (beingThrown) {
+                if (transform.position.y < landingY) {
+                    SoundManager.instance.PlaySingle(landSfx);
+                    ObjectPool.Instance.GetPooledObject("effect_enemyLand", gameObject.transform.position);
+                    Debug.Log("Reached Landing");
+                    beingThrown = false;
+                    myBody.gravityScale = 0f;
+                    myBody.velocity = new Vector2(0, 0f);
+                    myBody.AddForce(new Vector2(-4f * (Mathf.Sign(gameObject.transform.lossyScale.x)), 0f), ForceMode2D.Impulse);//slide
+                    beingCarried = false;
+                    canThrow = false;
+                    if (myShadow != null) {
+                        myShadow.SetActive(true);
+                        myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
+                    }
+
+                    //	physicalCollision.enabled = false;
+                    gameObject.layer = 11; //switch to item layer.
+                    for (int i = 0; i < behaviorsToStop.Count; i++) {
+                        behaviorsToStop[i].enabled = true;
+                    }
+                    gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
+                    gameObject.GetComponent<IsometricSorting>().enabled = true;
+                    gameObject.GetComponent<CannotExitScene>().enabled = false;
+                    if (physicalCollision != null)
+                        physicalCollision.enabled = true;
                 }
-
-			//	physicalCollision.enabled = false;
-				gameObject.layer = 11; //switch to item layer.
-				for(int i = 0; i < behaviorsToStop.Count; i++){
-					behaviorsToStop[i].enabled = true;
-				}
-				gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
-				gameObject.GetComponent<IsometricSorting>().enabled = true;
-				gameObject.GetComponent<CannotExitScene>().enabled = false;
-				if(physicalCollision != null)
-					physicalCollision.enabled = true;
-			}
-		}
+            }
+        }
 	}
 
 	public override void PickUp(){
