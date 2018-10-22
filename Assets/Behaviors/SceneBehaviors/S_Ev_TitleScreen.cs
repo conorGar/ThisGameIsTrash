@@ -39,7 +39,12 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 
         GameStateManager.Instance.PushState(typeof(TitleState));
 	}
-	
+
+    void OnDestroy()
+    {
+        GameStateManager.Instance.PopState();
+    }
+
     IEnumerator LoadUserData()
     {
         isInteractable = false;
@@ -83,8 +88,8 @@ public class S_Ev_TitleScreen : MonoBehaviour {
                         //StartCoroutine(LoadUserData());
 
 					}else if(navigationPosition == 2){
-						optionHud.SetActive(true);
-						Time.timeScale = 0;
+                        GameStateManager.Instance.PushState(typeof(OptionsState));
+                        optionHud.SetActive(true);
 
                     }
 					SoundManager.instance.PlaySingle(selectSFX);
@@ -111,8 +116,8 @@ public class S_Ev_TitleScreen : MonoBehaviour {
             }
         }else if(optionHud.activeInHierarchy){
 			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){
-				optionHud.SetActive(false);
-				Time.timeScale = 1f;
+                GameStateManager.Instance.PopState();
+                optionHud.SetActive(false);
 			}
         }
 

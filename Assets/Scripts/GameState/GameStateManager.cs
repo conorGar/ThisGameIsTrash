@@ -50,6 +50,7 @@ public class GameStateManager : MonoBehaviour {
             GameState state = gameStates[i];
             if (type == state.GetType()) {
                 EnterState(state);
+                return;
             }
         }
     }
