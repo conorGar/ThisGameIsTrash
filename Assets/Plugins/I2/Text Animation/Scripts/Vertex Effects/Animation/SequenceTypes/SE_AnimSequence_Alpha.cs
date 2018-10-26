@@ -54,7 +54,7 @@ namespace I2.TextAnimation
 
             var color = se.mWidgetColor;
             color.a = alpha;
-            se.SetWidgetColor(color);
+            se.SetWidgetAlpha(falpha);
         }
 
 

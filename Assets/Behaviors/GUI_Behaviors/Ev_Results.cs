@@ -127,7 +127,8 @@ public class Ev_Results : MonoBehaviour {
                             GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.RemoveAt(3);
                         }
                         LargeTrashManager.Instance.DisableProperTrash(currentWorld);
-                        FriendManager.Instance.DisableFriends(currentWorld);
+                        FriendManager.Instance.DisableAllFriends();
+                        //FriendManager.Instance.DisableFriends(currentWorld);
 
                         //---------------------------------------------//
                         GlobalVariableManager.Instance.ARROW_POSITION = 1;

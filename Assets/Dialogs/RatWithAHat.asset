@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: RatWithAHat
   m_EditorClassIdentifier: 
   title: RatWithAHat
+  dialogIconID: icon_RatWithAHat
   nodeStore:
     keys:
     - Value: 0700ab38-1992-4228-a392-531f1806dd89
@@ -23,7 +24,6 @@ MonoBehaviour:
     - Value: 4264e6fa-2a8d-49e1-8b1c-ca519db958f3
     - Value: 958953e7-3ff5-4b65-b5b1-65780785d77e
     - Value: c13358a9-a5e6-40de-bf92-1500d16a294e
-    - Value: e80950b7-badd-46f8-9e4c-bf7d0c3a03ff
     values:
     - window:
         serializedVersion: 2
@@ -33,10 +33,10 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Start
-      speakerName: 
+      speakerName: Rat With A Hat
       question: 
       action: finish
-      friendState: 
+      friendState: ADVERTISED
       id:
         Value: 0700ab38-1992-4228-a392-531f1806dd89
       x: 171
@@ -54,7 +54,7 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: RatHat1
-      speakerName: 
+      speakerName: Rat With A Hat
       question: 
       action: RatWithHatIntro
       friendState: 
@@ -75,7 +75,7 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: RatHat2
-      speakerName: 
+      speakerName: Rat With A Hat
       question: 
       action: 
       friendState: 
@@ -205,35 +205,14 @@ MonoBehaviour:
       title: RatHat8
       speakerName: 
       question: 
-      action: RatWithHatFinish
-      friendState: 
+      action: 
+      friendState: OPEN_FOR_BUSINESS
       id:
         Value: c13358a9-a5e6-40de-bf92-1500d16a294e
       x: 2589
       y: 521
       text: You, specifically, can use <color=#78FF32>positive reinforcement</color>
         to <color=#78FF32>upgrade your base stats</color>.
-      type: 1
-      child_id:
-        Value: e80950b7-badd-46f8-9e4c-bf7d0c3a03ff
-      responses: []
-    - window:
-        serializedVersion: 2
-        x: 3060
-        y: 502
-        width: 270
-        height: 250
-      isCollapsed: 0
-      title: extra
-      speakerName: 
-      question: 
-      action: 
-      friendState: 
-      id:
-        Value: e80950b7-badd-46f8-9e4c-bf7d0c3a03ff
-      x: 3060
-      y: 502
-      text: 
       type: 1
       child_id:
         Value: 

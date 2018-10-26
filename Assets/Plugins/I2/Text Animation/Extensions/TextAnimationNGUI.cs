@@ -54,6 +54,12 @@ namespace I2.TextAnimation
 				mNGUI_Widget.color = color;
 		}
 
+        void SetWidgetAlpha_NGUI(float alpha)
+        {
+            if (mNGUI_Widget != null)
+                mNGUI_Widget.color = new Color(mNGUI_Widget.color.r, mNGUI_Widget.color.g, mNGUI_Widget.color.b, alpha);
+        }
+
 		public void MarkWidgetAsChanged_NGUI(bool MarkVertices = true, bool MarkMaterial = false)
 		{
 			if (mNGUI_Widget)

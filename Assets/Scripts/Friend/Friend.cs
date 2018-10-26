@@ -12,8 +12,7 @@ public class Friend : UserDataItem {
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
 	protected FriendEvent newestAddedEvent;
-
-	[HideInInspector]
+    [HideInInspector]
 	public string missedDialog;
 
 	[HideInInspector]
@@ -23,7 +22,7 @@ public class Friend : UserDataItem {
     protected void OnEnable() {
     	Debug.Log("Next Dialog: " + nextDialog);
         gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
-        gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
+        gameObject.GetComponent<ActivateDialogWhenClose>().startNodeName = nextDialog;
         gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
 		StartingEvents();
@@ -128,7 +127,7 @@ public class Friend : UserDataItem {
     public virtual void OnFinishDialog()
     {
         CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-        gameObject.GetComponent<ActivateDialogWhenClose>().myDialogIcon.gameObject.SetActive(false);
+        DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(false);
         GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
         //nothing to do for basic friend
 
@@ -150,7 +149,7 @@ public class Friend : UserDataItem {
     public void CalendarMark()
     {
         dialogManager.textBox.SetActive(false);
-        dialogManager.currentlySpeakingIcon.SetActive(false);
+        dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 
         GUIManager.Instance.CalendarHUD.gameObject.SetActive(true);
         GUIManager.Instance.CalendarHUD.NewMarkSequence(newestAddedEvent.day, name);

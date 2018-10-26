@@ -18,7 +18,20 @@ public class GUIManager : MonoBehaviour {
     public GUI_RockItemHUD rockItemHUD;
     public GUI_SlabTrashGiveHUD slabTrashGiveHUD;
 
+    // Hub related
+    public GameObject BaseStatHUD;
+    public GUI_BaseStatUpgrade GUI_BaseStatUpgrade;
+    public Hub_UpgradeStand Hub_UpgradeStand;
+
+
 	void Awake () {
         Instance = this;
 	}
+
+    void Start()
+    {
+        if (BaseStatHUD != null) {
+            BaseStatHUD.SetActive(false);
+        }
+    }
 }

@@ -76,6 +76,7 @@ public class DialogNode
 [CreateAssetMenu(fileName = "New Dialog", menuName = "TGIT/Dialog", order = 3)]
 public class DialogDefinition : ScriptableObject {
     public string title = "dialog_name";
+    public string dialogIconID = "dialog_icon_ID";
 
     [SerializeField]
     public DialogNodeDictionary nodeStore = DialogNodeDictionary.New<DialogNodeDictionary>();

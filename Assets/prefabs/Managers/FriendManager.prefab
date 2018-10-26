@@ -485,6 +485,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1701860720969626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4576919503574186}
+  m_Layer: 0
+  m_Name: Hub
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1726596846846806
 GameObject:
   m_ObjectHideFlags: 1
@@ -576,6 +591,27 @@ GameObject:
   - component: {fileID: 114789090856584450}
   m_Layer: 0
   m_Name: hat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &1771308379611982
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4390357695109728}
+  - component: {fileID: 114003846127564352}
+  - component: {fileID: 114697731634092590}
+  - component: {fileID: 33879624589795606}
+  - component: {fileID: 23437879745889984}
+  - component: {fileID: 114278774633340210}
+  - component: {fileID: 114260351744120802}
+  m_Layer: 8
+  m_Name: RatWithAHat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -907,6 +943,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4447794386291676}
+  - {fileID: 4576919503574186}
   - {fileID: 4372733523819178}
   - {fileID: 4721231206632524}
   m_Father: {fileID: 0}
@@ -936,7 +973,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4281060172242464}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4383510963997928
 Transform:
@@ -967,6 +1004,19 @@ Transform:
   - {fileID: 4412578737582096}
   m_Father: {fileID: 4048931903428834}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4390357695109728
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771308379611982}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4576919503574186}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4393111894961628
 Transform:
@@ -1147,6 +1197,20 @@ Transform:
   m_Father: {fileID: 4837553805815240}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4576919503574186
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701860720969626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4390357695109728}
+  m_Father: {fileID: 4281060172242464}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4589738564429934
 Transform:
   m_ObjectHideFlags: 1
@@ -1246,7 +1310,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4281060172242464}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4770760326009760
 Transform:
@@ -1481,6 +1545,40 @@ MeshRenderer:
   m_SortingLayerID: 962927795
   m_SortingLayer: 2
   m_SortingOrder: 0
+--- !u!23 &23437879745889984
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771308379611982}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 54c34900bcba6bd4aa7c80a8ffb82b0d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23742296710862792
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -1631,6 +1729,13 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1135413675680542}
+  m_Mesh: {fileID: 0}
+--- !u!33 &33879624589795606
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771308379611982}
   m_Mesh: {fileID: 0}
 --- !u!50 &50943324201880736
 Rigidbody2D:
@@ -1927,6 +2032,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.93, y: 1.46}
   m_EdgeRadius: 0
+--- !u!114 &114003846127564352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771308379611982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8587147a3635714b94dc7dfef2eab47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friendName: RatWithAHat
+  day: 0
+  activateDialogWhenClose: 1
+  IsVisiting: 0
+  nextDialog: Start
+  myDialogDefiniton: {fileID: 11400000, guid: 09b9f350338526047a4837d2c5cdb368, type: 2}
+  tempFriend: 0
+  missedDialog: RatHat1
+  dialogManager: {fileID: 0}
+  friendStates:
+  - START
+  - ADVERTISED
+  - OPEN_FOR_BUSINESS
+  friendState: 0
+  StartDay: 2
 --- !u!114 &114056374394624038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2045,16 +2176,12 @@ MonoBehaviour:
   friend: {fileID: 114644867240026044}
   xDistanceThreshold: 0
   yDistanceThreshold: 0
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 0
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: questioTalk
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: 
+  startNodeName: 
   autoStart: 0
   dialogDefiniton: {fileID: 0}
   canTalkTo: 1
@@ -2140,16 +2267,12 @@ MonoBehaviour:
   friend: {fileID: 114795493734283286}
   xDistanceThreshold: 0
   yDistanceThreshold: 0
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: 
+  startNodeName: 
   autoStart: 0
   dialogDefiniton: {fileID: 0}
   canTalkTo: 1
@@ -2191,6 +2314,44 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
+--- !u!114 &114260351744120802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771308379611982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e54113e5604435b8ae87c7754f2725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  library: {fileID: 114363549637903068, guid: 638e20cc3cd8d904b8b6656251720691, type: 2}
+  defaultClipId: 0
+  playAutomatically: 1
+--- !u!114 &114278774633340210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771308379611982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fac570381f34f647b768dc5a5aa1364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collection: {fileID: 114721547678422474, guid: 253214650d0e3d34fb3b96054d691fe9,
+    type: 2}
+  _color: {r: 1, g: 1, b: 1, a: 1}
+  _scale: {x: 1, y: 1, z: 1}
+  _spriteId: 8
+  boxCollider2D: {fileID: 0}
+  polygonCollider2D: []
+  edgeCollider2D: []
+  boxCollider: {fileID: 0}
+  meshCollider: {fileID: 0}
+  meshColliderPositions: []
+  meshColliderMesh: {fileID: 0}
+  renderLayer: 0
 --- !u!114 &114307743106567290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2205,16 +2366,12 @@ MonoBehaviour:
   friend: {fileID: 0}
   xDistanceThreshold: 3
   yDistanceThreshold: 2
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: 
+  startNodeName: 
   autoStart: 0
   dialogDefiniton: {fileID: 0}
   canTalkTo: 1
@@ -2285,16 +2442,12 @@ MonoBehaviour:
   friend: {fileID: 114665128206782722}
   xDistanceThreshold: 15
   yDistanceThreshold: 15
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: exTalk
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: 
+  startNodeName: 
   autoStart: 1
   dialogDefiniton: {fileID: 0}
   canTalkTo: 1
@@ -2312,16 +2465,12 @@ MonoBehaviour:
   friend: {fileID: 114207858870703972}
   xDistanceThreshold: 5
   yDistanceThreshold: 5
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: RatOnMatIcon
   dialogIconName: icon_RatOnAMat
   mySpeechIconSFX: {fileID: 0}
-  dialogName: RatMat1
+  startNodeName: RatMat1
   autoStart: 1
   dialogDefiniton: {fileID: 11400000, guid: e6b778ad58d68df43a64562007705115, type: 2}
   canTalkTo: 1
@@ -2351,16 +2500,12 @@ MonoBehaviour:
   friend: {fileID: 114127334553777988}
   xDistanceThreshold: 5
   yDistanceThreshold: 5
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: 
+  startNodeName: 
   autoStart: 0
   dialogDefiniton: {fileID: 11400000, guid: 70f4c8fa2cd3b1742b7ef70ffd2b1a0b, type: 2}
   canTalkTo: 1
@@ -2392,16 +2537,12 @@ MonoBehaviour:
   friend: {fileID: 0}
   xDistanceThreshold: 0
   yDistanceThreshold: 0
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: 
+  startNodeName: 
   autoStart: 0
   dialogDefiniton: {fileID: 11400000, guid: e6b778ad58d68df43a64562007705115, type: 2}
   canTalkTo: 1
@@ -2625,18 +2766,37 @@ MonoBehaviour:
   friend: {fileID: 114396183013373906}
   xDistanceThreshold: 15
   yDistanceThreshold: 15
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: Jumbo2
+  startNodeName: 
   autoStart: 1
   dialogDefiniton: {fileID: 11400000, guid: 72ff0c4aa033ed149824bdd747aaab4f, type: 2}
+  canTalkTo: 1
+--- !u!114 &114697731634092590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1771308379611982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0eb8d5a38ad2684787e6657d568ec06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friend: {fileID: 114003846127564352}
+  xDistanceThreshold: 4
+  yDistanceThreshold: 4
+  cameraPanToFriendAtStart: 1
+  speechBubbleIcon: {fileID: 0}
+  iconAnimationName: RatWithHat
+  dialogIconName: 
+  mySpeechIconSFX: {fileID: 8300000, guid: ad304603b57917f45a698a6556ecf9bc, type: 3}
+  startNodeName: 
+  autoStart: 1
+  dialogDefiniton: {fileID: 11400000, guid: 09b9f350338526047a4837d2c5cdb368, type: 2}
   canTalkTo: 1
 --- !u!114 &114702471565439574
 MonoBehaviour:
@@ -2688,16 +2848,12 @@ MonoBehaviour:
   friend: {fileID: 114598329284208574}
   xDistanceThreshold: 10
   yDistanceThreshold: 6
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: 
+  startNodeName: 
   autoStart: 1
   dialogDefiniton: {fileID: 11400000, guid: 70f4c8fa2cd3b1742b7ef70ffd2b1a0b, type: 2}
   canTalkTo: 1
@@ -2796,6 +2952,7 @@ MonoBehaviour:
   - {fileID: 114795493734283286}
   - {fileID: 114665128206782722}
   - {fileID: 114207858870703972}
+  - {fileID: 114003846127564352}
   worlds:
   - {fileID: 1799755359581824}
 --- !u!114 &114839294446392172
@@ -2886,16 +3043,12 @@ MonoBehaviour:
   friend: {fileID: 0}
   xDistanceThreshold: 0
   yDistanceThreshold: 0
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
   cameraPanToFriendAtStart: 0
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: hashTalk
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: 
+  startNodeName: 
   autoStart: 0
   dialogDefiniton: {fileID: 0}
   canTalkTo: 1

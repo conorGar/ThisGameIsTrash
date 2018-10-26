@@ -55,7 +55,7 @@ public class GUI_PauseMenu : MonoBehaviour {
 
         GameStateManager.Instance.UnregisterEnterEvent(typeof(PauseMenuState), OnEnterPauseMenuState);
         GameStateManager.Instance.UnregisterLeaveEvent(typeof(PauseMenuState), OnLeavePauseMenuState);
-        GameStateManager.Instance.RegisterEnterEvent(typeof(EndDayState), OnEnterEndDayState);
+        GameStateManager.Instance.UnregisterEnterEvent(typeof(EndDayState), OnEnterEndDayState);
     }
 
     void OnPopupCloseEvent()

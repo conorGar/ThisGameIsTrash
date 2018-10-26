@@ -26,24 +26,9 @@ public class DialogActionManager : MonoBehaviour {
 		
 	}
 
-	public void RatWithHatIntro(){
-		friend.GetComponent<RatWithHatFriend>().hadIntroDialog = true;
-		dialogManager.ReturnFromAction();
-	}
-
-	public void RatWithHatFinish(){
-		dialogManager.FinishDialog();
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
-		player.GetComponent<EightWayMovement>().enabled = false;
-		friend.GetComponent<RatWithHatFriend>().baseStatHUD.SetActive(true);
-		friend.GetComponent<ActivateDialogWhenClose>().enabled = false;
-		friend.GetComponent<ActivateDialogWhenClose>().speechBubbleIcon.SetActive(false);
-
-	}
-
 	public void CalendarMark(){
 		dialogManager.textBox.SetActive(false);
-		dialogManager.currentlySpeakingIcon.SetActive(false);
+		dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 		Debug.Log(friend.name);
 		Debug.Log(newestAddedEvent.day);
 		calendar.SetActive(true);

@@ -77,6 +77,13 @@ public class FriendManager : MonoBehaviour {
 
     }
 
+    public void DisableAllFriends()
+    {
+        for (int i = 0; i < friends.Count; i++) {
+            friends[i].gameObject.SetActive(false);
+        }
+    }
+
     public void DisableFriends(int worldNum){ //activated by ev_results
 		for(int i = 0; i < worlds[worldNum-1].transform.childCount; i++){
 			worlds[worldNum-1].transform.GetChild(i).gameObject.SetActive(false);

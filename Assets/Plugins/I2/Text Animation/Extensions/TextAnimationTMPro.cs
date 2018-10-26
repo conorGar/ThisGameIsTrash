@@ -51,10 +51,14 @@ namespace I2.TextAnimation
 				mTMP_Label.color = color;
 		}
 
+        void SetWidgetAlpha_TMPro(float alpha)
+        {
+            if (mTMP_Label != null)
+                mTMP_Label.color = new Color(mTMP_Label.color.r, mTMP_Label.color.g, mTMP_Label.color.b, alpha);
+        }
 
 
-
-		protected void EnableTextModification_TMPro ()
+        protected void EnableTextModification_TMPro ()
 		{
 			TMPro_EventManager.TEXT_CHANGED_EVENT.Add( OnTextChanged_TMPro );
 		}

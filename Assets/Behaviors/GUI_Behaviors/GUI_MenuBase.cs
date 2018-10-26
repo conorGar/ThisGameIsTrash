@@ -23,19 +23,26 @@ public class GUI_MenuBase : MonoBehaviour {
 	public void Navigate(string dir){
 		Debug.Log("Arrow Pos = " + arrowPos);
 		currentSelectArrowPos = selectionArrow.transform.position;
-		if(dir == "left"){
-			arrowPos--;
-		}else if(dir == "right"){
-			arrowPos++;
-		}else if(dir == "up"){
-			arrowPos--;
-		}else if(dir == "down"){
-			if(valToIncreaseWhenDown == 0){
-				arrowPos++;
-			}else{
-				arrowPos = valToIncreaseWhenDown; //varies sometimes
-			}
-		}
+        if (dir == "left") {
+            arrowPos--;
+        }
+        else if (dir == "right") {
+            arrowPos++;
+        }
+        else if (dir == "up") {
+            arrowPos--;
+        }
+        else if (dir == "down") {
+            if (valToIncreaseWhenDown == 0) {
+                arrowPos++;
+            }
+            else {
+                arrowPos = valToIncreaseWhenDown; //varies sometimes
+            }
+        }
+        else {
+            arrowPos = 0;
+        }
 		NavigateEffect();
 
 

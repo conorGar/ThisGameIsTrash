@@ -106,6 +106,11 @@ public class DialogEditorWindow : EditorWindow {
             GUILayout.Label("Current Dialog: ", EditorStyles.boldLabel);
             currentDialog.title = GUILayout.TextField(currentDialog.title);
             GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Dialog Icon ID: ", EditorStyles.boldLabel);
+            currentDialog.dialogIconID = GUILayout.TextField(currentDialog.dialogIconID);
+            GUILayout.EndHorizontal();
         }
         else
         {

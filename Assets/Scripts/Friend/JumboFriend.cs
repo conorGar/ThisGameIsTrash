@@ -146,7 +146,7 @@ public class JumboFriend : Friend {
 			if(numberOfActivation == 1){//pan to jumbo hiding in bush...
                 CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position," ");
 				dialogManager.textBox.SetActive(false);
-				dialogManager.currentlySpeakingIcon.SetActive(false);
+				dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 				dialogManager.Invoke("ReturnFromAction",2f);
 			}else if(numberOfActivation == 2){//pan to audience...
 				dialogManager.textBox.SetActive(false);
@@ -158,7 +158,7 @@ public class JumboFriend : Friend {
 				dialogManager.ReturnFromAction();
                 CamManager.Instance.mainCamEffects.CameraPan(deadRat.transform.position," ");
                 CamManager.Instance.mainCamEffects.ZoomInOut(3f,.1f);
-				dialogManager.currentlySpeakingIcon.SetActive(false);
+				dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 				dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
 			}else if(numberOfActivation == 4){//return to jumbo after dead rat
                 CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position," ");
@@ -177,7 +177,7 @@ public class JumboFriend : Friend {
 
 			dialogManager.textBox.SetActive(false);
             CamManager.Instance.mainCamPostProcessor.profile = null;//TODO: returns to NO effect, not sure if you want this, future Conor
-			dialogManager.currentlySpeakingIcon.SetActive(false);
+			dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 
 
 			SoundManager.instance.PlaySingle(projectorPlay);

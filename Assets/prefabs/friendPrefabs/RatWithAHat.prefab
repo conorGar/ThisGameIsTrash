@@ -1,0 +1,196 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1278574680317912}
+  m_IsPrefabParent: 1
+--- !u!1 &1278574680317912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4772196795340458}
+  - component: {fileID: 114362045723706784}
+  - component: {fileID: 114059675113425702}
+  - component: {fileID: 114152425690961064}
+  - component: {fileID: 33702559017302722}
+  - component: {fileID: 23414815740304920}
+  - component: {fileID: 114748344149191506}
+  - component: {fileID: 114580869593401290}
+  m_Layer: 8
+  m_Name: RatWithAHat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4772196795340458
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278574680317912}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.16240028, y: -0.38960078, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23414815740304920
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278574680317912}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 54c34900bcba6bd4aa7c80a8ffb82b0d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &33702559017302722
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278574680317912}
+  m_Mesh: {fileID: 0}
+--- !u!114 &114059675113425702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278574680317912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0eb8d5a38ad2684787e6657d568ec06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friend: {fileID: 114362045723706784}
+  xDistanceThreshold: 4
+  yDistanceThreshold: 4
+  dialogCanvas: {fileID: 0}
+  dialogManager: {fileID: 0}
+  dialogActionManager: {fileID: 0}
+  myDialogIcon: {fileID: 0}
+  cameraPanToFriendAtStart: 1
+  speechBubbleIcon: {fileID: 0}
+  iconAnimationName: RatWithHat
+  dialogIconName: 
+  mySpeechIconSFX: {fileID: 8300000, guid: ad304603b57917f45a698a6556ecf9bc, type: 3}
+  dialogName: Start
+  autoStart: 0
+  dialogDefiniton: {fileID: 11400000, guid: 09b9f350338526047a4837d2c5cdb368, type: 2}
+  canTalkTo: 1
+--- !u!114 &114152425690961064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278574680317912}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16eb247ba43ce2a40b9a9fc367ee0ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectParticleEffect: {fileID: 0}
+  player: {fileID: 0}
+  spaceIcon: {fileID: 0}
+  upgradeHUD: {fileID: 0}
+--- !u!114 &114362045723706784
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278574680317912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8587147a3635714b94dc7dfef2eab47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friendName: RatWithAHat
+  day: 0
+  activateDialogWhenClose: 1
+  IsVisiting: 0
+  nextDialog: Start
+  myDialogDefiniton: {fileID: 11400000, guid: 09b9f350338526047a4837d2c5cdb368, type: 2}
+  tempFriend: 0
+  missedDialog: RatHat1
+  dialogManager: {fileID: 0}
+  friendStates:
+  - START
+  - OPEN_FOR_BUSINESS
+  friendState: 0
+  hadIntroDialog: 0
+  StartDay: 3
+  baseStatHUD: {fileID: 0}
+--- !u!114 &114580869593401290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278574680317912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e54113e5604435b8ae87c7754f2725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  library: {fileID: 114363549637903068, guid: 638e20cc3cd8d904b8b6656251720691, type: 2}
+  defaultClipId: 0
+  playAutomatically: 1
+--- !u!114 &114748344149191506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278574680317912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fac570381f34f647b768dc5a5aa1364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collection: {fileID: 114721547678422474, guid: 253214650d0e3d34fb3b96054d691fe9,
+    type: 2}
+  _color: {r: 1, g: 1, b: 1, a: 1}
+  _scale: {x: 1, y: 1, z: 1}
+  _spriteId: 8
+  boxCollider2D: {fileID: 0}
+  polygonCollider2D: []
+  edgeCollider2D: []
+  boxCollider: {fileID: 0}
+  meshCollider: {fileID: 0}
+  meshColliderPositions: []
+  meshColliderMesh: {fileID: 0}
+  renderLayer: 0
