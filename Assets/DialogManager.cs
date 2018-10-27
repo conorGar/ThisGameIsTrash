@@ -90,7 +90,6 @@ public class DialogManager : MonoBehaviour {
 	}
 
 	void NextNode(){
-		
 		if(currentNode.type == DIALOGNODETYPE.QUESTION){
 			Debug.Log("Question Dialog Node Properly Read");
 			textBox.SetActive(false);
@@ -111,11 +110,18 @@ public class DialogManager : MonoBehaviour {
 			}
 			canContinueDialog = false;
 			CancelInvoke();
-		}else if(currentNode.action != null && currentNode.action.Length > 2){ //length check just to see if not blank
-			if(currentNode.action == "finish"){
+		}else if(!currentNode.action.IsNullOrWhiteSpace()){ //length check just to see if not blank
+            // TODO: Maybe get rid of this?  We can infer the dialog as ended if it doesn't have a child node.
+            if (currentNode.action == "finish"){
 				canContinueDialog = false;
 				dayMeter.StartAgain();
 				FinishDialog();
+
+                if(!currentNode.friendState.IsNullOrWhiteSpace())
+                {
+                    Debug.Log("Setting Friend State to: " + currentNode.friendState);
+                    friend.SetFriendState(currentNode.friendState);
+                }
 			}else if(currentNode.action == "IconLeave"){
 				currentlySpeakingIcon.SetActive(false);
 				ReturnFromAction();
@@ -136,8 +142,23 @@ public class DialogManager : MonoBehaviour {
 			if(displayedText.fontSize != 16.5f){//return to normal font size after small text
 				displayedText.fontSize = 16.5f;
 			}
-			//currentlySpeakingIcon.GetComponent<Animator>().Play("JumboAnimation");
-			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
+
+            // No more nodes.  End Dialog.
+            if (currentNode.child_id.IsNullOrEmpty()) {
+                canContinueDialog = false;
+                dayMeter.StartAgain();
+                FinishDialog();
+
+                if (!currentNode.friendState.IsNullOrWhiteSpace()) {
+                    Debug.Log("Setting Friend State to: " + currentNode.friendState);
+                    friend.SetFriendState(currentNode.friendState);
+                }
+
+                return;
+            }
+
+            //currentlySpeakingIcon.GetComponent<Animator>().Play("JumboAnimation");
+            currentNode = myDialogDefiniton.nodes[currentNode.child_id];
 
 			//check to see if changed speaker
 			Debug.Log(currentNode.speakerName + "-o-o-o-o-o-o-o-o-o-o-o-");
@@ -217,10 +238,24 @@ public class DialogManager : MonoBehaviour {
 
             PlayTalkSounds();
 	}
-	public void ReturnFromAction(){
+
+    public void ReturnFromAction(){
+        ReturnFromAction(true);
+    }
+
+    public void ReturnFromActionOnSameNode(){
+        ReturnFromAction(false);
+    }
+
+	public void ReturnFromAction(bool useNextNode){
 			canContinueDialog = true;
-			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
-			currentlySpeakingIcon.SetActive(true);
+
+            if (useNextNode)
+			    currentNode = myDialogDefiniton.nodes[currentNode.child_id];
+            
+            if(currentlySpeakingIcon != null)
+			    currentlySpeakingIcon.SetActive(true);
+
 			textBox.SetActive(true);
 			if(characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
 			{
@@ -252,7 +287,7 @@ public class DialogManager : MonoBehaviour {
 	public void FinishedDisplay(){
 		if(finishedDisplayingText == false){
 			Debug.Log("Finished Display activated");
-			if(currentlySpeakingIcon.GetComponent<Animator>().isActiveAndEnabled)
+			if(currentlySpeakingIcon != null && currentlySpeakingIcon.GetComponent<Animator>().isActiveAndEnabled)
 				currentlySpeakingIcon.GetComponent<Animator>().enabled = false;
 
 			continueIcon.enabled = true;
@@ -324,13 +359,13 @@ public class DialogManager : MonoBehaviour {
 
 		Debug.Log(friend.nextDialog);
 		//Debug.Log(currentNode.child_id.ToString());
-		if(friend != null)//would = null for some one timers
+		if(friend != null && !currentNode.child_id.IsNullOrEmpty()) //would = null for some one timers
 			friend.nextDialog = myDialogDefiniton.nodes[currentNode.child_id].title;
 		 //sets up dialog for next interaction
 		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
 		player.GetComponent<EightWayMovement>().enabled = true;
-		friend.FinishDialogEvent();
+		friend.OnFinishDialog();
 		dialogCanvas.SetActive(false);
 
 	}

@@ -24,15 +24,12 @@ public class RoomManager : MonoBehaviour {
     void Awake()
     {
         Instance = this;
-    }
 
-    // Use this for initialization
-    void Start () {
         playerCollider2D = player.GetComponent<Collider2D>();
         currentRoom = startRoom;
         previousRoom = null;
-        currentRoom.ActivateRoom();
-	}
+    }
+
 	public void Restart(){//called at player death in PlayerTakedamage
 		currentRoom = startRoom;
         previousRoom = null;
@@ -72,6 +69,11 @@ public class RoomManager : MonoBehaviour {
                                                         pos.z);
             }
         }
+    }
+
+    public void ActivateCurrentRoom()
+    {
+        currentRoom.ActivateRoom();
     }
 
     public void SetCamFollowBounds(Room room)

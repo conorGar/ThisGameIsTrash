@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Friend : MonoBehaviour {
+public class Friend : UserDataItem {
     public string friendName = "Unknown Friend";
     public int day = 0;
     public bool activateDialogWhenClose = true;
@@ -12,7 +12,6 @@ public class Friend : MonoBehaviour {
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
 	protected FriendEvent newestAddedEvent;
-	public GameObject calendar;
 
 	[HideInInspector]
 	public string missedDialog;
@@ -22,34 +21,10 @@ public class Friend : MonoBehaviour {
 
     // Use this for initialization
     protected void OnEnable() {
-
-    	int currentDayNumber = GlobalVariableManager.Instance.DAY_NUMBER;
-
-    	//Enable ability to enter dialog on proper day
     	Debug.Log("Next Dialog: " + nextDialog);
-    	if(nextDialog != "Start" && nextDialog != missedDialog && !tempFriend){
-    		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false;
-    		for(int i = 0; i < CalendarManager.Instance.friendEvents.Count; i++){
-				if(CalendarManager.Instance.friendEvents[i].day == currentDayNumber ){//*********MAYBE MAKE THIS DETERMINE IF FRIEND SPAWNS RATHER THAN IF YOU CAN INTERACT...
-					if(CalendarManager.Instance.friendEvents[i].friend.name == friendName){
-						gameObject.GetComponent<ActivateDialogWhenClose>().enabled = true;
-						if(activateDialogWhenClose){
-	    					gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
-	    				}
-						gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
-						gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
-						break;
-					}
-				}
-    		}
-    	}else{
-	    	if(activateDialogWhenClose){
-	    		gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
-	    	}
-			gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
-			gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
-			//Debug.Log("Dialog Definition Name:"+ gameObject.GetComponent<ActivateDialogWhenClose>().dialogDefiniton.name);
-		}
+        gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
+        gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
+        gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
 		StartingEvents();
     }
@@ -92,18 +67,77 @@ public class Friend : MonoBehaviour {
         IsVisiting = true;
     }
 
-    public virtual void FinishDialogEvent(){
+    public void MissedEvent(){
+    	nextDialog = missedDialog;
+    }
 
-    	//TODO: DEFINATELY change this...
-    	Debug.Log("FINISH DIALOG EVENT ACTIVATE");
-		dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-    	//nothing to do for basic friend
+    // Useful for checking where a friend is if they like to visit different rooms.
+    public virtual bool IsCurrentRoom(Room room)
+    {
+        return true;
+    }
+
+
+    // Configure Friend States In the Editor Inspector for the friend!
+    public List<string> friendStates;
+    public int friendState = 0;
+
+    public string GetFriendState()
+    {
+        return friendStates[friendState];
+    }
+
+    public int GetFriendStatePosition(string state_str)
+    {
+        for (int i = 0; i < friendStates.Count; i++)
+        {
+            if (friendStates[i] == state_str)
+            {
+                return i;
+            }
+        }
+
+        Debug.Log("STATE NOT FOUND!  FIX THIS: " + state_str);
+        return 0;
+    }
+
+    public void SetFriendState(string state_str)
+    {
+        for (int i = 0; i < friendStates.Count; i++)
+        {
+            if (friendStates[i] == state_str)
+            {
+                friendState = i;
+
+                // TODO: Maybe too aggressive saving here???
+                UserDataManager.Instance.SetDirty();
+                return;
+            }
+        }
+
+        Debug.Log("STATE NOT FOUND!  FIX THIS: " + state_str);
+    }
+
+    public virtual void OnUpdate()
+    {
 
     }
 
-    public void MissedEvent(){
-    	nextDialog = missedDialog;
+    public virtual void OnFinishDialog()
+    {
+
+        //TODO: DEFINATELY change this...
+        gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+        gameObject.GetComponent<ActivateDialogWhenClose>().myDialogIcon.gameObject.SetActive(false);
+        GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+        //nothing to do for basic friend
+
+        StartCoroutine(OnFinishDialogEnumerator());
+    }
+
+    public virtual IEnumerator OnFinishDialogEnumerator()
+    {
+        yield return null;
     }
 	void DayAsStringSet(){
 		dialogManager.variableText = newestAddedEvent.day.ToString();
@@ -113,18 +147,42 @@ public class Friend : MonoBehaviour {
 	}
 
 
-	public void CalendarMark(){
-		dialogManager.textBox.SetActive(false);
-		dialogManager.currentlySpeakingIcon.SetActive(false);
-		//Debug.Log(friend.name);
-		//Debug.Log(newestAddedEvent.day);
-		calendar.SetActive(true);
-		calendar.GetComponent<HUD_Calendar>().NewMarkSequence(newestAddedEvent.day,name);
-		calendar.GetComponent<HUD_Calendar>().Invoke("LeaveScreen",4f);
-		dialogManager.Invoke("ReturnFromAction",5f);
+    public void CalendarMark()
+    {
+        dialogManager.textBox.SetActive(false);
+        dialogManager.currentlySpeakingIcon.SetActive(false);
 
-	}
- 
+        GUIManager.Instance.CalendarHUD.gameObject.SetActive(true);
+        GUIManager.Instance.CalendarHUD.NewMarkSequence(newestAddedEvent.day, name);
+        GUIManager.Instance.CalendarHUD.Invoke("LeaveScreen", 4f);
+        dialogManager.Invoke("ReturnFromAction", 5f);
+    }
 
-   
+    public virtual void OnActivateRoom()
+    {
+
+    }
+
+    public virtual void OnDeactivateRoom()
+    {
+
+    }
+
+    // User Data implementation
+    public override string UserDataKey()
+    {
+        return "FRIEND_DATA";
+    }
+
+    public override SimpleJSON.JSONObject Save()
+    {
+        var json_data = new SimpleJSON.JSONObject();
+
+        return json_data;
+    }
+
+    public override void Load(SimpleJSON.JSONObject json_data)
+    {
+
+    }
 }

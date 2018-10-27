@@ -17,7 +17,10 @@ public class GUI_SlabTrashGiveHUD : GUI_MenuBase
 	}
 
 	void OnEnable(){
-		maxTrashToGive = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0];
+        arrowPos = 0;
+        trashToGive.text = arrowPos.ToString();
+        trashTakenAway.text = "-" + arrowPos.ToString();
+        maxTrashToGive = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0];
 	}
 	
 	// Update is called once per frame

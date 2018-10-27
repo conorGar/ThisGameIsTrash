@@ -7,29 +7,60 @@ public class RatOnMatFriend : Friend
 	public ParticleSystem vanishPS;
 	public tk2dCamera mainCam;
 
+    private void Update(){
+        OnUpdate();
+    }
 
-	void OnEnable(){
-		if(GlobalVariableManager.Instance.WORLD_NUM == 1 && nextDialog != "RatMat1" || GlobalVariableManager.Instance.DAY_NUMBER != day){
-			Destroy(gameObject);//onlt happens once
-		}else{
-			base.OnEnable();
-		}
-		StartCoroutine("DayDisplayDelay");
+    void OnEnable(){
+		base.OnEnable();
+        mainCam = GameObject.Find("tk2dCamera").GetComponent<tk2dCamera>();
+        //StartCoroutine("DayDisplayDelay");
+    }
+
+    public override void GenerateEventData()
+    {
+        // Tutorial is every day.
+        day = CalendarManager.Instance.currentDay;
+    }
+
+    public override void OnActivateRoom()
+    {
+        switch (GetFriendState()) {
+            case "TUTORIAL":
+                gameObject.SetActive(true);
+                break;
+            case "END":
+                gameObject.SetActive(false);
+                break;
+        }
+    }
+
+    public override void OnUpdate()
+    {
+        switch (GetFriendState()) {
+            case "TUTORIAL":
+                nextDialog = "RatMat1";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
+            case "END":
+                break;
+        }
+    }
+
+    public override IEnumerator OnFinishDialogEnumerator(){
+        StartCoroutine("ReturnCam");
+
+        yield return null;
 	}
+	/*IEnumerator DayDisplayDelay(){
 
-	public override void FinishDialogEvent(){
-		Debug.Log("Ec finish dialog event activate");
-		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false; // needed to fix glitch where if player spammed continue button dialog would start again
-		StartCoroutine("ReturnCam");
-	}
-	IEnumerator DayDisplayDelay(){
-
-	yield return new WaitForSeconds(2f);
+	    yield return new WaitForSeconds(2f);
 		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = true; // needed to fix glitch where if player spammed continue button dialog would start again
 
-	}
+	}*/
+
 	IEnumerator ReturnCam(){
-		yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.3f);
 
 
 		vanishPS.Play();
@@ -44,5 +75,25 @@ public class RatOnMatFriend : Friend
 		gameObject.SetActive(false);
 
 	}
+
+    // User Data implementation
+    public override string UserDataKey()
+    {
+        return "RatOnAMat";
+    }
+
+    public override SimpleJSON.JSONObject Save()
+    {
+        var json_data = new SimpleJSON.JSONObject();
+
+        json_data["friendState"] = friendState;
+
+        return json_data;
+    }
+
+    public override void Load(SimpleJSON.JSONObject json_data)
+    {
+        friendState = json_data["friendState"].AsInt;
+    }
 }
 

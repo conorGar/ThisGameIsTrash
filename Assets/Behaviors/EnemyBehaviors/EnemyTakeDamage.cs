@@ -182,7 +182,10 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}else if(melee.gameObject.layer == 15){//throwable object
 			hitByThrownObject = true;
-			melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
+            // TODO: Get the boss battle to use throwable bodies???
+            var body = melee.gameObject.GetComponent<ThrowableBody>();
+            if (body)
+                melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
 			Debug.Log("Hit by thrown object!");
 			TakeDamage(melee.gameObject);
 			SoundManager.instance.PlaySingle(hitSound);
@@ -301,7 +304,10 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
 					currentCam.StartCoroutine("ScreenShake",.2f);
 					if(hitByThrownObject){
-						melee.gameObject.GetComponent<ThrowableBody>().TakeDamage();
+                        // TODO: Fix the boss battle to use throwable bodies????
+                        var body = melee.gameObject.GetComponent<ThrowableBody>();
+                        if (body)
+                         body.TakeDamage();
 						meleeSwingDirection = "plankSwing";
 					}
 					if(!moveWhenHit && !dontStopWhenHit && !hitByThrownObject ){

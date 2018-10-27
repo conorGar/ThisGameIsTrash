@@ -19,13 +19,79 @@ public class JumboFriend : Friend {
 	public AudioClip projectorPlay;
 	int numberOfActivation;
 	bool movieIsPlaying;
+    bool isFilmDateSet = false;
 
     //public DialogDefinition myDialogDefinition;
 
     public override void GenerateEventData()
     {
-        films.Shuffle();
-        day = CalendarManager.Instance.currentDay + Mathf.Min(Random.Range(minDays, maxDays), CalendarManager.Instance.maxDays);
+        if (!isFilmDateSet) {
+            films.Shuffle();
+
+            // Always play the first day.
+            if (CalendarManager.Instance.currentDay == 0) {
+                day = 0;
+            }
+            // Pick a date in the future to screen a new movie.
+            else {
+                day = GenerateNextFilmDay();
+            }
+
+            isFilmDateSet = true;
+        }
+    }
+
+    public int GenerateNextFilmDay()
+    {
+        return CalendarManager.Instance.currentDay + Mathf.Min(Random.Range(minDays, maxDays), CalendarManager.Instance.maxDays);
+    }
+
+    public new void OnEnable()
+    {
+        mainCam = GameObject.Find("tk2dCamera");
+
+        switch (GetFriendState()) {
+            case "START":
+                break;
+            case "END":
+                break;
+        }
+    }
+
+    private void Update()
+    {
+        OnUpdate();
+    }
+
+    public override void OnUpdate()
+    {
+        switch (GetFriendState()) {
+            case "START":
+                nextDialog = "Start";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
+            case "INVITE_TO_SECOND_SCREENING":
+                nextDialog = "Jumbo2";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
+            case "END":
+                break;
+        }
+    }
+
+    public override IEnumerator OnFinishDialogEnumerator()
+    {
+        yield return new WaitForSeconds(.3f);
+
+        switch (GetFriendState()) {
+            case "START":
+                // Jumbo gave jim an invitation to the the second film.  This event is finished so Jumbo is no longer visiting today, he's editing.
+                IsVisiting = false;
+                SetFriendState("INVITE_TO_SECOND_SCREENING");
+                break;
+            case "END":
+                break;
+        }
     }
 
     // TODO: Ugly names :(
@@ -54,10 +120,6 @@ public class JumboFriend : Friend {
             films.RemoveAt(0);
     }
 
-	public override void FinishDialogEvent(){
-		base.FinishDialogEvent();
-		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = false; // needed to fix glitch where if player spammed continue button dialog would start again
-	}
     public override void StartingEvents(){
     	Debug.Log("Starting Events function happened properly");
     	if(GlobalVariableManager.Instance.DAY_NUMBER == day && nextDialog == "Jumbo2"){
@@ -127,11 +189,15 @@ public class JumboFriend : Friend {
 			if(movieScreen.transform.GetChild(1).gameObject.activeInHierarchy){//if film color is enabled
 				movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay + "_Color");
 			}
-			DeleteCurrentFilm();
 
-			//determine next film
-			GenerateEventData();
-			FriendEvent nextMovie = GenerateEvent();
+            DeleteCurrentFilm();
+
+            //determine next film
+            isFilmDateSet = false;
+            FriendEvent nextMovie = GenerateEvent();
+            day = GenerateNextFilmDay(); // readjust the day because on the first day it gets screwy.
+            nextMovie.day = day;
+
 			Debug.Log("******NEXT MOVIE DAY****** = " + nextMovie.day);
 			CalendarManager.Instance.AddFriendEvent(nextMovie);
 			newestAddedEvent = nextMovie;
@@ -188,5 +254,29 @@ public class JumboFriend : Friend {
 		filmColor= neededObjs[2];
 		movieScreen= neededObjs[3];
 		mainCam= neededObjs[4];
+    }
+
+    // User Data implementation
+    public override string UserDataKey()
+    {
+        return "Jumbo";
+    }
+
+    public override SimpleJSON.JSONObject Save()
+    {
+        var json_data = new SimpleJSON.JSONObject();
+
+        json_data["friendState"] = friendState;
+        json_data["isFilmDateSet"] = isFilmDateSet;
+        json_data["day"] = day; // keeping hold of the day for the next film.
+
+        return json_data;
+    }
+
+    public override void Load(SimpleJSON.JSONObject json_data)
+    {
+        friendState = json_data["friendState"].AsInt;
+        isFilmDateSet = json_data["isFilmDateSet"].AsBool;
+        day = json_data["day"].AsInt;
     }
 }

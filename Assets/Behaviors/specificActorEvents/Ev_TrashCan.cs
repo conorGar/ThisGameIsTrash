@@ -21,11 +21,11 @@ public class Ev_TrashCan : MonoBehaviour {
 	int spawnOnce = 0;
 
 	void Start () {
-		if(GlobalVariableManager.Instance.IsPinDiscovered(myPin.Type)){
+        myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
+        if (GlobalVariableManager.Instance.IsPinDiscovered(myPin.Type)){
 			myAnim.Play("fall");
 			this.enabled = false;
 		}
-		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
 		//startSprite = gameObject.GetComponent<tk2dSprite>().CurrentSprite;
 	}
 	

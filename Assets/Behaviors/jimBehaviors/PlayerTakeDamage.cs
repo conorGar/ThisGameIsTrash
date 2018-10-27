@@ -38,6 +38,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		
 	}
 
+    // two objects collide
 	void OnCollisionEnter2D(Collision2D enemy){
 		if(enemy.gameObject.layer == 9 && !currentlyTakingDamage){ //layer 9 = enemies
 
@@ -45,12 +46,12 @@ public class PlayerTakeDamage : MonoBehaviour {
 				damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
 			}else{
 				damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
-
 			}
 			TakeDamage(enemy.gameObject);
 		}
 	}
 
+    // something entered this collider
 	void OnTriggerEnter2D(Collider2D projectile){
 		if(projectile.gameObject.layer == 10 && !currentlyTakingDamage){ //layer 10 = projectiles
 
@@ -58,8 +59,13 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 			TakeDamage(projectile.gameObject);
 		}else if(projectile.gameObject.layer == 9 && !currentlyTakingDamage){//enemy with non-solid collision(flying enemy)
-			damageDealt = projectile.gameObject.GetComponent<Enemy>().attkPower;
-			TakeDamage(projectile.gameObject);
+            if (projectile.gameObject.tag == "Boss"){
+                damageDealt = projectile.gameObject.GetComponent<Boss>().attkDmg;
+            }
+            else{
+                damageDealt = projectile.gameObject.GetComponent<Enemy>().attkPower;
+            }
+            TakeDamage(projectile.gameObject);
 		}
 	}
 

@@ -6,11 +6,10 @@ public class DialogActivator : MonoBehaviour {
 	public string myFriend;
 	GameObject friendInstance;
 	public GameObject dialogCanvas;
-	public GameObject dialogManager;
+	public DialogManager dialogManager;
 	public DialogActionManager  dialogActionManager;
 	public GameObject dialogIcon;
 	public List<GameObject> otherNeededObjects = new List<GameObject>();
-	public GameObject calendar;
 	//So this sets the local data(canvasHud and such) to the loaded friends at the start of the scene, by assigning it those values from its own 'ActivateDialogWhenClose)
 
 	void OnEnable(){

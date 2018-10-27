@@ -97,23 +97,22 @@ public class Room : MonoBehaviour
 
         for (int i=0; i < friendSpawners.Count; ++i)
         {
-            if (friendSpawners[i].friend.IsVisiting)
+            var spawnedFriend = FriendManager.Instance.GetFriend(friendSpawners[i].friend);
+            if (spawnedFriend != null && spawnedFriend.IsVisiting)
             {
-                var spawnedFriend = FriendManager.Instance.GetFriendObject(friendSpawners[i].friend);
-
-                if (spawnedFriend != null)
+                if (spawnedFriend.IsCurrentRoom(this))
                 {
-                    spawnedFriend.transform.position = friendSpawners[i].transform.position;
-                    spawnedFriend.SetActive(true);
-                    friends.Add(spawnedFriend);
+                    spawnedFriend.gameObject.transform.position = friendSpawners[i].transform.position;
+                    spawnedFriend.gameObject.SetActive(true);
+                    spawnedFriend.OnActivateRoom();
+
+                    friends.Add(spawnedFriend.gameObject);
                 }
             }
         }
 
         if(bossRoom){
         	for(int i = 0; i< bosses.Count;i++){
-        			
-        			bosses[i].gameObject.SetActive(true);
 					bosses[i].GetComponent<Boss>().ActivateBoss();
 					bosses[i].GetComponent<Boss>().currentRoom = this;
         		
@@ -137,7 +136,10 @@ public class Room : MonoBehaviour
 	        enemies[i].SetActive(false);
 
         for (int i = 0; i < friends.Count; ++i)
+        {
+            friends[i].GetComponent<Friend>().OnDeactivateRoom();
             friends[i].SetActive(false);
+        }
 
         friends.Clear();
 	    enemies.Clear();
@@ -174,6 +176,18 @@ public class Room : MonoBehaviour
         rect.xMax = Mathf.Max(rect.xMin, roomCollider2D.bounds.size.x / 2.0f - horzExtent + transform.position.x);
         rect.yMin = -roomCollider2D.bounds.size.y / 2.0f + vertExtent + transform.position.y;
         rect.yMax = Mathf.Max(rect.yMin, roomCollider2D.bounds.size.y / 2.0f - vertExtent + transform.position.y);
+
+        return rect;
+    }
+
+    public Rect GetRoomBoundaries()
+    {
+        Rect rect = new Rect();
+
+        rect.xMin = roomCollider2D.bounds.min.x;
+        rect.xMax = roomCollider2D.bounds.max.x;
+        rect.yMin = roomCollider2D.bounds.min.y;
+        rect.yMax = roomCollider2D.bounds.max.y;
 
         return rect;
     }

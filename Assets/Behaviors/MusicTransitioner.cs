@@ -49,7 +49,6 @@ public class MusicTransitioner : MonoBehaviour {
 
 				if(audioVolume <.7f){//TODO: check for globally set max volume
 					audioVolume += 0.2f*Time.deltaTime;
-					Debug.Log("Fade in. Volume:" + audioVolume);
 					SoundManager.instance.musicSource.volume = audioVolume;
 				}else{
 					fadeIn = false;

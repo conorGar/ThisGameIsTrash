@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CannotExitScene))]
 public class ThrowableObject : PickupableObject {
 
 	float landingY;
@@ -39,8 +40,10 @@ public class ThrowableObject : PickupableObject {
 				myBody.AddForce(new Vector2(-4f*(Mathf.Sign(gameObject.transform.lossyScale.x)),0f),ForceMode2D.Impulse);//slide
 				beingCarried= false;
 				canThrow = false;
-				myShadow.SetActive(true);
-				myShadow.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,.75f);
+                if (myShadow != null){
+                    myShadow.SetActive(true);
+                    myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
+                }
 
 			//	physicalCollision.enabled = false;
 				gameObject.layer = 11; //switch to item layer.
@@ -54,9 +57,6 @@ public class ThrowableObject : PickupableObject {
 					physicalCollision.enabled = true;
 			}
 		}
-
-		Debug.Log(physicalCollision.enabled);
-
 	}
 
 	public override void PickUp(){
@@ -65,12 +65,16 @@ public class ThrowableObject : PickupableObject {
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		//if(physicalCollision != null)
 			physicalCollision.enabled = false;
-		myShadow.SetActive(false);
+
+        if (myShadow != null)
+		    myShadow.SetActive(false);
 	}
 
 	void Throw(){
 		//beingCarried = false;
-		gameObject.GetComponent<Animator>().enabled = false;
+		var animator = gameObject.GetComponent<Animator>();
+            if (animator != null) animator.enabled = false;
+
 		SoundManager.instance.PlaySingle(throwObject);
 		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
 		if(currentRoom != RoomManager.Instance.currentRoom){
@@ -79,7 +83,9 @@ public class ThrowableObject : PickupableObject {
 	//	physicalCollision.enabled = false;
 		//gameObject.GetComponent<CannotExitScene>().enabled = true;
 		Debug.Log("Thrown");
-		myShadow.GetComponent<SpriteRenderer>().sortingLayerName = "Layer01";
+
+        if (myShadow != null)
+            myShadow.GetComponent<SpriteRenderer>().sortingLayerName = "Layer01";
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		player.GetComponent<MeleeAttack>().enabled = true;
 		if(gameObject.GetComponent<BoxCollider2D>()!=null){
@@ -104,9 +110,12 @@ public class ThrowableObject : PickupableObject {
 		player.GetComponent<EightWayMovement>().clipOverride = false;
 		//gameObject.GetComponent<Animator>().enabled = true;
 		canThrow = true;
-		myShadow.SetActive(true);
-		myShadow.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,.5f);
-		myShadow.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02";
+
+        if (myShadow != null){
+            myShadow.SetActive(true);
+            myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .5f);
+            myShadow.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02";
+        }
 		SoundManager.instance.PlaySingle(carrySound);
 		gameObject.layer = 15; //switch to thrownTrash layer.
 		for(int i = 0; i < behaviorsToStop.Count; i++){
@@ -123,8 +132,10 @@ public class ThrowableObject : PickupableObject {
 				myBody.velocity = new Vector2(0,0f);
 				beingCarried= false;
 				canThrow = false;
-				myShadow.SetActive(true);
-				myShadow.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,.75f);
+                if (myShadow != null){
+                    myShadow.SetActive(true);
+                    myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
+                }
 
 				gameObject.layer = 11; //switch to item layer.
 				for(int i = 0; i < behaviorsToStop.Count; i++){

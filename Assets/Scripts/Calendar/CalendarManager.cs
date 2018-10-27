@@ -15,18 +15,20 @@ public class CalendarManager : MonoBehaviour {
         Instance = this;
     }
 
-    // Use this for initialization
-    void Start () {
-        // TESTING EVENTS!  Go through the list of friends and let them generate any friend events they'd like to have.
-        //FriendManager.Instance.GenerateEvents();
-       // StartDay();
+    public void StartDay()
+    {
+        currentDay = GlobalVariableManager.Instance.DAY_NUMBER - 1;
+        FriendManager.Instance.GenerateEvents();
+        for (int i = 0; i < friendEvents.Count; ++i)
+        {
+            if (friendEvents[i].day == currentDay)
+            {
+                friendEvents[i].Execute();
+            }
+        }
 
         IsDayStarted = true;
     }
-	
-	// Update is called once per frame
-	void Update () {
-	}
 
     void EndDay ()
     {

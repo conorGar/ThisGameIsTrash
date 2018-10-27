@@ -11,35 +11,25 @@ public class CannotExitScene : MonoBehaviour {
 	public bool globalPos;
 	// Update is called once per frame
 
-	void OnEnable(){ 
-		SetLimits(RoomManager.Instance.currentRoom);
+	void OnEnable(){
+        if (RoomManager.Instance != null)
+		    SetLimits(RoomManager.Instance.currentRoom);
 	}
 
 	void Update () {
 
-		if(transform.position.x < leftLimit){
-			transform.localPosition = new Vector2(leftLimit, transform.localPosition.y);
-		//	Debug.Log("Enemy at left limit");
-		} else if(transform.position.x > rightLimit){
-			transform.localPosition = new Vector2(rightLimit, transform.localPosition.y);
-		//	Debug.Log("Enemy at right limit");
-
-		}
-		if(transform.position.y < botLimit){
-			transform.localPosition = new Vector2(transform.localPosition.x, botLimit);
-//			Debug.Log("Enemy at bot limit");
-
-		} else if(transform.position.y > topLimit){
-			transform.localPosition = new Vector2(transform.localPosition.x, topLimit);
-		//	Debug.Log("Enemy at top limit");
-
-		}
+        if (transform.position.x < leftLimit || transform.position.x > rightLimit ||
+            transform.position.y < botLimit || transform.position.y > topLimit)
+        {
+            transform.position = new Vector2(Mathf.Clamp(transform.position.x, leftLimit, rightLimit),
+                                         Mathf.Clamp(transform.position.y, botLimit, topLimit));
+        }
 	}
 
 
 
 	public void SetLimits(Room room){
-		Rect rect = room.GetRoomCameraBoundaries();
+		Rect rect = room.GetRoomBoundaries();
         leftLimit = rect.xMin;
         rightLimit = rect.xMax;
         botLimit = rect.yMin;

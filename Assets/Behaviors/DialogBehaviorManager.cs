@@ -257,8 +257,7 @@ public class DialogBehaviorManager : MonoBehaviour {
 		//-------------fade/darken non speakers, highlight current speaker----------//
 		for(int i = 0; i < dialogIcons.Count; i++){
 			Debug.Log("Change Speaker:" + dialogIcons[i].name);
-			Debug.Log("Change Speaker:" + dialogIcons[i].name.Substring(4));
-			if(dialogIcons[i].name.Substring(5) == currentSpeaker){//substring because of "icon_" infront of each icon's name
+			if(dialogIcons[i].name == "icon_" + currentSpeaker){
 				dialogIcons[i].GetComponent<Image>().color = new Color(255f,255f,255f,1f);
 				currentlySpeakingIcon = dialogIcons[i];
 			}else{

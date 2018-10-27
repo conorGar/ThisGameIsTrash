@@ -21,7 +21,7 @@ public class Boss : MonoBehaviour {
 	int deathSmokeNumber;
 
 
-	void Start () {
+	protected void Start () {
 
 
 		if(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] > hp){
@@ -35,8 +35,9 @@ public class Boss : MonoBehaviour {
 
 	}
 
-	public void ActivateBoss(){
-		gameObject.GetComponent<EnemyTakeDamage>().currentHp = GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber];
+	public virtual void ActivateBoss(){
+        gameObject.SetActive(true);
+        gameObject.GetComponent<EnemyTakeDamage>().currentHp = GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber];
 		gameObject.GetComponent<EnemyTakeDamage>().bossEnemy = true;
 		if(displayHealth){
 			hpDisplay.SetActive(true);

@@ -120,6 +120,8 @@ public class Ev_Results : MonoBehaviour {
 						GlobalVariableManager.Instance.BAG_SIZE-=2;
 					}
 
+                    UserDataManager.Instance.SetDirty();
+
 					if(GlobalVariableManager.Instance.DAY_NUMBER == 2){
 						GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");//supposed to be intro credits scene, changed for testing
 					}else if(GlobalVariableManager.Instance.DAY_NUMBER == 3){

@@ -213,6 +213,9 @@ public class GlobalVariableManager : UserDataItem {
     public override SimpleJSON.JSONObject Save()
     {
         var json_data = new SimpleJSON.JSONObject();
+
+        json_data["DAY_NUMBER"] = DAY_NUMBER;
+
         json_data["pinsDiscoveredValue"] = pinsDiscoveredValue;
         json_data["pinsEquippedValue"] = pinsEquippedValue;
 
@@ -235,6 +238,8 @@ public class GlobalVariableManager : UserDataItem {
 
     public override void Load(SimpleJSON.JSONObject json_data)
     {
+        DAY_NUMBER = json_data["DAY_NUMBER"].AsInt;
+
         pinsDiscoveredValue = (ulong)json_data["pinsDiscoveredValue"].AsLong;
         pinsEquippedValue = (ulong)json_data["pinsEquippedValue"].AsLong;
 
