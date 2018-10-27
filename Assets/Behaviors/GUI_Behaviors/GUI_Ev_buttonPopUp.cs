@@ -8,7 +8,6 @@ public class GUI_Ev_buttonPopUp : MonoBehaviour {
 	/// <summary>
 	/// Just takes care of highlighting buttons when this buttons position = menuSelectStageValue
 	/// </summary>
-	Image myImage;
 	Sprite startSprite;
 
 	public Sprite highlightSprite;
@@ -16,10 +15,9 @@ public class GUI_Ev_buttonPopUp : MonoBehaviour {
 	public bool floatUpWhenHL;
 	Vector2 startingPosition;
 
-	void Start () {
+	void Awake () {
 		startingPosition = gameObject.transform.position;
-		myImage = gameObject.GetComponent<Image>();
-		startSprite = myImage.sprite;
+		startSprite = GetComponent<Image>().sprite;
 
 	}
 	
@@ -37,16 +35,16 @@ public class GUI_Ev_buttonPopUp : MonoBehaviour {
 	}
 
 	public void HighlightButton(){
-		myImage.color = new Color(255f,255f,255f);
-		myImage.sprite = highlightSprite;
+        GetComponent<Image>().color = new Color(255f,255f,255f);
+        GetComponent<Image>().sprite = highlightSprite;
 		if(floatUpWhenHL){
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(startingPosition.x,startingPosition.y + 1f,.3f);
 		}
 	}
 
 	public void UnhighlightButton(){
-		myImage.color = new Color(180f,180f,180f);
-		myImage.sprite = startSprite;
+        GetComponent<Image>().color = new Color(180f,180f,180f);
+        GetComponent<Image>().sprite = startSprite;
 		if(floatUpWhenHL){
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(startingPosition.x,startingPosition.y,.3f);
 		}

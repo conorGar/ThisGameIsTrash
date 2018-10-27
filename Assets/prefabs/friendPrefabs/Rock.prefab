@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 212493485326861130}
   m_Layer: 0
   m_Name: Rock
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,8 +55,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friendName: rock
   day: 0
+  activateDialogWhenClose: 1
   IsVisiting: 0
-  desiredObject: 010000000200000003000000
+  nextDialog: 
+  myDialogDefiniton: {fileID: 0}
+  tempFriend: 0
+  calendar: {fileID: 0}
+  missedDialog: 
+  dialogManager: {fileID: 0}
+  friendStates: []
+  friendState: 0
+  desiredObject: []
+  itemHUD: {fileID: 0}
+  mainCam: {fileID: 0}
+  eyeBreakPS: {fileID: 0}
+  eyeCover: {fileID: 0}
+  slab: {fileID: 0}
+  stone: {fileID: 0}
 --- !u!114 &114342381488392626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,12 +84,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 114239772853087722}
-  introDialogName: rock1
   xDistanceThreshold: 6
   yDistanceThreshold: 4
   dialogCanvas: {fileID: 0}
   dialogManager: {fileID: 0}
+  dialogActionManager: {fileID: 0}
   myDialogIcon: {fileID: 0}
+  cameraPanToFriendAtStart: 1
+  speechBubbleIcon: {fileID: 0}
+  iconAnimationName: 
+  dialogIconName: 
+  mySpeechIconSFX: {fileID: 0}
+  dialogName: 
+  autoStart: 0
+  dialogDefiniton: {fileID: 0}
+  canTalkTo: 1
 --- !u!212 &212493485326861130
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -13,111 +13,145 @@ public class ActivateDialogWhenClose : MonoBehaviour {
     public Friend friend;
 
 	
-	public DialogDefinition dialogDefiniton;
+
 	public float xDistanceThreshold;
 	public float yDistanceThreshold;
-	//public GameObject myDialogIcon;
-	public GameObject dialogCanvas;
-	public GameObject dialogManager;
-	public DialogActionManager dialogActionManager;
-	public GameObject myDialogIcon;
 	public bool cameraPanToFriendAtStart = true;
 	public GameObject speechBubbleIcon;
 	public string iconAnimationName;
-	[HideInInspector]
-	public string dialogName;
+	public string dialogIconName;//only needed to find object
+	public AudioClip mySpeechIconSFX;
+	public string startNodeName;
 	public bool autoStart;//start dialog when player gets close(without player hitting space)
-
-
-	bool canTalkTo = true;
+	[HideInInspector]
+	public DialogDefinition dialogDefiniton;
+	public bool canTalkTo = true;
+//	public bool tempBoolForActionManager;
 
 	GameObject player;
-
+	int spawnSpeechBubble = 0;
 
 
 	void Awake(){
 		player = GameObject.FindGameObjectWithTag("Player");
 
+
+	}
+	void OnEnable(){
+		player = GameObject.FindGameObjectWithTag("Player");
+        startNodeName = friend.nextDialog;
+
+
 	}
 
-	
-	void Update () {
+    // Called by other friends to test if they are close and control the dialog as it's displayed and interacted with.
+    // Moved this out of Update so it can be controlled better by the friend and what state they are in.
+    public void Execute()
+    {
+        if (GlobalVariableManager.Instance.CARRYING_SOMETHING == false)
+        {
 
-		
-			//Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
+            if (startNodeName.Length > 0 && player != null)
+            {
 
-			if(GlobalVariableManager.Instance.CARRYING_SOMETHING == false){
-				
-				if(dialogName.Length > 0){
-					
-					if(Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold &&Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold){
-						
-						if(autoStart && canTalkTo){
-							ActivateDialog();
-						}else{
-							Debug.Log("Autostart val:" + autoStart);
-							Debug.Log("canTalkTo val:" + canTalkTo);
+                //Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
+                if (Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold && Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold)
+                {
 
-							if(speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy == false){
-								speechBubbleIcon.SetActive(true);
-							}
-							if(Input.GetKeyDown(KeyCode.Space)){
-								dialogManager.GetComponent<DialogManager>().canContinueDialog = true;
-								dialogName = friend.nextDialog;
-								ActivateDialog();
-							}
-						}
-					}else if(!autoStart && speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy){
-						speechBubbleIcon.SetActive(false);//disable speech bubble icon when far away
-					}
-				}
-			}//end of carry something check
+                    //Debug.Log("Criteria met - 2");
+                    if (autoStart && canTalkTo)
+                    {
+
+                        //Debug.Log("Criteria met - 3");
+                        startNodeName = friend.nextDialog;
+                        ActivateDialog();
+                    }
+                    else if (canTalkTo)
+                    {
+                        //Debug.Log("Autostart val:" + autoStart);
+                        //Debug.Log("canTalkTo val:" + canTalkTo);
+
+                        if (speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy == false)
+                        {
+                            SoundManager.instance.PlaySingle(mySpeechIconSFX);
+                            speechBubbleIcon.SetActive(true);
+                            spawnSpeechBubble = 1;
+                        }
+                        else
+                        {
+                            if (spawnSpeechBubble == 0)
+                            {
+                                speechBubbleIcon = ObjectPool.Instance.GetPooledObject("speechIcon", gameObject.transform.position);
+                                spawnSpeechBubble = 1;
+                            }
+                        }
+                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
+                        {
+                            DialogManager.Instance.canContinueDialog = true;
+                            startNodeName = friend.nextDialog;
+                            ActivateDialog();
+                        }
+                    }
+                }
+                else
+                {
+                    //Debug.Log("Far away from: " + gameObject.name);
+                    if (spawnSpeechBubble == 1)
+                    {
+                        //Debug.Log("Speech Bubble should've died");
+                        ObjectPool.Instance.ReturnPooledObject(speechBubbleIcon);
+                        spawnSpeechBubble = 0;
+                        //speechBubbleIcon.SetActive(false);//disable speech bubble icon when far away
+                    }
+                }
+
+            }
+        }//end of carry something check
+    }
+
+    public void ResetDefaults()
+    {
+        autoStart = true;
+        ObjectPool.Instance.ReturnPooledObject(speechBubbleIcon);
+        spawnSpeechBubble = 0;
+        GetComponent<ActivateDialogWhenClose>().canTalkTo = false;
+    }
+
+    void Update () {
 		
 	}
 
 	public void SetDialog(DialogDefinition dd){
 		dialogDefiniton = dd;
 		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
-		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
-		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
-		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
-
-
-
 	}
 
 	public void ActivateDialog(){
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-		player.GetComponent<EightWayMovement>().enabled = false;
+		player.GetComponent<EightWayMovement>().StopMovement();
 		player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-		if(dialogCanvas.activeInHierarchy == false){
+		if(DialogManager.Instance.dialogCanvas.activeInHierarchy == false){
 			if(cameraPanToFriendAtStart){
-					dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position, "");
+                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position, "");
 			}
 			Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
-			dialogManager.GetComponent<DialogManager>().animationName = iconAnimationName;
-			dialogManager.GetComponent<DialogManager>().myDialogDefiniton = dialogDefiniton;
-			dialogManager.GetComponent<DialogManager>().dialogTitle = dialogName;
+			DialogManager.Instance.animationName = iconAnimationName;
+            DialogManager.Instance.myDialogDefiniton = dialogDefiniton;
+            DialogManager.Instance.dialogTitle = startNodeName;
+            DialogManager.Instance.canContinueDialog = true; //need this for starting after any previous dialog
 			if(friend != null){ // = null for some one timers
-				dialogActionManager.friend = friend;
-				dialogManager.GetComponent<DialogManager>().characterName.text = friend.name;
-
+                DialogManager.Instance.dialogActionManager.friend = friend;
+                DialogManager.Instance.characterName.text = friend.friendName;
 			}
-			dialogManager.GetComponent<DialogManager>().SetFriend(friend);
-			dialogCanvas.SetActive(true);
-			myDialogIcon.SetActive(true);
-				if(myDialogIcon.transform.childCount>0){//if more than one icon
-						List<GameObject> dialogIcons = new List<GameObject>();
-						for(int i = 0; i< myDialogIcon.transform.childCount; i++){
-							dialogIcons.Add(myDialogIcon.transform.GetChild(i).gameObject);
-						}
-						dialogManager.GetComponent<DialogManager>().dialogIcons = dialogIcons;
-				}else{
-					dialogManager.GetComponent<DialogManager>().dialogIcons = new List<GameObject>{myDialogIcon};//one icon
-				}
-			myDialogIcon.GetComponent<DialogIconAnimationManager>().SwitchAni(iconAnimationName);
+
+            DialogManager.Instance.SetDialogIconByID(dialogDefiniton.dialogIconID);
+            DialogManager.Instance.SetFriend(friend);
+            DialogManager.Instance.dialogCanvas.SetActive(true);
+
+            DialogManager.Instance.currentlySpeakingIcon.SwitchAni(iconAnimationName);
+            DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(true);
+
 			canTalkTo = false;
-			}
+		}
 	}
-
 }

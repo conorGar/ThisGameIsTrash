@@ -18,14 +18,18 @@ public class Room : MonoBehaviour
     public GameObject tutPopup;
     public bool activateTutpopWhenEnter;
     public string tutPopUpToActivate;
+
+
 	int waifuChance;
     private List<GameObject> enemies;
     private List<GameObject> friends;
 
+    public List<GameObject> bosses;
+
     public void ActivateRoom()
     {
     	Debug.Log("ActivateRoom....activated");
-        roomManager.mainCamera.ScreenCamera.ViewportToWorldPoint(transform.position);
+        CamManager.Instance.tk2dMainCam.ScreenCamera.ViewportToWorldPoint(transform.position);
         roomManager.SetCamFollowBounds(this);
 
         // enemy spawns
@@ -55,6 +59,17 @@ public class Room : MonoBehaviour
              //ignore if enemy for this spawner has been killed
              if(enemySpawners[i].CheckIfEnemyDead()){
              	Debug.Log("MY ENEMY IS DEAD!!!");
+				int deathDate = enemySpawners[i].GetDeathDate();
+				if(deathDate != 0){//if body has not yet been spawned
+					
+	             	if(deathDate == 2){
+						GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",enemySpawners[i].transform.position);
+						body.GetComponent<ThrowableBody>().SetSpawnerID(enemySpawners[i].name);
+						body.GetComponent<tk2dSprite>().SetSprite(enemySpawners[i].enemyBodyName);
+	             		body.GetComponent<ThrowableBody>().Poison();
+	             		
+	             	}//TODO: else spawn skeleton
+             	}
              	continue;
              }else{
             	Debug.Log("*** MY ENEMY IS NOT DEAD ***");
@@ -82,41 +97,57 @@ public class Room : MonoBehaviour
 
         for (int i=0; i < friendSpawners.Count; ++i)
         {
-            if (friendSpawners[i].friend.IsVisiting)
+            var spawnedFriend = FriendManager.Instance.GetFriend(friendSpawners[i].friend);
+            if (spawnedFriend != null && spawnedFriend.IsVisiting)
             {
-                var spawnedFriend = FriendManager.Instance.GetFriendObject(friendSpawners[i].friend);
-
-                if (spawnedFriend != null)
+                if (spawnedFriend.IsCurrentRoom(this))
                 {
-                    spawnedFriend.transform.position = friendSpawners[i].transform.position;
-                    spawnedFriend.SetActive(true);
-                    friends.Add(spawnedFriend);
+                    spawnedFriend.gameObject.transform.position = friendSpawners[i].transform.position;
+                    spawnedFriend.gameObject.SetActive(true);
+                    spawnedFriend.OnActivateRoom();
+
+                    friends.Add(spawnedFriend.gameObject);
                 }
             }
         }
 
         if(bossRoom){
-        	for(int i = 0; i< transform.childCount;i++){
-        		if(transform.GetChild(i).tag == "Boss"){
-        			transform.GetChild(i).gameObject.SetActive(true);
-					transform.GetChild(i).GetComponent<Boss>().ActivateBoss();
-        		}
+        	for(int i = 0; i< bosses.Count;i++){
+					bosses[i].GetComponent<Boss>().ActivateBoss();
+					bosses[i].GetComponent<Boss>().currentRoom = this;
+        		
         	}
-        	cam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1f,5f); //for debug testing
+            CamManager.Instance.mainCamEffects.ZoomInOut(1f,5f); //for debug testing
         }
  
     }
 
     public void DeactivateRoom()
     {	
+    	if(bossRoom){
+			for(int i = 0; i< bosses.Count;i++){
+        			
+        			bosses[i].gameObject.SetActive(false);
+					
+        	}
+    	}
+
 	    for (int i=0; i < enemies.Count; ++i)
 	        enemies[i].SetActive(false);
 
         for (int i = 0; i < friends.Count; ++i)
+        {
+            friends[i].GetComponent<Friend>().OnDeactivateRoom();
             friends[i].SetActive(false);
+        }
 
         friends.Clear();
 	    enemies.Clear();
+
+        for (int i = 0; i < RoomManager.Instance.ObjectsClearedOnLeavingRoom.Count; i++)
+        {
+            ObjectPool.Instance.ClearPooledObjects(RoomManager.Instance.ObjectsClearedOnLeavingRoom[i]);
+        }
     }
 
 
@@ -135,8 +166,8 @@ public class Room : MonoBehaviour
 
     public Rect GetRoomCameraBoundaries()
     {
-        var vertExtent = roomManager.mainCamera.ScreenExtents.yMax;
-        var horzExtent = roomManager.mainCamera.ScreenExtents.xMax;
+        var vertExtent = CamManager.Instance.tk2dMainCam.ScreenExtents.yMax;
+        var horzExtent = CamManager.Instance.tk2dMainCam.ScreenExtents.xMax;
         Rect rect = new Rect();
 
         // TODO: There's a Mathf.Max call in here to handle situations where the room is smaller than the size of the camera (the max_x or max_y become smaller than the min_x or min_y in this case).
@@ -145,6 +176,18 @@ public class Room : MonoBehaviour
         rect.xMax = Mathf.Max(rect.xMin, roomCollider2D.bounds.size.x / 2.0f - horzExtent + transform.position.x);
         rect.yMin = -roomCollider2D.bounds.size.y / 2.0f + vertExtent + transform.position.y;
         rect.yMax = Mathf.Max(rect.yMin, roomCollider2D.bounds.size.y / 2.0f - vertExtent + transform.position.y);
+
+        return rect;
+    }
+
+    public Rect GetRoomBoundaries()
+    {
+        Rect rect = new Rect();
+
+        rect.xMin = roomCollider2D.bounds.min.x;
+        rect.xMax = roomCollider2D.bounds.max.x;
+        rect.yMin = roomCollider2D.bounds.min.y;
+        rect.yMax = roomCollider2D.bounds.max.y;
 
         return rect;
     }

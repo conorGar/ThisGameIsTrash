@@ -43,9 +43,13 @@ MonoBehaviour:
   trashCollected: {fileID: 0}
   largeTrashCollected: {fileID: 0}
   enemiesDefeated: {fileID: 0}
-  nextUnlock: {fileID: 0}
+  nextUnlockNeeded: {fileID: 0}
+  currentStars: {fileID: 0}
   largeTrashTextDisplay: {fileID: 0}
   treasureCollectedDisplay: {fileID: 0}
+  ltManager: {fileID: 0}
+  currentWorld: 0
+  backPaper: {fileID: 0}
 --- !u!114 &114844821011633220
 MonoBehaviour:
   m_ObjectHideFlags: 1

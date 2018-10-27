@@ -42,6 +42,8 @@ public class Ev_FallingProjectile : MonoBehaviour {
 		ObjectPool.Instance.GetPooledObject("effect_landingSmoke",gameObject.transform.position);
 		myShadow.transform.parent = gameObject.transform;
 		myShadow.transform.localPosition = new Vector3(0,-2,0);
+		falling = false;
+		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.SetActive(false);
 	}
 }

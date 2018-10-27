@@ -9,6 +9,7 @@ public class B_Ev_Ex : MonoBehaviour {
 	public GameObject myProjectile;
 	public GameObject myParticles;
 	public GameObject player;
+	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
 
 	Vector3 playerPosition;
 
@@ -57,10 +58,11 @@ public class B_Ev_Ex : MonoBehaviour {
 		if(myAnim.CurrentClip.name != "hurt"){
 			myAnim.Play("cast");
 			yield return new WaitForSeconds(.3f);
+			myProjectile.transform.position = gameObject.transform.position;
 			playerPosition = new Vector3(player.transform.position.x,player.transform.position.y,player.transform.position.z);
 
 			myProjectile.SetActive(true);
-			Vector2 moveDirection = (playerPosition - myProjectile.transform.position).normalized *20;
+			Vector2 moveDirection = (playerPosition - myProjectile.transform.position).normalized *10;
 			myProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(moveDirection.x,moveDirection.y);
 			myAnim.Play("idle");
 			yield return new WaitForSeconds(5f);
@@ -85,6 +87,18 @@ public class B_Ev_Ex : MonoBehaviour {
 			}
 		}
 
+	}
+
+	void Dazed(){
+		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
+		for(int i = 0; i < dazeDisables.Count; i++){
+			dazeDisables[i].enabled = false;
+		}
+		gameObject.layer = 11;
+		gameObject.GetComponent<ThrowableObject>().enabled = true;
+		myAnim.Play("dazed");
+		StopAllCoroutines();
+		//this.enabled = false;
 	}
 
 }

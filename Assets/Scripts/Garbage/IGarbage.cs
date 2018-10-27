@@ -61,10 +61,13 @@ public enum LARGEGARBAGE : int
 {
     NONE =                  0,
     CHAIR =                 1 << 0,
-    TESTTRASH2 =            1 << 1,
-    TESTTRASH3 =            1 << 2,
-    TESTTRASH4 =            1 << 3,
-    SIZE =                  1 << 3
+    STEREO =           		1 << 1,
+    SLIDE =           		1 << 2,
+    TV =           		 	1 << 3,
+	MATTRESS =           	1 << 4,
+	TIRE =           		1 << 5,
+	PIZZABOX =           	1 << 6,
+    SIZE =                  1 << 6,
 }
 
 
@@ -109,6 +112,34 @@ public class StandardGarbage : IGarbage
         { STANDARDGARBAGE.MOM_PRES,                 "trash_momPres2" }
     };
 
+	private static Dictionary<STANDARDGARBAGE, string> GARBAGENAME = new Dictionary<STANDARDGARBAGE, string>()
+    {
+        { STANDARDGARBAGE.NONE,                     "" },
+        { STANDARDGARBAGE.PAPER,                    "Crumpled Paper" },
+        { STANDARDGARBAGE.IPOD,                     "Last Year's Phone" },
+        { STANDARDGARBAGE.BOOK,                     "Hardcover Book" },
+        { STANDARDGARBAGE.ART_SUPPLIES,             "Broken Art Supplies" },
+        { STANDARDGARBAGE.BAG_SPICY,                "Spicy Chip Bag" },
+        { STANDARDGARBAGE.CHIPS,                    "Chip Bag" },
+        { STANDARDGARBAGE.BAG_BBQ,                  "BBQ Chip Bag" },
+        { STANDARDGARBAGE.CASETTE,                  "Casette Tape" },
+        { STANDARDGARBAGE.CHINESE,                  "Chinese Leftovers" },
+        { STANDARDGARBAGE.JUICE,                    "Juice Box" },
+        { STANDARDGARBAGE.LIGHTBULB,                "Lightbulb" },
+        { STANDARDGARBAGE.MUG,                      "Broken Mug" },
+        { STANDARDGARBAGE.PARTY,                    "Party Supplies" },
+        { STANDARDGARBAGE.SOCK,                     "Old Sock" },
+        { STANDARDGARBAGE.TISSUE,                   "Empty Tissue Box" },
+        { STANDARDGARBAGE.TOILET,                   "Soggy Toilet Paper" },
+        { STANDARDGARBAGE.HAIR,                     "Hair Scraps" },
+        { STANDARDGARBAGE.FISH,                     "Fish Carcass" },
+        { STANDARDGARBAGE.NEEDLE,                   "Used Needle" },
+        { STANDARDGARBAGE.BABY,                     "Dumpster Baby" },
+        { STANDARDGARBAGE.ARM,                      "Lost Arm" },
+        { STANDARDGARBAGE.CHILDHOOD,                "Childhood Memories" },
+        { STANDARDGARBAGE.MOM_PRES,                 "Mom's Gift" }
+    };
+
     public int GarbageIndex()
     {
         for (int i = 0; i < sizeof(STANDARDGARBAGE) * 8; ++i)
@@ -122,6 +153,10 @@ public class StandardGarbage : IGarbage
     public string GarbageSprite()
     {
         return StandardGarbage.SPRITELOOKUP[type];
+    }
+
+    public string GarbageName(){
+    	return StandardGarbage.GARBAGENAME[type];
     }
 
     public static STANDARDGARBAGE GarbageByIndex(int index)
@@ -240,9 +275,9 @@ public class LargeGarbage : IGarbage
     {
         { LARGEGARBAGE.NONE,                          "" },
         { LARGEGARBAGE.CHAIR,                         "" },
-        { LARGEGARBAGE.TESTTRASH2,                    "" },
-        { LARGEGARBAGE.TESTTRASH3,                    "" },
-        { LARGEGARBAGE.TESTTRASH4,                    "" }
+        { LARGEGARBAGE.STEREO,                    "" },
+        { LARGEGARBAGE.SLIDE,                    "" },
+        { LARGEGARBAGE.TIRE,                    "" }
     };
 
 

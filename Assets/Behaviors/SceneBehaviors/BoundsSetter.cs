@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BoundsSetter : MonoBehaviour {
 
-	/*Ev_MainCamera mycam;
+	/*
 	SwitchScene sceneChanger;
 
 	float minX;
@@ -18,7 +18,6 @@ public class BoundsSetter : MonoBehaviour {
 	string roomName;
 
 	void Start(){
-		mycam = GameObject.Find("tk2dCamera").GetComponent<Ev_MainCamera>();
 		sceneChanger = gameObject.GetComponent<SwitchScene>();
 	}
 

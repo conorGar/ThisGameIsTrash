@@ -39,10 +39,8 @@ public class SwitchScene : MonoBehaviour {
 	string sceneToSwitchTo;
 	int spawnOnce = 0;
 	BoundsSetter myBoundSetter;
-	Ev_MainCamera mycam;
 
 	void Start () {
-		mycam = GameObject.Find("tk2dCamera").GetComponent<Ev_MainCamera>();
 		myBoundSetter = gameObject.GetComponent<BoundsSetter>();
 		player = GameObject.FindGameObjectWithTag("Player");
 		canvas = GameObject.Find("HUD");

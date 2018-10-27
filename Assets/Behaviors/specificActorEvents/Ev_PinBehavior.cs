@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+ 
 public class Ev_PinBehavior : MonoBehaviour {
 
 	public GameObject smallTextDisplay;
 	public GameObject ppDisplayIcon; //neded for pin equip screen
 	public GameObject equippedBox;
+	public GameObject highlightBox;
+	public GameObject smallPPIcons;
 	public string soldTextSprite = "sold";
     PinDefinition pinData = null;
+	public AudioClip equipSFX;
+	public AudioClip unEquipSFX;
     //int myPositionInString = 0;
 
     Image descriptionBox;
@@ -24,7 +29,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 	GameObject shopLight;
 	List<GameObject> myIcons = new List<GameObject>();
 	GameObject myEquippedBox;
-
+	Animator myAnimator;
 	void Start () {
 		/*if(GlobalVariableManager.Instance.characterUpgradeArray[1][18] == 'o'){
 			//pin perk 5 - every pin costs one less pp to equip
@@ -34,7 +39,7 @@ public class Ev_PinBehavior : MonoBehaviour {
                 pinData.price = 1;
 			}
 		}*/
-
+		myAnimator = gameObject.GetComponent<Animator>();
 		mySFX = gameObject.GetComponent<SpecialEffectsBehavior>();
 		player = GameObject.Find("Jim");
 
@@ -48,14 +53,6 @@ public class Ev_PinBehavior : MonoBehaviour {
 			}else{
 				float xSpawnAdjust = -.6f;
 
-				for(int i = 0; i < pinData.ppValue; i++){//little pp displays
-					GameObject icon = Instantiate(ppDisplayIcon, new Vector2(transform.position.x + xSpawnAdjust,transform.position.y - .9f),Quaternion.identity);
-					icon.transform.parent = gameObject.transform;
-					//icon.transform.position = new Vector2(transform.position.x + xSpawnAdjust,transform.position.y - 9.3f);
-					icon.GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f);
-					myIcons.Add(icon);
-					xSpawnAdjust += .33f;
-				}
 			}
 		}
 
@@ -81,7 +78,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 				if(setArrowPosOnce == 0){
 					mySFX.SmoothMovementToPoint(transform.position.x,startingY + 2,.2f);
 					GlobalVariableManager.Instance.ARROW_POSITION = mySpotInShop;
-                    PinManager.Instance.PinTitleSprite.gameObject.SetActive(true);
+                    PinManager.Instance.PinTitle.gameObject.SetActive(true);
 					PinManager.Instance.DescriptionText.enabled = true;
 					descriptionBox.enabled = true;
 					descriptionBox.GetComponent<GUIEffects>().Start();
@@ -95,7 +92,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 				if(setArrowPosOnce == 1){
 					mySFX.SmoothMovementToPoint(transform.position.x,startingY,.2f);
 					GlobalVariableManager.Instance.ARROW_POSITION = 0;
-                    PinManager.Instance.PinTitleSprite.gameObject.SetActive(false);
+                    PinManager.Instance.PinTitle.gameObject.SetActive(false);
 					descriptionBox.enabled = false;
                     PinManager.Instance.DescriptionText.enabled = false;
                     PinManager.Instance.PPDisplay.Clear();
@@ -109,8 +106,8 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 			//------------what to do when arrow position is my position------------/
 			if(bought == false && GlobalVariableManager.Instance.ARROW_POSITION == mySpotInShop){
-				if(PinManager.Instance.PinTitleSprite.gameObject != null){
-                    PinManager.Instance.PinTitleSprite.SetSprite(pinData.titleSprite);
+				if(PinManager.Instance.PinTitle.gameObject != null){
+                    PinManager.Instance.PinTitle.text = pinData.displayName;
 				}
 				if(PinManager.Instance.DescriptionText != null){
                     PinManager.Instance.DescriptionText.text = pinData.description;
@@ -128,24 +125,37 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 	public void AtEquipScreen(){
 		if(IsPinDiscovered()){
+			for(int i = 0; i< pinData.ppValue;i++){
+				smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
+				myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
+				if(IsPinEquipped()){
+				smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+				}
+			}
+			if(IsPinEquipped()){
+				highlightBox.SetActive(true);
+			}
             PinManager.Instance.DescriptionText.text = pinData.description;
-            PinManager.Instance.PinTitleSprite.SetSprite(pinData.titleSprite);
+            PinManager.Instance.PinTitle.text = pinData.displayName;
             PinManager.Instance.PPDisplay.SetDisplayedIcons(pinData.ppValue);
 			PinManager.Instance.PinDisplaySprite.SetSprite(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name);
 
             Debug.Log("Pin Sprite Name : " + this.gameObject.GetComponent<tk2dSprite>().CurrentSprite.name
-                      + " Title Name : " + PinManager.Instance.PinTitleSprite.CurrentSprite.name
+                      + " Title Name : " + PinManager.Instance.PinTitle.text
                       + " Display Pin Sprite Name : " + PinManager.Instance.PinDisplaySprite.CurrentSprite.name);
         }
         else{
             PinManager.Instance.DescriptionText.text = "Buy or find this Pin to learn what powers it holds!";
-            PinManager.Instance.PinTitleSprite.SetSprite("pinTitle_locked");
+            PinManager.Instance.PinTitle.text = "???";
             PinManager.Instance.PPDisplay.Clear();
 		}
 	}
 
 	public bool EquipPin(){
         bool IsEquipped = false;
+
+        PinManager.Instance.equipSpark.transform.position = gameObject.transform.position;
+        PinManager.Instance.equipSpark.Play();
 		bool isDejaVuPinAndIsUnlocked = false;
 		if(GlobalVariableManager.Instance.IsPinDiscovered(PIN.THEPINTHATCANKILLTHEPAST) && pinData.Type == PIN.THEPINTHATCANKILLTHEPAST){
 			isDejaVuPinAndIsUnlocked = true;
@@ -154,8 +164,10 @@ public class Ev_PinBehavior : MonoBehaviour {
 			if((!IsPinEquipped() || isDejaVuPinAndIsUnlocked) && GlobalVariableManager.Instance.PPVALUE >= pinData.ppValue){ // equip unequipped pin
                 GlobalVariableManager.Instance.PINS_EQUIPPED |= pinData.Type; //set pin to active
                 GlobalVariableManager.Instance.PPVALUE -= pinData.ppValue;
+				myAnimator.Play("pinEquipAni");
                 IsEquipped = true;
-
+                SoundManager.instance.PlaySingle(equipSFX);
+				highlightBox.SetActive(true);
                 // Equip Pin that can kill the past
                 if (pinData.Type == PIN.THEPINTHATCANKILLTHEPAST)
                     GlobalVariableManager.Instance.DEJAVUCOUNT += 4;
@@ -164,7 +176,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 					myIcons[i].GetComponent<SpriteRenderer>().color = new Color(255f,255f,255f,1f);
 				}
 
-				myEquippedBox = Instantiate(equippedBox,transform.position,Quaternion.identity);
+				//myEquippedBox = Instantiate(equippedBox,transform.position,Quaternion.identity);
 				/*if(pinData.Type == PIN.APPLEPLUS){
 				//Apple Plus pin
 					GlobalVariableManager.Instance.characterUpgradeArray[3] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3]) + 1).ToString();
@@ -182,7 +194,8 @@ public class Ev_PinBehavior : MonoBehaviour {
                 GlobalVariableManager.Instance.PPVALUE += pinData.ppValue;
                 GlobalVariableManager.Instance.PINS_EQUIPPED &= ~pinData.Type;
                 IsEquipped = false;
-
+				SoundManager.instance.PlaySingle(unEquipSFX);
+				highlightBox.SetActive(false);
                 // Unequip Pin that can kill the past
                 if (pinData.Type == PIN.THEPINTHATCANKILLTHEPAST){
 					if(GlobalVariableManager.Instance.DEJAVUCOUNT != 3){
@@ -191,10 +204,13 @@ public class Ev_PinBehavior : MonoBehaviour {
                         GlobalVariableManager.Instance.DEJAVUCOUNT = 99;
 					}
 				}
+				Debug.Log("UNEQUIPPED PIN" + myIcons.Count);
+
 				for(int i = 0; i < myIcons.Count; i++){ //unshade the little pp icons below pin
-					myIcons[i].GetComponent<SpriteRenderer>().color = new Color(0f,0f,0f,1f);
+					Debug.Log("Icons should've turned black!!");
+					myIcons[i].GetComponent<SpriteRenderer>().color = Color.black;
 				}
-				Destroy(myEquippedBox);
+				//Destroy(myEquippedBox);
 
 			
 			}//end of unequip part
@@ -209,7 +225,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 			if(!bought && popupOnce == 0){
                 PinManager.Instance.Shop.TogglePopupEnable();
 				Image purchasePopup = GameObject.Find("purchasePopup").GetComponent<Image>();
-				purchasePopup.GetComponent<GUI_OptionsPopupBehavior>().setGameObjectToActivate(this.gameObject);
+                PinManager.Instance.Shop.SetCurrentPin(this);
 				GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 				popupOnce = 1;
 			}else if(popupOnce == 1){

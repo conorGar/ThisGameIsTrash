@@ -7,10 +7,14 @@ using I2.TextAnimation;
 
 public class GUI_TrashCollectedDisplay : MonoBehaviour {
 	public TextMeshProUGUI trashCollected;
+	public TextMeshProUGUI maxTrashDisplay;
 	public GameObject newDiscoveryDisplay;
+	public int trashDropped;
+	public GameObject deathDisplay;
 	// Use this for initialization
 	void Start () {
 		//TODO: adjust for different bag types
+		maxTrashDisplay.text = "/" + GlobalVariableManager.Instance.BAG_SIZE;
 		trashCollected.text = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0].ToString();
 
 	}
@@ -29,5 +33,28 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 		//newDiscoveryDisplay.GetComponent<GUIEffects>().Start();
 		newDiscoveryDisplay.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = trashname;
 		newDiscoveryDisplay.transform.GetChild(1).GetComponent<tk2dSprite>().SetSprite(trashSprite);
+		StopCoroutine("NewDiscoveryBehavior");//makes sure no in middle of another coroutine if just appeared...
+		StartCoroutine("NewDiscoveryBehavior");
+	}
+
+	IEnumerator NewDiscoveryBehavior(){
+
+		
+		yield return new WaitForSeconds(1f);
+		newDiscoveryDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-133f,-113f,.4f,true);
+		yield return new WaitForSeconds(3f);
+		newDiscoveryDisplay.SetActive(false);
+	}
+
+	public void Deplete(){ //invoked repeatedly by GUI_DeathDisplay
+
+		if(trashDropped > 0){
+			Debug.Log("Trash deplete activate ***********");
+			trashDropped--;
+			trashCollected.text = trashDropped.ToString();
+
+		}else{
+			deathDisplay.GetComponent<GUI_DeathDisplay>().CancelInvoke();
+		}
 	}
 }

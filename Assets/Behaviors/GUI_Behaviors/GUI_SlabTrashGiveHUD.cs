@@ -17,17 +17,20 @@ public class GUI_SlabTrashGiveHUD : GUI_MenuBase
 	}
 
 	void OnEnable(){
-		maxTrashToGive = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0];
+        arrowPos = 0;
+        trashToGive.text = arrowPos.ToString();
+        trashTakenAway.text = "-" + arrowPos.ToString();
+        maxTrashToGive = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0];
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if(Input.GetKeyDown(KeyCode.DownArrow) && arrowPos < maxTrashToGive){
-			Navigate("down");
-		}else if(Input.GetKeyDown(KeyCode.UpArrow)){
-			Navigate("up");
-		}else if(Input.GetKeyDown(KeyCode.Space)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && arrowPos < maxTrashToGive){
+			Navigate("right");
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && arrowPos >0){
+			Navigate("left");
+		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 			slabFriend.AddTrashToFund(arrowPos);
 			gameObject.SetActive(false);
 		}

@@ -6,14 +6,9 @@ public class Test_SmoothMove : MonoBehaviour
 	public float targetX;
 	int isMoving;
 	float timeBeforeReturn;
-	GameObject currentCam;
-	Camera cam;
 	// Use this for initialization
 	void Start ()
 	{
-		currentCam = GameObject.Find("tk2dCamera");
-		cam = currentCam.GetComponent<Camera>();
-
 		//test
 		Activate(-4f,1f);
 	}
@@ -28,8 +23,8 @@ public class Test_SmoothMove : MonoBehaviour
 				gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 			}
 		}else if(isMoving ==2){
-			if(currentCam.transform.position.x - 16.73f < gameObject.transform.position.x){
-				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2((currentCam.transform.position.x -16.73f) - gameObject.transform.position.x, 0f);
+			if(CamManager.Instance.mainCam.transform.position.x - 16.73f < gameObject.transform.position.x){
+				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2((CamManager.Instance.mainCam.transform.position.x -16.73f) - gameObject.transform.position.x, 0f);
 			}else{
 				Destroy(gameObject);
 			}

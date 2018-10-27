@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 61104918218594844}
   - component: {fileID: 114985142598086254}
   - component: {fileID: 50638987191242516}
+  - component: {fileID: 114384467011007262}
   m_Layer: 11
   m_Name: droppedPin
   m_TagString: Pin
@@ -186,6 +187,21 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
+--- !u!114 &114384467011007262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1870423167447052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0417ab65d686b8429b2a200e2f4f951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingRoom: 
+  largeTrash: 0
+  pins: 1
+  armoredEnemies: 0
 --- !u!114 &114670245665433804
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -6,8 +6,8 @@ public class S_Ev_shop : MonoBehaviour {
 
 	public GameObject tutorialPopup;
 	public Sprite tutPopupSprite;
-	public GameObject pin;
-	public GameObject purchasePopup;
+    Ev_PinBehavior currentPin;
+	public GUI_OptionsPopupBehavior purchasePopup;
 	public GameObject harry;
 	public GameObject priceDisplay;
 	public GameObject costText;
@@ -113,13 +113,47 @@ public class S_Ev_shop : MonoBehaviour {
 
 		SpawnPins();
 
-	}
+        // Register Events
+        purchasePopup.RegisterCloseEvent(OnCloseEvent);
+        purchasePopup.RegisterOptionEvent(OnOptionsEvent);
+    }
 
-	public void TogglePopupEnable(){
-		if(purchasePopup.activeInHierarchy){
-			purchasePopup.SetActive(false);
+    void OnDestroy()
+    {
+        // Unregister Events
+        purchasePopup.UnregisterCloseEvent(OnCloseEvent);
+        purchasePopup.UnregisterOptionEvent(OnOptionsEvent);
+    }
+
+    void OnCloseEvent()
+    {
+        if (currentPin != null) {
+            currentPin.SetPopupBack();
+        }
+    }
+
+    void OnOptionsEvent(int optionNum)
+    {
+        switch (optionNum) {
+            case 0:
+                if (currentPin != null) {
+                    currentPin.ShopPurchase();
+                }
+                purchasePopup.gameObject.SetActive(false);
+                break;
+        }
+    }
+
+    public void SetCurrentPin(Ev_PinBehavior pin)
+    {
+        currentPin = pin;
+    }
+
+    public void TogglePopupEnable(){
+		if(purchasePopup.gameObject.activeInHierarchy){
+			purchasePopup.gameObject.SetActive(false);
 		}else{
-			purchasePopup.SetActive(true);
+			purchasePopup.gameObject.SetActive(true);
 		}
 	}
 	

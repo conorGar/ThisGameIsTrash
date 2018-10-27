@@ -41,6 +41,7 @@ public class DialogNode
     public string speakerName;
     public string question;
     public string action;
+    public string friendState;
     public SerializableGuid id;
     public float x;
     public float y;
@@ -60,6 +61,7 @@ public class DialogNode
         speakerName = "speakerName";
         question = "";
         action = "";
+        friendState = "";
         id = Guid.NewGuid();
         text = p_text;
         type = p_type;
@@ -74,6 +76,7 @@ public class DialogNode
 [CreateAssetMenu(fileName = "New Dialog", menuName = "TGIT/Dialog", order = 3)]
 public class DialogDefinition : ScriptableObject {
     public string title = "dialog_name";
+    public string dialogIconID = "dialog_icon_ID";
 
     [SerializeField]
     public DialogNodeDictionary nodeStore = DialogNodeDictionary.New<DialogNodeDictionary>();

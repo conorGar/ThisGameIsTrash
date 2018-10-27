@@ -19,7 +19,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	int turnOnce = 0;
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		//walkCloud  = GameObject.Find("effect_WalkCloud");
 		startingScale = gameObject.transform.localScale;
 		anim = GetComponent<tk2dSpriteAnimator>();
@@ -28,28 +28,33 @@ public class RandomDirectionMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(moving && !anim.IsPlaying("hit")){
-			transform.position += direction*movementSpeed*Time.deltaTime;
-			if(direction.x > 0 ){
-				if(gameObject.transform.localScale.x < 0){
-					if(turnOnce == 0){
-					StartCoroutine("Turn");
-					}
-				}else if(!anim.IsPlaying("run")){
-						anim.Play("run");
-				}
-			}else{
-				if(gameObject.transform.localScale.x > 0){
-					if(turnOnce == 0){
-					StartCoroutine("Turn");
-					}
-				}else{
-					if(!anim.IsPlaying("run")){
-						anim.Play("run");
-					}
-				}
-			}
-		}
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (moving && !anim.IsPlaying("hit")) {
+                transform.position += direction * movementSpeed * Time.deltaTime;
+                if (direction.x > 0) {
+                    if (gameObject.transform.localScale.x < 0) {
+                        if (turnOnce == 0) {
+                            StartCoroutine("Turn");
+                        }
+                    }
+                    else if (!anim.IsPlaying("run")) {
+                        anim.Play("run");
+                    }
+                }
+                else {
+                    if (gameObject.transform.localScale.x > 0) {
+                        if (turnOnce == 0) {
+                            StartCoroutine("Turn");
+                        }
+                    }
+                    else {
+                        if (!anim.IsPlaying("run")) {
+                            anim.Play("run");
+                        }
+                    }
+                }
+            }
+        }
 	}
 	IEnumerator Turn(){
 		Debug.Log("Turn activated");
@@ -70,7 +75,9 @@ public class RandomDirectionMovement : MonoBehaviour {
 		bounceOffObject = 0;
 		CancelInvoke("SpawnClouds");
 		moving = false;
-		anim.Play("idle");
+		if(anim.GetClipByName("idle") != null){
+			anim.Play("idle");
+		}
 		//if(anim.IsPlaying("run")){
 			//anim.Play("idleR");
 		//} else if(anim.IsPlaying("runL"))

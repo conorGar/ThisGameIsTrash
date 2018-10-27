@@ -9,14 +9,19 @@ public class PauseGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
-        {
-			pauseMenu.SetActive(true);
-		}
+        pauseMenu.GetComponent<GUI_PauseMenu>().player = this.gameObject;
+    }
+
+    private void OnDestroy()
+    {
+    }
+
+    // Update is called once per frame
+    void Update () {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
+                GameStateManager.Instance.PushState(typeof(PauseMenuState));
+            }
+        }
 	}
 }

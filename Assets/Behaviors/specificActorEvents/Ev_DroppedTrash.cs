@@ -6,27 +6,31 @@ public class Ev_DroppedTrash : MonoBehaviour {
 
 	public bool isPile;
 	public GameObject droppedTrashCollectedDisplay;
+	public AudioClip spawn;
 	// Use this for initialization
 	void Start () {
 		if(!isPile)
 			StartCoroutine("Land");
 	}
-	
+	void OnEnable(){
+		SoundManager.instance.RandomizeSfx(spawn,.6f,.8f);
+	}
 	// Update is called once per frame
 	void Update () {
 		
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if(isPile && collider.gameObject.tag == "Player"){
-			droppedTrashCollectedDisplay.SetActive(true);
+		if(collider.gameObject.tag == "Player"){
+			/*droppedTrashCollectedDisplay.SetActive(true);
 			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(droppedTrashCollectedDisplay.transform.position.x, droppedTrashCollectedDisplay.transform.position.y+3,2);
 			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SetFadeVariables(.4f,1f);
-			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().FadeOut();
-			GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] += GlobalVariableManager.Instance.GARBAGE_HAD;
-			collider.gameObject.GetComponent<PlayerTakeDamage>().trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
-			GlobalVariableManager.Instance.GARBAGE_HAD = 0;
-			GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION = Vector3.zero;
+			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().FadeOut();*/
+			//GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] += GlobalVariableManager.Instance.GARBAGE_HAD;
+			GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]++;
+            GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
+			//GlobalVariableManager.Instance.GARBAGE_HAD = 0;
+			//GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION = Vector3.zero;
 			gameObject.SetActive(false);
 		}
 	}

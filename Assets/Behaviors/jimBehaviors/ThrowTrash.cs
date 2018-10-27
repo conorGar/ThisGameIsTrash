@@ -8,26 +8,33 @@ public class ThrowTrash : MonoBehaviour {
 	//tk2dSpriteAnimator myAnim;
 	public AudioClip throwSfx;
 
-
 	JimAnimationManager myAnim;
 	void Start () {
-		
+		if((GlobalVariableManager.Instance.BOSSES_KILLED & GlobalVariableManager.BOSSES.ONE ) != GlobalVariableManager.BOSSES.ONE){
+			this.enabled = false;// cant do if haven't picked up throwing gloves yet.
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)){
-			StartCoroutine("Throw","left");
-		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)){
-			StartCoroutine("Throw","right");
-		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)){
-			StartCoroutine("Throw","up");
-		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)){
-			StartCoroutine("Throw","down");
-		}
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (Input.GetKey(KeyCode.LeftShift)) {
+                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
+                    StartCoroutine("Throw", "left");
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
+                    StartCoroutine("Throw", "right");
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                    StartCoroutine("Throw", "up");
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                    StartCoroutine("Throw", "down");
+                }
 
-		myAnim = gameObject.GetComponent<JimAnimationManager>();
-
+                myAnim = gameObject.GetComponent<JimAnimationManager>();
+            }
+        }
 	}
 
 	IEnumerator Throw(string direction){

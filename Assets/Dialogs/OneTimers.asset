@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: OneTimers
   m_EditorClassIdentifier: 
   title: OneTimers
+  dialogIconID: icon_RatOnAMat
   nodeStore:
     keys:
     - Value: 32a3d734-8f3f-4d59-8c11-9fb5c81056f1
@@ -34,6 +35,19 @@ MonoBehaviour:
     - Value: 6643c57b-8239-452a-9d30-89263845a37f
     - Value: f52f4e23-2ff6-41c9-8f9b-0ffedf8e508c
     - Value: 53c5dd0e-d922-4e0c-b088-5d1ef09f7486
+    - Value: da7f4155-98c1-42df-88ee-e4199dac1edc
+    - Value: fbfd6f2b-a3fc-43f3-bb53-88cb39a9dc53
+    - Value: 1006cacc-e1b8-49cf-b53e-1267cf80d12f
+    - Value: 1a75caee-bc40-4b89-8e9c-795e2a8edb66
+    - Value: 76fcb649-dc45-4102-bcf5-e6056e154105
+    - Value: d74e3f84-5d52-4b3f-a18f-097a0e243f92
+    - Value: ff597232-56ef-47d8-913e-6471fa3d3467
+    - Value: 3cfa0aff-6f21-4ee5-974d-6f60ea953db1
+    - Value: 66981cff-c417-47dc-8e92-46194060b2da
+    - Value: 594f1769-d1ba-4541-a1fd-1d9881de5e88
+    - Value: aabad145-8d27-4509-8cf5-292d6f981d49
+    - Value: 92954e10-5d83-4823-999c-90b41b57a5ff
+    - Value: 696260f9-3aec-4cba-86ce-6e4758bf9584
     values:
     - window:
         serializedVersion: 2
@@ -46,6 +60,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 32a3d734-8f3f-4d59-8c11-9fb5c81056f1
       x: 126
@@ -66,6 +81,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: b1d52384-c013-4652-bfd3-8bbe952e1f91
       x: 469
@@ -97,6 +113,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: d2ae9a36-f1a9-4655-978c-ad0511593419
       x: 885
@@ -118,6 +135,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: f2ffc6f7-3e3e-45bc-8868-fd2232427294
       x: 879
@@ -138,6 +156,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 69fb8063-e5f6-4155-99e9-baaebcb47b0f
       x: 884
@@ -158,6 +177,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 421b76ff-35e3-4242-9e90-5bc786aed16c
       x: 1208
@@ -178,6 +198,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: e930d267-8eb8-44f2-8d8d-0a5497b5d3bd
       x: 1614.3152
@@ -198,6 +219,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 9a7e6925-d7bd-4e07-ae9e-f12be08e988c
       x: 2018.3152
@@ -218,6 +240,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 2873bcc3-2a2a-43b1-a633-27c0eb63477d
       x: 2342.3152
@@ -238,6 +261,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 2042eb82-9caa-4a3f-97a3-cb5987bd66ff
       x: 2673.3152
@@ -258,6 +282,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: d1720634-3bac-49c5-a7e5-db549381037f
       x: 2996.3152
@@ -278,6 +303,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 2175864a-f650-4a01-9d43-e93986135a89
       x: 3375.3152
@@ -298,6 +324,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 02dd5855-9229-4213-817f-95aa5db78b17
       x: 3733.3152
@@ -319,6 +346,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: b2eae8d8-0357-4911-b1fa-eaeb4ee97de7
       x: 4058.3152
@@ -340,6 +368,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 78d3b2d7-0320-4cce-a9fd-df5da86ccc9f
       x: 4391.3154
@@ -360,6 +389,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 29c80191-a081-430b-9889-e849898854d0
       x: 4724.3154
@@ -380,6 +410,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: dec70cf6-a13b-406c-b465-905ffa44e7a0
       x: 5049.3154
@@ -401,6 +432,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 6643c57b-8239-452a-9d30-89263845a37f
       x: 5379.3154
@@ -421,6 +453,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: f52f4e23-2ff6-41c9-8f9b-0ffedf8e508c
       x: 5710.3154
@@ -442,11 +475,291 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      friendState: 
       id:
         Value: 53c5dd0e-d922-4e0c-b088-5d1ef09f7486
       x: 6046.3154
       y: 309
       text: Anywho, was nice meetin' ya! See ya around folks!
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 153
+        y: 1030
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat1
+      speakerName: Rat On A Mat
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: da7f4155-98c1-42df-88ee-e4199dac1edc
+      x: 153
+      y: 1030
+      text: Greetings garbageman. Welcome to the <c=g> This Game Is Trash Demo</c>
+      type: 1
+      child_id:
+        Value: fbfd6f2b-a3fc-43f3-bb53-88cb39a9dc53
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 450
+        y: 1026
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat2
+      speakerName: 
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: fbfd6f2b-a3fc-43f3-bb53-88cb39a9dc53
+      x: 450
+      y: 1026
+      text: 'My name is <color=#78FF32> Rat On A Mat</color>. '
+      type: 1
+      child_id:
+        Value: 1006cacc-e1b8-49cf-b53e-1267cf80d12f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 740
+        y: 1045
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat3
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 1006cacc-e1b8-49cf-b53e-1267cf80d12f
+      x: 740
+      y: 1045
+      text: You may think that perhaps I got that name because I am a rat standing
+        on a mat.
+      type: 1
+      child_id:
+        Value: 1a75caee-bc40-4b89-8e9c-795e2a8edb66
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1034
+        y: 1070
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat4
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 1a75caee-bc40-4b89-8e9c-795e2a8edb66
+      x: 1034
+      y: 1070
+      text: You would be correct. I can tell you're judging my character design.
+      type: 1
+      child_id:
+        Value: 76fcb649-dc45-4102-bcf5-e6056e154105
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1331
+        y: 1080
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat5
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 76fcb649-dc45-4102-bcf5-e6056e154105
+      x: 1331
+      y: 1080
+      text: Listen, we had a lot we needed to do for this demo, alright? Not every
+        character design is gonna be genius.
+      type: 1
+      child_id:
+        Value: d74e3f84-5d52-4b3f-a18f-097a0e243f92
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1618
+        y: 1097
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat6
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: d74e3f84-5d52-4b3f-a18f-097a0e243f92
+      x: 1618
+      y: 1097
+      text: Don't judge, man. Really. We're just doin' our best.
+      type: 1
+      child_id:
+        Value: ff597232-56ef-47d8-913e-6471fa3d3467
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1910
+        y: 1112
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat7
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: ff597232-56ef-47d8-913e-6471fa3d3467
+      x: 1910
+      y: 1112
+      text: Anyway, I'm only here to help you out and give you a <color=#78FF32>map
+        of the area</color>.
+      type: 1
+      child_id:
+        Value: 3cfa0aff-6f21-4ee5-974d-6f60ea953db1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2223
+        y: 1099
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat8
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 3cfa0aff-6f21-4ee5-974d-6f60ea953db1
+      x: 2223
+      y: 1099
+      text: I'm gonna let you do your thing, explore...judge....
+      type: 1
+      child_id:
+        Value: 66981cff-c417-47dc-8e92-46194060b2da
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2512
+        y: 1124
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat9
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 66981cff-c417-47dc-8e92-46194060b2da
+      x: 2512
+      y: 1124
+      text: ..and I know everyone hates that hand-holdy stuff, but...if you'll allow
+        me...
+      type: 1
+      child_id:
+        Value: 594f1769-d1ba-4541-a1fd-1d9881de5e88
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2804
+        y: 1099
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat10
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 594f1769-d1ba-4541-a1fd-1d9881de5e88
+      x: 2804
+      y: 1099
+      text: '...I''m just gonna say, you know, maybe the <color=#29B6F6>star marks</color>
+        on there might be good to head toward...'
+      type: 1
+      child_id:
+        Value: aabad145-8d27-4509-8cf5-292d6f981d49
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3097
+        y: 1085
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat11
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: aabad145-8d27-4509-8cf5-292d6f981d49
+      x: 3097
+      y: 1085
+      text: '...but what do I know. I''m just a rat...standing on a mat.'
+      type: 1
+      child_id:
+        Value: 92954e10-5d83-4823-999c-90b41b57a5ff
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3389
+        y: 1121
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat12
+      speakerName: ' '
+      question: 
+      action: finish
+      friendState: END
+      id:
+        Value: 92954e10-5d83-4823-999c-90b41b57a5ff
+      x: 3389
+      y: 1121
+      text: 'Ok. I''ll show myself out now. Good talk. Good luck and all that stuff.
+        Ok. '
+      type: 1
+      child_id:
+        Value: 696260f9-3aec-4cba-86ce-6e4758bf9584
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3695
+        y: 1112
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: end
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 696260f9-3aec-4cba-86ce-6e4758bf9584
+      x: 3695
+      y: 1112
+      text: end
       type: 1
       child_id:
         Value: 

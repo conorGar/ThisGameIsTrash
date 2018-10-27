@@ -114,7 +114,19 @@ namespace I2.TextAnimation
 			SetWidgetColor_UGUI(color);
 		}
 
-		public void StartAgain(){
+        public void SetWidgetAlpha(float alpha)
+        {
+#if I2_NGUI
+			SetWidgetAlpha_NGUI(alpha);
+#endif
+
+#if I2_TMPro
+            SetWidgetAlpha_TMPro(alpha);
+#endif
+            SetWidgetAlpha_UGUI(alpha);
+        }
+
+        public void StartAgain(){
 			OnEnable();
 		}
 	}

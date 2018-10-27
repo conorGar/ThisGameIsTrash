@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class PinManager : MonoBehaviour {
     public static PinManager Instance;
@@ -13,11 +15,12 @@ public class PinManager : MonoBehaviour {
     public bool DebugPins = false;
     public S_Ev_shop Shop;
     public GameObject PageRoot;
-    public Text DescriptionText;
-    public tk2dSprite PinTitleSprite;
+    public TextMeshProUGUI DescriptionText;
+    public TextMeshProUGUI PinTitle;
     public Ev_PPDisplay PPDisplay;
     public tk2dSprite PinDisplaySprite;
     public PinConfig pinConfig;
+    public ParticleSystem equipSpark;
     private Dictionary<PIN, PinDefinition> PINLOOKUP = new Dictionary<PIN, PinDefinition>();
 
 	void Awake () {

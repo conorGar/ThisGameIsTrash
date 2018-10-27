@@ -245,5 +245,11 @@ namespace I2.TextAnimation
 			if (mGraphic!=null)
 				mGraphic.color = color;
 		}
+
+        void SetWidgetAlpha_UGUI(float alpha)
+        {
+            if (mGraphic != null)
+                mGraphic.color = new Color(mGraphic.color.r, mGraphic.color.g, mGraphic.color.b, alpha);
+        }
     }
 }

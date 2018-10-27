@@ -44,10 +44,10 @@ public class ControllerManager : MonoBehaviour {
             }
 
             string[] inputNames = Input.GetJoystickNames();
-            for (int i = 0; i < Input.GetJoystickNames().Length; i++)
+            /*for (int i = 0; i < Input.GetJoystickNames().Length; i++)
             {
                 Debug.Log(i + " input: " + inputNames[i]);
-            }
+            }*/
             
         }
     }
@@ -118,9 +118,6 @@ public class ControllerManager : MonoBehaviour {
                                 snapshot.isPressed |= snapshot.rawAxis > 0;
                             else
                                 snapshot.isPressed |= snapshot.rawAxis < 0;
-
-                            if (snapshot.rawAxis != 0f)
-                                Debug.Log("Axis in action: " + key + " " + input.axisDirection);
 
                             break;
                         case INPUTTYPE.BUTTON:

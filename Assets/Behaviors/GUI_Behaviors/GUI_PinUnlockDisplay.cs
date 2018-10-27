@@ -11,10 +11,17 @@ public class GUI_PinUnlockDisplay : MonoBehaviour {
 	public GameObject pinTitle;
 	public GameObject myPinDescription;
 	public GameObject pinImage;
+	public AudioClip unlockSFX;
+
 
 	// Use this for initialization
 	void Start () {
 		
+	}
+
+	void OnEnable(){
+	phase = 1;
+	SoundManager.instance.PlaySingle(unlockSFX);
 	}
 	
 	// Update is called once per frame

@@ -22,13 +22,15 @@ GameObject:
   - component: {fileID: 212004212098329112}
   - component: {fileID: 114945675712837876}
   - component: {fileID: 50679807916840308}
+  - component: {fileID: 111095379191885820}
+  - component: {fileID: 95634304949808062}
   m_Layer: 0
   m_Name: largeTrash_chair2
   m_TagString: LargeTrash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4711462657645448
 Transform:
   m_ObjectHideFlags: 1
@@ -36,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1027202827954816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.400893, y: 1.1104878, z: 0}
+  m_LocalPosition: {x: -27.729393, y: -0.047985077, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,6 +64,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &95634304949808062
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027202827954816}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 23c28480f3afff74e85539dd8adb375e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!111 &111095379191885820
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027202827954816}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 3e5542d12eb562b4285973cea184b5dd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 3e5542d12eb562b4285973cea184b5dd, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114945675712837876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,17 +107,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca88a61368a3d9445b07fcf477e617e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceUntilPickup: 3
+  player: {fileID: 0}
+  pickup: {fileID: 0}
+  drop: {fileID: 0}
+  carryXAdjustment: 3.3
+  myBody: {fileID: 0}
+  dumpster: {fileID: 0}
+  spinning: 0
   myPositionInList: 2
   isRewardForBoss: 0
-  myCharValue: 99
-  collisionBox: {fileID: 1063722312502430, guid: a532eb480d37056499854085127ae81d,
-    type: 2}
-  largeShadow: {fileID: 1818738814236254, guid: ba27c8f3d7b59dc458b0f7bd948ace32,
-    type: 2}
-  cloudEffect: {fileID: 1093340251420238, guid: 8bad8ed90c67dde43a84d4f320a25e8a,
-    type: 2}
+  collectedDisplaySprite: {fileID: 0}
   sparkle: {fileID: 1995515920980104, guid: 92df80640633c2d45a95e3cf88147b55, type: 2}
   smokePuff: {fileID: 1283276921881662, guid: db528b844f179cd44b47a18627d12908, type: 2}
+  mainCamera: {fileID: 0}
+  ltmManager: {fileID: 0}
+  returnSound: {fileID: 0}
 --- !u!212 &212004212098329112
 SpriteRenderer:
   m_ObjectHideFlags: 1

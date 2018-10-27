@@ -1,0 +1,320 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1603229517643436}
+  m_IsPrefabParent: 1
+--- !u!1 &1603229517643436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4994125703744762}
+  - component: {fileID: 114952209297838584}
+  m_Layer: 0
+  m_Name: RatFriends
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4994125703744762
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603229517643436}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114952209297838584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603229517643436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: ratOnAMat_1
+    boundsData:
+    - {x: -0.012820482, y: 0.12820506, z: 0}
+    - {x: 9.820513, y: 8.564102, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820721, z: 0}
+    - {x: 10.923077, y: 9.051282, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.9230766, y: -4.1538463, z: 0}
+    - {x: 4.8974357, y: -4.1538463, z: 0}
+    - {x: -4.9230766, y: 4.4102564, z: 0}
+    - {x: 4.8974357, y: 4.4102564, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.0019541015}
+    - {x: 0.37597558, y: 0.0019541015}
+    - {x: 0.0019541015, y: 0.32812402}
+    - {x: 0.37597558, y: 0.32812402}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5a1e0066c9edb254287e59c77e3ea6b3, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: bba0c2331008548468c4fd25a572cef9
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: ratOnAMat_2
+    boundsData:
+    - {x: -0.012820482, y: 0.089743376, z: 0}
+    - {x: 9.820513, y: 8.487179, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820721, z: 0}
+    - {x: 10.923077, y: 9.051282, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.9230766, y: -4.1538463, z: 0}
+    - {x: 4.8974357, y: -4.1538463, z: 0}
+    - {x: -4.9230766, y: 4.333333, z: 0}
+    - {x: 4.8974357, y: 4.333333, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.33203223}
+    - {x: 0.37597558, y: 0.33203223}
+    - {x: 0.0019541015, y: 0.6552725}
+    - {x: 0.37597558, y: 0.6552725}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5a1e0066c9edb254287e59c77e3ea6b3, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 28af68c6ae60b5e4dad402a2cc85e27f
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: ratOnAMat_5
+    boundsData:
+    - {x: -0.012820482, y: 0.11538434, z: 0}
+    - {x: 9.820513, y: 8.538462, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820721, z: 0}
+    - {x: 10.923077, y: 9.051282, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.9230766, y: -4.1538463, z: 0}
+    - {x: 4.8974357, y: -4.1538463, z: 0}
+    - {x: -4.9230766, y: 4.384615, z: 0}
+    - {x: 4.8974357, y: 4.384615, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3798838, y: 0.0019541015}
+    - {x: 0.7539053, y: 0.0019541015}
+    - {x: 0.3798838, y: 0.32714745}
+    - {x: 0.7539053, y: 0.32714745}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5a1e0066c9edb254287e59c77e3ea6b3, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ebf118d92e64763499aaadf8042c2744
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: ratOnAMat_4
+    boundsData:
+    - {x: -0.012820482, y: 0.10256386, z: 0}
+    - {x: 9.820513, y: 8.51282, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820721, z: 0}
+    - {x: 10.923077, y: 9.051282, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.9230766, y: -4.1538463, z: 0}
+    - {x: 4.8974357, y: -4.1538463, z: 0}
+    - {x: -4.9230766, y: 4.358974, z: 0}
+    - {x: 4.8974357, y: 4.358974, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3798838, y: 0.33105567}
+    - {x: 0.7539053, y: 0.33105567}
+    - {x: 0.3798838, y: 0.6552725}
+    - {x: 0.7539053, y: 0.6552725}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5a1e0066c9edb254287e59c77e3ea6b3, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 63351368bb7d6f0439de18026923ec47
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: ratOnAMat_3
+    boundsData:
+    - {x: -0.012820482, y: 0.089743376, z: 0}
+    - {x: 9.820513, y: 8.487179, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820721, z: 0}
+    - {x: 10.923077, y: 9.051282, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.9230766, y: -4.1538463, z: 0}
+    - {x: 4.8974357, y: -4.1538463, z: 0}
+    - {x: -4.9230766, y: 4.333333, z: 0}
+    - {x: 4.8974357, y: 4.333333, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.65918064}
+    - {x: 0.37597558, y: 0.65918064}
+    - {x: 0.0019541015, y: 0.9824209}
+    - {x: 0.37597558, y: 0.9824209}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5a1e0066c9edb254287e59c77e3ea6b3, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ff6822c93e17b9e438631913790a7af1
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: 5a1e0066c9edb254287e59c77e3ea6b3, type: 2}
+  textures:
+  - {fileID: 2800000, guid: 3a32d097e5b415b4796f277f7a6e9094, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: 40691d3be4cd8de4f849d9c4c8bd50e7
+  spriteCollectionName: RatFriends
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 1652442244
+  dataGuid: 1c0102b5da3d329409044df4e2626fc8
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

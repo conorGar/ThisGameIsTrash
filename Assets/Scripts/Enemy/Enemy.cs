@@ -20,6 +20,10 @@ public class Enemy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (gameObject.GetComponent<Rigidbody2D>()!=null){
+				gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			}
+		}
 	}
 }

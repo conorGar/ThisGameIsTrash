@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ev_HitStars : MonoBehaviour {
+	public Sprite oneDamage;
 	public Sprite TwoDamage;
 	public Sprite ThreeDamage;
 	public Sprite FourDamage;
@@ -29,6 +30,8 @@ public class Ev_HitStars : MonoBehaviour {
 	public void ShowProperDamage(int damageDealt){
 		if(damageDealt == 2){
 			this.gameObject.GetComponent<SpriteRenderer>().sprite = TwoDamage;
+		}else if(damageDealt == 1){
+			this.gameObject.GetComponent<SpriteRenderer>().sprite = oneDamage;
 		}else if(damageDealt == 3){
 			this.gameObject.GetComponent<SpriteRenderer>().sprite = ThreeDamage;
 		}else if(damageDealt == 4){

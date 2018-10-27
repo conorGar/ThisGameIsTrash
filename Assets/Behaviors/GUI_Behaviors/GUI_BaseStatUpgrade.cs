@@ -9,48 +9,63 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 
 
 	public TextMeshProUGUI positiveText;
-	public Hub_UpgradeStand stand;
 	public GameObject starsAvailableHUD;
 	public ParticleSystem selectPS;
 	public GameObject baseStatUpgrade;
-
-	void Start () {
-		
-	}
+	public AudioClip navSFX1;
+	public AudioClip navSFX2;
+	public AudioClip selectUpgradeSFX;
 
 	void OnEnable(){
-		mainCam.GetComponent<PostProcessingBehaviour>().profile = blur;
+        GameStateManager.Instance.PushState(typeof(ShopState));
+        CamManager.Instance.mainCamPostProcessor.profile = blur;
 		starsAvailableHUD.SetActive(true);
-		Navigate("");
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space)){
-			SelectUpgrade();
-		}
 
-		if(Input.GetKeyDown(KeyCode.LeftArrow) && leftRightNav && arrowPos>0){
-			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
-			Navigate("left");
-		}else if(Input.GetKeyDown(KeyCode.RightArrow) && leftRightNav && arrowPos<maxArrowPos){
-			Debug.Log("Arrow RIGHT");
-			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
-			Navigate("right");
-		}else if(Input.GetKeyDown(KeyCode.UpArrow) && upDownNav && arrowPos>0){
-			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
-			Navigate("up");
-		}else if(Input.GetKeyDown(KeyCode.DownArrow) && upDownNav && arrowPos<maxArrowPos){
-			optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
-			Navigate("down");
-		}
+    void OnDisable()
+    {
+        CamManager.Instance.mainCamPostProcessor.profile = null;
+        GameStateManager.Instance.PopState();
+    }
 
-		//selectionArrow.transform.position = Vector3.Lerp(currentSelectArrowPos,optionIcons[arrowPos].transform.position,2*Time.deltaTime);
-		selectionArrow.transform.position = optionIcons[arrowPos].transform.position;
+    // Update is called once per frame
+    void Update () {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(ShopState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
+                SelectUpgrade();
+            }
+
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && leftRightNav && arrowPos > 0) {
+                optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+                SoundManager.instance.PlaySingle(navSFX2);
+                Navigate("left");
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && leftRightNav && arrowPos < maxArrowPos) {
+                Debug.Log("Arrow RIGHT");
+                optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+                SoundManager.instance.PlaySingle(navSFX1);
+                Navigate("right");
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) && upDownNav && arrowPos > 0) {
+                SoundManager.instance.PlaySingle(navSFX2);
+                optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+                Navigate("up");
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && upDownNav && arrowPos < maxArrowPos) {
+                SoundManager.instance.PlaySingle(navSFX1);
+                optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+                Navigate("down");
+            }
+
+            //selectionArrow.transform.position = Vector3.Lerp(currentSelectArrowPos,optionIcons[arrowPos].transform.position,2*Time.deltaTime);
+            selectionArrow.transform.position = optionIcons[arrowPos].transform.position;
+        }
 	}
 
 	void SelectUpgrade(){
 		if(GlobalVariableManager.Instance.STAR_POINTS > 0){
+			SoundManager.instance.PlaySingle(selectUpgradeSFX);
+
 			selectPS.transform.position = optionIcons[arrowPos].transform.position;
 			selectPS.Play();
 			if(arrowPos == 0){
@@ -66,13 +81,8 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 			GlobalVariableManager.Instance.STAR_POINTS--;
 			PositiveText();
 		}if(arrowPos == 3){
-			this.gameObject.SetActive(false);
-			stand.player.GetComponent<EightWayMovement>().enabled = false;
-			mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
-			stand.ReturnFromDisplay();
 			starsAvailableHUD.SetActive(false);
 			baseStatUpgrade.SetActive(false);
-			stand.enabled = true;
 		}
 	}
 

@@ -9,7 +9,7 @@ public class GUI_TutPopup : MonoBehaviour {
 	public GameObject myDescription;
 	public GameObject myImage;
 	public GameObject myTitle;
-	public GameObject mainCam;
+	public AudioClip popupSFX;
 
 	public Sprite largeTrashImage;
 	public Sprite ArmoredEnemyImage;
@@ -20,15 +20,16 @@ public class GUI_TutPopup : MonoBehaviour {
 	public Sprite murderImage;
 	public Sprite dojoImage;
 
-
+	Vector3 startPos;
 	int phase;
 	// Use this for initialization
 	void Start () {
-
 	}
 
 	void OnEnable(){
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
+		SoundManager.instance.PlaySingle(popupSFX);
+		startPos = gameObject.transform.position;//reset position
+
 		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,transform.position.y +2.4f,.5f);
 		StartCoroutine("Delays");
 	}
@@ -41,26 +42,27 @@ public class GUI_TutPopup : MonoBehaviour {
 			phase = 2;
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,5f,.5f);
 			yield return new WaitForSeconds(.5f);
-			mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+            CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+			phase = 0;
+			gameObject.transform.position = startPos;
+            GameStateManager.Instance.PopState();
 			gameObject.SetActive(false);
+
 		}
 
 	}
 
 	void Update(){
-
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
-        {
-			if(phase == 1){
-				StartCoroutine("Delays");
-			}
-		}
-
+        if (GameStateManager.Instance.GetCurrentState() == typeof(DialogState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
+                if (phase == 1) {
+                    StartCoroutine("Delays");
+                }
+            }
+        }
 	}
 
 	public void SetData(string tutPopup){
-
 		if(tutPopup == "LargeTrash"){
 			myDescription.GetComponent<TextMeshProUGUI>().text = "Carry <color=#ffffb3>Large Trash</color> back to the dumpster " +
 															"to earn <color=#ffffb3>Star Points</color>, which allow you to"+
@@ -86,8 +88,18 @@ public class GUI_TutPopup : MonoBehaviour {
 			myTitle.GetComponent<TextMeshProUGUI>().text = "NIGHTFALL";
 			GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.DAYNIGHT;
 
+		}else if(tutPopup == "Pins"){
+			myDescription.GetComponent<TextMeshProUGUI>().text = "<color=#ffffb3>Pins</color> are equippable upgrades that you can " +
+																"equip using your <color=#ffffb3>Pin Points</color>. They can be "+
+																"found in each world or purchased in shops."+
+																"Mix and match them to get the most out of each day!";
+			myImage.GetComponent<Image>().sprite = PinsImage;
+			myTitle.GetComponent<TextMeshProUGUI>().text = "PINS";
+			GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.PINS;
+
 		}
 
+        UserDataManager.Instance.SetDirty();
 	}
 
 }

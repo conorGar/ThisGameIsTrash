@@ -17,7 +17,7 @@ public class Ev_Scrap : MonoBehaviour {
 	public Sprite spr4;
 	public Sprite spr5;
 
-	void Start () {
+	void OnEnable () {
 		meleeMeter = GameObject.Find("meleeMeter") as GameObject;
 		int whichAni = Random.Range(1,6);
 		if(whichAni == 1)
@@ -101,7 +101,7 @@ public class Ev_Scrap : MonoBehaviour {
 
 	void Fall(){
 		if(arc){
-			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,gameObject.GetComponent<Rigidbody2D>().velocity.y - 4f);
+			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,gameObject.GetComponent<Rigidbody2D>().velocity.y - 2f);
 		}else{
 			CancelInvoke();
 			turningSpeed = 0;

@@ -9,6 +9,8 @@ public class WorldManager : MonoBehaviour
     public GARBAGETYPE garbageType = GARBAGETYPE.STANDARD; 
     public int amountTrashHere = 0;
 	public PinFunctionsManager playersPFM;
+	public int worldNumber; //TODO: used temporarily for large trash manager because couldnt figure out WORLD variable system quickly
+	public AudioClip worldMusic;
 
 
     public World world = new World(WORLD.ONE);
@@ -20,6 +22,10 @@ public class WorldManager : MonoBehaviour
 
     private void Start()
     {
+    	SoundManager.instance.musicSource.clip = worldMusic;
+    	SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+    	SoundManager.instance.musicSource.Play();
+
         world.type = worldType;
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HUNGRYFORMORE)){
 				//Hungry For More pin
@@ -27,6 +33,18 @@ public class WorldManager : MonoBehaviour
 		}
         // TODO: Base this on bag type whether they are going for standard, compost, recyclable, etc.
         GarbageManager.Instance.PopulateGarbage(garbageType, amountTrashHere);
+
+        LargeTrashManager.Instance.EnableProperTrash(worldNumber);
+
+        // Initializing stuff from other managers.  Maybe we should put most of that kind of thing here to preserve ordering?
+
+        CalendarManager.Instance.StartDay();
+
+        // Activate the first room!
+        RoomManager.Instance.ActivateCurrentRoom();
+
+        // World scene begins in the gameplay state!
+        GameStateManager.Instance.PushState(typeof(GameplayState));
     }
 
     void Update()

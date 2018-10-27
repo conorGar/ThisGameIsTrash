@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class GUI_OptionsMenu : MonoBehaviour {
 
-    AudioSource musicSource;
-    AudioSource sfxSource;
+   // AudioSource musicSource;
+    //AudioSource sfxSource;
 
 
     public AudioClip selectSound;
 
-    public GameObject soundManager;
+    //public GameObject soundManager;
 
     public GameObject musicVol;
     public GameObject sfxVol;
@@ -25,71 +25,62 @@ public class GUI_OptionsMenu : MonoBehaviour {
     GameObject currentlySelectedOption;
     int arrowPos = 1;
     // Use this for initialization
-    void Start() {
-        AudioSource[] audioSources = soundManager.GetComponents<AudioSource>();
-        musicSource = audioSources[1];
-        sfxSource = audioSources[0];
-        musicVol.GetComponent<Image>().fillAmount = musicSource.volume;
-        sfxVol.GetComponent<Image>().fillAmount = sfxSource.volume;
+    void Start() { 
+        musicVol.GetComponent<Image>().fillAmount = SoundManager.instance.musicSource.volume;
+		sfxVol.GetComponent<Image>().fillAmount = SoundManager.instance.sfxSource.volume;
     }
 
     // Update is called once per frame
     void Update() {
         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
         || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos < 4) {
-            Time.timeScale = 1.0f - Time.timeScale;
             arrowPos++;
             SoundManager.instance.PlaySingle(selectSound);
             SelectNext();
-            Time.timeScale = 0;
         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
                || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 1f) {
-            Time.timeScale = 1.0f - Time.timeScale;
             arrowPos--;
             SoundManager.instance.PlaySingle(selectSound);
             SelectNext();
-            Time.timeScale = 0;
         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
                || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
         {
-            Time.timeScale = 1.0f - Time.timeScale;
             if (arrowPos == 1) {
-                if (musicSource.volume < 1) {
-                    musicSource.volume += .16f;
+				if (SoundManager.instance.musicSource.volume < 1) {
+                    SoundManager.instance.musicSource.volume += .16f;
                     musicVol.GetComponent<Image>().fillAmount += .16f;
+					GlobalVariableManager.Instance.MASTER_MUSIC_VOL = SoundManager.instance.musicSource.volume;
+
                 }
             } else if (arrowPos == 2) {
-                if (sfxSource.volume < 1f) {
-                    sfxSource.volume += .16f;
+				if (SoundManager.instance.sfxSource.volume < 1f) {
+					SoundManager.instance.sfxSource.volume += .16f;
+					GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
                     sfxVol.GetComponent<Image>().fillAmount += .16f;
                 }
             }
-            Time.timeScale = 0;
         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
                || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
         {
-            Time.timeScale = 1.0f - Time.timeScale;
             if (arrowPos == 1) {
-                if (musicSource.volume > 0f) {
-                    musicSource.volume -= .16f;
+				if (SoundManager.instance.musicSource.volume > 0f) {
+					SoundManager.instance. musicSource.volume -= .16f;
                     musicVol.GetComponent<Image>().fillAmount -= .16f;
                 }
             } else if (arrowPos == 2) {
-                if (sfxSource.volume > 0f) {
-                    sfxSource.volume -= .16f;
+				if (SoundManager.instance.sfxSource.volume > 0f) {
+					SoundManager.instance.sfxSource.volume -= .16f;
                     sfxVol.GetComponent<Image>().fillAmount -= .16f;
                 }
             }
-            Time.timeScale = 0;
         }
 
         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)
          || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
         {
-			Time.timeScale = 1.0f- Time.timeScale;
-			PauseMenu.GetComponent<GUI_PauseMenu>().enabled = true;
+            // Back to the pause menu.
+            GameStateManager.Instance.PopState();
 			gameObject.SetActive(false);
-			Time.timeScale = 0;
 		}
 	}
 

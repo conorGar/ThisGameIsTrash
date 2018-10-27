@@ -11,7 +11,7 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int value;
 
-    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG | PIN.TALKYTIME | PIN.CURSED | PIN.PIERCINGPIN);
+    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG); //| PIN.TALKYTIME | PIN.CURSED | PIN.PIERCINGPIN);
     public PIN PINS_DISCOVERED
     {
         set { pinsDiscoveredValue = (ulong)value; }
@@ -49,8 +49,8 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int DAY_NUMBER = 1;
 	public int IS_HIDDEN = 0;
-	public int MASTER_MUSIC_VOL = 30;
-	public int MASTER_SFX_VOL = 30;
+	public float MASTER_MUSIC_VOL = .5f;
+	public float MASTER_SFX_VOL = .5f;
 	public int MENU_SELECT_STAGE = 1;
 	public bool PLAYER_CAN_MOVE = true;
 	public bool TUT_POPUP_ON = true;
@@ -70,6 +70,7 @@ public class GlobalVariableManager : UserDataItem {
 	LARGETRASH =		1<<0,
 	ARMOREDENEMIES = 	1<<1,
 	DAYNIGHT = 			1<<2,
+	PINS = 				1<<3,
 
 	}
 
@@ -155,7 +156,7 @@ public class GlobalVariableManager : UserDataItem {
 
     public int GARBAGE_HAD = 0;
 	public int LARGE_TRASH_COLLECTED = 0;
-	public List<Vector2> LARGE_TRASH_LOCATIONS = new List<Vector2>();
+	//public List<Vector2> LARGE_TRASH_LOCATIONS = new List<Vector2>();
 	public int MY_NUM_IN_ROOM = 0;
 	public Vector3 DROPPED_TRASH_LOCATION = Vector3.zero;
 	public List<int> TODAYS_TRASH_AQUIRED = new List<int>{0,0,0};
@@ -188,7 +189,7 @@ public class GlobalVariableManager : UserDataItem {
 												"abcdefghijklmn",
 												};		
 
-    public WORLD WORLDS_UNLOCKED = WORLD.NONE;
+    public WORLD WORLDS_UNLOCKED = WORLD.ONE;
 
     //---------------------------------------------------------------------//
 
@@ -211,6 +212,9 @@ public class GlobalVariableManager : UserDataItem {
     public override SimpleJSON.JSONObject Save()
     {
         var json_data = new SimpleJSON.JSONObject();
+
+        json_data["DAY_NUMBER"] = DAY_NUMBER;
+
         json_data["pinsDiscoveredValue"] = pinsDiscoveredValue;
         json_data["pinsEquippedValue"] = pinsEquippedValue;
 
@@ -228,11 +232,15 @@ public class GlobalVariableManager : UserDataItem {
         json_data["CURSEVALUE"] = CURSEVALUE;
         json_data["MOMONEYVALUE"] = MOMONEYVALUE;
 
+        json_data["TUT_POPUPS_SHOWN"] = (uint)TUT_POPUPS_SHOWN;
+
         return json_data;
     }
 
     public override void Load(SimpleJSON.JSONObject json_data)
     {
+        DAY_NUMBER = json_data["DAY_NUMBER"].AsInt;
+
         pinsDiscoveredValue = (ulong)json_data["pinsDiscoveredValue"].AsLong;
         pinsEquippedValue = (ulong)json_data["pinsEquippedValue"].AsLong;
 
@@ -249,6 +257,8 @@ public class GlobalVariableManager : UserDataItem {
         DEJAVUCOUNT = json_data["DEJAVUCOUNT"].AsInt;
         CURSEVALUE = json_data["CURSEVALUE"].AsInt;
         MOMONEYVALUE = json_data["MOMONEYVALUE"].AsInt;
+
+        TUT_POPUPS_SHOWN = (TUTORIALPOPUPS)json_data["TUT_POPUPS_SHOWN"].AsInt;
     }
 
     // helpers
@@ -260,5 +270,10 @@ public class GlobalVariableManager : UserDataItem {
     public bool IsPinEquipped(PIN p_type)
     {
         return (GlobalVariableManager.Instance.PINS_EQUIPPED & p_type) == p_type;
+    }
+
+    public bool IsWorldUnlocked(WORLD world_type)
+    {
+		return (GlobalVariableManager.Instance.WORLDS_UNLOCKED & world_type) == world_type;
     }
 }

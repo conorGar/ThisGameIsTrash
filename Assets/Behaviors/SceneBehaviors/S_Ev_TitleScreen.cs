@@ -14,22 +14,37 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 	public GameObject title;
 	public GameObject choicesBox;
 	public GameObject backCam;
-	public GameObject fadeHelper;
 	public GameObject GUIcam;
 
 	public GameObject playOption;
 	public GameObject optionsOption;
 	public GameObject extrasOptions;
 
+	public GameObject saveFileSelectHUD;
+
     public TextMeshProUGUI loadingGameDataVisual;
+
+    public GameObject optionHud;
+    public AudioClip windGusts;
+
+    public AudioClip navigateSFX;
+    public AudioClip selectSFX;
 
 	GameObject currentSelected;
 
 	// Use this for initialization
 	void Start () {
 		currentSelected = playOption;
+		SoundManager.instance.PlaySingle(windGusts);
+
+        GameStateManager.Instance.PushState(typeof(TitleState));
 	}
-	
+
+    void OnDestroy()
+    {
+        GameStateManager.Instance.PopState();
+    }
+
     IEnumerator LoadUserData()
     {
         isInteractable = false;
@@ -45,12 +60,11 @@ public class S_Ev_TitleScreen : MonoBehaviour {
         loadingGameDataVisual.gameObject.SetActive(false);
 
         phase = 2;
-        fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
     }
 
 	// Update is called once per frame
 	void Update () {
-        if (isInteractable)
+        if (isInteractable && !optionHud.activeInHierarchy)
         {
             if (phase == 1) {
                 if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
@@ -68,25 +82,43 @@ public class S_Ev_TitleScreen : MonoBehaviour {
                 else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
                       || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
                     if (navigationPosition == 1) {
-                        StartCoroutine(LoadUserData());
+
+                    	saveFileSelectHUD.SetActive(true);
+                    	this.enabled = false;
+                        //StartCoroutine(LoadUserData());
+
+					}else if(navigationPosition == 2){
+                        GameStateManager.Instance.PushState(typeof(OptionsState));
+                        optionHud.SetActive(true);
+
                     }
+					SoundManager.instance.PlaySingle(selectSFX);
+
                 }
             } else if (phase == 0) {
                 if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
                     Debug.Log(title.GetComponent<SpecialEffectsBehavior>() == null);
-                    Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x, Screen.height * -1, 0));
+                    //Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x, Screen.height * -1, 0));
 
-                    Debug.Log(topLimit);
-                    Debug.Log(topLimit * -1);
+                    //Debug.Log(topLimit);
+                    //Debug.Log(topLimit * -1);
 
-                    title.transform.localPosition = topLimit * -1;
+                    //title.transform.localPosition = topLimit * -1;
+					SoundManager.instance.PlaySingle(selectSFX);
+
+                    title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-.1f,.6f,.5f, true);
                     //title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
                     choicesBox.SetActive(true);
                     phase = 1;
 
                 }
             }
+        }else if(optionHud.activeInHierarchy){
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){
+                GameStateManager.Instance.PopState();
+                optionHud.SetActive(false);
+			}
         }
 
 
@@ -120,6 +152,7 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 	}
 
 	void UpdateSelected(){
+		SoundManager.instance.PlaySingle(navigateSFX);
 		currentSelected.GetComponent<SpecialEffectsBehavior>().SetGrowValues(new Vector3(.5f,.5f,.5f),10f);//need new Grow function that takes two different values
 		currentSelected.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Grow",.01f);
 		currentSelected.GetComponent<Image>().color = new Color(currentSelected.GetComponent<Image>().color.r,currentSelected.GetComponent<Image>().color.g,currentSelected.GetComponent<Image>().color.b,.7f);

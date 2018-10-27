@@ -160,7 +160,7 @@ public class DialogBehaviorManager : MonoBehaviour {
 
 			textToSwitchto = dialogLines[currentLineNum];
 			currentDisplayedText.text = textToSwitchto;
-			currentlySpeakingIcon.GetComponent<Animator>().StartPlayback();
+			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
 			currentDisplayedText.GetComponent<TextAnimation>().PlayAnim(0);
 		}else if(lineNumbersThatActivateOptions.Count > 0){ //if spawn dialog
 			for(int i = 0; i < dialogIcons.Count;i++){
@@ -257,8 +257,7 @@ public class DialogBehaviorManager : MonoBehaviour {
 		//-------------fade/darken non speakers, highlight current speaker----------//
 		for(int i = 0; i < dialogIcons.Count; i++){
 			Debug.Log("Change Speaker:" + dialogIcons[i].name);
-			Debug.Log("Change Speaker:" + dialogIcons[i].name.Substring(4));
-			if(dialogIcons[i].name.Substring(5) == currentSpeaker){//substring because of "icon_" infront of each icon's name
+			if(dialogIcons[i].name == "icon_" + currentSpeaker){
 				dialogIcons[i].GetComponent<Image>().color = new Color(255f,255f,255f,1f);
 				currentlySpeakingIcon = dialogIcons[i];
 			}else{

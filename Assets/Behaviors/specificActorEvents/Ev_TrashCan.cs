@@ -16,11 +16,16 @@ public class Ev_TrashCan : MonoBehaviour {
 	public AudioClip hitSound;
 	public PinDefinition myPin;
 	public Sprite pinSprite;//given to dropped pin, which gives it to pin unlock display
+	public ParticleSystem smokePuff;
 	GameObject spawnedPin;
 	int spawnOnce = 0;
 
 	void Start () {
-		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
+        myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
+        if (GlobalVariableManager.Instance.IsPinDiscovered(myPin.Type)){
+			myAnim.Play("fall");
+			this.enabled = false;
+		}
 		//startSprite = gameObject.GetComponent<tk2dSprite>().CurrentSprite;
 	}
 	
@@ -46,7 +51,9 @@ public class Ev_TrashCan : MonoBehaviour {
 				damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.SetActive(true);
-			}else{
+			}else if(spawnOnce == 0){
+				smokePuff.gameObject.SetActive(true);
+				smokePuff.Play();
 				SoundManager.instance.PlaySingle(finalHit);
 				myAnim.Play("fall");
 				SoundManager.instance.PlaySingle(hitSound);
@@ -66,6 +73,7 @@ public class Ev_TrashCan : MonoBehaviour {
 			spawnedPin.name = myPin.name;
 			spawnedPin.GetComponent<tk2dSprite>().SetSprite(myPin.sprite);
 			spawnedPin.GetComponent<Ev_DroppedPin>().SetPinData(myPin,pinUnlockHud, pinSprite);
+			spawnOnce = 1;
 		}
 	}
 }

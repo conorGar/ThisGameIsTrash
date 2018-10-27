@@ -1,117 +1,94 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using I2.TextAnimation;
 
 public class Ev_DayMeter : MonoBehaviour {
-
 	public GameObject dayIcon;
-	public GameObject countdownNumber;
+	public TextMeshProUGUI countdownNumber;
 	public GameObject fadeHelper;
 	public GameObject tutPopup;
+    public GameObject startPos;
+    public GameObject endPos;
+	public AudioClip countdownTick;
+	public TextMeshProUGUI dayNumberDisplay;
+	public ParticleSystem halfWayDonePS;
+	public AudioClip halfWayDoneChime;
 
+	float delayBonus = 1.0f;
 
-	float delayBonus;
-	GameObject dayIconInstance;
-
-	GameObject tempNum;
-	float myX;
-	float myY;
-	bool canGo;
-	int triggerOnce;
+	public float secondsInTheDay = 240f;
+    public float secondsPassed = 0f;
+    public int timeDeathIncrease = 20;
+	int finalCountdownNumber = 10;
+	bool halfWayMark;
 
 	void Start () {
-		myX = -20f;
-		myY = 0f;
-		dayIconInstance = Instantiate(dayIcon, new Vector3(transform.position.x - 50f, transform.position.y, transform.position.z),Quaternion.identity);
-		dayIconInstance.transform.parent = this.gameObject.transform;
+		GlobalVariableManager.Instance.TIME_IN_DAY = 0;
+		dayIcon.transform.localPosition = startPos.transform.localPosition;
+		dayNumberDisplay.text = "Day: "+ GlobalVariableManager.Instance.DAY_NUMBER;
+        secondsPassed = 0f;
+    }//end of Start()
 
+    void Update()
+    {
+        Type state = GameStateManager.Instance.GetCurrentState();
+        if (state == typeof(GameplayState) || state == typeof(DethKlokState)) {
+            // Add the change in time but only in the states that are allowed to pass time.
+            // If it's the deathclock state, time moves at an accelerated rate.
+            secondsPassed += GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) ? Time.deltaTime
+                : Time.deltaTime * timeDeathIncrease;
+            secondsPassed = Mathf.Min(secondsPassed, secondsInTheDay * delayBonus);
 
-		/*if(GlobalVariableManager.Instance.pinsEquipped[36] == 2){
-			//Fuel Efficient Pin
-			delayBonus += .1f;
-		}
-		if(GlobalVariableManager.Instance.pinsEquipped[38] != 0){
-			//Hardly Working Pin
-			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 3){
-				if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] == 0)
-					delayBonus += .1f;
-			}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4){
-				if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[3] == 0)
-					delayBonus += .1f;
-			}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 5){
-				if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[4] == 0)
-					delayBonus += .1f;
-			}
-		}*/ 
-		Created();
+            // Update day icon position
+            dayIcon.transform.localPosition = Vector3.Lerp(startPos.transform.localPosition, endPos.transform.localPosition, secondsPassed / secondsInTheDay * delayBonus);
 
-	}//end of Start()
+            // Update time of day in seconds.
+            GlobalVariableManager.Instance.TIME_IN_DAY = Mathf.Min(Mathf.RoundToInt(secondsPassed), Mathf.RoundToInt(secondsInTheDay * delayBonus));
 
-	void Update () {
-		
-	}
+            // Trigger events based on the time.
+            if (state == typeof(GameplayState)) {
+                if (secondsPassed < secondsInTheDay * delayBonus) {
+                    //Debug.Log("Seconds Passed: " + GlobalVariableManager.Instance.TIME_IN_DAY);
+                    if (secondsPassed >= secondsInTheDay * delayBonus - finalCountdownNumber) {
+                        Debug.Log("Trigger final countdown number: " + finalCountdownNumber);
+                        countdownNumber.gameObject.SetActive(true);
 
-	public void Stop(){
-		CancelInvoke();
-		canGo = false;
-	}
-	public void Created(){
-		canGo = true;
-		InvokeRepeating("Count",0f,(1f +delayBonus));
-	}
-	public void UpdatePos(){
-		transform.position = new Vector2(myX + GlobalVariableManager.Instance.TIME_IN_DAY, myY - Mathf.Floor(GlobalVariableManager.Instance.TIME_IN_DAY)/4);
+                        SoundManager.instance.RandomizeSfx(countdownTick, .7f, 1.3f);
+                        countdownNumber.text = finalCountdownNumber.ToString();
+                        countdownNumber.color = new Color(152f, 152f, 152f, .64f);
+                        countdownNumber.gameObject.GetComponent<TextAnimation>().PlayAnim(0);
+                        finalCountdownNumber--;
 
-	}
+                        //InvokeRepeating("FinalCountdown", .1f, 2f + (delayBonus * 2));
+                    }
+                }
+                else {
+                    Debug.Log("*** END DAY FADE ACTIVATE ***");
+                    fadeHelper.GetComponent<Ev_FadeHelper>().EndOfDayFade();
+                    this.enabled = false;
+                }
+
+                if (secondsPassed > (secondsInTheDay * delayBonus / 2) && !halfWayMark) {
+                    Debug.Log("HALFWAY Seconds Passed: " + GlobalVariableManager.Instance.TIME_IN_DAY);
+                    HalfWay();
+                }
+            }
+        }
+    }
+
 	public void Slowdown(){
 		//For 'Workin' Hard' Pin
-		delayBonus += .1f;
+		delayBonus = 1.1f;
 	}
-	void Count(){
-		if(GlobalVariableManager.Instance.TIME_IN_DAY < 120){
-			if(canGo && GlobalVariableManager.Instance.ROOM_NUM != 20){
-				//myX += .1f;
-				//Debug.Log("Count activated. x position = " + myX);
-				//Debug.Log("Time in day: "+GlobalVariableManager.Instance.TIME_IN_DAY);
-				dayIconInstance.transform.Translate(1f,.1f,0);
-				//gameObject.transform.position.x = myX;
-					
-				GlobalVariableManager.Instance.TIME_IN_DAY++;
-					if(GlobalVariableManager.Instance.TIME_IN_DAY >= 100 && GlobalVariableManager.Instance.TIME_IN_DAY%2 ==0){
-						if(GlobalVariableManager.Instance.TIME_IN_DAY < 102){
-						//initially spawn the countdown
-							if((GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.DAYNIGHT) != GlobalVariableManager.TUTORIALPOPUPS.DAYNIGHT){
-								tutPopup.SetActive(true);
-								tutPopup.GetComponent<GUI_TutPopup>().SetData("DayNight");
-							}
-							tempNum = Instantiate(countdownNumber,new Vector3(300f,74f,0f),Quaternion.identity);
-							tempNum.transform.parent = this.gameObject.transform;
-						}else{
-							tempNum.GetComponent<Ev_CountdownNumber>().StartCoroutine("Reset");
-						}
-					}
-			}
-		}else{
-			/*if(GlobalVariableManager.Instance.ROOM_NUM != 2 && GlobalVariableManager.Instance.WORLD_NUM !=1){
 
-			took this out. Nt sure why was here??? 6/2/18
-
-			}*/
-			if(triggerOnce == 0){
-					Debug.Log("*** END DAY FADE ACTIVATE ***");
-					fadeHelper.GetComponent<Ev_FadeHelper>().EndOfDayFade();
-					triggerOnce = 1;
-				}
-		}
-		//if(GlobalVariableManager.Instance.TIME_IN_DAY > 2 && GlobalVariableManager.Instance.characterUpgradeArray[1][26].CompareTo('o') == 0 && GlobalVariableManager.Instance.CURRENT_HP < int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[3])){
-			//Fitness perk 5 - hp regen
-			//if(GlobalVariableManager.Instance.TIME_IN_DAY % 15 ==0){
-				//GlobalVariableManager.Instance.CURRENT_HP++;
-			//}
-		//}
-		if(GlobalVariableManager.Instance.MASTER_MUSIC_VOL > 0){
-			//adjust volumne
-		}
-	}//end of Count()
+    // Helpers
+	void HalfWay(){
+		halfWayMark = true;
+		halfWayDonePS.Play();
+		SoundManager.instance.PlaySingle(halfWayDoneChime);
+	}
 
 }

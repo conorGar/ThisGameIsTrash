@@ -7,38 +7,52 @@ public class B_Ev_Questio : MonoBehaviour {
 	public GameObject mySlashR;
 	public GameObject mySlashL;
 	public GameObject player;
+	public GameObject grabbyGloves;
+	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
 
+	EnemyTakeDamage myETD;
 	tk2dSpriteAnimator myAnim;
 	FollowPlayer fp;
 	int facingDirection = 0; //0 = left, 1 = right
 	int swingOnce;
+	int dropItemOnce;
 
 	void Start () {
+		myETD = gameObject.GetComponent<EnemyTakeDamage>();
 		fp = gameObject.GetComponent<FollowPlayer>();
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
 	}
 	
 	void Update () {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (player.transform.position.x < gameObject.transform.position.x && facingDirection != 0) {
+                facingDirection = 0;
+            }
+            else if (player.transform.position.x > gameObject.transform.position.x && facingDirection != 1) {
+                facingDirection = 1;
+            }
 
-		if(player.transform.position.x < gameObject.transform.position.x && facingDirection != 0){
-			facingDirection = 0;
-		}else if(player.transform.position.x > gameObject.transform.position.x && facingDirection != 1){
-			facingDirection = 1;
-		}
+            if (fp.enabled == true) {
+                if (facingDirection == 0 && myAnim.CurrentClip.name != "walkL") {
+                    myAnim.Play("walkL");
+                }
+                else if (facingDirection == 1 && myAnim.CurrentClip.name != "walkR") {
+                    myAnim.Play("walkR");
+                }
+                float distance = Vector3.Distance(transform.position, player.transform.position);
+                if (distance < 5 && swingOnce == 0) {
+                    Debug.Log("QUESTIO SWING ACTIVATE");
+                    StartCoroutine("Swing");
+                    swingOnce = 1;
+                }
+            }
 
-		if(fp.enabled == true){
-			if(facingDirection == 0 && myAnim.CurrentClip.name != "walkL"){
-				myAnim.Play("walkL");
-			}else if(facingDirection == 1 && myAnim.CurrentClip.name != "walkR"){
-				myAnim.Play("walkR");
-			}
-			float distance = Vector3.Distance(transform.position, player.transform.position);
-			if(distance < 5 && swingOnce == 0){
-				Debug.Log("QUESTIO SWING ACTIVATE");
-				StartCoroutine("Swing");
-				swingOnce = 1;
-			}
-		}
+            if (myETD.currentHp <= 12 && dropItemOnce == 0) {
+                DropItem();
+                dropItemOnce = 1;
+                Dazed();
+            }
+        }
 	}
 
 	IEnumerator Swing(){
@@ -66,4 +80,30 @@ public class B_Ev_Questio : MonoBehaviour {
 		myAnim.Play("idleL");
 		fp.enabled = true;
 	}
+
+	void DropItem(){
+		grabbyGloves.SetActive(true);
+		grabbyGloves.GetComponent<Ev_SpecialItem>().Toss();
+		CamManager.Instance.mainCamEffects.CameraPan(grabbyGloves,true);
+		Dazed();
+		Invoke("ReturnFromGloveShow",2f);
+
+	}
+
+	void ReturnFromGloveShow(){
+        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+	}
+
+	void Dazed(){
+		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
+		for(int i = 0; i < dazeDisables.Count; i++){
+			dazeDisables[i].enabled = false;
+		}
+		gameObject.layer = 11;
+		gameObject.GetComponent<ThrowableObject>().enabled = true;
+		myAnim.Play("dazed");
+		StopAllCoroutines();
+		//this.enabled = false;
+	}
+
 }

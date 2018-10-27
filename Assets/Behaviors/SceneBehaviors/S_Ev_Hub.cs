@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class S_Ev_Hub : MonoBehaviour {
 
-	
+	public AudioClip hubMusic;
+    public List<FriendSpawner> friendSpawners;
+
+
 	// Use this for initialization
 	void Start () {
+		UserDataManager.Instance.SetDirty();
+		SoundManager.instance.musicSource.clip = hubMusic;
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+		SoundManager.instance.musicSource.Play();
 		GlobalVariableManager.Instance.MENU_SELECT_STAGE = 2;
 		GlobalVariableManager.Instance.ARROW_POSITION = 0;
 		//create jim
@@ -15,19 +22,33 @@ public class S_Ev_Hub : MonoBehaviour {
 
         GlobalVariableManager.Instance.LARGE_TRASH_LIST.Clear();
 
-		
-
-
 		//disable melee swing at hub
 		GameObject.Find("Jim").GetComponent<MeleeAttack>().enabled = false;
 
-		LargeTrashSpawn();
+        // Friend events should be generated from the day before and the events will carry over to the hub, I think.
+        FriendSpawn();
+
+        //LargeTrashSpawn();
+        GameStateManager.Instance.PopAllStates();
+        GameStateManager.Instance.PushState(typeof(GameplayState));
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    void FriendSpawn()
+    {
+        for (int i = 0; i < friendSpawners.Count; ++i) {
+            var spawnedFriend = FriendManager.Instance.GetFriend(friendSpawners[i].friend);
+            if (spawnedFriend != null && spawnedFriend.IsVisiting) {
+                spawnedFriend.gameObject.transform.position = friendSpawners[i].transform.position;
+                spawnedFriend.gameObject.SetActive(true);
+                spawnedFriend.OnActivateRoom();
+            }
+        }
+    }
 
 	void LargeTrashSpawn(){
 

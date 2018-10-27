@@ -7,43 +7,67 @@ public class PickupableObject : MonoBehaviour
 	public float distanceUntilPickup =3f;
 	public GameObject player;
 	public AudioClip pickup;
-
-	int bounce = 0;
+	public AudioClip drop;
+	public float carryXAdjustment = 3.3f;
+	public GameObject carryMark;
+	public bool throwableObject;
+	protected bool movePlayerToObject;
+	//int bounce = 0;
 	//int doOnce = 0;
 	float myY;
-	//float xSpeedWhenCollected;
-	//float pickUpYSpeed;
-	int currentRoomNumber;
-	bool falling = false;
-	//bool stopBouncing = false;
-	//bool returning = false;
-	bool pickingUp = false;
-	Rigidbody2D myBody;
+
+
+	[HideInInspector]
+	public Rigidbody2D myBody;
+	protected bool beingCarried;
+	//public bool cannotDrop; // activated by Dumpster to make sure large trash isnt dropped before 'Return()' is activated...
 
 	GameObject myCollision;
-	GameObject myShadow;
+	//GameObject myShadow;
+	public GameObject dumpster;
 
-	bool spinning;
+	protected bool pickUpSpin;
+	public bool spinning;
 	float t;
 	Quaternion startRotation;
 
 	// Use this for initialization
-	void Start ()
+	public void Start ()
 	{
 		myBody  = gameObject.GetComponent<Rigidbody2D>();
 		startRotation = transform.rotation;
+		dumpster = GameObject.Find("Dumpster");
+		if(player == null){
+			player = GameObject.FindGameObjectWithTag("Player");
+			carryMark = player.transform.GetChild(7).gameObject;//TODO: better way to do this...not good
+		}
+
 	}
-	
+	/*void OnEnable(){
+		if(player == null){
+			player = GameObject.FindGameObjectWithTag("Player");
+
+		}
+	}*/
 	// Update is called once per frame
-	void Update ()
-	{	if(Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
-			
-			if(Input.GetKeyDown(KeyCode.Space) && !pickingUp && !GlobalVariableManager.Instance.CARRYING_SOMETHING){
+	protected virtual void Update ()
+	{	
+		if(player != null && Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
+			//Debug.Log("within distance" + GlobalVariableManager.Instance.CARRYING_SOMETHING);
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING && GlobalVariableManager.Instance.PLAYER_CAN_MOVE){//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'
 				Debug.Log("PickUpable object...picked up");
+				movePlayerToObject = true;
 				PickUp();
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried && !throwableObject){
+				if(Vector2.Distance(player.transform.position,dumpster.transform.position) > 15f) //TODO: temp solution for making sure trash isnt dropped before 'Return' is activated
+					Drop();
 			}
 		}else{
 //			Debug.Log(Vector2.Distance(player.transform.position,gameObject.transform.position));
+		}
+
+		if(movePlayerToObject){
+			player.transform.position = Vector2.Lerp(player.transform.position,this.gameObject.transform.position,2*Time.deltaTime);
 		}
 
 		if(spinning){
@@ -53,33 +77,78 @@ public class PickupableObject : MonoBehaviour
 			}else{
 				spinning = false;
 				t = 0f;
-				gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-				myBody.velocity = Vector2.zero;
-				gameObject.transform.localPosition = new Vector2(3.3f, 0f);
-				myBody.simulated = false; //prevents item from moving when player runs into a wall or something
-				PickUpEvent();
+				if(pickUpSpin){
+					beingCarried = true;
+					gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+					myBody.velocity = Vector2.zero;
+					if(!throwableObject){
+						gameObject.transform.localPosition = new Vector2(carryXAdjustment, 0f);
+					}else{
+						gameObject.transform.localPosition = carryMark.transform.localPosition;
+						gameObject.GetComponent<ThrowableObject>().enabled = true;
+					}
+					player.GetComponent<MeleeAttack>().enabled = false;
+					player.GetComponent<EightWayMovement>().enabled = true;
+					player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",true);
+
+					if(gameObject.GetComponent<SpriteRenderer>() != null)
+						gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02"; // makes sure in front of player
+					else
+						gameObject.GetComponent<Renderer>().sortingLayerName= "Layer02"; // makes sure in front of player
+
+					myBody.simulated = false; //prevents item from moving when player runs into a wall or something
+					PickUpEvent();
+					pickUpSpin = false;
+				}
 			}
 		}
 	}
 
-	public void PickUp(){
+	public virtual void PickUp(){
+		movePlayerToObject = false;
+		/*if(gameObject.GetComponent<BoxCollider2D>()!=null){
+			gameObject.GetComponent<BoxCollider2D>().enabled = false;
+		}*/
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
+		player.GetComponent<EightWayMovement>().enabled = false;
+		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
 		//move and play the particle system
+		beingCarried = true;
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		SoundManager.instance.PlaySingle(pickup);
 		//set object to follow player and push up in the sky
 		gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
 		gameObject.transform.parent = player.transform;
+		if(!throwableObject){
 		myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
+			player.GetComponent<EightWayMovement>().carryingAbove = false;
+
+		}else{
+			player.GetComponent<JimAnimationManager>().PlayAnimation("ani_pickUpBig",true);
+			player.GetComponent<EightWayMovement>().carryingAbove = true;
+			myBody.AddForce(new Vector2(0,14),ForceMode2D.Impulse);
+
+		}
 		myBody.gravityScale = 2;
 
-
+		pickUpSpin = true;
 		spinning = true;
 
 	}
 
 	public void Drop(){
+		beingCarried = false;
+		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
+		Debug.Log("ITEM DROPPED");
+		gameObject.transform.parent = null; //detatch from player transform
+		gameObject.transform.position = new Vector2(transform.position.x + 1f, transform.position.y -1f);
+		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
+		player.GetComponent<EightWayMovement>().clipOverride = false;
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
+		SoundManager.instance.PlaySingle(drop);
+		spinning = false;
+		pickUpSpin = false;
 		//proper postionining 
 		DropEvent();
 	}
@@ -89,6 +158,7 @@ public class PickupableObject : MonoBehaviour
 	}
 
 	public virtual void DropEvent(){
+		
 		//nothing for base
 	}
 

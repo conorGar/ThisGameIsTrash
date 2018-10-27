@@ -12,11 +12,11 @@ public class OpenCalendar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.CALENDAR)){
+		/*if(ControllerManager.Instance.GetKeyDown(INPUTACTION.CALENDAR)){
 			calendar.SetActive(true);
 			Time.timeScale = 0;
 			this.enabled = false;
 
-		}
+		}*/
 	}
 }

@@ -8,20 +8,23 @@ public class Ev_BagSelect : MonoBehaviour {
     tk2dSpriteAnimator myAnim;
 
 	int phase = 0;
+	int arrowPos;
+
+
 	// Use this for initialization
 	void Start () {
         // If the bag is locked.
-		if(GlobalVariableManager.Instance.IsBagLocked(GlobalVariableManager.Instance.MENU_SELECT_STAGE)) {
+		if(GlobalVariableManager.Instance.IsBagLocked(arrowPos)) {
 			gameObject.GetComponent<tk2dSprite>().color = Color.black;
 		}
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
-		if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 2){
+		if(arrowPos == 2){
 			myAnim.Play("cassie");
 
-		}else if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 1){
+		}else if(arrowPos == 1){
 			myAnim.Play("reggie");
 
-		}else if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == 3){
+		}else if(arrowPos == 3){
 			myAnim.Play("New Clip"); //its B.A.G., was just too lazy to go back and change it...
 		}
 
