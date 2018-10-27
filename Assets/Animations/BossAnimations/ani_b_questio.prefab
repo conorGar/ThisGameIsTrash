@@ -283,7 +283,7 @@ MonoBehaviour:
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    fps: 30
+    fps: 22.5
     loopStart: 0
     wrapMode: 2
   - name: walkL
@@ -578,7 +578,7 @@ MonoBehaviour:
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    fps: 30
+    fps: 22.5
     loopStart: 0
     wrapMode: 2
   - name: hit
@@ -609,12 +609,12 @@ MonoBehaviour:
     frames:
     - spriteCollection: {fileID: 114836925475477022, guid: 06f56661c592e234096ba43082b90989,
         type: 2}
-      spriteId: 53
+      spriteId: 72
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    fps: 30
+    fps: 14.285714
     loopStart: 0
     wrapMode: 0
   - name: carry
@@ -676,5 +676,17 @@ MonoBehaviour:
       eventInt: 0
       eventFloat: 0
     fps: 22.222221
+    loopStart: 0
+    wrapMode: 0
+  - name: ShowGloves
+    frames:
+    - spriteCollection: {fileID: 114836925475477022, guid: 06f56661c592e234096ba43082b90989,
+        type: 2}
+      spriteId: 73
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
     loopStart: 0
     wrapMode: 0

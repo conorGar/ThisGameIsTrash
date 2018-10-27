@@ -15,6 +15,7 @@ public class ThrowableObject : PickupableObject {
 	public AudioClip throwObject;
 	public AudioClip landSfx;
 	public List<MonoBehaviour> behaviorsToStop = new List<MonoBehaviour>();
+	public bool livingBody;
 	// Use this for initialization
 	void Start(){
 		base.Start();
@@ -65,7 +66,11 @@ public class ThrowableObject : PickupableObject {
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		//if(physicalCollision != null)
 			physicalCollision.enabled = false;
-
+		if(livingBody){
+			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
+			GameObject panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
+			panicSweat.transform.parent = gameObject.transform;
+		}
         if (myShadow != null)
 		    myShadow.SetActive(false);
 	}

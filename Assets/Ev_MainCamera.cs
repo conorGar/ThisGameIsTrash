@@ -37,7 +37,10 @@ public class Ev_MainCamera : MonoBehaviour {
 		
 			if(!transitioning){
 				if(screenShake == 0){
+					//Debug.Log("got here scrren shake");
 					if(stableCamera == false){
+						//Debug.Log("got HHHEEEERRREEE scrren shake");
+
 						transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, player.transform.position.x, Time.deltaTime * cameraSpeed),
                                                          Mathf.SmoothStep(transform.position.y, player.transform.position.y, Time.deltaTime * cameraSpeed),
                                                          -10f); // follows only when player is in center of screen
@@ -68,6 +71,7 @@ public class Ev_MainCamera : MonoBehaviour {
 					}
 				}else{
 					transform.position = new Vector3(startShakeX + Random.Range(0f, screenShake),startShakeY + Random.Range(0f, screenShake), -10f);
+
 				}
 
 			}else{
@@ -163,6 +167,7 @@ public class Ev_MainCamera : MonoBehaviour {
 
 
 	public IEnumerator ScreenShake(float time){
+		GetComponent<Ev_MainCameraEffects>().enabled = false; //needed to make sure it still works when trying to follow object
 		Debug.Log("SCREEN SHAKE ACTIVATE----------");
 		screenShake = .2f;
 		startShakeX = transform.position.x;
@@ -172,5 +177,7 @@ public class Ev_MainCamera : MonoBehaviour {
 		//if(!transitioning && !stableCamera)//stable camera check - no jim on stable camera scenes.
 		//	gameObject.transform.parent = GameObject.Find("Jim").transform; // attatch back
 		screenShake = 0;
+		GetComponent<Ev_MainCameraEffects>().enabled = true;
+
 	}
 }

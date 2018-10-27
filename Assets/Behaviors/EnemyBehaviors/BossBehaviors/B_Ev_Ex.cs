@@ -50,6 +50,7 @@ public class B_Ev_Ex : MonoBehaviour {
 		gameObject.GetComponent<tk2dSprite>().color = new Color(myColor.r,myColor.g,myColor.b,1); //fade back
 		myParticles.SetActive(false);
 		yield return new WaitForSeconds(Random.Range(1f,3f));
+		StopCoroutine("Fire");
 		StartCoroutine("Fire");
 	}
 
@@ -59,13 +60,17 @@ public class B_Ev_Ex : MonoBehaviour {
 			myAnim.Play("cast");
 			yield return new WaitForSeconds(.3f);
 			myProjectile.transform.position = gameObject.transform.position;
+			myProjectile.GetComponent<KillSelfAfterTime>().CancelInvoke();//prevents projectile from dying shortly after spawn
 			playerPosition = new Vector3(player.transform.position.x,player.transform.position.y,player.transform.position.z);
 
 			myProjectile.SetActive(true);
 			Vector2 moveDirection = (playerPosition - myProjectile.transform.position).normalized *10;
+			myProjectile.GetComponent<FollowPlayer>().enabled = true;
 			myProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(moveDirection.x,moveDirection.y);
 			myAnim.Play("idle");
-			yield return new WaitForSeconds(5f);
+			yield return new WaitForSeconds(2f);
+			myProjectile.GetComponent<FollowPlayer>().enabled = false;
+			yield return new WaitForSeconds(3f);
 			if(myProjectile.activeInHierarchy == true){
 			myProjectile.SetActive(false);
 			myProjectile.transform.localPosition = Vector3.zero;

@@ -9,7 +9,6 @@ public class BossStuart : Boss
     public Vector3 spawnPosition;
     public Vector3 exSpawnPosition, hashSpawnPosition, questioSpawnPosition;
 
-
     public MultipleDialogIconsManager mdim;
 
     public BossFriendEx ex;
@@ -20,8 +19,8 @@ public class BossStuart : Boss
     public B_Ev_Hash hash;
 	EnemyTakeDamage myETD;
 
-
-	bool canDamage;
+	[HideInInspector]
+	public bool canDamage;
 
     // Use this for initialization
     protected void Start()
@@ -74,8 +73,19 @@ public class BossStuart : Boss
     }
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if(collider.gameObject.layer == 15){ //throwable object hit
+		if(collider.gameObject.layer == 15 && !canDamage){ //throwable object hit
 			//gameObject.GetComponent<EnemyTakeDamage>().meleeDmgBonus + 2;//thrown object causes 3 damage
+			GetComponent<InvincibleEnemy>().enabled = false;
+
+			//-----------------Impact Ricochet---------------//
+			float currentDirection = collider.gameObject.GetComponent<Rigidbody2D>().velocity.x;
+			collider.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+			ObjectPool.Instance.GetPooledObject("effect_thrownImpact",transform.position);
+			if(currentDirection < 0)
+				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(3f,5f),ForceMode2D.Impulse);
+			else
+				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3f,5f),ForceMode2D.Impulse);
+			//----------------------------------------------//
 
 			hash.KnockOff();
 			canDamage = true;
@@ -86,14 +96,18 @@ public class BossStuart : Boss
 
     public void PrepPhase2()
     {
+		Debug.Log("Prep Phase 2");
+
         SoundManager.instance.musicSource.Play();
-        bossTrio.SetActive(true);
-        bossEx.SetActive(true);
-        bossHash.SetActive(true);
+       	bossTrio.SetActive(true);
+       	bossEx.SetActive(true);
+       	bossHash.SetActive(true);
         bossQuestio.SetActive(true);
+        GetComponent<InvincibleEnemy>().enabled = true;
         GetComponent<EnemyTakeDamage>().enabled = false;
         canDamage = false;
         GetComponent<FollowPlayer>().enabled = true;
+        ActivateHpDisplay();
     }
 
 	public override void BossEvent(){
@@ -104,6 +118,7 @@ public class BossStuart : Boss
 		/*for(int i = 0; i<bossTrio.transform.childCount;i++){//add ex and questio to bosses. This is done by BossFriendEx at start if in middle of fight
 			RoomManager.Instance.currentRoom.bosses.Add(bossTrio.transform.GetChild(i).gameObject);
 		}*/
+		Debug.Log("Boss Event Activate");
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		SoundManager.instance.musicSource.Pause();
 		mdim.icons[0].GetComponent<MultipleIcon>().positionOnScreen = 0;//change ex icon position to be on left side

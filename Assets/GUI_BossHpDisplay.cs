@@ -22,9 +22,9 @@ public class GUI_BossHpDisplay : MonoBehaviour {
 	}
 
 	public void UpdateBossHp(float currentHp){
-		Debug.Log("maxHP:" + currentHp + " " + maxHp + " " + currentHp/maxHp);
+//		Debug.Log("maxHP:" + currentHp + " " + maxHp + " " + currentHp/maxHp);
 		fillAmount = ((float)currentHp/(float)maxHp);
-		Debug.Log("fillamount:" + fillAmount);
+		//Debug.Log("fillamount:" + fillAmount);
 
 		myBar.fillAmount = fillAmount;
 	}

@@ -13,7 +13,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	public GameObject player;
 	public GameObject tutPopup;
 	public GameObject roomManager;//needed for proper camera panning
-
+	public AudioClip zoomSound;
 	[HideInInspector]
 	public GameObject objectToSpawn;
 	tk2dCamera thisCam;
@@ -64,6 +64,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 
 	public void ZoomInOut(float zoomAmount, float zs){ 
    		Debug.Log("Camera zoom in out activate ##############");
+   		SoundManager.instance.PlaySingle(zoomSound);
    		currentCamZoom = thisCam.ZoomFactor;
    		targetCamZoom = zoomAmount;
    		zoomSpeed = zs;

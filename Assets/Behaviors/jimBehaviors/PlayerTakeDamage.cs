@@ -200,6 +200,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<EightWayMovement>().myLegs.SetActive(true);
 		gameObject.GetComponent<EightWayMovement>().enabled = true;
 		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
+		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";//return player to proper layer
+
 	}
 	/*
 	IEnumerator Death(){

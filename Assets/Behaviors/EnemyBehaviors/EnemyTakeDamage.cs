@@ -98,7 +98,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		startRotation = transform.rotation;
 		if(myShadow !=null) //if has shadow
 			shadowStartPos = myShadow.transform.localPosition;
-		startScale = gameObject.transform.localPosition;
+		startScale = gameObject.transform.localScale;
 
 		//----------------Pins----------------//
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PIERCINGPIN)) //Piercing Pin
@@ -229,11 +229,12 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
 				myAnim.Play("hit");
-				if(gameObject.transform.position.x < player.transform.position.x)
-					gameObject.transform.localScale = new Vector2(startScale.x*-1,startScale.y);
-				else
-					gameObject.transform.localScale = new Vector2(startScale.x,startScale.y);
-
+				if(moveWhenHit){
+					if(gameObject.transform.position.x < player.transform.position.x)
+						gameObject.transform.localScale = new Vector2(startScale.x*-1,startScale.y);
+					else
+						gameObject.transform.localScale = new Vector2(startScale.x,startScale.y);
+				}
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
@@ -330,11 +331,12 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					}
 
 					myAnim.Play("hit");
-					if(gameObject.transform.position.x < player.transform.position.x)
-						gameObject.transform.localScale = new Vector2(-1f,1f);
-					else
-						gameObject.transform.localScale = new Vector2(1f,1f);
-
+					if(moveWhenHit){
+						if(gameObject.transform.position.x < player.transform.position.x)
+							gameObject.transform.localScale = new Vector2(-1f,1f);
+						else
+							gameObject.transform.localScale = new Vector2(1f,1f);
+					}
 					//camShake = 1;
 					if(gameObject.GetComponent<FollowPlayer>() != null && moveWhenHit){
 						gameObject.GetComponent<FollowPlayer>().StopSound();

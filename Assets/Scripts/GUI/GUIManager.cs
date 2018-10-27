@@ -12,10 +12,12 @@ public class GUIManager : MonoBehaviour {
     public GUI_DeathDisplay DeathDisplay;
     public GUI_TrashCollectedDisplay TrashCollectedDisplayGameplay; // At the top left of the screen during gameplay
     public GUI_TrashCollectedDisplay TrashCollectedDisplayDeath; // On the death display
+   
 
     // Friend related
     public GUI_RockItemHUD rockItemHUD;
     public GUI_SlabTrashGiveHUD slabTrashGiveHUD;
+	public GameObject SlabTrashNeededDisplay;
 
 	void Awake () {
         Instance = this;

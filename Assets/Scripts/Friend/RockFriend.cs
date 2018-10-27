@@ -28,6 +28,12 @@ public class RockFriend : Friend {
     public GameObject slab;
     public GameObject stone;
 
+	public GameObject moon;
+    public GameObject blockade;
+
+
+    bool moonInProperLocation;
+    int departureSequence = 0;
 
     public override void GenerateEventData()
     {
@@ -45,6 +51,8 @@ public class RockFriend : Friend {
                 BreakEyes();
                 break;
             case "END":
+				blockade.SetActive(false);
+                gameObject.SetActive(false);
                 break;
         }
     }
@@ -65,6 +73,21 @@ public class RockFriend : Friend {
                 break;
             case "END":
                 break;
+        }
+
+		if(moon.activeInHierarchy && !moonInProperLocation){
+        	moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(31,65), (5*Time.deltaTime));
+        	if(Vector2.Distance(moon.transform.position,new Vector2(31,65)) <5){
+        		moonInProperLocation = true;
+        	}
+        }
+
+        if(departureSequence == 1){
+			moon.transform.position = Vector2.MoveTowards(moon.transform.position, this.gameObject.transform.position, (5*Time.deltaTime));
+
+        }else if(departureSequence == 2){ //moon and rock leave
+			moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(54,92), (5*Time.deltaTime));
+
         }
     }
 
@@ -168,6 +191,35 @@ public class RockFriend : Friend {
     {
         Destroy(eyeCover);
         eyeBreakPS.SetActive(true);
+    }
+
+
+	public void MoonArrive(){
+    	StartCoroutine(MoonArriveSequence());
+    }
+
+    IEnumerator MoonArriveSequence(){
+    	moon.SetActive(true);
+    	yield return new WaitUntil(() => moonInProperLocation);
+    	yield return new WaitForSeconds(.5f);
+    	dialogManager.ReturnFromAction();
+
+    }
+	public void RockDeparture(){
+		StartCoroutine(DepartureSequence());
+
+    }
+
+    public IEnumerator DepartureSequence(){
+    	departureSequence = 1;
+    	yield return new WaitUntil(() => moon.transform.position.x >= transform.position.x);
+    	yield return new WaitForSeconds(.4f);
+    	departureSequence = 2;
+    	transform.parent = moon.transform;
+    	yield return new WaitForSeconds(1.5f);
+    	departureSequence=3;
+    	moon.SetActive(false);
+    	dialogManager.ReturnFromAction();
     }
 
     // User Data implementation

@@ -71,6 +71,11 @@ MonoBehaviour:
     - Value: 1fe9341a-2da3-4136-b004-327b5bbbc604
     - Value: 931b283a-6132-4ee4-985a-bbf929df1eff
     - Value: 230be8ab-3218-42a4-b746-dcf2be14e5f3
+    - Value: 57926ea2-c9ea-46d4-9a88-2a74fa34199a
+    - Value: 8277261e-a2b0-42a0-a141-f08b21ee827f
+    - Value: cb2f0459-38ed-47ce-a590-2a064fc0dfcb
+    - Value: 8cebfcc7-406b-4c8a-87fd-92ca75709a2b
+    - Value: d48f5a8f-7a51-489e-8691-140b5b1a6cae
     values:
     - window:
         serializedVersion: 2
@@ -720,8 +725,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 68
-        y: 997
+        x: 83
+        y: 981
         width: 270
         height: 200
       isCollapsed: 0
@@ -732,13 +737,13 @@ MonoBehaviour:
       friendState: 
       id:
         Value: a18af6f5-7a8e-4fb2-b7ad-c4cd1d68cc57
-      x: 68
-      y: 997
+      x: 83
+      y: 981
       text: Ok. From my advanced knowledge of the way women operate, I SHOULD have
         enough trash to be attractive now.
       type: 1
       child_id:
-        Value: 
+        Value: 57926ea2-c9ea-46d4-9a88-2a74fa34199a
       responses: []
     - window:
         serializedVersion: 2
@@ -1316,6 +1321,113 @@ MonoBehaviour:
       type: 1
       child_id:
         Value: e50452d9-d521-4165-b163-724be5c602fa
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 370
+        y: 997
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: SlabComplete1
+      speakerName: 
+      question: 
+      action: MoonArrive
+      friendState: 
+      id:
+        Value: 57926ea2-c9ea-46d4-9a88-2a74fa34199a
+      x: 370
+      y: 997
+      text: <shake>Ah yes! You see! Here she comes! <c=b> The Moon</c> has chosen
+        me as her lover!
+      type: 1
+      child_id:
+        Value: 8277261e-a2b0-42a0-a141-f08b21ee827f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 661
+        y: 982
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: SlabComplete2
+      speakerName: speakerName
+      question: 
+      action: SlabDeparture
+      friendState: 
+      id:
+        Value: 8277261e-a2b0-42a0-a141-f08b21ee827f
+      x: 661
+      y: 982
+      text: Ahaha! Enjoy the rest of your lonely, pathetic lives, losers!
+      type: 1
+      child_id:
+        Value: cb2f0459-38ed-47ce-a590-2a064fc0dfcb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 950
+        y: 969
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: SlabComplete3
+      speakerName: Stone
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: cb2f0459-38ed-47ce-a590-2a064fc0dfcb
+      x: 950
+      y: 969
+      text: Wow...I guess <c=b>The Moon</c> really did only care for a hubby who was
+        healthy...
+      type: 1
+      child_id:
+        Value: 8cebfcc7-406b-4c8a-87fd-92ca75709a2b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1239
+        y: 982
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: SlabComplete4
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 8cebfcc7-406b-4c8a-87fd-92ca75709a2b
+      x: 1239
+      y: 982
+      text: '...perhaps I was wrong to aim for her.'
+      type: 1
+      child_id:
+        Value: d48f5a8f-7a51-489e-8691-140b5b1a6cae
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1550
+        y: 971
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: SlabComplete5
+      speakerName: Rock
+      question: 
+      action: finish
+      friendState: 
+      id:
+        Value: d48f5a8f-7a51-489e-8691-140b5b1a6cae
+      x: 1550
+      y: 971
+      text: I am a Rock. I can do better than her.
+      type: 1
+      child_id:
+        Value: 
       responses: []
   rootNodeId:
     Value: e0e12f04-6174-495a-a666-8356a335eadd

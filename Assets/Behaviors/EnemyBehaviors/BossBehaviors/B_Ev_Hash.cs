@@ -86,6 +86,8 @@ public class B_Ev_Hash : MonoBehaviour {
 
 			//yield return new WaitForSeconds(1f);
 			stuartShield.SetActive(true);
+			stuart.GetComponent<BossStuart>().canDamage = false;
+			stuart.GetComponent<InvincibleEnemy>().enabled = true;
 			stuart.GetComponent<EnemyTakeDamage>().enabled = false;
 			//stuart.GetComponent<FollowPlayer>().enabled = false;
 		}
@@ -105,7 +107,7 @@ public class B_Ev_Hash : MonoBehaviour {
 
 	void Dazed(){
 		gameObject.GetComponent<EnemyTakeDamage>().enabled = true;
-		gameObject.layer = 15; //switch to thrownTrash layer.
+		gameObject.layer = 11; //switch to ite layer.
 		gameObject.GetComponent<ThrowableObject>().enabled = true;
 		myAnim.Play("dazed");
 		Invoke("Revive",10f);

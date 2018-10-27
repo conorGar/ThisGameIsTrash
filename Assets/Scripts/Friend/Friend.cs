@@ -125,14 +125,15 @@ public class Friend : UserDataItem {
 
     public virtual void OnFinishDialog()
     {
-
+    	Debug.Log("On finish dialog activate <<<<-----------------------");
         //TODO: DEFINATELY change this...
-        gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
-        gameObject.GetComponent<ActivateDialogWhenClose>().myDialogIcon.gameObject.SetActive(false);
+       // gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
+      
         GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
         //nothing to do for basic friend
 
         StartCoroutine(OnFinishDialogEnumerator());
+		gameObject.GetComponent<ActivateDialogWhenClose>().myDialogIcon.gameObject.SetActive(false);
     }
 
     public virtual IEnumerator OnFinishDialogEnumerator()

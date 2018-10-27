@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour {
 	public tk2dCamera mainCam;
 	public GameObject objectToPanTo;
 	public bool dazeAtDeath;
+	public AudioClip hpDisplayStartSfx;
 
 	[HideInInspector]
 	public Room currentRoom; //used to diable other bosses at main bosses' death
@@ -39,10 +40,15 @@ public class Boss : MonoBehaviour {
         gameObject.SetActive(true);
         gameObject.GetComponent<EnemyTakeDamage>().currentHp = GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber];
 		gameObject.GetComponent<EnemyTakeDamage>().bossEnemy = true;
+
+	}
+
+	public void ActivateHpDisplay(){
 		if(displayHealth){
 			hpDisplay.SetActive(true);
 			hpDisplay.GetComponent<GUI_BossHpDisplay>().maxHp = hp;
 			hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]);
+			SoundManager.instance.PlaySingle(hpDisplayStartSfx);
 		}
 	}
 

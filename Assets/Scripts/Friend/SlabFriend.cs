@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class SlabFriend : Friend
 {
@@ -9,6 +10,16 @@ public class SlabFriend : Friend
 	public GameObject trashGiveHUD;
 	public GameObject eyeBreakPS;
     public GameObject eyeCover;
+    //public GameObject slabTotalTrashHUD;
+
+    public GameObject moon;
+    public GameObject blockade;
+
+
+    bool moonInProperLocation;
+    int slabDepartureSequence = 0;
+
+    int currentDisplayedTotalTrash;
 
 	public override void GenerateEventData()
     {
@@ -22,9 +33,13 @@ public class SlabFriend : Friend
             case "START":
                 break;
             case "WANTS_TRASH":
+				GUIManager.Instance.SlabTrashNeededDisplay.GetComponent<TextMeshProUGUI>().text = trashInLoveFund + "/20";
+            	currentDisplayedTotalTrash = trashInLoveFund;
+            	break;
             case "END":
-                // Eyes open.
-                BreakEyes();
+				blockade.SetActive(false);
+                gameObject.SetActive(false);
+          
                 break;
         }
     }
@@ -46,6 +61,21 @@ public class SlabFriend : Friend
             case "END":
                 break;
         }
+
+        if(moon.activeInHierarchy && !moonInProperLocation){
+        	moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(31,65), (5*Time.deltaTime));
+        	if(Vector2.Distance(moon.transform.position,new Vector2(31,65)) <5){
+        		moonInProperLocation = true;
+        	}
+        }
+
+        if(slabDepartureSequence == 1){
+			moon.transform.position = Vector2.MoveTowards(moon.transform.position, this.gameObject.transform.position, (5*Time.deltaTime));
+
+        }else if(slabDepartureSequence == 2){
+			moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(54,92), (5*Time.deltaTime));
+
+        }
     }
 
     public override IEnumerator OnFinishDialogEnumerator()
@@ -58,6 +88,7 @@ public class SlabFriend : Friend
                 // Turn into a non-auto start prompt!
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+                StartCoroutine("TotalSlabTrashDisplay");
                 break;
             case "END":
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
@@ -112,6 +143,55 @@ public class SlabFriend : Friend
     	trashGiveHUD = neededObjects[0];
     	trashGiveHUD.GetComponent<GUI_SlabTrashGiveHUD>().slabFriend = this;
     }
+
+    public void MoonArrive(){
+    	StartCoroutine(MoonArriveSequence());
+    }
+
+    IEnumerator MoonArriveSequence(){
+    	moon.SetActive(true);
+    	yield return new WaitUntil(() => moonInProperLocation);
+    	yield return new WaitForSeconds(.5f);
+    	dialogManager.ReturnFromAction();
+
+    }
+
+    public void SlabDeparture(){
+		StartCoroutine(SlabDepartureSequence());
+
+    }
+
+    public IEnumerator SlabDepartureSequence(){
+    	slabDepartureSequence = 1;
+    	yield return new WaitUntil(() => moon.transform.position.x >= transform.position.x);
+    	yield return new WaitForSeconds(.4f);
+    	slabDepartureSequence = 2;
+    	transform.parent = moon.transform;
+    	yield return new WaitForSeconds(1.5f);
+    	slabDepartureSequence=3;
+    	moon.SetActive(false);
+    	dialogManager.ReturnFromAction();
+    }
+
+    IEnumerator TotalSlabTrashDisplay(){
+    	GUIManager.Instance.SlabTrashNeededDisplay.SetActive(true);
+    	if(currentDisplayedTotalTrash < trashInLoveFund){
+    		InvokeRepeating("IncreaseDisplayedTrash",0f,.1f);
+    	}
+		yield return new WaitUntil(() => currentDisplayedTotalTrash >= trashInLoveFund);
+		yield return new WaitForSeconds(1f);
+		GUIManager.Instance.SlabTrashNeededDisplay.SetActive(false);
+    }
+
+    void IncreaseDisplayedTrash(){
+		if(currentDisplayedTotalTrash < trashInLoveFund){
+			currentDisplayedTotalTrash++;
+			GUIManager.Instance.SlabTrashNeededDisplay.GetComponent<TextMeshProUGUI>().text = currentDisplayedTotalTrash + "/20";
+		}else{
+			CancelInvoke();
+		}
+    }
+
 
     // User Data implementation
     public override string UserDataKey()

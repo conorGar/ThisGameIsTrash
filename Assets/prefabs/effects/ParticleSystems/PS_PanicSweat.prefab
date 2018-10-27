@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199595080753014616}
   m_Layer: 8
   m_Name: PS_PanicSweat
-  m_TagString: Untagged
+  m_TagString: effect_carrySweat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1532506512155810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.26, y: -1.77, z: 0}
+  m_LocalPosition: {x: -5.475982, y: -1.8703847, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +51,7 @@ ParticleSystem:
   lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -101,7 +101,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 416273335
+  randomSeed: -539906757
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -190,8 +190,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0, g: 0.5034485, b: 1, a: 1}
-      maxColor: {r: 0.07298876, g: 0.91653717, b: 0.99264705, a: 1}
+      minColor: {r: 0, g: 0.751724, b: 1, a: 1}
+      maxColor: {r: 0.6838235, g: 0.97383356, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

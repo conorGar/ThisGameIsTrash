@@ -31,6 +31,7 @@ public class DialogManager : MonoBehaviour {
 	//------------Screen Blur stuff---------------//
 	public PostProcessingProfile dialogBlur;
 	public GameObject mainCam;
+
 	//------------------------------------------//
 
 	public string variableText; //For any variable that is displayed(ex: day of return)
@@ -42,8 +43,11 @@ public class DialogManager : MonoBehaviour {
 	bool hasWavingText; 
 	public bool canContinueDialog = true;
 	Friend friend;//needed for finish();
+	bool guiCamShake;
 	//string currentSpeakerName;
 	 // set by MultipleIconsManager.cs
+
+	Vector2 startingIconScale;
 
 	void Start () {
 
@@ -87,9 +91,18 @@ public class DialogManager : MonoBehaviour {
 				//FinishedDisplay();
 			}
 		}
+
+		 if(guiCamShake){
+		 	Debug.Log("gui cam shake");
+			dialogCanvas.transform.localPosition = new Vector3(14 + Random.Range(0.2f, 1f),11+ Random.Range(0.2f, 1f), 10f); //14/11 = starting position of dialog canvas
+
+		 }
 	}
 
 	void NextNode(){
+		if(guiCamShake){
+			guiCamShake = false;
+		}
 		if(currentNode.type == DIALOGNODETYPE.QUESTION){
 			Debug.Log("Question Dialog Node Properly Read");
 			textBox.SetActive(false);
@@ -123,7 +136,9 @@ public class DialogManager : MonoBehaviour {
                     friend.SetFriendState(currentNode.friendState);
                 }
 			}else if(currentNode.action == "IconLeave"){
+				Debug.Log("Icon leave activate for:  " + currentlySpeakingIcon.name);
 				currentlySpeakingIcon.SetActive(false);
+				currentlySpeakingIcon = null;
 				ReturnFromAction();
 			}else{
 				if(canContinueDialog){
@@ -173,21 +188,31 @@ public class DialogManager : MonoBehaviour {
 			if(currentNode.text.Contains("<c")){
 					HighLightText();
 			}
+			if(currentNode.text.Contains("<shake>")){
+					guiCamShake = true;
+					//mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",1f);
+					//currentNode.text = currentNode.text.Replace("<shake>","");
+			}else if(currentNode.text.Contains("<s")){ //else because dont want it to confuse with "shake" check. If need both just change to "small" or something
+				SmallText();
+			}
 			if(currentNode.text.Contains("<w")){
 					WaveyText();
 			}if(currentNode.text.Contains("<var>")){
 				currentNode.text = currentNode.text.Replace("<var>",variableText);
-			}if(currentNode.text.Contains("<s")){
-				SmallText();
 			}if(currentNode.text.Contains("<l")){
 				LargeText();
+			}if(currentNode.text.Contains("<zoom>")){
+					ZoomIcon();
+			}if(currentNode.text.Contains("<zReturn>")){
+					ReturnFromZoom();
 			}
 
 			displayedText.text = currentNode.text;
 			displayedText.GetComponent<TextAnimation>().StartAgain();
 			finishedDisplayingText = false;
 
-			currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
+			if(currentlySpeakingIcon != null && currentlySpeakingIcon.GetComponent<Animator>() != null)
+				currentlySpeakingIcon.GetComponent<Animator>().enabled = true;
 
             PlayTalkSounds();
 		}
@@ -227,10 +252,14 @@ public class DialogManager : MonoBehaviour {
 			if(currentNode.text.Contains("<c")){
 					Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
 					HighLightText();
-				}
-				if(currentNode.text.Contains("<w")){
+			}
+			if(currentNode.text.Contains("<w")){
 					WaveyText();
-				}
+			}if(currentNode.text.Contains("<zoom>")){
+					ZoomIcon();
+			}if(currentNode.text.Contains("<zReturn>")){
+					ReturnFromZoom();
+			}
 		//Debug.Log(currentlySpeakingIcon.GetComponent<Animator>().enabled);
 
 			finishedDisplayingText = false;
@@ -268,6 +297,7 @@ public class DialogManager : MonoBehaviour {
 					Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
 					HighLightText();
 			}
+
 			if(currentNode.text.Contains("<w")){
 					WaveyText();
 			}if(currentNode.text.Contains("<var>")){
@@ -276,6 +306,10 @@ public class DialogManager : MonoBehaviour {
 				SmallText();
 			}if(currentNode.text.Contains("<l")){
 				LargeText();
+			}if(currentNode.text.Contains("<zoom>")){
+					ZoomIcon();
+			}if(currentNode.text.Contains("<zReturn>")){
+					ReturnFromZoom();
 			}
 			finishedDisplayingText = false;
 			displayedText.text = currentNode.text;
@@ -341,7 +375,20 @@ public class DialogManager : MonoBehaviour {
 		displayedText.fontSize = 35;
 		currentNode.text = currentNode.text.Replace("<l>","");
 	}
+	public void ZoomIcon(){
+		if(startingIconScale == null)
+			startingIconScale = currentlySpeakingIcon.GetComponent<RectTransform>().localScale;
 
+		currentlySpeakingIcon.GetComponent<RectTransform>().localScale = new Vector3(currentlySpeakingIcon.GetComponent<RectTransform>().localScale.x+1,currentlySpeakingIcon.GetComponent<RectTransform>().localScale.y+1,1);
+		currentlySpeakingIcon.transform.localScale = new Vector3(currentlySpeakingIcon.transform.localScale.x+1,currentlySpeakingIcon.transform.localScale.y+1,1);
+
+		Debug.Log("ZoomIcon activate" + currentlySpeakingIcon.name);
+		//currentNode.text = currentNode.text.Replace("<zoom>","");
+	}
+	public void ReturnFromZoom(){
+		currentlySpeakingIcon.GetComponent<RectTransform>().localScale = startingIconScale;
+		currentNode.text = currentNode.text.Replace("<zReturn>","");
+	}
     private void PlayTalkSounds()
     {
         CancelInvoke();
