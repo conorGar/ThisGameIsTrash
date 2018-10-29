@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ev_LargeTrash : PickupableObject {
-
-	
-	public int myPositionInList;
 	public bool isRewardForBoss;
 
 
@@ -79,9 +76,6 @@ public class Ev_LargeTrash : PickupableObject {
 					
 			
 		}
-		garbage.type = LargeGarbage.ByIndex(myPositionInList);
-
-
 	}// end of Start()
 	
 	public override void PickUpEvent(){
@@ -181,7 +175,6 @@ public class Ev_LargeTrash : PickupableObject {
 		SoundManager.instance.PlaySingle(returnSound);
         // Add this trash item to the large trash list.
         var largeTrashItem = new GlobalVariableManager.LargeTrashItem(garbage.type);
-        largeTrashItem.spriteIndex = myPositionInList;
         largeTrashItem.collectedDisplaySprite = collectedDisplaySprite;
         GlobalVariableManager.Instance.LARGE_TRASH_LIST.Add(largeTrashItem);
 

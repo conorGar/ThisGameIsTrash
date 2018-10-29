@@ -109,14 +109,12 @@ public class GlobalVariableManager : UserDataItem {
     public struct LargeTrashItem
     {
         public LARGEGARBAGE type;
-        public int spriteIndex;
         public bool isViewed;
         public Sprite collectedDisplaySprite;
 
         public LargeTrashItem(LARGEGARBAGE p_type)
         {
             type = p_type;
-            spriteIndex = 0;
             isViewed = false;
             collectedDisplaySprite = null;
         }

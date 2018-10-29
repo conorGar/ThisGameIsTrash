@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -267,7 +268,7 @@ public class RecyclableGarbage : IGarbage
 
 
 
-
+[Serializable]
 public class LargeGarbage : IGarbage
 {
     public LARGEGARBAGE type;
