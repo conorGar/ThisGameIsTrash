@@ -22,13 +22,13 @@ public class RockFriend : Friend {
     private List<SpecialFriendObject> deliveredObjects = new List<SpecialFriendObject>();
     List<SpecialFriendObject> pickedUpObjects = new List<SpecialFriendObject>();
 
-    public GameObject mainCam;
     public GameObject eyeBreakPS;
     public GameObject eyeCover;
     public GameObject slab;
     public GameObject stone;
 
 	public GameObject moon;
+	public GameObject moonShadow;
     public GameObject blockade;
 
 
@@ -41,8 +41,6 @@ public class RockFriend : Friend {
         day = CalendarManager.Instance.currentDay;
     }
     public new void OnEnable(){
-    	mainCam = GameObject.Find("tk2dCamera");
-
         switch (GetFriendState()) {
             case "START":
                 break;
@@ -76,7 +74,8 @@ public class RockFriend : Friend {
         }
 
 		if(moon.activeInHierarchy && !moonInProperLocation){
-        	moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(31,65), (5*Time.deltaTime));
+        	moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(31,50), (3*Time.deltaTime));
+			moonShadow.transform.localPosition = Vector2.MoveTowards(moonShadow.transform.localPosition, new Vector2(0,-4.5f), (1*Time.deltaTime));
         	if(Vector2.Distance(moon.transform.position,new Vector2(31,65)) <5){
         		moonInProperLocation = true;
         	}
@@ -100,11 +99,13 @@ public class RockFriend : Friend {
                 // Now that we've met the rocks they each want something different.
                 // Slab wants to be rich with trash.
                 slab.GetComponent<SlabFriend>().SetFriendState("WANTS_TRASH");
-                slab.GetComponent<ActivateDialogWhenClose>().autoStart = true;
+                //slab.GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
                 // Stone wants hands to build the rocket.
                 stone.GetComponent<StoneFriend>().SetFriendState("WANTS_HANDS");
-                stone.GetComponent<ActivateDialogWhenClose>().autoStart = true;
+				stone.GetComponent<StoneFriend>().nextDialog = "StoneRequest";
+                stone.GetComponent<StoneFriend>().stoneHand.SetActive(true);
+                //stone.GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
                 // Rock wants to be pretty.
                 SetFriendState("WANTS_TO_BE_PRETTY");
@@ -159,29 +160,31 @@ public class RockFriend : Friend {
 	}
 
     public IEnumerator OpeningSequenceEvent(){
-		mainCam.GetComponent<PostProcessingBehaviour>().profile = null;
-		//Rock
-		mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",.5f);
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,null);
+        CamManager.Instance.mainCamPostProcessor.profile = null;
+        //Rock
+        CamManager.Instance.mainCam.ScreenShake(.5f);
+        CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,null);
 		yield return new WaitForSeconds(1f);
         BreakEyes();
 		yield return new WaitForSeconds(1f);
-		//Slab
-		mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",.5f);
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(slab.transform.position,null);
+        //Slab
+        CamManager.Instance.mainCam.ScreenShake(.5f);
+        CamManager.Instance.mainCamEffects.CameraPan(slab.transform.position,null);
 		yield return new WaitForSeconds(.3f);
 		slab.GetComponent<SlabFriend>().BreakEyes();
 
 		yield return new WaitForSeconds(1f);
-		//Stone
-		mainCam.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",.5f);
-		mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(stone.transform.position,null);
+        //Stone
+        CamManager.Instance.mainCam.ScreenShake(.5f);
+        CamManager.Instance.mainCamEffects.CameraPan(stone.transform.position,null);
 		yield return new WaitForSeconds(.3f);
 
 		stone.GetComponent<StoneFriend>().BreakEyes();
 		yield return new WaitForSeconds(1f);
-		for(int i = 0; i < dialogManager.dialogIcons.Count; i++){
-			dialogManager.dialogIcons[i].GetComponent<Image>().enabled = true;
+
+		var multiDialog = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
+		for(int i = 0; i <multiDialog.icons.Count;i++){
+			multiDialog.icons[i].GetComponent<Image>().enabled = true;
 		}
 		dialogManager.ReturnFromAction();
 
@@ -199,6 +202,7 @@ public class RockFriend : Friend {
     }
 
     IEnumerator MoonArriveSequence(){
+		CamManager.Instance.mainCamPostProcessor.profile = null;
     	moon.SetActive(true);
     	yield return new WaitUntil(() => moonInProperLocation);
     	yield return new WaitForSeconds(.5f);
@@ -212,6 +216,8 @@ public class RockFriend : Friend {
 
     public IEnumerator DepartureSequence(){
     	departureSequence = 1;
+		blockade.SetActive(false);
+
     	yield return new WaitUntil(() => moon.transform.position.x >= transform.position.x);
     	yield return new WaitForSeconds(.4f);
     	departureSequence = 2;

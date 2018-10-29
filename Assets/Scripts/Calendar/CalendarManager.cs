@@ -66,6 +66,11 @@ public class CalendarManager : MonoBehaviour {
     	return friendEvents;
     }
 
+    public void ClearFriendEvents()
+    {
+        friendEvents.Clear();
+    }
+
     /*public void MissFriendEventCheck(){ //checked at end of day
     	int currentDayNumber = GlobalVariableManager.Instance.DAY_NUMBER;
     	for(int i = 0; i < friendEvents.Count; i++){

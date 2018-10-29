@@ -26,12 +26,10 @@ public class S_Ev_BagSelect : MonoBehaviour {
 	bool canNavigate = true;
 	int selectedArrowPos;//used to hold current menu select stage postion when select bag(to return to if leave)
 	int arrowPos = 0;
-	public GameObject currentCam;
 	GameObject bagTitle;
 	Transform shadow;
 
 	void Start () {
-		//currentCam = GameObject.Find("tk2dCamera");
 		spawnedBag = GameObject.FindGameObjectWithTag("Trash");
 		GlobalVariableManager.Instance.MENU_SELECT_STAGE = 0;
 		bagTitle = GameObject.Find("title");
@@ -122,11 +120,11 @@ public class S_Ev_BagSelect : MonoBehaviour {
 
 		if(direction == "right"){
 			currentBag.GetComponent<Rigidbody2D>().velocity = new Vector2(30f,0f);
-			spawnedBag = Instantiate(bag,new Vector2(currentCam.transform.position.x - 6.45f,10.5f), Quaternion.identity);
+			spawnedBag = Instantiate(bag,new Vector2(CamManager.Instance.mainCam.transform.position.x - 6.45f,10.5f), Quaternion.identity);
 			spawnedBag.GetComponent<Rigidbody2D>().velocity = new Vector2(30f,0f);
 		}else if(direction == "left"){
 			currentBag.GetComponent<Rigidbody2D>().velocity = new Vector2(-30f,0f);
-			spawnedBag = Instantiate(bag,new Vector2(currentCam.transform.position.x + Screen.width/10 - 19f,10.5f), Quaternion.identity);
+			spawnedBag = Instantiate(bag,new Vector2(CamManager.Instance.mainCam.transform.position.x + Screen.width/10 - 19f,10.5f), Quaternion.identity);
 			spawnedBag.GetComponent<Rigidbody2D>().velocity = new Vector2(-30f,0f);
 		}
 		canNavigate = false; // set back by Trashbags 'Leave Screen() courotuine'

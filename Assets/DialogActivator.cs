@@ -5,10 +5,6 @@ using UnityEngine;
 public class DialogActivator : MonoBehaviour {
 	public string myFriend;
 	GameObject friendInstance;
-	public GameObject dialogCanvas;
-	public DialogManager dialogManager;
-	public DialogActionManager  dialogActionManager;
-	public GameObject dialogIcon;
 	public List<GameObject> otherNeededObjects = new List<GameObject>();
 	//So this sets the local data(canvasHud and such) to the loaded friends at the start of the scene, by assigning it those values from its own 'ActivateDialogWhenClose)
 
@@ -19,7 +15,9 @@ public class DialogActivator : MonoBehaviour {
 				break;
 			}
 		}
-		friendInstance.GetComponent<ActivateDialogWhenClose>().GetData(this);
+
+        // TODO: Feels a little odd but I don't have a better solution, honestly.
+        // Maybe creating prefabs on the friend themselves that can be loaded when the scene loads?
 		if(otherNeededObjects.Count>0){
 			friendInstance.GetComponent<Friend>().GiveData(otherNeededObjects);
 		}

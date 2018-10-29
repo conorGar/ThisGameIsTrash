@@ -5,7 +5,6 @@ using UnityEngine;
 public class Ev_SmallTruck : MonoBehaviour {
 
 	public GameObject player;
-	public GameObject resultsDisplay;
 	//public GameObject backPaper;
 	public GameObject oneTimers;
 	public AudioClip truckStart;
@@ -46,9 +45,6 @@ public class Ev_SmallTruck : MonoBehaviour {
 			delayTillSpawn = .3f;
 			StartCoroutine("StopMovement");
 		}
-
-		EndDay(); //TODO: just here for testing homeless harry sequence
-
 	}
 
 	void OnEnable(){
@@ -66,9 +62,9 @@ public class Ev_SmallTruck : MonoBehaviour {
 					Debug.Log("PLAYER SPRITE DISABLED HERE");
 					player.GetComponent<tk2dSprite>().enabled = false;
 					SoundManager.instance.PlaySingle(truckDoor);
-
-					//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
-				}
+                    StartCoroutine("StartMovement");
+                    //gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
+                }
 			}
 		}
 	}
@@ -102,7 +98,6 @@ public class Ev_SmallTruck : MonoBehaviour {
 		Debug.Log("Truck End Day Activate");
 	
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-		player.GetComponent<EightWayMovement>().enabled = false;
 		endDayTruck = true;
 		if(phase == 0){
 			//player = GameObject.FindGameObjectWithTag("Player");
@@ -127,11 +122,13 @@ public class Ev_SmallTruck : MonoBehaviour {
 			StartCoroutine("StartMovement");
 			if(GlobalVariableManager.Instance.DAY_NUMBER == 2){
 				//StartCoroutine("HomelessHarry"); TODO: tookout for debuggin other things to do this later
-				resultsDisplay.SetActive(true); //gets value from ev_fadeHelper
+				GameStateManager.Instance.PushState(typeof(EndDayState)); //gets value from ev_fadeHelper
 			}else{
-				resultsDisplay.SetActive(true); //gets value from ev_fadeHelper
-			}
-		}
+                GameStateManager.Instance.PushState(typeof(EndDayState)); //gets value from ev_fadeHelper
+            }
+
+            player.SetActive(false);
+        }
 
 
 	}

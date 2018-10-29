@@ -15,7 +15,7 @@ public class StringChangeTest : MonoBehaviour {
 	public tk2dCamera currentCam; 
 	Canvas currentCanvas;
 	void Start () {
-	GameObject tempCanvas = GameObject.Find("HUD");
+	GameObject tempCanvas = GUIManager.Instance.HUD.gameObject;
 	currentCanvas = tempCanvas.GetComponent<Canvas>();
 	currentCam = tk2dCamera.Instance;
 	string test = "abcdefghijklmn";

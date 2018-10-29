@@ -9,23 +9,19 @@ public class PauseGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
-        {
-        	gameObject.GetComponent<MeleeAttack>().enabled = false;
-        	gameObject.GetComponent<ThrowTrash>().enabled = false;
-        	pauseMenu.GetComponent<GUI_PauseMenu>().player = this.gameObject;
-			pauseMenu.SetActive(true);
-		}
-	}
+        pauseMenu.GetComponent<GUI_PauseMenu>().player = this.gameObject;
+    }
 
-	public void ReturnFromPause(){//Activated by GUI_PauseMenu
-		gameObject.GetComponent<MeleeAttack>().enabled = true;
-        gameObject.GetComponent<ThrowTrash>().enabled = true;
+    private void OnDestroy()
+    {
+    }
 
+    // Update is called once per frame
+    void Update () {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
+                GameStateManager.Instance.PushState(typeof(PauseMenuState));
+            }
+        }
 	}
 }

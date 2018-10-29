@@ -25,8 +25,7 @@ public class GUI_OptionsMenu : MonoBehaviour {
     GameObject currentlySelectedOption;
     int arrowPos = 1;
     // Use this for initialization
-    void Start() {
-       
+    void Start() { 
         musicVol.GetComponent<Image>().fillAmount = SoundManager.instance.musicSource.volume;
 		sfxVol.GetComponent<Image>().fillAmount = SoundManager.instance.sfxSource.volume;
     }
@@ -35,22 +34,17 @@ public class GUI_OptionsMenu : MonoBehaviour {
     void Update() {
         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
         || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos < 4) {
-            Time.timeScale = 1.0f - Time.timeScale;
             arrowPos++;
             SoundManager.instance.PlaySingle(selectSound);
             SelectNext();
-            Time.timeScale = 0;
         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
                || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 1f) {
-            Time.timeScale = 1.0f - Time.timeScale;
             arrowPos--;
             SoundManager.instance.PlaySingle(selectSound);
             SelectNext();
-            Time.timeScale = 0;
         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
                || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
         {
-            Time.timeScale = 1.0f - Time.timeScale;
             if (arrowPos == 1) {
 				if (SoundManager.instance.musicSource.volume < 1) {
                     SoundManager.instance.musicSource.volume += .16f;
@@ -65,11 +59,9 @@ public class GUI_OptionsMenu : MonoBehaviour {
                     sfxVol.GetComponent<Image>().fillAmount += .16f;
                 }
             }
-            Time.timeScale = 0;
         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
                || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
         {
-            Time.timeScale = 1.0f - Time.timeScale;
             if (arrowPos == 1) {
 				if (SoundManager.instance.musicSource.volume > 0f) {
 					SoundManager.instance. musicSource.volume -= .16f;
@@ -81,18 +73,13 @@ public class GUI_OptionsMenu : MonoBehaviour {
                     sfxVol.GetComponent<Image>().fillAmount -= .16f;
                 }
             }
-            Time.timeScale = 0;
         }
 
         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)
          || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
         {
-			Time.timeScale = 1.0f- Time.timeScale;
-			if(PauseMenu !=null){ //it should = null on title screen
-				PauseMenu.GetComponent<GUI_PauseMenu>().enabled = true;
-				Time.timeScale = 0;
-			}
-
+            // Back to the pause menu.
+            GameStateManager.Instance.PopState();
 			gameObject.SetActive(false);
 		}
 	}

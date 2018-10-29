@@ -12,9 +12,6 @@ public class Ev_GenericGarbage : MonoBehaviour {
     public Vector2 position;
     public AudioClip pickUpTrash;
     public AudioClip newDiscovery;
-
-    public GameObject trashCollectedDisplay;//given to by Garbage Manager
-
 	bool isFalling = false;
 	//bool justDisplay = false;
 	bool beingKilled = false;
@@ -119,7 +116,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 					if((GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED & garbage.type) != garbage.type && (GlobalVariableManager.Instance.STANDARD_GARBAGE_VIEWED & garbage.type) != garbage.type)
                     {
 						string myName = garbage.GarbageName();
-						trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().NewDiscoveryShow(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name, myName);
+                        GUIManager.Instance.TrashCollectedDisplayGameplay.NewDiscoveryShow(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name, myName);
 						GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED |= garbage.type;
 						SoundManager.instance.PlaySingle(newDiscovery);
 					}//end of new discover code
@@ -164,8 +161,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 					//otherwise increase race collected
 					GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[2]++;
 				}
-				if(trashCollectedDisplay != null)//TODO: dropped trash doesnt upgrade display: possibly just not have enemies drop trash...?
-					trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
+                    GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 
                     StartCoroutine("Kill");
 				    Debug.Log("Got this far - Trash pickup");

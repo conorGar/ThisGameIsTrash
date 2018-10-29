@@ -29,36 +29,39 @@ public class SE_GlowWhenClose : MonoBehaviour {
 	}
 
 	void Update(){
-		if(player!=null){
-			if(Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < distanceUntilGlow && Mathf.Abs(player.transform.position.y - gameObject.transform.position.y) < distanceUntilGlow){
-				if(glowCheck == 0){
-					if(glowSprite != null){
-						gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
-					}
-					if(spawnSomethingWithGlow){
-						tempSpawnedObject = Instantiate(objectToSpawn, new Vector2(transform.position.x + xSpawnAdjust,transform.position.y + ySpawnAdjust), Quaternion.identity);
-						if(spawnedObjectSprite != null){
-							tempSpawnedObject.GetComponent<SpriteRenderer>().sprite = spawnedObjectSprite;
-						}
-					}
-					SoundManager.instance.PlaySingle(highlightSound);
-					glowCheck = 1;
-				}else if(activateSomethingWithSpace){
-					if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
-                    {
-						Activate();
-					}
-				}
-			}else{ //if further away than distance
-				if(glowCheck > 0){
-					gameObject.GetComponent<SpriteRenderer>().sprite = startSprite;
-					if(tempSpawnedObject != null){
-						Destroy(tempSpawnedObject);
-					}
-					glowCheck = 0;
-				}
-			}
-		}
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (player != null) {
+                if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < distanceUntilGlow && Mathf.Abs(player.transform.position.y - gameObject.transform.position.y) < distanceUntilGlow) {
+                    if (glowCheck == 0) {
+                        if (glowSprite != null) {
+                            gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
+                        }
+                        if (spawnSomethingWithGlow) {
+                            tempSpawnedObject = Instantiate(objectToSpawn, new Vector2(transform.position.x + xSpawnAdjust, transform.position.y + ySpawnAdjust), Quaternion.identity);
+                            if (spawnedObjectSprite != null) {
+                                tempSpawnedObject.GetComponent<SpriteRenderer>().sprite = spawnedObjectSprite;
+                            }
+                        }
+                        SoundManager.instance.PlaySingle(highlightSound);
+                        glowCheck = 1;
+                    }
+                    else if (activateSomethingWithSpace) {
+                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
+                            Activate();
+                        }
+                    }
+                }
+                else { //if further away than distance
+                    if (glowCheck > 0) {
+                        gameObject.GetComponent<SpriteRenderer>().sprite = startSprite;
+                        if (tempSpawnedObject != null) {
+                            Destroy(tempSpawnedObject);
+                        }
+                        glowCheck = 0;
+                    }
+                }
+            }
+        }
 	}//end of update()
 
 	public virtual void Activate(){

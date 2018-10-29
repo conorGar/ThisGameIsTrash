@@ -31,60 +31,66 @@ public class MeleeAttack : MonoBehaviour {
 			swing = (AudioClip)Resources.Load("sfx_duckSwing", typeof(AudioClip));
 			Debug.Log("Cant attack because of HHHHEEEERRREE");
 		}
+    }
 
-	}
+    void Update () {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (isSwinging) {
+                if (swingDirection == 1) {
+                    //weapon.transform.position = new Vector2(gameObject.transform.position.x + 4f,gameObject.transform.position.y+ 1.4f);
+                    transform.Translate(new Vector2(playerMomentum, 0) * Time.deltaTime);
+                }
+                else if (swingDirection == 2) {
+                    //weapon.transform.position = new Vector2(gameObject.transform.position.x,gameObject.transform.position.y + 1.4f);
+                    transform.Translate(new Vector2(playerMomentum * -1, 0) * Time.deltaTime);
+                }
+                else if (swingDirection == 3) {//swing up
+                    transform.Translate(new Vector2(0, playerMomentum) * Time.deltaTime);
+                    //weapon.transform.position = new Vector2(gameObject.transform.position.x -.5f,gameObject.transform.position.y + 2f);
+                }
+                else if (swingDirection == 4) {//swing down
+                    transform.Translate(new Vector2(0, playerMomentum * -1) * Time.deltaTime);
+                    //weapon.transform.position = new Vector2(gameObject.transform.position.x + 2f,gameObject.transform.position.y + 2f);
+                }
+                playerMomentum -= .5f;
+            }
+            if (!cantAttack && Time.timeScale != 0f) {
+                //timescale part = if game isnt paused
+                if (GlobalVariableManager.Instance.TRASH_TYPE_SELECTED == 3 && !isSwinging && GlobalVariableManager.Instance.PLAYER_CAN_MOVE &&
+                 !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtL") && !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtR")) {
 
-	void Update () {
-		if(isSwinging){
-			if(swingDirection ==1){
-				//weapon.transform.position = new Vector2(gameObject.transform.position.x + 4f,gameObject.transform.position.y+ 1.4f);
-				transform.Translate(new Vector2(playerMomentum,0)*Time.deltaTime);
-			}else if(swingDirection ==2){
-				//weapon.transform.position = new Vector2(gameObject.transform.position.x,gameObject.transform.position.y + 1.4f);
-				transform.Translate(new Vector2(playerMomentum*-1,0)*Time.deltaTime);
-			}else if(swingDirection == 3){//swing up
-				transform.Translate(new Vector2(0,playerMomentum)*Time.deltaTime);
-				//weapon.transform.position = new Vector2(gameObject.transform.position.x -.5f,gameObject.transform.position.y + 2f);
-			}else if(swingDirection == 4){//swing down
-				transform.Translate(new Vector2(0,playerMomentum*-1)*Time.deltaTime);
-				//weapon.transform.position = new Vector2(gameObject.transform.position.x + 2f,gameObject.transform.position.y + 2f);
-			}
-			playerMomentum -= .5f;
-		}
-		if(!cantAttack && Time.timeScale != 0f){
-			//timescale part = if game isnt paused
-			if(GlobalVariableManager.Instance.TRASH_TYPE_SELECTED == 3 && !isSwinging && GlobalVariableManager.Instance.PLAYER_CAN_MOVE && 
-			 !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtL") && !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtR")){
-
-				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)){
-					playerMomentum = 6f;
-					this.gameObject.transform.localScale = new Vector3(startingScale.x*-1,startingScale.y, startingScale.z);
-					StartCoroutine("Swing",2);
-				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)){
-					this.gameObject.transform.localScale = startingScale;
-					playerMomentum = 6f;
-					StartCoroutine("Swing",1);
-				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)){
-					this.gameObject.transform.localScale = startingScale;
-					playerMomentum = 6f;
-					StartCoroutine("Swing",4);
-				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)){
-					this.gameObject.transform.localScale = startingScale;
-					playerMomentum = 6f;
-					StartCoroutine("Swing",3);
-				}
-			}else{
-				//Debug.Log("something wrong with global var checks");
-				//Debug.Log(GlobalVariableManager.Instance.TRASH_TYPE_SELECTED);
-				//Debug.Log(GlobalVariableManager.Instance.PLAYER_CAN_MOVE);
-				//Debug.Log(GlobalVariableManager.Instance.MENU_SELECT_STAGE);
-			}
-		}else{
-			//Debug.Log("Something wrong at MeleeAttack script, prob with pausing");
-		}
-
-
-
+                    if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
+                        playerMomentum = 6f;
+                        this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
+                        StartCoroutine("Swing", 2);
+                    }
+                    else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
+                        this.gameObject.transform.localScale = startingScale;
+                        playerMomentum = 6f;
+                        StartCoroutine("Swing", 1);
+                    }
+                    else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                        this.gameObject.transform.localScale = startingScale;
+                        playerMomentum = 6f;
+                        StartCoroutine("Swing", 4);
+                    }
+                    else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                        this.gameObject.transform.localScale = startingScale;
+                        playerMomentum = 6f;
+                        StartCoroutine("Swing", 3);
+                    }
+                }
+                else {
+                    //Debug.Log("something wrong with global var checks");
+                    //Debug.Log(GlobalVariableManager.Instance.TRASH_TYPE_SELECTED);
+                    //Debug.Log(GlobalVariableManager.Instance.PLAYER_CAN_MOVE);
+                    //Debug.Log(GlobalVariableManager.Instance.MENU_SELECT_STAGE);
+                }
+            }
+            else {
+                //Debug.Log("Something wrong at MeleeAttack script, prob with pausing");
+            }
+        }
 	}//end of update method
 
 	public void UpdateWeapon(){//activated by Ev_currentWeapon

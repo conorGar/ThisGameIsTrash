@@ -5,7 +5,6 @@ using UnityEngine;
 public class GarbageManager : MonoBehaviour {
     public static GarbageManager Instance;
     public List<GarbageSpawner> garbageSpawners = new List<GarbageSpawner>();
-    public GameObject trashCollectedDisplay;
 
     void Awake()
     {
@@ -53,7 +52,6 @@ public class GarbageManager : MonoBehaviour {
                     //go.GetComponent<Ev_GenericGarbage>().trashCollectedDisplay = trashCollectedDisplay;
                     evGarbage = go.GetComponent<Ev_GenericGarbage>();
                     evGarbage.garbage = garbage;
-					evGarbage.trashCollectedDisplay = trashCollectedDisplay;
                     evGarbage.SetSprite(garbage.GarbageSprite());
                     go.SetActive(true);
                 }

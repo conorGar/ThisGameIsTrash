@@ -6,7 +6,6 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 	public GameObject objectPool;
 	public GameObject HPdisplay;
-	public Ev_MainCamera currentCam;
 	//public GameObject fadeHelper;//needed for Death()
 	public GameObject roomManager; //needed for Death()
 	//public GameObject trashCollectedDisplay; //needed for Death()
@@ -91,7 +90,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 			damageCounter.SetActive(true);
 			GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars",this.gameObject.transform.position);
 			littleStars.SetActive(true);
-			currentCam.StartCoroutine("ScreenShake",.2f);
+            CamManager.Instance.mainCam.ScreenShake(.2f);
 
 			if(enemy.transform.position.x < gameObject.transform.position.x){
 				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,0f), ForceMode2D.Impulse);
@@ -131,14 +130,16 @@ public class PlayerTakeDamage : MonoBehaviour {
 			Debug.Log("Dropped Trash Here xoxoxoxoxoxoxo");
 			GameObject droppedTrash = objectPool.GetComponent<ObjectPool>().GetPooledObject("DroppedTrash",gameObject.transform.position);
 			droppedTrash.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-3f,3f),Random.Range(11f,17f)), ForceMode2D.Impulse);
-			droppedTrash.GetComponent<Ev_DroppedTrash>().trashCollectedDisplay = deathDisplay.currentTCD;
 		}
 
 
 	}
 
 	IEnumerator Death(){
-		SoundManager.instance.FadeMusic();
+        // Trigger Respawn State.
+        GameStateManager.Instance.PushState(typeof(RespawnState));
+
+        SoundManager.instance.FadeMusic();
 		SoundManager.instance.PlaySingle(deathSound);
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		if(currentlyCarriedObject != null){
@@ -147,8 +148,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		gameObject.GetComponent<BoxCollider2D>().enabled = false;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer04";//bring player to front
-		deathDisplay.HideHUD();
-		deathDisplay.DeathFade();
+        deathDisplay.DeathFade();
 			yield return new WaitForSeconds(.5f); //drop trash and deplete trash collected
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
 			yield return new WaitForSeconds(.5f);
@@ -156,7 +156,6 @@ public class PlayerTakeDamage : MonoBehaviour {
 		DropTrash();
 
 			yield return new WaitForSeconds(2f);//truck pickup
-		deathDisplay.currentTCD.gameObject.SetActive(false);
 
 		GameObject truck = objectPool.GetComponent<ObjectPool>().GetPooledObject("GarbageTruck",new Vector3(gameObject.transform.position.x - 20, gameObject.transform.position.y,0f));
 		truck.GetComponent<Ev_SmallTruck>().ReturnToDumpster();
@@ -164,21 +163,29 @@ public class PlayerTakeDamage : MonoBehaviour {
 		//day meter rise and enter truck
 		gameObject.GetComponent<MeshRenderer>().enabled = false;
 			yield return new WaitForSeconds(.5f);
-		deathDisplay.DayMeterRise();
+
+        // Trigger Death Clock State
+        GameStateManager.Instance.PushState(typeof(DethKlokState));
+        deathDisplay.DayMeterRise();
 			yield return new WaitForSeconds(1.5f);
-		//return to start room
-		deathDisplay.myDayMeter.gameObject.SetActive(false);
-		yield return new WaitForSeconds(.5f);
-		deathDisplay.ReturnHUD();
+
+        //return to start room
+        deathDisplay.myDayMeter.gameObject.SetActive(false);
+
+        // Pop Death Clock State
+        GameStateManager.Instance.PopState();
+
+        yield return new WaitForSeconds(.5f);
+		deathDisplay.FadeHUD();
 		SoundManager.instance.musicSource.Play();
 		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 
-		//-----------Resetting of needed values----------------//
-		roomManager.GetComponent<RoomManager>().currentRoom.DeactivateRoom();
+        //-----------Resetting of needed values----------------//
+        roomManager.GetComponent<RoomManager>().currentRoom.DeactivateRoom();
 		gameObject.transform.position = new Vector3(0f,-3f,0f); //Start at Beginning of world
 		truck.transform.position = new Vector3(-15f,-3f,0f);
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
-		currentCam.transform.position = new Vector3(0f,0f,-10f);
+        CamManager.Instance.mainCam.transform.position = new Vector3(0f,0f,-10f);
 		roomManager.GetComponent<RoomManager>().Restart();
 		currentHp = GlobalVariableManager.Instance.Max_HP;
 		currentlyTakingDamage = false;
@@ -191,7 +198,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 			gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();
 		}
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
-		deathDisplay.currentTCD.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
+        GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 		truck.GetComponent<Ev_SmallTruck>().RespawnEnd();
 		gameObject.GetComponent<BoxCollider2D>().enabled = true;
@@ -200,10 +207,11 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<EightWayMovement>().myLegs.SetActive(true);
 		gameObject.GetComponent<EightWayMovement>().enabled = true;
 		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
-		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";//return player to proper layer
 
-	}
-	/*
+        // Pop Respawn State
+        GameStateManager.Instance.PopState();
+    }
+    /*
 	IEnumerator Death(){
 		
 
@@ -217,7 +225,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<BoxCollider2D>().enabled = false;
 	
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-		currentCam.GetComponent<Ev_MainCamera>().enabled = false;
+		CamManager.Instance.mainCam.enabled = false;
 		//GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().WhiteFlash();
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
 			yield return new WaitForSeconds(.5f);

@@ -14,7 +14,7 @@ public class SlabFriend : Friend
 
     public GameObject moon;
     public GameObject blockade;
-
+    public GameObject moonShadow;
 
     bool moonInProperLocation;
     int slabDepartureSequence = 0;
@@ -63,14 +63,16 @@ public class SlabFriend : Friend
         }
 
         if(moon.activeInHierarchy && !moonInProperLocation){
-        	moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(31,65), (5*Time.deltaTime));
-        	if(Vector2.Distance(moon.transform.position,new Vector2(31,65)) <5){
+        	moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(31,50), (3*Time.deltaTime));
+			moonShadow.transform.localPosition = Vector2.MoveTowards(moonShadow.transform.localPosition, new Vector2(0,-4.5f), (.4f*Time.deltaTime));
+
+        	if(Vector2.Distance(moon.transform.position,new Vector2(31,60)) <5){
         		moonInProperLocation = true;
         	}
         }
 
         if(slabDepartureSequence == 1){
-			moon.transform.position = Vector2.MoveTowards(moon.transform.position, this.gameObject.transform.position, (5*Time.deltaTime));
+			moon.transform.position = Vector2.MoveTowards(moon.transform.position, this.gameObject.transform.position, (10*Time.deltaTime));
 
         }else if(slabDepartureSequence == 2){
 			moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(54,92), (5*Time.deltaTime));
@@ -89,6 +91,7 @@ public class SlabFriend : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 StartCoroutine("TotalSlabTrashDisplay");
+				CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 break;
             case "END":
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
@@ -149,6 +152,7 @@ public class SlabFriend : Friend
     }
 
     IEnumerator MoonArriveSequence(){
+    	CamManager.Instance.mainCamPostProcessor.profile = null;
     	moon.SetActive(true);
     	yield return new WaitUntil(() => moonInProperLocation);
     	yield return new WaitForSeconds(.5f);
@@ -163,6 +167,7 @@ public class SlabFriend : Friend
 
     public IEnumerator SlabDepartureSequence(){
     	slabDepartureSequence = 1;
+    	blockade.SetActive(false);
     	yield return new WaitUntil(() => moon.transform.position.x >= transform.position.x);
     	yield return new WaitForSeconds(.4f);
     	slabDepartureSequence = 2;
@@ -179,7 +184,7 @@ public class SlabFriend : Friend
     		InvokeRepeating("IncreaseDisplayedTrash",0f,.1f);
     	}
 		yield return new WaitUntil(() => currentDisplayedTotalTrash >= trashInLoveFund);
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(2f);
 		GUIManager.Instance.SlabTrashNeededDisplay.SetActive(false);
     }
 

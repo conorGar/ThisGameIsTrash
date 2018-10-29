@@ -21,7 +21,6 @@ public class Ev_LargeTrash : PickupableObject {
 	//public GameObject cloudEffect;
 	public GameObject sparkle;
 	public GameObject smokePuff;
-	public GameObject mainCamera;
 	public GameObject ltmManager;//only used for drop function
 	public AudioClip returnSound;
 	//^

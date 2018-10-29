@@ -5,11 +5,9 @@ using UnityEngine;
 public class AttatchCamera : MonoBehaviour {
 
 
-			//As of right now, this script is unneccessary and doesn't do anything	
-	GameObject mainCamera;
+	//As of right now, this script is unneccessary and doesn't do anything	
 
 	void Start () {
-		mainCamera = GameObject.Find("tk2dCamera");
 	}
 	
 	void Update () {

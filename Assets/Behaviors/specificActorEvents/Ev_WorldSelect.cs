@@ -172,7 +172,11 @@ public class Ev_WorldSelect : MonoBehaviour {
 			Instantiate(selectEffect,transform.position,Quaternion.identity);
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(gameObject.transform.position.x,5.42f,1f);
 			GameObject manager = GameObject.Find("manager");
-			manager.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
+
+            // Clear out all the states.
+            GameStateManager.Instance.PopAllStates();
+
+            manager.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
 		}
 	}
 
@@ -184,10 +188,9 @@ public class Ev_WorldSelect : MonoBehaviour {
 
 	IEnumerator Unlock(){
 		GameObject manager = GameObject.Find("manager");
-		GameObject camera = GameObject.Find("tk2dCamera");
 		manager.GetComponent<S_Ev_WorldSelect>().TriggeredMovement(WorldManager.Instance.world.WorldIndex());
-		camera.GetComponent<Ev_MainCamera>().StartCoroutine("ScreenShake",2f);
-		yield return new WaitForSeconds(2.5f);
+        CamManager.Instance.mainCam.ScreenShake(2f);
+        yield return new WaitForSeconds(2.5f);
 		manager.GetComponent<Ev_FadeHelper>().WhiteFlash();
 		Instantiate(cloudBurstEffect,transform.position,Quaternion.identity);
 		gameObject.GetComponent<SpriteRenderer>().color = Color.white;

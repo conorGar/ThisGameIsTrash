@@ -12,8 +12,7 @@ public class Friend : UserDataItem {
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
 	protected FriendEvent newestAddedEvent;
-
-	[HideInInspector]
+    [HideInInspector]
 	public string missedDialog;
 
 	[HideInInspector]
@@ -23,7 +22,7 @@ public class Friend : UserDataItem {
     protected void OnEnable() {
     	Debug.Log("Next Dialog: " + nextDialog);
         gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
-        gameObject.GetComponent<ActivateDialogWhenClose>().dialogName = nextDialog;
+        gameObject.GetComponent<ActivateDialogWhenClose>().startNodeName = nextDialog;
         gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
 		StartingEvents();
@@ -39,8 +38,10 @@ public class Friend : UserDataItem {
     {
         var the_event = new FriendEvent();
         GenerateEventData();
+        IsVisiting = false;
         the_event.friend = this;
         the_event.day = day;
+
 
         Debug.Log("New Friend Event Generated:\n" +
                   "Friend: " + the_event.friend.name + "\n" +
@@ -125,15 +126,12 @@ public class Friend : UserDataItem {
 
     public virtual void OnFinishDialog()
     {
-    	Debug.Log("On finish dialog activate <<<<-----------------------");
-        //TODO: DEFINATELY change this...
-       // gameObject.GetComponent<ActivateDialogWhenClose>().dialogManager.GetComponent<DialogManager>().mainCam.GetComponent<Ev_MainCameraEffects>().ReturnFromCamEffect();
-      
+        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+        DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(false);
         GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
         //nothing to do for basic friend
 
         StartCoroutine(OnFinishDialogEnumerator());
-		gameObject.GetComponent<ActivateDialogWhenClose>().myDialogIcon.gameObject.SetActive(false);
     }
 
     public virtual IEnumerator OnFinishDialogEnumerator()
@@ -151,7 +149,7 @@ public class Friend : UserDataItem {
     public void CalendarMark()
     {
         dialogManager.textBox.SetActive(false);
-        dialogManager.currentlySpeakingIcon.SetActive(false);
+        dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 
         GUIManager.Instance.CalendarHUD.gameObject.SetActive(true);
         GUIManager.Instance.CalendarHUD.NewMarkSequence(newestAddedEvent.day, name);

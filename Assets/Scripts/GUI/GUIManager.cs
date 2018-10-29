@@ -7,6 +7,7 @@ using UnityEngine;
 public class GUIManager : MonoBehaviour {
     public static GUIManager Instance;
 
+    public Ev_HUD HUD;
     public HUD_Calendar CalendarHUD;
     public GUI_DayDisplay DayDisplay;
     public GUI_DeathDisplay DeathDisplay;
@@ -18,8 +19,22 @@ public class GUIManager : MonoBehaviour {
     public GUI_RockItemHUD rockItemHUD;
     public GUI_SlabTrashGiveHUD slabTrashGiveHUD;
 	public GameObject SlabTrashNeededDisplay;
+	public GameObject StoneHandNeededDisplay;
+
+    // Hub related
+    public GameObject BaseStatHUD;
+    public GUI_BaseStatUpgrade GUI_BaseStatUpgrade;
+    public Hub_UpgradeStand Hub_UpgradeStand;
+
 
 	void Awake () {
         Instance = this;
 	}
+
+    void Start()
+    {
+        if (BaseStatHUD != null) {
+            BaseStatHUD.SetActive(false);
+        }
+    }
 }

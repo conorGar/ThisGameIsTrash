@@ -24,6 +24,7 @@ public class FriendManager : MonoBehaviour {
 
     public void GenerateEvents()
     {
+        CalendarManager.Instance.ClearFriendEvents();
         for (int i=0; i < friends.Count; ++i)
         {
             FriendEvent the_event = friends[i].GenerateEvent();
@@ -74,6 +75,13 @@ public class FriendManager : MonoBehaviour {
 			Debug.Log("Friend Game Object Activated: " + worlds[worldNum-1].transform.GetChild(i).gameObject.name);
 		}
 
+    }
+
+    public void DisableAllFriends()
+    {
+        for (int i = 0; i < friends.Count; i++) {
+            friends[i].gameObject.SetActive(false);
+        }
     }
 
     public void DisableFriends(int worldNum){ //activated by ev_results

@@ -5,7 +5,6 @@ using UnityEngine;
 public class TutorialActivator : MonoBehaviour {
 	public string startingRoom;//for now only needed for tutorial popup proper function.
 	GameObject player;
-	GameObject mainCamera;
 	bool activatedAlready;
 	Room currentRoom;
 
@@ -17,7 +16,6 @@ public class TutorialActivator : MonoBehaviour {
 	// Use this for initialization
 	void OnEnable() {
 		player = GameObject.FindGameObjectWithTag("Player");
-		mainCamera = GameObject.Find("tk2dCamera");
 	}
 	
 	// Update is called once per frame
@@ -35,7 +33,7 @@ public class TutorialActivator : MonoBehaviour {
 					activatedAlready = true;
 				}
 			}else if(armoredEnemies){
-				if(!activatedAlready && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.PINS ) != GlobalVariableManager.TUTORIALPOPUPS.PINS){
+				if(!activatedAlready && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES ) != GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES){
 					ActivateTutorial();
 					activatedAlready = true;
 				}
@@ -44,17 +42,14 @@ public class TutorialActivator : MonoBehaviour {
 	}
 
 	void ActivateTutorial(){
-		Debug.Log("Large Trash tutorial activated xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        GameStateManager.Instance.PushState(typeof(DialogState));
+        Debug.Log("Large Trash tutorial activated xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 		if(largeTrash){
-			mainCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,"tutorial");
+            CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"tutorial");
 		}else if(pins){
-			mainCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,"tutorial_pins");
+            CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"tutorial_pins");
 		}else if(armoredEnemies){
-			mainCamera.GetComponent<Ev_MainCameraEffects>().CameraPan(gameObject.transform.position,"tutorial_armored");
+            CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"tutorial_armored");
 		}
-		player.GetComponent<EightWayMovement>().enabled = false;
-		player.GetComponent<PlayerTakeDamage>().enabled = false;
-		GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = true;
-
 	}
 }

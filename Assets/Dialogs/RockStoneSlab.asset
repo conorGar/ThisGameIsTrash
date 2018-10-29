@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: RockStoneSlab
   m_EditorClassIdentifier: 
   title: RockStoneSlab
+  dialogIconID: icon_rocks
   nodeStore:
     keys:
     - Value: e0e12f04-6174-495a-a666-8356a335eadd
@@ -76,6 +77,9 @@ MonoBehaviour:
     - Value: cb2f0459-38ed-47ce-a590-2a064fc0dfcb
     - Value: 8cebfcc7-406b-4c8a-87fd-92ca75709a2b
     - Value: d48f5a8f-7a51-489e-8691-140b5b1a6cae
+    - Value: ef3c5f8e-7fe7-4be6-a6ed-8f83b4fa9f18
+    - Value: 6d00a0da-f001-40c1-871b-c14c35a604f0
+    - Value: bc73001d-e89f-449c-ada7-359e4e4f8df6
     values:
     - window:
         serializedVersion: 2
@@ -1428,6 +1432,71 @@ MonoBehaviour:
       type: 1
       child_id:
         Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 130
+        y: 1822
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: StoneRequest
+      speakerName: Stone
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: ef3c5f8e-7fe7-4be6-a6ed-8f83b4fa9f18
+      x: 130
+      y: 1822
+      text: You gotta believe me, garbageman. <c=b>The Moon</c> does'nt care about
+        money or looks.
+      type: 1
+      child_id:
+        Value: 6d00a0da-f001-40c1-871b-c14c35a604f0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 459
+        y: 1806
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: StoneRequest2
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 6d00a0da-f001-40c1-871b-c14c35a604f0
+      x: 459
+      y: 1806
+      text: I <c=g>need hands</c> to show <c=b>The Moon</c> how smart I am.
+      type: 1
+      child_id:
+        Value: bc73001d-e89f-449c-ada7-359e4e4f8df6
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 820
+        y: 1809
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: StoneRequest3
+      speakerName: 
+      question: 
+      action: finish
+      friendState: 
+      id:
+        Value: bc73001d-e89f-449c-ada7-359e4e4f8df6
+      x: 820
+      y: 1809
+      text: I guess if you find anything that <c=g>looks like it might work well for
+        a hand</c> be sure to <c=g>bring it back here</c>.
+      type: 1
+      child_id:
+        Value: ef3c5f8e-7fe7-4be6-a6ed-8f83b4fa9f18
       responses: []
   rootNodeId:
     Value: e0e12f04-6174-495a-a666-8356a335eadd
