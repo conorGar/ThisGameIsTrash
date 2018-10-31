@@ -14,6 +14,10 @@ public class StoneFriend : Friend
     public GameObject fader;
     public GameObject blockade;
     public GameObject stoneHand;
+    public GameObject secondStoneHand;
+    public GameObject rightHand;
+    public GameObject leftHand;
+
 
     bool rocketIsLaunching;
     Vector2 rocketDestination;
@@ -27,6 +31,11 @@ public class StoneFriend : Friend
                 // Eyes open.
                 BreakEyes();
 				nextDialog = "StoneRequest";
+                break;
+            case "ONE_MORE_HAND":
+				BreakEyes();
+				nextDialog = "StoneRequest";
+				rightHand.SetActive(true);
                 break;
             case "END":
 				blockade.SetActive(false);
@@ -121,12 +130,26 @@ public class StoneFriend : Friend
     	rocketIsLaunching = true;
     	yield return new WaitForSeconds(2f);
 		blockade.SetActive(false);
+		dialogManager.ReturnFromAction();
+
 
 		
     }
 
     public void ShowRockHand(){
+		CamManager.Instance.mainCamPostProcessor.profile = null;
+		fader.SetActive(true);
+		fader.GetComponent<Animator>().Play("FadeOut");
+		SetFriendState("ONE_MORE_HAND");
+		StartCoroutine(NewHandSequence());
+    }
 
+    IEnumerator NewHandSequence(){
+    	yield return new WaitForSeconds(1f);
+    	rightHand.SetActive(true);
+		fader.GetComponent<Animator>().Play("Fade");
+		yield return new WaitForSeconds(1f);
+		dialogManager.ReturnFromAction();
     }
 
     public void BreakEyes(){

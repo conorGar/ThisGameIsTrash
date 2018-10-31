@@ -1,0 +1,446 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: RatWhoFat
+  m_EditorClassIdentifier: 
+  title: RatWhoFat
+  dialogIconID: icon_RatWhoFat
+  nodeStore:
+    keys:
+    - Value: 4c11c195-2bae-4e3f-9948-750e00d966f1
+    - Value: 5df7b571-72fa-4549-9790-cc8380268f77
+    - Value: b1368a7a-677f-4692-999b-ec2a33246c5a
+    - Value: e4c687de-d342-4aeb-b872-9c0c6c602e68
+    - Value: c9a14834-a314-458f-9931-dbdf2bf6063b
+    - Value: aa63cc47-cc55-4c77-9808-1acd9519bd12
+    - Value: b44e780a-50f2-47e1-96c9-5b83cacb68cf
+    - Value: 1cd0d604-035f-4bd6-8f1d-27db902d05e1
+    - Value: a528bf28-f507-4dcf-82de-7be6b376aa39
+    - Value: e1e86f7a-df91-4fe5-be54-421c9a4ec06d
+    - Value: a4b98344-252c-49c9-b7ae-2a46e55ff9dc
+    - Value: 3d72cf9e-3276-44b0-a758-b2ebf8310ab2
+    - Value: 7c445c57-b2ef-4fe8-968d-de9248fc06bf
+    - Value: 9afa3eae-e607-4e16-9895-42abdb7a69e4
+    - Value: 73457223-940f-4f5e-87c4-7d2276c12ee4
+    - Value: 47653554-597d-4fe9-8fb6-d41e021f9d66
+    - Value: 5f06ccbe-a7b1-4a49-93d1-e7d7f62b3037
+    - Value: 26bbed68-4aa8-44db-9132-7ae294001e6d
+    - Value: a8ab7fc8-77b6-4f55-ac36-4890b1e79670
+    values:
+    - window:
+        serializedVersion: 2
+        x: 165
+        y: 208
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatFatIntro
+      speakerName: ???
+      question: 
+      action: FatRatWalk
+      friendState: 
+      id:
+        Value: 4c11c195-2bae-4e3f-9948-750e00d966f1
+      x: 165
+      y: 208
+      text: Hey there, buddy! Hold up there a sec!
+      type: 1
+      child_id:
+        Value: 5df7b571-72fa-4549-9790-cc8380268f77
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 585
+        y: 267
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro2
+      speakerName: ???
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 5df7b571-72fa-4549-9790-cc8380268f77
+      x: 585
+      y: 267
+      text: <s>(...hoo..hoo..oh dear god..)
+      type: 1
+      child_id:
+        Value: b1368a7a-677f-4692-999b-ec2a33246c5a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 886
+        y: 291
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro3
+      speakerName: 
+      question: 
+      action: FatRatWalk
+      friendState: 
+      id:
+        Value: b1368a7a-677f-4692-999b-ec2a33246c5a
+      x: 886
+      y: 291
+      text: H..Hold on now! Almost there!
+      type: 1
+      child_id:
+        Value: e4c687de-d342-4aeb-b872-9c0c6c602e68
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1213
+        y: 270
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro4
+      speakerName: 
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: e4c687de-d342-4aeb-b872-9c0c6c602e68
+      x: 1213
+      y: 270
+      text: <s>(hooo..oh my god...I'm dying)
+      type: 1
+      child_id:
+        Value: c9a14834-a314-458f-9931-dbdf2bf6063b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1503
+        y: 295
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro5
+      speakerName: Rat Who Is Fat
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: c9a14834-a314-458f-9931-dbdf2bf6063b
+      x: 1503
+      y: 295
+      text: Hello! Thanks for waiting! The rats around here call me <color=#78FF32>Rat
+        Who Is Fat</color>.
+      type: 1
+      child_id:
+        Value: aa63cc47-cc55-4c77-9808-1acd9519bd12
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1793
+        y: 262
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro6
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: aa63cc47-cc55-4c77-9808-1acd9519bd12
+      x: 1793
+      y: 262
+      text: Might seem a little harsh, but they're just jokin' around. A little rat
+        humor. I don't take it personally AT. ALL.
+      type: 1
+      child_id:
+        Value: b44e780a-50f2-47e1-96c9-5b83cacb68cf
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2082
+        y: 285
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro7
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: b44e780a-50f2-47e1-96c9-5b83cacb68cf
+      x: 2082
+      y: 285
+      text: I haven't seen you here at <color=#78FF32>The Dump</color> before.
+      type: 1
+      child_id:
+        Value: 1cd0d604-035f-4bd6-8f1d-27db902d05e1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2371
+        y: 261
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro8
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 1cd0d604-035f-4bd6-8f1d-27db902d05e1
+      x: 2371
+      y: 261
+      text: We rats built this place for aspiring garbagemen and women to <color=#78FF32>
+        return to after a hard days work</color>.
+      type: 1
+      child_id:
+        Value: a528bf28-f507-4dcf-82de-7be6b376aa39
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2752
+        y: 256
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro9
+      speakerName: 
+      question: 
+      action: FatRatWalk
+      friendState: 
+      id:
+        Value: a528bf28-f507-4dcf-82de-7be6b376aa39
+      x: 2752
+      y: 256
+      text: Here, follow me, I'll show you around!
+      type: 1
+      child_id:
+        Value: e1e86f7a-df91-4fe5-be54-421c9a4ec06d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3044
+        y: 237
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro10
+      speakerName: 
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: e1e86f7a-df91-4fe5-be54-421c9a4ec06d
+      x: 3044
+      y: 237
+      text: I'm sorry, what was that? Did you just say "No it's fine I can show myself
+        around, no need to walk all the way over there?"
+      type: 1
+      child_id:
+        Value: a4b98344-252c-49c9-b7ae-2a46e55ff9dc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3337
+        y: 261
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro11
+      speakerName: 
+      question: 
+      action: TruckPan
+      friendState: 
+      id:
+        Value: a4b98344-252c-49c9-b7ae-2a46e55ff9dc
+      x: 3337
+      y: 261
+      text: Oh. Alright, I guess if you really want me to stay here that's fine.
+      type: 1
+      child_id:
+        Value: 3d72cf9e-3276-44b0-a758-b2ebf8310ab2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3632
+        y: 243
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro12
+      speakerName: 
+      question: 
+      action: PinCasePan
+      friendState: 
+      id:
+        Value: 3d72cf9e-3276-44b0-a758-b2ebf8310ab2
+      x: 3632
+      y: 243
+      text: Darn, I was really looking forward to walking over to the <color=#78FF32>Garbage
+        Truck</color> where you can <color=#78FF32>go to start the next day</color>
+      type: 1
+      child_id:
+        Value: 7c445c57-b2ef-4fe8-968d-de9248fc06bf
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3926
+        y: 225
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro13
+      speakerName: 
+      question: 
+      action: PanReturn
+      friendState: 
+      id:
+        Value: 7c445c57-b2ef-4fe8-968d-de9248fc06bf
+      x: 3926
+      y: 225
+      text: Right by that is the <Pin Case</color> where you can <color=#78FF32>equip
+        any pins you've collected</color> in your travels.
+      type: 1
+      child_id:
+        Value: 9afa3eae-e607-4e16-9895-42abdb7a69e4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4214
+        y: 245
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro14
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 9afa3eae-e607-4e16-9895-42abdb7a69e4
+      x: 4214
+      y: 245
+      text: But that's fine. I'll stay here. Enjoy looking around.
+      type: 1
+      child_id:
+        Value: 73457223-940f-4f5e-87c4-7d2276c12ee4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4504
+        y: 262
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro15
+      speakerName: ' '
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 73457223-940f-4f5e-87c4-7d2276c12ee4
+      x: 4504
+      y: 262
+      text: Uh..also..be sure to tell any of the other rats that you and I are friends
+        if they ask.
+      type: 1
+      child_id:
+        Value: 47653554-597d-4fe9-8fb6-d41e021f9d66
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4790
+        y: 247
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro16
+      speakerName: 
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 47653554-597d-4fe9-8fb6-d41e021f9d66
+      x: 4790
+      y: 247
+      text: 'I could really use your help raising me in the rat social hierarchy. '
+      type: 1
+      child_id:
+        Value: 5f06ccbe-a7b1-4a49-93d1-e7d7f62b3037
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5080
+        y: 259
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro17
+      speakerName: 
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 5f06ccbe-a7b1-4a49-93d1-e7d7f62b3037
+      x: 5080
+      y: 259
+      text: They're sure to think I'm cool if I'm friends with a real garbageman.
+      type: 1
+      child_id:
+        Value: 26bbed68-4aa8-44db-9132-7ae294001e6d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5369
+        y: 242
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro18
+      speakerName: 
+      question: 
+      action: 
+      friendState: 
+      id:
+        Value: 26bbed68-4aa8-44db-9132-7ae294001e6d
+      x: 5369
+      y: 242
+      text: Then they'll invite me over to..have parties or watch anime or something.
+        Whatever it is the cool rats do.
+      type: 1
+      child_id:
+        Value: a8ab7fc8-77b6-4f55-ac36-4890b1e79670
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5725
+        y: 270
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Intro19
+      speakerName: 
+      question: 
+      action: finish
+      friendState: 
+      id:
+        Value: a8ab7fc8-77b6-4f55-ac36-4890b1e79670
+      x: 5725
+      y: 270
+      text: So, uh, ya, I'll see ya around...ol' pal.
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 4c11c195-2bae-4e3f-9948-750e00d966f1

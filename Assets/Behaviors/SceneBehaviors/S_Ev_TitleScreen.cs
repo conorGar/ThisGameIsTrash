@@ -36,7 +36,7 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 	void Start () {
 		currentSelected = playOption;
 		SoundManager.instance.PlaySingle(windGusts);
-
+		Time.timeScale = 1;
         GameStateManager.Instance.PushState(typeof(TitleState));
 	}
 

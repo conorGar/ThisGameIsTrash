@@ -80,6 +80,7 @@ MonoBehaviour:
     - Value: ef3c5f8e-7fe7-4be6-a6ed-8f83b4fa9f18
     - Value: 6d00a0da-f001-40c1-871b-c14c35a604f0
     - Value: bc73001d-e89f-449c-ada7-359e4e4f8df6
+    - Value: c9d3dea9-8dfc-4bc5-a30d-cd04fb076cac
     values:
     - window:
         serializedVersion: 2
@@ -870,7 +871,7 @@ MonoBehaviour:
         Value: 4089f6cb-be76-4a28-be34-382db02cc91a
       x: 1381
       y: 1289
-      text: You know..they're a little large. But, ya, I'll make it work.
+      text: You know..it's..a little large. But, ya, I'll make it work.
       type: 1
       child_id:
         Value: 8e3cb23f-7ba9-4c1a-aa46-30ba6140e967
@@ -912,8 +913,8 @@ MonoBehaviour:
         Value: f4ceede0-1a09-43c4-b82e-9069451a4978
       x: 1988
       y: 1254
-      text: ..but I'm just...I'm unsure if I'll be able to build the rocket with <c=g>one
-        hand</c>?
+      text: ..but I'm just...I'm unsure if I'll be able to build the rocket with <color=#78FF32>one
+        hand</color>?
       type: 1
       child_id:
         Value: 83a8ce32-137c-43da-bba6-2c9ef941c3ed
@@ -934,8 +935,8 @@ MonoBehaviour:
         Value: 83a8ce32-137c-43da-bba6-2c9ef941c3ed
       x: 2311
       y: 1252
-      text: I mean, I'll try it for sure, but just if you come across <c=g> one more
-        rock hand</c> let me know.
+      text: I mean, I'll try it for sure, but just if you come across <color=#78FF32>
+        one more rock hand</color> let me know.
       type: 1
       child_id:
         Value: ba88d82f-5bda-4237-a5c0-59e18b4dc966
@@ -1041,8 +1042,8 @@ MonoBehaviour:
         Value: 8448416a-004a-45a5-97a5-583e7623ed56
       x: 973
       y: 1549
-      text: Ya, whatever. Tell <c=b>The Moon</c> to hit me up when she wants a REAL
-        man rock.
+      text: Ya, whatever. Tell <color=#29B6F6>The Moon</color> to hit me up when she
+        wants a REAL man rock.
       type: 1
       child_id:
         Value: ff6e220a-93b8-4b15-848d-3081b4d27dcd
@@ -1063,8 +1064,8 @@ MonoBehaviour:
         Value: ff6e220a-93b8-4b15-848d-3081b4d27dcd
       x: 1261
       y: 1564
-      text: No <c=g> Slab</c>, I have intellect. THAT's what it takes to get to <c=b>The
-        Moon</c>, not wealth.
+      text: No <color=#78FF32> Slab</color>, I have intellect. THAT's what it takes
+        to get to <color=#29B6F6>The Moon</color>, not wealth.
       type: 1
       child_id:
         Value: a40c316d-8a41-402d-acc8-da7eb2b849a3
@@ -1109,7 +1110,7 @@ MonoBehaviour:
       text: '...I''m coming...my love.'
       type: 1
       child_id:
-        Value: 
+        Value: c9d3dea9-8dfc-4bc5-a30d-cd04fb076cac
       responses: []
     - window:
         serializedVersion: 2
@@ -1497,6 +1498,27 @@ MonoBehaviour:
       type: 1
       child_id:
         Value: ef3c5f8e-7fe7-4be6-a6ed-8f83b4fa9f18
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2244
+        y: 1562
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Stone2_8
+      speakerName: Stone
+      question: 
+      action: finish
+      friendState: 
+      id:
+        Value: c9d3dea9-8dfc-4bc5-a30d-cd04fb076cac
+      x: 2244
+      y: 1562
+      text: '...'
+      type: 1
+      child_id:
+        Value: 
       responses: []
   rootNodeId:
     Value: e0e12f04-6174-495a-a666-8356a335eadd

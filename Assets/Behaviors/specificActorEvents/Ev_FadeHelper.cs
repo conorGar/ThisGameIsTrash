@@ -103,6 +103,7 @@ public class Ev_FadeHelper : MonoBehaviour {
 			pfm.ReturnPinValues();
 			GameObject truckInstance = Instantiate(smallTruck,new Vector2(CamManager.Instance.mainCam.transform.position.x - 5, player.transform.position.y), Quaternion.identity);
 			truckInstance.GetComponent<Ev_SmallTruck>().EndDay();
+	
 		}
 	}
 

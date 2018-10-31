@@ -105,6 +105,7 @@ public class RockFriend : Friend {
                 stone.GetComponent<StoneFriend>().SetFriendState("WANTS_HANDS");
 				stone.GetComponent<StoneFriend>().nextDialog = "StoneRequest";
                 stone.GetComponent<StoneFriend>().stoneHand.SetActive(true);
+                stone.GetComponent<StoneFriend>().secondStoneHand.SetActive(true);
                 //stone.GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
                 // Rock wants to be pretty.
