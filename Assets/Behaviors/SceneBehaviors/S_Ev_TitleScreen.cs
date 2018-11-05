@@ -29,6 +29,8 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 
     public AudioClip navigateSFX;
     public AudioClip selectSFX;
+    public AudioClip titleMusic;
+
 
 	GameObject currentSelected;
 
@@ -37,7 +39,11 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 		currentSelected = playOption;
 		SoundManager.instance.PlaySingle(windGusts);
 		Time.timeScale = 1;
+		SoundManager.instance.musicSource.Stop();
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+		SoundManager.instance.musicSource.PlayOneShot(titleMusic);
         GameStateManager.Instance.PushState(typeof(TitleState));
+		
 	}
 
     void OnDestroy()

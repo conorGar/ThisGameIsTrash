@@ -56,7 +56,6 @@ public class Ev_FadeHelper : MonoBehaviour {
 			faderImage.color = Color.Lerp(faderImage.color,alphaColor,7f*Time.deltaTime);
 		}else if(fadeBack){
 			faderImage.color = Color.Lerp(faderImage.color,alphaColor,10f*Time.deltaTime);
-
 		}
 	}
 
