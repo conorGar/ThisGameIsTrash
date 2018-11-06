@@ -92,12 +92,15 @@ MonoBehaviour:
       speakerName: ???
       question: 
       action: OpeningSequence
+      isDialogAction: 0
       friendState: 
       id:
         Value: e0e12f04-6174-495a-a666-8356a335eadd
       x: 50
       y: 118
       text: A traveler! It's about time!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 6c0befcf-da23-4e15-8d8f-35b054c0514d
@@ -113,12 +116,15 @@ MonoBehaviour:
       speakerName: Slab
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 6c0befcf-da23-4e15-8d8f-35b054c0514d
       x: 376
       y: 107
       text: Now we can finally settle this guys.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: f6fe13b0-516c-4176-a463-d4c7cacae894
@@ -134,20 +140,23 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: f6fe13b0-516c-4176-a463-d4c7cacae894
       x: 701
       y: 76
       text: Listen garbageman, the three of us have a question for you.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 5e086c4a-e782-4fcd-a37c-502e0f325c0f
       responses: []
     - window:
         serializedVersion: 2
-        x: 1055
-        y: 110
+        x: 1040
+        y: 78
         width: 270
         height: 250
       isCollapsed: 0
@@ -155,12 +164,15 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 5e086c4a-e782-4fcd-a37c-502e0f325c0f
-      x: 1055
-      y: 110
+      x: 1040
+      y: 78
       text: '...It''s a little bit of a strange question. Please don''t judge us.'
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: ad0b5f2d-b8f3-4704-8141-08dc32f8503f
@@ -176,6 +188,7 @@ MonoBehaviour:
       speakerName: Slab
       question: Which of us do you find the most romantically attractive?
       action: (Slab)
+      isDialogAction: 0
       friendState: 
       id:
         Value: ad0b5f2d-b8f3-4704-8141-08dc32f8503f
@@ -183,6 +196,8 @@ MonoBehaviour:
       y: 20
       text: Alright, so, if you were INTO rocks, like...you know, <color=#DC3232>ROMANTICALLY</color>,
         which one of us would you pick as your lover?
+      isThought: 0
+      animTrigger: 
       type: 2
       child_id:
         Value: 
@@ -211,6 +226,7 @@ MonoBehaviour:
       speakerName: Rock
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 0b33165c-9704-4688-b4ac-2158936976b8
@@ -218,6 +234,8 @@ MonoBehaviour:
       y: 619
       text: Yes. Yes. Wahmen love <color=#78FF32>Rock</color>. Wahmen love <color=#78FF32>Rock</color>
         for <color=#78FF32>Rock's</color> charming personality.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: beabea17-27a1-423a-a964-1d6d4e82f690
@@ -233,12 +251,15 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 0850b1af-8acf-4d66-be76-fcdc4c5ff0bf
       x: 1707.3778
       y: 49
       text: '...woah, really? Jeez mister, that''s really nice of you to say to me.'
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: beabea17-27a1-423a-a964-1d6d4e82f690
@@ -254,12 +275,15 @@ MonoBehaviour:
       speakerName: Slab
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 6326e206-2cdc-4295-9c71-61b98794f432
       x: 1706.3075
       y: 327
       text: Ha Ha! See guys! I told you!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: a1a6321c-81fd-4805-81ea-4ab9e5f2be68
@@ -275,6 +299,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: a1a6321c-81fd-4805-81ea-4ab9e5f2be68
@@ -282,6 +307,8 @@ MonoBehaviour:
       y: 333
       text: The hard truth is, <color=#78FF32>The Moon</color> is gonna choose me
         as her man.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 392482c7-5702-45ce-b2ec-28d4d0f86098
@@ -297,6 +324,7 @@ MonoBehaviour:
       speakerName: Slab
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: beabea17-27a1-423a-a964-1d6d4e82f690
@@ -304,6 +332,8 @@ MonoBehaviour:
       y: 64
       text: Whatever. It doesn't matter what he thinks. Surely <color=#78FF32>The
         Moon</color> will choose ME.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 392482c7-5702-45ce-b2ec-28d4d0f86098
@@ -313,18 +343,21 @@ MonoBehaviour:
         x: 2354.9785
         y: 321
         width: 270
-        height: 250
+        height: 200
       isCollapsed: 0
       title: Start7
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 392482c7-5702-45ce-b2ec-28d4d0f86098
       x: 2354.9785
       y: 321
       text: Trust me guys, the ladies can't resist this <color=#29B6F6> CHISELED CHEST</color>.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 74ed1c0c-a855-4c3f-b878-239e55900d76
@@ -340,6 +373,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 74ed1c0c-a855-4c3f-b878-239e55900d76
@@ -347,6 +381,8 @@ MonoBehaviour:
       y: 323
       text: All I need is to get rich. Once I have enough <color=#78FF32>trash</color>,
         forget it, I won't be able to keep the girls away!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: e8cb5a99-f8a5-471f-9389-9f98d2bff131
@@ -362,6 +398,7 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: e8cb5a99-f8a5-471f-9389-9f98d2bff131
@@ -369,6 +406,8 @@ MonoBehaviour:
       y: 321
       text: <color=#78FF32>Slab</color>, I'm sorry but I just think it's sorta rude
         to assume that all lady rocks only care about wealth.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: ada8a573-6876-434e-bffa-610c6c0c8325
@@ -384,6 +423,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: ada8a573-6876-434e-bffa-610c6c0c8325
@@ -391,6 +431,8 @@ MonoBehaviour:
       y: 332
       text: Like, you know I'm not really good at confrontation like this, but I just
         think it's important for me to speak up here.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 6578cfbf-8ddd-4c14-9616-1abe332afd73
@@ -406,6 +448,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 6578cfbf-8ddd-4c14-9616-1abe332afd73
@@ -413,6 +456,8 @@ MonoBehaviour:
       y: 346
       text: You should have respect for a lady rock as beautiful as <color=#29B6F6>The
         Moon</color> is.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 89066994-d3a9-4d73-854e-cde5c691171e
@@ -428,6 +473,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 6b27feda-359c-4d53-98f9-cc56f499adeb
@@ -435,6 +481,8 @@ MonoBehaviour:
       y: 330
       text: You'll see, I'm gonna <color=#78FF32>build a rocket</color> and fly up
         to her. Then she'll see my intellect and love me.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: e7809ead-3be8-44c6-b1da-27c9ac8a2278
@@ -450,6 +498,7 @@ MonoBehaviour:
       speakerName: Slab
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: e7809ead-3be8-44c6-b1da-27c9ac8a2278
@@ -458,6 +507,8 @@ MonoBehaviour:
       text: '...<color=#78FF32>Stone</color> you''re a fool. Tell me, has that "intellect"
         you have given you an idea to how to build a rocket <color=#78FF32> with no
         hands</color>?!'
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 7d9c5c40-13dd-41a7-934a-855fbe02ec85
@@ -473,6 +524,7 @@ MonoBehaviour:
       speakerName: Rock
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: c32d0367-5719-4934-9334-72cf7d1031d1
@@ -480,6 +532,8 @@ MonoBehaviour:
       y: 334
       text: Rock think all wahmen are queen. <color=#29B6F6>Moon</color> will love
         Rock because Rock respect <color=#29B6F6>Moon</color>
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 8a159267-1ce9-40ed-b1a4-48ee1e104e7c
@@ -495,12 +549,15 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 8a159267-1ce9-40ed-b1a4-48ee1e104e7c
       x: 5063.9785
       y: 325
       text: 'Rock just not as <color=#78FF32>pretty as other rocks</color>. '
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 9c35d666-d2ac-4db0-91c3-533755cf29da
@@ -516,6 +573,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 9c35d666-d2ac-4db0-91c3-533755cf29da
@@ -523,6 +581,8 @@ MonoBehaviour:
       y: 341
       text: If only Rock was <color=#78FF32>prettier</color>, than <color=#29B6F6>Moon</color>
         would choose Rock.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 4b698f2c-c200-465d-a23d-c8c394e5bc1e
@@ -538,6 +598,7 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 4b698f2c-c200-465d-a23d-c8c394e5bc1e
@@ -545,6 +606,8 @@ MonoBehaviour:
       y: 347
       text: <color=#78FF32> Rock</color>, you're always way too hard on yourself.
         I think you're beautiful.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 185c466c-2f1e-47cc-b0fe-2e96235ab9fd
@@ -560,6 +623,7 @@ MonoBehaviour:
       speakerName: Slab
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 185c466c-2f1e-47cc-b0fe-2e96235ab9fd
@@ -568,6 +632,8 @@ MonoBehaviour:
       text: Nah, listen garbageman, <color=#78FF32>Rock</color>'s a lost cause, but
         i'd happily take <color=#78FF32>trash donations</color> to my <color=#78FF32>love
         fund</color> if you can spare any.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 8ffcbe0e-0991-42d0-b4be-f6bba7d83194
@@ -583,13 +649,16 @@ MonoBehaviour:
       speakerName: Slab
       question: You got any extra trash to help me get The Moon to love me?
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 26ed0a49-bf14-4bbb-b1a5-eb3bc8f1b905
       x: 12
       y: 486
-      text: Ah, my man! Help a bro out and hook me up with some extra <c=g>trash</c>
+      text: Ah, my man! Help a bro out and hook me up with some extra <color=#78FF32>trash</color>
         if you got some to spare.
+      isThought: 0
+      animTrigger: 
       type: 2
       child_id:
         Value: 
@@ -608,15 +677,18 @@ MonoBehaviour:
         height: 200
       isCollapsed: 0
       title: Slab2
-      speakerName: 
+      speakerName: Slab
       question: 
       action: TrashGiveHUDEnable
+      isDialogAction: 0
       friendState: 
       id:
         Value: 447127d8-d41d-4146-9a5d-74eb638057eb
       x: 340
       y: 466
       text: Sweet man, thanks,  how much you willing to contribute to the cause?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: a44c483c-0ccf-4ee8-99ae-59302c5ad908
@@ -629,15 +701,18 @@ MonoBehaviour:
         height: 200
       isCollapsed: 0
       title: SlabNoTrash1
-      speakerName: 
+      speakerName: Slab
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: e020b3a5-d28b-4970-af57-64051adad33e
       x: 408
       y: 708
       text: C'mon bro. Don't mess with me like that. I really need your help.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 37ff1489-22f8-4b08-8e55-11f3106d5c87
@@ -653,12 +728,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 37ff1489-22f8-4b08-8e55-11f3106d5c87
       x: 758
       y: 714
       text: This is serious. It's a crime for a slab as good looking as me to go unloved.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 9a946b12-c7e1-47eb-86b6-88d6c589b575
@@ -674,12 +752,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: finish
+      isDialogAction: 0
       friendState: 
       id:
         Value: 9a946b12-c7e1-47eb-86b6-88d6c589b575
       x: 1069
       y: 688
       text: So be sure to come back to me if you ever got extra.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 26ed0a49-bf14-4bbb-b1a5-eb3bc8f1b905
@@ -695,12 +776,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: GiveAnythingCheck
+      isDialogAction: 0
       friendState: 
       id:
         Value: a44c483c-0ccf-4ee8-99ae-59302c5ad908
       x: 628
       y: 436
       text: '...'
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 230be8ab-3218-42a4-b746-dcf2be14e5f3
@@ -716,6 +800,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: e50452d9-d521-4165-b163-724be5c602fa
@@ -723,6 +808,8 @@ MonoBehaviour:
       y: 455
       text: I don't think I have quite enough wealth for women to find me attractive
         yet though.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: fe6a1cd3-684b-48ad-b571-e7e14b442559
@@ -738,6 +825,7 @@ MonoBehaviour:
       speakerName: Slab
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: a18af6f5-7a8e-4fb2-b7ad-c4cd1d68cc57
@@ -745,6 +833,8 @@ MonoBehaviour:
       y: 981
       text: Ok. From my advanced knowledge of the way women operate, I SHOULD have
         enough trash to be attractive now.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 57926ea2-c9ea-46d4-9a88-2a74fa34199a
@@ -760,12 +850,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: finish
+      isDialogAction: 0
       friendState: 
       id:
         Value: fe6a1cd3-684b-48ad-b571-e7e14b442559
       x: 1469
       y: 488
       text: But we're gettin' there! Let me know when you can spare some trash!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 26ed0a49-bf14-4bbb-b1a5-eb3bc8f1b905
@@ -781,12 +874,15 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 439735d8-99d9-4d30-9a14-92bd39c764e5
       x: 63
       y: 1307
       text: Woah! A <c=g>rock hand</c>!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 37922e1d-7ad5-48f9-9288-d20b23aff377
@@ -802,12 +898,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 37922e1d-7ad5-48f9-9288-d20b23aff377
       x: 385
       y: 1285
       text: Wait... sorry if this is presumptious...did you bring that here for me?!?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 7c6dd6c5-4774-4e0a-a331-c34261ba5351
@@ -823,12 +922,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 7c6dd6c5-4774-4e0a-a331-c34261ba5351
       x: 750
       y: 1303
       text: That's so nice of you mister. Sorry I couldn't do much to help!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 9b95079f-08da-48c8-82cd-0306d393da56
@@ -844,12 +946,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: ShowRockHand
+      isDialogAction: 0
       friendState: 
       id:
         Value: 9b95079f-08da-48c8-82cd-0306d393da56
       x: 1063
       y: 1309
       text: Let me try it on here
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 4089f6cb-be76-4a28-be34-382db02cc91a
@@ -865,12 +970,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 4089f6cb-be76-4a28-be34-382db02cc91a
       x: 1381
       y: 1289
       text: You know..they're a little large. But, ya, I'll make it work.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 8e3cb23f-7ba9-4c1a-aa46-30ba6140e967
@@ -886,12 +994,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 8e3cb23f-7ba9-4c1a-aa46-30ba6140e967
       x: 1699
       y: 1270
       text: Now...I don't wanna sound ungrateful..I really DO appreciate your help.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: f4ceede0-1a09-43c4-b82e-9069451a4978
@@ -907,6 +1018,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: f4ceede0-1a09-43c4-b82e-9069451a4978
@@ -914,6 +1026,8 @@ MonoBehaviour:
       y: 1254
       text: ..but I'm just...I'm unsure if I'll be able to build the rocket with <c=g>one
         hand</c>?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 83a8ce32-137c-43da-bba6-2c9ef941c3ed
@@ -929,6 +1043,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 83a8ce32-137c-43da-bba6-2c9ef941c3ed
@@ -936,6 +1051,8 @@ MonoBehaviour:
       y: 1252
       text: I mean, I'll try it for sure, but just if you come across <c=g> one more
         rock hand</c> let me know.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: ba88d82f-5bda-4237-a5c0-59e18b4dc966
@@ -951,6 +1068,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: finish
+      isDialogAction: 0
       friendState: 
       id:
         Value: ba88d82f-5bda-4237-a5c0-59e18b4dc966
@@ -958,6 +1076,8 @@ MonoBehaviour:
       y: 1277
       text: I'll look out too. You can be sure if a hand suddenly appears in my very
         limited line of vision..I'll grab it and let you know.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 
@@ -973,12 +1093,15 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 65006570-947c-461a-b627-08753b6ae2a7
       x: 62
       y: 1577
       text: Oh my....is that...is that what I think it is?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 193e4232-93af-4fd5-9651-23d0503fadf0
@@ -994,12 +1117,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: BuildRocket
+      isDialogAction: 0
       friendState: 
       id:
         Value: 193e4232-93af-4fd5-9651-23d0503fadf0
       x: 351
       y: 1560
       text: Jeez. Ok. Here we go. Now I can finally build this thing.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: f4b4d741-8adf-4a70-8feb-bffa9d350ded
@@ -1015,12 +1141,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: f4b4d741-8adf-4a70-8feb-bffa9d350ded
       x: 683
       y: 1560
       text: Alright. This is it. Goodbye rock friends. And thank you garbageman.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 8448416a-004a-45a5-97a5-583e7623ed56
@@ -1036,6 +1165,7 @@ MonoBehaviour:
       speakerName: Slab
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 8448416a-004a-45a5-97a5-583e7623ed56
@@ -1043,6 +1173,8 @@ MonoBehaviour:
       y: 1549
       text: Ya, whatever. Tell <c=b>The Moon</c> to hit me up when she wants a REAL
         man rock.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: ff6e220a-93b8-4b15-848d-3081b4d27dcd
@@ -1058,6 +1190,7 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: ff6e220a-93b8-4b15-848d-3081b4d27dcd
@@ -1065,6 +1198,8 @@ MonoBehaviour:
       y: 1564
       text: No <c=g> Slab</c>, I have intellect. THAT's what it takes to get to <c=b>The
         Moon</c>, not wealth.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: a40c316d-8a41-402d-acc8-da7eb2b849a3
@@ -1080,12 +1215,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: a40c316d-8a41-402d-acc8-da7eb2b849a3
       x: 1550
       y: 1549
       text: Alright. Can't wait any longer. Here we go...
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: a96a9ff0-d028-476a-87ce-6b8ffe340dd4
@@ -1101,12 +1239,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: StoneEnding
+      isDialogAction: 0
       friendState: 
       id:
         Value: a96a9ff0-d028-476a-87ce-6b8ffe340dd4
       x: 1862
       y: 1559
       text: '...I''m coming...my love.'
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 
@@ -1122,6 +1263,7 @@ MonoBehaviour:
       speakerName: speakerName
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 0794c6ad-5da7-4d13-ad46-e6bd3f05d3e4
@@ -1130,6 +1272,8 @@ MonoBehaviour:
       text: 'end
 
 '
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 
@@ -1145,6 +1289,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 89066994-d3a9-4d73-854e-cde5c691171e
@@ -1152,6 +1297,8 @@ MonoBehaviour:
       y: 115
       text: <color=#29B6F6>The Moon</color>... the most beautiful rock of all...always
         looking down on me....
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 6b27feda-359c-4d53-98f9-cc56f499adeb
@@ -1167,6 +1314,7 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 7d9c5c40-13dd-41a7-934a-855fbe02ec85
@@ -1174,6 +1322,8 @@ MonoBehaviour:
       y: 88
       text: Ok. Slab. W-why'd you even have to bring that up?! You know how insecure
         I am about my lack of hands.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 752fbc39-2d25-4a83-b0b8-27faf0984e58
@@ -1189,6 +1339,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 752fbc39-2d25-4a83-b0b8-27faf0984e58
@@ -1196,6 +1347,8 @@ MonoBehaviour:
       y: 102
       text: ..but..it's fine. I'll just...have to find a way to build rockets without
         hands...
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: c32d0367-5719-4934-9334-72cf7d1031d1
@@ -1211,12 +1364,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 8ffcbe0e-0991-42d0-b4be-f6bba7d83194
       x: 6431.7075
       y: 191
       text: I'd do it myself, but, you know, being a slab and all kinda limits me...
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 90683219-9ad0-45b5-8c20-09544e0c1790
@@ -1232,12 +1388,15 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 90683219-9ad0-45b5-8c20-09544e0c1790
       x: 6726.7075
       y: 174
       text: Ya..heh..I guess you can say life for us rockfolk is .... H A R D ! heheh.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 789895af-f364-4efd-b40d-b9d9ba409c38
@@ -1253,12 +1412,15 @@ MonoBehaviour:
       speakerName: Slab
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 789895af-f364-4efd-b40d-b9d9ba409c38
       x: 7022.7075
       y: 185
       text: '...'
+      isThought: 1
+      animTrigger: 
       type: 1
       child_id:
         Value: 1fe9341a-2da3-4136-b004-327b5bbbc604
@@ -1274,12 +1436,15 @@ MonoBehaviour:
       speakerName: Rock
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 1fe9341a-2da3-4136-b004-327b5bbbc604
       x: 7319.7075
       y: 201
       text: '...'
+      isThought: 1
+      animTrigger: 
       type: 1
       child_id:
         Value: 931b283a-6132-4ee4-985a-bbf929df1eff
@@ -1295,12 +1460,15 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: finish
+      isDialogAction: 0
       friendState: 
       id:
         Value: 931b283a-6132-4ee4-985a-bbf929df1eff
       x: 7643.7075
       y: 257
       text: ' ...the moon will appreciate my jokes...'
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 0794c6ad-5da7-4d13-ad46-e6bd3f05d3e4
@@ -1316,12 +1484,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: EnoughTrashCheck
+      isDialogAction: 0
       friendState: 
       id:
         Value: 230be8ab-3218-42a4-b746-dcf2be14e5f3
       x: 920.57794
       y: 409
       text: Hey, thanks bro!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: e50452d9-d521-4165-b163-724be5c602fa
@@ -1337,6 +1508,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: MoonArrive
+      isDialogAction: 0
       friendState: 
       id:
         Value: 57926ea2-c9ea-46d4-9a88-2a74fa34199a
@@ -1344,6 +1516,8 @@ MonoBehaviour:
       y: 997
       text: <shake>Ah yes! You see! Here she comes! <c=b> The Moon</c> has chosen
         me as her lover!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 8277261e-a2b0-42a0-a141-f08b21ee827f
@@ -1359,12 +1533,15 @@ MonoBehaviour:
       speakerName: speakerName
       question: 
       action: SlabDeparture
+      isDialogAction: 0
       friendState: 
       id:
         Value: 8277261e-a2b0-42a0-a141-f08b21ee827f
       x: 661
       y: 982
       text: Ahaha! Enjoy the rest of your lonely, pathetic lives, losers!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: cb2f0459-38ed-47ce-a590-2a064fc0dfcb
@@ -1380,6 +1557,7 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: cb2f0459-38ed-47ce-a590-2a064fc0dfcb
@@ -1387,6 +1565,8 @@ MonoBehaviour:
       y: 969
       text: Wow...I guess <c=b>The Moon</c> really did only care for a hubby who was
         healthy...
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 8cebfcc7-406b-4c8a-87fd-92ca75709a2b
@@ -1402,12 +1582,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 8cebfcc7-406b-4c8a-87fd-92ca75709a2b
       x: 1239
       y: 982
       text: '...perhaps I was wrong to aim for her.'
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: d48f5a8f-7a51-489e-8691-140b5b1a6cae
@@ -1423,12 +1606,15 @@ MonoBehaviour:
       speakerName: Rock
       question: 
       action: finish
+      isDialogAction: 0
       friendState: 
       id:
         Value: d48f5a8f-7a51-489e-8691-140b5b1a6cae
       x: 1550
       y: 971
       text: I am a Rock. I can do better than her.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 
@@ -1444,13 +1630,16 @@ MonoBehaviour:
       speakerName: Stone
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: ef3c5f8e-7fe7-4be6-a6ed-8f83b4fa9f18
       x: 130
       y: 1822
-      text: You gotta believe me, garbageman. <c=b>The Moon</c> does'nt care about
-        money or looks.
+      text: You gotta believe me, garbageman. <color=#29B6F6>The Moon</color> does'nt
+        care about money or looks.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 6d00a0da-f001-40c1-871b-c14c35a604f0
@@ -1466,12 +1655,16 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 6d00a0da-f001-40c1-871b-c14c35a604f0
       x: 459
       y: 1806
-      text: I <c=g>need hands</c> to show <c=b>The Moon</c> how smart I am.
+      text: I <color=#78FF32>need hands</color> to show <color=#29B6F6>The Moon</color>
+        how smart I am.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: bc73001d-e89f-449c-ada7-359e4e4f8df6
@@ -1487,13 +1680,16 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: finish
+      isDialogAction: 0
       friendState: 
       id:
         Value: bc73001d-e89f-449c-ada7-359e4e4f8df6
       x: 820
       y: 1809
-      text: I guess if you find anything that <c=g>looks like it might work well for
-        a hand</c> be sure to <c=g>bring it back here</c>.
+      text: I guess if you find anything that <color=#78FF32>looks like it might work
+        well for a hand</color> be sure to <color=#78FF32>bring it back here</color>.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: ef3c5f8e-7fe7-4be6-a6ed-8f83b4fa9f18

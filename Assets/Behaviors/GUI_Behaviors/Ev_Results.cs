@@ -28,27 +28,39 @@ public class Ev_Results : MonoBehaviour {
         // Then starting active and disabling it immediately?
         gameObject.SetActive(false);
 
-        for (int i = 0; i<GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count; i++){
-			if(i != 1){
-				//^ doesnt count scrap
-				trashCollectedValue += GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[i];
-			}
-		}
-		currentStars.text = GlobalVariableManager.Instance.STAR_POINTS.ToString();
-		if(GlobalVariableManager.Instance.PROGRESS_LV == 0){
-			nextUnlockNeeded.text = "/2";
-		}else if(GlobalVariableManager.Instance.PROGRESS_LV == 1){
-			nextUnlockNeeded.text = "/5";
-		}else if(GlobalVariableManager.Instance.PROGRESS_LV == 2){
-			nextUnlockNeeded.text = "/10";
-		}
-		if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 5){
-			//in case player dies during race
-			GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(5);
-		}
-
         GameStateManager.Instance.RegisterEnterEvent(typeof(EndDayState), OnEnterEndDayState);
         GameStateManager.Instance.RegisterLeaveEvent(typeof(EndDayState), OnLeaveEndDayState);
+    }
+
+    void OnEnable()
+    {
+        for (int i = 0; i < GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count; i++) {
+            if (i != 1) {
+                //^ doesnt count scrap
+                trashCollectedValue += GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[i];
+            }
+        }
+
+        for (int i = 0; i < GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count; i++) {
+            // Add trash to the discover list and award a star for each.
+            GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED |= GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].type;
+            GlobalVariableManager.Instance.STAR_POINTS++;
+        }
+
+        currentStars.text = GlobalVariableManager.Instance.STAR_POINTS.ToString();
+        if (GlobalVariableManager.Instance.PROGRESS_LV == 0) {
+            nextUnlockNeeded.text = "/2";
+        }
+        else if (GlobalVariableManager.Instance.PROGRESS_LV == 1) {
+            nextUnlockNeeded.text = "/5";
+        }
+        else if (GlobalVariableManager.Instance.PROGRESS_LV == 2) {
+            nextUnlockNeeded.text = "/10";
+        }
+        if (GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 5) {
+            //in case player dies during race
+            GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(5);
+        }
     }
 
     void OnDestroy()
@@ -88,13 +100,7 @@ public class Ev_Results : MonoBehaviour {
                         treasureCollectedDisplay.GetComponent<Image>().sprite = (GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedDisplaySprite);
                         //	treasureCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(); //TODO: working on this..
 
-                        //add to large trash discovery list
-                        GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED |= GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].type;
-
-
                         displayIndex++;
-
-
                     }
                     else {
                         largeTrashTextDisplay.SetActive(false);

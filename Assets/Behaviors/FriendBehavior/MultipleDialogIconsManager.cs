@@ -37,12 +37,11 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
 				if(!icons[i].gameObject.activeInHierarchy){
 					icons[i].gameObject.SetActive(true);
 				}
-
 			}else{
 				Debug.Log("ICON FADE SHOULDVE HAPPENED!!!??!" + icons[i].name);
 				icons[i].GetComponent<Image>().color = new Color(.55f,.55f,.55f);//new Color(124,124,124);//fadeIconIfNotTalking
 				icons[i].ReturnToPosition();
-			}
+            }
 		}
 
 		//effects
@@ -53,49 +52,65 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
             movingIcons = true;
             StartCoroutine("MoveIcons");
         }
-
-        SwitchAni(icons[currentSpeakerIndex].myIconAniTrigger);
 	}
 
-	public override void SwitchAni(string triggerName){
-		int triggerHash = Animator.StringToHash(triggerName);
-		if(triggerName == "IconSlide"){
-			//disable other icons when iconSlide
-			for(int i = 0; i < icons.Count; i++){
-				if(icons[i] != icons[currentSpeakerIndex]) {
-					icons[i].gameObject.SetActive(false);
-				}
-			}
-		}
-		//dialogManager.currentlySpeakingIcon.GetComponent<Animator>().StopPlayback();
-		if(dialogManager.currentlySpeakingIcon != null){
-			Debug.Log("-x-x-x-x-x-x-x- SWITCHING TO ANI WITH TRIGGER NAME:" + triggerName);
-            icons[currentSpeakerIndex].GetComponent<Animator>().SetTrigger(triggerHash);
-            icons[currentSpeakerIndex].GetComponent<Animator>().Play(triggerName);
-		}
-		if(triggerName == "IconSlideBack"){
-			Debug.Log("ICON SLIDE BACK PROPERLY READ-x-x-x-x-x-x-x-x-x-");
-			for(int i = 0; i < icons.Count; i++){
-				if(!icons[i].gameObject.activeInHierarchy){
-					icons[i].gameObject.SetActive(true);
-				}
-			}
-		}
-	}
-
-    public override void EnableAnimator()
+    public override void SetTalking(bool talking)
     {
-        icons[currentSpeakerIndex].GetComponent<Animator>().enabled = true;
-    }
-
-    public override void DisableAnimator()
-    {
+        // Disable all talking.  Or, disable all talking but the current speaker.
         for (int i = 0; i < icons.Count; i++) {
-            icons[i].GetComponent<Animator>().enabled = false;
+            if (i == currentSpeakerIndex && talking) {
+                icons[i].isTalking = true;
+            }
+            else {
+                icons[i].isTalking = false;
+            }
+            icons[i].animator.SetBool("IsTalking", icons[i].isTalking);
         }
     }
 
-	IEnumerator MoveIcons(){
+    public override void Slide()
+    {
+        //hide other icons.
+        for (int i = 0; i < icons.Count; i++) {
+            if (icons[i] != icons[currentSpeakerIndex]) {
+                icons[i].gameObject.SetActive(false);
+            }
+        }
+
+        if (dialogManager.currentlySpeakingIcon != null) {
+            icons[currentSpeakerIndex].animator.SetTrigger("Slide");
+        }
+    }
+
+    public override void SlideBack()
+    {
+        // Show all icons.
+        for (int i = 0; i < icons.Count; i++) {
+            if (!icons[i].gameObject.activeInHierarchy) {
+                icons[i].gameObject.SetActive(true);
+            }
+        }
+
+        if (dialogManager.currentlySpeakingIcon != null) {
+            icons[currentSpeakerIndex].animator.SetTrigger("SlideBack");
+        }
+    }
+
+    public override void SetAnimTrigger(string action)
+    {
+        if (dialogManager.currentlySpeakingIcon != null) {
+            icons[currentSpeakerIndex].animator.SetTrigger(action);
+        }
+    }
+
+    public override void SetAnimBool(string key, bool value)
+    {
+        if (dialogManager.currentlySpeakingIcon != null) {
+            icons[currentSpeakerIndex].animator.SetBool(key, value);
+        }
+    }
+
+    IEnumerator MoveIcons(){
 		yield return new WaitForSeconds(.3f);
 		movingIcons = false;
 	}
@@ -117,18 +132,28 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
 		newIcon.GetComponent<GUIEffects>().Start();
 	}
 
-	public void SetStartingIcons(string[] iconNames){
-		for(int i = 0; i < icons.Count; i++){
-			icons[i].gameObject.SetActive(false); //deactivate all icons
-			for(int j = 0; j < iconNames.Length;j++){
-				Debug.Log(iconNames[j] + icons[i].name +(iconNames[j] == icons[i].name) );
-				if(iconNames[j] == icons[i].name){
-					icons[i].gameObject.SetActive(true);
-				}
-			}
-		}
+	public void SetStartingIcons(string firstIcon = "", string secondIcon = "", string thirdIcon = "")
+    {
+        // if no icons are defined, show everything.
+        if (string.IsNullOrEmpty(firstIcon) &&
+            string.IsNullOrEmpty(secondIcon) &&
+            string.IsNullOrEmpty(thirdIcon)) {
+            for (int i = 0; i < icons.Count; i++) {
+                icons[i].gameObject.SetActive(true);
+            }
+            return;
+        }
 
-
+        for (int i = 0; i < icons.Count; i++) {
+            if ((!string.IsNullOrEmpty(firstIcon)  && icons[i].name == firstIcon) ||
+                (!string.IsNullOrEmpty(secondIcon) && icons[i].name == secondIcon) ||
+                (!string.IsNullOrEmpty(thirdIcon)  && icons[i].name == thirdIcon)) {
+                icons[i].gameObject.SetActive(true);
+            }
+            else {
+                icons[i].gameObject.SetActive(false);
+            }
+        }
 	}
 
 }

@@ -72,13 +72,20 @@ public class DialogManager : MonoBehaviour {
 		}
 
         if (currentNode != null) {
-            displayedText.text = currentNode.text;
             characterName.text = currentNode.speakerName;
             CamManager.Instance.mainCamPostProcessor.profile = dialogBlur;
 
-            DialogManager.Instance.currentlySpeakingIcon.EnableAnimator();
+            // Set up the initial dialog icon
+            if (currentlySpeakingIcon != null) {
+                currentlySpeakingIcon.gameObject.SetActive(true);
 
+                if (currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager) && !string.IsNullOrEmpty(currentNode.speakerName)) {
+                    ((MultipleDialogIconsManager)currentlySpeakingIcon).ChangeSpeaker(currentNode.speakerName);
+                }
+            }
             GameStateManager.Instance.PushState(typeof(DialogState));
+
+            StartDisplay();
         }
 	}
 	
@@ -113,9 +120,8 @@ public class DialogManager : MonoBehaviour {
 			Debug.Log("CURRENT NODE NAME WHEN SWITCH TO DIALOG CHOICES : " + currentNode.title);
 			dialogOptions.GetComponent<DialogChoiceManager>().SetDialogChoices(currentNode);
 			finishedDisplayingText = false;
-			//currentlySpeakingIcon.transform.position = guiCamera.ViewportToWorldPoint(new Vector3(0f,0f,0f));
-			currentlySpeakingIcon.EnableAnimator();
-            ChangeIcon("IconSlide");
+            //currentlySpeakingIcon.transform.position = guiCamera.ViewportToWorldPoint(new Vector3(0f,0f,0f));
+            currentlySpeakingIcon.Slide();
 
             canContinueDialog = false;
 			CancelInvoke();
@@ -135,15 +141,25 @@ public class DialogManager : MonoBehaviour {
 				ReturnFromAction();
 			}else{
 				if(canContinueDialog){
-				canContinueDialog = false;
-				textBox.SetActive(false);
-				for(int i = 0; i < dialogIcons.Count; i++){
-					dialogIcons[i].gameObject.SetActive(false);
-				}
-				if(friend.dialogManager == null)
-					friend.dialogManager = this;
-				friend.Invoke(currentNode.action,.1f);
-				//dialogActionManager.Invoke(currentNode.action,.1f);
+                    // if this isn't a dialog action, go to the game scene to show the more detailed game scene action.
+                    if (!currentNode.isDialogAction) {
+                        canContinueDialog = false;
+                        textBox.SetActive(false);
+                        for (int i = 0; i < dialogIcons.Count; i++) {
+                            dialogIcons[i].gameObject.SetActive(false);
+                        }
+
+                        if (friend.dialogManager == null)
+                            friend.dialogManager = this;
+                        friend.Invoke(currentNode.action, .1f);
+                    }
+                    else {
+                        if (friend.dialogManager == null)
+                            friend.dialogManager = this;
+                        friend.Invoke(currentNode.action, .1f);
+
+                        ReturnFromAction();
+                    }
 				}
 			}
 		}else{
@@ -178,37 +194,15 @@ public class DialogManager : MonoBehaviour {
 				characterName.text = currentNode.speakerName;
 			}
 
-			if(currentNode.text.Contains("<c")){
-					HighLightText();
-			}
-			if(currentNode.text.Contains("<w")){
-					WaveyText();
-			}if(currentNode.text.Contains("<var>")){
-				currentNode.text = currentNode.text.Replace("<var>",variableText);
-			}if(currentNode.text.Contains("<shake>")){
-				guiCamShake = true;
-			}else if(currentNode.text.Contains("<s")){
-				SmallText();
-			}if(currentNode.text.Contains("<l")){
-				LargeText();
-			}
-
-			displayedText.text = currentNode.text;
-			displayedText.GetComponent<TextAnimation>().StartAgain();
-			finishedDisplayingText = false;
-
-            currentlySpeakingIcon.EnableAnimator();
-
-            PlayTalkSounds();
+            StartDisplay();
 		}
 	}
 
 	public void ReturnFromChoice(SerializableGuid link){
 		Debug.Log("Return From Choice activated");
-		currentlySpeakingIcon.EnableAnimator();
-        ChangeIcon("IconSlideBack");
+        currentlySpeakingIcon.SlideBack();
 
-		canContinueDialog = true;
+        canContinueDialog = true;
         CamManager.Instance.mainCamPostProcessor.profile = dialogBlur;
 		
 
@@ -225,20 +219,7 @@ public class DialogManager : MonoBehaviour {
 			characterName.text = currentNode.speakerName;
 		}
 
-		if(currentNode.text.Contains("<c")){
-				Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
-				HighLightText();
-			}
-			if(currentNode.text.Contains("<w")){
-				WaveyText();
-			}
-
-		finishedDisplayingText = false;
-		displayedText.text = currentNode.text;
-
-        currentlySpeakingIcon.EnableAnimator();
-
-        PlayTalkSounds();
+        StartDisplay();
 	}
 
     public void ReturnFromAction(){
@@ -259,45 +240,62 @@ public class DialogManager : MonoBehaviour {
 			currentlySpeakingIcon.gameObject.SetActive(true);
 
 		textBox.SetActive(true);
-		if(currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager) &&
-            characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
-		{
-			Debug.Log("NAMES DONT MATCHx-x-x-x--x-x-x-x-x-x-");
-			((MultipleDialogIconsManager)currentlySpeakingIcon).ChangeSpeaker(currentNode.speakerName);
-			characterName.text = currentNode.speakerName;
-		}
+        if (currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager) &&
+            characterName.text != currentNode.speakerName && currentNode.speakerName.Length > 1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
+        {
+            Debug.Log("NAMES DONT MATCHx-x-x-x--x-x-x-x-x-x-");
+            ((MultipleDialogIconsManager)currentlySpeakingIcon).ChangeSpeaker(currentNode.speakerName);
+            characterName.text = currentNode.speakerName;
+        }
 
-		if(currentNode.text.Contains("<c")){
-				Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
-				HighLightText();
-		}
-		if(currentNode.text.Contains("<w")){
-				WaveyText();
-		}if(currentNode.text.Contains("<var>")){
-			currentNode.text = currentNode.text.Replace("<var>",variableText);
-		}if(currentNode.text.Contains("<shake>")){
-				guiCamShake = true;
-		}else if(currentNode.text.Contains("<s")){
-				SmallText();
-		}if(currentNode.text.Contains("<l")){
-			LargeText();
-		}
-		finishedDisplayingText = false;
-		displayedText.text = currentNode.text;
-		displayedText.GetComponent<TextAnimation>().StartAgain();
-
-        currentlySpeakingIcon.SwitchAni(animationName);
-        currentlySpeakingIcon.EnableAnimator();
-
-        PlayTalkSounds();
+        StartDisplay();
 	}
 
+    // Starts the text scrolling
+    private void StartDisplay()
+    {
+        if (currentNode.text.Contains("<c")) {
+            Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
+            HighLightText();
+        }
+        if (currentNode.text.Contains("<w")) {
+            WaveyText();
+        }
+        if (currentNode.text.Contains("<var>")) {
+            currentNode.text = currentNode.text.Replace("<var>", variableText);
+        }
+        if (currentNode.text.Contains("<shake>")) {
+            guiCamShake = true;
+        }
+        else if (currentNode.text.Contains("<s")) {
+            SmallText();
+        }
+        if (currentNode.text.Contains("<l")) {
+            LargeText();
+        }
 
+        displayedText.text = currentNode.text;
+        displayedText.GetComponent<TextAnimation>().StartAgain();
+        finishedDisplayingText = false;
+
+        if (!currentNode.isThought) {
+            currentlySpeakingIcon.SetTalking(true);
+        }
+
+        if (!string.IsNullOrEmpty(currentNode.animTrigger)) {
+            Debug.Log("Firing Animation Trigger: " + currentNode.animTrigger);
+            currentlySpeakingIcon.SetAnimTrigger(currentNode.animTrigger);
+        }
+
+        PlayTalkSounds();
+    }
+
+    // End of the teext scrolling
 	public void FinishedDisplay(){
 		if(finishedDisplayingText == false){
 			Debug.Log("Finished Display activated");
 			if(currentlySpeakingIcon != null)
-				currentlySpeakingIcon.DisableAnimator();
+				currentlySpeakingIcon.SetTalking(false);
 
 			continueIcon.enabled = true;
 			CancelInvoke();
@@ -391,10 +389,6 @@ public class DialogManager : MonoBehaviour {
         Debug.LogError("Could not find Dialog Icon ID: " + p_dialogIconID + "!  Make sure it's defined on the friend icon!");
         currentlySpeakingIcon = null;
     }
-
-	public void ChangeIcon(string aniName){
-		currentlySpeakingIcon.SwitchAni(aniName);
-	}
 
 	public void SetFriend(Friend thisFriend){//set by activateDialogWhenClose
 		friend = thisFriend;

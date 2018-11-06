@@ -6,30 +6,37 @@ public class DialogIconAnimationManager : MonoBehaviour {
     public string ID = "icon_id";
 	public Animator myAnim;
 
-	void Awake () {
-		myAnim = gameObject.GetComponent<Animator>();
-	}
-	
+    [SerializeField] // to show in inspector!
+    private bool isTalking;
+
 	// Update is called once per frame
 	void Update () {
-		
-	}
-
-	public virtual void SwitchAni(string triggerName){
-		myAnim.StopPlayback();
-		int triggerHash = Animator.StringToHash(triggerName);
-		myAnim.SetTrigger(triggerHash);
-		myAnim.Play(triggerName);
-		Debug.Log("Switch ani activated with: " + triggerName);
-	}
-
-    public virtual void EnableAnimator()
-    {
-        myAnim.enabled = true;
+        
     }
 
-    public virtual void DisableAnimator()
+    public virtual void SetTalking(bool talking)
     {
-        myAnim.enabled = false;
+        isTalking = talking;
+        myAnim.SetBool("IsTalking", isTalking);
+    }
+
+    public virtual void Slide()
+    {
+        myAnim.SetTrigger("Slide");
+    }
+
+    public virtual void SlideBack()
+    {
+        myAnim.SetTrigger("SlideBack");
+    }
+
+    public virtual void SetAnimTrigger(string action)
+    {
+        myAnim.SetTrigger(action);
+    }
+
+    public virtual void SetAnimBool(string key, bool value)
+    {
+        myAnim.SetBool(key, value);
     }
 }

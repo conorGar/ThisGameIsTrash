@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: BossDialog
   m_EditorClassIdentifier: 
   title: BossDialog
-  dialogIconID: dialog_icon_ID
+  dialogIconID: icon_whiteTrashTrio
   nodeStore:
     keys:
     - Value: 53bd7fc5-2741-48ed-b548-8a1f5256b84f
@@ -74,12 +74,15 @@ MonoBehaviour:
       speakerName: Questio
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 53bd7fc5-2741-48ed-b548-8a1f5256b84f
       x: 259
       y: 347
       text: This is the place?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 72b1bdc0-959d-4669-91b7-df267726ced4
@@ -95,6 +98,7 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 72b1bdc0-959d-4669-91b7-df267726ced4
@@ -102,6 +106,8 @@ MonoBehaviour:
       y: 351
       text: Ya, <color=#78FF32>Q</color>, <color=#78FF32>Stuart</color> should be
         just up ahead.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 1136b375-43fe-48be-882d-27f930c0fab6
@@ -117,6 +123,7 @@ MonoBehaviour:
       speakerName: Questio
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 1136b375-43fe-48be-882d-27f930c0fab6
@@ -124,6 +131,8 @@ MonoBehaviour:
       y: 328
       text: Ok, we have to make sure he does his job and stop any aspiring garbageman
         wandering around?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: db7e319c-c6c4-4b66-ad5a-5f141ef998ba
@@ -139,6 +148,7 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: db7e319c-c6c4-4b66-ad5a-5f141ef998ba
@@ -146,6 +156,8 @@ MonoBehaviour:
       y: 350
       text: Uh..ya? Dude, <color=#DC3232> The Greasy Prince</color> JUST told us the
         plan, how could you forget already?!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 625dfae2-51b3-4892-986e-ed35ada9bdfc
@@ -161,12 +173,15 @@ MonoBehaviour:
       speakerName: Questio
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 625dfae2-51b3-4892-986e-ed35ada9bdfc
       x: 1527
       y: 384
       text: Ya I remember? That wasn't a question, it was a statement?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 94c12006-3a2d-4da0-b777-b4ef59de8a70
@@ -182,6 +197,7 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 94c12006-3a2d-4da0-b777-b4ef59de8a70
@@ -189,6 +205,8 @@ MonoBehaviour:
       y: 387
       text: Listen. Q, I'm sorry, if this trio we have here is gonna work, you HAVE
         to get better at your tone of voice dude.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 0c56361f-4e9b-424f-84fa-56fb9432b31c
@@ -204,6 +222,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 0c56361f-4e9b-424f-84fa-56fb9432b31c
@@ -211,6 +230,8 @@ MonoBehaviour:
       y: 374
       text: <color=#DC3232> The Greasy Prince</color> paired us up because we were
         the best of his <color=#DC3232>White Trash Army</color>...
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 3f631cb5-0a65-44c1-baa3-58f83100adef
@@ -226,6 +247,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 3f631cb5-0a65-44c1-baa3-58f83100adef
@@ -233,6 +255,8 @@ MonoBehaviour:
       y: 392
       text: '...but this isn''t gonna work if every sentence you say sounds like you''re
         asking a question!'
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: eb8f4327-659b-4215-b337-0c91113f969a
@@ -248,12 +272,15 @@ MonoBehaviour:
       speakerName: Questio
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: eb8f4327-659b-4215-b337-0c91113f969a
       x: 2883
       y: 378
       text: I can't stop? This is, like, my thing?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 97adda7f-7ea2-46e3-8a4e-0408c9bb570c
@@ -269,12 +296,15 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 97adda7f-7ea2-46e3-8a4e-0408c9bb570c
       x: 3214
       y: 400
       text: '...'
+      isThought: 1
+      animTrigger: 
       type: 1
       child_id:
         Value: e2641cfc-931a-4d7f-ad2c-94b148b1d75e
@@ -290,12 +320,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: e2641cfc-931a-4d7f-ad2c-94b148b1d75e
       x: 3549
       y: 404
       text: Alright. Nevermind. Let's just move out.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: a8df6d5c-91f2-435d-9f7d-006266b9d61f
@@ -311,6 +344,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: finish
+      isDialogAction: 0
       friendState: IN_TOXIC_FIELD
       id:
         Value: a8df6d5c-91f2-435d-9f7d-006266b9d61f
@@ -318,6 +352,8 @@ MonoBehaviour:
       y: 374
       text: We can't let any gargabeman steal the glory of<color=#DC3232> The Greasy
         Prince and his White Trash Army</color>!!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 9160cead-8d54-4d1e-bfe0-38835b13f40e
@@ -333,12 +369,16 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 9160cead-8d54-4d1e-bfe0-38835b13f40e
       x: 226.19177
       y: 690
-      text: Alright <c=g>Stuart</c>, there he is! Here we go, man! This is your moment!
+      text: Alright <color=#78FF32>Stuart</color>, there he is! Here we go, man! This
+        is your moment!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 1cadcf63-d08e-4336-856e-1d349862f87d
@@ -354,12 +394,15 @@ MonoBehaviour:
       speakerName: Stuart
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 1cadcf63-d08e-4336-856e-1d349862f87d
       x: 589.1918
       y: 704
       text: ..t-this is my moment.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 2e3bfcc0-b813-45f9-ae5c-8fd64bc174f7
@@ -375,6 +418,7 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 2e3bfcc0-b813-45f9-ae5c-8fd64bc174f7
@@ -382,6 +426,8 @@ MonoBehaviour:
       y: 699
       text: We know you've been feeling a bit down recently, but you got this. Go
         gittem', <color=#78FF32>Stuart</color>!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: acc028b6-0c29-4c5b-bae0-b92efd129d2f
@@ -397,12 +443,15 @@ MonoBehaviour:
       speakerName: Stuart
       question: 
       action: finish
+      isDialogAction: 0
       friendState: PREP_FIGHT_PHASE_1
       id:
         Value: acc028b6-0c29-4c5b-bae0-b92efd129d2f
       x: 1328.1918
       y: 705
       text: ..o...ok Ex. Here we go....we're goin'. He..doesn't stand a chance...
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: cede4314-a294-47af-9e92-a7b58d6b9e0d
@@ -418,12 +467,15 @@ MonoBehaviour:
       speakerName: Stuart
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: cede4314-a294-47af-9e92-a7b58d6b9e0d
       x: 210.19177
       y: 962
       text: Oh. Oh. Ow. Boy, this guy sure is tough...
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 21348e88-672a-4f30-8a88-2bec027d4341
@@ -439,6 +491,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 21348e88-672a-4f30-8a88-2bec027d4341
@@ -446,6 +499,8 @@ MonoBehaviour:
       y: 981
       text: I'm..t-trying so hard too. His...his attacks are just so quick, just can't
         seem to dodge them. Really trying here.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: e7ab10fe-33ae-4068-ab32-b2cda58d08ff
@@ -461,6 +516,7 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: e7ab10fe-33ae-4068-ab32-b2cda58d08ff
@@ -468,6 +524,8 @@ MonoBehaviour:
       y: 973
       text: Stuart. You're literally just running straight into him and letting him
         hit you.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: a2c4f300-ed48-4e5f-b84b-4dbcd17f41c4
@@ -483,6 +541,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: a2c4f300-ed48-4e5f-b84b-4dbcd17f41c4
@@ -490,6 +549,8 @@ MonoBehaviour:
       y: 997
       text: Come on man! Do what <color=#DC3232>Greasy Prince</color> demands! Get
         MEAN! Get <color=#DC3232>A N G R Y</color>!!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: b96c968a-81b1-43b8-a7d0-21029391ab62
@@ -505,12 +566,15 @@ MonoBehaviour:
       speakerName: Stuart
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: b96c968a-81b1-43b8-a7d0-21029391ab62
       x: 1563.1918
       y: 1037
       text: Oh. Uh...ok.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 6a881141-0f06-4e33-b3ab-a43b3f10674c
@@ -526,12 +590,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 6a881141-0f06-4e33-b3ab-a43b3f10674c
       x: 1975.1918
       y: 999
       text: G-GAH! I am...I am the gr-great and, uh, mighty...st...stuart.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: c6504e15-d92a-44bb-9e3e-da16b167f8e8
@@ -547,12 +614,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: c6504e15-d92a-44bb-9e3e-da16b167f8e8
       x: 2285.192
       y: 975
       text: 'H-Here I come. '
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 38423d56-25bf-414c-8a28-9fe307743a9c
@@ -568,12 +638,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 38423d56-25bf-414c-8a28-9fe307743a9c
       x: 2682.192
       y: 959
-      text: <zoom>I-I will, uh, stop you.
+      text: I-I will, uh, stop you.
+      isThought: 0
+      animTrigger: Zoom
       type: 1
       child_id:
         Value: 3c185585-a290-4f20-82fe-a5dde4c0f73d
@@ -589,12 +662,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 3c185585-a290-4f20-82fe-a5dde4c0f73d
       x: 3026.192
       y: 970
-      text: <zoom>..with my...
+      text: ..with my...
+      isThought: 0
+      animTrigger: Zoom
       type: 1
       child_id:
         Value: 114e26d2-5381-4a86-afef-5a9ea9d99f0c
@@ -610,12 +686,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 114e26d2-5381-4a86-afef-5a9ea9d99f0c
       x: 3363.192
       y: 983
-      text: <zoom>...deadly...toxic....attacks....
+      text: '...deadly...toxic....attacks....'
+      isThought: 0
+      animTrigger: Zoom
       type: 1
       child_id:
         Value: 2dd80d90-6d1b-407c-82e3-eeb3c110b216
@@ -630,13 +709,16 @@ MonoBehaviour:
       title: Boss1Middle_11
       speakerName: ' '
       question: 
-      action: 
+      action: Upset
+      isDialogAction: 1
       friendState: 
       id:
         Value: 2dd80d90-6d1b-407c-82e3-eeb3c110b216
       x: 3692.192
       y: 1003
-      text: <zoom>...
+      text: '...'
+      isThought: 1
+      animTrigger: Zoom
       type: 1
       child_id:
         Value: f5c73def-1be1-4697-8bb1-d555f36b7fdc
@@ -652,12 +734,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: f5c73def-1be1-4697-8bb1-d555f36b7fdc
       x: 4121.286
       y: 959
       text: <shake>AHHHHHHHHH!
+      isThought: 0
+      animTrigger: UnZoom
       type: 1
       child_id:
         Value: 2067ee40-7223-4767-b7f2-b161baf62e47
@@ -673,12 +758,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 2067ee40-7223-4767-b7f2-b161baf62e47
       x: 4478.286
       y: 1001
       text: I CAN'T TAKE IT ANYMORE!!! MY SKIN BURNS!!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: a206ff06-d08b-43b4-bd2b-348e5fe7ac5f
@@ -694,12 +782,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: a206ff06-d08b-43b4-bd2b-348e5fe7ac5f
       x: 4779.286
       y: 943
       text: MY EYES! OH GOD, MY EYES!! PERPETUALLY SIMMERING IN SOCKETS OF ACID!!!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 9c4394d9-f673-44c8-957a-862ebcafc800
@@ -715,12 +806,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 9c4394d9-f673-44c8-957a-862ebcafc800
       x: 5072.286
       y: 948
       text: EVERYDAY! MORE PAINFUL THAN THE LAST!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: a7235cc8-2ab4-4c9c-a5c7-78486449e656
@@ -736,12 +830,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: a7235cc8-2ab4-4c9c-a5c7-78486449e656
       x: 5360.286
       y: 953
       text: WHY GO ON?!? WHY CONTINUE?!?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 1a358662-fec8-43a8-b465-93f38c1eafb8
@@ -757,12 +854,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 1a358662-fec8-43a8-b465-93f38c1eafb8
       x: 5638.286
       y: 957
       text: PLEASE GARBAGEMAN! DEAR GOD! PLEASE KILL ME!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: cd9ee903-c66c-44c1-b01b-f0fa078e0de7
@@ -778,12 +878,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: IconLeave
+      isDialogAction: 0
       friendState: 
       id:
         Value: cd9ee903-c66c-44c1-b01b-f0fa078e0de7
       x: 5917.286
       y: 977
       text: KILL ME!!!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 630294a1-d45f-4aea-9ea7-bb84e031e2c1
@@ -799,12 +902,15 @@ MonoBehaviour:
       speakerName: Questio
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 630294a1-d45f-4aea-9ea7-bb84e031e2c1
       x: 6216.286
       y: 992
       text: This isn't good?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: fecebfe7-1c30-444b-9928-b33c5f839182
@@ -820,12 +926,15 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: fecebfe7-1c30-444b-9928-b33c5f839182
       x: 6505.286
       y: 1007
       text: No. No it's not, Q. Ok. Alright. We're gonna have to stop this guy ourselves.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: f4e05046-2fb8-41fd-94d2-9ae32630b0a0
@@ -841,6 +950,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: f4e05046-2fb8-41fd-94d2-9ae32630b0a0
@@ -848,6 +958,8 @@ MonoBehaviour:
       y: 991
       text: Q, you get in there close, just make sure not to lose <color=#78FF32>those
         gloves you got</color>, obviously.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 4072439d-ea31-4648-b118-93d9c88d1843
@@ -863,6 +975,7 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 4072439d-ea31-4648-b118-93d9c88d1843
@@ -870,6 +983,8 @@ MonoBehaviour:
       y: 1022
       text: <color=#78FF32>HASH</color>! You go up above and <color=#78FF32> shield
         Stuart</color> so he <color=#78FF32>can't hurt himself</color>.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 7924bdb4-387d-4417-9a07-96ec4c915c10
@@ -885,12 +1000,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: finish
+      isDialogAction: 0
       friendState: PREP_FIGHT_PHASE_2
       id:
         Value: 7924bdb4-387d-4417-9a07-96ec4c915c10
       x: 7379.286
       y: 1058
       text: White Trash Elite Trio...MOVE OUT!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: ec1eccbf-9cf2-4b37-955c-df119c2ebf53
@@ -906,12 +1024,15 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: c68fe40a-7e0a-422f-b83e-ce949ee8eb74
       x: 2387.2861
       y: 1332
       text: end
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 
@@ -926,13 +1047,16 @@ MonoBehaviour:
       title: Boss1Death
       speakerName: Stuart
       question: 
-      action: 
+      action: NotUpset
+      isDialogAction: 1
       friendState: 
       id:
         Value: ec1eccbf-9cf2-4b37-955c-df119c2ebf53
       x: 182
       y: 1244
       text: Finally...sweet...freedom
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 8fd91567-fce3-4eb6-9242-9d4dee442105
@@ -948,6 +1072,7 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 8fd91567-fce3-4eb6-9242-9d4dee442105
@@ -955,6 +1080,8 @@ MonoBehaviour:
       y: 1239
       text: Oh God, what a nightmare. <color=#DC3232>The Boss</color> is gonna kill
         us.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 92338f3e-43b0-4db6-81a5-b1d809a99712
@@ -970,12 +1097,15 @@ MonoBehaviour:
       speakerName: ' '
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 92338f3e-43b0-4db6-81a5-b1d809a99712
       x: 798
       y: 1229
       text: I can't imagine he's gonna give us any of that Trash he promised us?
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: aecea4b7-cb46-4e6b-992f-37eb3f1ca3f1
@@ -991,12 +1121,15 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: aecea4b7-cb46-4e6b-992f-37eb3f1ca3f1
       x: 1087
       y: 1217
       text: No, <color=#78FF32>Q</color>, no way he's giving us anything! We're failures!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: f6938fb9-db0f-453d-9cdc-ca591846fb67
@@ -1012,12 +1145,15 @@ MonoBehaviour:
       speakerName: Hash
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: f6938fb9-db0f-453d-9cdc-ca591846fb67
       x: 1375
       y: 1280
       text: '#NoTrashForHash'
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 2a11163d-d019-49d8-8e35-24a0efd092fd
@@ -1033,6 +1169,7 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 2a11163d-d019-49d8-8e35-24a0efd092fd
@@ -1040,6 +1177,8 @@ MonoBehaviour:
       y: 1301
       text: This isn't the last you'll see of us, Trashman! You should give up now!
         Your dreams are a lie!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 48a38881-46bc-4eb2-bd13-2e21ad85d74b
@@ -1055,6 +1194,7 @@ MonoBehaviour:
       speakerName: Ex
       question: 
       action: finish
+      isDialogAction: 0
       friendState: END
       id:
         Value: 48a38881-46bc-4eb2-bd13-2e21ad85d74b
@@ -1062,6 +1202,8 @@ MonoBehaviour:
       y: 1347
       text: <color=#DC3232>Greasy Prince</color> has been in the game far longer than
         you have! You can never best him!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: c68fe40a-7e0a-422f-b83e-ce949ee8eb74

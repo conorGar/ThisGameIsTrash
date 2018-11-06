@@ -26,7 +26,6 @@ public class StoneFriend : Friend
             case "WANTS_HANDS":
                 // Eyes open.
                 BreakEyes();
-				nextDialog = "StoneRequest";
                 break;
             case "END":
 				blockade.SetActive(false);
@@ -66,7 +65,8 @@ public class StoneFriend : Friend
         switch (GetFriendState()) {
             case "START":
                 break;
-            case "WANTS_HANDS":         
+            case "WANTS_HANDS":
+                nextDialog = "StoneRequest";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
             case "END":

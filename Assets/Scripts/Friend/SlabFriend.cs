@@ -114,7 +114,7 @@ public class SlabFriend : Friend
     }
 
     public void TrashGiveHUDEnable(){
-		dialogManager.currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SwitchAni("IconSlide");
+		dialogManager.currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().Slide();
     	trashGiveHUD.SetActive(true);
     }
     public void EnoughTrashCheck(){
@@ -129,7 +129,7 @@ public class SlabFriend : Friend
     	
     }
     public void GiveAnythingCheck(){
-		dialogManager.currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SwitchAni("IconSlideBack");
+		dialogManager.currentlySpeakingIcon.GetComponent<DialogIconAnimationManager>().SlideBack();
 
 		/*if(trashInLoveFund >= trashNeeded){
     		dialogManager.JumpToNewNode("SlabFinish");

@@ -41,11 +41,14 @@ public class DialogNode
     public string speakerName;
     public string question;
     public string action;
+    public bool isDialogAction;
     public string friendState;
     public SerializableGuid id;
     public float x;
     public float y;
     public string text;
+    public bool isThought;
+    public string animTrigger;
     public DIALOGNODETYPE type;
 
     // For statement linking
@@ -61,9 +64,12 @@ public class DialogNode
         speakerName = "speakerName";
         question = "";
         action = "";
+        isDialogAction = false;
         friendState = "";
         id = Guid.NewGuid();
         text = p_text;
+        isThought = false;
+        animTrigger = "";
         type = p_type;
 
         responses = new List<DialogResponse>();

@@ -10,6 +10,7 @@ public class GUI_HPdisplay : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		maxHP.text = "/" + GlobalVariableManager.Instance.Max_HP.ToString();
+        currentHP.text = GlobalVariableManager.Instance.Max_HP.ToString();
 	}
 	
 	// Update is called once per frame
