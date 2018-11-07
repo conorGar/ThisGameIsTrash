@@ -157,8 +157,6 @@ public class DialogManager : MonoBehaviour {
                         if (friend.dialogManager == null)
                             friend.dialogManager = this;
                         friend.Invoke(currentNode.action, .1f);
-
-                        ReturnFromAction();
                     }
 				}
 			}

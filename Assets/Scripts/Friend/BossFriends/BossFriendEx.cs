@@ -196,11 +196,13 @@ public class BossFriendEx : Friend
     public void Upset()
     {
         DialogManager.Instance.currentlySpeakingIcon.SetAnimBool("IsUpset", true);
+        DialogManager.Instance.ReturnFromAction();
     }
 
     public void NotUpset()
     {
         DialogManager.Instance.currentlySpeakingIcon.SetAnimBool("IsUpset", false);
+        DialogManager.Instance.ReturnFromAction();
     }
 
     // User Data implementation

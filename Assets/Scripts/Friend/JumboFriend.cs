@@ -199,9 +199,7 @@ public class JumboFriend : Friend {
 			CalendarManager.Instance.AddFriendEvent(nextMovie);
 			newestAddedEvent = nextMovie;
 			dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
-			dialogManager.ChangeIcon("SurprisedAni");
 			Debug.Log("***SET VARIABLE TEXT TO: " + GetCurrentFilm());
-
 
 			if(nextDialog == "Start"){
 				StartCoroutine("AfterFirstMovie");
@@ -220,12 +218,11 @@ public class JumboFriend : Friend {
 		yield return new WaitForSeconds(1f);
         CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"JumboMovie");
 		yield return new WaitForSeconds(.5f);
-		dialogManager.Invoke("ReturnFromAction",.1f);//10= length of each movie TODO:check for if this is the first movie or not, if not activate this line of code
+        DialogManager.Instance.ReturnFromAction(); //10= length of each movie TODO:check for if this is the first movie or not, if not activate this line of code
+        DialogManager.Instance.currentlySpeakingIcon.SetAnimBool("IsSurprised", true);
+    }
 
-
-	}
-
-	IEnumerator FilmSetPan(){
+    IEnumerator FilmSetPan(){
 		yield return new WaitForSeconds(4f);
         CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position," ");
 
@@ -250,6 +247,18 @@ public class JumboFriend : Friend {
 		moviePosters= neededObjs[1];
 		filmColor= neededObjs[2];
 		movieScreen= neededObjs[3];
+    }
+
+    public void Surprise()
+    {
+        DialogManager.Instance.currentlySpeakingIcon.SetAnimBool("IsSurprised", true);
+        DialogManager.Instance.ReturnFromAction();
+    }
+
+    public void Calm()
+    {
+        DialogManager.Instance.currentlySpeakingIcon.SetAnimBool("IsSurprised", false);
+        DialogManager.Instance.ReturnFromAction();
     }
 
     // User Data implementation
