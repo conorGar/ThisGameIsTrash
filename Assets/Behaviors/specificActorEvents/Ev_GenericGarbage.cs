@@ -9,6 +9,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 	public GameObject newDiscoveryDisplay;
 	public GameObject displayTrash;
 	public GameObject tempEffectsActor;
+    public GarbageSpawner garbageSpawner;
     public Vector2 position;
     public AudioClip pickUpTrash;
     public AudioClip newDiscovery;
@@ -70,6 +71,12 @@ public class Ev_GenericGarbage : MonoBehaviour {
 		}
 	}
 
+    private void OnDisable()
+    {
+        // lose the spawner reference.
+        garbageSpawner = null;
+    }
+
     // Update is called once per frame
     void Update () {
 
@@ -101,6 +108,9 @@ public class Ev_GenericGarbage : MonoBehaviour {
 	IEnumerator Kill(){
 
 		yield return new WaitForSeconds(1f);
+
+        // clear the spawner flag so it's not counted on the map icon.
+        garbageSpawner.spawned = false;
         ObjectPool.Instance.ReturnPooledObject(gameObject);
 
     }//end of Kill()

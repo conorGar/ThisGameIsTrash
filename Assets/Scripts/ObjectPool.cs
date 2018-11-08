@@ -8,6 +8,7 @@ public class ObjectPoolDefinition
 {
     public bool IsExpandable;
     public GameObject poolObject;
+    public GameObject parentObject;
     public int poolSize;
 }
 
@@ -33,6 +34,10 @@ public class ObjectPool : MonoBehaviour {
                 var obj = Instantiate(poolDefinition.poolObject) as GameObject;
                 obj.SetActive(false);
                 pooledObjects[poolDefinition].Add(obj);
+
+                if (poolDefinition.parentObject != null) {
+                    obj.transform.parent = poolDefinition.parentObject.transform;
+                }
             }
         }
 	}
@@ -69,6 +74,11 @@ public class ObjectPool : MonoBehaviour {
                 {
                     GameObject obj = Instantiate(poolDefinition.poolObject) as GameObject;
                     pooledObjects[poolDefinition].Add(obj);
+
+                    if (poolDefinition.parentObject != null) {
+                        obj.transform.parent = poolDefinition.parentObject.transform;
+                    }
+
                     return obj;
                 }
             }

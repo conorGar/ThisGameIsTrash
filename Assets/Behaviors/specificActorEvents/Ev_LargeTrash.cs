@@ -25,7 +25,7 @@ public class Ev_LargeTrash : PickupableObject {
 	//is dropped. If myCurrentRoom = RoomManager.currentRoom, deactivate self. (In update method?) check if the roomManager.room =
 	//current room and if so, activate the large trash
 
-	public string myCurrentRoom; // used by map Star icons
+	public Room myCurrentRoom; // used by map Star icons
 	[HideInInspector]
 	//public GameObject dumpster; //used for return
 
@@ -88,7 +88,7 @@ public class Ev_LargeTrash : PickupableObject {
 		gameObject.tag = "LargeTrash";
 		sparkle.SetActive(true);
 		gameObject.transform.parent = ltmManager.transform; //goes back to largeTrashManager when drop
-		myCurrentRoom = RoomManager.Instance.currentRoom.name;
+		myCurrentRoom = RoomManager.Instance.currentRoom;
 		//gameObject.GetComponent<Animator>().enabled = false;
 
 	}
