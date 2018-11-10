@@ -1,75 +1,78 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class IsometricSorting : MonoBehaviour {
-	//public int frontOrderInLayer = 4;
-	//public int backOrderInLayer = 0;
-	public bool hastk2dSprite = true;
+    [Serializable]
+    public struct SortBuddy
+    {
+        public Renderer renderer;
+        public int offset;
+    }
+
 	public bool movingObject;
-	public bool legs;
-	GameObject player;
-	//public float yPositionMark;
-	float myY;
-	tk2dSprite mytk2dSprite;
-	SpriteRenderer mySprite;
+    public List<SortBuddy> sortBuddies;
+
+	Renderer myRenderer;
+    BoxCollider2D boxCollider2D;
+    const int SOMELARGEOFFSET = 10000; // To keep everything positive (so less than -1 when the inverse multiplication happens)
 
 
 	// Use this for initialization
 	void Start () {
-		//player = GameObject.FindGameObjectWithTag("Player");
-		//myY = gameObject.transform.position.y + yPositionMark;
-		if(hastk2dSprite){
-		    mytk2dSprite = gameObject.GetComponent<tk2dSprite>();
+        myRenderer = gameObject.GetComponent<Renderer>();
 
-            if (mytk2dSprite == null)
-            {
-                Debug.Log("Missing Sprite! " + this.GetInstanceID());
-                return;
-            }
-		}else{
-		    mySprite = gameObject.GetComponent<SpriteRenderer>();
-		}
+        if (myRenderer == null) {
+            Debug.Log("Missing Renderer! " + this.GetInstanceID());
+        }
+        boxCollider2D = gameObject.GetComponent<BoxCollider2D>();
 
-		if(!movingObject){
-			if(hastk2dSprite)
-            {
-                mytk2dSprite.SortingOrder = -1*(int)gameObject.transform.position.y;
-
-		    }else{
-				
-			    mySprite.sortingOrder = -1*(int)gameObject.transform.position.y;
-
-		    }
+        if (!movingObject){
+            UpdateSortingOrder();
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if(movingObject){
-			if(hastk2dSprite){
-				//if(myY > player.transform.position.y && mytk2dSprite.SortingOrder != backOrderInLayer){
-				//	mytk2dSprite.SortingOrder = backOrderInLayer;
-				//}else if(myY < player.transform.position.y && mytk2dSprite.SortingOrder != frontOrderInLayer){
-				//	mytk2dSprite.SortingOrder = frontOrderInLayer;
-
-				//}
-				if(!legs){
-				mytk2dSprite.SortingOrder = -1*(int)gameObject.transform.position.y;
-				}else{
-					mytk2dSprite.SortingOrder = -1*(int)gameObject.transform.position.y-2;
-				}
-
-			}else{
-				/*if(myY > player.transform.position.y && mySprite.sortingOrder != backOrderInLayer){
-					mySprite.sortingOrder = backOrderInLayer;
-				}else if(myY < player.transform.position.y && mySprite.sortingOrder != frontOrderInLayer){
-					mySprite.sortingOrder = frontOrderInLayer;
-
-				}*/
-				mySprite.sortingOrder = -1*(int)gameObject.transform.position.y;
-
-			}
+            UpdateSortingOrder();
 		}
 	}
+
+    void UpdateSortingOrder()
+    {
+        int sortingOrder;
+
+        // Get the sorting order from the Y-value of the best component.
+        // Try to use the box collider since it's more accurate than the sprite size, typically.
+        if (boxCollider2D != null) {
+            sortingOrder = GetSortOrder(boxCollider2D);
+        } else {
+            sortingOrder = GetSortOrder(myRenderer);
+        }
+
+        // apply the sorting order.
+        myRenderer.sortingOrder = sortingOrder;
+
+        // sort any other gameObjects this one is in charge of sorting.
+        for (int i = 0; i < sortBuddies.Count; i++) {
+            sortBuddies[i].renderer.sortingOrder = sortingOrder + sortBuddies[i].offset;
+        }
+    }
+
+    // * Find the actual y position at the "feet" of the gameObject by subtracting 1/2 the size of the sprite.
+    // * Multiply the y by 100 to get a more accurate percentage (2 decimal places).
+    // * Round everything to an int.
+    // * Add some large offset so the SortingOrder is always positive before it's multiplied.
+    // * Multiply by -1 so it's projected away from the camera.
+    int GetSortOrder(Renderer renderer)
+    {
+        return (Mathf.RoundToInt((renderer.bounds.min.y) * 100f) + SOMELARGEOFFSET) * -1;
+    }
+
+    int GetSortOrder(BoxCollider2D collider2D)
+    {
+        return (Mathf.RoundToInt(collider2D.bounds.min.y * 100f) + SOMELARGEOFFSET) * -1;
+    }
 }

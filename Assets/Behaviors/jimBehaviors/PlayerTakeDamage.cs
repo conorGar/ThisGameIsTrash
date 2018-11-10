@@ -210,6 +210,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
         // Pop Respawn State
         GameStateManager.Instance.PopState();
+        gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";//return player to the gameplay layer
     }
     /*
 	IEnumerator Death(){
