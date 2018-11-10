@@ -34,7 +34,7 @@ public class Ev_MainCamera : MonoBehaviour {
     }
 
 	void Update () {
-		
+			if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
 			if(!transitioning){
 				if(screenShake == 0){
 					if(stableCamera == false){
@@ -76,7 +76,7 @@ public class Ev_MainCamera : MonoBehaviour {
 
 
 
-
+			}
 	}//end of update
 
 	public void Transition(string direction, string rName){

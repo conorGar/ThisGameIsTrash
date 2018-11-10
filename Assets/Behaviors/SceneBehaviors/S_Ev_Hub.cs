@@ -10,7 +10,7 @@ public class S_Ev_Hub : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		UserDataManager.Instance.SetDirty();
+		//UserDataManager.Instance.SetDirty();
 		SoundManager.instance.musicSource.clip = hubMusic;
 		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 		SoundManager.instance.musicSource.Play();

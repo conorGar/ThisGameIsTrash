@@ -25,8 +25,8 @@ public class EightWayMovement : MonoBehaviour {
 	public AudioClip footsteps2;
 
 
-
-	private tk2dSpriteAnimator legAnim;
+	[HideInInspector]
+	public tk2dSpriteAnimator legAnim;
 	Vector3 transformScale; // used for facing different directions
 
 	public bool clipOverride; //set by pickUpable object

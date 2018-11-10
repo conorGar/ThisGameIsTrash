@@ -112,8 +112,10 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    }
 
    public void ReturnFromCamEffect(){
+  	 	Debug.Log("return from cam effect");
 	   	zooming = false;
 	   	camPan = false;
+	   	continuousPanning = false;
 	   	thisCam.ZoomFactor = 1.15f;
 	   	gameObject.transform.position = new Vector2(player.transform.position.x, player.transform.position.y);
         CamManager.Instance.mainCam.enabled = true;

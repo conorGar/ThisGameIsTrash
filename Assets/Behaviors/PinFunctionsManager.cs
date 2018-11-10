@@ -18,16 +18,32 @@ public class PinFunctionsManager : MonoBehaviour {
 	public GameObject pinObjectPool;
 	public GameObject devil;
 	public Ev_CurrentWeapon currentWeaponDisplay;
+	public GameObject spinAttack;
 	//public PinManager pinManager;
 	public Sprite[] displaySprites;
 	Sprite displaySprite;
 	int displayHudCalledAgain;
+
+	//LinkToTheTrash
+	INPUTACTION heldKey;
+	bool chargingSpin;
 
 	public void Awake(){
 		if(inWorld){
 			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.BULKYBAG)){
 				GlobalVariableManager.Instance.BAG_SIZE += 2; //subtracted again at results.cs
 			}
+		}
+	}
+
+	void Update(){
+
+		if(chargingSpin && ControllerManager.Instance.GetKeyUp(heldKey)){
+			chargingSpin = false;
+			StopCoroutine("SpinAttack");
+			gameObject.GetComponent<MeleeAttack>().cantAttack = false;
+			gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
+
 		}
 	}
 
@@ -73,6 +89,22 @@ public class PinFunctionsManager : MonoBehaviour {
 	public void FaithfulWeapin(){
 		currentWeaponDisplay.UpdateMelee();
 	}
+
+	public IEnumerator SpinAttack(INPUTACTION givenKey){ //called at Swing() in 'MeleeAttack.cs'
+		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		heldKey = givenKey;
+		chargingSpin = true;
+		yield return new WaitForSeconds(.3f);
+		spinAttack.SetActive(true);
+		chargingSpin = false;
+		yield return new WaitForSeconds(.5f);
+		gameObject.GetComponent<MeleeAttack>().cantAttack = false;
+		gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
+		spinAttack.SetActive(false);
+	}
+
+
+
 
 	public void PassivePillage(bool increase){
 		if(increase){

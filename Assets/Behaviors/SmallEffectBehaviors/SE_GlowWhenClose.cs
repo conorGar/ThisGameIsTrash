@@ -19,16 +19,17 @@ public class SE_GlowWhenClose : MonoBehaviour {
 	Sprite startSprite;
 	[HideInInspector]
 	public GameObject player;
-	GameObject tempSpawnedObject;
+	//GameObject tempSpawnedObject;
 
 	int glowCheck = 0;
 
 	void Start(){
 		player = GameObject.FindGameObjectWithTag("Player");
-		startSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+		if(glowSprite != null)
+			startSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 	}
 
-	void Update(){
+	protected void Update(){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (player != null) {
                 if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < distanceUntilGlow && Mathf.Abs(player.transform.position.y - gameObject.transform.position.y) < distanceUntilGlow) {
@@ -37,10 +38,11 @@ public class SE_GlowWhenClose : MonoBehaviour {
                             gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
                         }
                         if (spawnSomethingWithGlow) {
-                            tempSpawnedObject = Instantiate(objectToSpawn, new Vector2(transform.position.x + xSpawnAdjust, transform.position.y + ySpawnAdjust), Quaternion.identity);
-                            if (spawnedObjectSprite != null) {
-                                tempSpawnedObject.GetComponent<SpriteRenderer>().sprite = spawnedObjectSprite;
-                            }
+                        	objectToSpawn.SetActive(true);
+                            //tempSpawnedObject = Instantiate(objectToSpawn, new Vector2(transform.position.x + xSpawnAdjust, transform.position.y + ySpawnAdjust), Quaternion.identity);
+                           // if (spawnedObjectSprite != null) {
+                                //tempSpawnedObject.GetComponent<SpriteRenderer>().sprite = spawnedObjectSprite;
+                           //}
                         }
                         SoundManager.instance.PlaySingle(highlightSound);
                         glowCheck = 1;
@@ -53,9 +55,10 @@ public class SE_GlowWhenClose : MonoBehaviour {
                 }
                 else { //if further away than distance
                     if (glowCheck > 0) {
-                        gameObject.GetComponent<SpriteRenderer>().sprite = startSprite;
-                        if (tempSpawnedObject != null) {
-                            Destroy(tempSpawnedObject);
+                    	if(startSprite !=null)
+                       		 gameObject.GetComponent<SpriteRenderer>().sprite = startSprite;
+                        if (objectToSpawn != null) {
+                            objectToSpawn.SetActive(false);
                         }
                         glowCheck = 0;
                     }

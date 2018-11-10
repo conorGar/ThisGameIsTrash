@@ -11,4 +11,6 @@ public class Ev_StartDayButton : SE_GlowWhenClose {
         FriendManager.Instance.DisableAllFriends();
 		fader.FadeToScene("WorldSelect");
 	}
+
+
 }

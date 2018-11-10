@@ -46,7 +46,8 @@ public class Ev_SignPost : MonoBehaviour {
                     CamManager.Instance.mainCamPostProcessor.profile = blur;
                     signPostHUD.SetActive(true);
                     signPostHUD.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = myText;
-                    nameDisplay.text = myName;
+                    if(nameDisplay != null)
+                  	  nameDisplay.text = myName;
                     if (myPicture != null) {
                         signPostHUD.transform.GetChild(1).GetComponent<Image>().sprite = myPicture;
                     }

@@ -12,7 +12,7 @@ public class MeleeAttack : MonoBehaviour {
 	public GameObject meleeWeaponTopSwing;
 	public GameObject meleeWeaponBotSwing;
 
-	bool cantAttack = false;
+	public bool cantAttack = false;
 	bool isSwinging = false;
 	int swingDirection;
 	float turningSpeed;
@@ -79,6 +79,8 @@ public class MeleeAttack : MonoBehaviour {
                         playerMomentum = 6f;
                         StartCoroutine("Swing", 3);
                     }
+
+                  
                 }
                 else {
                     //Debug.Log("something wrong with global var checks");
@@ -185,22 +187,42 @@ public class MeleeAttack : MonoBehaviour {
 			meleeDirectionEnabled.SetActive(true);
 
 			meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
+			if(//GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH) &&
+			ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT) ||ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN)){
+				INPUTACTION currentKey = INPUTACTION.ATTACKRIGHT;
+				if(direction ==1){
+					currentKey = INPUTACTION.ATTACKRIGHT;
+				}else if(direction == 2){
+					currentKey = INPUTACTION.ATTACKLEFT;
+				}else if(direction == 3){
+					currentKey = INPUTACTION.ATTACKUP;
+				}else if(direction == 4){
+					currentKey = INPUTACTION.ATTACKDOWN;
+				}
 
-			if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.SCRAPPYSHINOBI)){
-				//Scrappy Shinobi
-				yield return new WaitForSeconds(.1f);
-				meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
-				yield return new WaitForSeconds(.1f);
-				GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-				isSwinging = false;
-				gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
-				meleeDirectionEnabled.SetActive(false);
-			}else{
-				
-				GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-				gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
-				isSwinging = false;
-				meleeDirectionEnabled.SetActive(false);
+
+				//yield return new WaitForSeconds(.3f);
+				isSwinging = false; //prevents momentum from pushin player while twisting
+				cantAttack = true;
+
+				if(ControllerManager.Instance.GetKey(currentKey)){
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("spinAttack",true);
+					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("SpinAttack",currentKey);
+					meleeDirectionEnabled.SetActive(false);
+				}		    		
+                    	
+            }else{
+				if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.SCRAPPYSHINOBI)){
+					//Scrappy Shinobi
+					yield return new WaitForSeconds(.1f);
+					meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
+					yield return new WaitForSeconds(.1f);
+					ReturnFromSwing();
+					meleeDirectionEnabled.SetActive(false);
+				}else{
+					ReturnFromSwing();
+					meleeDirectionEnabled.SetActive(false);
+				}
 			}
 		}
 	}
@@ -208,6 +230,14 @@ public class MeleeAttack : MonoBehaviour {
 
 	public void SetCanAttack(bool val){
 		cantAttack = val;
+	}
+
+	public void ReturnFromSwing(){
+
+		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+		gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
+		isSwinging = false;
+
 	}
 }
 
