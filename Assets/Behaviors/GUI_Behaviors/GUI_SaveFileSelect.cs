@@ -17,34 +17,39 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 	}
 	void Update ()
 	{
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
-			LoadSave();
-			optionIcons[arrowPos].GetComponent<Image>().color = new Color(0.27f,.98f,.51f);
-			Invoke("ReturnFromSelectEffect",.2f);
-			//TODO: back button: enable scene event script again when do
-		
-		}
+        if (GameStateManager.Instance.GetCurrentState() == typeof(TitleState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
+                LoadSave();
+                optionIcons[arrowPos].GetComponent<Image>().color = new Color(0.27f, .98f, .51f);
+                Invoke("ReturnFromSelectEffect", .2f);
+                //TODO: back button: enable scene event script again when do
 
-        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && leftRightNav && arrowPos > 0) {
-            optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
-            Navigate("left");
-        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && leftRightNav && arrowPos < maxArrowPos) {
-            Debug.Log("Arrow RIGHT");
-            optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
-            Navigate("right");
-        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) && upDownNav && arrowPos > 0) {
-            optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
-            Navigate("up");
-        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && upDownNav && arrowPos < maxArrowPos) {
-            optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
-            Navigate("down");
-        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CALENDAR)){
-            ResetData(arrowPos);
+            }
+
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && leftRightNav && arrowPos > 0) {
+                optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+                Navigate("left");
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && leftRightNav && arrowPos < maxArrowPos) {
+                Debug.Log("Arrow RIGHT");
+                optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+                Navigate("right");
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) && upDownNav && arrowPos > 0) {
+                optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+                Navigate("up");
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && upDownNav && arrowPos < maxArrowPos) {
+                optionIcons[arrowPos].GetComponent<GUI_Ev_buttonPopUp>().UnhighlightButton();
+                Navigate("down");
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CALENDAR)) {
+                ResetData(arrowPos);
+            }
+
+
+            selectionArrow.transform.position = new Vector2(optionIcons[arrowPos].transform.position.x - 5f, optionIcons[arrowPos].transform.position.y);
         }
-
-
-        selectionArrow.transform.position = new Vector2(optionIcons[arrowPos].transform.position.x-5f,optionIcons[arrowPos].transform.position.y);
-
 	}
 	
 	public override void NavigateEffect(){
@@ -55,12 +60,23 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 	void LoadSave(){
 
 		UserDataManager.Instance.SetSlot(arrowPos);
-		StartCoroutine(UserDataManager.Instance.ReadAsync());
 
         // Clear out all the states.
         GameStateManager.Instance.PopAllStates();
 
-		fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
+        StartCoroutine(UserDataManager.Instance.ReadAsync(
+        () => {
+            // After the data is read, load the scene based on which day the player is currently at.
+            // Day 0 goes right into level 1.  All other days will be at the hub.
+            if (GlobalVariableManager.Instance.DAY_NUMBER - 1 < 1) {
+                fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
+            }
+            else {
+                fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
+            }
+        }));
+
+		
 
 	}
 

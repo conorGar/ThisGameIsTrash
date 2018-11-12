@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -7,7 +8,7 @@ using SimpleJSON;
 
 // Steam is pretty straight forward in regards to saving to disk.  It's not asyncronous at all.
 public class SteamUserDataManager : UserDataManager {
-    public override IEnumerator ReadAsync()
+    public override IEnumerator ReadAsync(Action callback = null)
     {
         yield return WhileReading();
 
@@ -49,7 +50,7 @@ public class SteamUserDataManager : UserDataManager {
             SetUserItemData(jsonObject);
         }
 
-        yield return base.ReadAsync();
+        yield return base.ReadAsync(callback);
         isReading = false;
     }
 

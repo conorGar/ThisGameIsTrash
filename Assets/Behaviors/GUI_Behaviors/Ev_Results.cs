@@ -145,6 +145,7 @@ public class Ev_Results : MonoBehaviour {
                         }
 
                         UserDataManager.Instance.SetDirty();
+                        GameStateManager.Instance.PopAllStates();
 
                         if (GlobalVariableManager.Instance.DAY_NUMBER == 2) {
                             GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");//supposed to be intro credits scene, changed for testing
