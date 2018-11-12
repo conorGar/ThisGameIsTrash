@@ -11,7 +11,7 @@ public class InvincibleEnemy : MonoBehaviour
 	}
 
 	void OnTriggerEnter2D(Collider2D melee){
-		if(melee.tag == "Weapon"){
+		if(isActiveAndEnabled && melee.tag == "Weapon"){
 			Deflect();
 			//Debug.Log("Collision with weapon: ");
 
