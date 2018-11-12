@@ -18,14 +18,22 @@ public class LargeTrashManager : MonoBehaviour
 
 		Instance = this;
 	}
-	public void EnableProperTrash(int currentWorld){ 
-		// activated by WorldManager
-
+	public void EnableProperTrash(int currentWorld){
+        // activated by WorldManager
 
 		worlds[currentWorld -1].SetActive(true);
 
+        var largeTrashList = worlds[currentWorld - 1].gameObject.GetComponentsInChildren<Ev_LargeTrash>();
+        for (int i = 0; i < largeTrashList.Length; i++) {
+            // Do not activate large trash that has already been discovered.
+            if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeTrashList[i].garbage.type) == largeTrashList[i].garbage.type) {
+                largeTrashList[i].gameObject.SetActive(false);
+            } else {
+                largeTrashList[i].gameObject.SetActive(true);
+            }
+        }
 
-	}
+    }
 
 	public void DisableProperTrash(int currentWorld){ // activated by Ev_results
 		

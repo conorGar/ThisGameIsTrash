@@ -9,7 +9,7 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 
 
 	public TextMeshProUGUI positiveText;
-	public GameObject starsAvailableHUD;
+	public GUI_StarsAvailableHUD starsAvailableHUD;
 	public ParticleSystem selectPS;
 	public GameObject baseStatUpgrade;
 	public AudioClip navSFX1;
@@ -19,7 +19,7 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 	void OnEnable(){
         GameStateManager.Instance.PushState(typeof(ShopState));
         CamManager.Instance.mainCamPostProcessor.profile = blur;
-		starsAvailableHUD.SetActive(true);
+        starsAvailableHUD.gameObject.SetActive(true);
 	}
 
     void OnDisable()
@@ -70,18 +70,16 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 			selectPS.Play();
 			if(arrowPos == 0){
 				GlobalVariableManager.Instance.BAG_SIZE +=2;
-				starsAvailableHUD.GetComponent<GUI_StarsAvailableHUD>().UpdateDisplay();
 			}else if(arrowPos == 1){
 				GlobalVariableManager.Instance.Max_HP +=1;
-				starsAvailableHUD.GetComponent<GUI_StarsAvailableHUD>().UpdateDisplay();
 			}else if(arrowPos == 2){
-				GlobalVariableManager.Instance.PPVALUE +=3;
-				starsAvailableHUD.GetComponent<GUI_StarsAvailableHUD>().UpdateDisplay();
+				GlobalVariableManager.Instance.PPVALUE +=3;	
 			}
 			GlobalVariableManager.Instance.STAR_POINTS--;
-			PositiveText();
+            starsAvailableHUD.UpdateDisplay();
+            PositiveText();
 		}if(arrowPos == 3){
-			starsAvailableHUD.SetActive(false);
+			starsAvailableHUD.gameObject.SetActive(false);
 			baseStatUpgrade.SetActive(false);
 		}
 	}

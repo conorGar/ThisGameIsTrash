@@ -45,7 +45,7 @@ namespace I2.TextAnimation
 
 			if (Application.isPlaying && _OnEnable_PlayAnim >= 0 && _OnEnable_PlayAnim < _AnimationSlots.Length)
 			{
-				StopAllAnimations();
+				StopAllAnimations(false);
 				_AnimationSlots[_OnEnable_PlayAnim].Play(this);
 			}
 

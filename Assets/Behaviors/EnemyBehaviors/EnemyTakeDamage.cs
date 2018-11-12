@@ -351,7 +351,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		for(int i = 0; i < behaviorsToDeactivate.Count;i++){
 						behaviorsToDeactivate[i].enabled = true;
 		}
-		yield return new WaitForSeconds(.3f);
+
 		//Debug.Log("STOP KNOCKBACK ACTIVATE");
 		damageOnce = 0;
 		SoundManager.instance.PlaySingle(bounce);
@@ -363,6 +363,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			myAnim.Play(returnAniName);
 			//else
 				//myAnim.Play("IdleR");
+		yield return new WaitForSeconds(.1f);
 		takingDamage = false;
 
 	}
@@ -372,7 +373,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		//remove effects from self
 
 
-		//Debug.Log("**Continue Hit activation***");
+
 		if(moveWhenHit || hitByThrownObject){
 			takingDamage = true;
 
@@ -382,13 +383,31 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				myCollisionBox.enabled = false;
 
 				if(swingDirectionSide < 0){
-						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-17f,8f), ForceMode2D.Impulse);
+					if(currentHp <= 0){
+						spinning = true;
+						myBody.AddForce(new Vector2(-11f,8f), ForceMode2D.Impulse);
+						myBody.gravityScale = 3;
+						if(myShadow != null)
+							myShadow.transform.parent = null; //shadow doesnt follow Y pos
+					}else{
+						Debug.Log("**Got here- enemy hit***");
+						myBody.AddForce(new Vector2(-17f,0f), ForceMode2D.Impulse);
+					}
 				}else{
-						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,8f), ForceMode2D.Impulse);	
+					if(currentHp <= 0){
+						spinning = true;
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11f,8f), ForceMode2D.Impulse);
+						myBody.gravityScale = 3;
+						if(myShadow != null)
+							myShadow.transform.parent = null; //shadow doesnt follow Y pos	
+					}else{
+						Debug.Log("**Got here- enemy hit***");
+						myBody.velocity = new Vector2(7f,0f);
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,0f), ForceMode2D.Impulse);	
+					}
 				}
-				myBody.gravityScale = 2;
-				if(myShadow != null)
-					myShadow.transform.parent = null; //shadow doesnt follow Y pos
+
+
 
 
 			}else if(meleeSwingDirection.CompareTo("stickUp") == 0||meleeSwingDirection.CompareTo("clawUp") == 0||meleeSwingDirection.CompareTo("poleUp") == 0){
@@ -396,14 +415,18 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			}else if(meleeSwingDirection.CompareTo("stickDown") == 0||meleeSwingDirection.CompareTo("clawDown") == 0||meleeSwingDirection.CompareTo("poleDown") == 0){
 				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,17f), ForceMode2D.Impulse);
 			}
-				spinning = true;
+				
 
-				yield return new WaitForSeconds(.2f);
-				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
-				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+			yield return new WaitForSeconds(.1f);
+			this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
+				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				//Debug.Log("**AND HERE!!!!!!!!***");
-				yield return new WaitForSeconds(.3f);
-				StartCoroutine( "StopKnockback");
+			if(currentHp <= 0)
+				yield return new WaitForSeconds(.4f);
+			else
+				yield return new WaitForSeconds(.1f);
+
+			StartCoroutine( "StopKnockback");
 
 		}else{
 			yield return new WaitForSeconds(.2f);
@@ -430,7 +453,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				}
 
 				//****SFX PLAY - 'hit2' on ch4
-				yield return new WaitForSeconds(.7f);
+				yield return new WaitForSeconds(.4f);
 				//***grow/shrink scale back to normal on all fronts
 
 				if(gameObject.GetComponent<FollowPlayer>() && this.enabled){ //enabled check for if other things disable follow player for whatever reason
@@ -550,6 +573,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			Debug.Log("dropped scrap:" + scrapDropped);
 		    for(int i = 0; i < scrapDropped; i++){
 				GameObject droppedScrap=   ObjectPool.Instance.GetPooledObject("Scrap",gameObject.transform.position); 
+				droppedScrap.GetComponent<Ev_Scrap>().landingY = gameObject.transform.position.y + Random.Range(-2f,2f);
 			    //droppedScrap = Instantiate(scrapDrop,new Vector3((transform.position.x + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.x)),(transform.position.y + Random.Range(0,gameObject.GetComponent<tk2dSprite>().GetBounds().size.y)),transform.position.z), Quaternion.identity);
 		    }
         }

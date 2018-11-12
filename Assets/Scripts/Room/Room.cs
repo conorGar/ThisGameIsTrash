@@ -16,6 +16,7 @@ public class Room : MonoBehaviour
     public GameObject objectPool; //given to enemy, who needs it for EnemyTakeDamage hitStar spawn
     public GameObject cam; // used for cam zoom when enter boss room, can probably find a better way
     public GameObject tutPopup;
+    public Transform miniMapPosition;
     public bool activateTutpopWhenEnter;
     public string tutPopUpToActivate;
 
@@ -190,5 +191,16 @@ public class Room : MonoBehaviour
         rect.yMax = roomCollider2D.bounds.max.y;
 
         return rect;
+    }
+
+    // Returns true if there is trash in at least one spawner.  TODO: if we want a trash number this function could change to return that instead.
+    public bool HasTrash()
+    {
+        for (int i = 0; i < garbageSpawners.Count; i++) {
+            if (garbageSpawners[i].spawned)
+                return true;
+        }
+
+        return false;
     }
 }

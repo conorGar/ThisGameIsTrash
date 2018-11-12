@@ -291,6 +291,7 @@ public class DialogEditorWindow : EditorWindow {
                     GUILayout.EndHorizontal();
 
                     GUILayout.BeginHorizontal();
+                    node.isDialogAction = GUILayout.Toggle(node.isDialogAction, "Dialog Action?");
                     GUILayout.Label("Action: ");
                     node.action = GUILayout.TextField(node.action);
                     GUILayout.EndHorizontal();
@@ -298,6 +299,12 @@ public class DialogEditorWindow : EditorWindow {
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("Change Friend State: ");
                     node.friendState = GUILayout.TextField(node.friendState);
+                    GUILayout.EndHorizontal();
+
+                    GUILayout.BeginHorizontal();
+                    node.isThought = GUILayout.Toggle(node.isThought, "Is Thought?");
+                    GUILayout.Label("Anim Trigger: ");
+                    node.animTrigger = GUILayout.TextField(node.animTrigger);
                     GUILayout.EndHorizontal();
                     break;
                 case DIALOGNODETYPE.QUESTION:

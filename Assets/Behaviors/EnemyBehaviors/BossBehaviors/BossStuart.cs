@@ -122,7 +122,7 @@ public class BossStuart : Boss
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		SoundManager.instance.musicSource.Pause();
 		mdim.icons[0].GetComponent<MultipleIcon>().positionOnScreen = 0;//change ex icon position to be on left side
-		mdim.SetStartingIcons(new string[]{"Stuart"});
+		mdim.SetStartingIcons("Stuart");
 		myETD.currentHp += 10; //regain lost hp
 		ex.gameObject.SetActive(true); //activate dialog
 
@@ -133,7 +133,7 @@ public class BossStuart : Boss
 	}
 
 	public override void BossDeathEvent(){
-		mdim.SetStartingIcons(new string[]{"Stuart"});
+		mdim.SetStartingIcons("Stuart");
 
         ex.gameObject.SetActive(true);
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;

@@ -65,7 +65,7 @@ public class RockFriend : Friend {
         switch (GetFriendState()) {
             case "START":
                 nextDialog = "Start";
-                GetComponent<ActivateDialogWhenClose>().Execute();
+                GetComponent<ActivateDialogWhenClose>().Execute("Nobody");
                 break;
             case "WANTS_TO_BE_PRETTY":
                 break;
@@ -184,9 +184,10 @@ public class RockFriend : Friend {
 		yield return new WaitForSeconds(1f);
 
 		var multiDialog = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
-		for(int i = 0; i <multiDialog.icons.Count;i++){
+        for (int i = 0; i <multiDialog.icons.Count;i++){
 			multiDialog.icons[i].GetComponent<Image>().enabled = true;
 		}
+
 		dialogManager.ReturnFromAction();
 
 	}

@@ -109,14 +109,12 @@ public class GlobalVariableManager : UserDataItem {
     public struct LargeTrashItem
     {
         public LARGEGARBAGE type;
-        public int spriteIndex;
         public bool isViewed;
         public Sprite collectedDisplaySprite;
 
         public LargeTrashItem(LARGEGARBAGE p_type)
         {
             type = p_type;
-            spriteIndex = 0;
             isViewed = false;
             collectedDisplaySprite = null;
         }
@@ -227,10 +225,15 @@ public class GlobalVariableManager : UserDataItem {
         json_data["LARGE_GARBAGE_DISCOVERED"] = (uint)LARGE_GARBAGE_DISCOVERED;
         json_data["LARGE_GARBAGE_VIEWED"] = (uint)LARGE_GARBAGE_VIEWED;
 
+        // Stats and things
+        json_data["STAR_POINTS"] = STAR_POINTS;
+        json_data["Max_HP"] = Max_HP;
+        json_data["BAG_SIZE"] = BAG_SIZE;
         json_data["PPVALUE"] = PPVALUE;
         json_data["DEJAVUCOUNT"] = DEJAVUCOUNT;
         json_data["CURSEVALUE"] = CURSEVALUE;
         json_data["MOMONEYVALUE"] = MOMONEYVALUE;
+        json_data["PROGRESS_LV"] = PROGRESS_LV;
 
         json_data["TUT_POPUPS_SHOWN"] = (uint)TUT_POPUPS_SHOWN;
 
@@ -253,10 +256,14 @@ public class GlobalVariableManager : UserDataItem {
         LARGE_GARBAGE_DISCOVERED = (LARGEGARBAGE)json_data["LARGE_GARBAGE_DISCOVERED"].AsInt;
         LARGE_GARBAGE_VIEWED = (LARGEGARBAGE)json_data["LARGE_GARBAGE_VIEWED"].AsInt;
 
-        PPVALUE =json_data["PPVALUE"].AsInt;
+        STAR_POINTS = json_data["STAR_POINTS"].AsInt;
+        Max_HP = json_data["Max_HP"].AsInt;
+        BAG_SIZE = json_data["BAG_SIZE"].AsInt;
+        PPVALUE = json_data["PPVALUE"].AsInt;
         DEJAVUCOUNT = json_data["DEJAVUCOUNT"].AsInt;
         CURSEVALUE = json_data["CURSEVALUE"].AsInt;
         MOMONEYVALUE = json_data["MOMONEYVALUE"].AsInt;
+        PROGRESS_LV = json_data["PROGRESS_LV"].AsInt;
 
         TUT_POPUPS_SHOWN = (TUTORIALPOPUPS)json_data["TUT_POPUPS_SHOWN"].AsInt;
     }

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ev_LargeTrash : PickupableObject {
-
-	
-	public int myPositionInList;
 	public bool isRewardForBoss;
 
 
@@ -15,7 +12,7 @@ public class Ev_LargeTrash : PickupableObject {
 	//public char myCharValue; //only used to set up string for use when showing today's collected large trash at day end
     public LargeGarbage garbage = new LargeGarbage();
     public Sprite collectedDisplaySprite;
-
+    public BoxCollider2D myCollisionBox;
 
 	//public GameObject largeShadow;
 	//public GameObject cloudEffect;
@@ -28,7 +25,7 @@ public class Ev_LargeTrash : PickupableObject {
 	//is dropped. If myCurrentRoom = RoomManager.currentRoom, deactivate self. (In update method?) check if the roomManager.room =
 	//current room and if so, activate the large trash
 
-	public string myCurrentRoom; // used by map Star icons
+	public Room myCurrentRoom; // used by map Star icons
 	[HideInInspector]
 	//public GameObject dumpster; //used for return
 
@@ -79,11 +76,14 @@ public class Ev_LargeTrash : PickupableObject {
 					
 			
 		}
-		garbage.type = LargeGarbage.ByIndex(myPositionInList);
-
-
 	}// end of Start()
-	
+
+	public override void PickUp(){
+		base.PickUp();
+		myCollisionBox.enabled = false; //doesnt collide with player
+
+	}
+
 	public override void PickUpEvent(){
 		gameObject.tag = "ActiveLargeTrash";
 		sparkle.SetActive(false);
@@ -93,8 +93,9 @@ public class Ev_LargeTrash : PickupableObject {
 	public override void DropEvent(){
 		gameObject.tag = "LargeTrash";
 		sparkle.SetActive(true);
+		myCollisionBox.enabled = true; //doesnt collide with player
 		gameObject.transform.parent = ltmManager.transform; //goes back to largeTrashManager when drop
-		myCurrentRoom = RoomManager.Instance.currentRoom.name;
+		myCurrentRoom = RoomManager.Instance.currentRoom;
 		//gameObject.GetComponent<Animator>().enabled = false;
 
 	}
@@ -181,19 +182,19 @@ public class Ev_LargeTrash : PickupableObject {
 		SoundManager.instance.PlaySingle(returnSound);
         // Add this trash item to the large trash list.
         var largeTrashItem = new GlobalVariableManager.LargeTrashItem(garbage.type);
-        largeTrashItem.spriteIndex = myPositionInList;
         largeTrashItem.collectedDisplaySprite = collectedDisplaySprite;
         GlobalVariableManager.Instance.LARGE_TRASH_LIST.Add(largeTrashItem);
 
 		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
 			//play trash pickup on channel 2
 		}
-
+		myBody.simulated = true;
 		gameObject.transform.parent = null;
 		myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
 		myBody.gravityScale = 2;
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		returning = true;
+		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
 		player.GetComponent<MeleeAttack>().enabled = true;
 		dumpster.GetComponent<SE_GlowWhenClose>().enabled = true;
 		ReturnArc();

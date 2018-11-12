@@ -42,7 +42,7 @@ public class S_Ev_Hub : MonoBehaviour {
     {
         for (int i = 0; i < friendSpawners.Count; ++i) {
             var spawnedFriend = FriendManager.Instance.GetFriend(friendSpawners[i].friend);
-            Debug.Log(spawnedFriend.name+"-m-m-m-m-m-m-m-m-m");
+            //Debug.Log(spawnedFriend.name+"-m-m-m-m-m-m-m-m-m");
             if (spawnedFriend != null && spawnedFriend.IsVisiting) {
                 spawnedFriend.gameObject.transform.position = friendSpawners[i].transform.position;
                 spawnedFriend.gameObject.SetActive(true);

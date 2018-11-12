@@ -57,7 +57,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 			damageDealt = projectile.gameObject.GetComponent<Projectile>().damageToPlayer;
 
 			TakeDamage(projectile.gameObject);
-		}else if(projectile.gameObject.layer == 9 && !currentlyTakingDamage){//enemy with non-solid collision(flying enemy)
+		}else if(projectile.gameObject.layer == 16 && !currentlyTakingDamage){//enemy with non-solid collision(flying enemy)
             if (projectile.gameObject.tag == "Boss"){
                 damageDealt = projectile.gameObject.GetComponent<Boss>().attkDmg;
             }
@@ -210,6 +210,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
         // Pop Respawn State
         GameStateManager.Instance.PopState();
+        gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";//return player to the gameplay layer
     }
     /*
 	IEnumerator Death(){

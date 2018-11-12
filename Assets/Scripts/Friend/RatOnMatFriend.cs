@@ -5,6 +5,11 @@ using System.Collections.Generic;
 public class RatOnMatFriend : Friend
 {
 	public ParticleSystem vanishPS;
+	GameObject openMapPrompt;
+
+	void Start(){
+		openMapPrompt = GameObject.Find("promptText");
+	}
 
     private void Update(){
         OnUpdate();
@@ -12,7 +17,7 @@ public class RatOnMatFriend : Friend
 
     void OnEnable(){
 		base.OnEnable();
-        //StartCoroutine("DayDisplayDelay");
+        StartCoroutine("DayDisplayDelay");
     }
 
     public override void GenerateEventData()
@@ -38,7 +43,7 @@ public class RatOnMatFriend : Friend
         switch (GetFriendState()) {
             case "TUTORIAL":
                 nextDialog = "RatMat1";
-                GetComponent<ActivateDialogWhenClose>().Execute();
+
                 break;
             case "END":
                 break;
@@ -47,15 +52,15 @@ public class RatOnMatFriend : Friend
 
     public override IEnumerator OnFinishDialogEnumerator(){
         StartCoroutine("ReturnCam");
-
+        openMapPrompt.SetActive(true);
         yield return null;
 	}
-	/*IEnumerator DayDisplayDelay(){
+	IEnumerator DayDisplayDelay(){
 
 	    yield return new WaitForSeconds(2f);
 		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = true; // needed to fix glitch where if player spammed continue button dialog would start again
-
-	}*/
+		GetComponent<ActivateDialogWhenClose>().Execute();
+	}
 
 	IEnumerator ReturnCam(){
         yield return new WaitForSeconds(.3f);
@@ -93,5 +98,7 @@ public class RatOnMatFriend : Friend
     {
         friendState = json_data["friendState"].AsInt;
     }
+
+
 }
 

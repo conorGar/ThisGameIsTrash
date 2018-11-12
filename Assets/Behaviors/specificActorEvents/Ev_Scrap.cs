@@ -17,8 +17,16 @@ public class Ev_Scrap : MonoBehaviour {
 	public Sprite spr4;
 	public Sprite spr5;
 
+	[HideInInspector]
+	public float landingY; //given by EnemyTakeDamage.cs
+
+	void OnStart(){
+
+	}
+
 	void OnEnable () {
-		meleeMeter = GameObject.Find("meleeMeter") as GameObject;
+		if(meleeMeter == null)
+			meleeMeter = GameObject.Find("meleeMeter") as GameObject;
 		int whichAni = Random.Range(1,6);
 		if(whichAni == 1)
 			gameObject.GetComponent<SpriteRenderer>().sprite = spr1;
@@ -33,9 +41,12 @@ public class Ev_Scrap : MonoBehaviour {
 
 	
 		turningSpeed = 360;
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-3f,.3f),20f);
+		gameObject.GetComponent<Rigidbody2D>().gravityScale = 2;
+		 
+		gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-2f,2f),Random.Range(18f,8f)),ForceMode2D.Impulse);
 		arc = true;
-		InvokeRepeating("Fall",0f,.1f);
+
+		//InvokeRepeating("Fall",0f,.1f);
 		StartCoroutine("WaitForGrab");
 
 		//InvokeRepeating("Test",1f,.4f);
@@ -84,11 +95,17 @@ public class Ev_Scrap : MonoBehaviour {
 	}
 
 	IEnumerator WaitForGrab(){
-		yield return new WaitForSeconds(.8f);
+		yield return new WaitForSeconds(.4f);// delay so doesnt instantly stop(starts below landing)
+		Debug.Log("scrap is waiting to reach: " + landingY);
+		yield return new WaitUntil(() => landingY >= transform.position.y);
+		Debug.Log("scrap has reached landing" + landingY + transform.position.y);
 		canBeGrabbed = true;
-		yield return new WaitForSeconds(.2f);
 		arc = false;
+		turningSpeed = 0;
+
+		gameObject.transform.Rotate(Vector2.left, 0f);
 		gameObject.transform.GetChild(0).gameObject.SetActive(true);
+		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
 

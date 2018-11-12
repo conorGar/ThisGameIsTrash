@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GUI_SaveFileSelect : GUI_MenuBase
 {
@@ -18,7 +19,10 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 	{
 		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 			LoadSave();
+			optionIcons[arrowPos].GetComponent<Image>().color = new Color(0.27f,.98f,.51f);
+			Invoke("ReturnFromSelectEffect",.2f);
 			//TODO: back button: enable scene event script again when do
+		
 		}
 
         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && leftRightNav && arrowPos > 0) {
@@ -74,6 +78,10 @@ public class GUI_SaveFileSelect : GUI_MenuBase
         }
 
         Debug.Log("Data in Slot: " + slot + " has been deleted!");
+    }
+
+    void ReturnFromSelectEffect(){
+		optionIcons[arrowPos].GetComponent<Image>().color = Color.white;
     }
 }
 

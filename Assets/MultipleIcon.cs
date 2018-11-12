@@ -7,6 +7,8 @@ public class MultipleIcon : MonoBehaviour {
 
 	//public ActivateDialogWhenClose myFriend;
 	public string myIconAniTrigger;
+    public Animator animator;
+    public bool isTalking;
 
 	// positionOnScreen should be changed by the specific friend event script's method that activates the new dialog.
 	public int positionOnScreen; //0 = left, 1 = middle, 2 = right

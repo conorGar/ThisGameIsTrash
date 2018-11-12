@@ -55,7 +55,7 @@ public class Ev_CurrentWeapon : MonoBehaviour {
 			player.GetComponent<MeleeAttack>().UpdateWeapon();
 
 		}
-		meleeDisplay.GetComponent<GUIEffects>().Start(); // makes meleeDisplay do a little bounce
+		meleeDisplay.GetComponent<Animator>().Play("meleeChangeEmphasis",-1,0f); // makes meleeDisplay do a little bounce
 		upgradePS.SetActive(true);
 		upgradePS.GetComponent<ParticleSystem>().Play();
 	}

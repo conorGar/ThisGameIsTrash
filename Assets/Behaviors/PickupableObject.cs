@@ -109,6 +109,7 @@ public class PickupableObject : MonoBehaviour
 		/*if(gameObject.GetComponent<BoxCollider2D>()!=null){
 			gameObject.GetComponent<BoxCollider2D>().enabled = false;
 		}*/
+		Debug.Log("Pickup() activated");
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
 		player.GetComponent<EightWayMovement>().enabled = false;
 		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -121,7 +122,7 @@ public class PickupableObject : MonoBehaviour
 		gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
 		gameObject.transform.parent = player.transform;
 		if(!throwableObject){
-		myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
+			myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
 			player.GetComponent<EightWayMovement>().carryingAbove = false;
 
 		}else{
@@ -149,6 +150,8 @@ public class PickupableObject : MonoBehaviour
 		SoundManager.instance.PlaySingle(drop);
 		spinning = false;
 		pickUpSpin = false;
+		myBody.simulated = true;
+		t=0f;
 		//proper postionining 
 		DropEvent();
 	}

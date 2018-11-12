@@ -47,6 +47,7 @@ public class GUI_DayDisplay : MonoBehaviour
 		yield return new WaitForSeconds(.3f);
 		phase = 3;
 		back.GetComponent<Animator>().enabled = true;
+		back.GetComponent<SpriteRenderer>().enabled = false;
 		player.GetComponent<EightWayMovement>().enabled = true;
 		playerDummy.SetActive(false);
 		yield return new WaitForSeconds(.5f);

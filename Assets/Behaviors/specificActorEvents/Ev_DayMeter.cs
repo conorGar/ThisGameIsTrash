@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using I2.TextAnimation;
+using UnityEngine.UI;
+
 
 public class Ev_DayMeter : MonoBehaviour {
 	public GameObject dayIcon;
@@ -16,20 +18,28 @@ public class Ev_DayMeter : MonoBehaviour {
 	public TextMeshProUGUI dayNumberDisplay;
 	public ParticleSystem halfWayDonePS;
 	public AudioClip halfWayDoneChime;
+	public Sprite nightIcon;
+	public Image dayColorTint;
+
 
 	float delayBonus = 1.0f;
+	Color sunsetColor = new Color(.85f,.64f,.18f,.13f);
+	Color nightColor = new Color(.18f,.26f,.85f,.13f);
+	Color startColor;
 
 	public float secondsInTheDay = 240f;
     public float secondsPassed = 0f;
     public int timeDeathIncrease = 20;
 	int finalCountdownNumber = 10;
 	bool halfWayMark;
+	bool nightMark;
 
 	void Start () {
 		GlobalVariableManager.Instance.TIME_IN_DAY = 0;
 		dayIcon.transform.localPosition = startPos.transform.localPosition;
 		dayNumberDisplay.text = "Day: "+ GlobalVariableManager.Instance.DAY_NUMBER;
         secondsPassed = 0f;
+        startColor = dayColorTint.color;
     }//end of Start()
 
     void Update()
@@ -47,6 +57,10 @@ public class Ev_DayMeter : MonoBehaviour {
 
             // Update time of day in seconds.
             GlobalVariableManager.Instance.TIME_IN_DAY = Mathf.Min(Mathf.RoundToInt(secondsPassed), Mathf.RoundToInt(secondsInTheDay * delayBonus));
+
+            //change Color
+			dayColorTint.color = Color.Lerp(startColor, nightColor,secondsPassed / secondsInTheDay * delayBonus);
+
 
             // Trigger events based on the time.
             if (state == typeof(GameplayState)) {
@@ -75,6 +89,11 @@ public class Ev_DayMeter : MonoBehaviour {
                     Debug.Log("HALFWAY Seconds Passed: " + GlobalVariableManager.Instance.TIME_IN_DAY);
                     HalfWay();
                 }
+
+				if(secondsPassed > (secondsInTheDay * delayBonus / 1.3f) && !nightMark){
+					NightMark();
+				}
+
             }
         }
     }
@@ -88,7 +107,18 @@ public class Ev_DayMeter : MonoBehaviour {
 	void HalfWay(){
 		halfWayMark = true;
 		halfWayDonePS.Play();
+		dayIcon.GetComponent<Animator>().Play("dayChangeEmphasis",-1,0f);
 		SoundManager.instance.PlaySingle(halfWayDoneChime);
 	}
+
+	void NightMark(){
+		nightMark = true;
+		dayIcon.GetComponent<Image>().sprite= nightIcon;
+		dayIcon.GetComponent<Animator>().Play("dayChangeEmphasis",-1,0f);
+		SoundManager.instance.PlaySingle(halfWayDoneChime);
+
+	}
+
+
 
 }

@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 114200476392568198}
   - component: {fileID: 114971438045356082}
   - component: {fileID: 96795652914796864}
-  - component: {fileID: 114740925349940560}
   m_Layer: 0
   m_Name: playerLegs
   m_TagString: Untagged
@@ -199,6 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4794204852092890}
   - component: {fileID: 212232770769180036}
+  - component: {fileID: 114131888816132292}
   m_Layer: 1
   m_Name: largeTrashShadow
   m_TagString: Untagged
@@ -248,7 +248,6 @@ GameObject:
   - component: {fileID: 114464350841643812}
   - component: {fileID: 114132427705094026}
   - component: {fileID: 114403107900317096}
-  - component: {fileID: 114711285932883472}
   - component: {fileID: 114732770225589538}
   - component: {fileID: 81923419685839720}
   - component: {fileID: 114659870708665122}
@@ -1035,6 +1034,25 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
+--- !u!114 &114131888816132292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1743049442551022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 1
+  sortBuddies:
+  - renderer: {fileID: 23509599961598266}
+    offset: 3
+  - renderer: {fileID: 23349307395468668}
+    offset: 2
+  - renderer: {fileID: 199518108732055438}
+    offset: -1
 --- !u!114 &114132427705094026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1108,7 +1126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPool: {fileID: 0}
   HPdisplay: {fileID: 0}
-  currentCam: {fileID: 0}
   roomManager: {fileID: 0}
   droppedTrashPile: {fileID: 0}
   deathDisplay: {fileID: 0}
@@ -1241,20 +1258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapDisplay: {fileID: 0}
---- !u!114 &114711285932883472
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1986514355627260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hastk2dSprite: 1
-  movingObject: 1
-  legs: 0
 --- !u!114 &114732770225589538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1267,20 +1270,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwSfx: {fileID: 8300000, guid: 713266d78f3d8d04b90715268e3ac62c, type: 3}
---- !u!114 &114740925349940560
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1013619722743968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hastk2dSprite: 1
-  movingObject: 1
-  legs: 1
 --- !u!114 &114790224221077936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1393,7 +1382,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1520558472
+  randomSeed: 230339282
   InitialModule:
     serializedVersion: 3
     enabled: 1

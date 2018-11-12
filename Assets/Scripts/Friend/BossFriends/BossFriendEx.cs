@@ -57,7 +57,7 @@ public class BossFriendEx : Friend
         {
             case "IN_FIELD":
                 nextDialog = "Boss1Intro";
-                GetComponent<ActivateDialogWhenClose>().Execute();
+                GetComponent<ActivateDialogWhenClose>().Execute("Ex", "Questio", "Hash");
                 break;
             case "IN_TOXIC_FIELD":
                 nextDialog = "Boss1Start";
@@ -140,7 +140,15 @@ public class BossFriendEx : Friend
         switch (GetFriendState())
         {
             case "IN_TOXIC_FIELD":
+                gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 15;
+                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 22;
+                break;
             case "STUART_PEP":
+                gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 15;
+                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 22;
+                break;
             case "STUART_DEFEATED":
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 15;
@@ -182,6 +190,19 @@ public class BossFriendEx : Friend
                 SetFriendState("LEFT_FIGHT_PHASE_2");
                 break;
         }
+    }
+
+    // Actions from the dialog script!
+    public void Upset()
+    {
+        DialogManager.Instance.currentlySpeakingIcon.SetAnimBool("IsUpset", true);
+        DialogManager.Instance.ReturnFromAction();
+    }
+
+    public void NotUpset()
+    {
+        DialogManager.Instance.currentlySpeakingIcon.SetAnimBool("IsUpset", false);
+        DialogManager.Instance.ReturnFromAction();
     }
 
     // User Data implementation

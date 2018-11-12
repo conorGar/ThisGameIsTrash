@@ -7,9 +7,6 @@ public class GUI_Map_StarIcon : MonoBehaviour {
 	public string myLargeTrashName;
 	public int worldChildIndex; // which world categorizer under LargeTrashManager, 0 = w1, 1 = w2, etc...
 	public GUI_Map map;
-
-
-	string myRoom;
 	Ev_LargeTrash myLargeTrash;
 	// Use this for initialization
 	void Start () {
@@ -22,7 +19,7 @@ public class GUI_Map_StarIcon : MonoBehaviour {
 			}
 		}
 		if(myLargeTrash == null){//if cant find large trash in the hiearchy, then destroy because player got trash already
-			Debug.Log("could not find star icon large trash and was destoryed");
+			Debug.Log("could not find star icon large trash and was destroyed");
 			Destroy(gameObject);
 		}else{
 		OnEnable();
@@ -32,8 +29,13 @@ public class GUI_Map_StarIcon : MonoBehaviour {
 
 	void OnEnable(){
 		if(myLargeTrash != null){
-			myRoom = myLargeTrash.myCurrentRoom;
-			gameObject.transform.position = map.GetRoomPosition(myRoom);
+            // Set the star to the minimap position if it has one (some rooms don't right now).
+            if (myLargeTrash.myCurrentRoom.miniMapPosition != null) {
+                gameObject.transform.position = myLargeTrash.myCurrentRoom.miniMapPosition.position;
+            }
+            else {
+                gameObject.transform.position = Vector3.zero;
+            }
 		}
 	}
 	

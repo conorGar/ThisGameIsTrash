@@ -187,8 +187,8 @@ public class MeleeAttack : MonoBehaviour {
 			meleeDirectionEnabled.SetActive(true);
 
 			meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
-			if(//GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH) &&
-			ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT) ||ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN)){
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH) && (
+			ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT) ||ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN))){
 				INPUTACTION currentKey = INPUTACTION.ATTACKRIGHT;
 				if(direction ==1){
 					currentKey = INPUTACTION.ATTACKRIGHT;

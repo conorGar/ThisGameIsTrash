@@ -36,12 +36,15 @@ MonoBehaviour:
       speakerName: Rat With A Hat
       question: 
       action: finish
+      isDialogAction: 0
       friendState: ADVERTISED
       id:
         Value: 0700ab38-1992-4228-a392-531f1806dd89
       x: 171
       y: 171
       text: Come one come all! Rat With A Hat's upgrade stand is now open for business!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 07af14f5-f324-427a-859a-6a4f17646e25
@@ -57,12 +60,15 @@ MonoBehaviour:
       speakerName: Rat With A Hat
       question: 
       action: RatWithHatIntro
+      isDialogAction: 0
       friendState: 
       id:
         Value: 07af14f5-f324-427a-859a-6a4f17646e25
       x: 196
       y: 517
       text: Welcome! Welcome!
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 0c079812-771d-49df-b80c-2359c5bc4993
@@ -78,12 +84,15 @@ MonoBehaviour:
       speakerName: Rat With A Hat
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 0c079812-771d-49df-b80c-2359c5bc4993
       x: 542
       y: 519
       text: I am a rat. But, as you can see, I am wearing a hat.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: af0fabe0-699b-4043-9112-7151a7c0103c
@@ -99,12 +108,15 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: af0fabe0-699b-4043-9112-7151a7c0103c
       x: 876
       y: 519
       text: 'Therefore, my name is: Rat With A Hat. '
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: a097f46e-b398-4f8f-9cc6-9b51b28924a5
@@ -120,12 +132,15 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: a097f46e-b398-4f8f-9cc6-9b51b28924a5
       x: 1211
       y: 520
       text: It's not exactly genius character design, but it'll do.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 2486d530-0987-467e-9564-1bd025cfb048
@@ -141,6 +156,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 2486d530-0987-467e-9564-1bd025cfb048
@@ -148,6 +164,8 @@ MonoBehaviour:
       y: 521
       text: 'If you have any <color=#29B6F6>Star Points</color> I''ll happily take
         some! '
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 4264e6fa-2a8d-49e1-8b1c-ca519db958f3
@@ -163,6 +181,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 4264e6fa-2a8d-49e1-8b1c-ca519db958f3
@@ -170,6 +189,8 @@ MonoBehaviour:
       y: 522
       text: In return I will tell you <color=#78FF32> a sentence of positive reinforcement</color>
         to make you feel good about yourself.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 958953e7-3ff5-4b65-b5b1-65780785d77e
@@ -185,12 +206,15 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 958953e7-3ff5-4b65-b5b1-65780785d77e
       x: 2236
       y: 521
       text: All of us need <color=#78FF32>positive reinforcement</color> sometimes.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: c13358a9-a5e6-40de-bf92-1500d16a294e
@@ -206,6 +230,7 @@ MonoBehaviour:
       speakerName: 
       question: 
       action: 
+      isDialogAction: 0
       friendState: OPEN_FOR_BUSINESS
       id:
         Value: c13358a9-a5e6-40de-bf92-1500d16a294e
@@ -213,6 +238,8 @@ MonoBehaviour:
       y: 521
       text: You, specifically, can use <color=#78FF32>positive reinforcement</color>
         to <color=#78FF32>upgrade your base stats</color>.
+      isThought: 0
+      animTrigger: 
       type: 1
       child_id:
         Value: 

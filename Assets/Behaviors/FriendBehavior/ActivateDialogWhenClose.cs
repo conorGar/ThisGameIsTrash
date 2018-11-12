@@ -26,6 +26,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	[HideInInspector]
 	public DialogDefinition dialogDefiniton;
 	public bool canTalkTo = true;
+    public bool hideDialogIconsOnStart = false;
 //	public bool tempBoolForActionManager;
 
 	GameObject player;
@@ -46,7 +47,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
     // Called by other friends to test if they are close and control the dialog as it's displayed and interacted with.
     // Moved this out of Update so it can be controlled better by the friend and what state they are in.
-    public void Execute()
+    public void Execute(string firstIcon = "", string secondIcon = "", string thirdIcon = "")
     {
         if (GlobalVariableManager.Instance.CARRYING_SOMETHING == false)
         {
@@ -64,7 +65,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
                         //Debug.Log("Criteria met - 3");
                         startNodeName = friend.nextDialog;
-                        ActivateDialog();
+                        ActivateDialog(firstIcon, secondIcon, thirdIcon);
                     }
                     else if (canTalkTo)
                     {
@@ -93,7 +94,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
                             DialogManager.Instance.canContinueDialog = true;
                             startNodeName = friend.nextDialog;
-                            ActivateDialog();
+                            ActivateDialog(firstIcon, secondIcon, thirdIcon);
                         }
                     }
                 }
@@ -130,7 +131,8 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 		Debug.Log("**MY DIALOG DEFINITION***"+dialogDefiniton.name);
 	}
 
-	public void ActivateDialog(){
+	public void ActivateDialog(string firstIcon = "", string secondIcon = "", string thirdIcon = "")
+    {
 		DialogManager.Instance.gameObject.SetActive(true);
 
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
@@ -152,14 +154,26 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
             DialogManager.Instance.SetDialogIconByID(dialogDefiniton.dialogIconID);
             DialogManager.Instance.SetFriend(friend);
-			
-            DialogManager.Instance.dialogCanvas.SetActive(true);
-			Debug.Log("Got here with activate dialog execute" + DialogManager.Instance.dialogCanvas.activeInHierarchy);
-			DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(true);
-            DialogManager.Instance.currentlySpeakingIcon.SwitchAni(iconAnimationName);
-         
 
-			canTalkTo = false;
-		}
+            
+            if (DialogManager.Instance.currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager)) {
+                // A flag to check if all dialogIcons should be hidden initially (Rocks) or visable initially (white trash army)
+                var multiIcon = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
+                for (int i = 0; i < multiIcon.icons.Count; i++) {
+                    multiIcon.icons[i].gameObject.SetActive(!hideDialogIconsOnStart);
+                }
+
+                var multiDialog = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
+                multiDialog.SetStartingIcons(firstIcon, secondIcon, thirdIcon);
+            }
+
+            DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(true);
+            DialogManager.Instance.currentlySpeakingIcon.SetTalking(true);
+
+            canTalkTo = false;
+
+            DialogManager.Instance.dialogCanvas.SetActive(true);
+            Debug.Log("Got here with activate dialog execute" + DialogManager.Instance.dialogCanvas.activeInHierarchy);
+        }
 	}
 }

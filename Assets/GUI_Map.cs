@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GUI_Map : MonoBehaviour {
-
-
-	public GameObject myRooms;
 	public GameObject playerIcon;
-
+    public GameObject trashIconPrefab;
+    public List<GameObject> trashIcons;
 
 	// Use this for initialization
 	void Start () {
@@ -20,23 +18,31 @@ public class GUI_Map : MonoBehaviour {
 	}
 
 	void OnEnable(){
+        // Set current player position in world.
+        playerIcon.transform.position = RoomManager.Instance.currentRoom.miniMapPosition.position;
 
-		for(int i = 0; i < myRooms.transform.childCount; i++){
-			if(RoomManager.Instance.currentRoom.name == myRooms.transform.GetChild(i).name){
-				playerIcon.transform.position = myRooms.transform.GetChild(i).transform.position;//set current player position in world
-				break;
-			}
-		}
+        // Loop through the rooms and display a trash icon for any room that has trash.  TODO: maybe even add the number of trash to pick up?
+        for (int i = 0; i < RoomManager.Instance.rooms.Count; i++) {
+            Room room = RoomManager.Instance.rooms[i];
+
+            if (room.HasTrash()) {
+                if (room.miniMapPosition != null) { // TODO: some rooms don't have miniMapPositions defined yet but they need too for this to work.
+                    GameObject go = ObjectPool.Instance.GetPooledObject(trashIconPrefab.tag, room.miniMapPosition.position);
+                    go.transform.Translate(0f, -.5f, 0f);
+                    go.SetActive(true);
+                    trashIcons.Add(go);
+                }
+            }
+        }
 	}
 
-	public Vector3 GetRoomPosition(string room){//used by star icons
-		for(int i = 0; i < myRooms.transform.childCount; i++){
-			if(room == myRooms.transform.GetChild(i).name){
-				return myRooms.transform.GetChild(i).position;//set current player position in world
-				break;
-			}
-		}
-		Debug.Log("Star Icon's position for room:"+ room + " was not found...");
-		return Vector3.zero;
-	}
+    void OnDisable()
+    {
+        // Return trash icons to the pool!
+        for (int i = 0; i < trashIcons.Count; i++) {
+            ObjectPool.Instance.ReturnPooledObject(trashIcons[i]);
+        }
+
+        trashIcons.Clear();
+    }
 }
