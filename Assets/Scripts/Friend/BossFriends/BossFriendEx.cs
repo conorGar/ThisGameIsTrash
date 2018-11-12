@@ -16,6 +16,7 @@ public class BossFriendEx : Friend
 	//public GameObject stuartIcon;
 	public AudioClip smokePuff;
 	public AudioClip bossMusic;
+    public AudioClip windSFX;
 	int enterIconPhase;
 	
 	// Update is called once per frame
@@ -74,7 +75,9 @@ public class BossFriendEx : Friend
             case "PREP_FIGHT_PHASE_1":
                 player.GetComponent<PlayerTakeDamage>().enabled = true;
                 stuart.GetComponent<FollowPlayer>().enabled = true;
-                SoundManager.instance.musicSource.PlayOneShot(bossMusic);
+
+                SoundManager.instance.TransitionMusic(bossMusic);
+
                 gameObject.SetActive(false);
                 SetFriendState("FIGHT_PHASE_1");
                 break;
@@ -160,6 +163,7 @@ public class BossFriendEx : Friend
                 break;
             case "FIGHT_PHASE_2":
             case "LEFT_FIGHT_PHASE_2":
+                SoundManager.instance.TransitionMusic(bossMusic);
                 SetFriendState("PREP_FIGHT_PHASE_2");
                 break;
 
@@ -173,7 +177,8 @@ public class BossFriendEx : Friend
             case "FIGHT_PHASE_1":
                 stuart.GetComponent<FollowPlayer>().enabled = false;
                 stuart.ResetBossPositions();
-                // TODO: Play normal music level music.
+
+                SoundManager.instance.TransitionMusic(windSFX);
 
                 SetFriendState("LEFT_FIGHT_PHASE_1");
                 break;
@@ -185,7 +190,8 @@ public class BossFriendEx : Friend
                 stuart.GetComponent<FollowPlayer>().enabled = false;
                 transform.gameObject.SetActive(false);
                 stuart.ResetBossPositions();
-                // TODO: Play normal music level music.
+
+                SoundManager.instance.TransitionMusic(windSFX);
 
                 SetFriendState("LEFT_FIGHT_PHASE_2");
                 break;
