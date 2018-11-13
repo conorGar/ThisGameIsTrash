@@ -5,31 +5,23 @@ using UnityEngine;
 public class MusicTransitioner : MonoBehaviour {
     public AudioClip TopMusic;
     public AudioClip BottomMusic;
+    private Coroutine MusicRoutine;
 
-    bool isTransitioning = false;
-
-	void OnTriggerEnter2D(Collider2D collider){
-        if (!isTransitioning) {
-            TransitionCheck(collider);
-        }
-	}
-
-    void TransitionCheck(Collider2D collider)
-    {
+	void OnTriggerExit2D(Collider2D collider){
         Debug.Log("Player enters audio switcher");
+
+        // Stop any old transitions if they player is running back and forth over the trigger and trying to break stuff.
+        if (MusicRoutine != null) {
+            StopCoroutine(MusicRoutine);
+            MusicRoutine = null;
+        }
+
         if (collider.gameObject.tag == "Player") {
-            isTransitioning = true;
-
-            if (collider.gameObject.transform.position.y < transform.position.y) {
-                SoundManager.instance.TransitionMusic(TopMusic, true, false, () => {
-                    isTransitioning = false;
-                });
-
+            if (collider.gameObject.transform.position.y > transform.position.y) {
+                MusicRoutine = SoundManager.instance.TransitionMusic(TopMusic);
             }
             else {
-                SoundManager.instance.TransitionMusic(BottomMusic, true, false, () => {
-                    isTransitioning = false;
-                });
+                MusicRoutine = SoundManager.instance.TransitionMusic(BottomMusic);
             }
         }
     }

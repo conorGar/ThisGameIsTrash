@@ -71,9 +71,9 @@ public class SoundManager : MonoBehaviour {
 		musicFading = true;
 	}
 
-    public void TransitionMusic(AudioClip nextClip, bool fadeOut = true, bool fadeIn = false, System.Action callback = null)
+    public Coroutine TransitionMusic(AudioClip nextClip, bool fadeOut = true, bool fadeIn = false, System.Action callback = null)
     {
-        StartCoroutine(TransitionMusicEnumerator(nextClip, fadeOut, fadeIn, callback));
+        return StartCoroutine(TransitionMusicEnumerator(nextClip, fadeOut, fadeIn, callback));
     }
 
     IEnumerator TransitionMusicEnumerator(AudioClip nextClip, bool fadeOut = true, bool fadeIn = false, System.Action callback = null)
