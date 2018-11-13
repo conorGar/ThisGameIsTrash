@@ -67,21 +67,17 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
             PinDefinition pinDefinition = PinManager.Instance.pinConfig.pinList[i];
             int pageNum = i / pinsPerPage;
             Vector3 pagePos = pinPageList[pageNum].transform.position;
-            GameObject pin = ObjectPool.Instance.GetPooledObject("Pin");
+            var pin = ObjectPool.Instance.GetPooledObject("Pin").GetComponent<Ev_PinBehavior>();
             pin.transform.SetParent(pinPageList[pageNum].transform);
 
             // populate the pin data
             pin.name = pinDefinition.displayName;
 
-            var sprite = pin.GetComponent<tk2dSprite>();
-            sprite.SetSprite(pinDefinition.sprite);
+            pin.sprite.SetSprite(pinDefinition.sprite);
+            pin.SetPinData(pinDefinition);
+            pin.gameObject.SetActive(true);
 
-            var behavior = pin.GetComponent<Ev_PinBehavior>();
-            behavior.SetPinData(pinDefinition);
-
-            pin.SetActive(true);
-
-            var pinSize = pin.GetComponent<Collider2D>().bounds.size;
+            var pinSize = pin.sprite.GetComponent<BoxCollider2D>().bounds.size;
             // x, at the page origin, per column, spaced with an offset
             // y, at the page origin, per row, per page, projected downward.
             pin.transform.position = new Vector3(pagePos.x + i % PinManager.Instance.PinCol * (pinSize.x + PinManager.Instance.PinOffsetX),
@@ -97,106 +93,113 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                 pinPageList[i].SetActive(false);
         }
 
-	}
+        arrowPos = 0;
+        MoveArrow();
+    }
 	void OnEnable(){
-		leftSide.transform.localPosition = new Vector2(-140f,0f);
+        GameStateManager.Instance.PushState(typeof(ShopState));
+        leftSide.transform.localPosition = new Vector2(-140f,0f);
 		rightSide.transform.localPosition = new Vector2(120f,0f);
 
 		leftSide.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0,0,.2f,true);
 		rightSide.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0,0,.2f,true);
         CamManager.Instance.mainCamPostProcessor.profile = blur;
         totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
+
+        arrowPos = 0;
+        MoveArrow();
 	}
 
-	void Update () {
-        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
-        {
-            MoveArrow();
-			highlightedPin.GetComponent<Ev_PinBehavior>().EquipPin();
+    void OnDisable()
+    {
+        GameStateManager.Instance.PopState();
+    }
 
-            /*if (highlightedPin.GetComponent<Ev_PinBehavior>().EquipPin())
-            {
-                // Untilt if equipped
-                //if (highlightedPin != null)
-                //    highlightedPin.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-            }
-            else
-            {
-                // Tilt if unequipped
-                //if (highlightedPin != null)
-                //    highlightedPin.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 15f));
-            }*/
+    void Update () {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(ShopState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
+                MoveArrow();
+                highlightedPin.GetComponent<Ev_PinBehavior>().EquipPin();
 
-            totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
-		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){
-			GameObject pinCase = GameObject.Find("hubWorld_pinCase");
-			pinCase.GetComponent<Ev_PinDisplayOption>().enabled = true;
-			pinCase.GetComponent<Ev_PinDisplayOption>().player.GetComponent<EightWayMovement>().enabled = true;
-            CamManager.Instance.mainCamPostProcessor.profile = null;
-			this.gameObject.SetActive(false);
-		}
-        else
-        {
-            bool isNewPin = false;
-            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
-             || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
-            {
-            	SoundManager.instance.PlaySingle(navLeftSFX);
-                arrowPos--;
-                isNewPin = true;
-            }
-            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
-                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
-            {
-				SoundManager.instance.PlaySingle(navRightSFX);
-
-                arrowPos++;
-                isNewPin = true;
-            }
-            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
-                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN))
-            {
-				SoundManager.instance.PlaySingle(navRightSFX);
-
-                arrowPos += PinManager.Instance.PinCol;
-                isNewPin = true;
-            }
-            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
-                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP))
-            {
-				SoundManager.instance.PlaySingle(navLeftSFX);
-                arrowPos -= PinManager.Instance.PinCol;
-                isNewPin = true;
-            }
-
-            if (isNewPin)
-            {
-                // Wrap from 0 to pin max.
-                if (arrowPos < 0)
-                    arrowPos = PinManager.Instance.pinConfig.pinList.Count - 1;
-
-                if (arrowPos > PinManager.Instance.pinConfig.pinList.Count - 1)
-                    arrowPos = 0;
-
-                // select the currentpage.
-                for (int i=0; i < pinPageList.Count; ++i)
+                /*if (highlightedPin.GetComponent<Ev_PinBehavior>().EquipPin())
                 {
-                    if (i == arrowPos / (PinManager.Instance.PinCol * PinManager.Instance.PinRow)){
-                    	currentPage.text = (i+1).ToString();
-                        pinPageList[i].SetActive(true);
+                    // Untilt if equipped
+                    //if (highlightedPin != null)
+                    //    highlightedPin.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+                }
+                else
+                {
+                    // Tilt if unequipped
+                    //if (highlightedPin != null)
+                    //    highlightedPin.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 15f));
+                }*/
 
-                    }else
-                        pinPageList[i].SetActive(false);
+                totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)) {
+                GameObject pinCase = GameObject.Find("hubWorld_pinCase");
+                pinCase.GetComponent<Ev_PinDisplayOption>().enabled = true;
+                pinCase.GetComponent<Ev_PinDisplayOption>().player.GetComponent<EightWayMovement>().enabled = true;
+                CamManager.Instance.mainCamPostProcessor.profile = null;
+                this.gameObject.SetActive(false);
+            }
+            else {
+                bool isNewPin = false;
+                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
+                 || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
+                    SoundManager.instance.PlaySingle(navLeftSFX);
+                    arrowPos--;
+                    isNewPin = true;
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
+                      || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
+                    SoundManager.instance.PlaySingle(navRightSFX);
+
+                    arrowPos++;
+                    isNewPin = true;
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
+                      || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                    SoundManager.instance.PlaySingle(navRightSFX);
+
+                    arrowPos += PinManager.Instance.PinCol;
+                    isNewPin = true;
+                }
+                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
+                      || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                    SoundManager.instance.PlaySingle(navLeftSFX);
+                    arrowPos -= PinManager.Instance.PinCol;
+                    isNewPin = true;
                 }
 
-                if (highlightedPin != null)
-                    highlightedPin.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+                if (isNewPin) {
+                    // Wrap from 0 to pin max.
+                    if (arrowPos < 0)
+                        arrowPos = PinManager.Instance.pinConfig.pinList.Count - 1;
 
-                MoveArrow();
+                    if (arrowPos > PinManager.Instance.pinConfig.pinList.Count - 1)
+                        arrowPos = 0;
+
+                    // select the currentpage.
+                    for (int i = 0; i < pinPageList.Count; ++i) {
+                        if (i == arrowPos / (PinManager.Instance.PinCol * PinManager.Instance.PinRow)) {
+                            currentPage.text = (i + 1).ToString();
+                            pinPageList[i].SetActive(true);
+
+                        }
+                        else
+                            pinPageList[i].SetActive(false);
+                    }
+
+                    if (highlightedPin != null)
+                        highlightedPin.GetComponent<Ev_PinBehavior>().Unhighlight();
+
+                    MoveArrow();
+                }
             }
-        }
 
-        totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
+            totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
+        }
     }
 
 	void MoveArrow(){
@@ -210,7 +213,8 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                                                         highlightedPin.transform.position.y,
                                                         selectionArrow.transform.position.z);
 
-		highlightedPin.transform.rotation =  Quaternion.Euler(new Vector3(0f,0f,15f));
-		highlightedPin.GetComponent<Ev_PinBehavior>().AtEquipScreen();
+        var pinBehavior = highlightedPin.GetComponent<Ev_PinBehavior>();
+        pinBehavior.Highlight();
+        pinBehavior.AtEquipScreen();
 	}
 }

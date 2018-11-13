@@ -5,7 +5,8 @@ using UnityEngine.UI;
  
 public class Ev_PinBehavior : MonoBehaviour {
 
-	public GameObject smallTextDisplay;
+    public tk2dSprite sprite;
+    public GameObject smallTextDisplay;
 	public GameObject ppDisplayIcon; //neded for pin equip screen
 	public GameObject equippedBox;
 	public GameObject highlightBox;
@@ -39,8 +40,8 @@ public class Ev_PinBehavior : MonoBehaviour {
                 pinData.price = 1;
 			}
 		}*/
-		myAnimator = gameObject.GetComponent<Animator>();
-		mySFX = gameObject.GetComponent<SpecialEffectsBehavior>();
+		myAnimator = sprite.GetComponent<Animator>();
+		mySFX = sprite.GetComponent<SpecialEffectsBehavior>();
 		player = GameObject.Find("Jim");
 
 		if(GlobalVariableManager.Instance.ROOM_NUM == 97){
@@ -49,7 +50,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 			descriptionBox = GameObject.Find("description").GetComponent<Image>();
 		}else if(GlobalVariableManager.Instance.ROOM_NUM == 101){
             if (!GlobalVariableManager.Instance.IsPinDiscovered(pinData.Type)){
-                gameObject.GetComponent<tk2dSprite>().color = new Color(0f,0f,0f,1f);//blacked out if not owned
+                sprite.color = new Color(0f,0f,0f,1f);//blacked out if not owned
 			}else{
 				float xSpawnAdjust = -.6f;
 
@@ -59,8 +60,8 @@ public class Ev_PinBehavior : MonoBehaviour {
 		if(inShop){
 			if(IsPinDiscovered() && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 10 && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 20 && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 30){
 				GameObject myTextDisplay = Instantiate(smallTextDisplay,transform.position,Quaternion.identity);
-				Color currentColor = gameObject.GetComponent<tk2dSprite>().color;
-				gameObject.GetComponent<tk2dSprite>().color = new Color(currentColor.r,currentColor.g,currentColor.b,.4f);//fade
+				Color currentColor = sprite.color;
+                sprite.color = new Color(currentColor.r,currentColor.g,currentColor.b,.4f);//fade
 				myTextDisplay.GetComponent<tk2dSprite>().SetSprite(soldTextSprite);
 				bought = true;
 			}
@@ -68,8 +69,18 @@ public class Ev_PinBehavior : MonoBehaviour {
 			startingY = gameObject.transform.position.y;
 		}//end of inShop Check
 	}
-	
-	void Update () {
+
+    void OnEnable()
+    {
+        Unhighlight();
+    }
+
+    void OnDisable()
+    {
+        Unhighlight();
+    }
+
+    void Update () {
 
 
 		if(inShop){
@@ -138,9 +149,10 @@ public class Ev_PinBehavior : MonoBehaviour {
             PinManager.Instance.DescriptionText.text = pinData.description;
             PinManager.Instance.PinTitle.text = pinData.displayName;
             PinManager.Instance.PPDisplay.SetDisplayedIcons(pinData.ppValue);
-			PinManager.Instance.PinDisplaySprite.SetSprite(gameObject.GetComponent<tk2dSprite>().CurrentSprite.name);
+            PinManager.Instance.PinDisplaySprite.GetComponent<Renderer>().enabled = true;
+            PinManager.Instance.PinDisplaySprite.SetSprite(sprite.CurrentSprite.name);
 
-            Debug.Log("Pin Sprite Name : " + this.gameObject.GetComponent<tk2dSprite>().CurrentSprite.name
+            Debug.Log("Pin Sprite Name : " + sprite.CurrentSprite.name
                       + " Title Name : " + PinManager.Instance.PinTitle.text
                       + " Display Pin Sprite Name : " + PinManager.Instance.PinDisplaySprite.CurrentSprite.name);
         }
@@ -148,7 +160,8 @@ public class Ev_PinBehavior : MonoBehaviour {
             PinManager.Instance.DescriptionText.text = "Buy or find this Pin to learn what powers it holds!";
             PinManager.Instance.PinTitle.text = "???";
             PinManager.Instance.PPDisplay.Clear();
-		}
+            PinManager.Instance.PinDisplaySprite.GetComponent<Renderer>().enabled = false;
+        }
 	}
 
 	public bool EquipPin(){
@@ -164,7 +177,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 			if((!IsPinEquipped() || isDejaVuPinAndIsUnlocked) && GlobalVariableManager.Instance.PPVALUE >= pinData.ppValue){ // equip unequipped pin
                 GlobalVariableManager.Instance.PINS_EQUIPPED |= pinData.Type; //set pin to active
                 GlobalVariableManager.Instance.PPVALUE -= pinData.ppValue;
-				myAnimator.Play("pinEquipAni");
+				myAnimator.SetTrigger("Equip");
                 IsEquipped = true;
                 SoundManager.instance.PlaySingle(equipSFX);
 				highlightBox.SetActive(true);
@@ -232,10 +245,10 @@ public class Ev_PinBehavior : MonoBehaviour {
 				//activated by GUI_optionsPopupBehavior
 				GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
                 GlobalVariableManager.Instance.PINS_DISCOVERED |= pinData.Type;
-                gameObject.GetComponent<tk2dSprite>().color = new Color(255f,255f,255f,.1f); //fade
+                sprite.color = new Color(255f,255f,255f,.1f); //fade
 				GlobalVariableManager.Instance.TOTAL_TRASH -= pinData.price;
 				Instantiate(smallTextDisplay,transform.position,Quaternion.identity);
-				smallTextDisplay.GetComponent<tk2dSprite>().SetSprite(soldTextSprite);
+                sprite.SetSprite(soldTextSprite);
 
 				Image totalTrashDisplay = GameObject.Find("totalTrashDisplay").GetComponent<Image>();
 				totalTrashDisplay.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Shake",1f);
@@ -258,6 +271,18 @@ public class Ev_PinBehavior : MonoBehaviour {
 	public void SetMySpot(int i){
 		mySpotInShop = i;
 	}
+
+    public void Highlight()
+    {
+        if (myAnimator != null)
+            myAnimator.SetBool("IsHighlighted", true);
+    }
+
+    public void Unhighlight()
+    {
+        if (myAnimator != null)
+            myAnimator.SetBool("IsHighlighted", false);
+    }
 
     //helpers
     private bool IsPinDiscovered()
