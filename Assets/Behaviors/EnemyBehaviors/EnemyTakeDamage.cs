@@ -74,12 +74,13 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	Vector2 startScale;
 
 	void OnEnable(){
+		
 		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		if(!bossEnemy)
 			currentHp = gameObject.GetComponent<Enemy>().health;//enemy health reset when enter room again
 		if(myBody == null)
 			myBody = gameObject.GetComponent<Rigidbody2D>();
-
+		myBody.mass = 2;
 		myBody.gravityScale = 0;
 		takingDamage = false;
 		damageOnce = 0;
@@ -385,6 +386,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				if(swingDirectionSide < 0){
 					if(currentHp <= 0){
 						spinning = true;
+						myBody.mass = 1;
 						myBody.AddForce(new Vector2(-11f,8f), ForceMode2D.Impulse);
 						myBody.gravityScale = 3;
 						if(myShadow != null)
@@ -396,6 +398,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				}else{
 					if(currentHp <= 0){
 						spinning = true;
+						myBody.mass = 1;
 						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11f,8f), ForceMode2D.Impulse);
 						myBody.gravityScale = 3;
 						if(myShadow != null)

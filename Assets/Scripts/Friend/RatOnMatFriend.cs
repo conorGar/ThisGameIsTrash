@@ -7,9 +7,7 @@ public class RatOnMatFriend : Friend
 	public ParticleSystem vanishPS;
 	GameObject openMapPrompt;
 
-	void Start(){
-		openMapPrompt = GameObject.Find("promptText");
-	}
+
 
     private void Update(){
         OnUpdate();
@@ -17,6 +15,8 @@ public class RatOnMatFriend : Friend
 
     void OnEnable(){
 		base.OnEnable();
+		if(openMapPrompt == null)
+			openMapPrompt = GameObject.Find("promptText");
         StartCoroutine("DayDisplayDelay");
     }
 
@@ -52,7 +52,8 @@ public class RatOnMatFriend : Friend
 
     public override IEnumerator OnFinishDialogEnumerator(){
         StartCoroutine("ReturnCam");
-        openMapPrompt.SetActive(true);
+        if(openMapPrompt != null)
+        	openMapPrompt.SetActive(true);
         yield return null;
 	}
 	IEnumerator DayDisplayDelay(){
@@ -73,6 +74,7 @@ public class RatOnMatFriend : Friend
 		gameObject.GetComponent<MeshRenderer>().enabled =true;
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
         CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+		GameStateManager.Instance.PushState(typeof(GameplayState));
 
 
 		gameObject.SetActive(false);

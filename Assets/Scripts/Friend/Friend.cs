@@ -126,7 +126,7 @@ public class Friend : UserDataItem {
 
     public virtual void OnFinishDialog()
     {
-        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+        //CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
         DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(false);
         GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
         //nothing to do for basic friend

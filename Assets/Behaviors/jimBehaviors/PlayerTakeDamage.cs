@@ -170,13 +170,14 @@ public class PlayerTakeDamage : MonoBehaviour {
 			yield return new WaitForSeconds(1.5f);
 
         //return to start room
+		deathDisplay.FadeHUD();
         deathDisplay.myDayMeter.gameObject.SetActive(false);
 
         // Pop Death Clock State
         GameStateManager.Instance.PopState();
 
         yield return new WaitForSeconds(.5f);
-		deathDisplay.FadeHUD();
+		deathDisplay.fader.SetActive(false);
 		SoundManager.instance.musicSource.Play();
 		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 

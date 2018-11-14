@@ -16,6 +16,8 @@ public class JumboFriend : Friend {
     public GameObject filmColor;
     public GameObject movieScreen;
 	public AudioClip projectorPlay;
+
+	public GameObject largeTrashProjector;
 	int numberOfActivation;
 	bool movieIsPlaying;
     bool isFilmDateSet = false;
@@ -86,6 +88,9 @@ public class JumboFriend : Friend {
                 IsVisiting = false;
                 SetFriendState("INVITE_TO_SECOND_SCREENING");
                 break;
+			case "INVITE_TO_SECOND_SCREENING":
+				largeTrashProjector.SetActive(true);
+				break;
             case "END":
                 break;
         }

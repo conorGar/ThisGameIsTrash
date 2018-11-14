@@ -81,23 +81,39 @@ public class RatWhoFatFriend : Friend
 		Debug.Log("Fat Rat Walk activate");
 		sweatPS.SetActive(true);
 		CamManager.Instance.mainCamEffects.ZoomInOut(1.6f,1);
+	
+		//this.gameObject.GetComponent<tk2dSpriteAnimator>().enabled = true;
+
 		this.gameObject.GetComponent<tk2dSpriteAnimator>().Play("fatRatWalk");
+		//this.gameObject.GetComponent<tk2dSpriteAnimator>().enabled = false;
+		Debug.Log(this.gameObject.GetComponent<tk2dSpriteAnimator>().CurrentClip.name);
 		walkCounter++;
 		if(walkCounter == 3){
 			targetPos = new Vector2(12f,6f);
 		}
 		isWalking = true;
-		StartCoroutine(WalkSequence());
+		StartCoroutine("WalkSequence");
 	}
 
 	IEnumerator WalkSequence(){
+		Debug.Log("Walk Sequence Start");
 		CamManager.Instance.mainCamPostProcessor.profile = null;
 		yield return new WaitForSeconds(3f);
 		isWalking = false;
+		//this.gameObject.GetComponent<tk2dSpriteAnimator>().enabled = true;
+
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("fatRatIdle");
+		//this.gameObject.GetComponent<tk2dSpriteAnimator>().enabled = false;
+
+		Debug.Log(this.gameObject.GetComponent<tk2dSpriteAnimator>().CurrentClip);
+		Debug.Log(this.gameObject.GetComponent<tk2dSpriteAnimator>().CurrentClip.name);
 		CamManager.Instance.mainCamEffects.ZoomInOut(1.15f,1);
 		sweatPS.SetActive(false);
 		dialogManager.ReturnFromAction();
+		Debug.Log("Walk Sequence End");
+
+		StopCoroutine("WalkSequence");
+
 	}
 
 	public void TruckPan(){

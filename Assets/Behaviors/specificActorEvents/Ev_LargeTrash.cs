@@ -24,7 +24,7 @@ public class Ev_LargeTrash : PickupableObject {
 	//large trash is aware f the current room it is in. This room is given by roomManger.currentoom at start and when large trash
 	//is dropped. If myCurrentRoom = RoomManager.currentRoom, deactivate self. (In update method?) check if the roomManager.room =
 	//current room and if so, activate the large trash
-
+	public string trashTitle;
 	public Room myCurrentRoom; // used by map Star icons
 	[HideInInspector]
 	//public GameObject dumpster; //used for return
@@ -86,6 +86,7 @@ public class Ev_LargeTrash : PickupableObject {
 
 	public override void PickUpEvent(){
 		gameObject.tag = "ActiveLargeTrash";
+		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
 		sparkle.SetActive(false);
 		//gameObject.GetComponent<Animator>().enabled = true;
 	}
@@ -183,6 +184,7 @@ public class Ev_LargeTrash : PickupableObject {
         // Add this trash item to the large trash list.
         var largeTrashItem = new GlobalVariableManager.LargeTrashItem(garbage.type);
         largeTrashItem.collectedDisplaySprite = collectedDisplaySprite;
+        largeTrashItem.collectedTitle = trashTitle;
         GlobalVariableManager.Instance.LARGE_TRASH_LIST.Add(largeTrashItem);
 
 		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){

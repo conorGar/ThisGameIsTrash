@@ -68,7 +68,8 @@ public enum LARGEGARBAGE : int
 	MATTRESS =           	1 << 4,
 	TIRE =           		1 << 5,
 	PIZZABOX =           	1 << 6,
-    SIZE =                  1 << 6,
+	PROJECTOR =				1 << 7,
+    SIZE =                  1 << 7,
 }
 
 
@@ -278,7 +279,8 @@ public class LargeGarbage : IGarbage
         { LARGEGARBAGE.CHAIR,                         "" },
         { LARGEGARBAGE.STEREO,                    "" },
         { LARGEGARBAGE.SLIDE,                    "" },
-        { LARGEGARBAGE.TIRE,                    "" }
+        { LARGEGARBAGE.TIRE,                    "" },
+		{ LARGEGARBAGE.PROJECTOR,                    "" }
     };
 
 

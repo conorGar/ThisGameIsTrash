@@ -18,12 +18,15 @@ public class DialogChoiceManager : MonoBehaviour {
 	List<DialogResponse> dialogResponses = new List<DialogResponse>();
 	public TextMeshProUGUI choiceTitle;
 	//DialogChoice currentDialogChoice;
+	public GameObject chooseHighlighter;
 
 	string mydialogName;
 	int numberOfOptions;
 	//string csvText;
 	string thisDialogText = null;
 	List<int> myLinks = new List<int>(); //needed up here for proper function of SelectOption()
+	bool canSelect = false;
+
 
 	//----Navigation Variables!---------//
 	int arrowPos = 0;
@@ -39,20 +42,28 @@ public class DialogChoiceManager : MonoBehaviour {
 	void Start () {
 
 	}
+
+	void OnEnable(){
+		arrowPos = 0;
+		canSelect = true;
+	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
-        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 0){
-            SoundManager.instance.PlaySingle(navUpSfx);
-            NavigateOptions("up");
-		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
-        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos <= (numberOfOptions - 1)){
-            SoundManager.instance.PlaySingle(navDownSfx);
-            NavigateOptions("down");
-		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
-            SoundManager.instance.PlaySingle(selectChoice);
-            SelectOption(arrowPos);
+		if(canSelect){
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
+	        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 0){
+	            SoundManager.instance.PlaySingle(navUpSfx);
+	            NavigateOptions("up");
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
+	        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos <= (numberOfOptions - 1)){
+	            SoundManager.instance.PlaySingle(navDownSfx);
+	            NavigateOptions("down");
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
+	            SoundManager.instance.PlaySingle(selectChoice);
+	            StartCoroutine("SelectOption",arrowPos);
+	            canSelect = false;
+			}
 		}
 	}
 
@@ -140,8 +151,15 @@ public class DialogChoiceManager : MonoBehaviour {
 
 	}
 
-	void SelectOption(int optionNumber){
+	IEnumerator SelectOption(int optionNumber){
 		//deactivate dialog boxes
+		chooseHighlighter.transform.parent = dialogChoiceBoxes[arrowPos].transform;
+		chooseHighlighter.transform.localPosition = new Vector2(.87f,1.9f);
+		chooseHighlighter.SetActive(true);
+		dialogChoiceBoxes[arrowPos].GetComponent<Animator>().Play("choicePopupSelect",-1,0f);
+
+		yield return new WaitForSeconds(.35f);
+
 		for(int i = 0; i < dialogChoiceBoxes.Count; i++){
 			if(dialogChoiceBoxes[i].transform.childCount >1)
 				dialogChoiceBoxes[i].transform.GetChild(1).gameObject.SetActive(false); // make sure choice images are deactivated
@@ -150,6 +168,7 @@ public class DialogChoiceManager : MonoBehaviour {
 		Debug.Log("number of choices: " + dialogChoiceBoxes.Count);
 		Debug.Log("Option number selected:" + optionNumber);
 		Debug.Log(dialogResponses.Count);
+		chooseHighlighter.SetActive(false);
 		dialogManager.GetComponent<DialogManager>().ReturnFromChoice(dialogResponses[optionNumber].node_id);
 	}
 

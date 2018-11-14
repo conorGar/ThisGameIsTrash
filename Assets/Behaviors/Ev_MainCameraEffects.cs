@@ -117,7 +117,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	   	camPan = false;
 	   	continuousPanning = false;
 	   	thisCam.ZoomFactor = 1.15f;
-	   	gameObject.transform.position = new Vector2(player.transform.position.x, player.transform.position.y);
+	   	gameObject.transform.position = new Vector3(player.transform.position.x, player.transform.position.y,-10f);
         CamManager.Instance.mainCam.enabled = true;
 	   	if(roomManager != null){
 	   		roomManager.SetActive(true);

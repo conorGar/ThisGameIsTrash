@@ -133,47 +133,49 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 	public void ActivateDialog(string firstIcon = "", string secondIcon = "", string thirdIcon = "")
     {
-		DialogManager.Instance.gameObject.SetActive(true);
+    	if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){ // added so dialog that happens right at start of scene(ratWhoFat,etc) waits until DayDisplay is done fading into the scene
+			DialogManager.Instance.gameObject.SetActive(true);
 
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-		player.GetComponent<EightWayMovement>().StopMovement();
-		player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-		if(DialogManager.Instance.dialogCanvas.activeInHierarchy == false){
-			if(cameraPanToFriendAtStart){
-                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position, "");
-			}
-			Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
-			DialogManager.Instance.animationName = iconAnimationName;
-            DialogManager.Instance.myDialogDefiniton = dialogDefiniton;
-            DialogManager.Instance.dialogTitle = startNodeName;
-            DialogManager.Instance.canContinueDialog = true; //need this for starting after any previous dialog
-			if(friend != null){ // = null for some one timers
-                DialogManager.Instance.dialogActionManager.friend = friend;
-                DialogManager.Instance.characterName.text = friend.friendName;
-			}
+			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
+			player.GetComponent<EightWayMovement>().StopMovement();
+			player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+			if(DialogManager.Instance.dialogCanvas.activeInHierarchy == false){
+				if(cameraPanToFriendAtStart){
+	                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position, "");
+				}
+				Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
+				DialogManager.Instance.animationName = iconAnimationName;
+	            DialogManager.Instance.myDialogDefiniton = dialogDefiniton;
+	            DialogManager.Instance.dialogTitle = startNodeName;
+	            DialogManager.Instance.canContinueDialog = true; //need this for starting after any previous dialog
+				if(friend != null){ // = null for some one timers
+	                DialogManager.Instance.dialogActionManager.friend = friend;
+	                DialogManager.Instance.characterName.text = friend.friendName;
+				}
 
-            DialogManager.Instance.SetDialogIconByID(dialogDefiniton.dialogIconID);
-            DialogManager.Instance.SetFriend(friend);
+	            DialogManager.Instance.SetDialogIconByID(dialogDefiniton.dialogIconID);
+	            DialogManager.Instance.SetFriend(friend);
 
-            
-            if (DialogManager.Instance.currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager)) {
-                // A flag to check if all dialogIcons should be hidden initially (Rocks) or visable initially (white trash army)
-                var multiIcon = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
-                for (int i = 0; i < multiIcon.icons.Count; i++) {
-                    multiIcon.icons[i].gameObject.SetActive(!hideDialogIconsOnStart);
-                }
+	            
+	            if (DialogManager.Instance.currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager)) {
+	                // A flag to check if all dialogIcons should be hidden initially (Rocks) or visable initially (white trash army)
+	                var multiIcon = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
+	                for (int i = 0; i < multiIcon.icons.Count; i++) {
+	                    multiIcon.icons[i].gameObject.SetActive(!hideDialogIconsOnStart);
+	                }
 
-                var multiDialog = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
-                multiDialog.SetStartingIcons(firstIcon, secondIcon, thirdIcon);
-            }
+	                var multiDialog = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
+	                multiDialog.SetStartingIcons(firstIcon, secondIcon, thirdIcon);
+	            }
 
-            DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(true);
-            DialogManager.Instance.currentlySpeakingIcon.SetTalking(true);
+	            DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(true);
+	            DialogManager.Instance.currentlySpeakingIcon.SetTalking(true);
 
-            canTalkTo = false;
+	            canTalkTo = false;
 
-            DialogManager.Instance.dialogCanvas.SetActive(true);
-            Debug.Log("Got here with activate dialog execute" + DialogManager.Instance.dialogCanvas.activeInHierarchy);
+	            DialogManager.Instance.dialogCanvas.SetActive(true);
+	            Debug.Log("Got here with activate dialog execute" + DialogManager.Instance.dialogCanvas.activeInHierarchy);
+	        }
         }
 	}
 }

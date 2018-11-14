@@ -111,12 +111,15 @@ public class GlobalVariableManager : UserDataItem {
         public LARGEGARBAGE type;
         public bool isViewed;
         public Sprite collectedDisplaySprite;
+        public string collectedTitle;
+
 
         public LargeTrashItem(LARGEGARBAGE p_type)
         {
             type = p_type;
             isViewed = false;
             collectedDisplaySprite = null;
+            collectedTitle = "";
         }
     };
 

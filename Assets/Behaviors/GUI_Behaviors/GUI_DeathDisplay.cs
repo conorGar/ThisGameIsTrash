@@ -37,13 +37,13 @@ public class GUI_DeathDisplay : MonoBehaviour
 
 	public void FadeHUD(){
 		fader.GetComponent<Animator>().speed = 1;
-		fader.GetComponent<Animator>().SetTrigger("Fade");
+		fader.GetComponent<Animator>().SetTrigger("FadeOut");
 	}
 
 	public void DeathFade(){
 		//fader.GetComponent<Animator>().speed = -1;
 		fader.SetActive(true);
-		fader.GetComponent<Animator>().Play("FadeOut");
+		fader.GetComponent<Animator>().SetTrigger("Fade");
 		//fader.GetComponent<Animator>().Play("Fade");
 		//fader.GetComponent<Animator>().speed = 1;
 
