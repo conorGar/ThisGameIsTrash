@@ -73,7 +73,6 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    }
 
 	public void CameraPan(Vector3 positionToPanTo,string triggerName){
-        CamManager.Instance.mainCam.enabled = false;
    		if(roomManager != null){
    			roomManager.SetActive(false);
    		}
@@ -82,7 +81,6 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    		camPan= true;
    }
    public void CameraPan(GameObject objectToFollow, bool continuous){
-        CamManager.Instance.mainCam.enabled = false;
    		if(roomManager != null){
    			roomManager.SetActive(false);
    		}
@@ -118,7 +116,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	   	continuousPanning = false;
 	   	thisCam.ZoomFactor = 1.15f;
 	   	gameObject.transform.position = new Vector3(player.transform.position.x, player.transform.position.y,-10f);
-        CamManager.Instance.mainCam.enabled = true;
+
 	   	if(roomManager != null){
 	   		roomManager.SetActive(true);
 	   	}

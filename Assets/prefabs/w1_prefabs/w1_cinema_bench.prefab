@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4256936921495768}
   - component: {fileID: 212239681333688942}
   - component: {fileID: 61206306590453864}
-  m_Layer: 0
+  - component: {fileID: 114197405529906152}
+  m_Layer: 8
   m_Name: w1_cinema_bench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.59, y: 1.32}
   m_EdgeRadius: 0
+--- !u!114 &114197405529906152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1200046352664150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  sortBuddies: []
 --- !u!212 &212239681333688942
 SpriteRenderer:
   m_ObjectHideFlags: 1

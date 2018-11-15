@@ -21697,6 +21697,16 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 576ab416164cc944bb550233c9211f2f, type: 2}
   m_IsPrefabParent: 0
@@ -32097,15 +32107,15 @@ RectTransform:
   m_GameObject: {fileID: 743110795}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3073688, y: 0.3073688, z: 0.30736428}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 829054942}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 114.79999, y: -58.399998}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 115.29742, y: -58.56582}
+  m_SizeDelta: {x: 18.3, y: 18.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &743110797
 MonoBehaviour:
@@ -51847,9 +51857,12 @@ MonoBehaviour:
   dialogManager: {fileID: 0}
   friendStates: []
   friendState: 0
+  mainCam: {fileID: 0}
   myTeleportPS: {fileID: 0}
   stuart: {fileID: 0}
   player: {fileID: 0}
+  hash: {fileID: 0}
+  questio: {fileID: 0}
   FieldRoomNum: 3
   ToxicFieldRoomNum: 99
   smokePuff: {fileID: 0}
@@ -65916,9 +65929,12 @@ MonoBehaviour:
   - STUART_DEFEATED
   - END
   friendState: 0
+  mainCam: {fileID: 0}
   myTeleportPS: {fileID: 1030231522}
   stuart: {fileID: 0}
   player: {fileID: 0}
+  hash: {fileID: 0}
+  questio: {fileID: 0}
   FieldRoomNum: 3
   ToxicFieldRoomNum: 99
   smokePuff: {fileID: 8300000, guid: 885c2d5df5a8ca74faa8b6e120d89b26, type: 3}
@@ -74309,7 +74325,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: START to Quit
+  m_text: ESC to Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1777e8dbacf426f43a980c6d7aa7b8bd, type: 2}
   m_sharedMaterial: {fileID: 21153409803939800, guid: 1777e8dbacf426f43a980c6d7aa7b8bd,
@@ -74378,7 +74394,7 @@ MonoBehaviour:
   m_margin: {x: -11.304402, y: 0, z: -9.043511, w: 1.4835076}
   m_textInfo:
     textComponent: {fileID: 0}
-    characterCount: 13
+    characterCount: 11
     spriteCount: 0
     spaceCount: 2
     wordCount: 3
@@ -78114,6 +78130,7 @@ MonoBehaviour:
   musicSource: {fileID: 1528128038}
   lowPitchRange: 0.95
   highPitchRange: 1.1
+  fadeSpeed: 0.4
 --- !u!82 &1528128038
 AudioSource:
   m_ObjectHideFlags: 0
@@ -78690,9 +78707,12 @@ MonoBehaviour:
   dialogManager: {fileID: 0}
   friendStates: []
   friendState: 0
+  mainCam: {fileID: 0}
   myTeleportPS: {fileID: 0}
   stuart: {fileID: 0}
   player: {fileID: 0}
+  hash: {fileID: 0}
+  questio: {fileID: 0}
   FieldRoomNum: 3
   ToxicFieldRoomNum: 99
   smokePuff: {fileID: 0}
@@ -110822,6 +110842,16 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
         type: 2}
