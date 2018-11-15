@@ -5192,6 +5192,7 @@ MonoBehaviour:
   clawSprite: {fileID: 21300000, guid: 5046b7429ec7b1b4a88dbf07408ddfb5, type: 3}
   poleSprite: {fileID: 21300000, guid: ddb9ad608fd6bca48af98790835386a1, type: 3}
   broomSprite: {fileID: 21300000, guid: e477c2e523adaee4bb6e3b2cf2a62117, type: 3}
+  weaponUnpgradeSfx: {fileID: 0}
 --- !u!114 &167008732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9529,6 +9530,7 @@ MonoBehaviour:
   clawSprite: {fileID: 21300000, guid: 5046b7429ec7b1b4a88dbf07408ddfb5, type: 3}
   poleSprite: {fileID: 21300000, guid: ddb9ad608fd6bca48af98790835386a1, type: 3}
   broomSprite: {fileID: 21300000, guid: e477c2e523adaee4bb6e3b2cf2a62117, type: 3}
+  weaponUnpgradeSfx: {fileID: 0}
 --- !u!114 &226627048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11617,17 +11619,17 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 317810676}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: -0.81272936, y: 1.2285, z: 1.2285}
   m_Children:
   - {fileID: 656344056}
   m_Father: {fileID: 1771147162}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.76, y: -5.38}
+  m_AnchoredPosition: {x: 19.46, y: -4.4399996}
   m_SizeDelta: {x: 9.04, y: 4.633}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &317810678
@@ -11650,7 +11652,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e105c7a6cdbb11c4aa336d7fb74ee1a5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fc9673844c4ef0044a8ffdba28db47d5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20646,6 +20648,16 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114060380697229208, guid: 53a29d08915c9364bb2a63652d18f8d9,
+        type: 2}
+      propertyPath: footsteps1
+      value: 
+      objectReference: {fileID: 8300000, guid: 322f40239494cfa4cb7461108bc40d49, type: 3}
+    - target: {fileID: 114060380697229208, guid: 53a29d08915c9364bb2a63652d18f8d9,
+        type: 2}
+      propertyPath: footsteps2
+      value: 
+      objectReference: {fileID: 8300000, guid: faea6b1c3e4c2a5409364ccfcf84bd66, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53a29d08915c9364bb2a63652d18f8d9, type: 2}
   m_IsPrefabParent: 0
@@ -21506,6 +21518,11 @@ Prefab:
         type: 2}
       propertyPath: InitialModule.startColor.maxColor.a
       value: 0.334
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
         type: 2}
@@ -30868,7 +30885,7 @@ Transform:
   m_LocalScale: {x: 0.47553736, y: 0.47553736, z: 0.47553736}
   m_Children: []
   m_Father: {fileID: 1771147162}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &686953455
 MonoBehaviour:
@@ -39339,6 +39356,7 @@ MonoBehaviour:
   currentWorld: 0
   backPaper: {fileID: 0}
   image: {fileID: 0}
+  largeTrashCollectedSfx: {fileID: 0}
 --- !u!114 &900898032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40046,7 +40064,7 @@ RectTransform:
   m_LocalScale: {x: 36.390957, y: 23.182661, z: 1.06}
   m_Children: []
   m_Father: {fileID: 1771147162}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -101351,9 +101369,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 9.87}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 317810677}
   - {fileID: 919482893}
   - {fileID: 686953454}
-  - {fileID: 317810677}
   m_Father: {fileID: 40757781}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101380,6 +101398,8 @@ MonoBehaviour:
   player: {fileID: 0}
   playerDummy: {fileID: 686953453}
   forHub: 1
+  truckSmokeSfx: {fileID: 8300000, guid: de2f0b76cf3869b4e883257268623231, type: 3}
+  truckDoor: {fileID: 8300000, guid: 523f27b06d4af8448adbf80c8bb2ebc4, type: 3}
 --- !u!114 &1771147164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110842,6 +110862,11 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
         type: 2}

@@ -8,7 +8,7 @@ public class RatWhoFatFriend : Friend
 	public GameObject garbageTruck;
 	public GameObject pinCase;
 	public GameObject sweatPS;
-
+	public AudioClip footStep;
 	int walkCounter;
 	bool isWalking;
 	Vector2 targetPos;
@@ -92,6 +92,7 @@ public class RatWhoFatFriend : Friend
 			targetPos = new Vector2(12f,6f);
 		}
 		isWalking = true;
+		InvokeRepeating("PlayFootstep",0f,.33f);
 		StartCoroutine("WalkSequence");
 	}
 
@@ -101,7 +102,7 @@ public class RatWhoFatFriend : Friend
 		yield return new WaitForSeconds(3f);
 		isWalking = false;
 		//this.gameObject.GetComponent<tk2dSpriteAnimator>().enabled = true;
-
+		CancelInvoke();
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("fatRatIdle");
 		//this.gameObject.GetComponent<tk2dSpriteAnimator>().enabled = false;
 
@@ -137,6 +138,11 @@ public class RatWhoFatFriend : Friend
 
 		dialogManager.ReturnFromAction();
 
+	}
+
+
+	void PlayFootstep(){
+		SoundManager.instance.RandomizeSfx(footStep,.9f,1.1f);
 	}
 
 	public override void GiveData(List<GameObject> neededObjs){

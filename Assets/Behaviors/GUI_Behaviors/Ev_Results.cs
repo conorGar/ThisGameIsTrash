@@ -17,6 +17,9 @@ public class Ev_Results : MonoBehaviour {
 	public int currentWorld; //needed for largeTrashManager
     public Image backPaper;
     public Image image;
+
+    public AudioClip largeTrashCollectedSfx;
+
 	int trashCollectedValue;
 	int phase = 0;
 	int spawnLargeTrashOnce = 0;
@@ -95,6 +98,8 @@ public class Ev_Results : MonoBehaviour {
                         else {
                             treasureCollectedDisplay.GetComponent<Animator>().Play("largeTrashCollected",-1,0f);
                         }
+
+                        SoundManager.instance.PlaySingle(largeTrashCollectedSfx);
 
                         //change sprite of the large trash display
                         treasureCollectedDisplay.GetComponent<Image>().sprite = (GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedDisplaySprite);

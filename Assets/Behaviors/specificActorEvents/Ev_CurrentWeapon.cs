@@ -18,6 +18,8 @@ public class Ev_CurrentWeapon : MonoBehaviour {
 	public Sprite poleSprite;
 	public Sprite broomSprite;
 
+	public AudioClip weaponUnpgradeSfx;
+
 	void Start () {
 		//meleeMeterDraw = gameObject.GetComponent<Image>();
 		//GameObject meleeDisplayInstance;
@@ -44,15 +46,18 @@ public class Ev_CurrentWeapon : MonoBehaviour {
 			player.GetComponent<MeleeAttack>().UpdateWeapon();
 		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 6 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] <= 12 && meleeDisplay.GetComponent<Image>().sprite != clawSprite ){
 			meleeDisplay.GetComponent<Image>().sprite = clawSprite;
+			SoundManager.instance.PlaySingle(weaponUnpgradeSfx);
 			player.GetComponent<MeleeAttack>().UpdateWeapon();
 
 		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 18 && meleeDisplay.GetComponent<Image>().sprite != poleSprite){
 			meleeDisplay.GetComponent<Image>().sprite = poleSprite;
 			player.GetComponent<MeleeAttack>().UpdateWeapon();
+			SoundManager.instance.PlaySingle(weaponUnpgradeSfx);
 
 		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] >= 18 && meleeDisplay.GetComponent<Image>().sprite != broomSprite && GlobalVariableManager.Instance.IsPinEquipped(PIN.WASTEWARRIOR)){
 			meleeDisplay.GetComponent<Image>().sprite = broomSprite;
 			player.GetComponent<MeleeAttack>().UpdateWeapon();
+			SoundManager.instance.PlaySingle(weaponUnpgradeSfx);
 
 		}
 		meleeDisplay.GetComponent<Animator>().Play("meleeChangeEmphasis",-1,0f); // makes meleeDisplay do a little bounce

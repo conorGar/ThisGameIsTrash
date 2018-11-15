@@ -330,7 +330,7 @@ public class EightWayMovement : MonoBehaviour {
 		}else {
 			newestCloud.GetComponent<Ev_WalkCloud>().MoveLeft();
 		}*/
-		SoundManager.instance.RandomizeSfx(footsteps1,footsteps2);
+		SoundManager.instance.RandomizeSfx(footsteps2,footsteps1);
 
     }
 

@@ -10,6 +10,7 @@ public class GUI_TutPopup : MonoBehaviour {
 	public GameObject myImage;
 	public GameObject myTitle;
 	public AudioClip popupSFX;
+	public AudioClip closeSfx;
 
 	public Sprite largeTrashImage;
 	public Sprite ArmoredEnemyImage;

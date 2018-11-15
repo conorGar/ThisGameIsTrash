@@ -12,7 +12,7 @@ public class GUI_PinUnlockDisplay : MonoBehaviour {
 	public GameObject myPinDescription;
 	public GameObject pinImage;
 	public AudioClip unlockSFX;
-
+	public AudioClip closeSfx;
 
 	// Use this for initialization
 	void Start () {
