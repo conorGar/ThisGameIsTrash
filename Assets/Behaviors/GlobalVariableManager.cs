@@ -214,6 +214,11 @@ public class GlobalVariableManager : UserDataItem {
     {
         var json_data = new SimpleJSON.JSONObject();
 
+        // Game Settings.
+        json_data["MASTER_MUSIC_VOL"] = MASTER_MUSIC_VOL;
+        json_data["MASTER_SFX_VOL"] = MASTER_SFX_VOL;
+
+        // Gameplay and collectables.
         json_data["DAY_NUMBER"] = DAY_NUMBER;
 
         json_data["pinsDiscoveredValue"] = pinsDiscoveredValue;
@@ -245,6 +250,9 @@ public class GlobalVariableManager : UserDataItem {
 
     public override void Load(SimpleJSON.JSONObject json_data)
     {
+        MASTER_MUSIC_VOL = json_data["MASTER_MUSIC_VOL"].AsFloat;
+        MASTER_SFX_VOL = json_data["MASTER_SFX_VOL"].AsFloat;
+
         DAY_NUMBER = json_data["DAY_NUMBER"].AsInt;
 
         pinsDiscoveredValue = (ulong)json_data["pinsDiscoveredValue"].AsLong;

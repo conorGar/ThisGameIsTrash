@@ -55,8 +55,8 @@ public class GUI_OptionsMenu : MonoBehaviour {
             } else if (arrowPos == 2) {
 				if (SoundManager.instance.sfxSource.volume < 1f) {
 					SoundManager.instance.sfxSource.volume += .16f;
-					GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
                     sfxVol.GetComponent<Image>().fillAmount += .16f;
+                    GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
                 }
             }
         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
@@ -66,11 +66,13 @@ public class GUI_OptionsMenu : MonoBehaviour {
 				if (SoundManager.instance.musicSource.volume > 0f) {
 					SoundManager.instance. musicSource.volume -= .16f;
                     musicVol.GetComponent<Image>().fillAmount -= .16f;
+                    GlobalVariableManager.Instance.MASTER_MUSIC_VOL = SoundManager.instance.musicSource.volume;
                 }
             } else if (arrowPos == 2) {
 				if (SoundManager.instance.sfxSource.volume > 0f) {
 					SoundManager.instance.sfxSource.volume -= .16f;
                     sfxVol.GetComponent<Image>().fillAmount -= .16f;
+                    GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
                 }
             }
         }

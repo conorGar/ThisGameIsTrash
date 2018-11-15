@@ -10,9 +10,11 @@ public class SoundManager : MonoBehaviour {
 
 	public float lowPitchRange = .95f;
 	public float highPitchRange = 1.1f;
+    public float fadeSpeed = .4f;
 
 
-	bool musicFading;
+
+    bool musicFading;
 	// Use this for initialization
 	void Awake () {
 		if(instance == null){
@@ -52,14 +54,56 @@ public class SoundManager : MonoBehaviour {
 	void Update(){
 		if(musicFading){
 			if(musicSource.volume > 0f){
-				musicSource.volume -= .4f*Time.deltaTime;
+				musicSource.volume -= fadeSpeed*Time.deltaTime;
 			}else{
 				musicFading = false;
 			}
 		}
 	}
-	public void FadeMusic(){
+
+    private void OnLevelWasLoaded(int level)
+    {
+        // Make sure fading ends before the next scene starts loading stuff.
+        musicFading = false;
+    }
+
+    public void FadeMusic(){
 		musicFading = true;
 	}
 
+    public Coroutine TransitionMusic(AudioClip nextClip, bool fadeOut = true, bool fadeIn = false, System.Action callback = null)
+    {
+        return StartCoroutine(TransitionMusicEnumerator(nextClip, fadeOut, fadeIn, callback));
+    }
+
+    IEnumerator TransitionMusicEnumerator(AudioClip nextClip, bool fadeOut = true, bool fadeIn = false, System.Action callback = null)
+    {
+        // fade out the last clip.
+        if (fadeOut) {
+            while (musicSource.volume > 0f) {
+                musicSource.volume = Mathf.Max(musicSource.volume - fadeSpeed * Time.deltaTime, 0f);
+                yield return null;
+            }
+        } else {
+            musicSource.volume = 0f;
+        }
+
+        // Switch to the new clip.
+        musicSource.Stop();
+        musicSource.clip = nextClip;
+        musicSource.Play();
+
+        // fade in the next clip.
+        if (fadeIn) {
+            while (musicSource.volume < GlobalVariableManager.Instance.MASTER_MUSIC_VOL) {
+                musicSource.volume = Mathf.Min(musicSource.volume + fadeSpeed * Time.deltaTime, GlobalVariableManager.Instance.MASTER_MUSIC_VOL);
+                yield return null;
+            }
+        } else {
+            musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+        }
+
+        if (callback != null)
+            callback();
+    }
 }

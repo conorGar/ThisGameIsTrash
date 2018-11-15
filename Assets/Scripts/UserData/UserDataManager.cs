@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
@@ -83,10 +84,12 @@ public class UserDataManager : MonoBehaviour {
         return json_data;
     }
 
-    public virtual IEnumerator ReadAsync()
+    public virtual IEnumerator ReadAsync(Action callback = null)
     {
         yield return null;
         Debug.Log("Data Read Complete.");
+        if (callback != null)
+            callback();
     }
 
     protected IEnumerator WhileReading()
