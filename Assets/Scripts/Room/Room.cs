@@ -173,10 +173,10 @@ public class Room : MonoBehaviour
 
         // TODO: There's a Mathf.Max call in here to handle situations where the room is smaller than the size of the camera (the max_x or max_y become smaller than the min_x or min_y in this case).
         // Maybe there's a better way to handle this kind of issue?  If careful, will this come up much?
-        rect.xMin = -roomCollider2D.bounds.size.x / 2.0f + horzExtent + transform.position.x;
-        rect.xMax = Mathf.Max(rect.xMin, roomCollider2D.bounds.size.x / 2.0f - horzExtent + transform.position.x);
-        rect.yMin = -roomCollider2D.bounds.size.y / 2.0f + vertExtent + transform.position.y;
-        rect.yMax = Mathf.Max(rect.yMin, roomCollider2D.bounds.size.y / 2.0f - vertExtent + transform.position.y);
+        rect.xMin = transform.position.x + roomCollider2D.offset.x - roomCollider2D.bounds.extents.x + horzExtent;
+        rect.xMax = Mathf.Max(rect.xMin, transform.position.x + roomCollider2D.offset.x + roomCollider2D.bounds.extents.x - horzExtent);
+        rect.yMin = -roomCollider2D.bounds.extents.y + vertExtent + transform.position.y + roomCollider2D.offset.y;
+        rect.yMax = Mathf.Max(rect.yMin, transform.position.y + roomCollider2D.offset.y + roomCollider2D.bounds.extents.y - vertExtent);
 
         return rect;
     }
