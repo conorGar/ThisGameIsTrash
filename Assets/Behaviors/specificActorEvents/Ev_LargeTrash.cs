@@ -99,6 +99,7 @@ public class Ev_LargeTrash : PickupableObject {
 		myCollisionBox.enabled = true; //doesnt collide with player
 		gameObject.transform.parent = ltmManager.transform; //goes back to largeTrashManager when drop
 		myCurrentRoom = RoomManager.Instance.currentRoom;
+		player.GetComponent<MeleeAttack>().enabled = true;
 		//gameObject.GetComponent<Animator>().enabled = false;
 
 	}

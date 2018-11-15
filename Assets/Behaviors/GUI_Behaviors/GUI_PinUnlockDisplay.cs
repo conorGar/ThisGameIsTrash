@@ -49,6 +49,7 @@ public class GUI_PinUnlockDisplay : MonoBehaviour {
 			phase = 2;
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,5f,.4f);
 			yield return new WaitForSeconds(.4f);
+			SoundManager.instance.PlaySingle(closeSfx);
 			Time.timeScale = 1;
 			gameObject.SetActive(false);
 		}

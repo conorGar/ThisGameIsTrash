@@ -14,6 +14,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 
 	public AudioClip hurt;
+	public AudioClip finalHit;
 	public AudioClip deathSound;
 	[HideInInspector]
 	public GameObject currentlyCarriedObject; // set by pickupableObject.cs for use when dropping at death
@@ -101,7 +102,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 			}
 
 			if(currentHp <= 0){
-				
+				SoundManager.instance.PlaySingle(finalHit);
+
 				StartCoroutine("Death");
 			
 			}else{
@@ -140,7 +142,10 @@ public class PlayerTakeDamage : MonoBehaviour {
         GameStateManager.Instance.PushState(typeof(RespawnState));
 
         SoundManager.instance.FadeMusic();
-		SoundManager.instance.PlaySingle(deathSound);
+		Time.timeScale = 0.3f;
+		yield return new WaitForSeconds(.3f);
+		Time.timeScale = 1;
+
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		if(currentlyCarriedObject != null){
 			currentlyCarriedObject.GetComponent<PickupableObject>().Drop();
@@ -151,6 +156,7 @@ public class PlayerTakeDamage : MonoBehaviour {
         deathDisplay.DeathFade();
 			yield return new WaitForSeconds(.5f); //drop trash and deplete trash collected
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
+		SoundManager.instance.PlaySingle(deathSound);
 			yield return new WaitForSeconds(.5f);
 		deathDisplay.DepleteTrashCollected();
 		DropTrash();
@@ -178,6 +184,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
         yield return new WaitForSeconds(.5f);
 		deathDisplay.fader.SetActive(false);
+		SoundManager.instance.musicSource.clip = SoundManager.instance.worldMusic;
 		SoundManager.instance.musicSource.Play();
 		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 

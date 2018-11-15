@@ -184,12 +184,15 @@ public class DialogManager : MonoBehaviour {
 			//check to see if changed speaker
 			Debug.Log(currentNode.speakerName + "-o-o-o-o-o-o-o-o-o-o-o-");
 			//Debug.Log(characterName.text == currentNode.speakerName);
+			if(characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1){
+				characterName.text = currentNode.speakerName;
+			}
+
 			if(currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager) &&
                characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
 			{
 				Debug.Log("NAMES DONT MATCHx-x-x-x--x-x-x-x-x-x-");
 				((MultipleDialogIconsManager)currentlySpeakingIcon).ChangeSpeaker(currentNode.speakerName);
-				characterName.text = currentNode.speakerName;
 			}
 
             StartDisplay();
@@ -369,7 +372,7 @@ public class DialogManager : MonoBehaviour {
 		 //sets up dialog for next interaction
 		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
-		player.GetComponent<EightWayMovement>().enabled = true;
+		//player.GetComponent<EightWayMovement>().enabled = true;
         GameStateManager.Instance.PopState();
         friend.OnFinishDialog();
 		dialogCanvas.SetActive(false);

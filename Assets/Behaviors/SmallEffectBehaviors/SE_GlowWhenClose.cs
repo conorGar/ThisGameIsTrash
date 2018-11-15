@@ -36,13 +36,12 @@ public class SE_GlowWhenClose : MonoBehaviour {
                     if (glowCheck == 0) {
                         if (glowSprite != null) {
                             gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
+						}else{
+                        	GlowFunction();
                         }
                         if (spawnSomethingWithGlow) {
                         	objectToSpawn.SetActive(true);
-                            //tempSpawnedObject = Instantiate(objectToSpawn, new Vector2(transform.position.x + xSpawnAdjust, transform.position.y + ySpawnAdjust), Quaternion.identity);
-                           // if (spawnedObjectSprite != null) {
-                                //tempSpawnedObject.GetComponent<SpriteRenderer>().sprite = spawnedObjectSprite;
-                           //}
+                          
                         }
                         SoundManager.instance.PlaySingle(highlightSound);
                         glowCheck = 1;
@@ -59,6 +58,8 @@ public class SE_GlowWhenClose : MonoBehaviour {
                        		 gameObject.GetComponent<SpriteRenderer>().sprite = startSprite;
                         if (objectToSpawn != null) {
                             objectToSpawn.SetActive(false);
+                        }else{
+                        	StopGlowFunction();
                         }
                         glowCheck = 0;
                     }
@@ -88,4 +89,13 @@ public class SE_GlowWhenClose : MonoBehaviour {
 	public void SetGlowCheck(int i){
 		glowCheck = i;
 	}
+
+	public virtual void GlowFunction(){
+		//nothing for base
+	}
+
+	public virtual void StopGlowFunction(){
+		//nothing for base
+	}
+
 }

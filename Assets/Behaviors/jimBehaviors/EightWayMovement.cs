@@ -318,6 +318,7 @@ public class EightWayMovement : MonoBehaviour {
 				else
 					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",false);
 			}
+		CancelInvoke();
 		StopAllCoroutines();
 		legAnim.Play(anim.CurrentClip.name);
     	this.enabled = true;

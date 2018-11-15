@@ -392,7 +392,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 						if(myShadow != null)
 							myShadow.transform.parent = null; //shadow doesnt follow Y pos
 					}else{
-						Debug.Log("**Got here- enemy hit***");
+						Debug.Log("**Got here- enemy hit***" + moveWhenHit + currentHp);
 						myBody.AddForce(new Vector2(-17f,0f), ForceMode2D.Impulse);
 					}
 				}else{
@@ -595,7 +595,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			//needed to make sure enemy doesnt spawn again functioning as if it was dead
 			spinning = false;
 			myCollisionBox.enabled = true;
-			damageOnce = 0;
+			//damageOnce = 0;
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 			if(currentHp >0 && myAnim.GetClipByName("idle") != null)
@@ -626,7 +626,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			body.GetComponent<ThrowableBody>().SetSpawnerID(mySpawnerID);
 		}
 		myAnim.Play("idle");//to fix enemies sometimes spawning in hurt animation
-
+		damageOnce = 0;
 		this.gameObject.SetActive(false);
 
 	}

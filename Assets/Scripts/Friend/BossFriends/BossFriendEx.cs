@@ -135,16 +135,18 @@ public class BossFriendEx : Friend
                 mainCam.GetComponent<Ev_MainCameraEffects>().ZoomInOut(1.5f,2f);
                 mainCam.GetComponent<Ev_MainCameraEffects>().CameraPan(stuart.gameObject,true);
                 stuart.ActivateHpDisplay();
+                SoundManager.instance.musicSource.clip = bossMusic;
                 yield return new WaitForSeconds(2f);
                 Debug.Log("*******^^^^^^CAMERA SHOULDVE GONE BACK TO PLAYER^^^^^^^^^^^^^^^^****");
                 gameObject.GetComponent<MeshRenderer>().enabled = true;
-				gameObject.SetActive(false);
+				
 	
                 GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 				stuart.GetComponent<FollowPlayer>().enabled = true;
 				CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
 				SetFriendState("FIGHT_PHASE_1");
+				gameObject.SetActive(false);
                 break;
             case "FIGHT_PHASE_2":
             	hash.GetComponent<MeshRenderer>().enabled = true;

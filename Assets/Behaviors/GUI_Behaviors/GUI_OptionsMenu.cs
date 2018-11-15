@@ -32,60 +32,61 @@ public class GUI_OptionsMenu : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
-        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos < 4) {
-            arrowPos++;
-            SoundManager.instance.PlaySingle(selectSound);
-            SelectNext();
-        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
-               || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 1f) {
-            arrowPos--;
-            SoundManager.instance.PlaySingle(selectSound);
-            SelectNext();
-        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
-               || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
-        {
-            if (arrowPos == 1) {
-				if (SoundManager.instance.musicSource.volume < 1) {
-                    SoundManager.instance.musicSource.volume += .16f;
-                    musicVol.GetComponent<Image>().fillAmount += .16f;
-					GlobalVariableManager.Instance.MASTER_MUSIC_VOL = SoundManager.instance.musicSource.volume;
+		if (GameStateManager.Instance.GetCurrentState() == typeof(OptionsState)) {
+	        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
+	        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos < 4) {
+	            arrowPos++;
+	            SoundManager.instance.PlaySingle(selectSound);
+	            SelectNext();
+	        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
+	               || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 1f) {
+	            arrowPos--;
+	            SoundManager.instance.PlaySingle(selectSound);
+	            SelectNext();
+	        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
+	               || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
+	        {
+	            if (arrowPos == 1) {
+					if (SoundManager.instance.musicSource.volume < 1) {
+	                    SoundManager.instance.musicSource.volume += .16f;
+	                    musicVol.GetComponent<Image>().fillAmount += .16f;
+						GlobalVariableManager.Instance.MASTER_MUSIC_VOL = SoundManager.instance.musicSource.volume;
 
-                }
-            } else if (arrowPos == 2) {
-				if (SoundManager.instance.sfxSource.volume < 1f) {
-					SoundManager.instance.sfxSource.volume += .16f;
-                    sfxVol.GetComponent<Image>().fillAmount += .16f;
-                    GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
-                }
-            }
-        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
-               || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
-        {
-            if (arrowPos == 1) {
-				if (SoundManager.instance.musicSource.volume > 0f) {
-					SoundManager.instance. musicSource.volume -= .16f;
-                    musicVol.GetComponent<Image>().fillAmount -= .16f;
-                    GlobalVariableManager.Instance.MASTER_MUSIC_VOL = SoundManager.instance.musicSource.volume;
-                }
-            } else if (arrowPos == 2) {
-				if (SoundManager.instance.sfxSource.volume > 0f) {
-					SoundManager.instance.sfxSource.volume -= .16f;
-                    sfxVol.GetComponent<Image>().fillAmount -= .16f;
-                    GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
-                }
-            }
-        }
+	                }
+	            } else if (arrowPos == 2) {
+					if (SoundManager.instance.sfxSource.volume < 1f) {
+						SoundManager.instance.sfxSource.volume += .16f;
+	                    sfxVol.GetComponent<Image>().fillAmount += .16f;
+	                    GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
+	                }
+	            }
+	        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
+	               || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT))
+	        {
+	            if (arrowPos == 1) {
+					if (SoundManager.instance.musicSource.volume > 0f) {
+						SoundManager.instance. musicSource.volume -= .16f;
+	                    musicVol.GetComponent<Image>().fillAmount -= .16f;
+	                    GlobalVariableManager.Instance.MASTER_MUSIC_VOL = SoundManager.instance.musicSource.volume;
+	                }
+	            } else if (arrowPos == 2) {
+					if (SoundManager.instance.sfxSource.volume > 0f) {
+						SoundManager.instance.sfxSource.volume -= .16f;
+	                    sfxVol.GetComponent<Image>().fillAmount -= .16f;
+	                    GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
+	                }
+	            }
+	        }
 
-        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)
-         || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
-        {
-            // Back to the pause menu.
-            GameStateManager.Instance.PopState();
-			gameObject.SetActive(false);
+	        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)
+	         || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
+	        {
+	            // Back to the pause menu.
+	            GameStateManager.Instance.PopState();
+				gameObject.SetActive(false);
+			}
 		}
 	}
-
 	void OnEnable(){
 		arrowPos = 1;
 	}

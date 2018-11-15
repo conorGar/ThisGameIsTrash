@@ -100,6 +100,7 @@ public class GUI_PauseMenu : MonoBehaviour {
             || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
                 if (arrowpos < 2) {
                     arrowpos++;
+					Debug.Log(GameStateManager.Instance.GetCurrentState());
                     SoundManager.instance.PlaySingle(selectSound);
                     enddayOption.GetComponent<Image>().sprite = endayHLspr;
                     optionsOption.GetComponent<Image>().sprite = optionStartSpr;
@@ -117,18 +118,20 @@ public class GUI_PauseMenu : MonoBehaviour {
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
                 if (arrowpos == 1) {
                     // To the options menu.
+					optionsMenu.SetActive(true);
                     GameStateManager.Instance.PushState(typeof(OptionsState));
-                    optionsMenu.SetActive(true);
+                   
                 }
                 else if (arrowpos == 2) {//end day
+					GameStateManager.Instance.PushState(typeof(PopupState));
                     endDayPopup.gameObject.SetActive(true);
                 }
             }
-            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)
-            || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
                 arrowpos = 1;
                 gameObject.transform.localPosition = startPos;
                 GameStateManager.Instance.PopState();
+                GameStateManager.Instance.PushState(typeof(GameState));
             }
         }
 

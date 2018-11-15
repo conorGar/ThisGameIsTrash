@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour {
 	public AudioSource sfxSource;
 	public AudioSource musicSource;
 	public static SoundManager instance = null;
-
+	public AudioClip worldMusic;
 	public float lowPitchRange = .95f;
 	public float highPitchRange = 1.1f;
     public float fadeSpeed = .4f;

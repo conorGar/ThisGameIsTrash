@@ -13,6 +13,8 @@ public class GUI_DayDisplay : MonoBehaviour
 	public bool forHub;
 	public AudioClip truckSmokeSfx;
 	public AudioClip truckDoor;
+	public AudioClip truckSfx;
+
 	int phase = 0;
 
 	// Use this for initialization
@@ -23,6 +25,7 @@ public class GUI_DayDisplay : MonoBehaviour
 		dayNumDisplay.GetComponent<TextAnimation>().PlayAnim();
 		}
 		StartCoroutine("TruckEnter");
+		SoundManager.instance.PlaySingle(truckSfx);
 		//player.GetComponent<EightWayMovement>().enabled = false;
 	}
 	
@@ -32,31 +35,35 @@ public class GUI_DayDisplay : MonoBehaviour
 		if(phase == 1){
 			if(forHub){
 				truck.transform.position = Vector2.MoveTowards(truck.transform.position,new Vector2(13f,15f),13*Time.deltaTime);
-				if(truck.transform.localPosition.x < 0f){
-				phase = 2;
-				StartCoroutine("TruckLeave");
-				}
+
 			}else{
-				truck.transform.position = Vector2.MoveTowards(truck.transform.position,new Vector2(.1f,8.2f),8*Time.deltaTime);
-				if(truck.transform.localPosition.x > -1.3f){
-				phase = 2;
-				StartCoroutine("TruckLeave");
-				}
+				truck.transform.position = Vector2.MoveTowards(truck.transform.position,new Vector2(.1f,8.2f),13*Time.deltaTime);
+			
 			}
 
 		}else if(phase == 3){
 			if(forHub){
 				truck.transform.Translate(Vector3.left);
 			}else{
-				truck.transform.position = Vector2.MoveTowards(truck.transform.position,new Vector2(27f,8.2f),13*Time.deltaTime);
+				truck.transform.position = Vector2.MoveTowards(truck.transform.position,new Vector2(27f,8.2f),24*Time.deltaTime);
 			}
 		}
 	}
 
 	IEnumerator TruckEnter(){
 		InvokeRepeating("SmokePuffSfx",.1f,.5f);
-		yield return new WaitForSeconds(1.5f);
 		phase = 1;
+		if(forHub){
+			yield return new WaitUntil(() => truck.transform.localPosition.x < 0f);
+
+		}else{
+			yield return new WaitUntil(() => truck.transform.localPosition.x > -1.3f);
+		}
+
+		phase = 2;
+		StartCoroutine("TruckLeave");
+		//yield return new WaitForSeconds(1.5f);
+
 	}
 
 	IEnumerator TruckLeave(){
@@ -64,7 +71,7 @@ public class GUI_DayDisplay : MonoBehaviour
 		SoundManager.instance.PlaySingle(truckDoor);
 		yield return new WaitForSeconds(.3f);
 		phase = 3;
-		yield return new WaitForSeconds(.3f);
+		yield return new WaitForSeconds(.6f);
 		back.GetComponent<Animator>().enabled = true;
 		back.GetComponent<SpriteRenderer>().enabled = false;
 		//player.GetComponent<EightWayMovement>().enabled = true;

@@ -17,5 +17,11 @@ public class Ev_StartDayButton : SE_GlowWhenClose {
 		fader.FadeToScene("WorldSelect");
 	}
 
+	public override void GlowFunction(){
+		gameObject.GetComponent<tk2dSpriteAnimator>().Play();
+	}
+	public override void StopGlowFunction(){
+		gameObject.GetComponent<tk2dSpriteAnimator>().Stop();
+	}
 
 }

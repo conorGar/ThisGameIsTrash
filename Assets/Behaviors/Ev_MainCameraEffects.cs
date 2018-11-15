@@ -14,6 +14,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	public GameObject tutPopup;
 	public GameObject roomManager;//needed for proper camera panning
 	public AudioClip zoomSound;
+	public AudioClip panWoosh;
 	[HideInInspector]
 	public GameObject objectToSpawn;
 	tk2dCamera thisCam;
@@ -73,6 +74,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    }
 
 	public void CameraPan(Vector3 positionToPanTo,string triggerName){
+		SoundManager.instance.PlaySingle(panWoosh);
    		if(roomManager != null){
    			roomManager.SetActive(false);
    		}
@@ -81,6 +83,8 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    		camPan= true;
    }
    public void CameraPan(GameObject objectToFollow, bool continuous){
+		SoundManager.instance.PlaySingle(panWoosh);
+
    		if(roomManager != null){
    			roomManager.SetActive(false);
    		}

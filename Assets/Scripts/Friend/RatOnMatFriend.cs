@@ -58,7 +58,7 @@ public class RatOnMatFriend : Friend
 	}
 	IEnumerator DayDisplayDelay(){
 
-	    yield return new WaitForSeconds(2f);
+	    yield return new WaitForSeconds(2.3f);
 		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = true; // needed to fix glitch where if player spammed continue button dialog would start again
 		GetComponent<ActivateDialogWhenClose>().Execute();
 	}
