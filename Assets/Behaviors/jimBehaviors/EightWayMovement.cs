@@ -324,15 +324,16 @@ public class EightWayMovement : MonoBehaviour {
     	this.enabled = true;
     }
     void SpawnClouds(){
-		/*GameObject newestCloud;
-		newestCloud = Instantiate(walkCloud, new Vector3(transform.position.x,transform.position.y - 1.5f, transform.position.z), Quaternion.identity) as GameObject;
-		if(movement.x <0){
-			newestCloud.GetComponent<Ev_WalkCloud>().MoveRight();
-		}else {
-			newestCloud.GetComponent<Ev_WalkCloud>().MoveLeft();
-		}*/
-		SoundManager.instance.RandomizeSfx(footsteps2,footsteps1);
-
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            /*GameObject newestCloud;
+            newestCloud = Instantiate(walkCloud, new Vector3(transform.position.x,transform.position.y - 1.5f, transform.position.z), Quaternion.identity) as GameObject;
+            if(movement.x <0){
+                newestCloud.GetComponent<Ev_WalkCloud>().MoveRight();
+            }else {
+                newestCloud.GetComponent<Ev_WalkCloud>().MoveLeft();
+            }*/
+            SoundManager.instance.RandomizeSfx(footsteps2, footsteps1);
+        }
     }
 
     public void UpdateSpeed(float updatedSpeed){

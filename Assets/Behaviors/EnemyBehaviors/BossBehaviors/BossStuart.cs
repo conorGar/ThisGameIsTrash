@@ -45,15 +45,15 @@ public class BossStuart : Boss
 	// Update is called once per frame
 	void Update ()
 	{
-        switch (ex.GetFriendState())
-        {
-            // In phase one, the trio will come back when Stuart's HP dips below 7.
-            case "FIGHT_PHASE_1":
-                if (myETD.currentHp <= 6)
-                {
-                    BossEvent();
-                }
-                break;
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            switch (ex.GetFriendState()) {
+                // In phase one, the trio will come back when Stuart's HP dips below 7.
+                case "FIGHT_PHASE_1":
+                    if (myETD.currentHp <= 6) {
+                        BossEvent();
+                    }
+                    break;
+            }
         }
 	}
 
@@ -152,6 +152,7 @@ public class BossStuart : Boss
 	}
 
 	public override void BossDeathEvent(){
+
         player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
         mdim.SetStartingIcons("Stuart");
@@ -162,6 +163,7 @@ public class BossStuart : Boss
         ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
         ex.SetFriendState("STUART_DEFEATED");
         bossTrio.SetActive(false);
+        DeactivateHpDisplay();
     }
 }
 

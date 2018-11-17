@@ -222,7 +222,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				currentHp = currentHp - 1 - meleeDmgBonus;
 				//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
-						gameObject.GetComponent<Boss>().hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(currentHp);
+                    gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
@@ -316,7 +316,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					currentHp = currentHp - 1 - meleeDmgBonus;
 					//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
-						gameObject.GetComponent<Boss>().hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(currentHp);
+						gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}

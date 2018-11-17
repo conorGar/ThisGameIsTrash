@@ -9,7 +9,6 @@ public class B_Ev_Questio : MonoBehaviour {
 	public GameObject player;
 	public GameObject grabbyGloves;
 	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
-	public GameObject myCamera;
 	public GameObject baseShadow;
 	public GameObject dazedShadow;
 	public GameObject pickupableGlow;
@@ -35,38 +34,39 @@ public class B_Ev_Questio : MonoBehaviour {
 		}
 	}
 	void Update () {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (player.transform.position.x < gameObject.transform.position.x && facingDirection != 0 && swingOnce == 0) {
+                facingDirection = 0;
+            }
+            else if (player.transform.position.x > gameObject.transform.position.x && facingDirection != 1 && swingOnce == 0) {
+                facingDirection = 1;
+            }
 
-		if(player.transform.position.x < gameObject.transform.position.x && facingDirection != 0 && swingOnce == 0){
-			facingDirection = 0;
-		}else if(player.transform.position.x > gameObject.transform.position.x && facingDirection != 1&& swingOnce == 0){
-			facingDirection = 1;
-		}
+            if (fp.enabled == true) {
+                if (facingDirection == 0 && myAnim.CurrentClip.name != "walkL") {
+                    myAnim.Play("walkL");
+                }
+                else if (facingDirection == 1 && myAnim.CurrentClip.name != "walkR") {
+                    myAnim.Play("walkR");
+                }
+                float distance = Vector3.Distance(transform.position, player.transform.position);
+                if (distance < 5 && swingOnce == 0) {
+                    Debug.Log("QUESTIO SWING ACTIVATE");
+                    StartCoroutine("Swing");
+                    swingOnce = 1;
+                }
+            }
 
-		if(fp.enabled == true){
-			if(facingDirection == 0 && myAnim.CurrentClip.name != "walkL"){
-				myAnim.Play("walkL");
-			}else if(facingDirection == 1 && myAnim.CurrentClip.name != "walkR"){
-				myAnim.Play("walkR");
-			}
-			float distance = Vector3.Distance(transform.position, player.transform.position);
-			if(distance < 5 && swingOnce == 0){
-				Debug.Log("QUESTIO SWING ACTIVATE");
-				StartCoroutine("Swing");
-				swingOnce = 1;
-			}
-		}
+            if (myETD.currentHp <= 12 && dropItemOnce == 0) {
+                DropItem();
+                dropItemOnce = 1;
+                Dazed();
+            }
 
-		if(myETD.currentHp <= 12 && dropItemOnce == 0){
-			DropItem();
-			dropItemOnce = 1;
-			Dazed();
-		}
-
-		if(gameObject.layer == 11&& grabbyGloves.activeInHierarchy == false && pickupableGlow.activeInHierarchy == false){
-			pickupableGlow.SetActive(true);
-		}
-
-
+            if (gameObject.layer == 11 && grabbyGloves.activeInHierarchy == false && pickupableGlow.activeInHierarchy == false) {
+                pickupableGlow.SetActive(true);
+            }
+        }
 	}
 
 	IEnumerator Swing(){

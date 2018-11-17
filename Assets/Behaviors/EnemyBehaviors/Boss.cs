@@ -42,15 +42,23 @@ public class Boss : MonoBehaviour {
 	}
 
 	public void ActivateHpDisplay(){
-		hpDisplay.SetActive(true);
-		hpDisplay.GetComponent<GUI_BossHpDisplay>().maxHp = hp;
-		hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]);
-		SoundManager.instance.PlaySingle(hpDisplayStartSfx);
+        if (hpDisplay != null) {
+            hpDisplay.SetActive(true);
+            hpDisplay.GetComponent<GUI_BossHpDisplay>().maxHp = hp;
+            hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]);
+            SoundManager.instance.PlaySingle(hpDisplayStartSfx);
+        }
 	}
 
     public void DeactivateHpDisplay()
     {
-        hpDisplay.SetActive(false);
+        if (hpDisplay != null)
+            hpDisplay.SetActive(false);
+    }
+
+    public virtual void UpdateBossHp(int hp){
+        if (hpDisplay != null)
+            hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(hp);
     }
 
 	public IEnumerator BossDeath(){

@@ -42,40 +42,41 @@ public class B_Ev_Hash : MonoBehaviour {
 	}
 
 	void Update () {
-		/*float distance = Vector3.Distance(transform.position, player.transform.position);
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            /*float distance = Vector3.Distance(transform.position, player.transform.position);
 
-		if(stuartShield.activeInHierarchy == true){//if hit while shielding Stuart, stops shield and starts runaway
-			if(myAnim.CurrentClip.name == "hurt"){
-				stuartShield.SetActive(false);
-				isRunningAway = true;
-			}
-		}else if(!isRunningAway && distance <10){ //if not shielding stuart, will start running away if the player gets close
-			isRunningAway = true;
-		}
-		if(isRunningAway){
-			transform.position = Vector2.MoveTowards(transform.position, player.transform.position, -1*8*Time.deltaTime);
-			if(myAnim.CurrentClip.name != "walk"){
-				myAnim.Play("walk");
-			}
-			if(distance > 10){
-				isRunningAway = false;
-				StartCoroutine("Shield");
-			}
-		}*/
-		if(onStuart){
-			gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
-		}
+            if(stuartShield.activeInHierarchy == true){//if hit while shielding Stuart, stops shield and starts runaway
+                if(myAnim.CurrentClip.name == "hurt"){
+                    stuartShield.SetActive(false);
+                    isRunningAway = true;
+                }
+            }else if(!isRunningAway && distance <10){ //if not shielding stuart, will start running away if the player gets close
+                isRunningAway = true;
+            }
+            if(isRunningAway){
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, -1*8*Time.deltaTime);
+                if(myAnim.CurrentClip.name != "walk"){
+                    myAnim.Play("walk");
+                }
+                if(distance > 10){
+                    isRunningAway = false;
+                    StartCoroutine("Shield");
+                }
+            }*/
+            if (onStuart) {
+                gameObject.transform.localPosition = new Vector2(0f, 3f);//place hash on top of stuart
+            }
 
-		if(falling){
-			if(gameObject.transform.position.y < landY){
-				Dazed();
-				myBody.gravityScale = 0f;
-				myBody.velocity = new Vector2(0,0f);
-				myBody.AddForce(new Vector2(4f*(Mathf.Sign(gameObject.transform.lossyScale.x)),0f),ForceMode2D.Impulse);//slide
-				falling = false;
-			}
-		}
-
+            if (falling) {
+                if (gameObject.transform.position.y < landY) {
+                    Dazed();
+                    myBody.gravityScale = 0f;
+                    myBody.velocity = new Vector2(0, 0f);
+                    myBody.AddForce(new Vector2(4f * (Mathf.Sign(gameObject.transform.lossyScale.x)), 0f), ForceMode2D.Impulse);//slide
+                    falling = false;
+                }
+            }
+        }
 	}
 
 
