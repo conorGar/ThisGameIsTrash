@@ -60,6 +60,8 @@ public class StoneFriend : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
+
+        yield return base.OnFinishDialogEnumerator();
     }
 
     private void Update(){

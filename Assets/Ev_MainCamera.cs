@@ -35,47 +35,44 @@ public class Ev_MainCamera : MonoBehaviour {
 
 	void Update () {
 			if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
-			if(!transitioning){
-				if(screenShake == 0){
-					if(stableCamera == false){
-						transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, player.transform.position.x, Time.deltaTime * cameraSpeed),
-                                                         Mathf.SmoothStep(transform.position.y, player.transform.position.y, Time.deltaTime * cameraSpeed),
-                                                         -10f); // follows only when player is in center of screen
+			    if(!transitioning){
+				    if(screenShake == 0){
+					    if(stableCamera == false){
+						    transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, player.transform.position.x, Time.deltaTime * cameraSpeed),
+                                                             Mathf.SmoothStep(transform.position.y, player.transform.position.y, Time.deltaTime * cameraSpeed),
+                                                             -10f); // follows only when player is in center of screen
 
-						transform.position = new Vector3(
-							Mathf.Clamp(transform.position.x, MIN_X, MAX_X),
-							Mathf.Clamp(transform.position.y, MIN_Y, MAX_Y),
-							-10f);
+						    transform.position = new Vector3(
+							    Mathf.Clamp(transform.position.x, MIN_X, MAX_X),
+							    Mathf.Clamp(transform.position.y, MIN_Y, MAX_Y),
+							    -10f);
 
-						/*if(transform.position.x >= MAX_X || transform.position.x <= MIN_X ){
-							hitbounds = 1; //=1:no x movement, =2: no y movement
-						}else if(transform.position.y >= MAX_Y || transform.position.y <= MIN_Y ){
-							hitbounds = 2; //=1:no x movement, =2: no y movement
-						}
+						    /*if(transform.position.x >= MAX_X || transform.position.x <= MIN_X ){
+							    hitbounds = 1; //=1:no x movement, =2: no y movement
+						    }else if(transform.position.y >= MAX_Y || transform.position.y <= MIN_Y ){
+							    hitbounds = 2; //=1:no x movement, =2: no y movement
+						    }
 
-						if(hitbounds == 0){
-							transform.position = player.transform.position + offset;
-						}else if(hitbounds == 1){
-							transform.position = new Vector3(transform.position.x,player.transform.position.y + offset.y,-10f);
-								if(Mathf.Abs(player.transform.position.x - transform.position.x) < 10f)
-									hitbounds = 0;
-						}else if(hitbounds == 2){
-							transform.position = new Vector3(player.transform.position.x,transform.position.y+offset.y,-10f);
-							if(Mathf.Abs(player.transform.position.y - transform.position.y) < 10f)
-								hitbounds = 0;
-						}*/
+						    if(hitbounds == 0){
+							    transform.position = player.transform.position + offset;
+						    }else if(hitbounds == 1){
+							    transform.position = new Vector3(transform.position.x,player.transform.position.y + offset.y,-10f);
+								    if(Mathf.Abs(player.transform.position.x - transform.position.x) < 10f)
+									    hitbounds = 0;
+						    }else if(hitbounds == 2){
+							    transform.position = new Vector3(player.transform.position.x,transform.position.y+offset.y,-10f);
+							    if(Mathf.Abs(player.transform.position.y - transform.position.y) < 10f)
+								    hitbounds = 0;
+						    }*/
 		
-					}
-				}else{
-					transform.position = new Vector3(startShakeX + Random.Range(0f, screenShake),startShakeY + Random.Range(0f, screenShake), -10f);
-				}
+					    }
+				    }else{
+					    transform.position = new Vector3(startShakeX + Random.Range(0f, screenShake),startShakeY + Random.Range(0f, screenShake), -10f);
+				    }
 
-			}else{
-				transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity,0.2f);
-			}
-
-
-
+			    }else{
+				    transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity,0.2f);
+			    }
 			}
 	}//end of update
 

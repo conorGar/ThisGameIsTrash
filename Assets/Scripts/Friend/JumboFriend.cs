@@ -94,6 +94,8 @@ public class JumboFriend : Friend {
             case "END":
                 break;
         }
+
+        yield return base.OnFinishDialogEnumerator();
     }
 
     // TODO: Ugly names :(

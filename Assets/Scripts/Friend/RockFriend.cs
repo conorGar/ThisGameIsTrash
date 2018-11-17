@@ -116,6 +116,8 @@ public class RockFriend : Friend {
             case "WANTS_TO_BE_PRETTY":
                 break;
         }
+
+        yield return base.OnFinishDialogEnumerator();
     }
 
     public void DeliverObject(SpecialFriendObject obj)

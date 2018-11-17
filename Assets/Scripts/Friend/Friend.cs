@@ -128,7 +128,6 @@ public class Friend : UserDataItem {
     {
         //CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
         DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(false);
-        //GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
         //nothing to do for basic friend
 
         StartCoroutine(OnFinishDialogEnumerator());
@@ -136,6 +135,9 @@ public class Friend : UserDataItem {
 
     public virtual IEnumerator OnFinishDialogEnumerator()
     {
+
+        // Pop Movie State.
+        GameStateManager.Instance.PopState();
         yield return null;
     }
 	void DayAsStringSet(){

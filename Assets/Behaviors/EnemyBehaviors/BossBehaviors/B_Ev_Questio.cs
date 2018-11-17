@@ -22,12 +22,12 @@ public class B_Ev_Questio : MonoBehaviour {
 	int dropItemOnce;
 	GameObject dazedStars;
 
-	void Start () {
+	void Awake () {
 		myETD = gameObject.GetComponent<EnemyTakeDamage>();
 		fp = gameObject.GetComponent<FollowPlayer>();
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
-
 	}
+
 	void OnEnable(){
 		if(myETD.currentHp > 12){
 			StopAllCoroutines();

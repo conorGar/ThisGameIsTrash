@@ -54,8 +54,9 @@ public class RatOnMatFriend : Friend
         StartCoroutine("ReturnCam");
         if(openMapPrompt != null)
         	openMapPrompt.SetActive(true);
-        yield return null;
-	}
+
+        yield return base.OnFinishDialogEnumerator();
+    }
 	IEnumerator DayDisplayDelay(){
 
 	    yield return new WaitForSeconds(2.3f);

@@ -136,7 +136,6 @@ public class ActivateDialogWhenClose : MonoBehaviour {
     	if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){ // added so dialog that happens right at start of scene(ratWhoFat,etc) waits until DayDisplay is done fading into the scene
 			DialogManager.Instance.gameObject.SetActive(true);
 
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 			player.GetComponent<EightWayMovement>().StopMovement();
 			player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 			if(DialogManager.Instance.dialogCanvas.activeInHierarchy == false){

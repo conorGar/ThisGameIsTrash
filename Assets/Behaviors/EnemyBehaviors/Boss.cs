@@ -7,7 +7,6 @@ public class Boss : MonoBehaviour {
 	public int bossNumber;
 	public int hp;
 	public int attkDmg;
-	public bool displayHealth;
 	public GameObject hpDisplay;
 	public GameObject objectPool;
 	public bool vanishAtDeath;
@@ -43,13 +42,16 @@ public class Boss : MonoBehaviour {
 	}
 
 	public void ActivateHpDisplay(){
-		if(displayHealth){
-			hpDisplay.SetActive(true);
-			hpDisplay.GetComponent<GUI_BossHpDisplay>().maxHp = hp;
-			hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]);
-			SoundManager.instance.PlaySingle(hpDisplayStartSfx);
-		}
+		hpDisplay.SetActive(true);
+		hpDisplay.GetComponent<GUI_BossHpDisplay>().maxHp = hp;
+		hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]);
+		SoundManager.instance.PlaySingle(hpDisplayStartSfx);
 	}
+
+    public void DeactivateHpDisplay()
+    {
+        hpDisplay.SetActive(false);
+    }
 
 	public IEnumerator BossDeath(){
 		Debug.Log("BOSS DEATH ACTIVATE ***********");

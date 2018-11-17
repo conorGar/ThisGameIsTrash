@@ -97,6 +97,8 @@ public class SlabFriend : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
+
+        yield return base.OnFinishDialogEnumerator();
     }
 
     public void AddTrashToFund(int trashAdded){

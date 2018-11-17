@@ -32,6 +32,8 @@ public class BossStuart : Boss
         exSpawnPosition = bossEx.transform.position;
         hashSpawnPosition = bossHash.transform.position;
         questioSpawnPosition = bossQuestio.transform.position;
+
+        gameObject.SetActive(false);
     }
     void OnEnable ()
 	{
@@ -94,12 +96,28 @@ public class BossStuart : Boss
 
 	}
 
+    public void PrepPhase1()
+    {
+        Debug.Log("Prep Phase 2");
+
+        SoundManager.instance.musicSource.Play();
+        bossTrio.SetActive(false);
+        bossEx.SetActive(false);
+        bossHash.SetActive(false);
+        bossQuestio.SetActive(false);
+        GetComponent<InvincibleEnemy>().enabled = false;
+        GetComponent<EnemyTakeDamage>().enabled = true;
+        canDamage = true;
+        GetComponent<FollowPlayer>().enabled = true;
+        ActivateHpDisplay();
+    }
+
     public void PrepPhase2()
     {
 		Debug.Log("Prep Phase 2");
 
         SoundManager.instance.musicSource.Play();
-       	bossTrio.SetActive(true);
+        bossTrio.SetActive(true);
        	bossEx.SetActive(true);
        	bossHash.SetActive(true);
         bossQuestio.SetActive(true);
@@ -111,15 +129,14 @@ public class BossStuart : Boss
     }
 
 	public override void BossEvent(){
-		//activate boss 1 middle dialog
-		player.GetComponent<BoxCollider2D>().enabled = false;
-		player.GetComponent<EightWayMovement>().enabled = false;
-		gameObject.GetComponent<FollowPlayer>().enabled = false;
-		/*for(int i = 0; i<bossTrio.transform.childCount;i++){//add ex and questio to bosses. This is done by BossFriendEx at start if in middle of fight
+        //activate boss 1 middle dialog
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        /*for(int i = 0; i<bossTrio.transform.childCount;i++){//add ex and questio to bosses. This is done by BossFriendEx at start if in middle of fight
 			RoomManager.Instance.currentRoom.bosses.Add(bossTrio.transform.GetChild(i).gameObject);
 		}*/
-		Debug.Log("Boss Event Activate");
-		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Debug.Log("Boss Event Activate");
 		SoundManager.instance.musicSource.Pause();
 		mdim.icons[0].GetComponent<MultipleIcon>().positionOnScreen = 0;//change ex icon position to be on left side
 		mdim.SetStartingIcons("Stuart");
@@ -129,11 +146,15 @@ public class BossStuart : Boss
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
         ex.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
         ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
+        
         ex.SetFriendState("STUART_PEP");
+        DeactivateHpDisplay();
 	}
 
 	public override void BossDeathEvent(){
-		mdim.SetStartingIcons("Stuart");
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        mdim.SetStartingIcons("Stuart");
 
         ex.gameObject.SetActive(true);
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;

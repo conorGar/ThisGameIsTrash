@@ -16,18 +16,22 @@ public class B_Ev_Hash : MonoBehaviour {
 	bool falling;
 	bool onStuart;
 	bool returnAfterThrow;
-	//Protects Stuart Until Hash is hit
-	//^Then Hash runs away
+    //Protects Stuart Until Hash is hit
+    //^Then Hash runs away
 
 
+    void Awake()
+    {
+        myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
+        myBody = gameObject.GetComponent<Rigidbody2D>();
+        onStuart = true;
+    }
 
-	void Start () {
-		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
+    void Start () {
 		gameObject.transform.parent = stuart.transform;
 		gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
-		onStuart = true;
-		myBody = gameObject.GetComponent<Rigidbody2D>();
+
 		Shield();
 	}
 
