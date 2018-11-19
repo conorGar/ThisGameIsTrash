@@ -43,8 +43,9 @@ public class ThrowableObject : PickupableObject {
                     beingCarried = false;
                     canThrow = false;
                     if (myShadow != null) {
-                        myShadow.SetActive(true);
+                        myShadow.transform.parent = this.gameObject.transform;
                         myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
+                        myShadow.transform.rotation = Quaternion.identity;
                     }
 
                     //	physicalCollision.enabled = false;
@@ -57,6 +58,10 @@ public class ThrowableObject : PickupableObject {
                     gameObject.GetComponent<CannotExitScene>().enabled = false;
                     if (physicalCollision != null)
                         physicalCollision.enabled = true;
+                }else{
+                	if(myShadow !=null){
+                		myShadow.transform.position = new Vector2(gameObject.transform.position.x,landingY); // shadow follows body
+                	}
                 }
             }
         }
@@ -91,8 +96,7 @@ public class ThrowableObject : PickupableObject {
 		//gameObject.GetComponent<CannotExitScene>().enabled = true;
 		Debug.Log("Thrown");
 
-        if (myShadow != null)
-            myShadow.GetComponent<SpriteRenderer>().sortingLayerName = "Layer01";
+        
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		player.GetComponent<MeleeAttack>().enabled = true;
 		if(gameObject.GetComponent<BoxCollider2D>()!=null){
@@ -101,6 +105,11 @@ public class ThrowableObject : PickupableObject {
 		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimThrowR",true);
 		spinning = true;
 		landingY = transform.position.y -3f;
+		if (myShadow != null){
+            myShadow.GetComponent<SpriteRenderer>().sortingLayerName = "Layer01";
+            myShadow.transform.parent = null;
+            myShadow.transform.position = new Vector2(myShadow.transform.position.x, landingY);
+        }
 		beingThrown = true;
 		gameObject.transform.parent = null;
 		myBody.simulated = true;

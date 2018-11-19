@@ -91,12 +91,14 @@ public class SlabFriend : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 StartCoroutine("TotalSlabTrashDisplay");
-				CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+				//CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 break;
             case "END":
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
+		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+		GameStateManager.Instance.PushState(typeof(GameplayState));
     }
 
     public void AddTrashToFund(int trashAdded){

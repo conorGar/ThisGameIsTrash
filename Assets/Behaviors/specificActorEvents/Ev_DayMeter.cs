@@ -59,7 +59,8 @@ public class Ev_DayMeter : MonoBehaviour {
             GlobalVariableManager.Instance.TIME_IN_DAY = Mathf.Min(Mathf.RoundToInt(secondsPassed), Mathf.RoundToInt(secondsInTheDay * delayBonus));
 
             //change Color
-			dayColorTint.color = Color.Lerp(startColor, nightColor,secondsPassed / secondsInTheDay * delayBonus);
+            if(dayColorTint !=null) //would be null for the day meter shown at player death
+				dayColorTint.color = Color.Lerp(startColor, nightColor,secondsPassed / secondsInTheDay * delayBonus);
 
 
             // Trigger events based on the time.

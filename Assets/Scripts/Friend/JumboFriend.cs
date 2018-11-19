@@ -94,6 +94,9 @@ public class JumboFriend : Friend {
             case "END":
                 break;
         }
+
+		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+		GameStateManager.Instance.PushState(typeof(GameplayState));
     }
 
     // TODO: Ugly names :(

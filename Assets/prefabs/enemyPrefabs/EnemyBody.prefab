@@ -273,9 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hastk2dSprite: 1
   movingObject: 0
-  legs: 0
+  sortBuddies: []
 --- !u!114 &114288479959162264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -303,6 +302,7 @@ MonoBehaviour:
   throwObject: {fileID: 8300000, guid: 39fdd0af36dba594da29a70a4573968b, type: 3}
   landSfx: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
   behaviorsToStop: []
+  livingBody: 0
   bodyHP: 3
   fliesPS: {fileID: 1714853125770136}
   poisioned: 0

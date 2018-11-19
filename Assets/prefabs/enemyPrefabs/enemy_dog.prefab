@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90732f15953ee234992e7e9f73c74d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noticeThreshold: 5
+  noticeThreshold: 7
   sleepingEnemy: 1
   sleepingPS: {fileID: 1763940434667328}
   noticeSfx: {fileID: 8300000, guid: 8648078d47b18484eb01c18cd8394427, type: 3}
@@ -314,7 +314,10 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
   hitSqueal: {fileID: 8300000, guid: 34a7e0879520a72449702df07bdb8ab9, type: 3}
   bounce: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
+  armoredEnemyHitSfx: {fileID: 0}
   bossEnemy: 0
+  IAmParentObj: 0
+  childEnemy: {fileID: 0}
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   gar_rec: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
@@ -390,9 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hastk2dSprite: 1
   movingObject: 0
-  legs: 0
+  sortBuddies: []
 --- !u!114 &114773077512966568
 MonoBehaviour:
   m_ObjectHideFlags: 1

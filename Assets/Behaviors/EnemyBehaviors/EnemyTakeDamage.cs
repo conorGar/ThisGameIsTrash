@@ -17,8 +17,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public AudioClip hitSound;
 	public AudioClip hitSqueal;
 	public AudioClip bounce;
+	public AudioClip armoredEnemyHitSfx;
 	public bool bossEnemy;
-
+	public bool IAmParentObj;
+	public GameObject childEnemy;
 
 	public GameObject tutPopup;
 
@@ -32,6 +34,9 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject myShadow;
 	public BoxCollider2D myCollisionBox;
 	public string returnAniName = "idle";
+	public bool dontSpawnBody;
+
+
 	public List<MonoBehaviour> behaviorsToDeactivate = new List<MonoBehaviour>();
 	[HideInInspector]
 	public GameObject objectPool;
@@ -70,6 +75,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	float t;
 	Quaternion startRotation;
 
+	bool startsOffDontMoveWhenHit; // needed for returning proper value when enemy dies(otherwise spawned enemies after starting obj pool amount will always have 'movewhenhit' enabled)
 
 	Vector2 startScale;
 
@@ -91,8 +97,15 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
-		myAnim = this.gameObject.GetComponent<tk2dSpriteAnimator>();
+		if(IAmParentObj){
+			myAnim = childEnemy.GetComponent<tk2dSpriteAnimator>();
+		}else{
+			myAnim = this.gameObject.GetComponent<tk2dSpriteAnimator>();
+		}
 		myBody = gameObject.GetComponent<Rigidbody2D>();
+		if(!moveWhenHit){
+			startsOffDontMoveWhenHit = true;
+		}
 		startRotation = transform.rotation;
 		if(myShadow !=null) //if has shadow
 			shadowStartPos = myShadow.transform.localPosition;
@@ -242,6 +255,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				StartCoroutine("AfterHit");
 
 			}
+		}else if(armoredEnemy){
+			SoundManager.instance.PlaySingle(armoredEnemyHitSfx);
 		}
 	}
 
@@ -279,7 +294,11 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 							behaviorsToDeactivate[i].enabled = false;
 						}
 					}
-					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
+					if(IAmParentObj){
+						childEnemy.GetComponent<tk2dSprite>().color = Color.red;
+					}else{
+						this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
+					}
 					GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars"); 
 					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
 					damageCounter.SetActive(true);
@@ -300,7 +319,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 						}
 
-                //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
+                Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
                 CamManager.Instance.mainCam.ScreenShake(.2f);
 					if(hitByThrownObject){
                         // TODO: Fix the boss battle to use throwable bodies????
@@ -341,6 +360,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 						gameObject.GetComponent<FollowPlayer>().enabled = false;
 					}
 					StartCoroutine("ContinueHit"); // just needed to seperate here for IEnumerator stuff
+				}else{
+				Debug.Log("taking damange = true?");
 				}
 			}
 
@@ -421,9 +442,15 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				
 
 			yield return new WaitForSeconds(.1f);
-			this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
+			if(IAmParentObj){
+				childEnemy.gameObject.GetComponent<tk2dSprite>().color = Color.white;
+
+			}else
+				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				//Debug.Log("**AND HERE!!!!!!!!***");
+
+			
 			if(currentHp <= 0)
 				yield return new WaitForSeconds(.4f);
 			else
@@ -433,7 +460,11 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 		}else{
 			yield return new WaitForSeconds(.2f);
-			this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
+			if(IAmParentObj){
+				childEnemy.gameObject.GetComponent<tk2dSprite>().color = Color.white;
+			}else{
+				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
+			}
 			damageOnce = 0;
 			takingDamage = false;
 			if(currentHp >0 && myAnim.GetClipByName(returnAniName) != null)
@@ -608,8 +639,18 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			currentHp = 2; //TODO: this is just for brownmole, maybe get it from 'Enemy.cs"?
 
 		}else{
+			
 			GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival = GlobalVariableManager.Instance.DAY_NUMBER +3;
 			Debug.Log("Day of revival: "+ GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival);
+
+		}
+
+		if(gameObject.GetComponent<FollowPlayerAfterNotice>()){
+			gameObject.GetComponent<FollowPlayer>().enabled = true;
+		}
+
+		if(gameObject.GetComponent<Animator>()){
+			gameObject.GetComponent<Animator>().StopPlayback();
 		}
 
 		GameObject deathSmoke = ObjectPool.Instance.GetPooledObject("effect_SmokePuff"); 
@@ -620,13 +661,16 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost");
 		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		Debug.Log("My spawner ID: "+mySpawnerID);
-		if(!respawnEnemy){
+		if(!respawnEnemy && !dontSpawnBody){
 			GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",gameObject.transform.position);
 			body.GetComponent<tk2dSprite>().SetSprite(myDeadBodyName);
 			body.GetComponent<ThrowableBody>().SetSpawnerID(mySpawnerID);
 		}
 		myAnim.Play("idle");//to fix enemies sometimes spawning in hurt animation
 		damageOnce = 0;
+		if(startsOffDontMoveWhenHit){
+			moveWhenHit = false;
+		}
 		this.gameObject.SetActive(false);
 
 	}

@@ -42,8 +42,8 @@ public class GUI_TutPopup : MonoBehaviour {
 		}else if(phase == 1){
 			phase = 2;
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,5f,.5f);
-			yield return new WaitForSeconds(.5f);
 			SoundManager.instance.PlaySingle(closeSfx);
+			yield return new WaitForSeconds(.5f);
 
             CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 			phase = 0;

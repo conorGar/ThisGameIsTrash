@@ -44,6 +44,7 @@ public class DialogChoiceManager : MonoBehaviour {
 	}
 
 	void OnEnable(){
+		chooseHighlighter.SetActive(false);
 		arrowPos = 0;
 		canSelect = true;
 	}

@@ -89,7 +89,8 @@ public class Room : MonoBehaviour
 	                spawnedEnemy.transform.position = enemySpawners[i].transform.position;
 					if(spawnedEnemy.GetComponent<EnemyTakeDamage>() != null){
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().SetSpawnerID(enemySpawners[i].name);
-		                spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
+		                if(spawnedEnemy.GetComponent<CannotExitScene>())
+		                	spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
 	                }
 	            }

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - name: run
+  - name: idle
     frames:
     - spriteCollection: {fileID: 114707067206574538, guid: 6385e2df30de156448465864d72126d4,
         type: 2}
@@ -120,7 +120,7 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  - name: hurt
+  - name: hit
     frames:
     - spriteCollection: {fileID: 114707067206574538, guid: 6385e2df30de156448465864d72126d4,
         type: 2}

@@ -7,7 +7,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 	public GameObject player;
 	//public GameObject backPaper;
 	public GameObject oneTimers;
-	public AudioClip truckStart;
+	//public AudioClip truckStart;
 	public AudioClip truckDoor;
 
 
@@ -47,9 +47,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 		}
 	}
 
-	void OnEnable(){
-		SoundManager.instance.PlaySingle(truckStart);
-	}
+
 	// Update is called once per frame
 	void Update () {
 		if(phase == 1){

@@ -9,7 +9,7 @@ public class B_Ev_Questio : MonoBehaviour {
 	public GameObject player;
 	public GameObject grabbyGloves;
 	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
-	public GameObject myCamera;
+	//public GameObject myCamera;
 	public GameObject baseShadow;
 	public GameObject dazedShadow;
 	public GameObject pickupableGlow;

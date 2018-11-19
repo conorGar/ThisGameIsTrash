@@ -140,7 +140,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 	IEnumerator Death(){
         // Trigger Respawn State.
         GameStateManager.Instance.PushState(typeof(RespawnState));
-
+        gameObject.GetComponent<EightWayMovement>().StopMovement();
         SoundManager.instance.FadeMusic();
 		Time.timeScale = 0.3f;
 		yield return new WaitForSeconds(.3f);

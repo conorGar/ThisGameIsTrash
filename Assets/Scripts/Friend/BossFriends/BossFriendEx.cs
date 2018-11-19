@@ -141,7 +141,6 @@ public class BossFriendEx : Friend
                 gameObject.GetComponent<MeshRenderer>().enabled = true;
 				
 	
-                GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 				stuart.GetComponent<FollowPlayer>().enabled = true;
 				CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;

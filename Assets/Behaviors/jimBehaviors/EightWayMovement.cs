@@ -135,6 +135,7 @@ public class EightWayMovement : MonoBehaviour {
             if (inputX != 0 && inputY != 0) {
                 if (momentum != 4) {
                     momentum = 4f;
+              
                     InvokeRepeating("SpawnClouds", .2f, .2f); //just have this here so it only happens once
                 }
                 legAnim.Play("walk");
@@ -252,7 +253,11 @@ public class EightWayMovement : MonoBehaviour {
                     }
                     else if (momentum != 4) {
                         momentum = 4f;
-                        InvokeRepeating("SpawnClouds", .2f, .2f);
+                        if(GlobalVariableManager.Instance.CARRYING_SOMETHING){
+								InvokeRepeating("SpawnClouds", .2f, .4f); //slower footsteps when carrying something
+                        }else{
+                       			InvokeRepeating("SpawnClouds", .2f, .2f);
+                        }
                         walkCloudPS.SetActive(true); //just have this here so it only happens once
                         walkCloudPS.GetComponent<ParticleSystem>().Play();
                     }
@@ -319,7 +324,7 @@ public class EightWayMovement : MonoBehaviour {
 					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",false);
 			}
 		CancelInvoke();
-		StopAllCoroutines();
+		//StopAllCoroutines();
 		legAnim.Play(anim.CurrentClip.name);
     	this.enabled = true;
     }

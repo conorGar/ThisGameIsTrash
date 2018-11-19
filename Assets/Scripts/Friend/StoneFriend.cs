@@ -54,12 +54,13 @@ public class StoneFriend : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 StartCoroutine("TotalStoneHandDisplay");
-				CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 break;
             case "END":
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
+		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+		GameStateManager.Instance.PushState(typeof(GameplayState));
     }
 
     private void Update(){

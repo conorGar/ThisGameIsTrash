@@ -77,6 +77,7 @@ public class GUI_PauseMenu : MonoBehaviour {
     {
         gameObject.SetActive(true);
         SoundManager.instance.PlaySingle(paperSlide);
+		SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume/2;
         Time.timeScale = 0;
     }
 
@@ -84,6 +85,7 @@ public class GUI_PauseMenu : MonoBehaviour {
     {
         gameObject.SetActive(false);
         SoundManager.instance.PlaySingle(paperSlide);
+		SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume*2;
         Time.timeScale = 1;
     }
 

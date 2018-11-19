@@ -89,7 +89,7 @@ public class GUI_OptionsPopupBehavior : MonoBehaviour {
                     gameObject.SetActive(false); // No longer in the popup state.
                     OnCloseEvent();
                 } else {
-					GameStateManager.Instance.PopAllStates(); //pop all because could also have pause state if got here from pause menu
+					//GameStateManager.Instance.PopAllStates(); //pop all because could also have pause state if got here from pause menu
                     OnOptionEvent(0);
                 }
             }

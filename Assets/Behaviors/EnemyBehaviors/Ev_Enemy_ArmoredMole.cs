@@ -34,6 +34,7 @@ public class Ev_Enemy_ArmoredMole : MonoBehaviour {
                 //Debug.Log(Vector2.Distance(gameObject.transform.position,player.transform.position));
                 if (startThrowOnce == 1) {
                     StopAllCoroutines();
+                    tossRockOnce = 0;
                     startThrowOnce = 0;
                 }
 

@@ -48,8 +48,8 @@ public class GUI_PinUnlockDisplay : MonoBehaviour {
 		}else if(phase == 1){
 			phase = 2;
 			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,5f,.4f);
-			yield return new WaitForSeconds(.4f);
 			SoundManager.instance.PlaySingle(closeSfx);
+			yield return new WaitForSeconds(.4f);
 			Time.timeScale = 1;
 			gameObject.SetActive(false);
 		}
