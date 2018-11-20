@@ -331,9 +331,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					myAnim.Play("hit");
 					if(moveWhenHit){
 						if(gameObject.transform.position.x < player.transform.position.x)
-							gameObject.transform.localScale = new Vector2(startScale.x*-1,startScale.y);
-						else
 							gameObject.transform.localScale = new Vector2(startScale.x,startScale.y);
+						else
+							gameObject.transform.localScale = new Vector2(startScale.x*-1,startScale.y);
 
 					}
 					//camShake = 1;

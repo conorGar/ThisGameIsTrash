@@ -17,7 +17,7 @@ public class B_Ev_Questio : MonoBehaviour {
 	tk2dSpriteAnimator myAnim;
 	FollowPlayer fp;
 	int facingDirection = 0; //0 = left, 1 = right
-	int swingOnce;
+	bool isSwinging;
 	int dropItemOnce;
 	GameObject dazedStars;
 
@@ -28,12 +28,6 @@ public class B_Ev_Questio : MonoBehaviour {
         myAnim.AnimationEventTriggered = AnimationEventCallback;
 	}
 
-    void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
-    {
-        var frame = clip.GetFrame(frameNo);
-        Debug.Log("Animation Trigger Check: " + frame.eventInfo);
-    }
-
 	void OnEnable(){
 		if(myETD.currentHp > 12){
 			StopAllCoroutines();
@@ -42,12 +36,8 @@ public class B_Ev_Questio : MonoBehaviour {
 	}
 	void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (player.transform.position.x < gameObject.transform.position.x && facingDirection != 0 && swingOnce == 0) {
-                facingDirection = 0;
-            }
-            else if (player.transform.position.x > gameObject.transform.position.x && facingDirection != 1 && swingOnce == 0) {
-                facingDirection = 1;
-            }
+            if (!isSwinging)
+                UpdateFacing();
 
             if (fp.enabled == true) {
                 if (facingDirection == 0 && myAnim.CurrentClip.name != "walkL") {
@@ -57,10 +47,9 @@ public class B_Ev_Questio : MonoBehaviour {
                     myAnim.Play("walkR");
                 }
                 float distance = Vector3.Distance(transform.position, player.transform.position);
-                if (distance < 5 && swingOnce == 0) {
+                if (distance < 5 && !isSwinging) {
                     Debug.Log("QUESTIO SWING ACTIVATE");
-                    StartCoroutine("Swing");
-                    swingOnce = 1;
+                    Swing();
                 }
             }
 
@@ -77,33 +66,27 @@ public class B_Ev_Questio : MonoBehaviour {
         }
 	}
 
-
-
-	IEnumerator Swing(){
-		fp.enabled = false;
-		if(facingDirection == 0){
+    // Helpers
+    void Swing()
+    {
+        fp.enabled = false;
+        if (facingDirection == 0) {
             myAnim.Play("swingL");
-		}else{
-			myAnim.Play("swingR");
-		}
-		yield return new WaitForSeconds(.7f);
-		gameObject.GetComponent<Rigidbody2D>().velocity = (player.transform.position -gameObject.transform.position).normalized *15;
-		yield return new WaitForSeconds(.5f);
-		if(myAnim.CurrentClip.name == "swingL"){
-			mySlashL.SetActive(true);
-		}else{
-			mySlashR.SetActive(true);
-		}
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-		yield return new WaitForSeconds(.5f);
-		//check for directionFacing
-		mySlashL.SetActive(false);
-		mySlashR.SetActive(false);
+        }
+        else {
+            myAnim.Play("swingR");
+        }
+    }
 
-		swingOnce = 0;
-		myAnim.Play("idleL");
-		fp.enabled = true;
-	}
+    void UpdateFacing()
+    {
+        if (player.transform.position.x < gameObject.transform.position.x && facingDirection != 0) {
+            facingDirection = 0;
+        }
+        else if (player.transform.position.x > gameObject.transform.position.x && facingDirection != 1) {
+            facingDirection = 1;
+        }
+    }
 
     IEnumerator DropGloves()
     {
@@ -133,4 +116,55 @@ public class B_Ev_Questio : MonoBehaviour {
 		//this.enabled = false;
 	}
 
+
+    // Callbacks
+    void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
+    {
+        var frame = clip.GetFrame(frameNo);
+        Debug.Log("Animation Trigger Check: " + frame.eventInfo);
+        switch (frame.eventInfo) {
+            case "SWING_SET":
+                isSwinging = true;
+                break;
+            case "SWING_UNSET":
+                isSwinging = false;
+                mySlashL.SetActive(false);
+                mySlashR.SetActive(false);
+                break;
+            case "SWING_CHARGE":
+                // At the start of the charge, Allow Questio to switch animations (mid frame) if the player got to his other side.
+                UpdateFacing();
+                if (facingDirection == 0) {
+                    if (clip.name != "swingL") {
+                        myAnim.Play("swingL");
+                        myAnim.PlayFromFrame(frameNo);
+                    }
+                } else {
+                    if (clip.name != "swingR") {
+                        myAnim.Play("swingR");
+                        myAnim.PlayFromFrame(frameNo);
+                    }
+                }
+
+                gameObject.GetComponent<Rigidbody2D>().velocity = (player.transform.position -gameObject.transform.position).normalized *15;
+                break;
+            case "SWING_MOMENTUM_FINISHED":
+                if (clip.name == "swingL")
+                    mySlashL.SetActive(true);
+                else
+                    mySlashR.SetActive(true);
+
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                break;
+            case "SWING_FINISHED":
+                mySlashL.SetActive(false);
+                mySlashR.SetActive(false);
+                myAnim.Play("idleL");
+                fp.enabled = true;
+                break;
+            default:
+                Debug.Log("Animation Trigger Not Found: " + frame.eventInfo);
+                break;
+        }
+    }
 }
