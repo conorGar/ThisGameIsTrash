@@ -12,6 +12,7 @@ public class BossFriendEx : Friend
     public GameObject ex;
 	public GameObject hash;
 	public GameObject questio;
+	public GameObject slideTrash;
     public int FieldRoomNum;
     public int ToxicFieldRoomNum;
 	//public GameObject stuartIcon;
@@ -76,6 +77,7 @@ public class BossFriendEx : Friend
                 nextDialog = "Boss1Death";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
+            
         }
     }
 
@@ -108,6 +110,11 @@ public class BossFriendEx : Friend
             case "END":
                 yield return TrioDisappears();
                 stuart.gameObject.SetActive(false);
+                CamManager.Instance.mainCamEffects.CameraPan(slideTrash.transform.position,"");
+                yield return new WaitUntil(() => Vector2.Distance(CamManager.Instance.mainCam.transform.position, slideTrash.transform.position) < 2);
+                slideTrash.SetActive(true);
+                yield return new WaitForSeconds(1f);
+                CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 SetFriendState("END");
                 break;
         }
