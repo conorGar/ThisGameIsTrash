@@ -153,7 +153,7 @@ public class BossStuart : Boss
 
 	public override void BossDeathEvent(){
 
-        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        
 
         mdim.SetStartingIcons("Stuart");
 
@@ -162,6 +162,7 @@ public class BossStuart : Boss
         ex.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
         ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
         ex.SetFriendState("STUART_DEFEATED");
+		ex.GetComponent<ActivateDialogWhenClose>().Execute();
         bossTrio.SetActive(false);
         DeactivateHpDisplay();
     }

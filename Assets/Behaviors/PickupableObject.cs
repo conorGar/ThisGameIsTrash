@@ -12,6 +12,7 @@ public class PickupableObject : MonoBehaviour
 	public GameObject carryMark;
 	public bool throwableObject;
 	protected bool movePlayerToObject;
+	public GameObject childPickupObj; // used for objects that need a parent, but whose spriterender cant be on the parent object(like for an intro animation)
 	//int bounce = 0;
 	//int doOnce = 0;
 	float myY;
@@ -87,15 +88,21 @@ public class PickupableObject : MonoBehaviour
 						gameObject.transform.localPosition = carryMark.transform.localPosition;
 						gameObject.GetComponent<ThrowableObject>().enabled = true;
 					}
-					player.GetComponent<MeleeAttack>().enabled = false;
+					//player.GetComponent<MeleeAttack>().enabled = false;
 					player.GetComponent<EightWayMovement>().enabled = true;
 					player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",true);
 
-					if(gameObject.GetComponent<SpriteRenderer>() != null)
-						gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02"; // makes sure in front of player
-					else
-						gameObject.GetComponent<Renderer>().sortingLayerName= "Layer02"; // makes sure in front of player
-
+					if(childPickupObj == null){
+						if(gameObject.GetComponent<SpriteRenderer>() != null)
+							gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02"; // makes sure in front of player
+						else
+							gameObject.GetComponent<Renderer>().sortingLayerName= "Layer02"; // makes sure in front of player
+					}else{
+						if(childPickupObj.GetComponent<SpriteRenderer>() != null)
+							childPickupObj.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02"; // makes sure in front of player
+						else
+							childPickupObj.GetComponent<Renderer>().sortingLayerName= "Layer02"; // makes sure in front of player
+					}
 					myBody.simulated = false; //prevents item from moving when player runs into a wall or something
 					PickUpEvent();
 					pickUpSpin = false;

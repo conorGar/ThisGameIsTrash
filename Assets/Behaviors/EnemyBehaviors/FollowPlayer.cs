@@ -30,7 +30,7 @@ public class FollowPlayer : MonoBehaviour {
                     transform.position = Vector3.MoveTowards(transform.position, player.position, chaseSpeed * Time.deltaTime);
                 }
                 if (!hasSeperateFacingAnimations) {
-                    if (anim.GetClipByName("chase") != null && !anim.IsPlaying("chase"))
+                    if ( anim != null && anim.GetClipByName("chase") != null && !anim.IsPlaying("chase"))
                         anim.Play("chase");
 
                     if (player.transform.position.x < transform.position.x) {

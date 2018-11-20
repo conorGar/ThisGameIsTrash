@@ -9,6 +9,8 @@ public class B_Ev_Hash : MonoBehaviour {
 	public GameObject stuartShield;
 	public AudioClip castSound;
 	public GameObject player;
+	public ParticleSystem smokePuff;
+
 
 	//bool isRunningAway;
 	float landY;
@@ -104,14 +106,14 @@ public class B_Ev_Hash : MonoBehaviour {
 		onStuart = false;
 		gameObject.transform.parent = null;
 		landY = gameObject.transform.position.y - 4;
-		myBody.AddForce(new Vector2(4f*(Mathf.Sign(gameObject.transform.lossyScale.x)),0f),ForceMode2D.Impulse);//slide
+		myBody.AddForce(new Vector2(7f*(Mathf.Sign(gameObject.transform.lossyScale.x)),4f),ForceMode2D.Impulse);//slide
 		myBody.gravityScale = 1;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
 		falling = true;
 	}
 
 	void Dazed(){
-		gameObject.GetComponent<EnemyTakeDamage>().enabled = true;
+		//gameObject.GetComponent<EnemyTakeDamage>().enabled = true;
 		gameObject.layer = 11; //switch to ite layer.
 		gameObject.GetComponent<ThrowableObject>().enabled = true;
 		myAnim.Play("dazed");
@@ -120,6 +122,7 @@ public class B_Ev_Hash : MonoBehaviour {
 
 	void Revive(){
 		if(this.enabled){
+			smokePuff.Play();
 			gameObject.GetComponent<EnemyTakeDamage>().enabled = false;//cant attack while he is riding Stuart
 			gameObject.transform.parent = stuart.transform;
 			gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart

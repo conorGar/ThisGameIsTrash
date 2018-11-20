@@ -34,7 +34,7 @@ public class MeleeAttack : MonoBehaviour {
     }
 
     void Update () {
-        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) && !GlobalVariableManager.Instance.CARRYING_SOMETHING) {
             if (isSwinging) {
                 if (swingDirection == 1) {
                     //weapon.transform.position = new Vector2(gameObject.transform.position.x + 4f,gameObject.transform.position.y+ 1.4f);
