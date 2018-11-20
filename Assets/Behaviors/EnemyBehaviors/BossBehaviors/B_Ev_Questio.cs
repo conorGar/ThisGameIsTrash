@@ -25,7 +25,14 @@ public class B_Ev_Questio : MonoBehaviour {
 		myETD = gameObject.GetComponent<EnemyTakeDamage>();
 		fp = gameObject.GetComponent<FollowPlayer>();
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
+        myAnim.AnimationEventTriggered = AnimationEventCallback;
 	}
+
+    void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
+    {
+        var frame = clip.GetFrame(frameNo);
+        Debug.Log(frame.eventInfo);
+    }
 
 	void OnEnable(){
 		if(myETD.currentHp > 12){
@@ -69,10 +76,12 @@ public class B_Ev_Questio : MonoBehaviour {
         }
 	}
 
+
+
 	IEnumerator Swing(){
 		fp.enabled = false;
 		if(facingDirection == 0){
-			myAnim.Play("swingL");
+            myAnim.Play("swingL");
 		}else{
 			myAnim.Play("swingR");
 		}
