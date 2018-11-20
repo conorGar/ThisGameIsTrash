@@ -127,6 +127,7 @@ public class Friend : UserDataItem {
     public virtual void OnFinishDialog()
     {
         //CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+        DialogManager.Instance.currentlySpeakingIcon.ResetIconPositionsOnScreen();
         DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(false);
         //nothing to do for basic friend
 

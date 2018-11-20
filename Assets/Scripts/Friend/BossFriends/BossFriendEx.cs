@@ -71,11 +71,11 @@ public class BossFriendEx : Friend
                 break;
             case "STUART_PEP":
                 nextDialog = "Boss1Middle";
-                GetComponent<ActivateDialogWhenClose>().Execute();
+                GetComponent<ActivateDialogWhenClose>().Execute("Stuart");
                 break;
             case "STUART_DEFEATED":
                 nextDialog = "Boss1Death";
-                GetComponent<ActivateDialogWhenClose>().Execute();
+                GetComponent<ActivateDialogWhenClose>().Execute("Stuart");
                 break;
             
         }
@@ -87,6 +87,10 @@ public class BossFriendEx : Friend
 
         switch (GetFriendState())
         {
+            case "IN_TOXIC_FIELD":
+                yield return TrioDisappears();
+                break;
+
             case "PREP_FIGHT_PHASE_1":
                 yield return TrioDisappears();
                 CamManager.Instance.mainCamEffects.ZoomInOut(1.5f,2f);

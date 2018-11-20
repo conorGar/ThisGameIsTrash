@@ -15,6 +15,9 @@ public class B_Ev_Ex : MonoBehaviour {
 
 	Color myColor;//needed for fade in/fadeOut
 	tk2dSpriteAnimator myAnim;
+    bool isActing = false;
+    string action = "Teleport";
+
 	// Use this for initialization
 	void Start () {
 		myColor = gameObject.GetComponent<tk2dSprite>().color;
@@ -24,7 +27,12 @@ public class B_Ev_Ex : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (!isActing) {
+                StartCoroutine(action);
+                isActing = true;
+            }
+        }
 	}
 
 	//for debug
@@ -35,6 +43,7 @@ public class B_Ev_Ex : MonoBehaviour {
 
 	public void StartBattle(){
 		StartCoroutine("Teleport");
+        isActing = true;
 	}
 
 
@@ -50,9 +59,9 @@ public class B_Ev_Ex : MonoBehaviour {
 		gameObject.GetComponent<tk2dSprite>().color = new Color(myColor.r,myColor.g,myColor.b,1); //fade back
 		myParticles.SetActive(false);
 		yield return new WaitForSeconds(Random.Range(1f,3f));
-		StopCoroutine("Fire");
-		StartCoroutine("Fire");
-	}
+        action = "Fire";
+        isActing = false;
+    }
 
 	IEnumerator Fire(){
 		Debug.Log("FIRE ACTIVATED-----------!");
@@ -77,21 +86,22 @@ public class B_Ev_Ex : MonoBehaviour {
 			}
 			int randomNextAction = Random.Range(0,3);
 			if(randomNextAction == 0){
-				StartCoroutine("Teleport");
+				action = "Teleport";
 			}else{
 				yield return new WaitForSeconds(Random.Range(1f,3f));
-				StartCoroutine("Fire");
+                action = "Fire";
 			}
 		}else{
 			int randomNextAction = Random.Range(0,3);
 			if(randomNextAction == 0){
-				StartCoroutine("Teleport");
-			}else{
+                action = "Teleport";
+            }
+            else{
 				yield return new WaitForSeconds(Random.Range(1f,3f));
-				StartCoroutine("Fire");
-			}
+                action = "Fire";
+            }
 		}
-
+        isActing = false;
 	}
 
 	void Dazed(){

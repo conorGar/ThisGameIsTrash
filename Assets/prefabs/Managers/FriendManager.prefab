@@ -2644,7 +2644,6 @@ MonoBehaviour:
   - STUART_PEP
   - PREP_FIGHT_PHASE_2
   - FIGHT_PHASE_2
-  - HASH_SHIELD_INTRO
   - LEFT_FIGHT_PHASE_2
   - STUART_DEFEATED
   - END
@@ -2658,6 +2657,7 @@ MonoBehaviour:
   ex: {fileID: 1355579274379740}
   hash: {fileID: 1155078101558290}
   questio: {fileID: 1283774092301924}
+  slideTrash: {fileID: 0}
   FieldRoomNum: 3
   ToxicFieldRoomNum: 99
   smokePuff: {fileID: 8300000, guid: 885c2d5df5a8ca74faa8b6e120d89b26, type: 3}
@@ -3151,6 +3151,7 @@ MonoBehaviour:
   carryXAdjustment: 3.3
   carryMark: {fileID: 0}
   throwableObject: 0
+  childPickupObj: {fileID: 0}
   myBody: {fileID: 0}
   dumpster: {fileID: 0}
   spinning: 0

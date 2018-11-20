@@ -67,6 +67,7 @@ public class Boss : MonoBehaviour {
 
 
 		if(vanishAtDeath){
+            GameStateManager.Instance.PushState(typeof(MovieState));
 			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = 0;
 			//yield return new WaitForSeconds(1.5f);
 
@@ -90,9 +91,10 @@ public class Boss : MonoBehaviour {
 			for(int i = 0; i < currentRoom.bosses.Count; i++){//disable all other bosses at death
 				currentRoom.bosses[i].SetActive(false);
 			}
-			BossDeathEvent();
-			//this.gameObject.SetActive(false);
-		}else{
+            GameStateManager.Instance.PopState();
+            BossDeathEvent();
+        }
+        else{
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("Death");
 			myBossScript.StopAllCoroutines();
 			myBossScript.enabled = false;

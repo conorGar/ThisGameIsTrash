@@ -139,8 +139,9 @@ public class BossStuart : Boss
         Debug.Log("Boss Event Activate");
 		SoundManager.instance.musicSource.Pause();
 		mdim.icons[0].GetComponent<MultipleIcon>().positionOnScreen = 0;//change ex icon position to be on left side
-		mdim.SetStartingIcons("Stuart");
-		myETD.currentHp += 10; //regain lost hp
+        mdim.icons[1].GetComponent<MultipleIcon>().positionOnScreen = 1;//change questio icon position to be center
+
+        myETD.currentHp += 10; //regain lost hp
 		ex.gameObject.SetActive(true); //activate dialog
 
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
@@ -152,17 +153,11 @@ public class BossStuart : Boss
 	}
 
 	public override void BossDeathEvent(){
-
-        
-
-        mdim.SetStartingIcons("Stuart");
-
         ex.gameObject.SetActive(true);
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
         ex.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
         ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
         ex.SetFriendState("STUART_DEFEATED");
-		ex.GetComponent<ActivateDialogWhenClose>().Execute();
         bossTrio.SetActive(false);
         DeactivateHpDisplay();
     }

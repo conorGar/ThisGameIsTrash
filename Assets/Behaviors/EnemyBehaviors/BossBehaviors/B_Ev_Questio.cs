@@ -31,7 +31,7 @@ public class B_Ev_Questio : MonoBehaviour {
     void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
     {
         var frame = clip.GetFrame(frameNo);
-        Debug.Log(frame.eventInfo);
+        Debug.Log("Animation Trigger Check: " + frame.eventInfo);
     }
 
 	void OnEnable(){
@@ -65,9 +65,10 @@ public class B_Ev_Questio : MonoBehaviour {
             }
 
             if (myETD.currentHp <= 12 && dropItemOnce == 0) {
-                DropItem();
-                dropItemOnce = 1;
+                StopAllCoroutines();
+                StartCoroutine(DropGloves());
                 Dazed();
+                dropItemOnce = 1;
             }
 
             if (gameObject.layer == 11 && grabbyGloves.activeInHierarchy == false && pickupableGlow.activeInHierarchy == false) {
@@ -104,25 +105,18 @@ public class B_Ev_Questio : MonoBehaviour {
 		fp.enabled = true;
 	}
 
-	void DropItem(){
-		//GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = true; //stops enemy function
-		player.GetComponent<EightWayMovement>().enabled = false;
-		player.GetComponent<PlayerTakeDamage>().enabled = false;
-		grabbyGloves.SetActive(true);
-		grabbyGloves.GetComponent<Ev_SpecialItem>().Toss();
-		CamManager.Instance.mainCamEffects.CameraPan(grabbyGloves,true);
-		Dazed();
-		Invoke("ReturnFromGloveShow",2f);
+    IEnumerator DropGloves()
+    {
+        GameStateManager.Instance.PushState(typeof(MovieState));
 
-	}
+        grabbyGloves.SetActive(true);
+        grabbyGloves.GetComponent<Ev_SpecialItem>().Toss();
+        CamManager.Instance.mainCamEffects.CameraPan(grabbyGloves, true);
+        yield return new WaitForSeconds(2f);
+        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 
-	void ReturnFromGloveShow(){
-		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		player.GetComponent<EightWayMovement>().enabled = true;
-		player.GetComponent<PlayerTakeDamage>().enabled = true;
-		//GlobalVariableManager.Instance.TUT_POPUP_ISSHOWING = false; //stops enemy function
-
-	}
+        GameStateManager.Instance.PopState();
+    }
 
 	void Dazed(){
 		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
@@ -136,7 +130,6 @@ public class B_Ev_Questio : MonoBehaviour {
 		myAnim.Play("dazed");
 		dazedStars = ObjectPool.Instance.GetPooledObject("effect_stars",new Vector3(transform.position.x,transform.position.y+2,0));
 		dazedStars.transform.parent = gameObject.transform;
-		StopAllCoroutines();
 		//this.enabled = false;
 	}
 

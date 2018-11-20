@@ -12,9 +12,9 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
     public int currentSpeakerIndex = 0;
 	bool movingIcons;
 	int iconMoveDir;
-	//int previouslyHighlightedIcon;// Just needed for 3- character dialogs for the character in the middle
+    //int previouslyHighlightedIcon;// Just needed for 3- character dialogs for the character in the middle
 
-	void Update(){
+    void Update(){
 		if(movingIcons){
 			if(iconMoveDir == 0){
 				gameObject.transform.Translate(Vector2.right*Time.deltaTime);//just move the parent
@@ -107,6 +107,14 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
     {
         if (dialogManager.currentlySpeakingIcon != null) {
             icons[currentSpeakerIndex].animator.SetBool(key, value);
+        }
+    }
+
+    public override void ResetIconPositionsOnScreen()
+    {
+        // Reset any custom position on screen changes that took place.
+        for (int i = 0; i < icons.Count; i++) {
+            icons[i].ResetPositionOnScreen();
         }
     }
 
