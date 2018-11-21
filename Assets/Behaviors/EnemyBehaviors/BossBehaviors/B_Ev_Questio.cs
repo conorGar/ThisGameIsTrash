@@ -16,7 +16,7 @@ public class B_Ev_Questio : MonoBehaviour {
 	EnemyTakeDamage myETD;
 	tk2dSpriteAnimator myAnim;
 	FollowPlayer fp;
-	int facingDirection = 0; //0 = left, 1 = right
+    bool IsFacingLeft = true;
 	bool isSwinging;
 	int dropItemOnce;
 	GameObject dazedStars;
@@ -29,21 +29,32 @@ public class B_Ev_Questio : MonoBehaviour {
 	}
 
 	void OnEnable(){
-		if(myETD.currentHp > 12){
-			StopAllCoroutines();
-			gameObject.GetComponent<FollowPlayer>().enabled = true; //when returning to room without this Q will just stand there
-		}
-	}
+        StopAllCoroutines();
+
+        // Reset gloves
+        dropItemOnce = 0;
+        grabbyGloves.SetActive(false);
+        grabbyGloves.transform.parent = transform;
+        grabbyGloves.transform.position = transform.position;
+
+        // Reset Questio
+        UnDazed();
+        fp.enabled = true; //when returning to room without this Q will just stand there
+        pickupableGlow.SetActive(false);
+        myETD.currentHp = 16; // TODO: why are we hardcoding this in a range from 16 to 12?  Doing this for now but this is weird and confusing.
+
+    }
+
 	void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (!isSwinging)
                 UpdateFacing();
 
             if (fp.enabled == true) {
-                if (facingDirection == 0 && myAnim.CurrentClip.name != "walkL") {
+                if (IsFacingLeft && myAnim.CurrentClip.name != "walkL") {
                     myAnim.Play("walkL");
                 }
-                else if (facingDirection == 1 && myAnim.CurrentClip.name != "walkR") {
+                else if (!IsFacingLeft && myAnim.CurrentClip.name != "walkR") {
                     myAnim.Play("walkR");
                 }
                 float distance = Vector3.Distance(transform.position, player.transform.position);
@@ -70,7 +81,7 @@ public class B_Ev_Questio : MonoBehaviour {
     void Swing()
     {
         fp.enabled = false;
-        if (facingDirection == 0) {
+        if (IsFacingLeft) {
             myAnim.Play("swingL");
         }
         else {
@@ -80,12 +91,7 @@ public class B_Ev_Questio : MonoBehaviour {
 
     void UpdateFacing()
     {
-        if (player.transform.position.x < gameObject.transform.position.x && facingDirection != 0) {
-            facingDirection = 0;
-        }
-        else if (player.transform.position.x > gameObject.transform.position.x && facingDirection != 1) {
-            facingDirection = 1;
-        }
+        IsFacingLeft = player.transform.position.x < gameObject.transform.position.x;
     }
 
     IEnumerator DropGloves()
@@ -116,6 +122,20 @@ public class B_Ev_Questio : MonoBehaviour {
 		//this.enabled = false;
 	}
 
+    void UnDazed()
+    {
+        for (int i = 0; i < dazeDisables.Count; i++) {
+            dazeDisables[i].enabled = true;
+        }
+
+        dazedShadow.SetActive(false);
+        baseShadow.SetActive(true);
+        gameObject.layer = 9;
+        gameObject.GetComponent<ThrowableObject>().enabled = false;
+        myAnim.Play("idleL");
+        ObjectPool.Instance.ReturnPooledObject(dazedStars);
+    }
+
 
     // Callbacks
     void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
@@ -134,15 +154,13 @@ public class B_Ev_Questio : MonoBehaviour {
             case "SWING_CHARGE":
                 // At the start of the charge, Allow Questio to switch animations (mid frame) if the player got to his other side.
                 UpdateFacing();
-                if (facingDirection == 0) {
+                if (IsFacingLeft) {
                     if (clip.name != "swingL") {
-                        myAnim.Play("swingL");
-                        myAnim.PlayFromFrame(frameNo);
+                        myAnim.PlayFromFrame("swingL", frameNo);
                     }
                 } else {
                     if (clip.name != "swingR") {
-                        myAnim.Play("swingR");
-                        myAnim.PlayFromFrame(frameNo);
+                        myAnim.PlayFromFrame("swingR", frameNo);
                     }
                 }
 

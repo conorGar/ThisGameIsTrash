@@ -7,6 +7,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 	public bool armoredEnemy = false;
 	public bool moveWhenHit = true;
+    public bool resetFacingAfterHit = false;
 	public bool secretHider = false;
 	public bool returnToCurrentAniAfterHit = false;
 	public tk2dSpriteAnimationClip invincibleAni = null;
@@ -37,7 +38,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject objectPool;
 	[HideInInspector]
 public EnemyRespawner myRespawner; //for use with respawning enemies
-	[HideInInspector]
 public int currentHp;
 	[HideInInspector]
 public int meleeDmgBonus = 0;
@@ -228,11 +228,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					}
 				myAnim.Play("hit");
 				if(moveWhenHit){
-					if(gameObject.transform.position.x < player.transform.position.x)
-						gameObject.transform.localScale = new Vector2(startScale.x*-1,startScale.y);
-					else
-						gameObject.transform.localScale = new Vector2(startScale.x,startScale.y);
-				}
+                    UpdateFacing();
+                }
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
@@ -330,12 +327,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 					myAnim.Play("hit");
 					if(moveWhenHit){
-						if(gameObject.transform.position.x < player.transform.position.x)
-							gameObject.transform.localScale = new Vector2(startScale.x,startScale.y);
-						else
-							gameObject.transform.localScale = new Vector2(startScale.x*-1,startScale.y);
-
-					}
+                        UpdateFacing();
+                    }
 					//camShake = 1;
 					if(gameObject.GetComponent<FollowPlayer>() != null && moveWhenHit){
 						gameObject.GetComponent<FollowPlayer>().StopSound();
@@ -346,6 +339,15 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			}
 
 	}
+
+    public void UpdateFacing()
+    {
+        if (gameObject.transform.position.x < player.transform.position.x)
+            gameObject.transform.localScale = new Vector2(startScale.x, startScale.y);
+        else
+            gameObject.transform.localScale = new Vector2(startScale.x * -1, startScale.y);
+    }
+
 	IEnumerator StopKnockback(){
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
 		spinning = false;
@@ -448,77 +450,86 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	}
 
-	IEnumerator AfterHit(){
-		if(currentHp >0){
-				
-				//disable follow player after notice behavior if end up having thta in game
-				if(gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled){
-					gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
-				}
+    IEnumerator AfterHit()
+    {
+        if (currentHp > 0) {
 
-				//****SFX PLAY - 'hit2' on ch4
-				yield return new WaitForSeconds(.4f);
-				//***grow/shrink scale back to normal on all fronts
+            //disable follow player after notice behavior if end up having thta in game
+            if (gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled) {
+                gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
+            }
 
-				if(gameObject.GetComponent<FollowPlayer>() && this.enabled){ //enabled check for if other things disable follow player for whatever reason
-					gameObject.GetComponent<FollowPlayer>().enabled = true;
-					//***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
-				}else if(gameObject.GetComponent<RandomDirectionMovement>()){
-					gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
-				}
-				damageOnce = 0;
-			
-			}else{ //if hp is NOT > 0
-				Debug.Log("CURRENT HP IS NOT GREATER THAN ZEROOOOOOO!");
-				if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
-				//**SFX PLAY- 'hit_final'
-				}
+            //****SFX PLAY - 'hit2' on ch4
+            yield return new WaitForSeconds(.4f);
+            //***grow/shrink scale back to normal on all fronts
 
-				if(gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled){
-					gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
-				}
+            if (gameObject.GetComponent<FollowPlayer>() && this.enabled) { //enabled check for if other things disable follow player for whatever reason
+                gameObject.GetComponent<FollowPlayer>().enabled = true;
+                //***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
+            }
+            else if (gameObject.GetComponent<RandomDirectionMovement>()) {
+                gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
+            }
+            damageOnce = 0;
 
-				if(GlobalVariableManager.Instance.ROOM_NUM != 201){
-					/*if(GlobalVariableManager.Instance.characterUpgradeArray[1].Substring(10,11).CompareTo("o") == 0){
-						//pin perk 1 - enemies have chance to drop pin
-						dropsPin = Random.Range(1,30);
-					}*/
-					dropsTrash = 99;
-					if(dropsPin !=22){
-						dropsTrash = Random.Range(1, (12-sharingUpgrade));
-					}
-				}
-				//gameObject.transform.Rotate(Vector3.right*Time.deltaTime);
-				GlobalVariableManager.Instance.ENEMIES_DEFEATED++;
+        }
+        else { //if hp is NOT > 0
+            Debug.Log("CURRENT HP IS NOT GREATER THAN ZEROOOOOOO!");
+            if (GlobalVariableManager.Instance.MASTER_SFX_VOL > 0) {
+                //**SFX PLAY- 'hit_final'
+            }
 
-				//string thisRoomsEnemyList = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum];
-				//if(!respawnEnemy){
-					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Substring(myPosInBasicEnemyStr,myPosInBasicEnemyStr+1) = "o";
-					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Remove(myPosInBasicEnemyStr);
-					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Insert(myPosInBasicEnemyStr, "o")
-					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum] = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Replace(thisRoomsEnemyList[myPosInBasicEnemyStr], 'o');
-				//}
-				if(secretHider){
-					//**SFX PLAY 'secret discovered'
-					GameObject hole =  Instantiate(GameObject.Find("hiddenHole"), transform.position, Quaternion.identity) as GameObject;
-				}else if(!bossEnemy){
-					DropThings();
-				}
+            if (gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled) {
+                gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
+            }
+
+            if (GlobalVariableManager.Instance.ROOM_NUM != 201) {
+                /*if(GlobalVariableManager.Instance.characterUpgradeArray[1].Substring(10,11).CompareTo("o") == 0){
+                    //pin perk 1 - enemies have chance to drop pin
+                    dropsPin = Random.Range(1,30);
+                }*/
+                dropsTrash = 99;
+                if (dropsPin != 22) {
+                    dropsTrash = Random.Range(1, (12 - sharingUpgrade));
+                }
+            }
+            //gameObject.transform.Rotate(Vector3.right*Time.deltaTime);
+            GlobalVariableManager.Instance.ENEMIES_DEFEATED++;
+
+            //string thisRoomsEnemyList = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum];
+            //if(!respawnEnemy){
+            //GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Substring(myPosInBasicEnemyStr,myPosInBasicEnemyStr+1) = "o";
+            //GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Remove(myPosInBasicEnemyStr);
+            //GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Insert(myPosInBasicEnemyStr, "o")
+            //GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum] = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Replace(thisRoomsEnemyList[myPosInBasicEnemyStr], 'o');
+            //}
+            if (secretHider) {
+                //**SFX PLAY 'secret discovered'
+                GameObject hole = Instantiate(GameObject.Find("hiddenHole"), transform.position, Quaternion.identity) as GameObject;
+            }
+            else if (!bossEnemy) {
+                DropThings();
+            }
 
 
-				yield return new WaitForSeconds(.2f);
-				Debug.Log("Got this far for boss death check");
+            yield return new WaitForSeconds(.2f);
+            Debug.Log("Got this far for boss death check");
 
-			
-				if(!bossEnemy){
-					DropScrap();
-					Death();
-				}else{
-					gameObject.GetComponent<Boss>().StartCoroutine("BossDeath");
-				}
-			}//end of (if hp is not > 0)
 
-	}
+            if (!bossEnemy) {
+                DropScrap();
+                Death();
+            }
+            else {
+                gameObject.GetComponent<Boss>().StartCoroutine("BossDeath");
+            }
+        }//end of (if hp is not > 0)
+
+        // Some Enemies control their own facing and need their scale reset after being hit (e.g. Questio).
+        if (resetFacingAfterHit) {
+            gameObject.transform.localScale = startScale;
+        }
+    }
 
 
 	void DropThings(){
