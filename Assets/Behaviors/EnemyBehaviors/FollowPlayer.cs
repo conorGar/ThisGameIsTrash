@@ -9,6 +9,7 @@ public class FollowPlayer : MonoBehaviour {
 	public float chaseSpeed = 10.0f;
 	public bool hasSeperateFacingAnimations;
 	public bool iBeLerpin;
+	public ParticleSystem chasePS;
 	private Vector3 smoothVelocity = Vector3.zero;
 	private tk2dSpriteAnimator anim;
 
@@ -17,7 +18,10 @@ public class FollowPlayer : MonoBehaviour {
 		anim = GetComponent<tk2dSpriteAnimator>();
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 	}
-	
+
+	void OnEnable(){
+		chasePS.Play();
+	}
 	// Update is called once per frame
 	void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {

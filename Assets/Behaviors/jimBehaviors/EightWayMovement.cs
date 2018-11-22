@@ -138,7 +138,8 @@ public class EightWayMovement : MonoBehaviour {
               
                     InvokeRepeating("SpawnClouds", .2f, .2f); //just have this here so it only happens once
                 }
-                legAnim.Play("walk");
+                if(legAnim.GetClipByName("walk") != null)
+                	legAnim.Play("walk");
 
                 isDiagonal = true;
                 if (movement.y == 1 && movement.x == -1) {

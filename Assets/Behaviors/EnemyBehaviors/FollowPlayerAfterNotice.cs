@@ -18,7 +18,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 		if((Mathf.Abs(transform.position.x - player.transform.position.x) < noticeThreshold) && Mathf.Abs(transform.position.y - player.transform.position.y) < noticeThreshold){
 			if((player.transform.position.x < gameObject.transform.position.x && gameObject.transform.localScale.x < 0) || (player.transform.position.x > gameObject.transform.position.x && gameObject.transform.localScale.x > 0)){//make sure is facing the direction of the player..
 				if(sleepingEnemy){
@@ -26,13 +26,20 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 					gameObject.transform.localScale = Vector3.one;//set to proper scale from sleeping
 					sleepingPS.SetActive(false);
 				}
-				if(this.gameObject.GetComponent<RandomDirectionMovement>() != null)
+				if(this.gameObject.GetComponent<RandomDirectionMovement>() != null){
 					this.gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
+					this.gameObject.GetComponent<RandomDirectionMovement>().StopAllCoroutines();
+				}
 				this.gameObject.GetComponent<FollowPlayer>().enabled = true;
 				SoundManager.instance.PlaySingle(noticeSfx);
 				ObjectPool.Instance.GetPooledObject("effect_notice",gameObject.transform.position);
-				this.enabled = false;
+				NoticePlayerEvent();
+
 			}
 		}
+	}
+
+	protected virtual void NoticePlayerEvent(){
+		this.enabled = false;
 	}
 }

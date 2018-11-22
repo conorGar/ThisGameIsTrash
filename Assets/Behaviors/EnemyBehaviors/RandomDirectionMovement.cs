@@ -7,8 +7,9 @@ public class RandomDirectionMovement : MonoBehaviour {
 	public float movementSpeed = 0;
 	public float minMoveTime = 0;
 	public float maxMoveTime = 0;
-	public GameObject walkCloud;
-	public float walkCloudYadjust = 0.8f;
+	//public GameObject walkCloud;
+	public ParticleSystem walkPS;
+	//public float walkCloudYadjust = 0.8f;
 
 
 	private Vector3 direction;
@@ -73,7 +74,8 @@ public class RandomDirectionMovement : MonoBehaviour {
 	IEnumerator Pause(){
 		yield return new WaitForSeconds(Random.Range(minMoveTime,maxMoveTime));
 		bounceOffObject = 0;
-		CancelInvoke("SpawnClouds");
+		//CancelInvoke("SpawnClouds");
+		walkPS.Stop();
 		moving = false;
 		if(anim.GetClipByName("idle") != null){
 			anim.Play("idle");
@@ -96,7 +98,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 		//print("Collided");
 	}
 	void SpawnClouds(){
-		if(this.gameObject.activeInHierarchy == true){
+		/*if(this.gameObject.activeInHierarchy == true){
 			GameObject newestCloud;
 			newestCloud = Instantiate(walkCloud, new Vector3(transform.position.x,transform.position.y - walkCloudYadjust, transform.position.z), Quaternion.identity) as GameObject;
 			if(direction.x <0){
@@ -106,12 +108,13 @@ public class RandomDirectionMovement : MonoBehaviour {
 				}
 		}else{
 			CancelInvoke();
-		}
+		}*/
 	}
 
 	void GoAgain(){
 		moving = true;
-		InvokeRepeating("SpawnClouds",.2f, .2f);
+		//InvokeRepeating("SpawnClouds",.2f, .2f);
+		walkPS.Play();
 		direction = (new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0.0f)).normalized;
 		StartCoroutine("Pause");
 	}

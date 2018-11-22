@@ -1,0 +1,800 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1832050741213588}
+  m_IsPrefabParent: 1
+--- !u!1 &1832050741213588
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4174078455246012}
+  - component: {fileID: 114117274036723322}
+  m_Layer: 0
+  m_Name: w1_e_spearMole
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4174078455246012
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1832050741213588}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114117274036723322
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1832050741213588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: spearMole_walk2
+    boundsData:
+    - {x: -0.62820506, y: 0.43589783, z: 0}
+    - {x: 8.128204, y: 9.025641, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.4358974, y: -4.076923, z: 0}
+    - {x: -4.6923075, y: -4.076923, z: 0}
+    - {x: 3.4358974, y: 4.9487185, z: 0}
+    - {x: -4.6923075, y: 4.9487185, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.0009770507}
+    - {x: 0.0019541015, y: 0.15576123}
+    - {x: 0.34570214, y: 0.0009770507}
+    - {x: 0.34570214, y: 0.15576123}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 8660448d821dc7b45b073653a6d695d0
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_walk3
+    boundsData:
+    - {x: -0.07692301, y: 0.7179489, z: 0}
+    - {x: 6.8717947, y: 10.461539, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.3589742, y: -4.5128207, z: 0}
+    - {x: -3.5128202, y: -4.5128207, z: 0}
+    - {x: 3.3589742, y: 5.9487185, z: 0}
+    - {x: -3.5128202, y: 5.9487185, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.34961036, y: 0.12939502}
+    - {x: 0.34961036, y: 0.26025343}
+    - {x: 0.7480459, y: 0.12939502}
+    - {x: 0.7480459, y: 0.26025343}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ca05e01ac18277543813eceebf3efd59
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_walk4
+    boundsData:
+    - {x: 0.5897436, y: 0.70512843, z: 0}
+    - {x: 6.5641026, y: 9.410257, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.871795, y: -4, z: 0}
+    - {x: -2.6923077, y: -4, z: 0}
+    - {x: 3.871795, y: 5.410257, z: 0}
+    - {x: -2.6923077, y: 5.410257, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.7070317}
+    - {x: 0.25195214, y: 0.7070317}
+    - {x: 0.0019541015, y: 0.88623}
+    - {x: 0.25195214, y: 0.88623}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 312e2dded266eec4bad250fca471c4dd
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_charge1
+    boundsData:
+    - {x: 0.8205129, y: -1.25641, z: 0}
+    - {x: 9.230769, y: 5.7435894, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 5.4358974, y: -4.128205, z: 0}
+    - {x: -3.7948716, y: -4.128205, z: 0}
+    - {x: 5.4358974, y: 1.6153848, z: 0}
+    - {x: -3.7948716, y: 1.6153848, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.8881841}
+    - {x: 0.35351464, y: 0.8881841}
+    - {x: 0.0019541015, y: 0.9975581}
+    - {x: 0.35351464, y: 0.9975581}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 2cdce43546497bf429b05d4a5f09680a
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_charge3
+    boundsData:
+    - {x: 1.1282052, y: -0.833333, z: 0}
+    - {x: 9.589743, y: 5.7692313, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 5.9230766, y: -3.7179487, z: 0}
+    - {x: -3.6666663, y: -3.7179487, z: 0}
+    - {x: 5.9230766, y: 2.0512826, z: 0}
+    - {x: -3.6666663, y: 2.0512826, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.7519541, y: 0.18066455}
+    - {x: 0.7519541, y: 0.36328077}
+    - {x: 0.97167873, y: 0.18066455}
+    - {x: 0.97167873, y: 0.36328077}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: dcb6ac6d10e70514c93bd36b3f614920
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_hurt
+    boundsData:
+    - {x: -0.2179488, y: 0.5769236, z: 0}
+    - {x: 6.6410255, y: 10.948719, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.102564, y: -4.8974357, z: 0}
+    - {x: -3.5384617, y: -4.8974357, z: 0}
+    - {x: 3.102564, y: 6.051283, z: 0}
+    - {x: -3.5384617, y: 6.051283, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.34961036, y: 0.0009770507}
+    - {x: 0.34961036, y: 0.12744091}
+    - {x: 0.7666006, y: 0.0009770507}
+    - {x: 0.7666006, y: 0.12744091}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 019939b40b844f0459e4e430f2384d2e
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_idle4
+    boundsData:
+    - {x: -0.3974359, y: 0.3846159, z: 0}
+    - {x: 7.25641, y: 9.538463, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.2307692, y: -4.3846154, z: 0}
+    - {x: -4.025641, y: -4.3846154, z: 0}
+    - {x: 3.2307692, y: 5.153847, z: 0}
+    - {x: -4.025641, y: 5.153847, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.3403325}
+    - {x: 0.27831933, y: 0.3403325}
+    - {x: 0.0019541015, y: 0.5219722}
+    - {x: 0.27831933, y: 0.5219722}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 22c7488da8b9fe445bf15c2e21cdfbb1
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_idle1
+    boundsData:
+    - {x: 0.025640965, y: 0.641026, z: 0}
+    - {x: 6.6666665, y: 9.74359, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.3589742, y: -4.230769, z: 0}
+    - {x: -3.3076923, y: -4.230769, z: 0}
+    - {x: 3.3589742, y: 5.512821, z: 0}
+    - {x: -3.3076923, y: 5.512821, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.2753916, y: 0.5566411}
+    - {x: 0.5292959, y: 0.5566411}
+    - {x: 0.2753916, y: 0.742187}
+    - {x: 0.5292959, y: 0.742187}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: d68076d80989731429b230c7ab59529a
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_idle2
+    boundsData:
+    - {x: -0.12820518, y: 0.48717976, z: 0}
+    - {x: 7.0256414, y: 9.538462, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.3846154, y: -4.282051, z: 0}
+    - {x: -3.6410258, y: -4.282051, z: 0}
+    - {x: 3.3846154, y: 5.2564106, z: 0}
+    - {x: -3.6410258, y: 5.2564106, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6386728, y: 0.5258794}
+    - {x: 0.90624905, y: 0.5258794}
+    - {x: 0.6386728, y: 0.70751905}
+    - {x: 0.90624905, y: 0.70751905}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 3a19b2338cad4cd4d9459571716f30d4
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_idle3
+    boundsData:
+    - {x: -0.15384614, y: 0.44871807, z: 0}
+    - {x: 7.0769234, y: 9.51282, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.3846154, y: -4.307692, z: 0}
+    - {x: -3.6923077, y: -4.307692, z: 0}
+    - {x: 3.3846154, y: 5.205128, z: 0}
+    - {x: -3.6923077, y: 5.205128, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.52392626}
+    - {x: 0.2714834, y: 0.52392626}
+    - {x: 0.0019541015, y: 0.70507765}
+    - {x: 0.2714834, y: 0.70507765}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: cd60ecb095c1747429ad3b426922c7b4
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_idle6
+    boundsData:
+    - {x: -0.73076904, y: 0.29487228, z: 0}
+    - {x: 7.564102, y: 9.256411, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.0512822, y: -4.333333, z: 0}
+    - {x: -4.5128202, y: -4.333333, z: 0}
+    - {x: 3.0512822, y: 4.9230776, z: 0}
+    - {x: -4.5128202, y: 4.9230776, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.28222755, y: 0.410645}
+    - {x: 0.28222755, y: 0.554687}
+    - {x: 0.6347647, y: 0.410645}
+    - {x: 0.6347647, y: 0.554687}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 16f0d50a7fee4da44b57d530e9f88482
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_idle5
+    boundsData:
+    - {x: -0.66666687, y: 0.28205156, z: 0}
+    - {x: 7.5384617, y: 9.48718, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.102564, y: -4.4615383, z: 0}
+    - {x: -4.435898, y: -4.4615383, z: 0}
+    - {x: 3.102564, y: 5.0256414, z: 0}
+    - {x: -4.435898, y: 5.0256414, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.15771534}
+    - {x: 0.28906152, y: 0.15771534}
+    - {x: 0.0019541015, y: 0.33837843}
+    - {x: 0.28906152, y: 0.33837843}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 8d766b35445cb4643ba65a48c5eb9687
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_idle7
+    boundsData:
+    - {x: -0.84615374, y: 0.21794891, z: 0}
+    - {x: 7.6923075, y: 9.256411, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3, y: -4.4102564, z: 0}
+    - {x: -4.6923075, y: -4.4102564, z: 0}
+    - {x: 3, y: 4.846154, z: 0}
+    - {x: -4.6923075, y: 4.846154, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.29296973, y: 0.2622075}
+    - {x: 0.29296973, y: 0.40869093}
+    - {x: 0.64550686, y: 0.2622075}
+    - {x: 0.64550686, y: 0.40869093}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 3c38c9ca1181a214581f583179154989
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_walk1
+    boundsData:
+    - {x: -1.0897437, y: 0.19230807, z: 0}
+    - {x: 8.48718, y: 8.333334, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.153846, y: -3.9743588, z: 0}
+    - {x: -5.3333335, y: -3.9743588, z: 0}
+    - {x: 3.153846, y: 4.358975, z: 0}
+    - {x: -5.3333335, y: 4.358975, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.649415, y: 0.36523485}
+    - {x: 0.9726553, y: 0.36523485}
+    - {x: 0.649415, y: 0.5239253}
+    - {x: 0.9726553, y: 0.5239253}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f89173dfbe77ac946abff87fa5a87200
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: spearMole_charge2
+    boundsData:
+    - {x: 1.1538463, y: -1.1538458, z: 0}
+    - {x: 9.333333, y: 5.948718, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 12.51282, y: 12.384616, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 5.820513, y: -4.128205, z: 0}
+    - {x: -3.5128202, y: -4.128205, z: 0}
+    - {x: 5.820513, y: 1.8205134, z: 0}
+    - {x: -3.5128202, y: 1.8205134, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.77050877, y: 0.0009770507}
+    - {x: 0.77050877, y: 0.17871045}
+    - {x: 0.99706936, y: 0.0009770507}
+    - {x: 0.99706936, y: 0.17871045}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: cd5b8089bb73da045979c20508ded973
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: 977b06d0adb82954997029436ece40fa, type: 2}
+  textures:
+  - {fileID: 2800000, guid: 486e1541fb238164b8f4fe2ddea71956, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: ff5f68d473c009c48afca65c71f25b15
+  spriteCollectionName: w1_e_spearMole
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 576481452
+  dataGuid: dec90957f0cb2dc4c91a6684be137390
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

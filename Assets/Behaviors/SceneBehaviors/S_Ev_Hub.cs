@@ -30,7 +30,7 @@ public class S_Ev_Hub : MonoBehaviour {
 
         //LargeTrashSpawn();
         GameStateManager.Instance.PopAllStates();
-       // GameStateManager.Instance.PushState(typeof(GameplayState));  <- Set by day display
+        //GameStateManager.Instance.PushState(typeof(GameplayState)); // <- Set by day display
 	}
 	
 	// Update is called once per frame
