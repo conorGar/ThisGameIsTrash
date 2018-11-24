@@ -16,6 +16,9 @@ public class ThrowableObject : PickupableObject {
 	public AudioClip landSfx;
 	public List<MonoBehaviour> behaviorsToStop = new List<MonoBehaviour>();
 	public bool livingBody;
+
+    [Tooltip("TK2D Animation Clip to play after the object lands and settles on the ground.")]
+    public string groundedClip;
 	// Use this for initialization
 	void Start(){
 		base.Start();
@@ -57,6 +60,10 @@ public class ThrowableObject : PickupableObject {
                     gameObject.GetComponent<CannotExitScene>().enabled = false;
                     if (physicalCollision != null)
                         physicalCollision.enabled = true;
+
+                    if (groundedClip != null) {
+                        GetComponent<tk2dSpriteAnimator>().Play(groundedClip);
+                    }
                 }
             }
         }
