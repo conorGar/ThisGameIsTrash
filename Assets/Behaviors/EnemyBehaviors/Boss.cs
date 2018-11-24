@@ -68,6 +68,7 @@ public class Boss : MonoBehaviour {
 
 		if(vanishAtDeath){
             GameStateManager.Instance.PushState(typeof(MovieState));
+            CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"zoom");
 			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = 0;
 			//yield return new WaitForSeconds(1.5f);
 

@@ -80,13 +80,14 @@ public class BossStuart : Boss
 			GetComponent<InvincibleEnemy>().enabled = false;
 
 			//-----------------Impact Ricochet---------------//
-			float currentDirection = collider.gameObject.GetComponent<Rigidbody2D>().velocity.x;
+			//float currentDirection = collider.gameObject.GetComponent<Rigidbody2D>().velocity.x;
 			collider.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-			ObjectPool.Instance.GetPooledObject("effect_thrownImpact",transform.position);
+			/*ObjectPool.Instance.GetPooledObject("effect_thrownImpact",transform.position);
 			if(currentDirection < 0)
 				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(3f,5f),ForceMode2D.Impulse);
 			else
-				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3f,5f),ForceMode2D.Impulse);
+				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3f,5f),ForceMode2D.Impulse);*/
+			GetComponent<EnemyTakeDamage>().OnTriggerEnter2D(collider);
 			//----------------------------------------------//
 
 			hash.KnockOff();
@@ -159,6 +160,8 @@ public class BossStuart : Boss
         ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
         ex.SetFriendState("STUART_DEFEATED");
         bossTrio.SetActive(false);
+        bossEx.SetActive(false);
+        bossQuestio.SetActive(false);
         DeactivateHpDisplay();
     }
 }

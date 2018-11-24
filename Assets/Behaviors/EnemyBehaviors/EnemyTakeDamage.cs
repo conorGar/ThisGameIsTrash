@@ -165,7 +165,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 
 	}
-	void OnTriggerEnter2D(Collider2D melee){
+	public void OnTriggerEnter2D(Collider2D melee){
 		if(melee.tag == "Weapon"){
 			TakeDamage(melee.gameObject);
 			//Debug.Log("Collision with weapon: ");
@@ -427,9 +427,10 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				//Debug.Log("**AND HERE!!!!!!!!***");
-			if(currentHp <= 0)
-				yield return new WaitForSeconds(.4f);
-			else
+			if(currentHp <= 0){
+				if(!bossEnemy)
+					yield return new WaitForSeconds(.4f);
+			}else
 				yield return new WaitForSeconds(.1f);
 
 			StartCoroutine( "StopKnockback");
@@ -512,11 +513,12 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             }
 
 
-            yield return new WaitForSeconds(.2f);
-            Debug.Log("Got this far for boss death check");
+           
+			//Debug.Log("Got this far for boss death check");
 
 
             if (!bossEnemy) {
+				yield return new WaitForSeconds(.2f);
                 DropScrap();
                 Death();
             }
