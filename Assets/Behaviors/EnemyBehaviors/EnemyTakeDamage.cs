@@ -32,7 +32,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject pinDrop;
 
 	public GameObject myShadow;
-	public BoxCollider2D myCollisionBox;
+	//public BoxCollider2D myCollisionBox;
 	public string returnAniName = "idle";
 	public bool dontSpawnBody;
 
@@ -65,7 +65,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	int scrapDropped = 0;
 	int roomNum;
 	//Color lerpColor = Color.white;
-	bool takingDamage = false;
+	protected bool takingDamage = false;
 	GameObject player;
 	string mySpawnerID;
 
@@ -178,9 +178,11 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 
 	}
-	void OnTriggerEnter2D(Collider2D melee){
+	protected void OnTriggerEnter2D(Collider2D melee){
 		if(melee.tag == "Weapon"){
+			
 			TakeDamage(melee.gameObject);
+
 			//Debug.Log("Collision with weapon: ");
 
 		}else if(melee.tag == "pObj_bullet"){
@@ -369,7 +371,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	IEnumerator StopKnockback(){
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
 		spinning = false;
-		myCollisionBox.enabled = true;
+		//myCollisionBox.enabled = true;
 		for(int i = 0; i < behaviorsToDeactivate.Count;i++){
 						behaviorsToDeactivate[i].enabled = true;
 		}
@@ -402,7 +404,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawR") == 0||meleeSwingDirection.CompareTo("poleR") == 0){
 				Debug.Log(swingDirectionSide);
 
-				myCollisionBox.enabled = false;
+				//myCollisionBox.enabled = false;
 
 				if(swingDirectionSide < 0){
 					if(currentHp <= 0){
@@ -550,6 +552,27 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	}
 
+	public void Clank(AudioClip clankSfx){
+		if(!takingDamage){
+			Debug.Log("Clanking material got here----x-x-x-x--- 2");
+			takingDamage = true;
+			GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars");
+			littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+			littleStars.SetActive(true);
+			SoundManager.instance.PlaySingle(clankSfx);
+			/*if(gameObject.GetComponent<FollowPlayer>()){
+				gameObject.GetComponent<FollowPlayer>().enabled = false;
+			}*/
+			if(gameObject.transform.position.x < player.transform.position.x){
+				player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
+				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);
+			}else{
+				player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
+				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
+			}
+			StartCoroutine("StopKnockback");
+		}
+	}
 
 	void DropThings(){
 		//Just took out for now, not sure what im doing as far as possibility to drop trash
@@ -625,7 +648,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			myRespawner.currentEnemies.Remove(this.gameObject);
 			//needed to make sure enemy doesnt spawn again functioning as if it was dead
 			spinning = false;
-			myCollisionBox.enabled = true;
+			//myCollisionBox.enabled = true;
 			//damageOnce = 0;
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);

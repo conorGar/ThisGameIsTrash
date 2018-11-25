@@ -23,7 +23,7 @@ public class FollowPlayer : MonoBehaviour {
 		chasePS.Play();
 	}
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             float distance = Vector3.Distance(transform.position, player.position);
             if (distance < walkDistance) { //TODO: 

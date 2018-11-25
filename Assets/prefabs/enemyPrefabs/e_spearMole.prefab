@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 4845603305284998}
   - component: {fileID: 61105984900029494}
   - component: {fileID: 114256065011109510}
+  - component: {fileID: 114317049081646286}
   m_Layer: 10
   m_Name: spearCollision
   m_TagString: Untagged
@@ -110,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1715004810931272}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42.490734, y: -1.2853637, z: 0}
+  m_LocalPosition: {x: 41.156105, y: -3.7852147, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4204505055763710}
@@ -139,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796316841233936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.33, y: 0, z: 0}
+  m_LocalPosition: {x: 0.41, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4231922287758494}
@@ -197,8 +198,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 0.4
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -218,7 +219,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.96, y: -1.07}
+  m_Offset: {x: -1.66, y: -1.07}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -229,7 +230,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.99, y: 0.85}
+  m_Size: {x: 0.92, y: 0.69}
   m_EdgeRadius: 0
 --- !u!61 &61110314396677700
 BoxCollider2D:
@@ -243,7 +244,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010717664, y: -0.65}
+  m_Offset: {x: -0.31, y: -0.65}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -254,7 +255,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.47, y: 2.63}
+  m_Size: {x: 2.08, y: 2.63}
   m_EdgeRadius: 0
 --- !u!61 &61747323131722756
 BoxCollider2D:
@@ -268,7 +269,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07, y: -0.69}
+  m_Offset: {x: -0.21, y: -0.69}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -279,7 +280,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.48, y: 1.6}
+  m_Size: {x: 1.39, y: 1.6}
   m_EdgeRadius: 0
 --- !u!114 &114134347591424222
 MonoBehaviour:
@@ -333,6 +334,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 1
+--- !u!114 &114317049081646286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1796316841233936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e942a2853b12a54284c2a4cc2c2e4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clankSound: {fileID: 8300000, guid: 1073f68275895f6429798e5be44021af, type: 3}
+  parentsETD: {fileID: 114745645828691684}
 --- !u!114 &114416602313476124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -374,10 +388,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   walkDistance: 10
-  chaseSpeed: 6
+  chaseSpeed: 5
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
-  chasePS: {fileID: 0}
+  chasePS: {fileID: 198037785932892104}
 --- !u!114 &114707988734180988
 MonoBehaviour:
   m_ObjectHideFlags: 1
