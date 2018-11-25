@@ -86,7 +86,13 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		damageOnce = 0;
 		if(gameObject.GetComponent<RandomDirectionMovement>() != null)
 			gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
-	}
+
+        // Reset scale and rotations if this enemy has already been initialized.
+        if (myAnim != null) {
+            transform.localScale = startScale;
+            transform.rotation = startRotation;
+        }
+    }
 
 
 	void Start () {
@@ -285,20 +291,20 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.SetActive(true);
 
-						if(gameObject.transform.position.x < player.transform.position.x){
-							//hitStarPS.SetActive(true);
-							//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
+					if(gameObject.transform.position.x < player.transform.position.x){
+						//hitStarPS.SetActive(true);
+						//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
 
-							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
-						}else{
-							//hitStarPS.SetActive(true);
-							//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
-							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
+						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
+					}else{
+						//hitStarPS.SetActive(true);
+						//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
+						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
-						}
+					}
 
-                //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
-                CamManager.Instance.mainCam.ScreenShake(.2f);
+                    //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
+                    CamManager.Instance.mainCam.ScreenShake(.2f);
 					if(hitByThrownObject){
                         // TODO: Fix the boss battle to use throwable bodies????
                         var body = melee.gameObject.GetComponent<ThrowableBody>();
