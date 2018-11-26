@@ -37,6 +37,11 @@ public class B_Ev_Ex : MonoBehaviour {
 
 	//for debug
 	void OnEnable(){
+        StopAllCoroutines();
+
+        // Reset Questio
+        UnDazed();
+
         action = "Teleport";
         isActing = false;
     }
@@ -120,6 +125,16 @@ public class B_Ev_Ex : MonoBehaviour {
 		StopAllCoroutines();
 		//this.enabled = false;
 	}
+
+    void UnDazed(){
+        for (int i = 0; i < dazeDisables.Count; i++) {
+            dazeDisables[i].enabled = true;
+        }
+
+        gameObject.layer = 9;
+        gameObject.GetComponent<ThrowableObject>().enabled = false;
+        myAnim.Play("idle");
+    }
 
     // Callbacks
     void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
