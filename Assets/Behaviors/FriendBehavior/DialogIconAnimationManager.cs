@@ -39,4 +39,9 @@ public class DialogIconAnimationManager : MonoBehaviour {
     {
         myAnim.SetBool(key, value);
     }
+
+    public virtual void ResetIconPositionsOnScreen()
+    {
+        // Don't do anything on single icon animation managers.
+    }
 }

@@ -40,33 +40,39 @@ public class PlayerTakeDamage : MonoBehaviour {
 
     // two objects collide
 	void OnCollisionEnter2D(Collision2D enemy){
-		if(enemy.gameObject.layer == 9 && !currentlyTakingDamage){ //layer 9 = enemies
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (enemy.gameObject.layer == 9 && !currentlyTakingDamage) { //layer 9 = enemies
 
-			if(enemy.gameObject.tag == "Boss"){
-				damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
-			}else{
-				damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
-			}
-			TakeDamage(enemy.gameObject);
-		}
+                if (enemy.gameObject.tag == "Boss") {
+                    damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
+                }
+                else {
+                    damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
+                }
+                TakeDamage(enemy.gameObject);
+            }
+        }
 	}
 
     // something entered this collider
 	void OnTriggerEnter2D(Collider2D projectile){
-		if(projectile.gameObject.layer == 10 && !currentlyTakingDamage){ //layer 10 = projectiles
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (projectile.gameObject.layer == 10 && !currentlyTakingDamage) { //layer 10 = projectiles
 
-			damageDealt = projectile.gameObject.GetComponent<Projectile>().damageToPlayer;
+                damageDealt = projectile.gameObject.GetComponent<Projectile>().damageToPlayer;
 
-			TakeDamage(projectile.gameObject);
-		}else if(projectile.gameObject.layer == 16 && !currentlyTakingDamage){//enemy with non-solid collision(flying enemy)
-            if (projectile.gameObject.tag == "Boss"){
-                damageDealt = projectile.gameObject.GetComponent<Boss>().attkDmg;
+                TakeDamage(projectile.gameObject);
             }
-            else{
-                damageDealt = projectile.gameObject.GetComponent<Enemy>().attkPower;
+            else if (projectile.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
+                if (projectile.gameObject.tag == "Boss") {
+                    damageDealt = projectile.gameObject.GetComponent<Boss>().attkDmg;
+                }
+                else {
+                    damageDealt = projectile.gameObject.GetComponent<Enemy>().attkPower;
+                }
+                TakeDamage(projectile.gameObject);
             }
-            TakeDamage(projectile.gameObject);
-		}
+        }
 	}
 
 	void TakeDamage(GameObject enemy){

@@ -97,8 +97,12 @@ public class SlabFriend : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
+
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		GameStateManager.Instance.PushState(typeof(GameplayState));
+
+
+        yield return base.OnFinishDialogEnumerator();
+
     }
 
     public void AddTrashToFund(int trashAdded){

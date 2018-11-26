@@ -70,7 +70,7 @@ public class RatWithHatFriend : Friend {
                 break;
         }
 
-        yield return null;
+        yield return base.OnFinishDialogEnumerator();
     }
 
     public void RatWithHatIntro()

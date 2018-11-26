@@ -75,7 +75,7 @@ public class RatWhoFatFriend : Friend
                 break;
         }
 
-        yield return null;
+        yield return base.OnFinishDialogEnumerator();
     }
 	public void FatRatWalk(){
 		Debug.Log("Fat Rat Walk activate");

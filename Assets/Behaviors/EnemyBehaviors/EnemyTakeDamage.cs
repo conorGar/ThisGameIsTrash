@@ -7,6 +7,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 	public bool armoredEnemy = false;
 	public bool moveWhenHit = true;
+    public bool resetFacingAfterHit = false;
 	public bool secretHider = false;
 	public bool returnToCurrentAniAfterHit = false;
 	public tk2dSpriteAnimationClip invincibleAni = null;
@@ -42,7 +43,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject objectPool;
 	[HideInInspector]
 public EnemyRespawner myRespawner; //for use with respawning enemies
-	[HideInInspector]
 public int currentHp;
 	[HideInInspector]
 public int meleeDmgBonus = 0;
@@ -92,7 +92,13 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		damageOnce = 0;
 		if(gameObject.GetComponent<RandomDirectionMovement>() != null)
 			gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
-	}
+
+        // Reset scale and rotations if this enemy has already been initialized.
+        if (myAnim != null) {
+            transform.localScale = startScale;
+            transform.rotation = startRotation;
+        }
+    }
 
 
 	void Start () {
@@ -178,7 +184,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 
 	}
-	protected void OnTriggerEnter2D(Collider2D melee){
+
+	public void OnTriggerEnter2D(Collider2D melee){
+
 		if(melee.tag == "Weapon"){
 			
 			TakeDamage(melee.gameObject);
@@ -237,17 +245,14 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				currentHp = currentHp - 1 - meleeDmgBonus;
 				//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
-						gameObject.GetComponent<Boss>().hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(currentHp);
+                    gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
 				myAnim.Play("hit");
 				if(moveWhenHit){
-					if(gameObject.transform.position.x < player.transform.position.x)
-						gameObject.transform.localScale = new Vector2(startScale.x*-1,startScale.y);
-					else
-						gameObject.transform.localScale = new Vector2(startScale.x,startScale.y);
-				}
+                    UpdateFacing();
+                }
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
@@ -309,20 +314,22 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.SetActive(true);
 
-						if(gameObject.transform.position.x < player.transform.position.x){
-							//hitStarPS.SetActive(true);
-							//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
+					if(gameObject.transform.position.x < player.transform.position.x){
+						//hitStarPS.SetActive(true);
+						//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
 
-							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
-						}else{
-							//hitStarPS.SetActive(true);
-							//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
-							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
+						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
+					}else{
+						//hitStarPS.SetActive(true);
+						//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
+						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
-						}
+					}
 
-                Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
-                CamManager.Instance.mainCam.ScreenShake(.2f);
+
+                    //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
+                    CamManager.Instance.mainCam.ScreenShake(.2f);
+
 					if(hitByThrownObject){
                         // TODO: Fix the boss battle to use throwable bodies????
                         var body = melee.gameObject.GetComponent<ThrowableBody>();
@@ -337,7 +344,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					currentHp = currentHp - 1 - meleeDmgBonus;
 					//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
-						gameObject.GetComponent<Boss>().hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(currentHp);
+						gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
@@ -351,11 +358,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 					myAnim.Play("hit");
 					if(moveWhenHit){
-						if(gameObject.transform.position.x < player.transform.position.x)
-							gameObject.transform.localScale = new Vector2(-1f,1f);
-						else
-							gameObject.transform.localScale = new Vector2(1f,1f);
-					}
+                        UpdateFacing();
+                    }
 					//camShake = 1;
 					if(gameObject.GetComponent<FollowPlayer>() != null && moveWhenHit){
 						gameObject.GetComponent<FollowPlayer>().StopSound();
@@ -368,6 +372,15 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			}
 
 	}
+
+    public void UpdateFacing()
+    {
+        if (gameObject.transform.position.x < player.transform.position.x)
+            gameObject.transform.localScale = new Vector2(startScale.x, startScale.y);
+        else
+            gameObject.transform.localScale = new Vector2(startScale.x * -1, startScale.y);
+    }
+
 	IEnumerator StopKnockback(){
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
 		spinning = false;
@@ -452,10 +465,10 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				//Debug.Log("**AND HERE!!!!!!!!***");
 
-			
-			if(currentHp <= 0)
-				yield return new WaitForSeconds(.4f);
-			else
+			if(currentHp <= 0){
+				if(!bossEnemy)
+					yield return new WaitForSeconds(.4f);
+			}else
 				yield return new WaitForSeconds(.1f);
 
 			StartCoroutine( "StopKnockback");
@@ -480,77 +493,87 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	}
 
-	IEnumerator AfterHit(){
-		if(currentHp >0){
-				
-				//disable follow player after notice behavior if end up having thta in game
-				if(gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled){
-					gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
-				}
+    IEnumerator AfterHit()
+    {
+        if (currentHp > 0) {
 
-				//****SFX PLAY - 'hit2' on ch4
-				yield return new WaitForSeconds(.4f);
-				//***grow/shrink scale back to normal on all fronts
+            //disable follow player after notice behavior if end up having thta in game
+            if (gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled) {
+                gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
+            }
 
-				if(gameObject.GetComponent<FollowPlayer>() && this.enabled){ //enabled check for if other things disable follow player for whatever reason
-					gameObject.GetComponent<FollowPlayer>().enabled = true;
-					//***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
-				}else if(gameObject.GetComponent<RandomDirectionMovement>()){
-					gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
-				}
-				damageOnce = 0;
-			
-			}else{ //if hp is NOT > 0
-				Debug.Log("CURRENT HP IS NOT GREATER THAN ZEROOOOOOO!");
-				if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
-				//**SFX PLAY- 'hit_final'
-				}
+            //****SFX PLAY - 'hit2' on ch4
+            yield return new WaitForSeconds(.4f);
+            //***grow/shrink scale back to normal on all fronts
 
-				if(gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled){
-					gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
-				}
+            if (gameObject.GetComponent<FollowPlayer>() && this.enabled) { //enabled check for if other things disable follow player for whatever reason
+                gameObject.GetComponent<FollowPlayer>().enabled = true;
+                //***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
+            }
+            else if (gameObject.GetComponent<RandomDirectionMovement>()) {
+                gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
+            }
+            damageOnce = 0;
 
-				if(GlobalVariableManager.Instance.ROOM_NUM != 201){
-					/*if(GlobalVariableManager.Instance.characterUpgradeArray[1].Substring(10,11).CompareTo("o") == 0){
-						//pin perk 1 - enemies have chance to drop pin
-						dropsPin = Random.Range(1,30);
-					}*/
-					dropsTrash = 99;
-					if(dropsPin !=22){
-						dropsTrash = Random.Range(1, (12-sharingUpgrade));
-					}
-				}
-				//gameObject.transform.Rotate(Vector3.right*Time.deltaTime);
-				GlobalVariableManager.Instance.ENEMIES_DEFEATED++;
+        }
+        else { //if hp is NOT > 0
+            Debug.Log("CURRENT HP IS NOT GREATER THAN ZEROOOOOOO!");
+            if (GlobalVariableManager.Instance.MASTER_SFX_VOL > 0) {
+                //**SFX PLAY- 'hit_final'
+            }
 
-				//string thisRoomsEnemyList = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum];
-				//if(!respawnEnemy){
-					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Substring(myPosInBasicEnemyStr,myPosInBasicEnemyStr+1) = "o";
-					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Remove(myPosInBasicEnemyStr);
-					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Insert(myPosInBasicEnemyStr, "o")
-					//GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum] = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Replace(thisRoomsEnemyList[myPosInBasicEnemyStr], 'o');
-				//}
-				if(secretHider){
-					//**SFX PLAY 'secret discovered'
-					GameObject hole =  Instantiate(GameObject.Find("hiddenHole"), transform.position, Quaternion.identity) as GameObject;
-				}else if(!bossEnemy){
-					DropThings();
-				}
+            if (gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled) {
+                gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
+            }
+
+            if (GlobalVariableManager.Instance.ROOM_NUM != 201) {
+                /*if(GlobalVariableManager.Instance.characterUpgradeArray[1].Substring(10,11).CompareTo("o") == 0){
+                    //pin perk 1 - enemies have chance to drop pin
+                    dropsPin = Random.Range(1,30);
+                }*/
+                dropsTrash = 99;
+                if (dropsPin != 22) {
+                    dropsTrash = Random.Range(1, (12 - sharingUpgrade));
+                }
+            }
+            //gameObject.transform.Rotate(Vector3.right*Time.deltaTime);
+            GlobalVariableManager.Instance.ENEMIES_DEFEATED++;
+
+            //string thisRoomsEnemyList = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum];
+            //if(!respawnEnemy){
+            //GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Substring(myPosInBasicEnemyStr,myPosInBasicEnemyStr+1) = "o";
+            //GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Remove(myPosInBasicEnemyStr);
+            //GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Insert(myPosInBasicEnemyStr, "o")
+            //GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum] = GlobalVariableManager.Instance.WORLD_ENEMY_LIST[roomNum].Replace(thisRoomsEnemyList[myPosInBasicEnemyStr], 'o');
+            //}
+            if (secretHider) {
+                //**SFX PLAY 'secret discovered'
+                GameObject hole = Instantiate(GameObject.Find("hiddenHole"), transform.position, Quaternion.identity) as GameObject;
+            }
+            else if (!bossEnemy) {
+                DropThings();
+            }
 
 
+           
+			//Debug.Log("Got this far for boss death check");
+
+
+            if (!bossEnemy) {
 				yield return new WaitForSeconds(.2f);
-				Debug.Log("Got this far for boss death check");
+                DropScrap();
+                Death();
+            }
+            else {
+                gameObject.GetComponent<Boss>().StartCoroutine("BossDeath");
+            }
+        }//end of (if hp is not > 0)
 
-			
-				if(!bossEnemy){
-					DropScrap();
-					Death();
-				}else{
-					gameObject.GetComponent<Boss>().StartCoroutine("BossDeath");
-				}
-			}//end of (if hp is not > 0)
-
-	}
+        // Some Enemies control their own facing and need their scale reset after being hit (e.g. Questio).
+        if (resetFacingAfterHit) {
+            gameObject.transform.localScale = startScale;
+        }
+    }
 
 	public void Clank(AudioClip clankSfx){
 		if(!takingDamage){

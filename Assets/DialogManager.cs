@@ -23,6 +23,7 @@ public class DialogManager : MonoBehaviour {
 	public DialogActionManager dialogActionManager;
 	public Camera guiCamera; //needed for icon to corner at dialog choice
 	public GameObject dialogCanvas;
+	//public GameObject blackBarCanvas;
 	public TextMeshProUGUI characterName;
 	[HideInInspector]
 	public string animationName;
@@ -84,7 +85,7 @@ public class DialogManager : MonoBehaviour {
                 }
             }
             GameStateManager.Instance.PushState(typeof(DialogState));
-
+           // blackBarCanvas.SetActive(true);
             StartDisplay();
         }
 	}
@@ -181,19 +182,12 @@ public class DialogManager : MonoBehaviour {
             //currentlySpeakingIcon.GetComponent<Animator>().Play("JumboAnimation");
             currentNode = myDialogDefiniton.nodes[currentNode.child_id];
 
-			//check to see if changed speaker
-			Debug.Log(currentNode.speakerName + "-o-o-o-o-o-o-o-o-o-o-o-");
-			//Debug.Log(characterName.text == currentNode.speakerName);
-			if(characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1){
-				characterName.text = currentNode.speakerName;
-			}
+            if (characterName.text != currentNode.speakerName && currentNode.speakerName.Length > 1) { // if the speaker is a new name, update it.
+                characterName.text = currentNode.speakerName;
 
-			if(currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager) &&
-               characterName.text != currentNode.speakerName && currentNode.speakerName.Length >1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
-			{
-				Debug.Log("NAMES DONT MATCHx-x-x-x--x-x-x-x-x-x-");
-				((MultipleDialogIconsManager)currentlySpeakingIcon).ChangeSpeaker(currentNode.speakerName);
-			}
+                if (currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager)) // change the speaker icon for multi dialogs.
+                    ((MultipleDialogIconsManager)currentlySpeakingIcon).ChangeSpeaker(currentNode.speakerName);
+            }
 
             StartDisplay();
 		}
@@ -374,7 +368,11 @@ public class DialogManager : MonoBehaviour {
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
 		//player.GetComponent<EightWayMovement>().enabled = true;
         GameStateManager.Instance.PopState();
+
+        // Handle when movie type stuff plays at the end of a dialog.
+        GameStateManager.Instance.PushState(typeof(MovieState));
         friend.OnFinishDialog();
+        //blackBarCanvas.SetActive(false);
 		dialogCanvas.SetActive(false);
     }
 

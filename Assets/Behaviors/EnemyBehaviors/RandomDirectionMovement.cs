@@ -60,7 +60,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	IEnumerator Turn(){
 		Debug.Log("Turn activated");
 		turnOnce = 1;
-		if(!anim.IsPlaying("turn")){
+		if(anim.GetClipByName("turn") != null && !anim.IsPlaying("turn")){
 			anim.Play("turn");
 		}
 

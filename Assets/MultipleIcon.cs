@@ -10,15 +10,21 @@ public class MultipleIcon : MonoBehaviour {
     public Animator animator;
     public bool isTalking;
 
-	// positionOnScreen should be changed by the specific friend event script's method that activates the new dialog.
+    // positionOnScreen should be changed by the specific friend event script's method that activates the new dialog.
+    
 	public int positionOnScreen; //0 = left, 1 = middle, 2 = right
+    int initialPositionOnScreen; // Since we sometimes allow positions to be edited, allow the original positions to restore themselves ondisable after these special cases.
 
+    bool movingBack;
+    // Use this for initialization
 
-	bool movingBack;
-	// Use this for initialization
+    void Awake()
+    {
+        initialPositionOnScreen = positionOnScreen;   
+    }
 
-	//mnEnable() here that postions icon properly based on 'positionOnScreen' value
-	void OnEnable(){
+    //mnEnable() here that postions icon properly based on 'positionOnScreen' value
+    void OnEnable(){
 		if(positionOnScreen == 0){
 			gameObject.transform.localPosition = new Vector2(-48f,6.5f);
 		}else if(positionOnScreen == 1){
@@ -26,12 +32,17 @@ public class MultipleIcon : MonoBehaviour {
 		}else if(positionOnScreen == 2){
 			gameObject.transform.localPosition = new Vector2(39f,6.5f);
 		}
-		//gameObject.GetComponent<GUIEffects>().
 	}
 
+    public void ResetPositionOnScreen()
+    {
+        // restore initial positions for the next time this icon is activated.
+        positionOnScreen = initialPositionOnScreen;
+    }
 
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		if(movingBack){
 			if(positionOnScreen == 0){
 				gameObject.transform.Translate(Vector2.left*Time.deltaTime);

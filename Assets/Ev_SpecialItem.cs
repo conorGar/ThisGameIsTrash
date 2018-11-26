@@ -23,7 +23,11 @@ public class Ev_SpecialItem : MonoBehaviour {
 			PlayerMoveToward();
 
 		myBody = gameObject.GetComponent<Rigidbody2D>();
-	}
+        myBody.gravityScale = 1f;
+        myBody.velocity = new Vector2(0,0f);
+        canPickUp = false;
+        beingTossed = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -41,6 +45,7 @@ public class Ev_SpecialItem : MonoBehaviour {
 			myBody.gravityScale = 0f;
 			myBody.velocity = new Vector2(0,0f);
 			canPickUp = true;
+            beingTossed = false;
 		}
 	}
 

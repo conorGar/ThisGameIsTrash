@@ -7,7 +7,6 @@ public class Boss : MonoBehaviour {
 	public int bossNumber;
 	public int hp;
 	public int attkDmg;
-	public bool displayHealth;
 	public GameObject hpDisplay;
 	public GameObject objectPool;
 	public bool vanishAtDeath;
@@ -43,40 +42,62 @@ public class Boss : MonoBehaviour {
 	}
 
 	public void ActivateHpDisplay(){
-		if(displayHealth){
-			hpDisplay.SetActive(true);
-			hpDisplay.GetComponent<GUI_BossHpDisplay>().maxHp = hp;
-			hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]);
-			SoundManager.instance.PlaySingle(hpDisplayStartSfx);
-		}
+        if (hpDisplay != null) {
+            hpDisplay.SetActive(true);
+            hpDisplay.GetComponent<Animator>().Play("bossHealthDisplay",-1,0f);
+            hpDisplay.GetComponent<GUI_BossHpDisplay>().maxHp = hp;
+            hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]);
+            SoundManager.instance.PlaySingle(hpDisplayStartSfx);
+        }
 	}
+
+    public void DeactivateHpDisplay()
+    {
+        if (hpDisplay != null)
+            hpDisplay.SetActive(false);
+    }
+
+    public virtual void UpdateBossHp(int hp){
+        if (hpDisplay != null)
+            hpDisplay.GetComponent<GUI_BossHpDisplay>().UpdateBossHp(hp);
+    }
 
 	public IEnumerator BossDeath(){
 		Debug.Log("BOSS DEATH ACTIVATE ***********");
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
-		player.GetComponent<EightWayMovement>().enabled = false;
-		player.GetComponent<PlayerTakeDamage>().enabled = false;
-		InvokeRepeating("DeathSmoke",.1f,.2f);
-		if(gameObject.GetComponent<FollowPlayer>() != null){
+
+
+		if(vanishAtDeath){
+            GameStateManager.Instance.PushState(typeof(MovieState));
+            CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"zoom");
+			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = 0;
+			//yield return new WaitForSeconds(1.5f);
+
+			GameObject player = GameObject.FindGameObjectWithTag("Player");
+			//GameStateManager.Instance.PushState(typeof(DialogState));
+			Time.timeScale = .2f;
+			yield return new WaitForSeconds(.5f);
+			Time.timeScale = 1;
+			InvokeRepeating("DeathSmoke",.1f,.2f);
+			yield return new WaitForSeconds(1f);
+			GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
+			deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+			if(gameObject.GetComponent<FollowPlayer>() != null){
 				gameObject.GetComponent<FollowPlayer>().StopSound();
 				gameObject.GetComponent<FollowPlayer>().enabled = false;
-		}
+			}
 	
-		GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = 0;
-		yield return new WaitForSeconds(1.5f);
-		GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
-		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-		if(vanishAtDeath){
             //CamManager.Instance.mainCamEffects.CameraPan(objectToPanTo.transform.position,"BossItem");
             //CamManager.Instance.mainCamEffects.objectToSpawn = objectToPanTo;
             GlobalVariableManager.Instance.BOSSES_KILLED |= GlobalVariableManager.BOSSES.ONE; //use this as way to tell if player has upgrade
 			for(int i = 0; i < currentRoom.bosses.Count; i++){//disable all other bosses at death
 				currentRoom.bosses[i].SetActive(false);
 			}
-			BossDeathEvent();
-			//this.gameObject.SetActive(false);
-		}else{
+            GameStateManager.Instance.PopState();
+            BossDeathEvent();
+        }
+        else{
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("Death");
+			myBossScript.StopAllCoroutines();
 			myBossScript.enabled = false;
 		}
 	}

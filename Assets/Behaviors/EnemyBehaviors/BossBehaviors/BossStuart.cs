@@ -32,6 +32,8 @@ public class BossStuart : Boss
         exSpawnPosition = bossEx.transform.position;
         hashSpawnPosition = bossHash.transform.position;
         questioSpawnPosition = bossQuestio.transform.position;
+
+        gameObject.SetActive(false);
     }
     void OnEnable ()
 	{
@@ -43,15 +45,15 @@ public class BossStuart : Boss
 	// Update is called once per frame
 	void Update ()
 	{
-        switch (ex.GetFriendState())
-        {
-            // In phase one, the trio will come back when Stuart's HP dips below 7.
-            case "FIGHT_PHASE_1":
-                if (myETD.currentHp <= 6)
-                {
-                    BossEvent();
-                }
-                break;
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            switch (ex.GetFriendState()) {
+                // In phase one, the trio will come back when Stuart's HP dips below 7.
+                case "FIGHT_PHASE_1":
+                    if (myETD.currentHp <= 6) {
+                        BossEvent();
+                    }
+                    break;
+            }
         }
 	}
 
@@ -78,28 +80,46 @@ public class BossStuart : Boss
 			GetComponent<InvincibleEnemy>().enabled = false;
 
 			//-----------------Impact Ricochet---------------//
-			float currentDirection = collider.gameObject.GetComponent<Rigidbody2D>().velocity.x;
+			//float currentDirection = collider.gameObject.GetComponent<Rigidbody2D>().velocity.x;
 			collider.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-			ObjectPool.Instance.GetPooledObject("effect_thrownImpact",transform.position);
+			/*ObjectPool.Instance.GetPooledObject("effect_thrownImpact",transform.position);
 			if(currentDirection < 0)
 				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(3f,5f),ForceMode2D.Impulse);
 			else
-				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3f,5f),ForceMode2D.Impulse);
+				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3f,5f),ForceMode2D.Impulse);*/
+			GetComponent<EnemyTakeDamage>().OnTriggerEnter2D(collider);
 			//----------------------------------------------//
 
 			hash.KnockOff();
 			canDamage = true;
 			myETD.enabled = true;
+			myETD.TakeDamage(collider.gameObject);
 		}
 
 	}
+
+    public void PrepPhase1()
+    {
+        Debug.Log("Prep Phase 2");
+
+        SoundManager.instance.musicSource.Play();
+        bossTrio.SetActive(false);
+        bossEx.SetActive(false);
+        bossHash.SetActive(false);
+        bossQuestio.SetActive(false);
+        GetComponent<InvincibleEnemy>().enabled = false;
+        GetComponent<EnemyTakeDamage>().enabled = true;
+        canDamage = true;
+        GetComponent<FollowPlayer>().enabled = true;
+        ActivateHpDisplay();
+    }
 
     public void PrepPhase2()
     {
 		Debug.Log("Prep Phase 2");
 
         SoundManager.instance.musicSource.Play();
-       	bossTrio.SetActive(true);
+        bossTrio.SetActive(true);
        	bossEx.SetActive(true);
        	bossHash.SetActive(true);
         bossQuestio.SetActive(true);
@@ -111,36 +131,40 @@ public class BossStuart : Boss
     }
 
 	public override void BossEvent(){
-		//activate boss 1 middle dialog
-		player.GetComponent<BoxCollider2D>().enabled = false;
-		player.GetComponent<EightWayMovement>().enabled = false;
-		gameObject.GetComponent<FollowPlayer>().enabled = false;
-		/*for(int i = 0; i<bossTrio.transform.childCount;i++){//add ex and questio to bosses. This is done by BossFriendEx at start if in middle of fight
+        //activate boss 1 middle dialog
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+        /*for(int i = 0; i<bossTrio.transform.childCount;i++){//add ex and questio to bosses. This is done by BossFriendEx at start if in middle of fight
 			RoomManager.Instance.currentRoom.bosses.Add(bossTrio.transform.GetChild(i).gameObject);
 		}*/
-		Debug.Log("Boss Event Activate");
-		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Debug.Log("Boss Event Activate");
 		SoundManager.instance.musicSource.Pause();
 		mdim.icons[0].GetComponent<MultipleIcon>().positionOnScreen = 0;//change ex icon position to be on left side
-		mdim.SetStartingIcons("Stuart");
-		myETD.currentHp += 10; //regain lost hp
+        mdim.icons[1].GetComponent<MultipleIcon>().positionOnScreen = 1;//change questio icon position to be center
+
+        myETD.currentHp += 10; //regain lost hp
 		ex.gameObject.SetActive(true); //activate dialog
 
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
         ex.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
         ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
+        
         ex.SetFriendState("STUART_PEP");
+        DeactivateHpDisplay();
 	}
 
 	public override void BossDeathEvent(){
-		mdim.SetStartingIcons("Stuart");
-
         ex.gameObject.SetActive(true);
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
         ex.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
         ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
         ex.SetFriendState("STUART_DEFEATED");
         bossTrio.SetActive(false);
+        bossHash.SetActive(false);
+        bossEx.SetActive(false);
+        bossQuestio.SetActive(false);
+        DeactivateHpDisplay();
     }
 }
 

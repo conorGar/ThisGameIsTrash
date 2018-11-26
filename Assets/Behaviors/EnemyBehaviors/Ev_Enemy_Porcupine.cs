@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Ev_Enemy_Porcupine : FollowPlayer
 {
+
+
+	//turns around to spikey backside and leaps toward player.
+
 	public GameObject myShadow;
 	public BoxCollider2D mySpikeHitBox;
 	public BoxCollider2D myHitBox;

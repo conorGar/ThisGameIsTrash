@@ -59,8 +59,12 @@ public class StoneFriend : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
+
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		GameStateManager.Instance.PushState(typeof(GameplayState));
+
+
+        yield return base.OnFinishDialogEnumerator();
+
     }
 
     private void Update(){

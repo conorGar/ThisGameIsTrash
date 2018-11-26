@@ -116,8 +116,10 @@ public class RockFriend : Friend {
             case "WANTS_TO_BE_PRETTY":
                 break;
         }
+
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		GameStateManager.Instance.PushState(typeof(GameplayState));
+		GameStateManager.Instance.PopState();
+
     }
 
     public void DeliverObject(SpecialFriendObject obj)

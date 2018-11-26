@@ -139,6 +139,7 @@ public class ObjectPool : MonoBehaviour {
     // When active is false the object can be retrieved by another function.  It's a sort of pointless function but we can use it to mark and search the code for pooled items specifically instead of objects that are deactivating normally.
     public void ReturnPooledObject ( GameObject go)
     {
-        go.SetActive(false);
+        if (go != null)
+            go.SetActive(false);
     }
 }
