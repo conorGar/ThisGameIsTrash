@@ -15,9 +15,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 	//public tk2dCamera currentCamera; //set in inspector
 	public string myDeadBodyName;
 	public bool respawnEnemy = false;
-	public AudioClip hitSound;
-	public AudioClip hitSqueal;
-	public AudioClip bounce;
 	public bool bossEnemy;
 
 
@@ -182,8 +179,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				melee.GetComponent<Ev_FallingProjectile>().Fell();
 			}
 			//Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
-			SoundManager.instance.RandomizeSfx(hitSound,.8f,1.1f);
-			SoundManager.instance.PlaySingle(hitSqueal);
+            SoundManager.instance.RandomizeSfx(SFXBANK.HIT7, .8f, 1.1f);
+			SoundManager.instance.PlaySingle(SFXBANK.RAT_SQUEAL);
 		}else if(melee.gameObject.layer == 15){//throwable object
 			hitByThrownObject = true;
             // TODO: Get the boss battle to use throwable bodies???
@@ -192,8 +189,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
                 melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
 			Debug.Log("Hit by thrown object!");
 			TakeDamage(melee.gameObject);
-			SoundManager.instance.PlaySingle(hitSound);
-			SoundManager.instance.PlaySingle(hitSqueal);
+			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
+			SoundManager.instance.PlaySingle(SFXBANK.RAT_SQUEAL);
 		}
 	}
 
@@ -256,8 +253,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					takingDamage = true;
 					damageOnce = 1;
 					meleeDmgBonus = 0;
-					SoundManager.instance.PlaySingle(hitSound);
-					SoundManager.instance.PlaySingle(hitSqueal);
+					SoundManager.instance.PlaySingle(SFXBANK.HIT7);
+					SoundManager.instance.PlaySingle(SFXBANK.RAT_SQUEAL);
 					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
 						//bonus dmg with pole
 						meleeDmgBonus++;
@@ -364,7 +361,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 		//Debug.Log("STOP KNOCKBACK ACTIVATE");
 		damageOnce = 0;
-		SoundManager.instance.PlaySingle(bounce);
+		SoundManager.instance.PlaySingle(SFXBANK.ENEMY_BOUNCE);
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 		//if(aniToSwitchBackTo != null)

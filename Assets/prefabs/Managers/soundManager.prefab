@@ -51,7 +51,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 76c8348a3616b274db129779bcef2bc0, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3e923a6cb13167745b957612e19f1c9b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.52
   m_Pitch: 1
@@ -109,7 +109,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -133,7 +133,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.626
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -189,7 +189,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -215,5 +215,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 82473485835732088}
   musicSource: {fileID: 82327134256991846}
+  worldMusic: {fileID: 8300000, guid: 76c8348a3616b274db129779bcef2bc0, type: 3}
   lowPitchRange: 0.95
   highPitchRange: 1.1
+  fadeSpeed: 0.4
+  SFXList:
+  - soundID: 1
+    clip: {fileID: 8300000, guid: f484d29b6db0241438e145d6dc57ae17, type: 3}
+  - soundID: 2
+    clip: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
+  - soundID: 3
+    clip: {fileID: 8300000, guid: a9a92855900bdaf4a882f2126f472fe2, type: 3}
+  - soundID: 4
+    clip: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
+  MusicList: []
