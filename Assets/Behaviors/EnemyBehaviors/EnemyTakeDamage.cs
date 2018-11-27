@@ -15,7 +15,10 @@ public class EnemyTakeDamage : MonoBehaviour {
 	//public tk2dCamera currentCamera; //set in inspector
 	public string myDeadBodyName;
 	public bool respawnEnemy = false;
-	public bool bossEnemy;
+    public SFXBANK hitSound;
+    public SFXBANK hitSqueal;
+    public SFXBANK bounce;
+    public bool bossEnemy;
 
 
 	public GameObject tutPopup;
@@ -168,7 +171,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 
 	}
-	void OnTriggerEnter2D(Collider2D melee){
+	public void OnTriggerEnter2D(Collider2D melee){
 		if(melee.tag == "Weapon"){
 			TakeDamage(melee.gameObject);
 			//Debug.Log("Collision with weapon: ");
@@ -179,8 +182,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				melee.GetComponent<Ev_FallingProjectile>().Fell();
 			}
 			//Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
-            SoundManager.instance.RandomizeSfx(SFXBANK.HIT7, .8f, 1.1f);
-			SoundManager.instance.PlaySingle(SFXBANK.RAT_SQUEAL);
+            SoundManager.instance.RandomizeSfx(hitSound, .8f, 1.1f);
+			SoundManager.instance.PlaySingle(hitSqueal);
 		}else if(melee.gameObject.layer == 15){//throwable object
 			hitByThrownObject = true;
             // TODO: Get the boss battle to use throwable bodies???
@@ -189,8 +192,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
                 melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
 			Debug.Log("Hit by thrown object!");
 			TakeDamage(melee.gameObject);
-			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
-			SoundManager.instance.PlaySingle(SFXBANK.RAT_SQUEAL);
+			SoundManager.instance.PlaySingle(hitSound);
+			SoundManager.instance.PlaySingle(hitSqueal);
 		}
 	}
 
@@ -253,8 +256,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					takingDamage = true;
 					damageOnce = 1;
 					meleeDmgBonus = 0;
-					SoundManager.instance.PlaySingle(SFXBANK.HIT7);
-					SoundManager.instance.PlaySingle(SFXBANK.RAT_SQUEAL);
+					SoundManager.instance.PlaySingle(hitSound);
+					SoundManager.instance.PlaySingle(hitSqueal);
 					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
 						//bonus dmg with pole
 						meleeDmgBonus++;
@@ -361,7 +364,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 		//Debug.Log("STOP KNOCKBACK ACTIVATE");
 		damageOnce = 0;
-		SoundManager.instance.PlaySingle(SFXBANK.ENEMY_BOUNCE);
+		SoundManager.instance.PlaySingle(bounce);
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 		//if(aniToSwitchBackTo != null)
@@ -430,9 +433,10 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				//Debug.Log("**AND HERE!!!!!!!!***");
-			if(currentHp <= 0)
-				yield return new WaitForSeconds(.4f);
-			else
+			if(currentHp <= 0){
+				if(!bossEnemy)
+					yield return new WaitForSeconds(.4f);
+			}else
 				yield return new WaitForSeconds(.1f);
 
 			StartCoroutine( "StopKnockback");
@@ -515,11 +519,12 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             }
 
 
-            yield return new WaitForSeconds(.2f);
-            Debug.Log("Got this far for boss death check");
+           
+			//Debug.Log("Got this far for boss death check");
 
 
             if (!bossEnemy) {
+				yield return new WaitForSeconds(.2f);
                 DropScrap();
                 Death();
             }

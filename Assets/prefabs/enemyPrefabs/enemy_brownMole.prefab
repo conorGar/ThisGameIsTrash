@@ -179,9 +179,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armoredEnemy: 0
   moveWhenHit: 1
+  resetFacingAfterHit: 0
   secretHider: 0
-  currentHp: 2
-  meleeDmgBonus: 0
+  returnToCurrentAniAfterHit: 0
   invincibleAni:
     name: Default
     frames: []
@@ -194,11 +194,11 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  currentCamera: {fileID: 0}
+  myDeadBodyName: 
   respawnEnemy: 1
-  hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
-  hitSqueal: {fileID: 8300000, guid: adab9cc7eebe17b4cb22fcca45fc48f0, type: 3}
-  bounce: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
+  hitSound: 2
+  hitSqueal: 0
+  bounce: 4
   bossEnemy: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 1053900122411524, guid: eda8c053eaf99a742b9e8aba8688ed2e, type: 2}
@@ -210,8 +210,12 @@ MonoBehaviour:
   myShadow: {fileID: 1317794643366104}
   myCollisionBox: {fileID: 61906788192166136}
   returnAniName: idle
+  behaviorsToDeactivate: []
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
+  currentHp: 2
+  meleeDmgBonus: 0
+  dontStopWhenHit: 0
 --- !u!114 &114298551362366922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,9 +257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hastk2dSprite: 1
   movingObject: 1
-  legs: 0
+  sortBuddies: []
 --- !u!114 &114679211738969614
 MonoBehaviour:
   m_ObjectHideFlags: 1

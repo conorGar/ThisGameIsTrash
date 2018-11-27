@@ -23,6 +23,7 @@ public class DialogManager : MonoBehaviour {
 	public DialogActionManager dialogActionManager;
 	public Camera guiCamera; //needed for icon to corner at dialog choice
 	public GameObject dialogCanvas;
+	public GameObject blackBarCanvas;
 	public TextMeshProUGUI characterName;
 	[HideInInspector]
 	public string animationName;
@@ -84,7 +85,7 @@ public class DialogManager : MonoBehaviour {
                 }
             }
             GameStateManager.Instance.PushState(typeof(DialogState));
-
+            blackBarCanvas.SetActive(true);
             StartDisplay();
         }
 	}
@@ -371,6 +372,7 @@ public class DialogManager : MonoBehaviour {
         // Handle when movie type stuff plays at the end of a dialog.
         GameStateManager.Instance.PushState(typeof(MovieState));
         friend.OnFinishDialog();
+        blackBarCanvas.SetActive(false);
 		dialogCanvas.SetActive(false);
     }
 

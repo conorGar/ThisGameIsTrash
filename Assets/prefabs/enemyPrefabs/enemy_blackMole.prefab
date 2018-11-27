@@ -275,6 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armoredEnemy: 0
   moveWhenHit: 1
+  resetFacingAfterHit: 0
   secretHider: 0
   returnToCurrentAniAfterHit: 0
   invincibleAni:
@@ -291,9 +292,9 @@ MonoBehaviour:
     wrapMode: 0
   myDeadBodyName: mole
   respawnEnemy: 0
-  hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
-  hitSqueal: {fileID: 8300000, guid: adab9cc7eebe17b4cb22fcca45fc48f0, type: 3}
-  bounce: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
+  hitSound: 2
+  hitSqueal: 0
+  bounce: 4
   bossEnemy: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 0}

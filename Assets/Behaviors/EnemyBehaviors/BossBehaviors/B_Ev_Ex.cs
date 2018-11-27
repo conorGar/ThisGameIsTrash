@@ -19,7 +19,7 @@ public class B_Ev_Ex : MonoBehaviour {
     string action = "Teleport";
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		myColor = gameObject.GetComponent<tk2dSprite>().color;
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
         myAnim.AnimationEventTriggered = AnimationEventCallback;
@@ -133,6 +133,7 @@ public class B_Ev_Ex : MonoBehaviour {
 
         gameObject.layer = 9;
         gameObject.GetComponent<ThrowableObject>().enabled = false;
+
         myAnim.Play("idle");
     }
 

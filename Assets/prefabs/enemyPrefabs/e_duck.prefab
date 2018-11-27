@@ -205,9 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hastk2dSprite: 1
   movingObject: 1
-  legs: 0
+  sortBuddies: []
 --- !u!114 &114020907024328940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -313,6 +312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armoredEnemy: 0
   moveWhenHit: 0
+  resetFacingAfterHit: 0
   secretHider: 0
   returnToCurrentAniAfterHit: 0
   invincibleAni:
@@ -329,9 +329,9 @@ MonoBehaviour:
     wrapMode: 0
   myDeadBodyName: duck
   respawnEnemy: 0
-  hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
-  hitSqueal: {fileID: 8300000, guid: 34a7e0879520a72449702df07bdb8ab9, type: 3}
-  bounce: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
+  hitSound: 2
+  hitSqueal: 0
+  bounce: 4
   bossEnemy: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}

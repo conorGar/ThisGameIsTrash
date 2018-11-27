@@ -196,23 +196,29 @@ public class SoundManager : MonoBehaviour {
     // Are these too slow to loop through all the time?  Should it be a hash internally?
     AudioClip GetSFX(SFXBANK id)
     {
+        if (id == SFXBANK.NONE)
+            return null;
+
         for (int i = 0; i < SFXList.Count; i++) {
             if (id == SFXList[i].soundID)
                 return SFXList[i].clip;
         }
 
-        Debug.Log("SFX Clip not found for SFXBANK id: " + id + " Did you define it in the SoundManager?");
+        Debug.LogError("SFX Clip not found for SFXBANK id: " + id + " Did you define it in the SoundManager?");
         return null;
     }
 
     AudioClip GetMusic(MUSICBANK id)
     {
+        if (id == MUSICBANK.NONE)
+            return null;
+
         for (int i = 0; i < MusicList.Count; i++) {
             if (id == MusicList[i].soundID)
                 return MusicList[i].clip;
         }
 
-        Debug.Log("Music Clip not found for MUSICBANK id: " + id + " Did you define it in the SoundManager?");
+        Debug.LogError("Music Clip not found for MUSICBANK id: " + id + " Did you define it in the SoundManager?");
         return null;
     }
 }
