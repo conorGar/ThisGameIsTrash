@@ -2,6 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SFXBANK
+{
+    NONE,
+    HIT6,
+    HIT7,
+    RAT_SQUEAL,
+    ENEMY_BOUNCE
+}
+
+public enum MUSICBANK
+{
+    NONE
+}
+
 public class SoundManager : MonoBehaviour {
 
 	public AudioSource sfxSource;
@@ -12,7 +26,22 @@ public class SoundManager : MonoBehaviour {
 	public float highPitchRange = 1.1f;
     public float fadeSpeed = .4f;
 
+    [System.Serializable]
+    public struct SFXItem
+    {
+        public SFXBANK soundID;
+        public AudioClip clip;
+    }
 
+    [System.Serializable]
+    public struct MusicItem
+    {
+        public MUSICBANK soundID;
+        public AudioClip clip;
+    }
+
+    public List<SFXItem> SFXList;
+    public List<MusicItem> MusicList;
 
     bool musicFading;
 	// Use this for initialization
@@ -26,12 +55,43 @@ public class SoundManager : MonoBehaviour {
 		DontDestroyOnLoad(gameObject);
 	}
 
+    public void PlaySingle(MUSICBANK id)
+    {
+        var clip = GetMusic(id);
+
+        if (clip != null) {
+            PlaySingle(clip);
+        }
+    }
+
+    public void PlaySingle(SFXBANK id)
+    {
+        var clip = GetSFX(id);
+
+        if (clip != null) {
+            PlaySingle(clip);
+        }
+    }
+
 	public void PlaySingle(AudioClip clip){
 		//sfxSource.clip = clip;
 		//sfxSource.Play();
 		sfxSource.pitch = 1;
 		sfxSource.PlayOneShot(clip);
 	}
+
+    public void RandomizeSfx(params SFXBANK[] ids)
+    {
+        int randomIndex = Random.Range(0, ids.Length);
+        float randomPitch = Random.Range(lowPitchRange, highPitchRange);
+
+        sfxSource.pitch = randomPitch;
+
+        var clip = GetSFX(ids[randomIndex]);
+
+        if (clip != null)
+            sfxSource.PlayOneShot(clip);
+    }
 
 	public void RandomizeSfx(params AudioClip[] clips){
 		int randomIndex = Random.Range(0, clips.Length);
@@ -42,7 +102,21 @@ public class SoundManager : MonoBehaviour {
 		//sfxSource.Play();
 		sfxSource.PlayOneShot(clips[randomIndex]);
 	}
-	public void RandomizeSfx(AudioClip clip, float lowPitch, float highPitch){
+
+    public void RandomizeSfx(SFXBANK id, float lowPitch, float highPitch)
+    {
+        //int randomIndex = Random.Range(0, clips.Length);
+        float randomPitch = Random.Range(lowPitch, highPitch);
+
+        sfxSource.pitch = randomPitch;
+
+        var clip = GetSFX(id);
+
+        if (clip != null)
+            sfxSource.PlayOneShot(clip);
+    }
+
+    public void RandomizeSfx(AudioClip clip, float lowPitch, float highPitch){
 		//int randomIndex = Random.Range(0, clips.Length);
 		float randomPitch = Random.Range(lowPitch,highPitch);
 
@@ -70,6 +144,16 @@ public class SoundManager : MonoBehaviour {
     public void FadeMusic(){
 		musicFading = true;
 	}
+
+    public Coroutine TransitionMusic(MUSICBANK id, bool fadeOut = true, bool fadeIn = false, System.Action callback = null)
+    {
+        var clip = GetMusic(id);
+
+        if (clip != null)
+            return TransitionMusic(id, fadeOut, fadeIn, callback);
+
+        return null;
+    }
 
     public Coroutine TransitionMusic(AudioClip nextClip, bool fadeOut = true, bool fadeIn = false, System.Action callback = null)
     {
@@ -105,5 +189,36 @@ public class SoundManager : MonoBehaviour {
 
         if (callback != null)
             callback();
+    }
+
+    // Helpers
+
+    // Are these too slow to loop through all the time?  Should it be a hash internally?
+    AudioClip GetSFX(SFXBANK id)
+    {
+        if (id == SFXBANK.NONE)
+            return null;
+
+        for (int i = 0; i < SFXList.Count; i++) {
+            if (id == SFXList[i].soundID)
+                return SFXList[i].clip;
+        }
+
+        Debug.LogError("SFX Clip not found for SFXBANK id: " + id + " Did you define it in the SoundManager?");
+        return null;
+    }
+
+    AudioClip GetMusic(MUSICBANK id)
+    {
+        if (id == MUSICBANK.NONE)
+            return null;
+
+        for (int i = 0; i < MusicList.Count; i++) {
+            if (id == MusicList[i].soundID)
+                return MusicList[i].clip;
+        }
+
+        Debug.LogError("Music Clip not found for MUSICBANK id: " + id + " Did you define it in the SoundManager?");
+        return null;
     }
 }

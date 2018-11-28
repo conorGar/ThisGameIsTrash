@@ -15,13 +15,16 @@ public class EnemyTakeDamage : MonoBehaviour {
 	//public tk2dCamera currentCamera; //set in inspector
 	public string myDeadBodyName;
 	public bool respawnEnemy = false;
-	public AudioClip hitSound;
-	public AudioClip hitSqueal;
-	public AudioClip bounce;
+
 	public AudioClip armoredEnemyHitSfx;
 	public bool bossEnemy;
 	public bool IAmParentObj;
 	public GameObject childEnemy;
+
+    public SFXBANK hitSound;
+    public SFXBANK hitSqueal;
+    public SFXBANK bounce;
+
 
 	public GameObject tutPopup;
 
@@ -207,7 +210,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				melee.GetComponent<Ev_FallingProjectile>().Fell();
 			}
 			//Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
-			SoundManager.instance.RandomizeSfx(hitSound,.8f,1.1f);
+            SoundManager.instance.RandomizeSfx(hitSound, .8f, 1.1f);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}else if(melee.gameObject.layer == 15){//throwable object
 			hitByThrownObject = true;
@@ -218,7 +221,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			Debug.Log("Hit by thrown object!");
 			ArmorKnockoff();
 			TakeDamage(melee.gameObject);
-			SoundManager.instance.PlaySingle(hitSound);
+			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
+			//SoundManager.instance.PlaySingle(hitSound);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}
 	}

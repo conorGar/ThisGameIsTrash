@@ -51,7 +51,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4569215430192432
 Transform:
   m_ObjectHideFlags: 1
@@ -59,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1776742418842668}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4977884, y: -15.750148, z: 0.2109375}
+  m_LocalPosition: {x: -0.359272, y: 5.1758294, z: 0.2109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4931915976921044}
@@ -233,6 +233,7 @@ MonoBehaviour:
   rightLimit: 0
   topLimit: 0
   botLimit: 0
+  globalPos: 0
 --- !u!114 &114823613773519374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,9 +247,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armoredEnemy: 0
   moveWhenHit: 1
+  resetFacingAfterHit: 0
   secretHider: 0
-  currentHp: 0
-  meleeDmgBonus: 0
+  returnToCurrentAniAfterHit: 0
   invincibleAni:
     name: Default
     frames: []
@@ -261,12 +262,12 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  currentCamera: {fileID: 0}
+  myDeadBodyName: 
   respawnEnemy: 0
-  hitSound: {fileID: 0}
-  hitSqueal: {fileID: 0}
+  hitSound: 2
+  hitSqueal: 0
+  bounce: 4
   bossEnemy: 0
-  objectPool: {fileID: 0}
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 0}
   gar_rec: {fileID: 0}
@@ -276,6 +277,13 @@ MonoBehaviour:
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1552007046852854}
   myCollisionBox: {fileID: 61161049283421296}
+  returnAniName: idle
+  behaviorsToDeactivate: []
+  objectPool: {fileID: 0}
+  myRespawner: {fileID: 0}
+  currentHp: 0
+  meleeDmgBonus: 0
+  dontStopWhenHit: 0
 --- !u!114 &114916655749127940
 MonoBehaviour:
   m_ObjectHideFlags: 1
