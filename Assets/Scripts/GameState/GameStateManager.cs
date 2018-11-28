@@ -9,9 +9,13 @@ public class GameStateManager : MonoBehaviour {
 
     Stack<GameState> currentGameStateStack = new Stack<GameState>();
 
+    public bool debugMode; //just pushes gameplay state at start for test rooms
+
     void Awake()
     {
         Instance = this;
+        if(debugMode)
+        	GameStateManager.Instance.PushState(typeof(GameplayState));
     }
 
     // Use this for initialization

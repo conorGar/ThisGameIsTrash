@@ -6,6 +6,7 @@ public class KillSelfAfterTime : MonoBehaviour {
 	public float timeUntilDeath;
 	public bool deactivateInsteadOfKill;
 	public bool playSoundAtStart;
+	public bool smokePuffAtEnd;
 	public AudioClip mySound;
 	// Use this for initialization
 	void Start () {
@@ -16,6 +17,8 @@ public class KillSelfAfterTime : MonoBehaviour {
 	
 	void Kill(){
 		if(deactivateInsteadOfKill){
+			if(smokePuffAtEnd)
+				ObjectPool.Instance.GetPooledObject("effect_landingSmoke",transform.position);
 			this.gameObject.SetActive(false);
 		}else{
 			Destroy(gameObject);

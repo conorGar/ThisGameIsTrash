@@ -7,7 +7,7 @@ public class B_Ev_Hash : MonoBehaviour {
 	tk2dSpriteAnimator myAnim;
 	public GameObject stuart;
 	public GameObject stuartShield;
-	public AudioClip castSound;
+	public AudioClip teleportSound;
 	public GameObject player;
 	public ParticleSystem smokePuff;
 
@@ -123,6 +123,7 @@ public class B_Ev_Hash : MonoBehaviour {
 	void Revive(){
 		if(this.enabled){
 			smokePuff.Play();
+			SoundManager.instance.PlaySingle(teleportSound);
 			gameObject.GetComponent<EnemyTakeDamage>().enabled = false;//cant attack while he is riding Stuart
 			gameObject.transform.parent = stuart.transform;
 			gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart

@@ -3,6 +3,10 @@ using System.Collections;
 
 public class InvincibleEnemy : MonoBehaviour
 {
+
+	public AudioClip nullHitSfx;
+
+
 	Rigidbody2D player;
 
 	void Start(){
@@ -19,6 +23,7 @@ public class InvincibleEnemy : MonoBehaviour
 	}
 
 	void Deflect(){
+		SoundManager.instance.PlaySingle(nullHitSfx);
 		GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars");
 		littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		littleStars.SetActive(true);

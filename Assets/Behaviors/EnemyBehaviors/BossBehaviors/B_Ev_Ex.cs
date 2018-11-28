@@ -9,6 +9,8 @@ public class B_Ev_Ex : MonoBehaviour {
 	public GameObject myProjectile;
 	public GameObject myParticles;
 	public GameObject player;
+	public AudioClip cast;
+	public AudioClip teleport;
 	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
 
 	Vector3 playerPosition;
@@ -43,7 +45,7 @@ public class B_Ev_Ex : MonoBehaviour {
 
 	IEnumerator Teleport(){
 		Debug.Log("Teleport Activated ----------- !");
-
+		SoundManager.instance.PlaySingle(teleport);
 		this.gameObject.GetComponent<SpecialEffectsBehavior>().SetFadeVariables(.1f,.3f);
 		this.gameObject.GetComponent<SpecialEffectsBehavior>().FadeOut();
 		myParticles.SetActive(true);
@@ -76,6 +78,7 @@ public class B_Ev_Ex : MonoBehaviour {
         myProjectile.GetComponent<KillSelfAfterTime>().CancelInvoke();//prevents projectile from dying shortly after spawn
         playerPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
         myProjectile.SetActive(true);
+        SoundManager.instance.PlaySingle(cast);
         Vector2 moveDirection = (playerPosition - myProjectile.transform.position).normalized * 10;
         myProjectile.GetComponent<FollowPlayer>().enabled = true;
         myProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(moveDirection.x, moveDirection.y);

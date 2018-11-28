@@ -39,6 +39,14 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 
 	public List<MonoBehaviour> behaviorsToDeactivate = new List<MonoBehaviour>();
+
+
+
+	//armor knockoff stuff
+	public GameObject armorCollisionObj; //object, like a shield or something, to deactivate
+	public tk2dSpriteAnimation disarmoredAnimation;
+
+
 	[HideInInspector]
 	public GameObject objectPool;
 	[HideInInspector]
@@ -141,7 +149,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			moveWhenHit = false;
 		}
 
-		if(armoredEnemy && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES) != GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES){
+		if(armoredEnemy && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES) != GlobalVariableManager.TUTORIALPOPUPS.ARMOREDENEMIES && tutPopup != null){
 			tutPopup.SetActive(true);
 			tutPopup.GetComponent<GUI_TutPopup>().SetData("ArmoredEnemies");
 		}
@@ -208,6 +216,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             if (body)
                 melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
 			Debug.Log("Hit by thrown object!");
+			ArmorKnockoff();
 			TakeDamage(melee.gameObject);
 			SoundManager.instance.PlaySingle(hitSound);
 			SoundManager.instance.PlaySingle(hitSqueal);
@@ -243,7 +252,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				}
 
 				currentHp = currentHp - 1 - meleeDmgBonus;
-				//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
+				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
                     gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
@@ -328,7 +337,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 
                     //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
-                    CamManager.Instance.mainCam.ScreenShake(.2f);
+                   CamManager.Instance.mainCam.ScreenShake(.2f);
 
 					if(hitByThrownObject){
                         // TODO: Fix the boss battle to use throwable bodies????
@@ -381,7 +390,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             gameObject.transform.localScale = new Vector2(startScale.x * -1, startScale.y);
     }
 
-	IEnumerator StopKnockback(){
+	IEnumerator StopKnockback(float delay = 0f){
+		yield return new WaitForSeconds(delay);
+
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);
 		spinning = false;
 		//myCollisionBox.enabled = true;
@@ -575,26 +586,36 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
         }
     }
 
-	public void Clank(AudioClip clankSfx){
+	public void Clank(AudioClip clankSfx,Vector2 clankPosition){
 		if(!takingDamage){
 			Debug.Log("Clanking material got here----x-x-x-x--- 2");
 			takingDamage = true;
-			GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars");
-			littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-			littleStars.SetActive(true);
+			GameObject clankSpark = ObjectPool.Instance.GetPooledObject("effect_clank",clankPosition);
 			SoundManager.instance.PlaySingle(clankSfx);
 			/*if(gameObject.GetComponent<FollowPlayer>()){
 				gameObject.GetComponent<FollowPlayer>().enabled = false;
 			}*/
+			for(int i = 0; i < behaviorsToDeactivate.Count;i++){
+						behaviorsToDeactivate[i].enabled = false;
+			}
 			if(gameObject.transform.position.x < player.transform.position.x){
 				player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
-				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);
+				this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);
 			}else{
 				player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
-				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
+				this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
 			}
-			StartCoroutine("StopKnockback");
+			StartCoroutine("StopKnockback",.5f);
 		}
+	}
+
+
+	void ArmorKnockoff(){
+		armoredEnemy = false;
+		armorCollisionObj.SetActive(false); //TODO: best way to enable it when the enemy is spawned(for proper reuse with ObjectPool pull)
+		gameObject.GetComponent<tk2dSpriteAnimator>().Library= disarmoredAnimation;
+		GameObject armorPiece =ObjectPool.Instance.GetPooledObject("effect_armorPiece",gameObject.transform.position);
+		armorPiece.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,6f),ForceMode2D.Impulse);
 	}
 
 	void DropThings(){
