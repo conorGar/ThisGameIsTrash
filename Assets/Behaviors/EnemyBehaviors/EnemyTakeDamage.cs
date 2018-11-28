@@ -192,7 +192,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
                 melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
 			Debug.Log("Hit by thrown object!");
 			TakeDamage(melee.gameObject);
-			SoundManager.instance.PlaySingle(hitSound);
+			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
+			//SoundManager.instance.PlaySingle(hitSound);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}
 	}
