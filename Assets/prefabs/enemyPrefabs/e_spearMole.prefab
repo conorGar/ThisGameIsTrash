@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 114416602313476124}
   m_Layer: 9
   m_Name: e_spearMole
-  m_TagString: Untagged
+  m_TagString: enemy_spearMole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -334,6 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 1
+  destroyOnTileCollision: 0
 --- !u!114 &114317049081646286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -347,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clankSound: {fileID: 8300000, guid: 1073f68275895f6429798e5be44021af, type: 3}
   parentsETD: {fileID: 114745645828691684}
+  pushBack: 1
 --- !u!114 &114416602313476124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -392,6 +394,7 @@ MonoBehaviour:
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198037785932892104}
+  returnToPreviousWhenFar: 0
 --- !u!114 &114707988734180988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -420,6 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armoredEnemy: 0
   moveWhenHit: 1
+  resetFacingAfterHit: 0
   secretHider: 0
   returnToCurrentAniAfterHit: 0
   invincibleAni:
@@ -436,13 +440,13 @@ MonoBehaviour:
     wrapMode: 0
   myDeadBodyName: mole
   respawnEnemy: 0
-  hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
-  hitSqueal: {fileID: 0}
-  bounce: {fileID: 0}
   armoredEnemyHitSfx: {fileID: 0}
   bossEnemy: 0
   IAmParentObj: 0
   childEnemy: {fileID: 0}
+  hitSound: 0
+  hitSqueal: 0
+  bounce: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 0}
   gar_rec: {fileID: 0}
@@ -451,10 +455,11 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 0}
-  myCollisionBox: {fileID: 61747323131722756}
   returnAniName: idle
   dontSpawnBody: 0
   behaviorsToDeactivate: []
+  armorCollisionObj: {fileID: 0}
+  disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
   currentHp: 0

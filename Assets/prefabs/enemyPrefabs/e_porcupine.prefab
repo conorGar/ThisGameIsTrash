@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 114759214080502328}
   - component: {fileID: 50609150297414640}
   - component: {fileID: 114743519393647910}
+  - component: {fileID: 114586182235095206}
   m_Layer: 9
   m_Name: e_porcupine
   m_TagString: Untagged
@@ -292,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clankSound: {fileID: 0}
   parentsETD: {fileID: 114759214080502328}
+  pushBack: 1
 --- !u!114 &114261148013917570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -303,9 +305,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7465d3cf6dc723459be3e518ac51b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
-  minMoveTime: 4
-  maxMoveTime: 6
+  movementSpeed: 2
+  minMoveTime: 2
+  maxMoveTime: 4
   walkPS: {fileID: 198251608602611088}
 --- !u!114 &114555138957307946
 MonoBehaviour:
@@ -331,6 +333,19 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
+--- !u!114 &114586182235095206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1201984153954284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 1
+  sortBuddies: []
 --- !u!114 &114645927745964818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -387,13 +402,13 @@ MonoBehaviour:
     wrapMode: 0
   myDeadBodyName: 
   respawnEnemy: 0
-  hitSound: {fileID: 0}
-  hitSqueal: {fileID: 0}
-  bounce: {fileID: 0}
   armoredEnemyHitSfx: {fileID: 0}
   bossEnemy: 0
   IAmParentObj: 0
   childEnemy: {fileID: 0}
+  hitSound: 0
+  hitSqueal: 0
+  bounce: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 0}
   gar_rec: {fileID: 0}
@@ -405,6 +420,8 @@ MonoBehaviour:
   returnAniName: idle
   dontSpawnBody: 0
   behaviorsToDeactivate: []
+  armorCollisionObj: {fileID: 0}
+  disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
   currentHp: 0
@@ -436,6 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 1
+  destroyOnTileCollision: 0
 --- !u!198 &198251608602611088
 ParticleSystem:
   m_ObjectHideFlags: 1

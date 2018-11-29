@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23515806391661276}
   - component: {fileID: 114863964948217370}
   - component: {fileID: 114973076299877944}
-  - component: {fileID: 61138836684799738}
+  - component: {fileID: 61272191608063292}
   m_Layer: 8
   m_Name: w1_tree
   m_TagString: Untagged
@@ -38,8 +38,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251009585309104}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.818666, y: -6.112877, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 1.3390303, y: -23.29458, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0.3154574}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1251009585309104}
   m_Mesh: {fileID: 0}
---- !u!61 &61138836684799738
+--- !u!61 &61272191608063292
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -108,7 +108,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.76, y: 4.29}
+  m_Size: {x: 2.69, y: 3.28}
   m_EdgeRadius: 0
 --- !u!114 &114863964948217370
 MonoBehaviour:
@@ -145,6 +145,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hastk2dSprite: 1
   movingObject: 0
-  legs: 0
+  sortBuddies: []

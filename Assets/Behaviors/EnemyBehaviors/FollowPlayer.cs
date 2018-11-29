@@ -10,6 +10,7 @@ public class FollowPlayer : MonoBehaviour {
 	public bool hasSeperateFacingAnimations;
 	public bool iBeLerpin;
 	public ParticleSystem chasePS;
+	public bool returnToPreviousWhenFar;
 	private Vector3 smoothVelocity = Vector3.zero;
 	private tk2dSpriteAnimator anim;
 
@@ -47,6 +48,12 @@ public class FollowPlayer : MonoBehaviour {
                         transform.localScale = new Vector3(1, 1, 1);
                     }
                 }//otherwise for now those specific actors handle it(Questio)
+            }else if(returnToPreviousWhenFar){
+				if(this.gameObject.GetComponent<RandomDirectionMovement>() != null){
+					this.gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
+				}
+				gameObject.GetComponent<FollowPlayerAfterNotice>().enabled = true;
+				this.enabled = false;
             }
         }
 	}

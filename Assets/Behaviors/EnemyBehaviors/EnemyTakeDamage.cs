@@ -271,7 +271,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				//Debug.Log("**AND HERE!!!!!!!!***");
 				yield return new WaitForSeconds(.4f);
-				StartCoroutine( "StopKnockback");
+				StartCoroutine( "StopKnockback",0f);
 				StartCoroutine("AfterHit");
 
 			}
@@ -341,7 +341,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 
                     //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
-                   CamManager.Instance.mainCam.ScreenShake(.2f);
+//                   CamManager.Instance.mainCam.ScreenShake(.2f);
 
 					if(hitByThrownObject){
                         // TODO: Fix the boss battle to use throwable bodies????
@@ -486,7 +486,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			}else
 				yield return new WaitForSeconds(.1f);
 
-			StartCoroutine( "StopKnockback");
+			StartCoroutine( "StopKnockback",0f);
 
 		}else{
 			yield return new WaitForSeconds(.2f);
@@ -590,7 +590,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
         }
     }
 
-	public void Clank(AudioClip clankSfx,Vector2 clankPosition){
+	public void Clank(AudioClip clankSfx,Vector2 clankPosition, bool getsPushedBack){
 		if(!takingDamage){
 			Debug.Log("Clanking material got here----x-x-x-x--- 2");
 			takingDamage = true;
@@ -599,20 +599,32 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			/*if(gameObject.GetComponent<FollowPlayer>()){
 				gameObject.GetComponent<FollowPlayer>().enabled = false;
 			}*/
-			for(int i = 0; i < behaviorsToDeactivate.Count;i++){
-						behaviorsToDeactivate[i].enabled = false;
-			}
-			if(gameObject.transform.position.x < player.transform.position.x){
-				player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
-				this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);
+			if(getsPushedBack){
+				for(int i = 0; i < behaviorsToDeactivate.Count;i++){
+							behaviorsToDeactivate[i].enabled = false;
+				}
+				if(gameObject.transform.position.x < player.transform.position.x){
+					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
+					this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);
+				}else{
+					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
+					this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
+				}
+				StartCoroutine("StopKnockback",.5f);
 			}else{
-				player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
-				this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
+				if(gameObject.transform.position.x < player.transform.position.x){
+					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
+				}else{
+					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
+				}
+				Invoke("ClankReturnDelay",.2f);
 			}
-			StartCoroutine("StopKnockback",.5f);
 		}
 	}
+	void ClankReturnDelay(){
+		takingDamage = false;
 
+	}
 
 	void ArmorKnockoff(){
 		armoredEnemy = false;

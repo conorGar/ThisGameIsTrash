@@ -19,6 +19,7 @@ public class Ev_Enemy_Porcupine2 : MonoBehaviour
 
 
 		gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
+		gameObject.GetComponent<RandomDirectionMovement>().StopAllCoroutines();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
 
