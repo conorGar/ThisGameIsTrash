@@ -5,11 +5,11 @@ using UnityEngine;
 public class Ev_SpecialItem : MonoBehaviour {
 
 	// Use this for initialization
-	public tk2dCamera mainCamera;
 	public GameObject player;
 	public GameObject upgradeUnlockDisplay;
 	public Sprite unlockSprite;
 	public bool playerAutoMoveToward;
+    public GlobalVariableManager.UPGRADES upgrade_type;
 
 	Vector3 smoothVelocity = Vector3.zero;
 	bool playerIsMovingToward;
@@ -62,7 +62,8 @@ public class Ev_SpecialItem : MonoBehaviour {
 	void PickUp(){
 		//yield return new WaitForSeconds(2f);
 		upgradeUnlockDisplay.SetActive(true);
-		//player.GetComponent<ThrowTrash>().enabled = true;
+        // Unlock the Special Item.
+        GlobalVariableManager.Instance.UPGRADES_UNLOCKED |= upgrade_type;
 		gameObject.SetActive(false);
 	}
 

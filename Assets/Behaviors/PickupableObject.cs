@@ -55,7 +55,7 @@ public class PickupableObject : MonoBehaviour
 	{	
 		if(player != null && Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
 			//Debug.Log("within distance" + GlobalVariableManager.Instance.CARRYING_SOMETHING);
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING && GlobalVariableManager.Instance.PLAYER_CAN_MOVE){//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING && GlobalVariableManager.Instance.PLAYER_CAN_MOVE && GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)){//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'
 				Debug.Log("PickUpable object...picked up");
 				movePlayerToObject = true;
 				PickUp();

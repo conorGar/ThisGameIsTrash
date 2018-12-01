@@ -64,6 +64,14 @@ public class GlobalVariableManager : UserDataItem {
 
     public List<PinDefinition> shopPins = new List<PinDefinition> { null, null, null };
 
+    public enum UPGRADES
+    {
+        NONE = 0,
+        GLOVES = 1<<0
+    }
+
+    public UPGRADES UPGRADES_UNLOCKED = UPGRADES.NONE;
+
     public enum TUTORIALPOPUPS{
 
 	NONE = 		0,
@@ -242,6 +250,7 @@ public class GlobalVariableManager : UserDataItem {
         json_data["CURSEVALUE"] = CURSEVALUE;
         json_data["MOMONEYVALUE"] = MOMONEYVALUE;
         json_data["PROGRESS_LV"] = PROGRESS_LV;
+        json_data["UPGRADES"] = (uint)UPGRADES_UNLOCKED;
 
         json_data["TUT_POPUPS_SHOWN"] = (uint)TUT_POPUPS_SHOWN;
 
@@ -275,6 +284,7 @@ public class GlobalVariableManager : UserDataItem {
         CURSEVALUE = json_data["CURSEVALUE"].AsInt;
         MOMONEYVALUE = json_data["MOMONEYVALUE"].AsInt;
         PROGRESS_LV = json_data["PROGRESS_LV"].AsInt;
+        UPGRADES_UNLOCKED = (UPGRADES)json_data["UPGRADES"].AsInt;
 
         TUT_POPUPS_SHOWN = (TUTORIALPOPUPS)json_data["TUT_POPUPS_SHOWN"].AsInt;
     }
@@ -282,16 +292,21 @@ public class GlobalVariableManager : UserDataItem {
     // helpers
     public bool IsPinDiscovered(PIN p_type)
     {
-        return (GlobalVariableManager.Instance.PINS_DISCOVERED & p_type) == p_type;
+        return (PINS_DISCOVERED & p_type) == p_type;
     }
 
     public bool IsPinEquipped(PIN p_type)
     {
-        return (GlobalVariableManager.Instance.PINS_EQUIPPED & p_type) == p_type;
+        return (PINS_EQUIPPED & p_type) == p_type;
     }
 
     public bool IsWorldUnlocked(WORLD world_type)
     {
-		return (GlobalVariableManager.Instance.WORLDS_UNLOCKED & world_type) == world_type;
+		return (WORLDS_UNLOCKED & world_type) == world_type;
+    }
+
+    public bool IsUpgradeUnlocked(UPGRADES upgrade_type)
+    {
+        return (UPGRADES_UNLOCKED & upgrade_type) == upgrade_type;
     }
 }
