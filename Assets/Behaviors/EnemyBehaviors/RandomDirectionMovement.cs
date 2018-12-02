@@ -20,7 +20,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	int turnOnce = 0;
 
 	// Use this for initialization
-	void OnEnable () {
+	protected void OnEnable () {
 		//walkCloud  = GameObject.Find("effect_WalkCloud");
 		startingScale = gameObject.transform.localScale;
 		anim = GetComponent<tk2dSpriteAnimator>();
@@ -28,7 +28,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (moving && !anim.IsPlaying("hit")) {
                 transform.position += direction * movementSpeed * Time.deltaTime;
@@ -40,6 +40,8 @@ public class RandomDirectionMovement : MonoBehaviour {
                     }
                     else if (!anim.IsPlaying("run")) {
                         anim.Play("run");
+						Debug.Log("RDM sets animation" + anim.CurrentClip.name);
+
                     }
                 }
                 else {
@@ -51,6 +53,8 @@ public class RandomDirectionMovement : MonoBehaviour {
                     else {
                         if (!anim.IsPlaying("run")) {
                             anim.Play("run");
+							Debug.Log("RDM sets animation" + anim.CurrentClip.name);
+
                         }
                     }
                 }
@@ -79,6 +83,8 @@ public class RandomDirectionMovement : MonoBehaviour {
 		moving = false;
 		if(anim.GetClipByName("idle") != null){
 			anim.Play("idle");
+			Debug.Log("RDM sets animation" + anim.CurrentClip.name);
+
 		}
 		//if(anim.IsPlaying("run")){
 			//anim.Play("idleR");

@@ -59,7 +59,7 @@ public class GUI_DayDisplay : MonoBehaviour
 		}else{
 			yield return new WaitUntil(() => truck.transform.localPosition.x > -1.3f);
 		}
-
+		Debug.Log("Day display got to this point...");
 		phase = 2;
 		StartCoroutine("TruckLeave");
 		//yield return new WaitForSeconds(1.5f);

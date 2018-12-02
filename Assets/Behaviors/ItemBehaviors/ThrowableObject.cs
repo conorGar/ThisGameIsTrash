@@ -56,12 +56,14 @@ public class ThrowableObject : PickupableObject {
                     for (int i = 0; i < behaviorsToStop.Count; i++) {
                         behaviorsToStop[i].enabled = true;
                     }
+
                     gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
                     gameObject.GetComponent<IsometricSorting>().enabled = true;
                     gameObject.GetComponent<CannotExitScene>().enabled = false;
                     if (physicalCollision != null)
                         physicalCollision.enabled = true;
 
+					LandingEvent();
                 }else{
                 	if(myShadow !=null){
                 		myShadow.transform.position = new Vector2(gameObject.transform.position.x,landingY); // shadow follows body
@@ -172,6 +174,9 @@ public class ThrowableObject : PickupableObject {
 				gameObject.GetComponent<CannotExitScene>().enabled = false;
 	}
 
+	protected virtual void LandingEvent(){
+		//nothing for base
+	}
 
 
 

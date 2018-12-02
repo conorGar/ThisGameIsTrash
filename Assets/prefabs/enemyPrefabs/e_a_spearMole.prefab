@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 114351243890378076}
   - component: {fileID: 114924262334039512}
   - component: {fileID: 61085258698728486}
-  - component: {fileID: 114505464084901080}
   - component: {fileID: 114823792153802328}
   - component: {fileID: 114404446273759330}
   - component: {fileID: 114843033388432866}
@@ -49,9 +48,10 @@ GameObject:
   - component: {fileID: 50843239995917258}
   - component: {fileID: 114789237316039340}
   - component: {fileID: 114155921973959784}
+  - component: {fileID: 114494172571047146}
   m_Layer: 9
   m_Name: e_a_spearMole
-  m_TagString: Untagged
+  m_TagString: enemy_armoredSpearMole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +84,22 @@ GameObject:
   - component: {fileID: 199720640834641010}
   m_Layer: 0
   m_Name: enemyWalkTrail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1886813148817060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4546235936817974}
+  - component: {fileID: 61281329975881570}
+  m_Layer: 0
+  m_Name: wanderBounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,11 +143,24 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1394941622026188}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.96, y: 0.38, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalPosition: {x: -1.19, y: -1.32, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4671191594251802}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4546235936817974
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1886813148817060}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.51, y: -0.44, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4671191594251802}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4671191594251802
 Transform:
@@ -141,12 +170,13 @@ Transform:
   m_GameObject: {fileID: 1355490609600872}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.331823, y: 4.6139855, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4546182400038260}
   - {fileID: 4208442766029598}
   - {fileID: 4808668736196076}
   - {fileID: 4906160836712270}
+  - {fileID: 4546235936817974}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -260,7 +290,32 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.68, y: 1.95}
+  m_Size: {x: 1.34, y: 1.31}
+  m_EdgeRadius: 0
+--- !u!61 &61281329975881570
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1886813148817060}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 19.25, y: 3.65}
   m_EdgeRadius: 0
 --- !u!61 &61385949047048344
 BoxCollider2D:
@@ -329,6 +384,7 @@ MonoBehaviour:
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198059248471040828}
+  returnToPreviousWhenFar: 0
 --- !u!114 &114162712783748792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,6 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clankSound: {fileID: 8300000, guid: 1073f68275895f6429798e5be44021af, type: 3}
   parentsETD: {fileID: 114539248192695394}
+  pushBack: 1
 --- !u!114 &114278261270486922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -355,6 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clankSound: {fileID: 8300000, guid: 1073f68275895f6429798e5be44021af, type: 3}
   parentsETD: {fileID: 114539248192695394}
+  pushBack: 1
 --- !u!114 &114351243890378076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -395,7 +453,7 @@ MonoBehaviour:
   topLimit: 0
   botLimit: 0
   globalPos: 0
---- !u!114 &114505464084901080
+--- !u!114 &114494172571047146
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -403,13 +461,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1355490609600872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7465d3cf6dc723459be3e518ac51b0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7145ca8301081f84b8f5d9a7a1663aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 5
-  minMoveTime: 1
-  maxMoveTime: 3
+  movementSpeed: 2
+  minMoveTime: 0.6
+  maxMoveTime: 1.6
   walkPS: {fileID: 198059248471040828}
+  wanderZone: {fileID: 61281329975881570}
 --- !u!114 &114539248192695394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -421,7 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289acecd8c5dec64dbebc899bcdcf860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armoredEnemy: 1
+  armoredEnemy: 0
   moveWhenHit: 1
   resetFacingAfterHit: 0
   secretHider: 0
@@ -440,13 +499,13 @@ MonoBehaviour:
     wrapMode: 0
   myDeadBodyName: mole
   respawnEnemy: 0
-  hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
-  hitSqueal: {fileID: 0}
-  bounce: {fileID: 0}
   armoredEnemyHitSfx: {fileID: 0}
   bossEnemy: 0
   IAmParentObj: 0
   childEnemy: {fileID: 0}
+  hitSound: 0
+  hitSqueal: 0
+  bounce: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 0}
   gar_rec: {fileID: 0}
@@ -491,10 +550,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noticeThreshold: 5
+  noticeThresholdY: 2
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
   noticeSfx: {fileID: 0}
   spearCollision: {fileID: 1942738747760542}
+  armoredVersion: 0
 --- !u!114 &114843033388432866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -536,6 +597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 1
+  destroyOnTileCollision: 0
 --- !u!198 &198059248471040828
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -644,7 +706,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1045,9 +1107,9 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0.6
     donutRadius: 0.2
-    m_Position: {x: -0.92, y: -1.56, z: 0}
+    m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 0.34, y: 0.13, z: 1}
+    m_Scale: {x: 0.62, y: 0.13, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0

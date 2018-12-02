@@ -53,6 +53,7 @@ public class FollowPlayer : MonoBehaviour {
 					this.gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
 				}
 				gameObject.GetComponent<FollowPlayerAfterNotice>().enabled = true;
+				ObjectPool.Instance.GetPooledObject("effect_confused");
 				this.enabled = false;
             }
         }
