@@ -58,39 +58,23 @@ public class Ev_Scrap : MonoBehaviour {
 
 
 
-		/*if(isFollowingPlayer){
-			gameObject.transform.localPosition = Vector3.zero;
-		}else if(canBeGrabbed){
-			if(Mathf.Abs(GameObject.FindGameObjectWithTag("Player").transform.position.x - gameObject.transform.position.x) < 1 && Mathf.Abs(GameObject.FindGameObjectWithTag("Player").transform.position.y - gameObject.transform.position.y) < 1){
-				gameObject.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
-				isFollowingPlayer = true;
-			}
-		}*/
 
 	}
 	void OnTriggerEnter2D(Collider2D collision){
-		/*if(!isFollowingPlayer){
-			//gameObject.transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
-			isFollowingPlayer = true;
-		}else if(isFollowingPlayer && canBeGrabbed){
-            // TODO: Double check which pin this was supposed to be.  It was index 20.
-			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 17 || (GlobalVariableManager.Instance.IsPinEquipped(PIN.HUNGRYFORMORE) && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 19)){
-				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1]++;
-
-			}
-			isFollowingPlayer = false;
-			if(canBeGrabbed){
-				meleeMeter.GetComponent<Ev_CurrentWeapon>().UpdateMelee();
-				Destroy(gameObject);
-				StartCoroutine("Kill");
-			}
-		}*/
+		
 		if(canBeGrabbed && collision.gameObject.tag == "Player"){
 				SoundManager.instance.PlaySingle(pickUp);
 				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1]++;
 				meleeMeter.GetComponent<Ev_CurrentWeapon>().UpdateMelee();
+				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.COUNTSCRAPULA)){
+					int healChance = Random.Range(0,16);
+					Debug.Log("count scrapula heal attempt: " + healChance);
+					if(healChance == 5){
+						collision.gameObject.GetComponent<PlayerTakeDamage>().Heal(1);
+					}
+				}
 				gameObject.SetActive(false);
-				//StartCoroutine("Kill");
+
 			}
 	}
 

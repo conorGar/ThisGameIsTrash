@@ -21,6 +21,8 @@ public class FollowPlayer : MonoBehaviour {
 	}
 
 	void OnEnable(){
+		player = GameObject.FindGameObjectWithTag("Player").transform; //needs to be in enable because of Dirty Decoy
+
 		if(chasePS != null)
 			chasePS.Play();
 	}
