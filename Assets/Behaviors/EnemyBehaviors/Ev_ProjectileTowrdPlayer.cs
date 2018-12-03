@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 
-	GameObject player;
+	
+
 	Vector2 playerPos;
 	Vector2 movementDir;
 	public ParticleSystem throwPS;
 	[HideInInspector]
 	public float speed = 5;
+	[HideInInspector]
+	public GameObject player; //given usually by whatever is spawning this.
 	// Use this for initialization
 	void Start () {
 		throwPS.Play();
@@ -25,7 +28,7 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 		throwPS.Play();
 		if(player == null){
 
-		player = GameObject.FindGameObjectWithTag("Player");
+		//player = GameObject.FindGameObjectWithTag("Player");
 		}
 		StartCoroutine("Delay");//Delay needed because this enable() was being ativated BEFORE the rock's new postion(back to thrower) was being set
 

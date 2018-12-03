@@ -5,11 +5,13 @@ public class Ev_Enemy_SpearMole : FollowPlayerAfterNotice
 {
 
 	public GameObject spearCollision;
-
+	public bool armoredVersion;
 	ParticleSystem.EmissionModule myEmission;
 
 	void OnEnable(){
-		spearCollision.SetActive(false);
+		if(!armoredVersion){
+			spearCollision.SetActive(false);
+		}
 		myEmission =gameObject.GetComponent<FollowPlayer>().chasePS.emission;
 		myEmission.rateOverTime = 5f;
 	}

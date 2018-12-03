@@ -16,6 +16,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 	public AudioClip hurt;
 	public AudioClip finalHit;
 	public AudioClip deathSound;
+	public AudioClip healSound;
 	[HideInInspector]
 	public GameObject currentlyCarriedObject; // set by pickupableObject.cs for use when dropping at death
 	int maxHP;
@@ -143,6 +144,18 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 	}
 
+	public void Heal(int healAmnt){
+		if(currentHp + healAmnt < maxHP){
+			currentHp += healAmnt;
+		}else{
+			currentHp = maxHP;
+		}
+		SoundManager.instance.PlaySingle(healSound);
+		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
+
+	}
+
+
 	IEnumerator Death(){
         // Trigger Respawn State.
         GameStateManager.Instance.PushState(typeof(RespawnState));
@@ -226,81 +239,5 @@ public class PlayerTakeDamage : MonoBehaviour {
         GameStateManager.Instance.PopState();
         gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";//return player to the gameplay layer
     }
-    /*
-	IEnumerator Death(){
-		
-
-		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
-		DropTrash();
-		GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION = gameObject.transform.position;
-		GlobalVariableManager.Instance.GARBAGE_HAD = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0];
-
-		//truck comes to pick player up
-		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
-		gameObject.GetComponent<BoxCollider2D>().enabled = false;
-	
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-		CamManager.Instance.mainCam.enabled = false;
-		//GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().WhiteFlash();
-		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
-			yield return new WaitForSeconds(.5f);
-			gameObject.GetComponent<PinFunctionsManager>().DevilsDeal();
-			yield return new WaitForSeconds(2f);
-			fadeHelper.GetComponent<Ev_FadeHelper>().EndOfDayFade();
-		}else{
-		yield return new WaitForSeconds(1f);
-		fadeHelper.GetComponent<Ev_FadeHelper>().BlackFade(); //fade to black
-		GameObject truck = objectPool.GetComponent<ObjectPool>().GetPooledObject("GarbageTruck",new Vector3(gameObject.transform.position.x - 20, gameObject.transform.position.y,0f));
-		truck.GetComponent<Ev_SmallTruck>().ReturnToDumpster();
-
-		yield return new WaitForSeconds(1.5f);
-		Debug.Log("Death Pickup - Phase 1");
-		//-----------Resetting of needed values----------------//
-		roomManager.GetComponent<RoomManager>().currentRoom.DeactivateRoom();
-		gameObject.transform.position = new Vector3(0f,-3f,0f); //Start at Beginning of world
-		truck.transform.position = new Vector3(-15f,-3f,0f);
-		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
-		currentCam.transform.position = new Vector3(0f,0f,-10f);
-		roomManager.GetComponent<RoomManager>().Restart();
-
-
-		yield return new WaitForSeconds(.3f);
-
-		Debug.Log("Death Pickup - Phase 2");
-		fadeHelper.GetComponent<Ev_FadeHelper>().FadeIn();
-		//gameObject.GetComponent<tk2dSprite>().enabled = true;//disabled by Ev_SmallTruck
-		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-
-		yield return new WaitForSeconds(.5f);
-		Debug.Log("Death Pickup - Phase 3");
-		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
-		currentHp = GlobalVariableManager.Instance.Max_HP;
-		currentlyTakingDamage = false;
-		if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] > 0){
-			droppedTrashPile.SetActive(true);
-			droppedTrashPile.transform.position = GlobalVariableManager.Instance.DROPPED_TRASH_LOCATION;
-		}
-		GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] = 0;
-		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
-				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 0;//reset scrap value
-				gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();//just used to update weapon HUD in this scenario
-		}else{
-			gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();
-		}
-		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
-		trashCollectedDisplay.GetComponent<GUI_TrashCollectedDisplay>().UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-		gameObject.GetComponent<BoxCollider2D>().enabled = true;
-
-		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
-		
-		gameObject.GetComponent<EightWayMovement>().enabled = true;
-		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
-		//----------------------------------------------------//
-		yield return new WaitForSeconds(.5f);
-		truck.SetActive(false);
-		fadeHelper.GetComponent<Ev_FadeHelper>().fadeBack = false;
-		}
-
-	}*/
+   
 }

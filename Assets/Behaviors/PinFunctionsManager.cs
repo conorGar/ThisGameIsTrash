@@ -19,10 +19,17 @@ public class PinFunctionsManager : MonoBehaviour {
 	public GameObject devil;
 	public Ev_CurrentWeapon currentWeaponDisplay;
 	public GameObject spinAttack;
+	public GameObject decoyObject;
 	//public PinManager pinManager;
 	public Sprite[] displaySprites;
 	Sprite displaySprite;
 	int displayHudCalledAgain;
+
+
+	GameObject decoyInstance;
+
+	int dashCounter = 0;
+	INPUTACTION dashKey;
 
 	//LinkToTheTrash
 	INPUTACTION heldKey;
@@ -33,6 +40,13 @@ public class PinFunctionsManager : MonoBehaviour {
 			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.BULKYBAG)){
 				GlobalVariableManager.Instance.BAG_SIZE += 2; //subtracted again at results.cs
 			}
+
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DIRTYDECOY)){
+				decoyInstance = Instantiate(decoyObject,gameObject.transform.position,Quaternion.identity); //ask if this is better since this object isnt needed unless has the pin?
+				decoyObject.SetActive(false);
+				InvokeRepeating("DirtyDecoy",Random.Range(7f,15f),25);
+			}
+
 		}
 	}
 
@@ -44,6 +58,47 @@ public class PinFunctionsManager : MonoBehaviour {
 			gameObject.GetComponent<MeleeAttack>().cantAttack = false;
 			gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
 
+		}
+
+
+	}
+
+	public IEnumerator DumpsterDash(INPUTACTION givenKey){
+		if(dashCounter == 0){
+			Debug.Log("Dumpster Dash - 0");
+			dashCounter = 1;
+			dashKey = givenKey;
+			yield return new WaitForSeconds(.2f);
+			if(dashCounter == 1){ //after a breif period if key isn't pressed again it resets
+				dashCounter = 0;
+			}
+		}else if(dashCounter == 1){
+			Debug.Log("Dumpster Dash - 1");
+
+			if(givenKey == dashKey){
+				//-------------Dash-----------------//
+				dashCounter = 2;
+				Debug.Log("Dumpster Dash - 2");
+
+				gameObject.GetComponent<EightWayMovement>().enabled = false; // I know we dont wanna do stuff like this, just felt like for this instance it was more appropriate doing this than creating a gamestate...?
+				ObjectPool.Instance.GetPooledObject("effect_enemyLand",new Vector2(gameObject.transform.position.x,gameObject.transform.position.y-1));
+				if(dashKey == INPUTACTION.MOVELEFT){
+					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-30f,0f),ForceMode2D.Impulse);
+				}else if(dashKey == INPUTACTION.MOVERIGHT){
+					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(30f,0f),ForceMode2D.Impulse);
+				}else if(dashKey == INPUTACTION.MOVEDOWN){
+					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,-30f),ForceMode2D.Impulse);
+				}else if(dashKey == INPUTACTION.MOVEUP){
+					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,30f),ForceMode2D.Impulse);
+				}
+				yield return new WaitForSeconds(.1f);
+				dashCounter = 0;
+				gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+				gameObject.GetComponent<EightWayMovement>().enabled = true;
+
+			}else{
+				dashCounter = 0; //reset if press different direction
+			}
 		}
 	}
 
@@ -74,6 +129,15 @@ public class PinFunctionsManager : MonoBehaviour {
 
 	}
 
+	void DirtyDecoy(){
+		Debug.Log("Dirty Decoy Activate");
+		decoyInstance.SetActive(false);
+		decoyInstance.transform.position = gameObject.transform.position;
+		decoyInstance.SetActive(true);
+		//decoyInstance.transform.parent = null;
+
+	}
+
 	public void HungryForMore(){
 		WorldManager.Instance.amountTrashHere += 5;
 		Sprite mySprite = GetSprite("pin_hungry");
@@ -89,6 +153,22 @@ public class PinFunctionsManager : MonoBehaviour {
 	public void FaithfulWeapin(){
 		currentWeaponDisplay.UpdateMelee();
 	}
+
+	public void SneakyScrapper(){
+		Debug.Log("Sneaky Scrapper Activated");
+		GlobalVariableManager.Instance.IS_HIDDEN = true;
+		gameObject.GetComponent<EightWayMovement>().myLegs.GetComponent<tk2dSprite>().color = new Color(1,1,1,.5f);
+		gameObject.GetComponent<tk2dSprite>().color = new Color(1,1,1,.5f);
+	}
+	public void SneakyScrapperReturn(){
+		Debug.Log("Sneaky Scrapper De-Activated");
+
+		gameObject.GetComponent<EightWayMovement>().myLegs.GetComponent<tk2dSprite>().color = new Color(1,1,1,1);
+
+		gameObject.GetComponent<tk2dSprite>().color = new Color(1,1,1,1);
+		GlobalVariableManager.Instance.IS_HIDDEN = false;
+	}
+
 
 	public IEnumerator SpinAttack(INPUTACTION givenKey){ //called at Swing() in 'MeleeAttack.cs'
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

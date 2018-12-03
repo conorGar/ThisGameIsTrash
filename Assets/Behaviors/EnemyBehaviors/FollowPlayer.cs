@@ -21,6 +21,8 @@ public class FollowPlayer : MonoBehaviour {
 	}
 
 	void OnEnable(){
+		player = GameObject.FindGameObjectWithTag("Player").transform; //needs to be in enable because of Dirty Decoy
+
 		if(chasePS != null)
 			chasePS.Play();
 	}
@@ -53,6 +55,7 @@ public class FollowPlayer : MonoBehaviour {
 					this.gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
 				}
 				gameObject.GetComponent<FollowPlayerAfterNotice>().enabled = true;
+				ObjectPool.Instance.GetPooledObject("effect_confused");
 				this.enabled = false;
             }
         }

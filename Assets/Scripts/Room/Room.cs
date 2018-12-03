@@ -22,7 +22,10 @@ public class Room : MonoBehaviour
 
 
 	int waifuChance;
-    private List<GameObject> enemies;
+	[HideInInspector]
+    public List<GameObject> enemies; //needs to be public to be accessible for things that change the behavior of enemies(Dirty Decoy, for example)
+
+
     private List<GameObject> friends;
 
     public List<GameObject> bosses;

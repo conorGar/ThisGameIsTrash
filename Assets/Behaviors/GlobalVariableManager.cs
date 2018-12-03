@@ -18,7 +18,7 @@ public class GlobalVariableManager : UserDataItem {
         get { return (PIN)pinsDiscoveredValue; }
     }
 
-    private ulong pinsEquippedValue = (ulong)(PIN.NONE);
+    private ulong pinsEquippedValue = (ulong)(PIN.DIRTYDECOY);//(PIN.NONE);
     public PIN PINS_EQUIPPED
     {
         set { pinsEquippedValue = (ulong)value; }
@@ -48,7 +48,7 @@ public class GlobalVariableManager : UserDataItem {
 	public int STAR_POINTS = 0;
 
 	public int DAY_NUMBER = 1;
-	public int IS_HIDDEN = 0;
+	public bool IS_HIDDEN = false;
 	public float MASTER_MUSIC_VOL = .5f;
 	public float MASTER_SFX_VOL = .5f;
 	public int MENU_SELECT_STAGE = 1;

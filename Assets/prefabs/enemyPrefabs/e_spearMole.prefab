@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1715004810931272}
   m_IsPrefabParent: 1
+--- !u!1 &1355402293291826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4858831313523900}
+  - component: {fileID: 61734991252071062}
+  m_Layer: 0
+  m_Name: wandrBounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1485748716646234
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,7 +58,6 @@ GameObject:
   - component: {fileID: 114766353726826246}
   - component: {fileID: 61110314396677700}
   - component: {fileID: 61747323131722756}
-  - component: {fileID: 114474204628714580}
   - component: {fileID: 114636667801948816}
   - component: {fileID: 114924733267092366}
   - component: {fileID: 114194065566079508}
@@ -50,6 +65,7 @@ GameObject:
   - component: {fileID: 114745645828691684}
   - component: {fileID: 50997994627135144}
   - component: {fileID: 114416602313476124}
+  - component: {fileID: 114832569406772972}
   m_Layer: 9
   m_Name: e_spearMole
   m_TagString: enemy_spearMole
@@ -111,11 +127,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1715004810931272}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.156105, y: -3.7852147, z: 0}
+  m_LocalPosition: {x: 127.780594, y: 74.98768, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4204505055763710}
   - {fileID: 4456894555070022}
+  - {fileID: 4858831313523900}
   - {fileID: 4845603305284998}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -141,6 +158,19 @@ Transform:
   m_GameObject: {fileID: 1796316841233936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.41, y: 0, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4231922287758494}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4858831313523900
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355402293291826}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.1, y: -0.5, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4231922287758494}
@@ -257,6 +287,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.08, y: 2.63}
   m_EdgeRadius: 0
+--- !u!61 &61734991252071062
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355402293291826}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 21.52, y: 10.61}
+  m_EdgeRadius: 0
 --- !u!61 &61747323131722756
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -362,21 +417,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingObject: 1
   sortBuddies: []
---- !u!114 &114474204628714580
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1715004810931272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7465d3cf6dc723459be3e518ac51b0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 5
-  minMoveTime: 1
-  maxMoveTime: 3
-  walkPS: {fileID: 198037785932892104}
 --- !u!114 &114636667801948816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,7 +494,7 @@ MonoBehaviour:
   timeDrop: {fileID: 0}
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
-  myShadow: {fileID: 0}
+  myShadow: {fileID: 1743829772922610}
   returnAniName: idle
   dontSpawnBody: 0
   behaviorsToDeactivate: []
@@ -479,6 +519,22 @@ MonoBehaviour:
   library: {fileID: 114356930639783786, guid: 3c711b45769ffb44abeb5545af2815a8, type: 2}
   defaultClipId: 0
   playAutomatically: 1
+--- !u!114 &114832569406772972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1715004810931272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7145ca8301081f84b8f5d9a7a1663aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 3
+  minMoveTime: 0.6
+  maxMoveTime: 1.6
+  walkPS: {fileID: 0}
+  wanderZone: {fileID: 61734991252071062}
 --- !u!114 &114924733267092366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -491,10 +547,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noticeThreshold: 5
+  noticeThresholdY: 0
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
   noticeSfx: {fileID: 0}
   spearCollision: {fileID: 1796316841233936}
+  armoredVersion: 0
 --- !u!198 &198037785932892104
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3943,7 +4001,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1780242901
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 17
   m_Sprite: {fileID: 21300000, guid: 66af31ef3a546c648ad6237d3b03a835, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.816}
   m_FlipX: 0

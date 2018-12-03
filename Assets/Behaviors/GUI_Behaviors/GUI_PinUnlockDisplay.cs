@@ -59,6 +59,6 @@ public class GUI_PinUnlockDisplay : MonoBehaviour {
 	public void SetValues(string thisPinTitle, string pinDescription, Sprite pinSprite){
 		pinTitle.GetComponent<TextMeshProUGUI>().text = thisPinTitle;
 		myPinDescription.GetComponent<TextMeshProUGUI>().text = pinDescription;
-		pinImage.GetComponent<Image>().sprite = pinSprite;
+		pinImage.GetComponent<SpriteRenderer>().sprite = pinSprite;
 	}
 }

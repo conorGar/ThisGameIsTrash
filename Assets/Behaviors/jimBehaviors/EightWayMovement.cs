@@ -73,6 +73,11 @@ public class EightWayMovement : MonoBehaviour {
                             gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
                     }
                 }
+
+                if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVELEFT);
+                }
+
                 directionFacing = 2;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)) {
@@ -94,6 +99,10 @@ public class EightWayMovement : MonoBehaviour {
                     }
 
                 }
+				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVERIGHT);
+                }
+
                 directionFacing = 1;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)) {
@@ -109,8 +118,9 @@ public class EightWayMovement : MonoBehaviour {
                             gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
                     }
                 }
-                //walkCloudPS.transform.localScale = new Vector3(2.42f,2.42f,2.42f); 
-                //walkCloudPS.transform.localPosition = new Vector3(2.5f,-3.3f,0f);
+				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEUP);
+                }
                 directionFacing = 3;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)) {
@@ -125,14 +135,16 @@ public class EightWayMovement : MonoBehaviour {
                             gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
                     }
                 }
-                //walkCloudPS.transform.localScale = new Vector3(2.42f,2.42f,2.42f); 
-                //walkCloudPS.transform.localPosition = new Vector3(2.5f,1.2f,0f);
+				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEDOWN);
+                }
                 directionFacing = 4;
             }
 
             //Diagonals
 
             if (inputX != 0 && inputY != 0) {
+            	
                 if (momentum != 4) {
                     momentum = 4f;
               
@@ -155,29 +167,7 @@ public class EightWayMovement : MonoBehaviour {
                     }
                 }
 
-                if (movement.y == 1 && movement.x == 1) {
-                    /*if(directionFacing == 2){
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimTurn",false);
-                        StartCoroutine ("TurnDelay");
-                     }else{
-                        /*if(setAniOnce == 0){
-                        setAniOnce = 1;
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
-                        }*/
-                    //}
-                }
-
-                if (movement.y == -1 && movement.x == -1) {
-                    /*if(setAniOnce == 0){
-                        setAniOnce = 1;
-                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkUp",false);
-                    }*/
-                }
-
-                if (movement.y == -1 && movement.x == 1) {
-
-                    //gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalkDown",false);
-                }
+               
             }
             else {
                 if (isDiagonal && !noDelayStarted) {
@@ -185,38 +175,7 @@ public class EightWayMovement : MonoBehaviour {
                     noDelayStarted = true;
                 }
                 else if (anim != null) {
-                    /*
-                    //left/right/up/down
-                    if (movement.x == -1) {
-                    /*if(directionFacing == 1){
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimTurn",false);
-                        StartCoroutine (TurnDelay());
-
-                     }else{
-                        //gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
-                     }*/
-                    //   }
-                    /*
-                                   if (movement.x == 1) {
-                                   if(directionFacing == 1){
-                                       gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimTurn",false);
-                                       StartCoroutine ("TurnDelay");
-
-                                    }else{
-                                       gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
-                                    }
-                                   }
-
-
-                                   if (movement.y == 1) {
-                                       gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
-                                   }
-
-
-                                   if (movement.y == -1) {
-                                       anim.Play("ani_jimWalkDown");
-                                   }
-                                   */
+                    
                     if (movement.x == 0 && movement.y == 0) {
                         walkCloudPS.GetComponent<ParticleSystem>().Stop();
                         //legAnim.Play("stop");
@@ -249,8 +208,14 @@ public class EightWayMovement : MonoBehaviour {
                         }
 
                         //not instant stop
-                        if (momentum > 0)
+                        if (momentum > 0){
                             momentum = momentum - .2f;
+                        }else{
+							if(GlobalVariableManager.Instance.IS_HIDDEN == false && GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER)){
+								gameObject.GetComponent<PinFunctionsManager>().SneakyScrapper();
+							}
+
+                        }
                     }
                     else if (momentum != 4) {
                         momentum = 4f;
@@ -259,6 +224,10 @@ public class EightWayMovement : MonoBehaviour {
                         }else{
                        			InvokeRepeating("SpawnClouds", .2f, .2f);
                         }
+						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER) && GlobalVariableManager.Instance.IS_HIDDEN){ //put here for function with 'Sneaky Scrapper' function, not sure if this will work with later sneaking functions...
+            				gameObject.GetComponent<PinFunctionsManager>().SneakyScrapperReturn();
+            				Debug.Log("got here- sneaky scrapper");
+            			}
                         walkCloudPS.SetActive(true); //just have this here so it only happens once
                         walkCloudPS.GetComponent<ParticleSystem>().Play();
                     }
@@ -345,6 +314,13 @@ public class EightWayMovement : MonoBehaviour {
     public void UpdateSpeed(float updatedSpeed){
     	speed += updatedSpeed;
     }
+
+    public void Dash(){ //activated in Pin Functions Manager
+    	if(directionFacing == 1){
+    		
+    	}
+    }
+
 
 	IEnumerator TurnDelay() {
         yield return new WaitForSeconds (.1f);
