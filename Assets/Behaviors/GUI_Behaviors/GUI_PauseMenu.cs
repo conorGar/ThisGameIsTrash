@@ -42,6 +42,8 @@ public class GUI_PauseMenu : MonoBehaviour {
         endDayPopup.RegisterCloseEvent(OnPopupCloseEvent);
         endDayPopup.RegisterOptionEvent(OnPopupOptionsEvent);
 
+        player = GameObject.Find("Jim");
+
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }
 
