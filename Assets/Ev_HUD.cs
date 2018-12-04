@@ -5,24 +5,24 @@ using UnityEngine;
 public class Ev_HUD : MonoBehaviour {
     public void Start()
     {
-        GameStateManager.Instance.RegisterEnterEvent(typeof(RespawnState), OnEnterRespawnState);
-        GameStateManager.Instance.RegisterLeaveEvent(typeof(RespawnState), OnLeaveRespawnState);
+        GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }
 
     public void OnDestroy()
     {
-        GameStateManager.Instance.UnregisterEnterEvent(typeof(RespawnState), OnEnterRespawnState);
-        GameStateManager.Instance.UnregisterLeaveEvent(typeof(RespawnState), OnLeaveRespawnState);
+        GameStateManager.Instance.UnregisterChangeStateEvent(OnChangeState);
     }
 
-    void OnEnterRespawnState()
+    void OnChangeState(System.Type stateType, bool isEntering)
     {
-        GetComponent<CanvasGroup>().alpha = 0;
-    }
-
-    void OnLeaveRespawnState()
-    {
-        GetComponent<CanvasGroup>().alpha = 1;
+        if (isEntering) {
+            if (stateType == typeof(RespawnState))
+                GetComponent<CanvasGroup>().alpha = 0;
+        }
+        else {
+            if (stateType == typeof(RespawnState))
+                GetComponent<CanvasGroup>().alpha = 1;
+        }
     }
 
     public void Create(GameObject go){

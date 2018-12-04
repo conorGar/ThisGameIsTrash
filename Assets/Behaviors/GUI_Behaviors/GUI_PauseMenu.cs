@@ -42,9 +42,7 @@ public class GUI_PauseMenu : MonoBehaviour {
         endDayPopup.RegisterCloseEvent(OnPopupCloseEvent);
         endDayPopup.RegisterOptionEvent(OnPopupOptionsEvent);
 
-        GameStateManager.Instance.RegisterEnterEvent(typeof(PauseMenuState), OnEnterPauseMenuState);
-        GameStateManager.Instance.RegisterLeaveEvent(typeof(PauseMenuState), OnLeavePauseMenuState);
-        GameStateManager.Instance.RegisterEnterEvent(typeof(EndDayState), OnEnterEndDayState);
+        GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }
 
     private void OnDestroy()
@@ -53,9 +51,7 @@ public class GUI_PauseMenu : MonoBehaviour {
         endDayPopup.UnregisterCloseEvent(OnPopupCloseEvent);
         endDayPopup.UnregisterOptionEvent(OnPopupOptionsEvent);
 
-        GameStateManager.Instance.UnregisterEnterEvent(typeof(PauseMenuState), OnEnterPauseMenuState);
-        GameStateManager.Instance.UnregisterLeaveEvent(typeof(PauseMenuState), OnLeavePauseMenuState);
-        GameStateManager.Instance.UnregisterEnterEvent(typeof(EndDayState), OnEnterEndDayState);
+        GameStateManager.Instance.UnregisterChangeStateEvent(OnChangeState);
     }
 
     void OnPopupCloseEvent()
@@ -73,26 +69,27 @@ public class GUI_PauseMenu : MonoBehaviour {
         }
     }
 
-    void OnEnterPauseMenuState()
+    void OnChangeState(System.Type stateType, bool isEntering)
     {
-        gameObject.SetActive(true);
-        SoundManager.instance.PlaySingle(paperSlide);
-		SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume/2;
-        Time.timeScale = 0;
-    }
-
-    void OnLeavePauseMenuState()
-    {
-        gameObject.SetActive(false);
-        SoundManager.instance.PlaySingle(paperSlide);
-		SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume*2;
-        Time.timeScale = 1;
-    }
-
-    void OnEnterEndDayState()
-    {
-        // Hide this if the day is over.
-        gameObject.SetActive(false);
+        if (isEntering) {
+            if (stateType == typeof(PauseMenuState)) {
+                gameObject.SetActive(true);
+                SoundManager.instance.PlaySingle(paperSlide);
+                SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume / 2;
+                Time.timeScale = 0;
+            }
+            else if (stateType == typeof(EndDayState)) {
+                gameObject.SetActive(false);
+            }
+        }
+        else {
+            if (stateType == typeof(PauseMenuState)) {
+                gameObject.SetActive(false);
+                SoundManager.instance.PlaySingle(paperSlide);
+                SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume * 2;
+                Time.timeScale = 1;
+            }
+        }
     }
 
 	// Update is called once per frame

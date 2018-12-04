@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameStateManager : MonoBehaviour {
     public static GameStateManager Instance;
     public List<GameState> gameStates;
+    public System.Action<System.Type, bool> OnChangeStateEvent;
 
     Stack<GameState> currentGameStateStack = new Stack<GameState>();
 
@@ -74,36 +75,19 @@ public class GameStateManager : MonoBehaviour {
     }
 
     // Register / Unregister convenience functions
-    public void RegisterEnterEvent(Type type, Action action)
+    public void RegisterChangeStateEvent(Action<System.Type, bool> action)
     {
 #if DEBUG_GAMESTATE
-        Debug.Log("Registering Enter Event. Type:" + type + " Action: " + action);
+        Debug.Log("Registering Change State Event. Action: " + action);
 #endif
-        GameStateManager.Instance.GetState(type).OnEnterEvent += action;
+        GameStateManager.Instance.OnChangeStateEvent += action;
     }
-
-    public void RegisterLeaveEvent(Type type, Action action)
+    public void UnregisterChangeStateEvent(Action<System.Type, bool> action)
     {
 #if DEBUG_GAMESTATE
-        Debug.Log("Registering Leave Event. Type:" + type + " Action: " + action);
+        Debug.Log("Unregistering Change State Event. Action: " + action);
 #endif
-        GameStateManager.Instance.GetState(type).OnLeaveEvent += action;
-    }
-
-    public void UnregisterEnterEvent(Type type, Action action)
-    {
-#if DEBUG_GAMESTATE
-        Debug.Log("Unregistering Enter Event. Type:" + type + " Action: " + action);
-#endif
-        GameStateManager.Instance.GetState(type).OnEnterEvent -= action;
-    }
-
-    public void UnregisterLeaveEvent(Type type, Action action)
-    {
-#if DEBUG_GAMESTATE
-        Debug.Log("Unregistering Leave Event. Type:" + type + " Action: " + action);
-#endif
-        GameStateManager.Instance.GetState(type).OnLeaveEvent -= action;
+        GameStateManager.Instance.OnChangeStateEvent -= action;
     }
 
     // Helpers
@@ -114,6 +98,8 @@ public class GameStateManager : MonoBehaviour {
         Debug.Log("Entering Gamestate: " + state.GetType());
 #endif
         state.gameObject.SetActive(true);
+        if (OnChangeStateEvent != null)
+            OnChangeStateEvent(state.GetType(), true);
     }
 
     void LeaveState()
@@ -123,5 +109,7 @@ public class GameStateManager : MonoBehaviour {
         Debug.Log("Leaving Gamestate: " + state.GetType());
 #endif
         state.gameObject.SetActive(false);
+        if (OnChangeStateEvent != null)
+            OnChangeStateEvent(state.GetType(), false);
     }
 }
