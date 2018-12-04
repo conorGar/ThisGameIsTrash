@@ -30,7 +30,7 @@ public class GUI_PinUnlockDisplay : MonoBehaviour {
 		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
         {
 			if(phase == 1){
-				Time.timeScale = 1;
+				GameStateManager.Instance.PopState();
 				StartCoroutine("Delays");
 			}
 		}

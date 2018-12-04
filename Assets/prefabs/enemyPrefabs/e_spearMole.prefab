@@ -63,9 +63,9 @@ GameObject:
   - component: {fileID: 114194065566079508}
   - component: {fileID: 114707988734180988}
   - component: {fileID: 114745645828691684}
+  - component: {fileID: 114832569406772972}
   - component: {fileID: 50997994627135144}
   - component: {fileID: 114416602313476124}
-  - component: {fileID: 114832569406772972}
   m_Layer: 9
   m_Name: e_spearMole
   m_TagString: enemy_spearMole
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1715004810931272}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7145ca8301081f84b8f5d9a7a1663aeb, type: 3}
   m_Name: 
@@ -533,8 +533,8 @@ MonoBehaviour:
   movementSpeed: 3
   minMoveTime: 0.6
   maxMoveTime: 1.6
-  walkPS: {fileID: 0}
-  wanderZone: {fileID: 61734991252071062}
+  walkPS: {fileID: 198037785932892104}
+  myWanderZone: {fileID: 61734991252071062}
 --- !u!114 &114924733267092366
 MonoBehaviour:
   m_ObjectHideFlags: 1

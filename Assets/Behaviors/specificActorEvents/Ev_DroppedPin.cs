@@ -50,7 +50,7 @@ public class Ev_DroppedPin : MonoBehaviour {
 			pinUnlockHud.SetActive(true);
 			pinUnlockHud.GetComponent<GUI_PinUnlockDisplay>().SetValues(pinData.displayName, pinData.description,mySprite);
 			GlobalVariableManager.Instance.PINS_DISCOVERED |= pinData.Type;
-			Time.timeScale = 0;
+			GameStateManager.Instance.PushState(typeof(PopupState));
 			gameObject.SetActive(false);
 		}
 	}

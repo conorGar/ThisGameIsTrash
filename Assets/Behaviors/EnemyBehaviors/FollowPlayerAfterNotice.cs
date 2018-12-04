@@ -36,7 +36,8 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 					}
 					this.gameObject.GetComponent<FollowPlayer>().enabled = true;
 					SoundManager.instance.PlaySingle(noticeSfx);
-					ObjectPool.Instance.GetPooledObject("effect_notice",gameObject.transform.position);
+					GameObject notice = ObjectPool.Instance.GetPooledObject("effect_notice",gameObject.transform.position);
+					notice.transform.parent = this.transform;
 					NoticePlayerEvent();
 				}
 			}

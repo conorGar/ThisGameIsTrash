@@ -11,14 +11,14 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int value;
 
-    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG); //| PIN.TALKYTIME | PIN.CURSED | PIN.PIERCINGPIN);
+    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG | PIN.TREASURETRACKER | PIN.COUNTSCRAPULA | PIN.PROJECTILEPROTECTOR);
     public PIN PINS_DISCOVERED
     {
         set { pinsDiscoveredValue = (ulong)value; }
         get { return (PIN)pinsDiscoveredValue; }
     }
 
-    private ulong pinsEquippedValue = (ulong)(PIN.DIRTYDECOY);//(PIN.NONE);
+    private ulong pinsEquippedValue = (ulong)(PIN.NONE);//(PIN.NONE);
     public PIN PINS_EQUIPPED
     {
         set { pinsEquippedValue = (ulong)value; }

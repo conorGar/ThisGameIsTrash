@@ -20,7 +20,6 @@ public class Room : MonoBehaviour
     public bool activateTutpopWhenEnter;
     public string tutPopUpToActivate;
 
-
 	int waifuChance;
 	[HideInInspector]
     public List<GameObject> enemies; //needs to be public to be accessible for things that change the behavior of enemies(Dirty Decoy, for example)
@@ -45,7 +44,7 @@ public class Room : MonoBehaviour
         {
             // get a random enemy from the enemy spawn list
             Enemy enemy = enemySpawners[i].enemies[0];
-
+			
 
 			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.WAIFUWANTED)){
 				//TODO: For now, waifu chance happens every time enter room, waifu isnt permanently set for that day.(players can keep entering room until waifu)
@@ -96,6 +95,10 @@ public class Room : MonoBehaviour
 		                	spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
 	                }
+					if(enemySpawners[i].gameObject.GetComponent<WanderZone>() != null){	
+						Rect wanderZone = enemySpawners[i].gameObject.GetComponent<WanderZone>().GetWanderBounds();
+						spawnedEnemy.GetComponent<WanderWithinBounds>().SetWalkBounds(wanderZone);
+					}
 	            }
             }   
         }
