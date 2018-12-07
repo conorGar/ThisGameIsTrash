@@ -46,6 +46,13 @@ public class EightWayMovement : MonoBehaviour {
 			speed += 1.5f;
 			myLegs.GetComponent<TrailRenderer>().enabled = true;
 		}
+
+        GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
+    }
+
+    void OnDestroy()
+    {
+        GameStateManager.Instance.UnregisterChangeStateEvent(OnChangeState);
     }
 
     // Update is called once per frame
@@ -340,5 +347,17 @@ public class EightWayMovement : MonoBehaviour {
 			directionFacing = 3;
         }
 	
+    }
+
+    void OnChangeState(System.Type stateType, bool isEntering)
+    {
+        /*if (isEntering) {
+            // Entering anything other than the gameplaystate
+            if (stateType != typeof(GameplayState)) {
+                movement = new Vector2(0f, 0f);
+                StopMovement();
+                walkCloudPS.GetComponent<ParticleSystem>().Stop();
+            }
+        }*/
     }
 }
