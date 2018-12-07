@@ -13,6 +13,7 @@ public class Ev_Results : MonoBehaviour {
 	public TextMeshProUGUI currentStars;
 	public GameObject largeTrashTextDisplay;
 	public GameObject treasureCollectedDisplay;
+	public GameObject largeTrashCollectedDisplay;
 	public LargeTrashManager ltManager;
 	public int currentWorld; //needed for largeTrashManager
     public Image backPaper;
@@ -89,13 +90,18 @@ public class Ev_Results : MonoBehaviour {
                     if (GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count > displayIndex) {
 
                         if (spawnLargeTrashOnce == 0) {
+                        	Debug.Log("L trash display got here - 1");
                             //spawn large trash collected display
+                            //treasureCollectedDisplay.SetActive(true);
+                            largeTrashCollectedDisplay.SetActive(true);
                             backPaper.enabled = false;
                             image.enabled = false;
                             largeTrashTextDisplay.SetActive(true);
                             spawnLargeTrashOnce = 1;
                         }
                         else {
+							Debug.Log("L trash display got here - 2");
+
                             treasureCollectedDisplay.GetComponent<Animator>().Play("largeTrashCollected",-1,0f);
                         }
 

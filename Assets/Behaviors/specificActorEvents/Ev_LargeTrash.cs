@@ -49,6 +49,8 @@ public class Ev_LargeTrash : PickupableObject {
 	void OnEnable () {
 		
 		player = GameObject.FindGameObjectWithTag("Player");
+		dumpster = GameObject.Find("Dumpster");
+
 		//playerAni = player.GetComponent<tk2dSpriteAnimator>();
 		//currentRoomNumber = GlobalVariableManager.Instance.ROOM_NUM;
 

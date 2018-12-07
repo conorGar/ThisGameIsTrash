@@ -39,7 +39,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	//public BoxCollider2D myCollisionBox;
 	public string returnAniName = "idle";
 	public bool dontSpawnBody;
-
+	public bool canKnockoffArmor;
 
 	public List<MonoBehaviour> behaviorsToDeactivate = new List<MonoBehaviour>();
 
@@ -219,7 +219,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             if (body)
                 melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
 			Debug.Log("Hit by thrown object!");
-			ArmorKnockoff();
+			if(canKnockoffArmor)
+				ArmorKnockoff();
 			TakeDamage(melee.gameObject);
 			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
 			//SoundManager.instance.PlaySingle(hitSound);

@@ -160,7 +160,10 @@ public class DialogChoiceManager : MonoBehaviour {
 		dialogChoiceBoxes[arrowPos].GetComponent<Animator>().Play("choicePopupSelect",-1,0f);
 
 		yield return new WaitForSeconds(.35f);
-
+		dialogChoiceBoxes[arrowPos].GetComponent<Image>().color = unhighlightedColor; 
+		dialogChoiceBoxes[arrowPos].transform.position = new Vector2(4.6f,dialogChoiceBoxes[arrowPos].transform.position.y);
+		dialogChoiceBoxes[arrowPos].transform.GetChild(0).gameObject.GetComponent<TextAnimation>().enabled = false;
+		dialogChoiceBoxes[arrowPos].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().color = Color.white;
 		for(int i = 0; i < dialogChoiceBoxes.Count; i++){
 			if(dialogChoiceBoxes[i].transform.childCount >1)
 				dialogChoiceBoxes[i].transform.GetChild(1).gameObject.SetActive(false); // make sure choice images are deactivated

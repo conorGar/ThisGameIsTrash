@@ -11,7 +11,7 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int value;
 
-    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG | PIN.TREASURETRACKER | PIN.COUNTSCRAPULA | PIN.PROJECTILEPROTECTOR);
+    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG); //| PIN.TREASURETRACKER | PIN.COUNTSCRAPULA | PIN.PROJECTILEPROTECTOR);
     public PIN PINS_DISCOVERED
     {
         set { pinsDiscoveredValue = (ulong)value; }

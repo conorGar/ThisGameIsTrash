@@ -14,6 +14,13 @@ public class BossFriendEx : Friend
 	public GameObject questio;
 	public GameObject slideTrash;
     public int FieldRoomNum;
+
+
+    public GameObject toxicBarrier;
+    public ParticleSystem toxicBarrierPS;
+    public GameObject goWithItDisplay;
+    public ParticleSystem toxicPipeFountain;
+
     public int ToxicFieldRoomNum;
 	//public GameObject stuartIcon;
 	public AudioClip smokePuff;
@@ -34,6 +41,15 @@ public class BossFriendEx : Friend
         ex.SetActive(true);
         hash.SetActive(true);
         questio.SetActive(true);
+
+		switch (GetFriendState())
+        {
+           
+            case "END":
+            	toxicBarrier.SetActive(false);
+            	toxicBarrierPS.gameObject.SetActive(false);
+            	break;
+        }
     }
 
     public override void GenerateEventData()
@@ -129,6 +145,17 @@ public class BossFriendEx : Friend
                 yield return new WaitUntil(() => Vector2.Distance(CamManager.Instance.mainCam.transform.position, slideTrash.transform.position) < 2);
                 slideTrash.SetActive(true);
                 yield return new WaitForSeconds(1f);
+				CamManager.Instance.mainCamEffects.CameraPan(toxicPipeFountain.transform.position,"");
+				yield return new WaitForSeconds(1f);
+				toxicPipeFountain.Stop();
+				yield return new WaitForSeconds(1f);
+				CamManager.Instance.mainCamEffects.CameraPan(toxicBarrier.transform.position,"");
+				yield return new WaitForSeconds(1f);
+				toxicBarrier.SetActive(false);
+				goWithItDisplay.SetActive(true);
+				toxicBarrierPS.Stop();
+				yield return new WaitForSeconds(4f);
+				goWithItDisplay.SetActive(false);
                 CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 SetFriendState("END");
                 break;
@@ -271,6 +298,14 @@ public class BossFriendEx : Friend
 
         stuart.PrepPhase2();
     }
+
+	public override void GiveData(List<GameObject> neededObjs){
+    	toxicBarrier = neededObjs[0];
+    	toxicBarrierPS = neededObjs[1].GetComponent<ParticleSystem>();
+    	toxicPipeFountain = neededObjs[2].GetComponent<ParticleSystem>();
+    	goWithItDisplay = neededObjs[3];
+    }
+
 
     // User Data implementation
     public override string UserDataKey()

@@ -497,6 +497,7 @@ MonoBehaviour:
   myShadow: {fileID: 1743829772922610}
   returnAniName: idle
   dontSpawnBody: 0
+  canKnockoffArmor: 0
   behaviorsToDeactivate: []
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
@@ -547,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noticeThreshold: 5
-  noticeThresholdY: 0
+  noticeThresholdY: 3
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
   noticeSfx: {fileID: 0}

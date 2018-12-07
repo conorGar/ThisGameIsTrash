@@ -49,21 +49,22 @@ public class ActivateDialogWhenClose : MonoBehaviour {
     // Moved this out of Update so it can be controlled better by the friend and what state they are in.
     public void Execute(string firstIcon = "", string secondIcon = "", string thirdIcon = "")
     {
+		Debug.Log("Dialog execute activate");
         if (GlobalVariableManager.Instance.CARRYING_SOMETHING == false)
         {
-
+			Debug.Log("Criteria met - 0");
             if (startNodeName.Length > 0 && player != null)
             {
 
-                //Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
+                Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
                 if (Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold && Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold)
                 {
 
-                    //Debug.Log("Criteria met - 2");
+                    Debug.Log("Criteria met - 2");
                     if (autoStart && canTalkTo)
                     {
 
-                        //Debug.Log("Criteria met - 3");
+                        Debug.Log("Criteria met - 3");
                         startNodeName = friend.nextDialog;
                         ActivateDialog(firstIcon, secondIcon, thirdIcon);
                     }
