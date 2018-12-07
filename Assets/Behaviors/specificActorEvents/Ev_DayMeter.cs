@@ -40,7 +40,14 @@ public class Ev_DayMeter : MonoBehaviour {
 		dayNumberDisplay.text = "Day: "+ GlobalVariableManager.Instance.DAY_NUMBER;
         secondsPassed = 0f;
         startColor = dayColorTint.color;
+
+        GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }//end of Start()
+
+    void OnDestroy()
+    {
+        GameStateManager.Instance.UnregisterChangeStateEvent(OnChangeState);
+    }
 
     void Update()
     {
@@ -120,6 +127,17 @@ public class Ev_DayMeter : MonoBehaviour {
 
 	}
 
-
-
+    void OnChangeState(System.Type stateType, bool isEntering)
+    {
+        // Show only if the current state is gameplay.
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (countdownNumber != null) {
+                countdownNumber.GetComponent<CanvasRenderer>().SetAlpha(1f);
+            }
+        } else {
+            if (countdownNumber != null) {
+                countdownNumber.GetComponent<CanvasRenderer>().SetAlpha(0f);
+            }
+        }
+    }
 }

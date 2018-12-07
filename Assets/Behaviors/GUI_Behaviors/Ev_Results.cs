@@ -28,12 +28,10 @@ public class Ev_Results : MonoBehaviour {
 
 
 	void Start () {
+        GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
         // TODO: Unity doesn't run start on disabled gameobjects because it's lame and weird.  Is there a better way to do this
         // Then starting active and disabling it immediately?
         gameObject.SetActive(false);
-
-        GameStateManager.Instance.RegisterEnterEvent(typeof(EndDayState), OnEnterEndDayState);
-        GameStateManager.Instance.RegisterLeaveEvent(typeof(EndDayState), OnLeaveEndDayState);
     }
 
     void OnEnable()
@@ -69,18 +67,17 @@ public class Ev_Results : MonoBehaviour {
 
     void OnDestroy()
     {
-        GameStateManager.Instance.UnregisterEnterEvent(typeof(EndDayState), OnEnterEndDayState);
-        GameStateManager.Instance.UnregisterLeaveEvent(typeof(EndDayState), OnLeaveEndDayState);
+        GameStateManager.Instance.UnregisterChangeStateEvent(OnChangeState);
     }
 
-    void OnEnterEndDayState()
+    void OnChangeState(System.Type stateType, bool isEntering )
     {
-        gameObject.SetActive(true);
-        StartCoroutine("InteractDelay"); // wait for the truck to get a bit up the road.
-    }
-
-    void OnLeaveEndDayState()
-    {
+        if (isEntering) {
+            if (stateType == typeof(EndDayState)) {
+                gameObject.SetActive(true);
+                StartCoroutine("InteractDelay"); // wait for the truck to get a bit up the road.
+            }
+        }
     }
 
     void Update () {

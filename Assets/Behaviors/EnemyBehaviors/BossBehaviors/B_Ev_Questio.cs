@@ -79,7 +79,8 @@ public class B_Ev_Questio : MonoBehaviour {
 
             if (myETD.currentHp <= 12 && dropItemOnce == 0) {
                 StopAllCoroutines();
-                StartCoroutine(DropGloves());
+                if (!GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES))
+                    StartCoroutine(DropGloves());
                 Dazed();
                 dropItemOnce = 1;
             }
