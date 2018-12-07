@@ -20,7 +20,6 @@ public class Ev_GenericGarbage : MonoBehaviour {
 	int delay;
 	int thisRoom;
 	int grabbedPhase = 0;
-	int bagSizeBonus;
 	public StandardGarbage garbage = new StandardGarbage();
 	int whichTrash;
 	float Speed = 20;
@@ -117,7 +116,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider){
 		if(collider.gameObject.CompareTag("Player")){
-			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] < (GlobalVariableManager.Instance.BAG_SIZE + bagSizeBonus) && !isFalling){
+			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] <= GlobalVariableManager.Instance.BAG_SIZE_STAT.GetMax() && !isFalling){
                 SoundManager.instance.PlaySingle(pickUpTrash);
                 playerPos = collider.gameObject.transform;
                 this.gameObject.transform.parent = playerPos;
@@ -192,12 +191,6 @@ public class Ev_GenericGarbage : MonoBehaviour {
     }
 
 	void Setup(){
-		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.BULKYBAG)){
-		//Bulky Bag pin
-			bagSizeBonus = bagSizeBonus + 3;
-		}
-
-
 		xSpeedWhenCollected = -30f;
 	}//End of Setup()
 }

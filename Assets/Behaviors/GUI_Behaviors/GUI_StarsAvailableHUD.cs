@@ -12,7 +12,7 @@ public class GUI_StarsAvailableHUD : MonoBehaviour {
 		
 	}
 	void OnEnable(){
-		myText.text = GlobalVariableManager.Instance.STAR_POINTS.ToString();
+		myText.text = GlobalVariableManager.Instance.STAR_POINTS_STAT.GetCurrent().ToString();
 	}
 	// Update is called once per frame
 	void Update () {
@@ -20,6 +20,6 @@ public class GUI_StarsAvailableHUD : MonoBehaviour {
 	}
 
 	public void UpdateDisplay(){
-		myText.text = GlobalVariableManager.Instance.STAR_POINTS.ToString();
+		myText.text = GlobalVariableManager.Instance.STAR_POINTS_STAT.GetCurrent().ToString();
 	}
 }

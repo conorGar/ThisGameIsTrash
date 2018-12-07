@@ -13,7 +13,7 @@ public class PinEditor : Editor {
         // This kanoodles it so the inspector properly displays an enum dropdown while serializing a 64 bit number (long).
         PinDefinition pinDefinition = (PinDefinition)target;
         pinDefinition.Type = (PIN)EditorGUILayout.EnumPopup(pinDefinition.Type);
-        pinDefinition.pinValue = (ulong)pinDefinition.Type;
+        pinDefinition.pinValue = (long)pinDefinition.Type;
 
         base.OnInspectorGUI();
         EditorUtility.SetDirty(target);

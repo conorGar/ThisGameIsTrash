@@ -75,11 +75,6 @@ public class PopulateWorld : MonoBehaviour
 			}*/
 		//}
 
-		if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 5){
-			//Hp Bonus with Cassie(set back at 'return events'
-			GlobalVariableManager.Instance.Max_HP += 1;
-		}
-
 		EnemyList();
 		if(GlobalVariableManager.Instance.WORLD_NUM == 2) 
 			BeachFriendUpdates();

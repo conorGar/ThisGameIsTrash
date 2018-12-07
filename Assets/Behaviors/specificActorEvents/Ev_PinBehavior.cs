@@ -52,12 +52,21 @@ public class Ev_PinBehavior : MonoBehaviour {
             if (!GlobalVariableManager.Instance.IsPinDiscovered(pinData.Type)){
                 sprite.color = new Color(0f,0f,0f,1f);//blacked out if not owned
 			}else{
-				float xSpawnAdjust = -.6f;
+                for (int i = 0; i < pinData.ppValue; i++) {
+                    smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
 
-			}
+                    if (IsPinEquipped()) {
+                        smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                    }
+                }
+            }
 		}
 
-		if(inShop){
+        for (int i = 0; i < pinData.ppValue; i++) {
+            myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
+        }
+
+        if (inShop){
 			if(IsPinDiscovered() && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 10 && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 20 && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 30){
 				GameObject myTextDisplay = Instantiate(smallTextDisplay,transform.position,Quaternion.identity);
 				Color currentColor = sprite.color;
@@ -136,13 +145,6 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 	public void AtEquipScreen(){
 		if(IsPinDiscovered()){
-			for(int i = 0; i< pinData.ppValue;i++){
-				smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
-				myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
-				if(IsPinEquipped()){
-				smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-				}
-			}
 			if(IsPinEquipped()){
 				highlightBox.SetActive(true);
 			}
@@ -174,9 +176,9 @@ public class Ev_PinBehavior : MonoBehaviour {
 			isDejaVuPinAndIsUnlocked = true;
 		}
 		if(IsPinDiscovered()){
-			if((!IsPinEquipped() || isDejaVuPinAndIsUnlocked) && GlobalVariableManager.Instance.PPVALUE >= pinData.ppValue){ // equip unequipped pin
+			if((!IsPinEquipped() || isDejaVuPinAndIsUnlocked) && GlobalVariableManager.Instance.PP_STAT.GetCurrent() >= pinData.ppValue){ // equip unequipped pin
                 GlobalVariableManager.Instance.PINS_EQUIPPED |= pinData.Type; //set pin to active
-                GlobalVariableManager.Instance.PPVALUE -= pinData.ppValue;
+                GlobalVariableManager.Instance.PP_STAT.UpdateCurrent(-pinData.ppValue);
 				myAnimator.SetTrigger("Equip");
                 IsEquipped = true;
                 SoundManager.instance.PlaySingle(equipSFX);
@@ -204,7 +206,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 					GlobalVariableManager.Instance.characterUpgradeArray[6] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[6]) + 1).ToString();
 				}*/
 			}else if(IsPinEquipped()){//Unequip pin
-                GlobalVariableManager.Instance.PPVALUE += pinData.ppValue;
+                GlobalVariableManager.Instance.PP_STAT.UpdateCurrent(+pinData.ppValue);
                 GlobalVariableManager.Instance.PINS_EQUIPPED &= ~pinData.Type;
                 IsEquipped = false;
 				SoundManager.instance.PlaySingle(unEquipSFX);

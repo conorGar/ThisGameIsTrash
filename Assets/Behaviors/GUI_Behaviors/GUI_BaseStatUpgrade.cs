@@ -63,19 +63,19 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 	}
 
 	void SelectUpgrade(){
-		if(GlobalVariableManager.Instance.STAR_POINTS > 0){
+		if(GlobalVariableManager.Instance.STAR_POINTS_STAT.GetCurrent() > 0){
 			SoundManager.instance.PlaySingle(selectUpgradeSFX);
 
 			selectPS.transform.position = optionIcons[arrowPos].transform.position;
 			selectPS.Play();
 			if(arrowPos == 0){
-				GlobalVariableManager.Instance.BAG_SIZE +=2;
+				GlobalVariableManager.Instance.BAG_SIZE_STAT.UpdateMax(+2);
 			}else if(arrowPos == 1){
-				GlobalVariableManager.Instance.Max_HP +=1;
+				GlobalVariableManager.Instance.HP_STAT.UpdateMax(+1);
 			}else if(arrowPos == 2){
-				GlobalVariableManager.Instance.PPVALUE +=3;	
+				GlobalVariableManager.Instance.PP_STAT.UpdateMax(+3);	
 			}
-			GlobalVariableManager.Instance.STAR_POINTS--;
+			GlobalVariableManager.Instance.STAR_POINTS_STAT.UpdateCurrent(-1);
             starsAvailableHUD.UpdateDisplay();
             PositiveText();
 		}if(arrowPos == 3){

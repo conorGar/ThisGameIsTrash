@@ -37,10 +37,6 @@ public class PinFunctionsManager : MonoBehaviour {
 
 	public void Awake(){
 		if(inWorld){
-			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.BULKYBAG)){
-				GlobalVariableManager.Instance.BAG_SIZE += 2; //subtracted again at results.cs
-			}
-
 			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DIRTYDECOY)){
 				decoyInstance = Instantiate(decoyObject,gameObject.transform.position,Quaternion.identity); //ask if this is better since this object isnt needed unless has the pin?
 				decoyObject.SetActive(false);
@@ -145,7 +141,6 @@ public class PinFunctionsManager : MonoBehaviour {
 	}
 
 	public void ApplePlus(){
-		GlobalVariableManager.Instance.Max_HP += 1;
 		Sprite mySprite = GetSprite("pin_applePlus");
 		StartCoroutine("DisplayEffectHud",mySprite);
 	}
@@ -215,16 +210,6 @@ public class PinFunctionsManager : MonoBehaviour {
 			}
 		}
 	}
-	public void ReturnPinValues(){ //Resets needed pin values at end of day(mostly just stat upgrade types
-
-		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.APPLEPLUS)){
-			GlobalVariableManager.Instance.Max_HP -= 1;
-		}
-
-
-	} 
-
-
 
 	Sprite GetSprite(string spriteName){
 		for(int i = 0; i < displaySprites.Length;i++){

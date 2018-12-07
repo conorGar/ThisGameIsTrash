@@ -179,7 +179,7 @@ public class MeleeAttack : MonoBehaviour {
 			isSwinging = true;
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
-		    if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HEROOFGRIME) && gameObject.GetComponent<PlayerTakeDamage>().currentHp == GlobalVariableManager.Instance.Max_HP){
+		    if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HEROOFGRIME) && GlobalVariableManager.Instance.HP_STAT.GetCurrent() == GlobalVariableManager.Instance.HP_STAT.GetMax()){
 				gameObject.GetComponent<PinFunctionsManager>().HeroOfGrime(swingDirection,meleeDirectionEnabled.transform.position);
 			}
 

@@ -45,10 +45,10 @@ public class Ev_Results : MonoBehaviour {
         for (int i = 0; i < GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count; i++) {
             // Add trash to the discover list and award a star for each.
             GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED |= GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].type;
-            GlobalVariableManager.Instance.STAR_POINTS++;
+            GlobalVariableManager.Instance.STAR_POINTS_STAT.UpdateMax(+1);
         }
 
-        currentStars.text = GlobalVariableManager.Instance.STAR_POINTS.ToString();
+        currentStars.text = GlobalVariableManager.Instance.STAR_POINTS_STAT.GetMax().ToString();
         if (GlobalVariableManager.Instance.PROGRESS_LV == 0) {
             nextUnlockNeeded.text = "/2";
         }
@@ -128,8 +128,6 @@ public class Ev_Results : MonoBehaviour {
                         //-------Reset today's trash collected---------//
                         if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 3) {
                             if (GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count > 4) {
-                                //resets hp after cassie gives you bonus
-                                GlobalVariableManager.Instance.Max_HP -= 1;
                                 GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.RemoveAt(4);
                             }
                             GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.RemoveAt(3);
@@ -140,11 +138,6 @@ public class Ev_Results : MonoBehaviour {
 
                         //---------------------------------------------//
                         GlobalVariableManager.Instance.ARROW_POSITION = 1;
-
-
-                        if (GlobalVariableManager.Instance.IsPinEquipped(PIN.BULKYBAG)) {
-                            GlobalVariableManager.Instance.BAG_SIZE -= 2;
-                        }
 
                         UserDataManager.Instance.SetDirty();
                         GameStateManager.Instance.PopAllStates();

@@ -18,7 +18,7 @@ public class Ev_TotalTrashDisplay : MonoBehaviour {
 		if(showingStarDisplay == false){
 			numberDisplay.text = GlobalVariableManager.Instance.TOTAL_TRASH.ToString();
 		}else{
-			numberDisplay.text = GlobalVariableManager.Instance.STAR_POINTS.ToString();
+			numberDisplay.text = GlobalVariableManager.Instance.STAR_POINTS_STAT.GetCurrent().ToString();
 		}
 	}
 

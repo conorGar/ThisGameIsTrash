@@ -99,7 +99,7 @@ public class Ev_FadeHelper : MonoBehaviour {
 //			if(GlobalVariableManager.Instance.CURRENT_HP > 0){
 				//GlobalVariableManager.Instance.ROOM_PLAYER_DIED_IN = 99;
 		//	}
-			pfm.ReturnPinValues();
+
 			GameObject truckInstance = Instantiate(smallTruck,new Vector2(CamManager.Instance.mainCam.transform.position.x - 5, player.transform.position.y), Quaternion.identity);
 			truckInstance.GetComponent<Ev_SmallTruck>().EndDay();
 	

@@ -25,13 +25,17 @@ public class S_Ev_Hub : MonoBehaviour {
 		//disable melee swing at hub
 		GameObject.Find("Jim").GetComponent<MeleeAttack>().enabled = false;
 
+        // Start the hub day.  Needed for hub friends if you are loading the game directly in the hub.
+        CalendarManager.Instance.StartDay();
+
         // Friend events should be generated from the day before and the events will carry over to the hub, I think.
         FriendSpawn();
 
         //LargeTrashSpawn();
         GameStateManager.Instance.PopAllStates();
+
         //GameStateManager.Instance.PushState(typeof(GameplayState)); // <- Set by day display
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
