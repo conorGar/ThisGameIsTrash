@@ -51,11 +51,17 @@ public class FollowPlayer : MonoBehaviour {
                     }
                 }//otherwise for now those specific actors handle it(Questio)
             }else if(returnToPreviousWhenFar){
+				if(this.gameObject.GetComponent<WanderWithinBounds>() != null){
+					this.gameObject.GetComponent<WanderWithinBounds>().enabled = true;
+					this.gameObject.GetComponent<WanderWithinBounds>().SetNewBounds(); 
+				}
 				if(this.gameObject.GetComponent<RandomDirectionMovement>() != null){
 					this.gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
 				}
+
 				gameObject.GetComponent<FollowPlayerAfterNotice>().enabled = true;
-				ObjectPool.Instance.GetPooledObject("effect_confused");
+				GameObject confused = ObjectPool.Instance.GetPooledObject("effect_confused");
+				confused.transform.parent = this.transform;
 				this.enabled = false;
             }
         }

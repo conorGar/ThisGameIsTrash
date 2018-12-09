@@ -468,7 +468,7 @@ MonoBehaviour:
   minMoveTime: 0.6
   maxMoveTime: 1.6
   walkPS: {fileID: 198059248471040828}
-  wanderZone: {fileID: 61281329975881570}
+  myWanderZone: {fileID: 0}
 --- !u!114 &114539248192695394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -516,6 +516,7 @@ MonoBehaviour:
   myShadow: {fileID: 0}
   returnAniName: idle
   dontSpawnBody: 0
+  canKnockoffArmor: 1
   behaviorsToDeactivate: []
   armorCollisionObj: {fileID: 1249466919941720}
   disarmoredAnimation: {fileID: 114356930639783786, guid: 3c711b45769ffb44abeb5545af2815a8,

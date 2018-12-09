@@ -73,6 +73,8 @@ public class RatWithHatFriend : Friend {
                 GetComponent<ActivateDialogWhenClose>().speechBubbleIcon.SetActive(false);
                 break;
         }
+
+        yield return null;
     }
 
     public void RatWithHatIntro()

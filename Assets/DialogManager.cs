@@ -367,10 +367,10 @@ public class DialogManager : MonoBehaviour {
 		//GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 		SoundManager.instance.musicSource.volume *= 2; //turn music back to normal.
 		//player.GetComponent<EightWayMovement>().enabled = true;
-        GameStateManager.Instance.PopState();
+        //GameStateManager.Instance.PopState();
 
         // Handle when movie type stuff plays at the end of a dialog.
-        GameStateManager.Instance.PushState(typeof(MovieState));
+        //sGameStateManager.Instance.PushState(typeof(MovieState));
         friend.OnFinishDialog();
         //blackBarCanvas.SetActive(false);
 		dialogCanvas.SetActive(false);
