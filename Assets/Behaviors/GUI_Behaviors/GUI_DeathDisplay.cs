@@ -20,11 +20,8 @@ public class GUI_DeathDisplay : MonoBehaviour
 		//dayMeter.gameObject.GetComponent<RectTransform>().offsetMax = offsetMax;
 		//dayMeter.gameObject.GetComponent<RectTransform>().offsetMin = offsetMin;
 		*/
-		Debug.Log("DayMeterRise() Activate--------");
         GUIManager.Instance.TrashCollectedDisplayDeath.gameObject.SetActive(false);
-		myDayMeter.gameObject.SetActive(true);
-        myDayMeter.secondsPassed = dayMeter.secondsPassed;
-        myDayMeter.dayIcon.transform.localPosition = dayMeter.dayIcon.transform.localPosition;
+        myDayMeter.DayMeterRise(dayMeter.secondsPassed);
 		SoundManager.instance.PlaySingle(dayIncrease);
 	}
 
