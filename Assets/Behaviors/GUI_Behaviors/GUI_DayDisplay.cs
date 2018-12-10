@@ -14,6 +14,9 @@ public class GUI_DayDisplay : MonoBehaviour
 	public AudioClip truckSmokeSfx;
 	public AudioClip truckDoor;
 	public AudioClip truckSfx;
+	public GameObject worldTitle;
+	public GameObject underline;
+
 
 	public GameObject demoGoalDisplay;
 	public GameObject Hud;
@@ -33,8 +36,9 @@ public class GUI_DayDisplay : MonoBehaviour
 			if(!forHub){
 			dayNumDisplay.text = "- Day " + GlobalVariableManager.Instance.DAY_NUMBER.ToString() + " -";
 			dayNumDisplay.GetComponent<TextAnimation>().PlayAnim();
+
 			}
-			StartCoroutine("TruckEnter");
+			StartCoroutine("DisplaySequence");
 			SoundManager.instance.PlaySingle(truckSfx);
 		}
 		//player.GetComponent<EightWayMovement>().enabled = false;
@@ -72,6 +76,8 @@ public class GUI_DayDisplay : MonoBehaviour
 		}
 		Debug.Log("Day display got to this point...");
 		phase = 2;
+		Hud.SetActive(true);
+
 		StartCoroutine("TruckLeave");
 		//yield return new WaitForSeconds(1.5f);
 
@@ -99,6 +105,20 @@ public class GUI_DayDisplay : MonoBehaviour
 		SoundManager.instance.PlaySingle(truckSmokeSfx);
 	}
 
+	IEnumerator DisplaySequence(){
+		underline.SetActive(true);
+		yield return new WaitForSeconds(.3f);
+		worldTitle.SetActive(true);
+		truck.SetActive(true);
+		dayNumDisplay.gameObject.SetActive(true);
+		if(!forHub){
+			dayNumDisplay.text = "- Day " + GlobalVariableManager.Instance.DAY_NUMBER.ToString() + " -";
+			dayNumDisplay.GetComponent<TextAnimation>().PlayAnim();
+		}
+			StartCoroutine("TruckEnter");
+			SoundManager.instance.PlaySingle(truckSfx);
+	
+	}
 
 	IEnumerator DemoGoalDisplay(){
 		demoGoalDisplay.SetActive(true);
@@ -106,6 +126,10 @@ public class GUI_DayDisplay : MonoBehaviour
 		truck.SetActive(true);
 		Hud.SetActive(true);
 		demoGoalDisplay.SetActive(false);
+		underline.SetActive(true);
+		yield return new WaitForSeconds(.3f);
+		worldTitle.SetActive(true);
+
 		dayNumDisplay.gameObject.SetActive(true);
 		if(!forHub){
 			dayNumDisplay.text = "- Day " + GlobalVariableManager.Instance.DAY_NUMBER.ToString() + " -";

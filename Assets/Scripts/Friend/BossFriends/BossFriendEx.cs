@@ -83,7 +83,7 @@ public class BossFriendEx : Friend
                 break;
             case "IN_TOXIC_FIELD":
                 nextDialog = "Boss1Start";
-                GetComponent<ActivateDialogWhenClose>().Execute();
+				GetComponent<ActivateDialogWhenClose>().Execute("Stuart");
                 break;
             case "STUART_PEP":
                 nextDialog = "Boss1Middle";
@@ -191,21 +191,18 @@ public class BossFriendEx : Friend
             case "IN_TOXIC_FIELD":
                 stuart.GetComponent<FollowPlayer>().enabled = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 15;
-                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 22;
+                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 22;
                 stuart.GetComponent<FollowPlayer>().enabled = false;
                 break;
             case "STUART_PEP":
                 stuart.GetComponent<FollowPlayer>().enabled = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 15;
-                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 22;
+                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 22;
                 break;
             case "STUART_DEFEATED":
                 stuart.GetComponent<FollowPlayer>().enabled = false;
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 15;
-                gameObject.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 22;
+                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 22;
                 break;
             case "FIGHT_PHASE_1":
             case "LEFT_FIGHT_PHASE_1":

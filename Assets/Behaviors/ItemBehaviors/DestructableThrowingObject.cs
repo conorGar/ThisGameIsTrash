@@ -44,7 +44,7 @@ public class DestructableThrowingObject : ThrowableObject {
 	}
 
 
-	protected override void LandingEvent(){
+	public override void LandingEvent(){
 		ObjectPool.Instance.GetPooledObject("effect_largeLand");
 		ObjectPool.Instance.ReturnPooledObject(this.gameObject);
 	}

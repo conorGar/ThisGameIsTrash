@@ -8,20 +8,16 @@ public class DirtyDecoyBehavior : MonoBehaviour
 	bool currentlyTakingDamage;
 	int damageDealt;
 
+	bool changedEnemyBehavior;
+	Room roomDecoyIsIn;
 	GameObject returnPlayer;
 
 	void OnEnable(){
 		currentHP = 3;
+		currentlyTakingDamage = false;
 		ObjectPool.Instance.GetPooledObject("effect_smokeBurst",gameObject.transform.position);
-		for(int i = 0; i < RoomManager.Instance.currentRoom.enemies.Count;i++){
-			GameObject enemy = RoomManager.Instance.currentRoom.enemies[i];
-			if(enemy.GetComponent<FollowPlayer>() != null){
-				enemy.GetComponent<FollowPlayer>().player = this.gameObject.transform;
-			}
-			if(enemy.GetComponent<FireTowardPlayer>() != null){
-				enemy.GetComponent<FireTowardPlayer>().player = this.gameObject;
-			}
-		}
+		roomDecoyIsIn = RoomManager.Instance.currentRoom;
+		AgroEnemies();
 
 	}
 
@@ -33,7 +29,28 @@ public class DirtyDecoyBehavior : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		if(!RoomManager.Instance.isTransitioning){
+			if(RoomManager.Instance.currentRoom == roomDecoyIsIn && !changedEnemyBehavior){
+				AgroEnemies();
+			}else if(RoomManager.Instance.currentRoom != roomDecoyIsIn && changedEnemyBehavior){
+				changedEnemyBehavior = false;
+			}
+		}
+	}
+
+
+	void AgroEnemies(){
+		Debug.Log("Agro Enemies activated");
+		changedEnemyBehavior = true;
+		for(int i = 0; i < RoomManager.Instance.currentRoom.enemies.Count;i++){
+			GameObject enemy = RoomManager.Instance.currentRoom.enemies[i];
+			if(enemy.GetComponent<FollowPlayer>() != null){
+				enemy.GetComponent<FollowPlayer>().player = this.gameObject.transform;
+			}
+			if(enemy.GetComponent<FireTowardPlayer>() != null){
+				enemy.GetComponent<FireTowardPlayer>().player = this.gameObject;
+			}
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D enemy){

@@ -218,6 +218,11 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             var body = melee.gameObject.GetComponent<ThrowableBody>();
             if (body)
                 melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
+            else{
+				var destructableObj = melee.gameObject.GetComponent<DestructableThrowingObject>();
+				if(destructableObj)
+					melee.gameObject.GetComponent<DestructableThrowingObject>().LandingEvent();
+            }
 			Debug.Log("Hit by thrown object!");
 			if(canKnockoffArmor)
 				ArmorKnockoff();

@@ -40,6 +40,14 @@ public class JumboFriend : Friend {
 
             isFilmDateSet = true;
         }
+		switch (GetFriendState()) {
+            case "START":
+				day = CalendarManager.Instance.currentDay; //1st meeting can happen any day
+                break;
+            case "END":
+                break;
+        }
+
     }
 
     public int GenerateNextFilmDay()
@@ -51,6 +59,7 @@ public class JumboFriend : Friend {
     {
         switch (GetFriendState()) {
             case "START":
+				day = CalendarManager.Instance.currentDay; //1st meeting can happen any day
                 break;
             case "END":
                 break;

@@ -14,8 +14,8 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 	
 
-	public float xDistanceThreshold;
-	public float yDistanceThreshold;
+	public float distanceThreshold = 5;
+	//public float yDistanceThreshold;
 	public bool cameraPanToFriendAtStart = true;
 	public GameObject speechBubbleIcon;
 	public string iconAnimationName;
@@ -57,7 +57,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
             {
 
                 Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
-                if (Mathf.Abs(transform.position.x - player.transform.position.x) < xDistanceThreshold && Mathf.Abs(transform.position.y - player.transform.position.y) < yDistanceThreshold)
+                if (Vector2.Distance(player.transform.position, gameObject.transform.position) <  distanceThreshold)
                 {
 
                     Debug.Log("Criteria met - 2");
@@ -73,20 +73,13 @@ public class ActivateDialogWhenClose : MonoBehaviour {
                         //Debug.Log("Autostart val:" + autoStart);
                         //Debug.Log("canTalkTo val:" + canTalkTo);
 
-                        if (speechBubbleIcon != null && speechBubbleIcon.activeInHierarchy == false)
-                        {
-                            SoundManager.instance.PlaySingle(mySpeechIconSFX);
-                            speechBubbleIcon.SetActive(true);
-                            spawnSpeechBubble = 1;
-                        }
-                        else
-                        {
+                      
                             if (spawnSpeechBubble == 0)
                             {
                                 speechBubbleIcon = ObjectPool.Instance.GetPooledObject("speechIcon", gameObject.transform.position);
                                 spawnSpeechBubble = 1;
                             }
-                        }
+                        
                         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT))
                         {
                         	if(dialogDefiniton == null){

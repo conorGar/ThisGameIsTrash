@@ -30,6 +30,7 @@ public class B_Ev_Questio : MonoBehaviour {
 	Vector2 targetPosition;
 	int dropItemOnce;
 	GameObject dazedStars;
+	bool isDazed;
 
 	void Awake () {
 		myETD = gameObject.GetComponent<EnemyTakeDamage>();
@@ -62,8 +63,12 @@ public class B_Ev_Questio : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (!isSwinging)
                 UpdateFacing();
+			else {
+            	//Debug.Log("Questio is swinging...");
+			}
 
-            if (fp.enabled == true) {
+            if (fp.enabled == true && !isDazed) {
+            	Debug.Log("anis should be working...");
                 if (IsFacingLeft && myAnim.CurrentClip.name != "walkL") {
                     myAnim.Play("walkL");
                 }
@@ -102,6 +107,13 @@ public class B_Ev_Questio : MonoBehaviour {
 					if(gameObject.transform.position.y < baseShadow.transform.position.y+1f){
 						Debug.Log("Landed from fall" + gameObject.transform.position.y + targetPosition.y);
 						hitBox.enabled = true;
+						if (myAnim.CurrentClip.name == "swingL"){
+                    		  mySlashL.SetActive(true);
+                  			  myAnim.Play("swingFinishL");
+              		  	}else{
+                  		    mySlashR.SetActive(true);
+							myAnim.Play("swingFinishR");
+               			 }
 						gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
 						SoundManager.instance.PlaySingle(swing);
 						leaping = false;
@@ -145,10 +157,11 @@ public class B_Ev_Questio : MonoBehaviour {
 
     IEnumerator LandDelay(){
 		yield return new WaitForSeconds(1f);
+
 		gameObject.GetComponent<FollowPlayer>().enabled = true;
 		gameObject.GetComponent<EnemyTakeDamage>().moveWhenHit = true;
-
-		yield return new WaitForSeconds(1f);
+		
+		//yield return new WaitForSeconds(1f);
 		isSwinging = false;
 	
     }
@@ -156,6 +169,7 @@ public class B_Ev_Questio : MonoBehaviour {
 
     void UpdateFacing()
     {
+    	Debug.Log("Questio Update facing activated");
         IsFacingLeft = player.transform.position.x < gameObject.transform.position.x;
     }
 
@@ -182,7 +196,9 @@ public class B_Ev_Questio : MonoBehaviour {
 		gameObject.layer = 11;
 		gameObject.GetComponent<ThrowableObject>().enabled = true;
 		gameObject.GetComponent<FollowPlayer>().chasePS.Stop();
+		isDazed = true;
 		myAnim.Play("dazed");
+		gameObject.GetComponent<FollowPlayer>().enabled = false;
 		dazedStars = ObjectPool.Instance.GetPooledObject("effect_stars",new Vector3(transform.position.x,transform.position.y+2,0));
 		dazedStars.transform.parent = gameObject.transform;
 		//this.enabled = false;
@@ -196,6 +212,7 @@ public class B_Ev_Questio : MonoBehaviour {
 
         dazedShadow.SetActive(false);
         baseShadow.SetActive(true);
+        isDazed = false;
         gameObject.layer = 9;
         gameObject.GetComponent<ThrowableObject>().enabled = false;
         myAnim.Play("idleL");
@@ -211,6 +228,7 @@ public class B_Ev_Questio : MonoBehaviour {
         switch (frame.eventInfo) {
             case "SWING_SET":
                 isSwinging = true;
+                Debug.Log("Questio Swing set activate");
                 break;
             case "SWING_UNSET":
                 //isSwinging = false;
@@ -219,7 +237,7 @@ public class B_Ev_Questio : MonoBehaviour {
                 break;
             case "SWING_CHARGE":
                 // At the start of the charge, Allow Questio to switch animations (mid frame) if the player got to his other side.
-                UpdateFacing();
+               // UpdateFacing();
                 if (IsFacingLeft) {
                     if (clip.name != "swingL") {
                         myAnim.PlayFromFrame("swingL", frameNo);
@@ -248,8 +266,11 @@ public class B_Ev_Questio : MonoBehaviour {
             case "SWING_FINISHED":
                 mySlashL.SetActive(false);
                 mySlashR.SetActive(false);
-                myAnim.Play("idle");
-                fp.enabled = true;
+               	if(!isDazed){
+	                myAnim.Play("idle");
+	                fp.enabled = true;
+                }
+                UpdateFacing();
                 break;
             default:
                 Debug.Log("Animation Trigger Not Found: " + frame.eventInfo);

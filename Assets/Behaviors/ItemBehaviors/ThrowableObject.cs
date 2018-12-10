@@ -174,7 +174,7 @@ public class ThrowableObject : PickupableObject {
 				gameObject.GetComponent<CannotExitScene>().enabled = false;
 	}
 
-	protected virtual void LandingEvent(){
+	public virtual void LandingEvent(){
 		//nothing for base
 	}
 

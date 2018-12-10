@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class B_Ev_Ex : MonoBehaviour {
+public class B_Ev_Ex : Boss {
 
 	
 
@@ -117,15 +117,17 @@ public class B_Ev_Ex : MonoBehaviour {
         isActing = false;
     }
 
-	void Dazed(){
+	protected override void Dazed(){
 		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
-		for(int i = 0; i < dazeDisables.Count; i++){
-			dazeDisables[i].enabled = false;
-		}
+		Debug.Log("Dazed activated - Ex");
 		gameObject.layer = 11;
 		gameObject.GetComponent<ThrowableObject>().enabled = true;
 		myAnim.Play("dazed");
 		StopAllCoroutines();
+		for(int i = 0; i < dazeDisables.Count; i++){
+			dazeDisables[i].enabled = false;
+		}
+
 		//this.enabled = false;
 	}
 

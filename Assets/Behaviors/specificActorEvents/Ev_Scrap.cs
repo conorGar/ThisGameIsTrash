@@ -70,6 +70,8 @@ public class Ev_Scrap : MonoBehaviour {
 					int healChance = Random.Range(0,16);
 					Debug.Log("count scrapula heal attempt: " + healChance);
 					if(healChance == 5){
+						SoundManager.instance.PlaySingle(SFXBANK.HEAL);
+						ObjectPool.Instance.GetPooledObject("effect_heal", gameObject.transform.position);
 						collision.gameObject.GetComponent<PlayerTakeDamage>().Heal(1);
 					}
 				}
@@ -87,7 +89,7 @@ public class Ev_Scrap : MonoBehaviour {
 		arc = false;
 		turningSpeed = 0;
 
-		gameObject.transform.Rotate(Vector2.left, 0f);
+		gameObject.transform.rotation = Quaternion.identity;
 		gameObject.transform.GetChild(0).gameObject.SetActive(true);
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);

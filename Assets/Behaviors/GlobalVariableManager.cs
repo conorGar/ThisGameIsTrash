@@ -18,7 +18,7 @@ public class GlobalVariableManager : UserDataItem {
         get { return (PIN)pinsDiscoveredValue; }
     }
 
-    private ulong pinsEquippedValue = (ulong)(PIN.NONE);//(PIN.NONE);
+    private ulong pinsEquippedValue = (ulong)(PIN.DIRTYDECOY);//(PIN.NONE);
     public PIN PINS_EQUIPPED
     {
         set { pinsEquippedValue = (ulong)value; }
