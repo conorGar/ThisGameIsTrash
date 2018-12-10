@@ -147,8 +147,8 @@ public class BossStuart : Boss
 		ex.gameObject.SetActive(true); //activate dialog
 
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-        ex.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
-        ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
+        ex.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 42;
+        //ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
         
         ex.SetFriendState("STUART_PEP");
         DeactivateHpDisplay();
@@ -157,8 +157,8 @@ public class BossStuart : Boss
 	public override void BossDeathEvent(){
         ex.gameObject.SetActive(true);
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-        ex.GetComponent<ActivateDialogWhenClose>().xDistanceThreshold = 42;
-        ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
+        ex.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 42;
+       // ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
         ex.SetFriendState("STUART_DEFEATED");
         bossTrio.SetActive(false);
         bossHash.SetActive(false);

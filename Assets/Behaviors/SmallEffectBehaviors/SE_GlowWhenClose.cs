@@ -36,9 +36,9 @@ public class SE_GlowWhenClose : MonoBehaviour {
                     if (glowCheck == 0) {
                         if (glowSprite != null) {
                             gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
-						}else{
-                        	GlowFunction();
-                        }
+						}
+                        GlowFunction();
+                        
                         if (spawnSomethingWithGlow) {
                         	objectToSpawn.SetActive(true);
                           
@@ -58,9 +58,9 @@ public class SE_GlowWhenClose : MonoBehaviour {
                        		 gameObject.GetComponent<SpriteRenderer>().sprite = startSprite;
                         if (objectToSpawn != null) {
                             objectToSpawn.SetActive(false);
-                        }else{
-                        	StopGlowFunction();
                         }
+                        StopGlowFunction();
+                        
                         glowCheck = 0;
                     }
                 }

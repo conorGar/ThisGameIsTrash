@@ -29,6 +29,8 @@ public class Room : MonoBehaviour
 
     public List<GameObject> bosses;
 
+
+
     public void ActivateRoom()
     {
     	Debug.Log("ActivateRoom....activated");

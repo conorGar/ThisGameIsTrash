@@ -1323,7 +1323,7 @@ MonoBehaviour:
   - {fileID: 517979272}
   dialogOptions: {fileID: 0}
   textBox: {fileID: 42795166}
-  typeSound: {fileID: 0}
+  typeSound: {fileID: 8300000, guid: 2aa039154a98c134dbbdf88c05a4924a, type: 3}
   dialogActionManager: {fileID: 477474868}
   guiCamera: {fileID: 97792199}
   dialogCanvas: {fileID: 40757786}
@@ -3793,12 +3793,12 @@ Prefab:
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterShallowColor.r
-      value: 0.1252738
+      value: 0.12527299
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterColor.r
-      value: 0.27973682
+      value: 0.27973595
       objectReference: {fileID: 0}
     - target: {fileID: 4000010873081078, guid: 4be443cc50afcd0478e5b4d4f2f6cb53, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3842,37 +3842,37 @@ Prefab:
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterColor.g
-      value: 0.3308289
+      value: 0.33082807
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterColor.b
-      value: 0.32025626
+      value: 0.3202554
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterShallowColor.g
-      value: 0.13965529
+      value: 0.13965449
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterShallowColor.b
-      value: 0.13667914
+      value: 0.13667834
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: fresnelColor.r
-      value: 0.26162493
+      value: 0.2616241
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: fresnelColor.g
-      value: 0.3234761
+      value: 0.32347527
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: fresnelColor.b
-      value: 0.31323612
+      value: 0.31323525
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
@@ -9770,8 +9770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 235218217}
-  xDistanceThreshold: 10
-  yDistanceThreshold: 6
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
@@ -10682,7 +10681,7 @@ MonoBehaviour:
   xSpawnAdjust: -3
   ySpawnAdjust: 1
   activateSomethingWithSpace: 1
-  spawnSomethingWithGlow: 1
+  spawnSomethingWithGlow: 0
   glowSprite: {fileID: 21300000, guid: 404cbafb32045b046a185217777700e9, type: 3}
   spawnedObjectSprite: {fileID: 21300000, guid: c05494d39ab916f4a987cd769e77f437,
     type: 3}
@@ -10691,6 +10690,7 @@ MonoBehaviour:
   highlightSound: {fileID: 8300000, guid: 6a3eedea784edf749a58fe7cf833a415, type: 3}
   player: {fileID: 0}
   pinEquipHUD: {fileID: 469352366}
+  hubDescriptionPrompt: {fileID: 2075678065}
 --- !u!114 &270618513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25229,6 +25229,36 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 576ab416164cc944bb550233c9211f2f, type: 2}
   m_IsPrefabParent: 0
@@ -39461,8 +39491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 761457621}
-  xDistanceThreshold: 3.5
-  yDistanceThreshold: 5
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: SlabTalk
@@ -42209,7 +42238,7 @@ GameObject:
   - component: {fileID: 867816566}
   - component: {fileID: 867816572}
   - component: {fileID: 867816573}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: workerRat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42860,6 +42889,7 @@ MonoBehaviour:
   currentStars: {fileID: 0}
   largeTrashTextDisplay: {fileID: 0}
   treasureCollectedDisplay: {fileID: 0}
+  largeTrashCollectedDisplay: {fileID: 0}
   ltManager: {fileID: 0}
   currentWorld: 0
   backPaper: {fileID: 0}
@@ -58861,8 +58891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 994577262}
-  xDistanceThreshold: 0
-  yDistanceThreshold: 0
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 0
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: questioTalk
@@ -70939,7 +70968,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1077156281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45, y: -2.33, z: 0}
+  m_LocalPosition: {x: -2.07, y: -2.33, z: 0}
   m_LocalScale: {x: 3.0227144, y: 2.5639124, z: 1}
   m_Children: []
   m_Father: {fileID: 1222395416}
@@ -70976,8 +71005,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 962927795
-  m_SortingLayer: 2
+  m_SortingLayerID: 1780242901
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 66af31ef3a546c648ad6237d3b03a835, type: 3}
   m_Color: {r: 0.86764705, g: 0.86764705, b: 0.86764705, a: 0.872}
@@ -73012,8 +73041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 1162992343}
-  xDistanceThreshold: 15
-  yDistanceThreshold: 15
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: exTalk
@@ -77329,6 +77357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1222395416}
   - component: {fileID: 1222395415}
+  - component: {fileID: 1222395417}
   m_Layer: 0
   m_Name: hub_crane
   m_TagString: Untagged
@@ -77398,6 +77427,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 58
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1222395417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1222395414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  sortBuddies: []
 --- !u!1 &1224685209
 GameObject:
   m_ObjectHideFlags: 0
@@ -79817,8 +79859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 0}
-  xDistanceThreshold: 3
-  yDistanceThreshold: 2
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
@@ -81092,8 +81133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 1359421486}
-  xDistanceThreshold: 4
-  yDistanceThreshold: 4
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: RatWithHat
@@ -84829,8 +84869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 1486387519}
-  xDistanceThreshold: 15
-  yDistanceThreshold: 15
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
@@ -85799,8 +85838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 0}
-  xDistanceThreshold: 0
-  yDistanceThreshold: 0
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 0
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: hashTalk
@@ -102619,8 +102657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 0}
-  xDistanceThreshold: 0
-  yDistanceThreshold: 0
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
@@ -113238,7 +113275,7 @@ GameObject:
   - component: {fileID: 1840151348}
   - component: {fileID: 1840151354}
   - component: {fileID: 1840151355}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: workerRat (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117827,7 +117864,7 @@ GameObject:
   - component: {fileID: 1886391816}
   - component: {fileID: 1886391822}
   - component: {fileID: 1886391823}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: workerRat (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118068,7 +118105,7 @@ GameObject:
   - component: {fileID: 1905467712}
   - component: {fileID: 1905467718}
   - component: {fileID: 1905467719}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: workerRat (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121476,6 +121513,36 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
   m_IsPrefabParent: 0
@@ -121845,7 +121912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20cf878af9997b547a821b07fb346969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceUntilGlow: 3
+  distanceUntilGlow: 5
   xSpawnAdjust: 5
   ySpawnAdjust: 3
   activateSomethingWithSpace: 1
@@ -121857,6 +121924,7 @@ MonoBehaviour:
   highlightSound: {fileID: 8300000, guid: 883f2ba59ade3f440893d5ac6c726d73, type: 3}
   player: {fileID: 0}
   fader: {fileID: 1243261373}
+  hubDescriptionPrompt: {fileID: 2075678065}
 --- !u!61 &2013572682
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -121880,7 +121948,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.14, y: 2.36}
+  m_Size: {x: 8.77, y: 5}
   m_EdgeRadius: 0
 --- !u!114 &2013572683
 MonoBehaviour:
@@ -126453,6 +126521,161 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &2075678065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2075678068}
+  - component: {fileID: 2075678067}
+  - component: {fileID: 2075678066}
+  m_Layer: 5
+  m_Name: DescriptionPrompt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2075678066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2075678065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1453722849, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_text: <color=#78FF32>Start Next Day</color>
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 1777e8dbacf426f43a980c6d7aa7b8bd, type: 2}
+  m_sharedMaterial: {fileID: 21153409803939800, guid: 1777e8dbacf426f43a980c6d7aa7b8bd,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontSize: 13.8
+  m_fontSizeBase: 13.8
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_textAlignment: 258
+  m_isAlignmentEnumConverted: 1
+  m_characterSpacing: 7.48
+  m_wordSpacing: -11.7
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_firstOverflowCharacterIndex: -1
+  m_linkedTextComponent: {fileID: 0}
+  m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_ignoreRectMaskCulling: 0
+  m_ignoreCulling: 1
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_firstVisibleCharacter: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_textInfo:
+    textComponent: {fileID: 2075678066}
+    characterCount: 14
+    spriteCount: 0
+    spaceCount: 2
+    wordCount: 3
+    linkCount: 0
+    lineCount: 1
+    pageCount: 1
+    materialCount: 1
+  m_havePropertiesChanged: 0
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_spriteAnimator: {fileID: 0}
+  m_isInputParsingRequired: 0
+  m_inputSource: 0
+  m_hasFontAssetChanged: 0
+  m_subTextObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &2075678067
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2075678065}
+--- !u!224 &2075678068
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2075678065}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 9.87}
+  m_LocalScale: {x: 1.0000466, y: 1.0000466, z: 1.0000466}
+  m_Children: []
+  m_Father: {fileID: 2122410668}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 14.460054, y: -100.60999}
+  m_SizeDelta: {x: 325.4, y: 19.3}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2077608951
 GameObject:
   m_ObjectHideFlags: 0
@@ -126620,8 +126843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 2078932520}
-  xDistanceThreshold: 5
-  yDistanceThreshold: 5
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: StoneTalk
@@ -126955,8 +127177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 2099071653}
-  xDistanceThreshold: 5
-  yDistanceThreshold: 5
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: RatOnMatIcon
@@ -127579,6 +127800,7 @@ Transform:
   - {fileID: 1081446014}
   - {fileID: 942603150}
   - {fileID: 620245718}
+  - {fileID: 2075678068}
   m_Father: {fileID: 1934492902}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

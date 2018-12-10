@@ -11,14 +11,14 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int value;
 
-    private long pinsDiscoveredValue = (long)(PIN.BULKYBAG); //| PIN.TREASURETRACKER | PIN.COUNTSCRAPULA | PIN.PROJECTILEPROTECTOR);
+    private long pinsDiscoveredValue = (long)(PIN.BULKYBAG | PIN.DIRTYDECOY); //| PIN.TREASURETRACKER | PIN.COUNTSCRAPULA | PIN.PROJECTILEPROTECTOR);
     public PIN PINS_DISCOVERED
     {
         set { pinsDiscoveredValue = (long)value; }
         get { return (PIN)pinsDiscoveredValue; }
     }
 
-    private long pinsEquippedValue = (long)(PIN.NONE);//(PIN.NONE);
+    private long pinsEquippedValue = (long)(PIN.DIRTYDECOY);//(PIN.NONE);
     public PIN PINS_EQUIPPED
     {
         set { pinsEquippedValue = (long)value; }

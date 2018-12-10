@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Ev_PinDisplayOption : SE_GlowWhenClose {
 
 	//public Ev_FadeHelper fader;
 	public GameObject pinEquipHUD;
-	//public EightWayMovement player;
-	// Use this for initialization
+	public GameObject hubDescriptionPrompt;
+
 
 
 	public override void Activate ()
@@ -16,4 +17,16 @@ public class Ev_PinDisplayOption : SE_GlowWhenClose {
 		pinEquipHUD.SetActive(true);
 		this.enabled = false;
 	}
+
+
+	public override void GlowFunction(){
+		
+		hubDescriptionPrompt.GetComponent<TextMeshProUGUI>().text = "<color=#78FF32>Equip Pins</color>";
+		hubDescriptionPrompt.SetActive(true);
+	}
+	public override void StopGlowFunction(){
+		hubDescriptionPrompt.SetActive(false);
+
+	}
+
 }

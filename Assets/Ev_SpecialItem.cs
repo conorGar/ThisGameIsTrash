@@ -47,6 +47,9 @@ public class Ev_SpecialItem : MonoBehaviour {
 			canPickUp = true;
             beingTossed = false;
 		}
+
+
+
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){

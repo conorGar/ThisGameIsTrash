@@ -37,7 +37,8 @@ public class MultipleIcon : MonoBehaviour {
     public void ResetPositionOnScreen()
     {
         // restore initial positions for the next time this icon is activated.
-        positionOnScreen = initialPositionOnScreen;
+        if(this.gameObject.activeInHierarchy)
+        	positionOnScreen = initialPositionOnScreen;
     }
 
 

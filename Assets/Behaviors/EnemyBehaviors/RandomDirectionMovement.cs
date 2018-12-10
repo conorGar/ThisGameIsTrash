@@ -20,9 +20,14 @@ public class RandomDirectionMovement : MonoBehaviour {
 	int turnOnce = 0;
 
 	// Use this for initialization
+
+	void Start(){
+		startingScale = gameObject.transform.localScale;
+
+	}
+
 	protected void OnEnable () {
 		//walkCloud  = GameObject.Find("effect_WalkCloud");
-		startingScale = gameObject.transform.localScale;
 		anim = GetComponent<tk2dSpriteAnimator>();
 		GoAgain();
 	}

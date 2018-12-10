@@ -27,6 +27,8 @@ public class PinFunctionsManager : MonoBehaviour {
 
 
 	GameObject decoyInstance;
+	int decoyTimer;
+
 
 	int dashCounter = 0;
 	INPUTACTION dashKey;
@@ -40,7 +42,7 @@ public class PinFunctionsManager : MonoBehaviour {
 			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DIRTYDECOY)){
 				decoyInstance = Instantiate(decoyObject,gameObject.transform.position,Quaternion.identity); //ask if this is better since this object isnt needed unless has the pin?
 				decoyObject.SetActive(false);
-				InvokeRepeating("DirtyDecoy",Random.Range(7f,15f),25);
+				InvokeRepeating("DirtyDecoyTimer",1,1);
 			}
 
 		}
@@ -132,6 +134,16 @@ public class PinFunctionsManager : MonoBehaviour {
 		decoyInstance.SetActive(true);
 		//decoyInstance.transform.parent = null;
 
+	}
+
+	void DirtyDecoyTimer(){
+		if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
+			decoyTimer++;
+			if(decoyTimer >= 25){
+			DirtyDecoy();
+			decoyTimer = 0;
+			}
+		}
 	}
 
 	public void HungryForMore(){

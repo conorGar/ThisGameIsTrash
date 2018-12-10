@@ -30,6 +30,11 @@ public class GUI_OptionsMenu : MonoBehaviour {
 		sfxVol.GetComponent<Image>().fillAmount = SoundManager.instance.sfxSource.volume;
     }
 
+    void OnEnable(){
+    	arrowPos = 1;
+    	SelectNext();
+    }
+
     // Update is called once per frame
     void Update() {
 		if (GameStateManager.Instance.GetCurrentState() == typeof(OptionsState)) {
@@ -87,9 +92,7 @@ public class GUI_OptionsMenu : MonoBehaviour {
 			}
 		}
 	}
-	void OnEnable(){
-		arrowPos = 1;
-	}
+
 
 	void SelectNext(){
 		if(arrowPos == 1){

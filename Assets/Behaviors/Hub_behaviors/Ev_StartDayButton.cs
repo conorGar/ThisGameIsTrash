@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Ev_StartDayButton : SE_GlowWhenClose {
 
 	public Ev_FadeHelper fader;
+	public GameObject hubDescriptionPrompt;
+
 
 	public override void Activate(){
         GameStateManager.Instance.PopAllStates();
@@ -19,9 +22,13 @@ public class Ev_StartDayButton : SE_GlowWhenClose {
 
 	public override void GlowFunction(){
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play();
+		hubDescriptionPrompt.GetComponent<TextMeshProUGUI>().text = "<color=#78FF32>Start Next Day</color>";
+		hubDescriptionPrompt.SetActive(true);
 	}
 	public override void StopGlowFunction(){
 		gameObject.GetComponent<tk2dSpriteAnimator>().Stop();
+		hubDescriptionPrompt.SetActive(false);
+
 	}
 
 }

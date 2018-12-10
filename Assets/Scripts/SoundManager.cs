@@ -8,7 +8,8 @@ public enum SFXBANK
     HIT6,
     HIT7,
     RAT_SQUEAL,
-    ENEMY_BOUNCE
+    ENEMY_BOUNCE,
+    HEAL
 }
 
 public enum MUSICBANK
