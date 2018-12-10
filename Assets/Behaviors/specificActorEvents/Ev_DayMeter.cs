@@ -35,14 +35,19 @@ public class Ev_DayMeter : MonoBehaviour {
 	bool nightMark;
 
 	void Start () {
-		GlobalVariableManager.Instance.TIME_IN_DAY = 0;
-		dayIcon.transform.localPosition = startPos.transform.localPosition;
-		dayNumberDisplay.text = "Day: "+ GlobalVariableManager.Instance.DAY_NUMBER;
-        secondsPassed = 0f;
-        startColor = dayColorTint.color;
-
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }//end of Start()
+
+    void Awake()
+    {
+        GlobalVariableManager.Instance.TIME_IN_DAY = 0;
+        dayIcon.transform.localPosition = startPos.transform.localPosition;
+        dayNumberDisplay.text = "Day: " + GlobalVariableManager.Instance.DAY_NUMBER;
+        secondsPassed = 0f;
+
+        if (dayColorTint != null)
+            startColor = dayColorTint.color;
+    }
 
     void OnDestroy()
     {
@@ -119,7 +124,17 @@ public class Ev_DayMeter : MonoBehaviour {
 		SoundManager.instance.PlaySingle(halfWayDoneChime);
 	}
 
-	void NightMark(){
+    public void DayMeterRise(float _secondsPassed)
+    {
+        gameObject.SetActive(true);
+        secondsPassed = _secondsPassed;
+        if (secondsPassed > (secondsInTheDay * delayBonus / 1.3f) && !nightMark) {
+            NightMark();
+        }
+    }
+
+
+    void NightMark(){
 		nightMark = true;
 		dayIcon.GetComponent<Image>().sprite= nightIcon;
 		dayIcon.GetComponent<Animator>().Play("dayChangeEmphasis",-1,0f);

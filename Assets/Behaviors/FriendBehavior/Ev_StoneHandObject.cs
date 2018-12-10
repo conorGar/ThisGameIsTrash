@@ -22,6 +22,7 @@ public class Ev_StoneHandObject : PickupableObject
 	}
 
 	void OnEnable(){
+        requiresGrabbyGloves = false;
 		if(rocksGatheringRoom == null)
 		rocksGatheringRoom = GameObject.Find("a4").GetComponent<Room>();
 	}

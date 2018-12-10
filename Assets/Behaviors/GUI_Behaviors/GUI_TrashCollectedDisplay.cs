@@ -14,8 +14,9 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//TODO: adjust for different bag types
-		maxTrashDisplay.text = "/" + GlobalVariableManager.Instance.BAG_SIZE;
-		trashCollected.text = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0].ToString();
+		maxTrashDisplay.text = "/" + GlobalVariableManager.Instance.BAG_SIZE_STAT.GetMax();
+        GlobalVariableManager.Instance.BAG_SIZE_STAT.ResetCurrent();
+        trashCollected.text = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0].ToString();
 
 	}
 	

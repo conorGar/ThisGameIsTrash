@@ -58,8 +58,12 @@ public class RatWithHatFriend : Friend {
             case "ADVERTISED":
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
+                yield return base.OnFinishDialogEnumerator();
                 break;
             case "OPEN_FOR_BUSINESS":
+                // pop the movie state before we push the shop state.
+                yield return base.OnFinishDialogEnumerator();
+
                 // After the shop is open for business it's controlled by the Hub_UpgradeStand!
                 GUIManager.Instance.Hub_UpgradeStand.enabled = true;
 
@@ -71,7 +75,6 @@ public class RatWithHatFriend : Friend {
         }
 
         yield return null;
-        //yield return base.OnFinishDialogEnumerator();
     }
 
     public void RatWithHatIntro()

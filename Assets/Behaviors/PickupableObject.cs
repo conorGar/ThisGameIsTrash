@@ -12,6 +12,7 @@ public class PickupableObject : MonoBehaviour
 	public GameObject carryMark;
 	public bool throwableObject;
 	protected bool movePlayerToObject;
+    protected bool requiresGrabbyGloves = true;
 	public GameObject childPickupObj; // used for objects that need a parent, but whose spriterender cant be on the parent object(like for an intro animation)
 	//int bounce = 0;
 	//int doOnce = 0;
@@ -55,10 +56,13 @@ public class PickupableObject : MonoBehaviour
 	{	
 		if(player != null && Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
 			//Debug.Log("within distance" + GlobalVariableManager.Instance.CARRYING_SOMETHING);
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING && GlobalVariableManager.Instance.PLAYER_CAN_MOVE && GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)){//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'
-				Debug.Log("PickUpable object...picked up");
-				movePlayerToObject = true;
-				PickUp();
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING && GlobalVariableManager.Instance.PLAYER_CAN_MOVE){//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'
+                // Allow this object to be picked up if it doesn't require the grabby gloves, or they have the grabby gloves.
+                if (!requiresGrabbyGloves || GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)) {
+                    Debug.Log("PickUpable object...picked up");
+                    movePlayerToObject = true;
+                    PickUp();
+                }
 			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried && !throwableObject){
 				if(Vector2.Distance(player.transform.position,dumpster.transform.position) > 15f) //TODO: temp solution for making sure trash isnt dropped before 'Return' is activated
 					Drop();

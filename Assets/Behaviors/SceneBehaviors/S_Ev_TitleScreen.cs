@@ -57,6 +57,7 @@ public class S_Ev_TitleScreen : MonoBehaviour {
         loadingGameDataVisual.gameObject.SetActive(true);
 
         // Testing data loading!
+        GlobalVariableManager.Instance.SetDefaultStats();
         UserDataManager.Instance.SetSlot(0);
         yield return UserDataManager.Instance.ReadAsync();
 

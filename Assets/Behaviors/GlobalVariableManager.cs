@@ -11,17 +11,17 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int value;
 
-    private ulong pinsDiscoveredValue = (ulong)(PIN.BULKYBAG); //| PIN.TREASURETRACKER | PIN.COUNTSCRAPULA | PIN.PROJECTILEPROTECTOR);
+    private long pinsDiscoveredValue = (long)(PIN.BULKYBAG | PIN.DIRTYDECOY); //| PIN.TREASURETRACKER | PIN.COUNTSCRAPULA | PIN.PROJECTILEPROTECTOR);
     public PIN PINS_DISCOVERED
     {
-        set { pinsDiscoveredValue = (ulong)value; }
+        set { pinsDiscoveredValue = (long)value; }
         get { return (PIN)pinsDiscoveredValue; }
     }
 
-    private ulong pinsEquippedValue = (ulong)(PIN.DIRTYDECOY);//(PIN.NONE);
+    private long pinsEquippedValue = (long)(PIN.DIRTYDECOY);//(PIN.NONE);
     public PIN PINS_EQUIPPED
     {
-        set { pinsEquippedValue = (ulong)value; }
+        set { pinsEquippedValue = (long)value; }
         get { return (PIN)pinsEquippedValue; }
     }
 
@@ -42,10 +42,11 @@ public class GlobalVariableManager : UserDataItem {
 	public int ARROW_POSITION = 1;
 
 	//base stats
-	public int Max_HP = 5;
-	public int BAG_SIZE = 10;
-	public int PPVALUE = 5;
-	public int STAR_POINTS = 0;
+	public PlayerStat HP_STAT = new PlayerStat(PLAYERSTATTYPE.HP, 5);
+    public PlayerStat BAG_SIZE_STAT = new PlayerStat(PLAYERSTATTYPE.BAG_SIZE, 10);
+    public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
+    public PlayerStat STAR_POINTS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_POINTS, 0);
+
 
 	public int DAY_NUMBER = 1;
 	public bool IS_HIDDEN = false;
@@ -205,7 +206,7 @@ public class GlobalVariableManager : UserDataItem {
     private void Awake(){
 		if(Instance == null){
 			Instance = this;
-            Instance.PPVALUE = 5;
+            Instance.PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
 			DontDestroyOnLoad(gameObject);
 		}else{
 			Destroy(gameObject);
@@ -220,6 +221,7 @@ public class GlobalVariableManager : UserDataItem {
 
     public override SimpleJSON.JSONObject Save()
     {
+        SimpleJSON.JSONNode.longAsString = true; // Needed to store pins properly.
         var json_data = new SimpleJSON.JSONObject();
 
         // Game Settings.
@@ -242,10 +244,12 @@ public class GlobalVariableManager : UserDataItem {
         json_data["LARGE_GARBAGE_VIEWED"] = (uint)LARGE_GARBAGE_VIEWED;
 
         // Stats and things
-        json_data["STAR_POINTS"] = STAR_POINTS;
-        json_data["Max_HP"] = Max_HP;
-        json_data["BAG_SIZE"] = BAG_SIZE;
-        json_data["PPVALUE"] = PPVALUE;
+        json_data["STAR_POINTS"] = STAR_POINTS_STAT.GetMaxRaw();
+        json_data["CURRENT_STAR_POINTS"] = STAR_POINTS_STAT.GetCurrent();
+
+        json_data["Max_HP"] = HP_STAT.GetMaxRaw();
+        json_data["BAG_SIZE"] = BAG_SIZE_STAT.GetMaxRaw();
+        json_data["PPVALUE"] = PP_STAT.GetMaxRaw();
         json_data["DEJAVUCOUNT"] = DEJAVUCOUNT;
         json_data["CURSEVALUE"] = CURSEVALUE;
         json_data["MOMONEYVALUE"] = MOMONEYVALUE;
@@ -257,6 +261,14 @@ public class GlobalVariableManager : UserDataItem {
         return json_data;
     }
 
+    public void SetDefaultStats()
+    {
+        STAR_POINTS_STAT.ResetCurrent();
+        HP_STAT.ResetCurrent();
+        PP_STAT.ResetCurrent();
+        BAG_SIZE_STAT.ResetCurrent();
+    }
+
     public override void Load(SimpleJSON.JSONObject json_data)
     {
         MASTER_MUSIC_VOL = json_data["MASTER_MUSIC_VOL"].AsFloat;
@@ -264,8 +276,8 @@ public class GlobalVariableManager : UserDataItem {
 
         DAY_NUMBER = json_data["DAY_NUMBER"].AsInt;
 
-        pinsDiscoveredValue = (ulong)json_data["pinsDiscoveredValue"].AsLong;
-        pinsEquippedValue = (ulong)json_data["pinsEquippedValue"].AsLong;
+        pinsDiscoveredValue = json_data["pinsDiscoveredValue"].AsLong;
+        pinsEquippedValue = json_data["pinsEquippedValue"].AsLong;
 
         STANDARD_GARBAGE_DISCOVERED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_DISCOVERED"].AsInt;
         STANDARD_GARBAGE_VIEWED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_VIEWED"].AsInt;
@@ -276,10 +288,17 @@ public class GlobalVariableManager : UserDataItem {
         LARGE_GARBAGE_DISCOVERED = (LARGEGARBAGE)json_data["LARGE_GARBAGE_DISCOVERED"].AsInt;
         LARGE_GARBAGE_VIEWED = (LARGEGARBAGE)json_data["LARGE_GARBAGE_VIEWED"].AsInt;
 
-        STAR_POINTS = json_data["STAR_POINTS"].AsInt;
-        Max_HP = json_data["Max_HP"].AsInt;
-        BAG_SIZE = json_data["BAG_SIZE"].AsInt;
-        PPVALUE = json_data["PPVALUE"].AsInt;
+        STAR_POINTS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_POINTS, json_data["STAR_POINTS"].AsInt);
+        STAR_POINTS_STAT.SetCurrent(json_data["CURRENT_STAR_POINTS"].AsInt);
+
+        HP_STAT = new PlayerStat(PLAYERSTATTYPE.HP, json_data["Max_HP"].AsInt);
+        HP_STAT.ResetCurrent();
+
+        BAG_SIZE_STAT = new PlayerStat(PLAYERSTATTYPE.BAG_SIZE, json_data["BAG_SIZE"].AsInt);
+        HP_STAT.ResetCurrent();
+
+        PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, json_data["PPVALUE"].AsInt);
+
         DEJAVUCOUNT = json_data["DEJAVUCOUNT"].AsInt;
         CURSEVALUE = json_data["CURSEVALUE"].AsInt;
         MOMONEYVALUE = json_data["MOMONEYVALUE"].AsInt;

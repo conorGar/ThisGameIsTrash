@@ -104,7 +104,12 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 		leftSide.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0,0,.2f,true);
 		rightSide.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0,0,.2f,true);
         CamManager.Instance.mainCamPostProcessor.profile = blur;
-        totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
+
+        // Get the current pp stat by evaluating the pins equipped.
+        GlobalVariableManager.Instance.PP_STAT.ResetCurrent();
+        GlobalVariableManager.Instance.PP_STAT.UpdateCurrent(-PinManager.Instance.GetAllocatedPP());
+
+        totalPPDisplay.text = GlobalVariableManager.Instance.PP_STAT.GetCurrent().ToString();
 
         arrowPos = 0;
         MoveArrow();
@@ -134,7 +139,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                     //    highlightedPin.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 15f));
                 }*/
 
-                totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
+                totalPPDisplay.text = GlobalVariableManager.Instance.PP_STAT.GetCurrent().ToString();
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)) {
                 GameObject pinCase = GameObject.Find("hubWorld_pinCase");
@@ -198,7 +203,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                 }
             }
 
-            totalPPDisplay.text = GlobalVariableManager.Instance.PPVALUE.ToString();
+            totalPPDisplay.text = GlobalVariableManager.Instance.PP_STAT.GetCurrent().ToString();
         }
     }
 

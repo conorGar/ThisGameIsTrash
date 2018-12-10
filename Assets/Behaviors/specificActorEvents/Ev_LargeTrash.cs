@@ -20,8 +20,7 @@ public class Ev_LargeTrash : PickupableObject {
 	public GameObject smokePuff;
 	public GameObject ltmManager;//only used for drop function
 	public AudioClip returnSound;
-
-
+    
 	//^
 	//large trash is aware f the current room it is in. This room is given by roomManger.currentoom at start and when large trash
 	//is dropped. If myCurrentRoom = RoomManager.currentRoom, deactivate self. (In update method?) check if the roomManager.room =
@@ -50,6 +49,7 @@ public class Ev_LargeTrash : PickupableObject {
 		
 		player = GameObject.FindGameObjectWithTag("Player");
 		dumpster = GameObject.Find("Dumpster");
+        requiresGrabbyGloves = false;
 
 		//playerAni = player.GetComponent<tk2dSpriteAnimator>();
 		//currentRoomNumber = GlobalVariableManager.Instance.ROOM_NUM;

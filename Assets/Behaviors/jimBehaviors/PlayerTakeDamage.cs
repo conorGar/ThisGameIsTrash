@@ -19,8 +19,6 @@ public class PlayerTakeDamage : MonoBehaviour {
 	public AudioClip healSound;
 	[HideInInspector]
 	public GameObject currentlyCarriedObject; // set by pickupableObject.cs for use when dropping at death
-	int maxHP;
-	public int currentHp;
 	int damageDealt;
 
 	bool currentlyTakingDamage = false;
@@ -30,8 +28,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.APPLEPLUS)){
 			gameObject.GetComponent<PinFunctionsManager>().ApplePlus();
 		}
-		maxHP = GlobalVariableManager.Instance.Max_HP;	
-		currentHp = maxHP;
+
+        GlobalVariableManager.Instance.HP_STAT.ResetCurrent();
 	}
 	
 	// Update is called once per frame
@@ -89,10 +87,10 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 			currentlyTakingDamage = true;
 			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-			currentHp -= damageDealt;
+			GlobalVariableManager.Instance.HP_STAT.UpdateCurrent(-damageDealt);
 			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("hurt",true);
-			Debug.Log("reached this end of hp hud change" + currentHp);
-			HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
+			Debug.Log("reached this end of hp hud change" + GlobalVariableManager.Instance.HP_STAT.GetCurrent());
+			HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
 			GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars_player",this.gameObject.transform.position);
 			damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(damageDealt);
 			damageCounter.SetActive(true);
@@ -108,7 +106,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 				damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 			}
 
-			if(currentHp <= 0){
+			if(GlobalVariableManager.Instance.HP_STAT.GetCurrent() <= 0){
 				SoundManager.instance.PlaySingle(finalHit);
 
 				StartCoroutine("Death");
@@ -145,13 +143,14 @@ public class PlayerTakeDamage : MonoBehaviour {
 	}
 
 	public void Heal(int healAmnt){
-		if(currentHp + healAmnt < maxHP){
-			currentHp += healAmnt;
+		if(GlobalVariableManager.Instance.HP_STAT.GetCurrent() + healAmnt < GlobalVariableManager.Instance.HP_STAT.GetMax()) {
+            GlobalVariableManager.Instance.HP_STAT.UpdateCurrent(+healAmnt);
 		}else{
-			currentHp = maxHP;
+            GlobalVariableManager.Instance.HP_STAT.ResetCurrent();
 		}
+
 		SoundManager.instance.PlaySingle(healSound);
-		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
+		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
 
 	}
 
@@ -214,7 +213,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
         CamManager.Instance.mainCam.transform.position = new Vector3(0f,0f,-10f);
 		roomManager.GetComponent<RoomManager>().Restart();
-		currentHp = GlobalVariableManager.Instance.Max_HP;
+		GlobalVariableManager.Instance.HP_STAT.ResetCurrent();
 		currentlyTakingDamage = false;
 		GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] = 0;
 		gameObject.GetComponent<MeshRenderer>().enabled = true;
@@ -224,7 +223,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		}else{
 			gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();
 		}
-		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay(currentHp);
+		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
         GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 		truck.GetComponent<Ev_SmallTruck>().RespawnEnd();

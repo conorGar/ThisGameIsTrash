@@ -36,11 +36,34 @@ public class PinManager : MonoBehaviour {
         }
     }
 
+    private void Start()
+    {
+        // Get the current pp stat by evaluating the pins equipped.
+        // TODO: PinManager is so coupled with the store that it can't exist outside the hub scene.  Need to move all the visual stuff back into the EquipScreen  so the PinManager can be used as a real Singleton.
+        GlobalVariableManager.Instance.PP_STAT.ResetCurrent();
+        GlobalVariableManager.Instance.PP_STAT.UpdateCurrent(-PinManager.Instance.GetAllocatedPP());
+    }
+
     public PinDefinition GetPin(PIN type)
     {
         if (PINLOOKUP.ContainsKey(type))
             return PINLOOKUP[type];
         return null;
+    }
+
+    // amount of allocated PP inferred from equipped pins.
+    public int GetAllocatedPP()
+    {
+        int count = 0;
+        for (int i = 0; i < pinConfig.pinList.Count; i++) {
+            var definition = pinConfig.pinList[i];
+
+            if (GlobalVariableManager.Instance.IsPinEquipped((PIN)definition.pinValue)) {
+                count += definition.ppValue;
+            }
+        }
+
+        return count;
     }
 
     // Returns a random pin from the range specified that fits the criteria.

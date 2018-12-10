@@ -63,6 +63,7 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 
         // Clear out all the states.
         GameStateManager.Instance.PopAllStates();
+        GlobalVariableManager.Instance.SetDefaultStats();
 
         StartCoroutine(UserDataManager.Instance.ReadAsync(
         () => {
