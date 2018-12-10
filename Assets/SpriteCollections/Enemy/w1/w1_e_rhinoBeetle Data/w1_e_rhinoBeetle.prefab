@@ -57,24 +57,120 @@ MonoBehaviour:
   spriteDefinitions:
   - name: w1_rhinoBeetle
     boundsData:
-    - {x: 0.012820125, y: 0.42307663, z: 0}
+    - {x: -0.012820125, y: 0.42307663, z: 0}
     - {x: 6.897435, y: 10.538462, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.4358976, y: -4.846154, z: 0}
+    - {x: -3.4615378, y: -4.846154, z: 0}
+    - {x: 3.4358976, y: 5.6923075, z: 0}
+    - {x: -3.4615378, y: 5.6923075, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.4838872, y: 0.7309575}
+    - {x: 0.6152339, y: 0.7309575}
+    - {x: 0.4838872, y: 0.93164015}
+    - {x: 0.6152339, y: 0.93164015}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: d8b1eb2d54314db468d5c8cbd722305e
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_backBounce
+    boundsData:
+    - {x: 0.43589783, y: 0.23076916, z: 0}
+    - {x: 7.7435894, y: 10.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.3076925, y: -5.1282053, z: 0}
+    - {x: -3.4358969, y: -5.1282053, z: 0}
+    - {x: 4.3076925, y: 5.5897436, z: 0}
+    - {x: -3.4358969, y: 5.5897436, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.0009770507}
+    - {x: 0.14843701, y: 0.0009770507}
+    - {x: 0.0009770507, y: 0.20507763}
+    - {x: 0.14843701, y: 0.20507763}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 5ec4e117d7957804ebe11ce3f844b2f0
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_idle6
+    boundsData:
+    - {x: 0.17948687, y: 0.11538434, z: 0}
+    - {x: 6.4102564, y: 10.333334, z: 0}
     untrimmedBoundsData:
     - {x: 0.012820244, y: -0.012820721, z: 0}
     - {x: 8.743589, y: 12.538462, z: 0}
     texelSize: {x: 0.025641026, y: 0.025641026}
     positions:
-    - {x: -3.4358976, y: -4.846154, z: 0}
-    - {x: 3.4615378, y: -4.846154, z: 0}
-    - {x: -3.4358976, y: 5.6923075, z: 0}
-    - {x: 3.4615378, y: 5.6923075, z: 0}
+    - {x: -3.0256412, y: -5.0512824, z: 0}
+    - {x: 3.384615, y: -5.0512824, z: 0}
+    - {x: -3.0256412, y: 5.282051, z: 0}
+    - {x: 3.384615, y: 5.282051, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 0.003908203, y: 0.30078223}
-    - {x: 0.003908203, y: 0.5634756}
-    - {x: 0.80663866, y: 0.30078223}
-    - {x: 0.80663866, y: 0.5634756}
+    - {x: 0.6528325, y: 0.37500048}
+    - {x: 0.6528325, y: 0.49706984}
+    - {x: 0.8496089, y: 0.37500048}
+    - {x: 0.8496089, y: 0.49706984}
     normalizedUvs:
     - {x: 0, y: 0}
     - {x: 0, y: 1}
@@ -84,7 +180,7 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
     materialId: 0
     materialIndexData: 000000000000000006000000
-    sourceTextureGUID: d8b1eb2d54314db468d5c8cbd722305e
+    sourceTextureGUID: 2f10cb7db9e71c24e8c0d1f31945fa7a
     extractRegion: 0
     regionX: 0
     regionY: 0
@@ -103,26 +199,170 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
-  - name: w1_rhinoBeetle_backBounce
+  - name: w1_rhinoBeetle_lookAround1
     boundsData:
-    - {x: -0.43589783, y: 0.23076916, z: 0}
-    - {x: 7.7435894, y: 10.717949, z: 0}
+    - {x: -0.00000035762787, y: 0.06410241, z: 0}
+    - {x: 7.5897436, y: 9.512821, z: 0}
     untrimmedBoundsData:
     - {x: 0.012820244, y: -0.012820721, z: 0}
     - {x: 8.743589, y: 12.538462, z: 0}
     texelSize: {x: 0.025641026, y: 0.025641026}
     positions:
-    - {x: -4.3076925, y: -5.1282053, z: 0}
-    - {x: 3.4358969, y: -5.1282053, z: 0}
-    - {x: -4.3076925, y: 5.5897436, z: 0}
-    - {x: 3.4358969, y: 5.5897436, z: 0}
+    - {x: -3.794872, y: -4.692308, z: 0}
+    - {x: 3.7948713, y: -4.692308, z: 0}
+    - {x: -3.794872, y: 4.820513, z: 0}
+    - {x: 3.7948713, y: 4.820513, z: 0}
     normals: []
     tangents: []
     uvs:
-    - {x: 0.003908203, y: 0.0019541015}
-    - {x: 0.003908203, y: 0.29687402}
-    - {x: 0.82031053, y: 0.0019541015}
-    - {x: 0.82031053, y: 0.29687402}
+    - {x: 0.30615282, y: 0.19677784}
+    - {x: 0.45068312, y: 0.19677784}
+    - {x: 0.30615282, y: 0.3779292}
+    - {x: 0.45068312, y: 0.3779292}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f68c6e482cd576a4aab56c1c97c370d6
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_lookAround2
+    boundsData:
+    - {x: -0.21794891, y: 0.089743614, z: 0}
+    - {x: 7.9230766, y: 9.615385, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.179487, y: -4.717949, z: 0}
+    - {x: 3.7435894, y: -4.717949, z: 0}
+    - {x: -4.179487, y: 4.897436, z: 0}
+    - {x: 3.7435894, y: 4.897436, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.29150438, y: 0.39599657}
+    - {x: 0.44238234, y: 0.39599657}
+    - {x: 0.29150438, y: 0.5791011}
+    - {x: 0.44238234, y: 0.5791011}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 9806931f4fdf7df48ba09e5ca7654a63
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_lookAround3
+    boundsData:
+    - {x: -0.320513, y: 0.17948699, z: 0}
+    - {x: 8.076923, y: 9.794872, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.3589745, y: -4.717949, z: 0}
+    - {x: 3.7179484, y: -4.717949, z: 0}
+    - {x: -4.3589745, y: 5.076923, z: 0}
+    - {x: 3.7179484, y: 5.076923, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.15039112, y: 0.0009770507}
+    - {x: 0.30419874, y: 0.0009770507}
+    - {x: 0.15039112, y: 0.18749951}
+    - {x: 0.30419874, y: 0.18749951}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 7faa956d630b6ca4592ccb8737fe293a
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_walk2
+    boundsData:
+    - {x: 0.26923037, y: 0.3461535, z: 0}
+    - {x: 6.435897, y: 11.205128, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.948718, y: -5.2564106, z: 0}
+    - {x: 3.4871788, y: -5.2564106, z: 0}
+    - {x: -2.948718, y: 5.9487176, z: 0}
+    - {x: 3.4871788, y: 5.9487176, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.44335985, y: 0.0009770507}
+    - {x: 0.44335985, y: 0.123534665}
+    - {x: 0.6567378, y: 0.0009770507}
+    - {x: 0.6567378, y: 0.123534665}
     normalizedUvs:
     - {x: 0, y: 0}
     - {x: 0, y: 1}
@@ -132,7 +372,919 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
     materialId: 0
     materialIndexData: 000000000000000006000000
-    sourceTextureGUID: 5ec4e117d7957804ebe11ce3f844b2f0
+    sourceTextureGUID: 2be5a151103e69241bc670cfaa7e5594
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_turn3
+    boundsData:
+    - {x: -0.2564106, y: 0.70512795, z: 0}
+    - {x: 7.076923, y: 10.948717, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.794872, y: -4.769231, z: 0}
+    - {x: 3.2820508, y: -4.769231, z: 0}
+    - {x: -3.794872, y: 6.1794868, z: 0}
+    - {x: 3.2820508, y: 6.1794868, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.14209034, y: 0.61767626}
+    - {x: 0.14209034, y: 0.7524409}
+    - {x: 0.35058546, y: 0.61767626}
+    - {x: 0.35058546, y: 0.7524409}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 4e2b2aa54aff8fa478e64a7931d63174
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_turn4
+    boundsData:
+    - {x: -0.3461541, y: 0.53846145, z: 0}
+    - {x: 7.717948, y: 10.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.205128, y: -4.8205132, z: 0}
+    - {x: 3.51282, y: -4.8205132, z: 0}
+    - {x: -4.205128, y: 5.897436, z: 0}
+    - {x: 3.51282, y: 5.897436, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.20703174}
+    - {x: 0.14794873, y: 0.20703174}
+    - {x: 0.0009770507, y: 0.41113234}
+    - {x: 0.14794873, y: 0.41113234}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 41d7eab85fd793c4ebdccd134cf07099
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_turn5
+    boundsData:
+    - {x: -0.4487183, y: 0.49999976, z: 0}
+    - {x: 7.7692304, y: 10.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.3333335, y: -4.8205132, z: 0}
+    - {x: 3.4358969, y: -4.8205132, z: 0}
+    - {x: -4.3333335, y: 5.820513, z: 0}
+    - {x: 3.4358969, y: 5.820513, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.4130864}
+    - {x: 0.14892529, y: 0.4130864}
+    - {x: 0.0009770507, y: 0.6157222}
+    - {x: 0.14892529, y: 0.6157222}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 8078ff43989cb50429d9cdb6e8f0a806
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_lookAround4
+    boundsData:
+    - {x: -0.17948747, y: 0.1025641, z: 0}
+    - {x: 7.8461537, y: 9.589745, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.1025643, y: -4.692308, z: 0}
+    - {x: 3.7435894, y: -4.692308, z: 0}
+    - {x: -4.1025643, y: 4.897436, z: 0}
+    - {x: 3.7435894, y: 4.897436, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.33252, y: 0.754395}
+    - {x: 0.48193312, y: 0.754395}
+    - {x: 0.33252, y: 0.93701124}
+    - {x: 0.48193312, y: 0.93701124}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 68f536c1bb3b4d248bd08ecec6122970
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_lookAround5
+    boundsData:
+    - {x: -0.08974385, y: 0.15384579, z: 0}
+    - {x: 7.7692304, y: 9.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.974359, y: -4.666667, z: 0}
+    - {x: 3.7948713, y: -4.666667, z: 0}
+    - {x: -3.974359, y: 4.9743586, z: 0}
+    - {x: 3.7948713, y: 4.9743586, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.35253954, y: 0.58105516}
+    - {x: 0.35253954, y: 0.7290034}
+    - {x: 0.53613234, y: 0.58105516}
+    - {x: 0.53613234, y: 0.7290034}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 8e30e5536258c824285e72dbaa3b08c6
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_lookAround6
+    boundsData:
+    - {x: -0.30769253, y: 0.14102554, z: 0}
+    - {x: 8.102564, y: 9.820513, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.3589745, y: -4.769231, z: 0}
+    - {x: 3.7435894, y: -4.769231, z: 0}
+    - {x: -4.3589745, y: 5.051282, z: 0}
+    - {x: 3.7435894, y: 5.051282, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.14990284, y: 0.20703174}
+    - {x: 0.30419874, y: 0.20703174}
+    - {x: 0.14990284, y: 0.3940425}
+    - {x: 0.30419874, y: 0.3940425}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 41db751e53465a64992dd9429cac80d7
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_turn6
+    boundsData:
+    - {x: -0.28205156, y: 0.49999976, z: 0}
+    - {x: 7.333333, y: 10.692308, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.948718, y: -4.846154, z: 0}
+    - {x: 3.384615, y: -4.846154, z: 0}
+    - {x: -3.948718, y: 5.8461537, z: 0}
+    - {x: 3.384615, y: 5.8461537, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.8251958}
+    - {x: 0.0009770507, y: 0.9648433}
+    - {x: 0.20458935, y: 0.8251958}
+    - {x: 0.20458935, y: 0.9648433}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 7ec0375aff6575241ad7f101d07cc9ab
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_walk1
+    boundsData:
+    - {x: 0.32051253, y: 0.7564099, z: 0}
+    - {x: 6.384615, y: 10.846153, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.871795, y: -4.666667, z: 0}
+    - {x: 3.51282, y: -4.666667, z: 0}
+    - {x: -2.871795, y: 6.1794868, z: 0}
+    - {x: 3.51282, y: 6.1794868, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.4443364, y: 0.3798833}
+    - {x: 0.4443364, y: 0.50146437}
+    - {x: 0.6508784, y: 0.3798833}
+    - {x: 0.6508784, y: 0.50146437}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 064b63f83fbdda54582ba542278dd7cb
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_walk3
+    boundsData:
+    - {x: 0.29487145, y: 0.24358964, z: 0}
+    - {x: 6.435897, y: 10.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.923077, y: -5.0769234, z: 0}
+    - {x: 3.51282, y: -5.0769234, z: 0}
+    - {x: -2.923077, y: 5.5641026, z: 0}
+    - {x: 3.51282, y: 5.5641026, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.617188, y: 0.70898485}
+    - {x: 0.7397456, y: 0.70898485}
+    - {x: 0.617188, y: 0.9116206}
+    - {x: 0.7397456, y: 0.9116206}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: eb2099dacee2f7943a08ad5203e6ca6a
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_walk4
+    boundsData:
+    - {x: 0.20512784, y: 0.653846, z: 0}
+    - {x: 6.4102564, y: 10.692308, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.0000002, y: -4.692308, z: 0}
+    - {x: 3.410256, y: -4.692308, z: 0}
+    - {x: -3.0000002, y: 6, z: 0}
+    - {x: 3.410256, y: 6, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5380864, y: 0.50341845}
+    - {x: 0.6601558, y: 0.50341845}
+    - {x: 0.5380864, y: 0.7070308}
+    - {x: 0.6601558, y: 0.7070308}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 8489cecb7d98dba48bf138ab6b01af19
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_walk5
+    boundsData:
+    - {x: -0.11538446, y: 0.833333, z: 0}
+    - {x: 7.102564, y: 10.179487, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.4358976, y: -4.2564106, z: 0}
+    - {x: -3.6666665, y: -4.2564106, z: 0}
+    - {x: 3.4358976, y: 5.9230766, z: 0}
+    - {x: -3.6666665, y: 5.9230766, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.30615282, y: 0.0009770507}
+    - {x: 0.44140577, y: 0.0009770507}
+    - {x: 0.30615282, y: 0.19482373}
+    - {x: 0.44140577, y: 0.19482373}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 92d1ed16439511a43b770ab295491d27
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_turn1
+    boundsData:
+    - {x: -0.17948759, y: 0.5769229, z: 0}
+    - {x: 7.282051, y: 10.48718, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.820513, y: -4.666667, z: 0}
+    - {x: 3.4615378, y: -4.666667, z: 0}
+    - {x: -3.820513, y: 5.820513, z: 0}
+    - {x: 3.4615378, y: 5.820513, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.1508794, y: 0.39599657}
+    - {x: 0.2895503, y: 0.39599657}
+    - {x: 0.1508794, y: 0.59570265}
+    - {x: 0.2895503, y: 0.59570265}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 7eae5479dc43ff74b90448df6c242a98
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_turn2
+    boundsData:
+    - {x: -0.39743602, y: 0.62820506, z: 0}
+    - {x: 7.3076916, y: 10.794872, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.051282, y: -4.769231, z: 0}
+    - {x: 3.25641, y: -4.769231, z: 0}
+    - {x: -4.051282, y: 6.025641, z: 0}
+    - {x: 3.25641, y: 6.025641, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.61767626}
+    - {x: 0.14013623, y: 0.61767626}
+    - {x: 0.0009770507, y: 0.8232417}
+    - {x: 0.14013623, y: 0.8232417}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ef333bb6b6e72da448b2265386998046
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_hurt
+    boundsData:
+    - {x: 0.2307688, y: 0.43589735, z: 0}
+    - {x: 6.5128202, y: 11.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.0256412, y: -5.3846154, z: 0}
+    - {x: 3.4871788, y: -5.3846154, z: 0}
+    - {x: -3.0256412, y: 6.25641, z: 0}
+    - {x: 3.4871788, y: 6.25641, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.20654346, y: 0.754395}
+    - {x: 0.33056593, y: 0.754395}
+    - {x: 0.20654346, y: 0.97607374}
+    - {x: 0.33056593, y: 0.97607374}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 63569bbafaf207f49b35c4120748649e
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_idle1
+    boundsData:
+    - {x: 0.1410253, y: 0.5512817, z: 0}
+    - {x: 6.4358974, y: 10.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.0769234, y: -4.769231, z: 0}
+    - {x: 3.358974, y: -4.769231, z: 0}
+    - {x: -3.0769234, y: 5.871794, z: 0}
+    - {x: 3.358974, y: 5.871794, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.617188, y: 0.70898485}
+    - {x: 0.7397456, y: 0.70898485}
+    - {x: 0.617188, y: 0.9116206}
+    - {x: 0.7397456, y: 0.9116206}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 3f2bb914a7443d245a2a6e103ac20b01
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_idle2
+    boundsData:
+    - {x: 0.16666639, y: 0.49999976, z: 0}
+    - {x: 6.435897, y: 10.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.0512822, y: -4.8205132, z: 0}
+    - {x: 3.384615, y: -4.8205132, z: 0}
+    - {x: -3.0512822, y: 5.820513, z: 0}
+    - {x: 3.384615, y: 5.820513, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6528325, y: 0.12548877}
+    - {x: 0.6528325, y: 0.24804638}
+    - {x: 0.8554683, y: 0.12548877}
+    - {x: 0.8554683, y: 0.24804638}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: dac938658cdec72408eaec88ab4a1e52
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_idle3
+    boundsData:
+    - {x: 0.1410253, y: 0.4743588, z: 0}
+    - {x: 6.4358974, y: 10.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.0769234, y: -4.846154, z: 0}
+    - {x: 3.358974, y: -4.846154, z: 0}
+    - {x: -3.0769234, y: 5.794872, z: 0}
+    - {x: 3.358974, y: 5.794872, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6586919, y: 0.0009770507}
+    - {x: 0.6586919, y: 0.123534665}
+    - {x: 0.86132765, y: 0.0009770507}
+    - {x: 0.86132765, y: 0.123534665}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: bba52f6382a65b94c9f8b694d990729c
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_idle4
+    boundsData:
+    - {x: 0.16666639, y: 0.39743567, z: 0}
+    - {x: 6.435897, y: 10.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.0512822, y: -4.923077, z: 0}
+    - {x: 3.384615, y: -4.923077, z: 0}
+    - {x: -3.0512822, y: 5.7179484, z: 0}
+    - {x: 3.384615, y: 5.7179484, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.4526372, y: 0.12548877}
+    - {x: 0.57519484, y: 0.12548877}
+    - {x: 0.4526372, y: 0.32812452}
+    - {x: 0.57519484, y: 0.32812452}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: fae6f12447cad114a9959db1156d96b8
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: w1_rhinoBeetle_idle5
+    boundsData:
+    - {x: 0.17948687, y: 0.2692306, z: 0}
+    - {x: 6.4615383, y: 10.487179, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 8.743589, y: 12.538462, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.0512822, y: -4.974359, z: 0}
+    - {x: 3.410256, y: -4.974359, z: 0}
+    - {x: -3.0512822, y: 5.5128202, z: 0}
+    - {x: 3.410256, y: 5.5128202, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5771489, y: 0.25000048}
+    - {x: 0.5771489, y: 0.3730464}
+    - {x: 0.776855, y: 0.25000048}
+    - {x: 0.776855, y: 0.3730464}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 6c0223b5df6442045a6dfeaff6728ee7, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 814678515f1eba44885f031ac5fc3e4a
     extractRegion: 0
     regionX: 0
     regionY: 0
@@ -168,7 +1320,7 @@ MonoBehaviour:
   loadable: 0
   invOrthoSize: 2
   halfTargetHeight: 19.5
-  buildKey: 249815539
+  buildKey: 1193855099
   dataGuid: e3146274486f0304fa19709a66c3c268
   managedSpriteCollection: 0
   hasPlatformData: 0

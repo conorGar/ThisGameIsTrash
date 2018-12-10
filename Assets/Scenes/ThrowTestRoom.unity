@@ -5841,8 +5841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 285573565}
-  xDistanceThreshold: 5
-  yDistanceThreshold: 5
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: StoneTalk
@@ -6427,8 +6426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 357177488}
-  xDistanceThreshold: 15
-  yDistanceThreshold: 15
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
@@ -6556,6 +6554,10 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1355490609600872, guid: eeac9d91c8185754fa0b2c28f675a574, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eeac9d91c8185754fa0b2c28f675a574, type: 2}
@@ -12651,8 +12653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 566397428}
-  xDistanceThreshold: 10
-  yDistanceThreshold: 6
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
@@ -13460,8 +13461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 625016837}
-  xDistanceThreshold: 5
-  yDistanceThreshold: 5
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: RatOnMatIcon
@@ -21507,8 +21507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 705709988}
-  xDistanceThreshold: 3.5
-  yDistanceThreshold: 5
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: SlabTalk
@@ -26544,6 +26543,7 @@ MonoBehaviour:
   devil: {fileID: 1448657158167314, guid: 408f2b547b8d8cb419be3af71b741a27, type: 2}
   currentWeaponDisplay: {fileID: 0}
   spinAttack: {fileID: 0}
+  decoyObject: {fileID: 0}
   displaySprites:
   - {fileID: 21300000, guid: 997b2462d150a3c4986a78c9b885f463, type: 3}
   - {fileID: 21300000, guid: 49645960227a57840ba9e4eff38c93b9, type: 3}
@@ -26560,7 +26560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 980373a4fde32ea4c941e93844c5e2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 0}
 --- !u!114 &888814094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26593,6 +26592,7 @@ MonoBehaviour:
   hurt: {fileID: 8300000, guid: 48e7ab674b36f264d9f3156eb2ef6e07, type: 3}
   finalHit: {fileID: 0}
   deathSound: {fileID: 0}
+  healSound: {fileID: 0}
   currentlyCarriedObject: {fileID: 0}
   currentHp: 0
 --- !u!61 &888814096
@@ -40199,8 +40199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 0}
-  xDistanceThreshold: 3
-  yDistanceThreshold: 2
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
@@ -40440,6 +40439,10 @@ MonoBehaviour:
   questio: {fileID: 0}
   slideTrash: {fileID: 0}
   FieldRoomNum: 3
+  toxicBarrier: {fileID: 0}
+  toxicBarrierPS: {fileID: 0}
+  goWithItDisplay: {fileID: 0}
+  toxicPipeFountain: {fileID: 0}
   ToxicFieldRoomNum: 99
   smokePuff: {fileID: 0}
   bossMusic: {fileID: 0}
@@ -40457,8 +40460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 0}
-  xDistanceThreshold: 0
-  yDistanceThreshold: 0
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 0
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: hashTalk
@@ -48671,8 +48673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 0}
-  xDistanceThreshold: 0
-  yDistanceThreshold: 0
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: 
@@ -61000,6 +61001,10 @@ Prefab:
       propertyPath: m_Name
       value: e_a_spearMole (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1355490609600872, guid: eeac9d91c8185754fa0b2c28f675a574, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eeac9d91c8185754fa0b2c28f675a574, type: 2}
   m_IsPrefabParent: 0
@@ -65348,7 +65353,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1197735560171940, guid: c53e2eee9581dc34fb499af47ac2ded2, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114179946484310874, guid: c53e2eee9581dc34fb499af47ac2ded2,
+        type: 2}
+      propertyPath: myDeadBodyName
+      value: rhinoBeetle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c53e2eee9581dc34fb499af47ac2ded2, type: 2}
@@ -65572,6 +65582,10 @@ MonoBehaviour:
   questio: {fileID: 0}
   slideTrash: {fileID: 0}
   FieldRoomNum: 3
+  toxicBarrier: {fileID: 0}
+  toxicBarrierPS: {fileID: 0}
+  goWithItDisplay: {fileID: 0}
+  toxicPipeFountain: {fileID: 0}
   ToxicFieldRoomNum: 99
   smokePuff: {fileID: 0}
   bossMusic: {fileID: 0}
@@ -65589,8 +65603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 1771063222}
-  xDistanceThreshold: 0
-  yDistanceThreshold: 0
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 0
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: questioTalk
@@ -66646,8 +66659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 1884044062}
-  xDistanceThreshold: 4
-  yDistanceThreshold: 4
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: RatWithHat
@@ -75231,6 +75243,10 @@ MonoBehaviour:
   questio: {fileID: 0}
   slideTrash: {fileID: 0}
   FieldRoomNum: 3
+  toxicBarrier: {fileID: 0}
+  toxicBarrierPS: {fileID: 0}
+  goWithItDisplay: {fileID: 0}
+  toxicPipeFountain: {fileID: 0}
   ToxicFieldRoomNum: 99
   smokePuff: {fileID: 8300000, guid: 885c2d5df5a8ca74faa8b6e120d89b26, type: 3}
   bossMusic: {fileID: 8300000, guid: 87d859b17dbd9f34286a7ebc0a70ce7b, type: 3}
@@ -75248,8 +75264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 2093679918}
-  xDistanceThreshold: 15
-  yDistanceThreshold: 15
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 1
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: exTalk
@@ -75938,6 +75953,10 @@ Prefab:
         type: 2}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1715004810931272, guid: 824de6d37100b3647a6dd0f5da33be29, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 824de6d37100b3647a6dd0f5da33be29, type: 2}

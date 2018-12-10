@@ -71,14 +71,14 @@ MonoBehaviour:
     normals: []
     tangents: []
     uvs:
-    - {x: 0.5175801, y: 0.49902442}
-    - {x: 0.9648418, y: 0.49902442}
-    - {x: 0.5175801, y: 0.7128897}
-    - {x: 0.9648418, y: 0.7128897}
+    - {x: 0.4628926, y: 0.7382822}
+    - {x: 0.4628926, y: 0.9619131}
+    - {x: 0.89062303, y: 0.7382822}
+    - {x: 0.89062303, y: 0.9619131}
     normalizedUvs:
     - {x: 0, y: 0}
-    - {x: 1, y: 0}
     - {x: 0, y: 1}
+    - {x: 1, y: 0}
     - {x: 1, y: 1}
     indices: 000000000300000001000000020000000300000000000000
     material: {fileID: 2100000, guid: b3298426399fada439b209e0dd2aabc1, type: 2}
@@ -90,7 +90,7 @@ MonoBehaviour:
     regionY: 0
     regionW: 0
     regionH: 0
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -119,10 +119,10 @@ MonoBehaviour:
     normals: []
     tangents: []
     uvs:
-    - {x: 0.003908203, y: 0.0019541015}
-    - {x: 0.62499803, y: 0.0019541015}
-    - {x: 0.003908203, y: 0.2373037}
-    - {x: 0.62499803, y: 0.2373037}
+    - {x: 0.003908203, y: 0.24121192}
+    - {x: 0.62499803, y: 0.24121192}
+    - {x: 0.003908203, y: 0.47656152}
+    - {x: 0.62499803, y: 0.47656152}
     normalizedUvs:
     - {x: 0, y: 0}
     - {x: 1, y: 0}
@@ -167,14 +167,14 @@ MonoBehaviour:
     normals: []
     tangents: []
     uvs:
-    - {x: 0.003908203, y: 0.49902442}
-    - {x: 0.50976366, y: 0.49902442}
-    - {x: 0.003908203, y: 0.7246084}
-    - {x: 0.50976366, y: 0.7246084}
+    - {x: 0.003908203, y: 0.7382822}
+    - {x: 0.003908203, y: 0.99121}
+    - {x: 0.45507616, y: 0.7382822}
+    - {x: 0.45507616, y: 0.99121}
     normalizedUvs:
     - {x: 0, y: 0}
-    - {x: 1, y: 0}
     - {x: 0, y: 1}
+    - {x: 1, y: 0}
     - {x: 1, y: 1}
     indices: 000000000300000001000000020000000300000000000000
     material: {fileID: 2100000, guid: b3298426399fada439b209e0dd2aabc1, type: 2}
@@ -186,7 +186,7 @@ MonoBehaviour:
     regionY: 0
     regionW: 0
     regionH: 0
-    flipped: 0
+    flipped: 1
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -215,10 +215,10 @@ MonoBehaviour:
     normals: []
     tangents: []
     uvs:
-    - {x: 0.003908203, y: 0.24121192}
-    - {x: 0.56249803, y: 0.24121192}
-    - {x: 0.003908203, y: 0.4951162}
-    - {x: 0.56249803, y: 0.4951162}
+    - {x: 0.003908203, y: 0.48046973}
+    - {x: 0.56249803, y: 0.48046973}
+    - {x: 0.003908203, y: 0.73437405}
+    - {x: 0.56249803, y: 0.73437405}
     normalizedUvs:
     - {x: 0, y: 0}
     - {x: 1, y: 0}
@@ -229,6 +229,54 @@ MonoBehaviour:
     materialId: 0
     materialIndexData: 000000000000000006000000
     sourceTextureGUID: 3258ba510d7a81a4193ebee59b1127a8
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: rhinoBeetle
+    boundsData:
+    - {x: 0.2820511, y: -0.012820482, z: 0}
+    - {x: 12.102564, y: 6.179487, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 13.230769, y: 6.179487, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -5.769231, y: -3.102564, z: 0}
+    - {x: 6.333333, y: -3.102564, z: 0}
+    - {x: -5.769231, y: 3.0769231, z: 0}
+    - {x: 6.333333, y: 3.0769231, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.003908203, y: 0.0019541015}
+    - {x: 0.9257793, y: 0.0019541015}
+    - {x: 0.003908203, y: 0.2373037}
+    - {x: 0.9257793, y: 0.2373037}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: b3298426399fada439b209e0dd2aabc1, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f740b1561c1722247ac6e55f9d1451c3
     extractRegion: 0
     regionX: 0
     regionY: 0
@@ -264,7 +312,7 @@ MonoBehaviour:
   loadable: 0
   invOrthoSize: 2
   halfTargetHeight: 19.5
-  buildKey: 1899875771
+  buildKey: 1666199091
   dataGuid: 420931c4d0bd40d479ece7f7ff51c99c
   managedSpriteCollection: 0
   hasPlatformData: 0
