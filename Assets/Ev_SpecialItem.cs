@@ -99,7 +99,10 @@ public class Ev_SpecialItem : MonoBehaviour {
 
         // Toss away from the player on the x-axis.
         endTossPosition = new Vector3(transform.position.x + TossVector.x * Mathf.Sign(transform.position.x - player.transform.position.x), transform.position.y + TossVector.y, transform.position.z);
-        endTossPosition = itemDropArea.GetDropPosition(endTossPosition);
+
+        if (itemDropArea != null)
+            endTossPosition = itemDropArea.GetDropPosition(endTossPosition);
+
 		beingTossed = true;
 	}
 }
