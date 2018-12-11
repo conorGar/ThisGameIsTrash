@@ -15,16 +15,19 @@ public class Ev_SpecialItem : MonoBehaviour {
 	bool playerIsMovingToward;
 	bool beingTossed;
 	bool canPickUp;
-	float landingY;
+    float tossTimePassed;
+    public Vector2 TossVector;
+    public float TossHeight;
+    Vector3 startTossPosition;
+	Vector3 endTossPosition;
 	Rigidbody2D myBody;
+    public ItemDropArea itemDropArea;
 
 	void OnEnable() {
 		if(playerAutoMoveToward)
 			PlayerMoveToward();
 
 		myBody = gameObject.GetComponent<Rigidbody2D>();
-        myBody.gravityScale = 1f;
-        myBody.velocity = new Vector2(0,0f);
         canPickUp = false;
         beingTossed = false;
     }
@@ -41,15 +44,18 @@ public class Ev_SpecialItem : MonoBehaviour {
 						//anim.Play("chaseL");
 					transform.localScale = new Vector3(1,1,1);
 				}
-		}else if(beingTossed && transform.position.y < landingY){
-			myBody.gravityScale = 0f;
-			myBody.velocity = new Vector2(0,0f);
-			canPickUp = true;
-            beingTossed = false;
 		}
+        else if (beingTossed) {
+            tossTimePassed += Time.deltaTime;
+            transform.position = MathTGIT.ParabolicArc(startTossPosition, endTossPosition, TossHeight, tossTimePassed);
 
-
-
+            // If the item has landed (below the end toss y-value)
+            if (transform.position.y < endTossPosition.y) {
+                transform.position = endTossPosition;
+                canPickUp = true;
+                beingTossed = false;
+            }
+        }
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
@@ -86,8 +92,14 @@ public class Ev_SpecialItem : MonoBehaviour {
 	public void Toss()
 	{
 		transform.parent = null;
-		myBody.AddForce(new Vector2(10f*(Mathf.Sign(gameObject.transform.lossyScale.x)),3f),ForceMode2D.Impulse);//slide
-		landingY = transform.position.y -3f;
+
+        // store the start and end points of the toss
+        tossTimePassed = 0f;
+        startTossPosition = transform.position;
+
+        // Toss away from the player on the x-axis.
+        endTossPosition = new Vector3(transform.position.x + TossVector.x * Mathf.Sign(transform.position.x - player.transform.position.x), transform.position.y + TossVector.y, transform.position.z);
+        endTossPosition = itemDropArea.GetDropPosition(endTossPosition);
 		beingTossed = true;
 	}
 }
