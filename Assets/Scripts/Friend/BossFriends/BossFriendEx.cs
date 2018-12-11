@@ -114,16 +114,6 @@ public class BossFriendEx : Friend
                 stuart.ActivateHpDisplay();
                 yield return new WaitForSeconds(2f);
 
-              /*  Debug.Log("*******^^^^^^CAMERA SHOULDVE GONE BACK TO PLAYER^^^^^^^^^^^^^^^^****");
-                gameObject.GetComponent<MeshRenderer>().enabled = true;
-				
-	
-				stuart.GetComponent<FollowPlayer>().enabled = true;
-				CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-                gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-				SetFriendState("FIGHT_PHASE_1");
-				gameObject.SetActive(false);*/
-
                 SoundManager.instance.TransitionMusic(bossMusic);
                 stuart.PrepPhase1();
                 SetFriendState("FIGHT_PHASE_1");
@@ -156,14 +146,12 @@ public class BossFriendEx : Friend
 				toxicBarrierPS.Stop();
 				yield return new WaitForSeconds(4f);
 				goWithItDisplay.SetActive(false);
-                CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 SetFriendState("END");
                 break;
         }
 
         yield return base.OnFinishDialogEnumerator();
         gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
         gameObject.SetActive(false);
     }
 

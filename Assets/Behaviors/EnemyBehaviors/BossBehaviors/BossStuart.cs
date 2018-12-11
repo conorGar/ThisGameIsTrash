@@ -100,7 +100,7 @@ public class BossStuart : Boss
 
     public void PrepPhase1()
     {
-        Debug.Log("Prep Phase 2");
+        Debug.Log("Prep Phase 1");
 
         SoundManager.instance.musicSource.Play();
         bossTrio.SetActive(false);
