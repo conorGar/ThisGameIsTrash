@@ -21,6 +21,7 @@ public class PinManager : MonoBehaviour {
     public tk2dSprite PinDisplaySprite;
     public PinConfig pinConfig;
     public ParticleSystem equipSpark;
+    public GameObject newPinIcon;
     private Dictionary<PIN, PinDefinition> PINLOOKUP = new Dictionary<PIN, PinDefinition>();
 
 	void Awake () {
@@ -33,6 +34,7 @@ public class PinManager : MonoBehaviour {
         for (int i = 0; i < pinConfig.pinList.Count; ++i)
         {
             PINLOOKUP[pinConfig.pinList[i].Type] = pinConfig.pinList[i];
+			
         }
     }
 
@@ -42,6 +44,16 @@ public class PinManager : MonoBehaviour {
         // TODO: PinManager is so coupled with the store that it can't exist outside the hub scene.  Need to move all the visual stuff back into the EquipScreen  so the PinManager can be used as a real Singleton.
         GlobalVariableManager.Instance.PP_STAT.ResetCurrent();
         GlobalVariableManager.Instance.PP_STAT.UpdateCurrent(-PinManager.Instance.GetAllocatedPP());
+    }
+
+    private void OnEnable(){
+		for (int i = 0; i < pinConfig.pinList.Count; ++i)
+        {
+			if(!newPinIcon.activeInHierarchy && GlobalVariableManager.Instance.IsPinDiscovered(pinConfig.pinList[i].Type) && !GlobalVariableManager.Instance.IsPinViewed(pinConfig.pinList[i].Type)){
+				Debug.Log("New pin Icon set active because of:" + pinConfig.pinList[i].displayName);
+				newPinIcon.SetActive(true);
+			}
+        }
     }
 
     public PinDefinition GetPin(PIN type)

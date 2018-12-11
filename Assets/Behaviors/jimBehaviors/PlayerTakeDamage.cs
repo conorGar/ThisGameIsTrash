@@ -160,10 +160,11 @@ public class PlayerTakeDamage : MonoBehaviour {
         GameStateManager.Instance.PushState(typeof(RespawnState));
         gameObject.GetComponent<EightWayMovement>().StopMovement();
         SoundManager.instance.FadeMusic();
+        CamManager.Instance.mainCamEffects.CameraPan(this.gameObject, true);
 		Time.timeScale = 0.3f;
 		yield return new WaitForSeconds(.3f);
 		Time.timeScale = 1;
-
+		CamManager.Instance.mainCamEffects.ZoomInOut(1.5f,3f);
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		if(currentlyCarriedObject != null){
 			currentlyCarriedObject.GetComponent<PickupableObject>().Drop();
@@ -175,7 +176,9 @@ public class PlayerTakeDamage : MonoBehaviour {
 			yield return new WaitForSeconds(.5f); //drop trash and deplete trash collected
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
 		SoundManager.instance.PlaySingle(deathSound);
-			yield return new WaitForSeconds(.5f);
+		yield return new WaitForSeconds(.4f);
+		ObjectPool.Instance.GetPooledObject("effect_enemyLand",transform.position);
+			yield return new WaitForSeconds(.6f);
 		deathDisplay.DepleteTrashCollected();
 		DropTrash();
 
@@ -191,17 +194,16 @@ public class PlayerTakeDamage : MonoBehaviour {
         // Trigger Death Clock State
         GameStateManager.Instance.PushState(typeof(DethKlokState));
         deathDisplay.DayMeterRise();
-			yield return new WaitForSeconds(1.5f);
+			yield return new WaitForSeconds(2f);
 
         //return to start room
-		deathDisplay.FadeHUD();
+		//deathDisplay.FadeHUD();
         deathDisplay.myDayMeter.gameObject.SetActive(false);
-
+        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
         // Pop Death Clock State
         GameStateManager.Instance.PopState();
 
         yield return new WaitForSeconds(.5f);
-		deathDisplay.fader.SetActive(false);
 		SoundManager.instance.musicSource.clip = SoundManager.instance.worldMusic;
 		SoundManager.instance.musicSource.Play();
 		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
@@ -213,10 +215,18 @@ public class PlayerTakeDamage : MonoBehaviour {
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
         CamManager.Instance.mainCam.transform.position = new Vector3(0f,0f,-10f);
 		roomManager.GetComponent<RoomManager>().Restart();
+		yield return new WaitForSeconds(.2f);
 		GlobalVariableManager.Instance.HP_STAT.ResetCurrent();
 		currentlyTakingDamage = false;
 		GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] = 0;
+		yield return new WaitForSeconds(.1f);
+		deathDisplay.FadeHUD();
+		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+		yield return new WaitForSeconds(.2f);
+		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
 		gameObject.GetComponent<MeshRenderer>().enabled = true;
+		yield return new WaitForSeconds(.3f);
+		deathDisplay.fader.SetActive(false);
 		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
 				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 0;//reset scrap value
 				gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();//just used to update weapon HUD in this scenario

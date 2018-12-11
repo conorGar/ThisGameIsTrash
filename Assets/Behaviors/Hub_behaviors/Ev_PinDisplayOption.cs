@@ -8,13 +8,16 @@ public class Ev_PinDisplayOption : SE_GlowWhenClose {
 	//public Ev_FadeHelper fader;
 	public GameObject pinEquipHUD;
 	public GameObject hubDescriptionPrompt;
-
+	public GameObject newPinIcon;
 
 
 	public override void Activate ()
 	{
 		player.GetComponent<EightWayMovement>().enabled = false;
 		pinEquipHUD.SetActive(true);
+		if(newPinIcon.activeInHierarchy){
+				newPinIcon.SetActive(false);
+		}
 		this.enabled = false;
 	}
 

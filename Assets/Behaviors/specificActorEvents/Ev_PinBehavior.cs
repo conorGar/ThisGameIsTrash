@@ -52,6 +52,7 @@ public class Ev_PinBehavior : MonoBehaviour {
             if (!GlobalVariableManager.Instance.IsPinDiscovered(pinData.Type)){
                 sprite.color = new Color(0f,0f,0f,1f);//blacked out if not owned
 			}else{
+				
                 for (int i = 0; i < pinData.ppValue; i++) {
                     smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
 
@@ -153,10 +154,14 @@ public class Ev_PinBehavior : MonoBehaviour {
             PinManager.Instance.PPDisplay.SetDisplayedIcons(pinData.ppValue);
             PinManager.Instance.PinDisplaySprite.GetComponent<Renderer>().enabled = true;
             PinManager.Instance.PinDisplaySprite.SetSprite(sprite.CurrentSprite.name);
-
+			
             Debug.Log("Pin Sprite Name : " + sprite.CurrentSprite.name
                       + " Title Name : " + PinManager.Instance.PinTitle.text
                       + " Display Pin Sprite Name : " + PinManager.Instance.PinDisplaySprite.CurrentSprite.name);
+			if(!GlobalVariableManager.Instance.IsPinViewed(pinData.Type)){
+					Debug.Log("added to pins_viewed:" + gameObject.name);
+					GlobalVariableManager.Instance.PINS_VIEWED |= pinData.Type; //set pin to active
+			}
         }
         else{
             PinManager.Instance.DescriptionText.text = "Buy or find this Pin to learn what powers it holds!";

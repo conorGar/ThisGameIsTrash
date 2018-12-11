@@ -24,7 +24,12 @@ public class GlobalVariableManager : UserDataItem {
         set { pinsEquippedValue = (long)value; }
         get { return (PIN)pinsEquippedValue; }
     }
-
+	private long pinsViewedValue = (long)(PIN.NONE);
+    public PIN PINS_VIEWED
+    {
+        set { pinsDiscoveredValue = (long)value; }
+        get { return (PIN)pinsViewedValue; }
+    }
 
     public int DEJAVUCOUNT = 0;
     public int CURSEVALUE = 0;
@@ -233,6 +238,7 @@ public class GlobalVariableManager : UserDataItem {
 
         json_data["pinsDiscoveredValue"] = pinsDiscoveredValue;
         json_data["pinsEquippedValue"] = pinsEquippedValue;
+        json_data["pinsViewedValue"] = pinsViewedValue;
 
         json_data["STANDARD_GARBAGE_DISCOVERED"] = (uint)STANDARD_GARBAGE_DISCOVERED;
         json_data["STANDARD_GARBAGE_VIEWED"] = (uint)STANDARD_GARBAGE_VIEWED;
@@ -278,6 +284,8 @@ public class GlobalVariableManager : UserDataItem {
 
         pinsDiscoveredValue = json_data["pinsDiscoveredValue"].AsLong;
         pinsEquippedValue = json_data["pinsEquippedValue"].AsLong;
+        pinsViewedValue = json_data["pinsViewedValue"].AsLong;
+
 
         STANDARD_GARBAGE_DISCOVERED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_DISCOVERED"].AsInt;
         STANDARD_GARBAGE_VIEWED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_VIEWED"].AsInt;
@@ -317,6 +325,10 @@ public class GlobalVariableManager : UserDataItem {
     public bool IsPinEquipped(PIN p_type)
     {
         return (PINS_EQUIPPED & p_type) == p_type;
+    }
+
+    public bool IsPinViewed(PIN p_type){
+    	return (PINS_VIEWED & p_type) == p_type;
     }
 
     public bool IsWorldUnlocked(WORLD world_type)

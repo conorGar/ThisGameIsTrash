@@ -95,7 +95,7 @@ public class GUI_TutPopup : MonoBehaviour {
 			myDescription.GetComponent<TextMeshProUGUI>().text = "<color=#ffffb3>Pins</color> are equippable upgrades that you can " +
 																"equip using your <color=#ffffb3>Pin Points</color>. They can be "+
 																"found in each world or purchased in shops."+
-																"Mix and match them to get the most out of each day!";
+																"You can equip them back at <color=#ffffb3>The Dump</color>!";
 			myImage.GetComponent<Image>().sprite = PinsImage;
 			myTitle.GetComponent<TextMeshProUGUI>().text = "PINS";
 			GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.PINS;

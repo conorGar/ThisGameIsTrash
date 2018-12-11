@@ -73,10 +73,11 @@ public class GUI_DayDisplay : MonoBehaviour
 
 		}else{
 			yield return new WaitUntil(() => truck.transform.localPosition.x > -1.3f);
+			Hud.SetActive(true);
 		}
 		Debug.Log("Day display got to this point...");
 		phase = 2;
-		Hud.SetActive(true);
+
 
 		StartCoroutine("TruckLeave");
 		//yield return new WaitForSeconds(1.5f);
@@ -106,12 +107,13 @@ public class GUI_DayDisplay : MonoBehaviour
 	}
 
 	IEnumerator DisplaySequence(){
-		underline.SetActive(true);
-		yield return new WaitForSeconds(.3f);
-		worldTitle.SetActive(true);
-		truck.SetActive(true);
-		dayNumDisplay.gameObject.SetActive(true);
+		
 		if(!forHub){
+			underline.SetActive(true);
+			yield return new WaitForSeconds(.3f);
+			worldTitle.SetActive(true);
+			truck.SetActive(true);
+			dayNumDisplay.gameObject.SetActive(true);
 			dayNumDisplay.text = "- Day " + GlobalVariableManager.Instance.DAY_NUMBER.ToString() + " -";
 			dayNumDisplay.GetComponent<TextAnimation>().PlayAnim();
 		}
