@@ -118,6 +118,11 @@ public class S_Ev_shop : MonoBehaviour {
         purchasePopup.RegisterOptionEvent(OnOptionsEvent);
     }
 
+    void OnDisable()
+    {
+        PinManager.Instance.RefreshNewPinIcon();
+    }
+
     void OnDestroy()
     {
         // Unregister Events

@@ -15,7 +15,7 @@ public class Ev_PinBehavior : MonoBehaviour {
     PinDefinition pinData = null;
 	public AudioClip equipSFX;
 	public AudioClip unEquipSFX;
-    //int myPositionInString = 0;
+    public GameObject newPinIcon;
 
     Image descriptionBox;
 
@@ -49,10 +49,10 @@ public class Ev_PinBehavior : MonoBehaviour {
 			shopLight = GameObject.Find("shopLight");
 			descriptionBox = GameObject.Find("description").GetComponent<Image>();
 		}else if(GlobalVariableManager.Instance.ROOM_NUM == 101){
-            if (!GlobalVariableManager.Instance.IsPinDiscovered(pinData.Type)){
+            if (!IsPinDiscovered()){
                 sprite.color = new Color(0f,0f,0f,1f);//blacked out if not owned
+                newPinIcon.SetActive(false);
 			}else{
-				
                 for (int i = 0; i < pinData.ppValue; i++) {
                     smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
 
@@ -60,6 +60,9 @@ public class Ev_PinBehavior : MonoBehaviour {
                         smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                     }
                 }
+
+                if (!IsPinViewed())
+                    newPinIcon.SetActive(true);
             }
 		}
 
@@ -158,10 +161,11 @@ public class Ev_PinBehavior : MonoBehaviour {
             Debug.Log("Pin Sprite Name : " + sprite.CurrentSprite.name
                       + " Title Name : " + PinManager.Instance.PinTitle.text
                       + " Display Pin Sprite Name : " + PinManager.Instance.PinDisplaySprite.CurrentSprite.name);
-			if(!GlobalVariableManager.Instance.IsPinViewed(pinData.Type)){
-					Debug.Log("added to pins_viewed:" + gameObject.name);
-					GlobalVariableManager.Instance.PINS_VIEWED |= pinData.Type; //set pin to active
-			}
+			if(!IsPinViewed()){
+				Debug.Log("Added to PINS_VIEWED:" + pinData.displayName);
+				GlobalVariableManager.Instance.PINS_VIEWED |= pinData.Type; //set pin as viewed
+                newPinIcon.SetActive(false);
+            }
         }
         else{
             PinManager.Instance.DescriptionText.text = "Buy or find this Pin to learn what powers it holds!";
@@ -295,6 +299,11 @@ public class Ev_PinBehavior : MonoBehaviour {
     private bool IsPinDiscovered()
     {
         return (GlobalVariableManager.Instance.PINS_DISCOVERED & pinData.Type) == pinData.Type;
+    }
+
+    private bool IsPinViewed()
+    {
+        return (GlobalVariableManager.Instance.PINS_VIEWED & pinData.Type) == pinData.Type;
     }
 
     public bool IsPinEquipped()

@@ -117,6 +117,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 
     void OnDisable()
     {
+        PinManager.Instance.RefreshNewPinIcon();
         GameStateManager.Instance.PopState();
     }
 
