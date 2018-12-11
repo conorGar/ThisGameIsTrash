@@ -139,6 +139,13 @@ public class Friend : UserDataItem {
 
         // Pop Movie State.
         GameStateManager.Instance.PopState();
+
+        // Slower pan back to the player.  This is probably a sucky way to do this.
+        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+        CamManager.Instance.mainCam.SetSlowCameraSpeed();
+        yield return new WaitForSeconds(2f);
+        CamManager.Instance.mainCam.SetNormalCameraSpeed();
+
         yield return null;
     }
 	void DayAsStringSet(){

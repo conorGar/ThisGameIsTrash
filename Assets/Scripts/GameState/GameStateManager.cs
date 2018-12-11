@@ -14,6 +14,10 @@ public class GameStateManager : MonoBehaviour {
 
     void Awake()
     {
+#if RUN_IN_BACKGROUND // To make debugging less annoying!  This will allow the game to run even when it's lost focus in windows.
+        Application.runInBackground = true;
+#endif
+
         Instance = this;
         if(debugMode)
         	GameStateManager.Instance.PushState(typeof(GameplayState));

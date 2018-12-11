@@ -25,12 +25,13 @@ public class B_Ev_Questio : MonoBehaviour {
 	tk2dSpriteAnimator myAnim;
 	FollowPlayer fp;
     bool IsFacingLeft = true;
-	bool isSwinging;
-	bool leaping;
-	Vector2 targetPosition;
+	public bool isSwinging;
+    public bool isLeaping;
+    public bool isDazed;
+    Vector2 targetPosition;
 	int dropItemOnce;
 	GameObject dazedStars;
-	bool isDazed;
+
 
 	void Awake () {
 		myETD = gameObject.GetComponent<EnemyTakeDamage>();
@@ -55,17 +56,17 @@ public class B_Ev_Questio : MonoBehaviour {
         baseShadow.transform.localPosition = new Vector2(-.38f,-1.27f);
         fp.enabled = true; //when returning to room without this Q will just stand there
         pickupableGlow.SetActive(false);
-        myETD.currentHp = 16; // TODO: why are we hardcoding this in a range from 16 to 12?  Doing this for now but this is weird and confusing.
+        myETD.currentHp = 4;
 
+        isSwinging = false;
+        isLeaping = false;
+        isDazed = false;
     }
 
 	void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (!isSwinging)
                 UpdateFacing();
-			else {
-            	//Debug.Log("Questio is swinging...");
-			}
 
             if (fp.enabled == true && !isDazed) {
             	Debug.Log("anis should be working...");
@@ -78,11 +79,11 @@ public class B_Ev_Questio : MonoBehaviour {
                 float distance = Vector3.Distance(transform.position, player.transform.position);
                 if (distance < 12 && !isSwinging) {
                     Debug.Log("QUESTIO SWING ACTIVATE");
-                    StartCoroutine("Swing");
+                    Swing();
                 }
             }
 
-            if (myETD.currentHp <= 12 && dropItemOnce == 0) {
+            if (myETD.currentHp < 1 && dropItemOnce == 0) {
                 StopAllCoroutines();
                 if (!GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES))
                     StartCoroutine(DropGloves());
@@ -94,36 +95,37 @@ public class B_Ev_Questio : MonoBehaviour {
                 pickupableGlow.SetActive(true);
             }
 
-            if(leaping){
+            if(isLeaping){
             	baseShadow.transform.position = Vector2.MoveTowards(baseShadow.transform.position, targetPosition,14*Time.deltaTime);
             	if(Vector2.Distance(baseShadow.transform.position, targetPosition) < 3){
             		if(gameObject.GetComponent<Rigidbody2D>().gravityScale != 3){
             			gameObject.GetComponent<Rigidbody2D>().gravityScale = 3; // questio falls back down
 						SoundManager.instance.PlaySingle(swing);
-						myAnim.SetFrame(43); //set to actual swing frame
             		}
 					gameObject.transform.position = new Vector2(baseShadow.transform.position.x, gameObject.transform.position.y);
 
+                    // LANDING
 					if(gameObject.transform.position.y < baseShadow.transform.position.y+1f){
 						Debug.Log("Landed from fall" + gameObject.transform.position.y + targetPosition.y);
 						hitBox.enabled = true;
 						if (myAnim.CurrentClip.name == "swingL"){
-                    		  mySlashL.SetActive(true);
-                  			  myAnim.Play("swingFinishL");
+                    		mySlashL.SetActive(true);
+                            mySlashL.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
+                            myAnim.Play("swingFinishL");
               		  	}else{
                   		    mySlashR.SetActive(true);
-							myAnim.Play("swingFinishR");
+                            mySlashR.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
+                            myAnim.Play("swingFinishR");
                			 }
 						gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
 						SoundManager.instance.PlaySingle(swing);
-						leaping = false;
+
+                        isLeaping = false;
 						SoundManager.instance.PlaySingle(land);
 						ObjectPool.Instance.GetPooledObject("effect_enemyLand", new Vector2(gameObject.transform.position.x, gameObject.transform.position.y-2f));
 						gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 						gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 						baseShadow.transform.parent = gameObject.transform;
-						//baseShadow.transform.localPosition = new Vector2(-.38f,-1.27f);
-						StartCoroutine("LandDelay");
 					}
 
             	}else{
@@ -135,7 +137,7 @@ public class B_Ev_Questio : MonoBehaviour {
 	}
 
     // Helpers
-    IEnumerator Swing()
+    void Swing()
     {
     	myETD.moveWhenHit = false;
     	baseShadow.transform.parent = null;
@@ -146,30 +148,27 @@ public class B_Ev_Questio : MonoBehaviour {
         else {
             myAnim.Play("swingR");
         }
-        yield return new WaitForSeconds(.3f);
+    }
+
+    void Leap()
+    {
         SoundManager.instance.PlaySingle(leap);
         targetPosition = player.transform.position;
         hitBox.enabled = false;
-		leaping = true;
-		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+        isLeaping = true;
+        gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
     }
 
-
-    IEnumerator LandDelay(){
-		yield return new WaitForSeconds(1f);
-
-		gameObject.GetComponent<FollowPlayer>().enabled = true;
-		gameObject.GetComponent<EnemyTakeDamage>().moveWhenHit = true;
-		
-		//yield return new WaitForSeconds(1f);
-		isSwinging = false;
-	
+    void SwingFinished()
+    {
+        gameObject.GetComponent<FollowPlayer>().enabled = true;
+        gameObject.GetComponent<EnemyTakeDamage>().moveWhenHit = true;
+        isSwinging = false;
     }
 
 
     void UpdateFacing()
     {
-    	Debug.Log("Questio Update facing activated");
         IsFacingLeft = player.transform.position.x < gameObject.transform.position.x;
     }
 
@@ -215,7 +214,7 @@ public class B_Ev_Questio : MonoBehaviour {
         isDazed = false;
         gameObject.layer = 9;
         gameObject.GetComponent<ThrowableObject>().enabled = false;
-        myAnim.Play("idleL");
+        myAnim.Play("idle");
         ObjectPool.Instance.ReturnPooledObject(dazedStars);
     }
 
@@ -224,44 +223,37 @@ public class B_Ev_Questio : MonoBehaviour {
     void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
     {
         var frame = clip.GetFrame(frameNo);
-        Debug.Log("Animation Trigger Check: " + frame.eventInfo);
+#if DEBUG_ANIMATION
+        Debug.Log("Animation Trigger Check: " + frame.eventInfo + " Clip Name: " + clip.name + " Frame No: " + frameNo);
+#endif
         switch (frame.eventInfo) {
             case "SWING_SET":
                 isSwinging = true;
-                Debug.Log("Questio Swing set activate");
                 break;
             case "SWING_UNSET":
-                //isSwinging = false;
+                isSwinging = false;
                 mySlashL.SetActive(false);
                 mySlashR.SetActive(false);
                 break;
-            case "SWING_CHARGE":
-                // At the start of the charge, Allow Questio to switch animations (mid frame) if the player got to his other side.
-               // UpdateFacing();
+            case "LEAP":
+                // At the start of the leap, Allow Questio to switch animations (mid frame) if the player got to his other side.
+                UpdateFacing();
                 if (IsFacingLeft) {
-                    if (clip.name != "swingL") {
-                        myAnim.PlayFromFrame("swingL", frameNo);
-                    }
+                    if (clip.name != "swingL")
+                        myAnim.PlayFromFrame("swingL", frameNo + 1);
                 } else {
-                    if (clip.name != "swingR") {
-                        myAnim.PlayFromFrame("swingR", frameNo);
-                    }
+                    if (clip.name != "swingR")
+                        myAnim.PlayFromFrame("swingR", frameNo + 1);
                 }
-               
 
-                //gameObject.GetComponent<Rigidbody2D>().velocity = (player.transform.position -gameObject.transform.position).normalized *15;
+                Leap();
                 break;
-            case "SWING_MOMENTUM_FINISHED":
-                if (clip.name == "swingL"){
-                    mySlashL.SetActive(true);
-                    mySlashL.GetComponent<Animator>().Play("slashAnimation",-1,0f);
-                }else{
-                    mySlashR.SetActive(true);
-					mySlashR.GetComponent<Animator>().Play("slashAnimation",-1,0f);
+            case "IN_AIR":
 
-                }
+                // repeat the leaping frame in air.
+                if (isLeaping)
+                    myAnim.PlayFromFrame(frameNo - 1);
 
-                //gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
                 break;
             case "SWING_FINISHED":
                 mySlashL.SetActive(false);
@@ -270,10 +262,13 @@ public class B_Ev_Questio : MonoBehaviour {
 	                myAnim.Play("idle");
 	                fp.enabled = true;
                 }
+                SwingFinished();
                 UpdateFacing();
                 break;
             default:
+#if DEBUG_ANIMATION
                 Debug.Log("Animation Trigger Not Found: " + frame.eventInfo);
+#endif
                 break;
         }
     }

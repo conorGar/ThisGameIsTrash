@@ -41,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842708842806886}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.8, y: -0.1, z: -10}
+  m_LocalPosition: {x: -12.2, y: 38.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -71,7 +71,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967263
+    m_Bits: 4294959071
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -113,7 +113,10 @@ MonoBehaviour:
   MIN_Y: -10.08
   MAX_Y: -9.08
   stableCamera: 0
-  cameraSpeed: 10
+  currentCameraSpeed: 10
+  normalCameraSpeed: 10
+  fastCameraSpeed: 20
+  slowCameraSpeed: 5
 --- !u!114 &114429630969264318
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,6 +131,9 @@ MonoBehaviour:
   player: {fileID: 0}
   tutPopup: {fileID: 0}
   roomManager: {fileID: 0}
+  zoomSound: {fileID: 8300000, guid: 3f9656b99167ef0478a6758de79a4220, type: 3}
+  panWoosh: {fileID: 8300000, guid: 60daab1fcf4698f439af0075f72ee1b1, type: 3}
+  objectToSpawn: {fileID: 0}
 --- !u!114 &114649234317195944
 MonoBehaviour:
   m_ObjectHideFlags: 1

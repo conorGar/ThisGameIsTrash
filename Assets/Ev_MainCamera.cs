@@ -9,7 +9,11 @@ public class Ev_MainCamera : MonoBehaviour {
 	public float MIN_Y = -9.08f;
 	public float MAX_Y = -9.08f;
 	public bool stableCamera = false;//set true in scenes where the camera doesnt move
-    public float cameraSpeed = 10.0f;
+
+    [SerializeField] float currentCameraSpeed = 10f;
+    [SerializeField] float normalCameraSpeed = 10f;
+    [SerializeField] float fastCameraSpeed = 20f;
+    [SerializeField] float slowCameraSpeed = 5f;
 
 
     Vector3 targetPos;
@@ -23,14 +27,13 @@ public class Ev_MainCamera : MonoBehaviour {
 	GameObject player;
 	Vector3 offset;
 
+    void Awake()
+    {
+        SetNormalCameraSpeed();
+    }
 
-
-	void Start(){
+    void Start(){
 		player = GameObject.Find("Jim");
-
-		/*offset = transform.position - player.transform.position;
-		Debug.Log(offset);*/
-
     }
 
 	void Update () {
@@ -38,8 +41,8 @@ public class Ev_MainCamera : MonoBehaviour {
 			    if(!transitioning){
 				    if(screenShake == 0){
 					    if(stableCamera == false){
-						    transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, player.transform.position.x, Time.deltaTime * cameraSpeed),
-                                                             Mathf.SmoothStep(transform.position.y, player.transform.position.y, Time.deltaTime * cameraSpeed),
+						    transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, player.transform.position.x, Time.deltaTime * currentCameraSpeed),
+                                                             Mathf.SmoothStep(transform.position.y, player.transform.position.y, Time.deltaTime * currentCameraSpeed),
                                                              -10f); // follows only when player is in center of screen
 
 						    transform.position = new Vector3(
@@ -157,6 +160,21 @@ public class Ev_MainCamera : MonoBehaviour {
 		}
 		//-----------------------------------------//
 	}//end of ActivateEnemies()
+    public void SetNormalCameraSpeed()
+    {
+        currentCameraSpeed = normalCameraSpeed;
+    }
+
+    public void SetFastCameraSpeed()
+    {
+        currentCameraSpeed = fastCameraSpeed;
+    }
+
+    public void SetSlowCameraSpeed()
+    {
+        currentCameraSpeed = slowCameraSpeed;
+    }
+
 
     public void ScreenShake(float time)
     {
