@@ -96,11 +96,11 @@ public class Boss : MonoBehaviour {
             BossDeathEvent();
         }
         else{
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("Death");
 			if(dazeAtDeath){
 				Dazed();
 			}else{
-				myBossScript.StopAllCoroutines();
+                gameObject.GetComponent<tk2dSpriteAnimator>().Play("death");
+                myBossScript.StopAllCoroutines();
 				myBossScript.enabled = false;
 			}
 		}
