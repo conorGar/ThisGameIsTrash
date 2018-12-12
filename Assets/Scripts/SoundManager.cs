@@ -9,7 +9,9 @@ public enum SFXBANK
     HIT7,
     RAT_SQUEAL,
     ENEMY_BOUNCE,
-    HEAL
+    HEAL,
+    DUMPSTERDASH,
+    SCRAPPYSNEAK
 }
 
 public enum MUSICBANK

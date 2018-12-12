@@ -26,6 +26,7 @@ public class PinFunctionsManager : MonoBehaviour {
 	int displayHudCalledAgain;
 
 
+
 	GameObject decoyInstance;
 	int decoyTimer;
 
@@ -89,6 +90,7 @@ public class PinFunctionsManager : MonoBehaviour {
 				}else if(dashKey == INPUTACTION.MOVEUP){
 					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,30f),ForceMode2D.Impulse);
 				}
+				SoundManager.instance.PlaySingle(SFXBANK.DUMPSTERDASH);
 				yield return new WaitForSeconds(.1f);
 				dashCounter = 0;
 				gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -163,6 +165,7 @@ public class PinFunctionsManager : MonoBehaviour {
 
 	public void SneakyScrapper(){
 		Debug.Log("Sneaky Scrapper Activated");
+		SoundManager.instance.PlaySingle(SFXBANK.SCRAPPYSNEAK);
 		GlobalVariableManager.Instance.IS_HIDDEN = true;
 		gameObject.GetComponent<EightWayMovement>().myLegs.GetComponent<tk2dSprite>().color = new Color(1,1,1,.5f);
 		gameObject.GetComponent<tk2dSprite>().color = new Color(1,1,1,.5f);

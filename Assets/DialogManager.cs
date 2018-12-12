@@ -20,6 +20,7 @@ public class DialogManager : MonoBehaviour {
 	public GameObject dialogOptions;
 	public GameObject textBox;
 	public AudioClip typeSound;
+	public AudioClip continueDialogSfx;
 	public DialogActionManager dialogActionManager;
 	public Camera guiCamera; //needed for icon to corner at dialog choice
 	public GameObject dialogCanvas;
@@ -110,6 +111,7 @@ public class DialogManager : MonoBehaviour {
 		if(guiCamShake){
 			guiCamShake = false;
 		}
+		SoundManager.instance.PlaySingle(continueDialogSfx);
 		if(currentNode.type == DIALOGNODETYPE.QUESTION){
 			Debug.Log("Question Dialog Node Properly Read");
 			textBox.SetActive(false);
