@@ -44,14 +44,16 @@ public class PinManager : MonoBehaviour {
         // TODO: PinManager is so coupled with the store that it can't exist outside the hub scene.  Need to move all the visual stuff back into the EquipScreen  so the PinManager can be used as a real Singleton.
         GlobalVariableManager.Instance.PP_STAT.ResetCurrent();
         GlobalVariableManager.Instance.PP_STAT.UpdateCurrent(-PinManager.Instance.GetAllocatedPP());
+        RefreshNewPinIcon();
     }
 
-    private void OnEnable(){
+    public void RefreshNewPinIcon(){
 		for (int i = 0; i < pinConfig.pinList.Count; ++i)
         {
 			if(!newPinIcon.activeInHierarchy && GlobalVariableManager.Instance.IsPinDiscovered(pinConfig.pinList[i].Type) && !GlobalVariableManager.Instance.IsPinViewed(pinConfig.pinList[i].Type)){
 				Debug.Log("New pin Icon set active because of:" + pinConfig.pinList[i].displayName);
 				newPinIcon.SetActive(true);
+                return;
 			}
         }
     }
