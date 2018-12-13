@@ -42,9 +42,6 @@ public class WorldManager : MonoBehaviour
 
         // Activate the first room!
         RoomManager.Instance.ActivateCurrentRoom();
-
-        // World scene begins in the gameplay state!
-        GameStateManager.Instance.PushState(typeof(GameplayState));
     }
 
     void Update()

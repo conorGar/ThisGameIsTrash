@@ -117,8 +117,7 @@ public class RockFriend : Friend {
                 break;
         }
 
-		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		GameStateManager.Instance.PopState();
+        yield return base.OnFinishDialogEnumerator();
 
     }
 

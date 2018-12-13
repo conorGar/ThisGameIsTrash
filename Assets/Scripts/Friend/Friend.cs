@@ -145,8 +145,6 @@ public class Friend : UserDataItem {
         CamManager.Instance.mainCam.SetSlowCameraSpeed();
         yield return new WaitForSeconds(2f);
         CamManager.Instance.mainCam.SetNormalCameraSpeed();
-
-        yield return null;
     }
 	void DayAsStringSet(){
 		dialogManager.variableText = newestAddedEvent.day.ToString();

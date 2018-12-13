@@ -60,9 +60,6 @@ public class StoneFriend : Friend
                 break;
         }
 
-		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-
-
         yield return base.OnFinishDialogEnumerator();
 
     }

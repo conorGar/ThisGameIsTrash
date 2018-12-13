@@ -98,9 +98,6 @@ public class SlabFriend : Friend
                 break;
         }
 
-		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-
-
         yield return base.OnFinishDialogEnumerator();
 
     }

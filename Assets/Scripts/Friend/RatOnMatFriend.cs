@@ -23,7 +23,6 @@ public class RatOnMatFriend : Friend
 		base.OnEnable();
 		if(openMapPrompt == null)
 			openMapPrompt = GameObject.Find("promptText");
-        StartCoroutine("DayDisplayDelay");
     }
 
     public override void GenerateEventData()
@@ -35,7 +34,7 @@ public class RatOnMatFriend : Friend
                 break;
             case "GUIDE":
             	if(GlobalVariableManager.Instance.DAY_NUMBER > 4){
-				day = CalendarManager.Instance.currentDay;
+				    day = CalendarManager.Instance.currentDay;
             	}
             	break;
             case "END":
@@ -51,8 +50,8 @@ public class RatOnMatFriend : Friend
                 gameObject.SetActive(true);
                 break;
             case "GUIDE":
-            	if(GlobalVariableManager.Instance.DAY_NUMBER <day){
-				gameObject.SetActive(false);
+            	if(GlobalVariableManager.Instance.DAY_NUMBER < day){
+				    gameObject.SetActive(false);
             	}
             	break;
             case "END":
@@ -66,11 +65,11 @@ public class RatOnMatFriend : Friend
         switch (GetFriendState()) {
             case "TUTORIAL":
                 nextDialog = "RatMat1";
-
+                GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
 			case "GUIDE":
                 nextDialog = "RatMat_2_1";
-
+                GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
             case "END":
                 break;
@@ -94,12 +93,6 @@ public class RatOnMatFriend : Friend
         }
         yield return base.OnFinishDialogEnumerator();
     }
-	IEnumerator DayDisplayDelay(){
-
-	    yield return new WaitForSeconds(7.3f);
-		gameObject.GetComponent<ActivateDialogWhenClose>().enabled = true; // needed to fix glitch where if player spammed continue button dialog would start again
-		GetComponent<ActivateDialogWhenClose>().Execute();
-	}
 
 	IEnumerator ReturnCam(){
         yield return new WaitForSeconds(.3f);
@@ -112,9 +105,6 @@ public class RatOnMatFriend : Friend
 		gameObject.GetComponent<MeshRenderer>().enabled =true;
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
         CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		GameStateManager.Instance.PushState(typeof(GameplayState));
-
-
 		gameObject.SetActive(false);
 
 	}

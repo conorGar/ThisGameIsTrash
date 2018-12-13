@@ -79,9 +79,7 @@ public class GUI_DayDisplay : MonoBehaviour
 		phase = 2;
 
 
-		StartCoroutine("TruckLeave");
-		//yield return new WaitForSeconds(1.5f);
-
+		StartCoroutine("TruckLeave");        
 	}
 
 	IEnumerator TruckLeave(){
@@ -96,10 +94,14 @@ public class GUI_DayDisplay : MonoBehaviour
 		playerDummy.SetActive(false);
 		yield return new WaitForSeconds(.5f);
 		CancelInvoke();
-		GameStateManager.Instance.PushState(typeof(GameplayState));
 
-		yield return new WaitForSeconds(1.5f);
-		gameObject.SetActive(false);
+        // Leaving pop up state.
+        GameStateManager.Instance.PopAllStates();
+        GameStateManager.Instance.PushState(typeof(GameplayState));
+
+        yield return new WaitForSeconds(1.5f);
+
+        gameObject.SetActive(false);
 	}
 
 	void SmokePuffSfx(){
@@ -123,6 +125,7 @@ public class GUI_DayDisplay : MonoBehaviour
 	}
 
 	IEnumerator DemoGoalDisplay(){
+        GameStateManager.Instance.PushState(typeof(PopupState));
 		demoGoalDisplay.SetActive(true);
 		yield return new WaitForSeconds(5f);
 		truck.SetActive(true);

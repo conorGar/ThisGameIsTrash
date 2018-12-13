@@ -104,11 +104,7 @@ public class JumboFriend : Friend {
                 break;
         }
 
-
-		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		GameStateManager.Instance.PushState(typeof(GameplayState));
-
-       // yield return base.OnFinishDialogEnumerator();
+        yield return base.OnFinishDialogEnumerator();
 
     }
 

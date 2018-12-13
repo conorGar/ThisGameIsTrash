@@ -74,7 +74,6 @@ public class RatWhoFatFriend : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 break;
         }
-		//GameStateManager.Instance.PushState(typeof(GameplayState));
 
         yield return base.OnFinishDialogEnumerator();
     }
