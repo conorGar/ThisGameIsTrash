@@ -119,7 +119,6 @@ public class DialogManager : MonoBehaviour {
 
 			SoundManager.instance.PlaySingle(choiceBoxAppear);
 
-			dialogOptions.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-22f,-31f,.5f,true);
 			Debug.Log("CURRENT NODE NAME WHEN SWITCH TO DIALOG CHOICES : " + currentNode.title);
 			dialogOptions.GetComponent<DialogChoiceManager>().SetDialogChoices(currentNode);
 			finishedDisplayingText = false;
