@@ -64,7 +64,7 @@ public class RatWhoFatFriend : Friend
                 break;*/
         }
     }
-	public override IEnumerator OnFinishDialogEnumerator()
+	public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         switch (GetFriendState()) {
             case "START":

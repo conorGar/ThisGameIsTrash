@@ -52,7 +52,7 @@ public class RatWithHatFriend : Friend {
         }
     }
 
-    public override IEnumerator OnFinishDialogEnumerator()
+    public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         switch (GetFriendState()) {
             case "ADVERTISED":
@@ -61,8 +61,8 @@ public class RatWithHatFriend : Friend {
                 yield return base.OnFinishDialogEnumerator();
                 break;
             case "OPEN_FOR_BUSINESS":
-                // pop the movie state before we push the shop state.
-                yield return base.OnFinishDialogEnumerator();
+                // pop the movie state before we push the shop state (no panning).
+                yield return base.OnFinishDialogEnumerator(false);
 
                 // After the shop is open for business it's controlled by the Hub_UpgradeStand!
                 GUIManager.Instance.Hub_UpgradeStand.enabled = true;

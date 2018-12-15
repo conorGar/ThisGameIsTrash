@@ -134,17 +134,20 @@ public class Friend : UserDataItem {
         StartCoroutine(OnFinishDialogEnumerator());
     }
 
-    public virtual IEnumerator OnFinishDialogEnumerator()
+    public virtual IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
 
         // Pop Movie State.
         GameStateManager.Instance.PopState();
 
-        // Slower pan back to the player.  This is probably a sucky way to do this.
         CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-        CamManager.Instance.mainCam.SetSlowCameraSpeed();
-        yield return new WaitForSeconds(2f);
-        CamManager.Instance.mainCam.SetNormalCameraSpeed();
+
+        // Slower pan back to the player.  This is probably a sucky way to do this. (Turns out it is!  Like transitioning into stuff after a dialog)
+        if (panToPlayer) {
+            CamManager.Instance.mainCam.SetSlowCameraSpeed();
+            yield return new WaitForSeconds(2f);
+            CamManager.Instance.mainCam.SetNormalCameraSpeed();
+        }
     }
 	void DayAsStringSet(){
 		dialogManager.variableText = newestAddedEvent.day.ToString();

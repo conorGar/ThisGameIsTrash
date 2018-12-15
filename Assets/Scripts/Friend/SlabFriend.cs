@@ -85,7 +85,7 @@ public class SlabFriend : Friend
         }
     }
 
-    public override IEnumerator OnFinishDialogEnumerator()
+    public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         yield return new WaitForSeconds(.3f);
 

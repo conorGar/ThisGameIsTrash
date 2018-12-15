@@ -49,7 +49,7 @@ public class StoneFriend : Friend
         GUIManager.Instance.StoneHandNeededDisplay.SetActive(false);
     }
 
-    public override IEnumerator OnFinishDialogEnumerator()
+    public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         yield return new WaitForSeconds(.3f);
 
@@ -66,7 +66,7 @@ public class StoneFriend : Friend
                 break;
         }
 
-        yield return base.OnFinishDialogEnumerator();
+        yield return base.OnFinishDialogEnumerator(panToPlayer);
 
     }
 

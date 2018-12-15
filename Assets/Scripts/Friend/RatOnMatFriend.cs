@@ -76,7 +76,8 @@ public class RatOnMatFriend : Friend
         }
     }
 
-    public override IEnumerator OnFinishDialogEnumerator(){
+    public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
+    {
         StartCoroutine("ReturnCam");
         if(openMapPrompt != null)
         	openMapPrompt.SetActive(true);

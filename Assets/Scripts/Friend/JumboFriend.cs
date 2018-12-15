@@ -64,6 +64,7 @@ public class JumboFriend : Friend {
             case "END":
                 break;
         }
+        movieIsPlaying = false;
     }
 
     private void Update()
@@ -87,7 +88,7 @@ public class JumboFriend : Friend {
         }
     }
 
-    public override IEnumerator OnFinishDialogEnumerator()
+    public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         yield return new WaitForSeconds(.3f);
 
@@ -290,6 +291,7 @@ public class JumboFriend : Friend {
 
         json_data["friendState"] = friendState;
         json_data["isFilmDateSet"] = isFilmDateSet;
+        json_data["movieEnhancement"] = movieEnhancement;
         json_data["day"] = day; // keeping hold of the day for the next film.
 
         return json_data;
@@ -299,6 +301,7 @@ public class JumboFriend : Friend {
     {
         friendState = json_data["friendState"].AsInt;
         isFilmDateSet = json_data["isFilmDateSet"].AsBool;
+        movieEnhancement = json_data["movieEnhancement"];
         day = json_data["day"].AsInt;
     }
 }
