@@ -158,7 +158,6 @@ public class BossStuart : Boss
         ex.gameObject.SetActive(true);
         ex.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
         ex.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 42;
-       // ex.GetComponent<ActivateDialogWhenClose>().yDistanceThreshold = 42;
         ex.SetFriendState("STUART_DEFEATED");
         bossTrio.SetActive(false);
         bossHash.SetActive(false);

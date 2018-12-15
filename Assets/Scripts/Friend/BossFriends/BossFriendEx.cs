@@ -97,6 +97,39 @@ public class BossFriendEx : Friend
         }
     }
 
+    public override void OnWorldStart(World world)
+    {
+        // Make sure the toxicBarrier is down if Stuart was defeated previously and we are entering World One.
+        if (world.type == WORLD.ONE) {
+            switch (GetFriendState()) {
+                case "END":
+                    // spawn the slideTrash if it wasn't delivered already.
+                    if (slideTrash != null) {
+                        if (!GlobalVariableManager.Instance.IsLargeTrashDiscovered(slideTrash.GetComponent<Ev_LargeTrash>().garbage.type)) {
+                            slideTrash.SetActive(true);
+                        }
+                        else {
+                            slideTrash.SetActive(false);
+                        }
+                    }
+
+                    toxicPipeFountain.Stop();
+                    toxicBarrier.SetActive(false);
+                    toxicBarrierPS.Stop();
+                    break;
+                default:
+                    // Any other state the slide is not spawned.
+                    if (slideTrash != null)
+                        slideTrash.SetActive(false);
+                    break;
+            }
+        }
+        else {
+            if (slideTrash != null)
+                slideTrash.SetActive(false);
+        }
+    }
+
     public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         yield return new WaitForSeconds(.5f);

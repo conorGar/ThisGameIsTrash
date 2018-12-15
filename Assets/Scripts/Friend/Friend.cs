@@ -124,6 +124,12 @@ public class Friend : UserDataItem {
 
     }
 
+    // Runs when the world starts (hub, world 1, world 2, etc..)  useful for setting friend state quest stuff and making sure everything in the world is set up properly.
+    public virtual void OnWorldStart(World world)
+    {
+
+    }
+
     public virtual void OnFinishDialog()
     {
         //CamManager.Instance.mainCamEffects.ReturnFromCamEffect();

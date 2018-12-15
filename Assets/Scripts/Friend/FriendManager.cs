@@ -66,6 +66,14 @@ public class FriendManager : MonoBehaviour {
         return null;
     }
 
+    // Activate any world stuff pertaining to friends.
+    public void OnWorldStart(World world)
+    {
+        for (int i = 0; i < friends.Count; i++) {
+            friends[i].OnWorldStart(world);
+        }
+    }
+
     public void EnableProperFriends(int worldNum){
     	Debug.Log("World Num:" + worldNum);
     	Debug.Log("World Count: " + worlds.Count);

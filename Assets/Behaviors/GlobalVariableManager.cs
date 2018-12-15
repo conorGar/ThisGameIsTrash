@@ -340,4 +340,9 @@ public class GlobalVariableManager : UserDataItem {
     {
         return (UPGRADES_UNLOCKED & upgrade_type) == upgrade_type;
     }
+
+    public bool IsLargeTrashDiscovered(LARGEGARBAGE large_garbage_type)
+    {
+        return (LARGE_GARBAGE_DISCOVERED & large_garbage_type) == large_garbage_type;
+    }
 }

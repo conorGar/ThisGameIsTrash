@@ -40,6 +40,9 @@ public class WorldManager : MonoBehaviour
 
         CalendarManager.Instance.StartDay();
 
+        // Activate any world stuff pertaining to friends.
+        FriendManager.Instance.OnWorldStart(world);
+
         // Activate the first room!
         RoomManager.Instance.ActivateCurrentRoom();
     }

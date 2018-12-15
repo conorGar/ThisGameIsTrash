@@ -54,7 +54,7 @@ public class DialogManager : MonoBehaviour {
     void Start () {
         dialogCanvas.SetActive(false);
         dialogTitle = "";
-	}
+    }
 
 	void OnEnable(){
         //currentNode = myDialogDefiniton.nodes[currentDialogTitle];
@@ -72,6 +72,11 @@ public class DialogManager : MonoBehaviour {
 				break;
 			}
 		}
+
+        // deactivate all the icons and start fresh.
+        for (int i = 0; i < dialogIcons.Count; i++) {
+            dialogIcons[i].gameObject.SetActive(false);
+        }
 
         if (currentNode != null) {
             characterName.text = currentNode.speakerName;
