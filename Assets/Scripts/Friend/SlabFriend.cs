@@ -44,6 +44,11 @@ public class SlabFriend : Friend
         }
     }
 
+    void OnDisable()
+    {
+        GUIManager.Instance.SlabTrashNeededDisplay.SetActive(false);
+    }
+
     private void Update()
     {
         OnUpdate();
@@ -90,7 +95,7 @@ public class SlabFriend : Friend
                 // Turn into a non-auto start prompt!
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-                StartCoroutine("TotalSlabTrashDisplay");
+                StartCoroutine(TotalSlabTrashDisplay());
 				//CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 break;
             case "END":
