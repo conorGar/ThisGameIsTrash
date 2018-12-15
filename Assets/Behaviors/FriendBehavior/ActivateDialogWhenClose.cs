@@ -41,7 +41,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	void OnEnable(){
 		player = GameObject.FindGameObjectWithTag("Player");
         startNodeName = friend.nextDialog;
-
+        canTalkTo = true;
 
 	}
 

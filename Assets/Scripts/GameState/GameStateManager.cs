@@ -53,6 +53,16 @@ public class GameStateManager : MonoBehaviour {
         return null;
     }
 
+    public Stack<GameState> GetGameStateStack()
+    {
+        return currentGameStateStack;
+    }
+
+    public int GetStateStackCount()
+    {
+        return currentGameStateStack.Count;
+    }
+
     public void PushState(Type type)
     {
         for (int i = 0; i < gameStates.Count; i++) {

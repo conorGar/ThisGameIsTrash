@@ -46,7 +46,11 @@ public class PlayerTakeDamage : MonoBehaviour {
                     damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
                 }
                 else {
-                    damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
+                    var enemyComp = enemy.gameObject.GetComponent<Enemy>();
+
+                    // Fixing a bug where colliding with toxic slime would cause an error.
+                    if (enemyComp != null)
+                        damageDealt = enemyComp.attkPower;
                 }
                 TakeDamage(enemy.gameObject);
             }
@@ -57,10 +61,13 @@ public class PlayerTakeDamage : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D projectile){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (projectile.gameObject.layer == 10 && !currentlyTakingDamage) { //layer 10 = projectiles
+                var projectileComp = projectile.gameObject.GetComponent<Projectile>();
 
-                damageDealt = projectile.gameObject.GetComponent<Projectile>().damageToPlayer;
-
-                TakeDamage(projectile.gameObject);
+                // Fixing a null reference error where the player keeps colliding with his own weapon.
+                if (projectileComp != null) {
+                    damageDealt = projectileComp.damageToPlayer;
+                    TakeDamage(projectile.gameObject);
+                }
             }
             else if (projectile.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
                 if (projectile.gameObject.tag == "Boss") {

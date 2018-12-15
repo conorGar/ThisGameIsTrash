@@ -30,11 +30,6 @@ public class S_Ev_Hub : MonoBehaviour {
 
         // Friend events should be generated from the day before and the events will carry over to the hub, I think.
         FriendSpawn();
-
-        //LargeTrashSpawn();
-        GameStateManager.Instance.PopAllStates();
-
-        //GameStateManager.Instance.PushState(typeof(GameplayState)); // <- Set by day display
     }
 	
 	// Update is called once per frame

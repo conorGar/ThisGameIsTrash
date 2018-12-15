@@ -84,6 +84,7 @@ public class JumboFriend : Friend {
             case "END":
                 break;
         }
+        movieIsPlaying = false;
     }
 
     private void Update()
@@ -111,7 +112,7 @@ public class JumboFriend : Friend {
         }
     }
 
-    public override IEnumerator OnFinishDialogEnumerator()
+    public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         yield return new WaitForSeconds(.3f);
 
@@ -139,10 +140,8 @@ public class JumboFriend : Friend {
         }
 
 
-		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		base.StartCoroutine("OnFinishDialogEnumerator");
+        yield return base.OnFinishDialogEnumerator();
 
-       // yield return base.OnFinishDialogEnumerator();
 
     }
 
@@ -236,6 +235,9 @@ public class JumboFriend : Friend {
 				dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 				dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
 			}else if(numberOfActivation == 4){//return to jumbo after dead rat
+				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().deadRatSparkle.SetActive(true);
+				SoundManager.instance.PlaySingle(SFXBANK.SPARKLE);
+				yield return new WaitForSeconds(1f);
                 CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position," ");
 				dialogManager.Invoke("ReturnFromAction",.1f);
                 CamManager.Instance.mainCamEffects.ZoomInOut(1.15f,4f);
@@ -290,9 +292,10 @@ public class JumboFriend : Friend {
 			if(nextDialog == "Start"){
 				StartCoroutine("AfterFirstMovie");
 			}else{
+				yield return new WaitForSeconds(10f);//10= length of each movie 
 				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().movieDarkness.SetActive(false);
 				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(false);
-				dialogManager.Invoke("ReturnFromAction",10f);//10= length of each movie 
+				dialogManager.Invoke("ReturnFromAction");
 			}
 		}
 	}
@@ -363,6 +366,7 @@ public class JumboFriend : Friend {
 
         json_data["friendState"] = friendState;
         json_data["isFilmDateSet"] = isFilmDateSet;
+        json_data["movieEnhancement"] = movieEnhancement;
         json_data["day"] = day; // keeping hold of the day for the next film.
 
         return json_data;
@@ -372,6 +376,7 @@ public class JumboFriend : Friend {
     {
         friendState = json_data["friendState"].AsInt;
         isFilmDateSet = json_data["isFilmDateSet"].AsBool;
+        movieEnhancement = json_data["movieEnhancement"];
         day = json_data["day"].AsInt;
     }
 }

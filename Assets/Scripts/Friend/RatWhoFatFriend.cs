@@ -64,7 +64,7 @@ public class RatWhoFatFriend : Friend
                 break;*/
         }
     }
-	public override IEnumerator OnFinishDialogEnumerator()
+	public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         switch (GetFriendState()) {
             case "START":
@@ -74,7 +74,6 @@ public class RatWhoFatFriend : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 break;
         }
-		//GameStateManager.Instance.PushState(typeof(GameplayState));
 
         yield return base.OnFinishDialogEnumerator();
     }

@@ -44,6 +44,11 @@ public class SlabFriend : Friend
         }
     }
 
+    void OnDisable()
+    {
+        GUIManager.Instance.SlabTrashNeededDisplay.SetActive(false);
+    }
+
     private void Update()
     {
         OnUpdate();
@@ -80,7 +85,7 @@ public class SlabFriend : Friend
         }
     }
 
-    public override IEnumerator OnFinishDialogEnumerator()
+    public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         yield return new WaitForSeconds(.3f);
 
@@ -90,16 +95,13 @@ public class SlabFriend : Friend
                 // Turn into a non-auto start prompt!
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-                StartCoroutine("TotalSlabTrashDisplay");
+                StartCoroutine(TotalSlabTrashDisplay());
 				//CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 break;
             case "END":
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
-
-		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-
 
         yield return base.OnFinishDialogEnumerator();
 

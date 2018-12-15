@@ -43,7 +43,13 @@ public class StoneFriend : Friend
                 break;
         }
     }
-	public override IEnumerator OnFinishDialogEnumerator()
+
+    void OnDisable()
+    {
+        GUIManager.Instance.StoneHandNeededDisplay.SetActive(false);
+    }
+
+    public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         yield return new WaitForSeconds(.3f);
 
@@ -53,17 +59,14 @@ public class StoneFriend : Friend
                 // Turn into a non-auto start prompt!
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-                StartCoroutine("TotalStoneHandDisplay");
+                StartCoroutine(TotalStoneHandDisplay());
                 break;
             case "END":
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
 
-		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-
-
-        yield return base.OnFinishDialogEnumerator();
+        yield return base.OnFinishDialogEnumerator(panToPlayer);
 
     }
 

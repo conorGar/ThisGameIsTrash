@@ -124,6 +124,12 @@ public class Friend : UserDataItem {
 
     }
 
+    // Runs when the world starts (hub, world 1, world 2, etc..)  useful for setting friend state quest stuff and making sure everything in the world is set up properly.
+    public virtual void OnWorldStart(World world)
+    {
+
+    }
+
     public virtual void OnFinishDialog()
     {
         //CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
@@ -134,19 +140,20 @@ public class Friend : UserDataItem {
         StartCoroutine(OnFinishDialogEnumerator());
     }
 
-    public virtual IEnumerator OnFinishDialogEnumerator()
+    public virtual IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
 
         // Pop Movie State.
         GameStateManager.Instance.PopState();
 
-        // Slower pan back to the player.  This is probably a sucky way to do this.
         CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-        CamManager.Instance.mainCam.SetSlowCameraSpeed();
-        yield return new WaitForSeconds(2f);
-        CamManager.Instance.mainCam.SetNormalCameraSpeed();
 
-        yield return null;
+        // Slower pan back to the player.  This is probably a sucky way to do this. (Turns out it is!  Like transitioning into stuff after a dialog)
+        if (panToPlayer) {
+            CamManager.Instance.mainCam.SetSlowCameraSpeed();
+            yield return new WaitForSeconds(2f);
+            CamManager.Instance.mainCam.SetNormalCameraSpeed();
+        }
     }
 	void DayAsStringSet(){
 		dialogManager.variableText = newestAddedEvent.day.ToString();

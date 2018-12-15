@@ -47,6 +47,10 @@ public class EightWayMovement : MonoBehaviour {
 			myLegs.GetComponent<TrailRenderer>().enabled = true;
 		}
 
+        movement = new Vector2(0f, 0f);
+        StopMovement();
+        walkCloudPS.GetComponent<ParticleSystem>().Stop();
+
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }
 
@@ -155,7 +159,7 @@ public class EightWayMovement : MonoBehaviour {
                 if (momentum != 4) {
                     momentum = 4f;
               
-                    InvokeRepeating("SpawnClouds", .2f, .2f); //just have this here so it only happens once
+                    InvokeRepeating("FootstepSounds", .2f, .2f); //just have this here so it only happens once
                 }
                 if(legAnim.GetClipByName("walk") != null)
                 	legAnim.Play("walk");
@@ -227,9 +231,9 @@ public class EightWayMovement : MonoBehaviour {
                     else if (momentum != 4) {
                         momentum = 4f;
                         if(GlobalVariableManager.Instance.CARRYING_SOMETHING){
-								InvokeRepeating("SpawnClouds", .2f, .4f); //slower footsteps when carrying something
+								InvokeRepeating("FootstepSounds", .2f, .4f); //slower footsteps when carrying something
                         }else{
-                       			InvokeRepeating("SpawnClouds", .2f, .2f);
+                       			InvokeRepeating("FootstepSounds", .2f, .2f);
                         }
 						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER) && GlobalVariableManager.Instance.IS_HIDDEN){ //put here for function with 'Sneaky Scrapper' function, not sure if this will work with later sneaking functions...
             				gameObject.GetComponent<PinFunctionsManager>().SneakyScrapperReturn();
@@ -242,7 +246,7 @@ public class EightWayMovement : MonoBehaviour {
             }
             if (movement.x == 0 && movement.y == 0) {
 
-                CancelInvoke("SpawnClouds");
+                CancelInvoke("FootstepSounds");
 
 
 
@@ -305,15 +309,8 @@ public class EightWayMovement : MonoBehaviour {
 		legAnim.Play(anim.CurrentClip.name);
     	this.enabled = true;
     }
-    void SpawnClouds(){
+    void FootstepSounds(){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            /*GameObject newestCloud;
-            newestCloud = Instantiate(walkCloud, new Vector3(transform.position.x,transform.position.y - 1.5f, transform.position.z), Quaternion.identity) as GameObject;
-            if(movement.x <0){
-                newestCloud.GetComponent<Ev_WalkCloud>().MoveRight();
-            }else {
-                newestCloud.GetComponent<Ev_WalkCloud>().MoveLeft();
-            }*/
             SoundManager.instance.RandomizeSfx(footsteps2, footsteps1);
         }
     }
@@ -351,13 +348,13 @@ public class EightWayMovement : MonoBehaviour {
 
     void OnChangeState(System.Type stateType, bool isEntering)
     {
-        /*if (isEntering) {
+        if (isEntering) {
             // Entering anything other than the gameplaystate
             if (stateType != typeof(GameplayState)) {
                 movement = new Vector2(0f, 0f);
                 StopMovement();
                 walkCloudPS.GetComponent<ParticleSystem>().Stop();
             }
-        }*/
+        }
     }
 }

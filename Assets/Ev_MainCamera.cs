@@ -34,6 +34,8 @@ public class Ev_MainCamera : MonoBehaviour {
 
     void Start(){
 		player = GameObject.Find("Jim");
+        if (player != null)
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
     }
 
 	void Update () {

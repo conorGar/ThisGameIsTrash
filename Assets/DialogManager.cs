@@ -54,7 +54,7 @@ public class DialogManager : MonoBehaviour {
     void Start () {
         dialogCanvas.SetActive(false);
         dialogTitle = "";
-	}
+    }
 
 	void OnEnable(){
         //currentNode = myDialogDefiniton.nodes[currentDialogTitle];
@@ -72,6 +72,11 @@ public class DialogManager : MonoBehaviour {
 				break;
 			}
 		}
+
+        // deactivate all the icons and start fresh.
+        for (int i = 0; i < dialogIcons.Count; i++) {
+            dialogIcons[i].gameObject.SetActive(false);
+        }
 
         if (currentNode != null) {
             characterName.text = currentNode.speakerName;
@@ -119,7 +124,6 @@ public class DialogManager : MonoBehaviour {
 
 			SoundManager.instance.PlaySingle(choiceBoxAppear);
 
-			dialogOptions.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-22f,-31f,.5f,true);
 			Debug.Log("CURRENT NODE NAME WHEN SWITCH TO DIALOG CHOICES : " + currentNode.title);
 			dialogOptions.GetComponent<DialogChoiceManager>().SetDialogChoices(currentNode);
 			finishedDisplayingText = false;

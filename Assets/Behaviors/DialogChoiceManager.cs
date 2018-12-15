@@ -25,7 +25,10 @@ public class DialogChoiceManager : MonoBehaviour {
 	//string csvText;
 	string thisDialogText = null;
 	List<int> myLinks = new List<int>(); //needed up here for proper function of SelectOption()
-	bool canSelect = false;
+    bool canSelect = false;
+	float popupSecondsPassed = 0f;
+    float popupWaitTime = 1f; // Time to wait for the player is allowed to select a dialog choice
+    float smoothMovementTime = .5f; // Time it takes for the dialog to transition smoothly into view
 
 
 	//----Navigation Variables!---------//
@@ -46,31 +49,38 @@ public class DialogChoiceManager : MonoBehaviour {
 	void OnEnable(){
 		chooseHighlighter.SetActive(false);
 		arrowPos = 0;
-		canSelect = true;
+        GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-22f, -31f, smoothMovementTime, true);
+        popupSecondsPassed = 0f;
+        canSelect = true;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(canSelect){
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
-	        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 0){
-	            SoundManager.instance.PlaySingle(navUpSfx);
-	            NavigateOptions("up");
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
-	        || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos <= (numberOfOptions - 1)){
-	            SoundManager.instance.PlaySingle(navDownSfx);
-	            NavigateOptions("down");
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
-	            SoundManager.instance.PlaySingle(selectChoice);
-	            StartCoroutine("SelectOption",arrowPos);
-	            canSelect = false;
-			}
-		}
+        if (GameStateManager.Instance.GetCurrentState() == typeof(DialogState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
+            || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP) && arrowPos > 0) {
+                SoundManager.instance.PlaySingle(navUpSfx);
+                NavigateOptions("up");
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
+            || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN) && arrowPos <= (numberOfOptions - 1)) {
+                SoundManager.instance.PlaySingle(navDownSfx);
+                NavigateOptions("down");
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
+                if (canSelect && popupSecondsPassed > popupWaitTime) {
+                    SoundManager.instance.PlaySingle(selectChoice);
+                    StartCoroutine("SelectOption", arrowPos);
+                    canSelect = false;
+                }
+            }
+
+            popupSecondsPassed += Time.deltaTime;
+        }
 	}
 
 	public void SetDialogChoices(DialogNode currentNode){//activated from DialogBehaviorManager.NextText()
-
-		arrowPos = 0;
+        arrowPos = 0;
 		dialogResponses.Clear();
 		numberOfOptions = currentNode.responses.Count;
 		//Debug.Log("Number of Options: " + numberOfOptions);

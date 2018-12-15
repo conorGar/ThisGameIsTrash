@@ -90,7 +90,7 @@ public class RockFriend : Friend {
         }
     }
 
-    public override IEnumerator OnFinishDialogEnumerator()
+    public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         yield return new WaitForSeconds(.3f);
 
@@ -117,8 +117,7 @@ public class RockFriend : Friend {
                 break;
         }
 
-		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		GameStateManager.Instance.PopState();
+        yield return base.OnFinishDialogEnumerator();
 
     }
 

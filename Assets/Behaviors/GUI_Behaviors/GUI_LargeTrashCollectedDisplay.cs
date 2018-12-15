@@ -23,7 +23,7 @@ public class GUI_LargeTrashCollectedDisplay : MonoBehaviour
 
 	void OnEnable(){
 		CamManager.Instance.mainCamPostProcessor.profile = dialogBlur;
-		displayIndex = GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count;
+		displayIndex = GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count-1;
 		phase = 1;
 		trashIcon.SetActive(true);
 		trashTitlePaper.SetActive(true);
