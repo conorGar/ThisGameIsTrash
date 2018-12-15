@@ -47,6 +47,7 @@ public class Ev_Results : MonoBehaviour {
             // Add trash to the discover list and award a star for each.
             GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED |= GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].type;
             GlobalVariableManager.Instance.STAR_POINTS_STAT.UpdateMax(+1);
+            GlobalVariableManager.Instance.STAR_POINTS_STAT.UpdateCurrent(+1);
         }
 
         currentStars.text = GlobalVariableManager.Instance.STAR_POINTS_STAT.GetMax().ToString();
