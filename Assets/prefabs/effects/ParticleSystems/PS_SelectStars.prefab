@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4736154580242392}
   - component: {fileID: 198767216390948532}
   - component: {fileID: 199524158610611456}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: PS_SelectStars
-  m_TagString: Untagged
+  m_TagString: effect_GUISelectStars
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1524912479087186}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.31, y: 10.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,7 +101,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -82385873
+  randomSeed: 2139029537
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -149,7 +149,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 3.26
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -253,7 +253,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.39
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -552,7 +552,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 5.71, y: 4.59, z: 1}
+    m_Scale: {x: 2.23, y: 2.06, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -3482,7 +3482,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 237963859
   m_SortingLayer: 5
-  m_SortingOrder: 11
+  m_SortingOrder: 36
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0

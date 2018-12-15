@@ -204,9 +204,23 @@ public class Ev_LargeTrash : PickupableObject {
 		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
 		player.GetComponent<MeleeAttack>().enabled = true;
 		dumpster.GetComponent<SE_GlowWhenClose>().enabled = true;
-		ReturnArc();
+		//ReturnArc();
+		StartCoroutine("ReturnSequence");
 		
 	}// end of Return()
+
+	IEnumerator ReturnSequence(){
+		GameStateManager.Instance.PushState(typeof(MovieState));
+		player.GetComponent<JimAnimationManager>().PlayExcitedJump();
+		CamManager.Instance.mainCamEffects.CameraPan(player.transform.position," ");
+		CamManager.Instance.mainCamEffects.ZoomInOut(2f,1f);
+		yield return new WaitForSeconds(.5f);
+		dumpster.GetComponent<Ev_Dumpster>().largeTrashDiscoveredDisplay.SetActive(true);
+		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+		player.GetComponent<JimAnimationManager>().StopTweenAnimation();
+		Destroy(gameObject);
+
+	}
 
 
 }

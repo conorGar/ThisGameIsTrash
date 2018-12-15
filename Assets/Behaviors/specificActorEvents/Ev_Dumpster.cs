@@ -7,6 +7,7 @@ public class Ev_Dumpster : MonoBehaviour {
 	//otherwise, bring up end day popup.
 
 	public GUI_OptionsPopupBehavior endDayPopUp;
+	public GameObject largeTrashDiscoveredDisplay; //enabled/disabled by ev_largeTrash
     // Use this for initialization
     void Start() {
         if (GlobalVariableManager.Instance.DAY_NUMBER == 1) {

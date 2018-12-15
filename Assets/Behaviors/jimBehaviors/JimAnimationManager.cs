@@ -5,7 +5,7 @@ using UnityEngine;
 public class JimAnimationManager : MonoBehaviour {
 
 	tk2dSpriteAnimator myAnimator;
-
+	public GameObject aniHelper;// for motion tween animations
 	bool clipOverride;
 
 	void Start () {
@@ -42,6 +42,22 @@ public class JimAnimationManager : MonoBehaviour {
 			}*/
 
 		}
+	}
+
+	public void PlayExcitedJump(){
+		//aniHelper.transform.parent = null;
+		//gameObject.transform.parent = aniHelper.transform;
+		gameObject.GetComponent<tk2dSpriteAnimator>().Play("excitedJump");
+		//gameObject.GetComponent<Animator>().enabled = true;
+		//gameObject.GetComponent<Animator>().Play("JimAni_excitedJump",-1,0f);
+
+	}
+
+	public void StopTweenAnimation(){
+		gameObject.transform.parent = null;
+		aniHelper.transform.parent  = this.transform;
+		//gameObject.GetComponent<Animator>().StopPlayback();
+		//gameObject.GetComponent<Animator>().enabled = false;
 	}
 
 	/*IEnumerator NextAnimation(float duration){

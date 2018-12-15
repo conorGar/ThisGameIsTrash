@@ -76,6 +76,39 @@ MonoBehaviour:
     - Value: 599c2436-14dd-404d-90f1-91c32c91b0b7
     - Value: 2509f38c-5fb6-4b89-8cae-2a1132be0f3a
     - Value: 8ded7e72-0f89-4ab7-92b9-fd1c92b3532d
+    - Value: 331f6642-3e13-4581-b00e-bf7553901401
+    - Value: 9f262215-4118-447b-82a2-ab864be387a2
+    - Value: 260a30de-62fc-4975-9168-5e827a240106
+    - Value: 91553922-7d6e-45de-bc2a-c7b70526a879
+    - Value: 159008e0-1340-4701-a47a-372a96d666a6
+    - Value: 4ac2b5fc-ebdf-4daf-9cea-23c9115ef4d2
+    - Value: f703ff9d-deb9-48e1-8a1a-69ff28e5c216
+    - Value: 95564977-f340-46f0-a738-50170ffe0114
+    - Value: 9f564b66-6f17-45e7-97fc-506b33d6e2c2
+    - Value: efcd52f1-fff7-4615-9767-321d9348b6eb
+    - Value: 9f0a52ae-8240-4cbf-bad1-f6902432aded
+    - Value: 6b654694-008e-4e8f-9cf4-b12385892a59
+    - Value: bf04d08f-961b-4507-8388-c8efad2a68cc
+    - Value: 21110a11-6337-4d42-9e45-2121242e787f
+    - Value: 3b4b992f-b24b-495a-8348-974a1a547c3a
+    - Value: 049b385b-a883-40a3-9491-03a2096719fd
+    - Value: dc67285b-5158-4acc-b234-9238c4e92be4
+    - Value: 60c69f75-0e4a-4e27-854c-7b3030ec7b20
+    - Value: 5c2ce688-3d7f-4b72-95f7-24f718e497b7
+    - Value: 2d51ff01-3488-4b80-8b4b-de6b94f3f91e
+    - Value: bd32cd65-9ae8-487b-b62a-2f1ec77471a6
+    - Value: 927dcc69-397b-4260-889a-fcd2fe2b915e
+    - Value: 2ffc7d8a-0f95-4ef7-b633-8a4141be2c43
+    - Value: 3ff46293-4565-4e47-a799-4e2e942f5146
+    - Value: e9021c04-231d-4354-a390-b68a8bac84dd
+    - Value: 5667e531-e030-4f3b-b022-5da0c7738639
+    - Value: f44bee49-71dc-4830-b091-f7f84511d10f
+    - Value: 23d50c7c-f353-498b-9dcf-deb69201a3cd
+    - Value: 7bf188b0-7ce3-4327-bea3-42c1efbc66d2
+    - Value: 7c2ad212-7993-43aa-ba95-ea0646b48706
+    - Value: 1209f2dc-28f4-4734-81f6-ddfda432c621
+    - Value: 759aa138-d62e-4d5d-bd2f-2b04c38000ba
+    - Value: a802d628-0995-40e5-b00e-042fadf98422
     values:
     - window:
         serializedVersion: 2
@@ -143,7 +176,7 @@ MonoBehaviour:
         Value: f235ed95-607a-4d33-aa20-1326da443437
       x: 637
       y: 56
-      text: woooooooooooooo.
+      text: 'woooooooooooooo. '
       isThought: 0
       animTrigger: 
       type: 1
@@ -529,8 +562,8 @@ MonoBehaviour:
         Value: f7b0d119-4fad-4153-a37b-69382708c5a9
       x: 4502.219
       y: 226
-      text: '...and maybe, if you wanna <color=#78FF32>tell any of your friends about
-        it</color> that''d be...cool.'
+      text: I..I know you're busy and stuff, but it would really mean a lot if you
+        showed up again...
       isThought: 0
       animTrigger: 
       type: 1
@@ -554,18 +587,17 @@ MonoBehaviour:
         Value: 7ba82fa2-d2b1-490a-8581-140bdc09d712
       x: 4877.219
       y: 215
-      text: My dream is to <color=#78FF32>fill up all four seats in this theatre</color>.
-        So if you have enough friends, maybe we can do that.
+      text: You're...all I got, garbageman.
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
-        Value: 6b27253b-ef06-4dc0-aa71-6a351f88d283
+        Value: c875b94f-2e77-4308-92ac-5820a19e1c53
       responses: []
     - window:
         serializedVersion: 2
-        x: 5328.219
-        y: 224
+        x: 5247.219
+        y: 69
         width: 270
         height: 250
       isCollapsed: 0
@@ -577,8 +609,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 6b27253b-ef06-4dc0-aa71-6a351f88d283
-      x: 5328.219
-      y: 224
+      x: 5247.219
+      y: 69
       text: '...but I''m getting ahead of myself. Sorry. Anyway, see you then, garbageman.'
       isThought: 0
       animTrigger: 
@@ -763,7 +795,7 @@ MonoBehaviour:
       isCollapsed: 0
       title: Jumbo2_5
       speakerName: 
-      question: 
+      question: Does this hat look good on me? Be honest.
       action: 
       isDialogAction: 0
       friendState: 
@@ -798,7 +830,7 @@ MonoBehaviour:
       title: Jumbo2_6_1
       speakerName: 
       question: 
-      action: 
+      action: KeepHat
       isDialogAction: 0
       friendState: 
       id:
@@ -822,7 +854,7 @@ MonoBehaviour:
       title: Jumbo2_6_2
       speakerName: 
       question: 
-      action: 
+      action: LoseHat
       isDialogAction: 0
       friendState: 
       id:
@@ -838,8 +870,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 2100.4248
-        y: 1005
+        x: 2063.4248
+        y: 993
         width: 270
         height: 250
       isCollapsed: 0
@@ -851,8 +883,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: d639562f-137c-4409-93c5-8c3c95416655
-      x: 2100.4248
-      y: 1005
+      x: 2063.4248
+      y: 993
       text: '...ya, ok. You''re right. Stupid idea.'
       isThought: 0
       animTrigger: 
@@ -870,7 +902,7 @@ MonoBehaviour:
       title: Jumbo2_6_3
       speakerName: 
       question: 
-      action: 
+      action: KeepHat
       isDialogAction: 0
       friendState: 
       id:
@@ -886,8 +918,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 2506.151
-        y: 994
+        x: 2396.151
+        y: 989
         width: 270
         height: 250
       isCollapsed: 0
@@ -899,8 +931,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: f2a040f9-9344-4f16-a00d-dd4d2b299a80
-      x: 2506.151
-      y: 994
+      x: 2396.151
+      y: 989
       text: Anyway, I guess it's time to give the fans what they came here for.
       isThought: 0
       animTrigger: 
@@ -910,32 +942,32 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 2846.151
-        y: 995
+        x: 2687.151
+        y: 985
         width: 270
         height: 250
       isCollapsed: 0
       title: Jumbo2_9
       speakerName: 
       question: 
-      action: JumboMoviePlay
+      action: 
       isDialogAction: 0
       friendState: 
       id:
         Value: 59dd07a0-195c-48f4-aaba-09059e759f96
-      x: 2846.151
-      y: 995
-      text: PRESENTING! Jumbo's latest masterpiece...<color=#78FF32></color>!
+      x: 2687.151
+      y: 985
+      text: PRESENTING! Jumbo's latest masterpiece...<color=#78FF32><var></color>!
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
-        Value: ea19f73e-4c52-493c-9191-570815b85c06
+        Value: 331f6642-3e13-4581-b00e-bf7553901401
       responses: []
     - window:
         serializedVersion: 2
-        x: 3180.151
-        y: 995
+        x: 3235.151
+        y: 855
         width: 270
         height: 250
       isCollapsed: 0
@@ -947,8 +979,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: ea19f73e-4c52-493c-9191-570815b85c06
-      x: 3180.151
-      y: 995
+      x: 3235.151
+      y: 855
       text: 'Wow. Ya, definately my best one yet! '
       isThought: 0
       animTrigger: 
@@ -958,8 +990,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 3508.151
-        y: 996
+        x: 3576.151
+        y: 1031
         width: 270
         height: 250
       isCollapsed: 0
@@ -971,9 +1003,9 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 5b452f4d-3914-46ae-9d99-71758918263d
-      x: 3508.151
-      y: 996
-      text: I think the crowd liked it too, judging my their reaction.
+      x: 3576.151
+      y: 1031
+      text: Do...do you think the crowd liked it? How does it look out there?
       isThought: 0
       animTrigger: 
       type: 1
@@ -982,8 +1014,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 3848.151
-        y: 996
+        x: 3909.151
+        y: 1127
         width: 270
         height: 250
       isCollapsed: 0
@@ -995,8 +1027,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 9fb553de-566b-4828-a2a9-61f03bf04745
-      x: 3848.151
-      y: 996
+      x: 3909.151
+      y: 1127
       text: (Although mostly soulless and dead, when Jim looked over into the eyes
         of the dead rat, he noticed something odd...)
       isThought: 0
@@ -1071,7 +1103,7 @@ MonoBehaviour:
         Value: 778b639e-8746-4f2e-8c09-7d848fa7be64
       x: 4848.151
       y: 996
-      text: (And the rats soul, in whatever cold, lonely darkness it now dwelt, felt
+      text: (And the rat's soul, in whatever cold, lonely darkness it now dwelt, felt
         the need to send a sparkle...)
       isThought: 0
       animTrigger: 
@@ -1081,8 +1113,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 5173.151
-        y: 995
+        x: 5137.151
+        y: 981
         width: 270
         height: 250
       isCollapsed: 0
@@ -1094,21 +1126,21 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 8a2a7df8-e216-4055-904e-992a6c397c4d
-      x: 5173.151
-      y: 995
+      x: 5137.151
+      y: 981
       text: (...a sparkle of hope. A sparkle as if to say..."Thank you, Jumbo".)
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
-        Value: d04517ba-0ff8-4a17-87c6-ce41536709de
+        Value: 260a30de-62fc-4975-9168-5e827a240106
       responses: []
     - window:
         serializedVersion: 2
-        x: 5538.151
-        y: 995
+        x: 5734.151
+        y: 1066
         width: 270
-        height: 250
+        height: 200
       isCollapsed: 0
       title: Jumbo2_17
       speakerName: 
@@ -1118,9 +1150,9 @@ MonoBehaviour:
       friendState: 
       id:
         Value: d04517ba-0ff8-4a17-87c6-ce41536709de
-      x: 5538.151
-      y: 995
-      text: Alright. I'm feeling good. I have high hopes. Maybe I can do this.
+      x: 5734.151
+      y: 1066
+      text: Darn, man...what more do I need to do?!?
       isThought: 0
       animTrigger: 
       type: 1
@@ -1129,8 +1161,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 5877.151
-        y: 996
+        x: 6006.151
+        y: 1009
         width: 270
         height: 250
       isCollapsed: 0
@@ -1142,9 +1174,10 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 9abff259-b7ae-428a-a492-24a55c884964
-      x: 5877.151
-      y: 996
-      text: My next film...OH. BOY. Wait till you see it man. It's...it's WOAH.
+      x: 6006.151
+      y: 1009
+      text: I'm doing the best I can...but it's still not enough...what is someone
+        suppossed to do in that situation?
       isThought: 0
       animTrigger: 
       type: 1
@@ -1153,8 +1186,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 6190.151
-        y: 996
+        x: 6289.151
+        y: 914
         width: 270
         height: 250
       isCollapsed: 0
@@ -1166,10 +1199,10 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 453105fc-c507-497d-8745-702f5747ae19
-      x: 6190.151
-      y: 996
-      text: It's gonna be called <color=#78FF32>The Pawshank Redemption</color>. It's
-        gonna be so good. You don't wanna miss it
+      x: 6289.151
+      y: 914
+      text: 'I guess I''ll give it one last try. I got one more movie I wanna make,
+        called <color=#78FF32>The Pawshank Redemption</color>. '
       isThought: 0
       animTrigger: 
       type: 1
@@ -1178,8 +1211,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 6517.151
-        y: 998
+        x: 6574.151
+        y: 1000
         width: 270
         height: 250
       isCollapsed: 0
@@ -1191,9 +1224,9 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 418e5e05-1ec2-4667-8d7d-1c81c89a7aa4
-      x: 6517.151
-      y: 998
-      text: <s>...p-please don't miss it.
+      x: 6574.151
+      y: 1000
+      text: '...p-please don''t miss it.'
       isThought: 0
       animTrigger: 
       type: 1
@@ -1227,8 +1260,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 7193.151
-        y: 999
+        x: 7299.151
+        y: 1012
         width: 270
         height: 250
       isCollapsed: 0
@@ -1240,8 +1273,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 7f011956-19c2-4f32-9cbb-47dcaad536c9
-      x: 7193.151
-      y: 999
+      x: 7299.151
+      y: 1012
       text: ..oh...uh, a-also. I wanted to give you something to thank you for believing
         in me.
       isThought: 0
@@ -1252,7 +1285,7 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 7510.151
+        x: 7604.151
         y: 999
         width: 270
         height: 250
@@ -1265,7 +1298,7 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 581e56dd-1e99-4694-87c8-1d60e42a1592
-      x: 7510.151
+      x: 7604.151
       y: 999
       text: I...I've never had anyone believe in me before..so it..it means a lot.
       isThought: 0
@@ -1276,8 +1309,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 7838.151
-        y: 999
+        x: 7890.151
+        y: 1001
         width: 270
         height: 250
       isCollapsed: 0
@@ -1289,10 +1322,10 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 59ba8e90-d6f5-4a63-896a-ed11e2ef52f6
-      x: 7838.151
-      y: 999
-      text: It might not be much...but I know you large garbage...so I have this <c=g>Old
-        Projector</c> that stopped working...
+      x: 7890.151
+      y: 1001
+      text: It might not be much...but I know you love large garbage...so I have this
+        <color=#78FF32>Old Projector</color> that stopped working...
       isThought: 0
       animTrigger: 
       type: 1
@@ -1532,7 +1565,7 @@ MonoBehaviour:
         Value: 599c2436-14dd-404d-90f1-91c32c91b0b7
       x: 2433
       y: 1699
-      text: Don't forget to <c=g>tell your friends about it too</c>.
+      text: I'd really appreciate it if you did.
       isThought: 0
       animTrigger: 
       type: 1
@@ -1556,7 +1589,7 @@ MonoBehaviour:
         Value: 2509f38c-5fb6-4b89-8cae-2a1132be0f3a
       x: 2762
       y: 1695
-      text: '...p-please tell your friends.'
+      text: '...p-please show up.'
       isThought: 0
       animTrigger: 
       type: 1
@@ -1565,8 +1598,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 29.15039
-        y: 1185
+        x: 14.150391
+        y: 1309
         width: 270
         height: 250
       isCollapsed: 0
@@ -1578,14 +1611,840 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 8ded7e72-0f89-4ab7-92b9-fd1c92b3532d
-      x: 29.15039
-      y: 1185
-      text: Child Dialog
+      x: 14.150391
+      y: 1309
+      text: Oh. Hey, Mr. Garbageman.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f703ff9d-deb9-48e1-8a1a-69ff28e5c216
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2969.329
+        y: 1014
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo2_9_2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 331f6642-3e13-4581-b00e-bf7553901401
+      x: 2969.329
+      y: 1014
+      text: Everyone pay attention please. I worked really hard on this.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9f262215-4118-447b-82a2-ab864be387a2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3244.2878
+        y: 1173
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo2_9_3
+      speakerName: 
+      question: 
+      action: JumboMoviePlay
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9f262215-4118-447b-82a2-ab864be387a2
+      x: 3244.2878
+      y: 1173
+      text: D-don't look at your phones or anything. Shouldn't be that hard to do.
+        Thanks. Appreciate it.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ea19f73e-4c52-493c-9191-570815b85c06
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5430.5757
+        y: 869
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: Jumbo2_16_2
+      speakerName: 
+      question: Do you think the audience liked it?
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 260a30de-62fc-4975-9168-5e827a240106
+      x: 5430.5757
+      y: 869
+      text: '...well?!'
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Oh yeah, you crushed it man, they love it.
+        node_id:
+          Value: 91553922-7d6e-45de-bc2a-c7b70526a879
+      - text: Um, I think they liked it?
+        node_id:
+          Value: d04517ba-0ff8-4a17-87c6-ce41536709de
+      - text: ..It's...hard to tell.
+        node_id:
+          Value: d04517ba-0ff8-4a17-87c6-ce41536709de
+    - window:
+        serializedVersion: 2
+        x: 5588.6987
+        y: 660
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo2_16_3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 91553922-7d6e-45de-bc2a-c7b70526a879
+      x: 5588.6987
+      y: 660
+      text: Hmm..you, you really think so?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 159008e0-1340-4701-a47a-372a96d666a6
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5879.6987
+        y: 648
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo2_16_4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 159008e0-1340-4701-a47a-372a96d666a6
+      x: 5879.6987
+      y: 648
+      text: I just don't know, Mr. Garbageman, I still don't think it's good enough.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 4ac2b5fc-ebdf-4daf-9cea-23c9115ef4d2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6169.6987
+        y: 666
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo2_16_5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4ac2b5fc-ebdf-4daf-9cea-23c9115ef4d2
+      x: 6169.6987
+      y: 666
+      text: I mean, I'm not getting press coverage, or recognition of any sort, it's
+        gotta just be because it's bad.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9abff259-b7ae-428a-a492-24a55c884964
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 341.1504
+        y: 1334
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f703ff9d-deb9-48e1-8a1a-69ff28e5c216
+      x: 341.1504
+      y: 1334
+      text: So this is it, I guess this is the end.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 95564977-f340-46f0-a738-50170ffe0114
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 664.1504
+        y: 1334
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 95564977-f340-46f0-a738-50170ffe0114
+      x: 664.1504
+      y: 1334
+      text: I'm not totally giving up, but I think after this I'm gonna move away.
+        Maybe try my luck someplace else.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9f564b66-6f17-45e7-97fc-506b33d6e2c2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 984.1504
+        y: 1335
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9f564b66-6f17-45e7-97fc-506b33d6e2c2
+      x: 984.1504
+      y: 1335
+      text: This'll probably be the last time we ever see each other. But maybe one
+        day you'll read about me in the paper or something.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: efcd52f1-fff7-4615-9767-321d9348b6eb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1300.1504
+        y: 1364
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_5
+      speakerName: ' '
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: efcd52f1-fff7-4615-9767-321d9348b6eb
+      x: 1300.1504
+      y: 1364
+      text: 'And I look forward to reading about your great achievements. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9f0a52ae-8240-4cbf-bad1-f6902432aded
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1610.1504
+        y: 1477
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_6
+      speakerName: ' '
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9f0a52ae-8240-4cbf-bad1-f6902432aded
+      x: 1610.1504
+      y: 1477
+      text: You're not like me, you got a good head on your shoulders. You'll be able
+        to find success, I'm sure of it!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6b654694-008e-4e8f-9cf4-b12385892a59
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2010.1504
+        y: 1479
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_7
+      speakerName: ' '
+      question: 
+      action: JumboMoviePlay
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6b654694-008e-4e8f-9cf4-b12385892a59
+      x: 2010.1504
+      y: 1479
+      text: 'Alrighty then, let''s get to it. Presenting, for the last time in Filthy
+        Falls: <c=g><var></c>.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: bf04d08f-961b-4507-8388-c8efad2a68cc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2299.1504
+        y: 1429
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_8
+      speakerName: ' '
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: bf04d08f-961b-4507-8388-c8efad2a68cc
+      x: 2299.1504
+      y: 1429
+      text: And there it is, folks. That's it.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 21110a11-6337-4d42-9e45-2121242e787f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2587.1504
+        y: 1409
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_9
+      speakerName: ' '
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 21110a11-6337-4d42-9e45-2121242e787f
+      x: 2587.1504
+      y: 1409
+      text: Thanks for sticking with me, mr. garbageman.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 3b4b992f-b24b-495a-8348-974a1a547c3a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2876.1504
+        y: 1424
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_10
+      speakerName: ' '
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 3b4b992f-b24b-495a-8348-974a1a547c3a
+      x: 2876.1504
+      y: 1424
+      text: I've been holding on to <c=g>this pin</c> for quite a while. It helped
+        keep luck on my side.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 049b385b-a883-40a3-9491-03a2096719fd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3173.1504
+        y: 1441
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_11
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 049b385b-a883-40a3-9491-03a2096719fd
+      x: 3173.1504
+      y: 1441
+      text: I'd like you to have it now on your journey. I hope you find a use for
+        it.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: dc67285b-5158-4acc-b234-9238c4e92be4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3465.1504
+        y: 1423
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_12
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: dc67285b-5158-4acc-b234-9238c4e92be4
+      x: 3465.1504
+      y: 1423
+      text: Before we go our seperate ways...you mind if I ask you one more question?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 60c69f75-0e4a-4e27-854c-7b3030ec7b20
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3745.1504
+        y: 1450
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_13
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 60c69f75-0e4a-4e27-854c-7b3030ec7b20
+      x: 3745.1504
+      y: 1450
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5c2ce688-3d7f-4b72-95f7-24f718e497b7
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4032.1504
+        y: 1472
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_14
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5c2ce688-3d7f-4b72-95f7-24f718e497b7
+      x: 4032.1504
+      y: 1472
+      text: '...at what point do you think someone should stop pursuing their dreams?'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2d51ff01-3488-4b80-8b4b-de6b94f3f91e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4322.1504
+        y: 1291
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: Jumbo3_15
+      speakerName: 
+      question: How far should one go before they give up on their dreams?
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2d51ff01-3488-4b80-8b4b-de6b94f3f91e
+      x: 4322.1504
+      y: 1291
+      text: '...how far should someone go before they can say it''s just not in the
+        cards for them?'
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: I...I don't know. Who's to say.
+        node_id:
+          Value: bd32cd65-9ae8-487b-b62a-2f1ec77471a6
+      - text: Never give up! You'll get somewhere eventually! Have faith!
+        node_id:
+          Value: 
+      - text: I think that might be a question you can only answer yourself, Jumbo.
+        node_id:
+          Value: 
+      - text: You gave it a good shot, but I think it's time to move on.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 4647.8223
+        y: 1380
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_16
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: bd32cd65-9ae8-487b-b62a-2f1ec77471a6
+      x: 4647.8223
+      y: 1380
+      text: Hmm. Yeah. ..Maybe.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 927dcc69-397b-4260-889a-fcd2fe2b915e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4968.8223
+        y: 1375
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_17
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 927dcc69-397b-4260-889a-fcd2fe2b915e
+      x: 4968.8223
+      y: 1375
+      text: '...maybe...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2ffc7d8a-0f95-4ef7-b633-8a4141be2c43
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5277.8223
+        y: 1408
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_18
+      speakerName: 
+      question: 
+      action: CheckHat
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2ffc7d8a-0f95-4ef7-b633-8a4141be2c43
+      x: 5277.8223
+      y: 1408
+      text: '...anyway, thanks again for the support, mr. garbageman.'
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
         Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5657.439
+        y: 1365
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_19
+      speakerName: ' '
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 3ff46293-4565-4e47-a799-4e2e942f5146
+      x: 5657.439
+      y: 1365
+      text: And thanks for saying my hat's cool. That meant more than you probably
+        realize.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e9021c04-231d-4354-a390-b68a8bac84dd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6026.439
+        y: 1360
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: Jumbo3_20
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e9021c04-231d-4354-a390-b68a8bac84dd
+      x: 6026.439
+      y: 1360
+      text: See ya around.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5667e531-e030-4f3b-b022-5da0c7738639
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6430.439
+        y: 1441
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: end
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5667e531-e030-4f3b-b022-5da0c7738639
+      x: 6430.439
+      y: 1441
+      text: end
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 40
+        y: 2055
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: JumboMissed2_1
+      speakerName: Jumbo
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f44bee49-71dc-4830-b091-f7f84511d10f
+      x: 40
+      y: 2055
+      text: Oh, it's you....hey.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 23d50c7c-f353-498b-9dcf-deb69201a3cd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 333
+        y: 2043
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: JumboMissed2_2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 23d50c7c-f353-498b-9dcf-deb69201a3cd
+      x: 333
+      y: 2043
+      text: You, uh, missed my last movie. No hard feelings, I'm sure you had better
+        things to do then hang out with pathetic old me.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7bf188b0-7ce3-4327-bea3-42c1efbc66d2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 634
+        y: 2020
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: JumboMissed2_3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7bf188b0-7ce3-4327-bea3-42c1efbc66d2
+      x: 634
+      y: 2020
+      text: Anyway, I'm just finishing packing up my things here. I'll be leaving
+        soon.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7c2ad212-7993-43aa-ba95-ea0646b48706
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 925
+        y: 2042
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: JumboMissed2_4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7c2ad212-7993-43aa-ba95-ea0646b48706
+      x: 925
+      y: 2042
+      text: I'll probably continue my movie making, but maybe more on the side. I
+        don't know.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1209f2dc-28f4-4734-81f6-ddfda432c621
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1216
+        y: 2026
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: JumboMissed2_5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1209f2dc-28f4-4734-81f6-ddfda432c621
+      x: 1216
+      y: 2026
+      text: '...yeah. I''ll figure it out.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 759aa138-d62e-4d5d-bd2f-2b04c38000ba
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1514
+        y: 2065
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: JumboMissed2_6
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 759aa138-d62e-4d5d-bd2f-2b04c38000ba
+      x: 1514
+      y: 2065
+      text: Thanks for showing up those times you did, though. Meant a lot.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a802d628-0995-40e5-b00e-042fadf98422
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1872
+        y: 2063
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: JumboMissed2_7
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a802d628-0995-40e5-b00e-042fadf98422
+      x: 1872
+      y: 2063
+      text: Listen, before I go, I got a question. Sorry if it's kinda..."real"...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 60c69f75-0e4a-4e27-854c-7b3030ec7b20
       responses: []
   rootNodeId:
     Value: 795cc605-3108-4cac-8593-1e5d45b72da9

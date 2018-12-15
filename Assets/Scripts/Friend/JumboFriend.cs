@@ -15,13 +15,14 @@ public class JumboFriend : Friend {
     public GameObject moviePosters;
     public GameObject filmColor;
     public GameObject movieScreen;
+    public GameObject hat;
 	public AudioClip projectorPlay;
 
 	public GameObject largeTrashProjector;
 	int numberOfActivation;
 	bool movieIsPlaying;
     bool isFilmDateSet = false;
-
+    bool wearHat;
     //public DialogDefinition myDialogDefinition;
 
     public override void GenerateEventData()
@@ -61,6 +62,25 @@ public class JumboFriend : Friend {
             case "START":
 				day = CalendarManager.Instance.currentDay; //1st meeting can happen any day
                 break;
+            case "INVITE_TO_SECOND_SCREENING":
+				gameObject.transform.position = new Vector2(-95f,8.5f);
+	    		deadRat.SetActive(true);
+	    		hat.SetActive(true);
+	    		gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+	    		movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().dialogIconHat.SetActive(true);
+	    		break;
+			case "INVITE_TO_THIRD_SCREENING":
+				if(wearHat){
+	    			hat.SetActive(true);
+					movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().dialogIconHat.SetActive(true);
+
+	    		}
+	    		else
+	    			hat.SetActive(false);
+
+				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+
+	    		break;
             case "END":
                 break;
         }
@@ -82,6 +102,10 @@ public class JumboFriend : Friend {
                 nextDialog = "Jumbo2";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
+			case "INVITE_TO_THIRD_SCREENING":
+                nextDialog = "Jumbo3";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
             case "END":
                 break;
         }
@@ -99,6 +123,16 @@ public class JumboFriend : Friend {
                 break;
 			case "INVITE_TO_SECOND_SCREENING":
 				largeTrashProjector.SetActive(true);
+				SetFriendState("INVITE_TO_THIRD_SCREENING");
+				break;
+			case "MISSED_SCREENING":
+				SetFriendState("INVITE_TO_THIRD_SCREENING");
+				break;
+			case "MISSED_SECOND_SCREENING":
+				SetFriendState("END");
+				break;
+			case "INVITE_TO_THIRD_SCREENING":
+				SetFriendState("END");
 				break;
             case "END":
                 break;
@@ -106,7 +140,7 @@ public class JumboFriend : Friend {
 
 
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		GameStateManager.Instance.PushState(typeof(GameplayState));
+		base.StartCoroutine("OnFinishDialogEnumerator");
 
        // yield return base.OnFinishDialogEnumerator();
 
@@ -140,10 +174,7 @@ public class JumboFriend : Friend {
 
     public override void StartingEvents(){
     	Debug.Log("Starting Events function happened properly");
-    	if(GlobalVariableManager.Instance.DAY_NUMBER == day && nextDialog == "Jumbo2"){
-    		gameObject.transform.position = new Vector2(-95f,8.5f);
-    		deadRat.SetActive(true);
-    	}
+    
 		if(nextDialog == "Start"){
 			day = GlobalVariableManager.Instance.DAY_NUMBER; 
     	}
@@ -160,6 +191,27 @@ public class JumboFriend : Friend {
     	}
 
     }
+
+    void KeepHat(){
+    	wearHat = true;
+    	dialogManager.ReturnFromAction();
+    }
+
+    void LoseHat(){
+    	hat.SetActive(false);
+    	wearHat = false;
+    	dialogManager.ReturnFromAction();
+    }
+
+    void CheckHat(){
+    	if(wearHat){
+    		dialogManager.JumpToNewNode("Jumbo3_19");
+    	}else{
+			dialogManager.JumpToNewNode("Jumbo3_20");
+    	}
+    	dialogManager.ReturnFromAction();
+    }
+
 	public void CurrentDialogAction(){
 		numberOfActivation++;
         CamManager.Instance.mainCamPostProcessor.profile = null;
@@ -171,14 +223,16 @@ public class JumboFriend : Friend {
 				dialogManager.Invoke("ReturnFromAction",2f);
 			}else if(numberOfActivation == 2){//pan to audience...
 				dialogManager.textBox.SetActive(false);
-                CamManager.Instance.mainCamEffects.CameraPan(deadRat.transform.position," ");
+				CamManager.Instance.mainCam.SetSlowCameraSpeed();
+				CamManager.Instance.mainCamEffects.CameraPan(deadRat.transform.position," ");
                 //CamManager.Instance.mainCamEffects.ZoomInOut(2f,.1f);
                 StartCoroutine("FilmSetPan");
 				dialogManager.Invoke("ReturnFromAction",5f);
 			}else if(numberOfActivation == 3){//dead rat zoom in...
 				dialogManager.ReturnFromAction();
-                CamManager.Instance.mainCamEffects.CameraPan(deadRat.transform.position," ");
-                CamManager.Instance.mainCamEffects.ZoomInOut(3f,.1f);
+				CamManager.Instance.mainCamEffects.CameraPan(new Vector3(deadRat.transform.position.x, deadRat.transform.position.y -1.5f,-10f)," ");
+
+                CamManager.Instance.mainCamEffects.ZoomInOut(3.5f,.1f);
 				dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 				dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
 			}else if(numberOfActivation == 4){//return to jumbo after dead rat
@@ -192,6 +246,12 @@ public class JumboFriend : Friend {
 	}
 
 	public void JumboMoviePlay(){
+		Debug.Log("Jumbo movie play activate");
+		StartCoroutine("MovieSequence");
+
+	}
+
+	IEnumerator MovieSequence(){
 		if(!movieIsPlaying){
 			movieIsPlaying = true;
             CamManager.Instance.mainCamEffects.CameraPan(new Vector3(-87.4f,32f,-10f),"JumboMovie");
@@ -201,8 +261,13 @@ public class JumboFriend : Friend {
 			dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 
 
-			SoundManager.instance.PlaySingle(projectorPlay);
 			string filmToPlay = GetCurrentFilm();
+			movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().movieDarkness.SetActive(true);
+			yield return new WaitForSeconds(.5f);
+			movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(true);
+			SoundManager.instance.PlaySingle(projectorPlay);
+
+			yield return new WaitForSeconds(2f);
 			movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);
 			if(movieScreen.transform.GetChild(1).gameObject.activeInHierarchy){//if film color is enabled
 				movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay + "_Color");
@@ -221,10 +286,12 @@ public class JumboFriend : Friend {
 			newestAddedEvent = nextMovie;
 			dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
 			Debug.Log("***SET VARIABLE TEXT TO: " + GetCurrentFilm());
-
+			movieIsPlaying = false;
 			if(nextDialog == "Start"){
 				StartCoroutine("AfterFirstMovie");
 			}else{
+				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().movieDarkness.SetActive(false);
+				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(false);
 				dialogManager.Invoke("ReturnFromAction",10f);//10= length of each movie 
 			}
 		}
@@ -232,6 +299,8 @@ public class JumboFriend : Friend {
 
 	IEnumerator AfterFirstMovie(){
 		yield return new WaitForSeconds(10f);
+		movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().movieDarkness.SetActive(false);
+		movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(false);
         CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"JumboMovie");
 		yield return new WaitForSeconds(1f);
 		GameObject player = GameObject.FindGameObjectWithTag("Player");

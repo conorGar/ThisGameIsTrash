@@ -10,6 +10,9 @@ public class Ev_JumboFilmSFXHandler : MonoBehaviour {
 
 
 	List<AudioClip> currentAudioList = new List<AudioClip>();
+	public GameObject projectorLight;
+	public GameObject movieDarkness;
+	public GameObject dialogIconHat;
 
 	tk2dSpriteAnimator myAnim;
 	int aniFrame = 1; //workaround for not being able to figure out how tk2d triggers work... starts at 1 so no play during title screen
@@ -19,10 +22,10 @@ public class Ev_JumboFilmSFXHandler : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		if(myAnim.CurrentFrame > aniFrame){
 			SoundManager.instance.PlaySingle(currentAudioList[myAnim.CurrentFrame +1]); //+1 because of title screen
 			aniFrame = myAnim.CurrentFrame;
 		}
-	}
+	}*/
 }
