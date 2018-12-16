@@ -235,16 +235,20 @@ public class JumboFriend : Friend {
 				dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 				dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
 			}else if(numberOfActivation == 4){//return to jumbo after dead rat
-				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().deadRatSparkle.SetActive(true);
-				SoundManager.instance.PlaySingle(SFXBANK.SPARKLE);
-				yield return new WaitForSeconds(1f);
-                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position," ");
-				dialogManager.Invoke("ReturnFromAction",.1f);
-                CamManager.Instance.mainCamEffects.ZoomInOut(1.15f,4f);
-                CamManager.Instance.mainCamPostProcessor.profile = dialogManager.dialogBlur;
+				StartCoroutine("RatSparkleSequence");
 
 			}
 		}
+	}
+
+	IEnumerator RatSparkleSequence(){
+			movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().deadRatSparkle.SetActive(true);
+			SoundManager.instance.PlaySingle(SFXBANK.SPARKLE);
+			yield return new WaitForSeconds(1);
+            CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position," ");
+			dialogManager.Invoke("ReturnFromAction",.1f);
+            CamManager.Instance.mainCamEffects.ZoomInOut(1.15f,4f);
+            CamManager.Instance.mainCamPostProcessor.profile = dialogManager.dialogBlur;
 	}
 
 	public void JumboMoviePlay(){
@@ -295,7 +299,7 @@ public class JumboFriend : Friend {
 				yield return new WaitForSeconds(10f);//10= length of each movie 
 				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().movieDarkness.SetActive(false);
 				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(false);
-				dialogManager.Invoke("ReturnFromAction");
+				dialogManager.Invoke("ReturnFromAction",.1f);
 			}
 		}
 	}
