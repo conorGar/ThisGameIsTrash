@@ -14,7 +14,7 @@ public class Ev_JumboFilmSFXHandler : MonoBehaviour {
 	public GameObject movieDarkness;
 	public GameObject dialogIconHat;
 	public GameObject deadRatSparkle;
-
+	public GameObject awardPin;
 
 	tk2dSpriteAnimator myAnim;
 	int aniFrame = 1; //workaround for not being able to figure out how tk2d triggers work... starts at 1 so no play during title screen

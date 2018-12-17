@@ -133,6 +133,7 @@ public class JumboFriend : Friend {
 				SetFriendState("END");
 				break;
 			case "INVITE_TO_THIRD_SCREENING":
+				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().awardPin.SetActive(true);
 				SetFriendState("END");
 				break;
             case "END":
@@ -290,7 +291,10 @@ public class JumboFriend : Friend {
 			Debug.Log("******NEXT MOVIE DAY****** = " + nextMovie.day);
 			CalendarManager.Instance.AddFriendEvent(nextMovie);
 			newestAddedEvent = nextMovie;
-			dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
+
+			if(GetCurrentFilm() != null)//will = null on the last film
+				dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
+
 			Debug.Log("***SET VARIABLE TEXT TO: " + GetCurrentFilm());
 			movieIsPlaying = false;
 			if(nextDialog == "Start"){

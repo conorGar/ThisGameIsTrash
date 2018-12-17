@@ -683,7 +683,7 @@ MonoBehaviour:
         Value: 2c5bf1d5-deb5-4249-8b21-4ec0f1fd1759
       x: 3019.918
       y: 569
-      text: Child Dialog
+      text: Hmm. Sound effects? Maybe that'll help...
       isThought: 0
       animTrigger: 
       type: 1
@@ -957,7 +957,7 @@ MonoBehaviour:
         Value: 59dd07a0-195c-48f4-aaba-09059e759f96
       x: 2687.151
       y: 985
-      text: PRESENTING! Jumbo's latest masterpiece...<color=#78FF32><var></color>!
+      text: PRESENTING! Jumbo's latest masterpiece...<color=#78FF32></color>!
       isThought: 0
       animTrigger: 
       type: 1
@@ -1604,7 +1604,7 @@ MonoBehaviour:
         height: 250
       isCollapsed: 0
       title: Jumbo3
-      speakerName: 
+      speakerName: Jumbo
       question: 
       action: 
       isDialogAction: 0
@@ -1916,7 +1916,7 @@ MonoBehaviour:
       x: 2010.1504
       y: 1479
       text: 'Alrighty then, let''s get to it. Presenting, for the last time in Filthy
-        Falls: <c=g><var></c>.'
+        Falls: <color=#78FF32></color>.'
       isThought: 0
       animTrigger: 
       type: 1
@@ -1988,8 +1988,8 @@ MonoBehaviour:
         Value: 3b4b992f-b24b-495a-8348-974a1a547c3a
       x: 2876.1504
       y: 1424
-      text: I've been holding on to <c=g>this pin</c> for quite a while. It helped
-        keep luck on my side.
+      text: I've been holding on to <color=#78FF32>this pin</color> for quite a while.
+        It helped keep luck on my side.
       isThought: 0
       animTrigger: 
       type: 1
@@ -2004,7 +2004,7 @@ MonoBehaviour:
         height: 200
       isCollapsed: 0
       title: Jumbo3_11
-      speakerName: speakerName
+      speakerName: 
       question: 
       action: 
       isDialogAction: 0
@@ -2123,13 +2123,13 @@ MonoBehaviour:
           Value: bd32cd65-9ae8-487b-b62a-2f1ec77471a6
       - text: Never give up! You'll get somewhere eventually! Have faith!
         node_id:
-          Value: 
+          Value: bd32cd65-9ae8-487b-b62a-2f1ec77471a6
       - text: I think that might be a question you can only answer yourself, Jumbo.
         node_id:
-          Value: 
+          Value: bd32cd65-9ae8-487b-b62a-2f1ec77471a6
       - text: You gave it a good shot, but I think it's time to move on.
         node_id:
-          Value: 
+          Value: bd32cd65-9ae8-487b-b62a-2f1ec77471a6
     - window:
         serializedVersion: 2
         x: 4647.8223
@@ -2180,8 +2180,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 5277.8223
-        y: 1408
+        x: 5278.8223
+        y: 1428
         width: 270
         height: 200
       isCollapsed: 0
@@ -2193,19 +2193,19 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 2ffc7d8a-0f95-4ef7-b633-8a4141be2c43
-      x: 5277.8223
-      y: 1408
+      x: 5278.8223
+      y: 1428
       text: '...anyway, thanks again for the support, mr. garbageman.'
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
-        Value: 
+        Value: e9021c04-231d-4354-a390-b68a8bac84dd
       responses: []
     - window:
         serializedVersion: 2
-        x: 5657.439
-        y: 1365
+        x: 5650.439
+        y: 1331
         width: 270
         height: 200
       isCollapsed: 0
@@ -2217,8 +2217,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 3ff46293-4565-4e47-a799-4e2e942f5146
-      x: 5657.439
-      y: 1365
+      x: 5650.439
+      y: 1331
       text: And thanks for saying my hat's cool. That meant more than you probably
         realize.
       isThought: 0
@@ -2229,8 +2229,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 6026.439
-        y: 1360
+        x: 5970.439
+        y: 1478
         width: 270
         height: 200
       isCollapsed: 0
@@ -2242,8 +2242,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: e9021c04-231d-4354-a390-b68a8bac84dd
-      x: 6026.439
-      y: 1360
+      x: 5970.439
+      y: 1478
       text: See ya around.
       isThought: 0
       animTrigger: 

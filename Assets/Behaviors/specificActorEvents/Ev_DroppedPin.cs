@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Ev_DroppedPin : MonoBehaviour {
 
-	PinDefinition pinData = null;
+	PinDefinition pinData = null; //usually given by trash can
 	int bounceCounter = 0;
 	GameObject pinUnlockHud; //given by trash can
 	float landingY;
