@@ -161,6 +161,7 @@ public class SoundManager : MonoBehaviour {
 
     public Coroutine TransitionMusic(AudioClip nextClip, bool fadeOut = true, bool fadeIn = false, System.Action callback = null)
     {
+        StopAllCoroutines();
         return StartCoroutine(TransitionMusicEnumerator(nextClip, fadeOut, fadeIn, callback));
     }
 
