@@ -11,6 +11,7 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 	public GameObject newDiscoveryDisplay;
 	public int trashDropped;
 	public GameObject deathDisplay;
+	int phase;
 	// Use this for initialization
 	void Start () {
 		//TODO: adjust for different bag types
@@ -42,6 +43,7 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 
 		
 		yield return new WaitForSeconds(1f);
+
 		newDiscoveryDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-133f,-113f,.4f,true);
 		yield return new WaitForSeconds(3f);
 		newDiscoveryDisplay.SetActive(false);

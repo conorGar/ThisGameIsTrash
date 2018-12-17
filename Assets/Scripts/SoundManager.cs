@@ -11,7 +11,8 @@ public enum SFXBANK
     ENEMY_BOUNCE,
     HEAL,
     DUMPSTERDASH,
-    SCRAPPYSNEAK
+    SCRAPPYSNEAK,
+    SPARKLE
 }
 
 public enum MUSICBANK

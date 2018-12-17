@@ -11,10 +11,10 @@ public class Ev_Results : MonoBehaviour {
 	public Text enemiesDefeated;
 	public TextMeshProUGUI nextUnlockNeeded;
 	public TextMeshProUGUI currentStars;
-	public GameObject largeTrashTextDisplay;
-	public GameObject treasureCollectedDisplay;
-	public GameObject largeTrashCollectedDisplay;
-	public LargeTrashManager ltManager;
+	//public GameObject largeTrashTextDisplay;
+	//public GameObject treasureCollectedDisplay;
+	//public GameObject largeTrashCollectedDisplay;
+	//public LargeTrashManager ltManager;
 	public int currentWorld; //needed for largeTrashManager
     public Image backPaper;
     public Image image;
@@ -85,7 +85,7 @@ public class Ev_Results : MonoBehaviour {
 		if(GameStateManager.Instance.GetCurrentState() == typeof(EndDayState)) {
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
                 if (phase == 2) {
-                    if (GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count > displayIndex) {
+                    /*if (GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count > displayIndex) {
 
                         if (spawnLargeTrashOnce == 0) {
                         	Debug.Log("L trash display got here - 1");
@@ -110,9 +110,9 @@ public class Ev_Results : MonoBehaviour {
                         //	treasureCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(); //TODO: working on this..
 						largeTrashTextDisplay.GetComponent<TextMeshProUGUI>().text = GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedTitle;
                         displayIndex++;
-                    }
-                    else {
-                        largeTrashTextDisplay.SetActive(false);
+                    }*/
+                   
+                       // largeTrashTextDisplay.SetActive(false);
                         backPaper.enabled = true;
                         image.enabled = true;
                         GlobalVariableManager.Instance.ENEMIES_DEFEATED = 0;
@@ -162,7 +162,7 @@ public class Ev_Results : MonoBehaviour {
 
                         // Fading needs time to pass.
                         Time.timeScale = 1f;
-                    }
+                    
                 }// end of phase = 2 check
             }
 		}
