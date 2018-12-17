@@ -56,120 +56,99 @@ MonoBehaviour:
     frames:
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 4
+      spriteId: 50
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 5
+      spriteId: 53
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 2
+      spriteId: 58
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 11
+      spriteId: 54
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
-        type: 2}
-      spriteId: 6
-      triggerEvent: 0
-      eventInfo: 
-      eventInt: 0
-      eventFloat: 0
-    fps: 30
+    fps: 40
     loopStart: 0
     wrapMode: 2
   - name: plankSwing
     frames:
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 13
+      spriteId: 55
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 14
+      spriteId: 44
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 18
+      spriteId: 51
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 19
+      spriteId: 59
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    fps: 30
+    fps: 40
     loopStart: 0
     wrapMode: 2
   - name: poleSwing
     frames:
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 26
+      spriteId: 46
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 20
+      spriteId: 48
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 12
+      spriteId: 61
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 27
+      spriteId: 49
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
-        type: 2}
-      spriteId: 9
-      triggerEvent: 0
-      eventInfo: 
-      eventInt: 0
-      eventFloat: 0
-    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
-        type: 2}
-      spriteId: 23
-      triggerEvent: 0
-      eventInfo: 
-      eventInt: 0
-      eventFloat: 0
-    fps: 30
+    fps: 40
     loopStart: 0
     wrapMode: 2
   - name: plankR
@@ -184,18 +163,25 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  - name: poleR
+  - name: poleDown
     frames:
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 17
+      spriteId: 47
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 60
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     fps: 30
     loopStart: 0
-    wrapMode: 0
+    wrapMode: 2
   - name: clawR
     frames:
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
@@ -348,35 +334,42 @@ MonoBehaviour:
     frames:
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 3
+      spriteId: 56
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 57
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     fps: 30
     loopStart: 0
-    wrapMode: 0
+    wrapMode: 2
   - name: clawUp
     frames:
     - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
         type: 2}
-      spriteId: 7
+      spriteId: 45
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 52
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
       eventFloat: 0
     fps: 30
     loopStart: 0
-    wrapMode: 0
-  - name: poleDown
-    frames:
-    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
-        type: 2}
-      spriteId: 16
-      triggerEvent: 0
-      eventInfo: 
-      eventInt: 0
-      eventFloat: 0
+    wrapMode: 2
+  - name: 
+    frames: []
     fps: 30
     loopStart: 0
     wrapMode: 0
@@ -413,6 +406,84 @@ MonoBehaviour:
       eventInfo: 
       eventInt: 0
       eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: swoosh
+    frames:
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 39
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 40
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 41
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 42
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 42
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 42
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 43
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 50
+    loopStart: 0
+    wrapMode: 2
+  - name: poleUp
+    frames:
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 62
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114648321413050076, guid: 84010c23f6956784bbbfdae43f3d365c,
+        type: 2}
+      spriteId: 63
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 2
+  - name: 
+    frames: []
     fps: 30
     loopStart: 0
     wrapMode: 0

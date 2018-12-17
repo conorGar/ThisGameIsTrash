@@ -11,6 +11,10 @@ public class MeleeAttack : MonoBehaviour {
 	public GameObject meleeWeaponLeftSwing;
 	public GameObject meleeWeaponTopSwing;
 	public GameObject meleeWeaponBotSwing;
+	public GameObject sideSwoosh;
+	public GameObject topSwoosh;
+	public GameObject botSwoosh;
+
 
 	public bool cantAttack = false;
 	bool isSwinging = false;
@@ -106,16 +110,36 @@ public class MeleeAttack : MonoBehaviour {
 
 		if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "plankSwing"){ //check what animation to change to based on current ani, just check one of the directions
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("clawSwing");
+				meleeWeaponRightSwing.transform.localPosition = new Vector2(4f,-2.08f);
+
+
 				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("clawDown");
-				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("clawUp");
+				meleeWeaponBotSwing.transform.localPosition = new Vector2(-.47f,-1.46f);
+
+				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("clawUp");
+				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,1.81f);
+
+				//meleeWeaponRightSwing.GetComponent<BoxCollider2D
 		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "clawSwing"){
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("poleSwing");
+				meleeWeaponRightSwing.transform.localPosition = new Vector2(4.8f,-2.06f);
+
 				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("poleDown");
-				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
+				meleeWeaponBotSwing.transform.localPosition = new Vector2(-1.28f,.2f);
+
+				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
+				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,.94f);
+
 		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "poleSwing"){
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("broomSwing");
+				meleeWeaponRightSwing.transform.localPosition = new Vector2(6.73f,-2.68f);
+
 				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("broomDown");
-				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("broomUp");
+				meleeWeaponBotSwing.transform.localPosition = new Vector2(.85f,-3.83f);
+
+				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("broomUp");
+				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,3.31f);
+
 		}
 
 	}
@@ -130,16 +154,34 @@ public class MeleeAttack : MonoBehaviour {
 
 		if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "poleSwing"){ //check what animation to change to based on current ani, just check one of the directions
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("clawSwing");
+				meleeWeaponRightSwing.transform.localPosition = new Vector2(4f,-1.28f);
+
 				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("clawDown");
-				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("clawUp");
+				meleeWeaponBotSwing.transform.localPosition = new Vector2(-.47f,-1.46f);
+
+				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("clawUp");
+				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,1.81f);
+
 		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "clawSwing"){
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("plankSwing");
+				meleeWeaponRightSwing.transform.localPosition = new Vector2(2.3f,-1.28f);
+
 				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("plankDown");
-				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("plankUp");
+				meleeWeaponBotSwing.transform.localPosition = new Vector2(-1.28f,.2f);
+
+				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("plankUp");
+				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,.94f);
+
 		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "broomSwing"){
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("poleSwing");
+				meleeWeaponRightSwing.transform.localPosition = new Vector2(4.8f,-2.01f);
+
 				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("poleDown");
-				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
+				meleeWeaponBotSwing.transform.localPosition = new Vector2(.6f,-2.9f);
+
+				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
+				meleeWeaponBotSwing.transform.localPosition = new Vector2(-.13f,2.56f);
+
 		}
 
 	}
@@ -153,18 +195,26 @@ public class MeleeAttack : MonoBehaviour {
 			if(direction == 1){
 				meleeDirectionEnabled = meleeWeaponRightSwing;
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingR",true);
+				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+				//sideSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFrom(0);
 				//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
 			}else if(direction == 2){
 				meleeDirectionEnabled = meleeWeaponLeftSwing;
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingR",true);
+				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+				//sideSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFrom(0);
 				//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
 			}else if(direction == 3){
 				//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingUp");
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingUp",true);
 				meleeDirectionEnabled = meleeWeaponTopSwing;
-
+			
+				topSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+				//topSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFrom(0);
 			}else if(direction == 4){
 				//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingDown");
+				botSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+				//botSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFrom(0);
 				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingDown",true);
 				meleeDirectionEnabled = meleeWeaponBotSwing;
 
