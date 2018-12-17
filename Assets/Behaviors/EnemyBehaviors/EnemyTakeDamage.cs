@@ -109,10 +109,19 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             transform.localScale = startScale;
             transform.rotation = startRotation;
         }
+
+        if (myShadow != null)
+            myShadow.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        if (myShadow != null)
+            myShadow.SetActive(false);
     }
 
 
-	void Start () {
+    void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		if(IAmParentObj){
 			myAnim = childEnemy.GetComponent<tk2dSpriteAnimator>();
@@ -586,6 +595,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
                 Death();
             }
             else {
+                //spinning = false;
                 gameObject.GetComponent<Boss>().StartCoroutine("BossDeath");
             }
         }//end of (if hp is not > 0)
