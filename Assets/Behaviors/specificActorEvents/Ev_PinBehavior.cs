@@ -44,14 +44,16 @@ public class Ev_PinBehavior : MonoBehaviour {
 		mySFX = sprite.GetComponent<SpecialEffectsBehavior>();
 		player = GameObject.Find("Jim");
 
-		if(GlobalVariableManager.Instance.ROOM_NUM == 97){
+        // Default the new pin to "off".
+        newPinIcon.SetActive(false);
+
+        if (GlobalVariableManager.Instance.ROOM_NUM == 97){
 			inShop = true;
 			shopLight = GameObject.Find("shopLight");
 			descriptionBox = GameObject.Find("description").GetComponent<Image>();
 		}else if(GlobalVariableManager.Instance.ROOM_NUM == 101){
             if (!IsPinDiscovered()){
                 sprite.color = new Color(0f,0f,0f,1f);//blacked out if not owned
-                newPinIcon.SetActive(false);
 			}else{
                 for (int i = 0; i < pinData.ppValue; i++) {
                     smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
