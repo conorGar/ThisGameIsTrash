@@ -407,5 +407,6 @@ public class DialogManager : MonoBehaviour {
 				break;
 			}
 		}
+		ReturnFromAction(false);
 	}
 }
