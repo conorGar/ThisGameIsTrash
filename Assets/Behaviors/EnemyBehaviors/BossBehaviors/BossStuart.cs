@@ -164,6 +164,7 @@ public class BossStuart : Boss
         bossEx.SetActive(false);
         bossQuestio.SetActive(false);
         DeactivateHpDisplay();
+        SoundManager.instance.musicSource.Stop();
     }
 }
 

@@ -211,13 +211,13 @@ public class PlayerTakeDamage : MonoBehaviour {
         GameStateManager.Instance.PopState();
 
         yield return new WaitForSeconds(.5f);
-		SoundManager.instance.musicSource.clip = SoundManager.instance.worldMusic;
-		SoundManager.instance.musicSource.Play();
-		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 
         //-----------Resetting of needed values----------------//
         roomManager.GetComponent<RoomManager>().currentRoom.DeactivateRoom();
-		gameObject.transform.position = new Vector3(0f,-3f,0f); //Start at Beginning of world
+
+        SoundManager.instance.TransitionMusic(SoundManager.instance.worldMusic, fadeOut:false);
+
+        gameObject.transform.position = new Vector3(0f,-3f,0f); //Start at Beginning of world
 		truck.transform.position = new Vector3(-15f,-3f,0f);
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
         CamManager.Instance.mainCam.transform.position = new Vector3(0f,0f,-10f);

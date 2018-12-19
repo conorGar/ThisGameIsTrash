@@ -82,6 +82,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	Vector2 shadowStartPos;
 	Rigidbody2D myBody;
+    [SerializeField]
 	bool spinning;
 	float t;
 	Quaternion startRotation;
@@ -109,10 +110,19 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             transform.localScale = startScale;
             transform.rotation = startRotation;
         }
+
+        if (myShadow != null)
+            myShadow.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        if (myShadow != null)
+            myShadow.SetActive(false);
     }
 
 
-	void Start () {
+    void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		if(IAmParentObj){
 			myAnim = childEnemy.GetComponent<tk2dSpriteAnimator>();
@@ -441,7 +451,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				//myCollisionBox.enabled = false;
 
 				if(swingDirectionSide < 0){
-					if(currentHp <= 0){
+					if(currentHp <= 0 && !bossEnemy){
 						spinning = true;
 						myBody.mass = 1;
 						myBody.AddForce(new Vector2(-11f,8f), ForceMode2D.Impulse);
@@ -453,7 +463,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 						myBody.AddForce(new Vector2(-17f,0f), ForceMode2D.Impulse);
 					}
 				}else{
-					if(currentHp <= 0){
+					if(currentHp <= 0 && !bossEnemy){
 						spinning = true;
 						myBody.mass = 1;
 						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11f,8f), ForceMode2D.Impulse);
