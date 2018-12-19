@@ -7,6 +7,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	public float movementSpeed = 0;
 	public float minMoveTime = 0;
 	public float maxMoveTime = 0;
+	public float stopTime = 2;
 	//public GameObject walkCloud;
 	public ParticleSystem walkPS;
 	//public float walkCloudYadjust = 0.8f;
@@ -82,6 +83,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	}
 	IEnumerator Pause(){
 		yield return new WaitForSeconds(Random.Range(minMoveTime,maxMoveTime));
+		if(moving){
 		bounceOffObject = 0;
 		//CancelInvoke("SpawnClouds");
 		walkPS.Stop();
@@ -95,8 +97,9 @@ public class RandomDirectionMovement : MonoBehaviour {
 			//anim.Play("idleR");
 		//} else if(anim.IsPlaying("runL"))
 			//anim.Play("idleL");
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(stopTime);
 		GoAgain();
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
@@ -122,12 +125,19 @@ public class RandomDirectionMovement : MonoBehaviour {
 		}*/
 	}
 
-	void GoAgain(){
+	public void GoAgain(){
 		moving = true;
 		//InvokeRepeating("SpawnClouds",.2f, .2f);
 		walkPS.Play();
 		direction = (new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0.0f)).normalized;
 		StartCoroutine("Pause");
+	}
+
+	public void StopMoving(){
+		walkPS.Stop();
+		StopAllCoroutines();
+		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		moving = false;
 	}
 
 

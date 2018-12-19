@@ -40,7 +40,6 @@ GameObject:
   - component: {fileID: 23744414011719256}
   - component: {fileID: 114555138957307946}
   - component: {fileID: 114857758858473470}
-  - component: {fileID: 114261148013917570}
   - component: {fileID: 61601539452241730}
   - component: {fileID: 61906568502245636}
   - component: {fileID: 114645927745964818}
@@ -48,6 +47,7 @@ GameObject:
   - component: {fileID: 50609150297414640}
   - component: {fileID: 114743519393647910}
   - component: {fileID: 114586182235095206}
+  - component: {fileID: 114141940548723122}
   m_Layer: 9
   m_Name: e_porcupine
   m_TagString: Untagged
@@ -280,6 +280,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.74, y: 1.55}
   m_EdgeRadius: 0
+--- !u!114 &114141940548723122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1201984153954284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7145ca8301081f84b8f5d9a7a1663aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 1
+  minMoveTime: 1
+  maxMoveTime: 3
+  walkPS: {fileID: 198251608602611088}
+  myWanderZone: {fileID: 0}
 --- !u!114 &114254527630802168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,21 +310,6 @@ MonoBehaviour:
   clankSound: {fileID: 0}
   parentsETD: {fileID: 114759214080502328}
   pushBack: 1
---- !u!114 &114261148013917570
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1201984153954284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7465d3cf6dc723459be3e518ac51b0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 2
-  minMoveTime: 2
-  maxMoveTime: 4
-  walkPS: {fileID: 198251608602611088}
 --- !u!114 &114555138957307946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -419,6 +420,7 @@ MonoBehaviour:
   myShadow: {fileID: 0}
   returnAniName: idle
   dontSpawnBody: 0
+  canKnockoffArmor: 0
   behaviorsToDeactivate: []
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ev_HUD : MonoBehaviour {
+
+	public GameObject promptText;
+
     public void Start()
     {
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);

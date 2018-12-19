@@ -34,6 +34,7 @@ public class CalendarManager : MonoBehaviour {
     {
         for (int i=0; i < friendEvents.Count; ++i)
         {
+        	Debug.Log("Calendar Manager EndDay(): " + friendEvents[i].day + currentDay);
             if (friendEvents[i].day == currentDay)
             {
                // friendEvents[i].Execute();

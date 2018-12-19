@@ -20,6 +20,8 @@ public class GUI_TutPopup : MonoBehaviour {
 	public Sprite upgradeImage;
 	public Sprite murderImage;
 	public Sprite dojoImage;
+	public Sprite shopImage;
+
 
 	Vector3 startPos;
 	int phase;
@@ -99,6 +101,14 @@ public class GUI_TutPopup : MonoBehaviour {
 			myImage.GetComponent<Image>().sprite = PinsImage;
 			myTitle.GetComponent<TextMeshProUGUI>().text = "PINS";
 			GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.PINS;
+
+		}else if(tutPopup == "Shop"){
+			myDescription.GetComponent<TextMeshProUGUI>().text = "<color=#ffffb3>Homeless Harry's Pin Shop</color> has a selection " +
+																"of pins that can be purchased using <color=#ffffb3>trash pieces</color>"+
+																" you have found in the world. Not available in Demo.";
+			myImage.GetComponent<Image>().sprite = shopImage;
+			myTitle.GetComponent<TextMeshProUGUI>().text = "SHOP";
+			//GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.PINS;
 
 		}
 

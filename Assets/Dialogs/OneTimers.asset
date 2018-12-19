@@ -80,6 +80,8 @@ MonoBehaviour:
     - Value: 90a9353b-269a-4b61-a789-ceb91079e0b9
     - Value: 411d8d95-524b-498f-a977-73d69d2fdb54
     - Value: 7c856693-427e-49fe-8cfb-e09ba6b13e77
+    - Value: 139fedc2-08c7-4ab5-a084-594c44a6602b
+    - Value: 84baea8b-68a4-40f3-83a4-d224aa169338
     values:
     - window:
         serializedVersion: 2
@@ -859,7 +861,7 @@ MonoBehaviour:
       question: 
       action: finish
       isDialogAction: 0
-      friendState: END
+      friendState: 
       id:
         Value: 92954e10-5d83-4823-999c-90b41b57a5ff
       x: 3389
@@ -962,7 +964,7 @@ MonoBehaviour:
         Value: 5c734b02-89e8-4317-9610-5e9cf6e501bb
       x: 1089
       y: 1378
-      text: Yup, see, I knew it. I'm pretty good at reading faces.
+      text: Yup, see, I knew it. I'm pretty good at reading people.
       isThought: 0
       animTrigger: 
       type: 1
@@ -1081,7 +1083,7 @@ MonoBehaviour:
         Value: c95a55eb-2db5-4e50-963e-3ba884cad977
       x: 1764.862
       y: 1357
-      text: We rats are always VERY concerned  with the quakity of the player's game
+      text: We rats are always VERY concerned  with the quality of the player's game
         experience.
       isThought: 0
       animTrigger: 
@@ -1107,7 +1109,7 @@ MonoBehaviour:
       x: 2093.862
       y: 1367
       text: '...especially when that player''s opinion is a pretty huge factor in
-        our future success...'
+        our future success...</s>'
       isThought: 0
       animTrigger: 
       type: 1
@@ -1116,8 +1118,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 2715.651
-        y: 1584
+        x: 2726.651
+        y: 1455
         width: 270
         height: 200
       isCollapsed: 0
@@ -1129,8 +1131,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 3453bfe1-2ee7-48bb-b206-c4b4afc94d6d
-      x: 2715.651
-      y: 1584
+      x: 2726.651
+      y: 1455
       text: Danger, huh?  Hmm..let's see...
       isThought: 0
       animTrigger: 
@@ -1140,11 +1142,11 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 3069.651
-        y: 1456
+        x: 3047.651
+        y: 1354
         width: 270
-        height: 42
-      isCollapsed: 1
+        height: 200
+      isCollapsed: 0
       title: RatMat2_danger2_1
       speakerName: 
       question: 
@@ -1153,8 +1155,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 92f18712-3c4f-494e-bb6d-3ca747577b41
-      x: 3069.651
-      y: 1456
+      x: 3047.651
+      y: 1354
       text: Have you checked out the <c=g> town of moles on the top of the cliffs</c>?
       isThought: 0
       animTrigger: 
@@ -1213,8 +1215,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 3073.055
-        y: 1567
+        x: 3328.055
+        y: 1684
         width: 270
         height: 42
       isCollapsed: 1
@@ -1226,8 +1228,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: f57a8e7d-e9d4-43d8-b3fa-8c06f4a4a264
-      x: 3073.055
-      y: 1567
+      x: 3328.055
+      y: 1684
       text: Try heading over to <c=g> The Bug Zone</c> just north and to the left
         of here.
       isThought: 0
@@ -1238,8 +1240,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 3407.055
-        y: 1594
+        x: 3608.055
+        y: 1611
         width: 270
         height: 200
       isCollapsed: 0
@@ -1251,8 +1253,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 2202b25b-2cb2-422f-a846-ae752faaa596
-      x: 3407.055
-      y: 1594
+      x: 3608.055
+      y: 1611
       text: I hear that the <color=#78FF32>armored rhino beetles</color> that wander
         there pack quite the punch.
       isThought: 0
@@ -1263,8 +1265,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 3067.4248
-        y: 1663
+        x: 3061.4248
+        y: 1611
         width: 270
         height: 42
       isCollapsed: 1
@@ -1276,8 +1278,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: ede3131e-457f-46e3-ad13-db95b16be486
-      x: 3067.4248
-      y: 1663
+      x: 3061.4248
+      y: 1611
       text: Over by the <c=g>Duck King's Marsh</c> there's a <c=g>ferocious dog</c>
         that guards a <c=g> great treasure</c>
       isThought: 0
@@ -1288,8 +1290,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 2669.3428
-        y: 2107
+        x: 2358.3428
+        y: 2036
         width: 270
         height: 200
       isCollapsed: 0
@@ -1301,8 +1303,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: e2c41d9a-5462-49fd-909a-fbec12b73f04
-      x: 2669.3428
-      y: 2107
+      x: 2358.3428
+      y: 2036
       text: Treasure, huh? Mmm..
       isThought: 0
       animTrigger: 
@@ -1312,8 +1314,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 2973.3428
-        y: 2060
+        x: 2930.3428
+        y: 2025
         width: 270
         height: 200
       isCollapsed: 0
@@ -1325,8 +1327,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: b53217ea-e2bb-458c-af5e-fc4c2f139739
-      x: 2973.3428
-      y: 2060
+      x: 2930.3428
+      y: 2025
       text: <c=g>Southeast</c> of here, there's an area full of dangerous <c=g> porcupines</c>...
       isThought: 0
       animTrigger: 
@@ -1336,8 +1338,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 3274.3428
-        y: 2071
+        x: 3483.3428
+        y: 2063
         width: 270
         height: 200
       isCollapsed: 0
@@ -1349,10 +1351,10 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 82e6653d-03cc-4ea7-a9af-b4f55a618c30
-      x: 3274.3428
-      y: 2071
-      text: If you can manage to survive, there's a few <c=g>pins<.c> scattered around
-        there...
+      x: 3483.3428
+      y: 2063
+      text: If you can manage to survive, there's a few <color=#78FF32>pins<.c> scattered
+        around there...
       isThought: 0
       animTrigger: 
       type: 1
@@ -1361,7 +1363,7 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 3590.3428
+        x: 3754.3428
         y: 2102
         width: 270
         height: 200
@@ -1374,10 +1376,10 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 59bf9a5f-3d8e-491d-8f9e-39de59e3693d
-      x: 3590.3428
+      x: 3754.3428
       y: 2102
-      text: I also think there's an <c=g>Old Flat Tire</c> somewhere around there
-        you may have a use for...
+      text: I also think there's an <color=#78FF32>Old Flat Tire</color> somewhere
+        around there you may have a use for...
       isThought: 0
       animTrigger: 
       type: 1
@@ -1484,27 +1486,27 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 2649.4248
-        y: 2819
+        x: 2310.4248
+        y: 2779
         width: 270
         height: 200
       isCollapsed: 0
       title: RatMat2_notNow
       speakerName: 
       question: 
-      action: finish
-      isDialogAction: 1
+      action: 
+      isDialogAction: 0
       friendState: 
       id:
         Value: 2610ff24-a9b1-4b1e-8f59-8fe85a311a09
-      x: 2649.4248
-      y: 2819
+      x: 2310.4248
+      y: 2779
       text: Alrighty, well, I'll stick around here if you end up needing me.
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
-        Value: 7c856693-427e-49fe-8cfb-e09ba6b13e77
+        Value: 84baea8b-68a4-40f3-83a4-d224aa169338
       responses: []
     - window:
         serializedVersion: 2
@@ -1700,6 +1702,63 @@ MonoBehaviour:
       type: 1
       child_id:
         Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 175.23303
+        y: 1716
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: RatMat_3
+      speakerName: Rat On A Mat
+      question: Anything you're looking for?
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 139fedc2-08c7-4ab5-a084-594c44a6602b
+      x: 175.23303
+      y: 1716
+      text: Hey, appreciated player. Need to know something?
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: I'm looking for some danger! Some action!
+        node_id:
+          Value: 3453bfe1-2ee7-48bb-b206-c4b4afc94d6d
+      - text: I'm looking for some cool treasure!
+        node_id:
+          Value: e2c41d9a-5462-49fd-909a-fbec12b73f04
+      - text: No, I think I'm good for now, thanks.
+        node_id:
+          Value: 2610ff24-a9b1-4b1e-8f59-8fe85a311a09
+    - window:
+        serializedVersion: 2
+        x: 2624.959
+        y: 2728
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RatMat2_notNow2
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 1
+      friendState: 
+      id:
+        Value: 84baea8b-68a4-40f3-83a4-d224aa169338
+      x: 2624.959
+      y: 2728
+      text: I'll be here for you, even when no one else is, player. Never forget that.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7c856693-427e-49fe-8cfb-e09ba6b13e77
       responses: []
   rootNodeId:
     Value: 32a3d734-8f3f-4d59-8c11-9fb5c81056f1

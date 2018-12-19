@@ -18,9 +18,7 @@ public class Ev_Enemy_Porcupine2 : MonoBehaviour
 		yield return new WaitForSeconds(Random.Range(1.5f, 3.5f));
 
 
-		gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
-		gameObject.GetComponent<RandomDirectionMovement>().StopAllCoroutines();
-		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		gameObject.GetComponent<WanderWithinBounds>().StopMoving();
 
 
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("shake");
@@ -46,12 +44,12 @@ public class Ev_Enemy_Porcupine2 : MonoBehaviour
 
 		yield return new WaitForSeconds(1f);
 
-		gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
+		gameObject.GetComponent<WanderWithinBounds>().GoAgain();
 
 		yield return new WaitForSeconds(Random.Range(1.5f, 3f));
 
+		StopCoroutine("FireQuills");
 		StartCoroutine("FireQuills");
-
 
 	}
 

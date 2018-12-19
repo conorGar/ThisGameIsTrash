@@ -62,6 +62,12 @@ public class JumboFriend : Friend {
             case "START":
 				day = CalendarManager.Instance.currentDay; //1st meeting can happen any day
                 break;
+            case "MISSED_SCREENING":
+				day = CalendarManager.Instance.currentDay;
+            	break;
+            case "MISSED_SECOND_SCREENING":
+				day = CalendarManager.Instance.currentDay;
+            	break;
             case "INVITE_TO_SECOND_SCREENING":
 				gameObject.transform.position = new Vector2(-95f,8.5f);
 	    		deadRat.SetActive(true);
@@ -107,6 +113,14 @@ public class JumboFriend : Friend {
                 nextDialog = "Jumbo3";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
+            case "MISSED_SCREENING":
+				nextDialog = "JumboMissed";
+           	    GetComponent<ActivateDialogWhenClose>().Execute();
+            	break;
+           	case "MISSED_SECOND_SCREENING":
+				nextDialog = "JumboMissed2_1";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+           		break;
             case "END":
                 break;
         }
@@ -306,6 +320,20 @@ public class JumboFriend : Friend {
 				dialogManager.Invoke("ReturnFromAction",.1f);
 			}
 		}
+	}
+
+	public override void MissedEvent(){
+		Debug.Log("Missed Event - Jumbo");
+		switch (GetFriendState()) {
+            case "INVITE_TO_SECOND_SCREENING":
+				SetFriendState("MISSED_SCREENING");
+	    		break;
+			case "INVITE_TO_THIRD_SCREENING":
+				SetFriendState("MISSED_SECOND_SCREENING");
+	    		break;
+            case "END":
+                break;
+        }
 	}
 
 	IEnumerator AfterFirstMovie(){

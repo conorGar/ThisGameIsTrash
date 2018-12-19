@@ -68,8 +68,10 @@ public class Friend : UserDataItem {
         IsVisiting = true;
     }
 
-    public void MissedEvent(){
-    	nextDialog = missedDialog;
+    public virtual void MissedEvent(){
+    	//nextDialog = missedDialog; Commented this out because didn't work well with new friend state system. For now everything is handeld by specific friend class(JumboFriend). As always, don't yell at me. Ok thanks.
+    	//Nothing to do for basic friend
+
     }
 
     // Useful for checking where a friend is if they like to visit different rooms.

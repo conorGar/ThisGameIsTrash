@@ -20,9 +20,30 @@ public class RatOnMatFriend : Friend
     }
 
     void OnEnable(){
+		if(openMapPrompt == null){
+			openMapPrompt = GameObject.Find("HUD").GetComponent<Ev_HUD>().promptText;
+		}
 		base.OnEnable();
-		if(openMapPrompt == null)
-			openMapPrompt = GameObject.Find("promptText");
+
+		switch (GetFriendState()) {
+            case "TUTORIAL":
+                break;
+            case "GUIDE_INTRO":
+            	if(GlobalVariableManager.Instance.DAY_NUMBER > 3){
+				    day = CalendarManager.Instance.currentDay;
+            	}
+            	break;
+           	case "GUIDE":
+				if(GlobalVariableManager.Instance.DAY_NUMBER > 3){
+				    day = CalendarManager.Instance.currentDay;
+            	}
+				gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
+				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+				gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 5;
+           		break;
+            case "END":
+                break;
+        }
     }
 
     public override void GenerateEventData()
@@ -33,7 +54,7 @@ public class RatOnMatFriend : Friend
 				day = CalendarManager.Instance.currentDay;
                 break;
             case "GUIDE":
-            	if(GlobalVariableManager.Instance.DAY_NUMBER > 4){
+            	if(GlobalVariableManager.Instance.DAY_NUMBER > 3){
 				    day = CalendarManager.Instance.currentDay;
             	}
             	break;
@@ -49,7 +70,7 @@ public class RatOnMatFriend : Friend
             case "TUTORIAL":
                 gameObject.SetActive(true);
                 break;
-            case "GUIDE":
+            case "GUIDE_INTRO":
             	if(GlobalVariableManager.Instance.DAY_NUMBER < day){
 				    gameObject.SetActive(false);
             	}
@@ -67,10 +88,14 @@ public class RatOnMatFriend : Friend
                 nextDialog = "RatMat1";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
-			case "GUIDE":
+			case "GUIDE_INTRO":
                 nextDialog = "RatMat_2_1";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
+            case "GUIDE":
+				nextDialog = "RatMat_3";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+            	break;
             case "END":
                 break;
         }
@@ -78,20 +103,39 @@ public class RatOnMatFriend : Friend
 
     public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
-        StartCoroutine("ReturnCam");
-        if(openMapPrompt != null)
-        	openMapPrompt.SetActive(true);
+       
+       		Debug.Log("Rat on Mat end activate");
 		switch (GetFriendState()) {
+			
             case "TUTORIAL":
+				Debug.Log("Rat on Mat end activate ---- tutorial----");
                 nextDialog = "RatMat_2_1";
-				SetFriendState("GUIDE");
-                day = 4;
+                SetFriendState("GUIDE_INTRO");
+                day = 3;
+				if(openMapPrompt != null)
+        			openMapPrompt.SetActive(true);
+
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 5;
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
+				StartCoroutine("ReturnCam");
                 break;
+            case "GUIDE_INTRO":
+				nextDialog = "RatMat_3";
+				SetFriendState("GUIDE");
+				gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
+				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+
+            	break;
+            case "GUIDE":
+				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+            	break;
             case "END":
+				Debug.Log("Rat on Mat end activate ---- end----");
+				StartCoroutine("ReturnCam");
+
                 break;
         }
+
         yield return base.OnFinishDialogEnumerator();
     }
 
@@ -151,18 +195,19 @@ public class RatOnMatFriend : Friend
 		 bool foundAction = false;
 		 int whichAction = Random.Range(1,4); //chooses randomly from given dialogs
 		 for(int i = 0; i < 3; i++){
-		 	if(whichAction == 1 && !actionCheck_bugZone){
+		 	Debug.Log("Check Treasure ---" + whichAction);
+		 	if(whichAction == 1 && !treasureCheck_porcupines){
 		 		//return call to proper node
 		 		dialogManager.JumpToNewNode("RatMat2_treasure2_1");
 		 		treasureCheck_porcupines = true;
 		 		foundAction = true;
 		 		break;
-		 	}else if(whichAction == 2 && !actionCheck_dog){
+		 	}else if(whichAction == 2 && !treasureCheck_dogTreasure){
 				dialogManager.JumpToNewNode("RatMat2_treasure3_1");
 		 		treasureCheck_dogTreasure = true;
 		 		foundAction = true;
 		 		break;
-		 	}else if(whichAction == 3 && !actionCheck_moleTown){
+		 	}else if(whichAction == 3 && !treasureCheck_moleTown){
 				dialogManager.JumpToNewNode("RatMat2_treasure4_1");
 		 		treasureCheck_moleTown = true;
 		 		foundAction = true;

@@ -33,6 +33,7 @@ public class SE_GlowWhenClose : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (player != null) {
                 if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < distanceUntilGlow && Mathf.Abs(player.transform.position.y - gameObject.transform.position.y) < distanceUntilGlow) {
+                	//Debug.Log("Close enough to glow");
                     if (glowCheck == 0) {
                         if (glowSprite != null) {
                             gameObject.GetComponent<SpriteRenderer>().sprite = glowSprite;
