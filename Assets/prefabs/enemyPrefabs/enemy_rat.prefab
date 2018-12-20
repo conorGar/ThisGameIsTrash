@@ -282,6 +282,7 @@ MonoBehaviour:
   movementSpeed: 4
   minMoveTime: 1
   maxMoveTime: 2.2
+  stopTime: 2
   walkPS: {fileID: 198577134872530542}
 --- !u!114 &114076671767681168
 MonoBehaviour:
@@ -354,6 +355,7 @@ MonoBehaviour:
   myShadow: {fileID: 1903692784849774}
   returnAniName: idle
   dontSpawnBody: 0
+  canKnockoffArmor: 0
   behaviorsToDeactivate:
   - {fileID: 114061048850949760}
   armorCollisionObj: {fileID: 0}
@@ -363,6 +365,7 @@ MonoBehaviour:
   currentHp: 3
   meleeDmgBonus: 0
   dontStopWhenHit: 0
+  spinning: 0
 --- !u!114 &114711155882897108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3826,7 +3829,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 66af31ef3a546c648ad6237d3b03a835, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.741}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.516}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

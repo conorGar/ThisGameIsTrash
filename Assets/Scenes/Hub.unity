@@ -3794,12 +3794,12 @@ Prefab:
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterShallowColor.r
-      value: 0.370024
+      value: 0.37002245
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterColor.r
-      value: 0.4093317
+      value: 0.40933016
       objectReference: {fileID: 0}
     - target: {fileID: 4000010873081078, guid: 4be443cc50afcd0478e5b4d4f2f6cb53, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3853,17 +3853,17 @@ Prefab:
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterShallowColor.g
-      value: 0.41270253
+      value: 0.412701
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: waterShallowColor.b
-      value: 0.4338216
+      value: 0.43382004
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
       propertyPath: fresnelColor.r
-      value: 0.4402023
+      value: 0.44020078
       objectReference: {fileID: 0}
     - target: {fileID: 114000011924948938, guid: 4be443cc50afcd0478e5b4d4f2f6cb53,
         type: 2}
@@ -25368,6 +25368,16 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 576ab416164cc944bb550233c9211f2f, type: 2}
   m_IsPrefabParent: 0
@@ -42474,6 +42484,7 @@ MonoBehaviour:
   movementSpeed: 2
   minMoveTime: 0.5
   maxMoveTime: 1.5
+  stopTime: 2
   walkPS: {fileID: 982750087}
 --- !u!61 &867816573
 BoxCollider2D:
@@ -90394,6 +90405,35 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 108483214877110912, guid: e77829d23b47ac046aa38ec362097deb,
+        type: 2}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108483214877110912, guid: e77829d23b47ac046aa38ec362097deb,
+        type: 2}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 108483214877110912, guid: e77829d23b47ac046aa38ec362097deb,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.8308824
+      objectReference: {fileID: 0}
+    - target: {fileID: 108483214877110912, guid: e77829d23b47ac046aa38ec362097deb,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.8308824
+      objectReference: {fileID: 0}
+    - target: {fileID: 108483214877110912, guid: e77829d23b47ac046aa38ec362097deb,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.8308824
+      objectReference: {fileID: 0}
+    - target: {fileID: 1069535248023362, guid: e77829d23b47ac046aa38ec362097deb, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e77829d23b47ac046aa38ec362097deb, type: 2}
   m_IsPrefabParent: 0
@@ -113439,6 +113479,7 @@ MonoBehaviour:
   movementSpeed: 4
   minMoveTime: 1
   maxMoveTime: 2.2
+  stopTime: 2
   walkPS: {fileID: 504816454}
 --- !u!61 &1840151355
 BoxCollider2D:
@@ -118028,6 +118069,7 @@ MonoBehaviour:
   movementSpeed: 2
   minMoveTime: 0.5
   maxMoveTime: 1.5
+  stopTime: 2
   walkPS: {fileID: 2062130189}
 --- !u!61 &1886391823
 BoxCollider2D:
@@ -118269,6 +118311,7 @@ MonoBehaviour:
   movementSpeed: 4
   minMoveTime: 1
   maxMoveTime: 2.2
+  stopTime: 2
   walkPS: {fileID: 1831954418}
 --- !u!61 &1905467719
 BoxCollider2D:
@@ -121440,6 +121483,16 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
         type: 2}

@@ -36,7 +36,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4870219287885606}
   - component: {fileID: 212344519357058742}
-  m_Layer: 0
+  - component: {fileID: 50458000394278592}
+  - component: {fileID: 61767556864387200}
+  - component: {fileID: 61800786726783424}
+  - component: {fileID: 114291934591599920}
+  - component: {fileID: 114416697846487598}
+  - component: {fileID: 114241844011279884}
+  m_Layer: 11
   m_Name: dungBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,14 +68,143 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1504254615547202}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.7, y: -12.61, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.3, y: 6.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4384952327179372}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50458000394278592
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504254615547202}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 1
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &61767556864387200
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504254615547202}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.18, y: 2.08}
+    newSize: {x: 2.18, y: 2.08}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.18, y: 2.08}
+  m_EdgeRadius: 0
+--- !u!61 &61800786726783424
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504254615547202}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.028820265, y: -0.19466501}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.18, y: 2.08}
+    newSize: {x: 2.18, y: 2.08}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.58, y: 1.72}
+  m_EdgeRadius: 0
+--- !u!114 &114241844011279884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504254615547202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  sortBuddies: []
+--- !u!114 &114291934591599920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504254615547202}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87e66f397c6ae134782c4022379cbba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftLimit: 0
+  rightLimit: 0
+  topLimit: 0
+  botLimit: 0
+  globalPos: 0
+--- !u!114 &114416697846487598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504254615547202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ef17e1413d98445a33fb87475b952f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceUntilPickup: 3
+  player: {fileID: 0}
+  pickup: {fileID: 8300000, guid: 8df408df4bf166f409446c0742895aff, type: 3}
+  drop: {fileID: 0}
+  carryXAdjustment: 3.3
+  carryMark: {fileID: 0}
+  throwableObject: 1
+  childPickupObj: {fileID: 0}
+  myBody: {fileID: 0}
+  dumpster: {fileID: 0}
+  spinning: 0
+  carrySound: {fileID: 0}
+  myShadow: {fileID: 1266209211681638}
+  physicalCollision: {fileID: 61767556864387200}
+  throwObject: {fileID: 8300000, guid: 39fdd0af36dba594da29a70a4573968b, type: 3}
+  landSfx: {fileID: 0}
+  behaviorsToStop: []
+  livingBody: 0
+  groundedClip: 
 --- !u!212 &212344519357058742
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -149,7 +284,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 66af31ef3a546c648ad6237d3b03a835, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.953}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.666}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

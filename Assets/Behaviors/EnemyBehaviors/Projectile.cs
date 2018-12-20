@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour {
 
 	public int damageToPlayer;
 	public bool destroyOnTileCollision;
-
+	public GameObject myShadow;
 
 	void OnTriggerEnter2D(Collider2D collider){
 		if(destroyOnTileCollision && collider.gameObject.layer == 8) //tile layer

@@ -46,6 +46,8 @@ public class RockFriend : Friend {
                 break;
             case "WANTS_TO_BE_PRETTY":
                 // Eyes open.
+				gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
+				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 BreakEyes();
                 break;
             case "END":
@@ -57,6 +59,17 @@ public class RockFriend : Friend {
 
     private void Update()
     {
+		switch (GetFriendState()) {
+            case "START":
+                break;
+            case "WANTS_TO_BE_PRETTY":
+                nextDialog = "RockRequest";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
+            case "END":
+                break;
+        }
+
         OnUpdate();
     }
 
@@ -110,7 +123,11 @@ public class RockFriend : Friend {
 
                 // Rock wants to be pretty.
                 SetFriendState("WANTS_TO_BE_PRETTY");
-                GetComponent<ActivateDialogWhenClose>().autoStart = true;
+                gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
+				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+
+				nextDialog = "RockRequest";
+                //GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
                 break;
             case "WANTS_TO_BE_PRETTY":

@@ -11,7 +11,7 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 	public GameObject shellShield;
 	public BoxCollider2D myHitBox;
 	public AudioClip land;
-
+	public GameObject[] dirtBallSpawnPoints;
 
 	bool leaping;
 	bool inAir;
@@ -46,7 +46,9 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 				Debug.Log("Landed from fall" + gameObject.transform.position.y + landingPos.y);
 				falling = false;
 				inAir = false;
+				gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
 				SoundManager.instance.PlaySingle(land);
+				SpawnDirtBallRing();
 				ObjectPool.Instance.GetPooledObject("effect_enemyLand",new Vector2(gameObject.transform.position.x, gameObject.transform.position.y -1f));
 				gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
@@ -61,7 +63,7 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 	}
 
 	void Leap(){
-		gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x*-1,gameObject.transform.localScale.y); // turn around
+		//gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x*-1,gameObject.transform.localScale.y); // turn around
 
 		//TODO: switch to leap animation
 		StartCoroutine("LeapSequence");
@@ -77,7 +79,7 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 		Debug.Log("Got here leap sequence - 1");
 		yield return new WaitForSeconds(.5f);
 		Debug.Log("Got here leap sequence - 2");
-
+		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer03"; // above other objects when in air
 		gameObject.GetComponent<EnemyTakeDamage>().moveWhenHit = false;
 		myShadow.transform.parent = null;
 
@@ -102,6 +104,16 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 		leaping = false;
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("run");
 		this.enabled = false;
+	}
+
+	void SpawnDirtBallRing(){
+		Vector2 movementDir;
+
+		for(int i = 0; i <dirtBallSpawnPoints.Length;i++){
+			GameObject dirtBall = ObjectPool.Instance.GetPooledObject("projectile_fallingRock",gameObject.transform.position);
+			movementDir = ( gameObject.transform.position - dirtBallSpawnPoints[i].transform.position).normalized * 5;
+			dirtBall.GetComponent<Rigidbody2D>().velocity = new Vector2(movementDir.x,movementDir.y);
+		}
 	}
 
 

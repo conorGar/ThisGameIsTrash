@@ -41,7 +41,7 @@ public class RandomDirectionMovement : MonoBehaviour {
                 if (direction.x > 0) {
                     if (gameObject.transform.localScale.x < 0) {
                         if (turnOnce == 0) {
-                            StartCoroutine("Turn");
+                            Turn();
                         }
                     }
                     else if (!anim.IsPlaying("run")) {
@@ -53,7 +53,7 @@ public class RandomDirectionMovement : MonoBehaviour {
                 else {
                     if (gameObject.transform.localScale.x > 0) {
                         if (turnOnce == 0) {
-                            StartCoroutine("Turn");
+                            Turn();
                         }
                     }
                     else {
@@ -67,21 +67,22 @@ public class RandomDirectionMovement : MonoBehaviour {
             }
         }
 	}
-	IEnumerator Turn(){
-		Debug.Log("Turn activated");
+	void Turn(){
+		Debug.Log("Turn activated:" + gameObject.name);
 		turnOnce = 1;
-		if(anim.GetClipByName("turn") != null && !anim.IsPlaying("turn")){
+		/*if(anim.GetClipByName("turn") != null && !anim.IsPlaying("turn")){
 			anim.Play("turn");
 		}
 
 		yield return new WaitForSeconds(.2f);
 		anim.Play("run");
-
+		*/
 		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
 		//Debug.Log("Turn activated");
-		turnOnce = 0;
 	}
 	IEnumerator Pause(){
+		turnOnce = 0;
+
 		yield return new WaitForSeconds(Random.Range(minMoveTime,maxMoveTime));
 		if(moving){
 		bounceOffObject = 0;
@@ -106,6 +107,8 @@ public class RandomDirectionMovement : MonoBehaviour {
 		//go a different direction when bump into something
 		//if(collision.gameObject.transform.position.y> this.gameObject.transform.position.y);
 		if(bounceOffObject == 0){
+			Debug.Log("Collided with something and GoAgain() called");
+
 			GoAgain();
 			bounceOffObject = 1;
 		}

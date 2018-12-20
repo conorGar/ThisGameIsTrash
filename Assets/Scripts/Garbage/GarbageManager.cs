@@ -29,6 +29,7 @@ public class GarbageManager : MonoBehaviour {
 
     public void PopulateGarbage(GARBAGETYPE type, int garbageCount)
     {
+    	Debug.Log("PopulateGarbage() activated");
         // Cap garbageCount at garbageSpawners.Count so we don't run out of spawners and crash.
         garbageCount = Mathf.Min(garbageCount, garbageSpawners.Count);
 
