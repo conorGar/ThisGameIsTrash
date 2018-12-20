@@ -79,13 +79,6 @@ public class Ev_GenericGarbage : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-		//myCollecion behavior --------------------//
-		if(thisRoom == 101){
-			if(GlobalVariableManager.Instance.MENU_SELECT_STAGE != 4){
-				ObjectPool.Instance.ReturnPooledObject(gameObject);
-			}
-		}
-
 	}
 	void Fall(){
 		isFalling = true;
