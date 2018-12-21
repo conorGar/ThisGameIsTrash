@@ -27,11 +27,6 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
     List<GameObject> pinPageList = new List<GameObject>();
 
 	void Start () {
-        if (PinManager.Instance.DebugPins)
-        {
-            GlobalVariableManager.Instance.PINS_DISCOVERED = PIN.ALL;
-        }
-
         GlobalVariableManager.Instance.MENU_SELECT_STAGE = 10;
 
 		if(GlobalVariableManager.Instance.ROOM_NUM != 112){
@@ -43,60 +38,13 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 			GlobalVariableManager.Instance.WORLD_SIGNS_READ[0].Replace(GlobalVariableManager.Instance.WORLD_SIGNS_READ[0][9],'o');
 		}*/
 
-
-        // Set up all the pin pages.
-        var pinsPerPage = PinManager.Instance.PinRow * PinManager.Instance.PinCol;
-        var pinPageCount = PinManager.Instance.pinConfig.pinList.Count / pinsPerPage;
-        pinPageList = new List<GameObject>();
-
-        // add a page for any remaining pins.
-        if (PinManager.Instance.pinConfig.pinList.Count % pinsPerPage > 0)
-            pinPageCount += 1;
-
-        for (int i=0; i < pinPageCount; ++i)
-        {
-            GameObject pinPage = ObjectPool.Instance.GetPooledObject("PinPage");
-            pinPage.transform.SetParent(PinManager.Instance.PageRoot.transform);
-            pinPage.transform.position = PinManager.Instance.PageRoot.transform.position;
-            pinPage.name = "Pin Page " + i;
-            pinPage.SetActive(true);
-            pinPageList.Add(pinPage);
-        }
-
-        for (int i = 0; i < PinManager.Instance.pinConfig.pinList.Count; i++){
-            PinDefinition pinDefinition = PinManager.Instance.pinConfig.pinList[i];
-            int pageNum = i / pinsPerPage;
-            Vector3 pagePos = pinPageList[pageNum].transform.position;
-            var pin = ObjectPool.Instance.GetPooledObject("Pin").GetComponent<Ev_PinBehavior>();
-            pin.transform.SetParent(pinPageList[pageNum].transform);
-
-            // populate the pin data
-            pin.name = pinDefinition.displayName;
-
-            pin.sprite.SetSprite(pinDefinition.sprite);
-            pin.SetPinData(pinDefinition);
-            pin.gameObject.SetActive(true);
-
-            var pinSize = pin.sprite.GetComponent<BoxCollider2D>().bounds.size;
-            // x, at the page origin, per column, spaced with an offset
-            // y, at the page origin, per row, per page, projected downward.
-            pin.transform.position = new Vector3(pagePos.x + i % PinManager.Instance.PinCol * (pinSize.x + PinManager.Instance.PinOffsetX),
-                                                 pagePos.y + -i / PinManager.Instance.PinCol % PinManager.Instance.PinRow * (pinSize.y + PinManager.Instance.PinOffsetY),
-                                                 pagePos.z);
-            Debug.Log("Got Here Pin Spawn");
-        }
-
-        for (int i=0; i < pinPageList.Count; ++i)
-        {
-            // deactivate all but the first page.
-            if (i != 0)
-                pinPageList[i].SetActive(false);
-        }
-
-        arrowPos = 0;
-        MoveArrow();
+        SetupPins();
     }
 	void OnEnable(){
+        if (PinManager.Instance.DebugPins) {
+            GlobalVariableManager.Instance.PINS_DISCOVERED = PIN.ALL;
+        }
+
         GameStateManager.Instance.PushState(typeof(ShopState));
         leftSide.transform.localPosition = new Vector2(-140f,0f);
 		rightSide.transform.localPosition = new Vector2(120f,0f);
@@ -223,4 +171,57 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
         pinBehavior.Highlight();
         pinBehavior.AtEquipScreen();
 	}
+
+    void SetupPins()
+    {
+        // Set up all the pin pages.
+        var pinsPerPage = PinManager.Instance.PinRow * PinManager.Instance.PinCol;
+        var pinPageCount = PinManager.Instance.pinConfig.pinList.Count / pinsPerPage;
+        pinPageList = new List<GameObject>();
+
+        // add a page for any remaining pins.
+        if (PinManager.Instance.pinConfig.pinList.Count % pinsPerPage > 0)
+            pinPageCount += 1;
+
+        for (int i = 0; i < pinPageCount; ++i) {
+            GameObject pinPage = ObjectPool.Instance.GetPooledObject("PinPage");
+            pinPage.transform.SetParent(PinManager.Instance.PageRoot.transform);
+            pinPage.transform.position = PinManager.Instance.PageRoot.transform.position;
+            pinPage.name = "Pin Page " + i;
+            pinPage.SetActive(true);
+            pinPageList.Add(pinPage);
+        }
+
+        for (int i = 0; i < PinManager.Instance.pinConfig.pinList.Count; i++) {
+            PinDefinition pinDefinition = PinManager.Instance.pinConfig.pinList[i];
+            int pageNum = i / pinsPerPage;
+            Vector3 pagePos = pinPageList[pageNum].transform.position;
+            var pin = ObjectPool.Instance.GetPooledObject("Pin").GetComponent<Ev_PinBehavior>();
+            pin.transform.SetParent(pinPageList[pageNum].transform);
+
+            // populate the pin data
+            pin.name = pinDefinition.displayName;
+
+            pin.sprite.SetSprite(pinDefinition.sprite);
+            pin.SetPinData(pinDefinition);
+            pin.gameObject.SetActive(true);
+
+            var pinSize = pin.sprite.GetComponent<BoxCollider2D>().bounds.size;
+            // x, at the page origin, per column, spaced with an offset
+            // y, at the page origin, per row, per page, projected downward.
+            pin.transform.position = new Vector3(pagePos.x + i % PinManager.Instance.PinCol * (pinSize.x + PinManager.Instance.PinOffsetX),
+                                                 pagePos.y + -i / PinManager.Instance.PinCol % PinManager.Instance.PinRow * (pinSize.y + PinManager.Instance.PinOffsetY),
+                                                 pagePos.z);
+            Debug.Log("Got Here Pin Spawn");
+        }
+
+        for (int i = 0; i < pinPageList.Count; ++i) {
+            // deactivate all but the first page.
+            if (i != 0)
+                pinPageList[i].SetActive(false);
+        }
+
+        arrowPos = 0;
+        MoveArrow();
+    }
 }
