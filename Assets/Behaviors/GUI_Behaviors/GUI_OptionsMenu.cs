@@ -11,6 +11,7 @@ public class GUI_OptionsMenu : MonoBehaviour {
 
 
     public AudioClip selectSound;
+    public AudioClip closeSound;
 
     //public GameObject soundManager;
 
@@ -87,6 +88,7 @@ public class GUI_OptionsMenu : MonoBehaviour {
 	         || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE))
 	        {
 	            // Back to the pause menu.
+	            SoundManager.instance.PlaySingle(closeSound);
 	            GameStateManager.Instance.PopState();
 				gameObject.SetActive(false);
 			}

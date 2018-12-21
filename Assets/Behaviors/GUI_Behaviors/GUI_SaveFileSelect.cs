@@ -10,6 +10,8 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 
 	// Use this for initialization
 	public GameObject fadeHelper;
+	public AudioClip selectSfx;
+
 
 	void OnEnable(){
 
@@ -19,6 +21,7 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 	{
         if (GameStateManager.Instance.GetCurrentState() == typeof(TitleState)) {
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
+            	SoundManager.instance.PlaySingle(selectSfx);
                 LoadSave();
                 optionIcons[arrowPos].GetComponent<Image>().color = new Color(0.27f, .98f, .51f);
                 Invoke("ReturnFromSelectEffect", .2f);

@@ -125,12 +125,15 @@ public class RockFriend : Friend {
                 SetFriendState("WANTS_TO_BE_PRETTY");
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
 				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
-
+				StartingEvents();
 				nextDialog = "RockRequest";
                 //GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
                 break;
             case "WANTS_TO_BE_PRETTY":
+				gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
+				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+				StartCoroutine("TotalProductsDisplay");
                 break;
         }
 
@@ -153,17 +156,12 @@ public class RockFriend : Friend {
 		List<GarbageSpawner> myChosenSpawners =GarbageManager.Instance.garbageSpawners;
 		myChosenSpawners.Shuffle();
     	for(int i = 0; i< desiredObject.Count;i++){
-  			desiredObject[i].transform.position = myChosenSpawners[i].transform.position;
+  			desiredObject[i].transform.position = myChosenSpawners[i].transform.position; 
+  			Debug.Log(myChosenSpawners[i].transform.position + " < spawned rock item position");
     		desiredObject[i].gameObject.SetActive(true);
     	}
 
-    	//give current needed info to collected HUD
-    	for(int i = 0; i< pickedUpObjects.Count;i++){
-    		GUIManager.Instance.rockItemHUD.UpdateItemsCollected(pickedUpObjects[i].gameObject.GetComponent<SpriteRenderer>().sprite);
-    	}
-		for(int i = 0; i< deliveredObjects.Count; i++){
-            GUIManager.Instance.rockItemHUD.UpdateItemsCollected(deliveredObjects[i].gameObject.GetComponent<SpriteRenderer>().sprite);
-    	}
+
 
     }
 
@@ -211,7 +209,12 @@ public class RockFriend : Friend {
 		dialogManager.ReturnFromAction();
 
 	}
+	IEnumerator TotalProductsDisplay(){
+    	GUIManager.Instance.rockItemHUD.gameObject.SetActive(true);
 
+		yield return new WaitForSeconds(2f);
+		GUIManager.Instance.rockItemHUD.gameObject.SetActive(false);
+    }
     public void BreakEyes()
     {
         Destroy(eyeCover);
@@ -249,6 +252,17 @@ public class RockFriend : Friend {
     	moon.SetActive(false);
     	dialogManager.ReturnFromAction();
     }
+
+    /*public override void OnWorldStart(){ //populates the world with beauty items
+		switch (GetFriendState()) {
+            
+            case "WANTS_TO_BE_PRETTY":
+                // Eyes open.
+				StartingEvents();
+                break;
+        }
+    }*/
+
 
     // User Data implementation
     public override string UserDataKey()

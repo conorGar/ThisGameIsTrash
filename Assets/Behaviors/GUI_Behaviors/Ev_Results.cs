@@ -19,7 +19,8 @@ public class Ev_Results : MonoBehaviour {
     public Image backPaper;
     public Image image;
 
-    public AudioClip largeTrashCollectedSfx;
+    public AudioClip closeSfx;
+
 
 	int trashCollectedValue;
 	int phase = 0;
@@ -159,7 +160,7 @@ public class Ev_Results : MonoBehaviour {
                         else {
                             GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
                         }
-
+                        SoundManager.instance.PlaySingle(closeSfx);
                         // Fading needs time to pass.
                         Time.timeScale = 1f;
                     

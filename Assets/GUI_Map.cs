@@ -6,11 +6,9 @@ public class GUI_Map : MonoBehaviour {
 	public GameObject playerIcon;
     public GameObject trashIconPrefab;
     public List<GameObject> trashIcons;
+    public AudioClip openMap;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -20,7 +18,7 @@ public class GUI_Map : MonoBehaviour {
 	void OnEnable(){
         // Set current player position in world.
         playerIcon.transform.position = RoomManager.Instance.currentRoom.miniMapPosition.position;
-
+		SoundManager.instance.PlaySingle(openMap);
         // Loop through the rooms and display a trash icon for any room that has trash.  TODO: maybe even add the number of trash to pick up?
         if(GlobalVariableManager.Instance.IsPinEquipped(PIN.TREASURETRACKER)){
 	        for (int i = 0; i < RoomManager.Instance.rooms.Count; i++) {

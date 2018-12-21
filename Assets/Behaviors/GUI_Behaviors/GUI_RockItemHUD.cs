@@ -21,7 +21,7 @@ public class GUI_RockItemHUD : MonoBehaviour
 
 	public void UpdateItemsCollected(Sprite spr){
 		for(int i = 0; i< itemsToCollect.Count;i++){
-			if(itemsToCollect[i].sprite = spr){
+			if(itemsToCollect[i].sprite == spr){
 				itemsToCollect[i].color = Color.white;
 				break;
 			}
