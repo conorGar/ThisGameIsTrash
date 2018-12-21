@@ -186,6 +186,12 @@ public class Friend : UserDataItem {
 
     }
 
+    public virtual string GetVariableText(string varKey)
+    {
+        Debug.LogError("GetVariableText wasn't set up for this friend but it was called!");
+        return varKey;
+    }
+
     // User Data implementation
     public override string UserDataKey()
     {
