@@ -101,7 +101,6 @@ MonoBehaviour:
     - Value: 2ffc7d8a-0f95-4ef7-b633-8a4141be2c43
     - Value: 3ff46293-4565-4e47-a799-4e2e942f5146
     - Value: e9021c04-231d-4354-a390-b68a8bac84dd
-    - Value: 5667e531-e030-4f3b-b022-5da0c7738639
     - Value: f44bee49-71dc-4830-b091-f7f84511d10f
     - Value: 23d50c7c-f353-498b-9dcf-deb69201a3cd
     - Value: 7bf188b0-7ce3-4327-bea3-42c1efbc66d2
@@ -488,7 +487,7 @@ MonoBehaviour:
         Value: 3a4f7d70-8149-4deb-91ae-5d8490233227
       x: 3415.2192
       y: 220
-      text: I got this idea for a film called<color=#78FF32> Pup Fiction</color>.
+      text: I got this idea for a film called <color=#78FF32><var='currentFilm'></color>.
         Its got heart. Character. I think it might be my best story yet.
       isThought: 0
       animTrigger: 
@@ -513,8 +512,9 @@ MonoBehaviour:
         Value: 778f7a04-0b35-4bd1-a7e4-c6fc77f9a0e1
       x: 3753.2192
       y: 220
-      text: I'll premiere it here in <color=#29B6F6>2 days</color>. I'll go ahead
-        and mark it on your <color=#78FF32>calendar</color> there so you don't forget.
+      text: I'll premiere it here in <color=#29B6F6><var='daysTillFilm'></color>.
+        I'll go ahead and mark it on your <color=#78FF32>calendar</color> there so
+        you don't forget.
       isThought: 0
       animTrigger: 
       type: 1
@@ -957,7 +957,7 @@ MonoBehaviour:
         Value: 59dd07a0-195c-48f4-aaba-09059e759f96
       x: 2687.151
       y: 985
-      text: PRESENTING! Jumbo's latest masterpiece...<color=#78FF32></color>!
+      text: PRESENTING! Jumbo's latest masterpiece...<color=#78FF32><var='currentFilm'></color>!
       isThought: 0
       animTrigger: 
       type: 1
@@ -1202,7 +1202,7 @@ MonoBehaviour:
       x: 6289.151
       y: 914
       text: 'I guess I''ll give it one last try. I got one more movie I wanna make,
-        called <color=#78FF32>The Pawshank Redemption</color>. '
+        called <color=#78FF32><var=''currentFilm''></color>. '
       isThought: 0
       animTrigger: 
       type: 1
@@ -1250,8 +1250,8 @@ MonoBehaviour:
         Value: 8c96c0d8-1497-4fb5-850c-8eda7da4ccf8
       x: 6856.151
       y: 999
-      text: It'll be playing in <color=#29B6F6>2 days</color>. I'll write it on your
-        <color=#78FF32>calendar</color> there.
+      text: It'll be playing in <color=#29B6F6><var='daysTillFilm'></color>. I'll
+        write it on your <color=#78FF32>calendar</color> there.
       isThought: 0
       animTrigger: 
       type: 1
@@ -1358,8 +1358,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 8488.15
-        y: 1000
+        x: 8464.15
+        y: 994
         width: 270
         height: 250
       isCollapsed: 0
@@ -1371,8 +1371,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: d09b4663-ba63-4623-a248-deaa5b9b93f9
-      x: 8488.15
-      y: 1000
+      x: 8464.15
+      y: 994
       text: Thanks again, Mr. Garbageman. I'll see you soon.
       isThought: 0
       animTrigger: 
@@ -1486,14 +1486,14 @@ MonoBehaviour:
       title: NewDialog
       speakerName: 
       question: 
-      action: 
+      action: SetNextFilmDay
       isDialogAction: 0
       friendState: 
       id:
         Value: 8eb98c3e-0c3a-490b-ac6e-4b4e3181e567
       x: 1420
       y: 1703
-      text: I got this new film I'm working on, <c=g><var></c>.
+      text: I got this new film I'm working on, <color=#78FF32><var='currentFilm'></color>
       isThought: 0
       animTrigger: 
       type: 1
@@ -1517,7 +1517,8 @@ MonoBehaviour:
         Value: 60266114-96a6-48d9-84fe-35c710ffae48
       x: 1758
       y: 1704
-      text: I'll be showing it in <c=b><var></c> days, if you're free.
+      text: I'll be showing it in <color=#29B6F6><var='daysTillFilm'></color> days,
+        if you're free.
       isThought: 0
       animTrigger: 
       type: 1
@@ -1777,8 +1778,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 341.1504
-        y: 1334
+        x: 367.1504
+        y: 1336
         width: 270
         height: 200
       isCollapsed: 0
@@ -1790,8 +1791,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: f703ff9d-deb9-48e1-8a1a-69ff28e5c216
-      x: 341.1504
-      y: 1334
+      x: 367.1504
+      y: 1336
       text: So this is it, I guess this is the end.
       isThought: 0
       animTrigger: 
@@ -1801,8 +1802,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 664.1504
-        y: 1334
+        x: 671.1504
+        y: 1338
         width: 270
         height: 200
       isCollapsed: 0
@@ -1814,8 +1815,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 95564977-f340-46f0-a738-50170ffe0114
-      x: 664.1504
-      y: 1334
+      x: 671.1504
+      y: 1338
       text: I'm not totally giving up, but I think after this I'm gonna move away.
         Maybe try my luck someplace else.
       isThought: 0
@@ -1916,7 +1917,7 @@ MonoBehaviour:
       x: 2010.1504
       y: 1479
       text: 'Alrighty then, let''s get to it. Presenting, for the last time in Filthy
-        Falls: <color=#78FF32></color>.'
+        Falls: <color=#78FF32><var=''currentFilm''></color>.'
       isThought: 0
       animTrigger: 
       type: 1
@@ -2180,8 +2181,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 5278.8223
-        y: 1428
+        x: 5268.8223
+        y: 1374
         width: 270
         height: 200
       isCollapsed: 0
@@ -2193,8 +2194,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 2ffc7d8a-0f95-4ef7-b633-8a4141be2c43
-      x: 5278.8223
-      y: 1428
+      x: 5268.8223
+      y: 1374
       text: '...anyway, thanks again for the support, mr. garbageman.'
       isThought: 0
       animTrigger: 
@@ -2204,8 +2205,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 5650.439
-        y: 1331
+        x: 5578.439
+        y: 1516
         width: 270
         height: 200
       isCollapsed: 0
@@ -2217,8 +2218,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: 3ff46293-4565-4e47-a799-4e2e942f5146
-      x: 5650.439
-      y: 1331
+      x: 5578.439
+      y: 1516
       text: And thanks for saying my hat's cool. That meant more than you probably
         realize.
       isThought: 0
@@ -2229,8 +2230,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 5970.439
-        y: 1478
+        x: 5885.439
+        y: 1384
         width: 270
         height: 200
       isCollapsed: 0
@@ -2242,33 +2243,9 @@ MonoBehaviour:
       friendState: 
       id:
         Value: e9021c04-231d-4354-a390-b68a8bac84dd
-      x: 5970.439
-      y: 1478
+      x: 5885.439
+      y: 1384
       text: See ya around.
-      isThought: 0
-      animTrigger: 
-      type: 1
-      child_id:
-        Value: 5667e531-e030-4f3b-b022-5da0c7738639
-      responses: []
-    - window:
-        serializedVersion: 2
-        x: 6430.439
-        y: 1441
-        width: 270
-        height: 200
-      isCollapsed: 0
-      title: end
-      speakerName: 
-      question: 
-      action: 
-      isDialogAction: 0
-      friendState: 
-      id:
-        Value: 5667e531-e030-4f3b-b022-5da0c7738639
-      x: 6430.439
-      y: 1441
-      text: end
       isThought: 0
       animTrigger: 
       type: 1

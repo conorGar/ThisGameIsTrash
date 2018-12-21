@@ -28,16 +28,8 @@ public class RatOnMatFriend : Friend
 		switch (GetFriendState()) {
             case "TUTORIAL":
                 break;
-            case "GUIDE_INTRO":
-            	if(GlobalVariableManager.Instance.DAY_NUMBER > 3){
-				    day = CalendarManager.Instance.currentDay;
-            	}
-            	break;
            	case "GUIDE":
-				if(GlobalVariableManager.Instance.DAY_NUMBER > 3){
-				    day = CalendarManager.Instance.currentDay;
-            	}
-				gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
+                gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
 				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
 				gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 5;
            		break;
@@ -53,11 +45,11 @@ public class RatOnMatFriend : Friend
             case "TUTORIAL":
 				day = CalendarManager.Instance.currentDay;
                 break;
+            case "GUIDE_INTRO":
             case "GUIDE":
-            	if(GlobalVariableManager.Instance.DAY_NUMBER > 3){
-				    day = CalendarManager.Instance.currentDay;
-            	}
-            	break;
+                // Shows up on day 4 and beyond.
+                day = Mathf.Max(3, CalendarManager.Instance.currentDay);
+                break;
             case "END":
                 gameObject.SetActive(false);
                 break;
@@ -111,7 +103,7 @@ public class RatOnMatFriend : Friend
 				Debug.Log("Rat on Mat end activate ---- tutorial----");
                 nextDialog = "RatMat_2_1";
                 SetFriendState("GUIDE_INTRO");
-                day = 3;
+                IsVisiting = false;
 				if(openMapPrompt != null)
         			openMapPrompt.SetActive(true);
 
@@ -187,8 +179,6 @@ public class RatOnMatFriend : Friend
 		 if(!foundAction){
 			dialogManager.JumpToNewNode("RatMat2_danger_none");
 		 }
-
-		 dialogManager.ReturnFromAction(true);
 	}
 
 	void CheckTreasure(){
@@ -225,8 +215,6 @@ public class RatOnMatFriend : Friend
 		 if(!foundAction){
 			dialogManager.JumpToNewNode("RatMat2_treasure_none");
 		 }
-
-		 dialogManager.ReturnFromAction(true);
 	}
 
     // User Data implementation

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using TMPro;
 using I2.TextAnimation;
@@ -255,27 +256,34 @@ public class DialogManager : MonoBehaviour {
     // Starts the text scrolling
     private void StartDisplay()
     {
-        if (currentNode.text.Contains("<c")) {
+        displayedText.text = currentNode.text;
+        if (displayedText.text.Contains("<c")) {
             Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
             HighLightText();
         }
-        if (currentNode.text.Contains("<w")) {
+        if (displayedText.text.Contains("<w")) {
             WaveyText();
         }
-        if (currentNode.text.Contains("<var>")) {
-            currentNode.text = currentNode.text.Replace("<var>", variableText);
-        }
-        if (currentNode.text.Contains("<shake>")) {
-            guiCamShake = true;
-        }
-        else if (currentNode.text.Contains("<s")) {
-            SmallText();
-        }
-        if (currentNode.text.Contains("<l")) {
-            LargeText();
+
+        // Go through all the var elements and clip out the varText so we can replace them.
+        var matchTag = new Regex(@"<var='(.+?)'>");
+        foreach (Match match in matchTag.Matches(displayedText.text)) {
+            var varText = match.Groups[1].Value;
+            displayedText.text = matchTag.Replace(displayedText.text, friend.GetVariableText(varText), 1);
         }
 
-        displayedText.text = currentNode.text;
+        if (displayedText.text.Contains("<shake>")) {
+            guiCamShake = true;
+        }
+        else if (displayedText.text.Contains("<s")) {
+            SmallText();
+        }
+        if (displayedText.text.Contains("<l")) {
+            LargeText();
+        }
+#if DEBUG_DIALOG
+        displayedText.text += " (" + currentNode.title + ")";
+#endif
         displayedText.GetComponent<TextAnimation>().StartAgain();
         finishedDisplayingText = false;
 
@@ -306,28 +314,28 @@ public class DialogManager : MonoBehaviour {
 
 	public void HighLightText(){ 
 		
-		if(currentNode.text.Contains("c=g")){//green color highlight
+		if(displayedText.text.Contains("c=g")){//green color highlight
 			Debug.Log("contains green color");
-			currentNode.text = currentNode.text.Replace("<c=g>","<color=#78FF32>");
+            displayedText.text = displayedText.text.Replace("<c=g>","<color=#78FF32>");
 		}
-		if(currentNode.text.Contains("c=r")){//red color highlight
-			currentNode.text = currentNode.text.Replace("<c=r>","<color=#DC3232>");
+		if(displayedText.text.Contains("c=r")){//red color highlight
+            displayedText.text = displayedText.text.Replace("<c=r>","<color=#DC3232>");
 			Debug.Log("contains red color");
 		}
-		if(currentNode.text.Contains("c=b")){//red color highlight
-			currentNode.text = currentNode.text.Replace("<c=b>","<color=#29B6F6>");
+		if(displayedText.text.Contains("c=b")){//red color highlight
+            displayedText.text = displayedText.text.Replace("<c=b>","<color=#29B6F6>");
 			Debug.Log("contains blue color");
 		}
-		currentNode.text = currentNode.text.Replace("</c>","</color>");
+        displayedText.text = displayedText.text.Replace("</c>","</color>");
 
 	}
 	public void WaveyText(){
-		int rangeStart = currentNode.text.IndexOf("<w>");
+		int rangeStart = displayedText.text.IndexOf("<w>");
 		Debug.Log("Wavey text start:" + rangeStart);
-		int rangeEnd = currentNode.text.IndexOf("</w>");
-		Debug.Log(currentNode.text.Substring(rangeStart));
-		currentNode.text = currentNode.text.Replace("<w>","");
-		currentNode.text = currentNode.text.Replace("</w>","");
+		int rangeEnd = displayedText.text.IndexOf("</w>");
+		Debug.Log(displayedText.text.Substring(rangeStart));
+        displayedText.text = displayedText.text.Replace("<w>","");
+        displayedText.text = displayedText.text.Replace("</w>","");
 
 		displayedText.GetComponent<TextAnimation>()._AnimationSlots[2]._Animation._Sequences[0]._Enabled = true;
 		displayedText.GetComponent<TextAnimation>()._AnimationSlots[2]._Animation._Sequences[1]._Enabled = true;
@@ -343,11 +351,11 @@ public class DialogManager : MonoBehaviour {
 	public void SmallText(){
 		//for now just makes whole speech one font size, not sure if making only certain text small is possible with TMpro
 		displayedText.fontSize = 8;
-		currentNode.text = currentNode.text.Replace("<s>","");
+        displayedText.text = displayedText.text.Replace("<s>","");
 	}
 	public void LargeText(){
 		displayedText.fontSize = 35;
-		currentNode.text = currentNode.text.Replace("<l>","");
+        displayedText.text = displayedText.text.Replace("<l>","");
 	}
 
     private void PlayTalkSounds()

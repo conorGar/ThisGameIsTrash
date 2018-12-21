@@ -21,34 +21,41 @@ public class JumboFriend : Friend {
 	public GameObject largeTrashProjector;
 	int numberOfActivation;
 	bool movieIsPlaying;
-    bool isFilmDateSet = false;
     bool wearHat;
     //public DialogDefinition myDialogDefinition;
 
+    public void Start()
+    {
+        // The original film list is shuffled.  After that it'll be saved to disk.
+        films.Shuffle();
+    }
+
     public override void GenerateEventData()
     {
-        if (!isFilmDateSet) {
-            films.Shuffle();
-
-            // Always play the first day.
-            if (CalendarManager.Instance.currentDay == 0) {
-                day = 0;
-            }
-            // Pick a date in the future to screen a new movie.
-            else {
-                day = GenerateNextFilmDay();
-            }
-
-            isFilmDateSet = true;
-        }
-		switch (GetFriendState()) {
+        switch (GetFriendState()) {
             case "START":
-				day = CalendarManager.Instance.currentDay; //1st meeting can happen any day
+            case "MISSED_SCREENING":
+            case "MISSED_SECOND_SCREENING":
+                day = CalendarManager.Instance.currentDay; // 1st meeting can happen any day
+                                                           // missing a screening jumbo will visit every day until he confronts you about it.
+                break;
+            case "INVITE_TO_SECOND_SCREENING":
+                // Missing the screening will change the state.
+                if (CalendarManager.Instance.currentDay > day) {
+                    SetFriendState("MISSED_SCREENING");
+                    day = CalendarManager.Instance.currentDay;
+                }
+                break;
+            case "INVITE_TO_THIRD_SCREENING":
+
+                if (CalendarManager.Instance.currentDay > day) {
+                    SetFriendState("MISSED_SECOND_SCREENING");
+                    day = CalendarManager.Instance.currentDay;
+                }
                 break;
             case "END":
                 break;
         }
-
     }
 
     public int GenerateNextFilmDay()
@@ -59,15 +66,6 @@ public class JumboFriend : Friend {
     public new void OnEnable()
     {
         switch (GetFriendState()) {
-            case "START":
-				day = CalendarManager.Instance.currentDay; //1st meeting can happen any day
-                break;
-            case "MISSED_SCREENING":
-				day = CalendarManager.Instance.currentDay;
-            	break;
-            case "MISSED_SECOND_SCREENING":
-				day = CalendarManager.Instance.currentDay;
-            	break;
             case "INVITE_TO_SECOND_SCREENING":
 				gameObject.transform.position = new Vector2(-95f,8.5f);
 	    		deadRat.SetActive(true);
@@ -188,11 +186,6 @@ public class JumboFriend : Friend {
 
     public override void StartingEvents(){
     	Debug.Log("Starting Events function happened properly");
-    
-		if(nextDialog == "Start"){
-			day = GlobalVariableManager.Instance.DAY_NUMBER; 
-    	}
-
     	if(movieEnhancement == "marketing"){
     		moviePosters.SetActive(true);
     		for(int i = 0; i < moviePosters.transform.childCount; i++){
@@ -223,10 +216,15 @@ public class JumboFriend : Friend {
     	}else{
 			dialogManager.JumpToNewNode("Jumbo3_20");
     	}
-    	dialogManager.ReturnFromAction();
     }
 
-	public void CurrentDialogAction(){
+    public void SetNextFilmDay()
+    {
+        day = GenerateNextFilmDay();
+        dialogManager.ReturnFromAction();
+    }
+
+    public void CurrentDialogAction(){
 		numberOfActivation++;
         CamManager.Instance.mainCamPostProcessor.profile = null;
 		if(nextDialog == "Jumbo2"){
@@ -248,7 +246,6 @@ public class JumboFriend : Friend {
 
                 CamManager.Instance.mainCamEffects.ZoomInOut(3.5f,.1f);
 				dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
-				dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
 			}else if(numberOfActivation == 4){//return to jumbo after dead rat
 				StartCoroutine("RatSparkleSequence");
 
@@ -297,19 +294,11 @@ public class JumboFriend : Friend {
             DeleteCurrentFilm();
 
             //determine next film
-            isFilmDateSet = false;
             FriendEvent nextMovie = GenerateEvent();
-            day = GenerateNextFilmDay(); // readjust the day because on the first day it gets screwy.
+            day = GenerateNextFilmDay();
             nextMovie.day = day;
-
-			Debug.Log("******NEXT MOVIE DAY****** = " + nextMovie.day);
-			CalendarManager.Instance.AddFriendEvent(nextMovie);
 			newestAddedEvent = nextMovie;
 
-			if(GetCurrentFilm() != null)//will = null on the last film
-				dialogManager.variableText = GetCurrentFilm().Replace('_',' ');
-
-			Debug.Log("***SET VARIABLE TEXT TO: " + GetCurrentFilm());
 			movieIsPlaying = false;
 			if(nextDialog == "Start"){
 				StartCoroutine("AfterFirstMovie");
@@ -320,20 +309,6 @@ public class JumboFriend : Friend {
 				dialogManager.Invoke("ReturnFromAction",.1f);
 			}
 		}
-	}
-
-	public override void MissedEvent(){
-		Debug.Log("Missed Event - Jumbo");
-		switch (GetFriendState()) {
-            case "INVITE_TO_SECOND_SCREENING":
-				SetFriendState("MISSED_SCREENING");
-	    		break;
-			case "INVITE_TO_THIRD_SCREENING":
-				SetFriendState("MISSED_SECOND_SCREENING");
-	    		break;
-            case "END":
-                break;
-        }
 	}
 
 	IEnumerator AfterFirstMovie(){
@@ -390,6 +365,18 @@ public class JumboFriend : Friend {
         DialogManager.Instance.ReturnFromAction();
     }
 
+    public override string GetVariableText(string varKey)
+    {
+        switch (varKey) {
+            case "currentFilm":
+                return GetCurrentFilm().Replace('_', ' ');
+            case "daysTillFilm":
+                return (day - CalendarManager.Instance.currentDay).ToString();
+        }
+
+        return base.GetVariableText(varKey);
+    }
+
     // User Data implementation
     public override string UserDataKey()
     {
@@ -401,9 +388,15 @@ public class JumboFriend : Friend {
         var json_data = new SimpleJSON.JSONObject();
 
         json_data["friendState"] = friendState;
-        json_data["isFilmDateSet"] = isFilmDateSet;
         json_data["movieEnhancement"] = movieEnhancement;
+        json_data["wearHat"] = wearHat;
         json_data["day"] = day; // keeping hold of the day for the next film.
+
+        // keep track of the films
+        json_data.Remove("films");
+        for (int i = 0; i < films.Count; i++) {
+            json_data["films"][i] = films[i];
+        }
 
         return json_data;
     }
@@ -411,8 +404,13 @@ public class JumboFriend : Friend {
     public override void Load(SimpleJSON.JSONObject json_data)
     {
         friendState = json_data["friendState"].AsInt;
-        isFilmDateSet = json_data["isFilmDateSet"].AsBool;
         movieEnhancement = json_data["movieEnhancement"];
+        wearHat = json_data["wearHat"].AsBool;
         day = json_data["day"].AsInt;
+
+        films.Clear();
+        for (int i = 0; i < json_data["films"].Count; i++) {
+            films.Add(json_data["films"][i]);
+        }
     }
 }
