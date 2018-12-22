@@ -71,13 +71,15 @@ public class Ev_MainCamera : MonoBehaviour {
 						    }*/
 		
 					    }
-				    }else{
-					    transform.position = new Vector3(startShakeX + Random.Range(0f, screenShake),startShakeY + Random.Range(0f, screenShake), -10f);
 				    }
 
 			    }else{
 				    transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity,0.2f);
 			    }
+			}
+
+			if(screenShake != 0){
+				transform.position = new Vector3(startShakeX + Random.Range(0f, screenShake),startShakeY + Random.Range(0f, screenShake), -10f);	  
 			}
 	}//end of update
 

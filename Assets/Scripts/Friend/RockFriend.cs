@@ -26,6 +26,8 @@ public class RockFriend : Friend {
     public GameObject eyeCover;
     public GameObject slab;
     public GameObject stone;
+    public Sprite beautifulRock;
+
 
 	public GameObject moon;
 	public GameObject moonShadow;
@@ -34,6 +36,7 @@ public class RockFriend : Friend {
 
     bool moonInProperLocation;
     int departureSequence = 0;
+    int endPhase = 0;
 
     public override void GenerateEventData()
     {
@@ -89,7 +92,7 @@ public class RockFriend : Friend {
 		if(moon.activeInHierarchy && !moonInProperLocation){
         	moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(31,50), (3*Time.deltaTime));
 			moonShadow.transform.localPosition = Vector2.MoveTowards(moonShadow.transform.localPosition, new Vector2(0,-4.5f), (1*Time.deltaTime));
-        	if(Vector2.Distance(moon.transform.position,new Vector2(31,65)) <5){
+        	if(Vector2.Distance(moon.transform.position,new Vector2(31,50)) <5){
         		moonInProperLocation = true;
         	}
         }
@@ -98,7 +101,7 @@ public class RockFriend : Friend {
 			moon.transform.position = Vector2.MoveTowards(moon.transform.position, this.gameObject.transform.position, (5*Time.deltaTime));
 
         }else if(departureSequence == 2){ //moon and rock leave
-			moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(54,92), (5*Time.deltaTime));
+			moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(54,112), (5*Time.deltaTime));
 
         }
     }
@@ -135,10 +138,24 @@ public class RockFriend : Friend {
 				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
 				StartCoroutine("TotalProductsDisplay");
                 break;
+            case "END":
+				yield return base.OnFinishDialogEnumerator();
+				moon.SetActive(false);
+			break;
+
         }
 
         yield return base.OnFinishDialogEnumerator();
 
+    }
+
+    public void GotItemsCheck(){
+    	
+    	Debug.Log(pickedUpObjects.Count + "<----------- Rock's delivered items count");
+    	if(pickedUpObjects.Count >= 4){  
+    		dialogManager.JumpToNewNode("RockComplete1");
+    	}
+    	dialogManager.ReturnFromAction();
     }
 
     public void DeliverObject(SpecialFriendObject obj)
@@ -168,10 +185,9 @@ public class RockFriend : Friend {
     public void PickUpObject(SpecialFriendObject go){ //activated by 'SpecialFriendObject'
     	pickedUpObjects.Add(go);
     	desiredObject.Remove(go);
-    	if(!GUIManager.Instance.rockItemHUD.gameObject.activeInHierarchy){
-            GUIManager.Instance.rockItemHUD.gameObject.SetActive(true);
-    	}
-        GUIManager.Instance.rockItemHUD.UpdateItemsCollected(go.GetComponent<SpriteRenderer>().sprite);
+		GUIManager.Instance.rockItemHUD.UpdateItemsCollected(go.GetComponent<SpriteRenderer>().sprite);
+    	StartCoroutine("TotalProductsDisplay");
+      
     }
 
 	public void OpeningSequence(){
@@ -221,47 +237,73 @@ public class RockFriend : Friend {
         eyeBreakPS.SetActive(true);
     }
 
-
+    public void RockDressUp(){
+    	gameObject.GetComponent<SpriteRenderer>().sprite = beautifulRock;
+    	StartCoroutine(DressUpSequence());
+    }
 	public void MoonArrive(){
     	StartCoroutine(MoonArriveSequence());
     }
 
     IEnumerator MoonArriveSequence(){
-		CamManager.Instance.mainCamPostProcessor.profile = null;
-    	moon.SetActive(true);
-    	yield return new WaitUntil(() => moonInProperLocation);
-    	yield return new WaitForSeconds(.5f);
-    	dialogManager.ReturnFromAction();
-
+    	if(endPhase == 0){
+			CamManager.Instance.mainCam.ScreenShake(3f);
+    		yield return new WaitForSeconds(1f);
+    		endPhase = 1;
+			dialogManager.ReturnFromAction();
+    	}else{
+    		CamManager.Instance.mainCamEffects.ZoomInOut(.9f,1);
+			CamManager.Instance.mainCamPostProcessor.profile = null;
+	    	moon.SetActive(true);
+	    	yield return new WaitUntil(() => moonInProperLocation);
+	    	yield return new WaitForSeconds(.5f);
+	    	dialogManager.ReturnFromAction();
+    	}
     }
-	public void RockDeparture(){
-		StartCoroutine(DepartureSequence());
 
+    IEnumerator DressUpSequence(){
+		CamManager.Instance.mainCamPostProcessor.profile = null;
+		yield return new WaitForSeconds(2f);
+		dialogManager.ReturnFromAction();
+    }
+
+	public void RockEnding(){
+		if(endPhase == 0){
+			StartCoroutine(MoonArriveSequence());
+		}else if(endPhase == 1){
+			StartCoroutine(DepartureSequence());
+		}
     }
 
     public IEnumerator DepartureSequence(){
+    	Debug.Log("Rock departure sequence activated");
     	departureSequence = 1;
 		blockade.SetActive(false);
 
     	yield return new WaitUntil(() => moon.transform.position.x >= transform.position.x);
+    	Debug.Log("Rock departure reached this part");
     	yield return new WaitForSeconds(.4f);
     	departureSequence = 2;
     	transform.parent = moon.transform;
-    	yield return new WaitForSeconds(1.5f);
+    	yield return new WaitForSeconds(2.5f);
     	departureSequence=3;
-    	moon.SetActive(false);
+		CamManager.Instance.mainCamPostProcessor.profile = null;
+		SetFriendState("END");
     	dialogManager.ReturnFromAction();
     }
-
-    /*public override void OnWorldStart(){ //populates the world with beauty items
+	
+    public override void OnWorldStart(World world){ //populates the world with beauty items
 		switch (GetFriendState()) {
             
             case "WANTS_TO_BE_PRETTY":
                 // Eyes open.
 				StartingEvents();
+				for(int i = 0; i < deliveredObjects.Count; i++){ // update display with previously gathered items
+					GUIManager.Instance.rockItemHUD.UpdateItemsCollected(deliveredObjects[i].GetComponent<SpriteRenderer>().sprite);
+				}
                 break;
         }
-    }*/
+    }
 
 
     // User Data implementation
