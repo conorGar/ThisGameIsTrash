@@ -236,7 +236,8 @@ public class JumboFriend : Friend {
 
     void LoseHat(){
     	hat.SetActive(false);
-    	wearHat = false;
+        movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().dialogIconHat.SetActive(false);
+        wearHat = false;
     	dialogManager.ReturnFromAction();
     }
 
