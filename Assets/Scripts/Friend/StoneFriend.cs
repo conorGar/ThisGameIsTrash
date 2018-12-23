@@ -17,7 +17,8 @@ public class StoneFriend : Friend
     public GameObject secondStoneHand;
     public GameObject rightHand;
     public GameObject leftHand;
-
+    public GameObject rock;
+    public GameObject slab;
 
     bool rocketIsLaunching;
     Vector2 rocketDestination;
@@ -62,6 +63,14 @@ public class StoneFriend : Friend
                 StartCoroutine(TotalStoneHandDisplay());
                 break;
             case "END":
+				CamManager.Instance.mainCamEffects.CameraPan(slab.transform.position,"");
+            	yield return new WaitForSeconds(.5f);
+            	slab.GetComponent<SlabFriend>().Sleep();
+				yield return new WaitForSeconds(.5f);
+            	CamManager.Instance.mainCamEffects.CameraPan(rock.transform.position,"");
+            	yield return new WaitForSeconds(.5f);
+            	rock.GetComponent<RockFriend>().Sleep();
+            	yield return new WaitForSeconds(.5f);
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
@@ -161,8 +170,13 @@ public class StoneFriend : Friend
     }
 
     public void BreakEyes(){
-    	Destroy(eyeCover);
+    	eyeCover.SetActive(false);
     	eyeBreakPS.SetActive(true);
+    }
+
+    public void Sleep(){
+    	eyeCover.SetActive(true);
+    	SetFriendState("END");
     }
 
     // User Data implementation

@@ -139,6 +139,14 @@ public class RockFriend : Friend {
 				StartCoroutine("TotalProductsDisplay");
                 break;
             case "END":
+            	CamManager.Instance.mainCamEffects.CameraPan(slab.transform.position,"");
+            	yield return new WaitForSeconds(.5f);
+            	slab.GetComponent<SlabFriend>().Sleep();
+				yield return new WaitForSeconds(.5f);
+            	CamManager.Instance.mainCamEffects.CameraPan(stone.transform.position,"");
+            	yield return new WaitForSeconds(.5f);
+            	stone.GetComponent<StoneFriend>().Sleep();
+            	yield return new WaitForSeconds(.5f);
 				yield return base.OnFinishDialogEnumerator();
 				moon.SetActive(false);
 			break;
@@ -233,10 +241,13 @@ public class RockFriend : Friend {
     }
     public void BreakEyes()
     {
-        Destroy(eyeCover);
+        eyeCover.SetActive(false);
         eyeBreakPS.SetActive(true);
     }
-
+	public void Sleep(){
+    	eyeCover.SetActive(true);
+    	SetFriendState("END");
+    }
     public void RockDressUp(){
     	gameObject.GetComponent<SpriteRenderer>().sprite = beautifulRock;
     	StartCoroutine(DressUpSequence());

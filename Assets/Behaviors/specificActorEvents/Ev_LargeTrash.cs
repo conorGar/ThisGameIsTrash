@@ -83,9 +83,19 @@ public class Ev_LargeTrash : PickupableObject {
 	}// end of Start()
 
 	public override void PickUp(){
+		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
+		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
 		myCollisionBox.enabled = false; //doesnt collide with player
+		StartCoroutine("PickupDelay");
+	}
 
+	IEnumerator PickupDelay(){
+		yield return new WaitForSeconds(1f);
+		beingCarried = true;
+		PickUpEvent();
+		player.GetComponent<EightWayMovement>().enabled = true;
 	}
 
 	public override void PickUpEvent(){
@@ -100,9 +110,12 @@ public class Ev_LargeTrash : PickupableObject {
 		sparkle.SetActive(true);
 		myCollisionBox.enabled = true; //doesnt collide with player
 		gameObject.transform.parent = ltmManager.transform; //goes back to largeTrashManager when drop
+		//gameObject.GetComponent<Animator>().SetTrigger("Drop");
+		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+		pickUpcheck = 0;
+		gameObject.GetComponent<Animator>().enabled = false;
 		myCurrentRoom = RoomManager.Instance.currentRoom;
 		player.GetComponent<MeleeAttack>().enabled = true;
-		//gameObject.GetComponent<Animator>().enabled = false;
 
 	}
 
@@ -181,6 +194,7 @@ public class Ev_LargeTrash : PickupableObject {
 	}
 	public void Return(){
 		//activated by dumpster's 'SE_GlowWhenClose'
+		gameObject.GetComponent<Animator>().enabled = false;
 		Debug.Log("Return activated - LARGE TRASH");
 		phase = 0;
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;

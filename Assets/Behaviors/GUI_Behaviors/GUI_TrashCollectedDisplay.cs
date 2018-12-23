@@ -31,6 +31,7 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 		trashCollected.GetComponent<TextAnimation>().PlayAnimation(0);
 	}
 	public void NewDiscoveryShow(string trashSprite, string trashname){
+		StopCoroutine("NewDiscoveryBehavior"); // prevents vanishing in middle of animation if recently picked up trash
 		newDiscoveryDisplay.SetActive(true);
 		//newDiscoveryDisplay.GetComponent<GUIEffects>().Start();
 		newDiscoveryDisplay.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = trashname;
@@ -42,10 +43,9 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
 	IEnumerator NewDiscoveryBehavior(){
 
 		
-		yield return new WaitForSeconds(1f);
+		newDiscoveryDisplay.GetComponent<Animator>().Play("newDiscoveryDisplay",-1,0f);
 
-		newDiscoveryDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-133f,-113f,.4f,true);
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(4f);
 		newDiscoveryDisplay.SetActive(false);
 	}
 

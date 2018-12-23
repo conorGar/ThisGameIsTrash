@@ -17,7 +17,8 @@ public class PickupableObject : MonoBehaviour
 	//int bounce = 0;
 	//int doOnce = 0;
 	float myY;
-
+	[HideInInspector]
+	protected int pickUpcheck = 0;
 
 	[HideInInspector]
 	public Rigidbody2D myBody;
@@ -58,10 +59,13 @@ public class PickupableObject : MonoBehaviour
 			//Debug.Log("within distance" + GlobalVariableManager.Instance.CARRYING_SOMETHING);
 			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING && GlobalVariableManager.Instance.PLAYER_CAN_MOVE){//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'
                 // Allow this object to be picked up if it doesn't require the grabby gloves, or they have the grabby gloves.
-                if (!requiresGrabbyGloves || GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)) {
+                if ( !requiresGrabbyGloves || GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)) {
                     Debug.Log("PickUpable object...picked up");
-                    movePlayerToObject = true;
-                    PickUp();
+					if(pickUpcheck == 0){
+	                    movePlayerToObject = true;
+	                    PickUp();
+	                    pickUpcheck = 1;
+                    }
                 }
 			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried && !throwableObject){
 				if(Vector2.Distance(player.transform.position,dumpster.transform.position) > 15f) //TODO: temp solution for making sure trash isnt dropped before 'Return' is activated
@@ -75,7 +79,7 @@ public class PickupableObject : MonoBehaviour
 			player.transform.position = Vector2.Lerp(player.transform.position,this.gameObject.transform.position,2*Time.deltaTime);
 		}
 
-		if(spinning){
+		/*if(spinning){
 			if (t<1f){
 				transform.rotation = startRotation * Quaternion.AngleAxis(t/1f * 360f, Vector3.forward);
 				t += Time.deltaTime;
@@ -112,7 +116,7 @@ public class PickupableObject : MonoBehaviour
 					pickUpSpin = false;
 				}
 			}
-		}
+		}*/
 	}
 
 	public virtual void PickUp(){
@@ -120,32 +124,32 @@ public class PickupableObject : MonoBehaviour
 		/*if(gameObject.GetComponent<BoxCollider2D>()!=null){
 			gameObject.GetComponent<BoxCollider2D>().enabled = false;
 		}*/
+		gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
+		gameObject.transform.parent = player.transform;
 		Debug.Log("Pickup() activated");
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
 		player.GetComponent<EightWayMovement>().enabled = false;
 		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
 		//move and play the particle system
-		beingCarried = true;
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		SoundManager.instance.PlaySingle(pickup);
 		//set object to follow player and push up in the sky
-		gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
-		gameObject.transform.parent = player.transform;
+
 		if(!throwableObject){
-			myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
+			gameObject.GetComponent<Animator>().SetTrigger("PickUp");
+			//myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
 			player.GetComponent<EightWayMovement>().carryingAbove = false;
 
 		}else{
 			player.GetComponent<JimAnimationManager>().PlayAnimation("ani_pickUpBig",true);
 			player.GetComponent<EightWayMovement>().carryingAbove = true;
 			myBody.AddForce(new Vector2(0,14),ForceMode2D.Impulse);
+			myBody.gravityScale = 2;
+			beingCarried = true;
 
 		}
-		myBody.gravityScale = 2;
 
-		pickUpSpin = true;
-		spinning = true;
 
 	}
 

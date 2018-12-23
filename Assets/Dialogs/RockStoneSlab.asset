@@ -102,6 +102,8 @@ MonoBehaviour:
     - Value: 379dd491-1e9b-4023-be2f-87ba057d4bdd
     - Value: ba0650fc-1949-44ee-8308-958a9495267b
     - Value: e7f2e50d-0189-4144-b172-0350771cbc03
+    - Value: 38d350cf-14c0-4209-a62f-2c370a787b87
+    - Value: d583b5d0-dfd5-4d71-86a4-d7670789901d
     values:
     - window:
         serializedVersion: 2
@@ -2234,7 +2236,7 @@ MonoBehaviour:
       title: RockComplete14
       speakerName: Stone
       question: 
-      action: finish
+      action: 
       isDialogAction: 0
       friendState: 
       id:
@@ -2242,6 +2244,54 @@ MonoBehaviour:
       x: 4011
       y: 2392
       text: Well...I guess she really did just care about looks. Huh.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 38d350cf-14c0-4209-a62f-2c370a787b87
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4305
+        y: 2419
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RockComplete15
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 38d350cf-14c0-4209-a62f-2c370a787b87
+      x: 4305
+      y: 2419
+      text: Welp. I guess that's it for us, then.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: d583b5d0-dfd5-4d71-86a4-d7670789901d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4602
+        y: 2420
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: RockComplete16
+      speakerName: Slab
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: d583b5d0-dfd5-4d71-86a4-d7670789901d
+      x: 4602
+      y: 2420
+      text: Yeah, whatever. I'm done. I'm going to bed.
       isThought: 0
       animTrigger: 
       type: 1

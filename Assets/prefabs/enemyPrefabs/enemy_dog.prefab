@@ -73,7 +73,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4381510617812586
 Transform:
   m_ObjectHideFlags: 1
@@ -107,7 +107,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950723656096496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63.726177, y: -20.385605, z: 0}
+  m_LocalPosition: {x: 32.818638, y: 10.143393, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4483404530793702}
@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noticeThreshold: 5
+  noticeThresholdY: 0
   sleepingEnemy: 1
   sleepingPS: {fileID: 1763940434667328}
   noticeSfx: {fileID: 8300000, guid: 8648078d47b18484eb01c18cd8394427, type: 3}
@@ -312,10 +313,13 @@ MonoBehaviour:
     wrapMode: 0
   myDeadBodyName: 
   respawnEnemy: 0
+  armoredEnemyHitSfx: {fileID: 0}
+  bossEnemy: 0
+  IAmParentObj: 0
+  childEnemy: {fileID: 0}
   hitSound: 2
   hitSqueal: 0
   bounce: 4
-  bossEnemy: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   gar_rec: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
@@ -324,15 +328,18 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1172485118927494}
-  myCollisionBox: {fileID: 61787944317269882, guid: a2b3d67d62603254490d45914917eac4,
-    type: 2}
   returnAniName: idle
+  dontSpawnBody: 0
+  canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  armorCollisionObj: {fileID: 0}
+  disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   myRespawner: {fileID: 0}
   currentHp: 3
   meleeDmgBonus: 0
   dontStopWhenHit: 0
+  spinning: 0
 --- !u!114 &114601902577098916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -423,6 +430,8 @@ MonoBehaviour:
   chaseSpeed: 5
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
+  chasePS: {fileID: 0}
+  returnToPreviousWhenFar: 0
 --- !u!198 &198994715302118384
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -483,7 +492,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1755020313
+  randomSeed: 2095428919
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3869,8 +3878,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 962927795
-  m_SortingLayer: 2
+  m_SortingLayerID: 1780242901
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 66af31ef3a546c648ad6237d3b03a835, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.534}

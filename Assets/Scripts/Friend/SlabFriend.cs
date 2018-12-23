@@ -15,6 +15,9 @@ public class SlabFriend : Friend
     public GameObject moon;
     public GameObject blockade;
     public GameObject moonShadow;
+    public GameObject stone;
+    public GameObject rock;
+
 
     bool moonInProperLocation;
     int slabDepartureSequence = 0;
@@ -99,7 +102,19 @@ public class SlabFriend : Friend
 				//CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
                 break;
             case "END":
+				CamManager.Instance.mainCamEffects.CameraPan(rock.transform.position,"");
+            	yield return new WaitForSeconds(.5f);
+            	rock.GetComponent<RockFriend>().Sleep();
+				yield return new WaitForSeconds(.5f);
+            	CamManager.Instance.mainCamEffects.CameraPan(stone.transform.position,"");
+            	yield return new WaitForSeconds(.5f);
+            	stone.GetComponent<StoneFriend>().Sleep();
+            	yield return new WaitForSeconds(.5f);
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
+				yield return base.OnFinishDialogEnumerator();
+
+				moon.SetActive(false);
+
                 break;
         }
 
@@ -146,10 +161,13 @@ public class SlabFriend : Friend
     }
 
     public void BreakEyes(){
-    	Destroy(eyeCover);
+    	eyeCover.SetActive(false);
     	eyeBreakPS.SetActive(true);
     }
-
+	public void Sleep(){
+    	eyeCover.SetActive(true);
+    	SetFriendState("END");
+    }
     public override void GiveData(List<GameObject> neededObjects){
     	trashGiveHUD = neededObjects[0];
     	trashGiveHUD.GetComponent<GUI_SlabTrashGiveHUD>().slabFriend = this;
@@ -182,7 +200,6 @@ public class SlabFriend : Friend
     	transform.parent = moon.transform;
     	yield return new WaitForSeconds(1.5f);
     	slabDepartureSequence=3;
-    	moon.SetActive(false);
     	dialogManager.ReturnFromAction();
     }
 
