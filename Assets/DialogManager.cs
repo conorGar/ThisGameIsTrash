@@ -25,7 +25,7 @@ public class DialogManager : MonoBehaviour {
 	public DialogActionManager dialogActionManager;
 	public Camera guiCamera; //needed for icon to corner at dialog choice
 	public GameObject dialogCanvas;
-	//public GameObject blackBarCanvas;
+	public GUI_CinematicBars blackBarCanvas;
 	public TextMeshProUGUI characterName;
 	[HideInInspector]
 	public string animationName;
@@ -92,7 +92,7 @@ public class DialogManager : MonoBehaviour {
                 }
             }
             GameStateManager.Instance.PushState(typeof(DialogState));
-           // blackBarCanvas.SetActive(true);
+           	blackBarCanvas.Show(100,.3f);
             StartDisplay();
         }
 	}
@@ -117,6 +117,7 @@ public class DialogManager : MonoBehaviour {
 		if(guiCamShake){
 			guiCamShake = false;
 		}
+		continueIcon.gameObject.SetActive(false);
 		SoundManager.instance.PlaySingle(continueDialogSfx);
 		if(currentNode.type == DIALOGNODETYPE.QUESTION){
 			Debug.Log("Question Dialog Node Properly Read");
@@ -306,7 +307,7 @@ public class DialogManager : MonoBehaviour {
 			if(currentlySpeakingIcon != null)
 				currentlySpeakingIcon.SetTalking(false);
 
-			continueIcon.enabled = true;
+			continueIcon.gameObject.SetActive(true);
 			CancelInvoke();
 			finishedDisplayingText = true;
 		}
@@ -386,7 +387,7 @@ public class DialogManager : MonoBehaviour {
         // Handle when movie type stuff plays at the end of a dialog.
         //sGameStateManager.Instance.PushState(typeof(MovieState));
         friend.OnFinishDialog();
-        //blackBarCanvas.SetActive(false);
+        blackBarCanvas.Hide(.3f);
 		dialogCanvas.SetActive(false);
     }
 

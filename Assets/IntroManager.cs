@@ -31,7 +31,7 @@ public class IntroManager : MonoBehaviour {
 				StartCoroutine(SkipTimer());
 			}else if(skipNumber == 1){	
 				SoundManager.instance.FadeMusic();
-				Initiate.Fade("TitleScreen",Color.black,0.5f);
+				Initiate.Fade("1_1",Color.black,0.5f);
 			}
 		} 
 	}
@@ -87,9 +87,9 @@ public class IntroManager : MonoBehaviour {
 		}else if(slideNumber == 17){
 			textShown.text = "They hope to set up their mysterious leader, known only as <color=#DC3232>The Greasy Prince</color>, to be the winner of the Garbageperson Of The Year Award!";
 		}else if(slideNumber == 18){
-			textShown.text = "And with only <color=#78FF32>30 days until the award ceremony</color>, will you really have the time to make your mark on the trashy world?!?";
+			textShown.text = "If you beat the world record and <color=#78FF32>collect 30 large pieces of trash in 30 days</color>, you'll be sure to win the award!";
 		}else if(slideNumber == 19){
-			textShown.text = "Or will you be forced to face the reality that you're just not cut out to be a garbageman...";
+			textShown.text = "If not... you be forced to face the reality that you're just not cut out to be a garbageman...";
 		}else if(slideNumber == 20){
 			slides[slideNumber-1].GetComponent<ChangingSlide>().changeDelay = 3;
 			textShown.gameObject.GetComponent<TextAnimation>().PlayAnim(1);//fast type
@@ -116,7 +116,7 @@ public class IntroManager : MonoBehaviour {
 		}else if(slideNumber == 27){
 			textShown.text = " ";
 			SoundManager.instance.FadeMusic();
-			Initiate.Fade("TitleScreen",Color.black,0.5f);
+			Initiate.Fade("1_1",Color.black,0.5f);
 			textShown.text = "";
 		}
 

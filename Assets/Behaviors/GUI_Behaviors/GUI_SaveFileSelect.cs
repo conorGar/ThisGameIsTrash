@@ -11,7 +11,7 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 	// Use this for initialization
 	public GameObject fadeHelper;
 	public AudioClip selectSfx;
-
+	public bool debugIntroSkip = true;
 
 	void OnEnable(){
 
@@ -73,7 +73,11 @@ public class GUI_SaveFileSelect : GUI_MenuBase
             // After the data is read, load the scene based on which day the player is currently at.
             // Day 0 goes right into level 1.  All other days will be at the hub.
             if (GlobalVariableManager.Instance.DAY_NUMBER - 1 < 1) {
-                fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
+            	if(!debugIntroSkip)
+                fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("Intro");
+                else
+				fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("1_1");
+
             }
             else {
                 fadeHelper.GetComponent<Ev_FadeHelper>().FadeToScene("Hub");

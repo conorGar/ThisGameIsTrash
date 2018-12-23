@@ -83,7 +83,7 @@ public class SlabFriend : Friend
 			moon.transform.position = Vector2.MoveTowards(moon.transform.position, this.gameObject.transform.position, (10*Time.deltaTime));
 
         }else if(slabDepartureSequence == 2){
-			moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(54,92), (5*Time.deltaTime));
+			moon.transform.position = Vector2.MoveTowards(moon.transform.position, new Vector2(54,122), (5*Time.deltaTime));
 
         }
     }
@@ -179,6 +179,7 @@ public class SlabFriend : Friend
 
     IEnumerator MoonArriveSequence(){
     	CamManager.Instance.mainCamPostProcessor.profile = null;
+		CamManager.Instance.mainCamEffects.ZoomInOut(.9f,1);
     	moon.SetActive(true);
     	yield return new WaitUntil(() => moonInProperLocation);
     	yield return new WaitForSeconds(.5f);
@@ -198,7 +199,7 @@ public class SlabFriend : Friend
     	yield return new WaitForSeconds(.4f);
     	slabDepartureSequence = 2;
     	transform.parent = moon.transform;
-    	yield return new WaitForSeconds(1.5f);
+    	yield return new WaitForSeconds(2.5f);
     	slabDepartureSequence=3;
     	dialogManager.ReturnFromAction();
     }

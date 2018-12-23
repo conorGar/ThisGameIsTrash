@@ -55,7 +55,7 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int DAY_NUMBER = 1;
 	public bool IS_HIDDEN = false;
-	public float MASTER_MUSIC_VOL = .5f;
+	public float MASTER_MUSIC_VOL = .3f;
 	public float MASTER_SFX_VOL = .5f;
 	public int MENU_SELECT_STAGE = 1;
 	public bool PLAYER_CAN_MOVE = true;

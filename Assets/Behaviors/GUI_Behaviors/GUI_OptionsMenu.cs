@@ -27,11 +27,12 @@ public class GUI_OptionsMenu : MonoBehaviour {
     int arrowPos = 1;
     // Use this for initialization
     void Start() { 
-        musicVol.GetComponent<Image>().fillAmount = SoundManager.instance.musicSource.volume;
-		sfxVol.GetComponent<Image>().fillAmount = SoundManager.instance.sfxSource.volume;
+        musicVol.GetComponent<Image>().fillAmount = SoundManager.instance.musicSource.volume*2; //*2 because music vol is halved at pause menu
+		sfxVol.GetComponent<Image>().fillAmount = SoundManager.instance.sfxSource.volume*2;
     }
 
     void OnEnable(){
+    	SoundManager.instance.PlaySingle(closeSound);
     	arrowPos = 1;
     	SelectNext();
     }
@@ -53,15 +54,15 @@ public class GUI_OptionsMenu : MonoBehaviour {
 	               || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT))
 	        {
 	            if (arrowPos == 1) {
-					if (SoundManager.instance.musicSource.volume < 1) {
-	                    SoundManager.instance.musicSource.volume += .16f;
+					if (SoundManager.instance.musicSource.volume < .5f) { // .5 because music is halved at pause screen
+	                    SoundManager.instance.musicSource.volume += .08f;
 	                    musicVol.GetComponent<Image>().fillAmount += .16f;
 						GlobalVariableManager.Instance.MASTER_MUSIC_VOL = SoundManager.instance.musicSource.volume;
 
 	                }
 	            } else if (arrowPos == 2) {
-					if (SoundManager.instance.sfxSource.volume < 1f) {
-						SoundManager.instance.sfxSource.volume += .16f;
+					if (SoundManager.instance.sfxSource.volume < .5f) { // .5 because music is halved at pause screen
+						SoundManager.instance.sfxSource.volume += .08f;
 	                    sfxVol.GetComponent<Image>().fillAmount += .16f;
 	                    GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
 	                }
@@ -71,13 +72,13 @@ public class GUI_OptionsMenu : MonoBehaviour {
 	        {
 	            if (arrowPos == 1) {
 					if (SoundManager.instance.musicSource.volume > 0f) {
-						SoundManager.instance. musicSource.volume -= .16f;
+						SoundManager.instance. musicSource.volume -= .08f;
 	                    musicVol.GetComponent<Image>().fillAmount -= .16f;
 	                    GlobalVariableManager.Instance.MASTER_MUSIC_VOL = SoundManager.instance.musicSource.volume;
 	                }
 	            } else if (arrowPos == 2) {
 					if (SoundManager.instance.sfxSource.volume > 0f) {
-						SoundManager.instance.sfxSource.volume -= .16f;
+						SoundManager.instance.sfxSource.volume -= .08f;
 	                    sfxVol.GetComponent<Image>().fillAmount -= .16f;
 	                    GlobalVariableManager.Instance.MASTER_SFX_VOL = SoundManager.instance.sfxSource.volume;
 	                }
