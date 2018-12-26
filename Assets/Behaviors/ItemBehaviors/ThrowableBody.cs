@@ -13,18 +13,12 @@ public class ThrowableBody : ThrowableObject
 
 
 	public override void PickUp(){
-		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_pickUpBig",true);
-		//gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
-		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
 		physicalCollision.enabled = false;
-		player.GetComponent<EightWayMovement>().enabled = false;
-		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
-		Invoke("PickUpWithDelay",.5f);
+		base.PickUp();
 	}
 
-	void PickUpWithDelay(){
+	/*void PickUpWithDelay(){
 		movePlayerToObject = false;
 	
 		physicalCollision.enabled = false;
@@ -48,7 +42,7 @@ public class ThrowableBody : ThrowableObject
 
 		pickUpSpin = true;
 		spinning = true;
-	}
+	}*/
 
 	public void Poison(){
 		poisioned = true;

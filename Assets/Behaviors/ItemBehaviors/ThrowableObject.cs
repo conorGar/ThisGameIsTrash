@@ -62,7 +62,7 @@ public class ThrowableObject : PickupableObject {
                     gameObject.GetComponent<CannotExitScene>().enabled = false;
                     if (physicalCollision != null)
                         physicalCollision.enabled = true;
-
+					player.GetComponent<EightWayMovement>().myLegs.SetActive(true);
 					LandingEvent();
                 }else{
                 	if(myShadow !=null){
@@ -70,9 +70,9 @@ public class ThrowableObject : PickupableObject {
                 	}
 
 
-                    if (groundedClip != null) {
+                    /*if (groundedClip != null) {  -- not sure what this was suppossed to be....?
                         GetComponent<tk2dSpriteAnimator>().Play(groundedClip);
-                    }
+                    }*/
 
                 }
             }
@@ -80,11 +80,14 @@ public class ThrowableObject : PickupableObject {
 	}
 
 	public override void PickUp(){
-		base.PickUp();
-		gameObject.GetComponent<IsometricSorting>().enabled = false;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
-		//if(physicalCollision != null)
-			physicalCollision.enabled = false;
+		gameObject.GetComponent<Animator>().enabled = true;
+		base.PickUp();
+		physicalCollision.enabled = false;
+		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
+
+		StartCoroutine("PickupDelay");
+
 		if(livingBody){
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
 			GameObject panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
@@ -92,6 +95,22 @@ public class ThrowableObject : PickupableObject {
 		}
         if (myShadow != null)
 		    myShadow.SetActive(false);
+	}
+
+	IEnumerator PickupDelay(){
+		yield return new WaitForSeconds(1f);
+		player.GetComponent<EightWayMovement>().myLegs.SetActive(false);
+
+		beingCarried = true;
+		if(livingBody){
+			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
+			GameObject panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
+			panicSweat.transform.parent = gameObject.transform;
+		}
+        if (myShadow != null)
+		    myShadow.SetActive(true);
+		player.GetComponent<EightWayMovement>().enabled = true;
+		canThrow = true;
 	}
 
 	void Throw(){

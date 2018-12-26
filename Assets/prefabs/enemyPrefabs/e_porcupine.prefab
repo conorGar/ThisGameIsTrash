@@ -292,8 +292,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
-  minMoveTime: 1
-  maxMoveTime: 3
+  minMoveTime: 0.5
+  maxMoveTime: 1.5
   stopTime: 3
   walkPS: {fileID: 198251608602611088}
   myWanderZone: {fileID: 0}
@@ -430,6 +430,7 @@ MonoBehaviour:
   currentHp: 0
   meleeDmgBonus: 0
   dontStopWhenHit: 0
+  spinning: 0
 --- !u!114 &114857758858473470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -457,6 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageToPlayer: 1
   destroyOnTileCollision: 0
+  myShadow: {fileID: 0}
 --- !u!198 &198251608602611088
 ParticleSystem:
   m_ObjectHideFlags: 1

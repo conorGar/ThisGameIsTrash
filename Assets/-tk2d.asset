@@ -169,6 +169,10 @@ MonoBehaviour:
     dataGUID: 
     managed: 0
     loadable: 0
+  - assetGUID: 7c2a2e05ce4a9c440917bff849e4301d
+    dataGUID: 
+    managed: 0
+    loadable: 0
   fontIndex:
   - assetGUID: 063b15d80dbb4604d890600a64c79cf8
     dataGUID: e7a6b09a73c6b2b4f8060096ddbd3b5e
@@ -2693,6 +2697,11 @@ MonoBehaviour:
     - jim4_excitedJump1
     - jim4_excitedJump2
     - jim4_excitedJump3
+    - jim4_death21
+    - jim4_death20
+    - jim4_death23
+    - jim4_death22
+    - jim4_death19
     spriteTextureGUIDs:
     - c6c486719bb81884cb55b219fd1269f9
     - 517db9be9d8a2b841ae59a1d6fcfdfc1
@@ -2847,6 +2856,11 @@ MonoBehaviour:
     - 85d4d97f02c24724b91989b78b82f6da
     - cf025cba4d2bb7441b9cc5862a186612
     - 8fc2d9f3ed24d2e4a835db6ae363d9b1
+    - 89a5a379aad90524ea2067b31827cb0c
+    - d65fd92d937864a4e801aaa211684541
+    - daf909540d691974d826dee45321659a
+    - f20f1a7362f50cc47887b3302fdf0c59
+    - 34d42f0283427e244a6723bbfe7f93cf
     spriteTextureTimeStamps:
     - 1534704154.79348
     - 1530694814.54134
@@ -2998,9 +3012,14 @@ MonoBehaviour:
     - 1542218414.38466
     - 1542218412.83154
     - 1542218412.9216
-    - 1544883304.84898
-    - 1544883304.85199
-    - 1544883304.85499
+    - 1545216964.02178
+    - 1545216964.13984
+    - 1545216964.22691
+    - 1545576513.16773
+    - 1545577841.20383
+    - 1545577884.83651
+    - 1545577862.59599
+    - 1545577826.25066
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
@@ -4529,6 +4548,28 @@ MonoBehaviour:
     - 1544561748.18626
     - 1544561748.33237
     - 1544561748.44446
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
+  - name: ProjectilesSC
+    spriteCollectionGUID: 5da0325eba38d2246ac937ced174c7f0
+    spriteCollectionDataGUID: 1610b5b24e8263d43873a9d0040d5210
+    spriteNames:
+    - porcupine_quill2
+    - porcupine_quill3
+    - porcupine_quill4
+    - porcupine_quill1
+    spriteTextureGUIDs:
+    - 0b974ae365a336442882f03c3e90c5b9
+    - 94bffce818f7a6c459cbe95f7ea1b040
+    - 5c0743f2e0a68db40bcdc7c9d8bee468
+    - f335e2d80ed1d4f4aa892dc02abb0f84
+    spriteTextureTimeStamps:
+    - 1545565777.12555
+    - 1545565785.81992
+    - 1545565793.24382
+    - 1545565765.49168
     managedSpriteCollection: 0
     loadable: 0
     assetName: 

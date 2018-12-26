@@ -75,8 +75,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619720335329708}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.154645, y: -8.125063, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.358991, y: -2.0680974, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4680057974950464}
@@ -293,6 +293,7 @@ MonoBehaviour:
   carryXAdjustment: 3.3
   carryMark: {fileID: 0}
   throwableObject: 1
+  childPickupObj: {fileID: 0}
   myBody: {fileID: 0}
   dumpster: {fileID: 0}
   spinning: 0
@@ -303,6 +304,7 @@ MonoBehaviour:
   landSfx: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
   behaviorsToStop: []
   livingBody: 0
+  groundedClip: 
   bodyHP: 3
   fliesPS: {fileID: 1714853125770136}
   poisioned: 0

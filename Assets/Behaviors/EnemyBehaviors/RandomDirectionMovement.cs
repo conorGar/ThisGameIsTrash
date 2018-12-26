@@ -129,6 +129,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	}
 
 	public void GoAgain(){
+		Debug.Log("Go again activated");
 		moving = true;
 		//InvokeRepeating("SpawnClouds",.2f, .2f);
 		walkPS.Play();
