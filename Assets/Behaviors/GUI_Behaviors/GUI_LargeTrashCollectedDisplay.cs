@@ -13,6 +13,10 @@ public class GUI_LargeTrashCollectedDisplay : MonoBehaviour
 	public GameObject trashTitlePaper;
 	public PostProcessingProfile dialogBlur;
 
+	public AudioClip trashDisplayChime;
+	public AudioClip continueSfx;
+	public AudioClip starFillSfx;
+
 	int indexOfCurrentLargeTrash;
 	int displayIndex;
 	// Use this for initialization
@@ -29,6 +33,7 @@ public class GUI_LargeTrashCollectedDisplay : MonoBehaviour
 		trashTitlePaper.SetActive(true);
 		trashIcon.GetComponent<Image>().sprite = (GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedDisplaySprite);
 		trashTitlePaper.GetComponent<TextMeshProUGUI>().text = GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedTitle;
+		SoundManager.instance.PlaySingle(trashDisplayChime);
 		trashIcon.GetComponent<Animator>().Play("largeTrashCollected",-1,0f);
 
 	}
@@ -39,6 +44,7 @@ public class GUI_LargeTrashCollectedDisplay : MonoBehaviour
 	{
 		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 			if(phase == 1){
+				SoundManager.instance.PlaySingle(continueSfx);
 				StartCoroutine("NewStarFill");
 				starDisplay.SetActive(true);
 				for(int i = 0; i < starDisplay.transform.childCount;i++){
@@ -52,6 +58,8 @@ public class GUI_LargeTrashCollectedDisplay : MonoBehaviour
 				phase = 2;
 
 			}else if(phase == 3){
+				SoundManager.instance.PlaySingle(continueSfx);
+
 				Close();
 			}
 		}
@@ -62,6 +70,7 @@ public class GUI_LargeTrashCollectedDisplay : MonoBehaviour
 		trashTitlePaper.SetActive(false);
 		yield return new WaitForSeconds(1f);
 		starDisplay.transform.GetChild(indexOfCurrentLargeTrash).gameObject.GetComponent<Animator>().enabled = true;
+		SoundManager.instance.PlaySingle(starFillSfx);
 		GameObject stars = ObjectPool.Instance.GetPooledObject("effect_GUISelectStars",starDisplay.transform.GetChild(indexOfCurrentLargeTrash).position);
 		starDisplay.transform.GetChild(indexOfCurrentLargeTrash).gameObject.GetComponent<Animator>().Play("largeTrashDisplay_starFill",-1,0);
 		yield return new WaitForSeconds(1.5f);

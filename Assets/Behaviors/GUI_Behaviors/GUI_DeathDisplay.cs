@@ -10,6 +10,7 @@ public class GUI_DeathDisplay : MonoBehaviour
 	public GameObject fader;
 	public GameObject meleeHUD;
 	public AudioClip dayIncrease;
+	public AudioClip truckSfx;
 
 	public void DayMeterRise(){
 		/*Vector2 offsetMin; 
@@ -45,6 +46,10 @@ public class GUI_DeathDisplay : MonoBehaviour
 		//fader.GetComponent<Animator>().Play("Fade");
 		//fader.GetComponent<Animator>().speed = 1;
 
+	}
+
+	public void PlayTruckSfx(){
+		SoundManager.instance.PlaySingle(truckSfx);
 	}
 }
 

@@ -95,6 +95,7 @@ public class Ev_LargeTrash : PickupableObject {
 		yield return new WaitForSeconds(1f);
 		beingCarried = true;
 		PickUpEvent();
+		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
 		player.GetComponent<EightWayMovement>().enabled = true;
 	}
 

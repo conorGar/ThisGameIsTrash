@@ -14,6 +14,9 @@ public class ClankingMaterial : MonoBehaviour
 	void Start ()
 	{
 		//player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+		if(clankSound == null){
+			clankSound = SoundManager.instance.GetSFX(SFXBANK.CLANK);
+		}
 	}
 	
 	// Update is called once per frame

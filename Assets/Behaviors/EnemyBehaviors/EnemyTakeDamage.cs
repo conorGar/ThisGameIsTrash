@@ -21,7 +21,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public bool IAmParentObj;
 	public GameObject childEnemy;
 
-    public SFXBANK hitSound;
+    //public SFXBANK hitSound;
     public SFXBANK hitSqueal;
     public SFXBANK bounce;
 
@@ -67,6 +67,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	int sharingUpgrade = 0;
 	int damageOnce = 0;
 	bool hitByThrownObject;
+	float hitPitch = .9f;
 
 	tk2dSpriteAnimator myAnim;
 	int camShake = 0;
@@ -220,7 +221,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				melee.GetComponent<Ev_FallingProjectile>().Fell();
 			}
 			//Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
-            SoundManager.instance.RandomizeSfx(hitSound, .8f, 1.1f);
+            SoundManager.instance.RandomizeSfx(SFXBANK.HIT6, .8f, 1.1f);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}else if(melee.gameObject.layer == 15){//throwable object
 			hitByThrownObject = true;
@@ -238,7 +239,6 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				ArmorKnockoff();
 			TakeDamage(melee.gameObject);
 			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
-			//SoundManager.instance.PlaySingle(hitSound);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}
 	}
@@ -304,8 +304,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					takingDamage = true;
 					damageOnce = 1;
 					meleeDmgBonus = 0;
-					SoundManager.instance.PlaySingle(hitSound);
-					SoundManager.instance.PlaySingle(hitSqueal);
+
+				
 					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
 						//bonus dmg with pole
 						meleeDmgBonus++;
@@ -371,6 +371,15 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					}
 
 					currentHp = currentHp - 1 - meleeDmgBonus;
+
+					if(currentHp <= 0){
+					SoundManager.instance.PlaySingle(SFXBANK.HIT7, hitPitch);
+					}else{
+					SoundManager.instance.PlaySingle(SFXBANK.HIT6, hitPitch);
+					hitPitch += .1f; // pitch goes up as hit enemy
+					}
+					SoundManager.instance.PlaySingle(hitSqueal);
+
 					//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
 						gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);

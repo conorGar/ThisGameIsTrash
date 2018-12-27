@@ -7,6 +7,7 @@ public class Ev_Enemy_Porcupine2 : MonoBehaviour
 	/// Wanders around, stops to fire quills, which fire in straight lines in north south east west directions.
 	/// </summary>
 
+	public AudioClip shake;
 
 	void OnEnable(){
 		//Invoke("FireQuills",Random.Range(1.5f,3.5f));
@@ -22,7 +23,7 @@ public class Ev_Enemy_Porcupine2 : MonoBehaviour
 
 
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("shake");
-
+		SoundManager.instance.PlaySingle(shake);
 		yield return new WaitForSeconds(.5f);
 
 

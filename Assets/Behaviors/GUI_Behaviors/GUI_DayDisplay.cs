@@ -16,7 +16,7 @@ public class GUI_DayDisplay : MonoBehaviour
 	public AudioClip truckSfx;
 	public GameObject worldTitle;
 	public GameObject underline;
-
+	public AudioClip typeSound;
 
 	public GameObject demoGoalDisplay;
 	public GameObject Hud;
@@ -36,7 +36,9 @@ public class GUI_DayDisplay : MonoBehaviour
 			if(!forHub){
 			dayNumDisplay.text = "- Day " + GlobalVariableManager.Instance.DAY_NUMBER.ToString() + " -";
 			dayNumDisplay.GetComponent<TextAnimation>().PlayAnim();
-
+				SoundManager.instance.musicSource.clip = SoundManager.instance.worldMusic;
+    			SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+    			SoundManager.instance.musicSource.Play();
 			}
 			StartCoroutine("DisplaySequence");
 			SoundManager.instance.PlaySingle(truckSfx);
@@ -126,22 +128,38 @@ public class GUI_DayDisplay : MonoBehaviour
 
 	IEnumerator DemoGoalDisplay(){
         GameStateManager.Instance.PushState(typeof(PopupState));
+        PlayTalkSounds();
 		demoGoalDisplay.SetActive(true);
-		yield return new WaitForSeconds(5f);
+		yield return new WaitForSeconds(2f);
+		CancelInvoke("TalkSound");
+		yield return new WaitForSeconds(3f);
 		truck.SetActive(true);
 		Hud.SetActive(true);
 		demoGoalDisplay.SetActive(false);
 		underline.SetActive(true);
 		yield return new WaitForSeconds(.3f);
 		worldTitle.SetActive(true);
-
+		SoundManager.instance.musicSource.clip = SoundManager.instance.worldMusic;
+    	SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+    	SoundManager.instance.musicSource.Play();
 		dayNumDisplay.gameObject.SetActive(true);
 		if(!forHub){
 			dayNumDisplay.text = "- Day " + GlobalVariableManager.Instance.DAY_NUMBER.ToString() + " -";
 			dayNumDisplay.GetComponent<TextAnimation>().PlayAnim();
-			}
-			StartCoroutine("TruckEnter");
-			SoundManager.instance.PlaySingle(truckSfx);
+		}
+		StartCoroutine("TruckEnter");
+		SoundManager.instance.PlaySingle(truckSfx);
+	}
+
+
+	private void PlayTalkSounds()
+    {
+        CancelInvoke();
+        InvokeRepeating("TalkSound", 0.1f, .05f);
+    }
+
+    private void TalkSound(){
+		SoundManager.instance.RandomizeSfx(typeSound,.8f,1.2f);
 	}
 }
 

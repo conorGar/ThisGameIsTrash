@@ -6,6 +6,7 @@ public class Ev_PollutedPathEscape : SE_GlowWhenClose
 
 	public Ev_FadeHelper fader;
 	public bool atHubSide;
+	public AudioClip selectSfx;
 	//public GameObject player;
 
 	int playerGoToStairs;
@@ -15,6 +16,7 @@ public class Ev_PollutedPathEscape : SE_GlowWhenClose
 		player.layer = 0; //set to layer that wont collide
 		GameStateManager.Instance.PushState(typeof(DialogState));
         FriendManager.Instance.DisableAllFriends();
+        SoundManager.instance.PlaySingle(selectSfx);
         if(atHubSide){
 			fader.FadeToScene("PollutedPeakPath");
         }else{

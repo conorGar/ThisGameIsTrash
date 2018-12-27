@@ -17,6 +17,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 	public AudioClip finalHit;
 	public AudioClip deathSound;
 	public AudioClip healSound;
+	public AudioClip deathLandSfx;
 	[HideInInspector]
 	public GameObject currentlyCarriedObject; // set by pickupableObject.cs for use when dropping at death
 	int damageDealt;
@@ -184,7 +185,10 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
 		SoundManager.instance.PlaySingle(deathSound);
 		yield return new WaitForSeconds(.4f);
-		ObjectPool.Instance.GetPooledObject("effect_enemyLand",transform.position);
+
+		GameObject landSmoke = ObjectPool.Instance.GetPooledObject("effect_enemyLand",transform.position);
+		landSmoke.GetComponent<Renderer>().sortingLayerName = "Layer04"; //needed to be able to see smoke
+		SoundManager.instance.PlaySingle(deathLandSfx);
 			yield return new WaitForSeconds(.6f);
 		deathDisplay.DepleteTrashCollected();
 		DropTrash();
@@ -219,6 +223,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
         gameObject.transform.position = new Vector3(0f,-3f,0f); //Start at Beginning of world
 		truck.transform.position = new Vector3(-15f,-3f,0f);
+		deathDisplay.PlayTruckSfx();
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
         CamManager.Instance.mainCam.transform.position = new Vector3(0f,0f,-10f);
 		roomManager.GetComponent<RoomManager>().Restart();
@@ -230,6 +235,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		deathDisplay.FadeHUD();
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 		yield return new WaitForSeconds(.2f);
+		deathDisplay.PlayTruckSfx();
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
 		gameObject.GetComponent<MeshRenderer>().enabled = true;
 		yield return new WaitForSeconds(.3f);

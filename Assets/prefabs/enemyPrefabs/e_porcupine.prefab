@@ -374,6 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bae7b9ab5157eb4a9013703ea054fc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shake: {fileID: 8300000, guid: 434cfb2af2afb3543ba2b33017b76ba3, type: 3}
 --- !u!114 &114759214080502328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -408,7 +409,6 @@ MonoBehaviour:
   bossEnemy: 0
   IAmParentObj: 0
   childEnemy: {fileID: 0}
-  hitSound: 0
   hitSqueal: 0
   bounce: 0
   tutPopup: {fileID: 0}

@@ -12,7 +12,9 @@ public enum SFXBANK
     HEAL,
     DUMPSTERDASH,
     SCRAPPYSNEAK,
-    SPARKLE
+    SPARKLE,
+    ITEM_CATCH,
+    CLANK
 }
 
 public enum MUSICBANK
@@ -71,6 +73,7 @@ public class SoundManager : MonoBehaviour {
     public void PlaySingle(SFXBANK id)
     {
         var clip = GetSFX(id);
+		sfxSource.pitch = 1;
 
         if (clip != null) {
             PlaySingle(clip);
@@ -82,6 +85,25 @@ public class SoundManager : MonoBehaviour {
 		//sfxSource.Play();
 		sfxSource.pitch = 1;
 		sfxSource.PlayOneShot(clip);
+	}
+
+	public void PlaySingle(AudioClip clip, float pitch){
+		//sfxSource.clip = clip;
+		//sfxSource.Play();
+		sfxSource.pitch = pitch;
+		sfxSource.PlayOneShot(clip);
+	}
+
+	public void PlaySingle(SFXBANK id, float pitch){
+		//sfxSource.clip = clip;
+		//sfxSource.Play();
+		var clip = GetSFX(id);
+		sfxSource.pitch = 1;
+
+        if (clip != null) {
+			sfxSource.pitch = pitch;
+			sfxSource.PlayOneShot(clip);
+        }
 	}
 
     public void RandomizeSfx(params SFXBANK[] ids)
@@ -199,7 +221,7 @@ public class SoundManager : MonoBehaviour {
     // Helpers
 
     // Are these too slow to loop through all the time?  Should it be a hash internally?
-    AudioClip GetSFX(SFXBANK id)
+    public AudioClip GetSFX(SFXBANK id)
     {
         if (id == SFXBANK.NONE)
             return null;

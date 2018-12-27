@@ -21,9 +21,7 @@ public class WorldManager : MonoBehaviour
 
     private void Start()
     {
-    	SoundManager.instance.musicSource.clip = SoundManager.instance.worldMusic;
-    	SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
-    	SoundManager.instance.musicSource.Play();
+
 
         world.type = worldType;
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HUNGRYFORMORE)){

@@ -109,6 +109,7 @@ public class ThrowableObject : PickupableObject {
 		}
         if (myShadow != null)
 		    myShadow.SetActive(true);
+		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
 		player.GetComponent<EightWayMovement>().enabled = true;
 		canThrow = true;
 	}

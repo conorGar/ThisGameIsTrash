@@ -67,7 +67,7 @@ public class GUI_SaveFileSelect : GUI_MenuBase
         // Clear out all the states.
         GameStateManager.Instance.PopAllStates();
         GlobalVariableManager.Instance.SetDefaultStats();
-
+        SoundManager.instance.FadeMusic();
         StartCoroutine(UserDataManager.Instance.ReadAsync(
         () => {
             // After the data is read, load the scene based on which day the player is currently at.
