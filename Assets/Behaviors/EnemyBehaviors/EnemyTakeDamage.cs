@@ -88,7 +88,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	float t;
 	Quaternion startRotation;
 
-	bool startsOffDontMoveWhenHit; // needed for returning proper value when enemy dies(otherwise spawned enemies after starting obj pool amount will always have 'movewhenhit' enabled)
+	public bool startsOffDontMoveWhenHit; // needed for returning proper value when enemy dies(otherwise spawned enemies after starting obj pool amount will always have 'movewhenhit' enabled)
 
 	Vector2 startScale;
 
@@ -376,7 +376,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					SoundManager.instance.PlaySingle(SFXBANK.HIT7, hitPitch);
 					}else{
 					SoundManager.instance.PlaySingle(SFXBANK.HIT6, hitPitch);
-					hitPitch += .1f; // pitch goes up as hit enemy
+					if(hitPitch < 1.3f)
+						hitPitch += .1f; // pitch goes up as hit enemy
 					}
 					SoundManager.instance.PlaySingle(hitSqueal);
 

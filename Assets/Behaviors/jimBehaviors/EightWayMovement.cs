@@ -7,7 +7,7 @@ public class EightWayMovement : MonoBehaviour {
 	private tk2dSpriteAnimator anim;
     public float speed = 8f;
     private Vector2 movement;
-
+    public AudioSource myFootstepSource;
  
     bool isDiagonal = false;
     bool noDelayStarted = false;
@@ -311,9 +311,18 @@ public class EightWayMovement : MonoBehaviour {
     }
     void FootstepSounds(){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            SoundManager.instance.RandomizeSfx(footsteps2, footsteps1);
+            RandomizeSfx(footsteps2, footsteps1);
         }
     }
+	public void RandomizeSfx(params AudioClip[] clips){
+		myFootstepSource.volume = GlobalVariableManager.Instance.MASTER_SFX_VOL;
+		int randomIndex = Random.Range(0, clips.Length);
+		float randomPitch = Random.Range(.9f,1.1f);
+
+		myFootstepSource.pitch = randomPitch;
+
+		myFootstepSource.PlayOneShot(clips[randomIndex]);
+	}
 
     public void UpdateSpeed(float updatedSpeed){
     	speed += updatedSpeed;

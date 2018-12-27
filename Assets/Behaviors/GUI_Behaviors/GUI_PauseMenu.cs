@@ -15,7 +15,7 @@ public class GUI_PauseMenu : MonoBehaviour {
     public Sprite optionsHLspr;
     public Sprite endayHLspr;
     public Sprite returnToDumpsterHlspr;
-
+    public bool forHub = false;
 
     public AudioClip selectSound;
     public AudioClip paperSlide;
@@ -99,7 +99,7 @@ public class GUI_PauseMenu : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(PauseMenuState)) {
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)
             || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
-                if (arrowpos < 2) {
+                if (arrowpos < 2 && !forHub) {
                     arrowpos++;
 					Debug.Log(GameStateManager.Instance.GetCurrentState());
                     SoundManager.instance.PlaySingle(selectSound);
@@ -109,7 +109,7 @@ public class GUI_PauseMenu : MonoBehaviour {
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
                  || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
-                if (arrowpos > 1) {
+                if (arrowpos > 1 && !forHub) {
                     arrowpos--;
                     SoundManager.instance.PlaySingle(selectSound);
                     enddayOption.GetComponent<Image>().sprite = endDayStartSpr;

@@ -47,6 +47,7 @@ public class RatWithHatFriend : Friend {
                 break;
             case "ADVERTISED":
                 nextDialog = "RatHat1";
+				gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 5;
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
         }
@@ -58,6 +59,7 @@ public class RatWithHatFriend : Friend {
             case "ADVERTISED":
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
+				gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 5;
                 yield return base.OnFinishDialogEnumerator();
                 break;
             case "OPEN_FOR_BUSINESS":

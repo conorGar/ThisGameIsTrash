@@ -51,6 +51,8 @@ public class RockFriend : Friend {
                 // Eyes open.
 				gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
 				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+				gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 5;
+
                 BreakEyes();
                 break;
             case "END":
@@ -128,6 +130,8 @@ public class RockFriend : Friend {
                 SetFriendState("WANTS_TO_BE_PRETTY");
                 gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = false;
 				gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+				gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 5;
+
 				StartingEvents();
 				nextDialog = "RockRequest";
                 //GetComponent<ActivateDialogWhenClose>().autoStart = true;

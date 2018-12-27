@@ -20,6 +20,8 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 	public TextMeshProUGUI currentPage;
 	public AudioClip navLeftSFX;
 	public AudioClip navRightSFX;
+	public AudioClip openSfx;
+
 
 	int arrowPos = 0;
 	GameObject highlightedPin;
@@ -97,6 +99,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
         MoveArrow();
     }
 	void OnEnable(){
+		SoundManager.instance.PlaySingle(openSfx);
         GameStateManager.Instance.PushState(typeof(ShopState));
         leftSide.transform.localPosition = new Vector2(-140f,0f);
 		rightSide.transform.localPosition = new Vector2(120f,0f);
@@ -147,6 +150,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
                 pinCase.GetComponent<Ev_PinDisplayOption>().enabled = true;
                 pinCase.GetComponent<Ev_PinDisplayOption>().player.GetComponent<EightWayMovement>().enabled = true;
                 CamManager.Instance.mainCamPostProcessor.profile = null;
+				SoundManager.instance.PlaySingle(openSfx);
                 this.gameObject.SetActive(false);
             }
             else {

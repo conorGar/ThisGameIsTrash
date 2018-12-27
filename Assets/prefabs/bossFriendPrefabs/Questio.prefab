@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 114793598932310076}
   - component: {fileID: 114001854225117882}
   - component: {fileID: 114129052633454340}
+  - component: {fileID: 95325837799594996}
   m_Layer: 9
   m_Name: Questio
   m_TagString: Boss
@@ -174,6 +175,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.32, y: 3.21}
   m_EdgeRadius: 0
+--- !u!95 &95325837799594996
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1832883319646916}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 06c501248660c52459306979c79a347a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114001854225117882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,21 +204,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   friend: {fileID: 114129052633454340}
-  xDistanceThreshold: 0
-  yDistanceThreshold: 0
-  dialogCanvas: {fileID: 0}
-  dialogManager: {fileID: 0}
-  dialogActionManager: {fileID: 0}
-  myDialogIcon: {fileID: 0}
+  distanceThreshold: 5
   cameraPanToFriendAtStart: 0
   speechBubbleIcon: {fileID: 0}
   iconAnimationName: questioTalk
   dialogIconName: 
   mySpeechIconSFX: {fileID: 0}
-  dialogName: 
+  startNodeName: 
   autoStart: 0
   dialogDefiniton: {fileID: 0}
   canTalkTo: 1
+  hideDialogIconsOnStart: 0
 --- !u!114 &114129052633454340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,13 +234,25 @@ MonoBehaviour:
   myDialogDefiniton: {fileID: 0}
   tempFriend: 0
   missedDialog: 
-  mainCam: {fileID: 0}
-  myTeleportPS: {fileID: 0}
+  dialogManager: {fileID: 0}
+  friendStates: []
+  friendState: 0
+  trioParticleSystems: []
   stuart: {fileID: 0}
   player: {fileID: 0}
-  bossTrio: {fileID: 0}
+  ex: {fileID: 0}
+  hash: {fileID: 0}
+  questio: {fileID: 0}
+  slideTrash: {fileID: 0}
+  FieldRoomNum: 0
+  toxicBarrier: {fileID: 0}
+  toxicBarrierPS: {fileID: 0}
+  goWithItDisplay: {fileID: 0}
+  toxicPipeFountain: {fileID: 0}
+  ToxicFieldRoomNum: 0
   smokePuff: {fileID: 0}
   bossMusic: {fileID: 0}
+  windSFX: {fileID: 0}
 --- !u!114 &114136053258156472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,9 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hastk2dSprite: 1
   movingObject: 1
-  legs: 0
+  sortBuddies: []
 --- !u!198 &198527237025810352
 ParticleSystem:
   m_ObjectHideFlags: 1
