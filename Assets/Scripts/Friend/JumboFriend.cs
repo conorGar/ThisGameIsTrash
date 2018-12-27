@@ -22,6 +22,7 @@ public class JumboFriend : Friend {
 	int numberOfActivation;
 	bool movieIsPlaying;
     bool wearHat;
+    bool earnedProjector = false;
     //public DialogDefinition myDialogDefinition;
 
     public void Start()
@@ -124,6 +125,34 @@ public class JumboFriend : Friend {
         }
     }
 
+    public override void OnWorldStart(World world)
+    {
+        // Make sure the projector spawns if the player earned it by attending the second screening, but didn't deliver it yet.
+        if (world.type == WORLD.ONE) {
+            switch (GetFriendState()) {
+                case "MISSED_SECOND_SCREENING":
+                case "INVITE_TO_THIRD_SCREENING":
+                case "END":
+                    if (largeTrashProjector != null && earnedProjector) {
+                        if (!GlobalVariableManager.Instance.IsLargeTrashDiscovered(largeTrashProjector.GetComponent<Ev_LargeTrash>().garbage.type)) {
+                            largeTrashProjector.SetActive(true);
+                        } else {
+                            largeTrashProjector.SetActive(false);
+                        }
+                    }
+                    break;
+                default:
+                    // Any other state the slide is not spawned.
+                    if (largeTrashProjector != null)
+                        largeTrashProjector.SetActive(false);
+                    break;
+            }
+        } else {
+            if (largeTrashProjector != null)
+                largeTrashProjector.SetActive(false);
+        }
+    }
+
     public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
     {
         yield return new WaitForSeconds(.3f);
@@ -135,6 +164,7 @@ public class JumboFriend : Friend {
                 SetFriendState("INVITE_TO_SECOND_SCREENING");
                 break;
 			case "INVITE_TO_SECOND_SCREENING":
+                earnedProjector = true;
 				largeTrashProjector.SetActive(true);
 				SetFriendState("INVITE_TO_THIRD_SCREENING");
 				break;
@@ -206,7 +236,8 @@ public class JumboFriend : Friend {
 
     void LoseHat(){
     	hat.SetActive(false);
-    	wearHat = false;
+        movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().dialogIconHat.SetActive(false);
+        wearHat = false;
     	dialogManager.ReturnFromAction();
     }
 
@@ -390,6 +421,7 @@ public class JumboFriend : Friend {
         json_data["friendState"] = friendState;
         json_data["movieEnhancement"] = movieEnhancement;
         json_data["wearHat"] = wearHat;
+        json_data["earnedProjector"] = earnedProjector;
         json_data["day"] = day; // keeping hold of the day for the next film.
 
         // keep track of the films
@@ -406,6 +438,7 @@ public class JumboFriend : Friend {
         friendState = json_data["friendState"].AsInt;
         movieEnhancement = json_data["movieEnhancement"];
         wearHat = json_data["wearHat"].AsBool;
+        earnedProjector = json_data["earnedProjector"].AsBool;
         day = json_data["day"].AsInt;
 
         films.Clear();

@@ -28,7 +28,15 @@ public class PinManager : MonoBehaviour {
         Instance = this;
 
         // sort by display priority
-        pinConfig.pinList.Sort((x, y) => x.displayPriority - y.displayPriority);
+        pinConfig.pinList.Sort((x, y) => {
+            // alphabetical within the same displayPriority
+            if (x.displayPriority == y.displayPriority) {
+                return String.Compare(x.displayName, y.displayName);
+            
+            // by displayPriority
+            } else {
+                return x.displayPriority - y.displayPriority;
+            }});
 
         // populate the pin look up table.
         for (int i = 0; i < pinConfig.pinList.Count; ++i)
