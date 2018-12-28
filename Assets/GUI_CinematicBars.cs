@@ -16,7 +16,7 @@ public class GUI_CinematicBars : MonoBehaviour {
 		go.transform.SetParent(transform,false);
 		go.GetComponent<Image>().color = Color.black;
 		topBar = gameObject.GetComponent<RectTransform>();
-		topBar.anchorMin = new Vector2(0,1);
+		topBar.anchorMin = new Vector2(0,0);
 		topBar.anchorMax = new Vector2(1,1);
 		topBar.sizeDelta = new Vector2(0,300);
 

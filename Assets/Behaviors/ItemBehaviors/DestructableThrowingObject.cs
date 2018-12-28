@@ -6,7 +6,7 @@ public class DestructableThrowingObject : ThrowableObject {
 
 
 	public override void PickUp(){
-		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+		/*gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_pickUpBig",true);
 		//gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
@@ -14,11 +14,21 @@ public class DestructableThrowingObject : ThrowableObject {
 		player.GetComponent<EightWayMovement>().enabled = false;
 		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
-		Invoke("PickUpWithDelay",.5f);
+		Invoke("PickUpWithDelay",.5f);*/
+		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+		gameObject.GetComponent<Animator>().enabled = true;
+		base.PickUp();
+		physicalCollision.enabled = false;
+		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
+
+		StartCoroutine("PickUpWithDelay");
+
+        if (myShadow != null)
+		    myShadow.SetActive(false);
 	}
 
-	void PickUpWithDelay(){
-		movePlayerToObject = false;
+	IEnumerator PickUpWithDelay(){
+		/*movePlayerToObject = false;
 	
 		physicalCollision.enabled = false;
 
@@ -40,7 +50,21 @@ public class DestructableThrowingObject : ThrowableObject {
 		myBody.gravityScale = 2;
 
 		pickUpSpin = true;
-		spinning = true;
+		spinning = true;*/
+		yield return new WaitForSeconds(1f);
+		player.GetComponent<EightWayMovement>().myLegs.SetActive(false);
+
+		beingCarried = true;
+		if(livingBody){
+			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
+			GameObject panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
+			panicSweat.transform.parent = gameObject.transform;
+		}
+        if (myShadow != null)
+		    myShadow.SetActive(true);
+		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
+		player.GetComponent<EightWayMovement>().enabled = true;
+		canThrow = true;
 	}
 
 
