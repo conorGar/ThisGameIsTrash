@@ -8,7 +8,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	public float noticeThresholdY;
 	public bool sleepingEnemy;
 	public GameObject sleepingPS;
-	public AudioClip noticeSfx;
+	//public AudioClip noticeSfx;
 	GameObject player;
 
 	bool noticedPlayer = false;
@@ -22,7 +22,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 		}
 	}
 
-	void OnEnable(){
+	protected void OnEnable(){
 		noticedPlayer = false;
 		if(sleepingEnemy){
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("sleep");
@@ -49,7 +49,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 							this.gameObject.GetComponent<RandomDirectionMovement>().StopAllCoroutines();
 						}
 						this.gameObject.GetComponent<FollowPlayer>().enabled = true;
-						SoundManager.instance.PlaySingle(noticeSfx);
+						SoundManager.instance.PlaySingle(SFXBANK.NOTICE);
 						GameObject notice = ObjectPool.Instance.GetPooledObject("effect_notice",gameObject.transform.position);
 						notice.transform.parent = this.transform;
 						NoticePlayerEvent();
@@ -60,6 +60,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	}
 
 	protected virtual void NoticePlayerEvent(){
+		
 		noticedPlayer = true;
 	}
 }

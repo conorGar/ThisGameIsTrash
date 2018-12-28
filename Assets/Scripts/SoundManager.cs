@@ -14,7 +14,10 @@ public enum SFXBANK
     SCRAPPYSNEAK,
     SPARKLE,
     ITEM_CATCH,
-    CLANK
+    CLANK,
+    VOICE_TICK,
+    NOTICE, 
+    TRUCK_APPEAR
 }
 
 public enum MUSICBANK

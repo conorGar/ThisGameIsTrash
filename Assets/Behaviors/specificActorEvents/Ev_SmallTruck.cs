@@ -24,7 +24,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 
 	void Start () {
 
-		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
+		/*roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		//Debug.Log(player.name);
 		if(roomNum == 112){
 			//transform.position = new Vector2(-4.79f,8.61f);//relative to camera parent
@@ -44,7 +44,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 			gameObject.GetComponent<Rigidbody2D>().velocity= new Vector2(40f,0f);
 			delayTillSpawn = .3f;
 			StartCoroutine("StopMovement");
-		}
+		}*/
 	}
 
 
@@ -99,6 +99,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 		endDayTruck = true;
 		if(phase == 0){
 			//player = GameObject.FindGameObjectWithTag("Player");
+			SoundManager.instance.PlaySingle(SFXBANK.TRUCK_APPEAR);
 			if(GlobalVariableManager.Instance.WORLD_NUM == 4){
 				// Empty evidence spawn list here
 				GlobalVariableManager.Instance.STATUE_LIST.Clear();
@@ -113,7 +114,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 
 			}
 
-			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
+			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(30f,0f);
 			phase = 1;
 		}else if(phase == 2){
 			//Destroy(player);
@@ -188,7 +189,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 	IEnumerator StartMovement(){
 		Debug.Log("STart Movement coroutine started ");
 		yield return new WaitForSeconds(.6f);
-		gameObject.GetComponent<Rigidbody2D>().velocity= new Vector2(50f,0f);
+		gameObject.GetComponent<Rigidbody2D>().velocity= new Vector2(30f,0f);
 
 	}
 

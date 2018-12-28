@@ -145,6 +145,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 			Debug.Log("Dropped Trash Here xoxoxoxoxoxoxo");
 			GameObject droppedTrash = objectPool.GetComponent<ObjectPool>().GetPooledObject("DroppedTrash",gameObject.transform.position);
 			droppedTrash.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-3f,3f),Random.Range(11f,17f)), ForceMode2D.Impulse);
+			droppedTrash.GetComponent<Ev_DroppedTrash>().PlaySound();
 		}
 
 

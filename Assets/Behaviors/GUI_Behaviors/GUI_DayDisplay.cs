@@ -16,7 +16,7 @@ public class GUI_DayDisplay : MonoBehaviour
 	public AudioClip truckSfx;
 	public GameObject worldTitle;
 	public GameObject underline;
-	public AudioClip typeSound;
+	//public AudioClip typeSound;
 
 	public GameObject demoGoalDisplay;
 	public GameObject Hud;
@@ -159,7 +159,7 @@ public class GUI_DayDisplay : MonoBehaviour
     }
 
     private void TalkSound(){
-		SoundManager.instance.RandomizeSfx(typeSound,.8f,1.2f);
+		SoundManager.instance.RandomizeSfx(SFXBANK.VOICE_TICK,.8f,1.2f);
 	}
 }
 

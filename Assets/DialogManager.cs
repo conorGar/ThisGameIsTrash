@@ -20,7 +20,7 @@ public class DialogManager : MonoBehaviour {
 	public List<DialogIconAnimationManager> dialogIcons = new List<DialogIconAnimationManager>();
 	public GameObject dialogOptions;
 	public GameObject textBox;
-	public AudioClip typeSound;
+	//public AudioClip typeSound;
 	public AudioClip continueDialogSfx;
 	public DialogActionManager dialogActionManager;
 	public Camera guiCamera; //needed for icon to corner at dialog choice
@@ -366,7 +366,7 @@ public class DialogManager : MonoBehaviour {
     }
 
     private void TalkSound(){
-		SoundManager.instance.RandomizeSfx(typeSound,.8f,1.2f);
+		SoundManager.instance.RandomizeSfx(SFXBANK.VOICE_TICK,.8f,1.2f);
 	}
 
 	public void FinishDialog(){//public because of rat with a hat
