@@ -113,7 +113,6 @@ public class Ev_LargeTrash : PickupableObject {
 		gameObject.transform.parent = ltmManager.transform; //goes back to largeTrashManager when drop
 		//gameObject.GetComponent<Animator>().SetTrigger("Drop");
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
-		pickUpcheck = 0;
 		gameObject.GetComponent<Animator>().enabled = false;
 		myCurrentRoom = RoomManager.Instance.currentRoom;
 		player.GetComponent<MeleeAttack>().enabled = true;

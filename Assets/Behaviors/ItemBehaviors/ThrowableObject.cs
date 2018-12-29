@@ -88,7 +88,7 @@ public class ThrowableObject : PickupableObject {
 		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
 		physicalCollision.enabled = false;
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
+
 
 		StartCoroutine("PickupDelay");
 
