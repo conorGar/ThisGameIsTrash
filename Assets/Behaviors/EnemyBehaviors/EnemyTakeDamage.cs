@@ -767,8 +767,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		AudioClip smokeSFX = deathSmoke.GetComponent<KillSelfAfterTime>().mySound;
 		SoundManager.instance.PlaySingle(smokeSFX);
 
-		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost");
-		deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost",new Vector3((transform.position.x), transform.position.y, transform.position.z));
+		deathGhost.GetComponent<Ev_DeathGhost>().OnSpawn();
+	
 		Debug.Log("My spawner ID: "+mySpawnerID);
 		if(!respawnEnemy && !dontSpawnBody){
 			GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",gameObject.transform.position);
