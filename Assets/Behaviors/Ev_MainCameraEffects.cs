@@ -25,6 +25,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	GameObject objectToFollow;
 	string triggerEventName;
 	bool zooming;
+	float panSpeed = .6f;
 	float currentCamZoom;
 	float targetCamZoom;
 	float zoomSpeed;
@@ -48,7 +49,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 		}
 		if(camPan){
 			if(continuousPanning){
-				gameObject.transform.position = Vector3.Lerp(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y,-10f),objectToFollow.transform.position, 3*(Time.deltaTime));
+				gameObject.transform.position = Vector3.Lerp(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y,-10f),objectToFollow.transform.position, panSpeed*(Time.deltaTime));
 
 			}else{
 				gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,targetPanPosition, 3*(Time.deltaTime));
@@ -79,6 +80,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    			roomManager.SetActive(false);
    		}
 		triggerEventName = triggerName;
+		panSpeed = 1;
   		targetPanPosition = new Vector3(positionToPanTo.x,positionToPanTo.y,-10);
    		camPan= true;
    }
@@ -89,6 +91,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    			roomManager.SetActive(false);
    		}
 		continuousPanning = continuous;
+		panSpeed = 1;
 		this.objectToFollow = objectToFollow;
    		camPan= true;
    }
