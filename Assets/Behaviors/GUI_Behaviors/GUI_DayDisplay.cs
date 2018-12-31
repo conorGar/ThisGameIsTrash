@@ -25,10 +25,10 @@ public class GUI_DayDisplay : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
+		Hud.SetActive(false);
 		if(GlobalVariableManager.Instance.DAY_NUMBER == 1){
 			truck.SetActive(false);
-			Hud.SetActive(false);
+
 			dayNumDisplay.gameObject.SetActive(false);
 			StartCoroutine("DemoGoalDisplay");
 		}else{
@@ -75,7 +75,7 @@ public class GUI_DayDisplay : MonoBehaviour
 
 		}else{
 			yield return new WaitUntil(() => truck.transform.localPosition.x > -1.3f);
-			Hud.SetActive(true);
+
 		}
 		Debug.Log("Day display got to this point...");
 		phase = 2;
@@ -90,6 +90,7 @@ public class GUI_DayDisplay : MonoBehaviour
 		yield return new WaitForSeconds(.3f);
 		phase = 3;
 		yield return new WaitForSeconds(.6f);
+		Hud.SetActive(true);
 		back.GetComponent<Animator>().enabled = true;
 		back.GetComponent<SpriteRenderer>().enabled = false;
 		//player.GetComponent<EightWayMovement>().enabled = true;
@@ -134,8 +135,10 @@ public class GUI_DayDisplay : MonoBehaviour
 		CancelInvoke("TalkSound");
 		yield return new WaitForSeconds(3f);
 		truck.SetActive(true);
-		Hud.SetActive(true);
+		//Hud.SetActive(true);
 		demoGoalDisplay.SetActive(false);
+		yield return new WaitForSeconds(.3f);
+
 		underline.SetActive(true);
 		yield return new WaitForSeconds(.3f);
 		worldTitle.SetActive(true);

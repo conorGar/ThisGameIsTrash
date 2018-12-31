@@ -11,7 +11,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 	//public GameObject trashCollectedDisplay; //needed for Death()
 	public GameObject droppedTrashPile;
 	public GUI_DeathDisplay deathDisplay;
-
+	public GameObject DeathGhost;
 
 	public AudioClip hurt;
 	public AudioClip finalHit;
@@ -186,7 +186,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
 		SoundManager.instance.PlaySingle(deathSound);
 		yield return new WaitForSeconds(.4f);
-
+		//DeathGhost.SetActive(true);
+		//DeathGhost.GetComponent<Animator>().Play("jimDeathGhostAni",-1,0f);
 		GameObject landSmoke = ObjectPool.Instance.GetPooledObject("effect_enemyLand",transform.position);
 		landSmoke.GetComponent<Renderer>().sortingLayerName = "Layer04"; //needed to be able to see smoke
 		SoundManager.instance.PlaySingle(deathLandSfx);
@@ -195,7 +196,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		DropTrash();
 
 			yield return new WaitForSeconds(2f);//truck pickup
-
+		//DeathGhost.SetActive(false);
 		GameObject truck = objectPool.GetComponent<ObjectPool>().GetPooledObject("GarbageTruck",new Vector3(gameObject.transform.position.x - 20, gameObject.transform.position.y,0f));
 		truck.GetComponent<Ev_SmallTruck>().ReturnToDumpster();
 			yield return new WaitForSeconds(.4f);

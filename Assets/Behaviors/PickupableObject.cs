@@ -12,7 +12,7 @@ public class PickupableObject : MonoBehaviour
 	public GameObject carryMark;
 	public bool throwableObject;
 	protected bool movePlayerToObject;
-    protected bool requiresGrabbyGloves = false;
+    protected bool requiresGrabbyGloves = true;
 	public GameObject childPickupObj; // used for objects that need a parent, but whose spriterender cant be on the parent object(like for an intro animation)
 	//int bounce = 0;
 	//int doOnce = 0;

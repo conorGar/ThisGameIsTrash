@@ -19,6 +19,9 @@ public class IntroManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(SkipTimer());
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+		SoundManager.instance.musicSource.clip = music;
+		SoundManager.instance.musicSource.Play();
 	}
 	
 	// Update is called once per frame
@@ -32,6 +35,7 @@ public class IntroManager : MonoBehaviour {
 			}else if(skipNumber == 1){	
 				SoundManager.instance.FadeMusic();
 				Initiate.Fade("1_1",Color.black,0.5f);
+				skipNumber = 2;
 			}
 		} 
 	}
@@ -111,11 +115,13 @@ public class IntroManager : MonoBehaviour {
 			textShown.text = "AND YOU'LL ENTRENCH YOURSELF IN A NEVERENDING SPIRAL OF EXISTENTIAL DREAD! FOREVER!";
 		}else if(slideNumber == 25){
 			textShown.text = "...";
+			SoundManager.instance.FadeMusic();
 		}else if(slideNumber == 26){
 			textShown.text = "...or maybe not. I don't know. Let's see!";
 		}else if(slideNumber == 27){
 			textShown.text = " ";
-			SoundManager.instance.FadeMusic();
+
+
 			Initiate.Fade("1_1",Color.black,0.5f);
 			textShown.text = "";
 		}

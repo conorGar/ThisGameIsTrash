@@ -17,7 +17,7 @@ public class GUI_LargeTrashCollectedDisplay : MonoBehaviour
 	public AudioClip continueSfx;
 	public AudioClip starFillSfx;
 
-	int indexOfCurrentLargeTrash;
+	public int indexOfCurrentLargeTrash; //given by Ev_LargeTrash at Return
 	int displayIndex;
 	// Use this for initialization
 	void Start ()

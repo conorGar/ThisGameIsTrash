@@ -455,7 +455,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		if(moveWhenHit || hitByThrownObject){
 			takingDamage = true;
 
-			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawR") == 0||meleeSwingDirection.CompareTo("poleR") == 0){
+			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawSwing") == 0||meleeSwingDirection.CompareTo("poleSwing") == 0){
 				Debug.Log(swingDirectionSide);
 
 				//myCollisionBox.enabled = false;
@@ -625,24 +625,31 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			/*if(gameObject.GetComponent<FollowPlayer>()){
 				gameObject.GetComponent<FollowPlayer>().enabled = false;
 			}*/
+			Vector2 pushBackDir = (gameObject.transform.position- player.transform.position).normalized * 9;
+
 			if(getsPushedBack){
 				for(int i = 0; i < behaviorsToDeactivate.Count;i++){
 							behaviorsToDeactivate[i].enabled = false;
 				}
-				if(gameObject.transform.position.x < player.transform.position.x){
+				/*if(gameObject.transform.position.x < player.transform.position.x){
 					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
 					this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);
 				}else{
 					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
 					this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
-				}
+				}*/
+				this.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir,ForceMode2D.Impulse);
+				player.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir*-1,ForceMode2D.Impulse);
+
 				StartCoroutine("StopKnockback",.5f);
 			}else{
-				if(gameObject.transform.position.x < player.transform.position.x){
+				/*if(gameObject.transform.position.x < player.transform.position.x){
 					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
 				}else{
 					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
-				}
+				}*/
+				player.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir*-1,ForceMode2D.Impulse);
+
 				Invoke("ClankReturnDelay",.2f);
 			}
 		}

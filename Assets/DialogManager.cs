@@ -92,7 +92,7 @@ public class DialogManager : MonoBehaviour {
                 }
             }
             GameStateManager.Instance.PushState(typeof(DialogState));
-           	blackBarCanvas.Show(100,.3f);
+//           	blackBarCanvas.Show(100,.3f);
             StartDisplay();
         }
 	}
@@ -387,7 +387,7 @@ public class DialogManager : MonoBehaviour {
         // Handle when movie type stuff plays at the end of a dialog.
         //sGameStateManager.Instance.PushState(typeof(MovieState));
         friend.OnFinishDialog();
-        blackBarCanvas.Hide(.3f);
+   //     blackBarCanvas.Hide(.3f);
 		dialogCanvas.SetActive(false);
     }
 
