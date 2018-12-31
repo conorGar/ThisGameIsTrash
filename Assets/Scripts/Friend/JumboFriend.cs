@@ -314,7 +314,9 @@ public class JumboFriend : Friend {
 			movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().movieDarkness.SetActive(true);
 			yield return new WaitForSeconds(.5f);
 			movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(true);
-			SoundManager.instance.PlaySingle(projectorPlay);
+			SoundManager.instance.musicSource.volume = 0;
+			SoundManager.instance.backupMusicSource.clip = projectorPlay;
+			SoundManager.instance.backupMusicSource.Play();
 
 			yield return new WaitForSeconds(2f);
 			movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);
@@ -335,6 +337,9 @@ public class JumboFriend : Friend {
 				StartCoroutine("AfterFirstMovie");
 			}else{
 				yield return new WaitForSeconds(10f);//10= length of each movie 
+				SoundManager.instance.backupMusicSource.Stop();
+				SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL/2;
+
 				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().movieDarkness.SetActive(false);
 				movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(false);
 				dialogManager.Invoke("ReturnFromAction",.1f);
@@ -344,6 +349,9 @@ public class JumboFriend : Friend {
 
 	IEnumerator AfterFirstMovie(){
 		yield return new WaitForSeconds(10f);
+		SoundManager.instance.backupMusicSource.Stop();
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL/2;
+
 		movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().movieDarkness.SetActive(false);
 		movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(false);
         CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"JumboMovie");

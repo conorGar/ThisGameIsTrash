@@ -140,13 +140,16 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 	}
 
-	public void DropTrash(){
+	public IEnumerator DropTrash(){
 		for(int i = 0; i < GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]; i++){
 			Debug.Log("Dropped Trash Here xoxoxoxoxoxoxo");
 			GameObject droppedTrash = objectPool.GetComponent<ObjectPool>().GetPooledObject("DroppedTrash",gameObject.transform.position);
 			droppedTrash.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-3f,3f),Random.Range(11f,17f)), ForceMode2D.Impulse);
 			droppedTrash.GetComponent<Ev_DroppedTrash>().PlaySound();
+			yield return new WaitForSeconds(.1f);
 		}
+
+		yield return null;
 
 
 	}
@@ -193,7 +196,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		SoundManager.instance.PlaySingle(deathLandSfx);
 			yield return new WaitForSeconds(.6f);
 		deathDisplay.DepleteTrashCollected();
-		DropTrash();
+		StartCoroutine("DropTrash");
 
 			yield return new WaitForSeconds(2f);//truck pickup
 		//DeathGhost.SetActive(false);

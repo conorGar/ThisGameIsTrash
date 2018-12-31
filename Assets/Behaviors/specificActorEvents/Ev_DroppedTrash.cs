@@ -8,7 +8,7 @@ public class Ev_DroppedTrash : MonoBehaviour {
 	public GameObject droppedTrashCollectedDisplay;
 	public AudioClip spawn;
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		if(!isPile)
 			StartCoroutine("Land");
 	}

@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour {
 
 	public AudioSource sfxSource;
 	public AudioSource musicSource;
+	public AudioSource backupMusicSource; // for use with looping sfx that play while main worl dmusic is paused
 	public static SoundManager instance = null;
 	public AudioClip worldMusic;
 	public float lowPitchRange = .95f;

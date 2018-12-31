@@ -186,6 +186,10 @@ public class Friend : UserDataItem {
 
     }
 
+    public virtual void OnActivateDialog(){
+
+    }
+
     public virtual string GetVariableText(string varKey)
     {
         Debug.LogError("GetVariableText wasn't set up for this friend but it was called!");

@@ -274,6 +274,7 @@ public class DialogManager : MonoBehaviour {
         }
 
         if (displayedText.text.Contains("<shake>")) {
+			displayedText.text = displayedText.text.Substring(0 ,displayedText.text.IndexOf("<shake>")) + displayedText.text.Substring(displayedText.text.IndexOf("<shake>"),displayedText.text.Length-7) ; // skips "shake"
             guiCamShake = true;
         }
         else if (displayedText.text.Contains("<s")) {
@@ -352,11 +353,13 @@ public class DialogManager : MonoBehaviour {
 	public void SmallText(){
 		//for now just makes whole speech one font size, not sure if making only certain text small is possible with TMpro
 		displayedText.fontSize = 8;
-        displayedText.text = displayedText.text.Replace("<s>","");
+		displayedText.text = displayedText.text.Substring(3,displayedText.text.Length-3); // skips the '<s>' note that <s> has to come at start
+       // displayedText.text = displayedText.text.Replace("<s>","");
 	}
 	public void LargeText(){
 		displayedText.fontSize = 35;
-        displayedText.text = displayedText.text.Replace("<l>","");
+		displayedText.text = displayedText.text.Substring(3,displayedText.text.Length-3);
+        //displayedText.text = displayedText.text.Replace("<l>","");
 	}
 
     private void PlayTalkSounds()
