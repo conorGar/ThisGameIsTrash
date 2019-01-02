@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GarbageSpawner : EditorMonoBehaviour
 {
-    public bool spawned = false;
+    public Ev_GenericGarbage spawnedGarbage;
 
 	// Use this for initialization
 	void Start () {

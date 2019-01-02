@@ -206,7 +206,7 @@ public class Room : MonoBehaviour
     public bool HasTrash()
     {
         for (int i = 0; i < garbageSpawners.Count; i++) {
-            if (garbageSpawners[i].spawned)
+            if (garbageSpawners[i].spawnedGarbage != null)
                 return true;
         }
 
