@@ -23,6 +23,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	public AudioClip mySpeechIconSFX;
 	public string startNodeName;
 	public bool autoStart;//start dialog when player gets close(without player hitting space)
+
 	[HideInInspector]
 	public DialogDefinition dialogDefiniton;
 	public bool canTalkTo = true;
@@ -31,6 +32,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 	GameObject player;
 	int spawnSpeechBubble = 0;
+	int activatePanOnce = 0;
 
 
 	void Awake(){
@@ -128,48 +130,74 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	public void ActivateDialog(string firstIcon = "", string secondIcon = "", string thirdIcon = "")
     {
     	if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){ // added so dialog that happens right at start of scene(ratWhoFat,etc) waits until DayDisplay is done fading into the scene
-			DialogManager.Instance.gameObject.SetActive(true);
-			friend.OnActivateDialog();
+    		
+				
+				if(cameraPanToFriendAtStart && activatePanOnce == 0){
+						Debug.Log("Camera Pan to friend activated");
+		                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position, "");
+						player.GetComponent<EightWayMovement>().StopMovement();
+						player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+						GameStateManager.Instance.PushState(typeof(MovieState));
+		                StartCoroutine(WaitUntilCamPan(firstIcon,secondIcon,thirdIcon));
+		                activatePanOnce = 1;
+		               
+				}else{
+					StartDialog(firstIcon,secondIcon,thirdIcon);
 
-			player.GetComponent<EightWayMovement>().StopMovement();
-			player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-			if(DialogManager.Instance.dialogCanvas.activeInHierarchy == false){
-				if(cameraPanToFriendAtStart){
-	                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position, "");
-				}
-				Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
-				DialogManager.Instance.animationName = iconAnimationName;
-	            DialogManager.Instance.myDialogDefiniton = dialogDefiniton;
-	            DialogManager.Instance.dialogTitle = startNodeName;
-	            DialogManager.Instance.canContinueDialog = true; //need this for starting after any previous dialog
-				if(friend != null){ // = null for some one timers
-	                DialogManager.Instance.dialogActionManager.friend = friend;
-	                DialogManager.Instance.characterName.text = friend.friendName;
-				}
+		        }
+		       
 
-	            DialogManager.Instance.SetDialogIconByID(dialogDefiniton.dialogIconID);
-	            DialogManager.Instance.SetFriend(friend);
-
-	            
-	            if (DialogManager.Instance.currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager)) {
-	                // A flag to check if all dialogIcons should be hidden initially (Rocks) or visable initially (white trash army)
-	                var multiIcon = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
-	                for (int i = 0; i < multiIcon.icons.Count; i++) {
-	                    multiIcon.icons[i].gameObject.SetActive(!hideDialogIconsOnStart);
-	                }
-
-	                var multiDialog = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
-	                multiDialog.SetStartingIcons(firstIcon, secondIcon, thirdIcon);
-	            }
-
-	            DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(true);
-	            DialogManager.Instance.currentlySpeakingIcon.SetTalking(true);
-
-	            canTalkTo = false;
-
-	            DialogManager.Instance.dialogCanvas.SetActive(true);
-	            Debug.Log("Got here with activate dialog execute" + DialogManager.Instance.dialogCanvas.activeInHierarchy);
-	        }
+	        
         }
+	}
+
+	IEnumerator WaitUntilCamPan(string first, string second, string third){
+		yield return new WaitUntil( () => Vector2.Distance(CamManager.Instance.mainCam.gameObject.transform.position, gameObject.transform.position) < 2f);
+		GameStateManager.Instance.PopState(); // pop movie state(pan to character)
+		StartDialog(first,second,third);
+	}
+
+	void StartDialog(string firstIcon = "", string secondIcon = "", string thirdIcon = ""){
+		DialogManager.Instance.gameObject.SetActive(true);
+				friend.OnActivateDialog();
+
+				player.GetComponent<EightWayMovement>().StopMovement();
+				player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+				if(DialogManager.Instance.dialogCanvas.activeInHierarchy == false){
+					
+					Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);
+					DialogManager.Instance.animationName = iconAnimationName;
+		            DialogManager.Instance.myDialogDefiniton = dialogDefiniton;
+		            DialogManager.Instance.dialogTitle = startNodeName;
+		            DialogManager.Instance.canContinueDialog = true; //need this for starting after any previous dialog
+					if(friend != null){ // = null for some one timers
+		                DialogManager.Instance.dialogActionManager.friend = friend;
+		                DialogManager.Instance.characterName.text = friend.friendName;
+					}
+
+		            DialogManager.Instance.SetDialogIconByID(dialogDefiniton.dialogIconID);
+		            DialogManager.Instance.SetFriend(friend);
+
+		            
+		            if (DialogManager.Instance.currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager)) {
+		                // A flag to check if all dialogIcons should be hidden initially (Rocks) or visable initially (white trash army)
+		                var multiIcon = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
+		                for (int i = 0; i < multiIcon.icons.Count; i++) {
+		                    multiIcon.icons[i].gameObject.SetActive(!hideDialogIconsOnStart);
+		                }
+
+		                var multiDialog = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
+		                multiDialog.SetStartingIcons(firstIcon, secondIcon, thirdIcon);
+		            }
+
+		            DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(true);
+		            DialogManager.Instance.currentlySpeakingIcon.SetTalking(true);
+
+		            canTalkTo = false;
+
+		            DialogManager.Instance.dialogCanvas.SetActive(true);
+		            Debug.Log("Got here with activate dialog execute" + DialogManager.Instance.dialogCanvas.activeInHierarchy);
+		            activatePanOnce = 0;
+		        }
 	}
 }

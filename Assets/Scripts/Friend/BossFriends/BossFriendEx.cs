@@ -80,6 +80,7 @@ public class BossFriendEx : Friend
         {
             case "IN_FIELD":
                 nextDialog = "Boss1Intro";
+               
 				GetComponent<ActivateDialogWhenClose>().Execute("Ex", "Questio", "Hash");
                 break;
             case "IN_TOXIC_FIELD":
