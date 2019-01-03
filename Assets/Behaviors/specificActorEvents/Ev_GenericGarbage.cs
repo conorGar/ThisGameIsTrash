@@ -102,7 +102,7 @@ public class Ev_GenericGarbage : MonoBehaviour {
 		yield return new WaitForSeconds(1f);
 
         // clear the spawner flag so it's not counted on the map icon.
-        garbageSpawner.spawned = false;
+        garbageSpawner.spawnedGarbage = null;
         ObjectPool.Instance.ReturnPooledObject(gameObject);
 
     }//end of Kill()

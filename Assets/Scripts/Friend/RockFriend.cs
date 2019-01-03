@@ -179,19 +179,48 @@ public class RockFriend : Friend {
         //deliveredObjects.Add(obj);
     }
 
-    public override void StartingEvents(){
+    public override void StartingEvents() {
 
-    	//spawn the 4(or how ever many left) objects at 4 random garbage spawner locations
-		List<GarbageSpawner> myChosenSpawners =GarbageManager.Instance.garbageSpawners;
-		myChosenSpawners.Shuffle();
-    	for(int i = 0; i< desiredObject.Count;i++){
-  			desiredObject[i].transform.position = myChosenSpawners[i].transform.position; 
-  			Debug.Log(myChosenSpawners[i].transform.position + " < spawned rock item position");
-    		desiredObject[i].gameObject.SetActive(true);
-    	}
+        //spawn the 4(or how ever many left) objects at 4 random garbage spawner locations
+        var myChosenSpawners = GarbageManager.Instance.garbageSpawners;
+        myChosenSpawners.Shuffle();
 
+        // Get a queue of desiredObject indices.
+        Queue<int> objectIndices = new Queue<int>();
+        for (int i = 0; i < desiredObject.Count; i++) {
+            objectIndices.Enqueue(i);
+        }
 
+        if (objectIndices.Count > 0) {
+            for (int i = 0; i < myChosenSpawners.Count; i++) {
+                // Spawn desiredObjects, skipping used spawners.
+                if (myChosenSpawners[i].spawnedGarbage == null) {
+                    var index = objectIndices.Dequeue();
+                    desiredObject[index].transform.position = myChosenSpawners[i].transform.position;
+                    desiredObject[index].gameObject.SetActive(true);
+                    if (objectIndices.Count <= 0)
+                        break;
+                }
+            }
+        }
 
+        // If we couldn't find enough empty spawners, replace some trash with the remaining desired objects.
+        if (objectIndices.Count > 0) {
+            for (int i = 0; i < myChosenSpawners.Count; i++) {
+                if (myChosenSpawners[i].spawnedGarbage != null) {
+                    myChosenSpawners[i].spawnedGarbage.gameObject.SetActive(false);
+
+                    var index = objectIndices.Dequeue();
+                    desiredObject[index].transform.position = myChosenSpawners[i].transform.position;
+                    desiredObject[index].gameObject.SetActive(true);
+
+                    myChosenSpawners[i].spawnedGarbage = null;
+
+                    if (objectIndices.Count > 0)
+                        break;
+                }
+            }
+        }
     }
 
     public void PickUpObject(SpecialFriendObject go){ //activated by 'SpecialFriendObject'

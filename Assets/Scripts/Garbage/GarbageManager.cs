@@ -50,12 +50,12 @@ public class GarbageManager : MonoBehaviour {
                     garbage.type = StandardGarbage.GarbageByIndex(Random.Range(0, StandardGarbage.Count()));
 
                     go = ObjectPool.Instance.GetPooledObject("generic_garbage", shuffledGarbageSpawners[i].transform.position);
-                    shuffledGarbageSpawners[i].spawned = true;
                     //go.GetComponent<Ev_GenericGarbage>().trashCollectedDisplay = trashCollectedDisplay;
                     evGarbage = go.GetComponent<Ev_GenericGarbage>();
                     evGarbage.garbageSpawner = shuffledGarbageSpawners[i];
                     evGarbage.garbage = garbage;
                     evGarbage.SetSprite(garbage.GarbageSprite());
+                    shuffledGarbageSpawners[i].spawnedGarbage = evGarbage;
                     go.SetActive(true);
                 }
                 break;
