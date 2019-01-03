@@ -16,9 +16,18 @@ public class Ev_DroppedPin : MonoBehaviour {
 	Sprite mySprite; //given by trash can, used by unlock hud
 	[SerializeField] int increaseOnce;
 
+    void Start()
+    {
+        GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
+    }
 
-	// Use this for initialization
-	void OnEnable () {
+    void OnDestroy()
+    {
+        GameStateManager.Instance.UnregisterChangeStateEvent(OnChangeState);
+    }
+
+    // Use this for initialization
+    void OnEnable () {
 		gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,5),ForceMode2D.Impulse);
         bounceCounter = 0;
         bouncing = false;
@@ -86,4 +95,14 @@ public class Ev_DroppedPin : MonoBehaviour {
 		yield return new WaitForSeconds(.1f);
 		bounceCounter++;
 	}
+
+    void OnChangeState(System.Type stateType, bool isEntering)
+    {
+        // Only simulate physics during gameplay.
+        if (GameStateManager.Instance.GetCurrentState() != typeof(GameplayState)) {
+            gameObject.GetComponent<Rigidbody2D>().simulated = false;
+        } else {
+            gameObject.GetComponent<Rigidbody2D>().simulated = true;
+        }
+    }
 }
