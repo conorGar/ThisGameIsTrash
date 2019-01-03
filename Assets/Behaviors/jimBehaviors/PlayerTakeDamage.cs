@@ -91,6 +91,11 @@ public class PlayerTakeDamage : MonoBehaviour {
 	}
 
 	void TakeDamage(GameObject enemy){
+        // Stop defeated enemies from damaging the player.
+        var etd = enemy.GetComponent<EnemyTakeDamage>();
+        if (etd != null)
+            if (etd.currentHp < 1)
+                return;
 
 		SoundManager.instance.PlaySingle(hurt);
 

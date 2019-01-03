@@ -18,6 +18,7 @@ public class IntroManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        SoundManager.instance.TransitionMusic(music);
 		StartCoroutine(SkipTimer());
 		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 		SoundManager.instance.musicSource.clip = music;
