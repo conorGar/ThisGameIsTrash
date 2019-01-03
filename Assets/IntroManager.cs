@@ -35,7 +35,7 @@ public class IntroManager : MonoBehaviour {
 			}else if(skipNumber == 1){	
 				SoundManager.instance.FadeMusic();
 				Initiate.Fade("1_1",Color.black,0.5f);
-				skipNumber = 2;
+
 			}
 		} 
 	}

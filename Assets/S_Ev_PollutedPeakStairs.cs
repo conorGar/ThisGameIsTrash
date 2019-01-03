@@ -16,6 +16,7 @@ public class S_Ev_PollutedPeakStairs : MonoBehaviour {
 		}else{
 			blockadeSignText.SetActive(true);
 			normalTextSign.SetActive(false);
+			Debug.Log(GlobalVariableManager.Instance.LARGE_TRASH_COLLECTED);
 		}
 	}
 
