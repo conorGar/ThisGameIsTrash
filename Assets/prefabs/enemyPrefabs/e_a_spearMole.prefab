@@ -65,7 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4208442766029598}
   - component: {fileID: 212410976967694508}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1355490609600872}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 210.6, y: 78.9, z: 0}
+  m_LocalPosition: {x: 32.900635, y: -15.063498, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4546182400038260}
@@ -467,6 +467,7 @@ MonoBehaviour:
   movementSpeed: 2
   minMoveTime: 0.6
   maxMoveTime: 1.6
+  stopTime: 2
   walkPS: {fileID: 198059248471040828}
   myWanderZone: {fileID: 0}
 --- !u!114 &114539248192695394
@@ -503,7 +504,6 @@ MonoBehaviour:
   bossEnemy: 0
   IAmParentObj: 0
   childEnemy: {fileID: 0}
-  hitSound: 0
   hitSqueal: 0
   bounce: 0
   tutPopup: {fileID: 0}
@@ -526,6 +526,8 @@ MonoBehaviour:
   currentHp: 0
   meleeDmgBonus: 0
   dontStopWhenHit: 0
+  spinning: 0
+  startsOffDontMoveWhenHit: 0
 --- !u!114 &114789237316039340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -554,7 +556,6 @@ MonoBehaviour:
   noticeThresholdY: 2
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
-  noticeSfx: {fileID: 0}
   spearCollision: {fileID: 1942738747760542}
   armoredVersion: 0
 --- !u!114 &114843033388432866
@@ -599,6 +600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageToPlayer: 1
   destroyOnTileCollision: 0
+  myShadow: {fileID: 0}
 --- !u!198 &198059248471040828
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -4049,7 +4051,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 66af31ef3a546c648ad6237d3b03a835, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.766}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.559}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -21,6 +21,7 @@ public class GUI_PinUnlockDisplay : MonoBehaviour {
 
 	void OnEnable(){
 	phase = 1;
+	GetComponent<Animator>().Play("pinUnlockDisplaySlideIn",-1,0f);
 	SoundManager.instance.PlaySingle(unlockSFX);
 	}
 	
@@ -47,9 +48,10 @@ public class GUI_PinUnlockDisplay : MonoBehaviour {
 		phase = 1;
 		}else if(phase == 1){
 			phase = 2;
-			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,5f,.4f);
+			//gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x,5f,.4f);
+			GetComponent<Animator>().SetTrigger("SlideOut");
 			SoundManager.instance.PlaySingle(closeSfx);
-			yield return new WaitForSeconds(.4f);
+			yield return new WaitForSeconds(.7f);
 			Time.timeScale = 1;
 			gameObject.SetActive(false);
 		}

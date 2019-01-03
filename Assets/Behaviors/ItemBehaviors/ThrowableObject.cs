@@ -44,11 +44,15 @@ public class ThrowableObject : PickupableObject {
                     myBody.velocity = new Vector2(0, 0f);
                     myBody.AddForce(new Vector2(-4f * (Mathf.Sign(gameObject.transform.lossyScale.x)), 0f), ForceMode2D.Impulse);//slide
                     beingCarried = false;
+                    spinning = false;
                     canThrow = false;
+                    pickUpcheck = 0;
                     if (myShadow != null) {
                         myShadow.transform.parent = this.gameObject.transform;
                         myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
                         myShadow.transform.rotation = Quaternion.identity;
+						myShadow.GetComponent<Renderer>().sortingLayerName = "Layer01";
+
                     }
 
                     //	physicalCollision.enabled = false;
@@ -56,7 +60,7 @@ public class ThrowableObject : PickupableObject {
                     for (int i = 0; i < behaviorsToStop.Count; i++) {
                         behaviorsToStop[i].enabled = true;
                     }
-
+                    gameObject.transform.localScale = Vector2.one;
                     gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
                     gameObject.GetComponent<IsometricSorting>().enabled = true;
                     gameObject.GetComponent<CannotExitScene>().enabled = false;
@@ -84,7 +88,7 @@ public class ThrowableObject : PickupableObject {
 		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
 		physicalCollision.enabled = false;
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
+
 
 		StartCoroutine("PickupDelay");
 
@@ -128,7 +132,7 @@ public class ThrowableObject : PickupableObject {
 		//gameObject.GetComponent<CannotExitScene>().enabled = true;
 		Debug.Log("Thrown");
 
-        
+        gameObject.layer = 15; //becomes 'ThrowableObject'
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		player.GetComponent<MeleeAttack>().enabled = true;
 		if(gameObject.GetComponent<BoxCollider2D>()!=null){
@@ -139,6 +143,7 @@ public class ThrowableObject : PickupableObject {
 		landingY = transform.position.y -3f;
 		if (myShadow != null){
             myShadow.GetComponent<SpriteRenderer>().sortingLayerName = "Layer01";
+			myShadow.GetComponent<SpriteRenderer>().sortingOrder= GetComponent<Renderer>().sortingOrder -1;
             myShadow.transform.parent = null;
             myShadow.transform.position = new Vector2(myShadow.transform.position.x, landingY);
         }

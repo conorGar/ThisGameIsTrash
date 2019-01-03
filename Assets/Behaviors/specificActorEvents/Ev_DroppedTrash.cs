@@ -8,12 +8,12 @@ public class Ev_DroppedTrash : MonoBehaviour {
 	public GameObject droppedTrashCollectedDisplay;
 	public AudioClip spawn;
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		if(!isPile)
 			StartCoroutine("Land");
 	}
-	void OnEnable(){
-		SoundManager.instance.RandomizeSfx(spawn,.6f,.8f);
+	public void PlaySound(){
+		SoundManager.instance.RandomizeSfx(spawn,1f,1.1f);
 	}
 	// Update is called once per frame
 	void Update () {

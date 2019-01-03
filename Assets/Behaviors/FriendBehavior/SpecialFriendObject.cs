@@ -20,9 +20,11 @@ public class SpecialFriendObject : MonoBehaviour
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		friend.PickUpObject(this);
-		GUIManager.Instance.rockItemHUD.gameObject.SetActive(true);
-		gameObject.SetActive(false);
+        if (collider.gameObject.tag == "Player") {
+            friend.PickUpObject(this);
+            GUIManager.Instance.rockItemHUD.gameObject.SetActive(true);
+            gameObject.SetActive(false);
+        }
 	}
 
 

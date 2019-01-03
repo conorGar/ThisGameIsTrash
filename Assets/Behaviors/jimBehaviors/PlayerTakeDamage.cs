@@ -11,7 +11,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 	//public GameObject trashCollectedDisplay; //needed for Death()
 	public GameObject droppedTrashPile;
 	public GUI_DeathDisplay deathDisplay;
-
+	public GameObject DeathGhost;
 
 	public AudioClip hurt;
 	public AudioClip finalHit;
@@ -145,12 +145,16 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 	}
 
-	public void DropTrash(){
+	public IEnumerator DropTrash(){
 		for(int i = 0; i < GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]; i++){
 			Debug.Log("Dropped Trash Here xoxoxoxoxoxoxo");
 			GameObject droppedTrash = objectPool.GetComponent<ObjectPool>().GetPooledObject("DroppedTrash",gameObject.transform.position);
 			droppedTrash.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-3f,3f),Random.Range(11f,17f)), ForceMode2D.Impulse);
+			droppedTrash.GetComponent<Ev_DroppedTrash>().PlaySound();
+			yield return new WaitForSeconds(.1f);
 		}
+
+		yield return null;
 
 
 	}
@@ -190,16 +194,17 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
 		SoundManager.instance.PlaySingle(deathSound);
 		yield return new WaitForSeconds(.4f);
-
+		//DeathGhost.SetActive(true);
+		//DeathGhost.GetComponent<Animator>().Play("jimDeathGhostAni",-1,0f);
 		GameObject landSmoke = ObjectPool.Instance.GetPooledObject("effect_enemyLand",transform.position);
 		landSmoke.GetComponent<Renderer>().sortingLayerName = "Layer04"; //needed to be able to see smoke
 		SoundManager.instance.PlaySingle(deathLandSfx);
 			yield return new WaitForSeconds(.6f);
 		deathDisplay.DepleteTrashCollected();
-		DropTrash();
+		StartCoroutine("DropTrash");
 
 			yield return new WaitForSeconds(2f);//truck pickup
-
+		//DeathGhost.SetActive(false);
 		GameObject truck = objectPool.GetComponent<ObjectPool>().GetPooledObject("GarbageTruck",new Vector3(gameObject.transform.position.x - 20, gameObject.transform.position.y,0f));
 		truck.GetComponent<Ev_SmallTruck>().ReturnToDumpster();
 			yield return new WaitForSeconds(.4f);

@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class GUI_CinematicBars : MonoBehaviour {
 
-	private RectTransform topBar, botBar;
+	//commented out because i couldnt get it to work for demo. Suppossed to slide in bars on top and bottom of screen when activated.
+
+	/*private RectTransform topBar, botBar;
 	private float targetSize;
 	private float changeSizeAmount;
 	private bool isActive;
@@ -16,7 +18,7 @@ public class GUI_CinematicBars : MonoBehaviour {
 		go.transform.SetParent(transform,false);
 		go.GetComponent<Image>().color = Color.black;
 		topBar = gameObject.GetComponent<RectTransform>();
-		topBar.anchorMin = new Vector2(0,1);
+		topBar.anchorMin = new Vector2(0,0);
 		topBar.anchorMax = new Vector2(1,1);
 		topBar.sizeDelta = new Vector2(0,300);
 
@@ -62,7 +64,7 @@ public class GUI_CinematicBars : MonoBehaviour {
 		targetSize = 0f;
 		changeSizeAmount = (targetSize - topBar.sizeDelta.y)/time;
 		isActive = true;
-	}
+	}*/
 
 
 }

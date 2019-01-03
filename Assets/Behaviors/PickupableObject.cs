@@ -124,6 +124,7 @@ public class PickupableObject : MonoBehaviour
 		/*if(gameObject.GetComponent<BoxCollider2D>()!=null){
 			gameObject.GetComponent<BoxCollider2D>().enabled = false;
 		}*/
+		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
 		gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
 		gameObject.transform.parent = player.transform;
 		Debug.Log("Pickup() activated");
@@ -164,8 +165,10 @@ public class PickupableObject : MonoBehaviour
 		SoundManager.instance.PlaySingle(drop);
 		spinning = false;
 		pickUpSpin = false;
-		myBody.simulated = true;
+		if(myBody !=null)
+			myBody.simulated = true;
 		t=0f;
+		pickUpcheck = 0;
 		//proper postionining 
 		DropEvent();
 	}

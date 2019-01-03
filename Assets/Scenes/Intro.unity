@@ -2474,6 +2474,16 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198200853372284496, guid: 92df80640633c2d45a95e3cf88147b55,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198200853372284496, guid: 92df80640633c2d45a95e3cf88147b55,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 92df80640633c2d45a95e3cf88147b55, type: 2}
   m_IsPrefabParent: 0
@@ -4367,7 +4377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &647773748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4381,8 +4391,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 647773750}
   musicSource: {fileID: 647773749}
+  worldMusic: {fileID: 0}
   lowPitchRange: 0.95
   highPitchRange: 1.1
+  fadeSpeed: 0.4
+  SFXList: []
+  MusicList: []
 --- !u!82 &647773749
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9713,6 +9727,10 @@ Prefab:
     - target: {fileID: 4875129526227124, guid: 0194cc6d1604b2d49a95e98c821f8729, type: 2}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1330306802204610, guid: 0194cc6d1604b2d49a95e98c821f8729, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0194cc6d1604b2d49a95e98c821f8729, type: 2}

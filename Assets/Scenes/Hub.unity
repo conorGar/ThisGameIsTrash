@@ -1323,7 +1323,6 @@ MonoBehaviour:
   - {fileID: 517979272}
   dialogOptions: {fileID: 0}
   textBox: {fileID: 42795166}
-  typeSound: {fileID: 8300000, guid: 2aa039154a98c134dbbdf88c05a4924a, type: 3}
   continueDialogSfx: {fileID: 8300000, guid: 66031c08c7e22a647ab713aba084e8df, type: 3}
   dialogActionManager: {fileID: 477474868}
   guiCamera: {fileID: 97792199}
@@ -25398,6 +25397,16 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 576ab416164cc944bb550233c9211f2f, type: 2}
   m_IsPrefabParent: 0
@@ -35008,6 +35017,7 @@ MonoBehaviour:
   spinning: 0
   stoneFriend: {fileID: 2078932520}
   rocksGatheringRoom: {fileID: 0}
+  w1FriendManager: {fileID: 0}
 --- !u!212 &703660320
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -42379,7 +42389,7 @@ GameObject:
   - component: {fileID: 867816566}
   - component: {fileID: 867816572}
   - component: {fileID: 867816573}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: workerRat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42788,6 +42798,7 @@ MonoBehaviour:
   spinning: 0
   stoneFriend: {fileID: 2078932520}
   rocksGatheringRoom: {fileID: 0}
+  w1FriendManager: {fileID: 0}
 --- !u!212 &877655060
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108745,9 +108756,8 @@ MonoBehaviour:
   truckSfx: {fileID: 0}
   worldTitle: {fileID: 0}
   underline: {fileID: 0}
-  typeSound: {fileID: 0}
   demoGoalDisplay: {fileID: 0}
-  Hud: {fileID: 0}
+  Hud: {fileID: 1934492901}
 --- !u!114 &1771147164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121663,6 +121673,16 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
         type: 2}

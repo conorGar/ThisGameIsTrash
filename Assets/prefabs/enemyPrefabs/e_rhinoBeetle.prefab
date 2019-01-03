@@ -381,7 +381,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61563710853219774
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -532,13 +532,12 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  myDeadBodyName: 
+  myDeadBodyName: rhinoBeetle
   respawnEnemy: 0
   armoredEnemyHitSfx: {fileID: 0}
   bossEnemy: 0
   IAmParentObj: 0
   childEnemy: {fileID: 0}
-  hitSound: 0
   hitSqueal: 0
   bounce: 0
   tutPopup: {fileID: 0}
@@ -561,6 +560,7 @@ MonoBehaviour:
   meleeDmgBonus: 0
   dontStopWhenHit: 0
   spinning: 0
+  startsOffDontMoveWhenHit: 0
 --- !u!114 &114191224085972858
 MonoBehaviour:
   m_ObjectHideFlags: 1

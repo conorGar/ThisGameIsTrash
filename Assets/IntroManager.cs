@@ -20,6 +20,9 @@ public class IntroManager : MonoBehaviour {
 	void Start () {
         SoundManager.instance.TransitionMusic(music);
 		StartCoroutine(SkipTimer());
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+		SoundManager.instance.musicSource.clip = music;
+		SoundManager.instance.musicSource.Play();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +36,7 @@ public class IntroManager : MonoBehaviour {
 			}else if(skipNumber == 1){	
 				SoundManager.instance.FadeMusic();
 				Initiate.Fade("1_1",Color.black,0.5f);
+				skipNumber = 2;
 			}
 		} 
 	}
@@ -74,7 +78,7 @@ public class IntroManager : MonoBehaviour {
 		}else if(slideNumber == 10){
 			textShown.text = "And every year, the best amoung them was chosen and given the prestigious <color=#78FF32>Garbageman Of The Year Award</color>.";
 		}else if(slideNumber == 11){
-			textShown.text = "Because of all this, many go out to try their hand at becoming a garbagemen...to follow their dumpster dreams...";
+			textShown.text = "Because of all this, many go out to try their hand at becoming a garbageman...to follow their dumpster dreams...";
 		}else if(slideNumber == 12){
 			textShown.text = "...many fail.";
 		}else if(slideNumber == 13){
@@ -112,11 +116,13 @@ public class IntroManager : MonoBehaviour {
 			textShown.text = "AND YOU'LL ENTRENCH YOURSELF IN A NEVERENDING SPIRAL OF EXISTENTIAL DREAD! FOREVER!";
 		}else if(slideNumber == 25){
 			textShown.text = "...";
+			SoundManager.instance.FadeMusic();
 		}else if(slideNumber == 26){
 			textShown.text = "...or maybe not. I don't know. Let's see!";
 		}else if(slideNumber == 27){
 			textShown.text = " ";
-			SoundManager.instance.FadeMusic();
+
+
 			Initiate.Fade("1_1",Color.black,0.5f);
 			textShown.text = "";
 		}

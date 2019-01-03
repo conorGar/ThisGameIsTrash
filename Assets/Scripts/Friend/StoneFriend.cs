@@ -45,6 +45,12 @@ public class StoneFriend : Friend
         }
     }
 
+    public override void OnWorldStart(World world){
+    	stoneHand.SetActive(true);
+    	secondStoneHand.SetActive(true);
+    }
+
+
     void OnDisable()
     {
         GUIManager.Instance.StoneHandNeededDisplay.SetActive(false);

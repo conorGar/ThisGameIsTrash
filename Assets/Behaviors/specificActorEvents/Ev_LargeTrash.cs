@@ -113,7 +113,6 @@ public class Ev_LargeTrash : PickupableObject {
 		gameObject.transform.parent = ltmManager.transform; //goes back to largeTrashManager when drop
 		//gameObject.GetComponent<Animator>().SetTrigger("Drop");
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
-		pickUpcheck = 0;
 		gameObject.GetComponent<Animator>().enabled = false;
 		myCurrentRoom = RoomManager.Instance.currentRoom;
 		player.GetComponent<MeleeAttack>().enabled = true;
@@ -230,6 +229,8 @@ public class Ev_LargeTrash : PickupableObject {
 		CamManager.Instance.mainCamEffects.CameraPan(player.transform.position," ");
 		CamManager.Instance.mainCamEffects.ZoomInOut(2f,1f);
 		yield return new WaitForSeconds(.5f);
+	
+		dumpster.GetComponent<Ev_Dumpster>().largeTrashDiscoveredDisplay.GetComponent<GUI_LargeTrashCollectedDisplay>().indexOfCurrentLargeTrash =  garbage.GarbageIndex();
 		dumpster.GetComponent<Ev_Dumpster>().largeTrashDiscoveredDisplay.SetActive(true);
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		player.GetComponent<JimAnimationManager>().StopTweenAnimation();

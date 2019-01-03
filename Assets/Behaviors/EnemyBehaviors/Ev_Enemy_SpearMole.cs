@@ -14,6 +14,7 @@ public class Ev_Enemy_SpearMole : FollowPlayerAfterNotice
 		}
 		myEmission =gameObject.GetComponent<FollowPlayer>().chasePS.emission;
 		myEmission.rateOverTime = 5f;
+		base.OnEnable();
 	}
 
 	public void Update(){
@@ -23,6 +24,7 @@ public class Ev_Enemy_SpearMole : FollowPlayerAfterNotice
 
 
 	protected override void NoticePlayerEvent(){
+		base.NoticePlayerEvent();
 		spearCollision.SetActive(true);
 		this.enabled = false;
 	}

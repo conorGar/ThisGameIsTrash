@@ -14,7 +14,7 @@ public class BossFriendEx : Friend
 	public GameObject questio;
 	public GameObject slideTrash;
     public int FieldRoomNum;
-
+    public AudioClip trioTheme;
 
     public GameObject toxicBarrier;
     public ParticleSystem toxicBarrierPS;
@@ -44,6 +44,7 @@ public class BossFriendEx : Friend
 
 		switch (GetFriendState())
         {
+			
            
             case "END":
             	toxicBarrier.SetActive(false);
@@ -79,6 +80,7 @@ public class BossFriendEx : Friend
         {
             case "IN_FIELD":
                 nextDialog = "Boss1Intro";
+               
 				GetComponent<ActivateDialogWhenClose>().Execute("Ex", "Questio", "Hash");
                 break;
             case "IN_TOXIC_FIELD":
@@ -137,7 +139,10 @@ public class BossFriendEx : Friend
         switch (GetFriendState())
         {
             case "IN_TOXIC_FIELD":
+            	
                 yield return TrioDisappears();
+				SoundManager.instance.backupMusicSource.Stop();
+            	SoundManager.instance.musicSource.Play();
                 break;
 
             case "PREP_FIGHT_PHASE_1":
@@ -149,6 +154,7 @@ public class BossFriendEx : Friend
 
                 SoundManager.instance.TransitionMusic(bossMusic);
                 stuart.PrepPhase1();
+                panToPlayer = false;
                 SetFriendState("FIGHT_PHASE_1");
 
                 break;
@@ -249,6 +255,19 @@ public class BossFriendEx : Friend
 				gameObject.SetActive(false);
                 break;
 
+        }
+    }
+
+    public override void OnActivateDialog(){
+		switch (GetFriendState())
+        {
+			case "IN_FIELD":
+				SoundManager.instance.backupMusicSource.clip = trioTheme;
+				SoundManager.instance.backupMusicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+				SoundManager.instance.backupMusicSource.Play();
+				SoundManager.instance.musicSource.Stop();
+        	break;
+           
         }
     }
 

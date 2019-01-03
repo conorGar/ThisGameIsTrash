@@ -138,10 +138,11 @@ public class RatOnMatFriend : Friend
 		vanishPS.Play();
 
 	
-		yield return new WaitForSeconds(.5f);
+		yield return new WaitForSeconds(1f);
 		gameObject.GetComponent<MeshRenderer>().enabled =true;
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-        CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+		CamManager.Instance.mainCam.SetNormalCameraSpeed();
+       // CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		gameObject.SetActive(false);
 
 	}

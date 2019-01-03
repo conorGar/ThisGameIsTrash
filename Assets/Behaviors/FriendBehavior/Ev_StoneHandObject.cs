@@ -6,6 +6,7 @@ public class Ev_StoneHandObject : PickupableObject
 
 	public StoneFriend stoneFriend;
 	public Room rocksGatheringRoom;
+	public Transform w1FriendManager;
 	//can be picked up and carried
 	//can talk to rock if carrying and will initialize return hand dialog
 	//^ will also activate dialog if drop the hand in the rock room
@@ -16,9 +17,19 @@ public class Ev_StoneHandObject : PickupableObject
 	}
 
 	public override void PickUp(){
+		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
 		stoneFriend.GetComponent<ActivateDialogWhenClose>().enabled = true; // can talk to stone if carrying hand
 		gameObject.GetComponent<BoxCollider2D>().enabled = false;
+		StartCoroutine("PickupDelay");
+	}
+
+	IEnumerator PickupDelay(){
+		yield return new WaitForSeconds(1f);
+		beingCarried = true;
+		PickUpEvent();
+		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
+		player.GetComponent<EightWayMovement>().enabled = true;
 	}
 
 	void OnEnable(){
@@ -46,7 +57,10 @@ public class Ev_StoneHandObject : PickupableObject
 			gameObject.SetActive(false);
 
 		}
-		//gameObject.transform.parent = stoneFriend.transform;//goes back to Stone as parent
+		gameObject.GetComponent<BoxCollider2D>().enabled = true;
+
+		gameObject.transform.parent = w1FriendManager.transform;//goes back to global parent
+		gameObject.GetComponent<Animator>().enabled = false;
 	}
 
 
