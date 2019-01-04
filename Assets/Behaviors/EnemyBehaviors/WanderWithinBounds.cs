@@ -9,28 +9,69 @@ public class WanderWithinBounds : RandomDirectionMovement
 	float MIN_Y;
 	float MAX_X;
 	float MAX_Y;
+	Vector2 startPosition;
 	bool boundsSet;
+	bool returningToStart;
 	// Use this for initialization
 	void OnEnable ()
 	{
+		Debug.Log("Wander in bounds OnEnable() activate -q-q-q-q-q-q-q-q-q");
 		boundsSet = false;
+		startPosition = gameObject.transform.position;
+		Debug.Log("wander start position:" + startPosition);
 		base.OnEnable();
+		Debug.Log("wander start position:" + startPosition);
+
 		//SetWalkBounds();
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if(boundsSet){
+		if(boundsSet && moving){
 			if(transform.position.x < MIN_X || transform.position.x > MAX_X ||
             transform.position.y < MIN_Y || transform.position.y > MAX_Y){
 				transform.position = new Vector3(
 								    Mathf.Clamp(gameObject.transform.position.x, MIN_X, MAX_X),
 								    Mathf.Clamp(gameObject.transform.position.y, MIN_Y, MAX_Y),
 								    0f);
+
 			}
+			base.Update();
+		}else if(returningToStart && moving){ //walk back to original position when lose sight of player
+			Debug.Log("returning to start");
+			if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+				if (!anim.IsPlaying("hit")) {
+					Debug.Log("returning to start - 2" + startPosition);
+
+					gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position,startPosition,4f*Time.deltaTime);
+
+
+					//face direction of movement
+					if(gameObject.transform.position.x < startPosition.x){
+						gameObject.transform.localScale = new Vector3(Mathf.Abs(gameObject.transform.localScale.x),startingScale.y,startingScale.z);
+
+					}else{
+						gameObject.transform.localScale = new Vector3(startingScale.x*-1,startingScale.y,startingScale.z);
+
+					}
+
+					if(transform.position.x > MIN_X && transform.position.x < MAX_X &&
+		            transform.position.y > MIN_Y && transform.position.y < MAX_Y){
+		            	//return to normal behavior
+		            	Debug.Log("back in start bounds");
+		  
+		            	returningToStart =false;
+		            	boundsSet = true;
+						GoAgain();
+		            }
+	            }
+            }
+
+
+
 		}
-		base.Update();
+
 
 	}
 
@@ -47,11 +88,34 @@ public class WanderWithinBounds : RandomDirectionMovement
 	}
 
 	public void SetNewBounds(){
+		Debug.Log("Set New Bounds activate");
 		MIN_X = myWanderZone.bounds.min.x;
         MAX_X = myWanderZone.bounds.max.x;
         MIN_Y = myWanderZone.bounds.min.y;
         MAX_Y = myWanderZone.bounds.max.y;
 	}
+
+	public void ReturnToStart(){
+		Debug.Log("returning to start - activate" + startPosition);
+
+		boundsSet = false;
+		moving = true;
+		returningToStart = true;
+		StopAllCoroutines();
+	}
+
+	public override void GoAgain(){
+		if(!returningToStart){
+			base.GoAgain();
+		}
+	}
+
+	public override void StopMoving(){
+		base.StopMoving();
+		boundsSet = false;
+	}
+
+
 
 }
 

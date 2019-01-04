@@ -362,11 +362,34 @@ public class RockFriend : Friend {
 
         json_data["friendState"] = friendState;
 
+        string savedObjString = null;
+        for(int i = 0; i < pickedUpObjects.Count; i++){
+        	savedObjString = savedObjString + pickedUpObjects[i].name + ",";
+        }
+        Debug.Log("***SavedObjString for Rock:" + savedObjString);
+
+        json_data["pickedUpObjects"] = savedObjString;
+
+
         return json_data;
     }
 
     public override void Load(SimpleJSON.JSONObject json_data)
     {
         friendState = json_data["friendState"].AsInt;
+
+
+        string pickedUpObjs = json_data["pickedUpObjects"];
+        Debug.Log("******loaded rock obj string:********" + pickedUpObjs);
+        string[] pickedUpArray = pickedUpObjs.Split(',');
+        for(int i = 0 ; i < pickedUpArray.Length;i++){
+        	for(int j = 0; j < desiredObject.Count; j++){
+        		if(desiredObject[j].name == pickedUpArray[i]){
+        			pickedUpObjects.Add(desiredObject[j]);
+        			desiredObject.RemoveAt(j);
+        			break;
+        		}
+        	}
+        }
     }
 }

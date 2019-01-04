@@ -11,7 +11,7 @@ public class Ev_MeleeWeapon : MonoBehaviour {
 
 
 			
-		if(anim.IsPlaying("stickUp")){
+		/*if(anim.IsPlaying("stickUp")){
 			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 18){
 				anim.Play("poleUp");
 			}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 6 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] <= 12){
@@ -40,7 +40,7 @@ public class Ev_MeleeWeapon : MonoBehaviour {
 			}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] >= 18){
 				anim.Play("broomSwing");
 			}
-		}
+		}*/
 	}
 	
 	// Update is called once per frame

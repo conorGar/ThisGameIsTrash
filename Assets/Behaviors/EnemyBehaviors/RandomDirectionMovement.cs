@@ -14,10 +14,10 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 
 	private Vector3 direction;
-	private bool moving = false;
-	private tk2dSpriteAnimator anim;
+	protected bool moving = false;
+	protected tk2dSpriteAnimator anim;
 	int bounceOffObject;
-	Vector3 startingScale;
+	protected Vector3 startingScale;
 	int turnOnce = 0;
 
 	// Use this for initialization
@@ -106,7 +106,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision){
 		//go a different direction when bump into something
 		//if(collision.gameObject.transform.position.y> this.gameObject.transform.position.y);
-		if(bounceOffObject == 0){
+		if(bounceOffObject == 0 && moving){
 			Debug.Log("Collided with something and GoAgain() called");
 
 			GoAgain();
@@ -128,7 +128,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 		}*/
 	}
 
-	public void GoAgain(){
+	public virtual void GoAgain(){
 		Debug.Log("Go again activated");
 		moving = true;
 		//InvokeRepeating("SpawnClouds",.2f, .2f);
@@ -137,7 +137,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 		StartCoroutine("Pause");
 	}
 
-	public void StopMoving(){
+	public virtual void StopMoving(){
 		walkPS.Stop();
 		StopAllCoroutines();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

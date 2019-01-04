@@ -45,8 +45,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 							sleepingPS.SetActive(false);
 						}
 						if(this.gameObject.GetComponent<RandomDirectionMovement>() != null){
-							this.gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
-							this.gameObject.GetComponent<RandomDirectionMovement>().StopAllCoroutines();
+							this.gameObject.GetComponent<RandomDirectionMovement>().StopMoving();
 						}
 						this.gameObject.GetComponent<FollowPlayer>().enabled = true;
 						SoundManager.instance.PlaySingle(SFXBANK.NOTICE);
@@ -62,5 +61,9 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	protected virtual void NoticePlayerEvent(){
 		
 		noticedPlayer = true;
+	}
+
+	public virtual void LostSightOfPlayer(){
+		noticedPlayer = false;
 	}
 }

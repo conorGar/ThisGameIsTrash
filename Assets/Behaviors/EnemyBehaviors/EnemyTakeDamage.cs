@@ -540,7 +540,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
             //disable follow player after notice behavior if end up having thta in game
             if (gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled) {
-                gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
+                gameObject.GetComponent<RandomDirectionMovement>().StopMoving();
             }
 
             //****SFX PLAY - 'hit2' on ch4
@@ -552,7 +552,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
                 //***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
             }
             else if (gameObject.GetComponent<RandomDirectionMovement>()) {
-                gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
+                gameObject.GetComponent<RandomDirectionMovement>().GoAgain();
             }
             damageOnce = 0;
 
@@ -564,7 +564,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             }
 
             if (gameObject.GetComponent<RandomDirectionMovement>() != null && gameObject.GetComponent<RandomDirectionMovement>().enabled) {
-                gameObject.GetComponent<RandomDirectionMovement>().enabled = false;
+                gameObject.GetComponent<RandomDirectionMovement>().StopMoving();
             }
 
             if (GlobalVariableManager.Instance.ROOM_NUM != 201) {
