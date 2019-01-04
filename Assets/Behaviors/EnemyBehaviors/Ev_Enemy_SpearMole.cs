@@ -26,7 +26,7 @@ public class Ev_Enemy_SpearMole : FollowPlayerAfterNotice
 	protected override void NoticePlayerEvent(){
 		base.NoticePlayerEvent();
 		spearCollision.SetActive(true);
-		this.enabled = false;
+
 	}
 }
 

@@ -17,24 +17,36 @@ public class WanderWithinBounds : RandomDirectionMovement
 	{
 		Debug.Log("Wander in bounds OnEnable() activate -q-q-q-q-q-q-q-q-q");
 		boundsSet = false;
-		startPosition = gameObject.transform.position;
+
 		Debug.Log("wander start position:" + startPosition);
 		base.OnEnable();
 		Debug.Log("wander start position:" + startPosition);
-
+		Invoke("StartPosDelay",.2f);
+		//startPosition = gameObject.transform.position;
 		//SetWalkBounds();
 	}
-	
+
+	void StartPosDelay(){
+		//** was having issues with armored spear mole setting its start position to the prefab's default position
+		//** that I could not figure out. This fixed the issue.
+		startPosition = gameObject.transform.position;
+
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
+		Debug.Log(startPosition);
+
 		if(boundsSet && moving){
 			if(transform.position.x < MIN_X || transform.position.x > MAX_X ||
-            transform.position.y < MIN_Y || transform.position.y > MAX_Y){
+            	transform.position.y < MIN_Y || transform.position.y > MAX_Y){
+
 				transform.position = new Vector3(
 								    Mathf.Clamp(gameObject.transform.position.x, MIN_X, MAX_X),
 								    Mathf.Clamp(gameObject.transform.position.y, MIN_Y, MAX_Y),
 								    0f);
+				TurnToNewDirection();
 
 			}
 			base.Update();

@@ -80,6 +80,15 @@ public class RandomDirectionMovement : MonoBehaviour {
 		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
 		//Debug.Log("Turn activated");
 	}
+
+	public void TurnToNewDirection(){
+		//activated by things like "Wander within bounds" when enemy reaches end of the bounds so it doesnt just keep walking into it.
+		Debug.Log("Turn to new direction activated:" + gameObject.name);
+		turnOnce = 1;
+		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
+		direction = (new Vector3(direction.x*-1, direction.y*-1, 0.0f)).normalized;
+
+	}
 	IEnumerator Pause(){
 		turnOnce = 0;
 
