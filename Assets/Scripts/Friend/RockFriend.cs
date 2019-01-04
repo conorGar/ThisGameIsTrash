@@ -362,7 +362,7 @@ public class RockFriend : Friend {
 
         json_data["friendState"] = friendState;
 
-        string savedObjString = null;
+        string savedObjString = "";
         for(int i = 0; i < pickedUpObjects.Count; i++){
         	savedObjString = savedObjString + pickedUpObjects[i].name + ",";
         }
@@ -381,15 +381,17 @@ public class RockFriend : Friend {
 
         string pickedUpObjs = json_data["pickedUpObjects"];
         Debug.Log("******loaded rock obj string:********" + pickedUpObjs);
-        string[] pickedUpArray = pickedUpObjs.Split(',');
-        for(int i = 0 ; i < pickedUpArray.Length;i++){
-        	for(int j = 0; j < desiredObject.Count; j++){
-        		if(desiredObject[j].name == pickedUpArray[i]){
-        			pickedUpObjects.Add(desiredObject[j]);
-        			desiredObject.RemoveAt(j);
-        			break;
-        		}
-        	}
+        if (pickedUpObjs != null) {
+            string[] pickedUpArray = pickedUpObjs.Split(',');
+            for (int i = 0; i < pickedUpArray.Length; i++) {
+                for (int j = 0; j < desiredObject.Count; j++) {
+                    if (desiredObject[j].name == pickedUpArray[i]) {
+                        pickedUpObjects.Add(desiredObject[j]);
+                        desiredObject.RemoveAt(j);
+                        break;
+                    }
+                }
+            }
         }
     }
 }

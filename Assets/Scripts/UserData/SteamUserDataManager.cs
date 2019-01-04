@@ -41,6 +41,7 @@ public class SteamUserDataManager : UserDataManager {
         // Create default data if no data is found.
         if (string.IsNullOrEmpty(text))
         {
+            Debug.Log("No Data Found.  Writing Default Data.");
             yield return WriteAsync();
         }
         else
