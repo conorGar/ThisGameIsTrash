@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 50253087318043024}
   - component: {fileID: 61136164289067188}
   - component: {fileID: 95393856392670956}
+  - component: {fileID: 114134684296094152}
   m_Layer: 16
   m_Name: e_bug
   m_TagString: Untagged
@@ -89,7 +90,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1931503545858434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32.668, y: -14.791443, z: 0.2109375}
+  m_LocalPosition: {x: 76.534874, y: 39.681297, z: 0.2109375}
   m_LocalScale: {x: 1.1376333, y: 1.1376334, z: 1.1376334}
   m_Children:
   - {fileID: 4955387219877874}
@@ -200,7 +201,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.11, y: 0.05}
@@ -228,7 +229,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04, y: 0.18}
+  m_Offset: {x: 0.04, y: 0.03}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -239,7 +240,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.13, y: 2.49}
+  m_Size: {x: 2.13, y: 1.97}
   m_EdgeRadius: 0
 --- !u!95 &95393856392670956
 Animator:
@@ -282,6 +283,21 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
+--- !u!114 &114134684296094152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368988894540294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  attkPower: 1
+  moveWhenHit: 0
+  respawningEnemyType: 0
 --- !u!114 &114180736788856948
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,6 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armoredEnemy: 0
   moveWhenHit: 0
+  resetFacingAfterHit: 0
   secretHider: 0
   returnToCurrentAniAfterHit: 0
   invincibleAni:
@@ -352,13 +369,12 @@ MonoBehaviour:
     wrapMode: 0
   myDeadBodyName: 
   respawnEnemy: 0
-  hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
-  hitSqueal: {fileID: 0}
-  bounce: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
   armoredEnemyHitSfx: {fileID: 0}
   bossEnemy: 0
   IAmParentObj: 1
   childEnemy: {fileID: 1368988894540294}
+  hitSqueal: 0
+  bounce: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   gar_rec: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
@@ -367,14 +383,19 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1192089782312036}
-  myCollisionBox: {fileID: 61136164289067188}
   returnAniName: idle
+  dontSpawnBody: 0
+  canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  armorCollisionObj: {fileID: 0}
+  disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   myRespawner: {fileID: 0}
   currentHp: 4
   meleeDmgBonus: 0
   dontStopWhenHit: 0
+  spinning: 0
+  startsOffDontMoveWhenHit: 0
 --- !u!212 &212961315518320126
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -54,6 +54,14 @@ public class PlayerTakeDamage : MonoBehaviour {
                         damageDealt = enemyComp.attkPower;
                 }
                 TakeDamage(enemy.gameObject);
+			} else if (enemy.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
+                if (enemy.gameObject.tag == "Boss") {
+                    damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
+                }
+                else {
+                    damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
+                }
+                TakeDamage(enemy.gameObject);
             }
         }
 	}
@@ -70,7 +78,7 @@ public class PlayerTakeDamage : MonoBehaviour {
                     TakeDamage(projectile.gameObject);
                 }
             }
-            else if (projectile.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
+            /*else if (projectile.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
                 if (projectile.gameObject.tag == "Boss") {
                     damageDealt = projectile.gameObject.GetComponent<Boss>().attkDmg;
                 }
@@ -78,7 +86,7 @@ public class PlayerTakeDamage : MonoBehaviour {
                     damageDealt = projectile.gameObject.GetComponent<Enemy>().attkPower;
                 }
                 TakeDamage(projectile.gameObject);
-            }
+            }*/
         }
 	}
 

@@ -1015,10 +1015,11 @@ MonoBehaviour:
   - {fileID: 517979272}
   dialogOptions: {fileID: 0}
   textBox: {fileID: 42795166}
-  typeSound: {fileID: 0}
+  continueDialogSfx: {fileID: 0}
   dialogActionManager: {fileID: 477474868}
   guiCamera: {fileID: 97792199}
   dialogCanvas: {fileID: 40757786}
+  blackBarCanvas: {fileID: 0}
   characterName: {fileID: 1313941075}
   animationName: 
   currentlySpeakingIcon: {fileID: 0}
@@ -2181,6 +2182,7 @@ MonoBehaviour:
   spinning: 0
   stoneFriend: {fileID: 1002932330}
   rocksGatheringRoom: {fileID: 0}
+  w1FriendManager: {fileID: 0}
 --- !u!212 &80516676
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19238,6 +19240,7 @@ MonoBehaviour:
   upgradeImage: {fileID: 0}
   murderImage: {fileID: 21300000, guid: 7d80da3c3b79bc94c9f551c5e861bd31, type: 3}
   dojoImage: {fileID: 21300000, guid: 56f63fce8c7c3e24eaf75b14e2f1d60a, type: 3}
+  shopImage: {fileID: 0}
 --- !u!1 &418884758
 GameObject:
   m_ObjectHideFlags: 0
@@ -19699,6 +19702,7 @@ MonoBehaviour:
   PinDisplaySprite: {fileID: 0}
   pinConfig: {fileID: 11400000, guid: 217b14bb8e24371458ca6e36df3d1911, type: 2}
   equipSpark: {fileID: 23220266}
+  newPinIcon: {fileID: 0}
 --- !u!1 &458887638
 GameObject:
   m_ObjectHideFlags: 0
@@ -28822,6 +28826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectSound: {fileID: 0}
+  closeSound: {fileID: 0}
   musicVol: {fileID: 1820695233}
   sfxVol: {fileID: 2001458734}
   fullscreenToggle: {fileID: 579828432}
@@ -40389,6 +40394,8 @@ MonoBehaviour:
   moon: {fileID: 2025665929}
   blockade: {fileID: 663082147}
   moonShadow: {fileID: 2025665928}
+  stone: {fileID: 0}
+  rock: {fileID: 0}
 --- !u!212 &801600797
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -40998,6 +41005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxSource: {fileID: 863272092}
   musicSource: {fileID: 863272091}
+  backupMusicSource: {fileID: 0}
   worldMusic: {fileID: 0}
   lowPitchRange: 0.95
   highPitchRange: 1.1
@@ -41716,14 +41724,10 @@ MonoBehaviour:
   enemiesDefeated: {fileID: 0}
   nextUnlockNeeded: {fileID: 0}
   currentStars: {fileID: 0}
-  largeTrashTextDisplay: {fileID: 0}
-  treasureCollectedDisplay: {fileID: 0}
-  largeTrashCollectedDisplay: {fileID: 0}
-  ltManager: {fileID: 0}
   currentWorld: 0
   backPaper: {fileID: 0}
   image: {fileID: 0}
-  largeTrashCollectedSfx: {fileID: 0}
+  closeSfx: {fileID: 0}
 --- !u!114 &900898032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50414,6 +50418,7 @@ MonoBehaviour:
   spinning: 0
   stoneFriend: {fileID: 1002932330}
   rocksGatheringRoom: {fileID: 0}
+  w1FriendManager: {fileID: 0}
 --- !u!212 &943441177
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -58162,6 +58167,8 @@ MonoBehaviour:
   secondStoneHand: {fileID: 80516671}
   rightHand: {fileID: 713841602}
   leftHand: {fileID: 1456037996}
+  rock: {fileID: 0}
+  slab: {fileID: 0}
 --- !u!212 &1002932331
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -58363,6 +58370,7 @@ MonoBehaviour:
   questio: {fileID: 0}
   slideTrash: {fileID: 0}
   FieldRoomNum: 3
+  trioTheme: {fileID: 0}
   toxicBarrier: {fileID: 0}
   toxicBarrierPS: {fileID: 0}
   goWithItDisplay: {fileID: 0}
@@ -62457,6 +62465,7 @@ MonoBehaviour:
   eyeCover: {fileID: 744316921}
   slab: {fileID: 801600791}
   stone: {fileID: 1002932325}
+  beautifulRock: {fileID: 0}
   moon: {fileID: 2025665929}
   moonShadow: {fileID: 2025665928}
   blockade: {fileID: 663082147}
@@ -67098,6 +67107,7 @@ MonoBehaviour:
   player: {fileID: 0}
   fader: {fileID: 589200130}
   atHubSide: 0
+  selectSfx: {fileID: 0}
 --- !u!1 &1088866491
 GameObject:
   m_ObjectHideFlags: 0
@@ -69113,6 +69123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ff32b89e8ceee4a8b7fdec8094a0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  promptText: {fileID: 0}
 --- !u!225 &1204013800
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -69722,6 +69733,7 @@ MonoBehaviour:
   moviePosters: {fileID: 0}
   filmColor: {fileID: 0}
   movieScreen: {fileID: 0}
+  hat: {fileID: 0}
   projectorPlay: {fileID: 0}
   largeTrashProjector: {fileID: 0}
 --- !u!114 &1236661185
@@ -70032,6 +70044,7 @@ MonoBehaviour:
   questio: {fileID: 0}
   slideTrash: {fileID: 0}
   FieldRoomNum: 3
+  trioTheme: {fileID: 0}
   toxicBarrier: {fileID: 0}
   toxicBarrierPS: {fileID: 0}
   goWithItDisplay: {fileID: 0}
@@ -71158,6 +71171,7 @@ MonoBehaviour:
   questio: {fileID: 0}
   slideTrash: {fileID: 0}
   FieldRoomNum: 3
+  trioTheme: {fileID: 0}
   toxicBarrier: {fileID: 0}
   toxicBarrierPS: {fileID: 0}
   goWithItDisplay: {fileID: 0}
@@ -82522,6 +82536,14 @@ Prefab:
     - target: {fileID: 4311553852781758, guid: 3ff0247a07086ff43ac2993fae14854f, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645651810266666, guid: 3ff0247a07086ff43ac2993fae14854f, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054080304615618, guid: 3ff0247a07086ff43ac2993fae14854f, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ff0247a07086ff43ac2993fae14854f, type: 2}
@@ -95335,6 +95357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ff32b89e8ceee4a8b7fdec8094a0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  promptText: {fileID: 0}
 --- !u!225 &1934492904
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -104474,6 +104497,7 @@ MonoBehaviour:
   endayHLspr: {fileID: 21300000, guid: 01033f355c72ced439cec6b08440613b, type: 3}
   returnToDumpsterHlspr: {fileID: 21300000, guid: 8f912acf77eea974daa9a609a40712b1,
     type: 3}
+  forHub: 0
   selectSound: {fileID: 8300000, guid: ccf38e21826c09d4e994e48ecf9abd8c, type: 3}
   paperSlide: {fileID: 8300000, guid: 0cd4a6ab01e81e24fb7d897836b8fab3, type: 3}
   player: {fileID: 0}
