@@ -32,6 +32,7 @@ public class ThrowableObject : PickupableObject {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && canThrow) {
                 Invoke("Throw", .1f);
+                canThrow = false; 
             }
 
             if (beingThrown) {
