@@ -18,6 +18,7 @@ public class Ev_Results : MonoBehaviour {
 	public int currentWorld; //needed for largeTrashManager
     public Image backPaper;
     public Image image;
+    public ParticleSystem clouds;
 
     public AudioClip closeSfx;
 
@@ -61,10 +62,14 @@ public class Ev_Results : MonoBehaviour {
         else if (GlobalVariableManager.Instance.PROGRESS_LV == 2) {
             nextUnlockNeeded.text = "/10";
         }
-        if (GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 5) {
+        /*if (GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 5) {
             //in case player dies during race
             GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(5);
-        }
+        }*/
+
+        clouds.gameObject.SetActive(true);
+        clouds.Play();
+
     }
 
     void OnDestroy()
