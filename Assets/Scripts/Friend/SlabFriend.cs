@@ -47,6 +47,15 @@ public class SlabFriend : Friend
         }
     }
 
+	public override void OnWorldStart(World world){ //populates the world with beauty items
+		switch (GetFriendState()) {
+            
+           
+           	case "END":
+	           	blockade.SetActive(false);
+	           	break;
+        }
+    }
     void OnDisable()
     {
         GUIManager.Instance.SlabTrashNeededDisplay.SetActive(false);

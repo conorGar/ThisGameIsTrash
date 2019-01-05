@@ -345,10 +345,27 @@ public class RockFriend : Friend {
 				for(int i = 0; i < deliveredObjects.Count; i++){ // update display with previously gathered items
 					GUIManager.Instance.rockItemHUD.UpdateItemsCollected(deliveredObjects[i].GetComponent<SpriteRenderer>().sprite);
 				}
+				for(int i = 0; i < desiredObject.Count; i++){ // enabled again after 'OnWorldEnd' Disables
+					desiredObject[i].gameObject.SetActive(true);
+				}
                 break;
+           	case "END":
+	           	blockade.SetActive(false);
+	           	break;
         }
     }
-
+    public override void OnWorldEnd(){
+		switch (GetFriendState()) {
+            
+            case "WANTS_TO_BE_PRETTY":
+               
+				for(int i = 0; i < desiredObject.Count; i++){
+					desiredObject[i].gameObject.SetActive(false);
+				}
+                break;
+           	
+        }
+    }
 
     // User Data implementation
     public override string UserDataKey()

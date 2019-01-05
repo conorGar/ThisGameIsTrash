@@ -86,32 +86,8 @@ public class Ev_Results : MonoBehaviour {
 		if(GameStateManager.Instance.GetCurrentState() == typeof(EndDayState)) {
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
                 if (phase == 2) {
-                    /*if (GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count > displayIndex) {
 
-                        if (spawnLargeTrashOnce == 0) {
-                        	Debug.Log("L trash display got here - 1");
-                            //spawn large trash collected display
-                            //treasureCollectedDisplay.SetActive(true);
-                            largeTrashCollectedDisplay.SetActive(true);
-                            backPaper.enabled = false;
-                            image.enabled = false;
-                            largeTrashTextDisplay.SetActive(true);
-                            spawnLargeTrashOnce = 1;
-                        }
-                        else {
-							Debug.Log("L trash display got here - 2");
-
-                            treasureCollectedDisplay.GetComponent<Animator>().Play("largeTrashCollected",-1,0f);
-                        }
-
-                        SoundManager.instance.PlaySingle(largeTrashCollectedSfx);
-
-                        //change sprite of the large trash display
-                        treasureCollectedDisplay.GetComponent<Image>().sprite = (GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedDisplaySprite);
-                        //	treasureCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(); //TODO: working on this..
-						largeTrashTextDisplay.GetComponent<TextMeshProUGUI>().text = GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedTitle;
-                        displayIndex++;
-                    }*/
+						FriendManager.Instance.OnWorldEnd();
                    
                        // largeTrashTextDisplay.SetActive(false);
                         backPaper.enabled = true;

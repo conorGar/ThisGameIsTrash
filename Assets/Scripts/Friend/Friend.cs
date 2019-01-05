@@ -132,6 +132,10 @@ public class Friend : UserDataItem {
 
     }
 
+    public virtual void OnWorldEnd(){
+
+    }
+
     public virtual void OnFinishDialog()
     {
         //CamManager.Instance.mainCamEffects.ReturnFromCamEffect();

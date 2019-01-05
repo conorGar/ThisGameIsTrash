@@ -74,6 +74,12 @@ public class FriendManager : MonoBehaviour {
         }
     }
 
+    public void OnWorldEnd(){ // Activated by Ev_results
+		for (int i = 0; i < friends.Count; i++) {
+            friends[i].OnWorldEnd();
+        }
+    }
+
     public void EnableProperFriends(int worldNum){
     	Debug.Log("World Num:" + worldNum);
     	Debug.Log("World Count: " + worlds.Count);
