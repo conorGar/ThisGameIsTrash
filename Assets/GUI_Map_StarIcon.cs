@@ -4,43 +4,43 @@ using UnityEngine;
 
 public class GUI_Map_StarIcon : MonoBehaviour {
 
-	public string myLargeTrashName;
-	public int worldChildIndex; // which world categorizer under LargeTrashManager, 0 = w1, 1 = w2, etc...
-	public GUI_Map map;
-	Ev_LargeTrash myLargeTrash;
+	//public string myLargeTrashName;
+	//public LargeGarbage myGarbage = new LargeGarbage();
+	public LARGEGARBAGE thisGarbage;
+	public GameObject starParent;
+	//public int worldChildIndex; // which world categorizer under LargeTrashManager, 0 = w1, 1 = w2, etc...
+	//public GUI_Map map;
+
 	// Use this for initialization
-	void Start () {
-		GameObject currentWorldLargeTrash =LargeTrashManager.Instance.transform.GetChild(worldChildIndex).gameObject;
-		for(int i = 0; i <currentWorldLargeTrash.transform.childCount; i++){
-			Debug.Log(currentWorldLargeTrash.transform.GetChild(i).name + "  " + myLargeTrashName);
-			if(currentWorldLargeTrash.transform.GetChild(i).name == myLargeTrashName){
-				myLargeTrash = currentWorldLargeTrash.transform.GetChild(i).GetComponent<Ev_LargeTrash>();
-				break;
+	void OnEnable () {
+
+		Debug.Log("Map Star OnEnable() activate");
+		for(int i = 0; i < starParent.transform.childCount; i++){
+			if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & thisGarbage) == thisGarbage|| (GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED & thisGarbage) == thisGarbage) {
+            			Destroy(this.gameObject);
+      
 			}
 		}
-		if(myLargeTrash == null){//if cant find large trash in the hiearchy, then destroy because player got trash already
-			Debug.Log("could not find star icon large trash and was destroyed");
-			Destroy(gameObject);
-		}else{
-		OnEnable();
-		}
-		
-	}
 
-	void OnEnable(){
-		if(myLargeTrash != null){
-            // Set the star to the minimap position if it has one (some rooms don't right now).
-            if (myLargeTrash.myCurrentRoom.miniMapPosition != null) {
+		//TODO: update star position based on location of the large trash
+
+			/*if (myGarbage.myCurrentRoom.miniMapPosition != null) {
                 gameObject.transform.position = myLargeTrash.myCurrentRoom.miniMapPosition.position;
             }
             else {
                 gameObject.transform.position = Vector3.zero;
-            }
-		}
+            }*/
+		
+		
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void SetNewStarPosition(){
+		//TODO: update star position based on location of the large trash
+
 	}
 }

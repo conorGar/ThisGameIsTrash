@@ -43,10 +43,14 @@ public class MeleeAttack : MonoBehaviour {
                 if (swingDirection == 1) {
                     //weapon.transform.position = new Vector2(gameObject.transform.position.x + 4f,gameObject.transform.position.y+ 1.4f);
                     transform.Translate(new Vector2(playerMomentum, 0) * Time.deltaTime);
+					this.gameObject.transform.localScale = startingScale; //always faces proper way
+
                 }
                 else if (swingDirection == 2) {
                     //weapon.transform.position = new Vector2(gameObject.transform.position.x,gameObject.transform.position.y + 1.4f);
                     transform.Translate(new Vector2(playerMomentum * -1, 0) * Time.deltaTime);
+					this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z); //always faces left
+
                 }
                 else if (swingDirection == 3) {//swing up
                     transform.Translate(new Vector2(0, playerMomentum) * Time.deltaTime);
@@ -186,7 +190,6 @@ public class MeleeAttack : MonoBehaviour {
 	}
 
 	IEnumerator Swing(int direction){
-		if(!(Input.GetKey(KeyCode.LeftShift) && gameObject.GetComponent<ThrowTrash>().enabled)){ //if holding shift down throw instead
 			SoundManager.instance.RandomizeSfx(swing);
 			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 			GameObject meleeDirectionEnabled = null;
@@ -273,7 +276,7 @@ public class MeleeAttack : MonoBehaviour {
 					meleeDirectionEnabled.SetActive(false);
 				}
 			}
-		}
+		
 	}
 
 
