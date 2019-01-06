@@ -19,7 +19,6 @@ public class RockFriend : Friend {
 
    
     public List<SpecialFriendObject> desiredObject = new List<SpecialFriendObject>();//the needed objects start off as the friend's children
-    private List<SpecialFriendObject> deliveredObjects = new List<SpecialFriendObject>();
     List<SpecialFriendObject> pickedUpObjects = new List<SpecialFriendObject>();
 
     public GameObject eyeBreakPS;
@@ -168,15 +167,6 @@ public class RockFriend : Friend {
     		dialogManager.JumpToNewNode("RockComplete1");
     	}
     	dialogManager.ReturnFromAction();
-    }
-
-    public void DeliverObject(SpecialFriendObject obj)
-    {
-    	for(int i = 0; i < pickedUpObjects.Count;i++){
-    		deliveredObjects.Add(pickedUpObjects[i]);
-    	}
-    	pickedUpObjects.Clear();
-        //deliveredObjects.Add(obj);
     }
 
     public override void StartingEvents() {
@@ -342,8 +332,8 @@ public class RockFriend : Friend {
             case "WANTS_TO_BE_PRETTY":
                 // Eyes open.
 				StartingEvents();
-				for(int i = 0; i < deliveredObjects.Count; i++){ // update display with previously gathered items
-					GUIManager.Instance.rockItemHUD.UpdateItemsCollected(deliveredObjects[i].GetComponent<SpriteRenderer>().sprite);
+				for(int i = 0; i < pickedUpObjects.Count; i++){ // update display with previously gathered items
+					GUIManager.Instance.rockItemHUD.UpdateItemsCollected(pickedUpObjects[i].GetComponent<SpriteRenderer>().sprite);
 				}
 				for(int i = 0; i < desiredObject.Count; i++){ // enabled again after 'OnWorldEnd' Disables
 					desiredObject[i].gameObject.SetActive(true);
