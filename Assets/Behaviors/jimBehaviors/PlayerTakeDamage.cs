@@ -258,12 +258,12 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<MeshRenderer>().enabled = true;
 		yield return new WaitForSeconds(.3f);
 		deathDisplay.fader.SetActive(false);
-		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
+		/*if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
 				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 0;//reset scrap value
 				gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();//just used to update weapon HUD in this scenario
 		}else{
 			gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();
-		}
+		}*/
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
         GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;

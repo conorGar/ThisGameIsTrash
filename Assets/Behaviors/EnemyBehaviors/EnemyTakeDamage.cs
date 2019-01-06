@@ -112,8 +112,10 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             transform.rotation = startRotation;
         }
 
-        if (myShadow != null)
+        if (myShadow != null){
             myShadow.SetActive(true);
+            myShadow.transform.rotation = Quaternion.identity; //keep shadow from rotating.
+        }
     }
 
     private void OnDisable()
@@ -455,6 +457,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		if(moveWhenHit || hitByThrownObject){
 			takingDamage = true;
 
+			Debug.Log("-----MELEE WEAPON SWING DIRECTION :" + meleeSwingDirection);
+
 			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawSwing") == 0||meleeSwingDirection.CompareTo("poleSwing") == 0){
 				Debug.Log(swingDirectionSide);
 
@@ -490,10 +494,12 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 
 
-			}else if(meleeSwingDirection.CompareTo("stickUp") == 0||meleeSwingDirection.CompareTo("clawUp") == 0||meleeSwingDirection.CompareTo("poleUp") == 0){
-				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,-17f), ForceMode2D.Impulse);
-			}else if(meleeSwingDirection.CompareTo("stickDown") == 0||meleeSwingDirection.CompareTo("clawDown") == 0||meleeSwingDirection.CompareTo("poleDown") == 0){
+			}else if(meleeSwingDirection.CompareTo("plankUp") == 0||meleeSwingDirection.CompareTo("clawUp") == 0||meleeSwingDirection.CompareTo("poleUp") == 0){
 				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,17f), ForceMode2D.Impulse);
+				Debug.Log("ENEMY WAS HIT UP!!");
+			}else if(meleeSwingDirection.CompareTo("plankDown") == 0||meleeSwingDirection.CompareTo("clawDown") == 0||meleeSwingDirection.CompareTo("poleDown") == 0){
+				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,-17f), ForceMode2D.Impulse);
+				Debug.Log("ENEMY WAS HIT down!!");
 			}
 				
 
