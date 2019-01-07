@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class Ev_Results : MonoBehaviour {
 
-	public Text trashCollected;
-	public Text largeTrashCollected;
-	public Text enemiesDefeated;
-	public TextMeshProUGUI nextUnlockNeeded;
+	public TextMeshProUGUI trashCollected;
+	public TextMeshProUGUI largeTrashCollected;
+	public TextMeshProUGUI totalTrash;
+	//public Text enemiesDefeated;
+	//public TextMeshProUGUI nextUnlockNeeded;
 	public TextMeshProUGUI currentStars;
 	//public GameObject largeTrashTextDisplay;
 	//public GameObject treasureCollectedDisplay;
@@ -19,7 +20,7 @@ public class Ev_Results : MonoBehaviour {
     public Image backPaper;
     public Image image;
     public ParticleSystem clouds;
-
+    public AudioClip resultsMusic;
     public AudioClip closeSfx;
 
 
@@ -52,8 +53,13 @@ public class Ev_Results : MonoBehaviour {
             GlobalVariableManager.Instance.STAR_POINTS_STAT.UpdateCurrent(+1);
         }
 
+        largeTrashCollected.text = "+" + GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count;
         currentStars.text = GlobalVariableManager.Instance.STAR_POINTS_STAT.GetMax().ToString();
-        if (GlobalVariableManager.Instance.PROGRESS_LV == 0) {
+
+        totalTrash.text = "/" + GlobalVariableManager.Instance.TOTAL_TRASH.ToString();
+        trashCollected.text = "+" +trashCollectedValue;
+
+       /* if (GlobalVariableManager.Instance.PROGRESS_LV == 0) {
             nextUnlockNeeded.text = "/2";
         }
         else if (GlobalVariableManager.Instance.PROGRESS_LV == 1) {
@@ -67,8 +73,7 @@ public class Ev_Results : MonoBehaviour {
             GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(5);
         }*/
 
-        clouds.gameObject.SetActive(true);
-        clouds.Play();
+       
 
     }
 
@@ -82,6 +87,12 @@ public class Ev_Results : MonoBehaviour {
         if (isEntering) {
             if (stateType == typeof(EndDayState)) {
                 gameObject.SetActive(true);
+				SoundManager.instance.backupMusicSource.clip = resultsMusic;
+				SoundManager.instance.backupMusicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+				SoundManager.instance.backupMusicSource.Play();
+				SoundManager.instance.musicSource.Stop();
+				clouds.gameObject.SetActive(true);
+        		clouds.Play();
                 StartCoroutine("InteractDelay"); // wait for the truck to get a bit up the road.
             }
         }
@@ -93,7 +104,7 @@ public class Ev_Results : MonoBehaviour {
                 if (phase == 2) {
 
 						FriendManager.Instance.OnWorldEnd();
-                   
+						SoundManager.instance.backupMusicSource.Stop();
                        // largeTrashTextDisplay.SetActive(false);
                         backPaper.enabled = true;
                         image.enabled = true;
