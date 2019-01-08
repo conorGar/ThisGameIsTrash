@@ -45,6 +45,8 @@ public class DialogEditorWindow : EditorWindow {
     [MenuItem ("Window/TGIT/Dialog Editor")]
     static void Init()
     {
+        EditorStyles.textField.wordWrap = true;
+
         Debug.Log("Opening Dialog Editor Window");
         dialogs = new List<DialogDefinition>();
         ClearDialogs();
@@ -104,12 +106,12 @@ public class DialogEditorWindow : EditorWindow {
         {
             GUILayout.BeginHorizontal();
             GUILayout.Label("Current Dialog: ", EditorStyles.boldLabel);
-            currentDialog.title = GUILayout.TextField(currentDialog.title);
+            currentDialog.title = EditorGUILayout.TextField(currentDialog.title);
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Dialog Icon ID: ", EditorStyles.boldLabel);
-            currentDialog.dialogIconID = GUILayout.TextField(currentDialog.dialogIconID);
+            currentDialog.dialogIconID = EditorGUILayout.TextField(currentDialog.dialogIconID);
             GUILayout.EndHorizontal();
         }
         else
@@ -154,7 +156,7 @@ public class DialogEditorWindow : EditorWindow {
                         break;
                 }
 
-                node.window = GUI.Window(i, node.window, DrawNodeWindow, node.title);
+                node.window = GUILayout.Window(i, node.window, DrawNodeWindow, node.title);
             }
         }
         EndWindows();
@@ -165,14 +167,27 @@ public class DialogEditorWindow : EditorWindow {
         if (Event.current.type == EventType.MouseDrag)
         {
             Vector2 currPos = Event.current.mousePosition;
+            float speed = 0f;
+            switch (Event.current.button) {
+                case 0: // Left Mouse
+                case 1: // Right Mouse
+                    speed = 2f;
+                    break;
+                case 2: // Middle Mouse
+                    speed = 4f;
+                    break;
+                default:
+                    // Some other mouse button
+                    break;
+            }
 
-            if (Vector2.Distance(currPos, lastMousePos) < 50)
+            if (Vector2.Distance(currPos, lastMousePos) < 100)
             {
                 float x = lastMousePos.x - currPos.x;
                 float y = lastMousePos.y - currPos.y;
 
-                scrollPos.x += x;
-                scrollPos.y += y;
+                scrollPos.x += x*speed;
+                scrollPos.y += y*speed;
                 Event.current.Use();
             }
             lastMousePos = currPos;
@@ -189,26 +204,17 @@ public class DialogEditorWindow : EditorWindow {
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Title: ");
-        node.title = GUILayout.TextField(node.title);
+        node.title = EditorGUILayout.TextField(node.title);
         if (GUILayout.Button("Collapse"))
         {
             node.isCollapsed = !node.isCollapsed;
-
-            if (node.isCollapsed)
-                node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.collapsedHeight);
-            else
-            {
-                if (node.type == DIALOGNODETYPE.STATEMENT)
-                    node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.defaultWindowHeight);
-                else
-                    node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.questionWindowHeight);
-            }
+            node.window.height = 0f;
         }
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Speaker: ");
-        node.speakerName = GUILayout.TextField(node.speakerName);
+        node.speakerName = EditorGUILayout.TextField(node.speakerName);
         GUILayout.EndHorizontal();
 
         if (!node.isCollapsed)
@@ -222,22 +228,17 @@ public class DialogEditorWindow : EditorWindow {
             node.type = (DIALOGNODETYPE)EditorGUILayout.EnumPopup(node.type);
             GUILayout.EndHorizontal();
 
-            if (GUI.changed)
-            {
-                if (node.isCollapsed)
-                    node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.collapsedHeight);
-                else
-                {
-                    if (node.type == DIALOGNODETYPE.STATEMENT)
-                        node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.defaultWindowHeight);
-                    else
-                        node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, DialogNode.questionWindowHeight);
-                }
+            if (GUI.changed) {
+                node.window.height = 0f;
             }
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Text: ");
-            node.text = GUILayout.TextArea(node.text, GUILayout.Height(50));
+            EditorGUI.BeginChangeCheck();
+            node.text = EditorGUILayout.TextArea(node.text);
+            if (EditorGUI.EndChangeCheck())
+                node.window.height = 0f;
+
             GUILayout.EndHorizontal();
 
             switch (node.type)
@@ -249,7 +250,7 @@ public class DialogEditorWindow : EditorWindow {
                         // Create
                         if (GUILayout.Button("Create Next Dialog"))
                         {
-                            DialogNode new_node = new DialogNode(currentDialog, "NewDialog", "Child Dialog", DIALOGNODETYPE.STATEMENT, node.window.x + 110f, node.window.y + 110f);
+                            DialogNode new_node = new DialogNode(currentDialog, node.title, "", DIALOGNODETYPE.STATEMENT, node.window.x + 110f, node.window.y + 110f);
                             currentDialog.nodes[new_node.id] = new_node;
                             node.child_id = new_node.id;
 
@@ -293,30 +294,33 @@ public class DialogEditorWindow : EditorWindow {
                     GUILayout.BeginHorizontal();
                     node.isDialogAction = GUILayout.Toggle(node.isDialogAction, "Dialog Action?");
                     GUILayout.Label("Action: ");
-                    node.action = GUILayout.TextField(node.action);
+                    node.action = EditorGUILayout.TextField(node.action);
                     GUILayout.EndHorizontal();
 
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("Change Friend State: ");
-                    node.friendState = GUILayout.TextField(node.friendState);
+                    node.friendState = EditorGUILayout.TextField(node.friendState);
                     GUILayout.EndHorizontal();
 
                     GUILayout.BeginHorizontal();
                     node.isThought = GUILayout.Toggle(node.isThought, "Is Thought?");
                     GUILayout.Label("Anim Trigger: ");
-                    node.animTrigger = GUILayout.TextField(node.animTrigger);
+                    node.animTrigger = EditorGUILayout.TextField(node.animTrigger);
                     GUILayout.EndHorizontal();
                     break;
                 case DIALOGNODETYPE.QUESTION:
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("Question: ");
-                    node.question = GUILayout.TextArea(node.question, GUILayout.Height(50));
+                    EditorGUI.BeginChangeCheck();
+                    node.question = EditorGUILayout.TextArea(node.question);
+                    if (EditorGUI.EndChangeCheck())
+                        node.window.height = 0f;
                     GUILayout.EndHorizontal();
 
                     // Create
                     if (GUILayout.Button("Create Response"))
                     {
-                        DialogResponse new_response = new DialogResponse("NewResponse");
+                        DialogResponse new_response = new DialogResponse("");
                         node.responses.Add(new_response);
                     }
 
@@ -327,6 +331,7 @@ public class DialogEditorWindow : EditorWindow {
                         if (GUILayout.Button("X"))
                         {
                             node.responses.Remove(node.responses[i]);
+                            node.window = new Rect(node.window.x, node.window.y, DialogNode.defaultWindowWidth, 0f);
                         }
                         if (GUILayout.Button("Link"))
                         {
@@ -342,7 +347,11 @@ public class DialogEditorWindow : EditorWindow {
                             menu.ShowAsContext();
                         }
                         GUILayout.EndHorizontal();
-                        node.responses[i].text = GUILayout.TextArea(node.responses[i].text);
+
+                        EditorGUI.BeginChangeCheck();
+                        node.responses[i].text = EditorGUILayout.TextArea(node.responses[i].text);
+                        if (EditorGUI.EndChangeCheck())
+                            node.window.height = 0f;
                     }
                     break;
             }

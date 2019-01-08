@@ -30,9 +30,6 @@ public class DialogResponse
 public class DialogNode
 {
     public static float defaultWindowWidth = 270f;
-    public static float defaultWindowHeight = 200f;
-    public static float questionWindowHeight = 420f;
-    public static float collapsedHeight = 42f;
 
     public Rect window;
 
@@ -61,7 +58,7 @@ public class DialogNode
     {
         isCollapsed = false;
         title = p_title;
-        speakerName = "speakerName";
+        speakerName = "";
         question = "";
         action = "";
         isDialogAction = false;
@@ -75,7 +72,7 @@ public class DialogNode
         responses = new List<DialogResponse>();
         x = p_x;
         y = p_y;
-        window = new Rect(x, y, defaultWindowWidth, defaultWindowHeight);
+        window = new Rect(x, y, defaultWindowWidth, 0);
     }
 }
 
