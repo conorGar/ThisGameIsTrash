@@ -10,6 +10,11 @@ public class CutsceneActivator : MonoBehaviour
 	public ParticleSystem backHidingClouds;
 	public GameObject title;
 	public GameObject peakViewStars;
+	public AudioClip musicToPlay;
+	public AudioClip starShow;
+	public GameObject demoEndFader;
+	public GameObject demoEndText;
+	public Ev_FadeHelper fader;
 
 	bool movePlayer;
 	Vector2 playerDestination;
@@ -36,6 +41,8 @@ public class CutsceneActivator : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D collider){
 		if(collider.gameObject == player && !movePlayer){
 		GameStateManager.Instance.PushState(typeof(DialogState));
+		SoundManager.instance.backupMusicSource.clip = musicToPlay;
+		SoundManager.instance.backupMusicSource.Play();
 		CamManager.Instance.mainCamEffects.CameraPan(player,true);
 		playerDestination = new Vector2(67.9f,47.7f);
 
@@ -58,11 +65,19 @@ public class CutsceneActivator : MonoBehaviour
 		InvokeRepeating("PeakStarShow",0f,.2f);
 		yield return new WaitForSeconds(5f);
 		title.SetActive(true);
+		yield return new WaitForSeconds(2f);
+		demoEndFader.SetActive(true);
+		yield return new WaitForSeconds(3.5f);
+		demoEndText.SetActive(true);
+		yield return new WaitForSeconds(1.5f);
+		fader.FadeToScene("TitleScreen");
+
 	}
 
 	void PeakStarShow(){
 		if(starShowIndex < peakViewStars.transform.childCount){
 			peakViewStars.transform.GetChild(starShowIndex).gameObject.SetActive(true);
+			SoundManager.instance.PlaySingle(starShow);
 			starShowIndex++;
 		}else{
 			CancelInvoke();
