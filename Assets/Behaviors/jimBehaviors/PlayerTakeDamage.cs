@@ -53,7 +53,21 @@ public class PlayerTakeDamage : MonoBehaviour {
                     if (enemyComp != null)
                         damageDealt = enemyComp.attkPower;
                 }
-                TakeDamage(enemy.gameObject);
+
+				if(enemy.gameObject.GetComponent<FollowPlayerAfterNotice>() != null){
+					if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER)){
+						if(enemy.gameObject.GetComponent<FollowPlayerAfterNotice>().noticedPlayer || !GlobalVariableManager.Instance.IS_HIDDEN){
+							TakeDamage(enemy.gameObject);
+                		}
+                	}else{
+							TakeDamage(enemy.gameObject);
+                	}
+                	
+                }else{
+					if(!GlobalVariableManager.Instance.IS_HIDDEN){
+               	 		TakeDamage(enemy.gameObject);
+               	 	}
+                }
 			} else if (enemy.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
                 if (enemy.gameObject.tag == "Boss") {
                     damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;

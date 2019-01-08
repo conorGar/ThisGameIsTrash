@@ -30,21 +30,22 @@ public class FireTowardPlayer : MonoBehaviour {
 	}
 
 	void Fire(){
-		if(gameObject.activeInHierarchy == false){
-			CancelInvoke();
-		}
-		//Debug.Log("fired");
-		if(anim.CurrentClip.name != "hit"){
-			anim.Play("throwL");
-			if(player.transform.position.x < transform.position.x){
-				transform.localScale = new Vector3(1,1,1);
-			} else{
-				transform.localScale = new Vector3(-1,1,1);
+		if(!GlobalVariableManager.Instance.IS_HIDDEN){ //wont fire at player if player is hidden
+			if(gameObject.activeInHierarchy == false){
+				CancelInvoke();
 			}
-			if(gameObject.activeInHierarchy)
-				StartCoroutine("AnimationControl");
+			//Debug.Log("fired");
+			if(anim.CurrentClip.name != "hit"){
+				anim.Play("throwL");
+				if(player.transform.position.x < transform.position.x){
+					transform.localScale = new Vector3(1,1,1);
+				} else{
+					transform.localScale = new Vector3(-1,1,1);
+				}
+				if(gameObject.activeInHierarchy)
+					StartCoroutine("AnimationControl");
+			}
 		}
-
 
 	}
 

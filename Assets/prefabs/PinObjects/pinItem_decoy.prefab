@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61061166409578846}
   - component: {fileID: 114990906393867566}
   - component: {fileID: 61206678299793838}
-  m_Layer: 8
+  m_Layer: 18
   m_Name: pinItem_decoy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1379627873090016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.080376, y: -4.3403306, z: 0}
+  m_LocalPosition: {x: 30.336016, y: 17.028303, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4965592082825652}
@@ -110,7 +110,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.14, y: -0.59}
+  m_Offset: {x: 0.14, y: -1.15}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -121,7 +121,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 1.69}
+  m_Size: {x: 1.2, y: 1.07}
   m_EdgeRadius: 0
 --- !u!114 &114990906393867566
 MonoBehaviour:
