@@ -1,0 +1,2847 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: CaptainBadgerDialog
+  m_EditorClassIdentifier: 
+  title: CaptainBadgerDialog
+  dialogIconID: dialog_icon_ID
+  nodeStore:
+    keys:
+    - Value: 0a383284-2e6b-4d10-9b70-b061e1340d13
+    - Value: 457beb5a-f79c-47a9-aefb-7b63264cb553
+    - Value: 177cf556-a59c-46d9-b809-5191d972b67d
+    - Value: a7ce2ffa-996b-4a4c-97b3-ef704ba6c98a
+    - Value: 1c764f28-fa4a-4270-ba58-db6c3066da32
+    - Value: 60ef3fa0-08cf-4872-95b2-420391107323
+    - Value: 54e7223f-a68e-41b9-be9d-7160421accb8
+    - Value: 8a9ec983-8382-4fc6-a533-742b7e36f516
+    - Value: 2a505efc-22da-4242-8e38-365e41a51521
+    - Value: 8775dfbd-dc92-4e29-8ab0-5e564f8f4408
+    - Value: 46ddac36-67ed-459c-86c6-4ff661447035
+    - Value: ea1ee072-f8ad-4a46-a543-ddccb2e960a5
+    - Value: e007cc73-8b21-4adb-816f-8ab08a07b357
+    - Value: af1d7892-5032-4025-abda-ee3e34e87161
+    - Value: a3d9da4d-85cf-455d-8249-ca646d223cf9
+    - Value: 47b93b04-d130-4dc1-b9c2-378c6a2ad039
+    - Value: 981b152d-1ce0-4429-bed6-29ccfda89e5f
+    - Value: 9c75ef75-4a20-4caf-88b0-e213a4448ace
+    - Value: efd23be1-bee9-43e7-bc46-ab66b8f7c402
+    - Value: ed064f59-a2f8-40c1-8007-5111f10794f8
+    - Value: c7201020-41cc-4c88-8713-87a1d19c25c0
+    - Value: 188aeb74-fd86-44cc-bd99-17d04765defa
+    - Value: 54404677-c1dc-44c4-851b-dafb0b8f6554
+    - Value: 5efef046-cd36-4a93-b165-ebd9dde7550e
+    - Value: 931fce83-4d26-415a-8d37-e78ae71e1d6e
+    - Value: fafc838f-b224-46f8-8a11-8d6b353d293a
+    - Value: ba6960ba-2089-41d3-a8ab-d6a9929f1cbc
+    - Value: a4ca2c47-fedc-40c0-a086-67c38d32363b
+    - Value: f189384d-a950-4b7d-b42c-c9624e5142b1
+    - Value: a7805769-f2f9-48c6-bff3-e3452d52ebea
+    - Value: e44dc503-c3f3-4c19-b6f9-b7f0bc0777dc
+    - Value: f3f17911-5273-4c4c-935a-83faf9354f49
+    - Value: deeff89a-8614-43d9-9a08-d66f335556d2
+    - Value: 5df3cb33-0217-404c-9fec-5ff182a9ff85
+    - Value: f1f9bf5f-adde-426b-bfce-fe88cc5f64e0
+    - Value: 0212977f-b29d-4e2a-a661-94ce82210c9a
+    - Value: b404b723-71e4-40a6-b87a-609e1ddb674b
+    - Value: bcd08385-0ded-4740-899d-47b388fc70af
+    - Value: 0a59f541-bbf2-43fd-9090-fcb2243184fb
+    - Value: 5ca42b3b-e71c-4782-8539-2e51200dc826
+    - Value: c0942420-3e96-4856-8a84-a70d3c262367
+    - Value: 072c8a37-1ac1-43d9-abc6-834c3d69fb71
+    - Value: 089f0c36-614c-448a-b621-e56eb8e86086
+    - Value: fc1dfff4-2765-4b63-bb3d-f16792eef5fc
+    - Value: edf44eed-666c-4503-8960-0b6e60033d52
+    - Value: f9baf7c1-5dcd-4046-9168-2784dc0c3834
+    - Value: 495b5131-a641-4bc9-9608-2a5ad182b090
+    - Value: dc2709d1-6322-44e5-bfb4-9461389b1dc8
+    - Value: ee7d921a-f082-46b9-8e71-85ffc44413a4
+    - Value: 030eb157-244e-4908-8e0d-7d1ba733efb5
+    - Value: 33fc4c03-0983-46e9-bbde-6f340b920875
+    - Value: 0f5a98dc-3fc4-42b8-9c62-2209153f87a1
+    - Value: a3ba3c2d-aa08-4181-9d2b-6e0a52ec6270
+    - Value: 9b70e457-6982-4817-9e27-4a51fd62cf9a
+    - Value: c494d363-c537-4d5b-b037-3bcd0f1f3dcb
+    - Value: 0b5780ba-253e-4c77-a17e-d8dddfb2325b
+    - Value: e7b7dfb1-2cfc-465d-9716-4b7ad0d6a493
+    - Value: a2bf86cb-e9f0-43ad-bedf-90680b8816c2
+    - Value: c7f0bdf2-d88e-42f0-a8a1-02484fef1c9e
+    - Value: f3a42f6e-4d48-49c1-b41a-83d3aa7c1a2a
+    - Value: 89814900-ec96-4460-9524-58d79e807664
+    - Value: 88edd468-bbfc-40d4-9376-5356889f1b11
+    - Value: 09ff2aed-d3b3-4a46-bf1f-d922b3c971ed
+    - Value: 754e14f9-5776-4872-8025-faa51e162120
+    - Value: f0a69d9f-a2e6-46f8-9429-50ce6c621582
+    - Value: 50a38c89-1ebe-4783-8523-85516f95120a
+    - Value: 62147583-224f-45ae-b5d8-df06837d42d3
+    - Value: f33988c4-310a-49af-9ad6-ffd48aa43532
+    - Value: 1b4b354e-1d14-4af5-9275-9450367015c5
+    - Value: 7e7eb0ee-876b-4885-842d-370743fe780a
+    - Value: 735eeeb9-cd99-46c7-90c5-e14709e6713c
+    - Value: f61ac467-baee-425d-bde5-db29278b6470
+    - Value: a5f97b44-c20a-4d99-bc5e-6d5de7042605
+    - Value: 6f139d94-0c9c-44c0-9166-9d6f668e0b8c
+    - Value: 9c32c24c-e6f2-48b8-a4e6-6dace9cd9afb
+    - Value: 5596f20b-e3e3-480d-979a-ea6e44871116
+    - Value: 5f31d288-3560-4c34-8c71-eddbfb568222
+    - Value: feb1c40b-b89f-486e-9e21-07ddad615b6c
+    - Value: 369e6a31-73a4-42a5-aca1-30fe8b2e584f
+    - Value: c3292c46-8320-4952-9340-2d075372f984
+    - Value: 3e00f1a8-22b7-40d3-b880-a051b17439a5
+    - Value: 707259b8-7d9a-489e-90eb-b0033c5bbc88
+    - Value: 24ac0802-27ec-40bc-bc52-432cd69b2510
+    - Value: 984ade3b-a2f8-4077-a1a3-b125360d139f
+    - Value: 732a0310-d326-4705-b653-b44a51cfe986
+    - Value: 174ea158-48b4-4408-92fe-e9b2194f997d
+    - Value: 4269ae01-bf93-49be-8ef1-1907650c82a4
+    - Value: 86516390-3aab-473d-8030-648694996eb8
+    - Value: a24fcaaf-d175-4d40-927d-f1e722d2365e
+    - Value: aac14758-f144-431b-bc8d-4cb8152020f0
+    - Value: a4508cfb-1c09-4256-bbdd-98f313c84145
+    - Value: 9b4d0cf0-ed38-4d51-bed1-6ca44930df82
+    - Value: 44f50a1f-21c4-4817-b8c3-7fe4b1b1adce
+    - Value: a3fe058d-3084-427a-a8fb-215018d4da61
+    - Value: 80b6760c-35c6-4832-ada8-137ba8f02279
+    - Value: 210b90a6-8b2c-415c-9664-5d9b86fcfb87
+    - Value: 13a41794-e16f-4390-be0f-563143213649
+    - Value: e272c937-3535-46b9-9597-ab08c046389e
+    - Value: 8dc21838-d60d-4e7e-ab73-75454139e9c4
+    - Value: 0805d9f3-9a58-4afe-9248-02fbc028d0d6
+    - Value: 37df0bb6-311f-4b19-bb14-d96ae36bee5f
+    - Value: 42502878-ce79-42e0-b67b-1fe5eb81d0f1
+    - Value: 6527deae-ce36-4a8b-9e3d-daddd139d4d4
+    - Value: 8d7bdf90-4d43-4d4e-a84d-ed4cfdec72ca
+    - Value: ffc3b0a7-8c4c-4e31-95dc-021fe06cf6cc
+    - Value: 5f2334fa-bddb-4cd7-812b-1dc2f7dca47f
+    - Value: 5cf62f91-1a84-4bb9-81f9-6ce1a554b9e7
+    values:
+    - window:
+        serializedVersion: 2
+        x: 183
+        y: 244
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: badgerStar
+      speakerName: Captain Badger
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0a383284-2e6b-4d10-9b70-b061e1340d13
+      x: 183
+      y: 244
+      text: Heh. Heh. Hoo. Heh.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 457beb5a-f79c-47a9-aefb-7b63264cb553
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 487
+        y: 218
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 457beb5a-f79c-47a9-aefb-7b63264cb553
+      x: 487
+      y: 218
+      text: Oh! A garbage man! How cool!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 177cf556-a59c-46d9-b809-5191d972b67d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 777
+        y: 235
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 177cf556-a59c-46d9-b809-5191d972b67d
+      x: 777
+      y: 235
+      text: It's a pleasure to meet you, sir. I am <c=g> Captain Badger </c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a7ce2ffa-996b-4a4c-97b3-ef704ba6c98a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1072
+        y: 222
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a7ce2ffa-996b-4a4c-97b3-ef704ba6c98a
+      x: 1072
+      y: 222
+      text: Sorry for the noise, I've just been working real hard trying to <c=g>dig
+        a tunnel</c> here.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1c764f28-fa4a-4270-ba58-db6c3066da32
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1360
+        y: 241
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1c764f28-fa4a-4270-ba58-db6c3066da32
+      x: 1360
+      y: 241
+      text: I got big plans, man, BIG PLANS! You'll see, this won't be your average
+        badger tunnel!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 60ef3fa0-08cf-4872-95b2-420391107323
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1650
+        y: 225
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 60ef3fa0-08cf-4872-95b2-420391107323
+      x: 1650
+      y: 225
+      text: No, no. I, Captain Badger, will dig out nothing less than the bestest
+        tunnel ever dug!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 54e7223f-a68e-41b9-be9d-7160421accb8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1939
+        y: 240
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 54e7223f-a68e-41b9-be9d-7160421accb8
+      x: 1939
+      y: 240
+      text: It won't be easy, no, it is certainly a task that most...maybe even ALL
+        other badgers, could not handle.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8a9ec983-8382-4fc6-a533-742b7e36f516
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2228
+        y: 258
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8a9ec983-8382-4fc6-a533-742b7e36f516
+      x: 2228
+      y: 258
+      text: But I, <c=g>Captain Badger</c>, am certainly no ordinary badger! No sir!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2a505efc-22da-4242-8e38-365e41a51521
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2515
+        y: 277
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2a505efc-22da-4242-8e38-365e41a51521
+      x: 2515
+      y: 277
+      text: I have high hopes! I will be the change! I will make this great tunnel!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8775dfbd-dc92-4e29-8ab0-5e564f8f4408
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2815
+        y: 54
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: I will build the best-est tunnel ever! I have big plans!
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8775dfbd-dc92-4e29-8ab0-5e564f8f4408
+      x: 2815
+      y: 54
+      text: Then all the other badgers will finally think I, <c=g>Captain Badger</c>,
+        am cool!
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Cool, good luck. I have total faith in you, Captain Badger.
+        node_id:
+          Value: 
+      - text: Seems like a big task for one badger.
+        node_id:
+          Value: 
+      - text: '...'
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 3101.6987
+        y: 238
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 46ddac36-67ed-459c-86c6-4ff661447035
+      x: 3101.6987
+      y: 238
+      text: Ah, well, maybe for a normal badger, yes.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ea1ee072-f8ad-4a46-a543-ddccb2e960a5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3402.6987
+        y: 239
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ea1ee072-f8ad-4a46-a543-ddccb2e960a5
+      x: 3402.6987
+      y: 239
+      text: 'I understand your concern. But you will soon see. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e007cc73-8b21-4adb-816f-8ab08a07b357
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3702.6987
+        y: 337
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e007cc73-8b21-4adb-816f-8ab08a07b357
+      x: 3702.6987
+      y: 337
+      text: Give me time. Come by <c=g> in a few days</c> and I'll show you the power
+        of <c=g>Captain Badger</c>'s determination!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: af1d7892-5032-4025-abda-ee3e34e87161
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4024.6987
+        y: 255
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: af1d7892-5032-4025-abda-ee3e34e87161
+      x: 4024.6987
+      y: 255
+      text: Until then, there is no time to waste! HEE! HOOO!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3120.5889
+        y: 30
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a3d9da4d-85cf-455d-8249-ca646d223cf9
+      x: 3120.5889
+      y: 30
+      text: Ah! And rightfully so, garbage man!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 47b93b04-d130-4dc1-b9c2-378c6a2ad039
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3416.5889
+        y: 28
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 47b93b04-d130-4dc1-b9c2-378c6a2ad039
+      x: 3416.5889
+      y: 28
+      text: 'Many don''t have the vision! Many don''t understand the drive of <c=g>
+        Captain Badger</c>!I''m glad that is not the case with you! '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 196
+        y: 518
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: TakingLonger
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 981b152d-1ce0-4429-bed6-29ccfda89e5f
+      x: 196
+      y: 518
+      text: Ah! He returns!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9c75ef75-4a20-4caf-88b0-e213a4448ace
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 482
+        y: 536
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9c75ef75-4a20-4caf-88b0-e213a4448ace
+      x: 482
+      y: 536
+      text: I hope your pursuits of trash are going well, trashman!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: efd23be1-bee9-43e7-bc46-ab66b8f7c402
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 753
+        y: 556
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: efd23be1-bee9-43e7-bc46-ab66b8f7c402
+      x: 753
+      y: 556
+      text: I, <c=g>Captain Badger</c>, am still on that mining grind...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ed064f59-a2f8-40c1-8007-5111f10794f8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1043
+        y: 542
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ed064f59-a2f8-40c1-8007-5111f10794f8
+      x: 1043
+      y: 542
+      text: '...I...uh..will say, it''s taking a bit longer than expected to dig this
+        tunnel.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: c7201020-41cc-4c88-8713-87a1d19c25c0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1351
+        y: 559
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: Building this tunnel is taking...longer than expected.
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c7201020-41cc-4c88-8713-87a1d19c25c0
+      x: 1351
+      y: 559
+      text: Turns out being the change is a little more effort than <c=g> Captain
+        Badger</c> initally believed.
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Are you thinking of giving up?
+        node_id:
+          Value: 
+      - text: Don't tell me you're giving up!!
+        node_id:
+          Value: 
+      - text: Yeah, well, no real rush. You got this, keep it up, Captain Badger!
+        node_id:
+          Value: 
+      - text: You've made great progress! Things worth doing often take time!
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 1649.1096
+        y: 679
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 188aeb74-fd86-44cc-bd99-17d04765defa
+      x: 1649.1096
+      y: 679
+      text: Ahh! NEVER, GARBAGEMAN!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 54404677-c1dc-44c4-851b-dafb0b8f6554
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1942.1096
+        y: 671
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 54404677-c1dc-44c4-851b-dafb0b8f6554
+      x: 1942.1096
+      y: 671
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5efef046-cd36-4a93-b165-ebd9dde7550e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2260.1096
+        y: 678
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5efef046-cd36-4a93-b165-ebd9dde7550e
+      x: 2260.1096
+      y: 678
+      text: ..but..to be honest...there is some doubt that I may have bitten off more
+        than chew here, garbage man.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 931fce83-4d26-415a-8d37-e78ae71e1d6e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2547.1096
+        y: 540
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 931fce83-4d26-415a-8d37-e78ae71e1d6e
+      x: 2547.1096
+      y: 540
+      text: I am unsure how much credit to give the doubt that grows in my mind.
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Don't kill youself over this. Even if you don't build the tunnel, I
+          think you're still cool.
+        node_id:
+          Value: 
+      - text: Hmm. I think it might be a little too soon to start doubting yourself.
+        node_id:
+          Value: 
+      - text: No, Captain Badger, you got this! You're so cool!
+        node_id:
+          Value: 
+      - text: Yeah..I'm not sure either.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 1649.6986
+        y: 474
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fafc838f-b224-46f8-8a11-8d6b353d293a
+      x: 1649.6986
+      y: 474
+      text: Me?! <c=g>CAPTAIN BADGER</c>?!? Give up?!?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ba6960ba-2089-41d3-a8ab-d6a9929f1cbc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1929.6986
+        y: 464
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ba6960ba-2089-41d3-a8ab-d6a9929f1cbc
+      x: 1929.6986
+      y: 464
+      text: I'll have you know, garbage man, it will take quite a lot more than a
+        few extra rocks to sway me, sir!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1650.2329
+        y: 886
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a4ca2c47-fedc-40c0-a086-67c38d32363b
+      x: 1650.2329
+      y: 886
+      text: Ah, but there is a rush, garbage man.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f189384d-a950-4b7d-b42c-c9624e5142b1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1943.2329
+        y: 911
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f189384d-a950-4b7d-b42c-c9624e5142b1
+      x: 1943.2329
+      y: 911
+      text: I cannot stand to live longer as an average badger.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a7805769-f2f9-48c6-bff3-e3452d52ebea
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2234.233
+        y: 934
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a7805769-f2f9-48c6-bff3-e3452d52ebea
+      x: 2234.233
+      y: 934
+      text: You must understand. I must be taken seriously by the other badgers.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e44dc503-c3f3-4c19-b6f9-b7f0bc0777dc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2523.233
+        y: 1064
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e44dc503-c3f3-4c19-b6f9-b7f0bc0777dc
+      x: 2523.233
+      y: 1064
+      text: And if I can do just this one thing...then for the rest of my life I'll
+        know that I can achieve whatever I set my mind to.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f3f17911-5273-4c4c-935a-83faf9354f49
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2822.233
+        y: 1198
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: I need to get this tunnel done. It's the only way the other badgers
+        will take me seriously.
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f3f17911-5273-4c4c-935a-83faf9354f49
+      x: 2822.233
+      y: 1198
+      text: Yes..there's no other way. It's... all I got.
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: I'm sure there are other ways to get the other badgers to take you seriously.
+        node_id:
+          Value: 
+      - text: Hm. I understand, but be patient. You got this.
+        node_id:
+          Value: 
+      - text: So don't stop, Captain Badger! You're almost there!
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 3152.4795
+        y: 909
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: deeff89a-8614-43d9-9a08-d66f335556d2
+      x: 3152.4795
+      y: 909
+      text: ..Well, frankly, what do you know about badgers.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5df3cb33-0217-404c-9fec-5ff182a9ff85
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3464.4795
+        y: 831
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5df3cb33-0217-404c-9fec-5ff182a9ff85
+      x: 3464.4795
+      y: 831
+      text: We badger's are a simple race. A good digger is a good badger, plain and
+        simple.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3761.014
+        y: 831
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f1f9bf5f-adde-426b-bfce-fe88cc5f64e0
+      x: 3761.014
+      y: 831
+      text: But you humans wouldn't understand that, with your potential for multiple
+        skills and life choices and stuff.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 0212977f-b29d-4e2a-a661-94ce82210c9a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4036.014
+        y: 1036
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0212977f-b29d-4e2a-a661-94ce82210c9a
+      x: 4036.014
+      y: 1036
+      text: 'Anyway, I really should be getting back to digging now. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b404b723-71e4-40a6-b87a-609e1ddb674b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4357.0137
+        y: 1036
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b404b723-71e4-40a6-b87a-609e1ddb674b
+      x: 4357.0137
+      y: 1036
+      text: Catch you later. HEE! HOOO!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3141.3835
+        y: 1286
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: bcd08385-0ded-4740-899d-47b388fc70af
+      x: 3141.3835
+      y: 1286
+      text: Yeah...maybe, garbage man. But how can either of us know for sure?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 0a59f541-bbf2-43fd-9090-fcb2243184fb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3460.3835
+        y: 1293
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0a59f541-bbf2-43fd-9090-fcb2243184fb
+      x: 3460.3835
+      y: 1293
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3152.9727
+        y: 1071
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5ca42b3b-e71c-4782-8539-2e51200dc826
+      x: 3152.9727
+      y: 1071
+      text: Hm. Yeah, I suppose so. I hope you're right, garbage man.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2844.2056
+        y: 487
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c0942420-3e96-4856-8a84-a70d3c262367
+      x: 2844.2056
+      y: 487
+      text: Well, thanks, but, I'm more concerned about the way the other badgers
+        see me.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 072c8a37-1ac1-43d9-abc6-834c3d69fb71
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3189.2056
+        y: 478
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 072c8a37-1ac1-43d9-abc6-834c3d69fb71
+      x: 3189.2056
+      y: 478
+      text: 'You must understand, garbage man, this is all I got. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2874.5068
+        y: 719
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 089f0c36-614c-448a-b621-e56eb8e86086
+      x: 2874.5068
+      y: 719
+      text: '...Yeah.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: fc1dfff4-2765-4b63-bb3d-f16792eef5fc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3172.5068
+        y: 708
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fc1dfff4-2765-4b63-bb3d-f16792eef5fc
+      x: 3172.5068
+      y: 708
+      text: Yeah! You're right, garbage man! As usual!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: edf44eed-666c-4503-8960-0b6e60033d52
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3497.5068
+        y: 616
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: edf44eed-666c-4503-8960-0b6e60033d52
+      x: 3497.5068
+      y: 616
+      text: To think that I, <c=g> Captain Badger</c> himself, would succumb to self-doubt!
+        Ha!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f9baf7c1-5dcd-4046-9168-2784dc0c3834
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3882.5068
+        y: 590
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f9baf7c1-5dcd-4046-9168-2784dc0c3834
+      x: 3882.5068
+      y: 590
+      text: I'm sure I must only dig a little longer, then I will be finished! I know
+        it!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2851.2742
+        y: 936
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 495b5131-a641-4bc9-9608-2a5ad182b090
+      x: 2851.2742
+      y: 936
+      text: '...Yeah. Well! Don''t be too concerned, garbage man!'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 197.69873
+        y: 1229
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: GivingUp
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: dc2709d1-6322-44e5-bfb4-9461389b1dc8
+      x: 197.69873
+      y: 1229
+      text: Ah. Hello there, garbage man.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9b70e457-6982-4817-9e27-4a51fd62cf9a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 199
+        y: 1753
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: ActingCold
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ee7d921a-f082-46b9-8e71-85ffc44413a4
+      x: 199
+      y: 1753
+      text: Oh...hey garbage man.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 33fc4c03-0983-46e9-bbde-6f340b920875
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 179
+        y: 2807
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: IsItEnough
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 030eb157-244e-4908-8e0d-7d1ba733efb5
+      x: 179
+      y: 2807
+      text: 'Ah. Garbage man. I''m glad you''re here. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: aac14758-f144-431b-bc8d-4cb8152020f0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 506
+        y: 1750
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 33fc4c03-0983-46e9-bbde-6f340b920875
+      x: 506
+      y: 1750
+      text: You, uh, need something? I'm pretty busy right now.
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Just checking to see how progress on the tunnel was going.
+        node_id:
+          Value: 
+      - text: Oh. No. Sorry to bother you.
+        node_id:
+          Value: 
+      - text: Is everything alright?
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 186
+        y: 3047
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: End_pride
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0f5a98dc-3fc4-42b8-9c62-2209153f87a1
+      x: 186
+      y: 3047
+      text: Child Dialog
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 190
+        y: 3286
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: End_FinishTunnel
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a3ba3c2d-aa08-4181-9d2b-6e0a52ec6270
+      x: 190
+      y: 3286
+      text: Child Dialog
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 519.6987
+        y: 1249
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9b70e457-6982-4817-9e27-4a51fd62cf9a
+      x: 519.6987
+      y: 1249
+      text: Darn. I...I was really hoping I'd have a tunnel to show you when you showed
+        up next...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: c494d363-c537-4d5b-b037-3bcd0f1f3dcb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 835.6987
+        y: 1239
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c494d363-c537-4d5b-b037-3bcd0f1f3dcb
+      x: 835.6987
+      y: 1239
+      text: '...but...I don''t. All I have is a pile of rocks still. I bet you can''t
+        even tell the difference since the last time.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 0b5780ba-253e-4c77-a17e-d8dddfb2325b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1152.6987
+        y: 1242
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0b5780ba-253e-4c77-a17e-d8dddfb2325b
+      x: 1152.6987
+      y: 1242
+      text: Nobody ever said it would take this long.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e7b7dfb1-2cfc-465d-9716-4b7ad0d6a493
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1450.6987
+        y: 1282
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e7b7dfb1-2cfc-465d-9716-4b7ad0d6a493
+      x: 1450.6987
+      y: 1282
+      text: I've been thinking...I think I'd be a pretty good teacher. You know, like,
+        a school teacher.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a2bf86cb-e9f0-43ad-bedf-90680b8816c2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1760.6987
+        y: 1301
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a2bf86cb-e9f0-43ad-bedf-90680b8816c2
+      x: 1760.6987
+      y: 1301
+      text: I could teach all the younger badgers how to dig and stuff.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: c7f0bdf2-d88e-42f0-a8a1-02484fef1c9e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2058.6987
+        y: 1262
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c7f0bdf2-d88e-42f0-a8a1-02484fef1c9e
+      x: 2058.6987
+      y: 1262
+      text: '...a-and I''m sure some of them will have a lot of natural digging talent!'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f3a42f6e-4d48-49c1-b41a-83d3aa7c1a2a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2064.6987
+        y: 1722
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f3a42f6e-4d48-49c1-b41a-83d3aa7c1a2a
+      x: 2064.6987
+      y: 1722
+      text: ..and I could be, like, a mentor to some badger that will be a better
+        digger than I ever could be.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 89814900-ec96-4460-9524-58d79e807664
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2354.6987
+        y: 1673
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: I think I'm better off becoming a teacher, then trying to dig this
+        tunnel.
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 89814900-ec96-4460-9524-58d79e807664
+      x: 2354.6987
+      y: 1673
+      text: Then HE can dig the best-est tunnel ever dug!
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Yeah. Maybe that's not such a bad idea.
+        node_id:
+          Value: 
+      - text: So you're giving up, then?
+        node_id:
+          Value: 
+      - text: Nah, you're a great digger, keep digging. Don't become a teacher.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 2653.6577
+        y: 1891
+        width: 270
+        height: 42
+      isCollapsed: 1
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 88edd468-bbfc-40d4-9376-5356889f1b11
+      x: 2653.6577
+      y: 1891
+      text: Well, when you put it that way, it sounds bad!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 09ff2aed-d3b3-4a46-bf1f-d922b3c971ed
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2967.6577
+        y: 1900
+        width: 270
+        height: 42
+      isCollapsed: 1
+      title: NewDialog
+      speakerName: speakerName
+      question: It's not like I'm giving up, just refocusing my efforts...
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 09ff2aed-d3b3-4a46-bf1f-d922b3c971ed
+      x: 2967.6577
+      y: 1900
+      text: I'm just trying to think of the best place to focus my efforts! Because
+        my digging really isn't working out here!
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: No, I think you should keep digging. Be patient.
+        node_id:
+          Value: 
+      - text: '...Hm. Ok. I guess that makes sense. Do whatever works for you.'
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 2650.0962
+        y: 1964
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 754e14f9-5776-4872-8025-faa51e162120
+      x: 2650.0962
+      y: 1964
+      text: Wow. You are relentless, huh.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f0a69d9f-a2e6-46f8-9429-50ce6c621582
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2956.0962
+        y: 1988
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f0a69d9f-a2e6-46f8-9429-50ce6c621582
+      x: 2956.0962
+      y: 1988
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 50a38c89-1ebe-4783-8523-85516f95120a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3242.0962
+        y: 1992
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 50a38c89-1ebe-4783-8523-85516f95120a
+      x: 3242.0962
+      y: 1992
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 62147583-224f-45ae-b5d8-df06837d42d3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3532.0962
+        y: 1975
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 62147583-224f-45ae-b5d8-df06837d42d3
+      x: 3532.0962
+      y: 1975
+      text: Ok. Ok. I'll keep going for a few more days. But if my tunnel isn't done
+        by then, that's it.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f33988c4-310a-49af-9ad6-ffd48aa43532
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3823.0962
+        y: 2000
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f33988c4-310a-49af-9ad6-ffd48aa43532
+      x: 3823.0962
+      y: 2000
+      text: I don't know where you get all this faith from garbage man, but I hope
+        you leave some for yourself.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1b4b354e-1d14-4af5-9275-9450367015c5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4138.096
+        y: 1906
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1b4b354e-1d14-4af5-9275-9450367015c5
+      x: 4138.096
+      y: 1906
+      text: Well, back to work, I guess. Hee. Hooo.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2648.4385
+        y: 1652
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7e7eb0ee-876b-4885-842d-370743fe780a
+      x: 2648.4385
+      y: 1652
+      text: Yeah, I mean, it's pretty clear to me that I bit off more than I can chew
+        with this.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 735eeeb9-cd99-46c7-90c5-e14709e6713c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2940.4385
+        y: 1669
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 735eeeb9-cd99-46c7-90c5-e14709e6713c
+      x: 2940.4385
+      y: 1669
+      text: But, well, I tried.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f61ac467-baee-425d-bde5-db29278b6470
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3227.4385
+        y: 1652
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f61ac467-baee-425d-bde5-db29278b6470
+      x: 3227.4385
+      y: 1652
+      text: Darn...how am I gonna get all this stuff outta here?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a5f97b44-c20a-4d99-bc5e-6d5de7042605
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3518.4385
+        y: 1680
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a5f97b44-c20a-4d99-bc5e-6d5de7042605
+      x: 3518.4385
+      y: 1680
+      text: 'Any chance you need a <c=g>Mine Cart</c>? '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6f139d94-0c9c-44c0-9166-9d6f668e0b8c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3831.4385
+        y: 1641
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6f139d94-0c9c-44c0-9166-9d6f668e0b8c
+      x: 3831.4385
+      y: 1641
+      text: I really don't feel like taking that, so you're welcome to have it. Or
+        leave it here. Whatever works.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9c32c24c-e6f2-48b8-a4e6-6dace9cd9afb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4126.4385
+        y: 1601
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9c32c24c-e6f2-48b8-a4e6-6dace9cd9afb
+      x: 4126.4385
+      y: 1601
+      text: Ah. Well, it was a pleasure meeting you, garbage man!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5596f20b-e3e3-480d-979a-ea6e44871116
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4431.4385
+        y: 1628
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5596f20b-e3e3-480d-979a-ea6e44871116
+      x: 4431.4385
+      y: 1628
+      text: I look forward to hearing of your grand accomplishments one day!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 858
+        y: 1868
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5f31d288-3560-4c34-8c71-eddbfb568222
+      x: 858
+      y: 1868
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 817
+        y: 2075
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: Everything's fine, why wouldn't that be the case?
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: feb1c40b-b89f-486e-9e21-07ddad615b6c
+      x: 817
+      y: 2075
+      text: '...yeah? Why? Why wouldn''t something be alright?'
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Just asking.
+        node_id:
+          Value: 
+      - text: Well, you seem a little...short fused.
+        node_id:
+          Value: 
+      - text: Something's clearly bothering you.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 1177
+        y: 2135
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 369e6a31-73a4-42a5-aca1-30fe8b2e584f
+      x: 1177
+      y: 2135
+      text: Well, I don't know what to tell you. Everything's fine.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: c3292c46-8320-4952-9340-2d075372f984
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1479
+        y: 2164
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: If there's nothing else, I really gotta get back to digging...
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c3292c46-8320-4952-9340-2d075372f984
+      x: 1479
+      y: 2164
+      text: Now, if there's nothing else, I really gotta get back to digging.
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: No..I guess that's it.
+        node_id:
+          Value: 
+      - text: What is wrong with you?! You're acting like a real butt right now.
+        node_id:
+          Value: 
+      - text: Alright, now I think you might be getting a little too caught up in
+          your digging.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 1813.4658
+        y: 2154
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 3e00f1a8-22b7-40d3-b880-a051b17439a5
+      x: 1813.4658
+      y: 2154
+      text: See ya. He. Hoo.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1810.4521
+        y: 2356
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 707259b8-7d9a-489e-90eb-b0033c5bbc88
+      x: 1810.4521
+      y: 2356
+      text: I'M acting like a butt?!? You're the one that's distracting me from digging!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 24ac0802-27ec-40bc-bc52-432cd69b2510
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2129.4521
+        y: 2358
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 24ac0802-27ec-40bc-bc52-432cd69b2510
+      x: 2129.4521
+      y: 2358
+      text: I'm so close too. This really will be the best tunnel ever dug.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 984ade3b-a2f8-4077-a1a3-b125360d139f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2449.4521
+        y: 2296
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: Nothing's wrong! I'm close to digging this tunnel! All by myself!
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 984ade3b-a2f8-4077-a1a3-b125360d139f
+      x: 2449.4521
+      y: 2296
+      text: And it'll be all thanks to me. ONLY me.
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: You need to take a break.
+        node_id:
+          Value: 
+      - text: If I may, I think it might do you good to step away for a bit.
+        node_id:
+          Value: 
+      - text: '...alright, if you insist, I''ll leave you to it.'
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 1805.7947
+        y: 2576
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 732a0310-d326-4705-b653-b44a51cfe986
+      x: 1805.7947
+      y: 2576
+      text: What?! You're the one who told me to keep going.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 174ea158-48b4-4408-92fe-e9b2194f997d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2103.7947
+        y: 2590
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 174ea158-48b4-4408-92fe-e9b2194f997d
+      x: 2103.7947
+      y: 2590
+      text: No. I won't stop now.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 863.38367
+        y: 1635
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4269ae01-bf93-49be-8ef1-1907650c82a4
+      x: 863.38367
+      y: 1635
+      text: 'Yup. Everything''s going good. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 86516390-3aab-473d-8030-648694996eb8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1199.3837
+        y: 1673
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 86516390-3aab-473d-8030-648694996eb8
+      x: 1199.3837
+      y: 1673
+      text: Super busy though.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a24fcaaf-d175-4d40-927d-f1e722d2365e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1502.3837
+        y: 1696
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a24fcaaf-d175-4d40-927d-f1e722d2365e
+      x: 1502.3837
+      y: 1696
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 476
+        y: 2813
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: aac14758-f144-431b-bc8d-4cb8152020f0
+      x: 476
+      y: 2813
+      text: I...wanted to talk to you.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a4508cfb-1c09-4256-bbdd-98f313c84145
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 768
+        y: 2815
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a4508cfb-1c09-4256-bbdd-98f313c84145
+      x: 768
+      y: 2815
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9b4d0cf0-ed38-4d51-bed1-6ca44930df82
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1053
+        y: 2805
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9b4d0cf0-ed38-4d51-bed1-6ca44930df82
+      x: 1053
+      y: 2805
+      text: I...can't keep doing this.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 44f50a1f-21c4-4817-b8c3-7fe4b1b1adce
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1349
+        y: 2824
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 44f50a1f-21c4-4817-b8c3-7fe4b1b1adce
+      x: 1349
+      y: 2824
+      text: 'I was too optimistic about this tunnel project. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a3fe058d-3084-427a-a8fb-215018d4da61
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1657
+        y: 2867
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a3fe058d-3084-427a-a8fb-215018d4da61
+      x: 1657
+      y: 2867
+      text: I just...can't stand the feeling of not knowing how much longer it will
+        take.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 80b6760c-35c6-4832-ada8-137ba8f02279
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1961
+        y: 2898
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 80b6760c-35c6-4832-ada8-137ba8f02279
+      x: 1961
+      y: 2898
+      text: And, you know, it sucks to give up on a passion project so early....
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 210b90a6-8b2c-415c-9664-5d9b86fcfb87
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2260
+        y: 2892
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 210b90a6-8b2c-415c-9664-5d9b86fcfb87
+      x: 2260
+      y: 2892
+      text: '...but I think it''s far worse to get halfway through only to realize
+        you can''t do it.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 13a41794-e16f-4390-be0f-563143213649
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2581
+        y: 2810
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: I can't keep doing this. It sucks to give up, but it's better to do
+        it now rather than later.
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 13a41794-e16f-4390-be0f-563143213649
+      x: 2581
+      y: 2810
+      text: '...that''s what really scares me, I think...'
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: No! Keep going, Captain Badger!
+        node_id:
+          Value: 
+      - text: Hm. Yeah, I guess I see your point.
+        node_id:
+          Value: 
+      - text: Whatever you think is best for you, Captain Badger.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 2907.8083
+        y: 2677
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e272c937-3535-46b9-9597-ab08c046389e
+      x: 2907.8083
+      y: 2677
+      text: How? How can you be so sure? Is there something I'm missing?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8dc21838-d60d-4e7e-ab73-75454139e9c4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3283.8083
+        y: 2641
+        width: 270
+        height: 420
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: I don't understand. How can you have such faith?
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8dc21838-d60d-4e7e-ab73-75454139e9c4
+      x: 3283.8083
+      y: 2641
+      text: How can you know that It'll be worth investing the time into this project?
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: BECAUSE YOU'RE CAPTAIN BADGER! YOU CAN DO ANYTHING YOU SET YOUR MIND
+          TO!
+        node_id:
+          Value: 
+      - text: I don't know. But if it's something you really care about, you shouldn't
+          stop easily.
+        node_id:
+          Value: 
+      - text: BLIND FAITH!
+        node_id:
+          Value: 
+      - text: I guess you're right, actually, maybe it's best to stop now.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 2906.918
+        y: 2911
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0805d9f3-9a58-4afe-9248-02fbc028d0d6
+      x: 2906.918
+      y: 2911
+      text: Yeah, I mean, that's what seems to make the most sense to me. Quit while
+        I can.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2912.5347
+        y: 3147
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 37df0bb6-311f-4b19-bb14-d96ae36bee5f
+      x: 2912.5347
+      y: 3147
+      text: Hmm. Yeah, well I gave it a lot of thought...I think I'll just stop while
+        I can.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 42502878-ce79-42e0-b67b-1fe5eb81d0f1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3222.5347
+        y: 3244
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 42502878-ce79-42e0-b67b-1fe5eb81d0f1
+      x: 3222.5347
+      y: 3244
+      text: I don't know, I'll give it a few more days, just in case.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6527deae-ce36-4a8b-9e3d-daddd139d4d4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3524.5347
+        y: 3294
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6527deae-ce36-4a8b-9e3d-daddd139d4d4
+      x: 3524.5347
+      y: 3294
+      text: If I can't get something together, I'll just pack up and leave.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8d7bdf90-4d43-4d4e-a84d-ed4cfdec72ca
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3819.5347
+        y: 3273
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8d7bdf90-4d43-4d4e-a84d-ed4cfdec72ca
+      x: 3819.5347
+      y: 3273
+      text: If I end up leaving, I'll be sure to leave this <c=g>Mine Cart</c> for
+        you, if you'd like.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ffc3b0a7-8c4c-4e31-95dc-021fe06cf6cc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4117.5347
+        y: 3279
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ffc3b0a7-8c4c-4e31-95dc-021fe06cf6cc
+      x: 4117.5347
+      y: 3279
+      text: Yeah. We'll see. For now I, <c=g>Captain Badger</c>, will continue digging.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5f2334fa-bddb-4cd7-812b-1dc2f7dca47f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4431.5347
+        y: 3294
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5f2334fa-bddb-4cd7-812b-1dc2f7dca47f
+      x: 4431.5347
+      y: 3294
+      text: HEEE! HOOO!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3674.0547
+        y: 2656
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: speakerName
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5cf62f91-1a84-4bb9-81f9-6ce1a554b9e7
+      x: 3674.0547
+      y: 2656
+      text: Haha. Well. Maybe you're right.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 0a383284-2e6b-4d10-9b70-b061e1340d13

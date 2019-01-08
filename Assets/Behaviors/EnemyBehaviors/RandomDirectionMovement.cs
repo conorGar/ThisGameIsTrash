@@ -14,10 +14,10 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 
 	private Vector3 direction;
-	private bool moving = false;
-	private tk2dSpriteAnimator anim;
+	protected bool moving = false;
+	protected tk2dSpriteAnimator anim;
 	int bounceOffObject;
-	Vector3 startingScale;
+	protected Vector3 startingScale;
 	int turnOnce = 0;
 
 	// Use this for initialization
@@ -80,6 +80,15 @@ public class RandomDirectionMovement : MonoBehaviour {
 		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
 		//Debug.Log("Turn activated");
 	}
+
+	public void TurnToNewDirection(){
+		//activated by things like "Wander within bounds" when enemy reaches end of the bounds so it doesnt just keep walking into it.
+		Debug.Log("Turn to new direction activated:" + gameObject.name);
+		turnOnce = 1;
+		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
+		direction = (new Vector3(direction.x*-1, direction.y*-1, 0.0f)).normalized;
+
+	}
 	IEnumerator Pause(){
 		turnOnce = 0;
 
@@ -106,7 +115,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D collision){
 		//go a different direction when bump into something
 		//if(collision.gameObject.transform.position.y> this.gameObject.transform.position.y);
-		if(bounceOffObject == 0){
+		if(bounceOffObject == 0 && moving){
 			Debug.Log("Collided with something and GoAgain() called");
 
 			GoAgain();
@@ -128,7 +137,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 		}*/
 	}
 
-	public void GoAgain(){
+	public virtual void GoAgain(){
 		Debug.Log("Go again activated");
 		moving = true;
 		//InvokeRepeating("SpawnClouds",.2f, .2f);
@@ -137,7 +146,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 		StartCoroutine("Pause");
 	}
 
-	public void StopMoving(){
+	public virtual void StopMoving(){
 		walkPS.Stop();
 		StopAllCoroutines();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

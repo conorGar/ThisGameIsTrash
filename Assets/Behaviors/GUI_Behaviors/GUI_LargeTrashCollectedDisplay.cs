@@ -50,7 +50,7 @@ public class GUI_LargeTrashCollectedDisplay : MonoBehaviour
 				for(int i = 0; i < starDisplay.transform.childCount;i++){
 					LARGEGARBAGE largeGarbageType = LargeGarbage.ByIndex(i);
             		Debug.Log(LargeGarbage.ByIndex(i).ToString());
-           			if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeGarbageType) == largeGarbageType || (GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED & largeGarbageType) == largeGarbageType) {
+           			if (i != indexOfCurrentLargeTrash && (GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeGarbageType) == largeGarbageType || (GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED & largeGarbageType) == largeGarbageType) {
             			starDisplay.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 					}
 				}

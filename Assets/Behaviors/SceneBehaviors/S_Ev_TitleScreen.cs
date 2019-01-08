@@ -42,8 +42,15 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 		SoundManager.instance.musicSource.Stop();
 		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 		SoundManager.instance.musicSource.PlayOneShot(titleMusic);
-        GameStateManager.Instance.PushState(typeof(TitleState));
-		
+        GameStateManager.Instance.PushState(typeof(MovieState));
+
+        // Tweens the title into view and then calls a callback to allow the player to use the menus.
+        iTween.ScaleFrom(title,
+            iTween.Hash("scale", Vector3.zero,
+                        "time", 1.5f,
+                        "delay", 3.5f,
+                        "oncomplete", "OnTitleComplete",
+                        "oncompleteTarget", gameObject));
 	}
 
     void OnDestroy()
@@ -69,63 +76,72 @@ public class S_Ev_TitleScreen : MonoBehaviour {
         phase = 2;
     }
 
-	// Update is called once per frame
-	void Update () {
-        if (isInteractable && !optionHud.activeInHierarchy)
-        {
-            if (phase == 1) {
-                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
-                    if (navigationPosition > 1) {
-                        navigationPosition--;
-                        UpdateSelected();
+    // Update is called once per frame
+    void Update () {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(TitleState)) {
+            if (isInteractable && !optionHud.activeInHierarchy) {
+                if (phase == 1) {
+                    if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                        if (navigationPosition > 1) {
+                            navigationPosition--;
+                            UpdateSelected();
+                        }
+                    } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                        if (navigationPosition < 3) {
+                            navigationPosition++;
+                            UpdateSelected();
+                        }
+                    } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
+                            || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
+                        if (navigationPosition == 1) {
+
+                            saveFileSelectHUD.SetActive(true);
+                            this.enabled = false;
+                            //StartCoroutine(LoadUserData());
+
+                        } else if (navigationPosition == 2) {
+                            GameStateManager.Instance.PushState(typeof(OptionsState));
+                            optionHud.SetActive(true);
+
+                        }
+                        SoundManager.instance.PlaySingle(selectSFX);
+
+                    }
+                } else if (phase == 0) {
+                    if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
+                     || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
+                        Debug.Log(title.GetComponent<SpecialEffectsBehavior>() == null);
+                        //Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x, Screen.height * -1, 0));
+
+                        //Debug.Log(topLimit);
+                        //Debug.Log(topLimit * -1);
+
+                        //title.transform.localPosition = topLimit * -1;
+                        SoundManager.instance.PlaySingle(selectSFX);
+
+                        title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-.1f, .6f, .5f, true);
+                        //title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
+
+
+                        phase = 1;
+                        // Tweens the title into view and then calls a callback to allow the player to use the menus.
+                        choicesBox.SetActive(true);
+                        GameStateManager.Instance.PushState(typeof(MovieState));
+                        iTween.MoveFrom(choicesBox, 
+                            iTween.Hash("position", new Vector3(0f, -3f, 0f),
+                                        "islocal", true,
+                                        "time", 1.5f,
+                                        "easetype", iTween.EaseType.easeOutExpo,
+                                        "oncomplete", "OnChoiceBoxComplete",
+                                        "oncompleteTarget", gameObject));
                     }
                 }
-                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
-                    if (navigationPosition < 3) {
-                        navigationPosition++;
-                        UpdateSelected();
-                    }
-                }
-                else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
-                      || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
-                    if (navigationPosition == 1) {
-
-                    	saveFileSelectHUD.SetActive(true);
-                    	this.enabled = false;
-                        //StartCoroutine(LoadUserData());
-
-					}else if(navigationPosition == 2){
-                        GameStateManager.Instance.PushState(typeof(OptionsState));
-                        optionHud.SetActive(true);
-
-                    }
-					SoundManager.instance.PlaySingle(selectSFX);
-
-                }
-            } else if (phase == 0) {
-                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
-                 || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
-                    Debug.Log(title.GetComponent<SpecialEffectsBehavior>() == null);
-                    //Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x, Screen.height * -1, 0));
-
-                    //Debug.Log(topLimit);
-                    //Debug.Log(topLimit * -1);
-
-                    //title.transform.localPosition = topLimit * -1;
-					SoundManager.instance.PlaySingle(selectSFX);
-
-                    title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-.1f,.6f,.5f, true);
-                    //title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
-                    choicesBox.SetActive(true);
-                    phase = 1;
-
+            } else if (optionHud.activeInHierarchy) {
+                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
+                    GameStateManager.Instance.PopState();
+                    optionHud.SetActive(false);
                 }
             }
-        }else if(optionHud.activeInHierarchy){
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){
-                GameStateManager.Instance.PopState();
-                optionHud.SetActive(false);
-			}
         }
 
 
@@ -179,4 +195,22 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 		currentSelected.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(255f,255f,255f,1f);
 
 	}
+
+    // Callbacks 
+    void OnTitleComplete()
+    {
+        // Once the Title pops up the player can interact with stuff!
+        Debug.Log("Title Tween Complete.");
+        GameStateManager.Instance.PopState(); // Pop Movie State.
+        GameStateManager.Instance.PushState(typeof(TitleState));
+    }
+
+
+    void OnChoiceBoxComplete()
+    {
+        // Once the ChoiceBox tweens the player can interact with stuff, again!
+        Debug.Log("Choice box Tween Complete.");
+        GameStateManager.Instance.PopState(); // Pop Movie State.
+        GameStateManager.Instance.PushState(typeof(TitleState));
+    }
 }

@@ -205,6 +205,7 @@ public class Ev_LargeTrash : PickupableObject {
         largeTrashItem.collectedDisplaySprite = collectedDisplaySprite;
         largeTrashItem.collectedTitle = trashTitle;
         GlobalVariableManager.Instance.LARGE_TRASH_LIST.Add(largeTrashItem);
+        GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED |= garbage.type;
         GlobalVariableManager.Instance.LARGE_TRASH_COLLECTED++;
 		if(GlobalVariableManager.Instance.MASTER_SFX_VOL > 0){
 			//play trash pickup on channel 2

@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 using TMPro;
 public class Ev_Results : MonoBehaviour {
 
-	public Text trashCollected;
-	public Text largeTrashCollected;
-	public Text enemiesDefeated;
-	public TextMeshProUGUI nextUnlockNeeded;
+	public TextMeshProUGUI trashCollected;
+	public TextMeshProUGUI largeTrashCollected;
+	public TextMeshProUGUI totalTrash;
+	//public Text enemiesDefeated;
+	//public TextMeshProUGUI nextUnlockNeeded;
 	public TextMeshProUGUI currentStars;
 	//public GameObject largeTrashTextDisplay;
 	//public GameObject treasureCollectedDisplay;
@@ -18,7 +19,8 @@ public class Ev_Results : MonoBehaviour {
 	public int currentWorld; //needed for largeTrashManager
     public Image backPaper;
     public Image image;
-
+    public ParticleSystem clouds;
+    public AudioClip resultsMusic;
     public AudioClip closeSfx;
 
 
@@ -51,8 +53,13 @@ public class Ev_Results : MonoBehaviour {
             GlobalVariableManager.Instance.STAR_POINTS_STAT.UpdateCurrent(+1);
         }
 
+        largeTrashCollected.text = "+" + GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count;
         currentStars.text = GlobalVariableManager.Instance.STAR_POINTS_STAT.GetMax().ToString();
-        if (GlobalVariableManager.Instance.PROGRESS_LV == 0) {
+
+        totalTrash.text = "/" + GlobalVariableManager.Instance.TOTAL_TRASH.ToString();
+        trashCollected.text = "+" +trashCollectedValue;
+
+       /* if (GlobalVariableManager.Instance.PROGRESS_LV == 0) {
             nextUnlockNeeded.text = "/2";
         }
         else if (GlobalVariableManager.Instance.PROGRESS_LV == 1) {
@@ -61,10 +68,13 @@ public class Ev_Results : MonoBehaviour {
         else if (GlobalVariableManager.Instance.PROGRESS_LV == 2) {
             nextUnlockNeeded.text = "/10";
         }
-        if (GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 5) {
+        /*if (GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 5) {
             //in case player dies during race
             GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(5);
-        }
+        }*/
+
+       
+
     }
 
     void OnDestroy()
@@ -77,6 +87,12 @@ public class Ev_Results : MonoBehaviour {
         if (isEntering) {
             if (stateType == typeof(EndDayState)) {
                 gameObject.SetActive(true);
+				SoundManager.instance.backupMusicSource.clip = resultsMusic;
+				SoundManager.instance.backupMusicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+				SoundManager.instance.backupMusicSource.Play();
+				SoundManager.instance.musicSource.Stop();
+				clouds.gameObject.SetActive(true);
+        		clouds.Play();
                 StartCoroutine("InteractDelay"); // wait for the truck to get a bit up the road.
             }
         }
@@ -86,33 +102,9 @@ public class Ev_Results : MonoBehaviour {
 		if(GameStateManager.Instance.GetCurrentState() == typeof(EndDayState)) {
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
                 if (phase == 2) {
-                    /*if (GlobalVariableManager.Instance.LARGE_TRASH_LIST.Count > displayIndex) {
 
-                        if (spawnLargeTrashOnce == 0) {
-                        	Debug.Log("L trash display got here - 1");
-                            //spawn large trash collected display
-                            //treasureCollectedDisplay.SetActive(true);
-                            largeTrashCollectedDisplay.SetActive(true);
-                            backPaper.enabled = false;
-                            image.enabled = false;
-                            largeTrashTextDisplay.SetActive(true);
-                            spawnLargeTrashOnce = 1;
-                        }
-                        else {
-							Debug.Log("L trash display got here - 2");
-
-                            treasureCollectedDisplay.GetComponent<Animator>().Play("largeTrashCollected",-1,0f);
-                        }
-
-                        SoundManager.instance.PlaySingle(largeTrashCollectedSfx);
-
-                        //change sprite of the large trash display
-                        treasureCollectedDisplay.GetComponent<Image>().sprite = (GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedDisplaySprite);
-                        //	treasureCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(); //TODO: working on this..
-						largeTrashTextDisplay.GetComponent<TextMeshProUGUI>().text = GlobalVariableManager.Instance.LARGE_TRASH_LIST[displayIndex].collectedTitle;
-                        displayIndex++;
-                    }*/
-                   
+						FriendManager.Instance.OnWorldEnd();
+						SoundManager.instance.backupMusicSource.Stop();
                        // largeTrashTextDisplay.SetActive(false);
                         backPaper.enabled = true;
                         image.enabled = true;

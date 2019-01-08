@@ -7,14 +7,15 @@ public class Friend : UserDataItem {
     public int day = 0;
     public bool activateDialogWhenClose = true;
     // Is the friend visiting the level on this day.
-    public bool IsVisiting = false;
+   
     public string nextDialog;
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
 	protected FriendEvent newestAddedEvent;
     [HideInInspector]
 	public string missedDialog;
-
+	[HideInInspector]
+	public bool IsVisiting = false;
 	[HideInInspector]
 	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
 
@@ -129,6 +130,10 @@ public class Friend : UserDataItem {
     // Runs when the world starts (hub, world 1, world 2, etc..)  useful for setting friend state quest stuff and making sure everything in the world is set up properly.
     public virtual void OnWorldStart(World world)
     {
+
+    }
+
+    public virtual void OnWorldEnd(){
 
     }
 

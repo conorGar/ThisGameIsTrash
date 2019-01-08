@@ -119,6 +119,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 		}else if(phase == 2){
 			//Destroy(player);
 			StartCoroutine("StartMovement");
+			CamManager.Instance.mainCamEffects.ZoomInOut(.6f,1f);
 			if(GlobalVariableManager.Instance.DAY_NUMBER == 2){
 				//StartCoroutine("HomelessHarry"); TODO: tookout for debuggin other things to do this later
 				GameStateManager.Instance.PushState(typeof(EndDayState)); //gets value from ev_fadeHelper

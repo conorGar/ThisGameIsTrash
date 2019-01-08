@@ -43,10 +43,14 @@ public class MeleeAttack : MonoBehaviour {
                 if (swingDirection == 1) {
                     //weapon.transform.position = new Vector2(gameObject.transform.position.x + 4f,gameObject.transform.position.y+ 1.4f);
                     transform.Translate(new Vector2(playerMomentum, 0) * Time.deltaTime);
+					this.gameObject.transform.localScale = startingScale; //always faces proper way
+
                 }
                 else if (swingDirection == 2) {
                     //weapon.transform.position = new Vector2(gameObject.transform.position.x,gameObject.transform.position.y + 1.4f);
                     transform.Translate(new Vector2(playerMomentum * -1, 0) * Time.deltaTime);
+					this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z); //always faces left
+
                 }
                 else if (swingDirection == 3) {//swing up
                     transform.Translate(new Vector2(0, playerMomentum) * Time.deltaTime);
@@ -109,9 +113,6 @@ public class MeleeAttack : MonoBehaviour {
 		meleeWeaponBotSwing.transform.localPosition = new Vector2(meleeWeaponBotSwing.transform.localPosition.x,meleeWeaponBotSwing.transform.localPosition.y-1.1f);
 
 		if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "plankSwing"){ //check what animation to change to based on current ani, just check one of the directions
-				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("clawSwing");
-				meleeWeaponRightSwing.transform.localPosition = new Vector2(4f,-2.08f);
-
 
 				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("clawDown");
 				meleeWeaponBotSwing.transform.localPosition = new Vector2(-.47f,-1.46f);
@@ -119,7 +120,9 @@ public class MeleeAttack : MonoBehaviour {
 				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("clawUp");
 				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,1.81f);
 
-				//meleeWeaponRightSwing.GetComponent<BoxCollider2D
+				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("clawSwing");
+				meleeWeaponRightSwing.transform.localPosition = new Vector2(4f,-2.08f);
+
 		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "clawSwing"){
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("poleSwing");
 				meleeWeaponRightSwing.transform.localPosition = new Vector2(4.8f,-2.06f);
@@ -130,7 +133,7 @@ public class MeleeAttack : MonoBehaviour {
 				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
 				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,.94f);
 
-		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "poleSwing"){
+		}/*else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "poleSwing"){
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("broomSwing");
 				meleeWeaponRightSwing.transform.localPosition = new Vector2(6.73f,-2.68f);
 
@@ -140,7 +143,7 @@ public class MeleeAttack : MonoBehaviour {
 				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("broomUp");
 				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,3.31f);
 
-		}
+		}*/
 
 	}
 	public void DemoteWeapon(){//activated by PlayerTakeDamage
@@ -172,7 +175,7 @@ public class MeleeAttack : MonoBehaviour {
 				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("plankUp");
 				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,.94f);
 
-		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "broomSwing"){
+		}/*else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "broomSwing"){
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("poleSwing");
 				meleeWeaponRightSwing.transform.localPosition = new Vector2(4.8f,-2.01f);
 
@@ -182,12 +185,11 @@ public class MeleeAttack : MonoBehaviour {
 				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
 				meleeWeaponBotSwing.transform.localPosition = new Vector2(-.13f,2.56f);
 
-		}
+		}*/
 
 	}
 
 	IEnumerator Swing(int direction){
-		if(!(Input.GetKey(KeyCode.LeftShift) && gameObject.GetComponent<ThrowTrash>().enabled)){ //if holding shift down throw instead
 			SoundManager.instance.RandomizeSfx(swing);
 			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 			GameObject meleeDirectionEnabled = null;
@@ -274,7 +276,7 @@ public class MeleeAttack : MonoBehaviour {
 					meleeDirectionEnabled.SetActive(false);
 				}
 			}
-		}
+		
 	}
 
 

@@ -47,6 +47,7 @@ public class BossFriendEx : Friend
 			
            
             case "END":
+            	
             	toxicBarrier.SetActive(false);
             	toxicBarrierPS.gameObject.SetActive(false);
             	break;

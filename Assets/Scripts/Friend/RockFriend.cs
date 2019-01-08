@@ -19,7 +19,7 @@ public class RockFriend : Friend {
 
    
     public List<SpecialFriendObject> desiredObject = new List<SpecialFriendObject>();//the needed objects start off as the friend's children
-    private List<SpecialFriendObject> deliveredObjects = new List<SpecialFriendObject>();
+   // private List<SpecialFriendObject> deliveredObjects = new List<SpecialFriendObject>();
     List<SpecialFriendObject> pickedUpObjects = new List<SpecialFriendObject>();
 
     public GameObject eyeBreakPS;
@@ -170,14 +170,14 @@ public class RockFriend : Friend {
     	dialogManager.ReturnFromAction();
     }
 
-    public void DeliverObject(SpecialFriendObject obj)
+    /*public void DeliverObject(SpecialFriendObject obj)
     {
     	for(int i = 0; i < pickedUpObjects.Count;i++){
     		deliveredObjects.Add(pickedUpObjects[i]);
     	}
     	pickedUpObjects.Clear();
         //deliveredObjects.Add(obj);
-    }
+    }*/
 
     public override void StartingEvents() {
 
@@ -342,13 +342,30 @@ public class RockFriend : Friend {
             case "WANTS_TO_BE_PRETTY":
                 // Eyes open.
 				StartingEvents();
-				for(int i = 0; i < deliveredObjects.Count; i++){ // update display with previously gathered items
-					GUIManager.Instance.rockItemHUD.UpdateItemsCollected(deliveredObjects[i].GetComponent<SpriteRenderer>().sprite);
+				for(int i = 0; i < pickedUpObjects.Count; i++){ // update display with previously gathered items
+					GUIManager.Instance.rockItemHUD.UpdateItemsCollected(pickedUpObjects[i].GetComponent<SpriteRenderer>().sprite);
+				}
+				for(int i = 0; i < desiredObject.Count; i++){ // enabled again after 'OnWorldEnd' Disables
+					desiredObject[i].gameObject.SetActive(true);
 				}
                 break;
+           	case "END":
+	           	blockade.SetActive(false);
+	           	break;
         }
     }
-
+    public override void OnWorldEnd(){
+		switch (GetFriendState()) {
+            
+            case "WANTS_TO_BE_PRETTY":
+               
+				for(int i = 0; i < desiredObject.Count; i++){
+					desiredObject[i].gameObject.SetActive(false);
+				}
+                break;
+           	
+        }
+    }
 
     // User Data implementation
     public override string UserDataKey()
@@ -362,11 +379,36 @@ public class RockFriend : Friend {
 
         json_data["friendState"] = friendState;
 
+        string savedObjString = "";
+        for(int i = 0; i < pickedUpObjects.Count; i++){
+        	savedObjString = savedObjString + pickedUpObjects[i].name + ",";
+        }
+        Debug.Log("***SavedObjString for Rock:" + savedObjString);
+
+        json_data["pickedUpObjects"] = savedObjString;
+
+
         return json_data;
     }
 
     public override void Load(SimpleJSON.JSONObject json_data)
     {
         friendState = json_data["friendState"].AsInt;
+
+
+        string pickedUpObjs = json_data["pickedUpObjects"];
+        Debug.Log("******loaded rock obj string:********" + pickedUpObjs);
+        if (pickedUpObjs != null) {
+            string[] pickedUpArray = pickedUpObjs.Split(',');
+            for (int i = 0; i < pickedUpArray.Length; i++) {
+                for (int j = 0; j < desiredObject.Count; j++) {
+                    if (desiredObject[j].name == pickedUpArray[i]) {
+                        pickedUpObjects.Add(desiredObject[j]);
+                        desiredObject.RemoveAt(j);
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
