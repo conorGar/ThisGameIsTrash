@@ -122,6 +122,10 @@ MonoBehaviour:
     - Value: ffc3b0a7-8c4c-4e31-95dc-021fe06cf6cc
     - Value: 5f2334fa-bddb-4cd7-812b-1dc2f7dca47f
     - Value: 5cf62f91-1a84-4bb9-81f9-6ce1a554b9e7
+    - Value: 35e32cab-03fd-4075-960c-0fff1b3a139e
+    - Value: 78c71a33-bf4b-4db7-b21f-d488b8ea3529
+    - Value: f438b41f-f622-4203-8eb9-f9a806d2ab82
+    - Value: 8611ccfd-39e6-4f25-a408-400e2d675ca4
     values:
     - window:
         serializedVersion: 2
@@ -430,7 +434,7 @@ MonoBehaviour:
         x: 3702.6987
         y: 337
         width: 270
-        height: 200
+        height: 212
       isCollapsed: 0
       title: NewDialog
       speakerName: speakerName
@@ -503,7 +507,7 @@ MonoBehaviour:
         x: 3416.5889
         y: 28
         width: 270
-        height: 200
+        height: 212
       isCollapsed: 0
       title: NewDialog
       speakerName: speakerName
@@ -893,7 +897,7 @@ MonoBehaviour:
         x: 2523.233
         y: 1064
         width: 270
-        height: 200
+        height: 212
       isCollapsed: 0
       title: NewDialog
       speakerName: speakerName
@@ -1422,7 +1426,7 @@ MonoBehaviour:
         x: 186
         y: 3047
         width: 270
-        height: 200
+        height: 173
       isCollapsed: 0
       title: End_pride
       speakerName: speakerName
@@ -1434,12 +1438,12 @@ MonoBehaviour:
         Value: 0f5a98dc-3fc4-42b8-9c62-2209153f87a1
       x: 186
       y: 3047
-      text: Child Dialog
+      text: You! Why are you here?!?
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
-        Value: 
+        Value: 35e32cab-03fd-4075-960c-0fff1b3a139e
       responses: []
     - window:
         serializedVersion: 2
@@ -1676,7 +1680,7 @@ MonoBehaviour:
         x: 2653.6577
         y: 1891
         width: 270
-        height: 42
+        height: 61
       isCollapsed: 1
       title: NewDialog
       speakerName: speakerName
@@ -1700,7 +1704,7 @@ MonoBehaviour:
         x: 2967.6577
         y: 1900
         width: 270
-        height: 42
+        height: 61
       isCollapsed: 1
       title: NewDialog
       speakerName: speakerName
@@ -2837,6 +2841,104 @@ MonoBehaviour:
       x: 3674.0547
       y: 2656
       text: Haha. Well. Maybe you're right.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 615
+        y: 3097
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: End_pride1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 35e32cab-03fd-4075-960c-0fff1b3a139e
+      x: 615
+      y: 3097
+      text: 'See what I did!? I built the tunnel! All by myself! '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 78c71a33-bf4b-4db7-b21f-d488b8ea3529
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 943
+        y: 3118
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: End_pride1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 78c71a33-bf4b-4db7-b21f-d488b8ea3529
+      x: 943
+      y: 3118
+      text: 'I know what you''re thinking! You think I wouldn''t of been able to do
+        it without you! '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f438b41f-f622-4203-8eb9-f9a806d2ab82
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1233
+        y: 3117
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: End_pride1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f438b41f-f622-4203-8eb9-f9a806d2ab82
+      x: 1233
+      y: 3117
+      text: Well, you're WRONG! I did it me! I'm the best in the world!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8611ccfd-39e6-4f25-a408-400e2d675ca4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1521
+        y: 3141
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: End_pride1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8611ccfd-39e6-4f25-a408-400e2d675ca4
+      x: 1521
+      y: 3141
+      text: I'm even better than YOU, garbage man! I'll take you on! I'll show you
+        who's the best!
       isThought: 0
       animTrigger: 
       type: 1
