@@ -99,11 +99,11 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 		yield return new WaitForSeconds(1f);
 
 		gameObject.GetComponent<FollowPlayerAfterNotice>().enabled = true;
-		gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
+		gameObject.GetComponent<RandomDirectionMovement>().GoAgain();
 		gameObject.GetComponent<EnemyTakeDamage>().moveWhenHit = true;
 		leaping = false;
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("run");
-		this.enabled = false;
+		//this.enabled = false;
 	}
 
 	void SpawnDirtBallRing(){

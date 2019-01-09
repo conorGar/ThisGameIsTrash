@@ -41,7 +41,7 @@ public class GUI_DayDisplay : MonoBehaviour
     			SoundManager.instance.musicSource.Play();
 			}
 			StartCoroutine("DisplaySequence");
-			SoundManager.instance.PlaySingle(truckSfx);
+			//SoundManager.instance.PlaySingle(truckSfx);
 		}
 		//player.GetComponent<EightWayMovement>().enabled = false;
 	}

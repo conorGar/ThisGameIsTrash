@@ -9645,78 +9645,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 272869071}
---- !u!1 &278866735
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1839468695887708, guid: 86040b24d70739440ade37747785f2a2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 278866738}
-  - component: {fileID: 278866737}
-  - component: {fileID: 278866736}
-  m_Layer: 5
-  m_Name: endDay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &278866736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114461594422331644, guid: 86040b24d70739440ade37747785f2a2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 278866735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 9226f3b84ce9eb644b245fe2cc92f9c7, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &278866737
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222003772894934530, guid: 86040b24d70739440ade37747785f2a2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 278866735}
---- !u!224 &278866738
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 224298184060198958, guid: 86040b24d70739440ade37747785f2a2,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 278866735}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2036311010}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.9, y: -5.34}
-  m_SizeDelta: {x: 4.842, y: 2.743}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &281469023
 GameObject:
   m_ObjectHideFlags: 0
@@ -10072,7 +10000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &313218997
 Transform:
   m_ObjectHideFlags: 0
@@ -71452,8 +71380,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3.08, y: -5.34}
-  m_SizeDelta: {x: 5.138, y: 2.496}
+  m_AnchoredPosition: {x: 1.09, y: -0.38}
+  m_SizeDelta: {x: 6.263, y: 3.043}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1220961949
 GameObject:
@@ -74039,7 +73967,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2036311010}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -107832,7 +107760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsOption: {fileID: 1212132671}
-  enddayOption: {fileID: 278866735}
+  enddayOption: {fileID: 1343025277}
   optionsMenu: {fileID: 543098111}
   returnToDumpsterOption: {fileID: 1343025277}
   endDayPopup: {fileID: 928528030}
@@ -107840,7 +107768,7 @@ MonoBehaviour:
   endayHLspr: {fileID: 21300000, guid: 01033f355c72ced439cec6b08440613b, type: 3}
   returnToDumpsterHlspr: {fileID: 21300000, guid: 8f912acf77eea974daa9a609a40712b1,
     type: 3}
-  forHub: 0
+  forHub: 1
   selectSound: {fileID: 8300000, guid: ccf38e21826c09d4e994e48ecf9abd8c, type: 3}
   paperSlide: {fileID: 8300000, guid: 0cd4a6ab01e81e24fb7d897836b8fab3, type: 3}
   player: {fileID: 0}
@@ -107891,7 +107819,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1212132674}
-  - {fileID: 278866738}
   - {fileID: 1343025280}
   m_Father: {fileID: 1291495094}
   m_RootOrder: 0

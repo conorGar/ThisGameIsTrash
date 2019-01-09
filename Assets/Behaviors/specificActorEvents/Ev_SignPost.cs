@@ -48,7 +48,7 @@ public class Ev_SignPost : MonoBehaviour {
                     signPostHUD.SetActive(true);
 					if( signPostHUD.transform.GetChild(0).GetComponent<TextMeshProUGUI>() !=null)
                     	signPostHUD.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = myText;
-                    else
+                    else if(signText != null)
                     	signText.text = myText;
                     if(nameDisplay != null)
                   	  nameDisplay.text = myName;
