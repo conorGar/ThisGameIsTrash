@@ -7,7 +7,8 @@ public class Ev_StartDayButton : SE_GlowWhenClose {
 
 	public Ev_FadeHelper fader;
 	public GameObject hubDescriptionPrompt;
-
+	public GameObject demoEndFader;
+	public GameObject demoEndText;
 
 	public override void Activate(){
         GameStateManager.Instance.PopAllStates();
@@ -17,7 +18,11 @@ public class Ev_StartDayButton : SE_GlowWhenClose {
         // TODO: Maybe save after every store option if the player wants to do a few upgrades but not start a new day?
         UserDataManager.Instance.SetDirty();
 
+        if(GlobalVariableManager.Instance.DAY_NUMBER < 10){
 		fader.FadeToScene("WorldSelect");
+		}else{
+			StartCoroutine("DemoEnd");
+		}
 	}
 
 	public override void GlowFunction(){
@@ -28,6 +33,16 @@ public class Ev_StartDayButton : SE_GlowWhenClose {
 	public override void StopGlowFunction(){
 		gameObject.GetComponent<tk2dSpriteAnimator>().Stop();
 		hubDescriptionPrompt.SetActive(false);
+
+	}
+
+	IEnumerator DemoEnd(){
+		demoEndFader.SetActive(true);
+		yield return new WaitForSeconds(2f);
+		demoEndText.SetActive(true);
+		yield return new WaitForSeconds(2f);
+		GameStateManager.Instance.PushState(typeof(TitleState));
+		fader.FadeToScene("TitleScreen");
 
 	}
 
