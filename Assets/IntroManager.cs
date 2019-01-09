@@ -76,7 +76,7 @@ public class IntroManager : MonoBehaviour {
 		}else if(slideNumber == 9){
 			textShown.text = "...Or whatever they were into!<color=#DC3232> NOBODY JUDGED THEM!</color>";
 		}else if(slideNumber == 10){
-			textShown.text = "And every year, the best amoung them was chosen and given the prestigious <color=#78FF32>Garbageman Of The Year Award</color>.";
+			textShown.text = "And every year, the best among them was chosen and given the prestigious <color=#78FF32>Garbageman Of The Year Award</color>.";
 		}else if(slideNumber == 11){
 			textShown.text = "Because of all this, many go out to try their hand at becoming a garbageman...to follow their dumpster dreams...";
 		}else if(slideNumber == 12){
