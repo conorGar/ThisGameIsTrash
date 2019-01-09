@@ -204,7 +204,7 @@ public class DialogEditorWindow : EditorWindow {
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Title: ");
-        node.title = EditorGUILayout.TextField(node.title);
+        node.title = WithoutSelectAll(() => EditorGUILayout.TextField(node.title));
         if (GUILayout.Button("Collapse"))
         {
             node.isCollapsed = !node.isCollapsed;
@@ -235,7 +235,7 @@ public class DialogEditorWindow : EditorWindow {
             GUILayout.BeginHorizontal();
             GUILayout.Label("Text: ");
             EditorGUI.BeginChangeCheck();
-            node.text = EditorGUILayout.TextArea(node.text);
+            node.text = WithoutSelectAll(() => EditorGUILayout.TextArea(node.text));
             if (EditorGUI.EndChangeCheck())
                 node.window.height = 0f;
 
@@ -312,7 +312,7 @@ public class DialogEditorWindow : EditorWindow {
                     GUILayout.BeginHorizontal();
                     GUILayout.Label("Question: ");
                     EditorGUI.BeginChangeCheck();
-                    node.question = EditorGUILayout.TextArea(node.question);
+                    node.question = WithoutSelectAll(() => EditorGUILayout.TextArea(node.question));
                     if (EditorGUI.EndChangeCheck())
                         node.window.height = 0f;
                     GUILayout.EndHorizontal();
@@ -349,7 +349,7 @@ public class DialogEditorWindow : EditorWindow {
                         GUILayout.EndHorizontal();
 
                         EditorGUI.BeginChangeCheck();
-                        node.responses[i].text = EditorGUILayout.TextArea(node.responses[i].text);
+                        node.responses[i].text = WithoutSelectAll(() => EditorGUILayout.TextArea(node.responses[i].text));
                         if (EditorGUI.EndChangeCheck())
                             node.window.height = 0f;
                     }
@@ -458,5 +458,23 @@ public class DialogEditorWindow : EditorWindow {
         parent_node.child_id = node.id;
 
         Debug.Log("Parent_node.id : " + parent_node.id + "\nChild_node.id : " + node.id);
+    }
+
+    // Insane hack from a smart person because Unity loves to select all text when you use EditorGUILayouts... Source: https://stackoverflow.com/questions/44097608/how-can-i-stop-immediate-gui-from-selecting-all-text-on-click
+    private T WithoutSelectAll<T>(Func<T> guiCall)
+    {
+        bool preventSelection = (Event.current.type == EventType.MouseDown);
+
+        Color oldCursorColor = GUI.skin.settings.cursorColor;
+
+        if (preventSelection)
+            GUI.skin.settings.cursorColor = new Color(0, 0, 0, 0);
+
+        T value = guiCall();
+
+        if (preventSelection)
+            GUI.skin.settings.cursorColor = oldCursorColor;
+
+        return value;
     }
 }
