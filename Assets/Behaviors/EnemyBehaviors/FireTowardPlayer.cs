@@ -7,10 +7,10 @@ public class FireTowardPlayer : MonoBehaviour {
 	public float projectileSpeed;
 	public float fireRate;
 	public bool myProjectileFalls = false;
+	public bool stopMovingWhenFire;
 
-	public GameObject projectile;
 	public AudioClip throwSFX;
-
+	public string projectileName = "projectile_largeRock";
 	[HideInInspector]
 	public GameObject player;
 
@@ -20,7 +20,7 @@ public class FireTowardPlayer : MonoBehaviour {
 	void OnEnable () {
 		anim = GetComponent<tk2dSpriteAnimator>();
 		CancelInvoke();
-		InvokeRepeating("Fire",2.0f,fireRate);
+		InvokeRepeating("Fire",fireRate,fireRate);
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
@@ -32,6 +32,9 @@ public class FireTowardPlayer : MonoBehaviour {
 	void Fire(){
 		if(gameObject.activeInHierarchy == false){
 			CancelInvoke();
+		}
+		if(stopMovingWhenFire){
+			gameObject.GetComponent<RandomDirectionMovement>().StopMoving();
 		}
 		//Debug.Log("fired");
 		if(anim.CurrentClip.name != "hit"){
@@ -66,7 +69,9 @@ public class FireTowardPlayer : MonoBehaviour {
 			bullet.GetComponent<Ev_FallingProjectile>().enabled = false;
 		//bullet.GetComponent<Ev_ProjectileTowrdPlayer>().speed = projectileSpeed;
 		//bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position).normalized *projectileSpeed;
-
+		if(stopMovingWhenFire){
+			gameObject.GetComponent<RandomDirectionMovement>().GoAgain();
+		}
 		anim.Play("idle");
 	}
 }
