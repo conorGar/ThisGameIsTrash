@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class OpenCalendar : MonoBehaviour {
 
-	public GameObject calendar;
+	//public GameObject calendar;
 
-	void Start () {
-		
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		/*if(ControllerManager.Instance.GetKeyDown(INPUTACTION.CALENDAR)){
-			calendar.SetActive(true);
-			Time.timeScale = 0;
-			this.enabled = false;
-
-		}*/
+		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CALENDAR)) {
+                GameStateManager.Instance.PushState(typeof(CalendarState));
+            }
+        }
 	}
 }

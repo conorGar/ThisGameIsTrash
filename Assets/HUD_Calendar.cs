@@ -11,21 +11,48 @@ public class HUD_Calendar : MonoBehaviour {
 	List<FriendEvent> currentEvents;
 	public AudioClip calendaMarkSfx;
 	public OpenCalendar player;
+	public AudioClip paperSlide;
 
 	bool newMarkSequence;
 	bool leavingScreen;
 
 	void Start () {
 		currentEvents = CalendarManager.Instance.friendEvents;
-		/*for(int i = 0; i < currentEvents.Count; i++){
-			Debug.Log(currentEvents[i].day);
-			if(!gameObject.transform.GetChild(currentEvents[i].day -1).gameObject.activeInHierarchy){
-				transform.GetChild(currentEvents[i].day -1).gameObject.SetActive(true);
-			}
-		}*/
+		gameObject.SetActive(false);
+		GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
+
 
 	}
 
+	private void OnDestroy()
+    {
+       
+
+        GameStateManager.Instance.UnregisterChangeStateEvent(OnChangeState);
+    }
+
+	void OnChangeState(System.Type stateType, bool isEntering)
+    {
+        if (isEntering) {
+            if (stateType == typeof(CalendarState)) {
+                gameObject.SetActive(true);
+                SoundManager.instance.PlaySingle(paperSlide);
+                SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume / 2;
+                Time.timeScale = 0;
+            }
+            else if (stateType == typeof(CalendarState)) {
+                gameObject.SetActive(false);
+            }
+        }
+        else {
+            if (stateType == typeof(PauseMenuState)) {
+                gameObject.SetActive(false);
+                SoundManager.instance.PlaySingle(paperSlide);
+                SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume * 2;
+                Time.timeScale = 1;
+            }
+        }
+    }
 	void OnEnable(){
 		leavingScreen = false;
 		newMarkSequence = false;
@@ -79,10 +106,12 @@ public class HUD_Calendar : MonoBehaviour {
 	public void LeaveScreen(){
 		leavingScreen = true;
 		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(24f,0f,.2f,true);
+		GameStateManager.Instance.PopState();
+        GameStateManager.Instance.PushState(typeof(GameState));
 	}
 
 	public void ReenableOpenCal(){
-		player.enabled = true;
+		
 		this.gameObject.SetActive(false);
 	}
 
