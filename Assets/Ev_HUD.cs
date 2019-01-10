@@ -18,13 +18,10 @@ public class Ev_HUD : MonoBehaviour {
 
     void OnChangeState(System.Type stateType, bool isEntering)
     {
-        if (isEntering) {
-            if (stateType == typeof(RespawnState))
-                GetComponent<CanvasGroup>().alpha = 0;
-        }
-        else {
-            if (stateType == typeof(RespawnState))
-                GetComponent<CanvasGroup>().alpha = 1;
+        if (GameStateManager.Instance.GetCurrentState() != typeof(GameplayState)) {
+            GetComponent<CanvasGroup>().alpha = 0;
+        } else {
+            GetComponent<CanvasGroup>().alpha = 1;
         }
     }
 
