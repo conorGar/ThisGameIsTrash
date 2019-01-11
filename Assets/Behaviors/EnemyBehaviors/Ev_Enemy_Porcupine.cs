@@ -94,7 +94,7 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 	}
 
 	IEnumerator LandDelay(){
-		//TODO: switch to confused/ looking around animation
+		
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("LandConfusion");
 		yield return new WaitForSeconds(1f);
 

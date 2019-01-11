@@ -1,0 +1,272 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1930449221198228}
+  m_IsPrefabParent: 1
+--- !u!1 &1930449221198228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4588287059606644}
+  - component: {fileID: 114032455942508048}
+  m_Layer: 0
+  m_Name: B_moleKing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4588287059606644
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1930449221198228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114032455942508048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1930449221198228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: moleKing_legs
+    boundsData:
+    - {x: 0.52564144, y: -7.3846154, z: 0}
+    - {x: 26.897436, y: 14.871797, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.0128211975, y: 0, z: 0}
+    - {x: 32.897438, y: 33.025642, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -12.923077, y: -14.820514, z: 0}
+    - {x: 13.9743595, y: -14.820514, z: 0}
+    - {x: -12.923077, y: 0.051282886, z: 0}
+    - {x: 13.9743595, y: 0.051282886, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6318364, y: 0.0004885254}
+    - {x: 0.6318364, y: 0.25659156}
+    - {x: 0.9150386, y: 0.0004885254}
+    - {x: 0.9150386, y: 0.25659156}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 7b4d31e03b980d94fabab67732ad71a5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 4783f80aad82fcb4e92ec9ab43c3fdff
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleKing_swing1
+    boundsData:
+    - {x: 0.9358983, y: -2.0897431, z: 0}
+    - {x: 27.358974, y: 26.589745, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.0128211975, y: 0, z: 0}
+    - {x: 32.897438, y: 33.025642, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -12.743589, y: -15.384616, z: 0}
+    - {x: 14.615386, y: -15.384616, z: 0}
+    - {x: -12.743589, y: 11.20513, z: 0}
+    - {x: 14.615386, y: 11.20513, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.26196313}
+    - {x: 0.5219722, y: 0.26196313}
+    - {x: 0.0009770507, y: 0.5151365}
+    - {x: 0.5219722, y: 0.5151365}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 7b4d31e03b980d94fabab67732ad71a5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 5bc5b3d1d41a79445abc915ea21df27a
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleKing_swing2
+    boundsData:
+    - {x: -2.3846154, y: -4.948718, z: 0}
+    - {x: 27.69231, y: 20.102566, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.0128211975, y: 0, z: 0}
+    - {x: 32.897438, y: 33.025642, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -16.23077, y: -15.000001, z: 0}
+    - {x: 11.461539, y: -15.000001, z: 0}
+    - {x: -16.23077, y: 5.1025643, z: 0}
+    - {x: 11.461539, y: 5.1025643, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.52392626, y: 0.26196313}
+    - {x: 0.52392626, y: 0.5256345}
+    - {x: 0.9067378, y: 0.26196313}
+    - {x: 0.9067378, y: 0.5256345}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 7b4d31e03b980d94fabab67732ad71a5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 78987725c81872442b603501eb6e7da9
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleKing
+    boundsData:
+    - {x: 0.012820244, y: 0, z: 0}
+    - {x: 27.358974, y: 33.025642, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: 0, z: 0}
+    - {x: 27.358974, y: 33.025642, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -13.666667, y: -16.512821, z: 0}
+    - {x: 13.692307, y: -16.512821, z: 0}
+    - {x: -13.666667, y: 16.512821, z: 0}
+    - {x: 13.692307, y: 16.512821, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.0004885254}
+    - {x: 0.0009770507, y: 0.2609861}
+    - {x: 0.62988234, y: 0.0004885254}
+    - {x: 0.62988234, y: 0.2609861}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 7b4d31e03b980d94fabab67732ad71a5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: fab41a46f3be88f4e83eb2f763c5a4ad
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: 7b4d31e03b980d94fabab67732ad71a5, type: 2}
+  textures:
+  - {fileID: 2800000, guid: f4bbd52ae8e9e6146a4dbb1aebf4dc19, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: 99d42d8c28e6e4d46852d2e8bf1eec77
+  spriteCollectionName: B_moleKing
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 119685358
+  dataGuid: bf6787697d8ec2c478fcc4d829492f3f
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

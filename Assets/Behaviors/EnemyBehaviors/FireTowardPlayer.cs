@@ -8,7 +8,7 @@ public class FireTowardPlayer : MonoBehaviour {
 	public float fireRate;
 	public bool myProjectileFalls = false;
 	public bool stopMovingWhenFire;
-
+	public bool startWhenEnabled = true;
 	public AudioClip throwSFX;
 	public string projectileName = "projectile_largeRock";
 	[HideInInspector]
@@ -18,10 +18,12 @@ public class FireTowardPlayer : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
-		anim = GetComponent<tk2dSpriteAnimator>();
-		CancelInvoke();
-		InvokeRepeating("Fire",fireRate,fireRate);
-		player = GameObject.FindGameObjectWithTag("Player");
+		if(startWhenEnabled){
+			anim = GetComponent<tk2dSpriteAnimator>();
+			CancelInvoke();
+			InvokeRepeating("Fire",fireRate,fireRate);
+			player = GameObject.FindGameObjectWithTag("Player");
+		}
 	}
 	
 	// Update is called once per frame
@@ -29,7 +31,7 @@ public class FireTowardPlayer : MonoBehaviour {
 		
 	}
 
-	void Fire(){
+	public void Fire(){ // public because used by BossMoleKing
 		if(gameObject.activeInHierarchy == false){
 			CancelInvoke();
 		}

@@ -1,0 +1,631 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: MoleKing
+  m_EditorClassIdentifier: 
+  title: MoleKing
+  dialogIconID: dialog_icon_ID
+  nodeStore:
+    keys:
+    - Value: d37e613f-9249-48fe-a0cb-057f95fda70a
+    - Value: 6648cbbe-e023-4be5-983e-34a992ca6d83
+    - Value: ef568463-a3fd-4da3-be26-5ef4e6c2959c
+    - Value: 922a8293-7a22-45f8-b43b-d20fe5c09d15
+    - Value: 91de402c-be3f-4128-b5ce-55f950d1824a
+    - Value: f1958589-fea3-4a7e-b3f6-e5abe8f988ac
+    - Value: 4b2c9311-b3ef-4ca1-b2cf-5428c83209d1
+    - Value: ccc142da-1891-4f31-af13-42a3631f683c
+    - Value: 2114777d-76bc-4e7f-bf71-f294a009950d
+    - Value: 4f9a72e8-b0ee-4c07-9da1-62afeec4464e
+    - Value: 46856a4c-baee-44fc-a351-be970ed579b8
+    - Value: 0dd74465-564d-4f13-b4c7-53031f44f5b9
+    - Value: 84a84039-f316-47f6-82ed-0fdcbbe297ff
+    - Value: 00f8f0c4-0347-4c8b-869c-66059d07998d
+    - Value: 6650b7d8-adf0-4b70-adec-f324f349ded4
+    - Value: 7b55dd3c-d571-4ef8-b7f7-d5e6a1aeb1ee
+    - Value: f3c9e4b5-29df-4a23-b398-894ac587cf64
+    - Value: 18722d2c-7b72-47bb-9f83-0a288362061c
+    - Value: a6c1a6a0-4b38-4c6f-abb3-8a336f78f92e
+    - Value: 0f22bdc7-dfca-468f-aa9d-d61a53bfe699
+    - Value: a0f3d17a-c120-4b05-a3e2-e60fdaaf1c44
+    - Value: fe374680-3753-47f6-9c94-49989a2c6c9d
+    - Value: 0f2e8a89-b9e4-4d33-a1e0-f5fec8b82b3c
+    values:
+    - window:
+        serializedVersion: 2
+        x: 153
+        y: 283
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: d37e613f-9249-48fe-a0cb-057f95fda70a
+      x: 153
+      y: 283
+      text: Default Text
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1669
+        y: 752
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6648cbbe-e023-4be5-983e-34a992ca6d83
+      x: 1669
+      y: 752
+      text: It's just...you know...I don't really get a lot of guys trying to challenge
+        me...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ef568463-a3fd-4da3-be26-5ef4e6c2959c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1969
+        y: 790
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ef568463-a3fd-4da3-be26-5ef4e6c2959c
+      x: 1969
+      y: 790
+      text: The other moles all worship me, so they don't really try to pick a fight
+        or anything...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 922a8293-7a22-45f8-b43b-d20fe5c09d15
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2266
+        y: 750
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 922a8293-7a22-45f8-b43b-d20fe5c09d15
+      x: 2266
+      y: 750
+      text: '...so I''m pretty lonely...and I just thought...you know..that we had
+        something special going on...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 91de402c-be3f-4128-b5ce-55f950d1824a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2557
+        y: 769
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 91de402c-be3f-4128-b5ce-55f950d1824a
+      x: 2557
+      y: 769
+      text: '...I-If I was too tough for you, that''s totally understandable. I could
+        dial it back a little...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 46856a4c-baee-44fc-a351-be970ed579b8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 150.35617
+        y: 780
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f1958589-fea3-4a7e-b3f6-e5abe8f988ac
+      x: 150.35617
+      y: 780
+      text: Hey, garbage man. Over here.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 4b2c9311-b3ef-4ca1-b2cf-5428c83209d1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 457.3562
+        y: 779
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4b2c9311-b3ef-4ca1-b2cf-5428c83209d1
+      x: 457.3562
+      y: 779
+      text: Hey. Hello. How's it going. It's me, <c=g>The Mole King</c>. We met yesterday,
+        remember?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ccc142da-1891-4f31-af13-42a3631f683c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 761.3562
+        y: 751
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ccc142da-1891-4f31-af13-42a3631f683c
+      x: 761.3562
+      y: 751
+      text: Listen, I noticed that, you know, we fought yesterday and stuff...and
+        were having a good old time.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2114777d-76bc-4e7f-bf71-f294a009950d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1053.3562
+        y: 775
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2114777d-76bc-4e7f-bf71-f294a009950d
+      x: 1053.3562
+      y: 775
+      text: '...um..but then you, like, left? And didn''t come back?'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 4f9a72e8-b0ee-4c07-9da1-62afeec4464e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1340.3562
+        y: 756
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4f9a72e8-b0ee-4c07-9da1-62afeec4464e
+      x: 1340.3562
+      y: 756
+      text: And I'm just...unsure..was it something I did? Did I come on a bit too
+        intense?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2874
+        y: 617
+        width: 270
+        height: 367
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: Would you wanna fight again if I was a little easier?
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 46856a4c-baee-44fc-a351-be970ed579b8
+      x: 2874
+      y: 617
+      text: ..if...that would make the difference between us fighting again...and
+        stuff.
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Yeah, maybe if you had a bit less health, we'd be a better match.
+        node_id:
+          Value: 
+      - text: Yeah, can your hits not do so much damage?
+        node_id:
+          Value: 
+      - text: No, I think it was a fair fight, no need to make it easier.
+        node_id:
+          Value: 
+      - text: WHAT?!? You think you're too tough for me! You just got lucky last time!
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 3185.3289
+        y: 835
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0dd74465-564d-4f13-b4c7-53031f44f5b9
+      x: 3185.3289
+      y: 835
+      text: 'A-Are you sure? '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 84a84039-f316-47f6-82ed-0fdcbbe297ff
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3470.3289
+        y: 815
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 84a84039-f316-47f6-82ed-0fdcbbe297ff
+      x: 3470.3289
+      y: 815
+      text: This might break the immersion a bit, but, uh, <c=g> the reward for defeating
+        me wont be different no matter what you choose</c>
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 00f8f0c4-0347-4c8b-869c-66059d07998d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3748.3289
+        y: 760
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 00f8f0c4-0347-4c8b-869c-66059d07998d
+      x: 3748.3289
+      y: 760
+      text: So there's, like, no downside to making our fight easier. Mechanically,
+        at least.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6650b7d8-adf0-4b70-adec-f324f349ded4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4047.329
+        y: 768
+        width: 270
+        height: 329
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: You sure you don't wanna make the fight easier? There isn't any downside..
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6650b7d8-adf0-4b70-adec-f324f349ded4
+      x: 4047.329
+      y: 768
+      text: I'm not one to judge, either. The other moles wont judge. Nobody will
+        judge you for making it easier.
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Eh, I guess if you had less health...
+        node_id:
+          Value: 
+      - text: '...I suppose it would be a bit better if your attacks didn''t do so
+          much damage.'
+        node_id:
+          Value: 
+      - text: No. I don't need you to handicap yourself. I can take you on.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 4371.167
+        y: 620
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7b55dd3c-d571-4ef8-b7f7-d5e6a1aeb1ee
+      x: 4371.167
+      y: 620
+      text: Yes! DEFINATELY! No problem at all! I can <c=g>cut down my health a bit
+        for our next fight</c>!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f3c9e4b5-29df-4a23-b398-894ac587cf64
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4705.167
+        y: 630
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f3c9e4b5-29df-4a23-b398-894ac587cf64
+      x: 4705.167
+      y: 630
+      text: Oh, man. Cool. This is awesome.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 18722d2c-7b72-47bb-9f83-0a288362061c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5015.167
+        y: 671
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 18722d2c-7b72-47bb-9f83-0a288362061c
+      x: 5015.167
+      y: 671
+      text: Ok! So I'll see you soon, then! Don't forget!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a6c1a6a0-4b38-4c6f-abb3-8a336f78f92e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5304.167
+        y: 738
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a6c1a6a0-4b38-4c6f-abb3-8a336f78f92e
+      x: 5304.167
+      y: 738
+      text: I went ahead and marked <c=g> my location on the map</c> so you don't
+        forget where I am...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 0f22bdc7-dfca-468f-aa9d-d61a53bfe699
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5614.167
+        y: 773
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0f22bdc7-dfca-468f-aa9d-d61a53bfe699
+      x: 5614.167
+      y: 773
+      text: '...you know...just in case...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a0f3d17a-c120-4b05-a3e2-e60fdaaf1c44
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5926.167
+        y: 742
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a0f3d17a-c120-4b05-a3e2-e60fdaaf1c44
+      x: 5926.167
+      y: 742
+      text: ALSO! LAST THING! I had some of my best moles dig <c=g>this tunnel</c>
+        for you last night.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: fe374680-3753-47f6-9c94-49989a2c6c9d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6239.167
+        y: 744
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fe374680-3753-47f6-9c94-49989a2c6c9d
+      x: 6239.167
+      y: 744
+      text: 'You can use it as <c=g> a shortcut to my throne</c>. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 0f2e8a89-b9e4-4d33-a1e0-f5fec8b82b3c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6539.167
+        y: 781
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0f2e8a89-b9e4-4d33-a1e0-f5fec8b82b3c
+      x: 6539.167
+      y: 781
+      text: Alright! Hope to see you soon!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: d37e613f-9249-48fe-a0cb-057f95fda70a
