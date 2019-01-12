@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class CutsceneActivator : MonoBehaviour
 {
@@ -69,8 +70,14 @@ public class CutsceneActivator : MonoBehaviour
 		demoEndFader.SetActive(true);
 		yield return new WaitForSeconds(3.5f);
 		demoEndText.SetActive(true);
-		yield return new WaitForSeconds(1.5f);
-		fader.FadeToScene("TitleScreen");
+		int currentSaveSlot = UserDataManager.Instance.GetSlot();
+		yield return new WaitForSeconds(4.5f);
+		ResetData(currentSaveSlot);
+		GlobalVariableManager.Instance.SetDefaultStats();
+		SoundManager.instance.backupMusicSource.Stop();
+		GameStateManager.Instance.PopAllStates();
+		//GameStateManager.Instance.PushState(typeof(TitleState));
+		fader.FadeToScene("TitleScreen2");
 
 	}
 
@@ -83,5 +90,22 @@ public class CutsceneActivator : MonoBehaviour
 			CancelInvoke();
 		}
 	}
+
+
+	static void ResetData(int slot)
+    {
+        string directory_path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "TGIT");
+        if (!Directory.Exists(directory_path)) {
+            return;
+        }
+
+        string fileName = Path.Combine(directory_path, "UserData_" + slot + ".json");
+
+        if (File.Exists(fileName)) {
+            File.Delete(fileName);
+        }
+
+        Debug.Log("Data in Slot: " + slot + " has been deleted!");
+    }
 }
 

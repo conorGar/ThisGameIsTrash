@@ -48,6 +48,10 @@ public class UserDataManager : MonoBehaviour {
         slot = p_slot;
     }
 
+    public int GetSlot(){
+    	return slot;
+    }
+
     public void SetDirty()
     {
         isDirty = true;

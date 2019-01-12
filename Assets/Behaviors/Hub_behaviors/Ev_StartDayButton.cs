@@ -19,9 +19,7 @@ public class Ev_StartDayButton : SE_GlowWhenClose {
         UserDataManager.Instance.SetDirty();
 
         if(GlobalVariableManager.Instance.DAY_NUMBER < 10){
-		fader.FadeToScene("WorldSelect");
-		}else{
-			StartCoroutine("DemoEnd");
+			fader.FadeToScene("WorldSelect");
 		}
 	}
 
@@ -41,8 +39,11 @@ public class Ev_StartDayButton : SE_GlowWhenClose {
 		yield return new WaitForSeconds(2f);
 		demoEndText.SetActive(true);
 		yield return new WaitForSeconds(2f);
+		GameStateManager.Instance.PopAllStates();
 		GameStateManager.Instance.PushState(typeof(TitleState));
-		fader.FadeToScene("TitleScreen");
+		SoundManager.instance.backupMusicSource.Stop();
+
+		fader.FadeToScene("TitleScreen2");
 
 	}
 

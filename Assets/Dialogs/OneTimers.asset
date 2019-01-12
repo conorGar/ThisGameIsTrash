@@ -83,6 +83,13 @@ MonoBehaviour:
     - Value: 139fedc2-08c7-4ab5-a084-594c44a6602b
     - Value: 84baea8b-68a4-40f3-83a4-d224aa169338
     - Value: 3452d4dc-43c5-4bcc-9a30-50a0d1599bf1
+    - Value: 4a5cbd64-074d-44d6-8a9a-28699832f50a
+    - Value: 2f5cb7bf-942e-45c7-ae89-28015e437c1b
+    - Value: 8418b4e4-fb7d-46a6-86de-e44b907bd9fc
+    - Value: 18006437-2712-44f9-8523-29b9edd4320d
+    - Value: 64f8df78-04e5-430e-891d-53b9a89707d9
+    - Value: a10a4e2c-ef2a-41a5-bbd3-986395fdff8e
+    - Value: ce856e59-9ad8-4fdd-a013-0323732526e4
     values:
     - window:
         serializedVersion: 2
@@ -1782,6 +1789,178 @@ MonoBehaviour:
       x: 2875.7537
       y: 1351
       text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 170
+        y: 2248
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: DemoEnd
+      speakerName: Rat On A Mat
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4a5cbd64-074d-44d6-8a9a-28699832f50a
+      x: 170
+      y: 2248
+      text: Welp. Looks like you couldn't do it. You couldn't collect <c=g>3 Large
+        Trash</c> within <c=b>10 days</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2f5cb7bf-942e-45c7-ae89-28015e437c1b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 463
+        y: 2261
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: DemoEnd2
+      speakerName: ' '
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2f5cb7bf-942e-45c7-ae89-28015e437c1b
+      x: 463
+      y: 2261
+      text: You really blew it.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8418b4e4-fb7d-46a6-86de-e44b907bd9fc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 749
+        y: 2273
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: DemoEnd3
+      speakerName: ' '
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8418b4e4-fb7d-46a6-86de-e44b907bd9fc
+      x: 749
+      y: 2273
+      text: But don't worry, I'm still proud of you. I'm sure you tried your best.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 64f8df78-04e5-430e-891d-53b9a89707d9
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1417
+        y: 2268
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: DemoEnd6
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 18006437-2712-44f9-8523-29b9edd4320d
+      x: 1417
+      y: 2268
+      text: '...I very much hope your...regrettable..performance doesn''t affect your
+        positive opinion of the game.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ce856e59-9ad8-4fdd-a013-0323732526e4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 842.9958
+        y: 2561
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: DemoEnd4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 64f8df78-04e5-430e-891d-53b9a89707d9
+      x: 842.9958
+      y: 2561
+      text: and sometimes, all we can do is <c=g> try our best and hope that it's
+        good enough to the people who matter</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a10a4e2c-ef2a-41a5-bbd3-986395fdff8e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1131.9958
+        y: 2574
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: DemoEnd5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a10a4e2c-ef2a-41a5-bbd3-986395fdff8e
+      x: 1131.9958
+      y: 2574
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 18006437-2712-44f9-8523-29b9edd4320d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1752
+        y: 2269
+        width: 270
+        height: 200
+      isCollapsed: 0
+      title: DemoEnd7
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ce856e59-9ad8-4fdd-a013-0323732526e4
+      x: 1752
+      y: 2269
+      text: It was a pleasure being here with you... I hope it was a pleasure for
+        you too.
       isThought: 0
       animTrigger: 
       type: 1

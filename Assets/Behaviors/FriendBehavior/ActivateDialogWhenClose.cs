@@ -51,22 +51,22 @@ public class ActivateDialogWhenClose : MonoBehaviour {
     // Moved this out of Update so it can be controlled better by the friend and what state they are in.
     public void Execute(string firstIcon = "", string secondIcon = "", string thirdIcon = "")
     {
-		//Debug.Log("Dialog execute activate");
+		Debug.Log("Dialog execute activate");
         if (GlobalVariableManager.Instance.CARRYING_SOMETHING == false)
         {
-			//Debug.Log("Criteria met - 0");
+			Debug.Log("Criteria met - 0");
             if (startNodeName.Length > 0 && player != null)
             {
 
-               // Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
+                Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
                 if (Vector2.Distance(player.transform.position, gameObject.transform.position) <  distanceThreshold)
                 {
 
-                   // Debug.Log("Criteria met - 2");
+                    Debug.Log("Criteria met - 2");
                     if (autoStart && canTalkTo)
                     {
 
-                       // Debug.Log("Criteria met - 3");
+                       Debug.Log("Criteria met - 3");
                         startNodeName = friend.nextDialog;
                         ActivateDialog(firstIcon, secondIcon, thirdIcon);
                     }
@@ -158,11 +158,14 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	}
 
 	void StartDialog(string firstIcon = "", string secondIcon = "", string thirdIcon = ""){
+		Debug.Log("Start Dialog Activated");
 		DialogManager.Instance.gameObject.SetActive(true);
 				friend.OnActivateDialog();
+				if(player.GetComponent<EightWayMovement>()!=null)
+					player.GetComponent<EightWayMovement>().StopMovement();
+				if(player.GetComponent<Rigidbody2D>()!=null)
+					player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
-				player.GetComponent<EightWayMovement>().StopMovement();
-				player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 				if(DialogManager.Instance.dialogCanvas.activeInHierarchy == false){
 					
 					Debug.Log("Dialog Definition Name:"+ dialogDefiniton.name);

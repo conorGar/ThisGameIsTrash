@@ -126,12 +126,15 @@ public class Ev_Results : MonoBehaviour {
                         UserDataManager.Instance.SetDirty();
                         GameStateManager.Instance.PopAllStates();
 
-                        if (GlobalVariableManager.Instance.DAY_NUMBER == 2) {
+                        if (GlobalVariableManager.Instance.DAY_NUMBER == 2) { // was 2
                             GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");//supposed to be intro credits scene, changed for testing
                         }
-                        else if (GlobalVariableManager.Instance.DAY_NUMBER == 3) {
-                            //StartCoroutine("HomelessHarry"); TODO
-                            GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
+                        else if (GlobalVariableManager.Instance.DAY_NUMBER >= 10) {
+							if(GlobalVariableManager.Instance.LARGE_TRASH_COLLECTED < 3){
+                           		 GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("DemoEndRoom"); //if havent collected enough large trash by the demos end, game ends
+                           	}else{
+								GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
+                           	}
                         }
                         else {
                             GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
