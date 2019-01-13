@@ -84,6 +84,11 @@ public class StoneFriend : Friend
             	yield return new WaitForSeconds(.5f);
             	rock.GetComponent<RockFriend>().Sleep();
             	yield return new WaitForSeconds(.5f);
+				CamManager.Instance.mainCamEffects.CameraPan(blockade.transform.position,"");
+				yield return new WaitForSeconds(.5f);
+				blockade.SetActive(false);
+				ObjectPool.Instance.GetPooledObject("effect_SmokePuff",blockade.transform.position);
+				yield return new WaitForSeconds(.5f);
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
                 break;
         }
@@ -159,8 +164,23 @@ public class StoneFriend : Friend
     	rocketDestination = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y +20f);
     	rocketIsLaunching = true;
     	yield return new WaitForSeconds(2f);
+		//blockade.SetActive(false);
+		CamManager.Instance.mainCamEffects.CameraPan(slab.transform.position,"");
+        yield return new WaitForSeconds(.5f);
+        slab.GetComponent<SlabFriend>().Sleep();
+		yield return new WaitForSeconds(.5f);
+        CamManager.Instance.mainCamEffects.CameraPan(rock.transform.position,"");
+        yield return new WaitForSeconds(.5f);
+        rock.GetComponent<RockFriend>().Sleep();
+        yield return new WaitForSeconds(.5f);
+		CamManager.Instance.mainCamEffects.CameraPan(blockade.transform.position,"");
+		yield return new WaitForSeconds(.5f);
 		blockade.SetActive(false);
-		dialogManager.ReturnFromAction();
+		ObjectPool.Instance.GetPooledObject("effect_SmokePuff",blockade.transform.position);
+		yield return new WaitForSeconds(.5f);
+        gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
+		yield return base.OnFinishDialogEnumerator(true);
+        
 
 
 		

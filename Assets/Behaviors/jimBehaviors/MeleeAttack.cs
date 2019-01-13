@@ -298,7 +298,11 @@ public class MeleeAttack : MonoBehaviour {
 	public void ReturnFromSwing(){
 
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-		gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
+		//gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
+		//GetComponent<EightWayMovement>().clipOverride = false;
+		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
+
+		//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
 		isSwinging = false;
 
 	}

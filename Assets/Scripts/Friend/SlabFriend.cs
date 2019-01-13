@@ -119,6 +119,11 @@ public class SlabFriend : Friend
             	yield return new WaitForSeconds(.5f);
             	stone.GetComponent<StoneFriend>().Sleep();
             	yield return new WaitForSeconds(.5f);
+				CamManager.Instance.mainCamEffects.CameraPan(blockade.transform.position,"");
+				yield return new WaitForSeconds(.5f);
+				blockade.SetActive(false);
+				ObjectPool.Instance.GetPooledObject("effect_SmokePuff",blockade.transform.position);
+				yield return new WaitForSeconds(.5f);
                 gameObject.GetComponent<ActivateDialogWhenClose>().ResetDefaults();
 				yield return base.OnFinishDialogEnumerator();
 
@@ -203,7 +208,7 @@ public class SlabFriend : Friend
 
     public IEnumerator SlabDepartureSequence(){
     	slabDepartureSequence = 1;
-    	blockade.SetActive(false);
+    	//blockade.SetActive(false);
     	yield return new WaitUntil(() => moon.transform.position.x >= transform.position.x);
     	yield return new WaitForSeconds(.4f);
     	slabDepartureSequence = 2;

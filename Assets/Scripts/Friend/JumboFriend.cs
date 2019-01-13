@@ -315,6 +315,7 @@ public class JumboFriend : Friend {
 			yield return new WaitForSeconds(.5f);
 			movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(true);
 			SoundManager.instance.musicSource.volume = 0;
+			SoundManager.instance.backupMusicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 			SoundManager.instance.backupMusicSource.clip = projectorPlay;
 			SoundManager.instance.backupMusicSource.Play();
 

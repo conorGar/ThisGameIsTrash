@@ -88,7 +88,7 @@ public class IntroManager : MonoBehaviour {
 		}else if(slideNumber == 15){
 			textShown.text = "Angry at the humans for trashing their homes.";
 		}else if(slideNumber == 16){
-			textShown.text = "Worse yet, a malicious group calling themselves <color=#DC3232>White Trash</color> are rising to power.";
+			textShown.text = "Worse yet, a malicious group calling themselves <color=#DC3232>The White Trash Army</color> are rising to power.";
 		}else if(slideNumber == 17){
 			textShown.text = "They hope to set up their mysterious leader, known only as <color=#DC3232>The Greasy Prince</color>, to be the winner of the Garbageperson Of The Year Award!";
 		}else if(slideNumber == 18){

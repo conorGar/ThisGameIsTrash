@@ -150,6 +150,11 @@ public class RockFriend : Friend {
             	yield return new WaitForSeconds(.5f);
             	stone.GetComponent<StoneFriend>().Sleep();
             	yield return new WaitForSeconds(.5f);
+				CamManager.Instance.mainCamEffects.CameraPan(blockade.transform.position,"");
+				yield return new WaitForSeconds(.5f);
+				blockade.SetActive(false);
+				ObjectPool.Instance.GetPooledObject("effect_SmokePuff",blockade.transform.position);
+				yield return new WaitForSeconds(.5f);
 				yield return base.OnFinishDialogEnumerator();
 				moon.SetActive(false);
 			break;
@@ -321,7 +326,7 @@ public class RockFriend : Friend {
     public IEnumerator DepartureSequence(){
     	Debug.Log("Rock departure sequence activated");
     	departureSequence = 1;
-		blockade.SetActive(false);
+		
 
     	yield return new WaitUntil(() => moon.transform.position.x >= transform.position.x);
     	Debug.Log("Rock departure reached this part");
