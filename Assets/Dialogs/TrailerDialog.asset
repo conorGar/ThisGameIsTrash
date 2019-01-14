@@ -1,0 +1,701 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: TrailerDialog
+  m_EditorClassIdentifier: 
+  title: TrailerDialog
+  dialogIconID: dialog_icon_ID
+  nodeStore:
+    keys:
+    - Value: 4684fdf4-6a91-43ac-8647-3163e4558b5c
+    - Value: 4483bbd0-dea6-4099-aa2b-871b8ad3a373
+    - Value: 40932f29-c2a4-49c5-bb6b-5fc6693099b3
+    - Value: e98920b8-605b-4a17-97d9-91240fdc9db2
+    - Value: 53094516-b3a4-416e-861a-c40197dff7af
+    - Value: 145963d2-5751-45cc-b1e1-07940b7db900
+    - Value: 61e70efe-b295-4d66-98b0-c3be33939aa2
+    - Value: 776ad622-2be3-45aa-af69-9bd10fce3aa7
+    - Value: a35cf0c6-5dbc-4c90-bfa3-6d157a9d686c
+    - Value: 992429aa-1fd6-493d-8492-646108872d48
+    - Value: 365f348c-2344-478c-ab95-3dc6051b3e28
+    - Value: 9e9b1a3a-7c72-442a-bf06-1ba32208c9e7
+    - Value: ab40eb3c-e480-455c-8626-afa996183780
+    - Value: fdd90bbb-4004-44c4-a526-79dac5b23ff2
+    - Value: b766f6d0-fb76-46fc-b098-eec68dd36210
+    - Value: 38a47816-e5b1-44f9-bc9a-1a863c9ab81c
+    - Value: b76551f7-fb5c-47be-8676-0975915e89a7
+    - Value: 09e1fd20-4780-4ce9-b833-068311f563e5
+    - Value: b7d91c8a-3ad0-44f2-b0e1-0d024b827043
+    - Value: 1801d728-4fda-4278-814c-65a3e5432d26
+    - Value: b5fdd2aa-f106-4c17-9a9d-75dd8d5fbff1
+    - Value: 1cb52b08-83a5-4da5-b107-1c17edcc20b3
+    - Value: 92214c92-c35a-43c5-bf2e-648fbe0a76a5
+    - Value: 94e85d0f-a372-4437-a79d-e43845bfc36f
+    - Value: 1f5a514c-bb31-4682-b132-533b5d6824b0
+    - Value: c98c6431-1d45-4e6c-883a-ea2480ae941f
+    - Value: 1436956e-4657-4b94-8145-42734ce8f9bd
+    values:
+    - window:
+        serializedVersion: 2
+        x: 127
+        y: 198
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ChipTrailerStart
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4684fdf4-6a91-43ac-8647-3163e4558b5c
+      x: 127
+      y: 198
+      text: ..M-my name? Oh...it's...uh...<c=g>Chip</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 4483bbd0-dea6-4099-aa2b-871b8ad3a373
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 432
+        y: 252
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ChipTrailer1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4483bbd0-dea6-4099-aa2b-871b8ad3a373
+      x: 432
+      y: 252
+      text: Well...I was recently purchased by some <c=r>greasy guy</c> at the ice
+        cream truck back there...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 40932f29-c2a4-49c5-bb6b-5fc6693099b3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 759
+        y: 280
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: ChipTrailer1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 40932f29-c2a4-49c5-bb6b-5fc6693099b3
+      x: 759
+      y: 280
+      text: '...and he dropped me in the sand. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e98920b8-605b-4a17-97d9-91240fdc9db2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1063
+        y: 279
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ChipTrailer1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e98920b8-605b-4a17-97d9-91240fdc9db2
+      x: 1063
+      y: 279
+      text: So now...here I am...<c=g> steadily melting away</c> in the sun....
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 53094516-b3a4-416e-861a-c40197dff7af
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1359
+        y: 326
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ChipTrailer1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 53094516-b3a4-416e-861a-c40197dff7af
+      x: 1359
+      y: 326
+      text: I'm...<c=r>dying</c>, mister. I can feel myself losing a little life with
+        every breath.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 145963d2-5751-45cc-b1e1-07940b7db900
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1648
+        y: 309
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ChipTrailer1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 145963d2-5751-45cc-b1e1-07940b7db900
+      x: 1648
+      y: 309
+      text: What did I do to deserve this, Mister?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 61e70efe-b295-4d66-98b0-c3be33939aa2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1942
+        y: 346
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ChipTrailer1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 61e70efe-b295-4d66-98b0-c3be33939aa2
+      x: 1942
+      y: 346
+      text: I just wish <c=g> God would take away the pain</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 776ad622-2be3-45aa-af69-9bd10fce3aa7
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 91
+        y: 506
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: LemonTrailer1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 776ad622-2be3-45aa-af69-9bd10fce3aa7
+      x: 91
+      y: 506
+      text: Oh, you know, just hanging around, being a lemon. Doing lemon things.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a35cf0c6-5dbc-4c90-bfa3-6d157a9d686c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 379
+        y: 498
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: LemonTrailer12
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a35cf0c6-5dbc-4c90-bfa3-6d157a9d686c
+      x: 379
+      y: 498
+      text: '...you know how it goes.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 992429aa-1fd6-493d-8492-646108872d48
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 675
+        y: 526
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: LemonTrailer13
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 992429aa-1fd6-493d-8492-646108872d48
+      x: 675
+      y: 526
+      text: Yeah...it's alright, I guess...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 365f348c-2344-478c-ab95-3dc6051b3e28
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 978
+        y: 531
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: LemonTrailer14
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 365f348c-2344-478c-ab95-3dc6051b3e28
+      x: 978
+      y: 531
+      text: It's just...you know... see <c=g>those limes over there</c>?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9e9b1a3a-7c72-442a-bf06-1ba32208c9e7
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1273
+        y: 581
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: LemonTrailer15
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9e9b1a3a-7c72-442a-bf06-1ba32208c9e7
+      x: 1273
+      y: 581
+      text: I've just been thinking recently. About how cool it would be to be a <c=g>lime</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ab40eb3c-e480-455c-8626-afa996183780
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1570
+        y: 567
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: LemonTrailer16
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ab40eb3c-e480-455c-8626-afa996183780
+      x: 1570
+      y: 567
+      text: Then I'd be able to hang around, <c=g>being a lime</c>. Doing <c=g>lime
+        things</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: fdd90bbb-4004-44c4-a526-79dac5b23ff2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1870
+        y: 574
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: LemonTrailer17
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fdd90bbb-4004-44c4-a526-79dac5b23ff2
+      x: 1870
+      y: 574
+      text: Yeah.... All my suffering in life would be relieved then.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b766f6d0-fb76-46fc-b098-eec68dd36210
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2158
+        y: 587
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: LemonTrailer18
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b766f6d0-fb76-46fc-b098-eec68dd36210
+      x: 2158
+      y: 587
+      text: Yeah, well, frankly mister, <c=g>what do you know</c>?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 38a47816-e5b1-44f9-bc9a-1a863c9ab81c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2450
+        y: 627
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: LemonTrailer19
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 38a47816-e5b1-44f9-bc9a-1a863c9ab81c
+      x: 2450
+      y: 627
+      text: Nobody understands my <c=r>suffering</c>!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 127
+        y: 10
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: JumboTrailerStart
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b76551f7-fb5c-47be-8676-0975915e89a7
+      x: 127
+      y: 10
+      text: 'Oh...h-hello, Mister. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 09e1fd20-4780-4ce9-b833-068311f563e5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 437
+        y: 22
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: JumboTrailer1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 09e1fd20-4780-4ce9-b833-068311f563e5
+      x: 437
+      y: 22
+      text: '...how''s it going...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b7d91c8a-3ad0-44f2-b0e1-0d024b827043
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 740
+        y: 32
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: JumboTrailer12
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b7d91c8a-3ad0-44f2-b0e1-0d024b827043
+      x: 740
+      y: 32
+      text: ..oh...that's....nice...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1801d728-4fda-4278-814c-65a3e5432d26
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1048
+        y: 29
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: JumboTrailer13
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1801d728-4fda-4278-814c-65a3e5432d26
+      x: 1048
+      y: 29
+      text: It's just, you know, I've been spending all morning putting up osters
+        of me new movie, <c=g>Pup Fiction</c>...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b5fdd2aa-f106-4c17-9a9d-75dd8d5fbff1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1341
+        y: 43
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: JumboTrailer14
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b5fdd2aa-f106-4c17-9a9d-75dd8d5fbff1
+      x: 1341
+      y: 43
+      text: ..and it's..just... like...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1cb52b08-83a5-4da5-b107-1c17edcc20b3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1647
+        y: 59
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: JumboTrailer15
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1cb52b08-83a5-4da5-b107-1c17edcc20b3
+      x: 1647
+      y: 59
+      text: ..what's the point? <c=g>Nobody ever shows up to my movies anyway</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 92214c92-c35a-43c5-bf2e-648fbe0a76a5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1946
+        y: 70
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: JumboTrailer16
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 92214c92-c35a-43c5-bf2e-648fbe0a76a5
+      x: 1946
+      y: 70
+      text: I try and I try and I give it my all, but it's <c=g> just not enough for
+        people</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 94e85d0f-a372-4437-a79d-e43845bfc36f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2237
+        y: 92
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: JumboTrailer17
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 94e85d0f-a372-4437-a79d-e43845bfc36f
+      x: 2237
+      y: 92
+      text: '...what am I suppossed to do when <c=g> I give something my all</c> and
+        it''s <c=g>still not enough</c>?'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1f5a514c-bb31-4682-b132-533b5d6824b0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2531
+        y: 129
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: JumboTrailer18
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1f5a514c-bb31-4682-b132-533b5d6824b0
+      x: 2531
+      y: 129
+      text: '...what is...anyone suppossed to do then...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: c98c6431-1d45-4e6c-883a-ea2480ae941f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2832
+        y: 118
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: JumboTrailer19
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c98c6431-1d45-4e6c-883a-ea2480ae941f
+      x: 2832
+      y: 118
+      text: ..yeah, well, who cares what you think. What do you know.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1436956e-4657-4b94-8145-42734ce8f9bd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3161
+        y: 156
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: JumboTrailer20
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1436956e-4657-4b94-8145-42734ce8f9bd
+      x: 3161
+      y: 156
+      text: Yeah, whatever. See ya.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 4684fdf4-6a91-43ac-8647-3163e4558b5c
+      responses: []
+  rootNodeId:
+    Value: 4684fdf4-6a91-43ac-8647-3163e4558b5c

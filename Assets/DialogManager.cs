@@ -70,6 +70,8 @@ public class DialogManager : MonoBehaviour {
 			string nodeTitle = node.Value.title;
 			if(nodeTitle == dialogTitle){
 				currentNode = node.Value;
+				Debug.Log("Found proper title - next node");
+
 				break;
 			}
 		}
@@ -186,7 +188,7 @@ public class DialogManager : MonoBehaviour {
                 FinishDialog();
                 return;
             }
-
+			Debug.Log("Got here - next node");
             //currentlySpeakingIcon.GetComponent<Animator>().Play("JumboAnimation");
             currentNode = myDialogDefiniton.nodes[currentNode.child_id];
 
