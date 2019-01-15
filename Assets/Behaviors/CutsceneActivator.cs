@@ -77,7 +77,8 @@ public class CutsceneActivator : MonoBehaviour
 		SoundManager.instance.backupMusicSource.Stop();
 		GameStateManager.Instance.PopAllStates();
 		//GameStateManager.Instance.PushState(typeof(TitleState));
-		fader.FadeToScene("TitleScreen2");
+		Application.Quit();
+		//fader.FadeToScene("TitleScreen2");
 
 	}
 

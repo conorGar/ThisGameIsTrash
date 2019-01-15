@@ -35,8 +35,9 @@ public class S_Ev_DemoEnd : MonoBehaviour {
 			SoundManager.instance.backupMusicSource.Stop();
 			GameStateManager.Instance.PopAllStates();
 			SoundManager.instance.backupMusicSource.Stop();
+			Application.Quit();
 
-			fader.FadeToScene("TitleScreen2");
+			//fader.FadeToScene("TitleScreen2");
 	}
 
 	static void ResetData(int slot)
