@@ -108,7 +108,8 @@ public class BossMoleKing : Boss
 	}
 
 	void TossRock(){
-		gameObject.GetComponent<FireTowardPlayer>().Fire();
+		Debug.Log("Toss Rock Activate");
+		gameObject.GetComponent<FireTowardPlayer>().FireBullet();
 	}
 
 	public void ActivateMoleSpawners(){

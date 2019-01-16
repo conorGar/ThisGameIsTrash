@@ -5920,6 +5920,15 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1483496130492050, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114031700106786510, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7,
+        type: 2}
+      propertyPath: maxEnemiesAtOnce
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7, type: 2}
   m_IsPrefabParent: 0
@@ -6803,6 +6812,15 @@ Prefab:
     - target: {fileID: 1483496130492050, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7, type: 2}
       propertyPath: m_Name
       value: respawningEnemyspawner (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114031700106786510, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7,
+        type: 2}
+      propertyPath: maxEnemiesAtOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483496130492050, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7, type: 2}
@@ -40114,6 +40132,15 @@ Prefab:
       propertyPath: m_Name
       value: respawningEnemyspawner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114031700106786510, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7,
+        type: 2}
+      propertyPath: maxEnemiesAtOnce
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1483496130492050, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f374db40cacdd84eba5b9f5dbe0b8a7, type: 2}
   m_IsPrefabParent: 0
@@ -61901,6 +61928,7 @@ MonoBehaviour:
   - PHASE1_AFTERTALK_LEFT
   - END
   friendState: 0
+  bossScript: {fileID: 0}
 --- !u!1 &1677686086
 GameObject:
   m_ObjectHideFlags: 0
