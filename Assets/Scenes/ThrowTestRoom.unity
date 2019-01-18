@@ -3607,36 +3607,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &10800593
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1397537398804860, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 10800594}
-  m_Layer: 9
-  m_Name: spawnPos4 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &10800594
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4429106046477422, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 10800593}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.7, y: -13.7, z: 0}
-  m_LocalScale: {x: 1.6580482, y: 1.6068945, z: 0.9999996}
-  m_Children: []
-  m_Father: {fileID: 1946988990}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &15947773
 GameObject:
   m_ObjectHideFlags: 0
@@ -5056,36 +5026,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1 &194791600
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1397537398804860, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 194791601}
-  m_Layer: 9
-  m_Name: spawnPos4 (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &194791601
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4429106046477422, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 194791600}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.8, y: -16.1, z: 0}
-  m_LocalScale: {x: 1.6580482, y: 1.6068945, z: 0.9999996}
-  m_Children: []
-  m_Father: {fileID: 1946988990}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &196328639 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1861023499579450, guid: 3ff0247a07086ff43ac2993fae14854f,
@@ -61653,19 +61593,9 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114701775736133534, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-        type: 2}
-      propertyPath: smallMoleSpawners.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114701775736133534, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-        type: 2}
-      propertyPath: dirtBallSpawnPoints.Array.size
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4038376225750262, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 11.865217
+      value: 11.565738
       objectReference: {fileID: 0}
     - target: {fileID: 4038376225750262, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
       propertyPath: m_LocalPosition.y
@@ -61695,75 +61625,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 33005280028056834, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 114701775736133534, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
         type: 2}
       propertyPath: objectPool
       value: 
       objectReference: {fileID: 222976477}
-    - target: {fileID: 114701775736133534, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 888814087}
-    - target: {fileID: 4424493168899132, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -2.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4424493168899132, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -1.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4589081999792482, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4589081999792482, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -4.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4700635755574386, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 11.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4700635755574386, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -11.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429106046477422, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -3.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4429106046477422, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -16.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138274146974546, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -17.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4178146985746966, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -9.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4178146985746966, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114701775736133534, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-        type: 2}
-      propertyPath: dirtBallSpawnPoints.Array.data[6]
-      value: 
-      objectReference: {fileID: 10800593}
-    - target: {fileID: 114701775736133534, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-        type: 2}
-      propertyPath: dirtBallSpawnPoints.Array.data[7]
-      value: 
-      objectReference: {fileID: 194791600}
     - target: {fileID: 114701775736133534, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
         type: 2}
       propertyPath: smallMoleSpawners.Array.data[0]
@@ -61779,156 +61645,19 @@ Prefab:
       propertyPath: smallMoleSpawners.Array.data[2]
       value: 
       objectReference: {fileID: 370971323}
+    - target: {fileID: 114701775736133534, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 888814087}
+    - target: {fileID: 33005280028056834, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ae126eb26cfff64d9adb6cbb3eba677, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1674146055 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1936867313337426, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-    type: 2}
-  m_PrefabInternal: {fileID: 1674146054}
---- !u!114 &1674146056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1674146055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 289acecd8c5dec64dbebc899bcdcf860, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  armoredEnemy: 0
-  moveWhenHit: 0
-  resetFacingAfterHit: 0
-  secretHider: 0
-  returnToCurrentAniAfterHit: 0
-  invincibleAni:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
-  aniToSwitchBackTo:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
-  myDeadBodyName: 
-  respawnEnemy: 0
-  armoredEnemyHitSfx: {fileID: 0}
-  bossEnemy: 1
-  IAmParentObj: 0
-  childEnemy: {fileID: 0}
-  hitSqueal: 0
-  bounce: 4
-  tutPopup: {fileID: 0}
-  gar_trash: {fileID: 0}
-  gar_rec: {fileID: 0}
-  gar_comp: {fileID: 0}
-  timeDrop: {fileID: 0}
-  healthDrop: {fileID: 0}
-  pinDrop: {fileID: 0}
-  myShadow: {fileID: 0}
-  returnAniName: idle
-  dontSpawnBody: 0
-  canKnockoffArmor: 0
-  behaviorsToDeactivate: []
-  armorCollisionObj: {fileID: 0}
-  disarmoredAnimation: {fileID: 0}
-  objectPool: {fileID: 0}
-  myRespawner: {fileID: 0}
-  currentHp: 0
-  meleeDmgBonus: 0
-  dontStopWhenHit: 0
-  spinning: 0
-  startsOffDontMoveWhenHit: 0
---- !u!114 &1674146057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1674146055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5e54113e5604435b8ae87c7754f2725, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  library: {fileID: 114314783538798136, guid: 3c12bbb793fb8ca469b9005607482415, type: 2}
-  defaultClipId: 0
-  playAutomatically: 1
---- !u!50 &1674146058
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1674146055}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 3
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &1674146059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1674146055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 713fadc5b132fca4a81a9e0f2aecb0a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSpeed: 4
-  fireRate: 0
-  myProjectileFalls: 0
-  stopMovingWhenFire: 0
-  startWhenEnabled: 0
-  throwSFX: {fileID: 0}
-  projectileName: projectile_largeRock
-  player: {fileID: 0}
---- !u!114 &1674146060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1674146055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2a8f1203647b31468bd81a3461e23cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  friendName: The Mole King
-  day: 0
-  activateDialogWhenClose: 1
-  nextDialog: Start
-  myDialogDefiniton: {fileID: 11400000, guid: ba88346b4cde43d4483c33da329268b4, type: 2}
-  tempFriend: 0
-  missedDialog: 
-  IsVisiting: 0
-  dialogManager: {fileID: 0}
-  friendStates:
-  - INTRO
-  - PHASE1
-  - PHASE1_LEFT
-  - PHASE2
-  - PHASE2_LEFT
-  - PHASE1_DIED
-  - PHASE1_AFTERTALK
-  - PHASE1_AFTERTALK_LEFT
-  - END
-  friendState: 0
-  bossScript: {fileID: 0}
 --- !u!1 &1677686086
 GameObject:
   m_ObjectHideFlags: 0
@@ -71231,11 +70960,6 @@ RectTransform:
   m_AnchoredPosition: {x: -165.30003, y: 74.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!4 &1946988990 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4496676796034296, guid: 8ae126eb26cfff64d9adb6cbb3eba677,
-    type: 2}
-  m_PrefabInternal: {fileID: 1674146054}
 --- !u!1 &1950153290
 GameObject:
   m_ObjectHideFlags: 0

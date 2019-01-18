@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: MoleKing
   m_EditorClassIdentifier: 
   title: MoleKing
-  dialogIconID: dialog_icon_ID
+  dialogIconID: icon_moleKing
   nodeStore:
     keys:
     - Value: d37e613f-9249-48fe-a0cb-057f95fda70a
@@ -38,15 +38,17 @@ MonoBehaviour:
     - Value: a0f3d17a-c120-4b05-a3e2-e60fdaaf1c44
     - Value: fe374680-3753-47f6-9c94-49989a2c6c9d
     - Value: 0f2e8a89-b9e4-4d33-a1e0-f5fec8b82b3c
+    - Value: 1ed7df8e-ea00-4ae7-a1d4-97eb1e40f3c2
+    - Value: 7cb4c2d6-58f4-40f8-83d0-d776c2d1660d
     values:
     - window:
         serializedVersion: 2
         x: 153
-        y: 283
+        y: 281
         width: 270
-        height: 173
+        height: 199
       isCollapsed: 0
-      title: DialogRoot
+      title: MK_intro
       speakerName: 
       question: 
       action: 
@@ -55,13 +57,13 @@ MonoBehaviour:
       id:
         Value: d37e613f-9249-48fe-a0cb-057f95fda70a
       x: 153
-      y: 283
-      text: Default Text
+      y: 281
+      text: Oh?! An intruder DARES enter the throne of me, the great <c=g>Mole King</c>?!?
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
-        Value: 
+        Value: 1ed7df8e-ea00-4ae7-a1d4-97eb1e40f3c2
       responses: []
     - window:
         serializedVersion: 2
@@ -621,6 +623,55 @@ MonoBehaviour:
       x: 6539.167
       y: 781
       text: Alright! Hope to see you soon!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 450
+        y: 262
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: MK_intro2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1ed7df8e-ea00-4ae7-a1d4-97eb1e40f3c2
+      x: 450
+      y: 262
+      text: Me?! Who clawed his way through the mole hierarchy and emerged as the
+        strongest mole of all?!?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7cb4c2d6-58f4-40f8-83d0-d776c2d1660d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 756
+        y: 309
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: MK_intro3
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7cb4c2d6-58f4-40f8-83d0-d776c2d1660d
+      x: 756
+      y: 309
+      text: Ahaha! That will be the last mistake you ever make, human!
       isThought: 0
       animTrigger: 
       type: 1

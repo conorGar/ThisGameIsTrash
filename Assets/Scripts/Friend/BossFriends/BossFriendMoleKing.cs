@@ -54,9 +54,59 @@ public class BossFriendMoleKing : Friend
 	}
 
 	// Update is called once per frame
-	void Update ()
+	private void Update ()
 	{
-	
+		OnUpdate();
 	}
+
+	public override void OnUpdate(){
+		switch (GetFriendState())
+        {
+			case "INTRO":
+				nextDialog = "MK_intro";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+				break;
+			case "PHASE1":
+				break;
+			case "PHASE1_LEFT":
+				break;
+			case "PHASE1_AFTERTALK":
+				break;
+			case "PHASE1_AFTERTALK_LEFT":
+				break;
+            case "PHASE2":
+           		bossScript.ActivateMoleSpawners();
+           		break;
+		    case "PHASE2_LEFT":
+           		bossScript.ActivateMoleSpawners();
+           		break;
+            case "END":           	
+           		break;
+         }
+	}
+
+	public override void OnDeactivateRoom()
+    {
+        // TODO
+    }
+
+	public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
+    {
+        yield return new WaitForSeconds(.5f);
+        //TODO
+        switch (GetFriendState())
+        {
+			case "PHASE1":
+				break;
+
+			case "PHASE2":
+           		bossScript.ActivateMoleSpawners();
+           		break;
+        }
+
+        yield return base.OnFinishDialogEnumerator();
+        gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+        gameObject.SetActive(false);
+    }
 }
 
