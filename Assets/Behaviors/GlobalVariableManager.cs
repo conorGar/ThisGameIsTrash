@@ -49,7 +49,7 @@ public class GlobalVariableManager : UserDataItem {
 	//base stats
 	public PlayerStat HP_STAT = new PlayerStat(PLAYERSTATTYPE.HP, 5);
     public PlayerStat BAG_SIZE_STAT = new PlayerStat(PLAYERSTATTYPE.BAG_SIZE, 10);
-    public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
+    public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 3);
     public PlayerStat STAR_POINTS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_POINTS, 0);
 
 

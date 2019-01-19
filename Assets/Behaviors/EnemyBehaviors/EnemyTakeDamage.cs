@@ -212,7 +212,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	public void OnTriggerEnter2D(Collider2D melee){
 
 		if(melee.tag == "Weapon"){
-			
+			if(hitByThrownObject)
+				hitByThrownObject = false;
 			TakeDamage(melee.gameObject);
 
 			//Debug.Log("Collision with weapon: ");
@@ -229,17 +230,20 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			hitByThrownObject = true;
             // TODO: Get the boss battle to use throwable bodies???
             var body = melee.gameObject.GetComponent<ThrowableBody>();
-            if (body)
-                melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
-            else{
+            if (body){
+                //melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
+              	body.StartCoroutine("DeathImpact",this.gameObject);
+            }else{
 				var destructableObj = melee.gameObject.GetComponent<DestructableThrowingObject>();
 				if(destructableObj)
 					melee.gameObject.GetComponent<DestructableThrowingObject>().LandingEvent();
             }
 			Debug.Log("Hit by thrown object!");
-			if(canKnockoffArmor)
+			if(canKnockoffArmor){
 				ArmorKnockoff();
-			TakeDamage(melee.gameObject);
+			}else{
+				TakeDamage(melee.gameObject);
+			}
 			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
 			SoundManager.instance.PlaySingle(hitSqueal);
 		}
@@ -307,17 +311,14 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					damageOnce = 1;
 					meleeDmgBonus = 0;
 
-				
-					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
-						//bonus dmg with pole
+			
+					if(hitByThrownObject){
+						meleeDmgBonus+=1;
+					}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
+					//bonus dmg with pole
 						meleeDmgBonus++;
 					}
-					if(hitByThrownObject)
-						meleeDmgBonus+=2;
-					//if(GlobalVariableManager.Instance.IsPinEquipped(PIN.STAYBACK) && GlobalVariableManager.Instance.CURRENT_HP == 1){
-						//STAY BACK pin
-						//meleeDmgBonus++;
-					//}
+
 
 					meleeDmgBonus = meleeDmgBonus;
 					if(!hitByThrownObject)
@@ -363,9 +364,11 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 					if(hitByThrownObject){
                         // TODO: Fix the boss battle to use throwable bodies????
-                        var body = melee.gameObject.GetComponent<ThrowableBody>();
-                        if (body)
-                         body.TakeDamage();
+                       /* var body = melee.gameObject.GetComponent<ThrowableBody>();
+                        if (body){
+                         //body.TakeDamage();
+                         body.Death();
+                         }*/
 						meleeSwingDirection = "plankSwing";
 					}
 					if(!moveWhenHit && !dontStopWhenHit && !hitByThrownObject ){
@@ -667,6 +670,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	void ArmorKnockoff(){
 		armoredEnemy = false;
+	
 		armorCollisionObj.SetActive(false); //TODO: best way to enable it when the enemy is spawned(for proper reuse with ObjectPool pull)
 		gameObject.GetComponent<tk2dSpriteAnimator>().Library= disarmoredAnimation;
 		GameObject armorPiece =ObjectPool.Instance.GetPooledObject("effect_armorPiece",gameObject.transform.position);

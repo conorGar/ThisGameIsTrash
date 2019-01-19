@@ -247,6 +247,54 @@ MonoBehaviour:
     polygonCollider2D: []
     edgeCollider2D: []
     attachPoints: []
+  - name: porcupine_quillv2
+    boundsData:
+    - {x: 0.4358974, y: 0, z: 0}
+    - {x: 4, y: 2.7692308, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820482, y: 0, z: 0}
+    - {x: 4.8461537, y: 2.7692308, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -1.5641025, y: -1.3846154, z: 0}
+    - {x: 2.4358974, y: -1.3846154, z: 0}
+    - {x: -1.5641025, y: 1.3846154, z: 0}
+    - {x: 2.4358974, y: 1.3846154, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.42578515, y: 0.6289082}
+    - {x: 0.42578515, y: 0.9335918}
+    - {x: 0.8476523, y: 0.6289082}
+    - {x: 0.8476523, y: 0.9335918}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5561a73ea41e9ea4ea3034ba372203f4, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 398a9759e23fa0c47997032c1be4fa54
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
   premultipliedAlpha: 0
   material: {fileID: 0}
   materials:
@@ -264,7 +312,7 @@ MonoBehaviour:
   loadable: 0
   invOrthoSize: 2
   halfTargetHeight: 19.5
-  buildKey: 2106770865
+  buildKey: 1482484965
   dataGuid: 1610b5b24e8263d43873a9d0040d5210
   managedSpriteCollection: 0
   hasPlatformData: 0
