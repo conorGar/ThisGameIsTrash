@@ -211,7 +211,7 @@ public class GlobalVariableManager : UserDataItem {
     private void Awake(){
 		if(Instance == null){
 			Instance = this;
-            Instance.PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
+            Instance.PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 3);
 			DontDestroyOnLoad(gameObject);
 		}else{
 			Destroy(gameObject);
