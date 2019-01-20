@@ -239,7 +239,7 @@ public class MeleeAttack : MonoBehaviour {
 			meleeDirectionEnabled.SetActive(true);
 
 			meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
-			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH) && (
+			/*if(GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH) && (
 			ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT) ||ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN))){
 				INPUTACTION currentKey = INPUTACTION.ATTACKRIGHT;
 				if(direction ==1){
@@ -263,7 +263,7 @@ public class MeleeAttack : MonoBehaviour {
 					meleeDirectionEnabled.SetActive(false);
 				}		    		
                     	
-            }else{
+            }else{*/
 				if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.SCRAPPYSHINOBI)){
 					//Scrappy Shinobi
 					yield return new WaitForSeconds(.1f);
@@ -275,7 +275,7 @@ public class MeleeAttack : MonoBehaviour {
 					ReturnFromSwing();
 					meleeDirectionEnabled.SetActive(false);
 				}
-			}
+			//}
 		
 	}
 

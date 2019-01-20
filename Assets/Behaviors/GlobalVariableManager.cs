@@ -18,7 +18,7 @@ public class GlobalVariableManager : UserDataItem {
         get { return (PIN)pinsDiscoveredValue; }
     }
 
-    private long pinsEquippedValue = (long)(PIN.NONE);
+    private long pinsEquippedValue = (long)(PIN.LINKTOTRASH);//PIN.NONE);
     public PIN PINS_EQUIPPED
     {
         set { pinsEquippedValue = (long)value; }
