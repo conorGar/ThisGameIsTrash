@@ -97,7 +97,7 @@ public class Ev_Results : MonoBehaviour {
             			starDisplay.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = filledStarSprite;
 					}
 			}
-                CamManager.Instance.mainCamEffects.ZoomInOut(.8f,1f);
+                CamManager.Instance.mainCamEffects.ZoomInOut(.7f,.5f);
 				SoundManager.instance.backupMusicSource.clip = resultsMusic;
 				SoundManager.instance.backupMusicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 				SoundManager.instance.backupMusicSource.Play();
@@ -175,7 +175,7 @@ public class Ev_Results : MonoBehaviour {
 	}//end of update
 
 	IEnumerator InteractDelay(){
-		yield return new WaitForSeconds(.2f);
+		yield return new WaitForSeconds(.3f);
 		clouds.gameObject.SetActive(true);
         clouds.Play();
 		yield return new WaitForSeconds(1f);

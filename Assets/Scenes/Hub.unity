@@ -25819,6 +25819,11 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 576ab416164cc944bb550233c9211f2f, type: 2}
   m_IsPrefabParent: 0
@@ -43470,13 +43475,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trashCollected: {fileID: 0}
   largeTrashCollected: {fileID: 0}
-  enemiesDefeated: {fileID: 0}
-  nextUnlockNeeded: {fileID: 0}
+  totalTrash: {fileID: 0}
   currentStars: {fileID: 0}
   currentWorld: 0
   backPaper: {fileID: 0}
   image: {fileID: 0}
+  clouds: {fileID: 0}
+  resultsMusic: {fileID: 0}
   closeSfx: {fileID: 0}
+  starDisplay: {fileID: 0}
+  startIndexOfLargeTrash: 0
+  filledStarSprite: {fileID: 0}
 --- !u!114 &900898032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110125,7 +110134,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d818ac2188c29a940ac4b0becd8485ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 32490fe5ff1dbd54089bb9a62a1e15a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -122580,6 +122589,11 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
   m_IsPrefabParent: 0
@@ -128363,6 +128377,7 @@ MonoBehaviour:
   - END
   friendState: 0
   vanishPS: {fileID: 967555793}
+  demoEndManager: {fileID: 0}
 --- !u!23 &2099071654
 MeshRenderer:
   m_ObjectHideFlags: 0

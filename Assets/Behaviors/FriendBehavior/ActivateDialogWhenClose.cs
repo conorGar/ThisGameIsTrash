@@ -78,7 +78,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
                       
                             if (spawnSpeechBubble == 0)
                             {
-                                speechBubbleIcon = ObjectPool.Instance.GetPooledObject("speechIcon", gameObject.transform.position);
+                                speechBubbleIcon = ObjectPool.Instance.GetPooledObject("speechIcon", new Vector2(gameObject.transform.position.x+2f,gameObject.transform.position.y));
                                 spawnSpeechBubble = 1;
                             }
                         
