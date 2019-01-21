@@ -46,6 +46,8 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 						}
 						if(this.gameObject.GetComponent<RandomDirectionMovement>() != null){
 							this.gameObject.GetComponent<RandomDirectionMovement>().StopMoving();
+						}else if(this.gameObject.GetComponent<WanderOnPath>() != null){
+							this.gameObject.GetComponent<WanderOnPath>().StopMoving();
 						}
 						this.gameObject.GetComponent<FollowPlayer>().enabled = true;
 						SoundManager.instance.PlaySingle(SFXBANK.NOTICE);
