@@ -6,7 +6,7 @@ using UnityEngine;
 public class ThrowableObject : PickupableObject {
 
 	float landingY;
-	bool beingThrown;
+	protected bool beingThrown;
 	protected bool canThrow;
 	public AudioClip carrySound;
 	public GameObject myShadow;

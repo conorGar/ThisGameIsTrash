@@ -60,7 +60,9 @@ public class FollowPlayer : MonoBehaviour {
 				}
 				else if(this.gameObject.GetComponent<RandomDirectionMovement>() != null){
 					this.gameObject.GetComponent<RandomDirectionMovement>().GoAgain();
-				}
+				}/*else if(this.gameObject.GetComponent<WanderOnPath>() != null){
+						this.gameObject.GetComponent<WanderOnPath>().ReturnToStart();
+				}*/
 
 
 				GameObject confused = ObjectPool.Instance.GetPooledObject("effect_confused");

@@ -332,6 +332,7 @@ public class JumboFriend : Friend {
 
 			yield return new WaitForSeconds(2f);
 			if(movieEnhancement == "color"){
+				filmColor.SetActive(true);
 				filmColor.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay + "_Color");
 			}
 			movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);

@@ -88,6 +88,37 @@ public class ThrowableBody : ThrowableObject
 		ObjectPool.Instance.GetPooledObject("effect_landingSmoke",transform.position);
 		ObjectPool.Instance.GetPooledObject("effect_vanishStars",transform.position);
 
+
+
+	
+        beingThrown = false;
+        myBody.gravityScale = 0f;
+       	myBody.velocity = new Vector2(0, 0f);
+        beingCarried = false;
+        spinning = false;
+        canThrow = false;
+        pickUpcheck = 0;
+        if (myShadow != null) {
+                        myShadow.transform.parent = this.gameObject.transform;
+                        myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
+                        myShadow.transform.rotation = Quaternion.identity;
+						myShadow.GetComponent<Renderer>().sortingLayerName = "Layer01";
+						myShadow.transform.localPosition = Vector2.zero;
+        }
+
+     
+        gameObject.layer = 11; //switch to item layer.
+        for (int i = 0; i < behaviorsToStop.Count; i++) {
+            behaviorsToStop[i].enabled = true;
+        }
+        gameObject.transform.localScale = Vector2.one;
+        gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
+        gameObject.GetComponent<IsometricSorting>().enabled = true;
+        gameObject.GetComponent<CannotExitScene>().enabled = false;
+        if (physicalCollision != null)
+              physicalCollision.enabled = true;
+
+
 		this.gameObject.SetActive(false);
 	}
 
