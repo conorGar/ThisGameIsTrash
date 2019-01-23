@@ -235,17 +235,23 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
               	body.StartCoroutine("DeathImpact",this.gameObject);
             }else{
 				var destructableObj = melee.gameObject.GetComponent<DestructableThrowingObject>();
-				if(destructableObj)
+				if(destructableObj){
 					melee.gameObject.GetComponent<DestructableThrowingObject>().LandingEvent();
+				}
             }
 			Debug.Log("Hit by thrown object!");
 			if(canKnockoffArmor){
 				ArmorKnockoff();
-			}else{
+			}else if(gameObject.GetComponent<InvincibleEnemy>() == null){
+				TakeDamage(melee.gameObject);
+			}else if(gameObject.GetComponent<InvincibleEnemy>().enabled == false){
 				TakeDamage(melee.gameObject);
 			}
 			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
 			SoundManager.instance.PlaySingle(hitSqueal);
+			/*var throwObj = melee.gameObject.GetComponent<ThrowableObject>();
+				if(throwObj)
+					melee.gameObject.layer = 11; //switched to item obj once hit so doesnt hit anything else*/
 		}
 	}
 

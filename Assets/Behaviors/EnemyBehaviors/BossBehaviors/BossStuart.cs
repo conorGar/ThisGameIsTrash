@@ -76,27 +76,22 @@ public class BossStuart : Boss
 
 	void OnTriggerEnter2D(Collider2D collider){
 		if(collider.gameObject.layer == 15 && !canDamage){ //throwable object hit
-			//gameObject.GetComponent<EnemyTakeDamage>().meleeDmgBonus + 2;//thrown object causes 3 damage
-			GetComponent<InvincibleEnemy>().enabled = false;
 
-			//-----------------Impact Ricochet---------------//
-			//float currentDirection = collider.gameObject.GetComponent<Rigidbody2D>().velocity.x;
 			collider.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-			/*ObjectPool.Instance.GetPooledObject("effect_thrownImpact",transform.position);
-			if(currentDirection < 0)
-				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(3f,5f),ForceMode2D.Impulse);
-			else
-				collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3f,5f),ForceMode2D.Impulse);*/
-			GetComponent<EnemyTakeDamage>().OnTriggerEnter2D(collider);
-			//----------------------------------------------//
+
 
 			hash.KnockOff();
+			GetComponent<InvincibleEnemy>().enabled = false;
 			canDamage = true;
+			collider.gameObject.layer = 11; //switched to item obj once hit so doesnt hit anything else
+			collider.GetComponent<B_Ev_Questio>().Invoke("UnDazed",5f);
 			myETD.enabled = true;
-			myETD.TakeDamage(collider.gameObject);
+
 		}
 
 	}
+
+
 
     public void PrepPhase1()
     {

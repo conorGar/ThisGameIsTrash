@@ -96,7 +96,10 @@ public class Boss : MonoBehaviour {
             BossDeathEvent();
         }
         else{
+        	Debug.Log("Got here- boss death - 1");
 			if(dazeAtDeath){
+				Debug.Log("Got here- boss death - 2");
+
 				Dazed();
 			}else{
                 gameObject.GetComponent<tk2dSpriteAnimator>().Play("death");

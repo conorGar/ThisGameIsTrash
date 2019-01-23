@@ -117,7 +117,7 @@ public class B_Ev_Hash : MonoBehaviour {
 		gameObject.layer = 11; //switch to ite layer.
 		gameObject.GetComponent<ThrowableObject>().enabled = true;
 		myAnim.Play("dazed");
-		Invoke("Revive",10f);
+		Invoke("Revive",5f);
 	}
 
 	void Revive(){

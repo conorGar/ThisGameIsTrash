@@ -31,6 +31,8 @@ public class B_Ev_Questio : MonoBehaviour {
     Vector2 targetPosition;
 	int dropItemOnce;
 	GameObject dazedStars;
+	//bool firstKnockDown;
+
 
 
 	void Awake () {
@@ -83,12 +85,15 @@ public class B_Ev_Questio : MonoBehaviour {
                 }
             }
 
-            if (myETD.currentHp < 1 && dropItemOnce == 0) {
+            if (myETD.currentHp < 1 && !isDazed) {
                 StopAllCoroutines();
+				if(dropItemOnce == 0){
                 if (!GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES))
                     StartCoroutine(DropGloves());
+					dropItemOnce = 1;
+                }
                 Dazed();
-                dropItemOnce = 1;
+               
             }
 
             if (gameObject.layer == 11 && grabbyGloves.activeInHierarchy == false && pickupableGlow.activeInHierarchy == false) {
@@ -187,6 +192,7 @@ public class B_Ev_Questio : MonoBehaviour {
 
 	void Dazed(){
 		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
+		Debug.Log("Questio Dazed Activated -x-x-x-x-x--x-x-x-x-x-");
 		for(int i = 0; i < dazeDisables.Count; i++){
 			dazeDisables[i].enabled = false;
 		}
@@ -200,15 +206,17 @@ public class B_Ev_Questio : MonoBehaviour {
 		gameObject.GetComponent<FollowPlayer>().enabled = false;
 		dazedStars = ObjectPool.Instance.GetPooledObject("effect_stars",new Vector3(transform.position.x,transform.position.y+2,0));
 		dazedStars.transform.parent = gameObject.transform;
+
+		//Invoke("UnDazed",5f);
 		//this.enabled = false;
 	}
 
     void UnDazed()
-    {
+    { //activated by BossStuart after Q hits stuart
         for (int i = 0; i < dazeDisables.Count; i++) {
             dazeDisables[i].enabled = true;
         }
-
+        myETD.currentHp = 3;
         dazedShadow.SetActive(false);
         baseShadow.SetActive(true);
         isDazed = false;
