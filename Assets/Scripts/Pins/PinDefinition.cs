@@ -64,7 +64,7 @@ public enum PIN : long
     TREASURETRACKER =           (long)1 << 55,
     COUNTSCRAPULA =             (long)1 << 56,
     DIRTYDECOY =                (long)1 << 57,
-    Test59 =                    (long)1 << 58,
+    IRRADIATED =                (long)1 << 58,
     Test60 =                    (long)1 << 59,
     Test61 =                    (long)1 << 60,
     Test62 =                    (long)1 << 61,

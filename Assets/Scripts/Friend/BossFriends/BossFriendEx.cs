@@ -15,7 +15,7 @@ public class BossFriendEx : Friend
 	public GameObject slideTrash;
     public int FieldRoomNum;
     public AudioClip trioTheme;
-
+    public AudioClip shieldSound;
     public GameObject toxicBarrier;
     public ParticleSystem toxicBarrierPS;
     public GameObject goWithItDisplay;
@@ -317,6 +317,7 @@ public class BossFriendEx : Friend
     	hash.GetComponent<Rigidbody2D>().gravityScale = 1;
     	yield return new WaitForSeconds(1f);
 		hash.GetComponent<Rigidbody2D>().gravityScale = 0;
+		SoundManager.instance.PlaySingle(shieldSound);
 		stuart.transform.Find("shield").gameObject.SetActive(true);
 		hash.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		yield return new WaitForSeconds(1f);

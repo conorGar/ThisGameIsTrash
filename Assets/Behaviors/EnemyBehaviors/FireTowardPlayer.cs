@@ -18,9 +18,11 @@ public class FireTowardPlayer : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable () {
+		Debug.Log("Fire toward player on enable activated");
 		anim = GetComponent<tk2dSpriteAnimator>();
 		CancelInvoke();
-		InvokeRepeating("Fire",2.0f,fireRate);
+		//InvokeRepeating("Fire",2.0f,fireRate);
+		StartCoroutine("Fire");
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
@@ -29,12 +31,13 @@ public class FireTowardPlayer : MonoBehaviour {
 		
 	}
 
-	void Fire(){
+	IEnumerator Fire(){
+		yield return new WaitForSeconds(fireRate);
 		if(!GlobalVariableManager.Instance.IS_HIDDEN){ //wont fire at player if player is hidden
 			if(gameObject.activeInHierarchy == false){
-				CancelInvoke();
+				StopCoroutine("Fire");
 			}
-			//Debug.Log("fired");
+			Debug.Log("fired");
 			if(anim.CurrentClip.name != "hit"){
 				anim.Play("throwL");
 				if(player.transform.position.x < transform.position.x){
@@ -44,6 +47,7 @@ public class FireTowardPlayer : MonoBehaviour {
 				}
 				if(gameObject.activeInHierarchy)
 					StartCoroutine("AnimationControl");
+					StopCoroutine("Fire");
 			}
 		}
 
@@ -55,7 +59,7 @@ public class FireTowardPlayer : MonoBehaviour {
 		//Vector3 playerPosition = new Vector3(player.transform.position.x,player.transform.position.y,player.transform.position.z);
 
 		Debug.Log("FiredObject");
-		GameObject bullet = ObjectPool.Instance.GetPooledObject("projectile_largeRock",gameObject.transform.position);
+		GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag,gameObject.transform.position);
 		bullet.GetComponent<Ev_ProjectileTowrdPlayer>().enabled = true; // starts off disabled only so i didnt have to make another tag for rocks that DONT follow player(like ones that spawn from boulder.) feel free to just do that if tis causes issues
 		if(bullet.GetComponent<Ev_ProjectileTowrdPlayer>() != null){
 			bullet.GetComponent<Ev_ProjectileTowrdPlayer>().player = this.player;
@@ -63,11 +67,14 @@ public class FireTowardPlayer : MonoBehaviour {
 		bullet.GetComponent<Rigidbody2D>().gravityScale = 0;
 		SoundManager.instance.PlaySingle(throwSFX);
 
-		if(!myProjectileFalls)
+		if(!myProjectileFalls && bullet.GetComponent<Ev_FallingProjectile>() !=null)
 			bullet.GetComponent<Ev_FallingProjectile>().enabled = false;
 		//bullet.GetComponent<Ev_ProjectileTowrdPlayer>().speed = projectileSpeed;
 		//bullet.GetComponent<Rigidbody2D>().velocity = (player.transform.position).normalized *projectileSpeed;
 
 		anim.Play("idle");
+		StartCoroutine("Fire");
+		StopCoroutine("AnimationControl");
+
 	}
 }

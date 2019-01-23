@@ -10,12 +10,13 @@ public class KillSelfAfterTime : MonoBehaviour {
 	public AudioClip mySound;
 	// Use this for initialization
 	void Start () {
-		Invoke("Kill",timeUntilDeath);
+		//Invoke("Kill",timeUntilDeath);
 
 	}
 
 	
-	void Kill(){
+	IEnumerator Kill(){
+		yield return new WaitForSeconds(timeUntilDeath);
 		if(deactivateInsteadOfKill){
 			if(smokePuffAtEnd)
 				ObjectPool.Instance.GetPooledObject("effect_landingSmoke",transform.position);
@@ -26,7 +27,9 @@ public class KillSelfAfterTime : MonoBehaviour {
 	}
 
 	void OnEnable(){
-		Invoke("Kill",timeUntilDeath);
+		//Invoke("Kill",timeUntilDeath);
+		StopAllCoroutines();
+		StartCoroutine("Kill");
 		if(playSoundAtStart){
 			SoundManager.instance.PlaySingle(mySound);
 		}

@@ -8,6 +8,7 @@ public class B_Ev_Hash : MonoBehaviour {
 	public GameObject stuart;
 	public GameObject stuartShield;
 	public AudioClip teleportSound;
+	public AudioClip shieldSound;
 	public GameObject player;
 	public ParticleSystem smokePuff;
 
@@ -84,7 +85,7 @@ public class B_Ev_Hash : MonoBehaviour {
 
 
 
-	void Shield(){
+	public void Shield(){
 	Debug.Log("HASH SHIELD ACTIVATED");
 		//myAnim.Play("idle");
 		//yield return new WaitForSeconds(Random.Range(3f,6f));
@@ -92,6 +93,7 @@ public class B_Ev_Hash : MonoBehaviour {
 			myAnim.Play("cast");
 
 			//yield return new WaitForSeconds(1f);
+			SoundManager.instance.PlaySingle(shieldSound);
 			stuartShield.SetActive(true);
 			stuart.GetComponent<BossStuart>().canDamage = false;
 			stuart.GetComponent<InvincibleEnemy>().enabled = true;

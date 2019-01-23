@@ -1,0 +1,704 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1400732134148690}
+  m_IsPrefabParent: 1
+--- !u!1 &1400732134148690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4765761549761700}
+  - component: {fileID: 114598855037829586}
+  m_Layer: 0
+  m_Name: w1_e_slime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4765761549761700
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400732134148690}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114598855037829586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400732134148690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: toxicSlime_spit6
+    boundsData:
+    - {x: -0.49999964, y: -0.2820512, z: 0}
+    - {x: 8.128205, y: 5.7948723, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.564103, y: -3.1794872, z: 0}
+    - {x: -4.564102, y: -3.1794872, z: 0}
+    - {x: 3.564103, y: 2.6153848, z: 0}
+    - {x: -4.564102, y: 2.6153848, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.22656348}
+    - {x: 0.31152245, y: 0.22656348}
+    - {x: 0.0019541015, y: 0.44726464}
+    - {x: 0.31152245, y: 0.44726464}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f25abd50142e4d04297889b5c6733be5
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_spit1
+    boundsData:
+    - {x: -0.012820125, y: -0.47435904, z: 0}
+    - {x: 7.9743586, y: 5.6153846, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.9743593, y: -3.2820513, z: 0}
+    - {x: -3.9999995, y: -3.2820513, z: 0}
+    - {x: 3.9743593, y: 2.3333333, z: 0}
+    - {x: -3.9999995, y: 2.3333333, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.62207127, y: 0.75879}
+    - {x: 0.9257803, y: 0.75879}
+    - {x: 0.62207127, y: 0.9726553}
+    - {x: 0.9257803, y: 0.9726553}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 065e351523f03ba4daa3b56412626a9d
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_spit2
+    boundsData:
+    - {x: 0.00000047683716, y: -0.4871794, z: 0}
+    - {x: 8, y: 5.5897436, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.0000005, y: -3.2820513, z: 0}
+    - {x: -3.9999995, y: -3.2820513, z: 0}
+    - {x: 4.0000005, y: 2.3076925, z: 0}
+    - {x: -3.9999995, y: 2.3076925, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.7519541, y: 0.44824317}
+    - {x: 0.7519541, y: 0.75292873}
+    - {x: 0.9648428, y: 0.44824317}
+    - {x: 0.9648428, y: 0.75292873}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: c9d9c6ffdd4467241b801ba7ea35cd1d
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_idle1
+    boundsData:
+    - {x: -0.10256386, y: -0.14102578, z: 0}
+    - {x: 8.051282, y: 5.7179484, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 3.923077, y: -3, z: 0}
+    - {x: -4.128205, y: -3, z: 0}
+    - {x: 3.923077, y: 2.7179484, z: 0}
+    - {x: -4.128205, y: 2.7179484, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.6777353}
+    - {x: 0.30859277, y: 0.6777353}
+    - {x: 0.0019541015, y: 0.89550686}
+    - {x: 0.30859277, y: 0.89550686}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 6afc6731425997045b6292432af4e318
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_spit3
+    boundsData:
+    - {x: -0.025640488, y: -0.5512819, z: 0}
+    - {x: 8.051282, y: 5.5641026, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.0000005, y: -3.3333333, z: 0}
+    - {x: -4.0512815, y: -3.3333333, z: 0}
+    - {x: 4.0000005, y: 2.2307694, z: 0}
+    - {x: -4.0512815, y: 2.2307694, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.53613377, y: 0.44824317}
+    - {x: 0.53613377, y: 0.75488186}
+    - {x: 0.7480459, y: 0.44824317}
+    - {x: 0.7480459, y: 0.75488186}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 49607fdbe0a9289469e6caf9c01a9b1f
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_spit4
+    boundsData:
+    - {x: -0.012820244, y: -0.6153847, z: 0}
+    - {x: 8.025641, y: 5.5897436, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.0000005, y: -3.4102564, z: 0}
+    - {x: -4.025641, y: -3.4102564, z: 0}
+    - {x: 4.0000005, y: 2.179487, z: 0}
+    - {x: -4.025641, y: 2.179487, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.31250098, y: 0.7666025}
+    - {x: 0.6181631, y: 0.7666025}
+    - {x: 0.31250098, y: 0.97949123}
+    - {x: 0.6181631, y: 0.97949123}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 828102f0a3b76c84ea93c15dac4606c7
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_spit5
+    boundsData:
+    - {x: 0.012820959, y: -0.56410253, z: 0}
+    - {x: 8.0256405, y: 5.846154, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.0256414, y: -3.4871795, z: 0}
+    - {x: -3.9999995, y: -3.4871795, z: 0}
+    - {x: 4.0256414, y: 2.3589745, z: 0}
+    - {x: -3.9999995, y: 2.3589745, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.45117286}
+    - {x: 0.3076162, y: 0.45117286}
+    - {x: 0.0019541015, y: 0.6738272}
+    - {x: 0.3076162, y: 0.6738272}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f94e5f56229254446b38930e66794607
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_idle4
+    boundsData:
+    - {x: -0.025640726, y: -0.17948735, z: 0}
+    - {x: 8.512821, y: 5.7948713, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.2307696, y: -3.0769231, z: 0}
+    - {x: -4.282051, y: -3.0769231, z: 0}
+    - {x: 4.2307696, y: 2.7179484, z: 0}
+    - {x: -4.282051, y: 2.7179484, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.0019541015}
+    - {x: 0.3261709, y: 0.0019541015}
+    - {x: 0.0019541015, y: 0.22265527}
+    - {x: 0.3261709, y: 0.22265527}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 6ceec32a631534b4e86bd845da0791f1
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_idle5
+    boundsData:
+    - {x: -0.05128169, y: -0.19230771, z: 0}
+    - {x: 8.512821, y: 5.769231, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.2051287, y: -3.0769231, z: 0}
+    - {x: -4.307692, y: -3.0769231, z: 0}
+    - {x: 4.2051287, y: 2.6923077, z: 0}
+    - {x: -4.307692, y: 2.6923077, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3300791, y: 0.0019541015}
+    - {x: 0.6542959, y: 0.0019541015}
+    - {x: 0.3300791, y: 0.2216787}
+    - {x: 0.6542959, y: 0.2216787}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 10b808cfd98503e4dbf069d9e9da7f34
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_hit
+    boundsData:
+    - {x: -0.10256386, y: 0.2051282, z: 0}
+    - {x: 8.256411, y: 5.6923075, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.0256414, y: -2.6410255, z: 0}
+    - {x: -4.230769, y: -2.6410255, z: 0}
+    - {x: 4.0256414, y: 3.051282, z: 0}
+    - {x: -4.230769, y: 3.051282, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.31543067, y: 0.44824317}
+    - {x: 0.31543067, y: 0.76269436}
+    - {x: 0.5322256, y: 0.44824317}
+    - {x: 0.5322256, y: 0.76269436}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 8240d71e7bde8a648a8afb748696b58e
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_idle6
+    boundsData:
+    - {x: -0.05128169, y: -0.17948711, z: 0}
+    - {x: 8.512821, y: 5.7435894, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.2051287, y: -3.051282, z: 0}
+    - {x: -4.307692, y: -3.051282, z: 0}
+    - {x: 4.2051287, y: 2.6923077, z: 0}
+    - {x: -4.307692, y: 2.6923077, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6582041, y: 0.0019541015}
+    - {x: 0.9824209, y: 0.0019541015}
+    - {x: 0.6582041, y: 0.22070214}
+    - {x: 0.9824209, y: 0.22070214}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 137a6b5a9d5bc2e4a84a39a6273fed2d
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_idle2
+    boundsData:
+    - {x: -0.06410241, y: -0.16666675, z: 0}
+    - {x: 8.23077, y: 5.7692304, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.0512824, y: -3.051282, z: 0}
+    - {x: -4.179487, y: -3.051282, z: 0}
+    - {x: 4.0512824, y: 2.7179484, z: 0}
+    - {x: -4.179487, y: 2.7179484, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6582041, y: 0.22461036}
+    - {x: 0.97167873, y: 0.22461036}
+    - {x: 0.6582041, y: 0.44433495}
+    - {x: 0.97167873, y: 0.44433495}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: c7e68177b9c21a84089d701c52764da1
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: toxicSlime_idle3
+    boundsData:
+    - {x: -0.03846121, y: -0.17948711, z: 0}
+    - {x: 8.230769, y: 5.7435894, z: 0}
+    untrimmedBoundsData:
+    - {x: -0.012820244, y: 0, z: 0}
+    - {x: 9.410256, y: 7.230769, z: 0}
+    texelSize: {x: -0.025641026, y: 0.025641026}
+    positions:
+    - {x: 4.0769234, y: -3.051282, z: 0}
+    - {x: -4.153846, y: -3.051282, z: 0}
+    - {x: 4.0769234, y: 2.6923077, z: 0}
+    - {x: -4.153846, y: 2.6923077, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3300791, y: 0.22558692}
+    - {x: 0.64355373, y: 0.22558692}
+    - {x: 0.3300791, y: 0.44433495}
+    - {x: 0.64355373, y: 0.44433495}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 2e14fe4379758324aa3388693b539738
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
+  textures:
+  - {fileID: 2800000, guid: ebe43c2b3d4ac8148b95abe14148a72a, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: be039de50a0ef874586c89d1ed755b0f
+  spriteCollectionName: w1_e_slime
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 670862127
+  dataGuid: 66f1caa88c98d0d42bb512bc3f7d34f3
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

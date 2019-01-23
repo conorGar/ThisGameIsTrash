@@ -91,6 +91,14 @@ public class PlayerTakeDamage : MonoBehaviour {
                     damageDealt = projectileComp.damageToPlayer;
                     TakeDamage(projectile.gameObject);
                 }
+			} if (projectile.gameObject.layer == 19 && !currentlyTakingDamage) { //layer 19 = hazards
+                var hazardComp = projectile.gameObject.GetComponent<Hazard>();
+
+                // Fixing a null reference error where the player keeps colliding with his own weapon.
+                if (hazardComp != null) {
+                    damageDealt = hazardComp.damageToPlayer;
+                    TakeDamage(projectile.gameObject);
+                }
             }
             /*else if (projectile.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
                 if (projectile.gameObject.tag == "Boss") {

@@ -85,6 +85,7 @@ public class GlobalVariableManager : UserDataItem {
 	ARMOREDENEMIES = 	1<<1,
 	DAYNIGHT = 			1<<2,
 	PINS = 				1<<3,
+	TOXICENEMIES =      1<<4,
 
 	}
 

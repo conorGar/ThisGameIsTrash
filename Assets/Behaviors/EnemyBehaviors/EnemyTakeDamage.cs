@@ -54,6 +54,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject objectPool;
 	[HideInInspector]
 public EnemyRespawner myRespawner; //for use with respawning enemies
+	[HideInInspector]
+public B_Ev_Ex otherRespawner; //for use with other things that spawn enemies, like bosses(see ex behavior for example). SHort term solution. Im a bit drunk when im making this so cant think of anything better for now...
 public int currentHp;
 	[HideInInspector]
 public int meleeDmgBonus = 0;
@@ -754,7 +756,11 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		Debug.Log("Death Activate!!!");
 
 		if(respawnEnemy){
-			myRespawner.currentEnemies.Remove(this.gameObject);
+			if(myRespawner != null)
+				myRespawner.currentEnemies.Remove(this.gameObject);
+			else{
+				otherRespawner.currentBlobs.Remove(this.gameObject);
+			}
 			//needed to make sure enemy doesnt spawn again functioning as if it was dead
 			spinning = false;
 			//myCollisionBox.enabled = true;

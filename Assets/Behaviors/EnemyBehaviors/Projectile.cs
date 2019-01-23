@@ -7,6 +7,14 @@ public class Projectile : MonoBehaviour {
 	public int damageToPlayer;
 	public bool destroyOnTileCollision;
 	public GameObject myShadow;
+	public bool toxicProjectile;
+
+
+	void Start(){
+		if(toxicProjectile &&GlobalVariableManager.Instance.IsPinEquipped(PIN.IRRADIATED)){
+			damageToPlayer--;
+		}
+	}
 
 	void OnTriggerEnter2D(Collider2D collider){
 		if(destroyOnTileCollision && collider.gameObject.layer == 8) //tile layer
