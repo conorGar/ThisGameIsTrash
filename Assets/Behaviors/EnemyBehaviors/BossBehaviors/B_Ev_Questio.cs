@@ -158,7 +158,7 @@ public class B_Ev_Questio : MonoBehaviour {
     void Leap()
     {
         SoundManager.instance.PlaySingle(leap);
-        targetPosition = player.transform.position;
+        targetPosition = new Vector2(player.transform.position.x, player.transform.position.y);
         hitBox.enabled = false;
         isLeaping = true;
         gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
@@ -255,13 +255,6 @@ public class B_Ev_Questio : MonoBehaviour {
                 }
 
                 Leap();
-                break;
-            case "IN_AIR":
-
-                // repeat the leaping frame in air.
-                if (isLeaping)
-                    myAnim.PlayFromFrame(frameNo - 1);
-
                 break;
             case "SWING_FINISHED":
                 mySlashL.SetActive(false);
