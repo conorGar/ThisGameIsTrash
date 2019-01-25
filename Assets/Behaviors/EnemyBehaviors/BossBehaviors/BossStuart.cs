@@ -156,6 +156,7 @@ public class BossStuart : Boss
         ex.SetFriendState("STUART_DEFEATED");
         bossTrio.SetActive(false);
         bossHash.SetActive(false);
+        bossEx.GetComponent<B_Ev_Ex>().KillSlimes();
         bossEx.SetActive(false);
         bossQuestio.SetActive(false);
         DeactivateHpDisplay();

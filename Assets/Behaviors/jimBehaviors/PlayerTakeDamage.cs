@@ -97,7 +97,8 @@ public class PlayerTakeDamage : MonoBehaviour {
                 // Fixing a null reference error where the player keeps colliding with his own weapon.
                 if (hazardComp != null) {
                     damageDealt = hazardComp.damageToPlayer;
-                    TakeDamage(projectile.gameObject);
+                    if(damageDealt > 0)
+                    	TakeDamage(projectile.gameObject);
                 }
             }
             /*else if (projectile.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)

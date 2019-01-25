@@ -18,12 +18,16 @@ public class EnemyTrail : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
+
 	}
 
 	void TrailSpawn(){
-		GameObject trail = ObjectPool.Instance.GetPooledObject(trailPiece.tag,this.gameObject.transform.position);
-		trail.GetComponent<Animator>().Play("generalFadeOut",-1,0f);
+		if(gameObject.activeInHierarchy){
+			GameObject trail = ObjectPool.Instance.GetPooledObject(trailPiece.tag,this.gameObject.transform.position);
+			trail.GetComponent<Animator>().Play("generalFadeOut",-1,0f);
+		}else{
+			StopAllCoroutines();
+		}
 	}
 
 }

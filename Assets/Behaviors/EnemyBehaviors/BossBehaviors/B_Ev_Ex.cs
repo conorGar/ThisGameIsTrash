@@ -224,5 +224,11 @@ public class B_Ev_Ex : Boss {
     	}
     }
 
+    public void KillSlimes(){
+    	for(int i = 0; i <currentBlobs.Count;i++){
+    		currentBlobs[i].SetActive(false);
+    	}
+    }
+
 
 }
