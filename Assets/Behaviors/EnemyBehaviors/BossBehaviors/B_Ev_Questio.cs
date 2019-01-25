@@ -113,17 +113,23 @@ public class B_Ev_Questio : MonoBehaviour {
 					if(gameObject.transform.position.y < baseShadow.transform.position.y+1f){
 						Debug.Log("Landed from fall" + gameObject.transform.position.y + targetPosition.y);
 						hitBox.enabled = true;
-						if (myAnim.CurrentClip.name == "swingL"){
-                    		mySlashL.SetActive(true);
-                            mySlashL.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
-                            myAnim.Play("swingFinishL");
-              		  	}else{
-                  		    mySlashR.SetActive(true);
-                            mySlashR.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
-                            myAnim.Play("swingFinishR");
-               			 }
+						switch (myAnim.CurrentClip.name)
+                        {
+                            case "swingL":
+                    		    mySlashL.SetActive(true);
+                                mySlashL.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
+                                myAnim.Play("swingFinishL");
+                                SoundManager.instance.PlaySingle(swing);
+                                break;
+                            case "swingR":
+                  		        mySlashR.SetActive(true);
+                                mySlashR.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
+                                myAnim.Play("swingFinishR");
+                                SoundManager.instance.PlaySingle(swing);
+                                break;
+               			}
+
 						gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
-						SoundManager.instance.PlaySingle(swing);
 
                         isLeaping = false;
 						SoundManager.instance.PlaySingle(land);
@@ -137,6 +143,12 @@ public class B_Ev_Questio : MonoBehaviour {
 					gameObject.transform.position = new Vector2(baseShadow.transform.position.x, Mathf.Lerp(gameObject.transform.position.y, baseShadow.transform.position.y+3f, 9*Time.deltaTime));
 
             	}
+            }
+
+            // Band aid to keep a dazed Questio from following the player.  TODO: Remove this when developing EnemyStates.
+            if (fp.enabled == true && isDazed) {
+                fp.enabled = false;
+                myAnim.Play("dazed");
             }
         }
 	}
@@ -234,6 +246,7 @@ public class B_Ev_Questio : MonoBehaviour {
 #if DEBUG_ANIMATION
         Debug.Log("Animation Trigger Check: " + frame.eventInfo + " Clip Name: " + clip.name + " Frame No: " + frameNo);
 #endif
+
         switch (frame.eventInfo) {
             case "SWING_SET":
                 isSwinging = true;
