@@ -225,7 +225,11 @@ public class B_Ev_Questio : MonoBehaviour {
         myAnim.Play("idle");
         ObjectPool.Instance.ReturnPooledObject(dazedStars);
     }
-
+    public IEnumerator UndazeCheck(){
+    	yield return new WaitForSeconds(5f);
+		yield return new WaitUntil(() => gameObject.GetComponent<ThrowableObject>().onGround == true);
+		UnDazed();
+    }
 
     // Callbacks
     void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)

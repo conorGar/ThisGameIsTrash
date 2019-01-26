@@ -27,6 +27,10 @@ public class B_Ev_Ex : Boss {
 	public Room myRoom;
 	[HideInInspector]
     public List<GameObject> currentBlobs = new List<GameObject>();
+	[HideInInspector]
+    public bool initialTeleport = true;
+
+
 	// Use this for initialization
 	void Awake () {
 		myColor = gameObject.GetComponent<tk2dSprite>().color;
@@ -44,6 +48,10 @@ public class B_Ev_Ex : Boss {
             if(isTeleporting){
             	gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position,teleportDestination,5*Time.deltaTime);
             }
+        }
+        if(initialTeleport == true && isTeleporting){
+			gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position,teleportDestination,5*Time.deltaTime);
+
         }
 
 		if(RoomManager.Instance.currentRoom != myRoom){//TODO: probably not the best way to keep this from going when player isnt in room but whatever
@@ -69,6 +77,10 @@ public class B_Ev_Ex : Boss {
 	IEnumerator Teleport(){
 		Debug.Log("Teleport Activated ----------- !");
 		SoundManager.instance.PlaySingle(teleport);
+
+		//turn invisible
+		gameObject.GetComponent<MeshRenderer>().enabled = false;
+		gameObject.layer = 1; //transparent layer, wont collide with anything
 		this.gameObject.GetComponent<SpecialEffectsBehavior>().SetFadeVariables(.1f,.3f);
 		this.gameObject.GetComponent<SpecialEffectsBehavior>().FadeOut();
 		myParticles.SetActive(true);
@@ -78,14 +90,19 @@ public class B_Ev_Ex : Boss {
 		SoundManager.instance.PlaySingle(teleportTrail);
 		isTeleporting = true;
 
-		//turn invisible
-		gameObject.GetComponent<MeshRenderer>().enabled = false;
-		gameObject.layer = 0; //default layer, wont collide with anything
 
 
 		teleportTrailParticle.SetActive(true);
 		teleportTrailParticle.GetComponent<ParticleSystem>().Play();
+		if(!initialTeleport){
 		teleportDestination = new Vector2(Random.Range(-55f,-4f),Random.Range(134f,149f)); 
+		}else{
+			if(player.transform.position.x < -25f){//player on left side
+				teleportDestination = new Vector2(-9f,144f); 
+			}else{
+				teleportDestination = new Vector2(-40f,144f); 
+			}
+		}
 		//gameObject.transform.localPosition = new Vector2(Random.Range(-36f,17f),Random.Range(-14f,10f));
 		yield return new WaitUntil(() => (Vector2.Distance(gameObject.transform.position, teleportDestination) < 1));
 		isTeleporting = false;
@@ -98,18 +115,26 @@ public class B_Ev_Ex : Boss {
 		gameObject.GetComponent<tk2dSprite>().color = new Color(myColor.r,myColor.g,myColor.b,1); //fade back
 		myParticles.GetComponent<ParticleSystem>().Play();
 		teleportTrailParticle.SetActive(false);
-		yield return new WaitForSeconds(Random.Range(1f,3f));
-		int randomNextAction = Random.Range(0, 3);
-		if (randomNextAction == 0) {
-			yield return new WaitForSeconds(Random.Range(1f, 3f));
-            action = "SpawnBlob";//"Fire";
 
-        }
-        else {
-			yield return new WaitForSeconds(Random.Range(1f, 3f));
-			action = "Teleport";
-        }
-       
+		if(initialTeleport){
+
+            action = "SpawnBlob";
+            yield return new WaitForSeconds(1f);
+            StartCoroutine("SpawnBlob");
+            initialTeleport = false;
+		}else{
+			yield return new WaitForSeconds(Random.Range(1f,3f));
+			int randomNextAction = Random.Range(0, 3);
+			if (randomNextAction == 0) {
+				yield return new WaitForSeconds(Random.Range(1f, 3f));
+	            action = "SpawnBlob";//"Fire";
+
+	        }
+	        else {
+				yield return new WaitForSeconds(Random.Range(1f, 3f));
+				action = "Teleport";
+	        }
+       }
 		//yield return PrepareNextAction();
         isActing = false;
     }
@@ -213,6 +238,7 @@ public class B_Ev_Ex : Boss {
 		if(currentBlobs.Count < 3){
 			GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject("enemy_slime",gameObject.transform.position);
 			spawnedEnemy.GetComponent<EnemyTakeDamage>().otherRespawner = this;
+			spawnedEnemy.GetComponent<EnemyTakeDamage>().bossSpawnedEnemy = true;//null spawner ID, fixes glitch where killing Ex's slimes would kill slimes in hall
 			slimeSpawnPS.Play();
 			currentBlobs.Add(spawnedEnemy);
 			Debug.Log("ENEMY SHOULDVE BEEN SPAWNED");

@@ -84,7 +84,7 @@ public class BossStuart : Boss
 			GetComponent<InvincibleEnemy>().enabled = false;
 			canDamage = true;
 			collider.gameObject.layer = 11; //switched to item obj once hit so doesnt hit anything else
-			collider.GetComponent<B_Ev_Questio>().Invoke("UnDazed",5f);
+			collider.GetComponent<B_Ev_Questio>().StartCoroutine("UndazeCheck");
 			myETD.enabled = true;
 
 		}

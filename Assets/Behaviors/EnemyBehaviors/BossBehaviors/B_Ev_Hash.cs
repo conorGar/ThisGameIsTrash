@@ -119,7 +119,7 @@ public class B_Ev_Hash : MonoBehaviour {
 		gameObject.layer = 11; //switch to ite layer.
 		gameObject.GetComponent<ThrowableObject>().enabled = true;
 		myAnim.Play("dazed");
-		Invoke("Revive",5f);
+		StartCoroutine("ReviveCheck");
 	}
 
 	void Revive(){
@@ -128,14 +128,22 @@ public class B_Ev_Hash : MonoBehaviour {
 			SoundManager.instance.PlaySingle(teleportSound);
 			gameObject.GetComponent<EnemyTakeDamage>().enabled = false;//cant attack while he is riding Stuart
 			gameObject.transform.parent = stuart.transform;
+			gameObject.GetComponent<Animator>().enabled = false;
+			gameObject.transform.localScale = Vector2.one;
 			gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
 			onStuart = true;
 			gameObject.layer = 9; //switch to enemy layer.
-			gameObject.GetComponent<ThrowableObject>().enabled = true;
+			gameObject.GetComponent<ThrowableObject>().enabled = false;
 			Shield();
 		}else{
 			returnAfterThrow = true;
 		}
+	}
+
+	IEnumerator ReviveCheck(){
+		yield return new WaitForSeconds(5f);// delay until can revive
+		yield return new WaitUntil(() => gameObject.GetComponent<ThrowableObject>().onGround == true);
+		Revive();
 	}
 
 

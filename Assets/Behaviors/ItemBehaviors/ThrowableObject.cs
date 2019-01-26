@@ -16,6 +16,8 @@ public class ThrowableObject : PickupableObject {
 	public AudioClip landSfx;
 	public List<MonoBehaviour> behaviorsToStop = new List<MonoBehaviour>();
 	public bool livingBody;
+	public Transform roomToReattatchTo;
+	public bool onGround = true; //used for living bodies that revive after a bit, to make sure they dont do so while being carried
 
     [Tooltip("TK2D Animation Clip to play after the object lands and settles on the ground.")]
     public string groundedClip;
@@ -68,6 +70,7 @@ public class ThrowableObject : PickupableObject {
                     if (physicalCollision != null)
                         physicalCollision.enabled = true;
 					player.GetComponent<EightWayMovement>().myLegs.SetActive(true);
+					onGround = true;
 					LandingEvent();
                 }else{
                 	if(myShadow !=null){
@@ -85,6 +88,7 @@ public class ThrowableObject : PickupableObject {
 	}
 
 	public override void PickUp(){
+		onGround = false;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
@@ -190,7 +194,14 @@ public class ThrowableObject : PickupableObject {
                     myShadow.SetActive(true);
                     myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
                 }
-
+                if(livingBody){
+                	
+                	if(roomToReattatchTo !=null){
+                		gameObject.transform.parent = roomToReattatchTo; // return body to proper parent, in the case of trio in stuart fight, it was a room, not sure if applicable to later things...
+                	}
+					gameObject.GetComponent<Animator>().enabled = false;
+					gameObject.transform.localScale = Vector2.one;
+                }
 				gameObject.layer = 11; //switch to item layer.
 				for(int i = 0; i < behaviorsToStop.Count; i++){
 					behaviorsToStop[i].enabled = true;

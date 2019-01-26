@@ -59,6 +59,8 @@ public B_Ev_Ex otherRespawner; //for use with other things that spawn enemies, l
 public int currentHp;
 	[HideInInspector]
 public int meleeDmgBonus = 0;
+	//[HideInInspector]
+public bool bossSpawnedEnemy;
 	[HideInInspector]
 public bool dontStopWhenHit; //usually temporary and set by other behavior, such as 'LungeAtPlayer.cs'
 
@@ -95,7 +97,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	Vector2 startScale;
 
 	void OnEnable(){
-		
+		if(bossSpawnedEnemy){
+			bossSpawnedEnemy = false;
+		}
 		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		if(!bossEnemy)
 			currentHp = gameObject.GetComponent<Enemy>().health;//enemy health reset when enter room again
@@ -755,7 +759,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	void Death(){
 		Debug.Log("Death Activate!!!");
 
-		if(respawnEnemy){
+		if(respawnEnemy || bossSpawnedEnemy){
 			if(myRespawner != null)
 				myRespawner.currentEnemies.Remove(this.gameObject);
 			else{
