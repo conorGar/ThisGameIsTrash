@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HUD_Calendar : MonoBehaviour {
 
@@ -12,15 +13,24 @@ public class HUD_Calendar : MonoBehaviour {
 	public AudioClip calendaMarkSfx;
 	public OpenCalendar player;
 	public AudioClip paperSlide;
+	public List<Calendar_DaySquare> daySquares;
+	public GameObject navArrow;
+	public TextMeshProUGUI eventDescription;
 
+
+	List<GameObject> selectableIcons = new List<GameObject>();
 	bool newMarkSequence;
 	bool leavingScreen;
+	int navArrowPos;
 
+	void OnAwake(){
+		FillCalendar();
+
+	}
 	void Start () {
 		currentEvents = CalendarManager.Instance.friendEvents;
 		gameObject.SetActive(false);
 		GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
-
 
 	}
 
@@ -58,7 +68,7 @@ public class HUD_Calendar : MonoBehaviour {
 		newMarkSequence = false;
 		gameObject.transform.localPosition = new Vector2(-23f,-1f);
 
-			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);//TODO: This gets faster as time passes...fix!
+		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);//TODO: This gets faster as time passes...fix!
 
 	}
 
@@ -70,7 +80,23 @@ public class HUD_Calendar : MonoBehaviour {
 		}
 		if(!newMarkSequence && !leavingScreen){ 
 			gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition,Vector3.zero,.1f*(Time.realtimeSinceStartup - Time.deltaTime));
+
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && navArrowPos <selectableIcons.Count){
+				navArrowPos++;
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && navArrowPos > 0){
+				navArrowPos--;
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && navArrowPos < selectableIcons.Count){
+				navArrowPos++;
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && navArrowPos > 0){
+				navArrowPos--;
+			}
+
+			navArrow.transform.position = selectableIcons[navArrowPos].transform.position;
+			//TODO:Effects for Highlighted Icon
+			eventDescription.text = currentEvents[navArrowPos].friend.GetEventDescription();
 		}
+
+
 	}
 
 	public void NewMarkSequence(int day, string friendName){
@@ -113,6 +139,14 @@ public class HUD_Calendar : MonoBehaviour {
 	public void ReenableOpenCal(){
 		
 		this.gameObject.SetActive(false);
+	}
+
+
+	void FillCalendar(){
+		for(int i = 0 ; i < currentEvents.Count; i++){
+			GameObject icon = daySquares[currentEvents[i].day].AddIcon(currentEvents[i]);
+			selectableIcons.Add(icon);
+		}
 	}
 
 

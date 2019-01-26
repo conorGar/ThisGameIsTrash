@@ -12,12 +12,16 @@ public class Friend : UserDataItem {
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
 	protected FriendEvent newestAddedEvent;
+	public Sprite calendarIcon;
     [HideInInspector]
 	public string missedDialog;
 	[HideInInspector]
 	public bool IsVisiting = false;
 	[HideInInspector]
 	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
+
+
+
 
     // Use this for initialization
     protected void OnEnable() {
@@ -194,6 +198,11 @@ public class Friend : UserDataItem {
     public virtual void OnActivateDialog(){
 
     }
+
+    public virtual string GetEventDescription(){
+    	return null;
+    }
+
 
     public virtual string GetVariableText(string varKey)
     {

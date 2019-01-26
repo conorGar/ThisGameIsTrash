@@ -416,6 +416,10 @@ public class JumboFriend : Friend {
         return base.GetVariableText(varKey);
     }
 
+    public override string GetEventDescription(){
+    	return "Jumbo wants to show you his next film at Filthy Falls";
+    }
+
     // User Data implementation
     public override string UserDataKey()
     {
