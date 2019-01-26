@@ -12,6 +12,7 @@ public class B_Ev_Ex : Boss {
 	public AudioClip cast;
 	public AudioClip teleport;
 	public AudioClip teleportTrail;
+	public AudioClip blobSpawnSFX;
 	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
 
 	Vector3 playerPosition;
@@ -86,7 +87,6 @@ public class B_Ev_Ex : Boss {
 		myParticles.SetActive(true);
 		myParticles.GetComponent<ParticleSystem>().Play();
 		yield return new WaitForSeconds(.3f);
-		//TODO: when finalize room art, ex cannot land on one of the acid piles in the room
 		SoundManager.instance.PlaySingle(teleportTrail);
 		isTeleporting = true;
 
@@ -118,20 +118,20 @@ public class B_Ev_Ex : Boss {
 
 		if(initialTeleport){
 
-            action = "SpawnBlob";
+            //action = "SpawnBlob";
             yield return new WaitForSeconds(1f);
             StartCoroutine("SpawnBlob");
             initialTeleport = false;
 		}else{
 			yield return new WaitForSeconds(Random.Range(1f,3f));
-			int randomNextAction = Random.Range(0, 3);
-			if (randomNextAction == 0) {
+			int randomNextAction = Random.Range(0, 4);
+			if (randomNextAction == 1) {
 				yield return new WaitForSeconds(Random.Range(1f, 3f));
 	            action = "SpawnBlob";//"Fire";
 
 	        }
 	        else {
-				yield return new WaitForSeconds(Random.Range(1f, 3f));
+				yield return new WaitForSeconds(Random.Range(2f, 3f));
 				action = "Teleport";
 	        }
        }
@@ -236,6 +236,7 @@ public class B_Ev_Ex : Boss {
 
     IEnumerator SpawnBlob(){
 		if(currentBlobs.Count < 3){
+			SoundManager.instance.PlaySingle(blobSpawnSFX);
 			GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject("enemy_slime",gameObject.transform.position);
 			spawnedEnemy.GetComponent<EnemyTakeDamage>().otherRespawner = this;
 			spawnedEnemy.GetComponent<EnemyTakeDamage>().bossSpawnedEnemy = true;//null spawner ID, fixes glitch where killing Ex's slimes would kill slimes in hall
@@ -255,6 +256,8 @@ public class B_Ev_Ex : Boss {
     		currentBlobs[i].SetActive(false);
     	}
     }
+
+	
 
 
 }

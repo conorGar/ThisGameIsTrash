@@ -126,6 +126,12 @@ public class Boss : MonoBehaviour {
 
 	}
 
+	public virtual void BossDeactivateEvent(){ //for when player dies
+		Debug.Log("Boss Deactivate activated...?");
+		//nothing for basic boss
+
+	}
+
 
 	void DeathSmoke(){
 		if(deathSmokeNumber < 15){

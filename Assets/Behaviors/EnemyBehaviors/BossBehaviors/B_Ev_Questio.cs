@@ -233,6 +233,7 @@ public class B_Ev_Questio : MonoBehaviour {
         baseShadow.SetActive(true);
         isDazed = false;
         gameObject.layer = 9;
+		gameObject.GetComponent<ThrowableObject>().StopSweat();
         gameObject.GetComponent<ThrowableObject>().enabled = false;
         myAnim.Play("idle");
         ObjectPool.Instance.ReturnPooledObject(dazedStars);

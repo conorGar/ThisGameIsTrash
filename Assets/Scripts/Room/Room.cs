@@ -135,8 +135,13 @@ public class Room : MonoBehaviour
     public void DeactivateRoom()
     {	
     	if(bossRoom){
+    		Debug.Log("Deactivate Room activated for boss room");
 			for(int i = 0; i< bosses.Count;i++){
-        			
+        			if(bosses[i].GetComponent<Boss>() != null){
+						Debug.Log("Boss Deactivate event should be activated...?" + bosses[i].name);
+
+        				bosses[i].GetComponent<Boss>().BossDeactivateEvent();
+        			}
         			bosses[i].gameObject.SetActive(false);
 					
         	}

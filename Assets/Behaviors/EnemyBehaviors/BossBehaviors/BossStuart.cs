@@ -162,5 +162,22 @@ public class BossStuart : Boss
         DeactivateHpDisplay();
         SoundManager.instance.musicSource.Stop();
     }
+
+	public override void BossDeactivateEvent(){
+		Debug.Log("Stuart Boss Deactivate Event activated");
+
+		//return bosses that are being carried properly when player leaves a room while carrying them
+		if(bossQuestio.GetComponent<ThrowableObject>().enabled && bossQuestio.GetComponent<ThrowableObject>().onGround == false){
+			bossQuestio.GetComponent<ThrowableObject>().Drop();
+		}
+		if(bossHash.GetComponent<ThrowableObject>().enabled && bossHash.GetComponent<ThrowableObject>().onGround == false){
+			bossHash.GetComponent<ThrowableObject>().Drop();
+		}
+		if(bossEx.GetComponent<ThrowableObject>().enabled&& bossEx.GetComponent<ThrowableObject>().onGround == false){
+			bossEx.GetComponent<ThrowableObject>().Drop();
+		}
+		bossEx.GetComponent<B_Ev_Ex>().KillSlimes();
+
+	}
 }
 

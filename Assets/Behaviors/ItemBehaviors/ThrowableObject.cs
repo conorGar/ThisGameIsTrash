@@ -18,7 +18,7 @@ public class ThrowableObject : PickupableObject {
 	public bool livingBody;
 	public Transform roomToReattatchTo;
 	public bool onGround = true; //used for living bodies that revive after a bit, to make sure they dont do so while being carried
-
+	GameObject panicSweat;
     [Tooltip("TK2D Animation Clip to play after the object lands and settles on the ground.")]
     public string groundedClip;
 	// Use this for initialization
@@ -99,7 +99,7 @@ public class ThrowableObject : PickupableObject {
 
 		if(livingBody){
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
-			GameObject panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
+			panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
 			panicSweat.transform.parent = gameObject.transform;
 		}
         if (myShadow != null)
@@ -113,7 +113,7 @@ public class ThrowableObject : PickupableObject {
 		beingCarried = true;
 		if(livingBody){
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
-			GameObject panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
+			panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
 			panicSweat.transform.parent = gameObject.transform;
 		}
         if (myShadow != null)
@@ -215,6 +215,11 @@ public class ThrowableObject : PickupableObject {
 		//nothing for base
 	}
 
+	public void StopSweat(){
+		if(panicSweat != null){
+			ObjectPool.Instance.ReturnPooledObject(panicSweat);
+		}
+	}
 
 
 }
