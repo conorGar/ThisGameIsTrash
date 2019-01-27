@@ -10,6 +10,7 @@ public class Ev_SignPost : MonoBehaviour {
 	public GameObject player;
 	public float distanceUntilGlow;
 	public GameObject signPostHUD;
+	public TextMeshProUGUI signText;
 	public string myText;
 	public string myName = "- Your Pal, Stuart";
 	public TextMeshProUGUI nameDisplay;
@@ -47,6 +48,8 @@ public class Ev_SignPost : MonoBehaviour {
                     signPostHUD.SetActive(true);
 					if( signPostHUD.transform.GetChild(0).GetComponent<TextMeshProUGUI>() !=null)
                     	signPostHUD.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = myText;
+                    else if(signText != null)
+                    	signText.text = myText;
                     if(nameDisplay != null)
                   	  nameDisplay.text = myName;
                     if (myPicture != null) {

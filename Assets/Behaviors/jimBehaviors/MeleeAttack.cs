@@ -35,6 +35,17 @@ public class MeleeAttack : MonoBehaviour {
 			swing = (AudioClip)Resources.Load("sfx_duckSwing", typeof(AudioClip));
 			Debug.Log("Cant attack because of HHHHEEEERRREE");
 		}
+
+		//reset values
+		meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("plankSwing");
+		meleeWeaponRightSwing.transform.localPosition = new Vector2(2.3f,-1.28f);
+
+		meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("plankDown");
+		meleeWeaponBotSwing.transform.localPosition = new Vector2(-1.28f,.2f);
+
+		meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("plankUp");
+		meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,.94f);
+
     }
 
     void Update () {
@@ -287,7 +298,11 @@ public class MeleeAttack : MonoBehaviour {
 	public void ReturnFromSwing(){
 
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-		gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
+		//gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
+		//GetComponent<EightWayMovement>().clipOverride = false;
+		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
+
+		//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
 		isSwinging = false;
 
 	}

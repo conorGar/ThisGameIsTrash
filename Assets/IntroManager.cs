@@ -76,7 +76,7 @@ public class IntroManager : MonoBehaviour {
 		}else if(slideNumber == 9){
 			textShown.text = "...Or whatever they were into!<color=#DC3232> NOBODY JUDGED THEM!</color>";
 		}else if(slideNumber == 10){
-			textShown.text = "And every year, the best amoung them was chosen and given the prestigious <color=#78FF32>Garbageman Of The Year Award</color>.";
+			textShown.text = "And every year, the best among them was chosen and given the prestigious <color=#78FF32>Garbageman Of The Year Award</color>.";
 		}else if(slideNumber == 11){
 			textShown.text = "Because of all this, many go out to try their hand at becoming a garbageman...to follow their dumpster dreams...";
 		}else if(slideNumber == 12){
@@ -88,7 +88,7 @@ public class IntroManager : MonoBehaviour {
 		}else if(slideNumber == 15){
 			textShown.text = "Angry at the humans for trashing their homes.";
 		}else if(slideNumber == 16){
-			textShown.text = "Worse yet, a malicious group calling themselves <color=#DC3232>White Trash</color> are rising to power.";
+			textShown.text = "Worse yet, a malicious group calling themselves <color=#DC3232>The White Trash Army</color> are rising to power.";
 		}else if(slideNumber == 17){
 			textShown.text = "They hope to set up their mysterious leader, known only as <color=#DC3232>The Greasy Prince</color>, to be the winner of the Garbageperson Of The Year Award!";
 		}else if(slideNumber == 18){

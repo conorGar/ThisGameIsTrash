@@ -36,7 +36,7 @@ public class WanderWithinBounds : RandomDirectionMovement
 	// Update is called once per frame
 	void Update ()
 	{
-		Debug.Log(startPosition);
+		//Debug.Log(startPosition);
 
 		if(boundsSet && moving){
 			if(transform.position.x < MIN_X || transform.position.x > MAX_X ||

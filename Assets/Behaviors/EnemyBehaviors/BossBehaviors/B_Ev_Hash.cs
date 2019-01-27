@@ -8,6 +8,7 @@ public class B_Ev_Hash : MonoBehaviour {
 	public GameObject stuart;
 	public GameObject stuartShield;
 	public AudioClip teleportSound;
+	public AudioClip shieldSound;
 	public GameObject player;
 	public ParticleSystem smokePuff;
 
@@ -84,7 +85,7 @@ public class B_Ev_Hash : MonoBehaviour {
 
 
 
-	void Shield(){
+	public void Shield(){
 	Debug.Log("HASH SHIELD ACTIVATED");
 		//myAnim.Play("idle");
 		//yield return new WaitForSeconds(Random.Range(3f,6f));
@@ -92,6 +93,7 @@ public class B_Ev_Hash : MonoBehaviour {
 			myAnim.Play("cast");
 
 			//yield return new WaitForSeconds(1f);
+			SoundManager.instance.PlaySingle(shieldSound);
 			stuartShield.SetActive(true);
 			stuart.GetComponent<BossStuart>().canDamage = false;
 			stuart.GetComponent<InvincibleEnemy>().enabled = true;
@@ -110,6 +112,7 @@ public class B_Ev_Hash : MonoBehaviour {
 		myBody.gravityScale = 1;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
 		falling = true;
+		stuart.GetComponent<EnemyTakeDamage>().enabled = true;
 	}
 
 	void Dazed(){
@@ -117,7 +120,7 @@ public class B_Ev_Hash : MonoBehaviour {
 		gameObject.layer = 11; //switch to ite layer.
 		gameObject.GetComponent<ThrowableObject>().enabled = true;
 		myAnim.Play("dazed");
-		Invoke("Revive",10f);
+		StartCoroutine("ReviveCheck");
 	}
 
 	void Revive(){
@@ -126,14 +129,22 @@ public class B_Ev_Hash : MonoBehaviour {
 			SoundManager.instance.PlaySingle(teleportSound);
 			gameObject.GetComponent<EnemyTakeDamage>().enabled = false;//cant attack while he is riding Stuart
 			gameObject.transform.parent = stuart.transform;
+			gameObject.GetComponent<Animator>().enabled = false;
+			gameObject.transform.localScale = Vector2.one;
 			gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
 			onStuart = true;
-			gameObject.layer = 9; //switch to enemy layer.
-			gameObject.GetComponent<ThrowableObject>().enabled = true;
+			gameObject.layer = 1; //switch to tile layer.
+			gameObject.GetComponent<ThrowableObject>().enabled = false;
 			Shield();
 		}else{
 			returnAfterThrow = true;
 		}
+	}
+
+	IEnumerator ReviveCheck(){
+		yield return new WaitForSeconds(5f);// delay until can revive
+		yield return new WaitUntil(() => gameObject.GetComponent<ThrowableObject>().onGround == true);
+		Revive();
 	}
 
 

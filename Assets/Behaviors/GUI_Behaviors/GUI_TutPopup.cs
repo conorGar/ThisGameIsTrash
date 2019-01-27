@@ -21,7 +21,7 @@ public class GUI_TutPopup : MonoBehaviour {
 	public Sprite murderImage;
 	public Sprite dojoImage;
 	public Sprite shopImage;
-
+	public Sprite toxicImage;
 
 	Vector3 startPos;
 	int phase;
@@ -109,6 +109,14 @@ public class GUI_TutPopup : MonoBehaviour {
 			myImage.GetComponent<Image>().sprite = shopImage;
 			myTitle.GetComponent<TextMeshProUGUI>().text = "SHOP";
 			//GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.PINS;
+
+		}else if(tutPopup == "RadioactiveEnemy"){
+			myDescription.GetComponent<TextMeshProUGUI>().text = "Enemies that give off a <color=#ffffb3>green glow</color> are radioactive." +
+																 "Their attacks do <color=#ffffb3>2 damage</color>  instead of 1.";
+			myImage.GetComponent<Image>().sprite = toxicImage;
+			myTitle.GetComponent<TextMeshProUGUI>().text = "Radioactive Enemies";
+			//GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.PINS;
+			GlobalVariableManager.Instance.TUT_POPUPS_SHOWN |= GlobalVariableManager.TUTORIALPOPUPS.TOXICENEMIES;
 
 		}
 

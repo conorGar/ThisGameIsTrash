@@ -68,6 +68,9 @@ public class JumboFriend : Friend {
     {
         switch (GetFriendState()) {
             case "INVITE_TO_SECOND_SCREENING":
+				if(movieEnhancement == "color"){
+	    			filmColor.SetActive(true);
+	    		}
 				gameObject.transform.position = new Vector2(-95f,8.5f);
 	    		deadRat.SetActive(true);
 	    		hat.SetActive(true);
@@ -147,6 +150,14 @@ public class JumboFriend : Friend {
                         largeTrashProjector.SetActive(false);
                     break;
             }
+			if(movieEnhancement == "marketing"){
+	    		moviePosters.SetActive(true);
+	    		for(int i = 0; i < moviePosters.transform.childCount; i++){
+	    			moviePosters.transform.GetChild(i).GetComponent<Ev_JumboPoster>().SetSprite(films[0]);
+	    		}
+    		}
+
+
         } else {
             if (largeTrashProjector != null)
                 largeTrashProjector.SetActive(false);
@@ -315,14 +326,16 @@ public class JumboFriend : Friend {
 			yield return new WaitForSeconds(.5f);
 			movieScreen.GetComponent<Ev_JumboFilmSFXHandler>().projectorLight.SetActive(true);
 			SoundManager.instance.musicSource.volume = 0;
+			SoundManager.instance.backupMusicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 			SoundManager.instance.backupMusicSource.clip = projectorPlay;
 			SoundManager.instance.backupMusicSource.Play();
 
 			yield return new WaitForSeconds(2f);
-			movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);
-			if(movieScreen.transform.GetChild(1).gameObject.activeInHierarchy){//if film color is enabled
-				movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay + "_Color");
+			if(movieEnhancement == "color"){
+				filmColor.SetActive(true);
+				filmColor.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay + "_Color");
 			}
+			movieScreen.GetComponent<tk2dSpriteAnimator>().Play(filmToPlay);
 
             DeleteCurrentFilm();
 
@@ -384,7 +397,7 @@ public class JumboFriend : Friend {
 		dialogManager.Invoke("ReturnFromAction",.1f);
 	}
 
-	public override void GiveData(List<GameObject> neededObjs){
+	public override void GiveData(List<GameObject> neededObjs){ //given by 'DialogActivators' in tempManager
 
 		deadRat = neededObjs[0];
 		moviePosters= neededObjs[1];

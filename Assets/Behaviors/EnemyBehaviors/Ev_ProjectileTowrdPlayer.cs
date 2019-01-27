@@ -15,7 +15,8 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 	public GameObject player; //given usually by whatever is spawning this.
 	// Use this for initialization
 	void Start () {
-		throwPS.Play();
+		if(throwPS != null)
+			throwPS.Play();
 		if(player == null){
 			player = GameObject.FindGameObjectWithTag("Player");
 		}
@@ -25,7 +26,8 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 
 
 	void OnEnable(){
-		throwPS.Play();
+		if(throwPS != null)
+			throwPS.Play();
 		if(player == null){
 
 		//player = GameObject.FindGameObjectWithTag("Player");

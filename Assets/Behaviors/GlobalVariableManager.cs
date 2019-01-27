@@ -18,7 +18,7 @@ public class GlobalVariableManager : UserDataItem {
         get { return (PIN)pinsDiscoveredValue; }
     }
 
-    private long pinsEquippedValue = (long)(PIN.NONE);
+	private long pinsEquippedValue = (long)(PIN.NONE);
     public PIN PINS_EQUIPPED
     {
         set { pinsEquippedValue = (long)value; }
@@ -49,7 +49,7 @@ public class GlobalVariableManager : UserDataItem {
 	//base stats
 	public PlayerStat HP_STAT = new PlayerStat(PLAYERSTATTYPE.HP, 5);
     public PlayerStat BAG_SIZE_STAT = new PlayerStat(PLAYERSTATTYPE.BAG_SIZE, 10);
-    public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
+    public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 3);
     public PlayerStat STAR_POINTS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_POINTS, 0);
 
 
@@ -85,6 +85,7 @@ public class GlobalVariableManager : UserDataItem {
 	ARMOREDENEMIES = 	1<<1,
 	DAYNIGHT = 			1<<2,
 	PINS = 				1<<3,
+	TOXICENEMIES =      1<<4,
 
 	}
 
@@ -211,7 +212,7 @@ public class GlobalVariableManager : UserDataItem {
     private void Awake(){
 		if(Instance == null){
 			Instance = this;
-            Instance.PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
+            Instance.PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 3);
 			DontDestroyOnLoad(gameObject);
 		}else{
 			Destroy(gameObject);

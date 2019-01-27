@@ -15,7 +15,7 @@ public class BossFriendEx : Friend
 	public GameObject slideTrash;
     public int FieldRoomNum;
     public AudioClip trioTheme;
-
+    public AudioClip shieldSound;
     public GameObject toxicBarrier;
     public ParticleSystem toxicBarrierPS;
     public GameObject goWithItDisplay;
@@ -317,9 +317,11 @@ public class BossFriendEx : Friend
     	hash.GetComponent<Rigidbody2D>().gravityScale = 1;
     	yield return new WaitForSeconds(1f);
 		hash.GetComponent<Rigidbody2D>().gravityScale = 0;
+		SoundManager.instance.PlaySingle(shieldSound);
 		stuart.transform.Find("shield").gameObject.SetActive(true);
 		hash.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		yield return new WaitForSeconds(1f);
+		ex.GetComponent<MeshRenderer>().enabled = false; // friend ex version vanishes
 		GameObject healIcon = ObjectPool.Instance.GetPooledObject("effect_HealMarker",hash.transform.position);
 		healIcon.transform.GetChild(0).GetComponent<tk2dTextMesh>().text = "10";
 		healIcon.GetComponent<Rigidbody2D>().velocity = Vector2.up;
@@ -334,6 +336,12 @@ public class BossFriendEx : Friend
 		yield return new WaitForSeconds(2f);
 		questio.transform.Find("throwingGloves").gameObject.SetActive(false);
 
+		//Ex teleports and spawns blob
+		stuart.bossEx.SetActive(true);
+		stuart.bossEx.GetComponent<B_Ev_Ex>().StartCoroutine("Teleport");
+		CamManager.Instance.mainCamEffects.CameraPan(stuart.bossEx, true);
+		yield return new WaitUntil(() => stuart.bossEx.GetComponent<B_Ev_Ex>().initialTeleport == false);
+		yield return new WaitForSeconds(2.5f);
         stuart.PrepPhase2();
     }
 

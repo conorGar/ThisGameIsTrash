@@ -53,7 +53,21 @@ public class PlayerTakeDamage : MonoBehaviour {
                     if (enemyComp != null)
                         damageDealt = enemyComp.attkPower;
                 }
-                TakeDamage(enemy.gameObject);
+
+				if(enemy.gameObject.GetComponent<FollowPlayerAfterNotice>() != null){
+					if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER)){
+						if(enemy.gameObject.GetComponent<FollowPlayerAfterNotice>().noticedPlayer || !GlobalVariableManager.Instance.IS_HIDDEN){
+							TakeDamage(enemy.gameObject);
+                		}
+                	}else{
+							TakeDamage(enemy.gameObject);
+                	}
+                	
+                }else{
+					if(!GlobalVariableManager.Instance.IS_HIDDEN){
+               	 		TakeDamage(enemy.gameObject);
+               	 	}
+                }
 			} else if (enemy.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
                 if (enemy.gameObject.tag == "Boss") {
                     damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
@@ -62,6 +76,15 @@ public class PlayerTakeDamage : MonoBehaviour {
                     damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
                 }
                 TakeDamage(enemy.gameObject);
+			}else if (enemy.gameObject.layer == 19 && !currentlyTakingDamage) { //layer 19 = hazards
+                var hazardComp = enemy.gameObject.GetComponent<Hazard>();
+
+                // Fixing a null reference error where the player keeps colliding with his own weapon.
+                if (hazardComp != null) {
+                    damageDealt = hazardComp.damageToPlayer;
+                    if(damageDealt > 0)
+                    	TakeDamage(enemy.gameObject);
+                }
             }
         }
 	}
@@ -76,6 +99,15 @@ public class PlayerTakeDamage : MonoBehaviour {
                 if (projectileComp != null) {
                     damageDealt = projectileComp.damageToPlayer;
                     TakeDamage(projectile.gameObject);
+                }
+			} if (projectile.gameObject.layer == 19 && !currentlyTakingDamage) { //layer 19 = hazards
+                var hazardComp = projectile.gameObject.GetComponent<Hazard>();
+
+                // Fixing a null reference error where the player keeps colliding with his own weapon.
+                if (hazardComp != null) {
+                    damageDealt = hazardComp.damageToPlayer;
+                    if(damageDealt > 0)
+                    	TakeDamage(projectile.gameObject);
                 }
             }
             /*else if (projectile.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
@@ -258,12 +290,12 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<MeshRenderer>().enabled = true;
 		yield return new WaitForSeconds(.3f);
 		deathDisplay.fader.SetActive(false);
-		if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
+		/*if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
 				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 0;//reset scrap value
 				gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();//just used to update weapon HUD in this scenario
 		}else{
 			gameObject.GetComponent<PinFunctionsManager>().FaithfulWeapin();
-		}
+		}*/
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
         GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;

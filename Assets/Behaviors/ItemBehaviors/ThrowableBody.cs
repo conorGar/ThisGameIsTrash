@@ -11,6 +11,7 @@ public class ThrowableBody : ThrowableObject
 
 	string mySpawnerID;
 
+	Vector2 impactForce = new Vector2(3f,5f);
 
 	public override void PickUp(){
 		physicalCollision.enabled = false;
@@ -61,9 +62,9 @@ public class ThrowableBody : ThrowableObject
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		ObjectPool.Instance.GetPooledObject("effect_thrownImpact",transform.position);
 		if(currentDirection < 0)
-			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(3f,5f),ForceMode2D.Impulse);
+			gameObject.GetComponent<Rigidbody2D>().AddForce(impactForce,ForceMode2D.Impulse);
 		else
-			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3f,5f),ForceMode2D.Impulse);
+			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(impactForce.x*-1,impactForce.y),ForceMode2D.Impulse);
 		yield return new WaitForSeconds(.2f);
 
 	}
@@ -76,14 +77,57 @@ public class ThrowableBody : ThrowableObject
 	}
 
 	public void Death(){
+		Debug.Log("Body death() activated.......");
 		GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].bodyDestroyed = true;
 		myBody.gravityScale = 0f;
 		myBody.velocity = new Vector2(0,0f);
 		beingCarried= false;
 		canThrow = false;
-		myShadow.SetActive(true);
+		myShadow.SetActive(false);
 		gameObject.layer = 11; //switch to item layer.
+		ObjectPool.Instance.GetPooledObject("effect_landingSmoke",transform.position);
+		ObjectPool.Instance.GetPooledObject("effect_vanishStars",transform.position);
+
+
+
+	
+        beingThrown = false;
+        myBody.gravityScale = 0f;
+       	myBody.velocity = new Vector2(0, 0f);
+        beingCarried = false;
+        spinning = false;
+        canThrow = false;
+        pickUpcheck = 0;
+        if (myShadow != null) {
+                        myShadow.transform.parent = this.gameObject.transform;
+                        myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
+                        myShadow.transform.rotation = Quaternion.identity;
+						myShadow.GetComponent<Renderer>().sortingLayerName = "Layer01";
+						myShadow.transform.localPosition = Vector2.zero;
+        }
+
+     
+        gameObject.layer = 11; //switch to item layer.
+        for (int i = 0; i < behaviorsToStop.Count; i++) {
+            behaviorsToStop[i].enabled = true;
+        }
+        gameObject.transform.localScale = Vector2.one;
+        gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
+        gameObject.GetComponent<IsometricSorting>().enabled = true;
+        gameObject.GetComponent<CannotExitScene>().enabled = false;
+        if (physicalCollision != null)
+              physicalCollision.enabled = true;
+
+
 		this.gameObject.SetActive(false);
+	}
+
+	public IEnumerator DeathImpact(GameObject pointOfImpact){
+		impactForce = new Vector2(6f,8f);
+		StartCoroutine("Impact",pointOfImpact);
+		yield return new WaitForSeconds(.5f);
+		impactForce = new Vector2(3f,5f);
+		Death();
 	}
 }
 
