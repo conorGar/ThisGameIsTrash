@@ -76,6 +76,15 @@ public class PlayerTakeDamage : MonoBehaviour {
                     damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
                 }
                 TakeDamage(enemy.gameObject);
+			}else if (enemy.gameObject.layer == 19 && !currentlyTakingDamage) { //layer 19 = hazards
+                var hazardComp = enemy.gameObject.GetComponent<Hazard>();
+
+                // Fixing a null reference error where the player keeps colliding with his own weapon.
+                if (hazardComp != null) {
+                    damageDealt = hazardComp.damageToPlayer;
+                    if(damageDealt > 0)
+                    	TakeDamage(enemy.gameObject);
+                }
             }
         }
 	}

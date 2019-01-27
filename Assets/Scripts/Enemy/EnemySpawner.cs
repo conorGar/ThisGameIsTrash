@@ -7,6 +7,7 @@ public class EnemySpawner : EditorMonoBehaviour {
     public bool isMyEnemyDead = false;
     public EnemyInstance myEnemyInstance;
     public string enemyBodyName;
+    public bool myEnemyHasNoDeadBody;
     [HideInInspector]
     public bool bodyDestroyed;// set true by 'ThrowableBody.cs - Death()'
     string spawnerID;

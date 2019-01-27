@@ -112,6 +112,7 @@ public class B_Ev_Hash : MonoBehaviour {
 		myBody.gravityScale = 1;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
 		falling = true;
+		stuart.GetComponent<EnemyTakeDamage>().enabled = true;
 	}
 
 	void Dazed(){
@@ -132,7 +133,7 @@ public class B_Ev_Hash : MonoBehaviour {
 			gameObject.transform.localScale = Vector2.one;
 			gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
 			onStuart = true;
-			gameObject.layer = 9; //switch to enemy layer.
+			gameObject.layer = 1; //switch to tile layer.
 			gameObject.GetComponent<ThrowableObject>().enabled = false;
 			Shield();
 		}else{

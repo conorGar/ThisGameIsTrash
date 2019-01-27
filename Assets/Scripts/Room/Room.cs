@@ -67,7 +67,7 @@ public class Room : MonoBehaviour
 				int deathDate = enemySpawners[i].GetDeathDate();
 				if(deathDate != 0){//if body has not yet been spawned
 					
-	             	if(deathDate == 2){
+	             	if(deathDate == 2 && enemySpawners[i].myEnemyHasNoDeadBody != true){
 						GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",enemySpawners[i].transform.position);
 						body.GetComponent<ThrowableBody>().SetSpawnerID(enemySpawners[i].name);
 						body.GetComponent<tk2dSprite>().SetSprite(enemySpawners[i].enemyBodyName);
