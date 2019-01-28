@@ -20,6 +20,7 @@ public class Friend : UserDataItem {
 	[HideInInspector]
 	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
 
+	public string myFriendType; //**Steve: Should I change this to Enum?   (ActiveQuestFriend,ScheduleFriend,ConversationFriend)
 
 
 
@@ -180,7 +181,7 @@ public class Friend : UserDataItem {
         dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 
         GUIManager.Instance.CalendarHUD.gameObject.SetActive(true);
-        GUIManager.Instance.CalendarHUD.NewMarkSequence(newestAddedEvent.day, name);
+        GUIManager.Instance.CalendarHUD.NewMarkSequence(newestAddedEvent.day, newestAddedEvent);
         GUIManager.Instance.CalendarHUD.Invoke("LeaveScreen", 4f);
         dialogManager.Invoke("ReturnFromAction", 5f);
     }

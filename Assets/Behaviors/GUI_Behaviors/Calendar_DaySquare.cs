@@ -7,7 +7,7 @@ public class Calendar_DaySquare : MonoBehaviour
 	List<GameObject> myIcons = new List<GameObject>();
 
 	//TODO: Determine positioning of new icon based on how many icons are in the box already
-
+	//TODO: ^ determine positioning also based on whether this 'Calendar_DaySquare' Object is one of the two other boxes on the side
 	void Start ()
 	{
 	

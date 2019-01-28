@@ -32,7 +32,7 @@ public class DialogActionManager : MonoBehaviour {
 		Debug.Log(friend.name);
 		Debug.Log(newestAddedEvent.day);
 		calendar.SetActive(true);
-		calendar.GetComponent<HUD_Calendar>().NewMarkSequence(newestAddedEvent.day,friend.name);
+		calendar.GetComponent<HUD_Calendar>().NewMarkSequence(newestAddedEvent.day,newestAddedEvent);
 		calendar.GetComponent<HUD_Calendar>().Invoke("LeaveScreen",4f);
 		dialogManager.Invoke("ReturnFromAction",5f);
 

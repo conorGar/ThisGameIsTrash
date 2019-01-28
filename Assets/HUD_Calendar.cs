@@ -6,9 +6,9 @@ using TMPro;
 
 public class HUD_Calendar : MonoBehaviour {
 
-	public Sprite jumboSprite;
-	public Sprite coonSprite;
-	public Sprite iggySprite;
+	//public Sprite jumboSprite;
+	//public Sprite coonSprite;
+	//public Sprite iggySprite;
 	List<FriendEvent> currentEvents;
 	public AudioClip calendaMarkSfx;
 	public OpenCalendar player;
@@ -16,14 +16,20 @@ public class HUD_Calendar : MonoBehaviour {
 	public List<Calendar_DaySquare> daySquares;
 	public GameObject navArrow;
 	public TextMeshProUGUI eventDescription;
-
+	public GameObject calendarBack;
+	public Calendar_DaySquare activeQuestsBack;
+	public Calendar_DaySquare readyToTalkBack;
 
 	List<GameObject> selectableIcons = new List<GameObject>();
+	List<GameObject> activeRequestIcons = new List<GameObject>();
 	bool newMarkSequence;
 	bool leavingScreen;
 	int navArrowPos;
+	int currentSection;
+	Color unhighlightedColor = new Color(1,1,1,.4f);
 
 	void OnAwake(){
+		currentEvents = CalendarManager.Instance.friendEvents;
 		FillCalendar();
 
 	}
@@ -48,7 +54,7 @@ public class HUD_Calendar : MonoBehaviour {
                 gameObject.SetActive(true);
                 SoundManager.instance.PlaySingle(paperSlide);
                 SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume / 2;
-                Time.timeScale = 0;
+               // Time.timeScale = 0;
             }
             else if (stateType == typeof(CalendarState)) {
                 gameObject.SetActive(false);
@@ -59,16 +65,16 @@ public class HUD_Calendar : MonoBehaviour {
                 gameObject.SetActive(false);
                 SoundManager.instance.PlaySingle(paperSlide);
                 SoundManager.instance.musicSource.volume = SoundManager.instance.musicSource.volume * 2;
-                Time.timeScale = 1;
+                //Time.timeScale = 1;
             }
         }
     }
 	void OnEnable(){
 		leavingScreen = false;
 		newMarkSequence = false;
-		gameObject.transform.localPosition = new Vector2(-23f,-1f);
+		//gameObject.transform.localPosition = new Vector2(-23f,-1f);
 
-		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);//TODO: This gets faster as time passes...fix!
+		//gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);//TODO: This gets faster as time passes...fix!
 
 	}
 
@@ -79,61 +85,84 @@ public class HUD_Calendar : MonoBehaviour {
 			Invoke("ReenableOpenCal",.5f);
 		}
 		if(!newMarkSequence && !leavingScreen){ 
-			gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition,Vector3.zero,.1f*(Time.realtimeSinceStartup - Time.deltaTime));
+			if(currentSection == 0){
+				if(selectableIcons.Count >0){
+					gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition,Vector3.zero,.1f*(Time.realtimeSinceStartup - Time.deltaTime));
 
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && navArrowPos <selectableIcons.Count){
-				navArrowPos++;
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && navArrowPos > 0){
-				navArrowPos--;
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && navArrowPos < selectableIcons.Count){
-				navArrowPos++;
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && navArrowPos > 0){
-				navArrowPos--;
+					if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && navArrowPos <selectableIcons.Count){
+						navArrowPos++;
+					}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && navArrowPos > 0){
+						navArrowPos--;
+					}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && navArrowPos < selectableIcons.Count){
+						navArrowPos++;
+					}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN) && navArrowPos > 0){
+						navArrowPos--;
+					}
+					Debug.Log(selectableIcons.Count);
+					navArrow.transform.position = selectableIcons[navArrowPos].transform.position;
+					//TODO:Effects for Highlighted Icon
+					eventDescription.text = currentEvents[navArrowPos].friend.GetEventDescription();
+				}
+			}else if(currentSection == 1){//active requests
+				if(activeRequestIcons.Count >0){
+					navArrow.transform.position = activeRequestIcons[navArrowPos].transform.position;
+				}else{
+					navArrow.transform.position = activeQuestsBack.transform.position;
+				}
+			}else if(currentSection == 2){//ready to talk
+
 			}
 
-			navArrow.transform.position = selectableIcons[navArrowPos].transform.position;
-			//TODO:Effects for Highlighted Icon
-			eventDescription.text = currentEvents[navArrowPos].friend.GetEventDescription();
+
+
+			//Switch between the different sections
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){ //switch to active requests
+				currentSection = 1;
+				calendarBack.GetComponent<SpriteRenderer>().color = unhighlightedColor;
+				readyToTalkBack.GetComponent<SpriteRenderer>().color = unhighlightedColor;
+				activeQuestsBack.GetComponent<SpriteRenderer>().color = Color.white;
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)){//switch to readyToTalk
+				currentSection = 2;
+				calendarBack.GetComponent<SpriteRenderer>().color = unhighlightedColor;
+				activeQuestsBack.GetComponent<SpriteRenderer>().color = unhighlightedColor;
+				readyToTalkBack.GetComponent<SpriteRenderer>().color = Color.white;
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)){//switch to calendar
+				currentSection = 0;
+				readyToTalkBack.GetComponent<SpriteRenderer>().color = unhighlightedColor;
+				activeQuestsBack.GetComponent<SpriteRenderer>().color = unhighlightedColor;
+				calendarBack.GetComponent<SpriteRenderer>().color = Color.white;
+			}
+
+
+
+
 		}
 
 
 	}
 
-	public void NewMarkSequence(int day, string friendName){
-		newMarkSequence = true;
-		//gameObject.transform.localPosition = new Vector2(-23f,-1f);
-		//gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(0f,0f,.5f,true);
+	public void NewMarkSequence(int day, FriendEvent fEvent){
 
-		GameObject daySquare = transform.GetChild(day).gameObject;
-		if(!daySquare.activeInHierarchy){
-				daySquare.SetActive(true);
-		}
-		GameObject newIcon = null;
-		if(!daySquare.transform.GetChild(0).gameObject.activeInHierarchy){
-			newIcon = daySquare.transform.GetChild(0).gameObject;
-		}else if(!daySquare.transform.GetChild(1).gameObject.activeInHierarchy){
-			newIcon = daySquare.transform.GetChild(1).gameObject;
-		}else if(!daySquare.transform.GetChild(2).gameObject.activeInHierarchy){
-			newIcon = daySquare.transform.GetChild(2).gameObject;
-		}
-			newIcon.SetActive(true);
-			if(friendName == "Jumbo"){
-				newIcon.GetComponent<Image>().sprite = jumboSprite;
-			}else if(friendName == "Iggy"){
-				newIcon.GetComponent<Image>().sprite = iggySprite;
-			}else if(friendName == "Coonelius"){
-				newIcon.GetComponent<Image>().sprite = coonSprite;
-			}
-			//newIcon.GetComponent<GUIEffects>().Start();//marker shrinks into position
-			SoundManager.instance.PlaySingle(calendaMarkSfx);
+		newMarkSequence = true;
+
+		daySquares[day].AddIcon(fEvent);
+
+
+		SoundManager.instance.PlaySingle(calendaMarkSfx);
 		
+	}
+
+
+	public void NewActiveQuestsMark(FriendEvent fEvent){
+
 	}
 
 	public void LeaveScreen(){
 		leavingScreen = true;
-		gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(24f,0f,.2f,true);
 		GameStateManager.Instance.PopState();
         GameStateManager.Instance.PushState(typeof(GameState));
+		gameObject.SetActive(false);
+
 	}
 
 	public void ReenableOpenCal(){
@@ -143,10 +172,28 @@ public class HUD_Calendar : MonoBehaviour {
 
 
 	void FillCalendar(){
+		Debug.Log("Fill Calendar Activated");
 		for(int i = 0 ; i < currentEvents.Count; i++){
-			GameObject icon = daySquares[currentEvents[i].day].AddIcon(currentEvents[i]);
-			selectableIcons.Add(icon);
+			if(currentEvents[i].friend.myFriendType == "ScheduleFriend"){
+				GameObject icon = daySquares[currentEvents[i].day].AddIcon(currentEvents[i]);
+				Debug.Log("Fill Calendar - selectableIcon added");
+				selectableIcons.Add(icon);
+			}
 		}
+	}
+
+	void FillActiveQuestsBox(){
+		for(int i = 0 ; i < currentEvents.Count; i++){
+			if(currentEvents[i].friend.myFriendType == "ActiveQuestFriend"){
+				GameObject icon = activeQuestsBack.AddIcon(currentEvents[i]);
+				Debug.Log("Fill Calendar - selectableIcon added");
+				activeRequestIcons.Add(icon);
+			}
+		}
+	}
+
+	void FillConversationFriendBox(){
+
 	}
 
 
