@@ -19,6 +19,8 @@ public class HUD_Calendar : MonoBehaviour {
 	public GameObject calendarBack;
 	public Calendar_DaySquare activeQuestsBack;
 	public Calendar_DaySquare readyToTalkBack;
+	public GameObject calendarHighlightPS;
+
 
 	List<GameObject> selectableIcons = new List<GameObject>();
 	List<GameObject> activeRequestIcons = new List<GameObject>();
@@ -28,13 +30,16 @@ public class HUD_Calendar : MonoBehaviour {
 	int currentSection;
 	Color unhighlightedColor = new Color(1,1,1,.4f);
 
-	void OnAwake(){
+	/*void OnAwake(){
 		currentEvents = CalendarManager.Instance.friendEvents;
 		FillCalendar();
-
-	}
+		FillActiveQuestsBox();
+	}*/
 	void Start () {
+		//currentEvents = CalendarManager.Instance.friendEvents;
 		currentEvents = CalendarManager.Instance.friendEvents;
+		FillCalendar();
+		FillActiveQuestsBox();
 		gameObject.SetActive(false);
 		GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
 
@@ -81,13 +86,19 @@ public class HUD_Calendar : MonoBehaviour {
 	void Update () {
 		if((ControllerManager.Instance.GetKeyDown(INPUTACTION.CALENDAR) || ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) && !newMarkSequence){
 			Time.timeScale = 1f;
+			ReenableOpenCal();
+			GameStateManager.Instance.PopState();
 			LeaveScreen();
-			Invoke("ReenableOpenCal",.5f);
+			//Invoke("ReenableOpenCal",.5f);
 		}
 		if(!newMarkSequence && !leavingScreen){ 
 			if(currentSection == 0){
 				if(selectableIcons.Count >0){
-					gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition,Vector3.zero,.1f*(Time.realtimeSinceStartup - Time.deltaTime));
+					if(calendarHighlightPS.activeInHierarchy == false)
+						calendarHighlightPS.SetActive(true);
+
+					//gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition,Vector3.zero,.1f*(Time.realtimeSinceStartup - Time.deltaTime));
+					selectableIcons[navArrowPos].GetComponent<Animator>().enabled = false;
 
 					if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && navArrowPos <selectableIcons.Count){
 						navArrowPos++;
@@ -100,12 +111,15 @@ public class HUD_Calendar : MonoBehaviour {
 					}
 					Debug.Log(selectableIcons.Count);
 					navArrow.transform.position = selectableIcons[navArrowPos].transform.position;
-					//TODO:Effects for Highlighted Icon
+					calendarHighlightPS.transform.position = selectableIcons[navArrowPos].transform.position;
+					selectableIcons[navArrowPos].GetComponent<Animator>().enabled = true; //highlight animation
 					eventDescription.text = currentEvents[navArrowPos].friend.GetEventDescription();
 				}
 			}else if(currentSection == 1){//active requests
 				if(activeRequestIcons.Count >0){
 					navArrow.transform.position = activeRequestIcons[navArrowPos].transform.position;
+					calendarHighlightPS.transform.position = activeRequestIcons[navArrowPos].transform.position;
+					activeRequestIcons[navArrowPos].GetComponent<Animator>().enabled = true; //highlight animation
 				}else{
 					navArrow.transform.position = activeQuestsBack.transform.position;
 				}
@@ -145,8 +159,9 @@ public class HUD_Calendar : MonoBehaviour {
 
 		newMarkSequence = true;
 
-		daySquares[day].AddIcon(fEvent);
 
+		GameObject icon = daySquares[day].AddIcon(fEvent);
+		selectableIcons.Add(icon);
 
 		SoundManager.instance.PlaySingle(calendaMarkSfx);
 		
@@ -159,8 +174,8 @@ public class HUD_Calendar : MonoBehaviour {
 
 	public void LeaveScreen(){
 		leavingScreen = true;
-		GameStateManager.Instance.PopState();
-        GameStateManager.Instance.PushState(typeof(GameState));
+		//GameStateManager.Instance.PopState();
+        //GameStateManager.Instance.PushState(typeof(GameState));
 		gameObject.SetActive(false);
 
 	}
@@ -174,7 +189,7 @@ public class HUD_Calendar : MonoBehaviour {
 	void FillCalendar(){
 		Debug.Log("Fill Calendar Activated");
 		for(int i = 0 ; i < currentEvents.Count; i++){
-			if(currentEvents[i].friend.myFriendType == "ScheduleFriend"){
+			if(currentEvents[i].friend.myFriendType == Friend.FriendType.ScheduleFriend){
 				GameObject icon = daySquares[currentEvents[i].day].AddIcon(currentEvents[i]);
 				Debug.Log("Fill Calendar - selectableIcon added");
 				selectableIcons.Add(icon);
@@ -184,7 +199,7 @@ public class HUD_Calendar : MonoBehaviour {
 
 	void FillActiveQuestsBox(){
 		for(int i = 0 ; i < currentEvents.Count; i++){
-			if(currentEvents[i].friend.myFriendType == "ActiveQuestFriend"){
+			if(currentEvents[i].friend.myFriendType == Friend.FriendType.GatheringFriend){
 				GameObject icon = activeQuestsBack.AddIcon(currentEvents[i]);
 				Debug.Log("Fill Calendar - selectableIcon added");
 				activeRequestIcons.Add(icon);

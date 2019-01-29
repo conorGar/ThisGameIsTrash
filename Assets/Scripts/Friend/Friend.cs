@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Friend : UserDataItem {
+
+
+	public enum FriendType
+	{
+	GatheringFriend,
+	ScheduleFriend,
+	ConversationFriend
+
+	};
+
+
     public string friendName = "Unknown Friend";
     public int day = 0;
     public bool activateDialogWhenClose = true;
@@ -20,7 +31,7 @@ public class Friend : UserDataItem {
 	[HideInInspector]
 	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
 
-	public string myFriendType; //**Steve: Should I change this to Enum?   (ActiveQuestFriend,ScheduleFriend,ConversationFriend)
+	public FriendType myFriendType; //**Steve: Should I change this to Enum?   (ActiveQuestFriend,ScheduleFriend,ConversationFriend)
 
 
 

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4275923502824190}
   - component: {fileID: 212015511503977828}
+  - component: {fileID: 95340362352852402}
   m_Layer: 5
   m_Name: calendarIcon 1
   m_TagString: calendarIcon
@@ -40,6 +41,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95340362352852402
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424045506910398}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 340e0d6a73b5e19428f9c1aa90710167, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &212015511503977828
 SpriteRenderer:
   m_ObjectHideFlags: 1
