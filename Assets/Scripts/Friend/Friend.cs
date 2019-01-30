@@ -30,7 +30,7 @@ public class Friend : UserDataItem {
 	public bool IsVisiting = false;
 	[HideInInspector]
 	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
-
+	public WORLD myWorld;
 	public FriendType myFriendType; //**Steve: Should I change this to Enum?   (ActiveQuestFriend,ScheduleFriend,ConversationFriend)
 
 

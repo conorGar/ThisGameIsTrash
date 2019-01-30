@@ -20,7 +20,7 @@ public class HUD_Calendar : MonoBehaviour {
 	public Calendar_DaySquare activeQuestsBack;
 	public Calendar_DaySquare readyToTalkBack;
 	public GameObject calendarHighlightPS;
-
+	public GameObject calendarPrompt;
 
 	List<GameObject> selectableIcons = new List<GameObject>();
 	List<GameObject> activeRequestIcons = new List<GameObject>();

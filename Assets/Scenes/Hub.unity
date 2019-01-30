@@ -3291,11 +3291,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HUD: {fileID: 1934492903}
-  CalendarHUD: {fileID: 1569791140}
+  CalendarHUD: {fileID: 0}
   DayDisplay: {fileID: 0}
   DeathDisplay: {fileID: 0}
   TrashCollectedDisplayGameplay: {fileID: 458887640}
   TrashCollectedDisplayDeath: {fileID: 0}
+  tutorialPopup: {fileID: 0}
   rockItemHUD: {fileID: 0}
   slabTrashGiveHUD: {fileID: 0}
   SlabTrashNeededDisplay: {fileID: 0}
@@ -9898,12 +9899,15 @@ MonoBehaviour:
   friendName: Rock
   day: 0
   activateDialogWhenClose: 1
-  IsVisiting: 1
   nextDialog: Start
   myDialogDefiniton: {fileID: 11400000, guid: 70f4c8fa2cd3b1742b7ef70ffd2b1a0b, type: 2}
   tempFriend: 0
+  calendarIcon: {fileID: 0}
   missedDialog: 
+  IsVisiting: 1
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates:
   - START
   - WANTS_TO_BE_PRETTY
@@ -12060,6 +12064,11 @@ MonoBehaviour:
     poolSize: 50
   - IsExpandable: 1
     poolObject: {fileID: 1214493902976454, guid: e0d4f2a918a5fec439add0e9da633cbc,
+      type: 2}
+    parentObject: {fileID: 0}
+    poolSize: 1
+  - IsExpandable: 1
+    poolObject: {fileID: 1424045506910398, guid: d22cac07299a9044dbd1d17201245951,
       type: 2}
     parentObject: {fileID: 0}
     poolSize: 1
@@ -18574,6 +18583,7 @@ MonoBehaviour:
   murderImage: {fileID: 21300000, guid: 7d80da3c3b79bc94c9f551c5e861bd31, type: 3}
   dojoImage: {fileID: 21300000, guid: 56f63fce8c7c3e24eaf75b14e2f1d60a, type: 3}
   shopImage: {fileID: 21300000, guid: 714b5933191962142a0dbbe2760dc13d, type: 3}
+  toxicImage: {fileID: 0}
 --- !u!1 &427551129
 GameObject:
   m_ObjectHideFlags: 0
@@ -25588,6 +25598,11 @@ Prefab:
         type: 2}
       propertyPath: ShapeModule.radiusThickness
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     - target: {fileID: 198466120154779254, guid: 576ab416164cc944bb550233c9211f2f,
         type: 2}
@@ -40083,12 +40098,15 @@ MonoBehaviour:
   friendName: Slab
   day: 0
   activateDialogWhenClose: 0
-  IsVisiting: 1
   nextDialog: Slab1
   myDialogDefiniton: {fileID: 11400000, guid: 70f4c8fa2cd3b1742b7ef70ffd2b1a0b, type: 2}
   tempFriend: 0
+  calendarIcon: {fileID: 0}
   missedDialog: 
+  IsVisiting: 1
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates:
   - START
   - WANTS_TRASH
@@ -59445,12 +59463,15 @@ MonoBehaviour:
   friendName: Questio
   day: 1
   activateDialogWhenClose: 0
-  IsVisiting: 0
   nextDialog: 
   myDialogDefiniton: {fileID: 0}
   tempFriend: 0
+  calendarIcon: {fileID: 0}
   missedDialog: 
+  IsVisiting: 0
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates: []
   friendState: 0
   trioParticleSystems: []
@@ -59462,6 +59483,7 @@ MonoBehaviour:
   slideTrash: {fileID: 0}
   FieldRoomNum: 3
   trioTheme: {fileID: 0}
+  shieldSound: {fileID: 0}
   toxicBarrier: {fileID: 0}
   toxicBarrierPS: {fileID: 0}
   goWithItDisplay: {fileID: 0}
@@ -73585,12 +73607,15 @@ MonoBehaviour:
   friendName: Ex
   day: 0
   activateDialogWhenClose: 1
-  IsVisiting: 1
   nextDialog: Boss1Intro
   myDialogDefiniton: {fileID: 11400000, guid: d246d419998c2654d9da21eeea955a46, type: 2}
   tempFriend: 1
+  calendarIcon: {fileID: 0}
   missedDialog: 
+  IsVisiting: 1
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates:
   - IN_FIELD
   - IN_TOXIC_FIELD
@@ -73613,6 +73638,7 @@ MonoBehaviour:
   slideTrash: {fileID: 0}
   FieldRoomNum: 3
   trioTheme: {fileID: 0}
+  shieldSound: {fileID: 0}
   toxicBarrier: {fileID: 0}
   toxicBarrierPS: {fileID: 0}
   goWithItDisplay: {fileID: 0}
@@ -81775,12 +81801,15 @@ MonoBehaviour:
   friendName: RatWithAHat
   day: 0
   activateDialogWhenClose: 1
-  IsVisiting: 0
   nextDialog: Start
   myDialogDefiniton: {fileID: 11400000, guid: 09b9f350338526047a4837d2c5cdb368, type: 2}
   tempFriend: 0
+  calendarIcon: {fileID: 0}
   missedDialog: RatHat1
+  IsVisiting: 0
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates:
   - START
   - ADVERTISED
@@ -85363,12 +85392,15 @@ MonoBehaviour:
   friendName: Jumbo
   day: 2
   activateDialogWhenClose: 1
-  IsVisiting: 0
   nextDialog: Start
   myDialogDefiniton: {fileID: 11400000, guid: 72ff0c4aa033ed149824bdd747aaab4f, type: 2}
   tempFriend: 0
+  calendarIcon: {fileID: 0}
   missedDialog: 
+  IsVisiting: 0
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates:
   - START
   - INVITE_TO_SECOND_SCREENING
@@ -86419,12 +86451,15 @@ MonoBehaviour:
   friendName: Hash
   day: 1
   activateDialogWhenClose: 0
-  IsVisiting: 0
   nextDialog: 
   myDialogDefiniton: {fileID: 0}
   tempFriend: 0
+  calendarIcon: {fileID: 0}
   missedDialog: 
+  IsVisiting: 0
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates: []
   friendState: 0
   trioParticleSystems: []
@@ -86436,6 +86471,7 @@ MonoBehaviour:
   slideTrash: {fileID: 0}
   FieldRoomNum: 3
   trioTheme: {fileID: 0}
+  shieldSound: {fileID: 0}
   toxicBarrier: {fileID: 0}
   toxicBarrierPS: {fileID: 0}
   goWithItDisplay: {fileID: 0}
@@ -87297,12 +87333,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224322022474772396, guid: 8b3461acf40fcff4ba19ca442866b307,
     type: 2}
   m_PrefabInternal: {fileID: 1569791137}
---- !u!114 &1569791140 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114518615820817810, guid: 8b3461acf40fcff4ba19ca442866b307,
-    type: 2}
-  m_PrefabInternal: {fileID: 1569791137}
-  m_Script: {fileID: 11500000, guid: f28a87863c1729245ba836ee63094c91, type: 3}
 --- !u!1 &1570214129
 GameObject:
   m_ObjectHideFlags: 0
@@ -103394,12 +103424,15 @@ MonoBehaviour:
   friendName: Unknown Friend
   day: 0
   activateDialogWhenClose: 1
-  IsVisiting: 0
   nextDialog: 
   myDialogDefiniton: {fileID: 0}
   tempFriend: 0
+  calendarIcon: {fileID: 0}
   missedDialog: 
+  IsVisiting: 0
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates: []
   friendState: 0
 --- !u!1 &1679171628
@@ -122594,6 +122627,11 @@ Prefab:
       propertyPath: ShapeModule.radiusThickness
       value: 1.0000
       objectReference: {fileID: 0}
+    - target: {fileID: 198767216390948532, guid: 6a34bb4c7f1f89343bcbb9f8b9939031,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6a34bb4c7f1f89343bcbb9f8b9939031, type: 2}
   m_IsPrefabParent: 0
@@ -127990,12 +128028,15 @@ MonoBehaviour:
   friendName: Stone
   day: 0
   activateDialogWhenClose: 1
-  IsVisiting: 1
   nextDialog: StoneRequest
   myDialogDefiniton: {fileID: 11400000, guid: 70f4c8fa2cd3b1742b7ef70ffd2b1a0b, type: 2}
   tempFriend: 0
+  calendarIcon: {fileID: 0}
   missedDialog: 
+  IsVisiting: 1
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates:
   - START
   - WANTS_HANDS
@@ -128366,12 +128407,15 @@ MonoBehaviour:
   friendName: Rat On A Mat
   day: 0
   activateDialogWhenClose: 1
-  IsVisiting: 1
   nextDialog: RatMat1
   myDialogDefiniton: {fileID: 11400000, guid: e6b778ad58d68df43a64562007705115, type: 2}
   tempFriend: 1
+  calendarIcon: {fileID: 0}
   missedDialog: 
+  IsVisiting: 1
   dialogManager: {fileID: 0}
+  myWorld: 0
+  myFriendType: 0
   friendStates:
   - TUTORIAL
   - END
