@@ -78,6 +78,44 @@ public class GlobalVariableManager : UserDataItem {
 
     public UPGRADES UPGRADES_UNLOCKED = UPGRADES.NONE;
 
+
+    public enum ROOM{
+    NONE = 				0,
+    W1A1 = 			1<<0,
+    W1A2 =			1<<1,
+	W1A3 =			1<<2,
+	W1A4 =			1<<3,
+	W1A5 =			1<<4,
+	W1B1 =			1<<5,
+	W1B2 =			1<<6,
+	W1B3 =			1<<7,
+	W1B4 =			1<<8,
+	W1B5 =			1<<9,
+	W1C1 = 			1<<10,
+	W1C2 = 			1<<11,
+	W1C3 = 			1<<12,
+	W1C4 = 			1<<13,
+	W1C5 = 			1<<14,
+	W1D1 = 			1<<15,
+	W1D2 = 			1<<16,
+	W1D3 = 			1<<17,
+	W1D4 = 			1<<18,
+	W1D5 = 			1<<19,
+	W1E1 = 			1<<20,
+	W1E2 = 			1<<21,
+	W1E3 = 			1<<22,
+	W1E4 = 			1<<23,
+	W1E5 = 			1<<24,
+	W1BOSSROOM = 	1<<25,
+	W1MOLETOWN1 =	1<<26,
+	W1MOLETOWN2 =   1<<27,
+	W1MOLETOWN3 =   1<<28,
+	W1BOSSHALL =    1<<29,
+    }
+
+    public ROOM WORLD_ROOMS_DISCOVERED = ROOM.W1C3;
+
+
     public enum TUTORIALPOPUPS{
 
 	NONE = 		0,
@@ -191,12 +229,7 @@ public class GlobalVariableManager : UserDataItem {
 	public int TIME_IN_DAY = -90;
 	public int WORLD_NUM = 1;
 
-	public List<string> WORLD_ROOM_DISCOVER = new List<string>{
-												"obcdefghijklmnpqrstuvwxyz123456789;',.",
-												"abcdefghijklmnpqrstuvwxyz123",
-												"abcdefghijklmnpqrstuvwxyz123",
-												"abcdefghijklmnpqrstuvwxyz123",
-												};
+
 	public List<string> WORLD_SIGNS_READ = new List<string>{
 												"abcdefghijklmnpqrstuvwxyz12{}",
 												"abcdefghijklmn/:rstuv}xy1234567",
@@ -250,6 +283,9 @@ public class GlobalVariableManager : UserDataItem {
         json_data["LARGE_GARBAGE_DISCOVERED"] = (uint)LARGE_GARBAGE_DISCOVERED;
         json_data["LARGE_GARBAGE_VIEWED"] = (uint)LARGE_GARBAGE_VIEWED;
 
+
+        json_data["WORLD_ROOMS_DISCOVERED"] = (uint)WORLD_ROOMS_DISCOVERED;
+
         // Stats and things
         json_data["STAR_POINTS"] = STAR_POINTS_STAT.GetMaxRaw();
         json_data["CURRENT_STAR_POINTS"] = STAR_POINTS_STAT.GetCurrent();
@@ -287,6 +323,8 @@ public class GlobalVariableManager : UserDataItem {
         pinsEquippedValue = json_data["pinsEquippedValue"].AsLong;
         pinsViewedValue = json_data["pinsViewedValue"].AsLong;
 
+
+        WORLD_ROOMS_DISCOVERED = (ROOM)json_data["WORLD_ROOMS_DISCOVERED"].AsInt;
 
         STANDARD_GARBAGE_DISCOVERED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_DISCOVERED"].AsInt;
         STANDARD_GARBAGE_VIEWED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_VIEWED"].AsInt;

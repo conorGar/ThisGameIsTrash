@@ -20,7 +20,7 @@ public class Room : MonoBehaviour
     public bool activateTutpopWhenEnter;
     public string tutPopUpToActivate;
     public GameObject myMapClouds;
-
+    public GlobalVariableManager.ROOM myRoom;
 
 	int waifuChance;
 	[HideInInspector]
@@ -36,10 +36,16 @@ public class Room : MonoBehaviour
     public void ActivateRoom()
     {
     	Debug.Log("ActivateRoom....activated");
-    	if(myMapClouds != null){
-    	myMapClouds.SetActive(false);
-    	}else{
-    		Debug.Log("Room:" +gameObject.name + "has No map clouds assigned to it! ***");
+
+
+    	//Set room as visited
+    	if((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) != myRoom){
+    		GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED |= myRoom;
+			if(myMapClouds != null){
+    			myMapClouds.SetActive(false);
+    		}else{
+    			Debug.Log("Room:" +gameObject.name + "has No map clouds assigned to it! ***");
+    		}
     	}
         CamManager.Instance.tk2dMainCam.ScreenCamera.ViewportToWorldPoint(transform.position);
         roomManager.SetCamFollowBounds(this);
@@ -178,6 +184,14 @@ public class Room : MonoBehaviour
     {
         enemies = new List<GameObject>();
         friends = new List<GameObject>();
+
+		if((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) == myRoom){
+			if(myMapClouds != null){
+    			myMapClouds.SetActive(false);
+    		}else{
+    			Debug.Log("Room:" +gameObject.name + "has No map clouds assigned to it! ***");
+    		}
+    	}
     }
 	
 	// Update is called once per frame

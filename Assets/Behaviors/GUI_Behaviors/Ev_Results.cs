@@ -122,8 +122,7 @@ public class Ev_Results : MonoBehaviour {
                             GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[i] = 0;
                         }
                         //GlobalVariableManager.Instance.CURRENT_HP = 0;
-                        if (GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 4)
-                            GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(4); // remove temporary room discover string
+                 
                         GlobalVariableManager.Instance.MENU_SELECT_STAGE = 1;
                         if (GlobalVariableManager.Instance.DEJAVUCOUNT - 3 <= 0) {
                             //Deja Vu pin

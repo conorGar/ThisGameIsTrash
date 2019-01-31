@@ -157,13 +157,10 @@ public class Ev_GenericGarbage : MonoBehaviour {
 					currentWeaponHUD.GetComponent<Ev_CurrentWeapon>().UpdateMelee();
 				}
 
-				if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count <= 5){
-					// (if not in race mode, trash is collected normally)
+			
 					GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]++;
-				}else{
-					//otherwise increase race collected
-					GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[2]++;
-				}
+				
+
                     GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 
                     StartCoroutine("Kill");

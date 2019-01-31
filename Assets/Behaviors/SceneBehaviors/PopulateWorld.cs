@@ -28,10 +28,7 @@ public class PopulateWorld : MonoBehaviour
 
 		
 			Debug.Log("World list count check After");
-			if(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count < 5){
-			//assigns string so com knows how many new rooms were discovered at result screen
-				GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Add(GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER[GlobalVariableManager.Instance.WORLD_NUM - 1]);
-			}
+		
 			/*if(GlobalVariableManager.Instance.characterUpgradeArray[1][28].CompareTo('o') == 0){
                 //2nd gathering perk: amount of trash in world increased by 25%
                 WorldManager.Instance.amountTrashHere += Mathf.RoundToInt(WorldManager.Instance.amountTrashHere/ 4);
