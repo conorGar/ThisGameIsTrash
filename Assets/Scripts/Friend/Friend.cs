@@ -32,7 +32,7 @@ public class Friend : UserDataItem {
 	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
 	public WORLD myWorld;
 	public FriendType myFriendType; //**Steve: Should I change this to Enum?   (ActiveQuestFriend,ScheduleFriend,ConversationFriend)
-
+	public GUI_WorldMap_FriendIcon myMapIcon;
 
 
     // Use this for initialization
@@ -146,11 +146,15 @@ public class Friend : UserDataItem {
     // Runs when the world starts (hub, world 1, world 2, etc..)  useful for setting friend state quest stuff and making sure everything in the world is set up properly.
     public virtual void OnWorldStart(World world)
     {
-
+    	myMapIcon.gameObject.SetActive(true);
+    	myMapIcon.gameObject.transform.parent = null;
+		if(day == GlobalVariableManager.Instance.DAY_NUMBER && (myFriendType == FriendType.ConversationFriend ||myFriendType == FriendType.ScheduleFriend)){
+			myMapIcon.ActivateSpeechIcon();
+		}
     }
 
     public virtual void OnWorldEnd(){
-
+		myMapIcon.gameObject.transform.parent = this.transform;
     }
 
     public virtual void OnFinishDialog()

@@ -40,6 +40,7 @@ public class Room : MonoBehaviour
 
     	//Set room as visited
     	if((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) != myRoom){
+    		Debug.Log("Room has not been discovered previously:" + gameObject.name);
     		GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED |= myRoom;
 			if(myMapClouds != null){
     			myMapClouds.SetActive(false);

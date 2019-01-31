@@ -162,6 +162,7 @@ public class JumboFriend : Friend {
             if (largeTrashProjector != null)
                 largeTrashProjector.SetActive(false);
         }
+        base.OnWorldStart(world);
     }
 
     public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)

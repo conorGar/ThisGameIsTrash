@@ -3,9 +3,10 @@ using System.Collections;
 
 public class GUI_WorldMap : MonoBehaviour
 {
-	public float maxZoom = -100f;
-	public float minZoom = -7f;
+	public float maxZoom = -30f;
+	public float minZoom = -3f;
 	public Camera miniMapCam;
+	public GameObject player;
 
 	float currentZoom = -11f;
 
@@ -28,7 +29,7 @@ public class GUI_WorldMap : MonoBehaviour
 			}
 		}
 
-		miniMapCam.transform.localPosition = new Vector3(0,0,currentZoom);
+		miniMapCam.gameObject.transform.position = new Vector3(player.transform.position.x,player.transform.position.y,currentZoom);
 	}
 }
 

@@ -13,7 +13,8 @@ public class GUIManager : MonoBehaviour {
     public GUI_DeathDisplay DeathDisplay;
     public GUI_TrashCollectedDisplay TrashCollectedDisplayGameplay; // At the top left of the screen during gameplay
     public GUI_TrashCollectedDisplay TrashCollectedDisplayDeath; // On the death display
-  	 public GUI_TutPopup tutorialPopup;
+  	public GUI_TutPopup tutorialPopup;
+  	public Camera miniMapCam;
 
     // Friend related
     public GUI_RockItemHUD rockItemHUD;
