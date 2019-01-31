@@ -19,6 +19,8 @@ public class Room : MonoBehaviour
     public Transform miniMapPosition;
     public bool activateTutpopWhenEnter;
     public string tutPopUpToActivate;
+    public GameObject myMapClouds;
+
 
 	int waifuChance;
 	[HideInInspector]
@@ -34,6 +36,11 @@ public class Room : MonoBehaviour
     public void ActivateRoom()
     {
     	Debug.Log("ActivateRoom....activated");
+    	if(myMapClouds != null){
+    	myMapClouds.SetActive(false);
+    	}else{
+    		Debug.Log("Room:" +gameObject.name + "has No map clouds assigned to it! ***");
+    	}
         CamManager.Instance.tk2dMainCam.ScreenCamera.ViewportToWorldPoint(transform.position);
         roomManager.SetCamFollowBounds(this);
 
