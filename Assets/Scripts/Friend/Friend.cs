@@ -154,7 +154,8 @@ public class Friend : UserDataItem {
     }
 
     public virtual void OnWorldEnd(){
-		myMapIcon.gameObject.transform.parent = this.transform;
+    	if(myMapIcon != null)
+			myMapIcon.gameObject.transform.parent = this.transform;
     }
 
     public virtual void OnFinishDialog()

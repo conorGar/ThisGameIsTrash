@@ -227,6 +227,8 @@ public class GlobalVariableManager : UserDataItem {
 	public List<string> WORLD_ENEMY_LIST = new List<string>();
 	public int ROOM_NUM = 0;
 	public int TIME_IN_DAY = -90;
+	public int TOTAL_DAYTIME_INSECONDS = 240;
+	public int TIME_UPGRADE_LEVEL = 1;
 	public int WORLD_NUM = 1;
 
 
@@ -298,6 +300,9 @@ public class GlobalVariableManager : UserDataItem {
         json_data["MOMONEYVALUE"] = MOMONEYVALUE;
         json_data["PROGRESS_LV"] = PROGRESS_LV;
         json_data["UPGRADES"] = (uint)UPGRADES_UNLOCKED;
+        json_data["TOTAL_DAYTIME_INSECONDS"] = TOTAL_DAYTIME_INSECONDS;
+        json_data["TIME_UPGRADE_LEVEL"] = TIME_UPGRADE_LEVEL;
+
 
         json_data["TUT_POPUPS_SHOWN"] = (uint)TUT_POPUPS_SHOWN;
 
@@ -350,6 +355,8 @@ public class GlobalVariableManager : UserDataItem {
         CURSEVALUE = json_data["CURSEVALUE"].AsInt;
         MOMONEYVALUE = json_data["MOMONEYVALUE"].AsInt;
         PROGRESS_LV = json_data["PROGRESS_LV"].AsInt;
+        TOTAL_DAYTIME_INSECONDS = json_data["TOTAL_DAYTIME_INSECONDS"].AsInt;
+        TIME_UPGRADE_LEVEL = json_data["TIME_UPGRADE_LEVEL"].AsInt;
         UPGRADES_UNLOCKED = (UPGRADES)json_data["UPGRADES"].AsInt;
 
         TUT_POPUPS_SHOWN = (TUTORIALPOPUPS)json_data["TUT_POPUPS_SHOWN"].AsInt;

@@ -17,7 +17,9 @@ public enum SFXBANK
     CLANK,
     VOICE_TICK,
     NOTICE, 
-    TRUCK_APPEAR
+    TRUCK_APPEAR,
+    MENU_NAV1,
+    MENU_NAV2,
 }
 
 public enum MUSICBANK

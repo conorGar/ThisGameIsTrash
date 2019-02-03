@@ -1,0 +1,457 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: RatNearACat
+  m_EditorClassIdentifier: 
+  title: RatNearACat
+  dialogIconID: dialog_icon_ID
+  nodeStore:
+    keys:
+    - Value: 7148399d-00df-411b-803c-875c13163097
+    - Value: 05b00328-bf18-40da-9374-d5b548868b60
+    - Value: 815d8bbe-db89-4ecd-8d56-8b8850a5a002
+    - Value: ebd94bfa-fc7a-49f0-86a1-43522110ef8e
+    - Value: 66f82910-7e88-4a5a-a200-ed90fabd7cd5
+    - Value: 9e4edca9-e1d2-4931-a478-7d75c98549b6
+    - Value: 6234e02d-89dd-4927-a902-ece41debcebb
+    - Value: 8b5a6866-999e-4b4f-a677-1523e114072f
+    - Value: 5c243141-479a-4b15-a937-f51f47a0e31d
+    - Value: bc412b3e-a8ed-4c85-b9d5-da6427f7eca6
+    - Value: 0f476f65-99ca-4f92-87fe-910fdd359ada
+    - Value: 14c83508-cfbc-46aa-b3e3-dc24e5a19a1c
+    - Value: 6b15c8f5-85b4-4ecf-b6a0-04d3a0560187
+    - Value: 11958fe7-9499-4566-b427-d266d1078e52
+    - Value: 4d199465-7ab4-439c-83df-dda1375347a5
+    - Value: fab51b05-f0cf-4fa9-8778-8e98a533f249
+    - Value: dc1c1ca4-54e4-4fc6-af7b-3b64d39ff19a
+    values:
+    - window:
+        serializedVersion: 2
+        x: 179
+        y: 231
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCat1
+      speakerName: Rat Near A Cat
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7148399d-00df-411b-803c-875c13163097
+      x: 179
+      y: 231
+      text: Greetings, wandering garbage man...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 05b00328-bf18-40da-9374-d5b548868b60
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 509
+        y: 229
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RatCat2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 05b00328-bf18-40da-9374-d5b548868b60
+      x: 509
+      y: 229
+      text: So..where were we...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 815d8bbe-db89-4ecd-8d56-8b8850a5a002
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 797
+        y: 223
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCat3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 815d8bbe-db89-4ecd-8d56-8b8850a5a002
+      x: 797
+      y: 223
+      text: <s>...oh, yeah, ok...opening his third eye...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ebd94bfa-fc7a-49f0-86a1-43522110ef8e
+      responses:
+      - text: Yeah, sure.
+        node_id:
+          Value: 
+      - text: '...'
+        node_id:
+          Value: 
+      - text: Nope. I really wanna just get this conversation over with.
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 1108
+        y: 246
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: RatCat4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ebd94bfa-fc7a-49f0-86a1-43522110ef8e
+      x: 1108
+      y: 246
+      text: Come here and I will show you. I will take you to <c=g>the world of the
+        not-yet-there</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 66f82910-7e88-4a5a-a200-ed90fabd7cd5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1394
+        y: 282
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCat5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 66f82910-7e88-4a5a-a200-ed90fabd7cd5
+      x: 1394
+      y: 282
+      text: I will unlock your <c=b>future potential</c>...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9e4edca9-e1d2-4931-a478-7d75c98549b6
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1686
+        y: 259
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCat6
+      speakerName: 
+      question: 
+      action: TimeBackActivate
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9e4edca9-e1d2-4931-a478-7d75c98549b6
+      x: 1686
+      y: 259
+      text: '...I will give you...<c=b> VISION</c>!'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6234e02d-89dd-4927-a902-ece41debcebb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1998
+        y: 278
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCat7
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6234e02d-89dd-4927-a902-ece41debcebb
+      x: 1998
+      y: 278
+      text: BEHOLD! <c=g>The Cats of Time</c>!!!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8b5a6866-999e-4b4f-a677-1523e114072f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2287
+        y: 266
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: RatCat8
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8b5a6866-999e-4b4f-a677-1523e114072f
+      x: 2287
+      y: 266
+      text: Using their power, I can give you more <c=g>time in each day</c> to act
+        on your potential.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5c243141-479a-4b15-a937-f51f47a0e31d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2583
+        y: 301
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCat9
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5c243141-479a-4b15-a937-f51f47a0e31d
+      x: 2583
+      y: 301
+      text: Like I said, VISION! I will help you imagine your best future self!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: bc412b3e-a8ed-4c85-b9d5-da6427f7eca6
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2871
+        y: 297
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RatCat10
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: bc412b3e-a8ed-4c85-b9d5-da6427f7eca6
+      x: 2871
+      y: 297
+      text: <s>...for the right price...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 248
+        y: 2
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCatIntro
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0f476f65-99ca-4f92-87fe-910fdd359ada
+      x: 248
+      y: 2
+      text: Ah, garbageman...I have been waiting for your arrival.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 14c83508-cfbc-46aa-b3e3-dc24e5a19a1c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 545
+        y: 17
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCatIntro2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 14c83508-cfbc-46aa-b3e3-dc24e5a19a1c
+      x: 545
+      y: 17
+      text: My name is...<c=g> Rat Near A Cat</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6b15c8f5-85b4-4ecf-b6a0-04d3a0560187
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 836
+        y: 16
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: RatCatIntro3
+      speakerName: Rat Near A Cat
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6b15c8f5-85b4-4ecf-b6a0-04d3a0560187
+      x: 836
+      y: 16
+      text: You may ask...how does a rat get such a name with nary a cat in sight?!?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 11958fe7-9499-4566-b427-d266d1078e52
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1121
+        y: 11
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCatIntro4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 11958fe7-9499-4566-b427-d266d1078e52
+      x: 1121
+      y: 11
+      text: My, what an ignorant question, garbage man.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 4d199465-7ab4-439c-83df-dda1375347a5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1415
+        y: 32
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RatCatIntro5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4d199465-7ab4-439c-83df-dda1375347a5
+      x: 1415
+      y: 32
+      text: I will show you..in time.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: fab51b05-f0cf-4fa9-8778-8e98a533f249
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1705
+        y: 17
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: RatCatIntro6
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fab51b05-f0cf-4fa9-8778-8e98a533f249
+      x: 1705
+      y: 17
+      text: 'For saving me, I will set up at your <c=g>Dump</c>. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: dc1c1ca4-54e4-4fc6-af7b-3b64d39ff19a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2003
+        y: 46
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: RatCatIntro7
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: dc1c1ca4-54e4-4fc6-af7b-3b64d39ff19a
+      x: 2003
+      y: 46
+      text: When you next arrive there...come to me... and I will allow you to see
+        what has always been right before your eyes...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7148399d-00df-411b-803c-875c13163097
+      responses: []
+  rootNodeId:
+    Value: 7148399d-00df-411b-803c-875c13163097

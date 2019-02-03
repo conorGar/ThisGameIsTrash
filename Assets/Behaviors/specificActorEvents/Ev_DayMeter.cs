@@ -27,7 +27,7 @@ public class Ev_DayMeter : MonoBehaviour {
 	Color nightColor = new Color(.18f,.26f,.85f,.13f);
 	Color startColor;
 
-	public float secondsInTheDay = 240f;
+	public float secondsInTheDay;
     public float secondsPassed = 0f;
     public int timeDeathIncrease = 20;
 	int finalCountdownNumber = 10;
@@ -35,6 +35,7 @@ public class Ev_DayMeter : MonoBehaviour {
 	bool nightMark;
 
 	void Start () {
+		secondsInTheDay = GlobalVariableManager.Instance.TOTAL_DAYTIME_INSECONDS;
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }//end of Start()
 
