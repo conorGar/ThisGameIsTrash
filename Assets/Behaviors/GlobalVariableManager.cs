@@ -19,6 +19,7 @@ public class GlobalVariableManager : UserDataItem {
     }
 
 	private long pinsEquippedValue = (long)(PIN.NONE);
+
     public PIN PINS_EQUIPPED
     {
         set { pinsEquippedValue = (long)value; }
@@ -128,6 +129,13 @@ public class GlobalVariableManager : UserDataItem {
 	}
 
 	public TUTORIALPOPUPS TUT_POPUPS_SHOWN = TUTORIALPOPUPS.NONE;
+
+	public enum TRASHDOORS{
+		NONE =	0,
+		W1_11TRASH =	1<<0,
+	}
+
+	public TRASHDOORS BROKEN_TRASH_DOORS = TRASHDOORS.NONE;
 
     //-------------Enemy Global Variables------------//
     public enum BOSSES : int
@@ -305,6 +313,7 @@ public class GlobalVariableManager : UserDataItem {
 
 
         json_data["TUT_POPUPS_SHOWN"] = (uint)TUT_POPUPS_SHOWN;
+		json_data["BROKEN_TRASH_DOORS"] = (uint)BROKEN_TRASH_DOORS; //steve did I do this right?
 
         return json_data;
     }
@@ -360,6 +369,8 @@ public class GlobalVariableManager : UserDataItem {
         UPGRADES_UNLOCKED = (UPGRADES)json_data["UPGRADES"].AsInt;
 
         TUT_POPUPS_SHOWN = (TUTORIALPOPUPS)json_data["TUT_POPUPS_SHOWN"].AsInt;
+		BROKEN_TRASH_DOORS = (TRASHDOORS)json_data["BROKEN_TRASH_DOORS"].AsInt; //Steve did I do this right?
+
     }
 
     // helpers

@@ -114,6 +114,10 @@ public class Room : MonoBehaviour
 					if(enemySpawners[i].gameObject.GetComponent<WanderZone>() != null){	
 						Rect wanderZone = enemySpawners[i].gameObject.GetComponent<WanderZone>().GetWanderBounds();
 						spawnedEnemy.GetComponent<WanderWithinBounds>().SetWalkBounds(wanderZone);
+					}else if(enemySpawners[i].gameObject.GetComponent<PathingMarks>() != null){
+						List<GameObject> pathMarks = enemySpawners[i].gameObject.GetComponent<PathingMarks>().wanderpoints;
+						spawnedEnemy.GetComponent<WanderOnPath>().SetPathMarks(pathMarks);
+						spawnedEnemy.transform.position = enemySpawners[i].gameObject.GetComponent<PathingMarks>().startingPoint.transform.position;
 					}
 	            }
             }   
