@@ -30,7 +30,7 @@ public class GUIManager : MonoBehaviour {
     public GameObject BaseStatHUD;
     public GUI_BaseStatUpgrade GUI_BaseStatUpgrade;
     public Hub_UpgradeStand Hub_UpgradeStand;
-
+    public GUI_TimeUpgrade GUI_TimeUpgrade;
 
 	void Awake () {
         Instance = this;

@@ -88,6 +88,7 @@ public class Ev_PinBehavior : MonoBehaviour {
     void OnEnable()
     {
         Unhighlight();
+
     }
 
     void OnDisable()
@@ -98,7 +99,7 @@ public class Ev_PinBehavior : MonoBehaviour {
     void Update () {
 
 
-		if(inShop){
+		/*if(inShop){
 
 			if(Mathf.Abs(transform.position.x - player.transform.position.x) < 2 && Mathf.Abs(startingY - player.transform.position.y) < 3.6 && !bought){
 				if(setArrowPosOnce == 0){
@@ -146,7 +147,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 			//-----------------------------------------------------------------//
 
 
-		}
+		}*/
 	}
 
 	public void AtEquipScreen(){

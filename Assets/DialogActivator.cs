@@ -12,6 +12,7 @@ public class DialogActivator : MonoBehaviour {
 		for(int i = 0; i < FriendManager.Instance.friends.Count;i++){
 			if(FriendManager.Instance.friends[i].friendName == myFriend){
 				friendInstance = FriendManager.Instance.friends[i].gameObject;
+				Debug.Log(">>>>>>>>>friend found>>>>>>>>" + friendInstance);
 				break;
 			}
 		}

@@ -1,16 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class S_Ev_shop : MonoBehaviour {
 
-	public GameObject tutorialPopup;
-	public Sprite tutPopupSprite;
+	//public GameObject tutorialPopup;
+	//public Sprite tutPopupSprite;
     Ev_PinBehavior currentPin;
 	public GUI_OptionsPopupBehavior purchasePopup;
 	public GameObject harry;
 	public GameObject priceDisplay;
-	public GameObject costText;
+	public TextMeshProUGUI priceDisplayText;
+	public TextMeshProUGUI pinDescriptionText;
+	public TextMeshProUGUI pinTitleText;
+	public GameObject ppDisplay;
+	public GameObject descriptionPopup;
+
+
     public PinDefinition upgrade1;
     public PinDefinition upgrade2;
     public PinDefinition upgrade3;
@@ -18,6 +25,7 @@ public class S_Ev_shop : MonoBehaviour {
 	List<PinDefinition> nonShopPins = new List<PinDefinition>();
 	GameObject player;
 	GameObject manager;
+	List<GameObject> todaysPins = new List<GameObject>(); 
 
     void Start() {
 
@@ -57,16 +65,13 @@ public class S_Ev_shop : MonoBehaviour {
 
         GlobalVariableManager.Instance.shopPins = new List<PinDefinition> { null, null, null };
 
-        // VV----------just makes it so "dont you wanna check shop shop" dialog doesnt happen
-        GlobalVariableManager.Instance.WORLD_SIGNS_READ[1].Replace(GlobalVariableManager.Instance.WORLD_SIGNS_READ[1][14],'o');
 
 
-		GlobalVariableManager.Instance.ARROW_POSITION = 0;
-		GlobalVariableManager.Instance.MENU_SELECT_STAGE = 9;//needed for proper purchasing action when hit SPACE that doesnt interefere with upgrade behavior
-		GlobalVariableManager.Instance.ROOM_NUM = 97;
+
+	
 
 		//---------------------------------------set pins in today's shop------------------------------------------//
-		if(GlobalVariableManager.Instance.TIME_IN_DAY != GlobalVariableManager.Instance.DAY_NUMBER){
+
             //Uses shopPins list to place values for today's pins
             //Reset when activate "Continue" truck at hub.
             upgrade1 = null;
@@ -103,13 +108,7 @@ public class S_Ev_shop : MonoBehaviour {
                 }
             }
 
-			GlobalVariableManager.Instance.TIME_IN_DAY = GlobalVariableManager.Instance.DAY_NUMBER; //only happens once a day
-		}else{
-			upgrade1 = GlobalVariableManager.Instance.shopPins[0];
-			upgrade2 = GlobalVariableManager.Instance.shopPins[1];
-			upgrade3 = GlobalVariableManager.Instance.shopPins[2];
-		}
-		//-------------------------------------------------------------------------------------------------------//
+	
 
 		SpawnPins();
 
@@ -164,29 +163,18 @@ public class S_Ev_shop : MonoBehaviour {
 	
 	void Update () {
 
-		//---------------Player Bounds-----------------//
-		if(player != null){
-			if(player.transform.position.y > 8.9f){
-				player.transform.position = new Vector2(player.transform.position.x,8.9f);
-			}else if(player.transform.position.y < 1.6){
-				player.transform.position = new Vector2(player.transform.position.x,1.6f);
-			}else if(player.transform.position.x > 22f){
-				player.transform.position = new Vector2(22f,player.transform.position.y);
-			}else if(player.transform.position.x < -1f && GlobalVariableManager.Instance.SCENE_IS_TRANSITIONING == false){
-				//Leave room
+		if(Vector2.Distance(todaysPins[0].transform.position,player.transform.position) <5){
+			
+		}else if(Vector2.Distance(todaysPins[1].transform.position,player.transform.position) <5){
 
-				GlobalVariableManager.Instance.ROOM_NUM = 101;
-				manager.GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
+		}else if(Vector2.Distance(todaysPins[2].transform.position,player.transform.position) <5){
 
-				GlobalVariableManager.Instance.SCENE_IS_TRANSITIONING = true;
-			}
 		}
-		//--------------------------------------------//
 	}
 
-	public void ShowThings(int cost){
+	public void ShowThings(Ev_PinBehavior highlightedPin){
 		harry.GetComponent<tk2dSpriteAnimator>().Play("talk");
-		costText.GetComponent<TextMesh>().text = cost.ToString();
+		//priceDisplayText.text = highlightedPin.
 		priceDisplay.SetActive(true);
 	}
 
@@ -230,7 +218,7 @@ public class S_Ev_shop : MonoBehaviour {
             behavior.SetPinData(currentPin);
 
             spawnedPin.SetActive(true);
-
+            todaysPins.Add(spawnedPin);
             //spawnedPin.GetComponent<Ev_PinBehavior>().SetPinData(currentUpgradeCheck);
             behavior.SetMySpot(i+1);
 		}

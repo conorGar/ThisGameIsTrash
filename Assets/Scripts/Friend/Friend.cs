@@ -26,7 +26,7 @@ public class Friend : UserDataItem {
 	public Sprite calendarIcon;
     [HideInInspector]
 	public string missedDialog;
-	[HideInInspector]
+	//[HideInInspector] commented out for testing
 	public bool IsVisiting = false;
 	[HideInInspector]
 	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.

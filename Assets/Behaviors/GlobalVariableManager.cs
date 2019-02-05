@@ -18,8 +18,7 @@ public class GlobalVariableManager : UserDataItem {
         get { return (PIN)pinsDiscoveredValue; }
     }
 
-	private long pinsEquippedValue = (long)(PIN.NONE);
-
+    private long pinsEquippedValue = (long)(PIN.LINKTOTRASH);//PIN.NONE);
     public PIN PINS_EQUIPPED
     {
         set { pinsEquippedValue = (long)value; }
@@ -50,7 +49,7 @@ public class GlobalVariableManager : UserDataItem {
 	//base stats
 	public PlayerStat HP_STAT = new PlayerStat(PLAYERSTATTYPE.HP, 5);
     public PlayerStat BAG_SIZE_STAT = new PlayerStat(PLAYERSTATTYPE.BAG_SIZE, 10);
-    public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 3);
+    public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
     public PlayerStat STAR_POINTS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_POINTS, 0);
 
 
@@ -117,6 +116,7 @@ public class GlobalVariableManager : UserDataItem {
     public ROOM WORLD_ROOMS_DISCOVERED = ROOM.W1C3;
 
 
+
     public enum TUTORIALPOPUPS{
 
 	NONE = 		0,
@@ -124,7 +124,7 @@ public class GlobalVariableManager : UserDataItem {
 	ARMOREDENEMIES = 	1<<1,
 	DAYNIGHT = 			1<<2,
 	PINS = 				1<<3,
-	TOXICENEMIES =      1<<4,
+	TOXICENEMIES = 		1<<4,
 
 	}
 
@@ -228,15 +228,14 @@ public class GlobalVariableManager : UserDataItem {
 	public bool SCENE_IS_TRANSITIONING = false;
 
 	//------World-Related Global Vars ---------------//
-
+	public int TOTAL_DAYTIME_INSECONDS = 240;
+	public int TIME_UPGRADE_LEVEL = 1;
 	public int AMOUNT_TRASH_IN_WORLD = 0;
 	public List<string> CALENDAR = new List<string>(); //put as string for now, not sure if it can be int
 	public List<string> FRIEND_LIST = new List<string>();
 	public List<string> WORLD_ENEMY_LIST = new List<string>();
 	public int ROOM_NUM = 0;
 	public int TIME_IN_DAY = -90;
-	public int TOTAL_DAYTIME_INSECONDS = 240;
-	public int TIME_UPGRADE_LEVEL = 1;
 	public int WORLD_NUM = 1;
 
 
@@ -255,7 +254,7 @@ public class GlobalVariableManager : UserDataItem {
     private void Awake(){
 		if(Instance == null){
 			Instance = this;
-            Instance.PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 3);
+            Instance.PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
 			DontDestroyOnLoad(gameObject);
 		}else{
 			Destroy(gameObject);
@@ -284,6 +283,8 @@ public class GlobalVariableManager : UserDataItem {
         json_data["pinsEquippedValue"] = pinsEquippedValue;
         json_data["pinsViewedValue"] = pinsViewedValue;
 
+		json_data["WORLD_ROOMS_DISCOVERED"] = (uint)WORLD_ROOMS_DISCOVERED;
+
         json_data["STANDARD_GARBAGE_DISCOVERED"] = (uint)STANDARD_GARBAGE_DISCOVERED;
         json_data["STANDARD_GARBAGE_VIEWED"] = (uint)STANDARD_GARBAGE_VIEWED;
         json_data["COMPOST_GARBAGE_DISCOVERED"] = (uint)COMPOST_GARBAGE_DISCOVERED;
@@ -293,13 +294,11 @@ public class GlobalVariableManager : UserDataItem {
         json_data["LARGE_GARBAGE_DISCOVERED"] = (uint)LARGE_GARBAGE_DISCOVERED;
         json_data["LARGE_GARBAGE_VIEWED"] = (uint)LARGE_GARBAGE_VIEWED;
 
-
-        json_data["WORLD_ROOMS_DISCOVERED"] = (uint)WORLD_ROOMS_DISCOVERED;
-
         // Stats and things
         json_data["STAR_POINTS"] = STAR_POINTS_STAT.GetMaxRaw();
         json_data["CURRENT_STAR_POINTS"] = STAR_POINTS_STAT.GetCurrent();
-
+		json_data["TOTAL_DAYTIME_INSECONDS"] = TOTAL_DAYTIME_INSECONDS;
+        json_data["TIME_UPGRADE_LEVEL"] = TIME_UPGRADE_LEVEL;
         json_data["Max_HP"] = HP_STAT.GetMaxRaw();
         json_data["BAG_SIZE"] = BAG_SIZE_STAT.GetMaxRaw();
         json_data["PPVALUE"] = PP_STAT.GetMaxRaw();
@@ -308,9 +307,6 @@ public class GlobalVariableManager : UserDataItem {
         json_data["MOMONEYVALUE"] = MOMONEYVALUE;
         json_data["PROGRESS_LV"] = PROGRESS_LV;
         json_data["UPGRADES"] = (uint)UPGRADES_UNLOCKED;
-        json_data["TOTAL_DAYTIME_INSECONDS"] = TOTAL_DAYTIME_INSECONDS;
-        json_data["TIME_UPGRADE_LEVEL"] = TIME_UPGRADE_LEVEL;
-
 
         json_data["TUT_POPUPS_SHOWN"] = (uint)TUT_POPUPS_SHOWN;
 		json_data["BROKEN_TRASH_DOORS"] = (uint)BROKEN_TRASH_DOORS; //steve did I do this right?
@@ -332,13 +328,11 @@ public class GlobalVariableManager : UserDataItem {
         MASTER_SFX_VOL = json_data["MASTER_SFX_VOL"].AsFloat;
 
         DAY_NUMBER = json_data["DAY_NUMBER"].AsInt;
-
+		WORLD_ROOMS_DISCOVERED = (ROOM)json_data["WORLD_ROOMS_DISCOVERED"].AsInt;
         pinsDiscoveredValue = json_data["pinsDiscoveredValue"].AsLong;
         pinsEquippedValue = json_data["pinsEquippedValue"].AsLong;
         pinsViewedValue = json_data["pinsViewedValue"].AsLong;
 
-
-        WORLD_ROOMS_DISCOVERED = (ROOM)json_data["WORLD_ROOMS_DISCOVERED"].AsInt;
 
         STANDARD_GARBAGE_DISCOVERED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_DISCOVERED"].AsInt;
         STANDARD_GARBAGE_VIEWED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_VIEWED"].AsInt;
@@ -364,10 +358,9 @@ public class GlobalVariableManager : UserDataItem {
         CURSEVALUE = json_data["CURSEVALUE"].AsInt;
         MOMONEYVALUE = json_data["MOMONEYVALUE"].AsInt;
         PROGRESS_LV = json_data["PROGRESS_LV"].AsInt;
-        TOTAL_DAYTIME_INSECONDS = json_data["TOTAL_DAYTIME_INSECONDS"].AsInt;
-        TIME_UPGRADE_LEVEL = json_data["TIME_UPGRADE_LEVEL"].AsInt;
         UPGRADES_UNLOCKED = (UPGRADES)json_data["UPGRADES"].AsInt;
-
+		TOTAL_DAYTIME_INSECONDS = json_data["TOTAL_DAYTIME_INSECONDS"].AsInt;
+        TIME_UPGRADE_LEVEL = json_data["TIME_UPGRADE_LEVEL"].AsInt;
         TUT_POPUPS_SHOWN = (TUTORIALPOPUPS)json_data["TUT_POPUPS_SHOWN"].AsInt;
 		BROKEN_TRASH_DOORS = (TRASHDOORS)json_data["BROKEN_TRASH_DOORS"].AsInt; //Steve did I do this right?
 

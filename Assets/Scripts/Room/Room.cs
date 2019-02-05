@@ -126,10 +126,14 @@ public class Room : MonoBehaviour
         for (int i=0; i < friendSpawners.Count; ++i)
         {
             var spawnedFriend = FriendManager.Instance.GetFriend(friendSpawners[i].friend);
+			Debug.Log("Friend Spawn got here *0*- " + friendSpawners[i].friend.name + spawnedFriend.IsVisiting);
             if (spawnedFriend != null && spawnedFriend.IsVisiting)
             {
+            	Debug.Log("Friend Spawn got here *1* - " + friendSpawners[i].friend.name);
                 if (spawnedFriend.IsCurrentRoom(this))
                 {
+					Debug.Log("Friend Spawn got here *2*- " + friendSpawners[i].friend.name);
+
                     spawnedFriend.gameObject.transform.position = friendSpawners[i].transform.position;
                     spawnedFriend.gameObject.SetActive(true);
                     spawnedFriend.OnActivateRoom();

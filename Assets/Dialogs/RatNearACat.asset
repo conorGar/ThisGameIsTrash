@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: RatNearACat
   m_EditorClassIdentifier: 
   title: RatNearACat
-  dialogIconID: dialog_icon_ID
+  dialogIconID: icon_RatNearCat
   nodeStore:
     keys:
     - Value: 7148399d-00df-411b-803c-875c13163097
@@ -173,7 +173,7 @@ MonoBehaviour:
       title: RatCat6
       speakerName: 
       question: 
-      action: TimeBackActivate
+      action: TimeBackShow
       isDialogAction: 0
       friendState: 
       id:
@@ -292,7 +292,7 @@ MonoBehaviour:
         height: 186
       isCollapsed: 0
       title: RatCatIntro
-      speakerName: 
+      speakerName: ???
       question: 
       action: 
       isDialogAction: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
       title: RatCatIntro7
       speakerName: 
       question: 
-      action: 
+      action: finish
       isDialogAction: 0
       friendState: 
       id:
