@@ -54,9 +54,6 @@ public class PinFunctionsManager : MonoBehaviour {
 		if(chargingSpin && ControllerManager.Instance.GetKeyUp(heldKey)){
 			chargingSpin = false;
 			StopCoroutine("SpinAttack");
-			gameObject.GetComponent<MeleeAttack>().cantAttack = false;
-			gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
-
 		}
 
 
@@ -187,8 +184,6 @@ public class PinFunctionsManager : MonoBehaviour {
 		spinAttack.SetActive(true);
 		chargingSpin = false;
 		yield return new WaitForSeconds(.5f);
-		gameObject.GetComponent<MeleeAttack>().cantAttack = false;
-		gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
 		spinAttack.SetActive(false);
 	}
 

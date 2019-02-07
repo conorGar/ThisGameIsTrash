@@ -360,6 +360,7 @@ public class DialogEditorWindow : EditorWindow {
         GUI.DragWindow();
     }
 
+    // DrawNodeCurve example from this post https://forum.unity.com/threads/simple-node-editor.189230/ and modified to handle an offset based on response number so they are more readable.
     void DrawNodeCurve(Rect start, Rect end, int responseNumber = -1)
     {
         Vector3 startPos;

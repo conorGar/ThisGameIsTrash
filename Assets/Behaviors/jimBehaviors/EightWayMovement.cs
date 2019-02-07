@@ -66,24 +66,10 @@ public class EightWayMovement : MonoBehaviour {
             float inputX = ControllerManager.Instance.GetAxis(INPUTACTION.MOVELEFT);
             float inputY = ControllerManager.Instance.GetAxis(INPUTACTION.MOVEUP);
             movement = new Vector2(inputX, inputY);
-            //Debug.Log(inputX);
+
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)) {
-                if (directionFacing != 2) {
-                    gameObject.transform.localScale = new Vector2(transformScale.x * -1, transformScale.y);
-                    //walkCloudPS.transform.localPosition = new Vector3(0f,-1.75f,0f);
-                    //walkCloudPS.transform.localScale = new Vector3(walkCloudPS.transform.localScale.x*-1,walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
-                }
-                if (anim.CurrentClip.name != "ani_jimWalk" && !clipOverride) {
-                    if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
-                    }
-                    else {
-                        if (carryingAbove)
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove", false);
-                        else
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
-                    }
-                }
+                GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
+                GetComponent<JimStateController>().SetFlag((int)JimFlag.FACING_LEFT);
 
                 if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVELEFT);
@@ -92,61 +78,29 @@ public class EightWayMovement : MonoBehaviour {
                 directionFacing = 2;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)) {
-                if (directionFacing != 1) {
-                    gameObject.transform.localScale = new Vector2(transformScale.x, transformScale.y);
-                    //walkCloudPS.transform.localPosition = new Vector3(0,-1.75f,0f);
-                    //walkCloudPS.transform.localScale = new Vector3(Mathf.Abs(walkCloudPS.transform.localScale.x),walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
-                }
-                if (anim.CurrentClip.name != "ani_jimWalk" && !clipOverride) {
+                GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
+                GetComponent<JimStateController>().RemoveFlag((int)JimFlag.FACING_LEFT);
 
-                    if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
-                    }
-                    else {
-                        if (carryingAbove)
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove", false);
-                        else
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
-                    }
-
-                }
-				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVERIGHT);
                 }
 
                 directionFacing = 1;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)) {
-                //legAnim.Play("walk");
-                if (anim.CurrentClip.name != "ani_jimWalk" && !clipOverride) {
-                    if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
-                    }
-                    else {
-                        if (carryingAbove)
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove", false);
-                        else
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
-                    }
-                }
-				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+
+                GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
+
+                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEUP);
                 }
                 directionFacing = 3;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)) {
-                if (anim.CurrentClip.name != "ani_jimWalk" && !clipOverride) {
-                    if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
-                    }
-                    else {
-                        if (carryingAbove)
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove", false);
-                        else
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
-                    }
-                }
-				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+
+                GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
+
+                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEDOWN);
                 }
                 directionFacing = 4;
@@ -165,19 +119,6 @@ public class EightWayMovement : MonoBehaviour {
                 	legAnim.Play("walk");
 
                 isDiagonal = true;
-                if (movement.y == 1 && movement.x == -1) {
-                    if (directionFacing == 1) {
-                        /*gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimTurn",false);
-                        StartCoroutine ("TurnDelay");*/
-                    }
-                    else {
-                        //if(setAniOnce == 0){
-                        //setAniOnce = 1;
-                        //gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
-                        //}
-                    }
-                }
-
                
             }
             else {
@@ -189,34 +130,8 @@ public class EightWayMovement : MonoBehaviour {
                     
                     if (movement.x == 0 && movement.y == 0) {
                         walkCloudPS.GetComponent<ParticleSystem>().Stop();
-                        //legAnim.Play("stop");
 
-                        if (!clipOverride) {
-                            if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                                if (anim.CurrentClip.name == "ani_jimWalk") {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle", false);
-                                }
-                                else if (anim.CurrentClip.name == "ani_jimWalkDown") {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle", false);
-                                }
-                                else if (anim.CurrentClip.name == "ani_jimWalkUp") {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle", false);
-                                }
-                                else if (anim.CurrentClip.name != "ani_jimIdle") {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle", false);//set to normal idle when return from override clip(hurt, pickup,etc)
-                                }
-                            }
-                            else {
-                                Debug.Log("carrying something and carrying above = " + carryingAbove);
-                                if (carryingAbove) {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAboveIdle", false);
-                                    //clipOverride = true;
-
-                                }
-                                else
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle", false);
-                            }
-                        }
+                        GetComponent<JimStateController>().RemoveFlag((int)JimFlag.MOVING);
 
                         //not instant stop
                         if (momentum > 0){
@@ -265,20 +180,35 @@ public class EightWayMovement : MonoBehaviour {
                     transform.Translate(new Vector2(momentum * -1, 0) * Time.deltaTime);
                 }
             }
-            if (GlobalVariableManager.Instance.PLAYER_CAN_MOVE) {
+            if (GetComponent<JimStateController>().GetCurrentState() == JimState.IDLE) {
+                // correct the facing.
+                if (inputX < 0) { // The player is holding left.
+                    if (transform.localScale.x > 0) {
+                        gameObject.transform.localScale = new Vector2(transformScale.x * -1, transformScale.y);
+                        GetComponent<JimStateController>().SetFlag((int)JimFlag.FACING_LEFT);
+                    }
+                } else if (inputX > 0) { // The player is holding right.
+                    if (transform.localScale.x < 0) {
+                        gameObject.transform.localScale = new Vector2(transformScale.x, transformScale.y);
+                        GetComponent<JimStateController>().RemoveFlag((int)JimFlag.FACING_LEFT);
+                    }
+                }
+
 
                 transform.Translate(movement * speed * Time.deltaTime);
-                //show legs and change to current animation of Jim
+                /*//show legs and change to current animation of Jim
                 if (!clipOverride && myLegs.activeInHierarchy) {
 
                     legAnim.Play(anim.CurrentClip.name);
                     legAnim.PlayFromFrame(anim.CurrentFrame);
-                }
+                }*/
 
 
             }
 
-
+            if (Input.GetKeyDown(KeyCode.L)) {
+                Debug.Log("JimStateController.GetCurrentState() == " + GetComponent<JimStateController>().GetCurrentState());
+            }
 
             if (Input.GetKeyDown(KeyCode.V)) {
                 Debug.Log(GlobalVariableManager.Instance.BASIC_ENEMY_LIST["enemy_spawner 2"].dayOfRevival);
@@ -293,18 +223,9 @@ public class EightWayMovement : MonoBehaviour {
     }
 
     public void StopMovement(){
-			if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
-						
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);//set to normal idle when return from override clip(hurt, pickup,etc)
-							
-			}else{
-				if(carryingAbove){
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAboveIdle",false);
-				}
-				else
-					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",false);
-			}
-		CancelInvoke();
+        GetComponent<JimStateController>().RemoveFlag((int)JimFlag.MOVING);
+
+        CancelInvoke();
 		//StopAllCoroutines();
 		legAnim.Play(anim.CurrentClip.name);
     	this.enabled = true;
@@ -332,27 +253,6 @@ public class EightWayMovement : MonoBehaviour {
     	if(directionFacing == 1){
     		
     	}
-    }
-
-
-	IEnumerator TurnDelay() {
-        yield return new WaitForSeconds (.1f);
-		if(directionFacing == 1 || directionFacing == 2){
-			anim.Play("ani_jimWalk");
-			gameObject.transform.localScale = new Vector3(transformScale.x*-1,transformScale.y,transformScale.z);
-				if(directionFacing == 1){
-					directionFacing = 2;
-				}else{
-					directionFacing = 1;
-				}
-		}else if(directionFacing == 3){
-			anim.Play("ani_jimWalk");
-			directionFacing = 4;
-        }else{
-			anim.Play("ani_jimWalk");
-			directionFacing = 3;
-        }
-	
     }
 
     void OnChangeState(System.Type stateType, bool isEntering)
