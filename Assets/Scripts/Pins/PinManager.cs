@@ -17,6 +17,7 @@ public class PinManager : MonoBehaviour {
     public GameObject PageRoot;
     public TextMeshProUGUI DescriptionText;
     public TextMeshProUGUI PinTitle;
+	public TextMeshProUGUI AbilityPinText;
     public Ev_PPDisplay PPDisplay;
     public tk2dSprite PinDisplaySprite;
     public PinConfig pinConfig;

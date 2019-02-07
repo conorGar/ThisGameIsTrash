@@ -101,7 +101,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 		moving = false;
 		if(anim.GetClipByName("idle") != null){
 			anim.Play("idle");
-			Debug.Log("RDM sets animation" + anim.CurrentClip.name);
+//			Debug.Log("RDM sets animation" + anim.CurrentClip.name);
 
 		}
 		//if(anim.IsPlaying("run")){
@@ -139,7 +139,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	}
 
 	public virtual void GoAgain(){
-		Debug.Log("Go again activated");
+	//	Debug.Log("Go again activated");
 		moving = true;
 		//InvokeRepeating("SpawnClouds",.2f, .2f);
 		if(walkPS != null)

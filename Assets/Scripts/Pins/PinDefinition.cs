@@ -96,5 +96,5 @@ public class PinDefinition : ScriptableObject
     public int ppValue = 1;
     public int price = 1;
     public int displayPriority = 1;
-
+    public bool abilityPin = false;
 }
