@@ -29,6 +29,7 @@ public enum JimFlag : int
 [Serializable]
 public enum JimTrigger
 {
+    IDLE,
     HIT,
     DEATH,
     SWING_RIGHT,
@@ -78,7 +79,7 @@ public class JimStateController : ActorStateController<JimState, JimTrigger> {
             case JimState.PICKING_UP:
                 // carrying a droppable
                 if ((flags & (int)JimFlag.CARRYING_DROPABLE) == (int)JimFlag.CARRYING_DROPABLE) {
-                    animator.Play("jimCarryAboveIdle");
+                    animator.Play("ani_jimCarryIdle");
                     currentState = new JimCarrying();
 
                     // carrying a throwable

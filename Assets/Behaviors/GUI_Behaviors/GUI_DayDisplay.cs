@@ -43,7 +43,6 @@ public class GUI_DayDisplay : MonoBehaviour
 			StartCoroutine("DisplaySequence");
 			//SoundManager.instance.PlaySingle(truckSfx);
 		}
-		//player.GetComponent<EightWayMovement>().enabled = false;
 	}
 	
 	// Update is called once per frame

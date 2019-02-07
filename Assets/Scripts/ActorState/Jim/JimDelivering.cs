@@ -14,8 +14,14 @@ public class JimDelivering : IActorState<JimState, JimTrigger>
         return null;
     }
 
-    public IActorState<JimState, JimTrigger> SendTrigger(JimTrigger trigger, tk2dSpriteAnimator animator, ref int flags)
+    public IActorState<JimState, JimTrigger> SendTrigger(JimTrigger trigger, GameObject actor, tk2dSpriteAnimator animator, ref int flags)
     {
+        switch (trigger) {
+            case JimTrigger.IDLE:
+                animator.Play("ani_jimIdle");
+                return new JimIdle();
+        }
+
         return null;
     }
 

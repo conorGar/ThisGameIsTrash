@@ -30,8 +30,7 @@ public class EightWayMovement : MonoBehaviour {
 	Vector3 transformScale; // used for facing different directions
 
 	public bool clipOverride; //set by pickUpable object
-	[HideInInspector]
-	public bool carryingAbove;
+
     // Use this for initialization
     void Start () {
 
@@ -180,7 +179,8 @@ public class EightWayMovement : MonoBehaviour {
                     transform.Translate(new Vector2(momentum * -1, 0) * Time.deltaTime);
                 }
             }
-            if (GetComponent<JimStateController>().GetCurrentState() == JimState.IDLE) {
+            if (GetComponent<JimStateController>().GetCurrentState() == JimState.IDLE ||
+                GetComponent<JimStateController>().GetCurrentState() == JimState.CARRYING) {
                 // correct the facing.
                 if (inputX < 0) { // The player is holding left.
                     if (transform.localScale.x > 0) {

@@ -46,10 +46,9 @@ public class ThrowableObject : PickupableObject {
                     myBody.gravityScale = 0f;
                     myBody.velocity = new Vector2(0, 0f);
                     myBody.AddForce(new Vector2(-4f * (Mathf.Sign(gameObject.transform.lossyScale.x)), 0f), ForceMode2D.Impulse);//slide
-                    beingCarried = false;
                     spinning = false;
                     canThrow = false;
-                    pickUpcheck = 0;
+
                     if (myShadow != null) {
                         myShadow.transform.parent = this.gameObject.transform;
                         myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);
@@ -110,7 +109,6 @@ public class ThrowableObject : PickupableObject {
 		yield return new WaitForSeconds(1f);
 		player.GetComponent<EightWayMovement>().myLegs.SetActive(false);
 
-		beingCarried = true;
 		if(livingBody){
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
 			panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
@@ -124,7 +122,6 @@ public class ThrowableObject : PickupableObject {
 	}
 
 	void Throw(){
-		//beingCarried = false;
 		var animator = gameObject.GetComponent<Animator>();
             if (animator != null) animator.enabled = false;
 
@@ -188,7 +185,6 @@ public class ThrowableObject : PickupableObject {
 				beingThrown = false;
 				myBody.gravityScale = 0f;
 				myBody.velocity = new Vector2(0,0f);
-				beingCarried= false;
 				canThrow = false;
                 if (myShadow != null){
                     myShadow.SetActive(true);

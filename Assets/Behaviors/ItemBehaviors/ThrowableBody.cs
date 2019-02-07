@@ -25,7 +25,6 @@ public class ThrowableBody : ThrowableObject
 		physicalCollision.enabled = false;
 
 		//move and play the particle system
-		beingCarried = true;
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		SoundManager.instance.PlaySingle(pickup);
 		//set object to follow player and push up in the sky
@@ -81,7 +80,6 @@ public class ThrowableBody : ThrowableObject
 		GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].bodyDestroyed = true;
 		myBody.gravityScale = 0f;
 		myBody.velocity = new Vector2(0,0f);
-		beingCarried= false;
 		canThrow = false;
 		myShadow.SetActive(false);
 		gameObject.layer = 11; //switch to item layer.
@@ -94,10 +92,9 @@ public class ThrowableBody : ThrowableObject
         beingThrown = false;
         myBody.gravityScale = 0f;
        	myBody.velocity = new Vector2(0, 0f);
-        beingCarried = false;
         spinning = false;
         canThrow = false;
-        pickUpcheck = 0;
+
         if (myShadow != null) {
                         myShadow.transform.parent = this.gameObject.transform;
                         myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);

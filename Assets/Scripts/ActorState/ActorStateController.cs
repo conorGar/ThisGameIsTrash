@@ -36,7 +36,7 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
         AnyStateTrigger(trigger);
 
         // Resolve triggers based on the current state.
-        var newState = currentState.SendTrigger(trigger, animator, ref flags);
+        var newState = currentState.SendTrigger(trigger, gameObject, animator, ref flags);
 
         if (newState != null)
             currentState = newState;

@@ -20,7 +20,7 @@ public class JimIdle : IActorState<JimState, JimTrigger>
         return null;
     }
 
-    public IActorState<JimState, JimTrigger> SendTrigger(JimTrigger trigger, tk2dSpriteAnimator animator, ref int flags )
+    public IActorState<JimState, JimTrigger> SendTrigger(JimTrigger trigger, GameObject actor, tk2dSpriteAnimator animator, ref int flags )
     {
         switch (trigger) {
             case JimTrigger.HIT:
