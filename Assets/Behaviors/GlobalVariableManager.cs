@@ -24,12 +24,17 @@ public class GlobalVariableManager : UserDataItem {
         set { pinsEquippedValue = (long)value; }
         get { return (PIN)pinsEquippedValue; }
     }
+
+ 
+
 	private long pinsViewedValue = (long)(PIN.NONE);
     public PIN PINS_VIEWED
     {
         set { pinsViewedValue = (long)value; }
         get { return (PIN)pinsViewedValue; }
     }
+
+    public List<Ev_PinBehavior> EquippedAbilityPins = new List<Ev_PinBehavior> {null,null};
 
     public int DEJAVUCOUNT = 0;
     public int CURSEVALUE = 0;

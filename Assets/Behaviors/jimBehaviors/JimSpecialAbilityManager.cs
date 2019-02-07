@@ -48,12 +48,13 @@ public class JimSpecialAbilityManager : MonoBehaviour
 		Debug.Log("Spin Attack Coroutine Started");
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("spinAttack",true);
-
+		CamManager.Instance.mainCamEffects.ZoomInOut(1.4f,1f);
 		//givenKey = INPUTACTION.SPECIAL;
 		yield return new WaitForSeconds(.3f);
 		spinAttack.SetActive(true);
 		DepleteTrash();
 		chargingSpin = false;
+		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		yield return new WaitForSeconds(.5f);
 		gameObject.GetComponent<MeleeAttack>().cantAttack = false;
 		gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();

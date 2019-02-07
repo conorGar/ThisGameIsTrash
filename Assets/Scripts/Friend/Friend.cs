@@ -146,10 +146,12 @@ public class Friend : UserDataItem {
     // Runs when the world starts (hub, world 1, world 2, etc..)  useful for setting friend state quest stuff and making sure everything in the world is set up properly.
     public virtual void OnWorldStart(World world)
     {
-    	myMapIcon.gameObject.SetActive(true);
-    	myMapIcon.gameObject.transform.parent = null;
-		if(day == GlobalVariableManager.Instance.DAY_NUMBER && (myFriendType == FriendType.ConversationFriend ||myFriendType == FriendType.ScheduleFriend)){
-			myMapIcon.ActivateSpeechIcon();
+    	if(myMapIcon != null){
+	    	myMapIcon.gameObject.SetActive(true);
+	    	myMapIcon.gameObject.transform.parent = null;
+			if(day == GlobalVariableManager.Instance.DAY_NUMBER && (myFriendType == FriendType.ConversationFriend ||myFriendType == FriendType.ScheduleFriend)){
+				myMapIcon.ActivateSpeechIcon();
+			}
 		}
     }
 

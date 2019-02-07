@@ -23,6 +23,7 @@ public class PinManager : MonoBehaviour {
     public PinConfig pinConfig;
     public ParticleSystem equipSpark;
     public GameObject newPinIcon;
+    public GUI_AbilityPinEquipDisplay abilityPinEquipHUD;
     private Dictionary<PIN, PinDefinition> PINLOOKUP = new Dictionary<PIN, PinDefinition>();
 
 	void Awake () {

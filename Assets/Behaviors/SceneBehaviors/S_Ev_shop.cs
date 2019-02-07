@@ -35,7 +35,7 @@ public class S_Ev_shop : MonoBehaviour {
 
     void Start() {
 
-
+    	
         /*if(GlobalVariableManager.Instance.WORLD_SIGNS_READ[0][9] != 'o'){
 			if(GlobalVariableManager.Instance.TUT_POPUP_ON){
 				Instantiate(tutorialPopup,transform.position,Quaternion.identity);

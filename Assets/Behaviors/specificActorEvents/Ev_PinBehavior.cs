@@ -183,6 +183,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 				GlobalVariableManager.Instance.PINS_VIEWED |= pinData.Type; //set pin as viewed
                 newPinIcon.SetActive(false);
             }
+
         }
         else{
             PinManager.Instance.DescriptionText.text = "Buy or find this Pin to learn what powers it holds!";
@@ -231,6 +232,12 @@ public class Ev_PinBehavior : MonoBehaviour {
 				//Defense Pin
 					GlobalVariableManager.Instance.characterUpgradeArray[6] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[6]) + 1).ToString();
 				}*/
+
+				if(GetData().abilityPin == true){
+					PinManager.Instance.abilityPinEquipHUD.gameObject.SetActive(true);
+					PinManager.Instance.abilityPinEquipHUD.selectedPin = this;
+				}
+
 			}else if(IsPinEquipped()){//Unequip pin
                 GlobalVariableManager.Instance.PP_STAT.UpdateCurrent(+pinData.ppValue);
                 GlobalVariableManager.Instance.PINS_EQUIPPED &= ~pinData.Type;
