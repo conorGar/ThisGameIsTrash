@@ -68,11 +68,12 @@ public class EightWayMovement : MonoBehaviour {
 
             float inputX = ControllerManager.Instance.GetAxis(INPUTACTION.MOVELEFT);
             float inputY = ControllerManager.Instance.GetAxis(INPUTACTION.MOVEUP);
+            var jimStateController = GetComponent<JimStateController>();
             movement = new Vector2(inputX, inputY);
 
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)) {
-                GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
-                GetComponent<JimStateController>().SetFlag((int)JimFlag.FACING_LEFT);
+                StartMovement();
+                jimStateController.SetFlag((int)JimFlag.FACING_LEFT);
 
                 if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVELEFT);
@@ -81,8 +82,8 @@ public class EightWayMovement : MonoBehaviour {
                 directionFacing = 2;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)) {
-                GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
-                GetComponent<JimStateController>().RemoveFlag((int)JimFlag.FACING_LEFT);
+                StartMovement();
+                jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
 
                 if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVERIGHT);
@@ -91,8 +92,7 @@ public class EightWayMovement : MonoBehaviour {
                 directionFacing = 1;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)) {
-
-                GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
+                StartMovement();
 
                 if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEUP);
@@ -100,8 +100,7 @@ public class EightWayMovement : MonoBehaviour {
                 directionFacing = 3;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)) {
-
-                GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
+                StartMovement();
 
                 if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEDOWN);
@@ -112,12 +111,6 @@ public class EightWayMovement : MonoBehaviour {
             //Diagonals
 
             if (inputX != 0 && inputY != 0) {
-            	
-                /*if (momentum != 4) {
-                    momentum = 4f;
-              
-                    InvokeRepeating("FootstepSounds", .2f, .2f); //just have this here so it only happens once
-                }*/
                 if(legAnim.GetClipByName("walk") != null)
                 	legAnim.Play("walk");
 
@@ -133,7 +126,7 @@ public class EightWayMovement : MonoBehaviour {
                     if (movement == Vector2.zero) {
                         walkCloudPS.GetComponent<ParticleSystem>().Stop();
 
-                        GetComponent<JimStateController>().RemoveFlag((int)JimFlag.MOVING);
+                        jimStateController.RemoveFlag((int)JimFlag.MOVING);
 
                         // if all the momentum is expanded, reactivate Sneaky Scrapper.
                         if (momentum.magnitude == 0) {
@@ -142,12 +135,6 @@ public class EightWayMovement : MonoBehaviour {
 							}
                         }
                     } else {
-                        if(GetComponent<JimStateController>().GetCurrentState() == JimState.CARRYING) {
-								InvokeRepeating("FootstepSounds", .2f, .4f); //slower footsteps when carrying something
-                        } else {
-                       			InvokeRepeating("FootstepSounds", .2f, .2f);
-                        }
-
 						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER) && GlobalVariableManager.Instance.IS_HIDDEN){ //put here for function with 'Sneaky Scrapper' function, not sure if this will work with later sneaking functions...
             				gameObject.GetComponent<PinFunctionsManager>().SneakyScrapperReturn();
             				Debug.Log("got here- sneaky scrapper");
@@ -161,8 +148,8 @@ public class EightWayMovement : MonoBehaviour {
 
             // If the player is inputting a move and in a valid movement state.
             if (movement != Vector2.zero &&
-                (GetComponent<JimStateController>().GetCurrentState() == JimState.IDLE ||
-                GetComponent<JimStateController>().GetCurrentState() == JimState.CARRYING)) {
+               (jimStateController.GetCurrentState() == JimState.IDLE ||
+                jimStateController.GetCurrentState() == JimState.CARRYING)) {
 
                 // update stored momentum values.
                 momentum = Vector2.ClampMagnitude(momentum + movement * momentum_build, momentum_max);
@@ -171,12 +158,12 @@ public class EightWayMovement : MonoBehaviour {
                 if (inputX < 0) { // The player is holding left.
                     if (transform.localScale.x > 0) {
                         gameObject.transform.localScale = new Vector2(transformScale.x * -1, transformScale.y);
-                        GetComponent<JimStateController>().SetFlag((int)JimFlag.FACING_LEFT);
+                        jimStateController.SetFlag((int)JimFlag.FACING_LEFT);
                     }
                 } else if (inputX > 0) { // The player is holding right.
                     if (transform.localScale.x < 0) {
                         gameObject.transform.localScale = new Vector2(transformScale.x, transformScale.y);
-                        GetComponent<JimStateController>().RemoveFlag((int)JimFlag.FACING_LEFT);
+                        jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
                     }
                 }
 
@@ -203,10 +190,6 @@ public class EightWayMovement : MonoBehaviour {
             else
                 momentum = Vector2.zero;
 
-            if (Input.GetKeyDown(KeyCode.L)) {
-                Debug.Log("JimStateController.GetCurrentState() == " + GetComponent<JimStateController>().GetCurrentState());
-            }
-
             if (Input.GetKeyDown(KeyCode.V)) {
                 Debug.Log(GlobalVariableManager.Instance.BASIC_ENEMY_LIST["enemy_spawner 2"].dayOfRevival);
             }
@@ -223,10 +206,28 @@ public class EightWayMovement : MonoBehaviour {
         GetComponent<JimStateController>().RemoveFlag((int)JimFlag.MOVING);
 
         CancelInvoke();
-		//StopAllCoroutines();
-		legAnim.Play(anim.CurrentClip.name);
+        //StopAllCoroutines();
+        legAnim.Play(anim.CurrentClip.name);
     	this.enabled = true;
     }
+
+    void StartMovement()
+    {
+        var controller = GetComponent<JimStateController>();
+
+        if (!controller.IsFlag((int)JimFlag.MOVING)) {
+            controller.SetFlag((int)JimFlag.MOVING);
+
+            if (controller.GetCurrentState() == JimState.CARRYING) {
+
+                InvokeRepeating("FootstepSounds", .2f, .4f); //slower footsteps when carrying something
+            } else {
+                InvokeRepeating("FootstepSounds", .2f, .2f);
+            }
+
+        }
+    }
+
     void FootstepSounds(){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             RandomizeSfx(footsteps2, footsteps1);
