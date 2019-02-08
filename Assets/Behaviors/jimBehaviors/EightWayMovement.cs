@@ -6,14 +6,18 @@ public class EightWayMovement : MonoBehaviour {
 
 	private tk2dSpriteAnimator anim;
     public float speed = 8f;
+    public float momentum_max = 4f;
+    public float momentum_decay = .2f;
+    public float momentum_build = 2f;
     private Vector2 movement;
+    private Vector2 momentum;
     public AudioSource myFootstepSource;
  
     bool isDiagonal = false;
     bool noDelayStarted = false;
     public float delay = 0.05f;
     private int directionFacing = 1; //1 = right, 2 = left, 3 = up, 4 = down
-    private float momentum = 0f;
+
  
 	//public GameObject legs;
 	//public GameObject shadow;
@@ -109,11 +113,11 @@ public class EightWayMovement : MonoBehaviour {
 
             if (inputX != 0 && inputY != 0) {
             	
-                if (momentum != 4) {
+                /*if (momentum != 4) {
                     momentum = 4f;
               
                     InvokeRepeating("FootstepSounds", .2f, .2f); //just have this here so it only happens once
-                }
+                }*/
                 if(legAnim.GetClipByName("walk") != null)
                 	legAnim.Play("walk");
 
@@ -124,63 +128,45 @@ public class EightWayMovement : MonoBehaviour {
                 if (isDiagonal && !noDelayStarted) {
                     StartCoroutine(NoMoreDiagonal());
                     noDelayStarted = true;
-                }
-                else if (anim != null) {
+                } else if (anim != null) {
                     
-                    if (movement.x == 0 && movement.y == 0) {
+                    if (movement == Vector2.zero) {
                         walkCloudPS.GetComponent<ParticleSystem>().Stop();
 
                         GetComponent<JimStateController>().RemoveFlag((int)JimFlag.MOVING);
 
-                        //not instant stop
-                        if (momentum > 0){
-                            momentum = momentum - .2f;
-                        }else{
+                        // if all the momentum is expanded, reactivate Sneaky Scrapper.
+                        if (momentum.magnitude == 0) {
 							if(GlobalVariableManager.Instance.IS_HIDDEN == false && GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER)){
 								gameObject.GetComponent<PinFunctionsManager>().SneakyScrapper();
 							}
-
                         }
-                    }
-                    else if (momentum != 4) {
-                        momentum = 4f;
+                    } else {
                         if(GetComponent<JimStateController>().GetCurrentState() == JimState.CARRYING) {
 								InvokeRepeating("FootstepSounds", .2f, .4f); //slower footsteps when carrying something
-                        }else{
+                        } else {
                        			InvokeRepeating("FootstepSounds", .2f, .2f);
                         }
+
 						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER) && GlobalVariableManager.Instance.IS_HIDDEN){ //put here for function with 'Sneaky Scrapper' function, not sure if this will work with later sneaking functions...
             				gameObject.GetComponent<PinFunctionsManager>().SneakyScrapperReturn();
             				Debug.Log("got here- sneaky scrapper");
             			}
+
                         walkCloudPS.SetActive(true); //just have this here so it only happens once
                         walkCloudPS.GetComponent<ParticleSystem>().Play();
                     }
                 }
             }
-            if (movement.x == 0 && movement.y == 0) {
 
-                CancelInvoke("FootstepSounds");
+            // If the player is inputting a move and in a valid movement state.
+            if (movement != Vector2.zero &&
+                (GetComponent<JimStateController>().GetCurrentState() == JimState.IDLE ||
+                GetComponent<JimStateController>().GetCurrentState() == JimState.CARRYING)) {
 
+                // update stored momentum values.
+                momentum = Vector2.ClampMagnitude(momentum + movement * momentum_build, momentum_max);
 
-
-
-                //not instant stop
-                if (directionFacing == 3) {//anim.CurrentClip.name == "ani_jimIdleUp"){
-                    transform.Translate(new Vector2(0, momentum) * Time.deltaTime);
-                }
-                else if (directionFacing == 4) {
-                    transform.Translate(new Vector2(0, momentum * -1) * Time.deltaTime);
-                }
-                else if (gameObject.transform.localScale.x > 0) {
-                    transform.Translate(new Vector2(momentum, 0) * Time.deltaTime);
-                }
-                else if (gameObject.transform.localScale.x < 0) {
-                    transform.Translate(new Vector2(momentum * -1, 0) * Time.deltaTime);
-                }
-            }
-            if (GetComponent<JimStateController>().GetCurrentState() == JimState.IDLE ||
-                GetComponent<JimStateController>().GetCurrentState() == JimState.CARRYING) {
                 // correct the facing.
                 if (inputX < 0) { // The player is holding left.
                     if (transform.localScale.x > 0) {
@@ -194,7 +180,6 @@ public class EightWayMovement : MonoBehaviour {
                     }
                 }
 
-
                 transform.Translate(movement * speed * Time.deltaTime);
                 /*//show legs and change to current animation of Jim
                 if (!clipOverride && myLegs.activeInHierarchy) {
@@ -202,7 +187,19 @@ public class EightWayMovement : MonoBehaviour {
                     legAnim.Play(anim.CurrentClip.name);
                     legAnim.PlayFromFrame(anim.CurrentFrame);
                 }*/
+                     
+            // If the player is not inputting a move or is in a state where he is not allowed to move.
+            } else {
+                CancelInvoke("FootstepSounds");
+
+                transform.Translate(momentum * Time.deltaTime);
             }
+
+            //not instant stop.  Decay momentum by shrinking the vectors magnitude.
+            float decayedLength = momentum.magnitude - momentum_decay;
+
+            // update to the new length.
+            momentum = momentum.normalized * decayedLength;
 
             if (Input.GetKeyDown(KeyCode.L)) {
                 Debug.Log("JimStateController.GetCurrentState() == " + GetComponent<JimStateController>().GetCurrentState());
@@ -261,6 +258,10 @@ public class EightWayMovement : MonoBehaviour {
                 movement = new Vector2(0f, 0f);
                 StopMovement();
                 walkCloudPS.GetComponent<ParticleSystem>().Stop();
+            }
+
+            if (stateType == typeof(RespawnState)) {
+                momentum = Vector2.zero;
             }
         }
     }
