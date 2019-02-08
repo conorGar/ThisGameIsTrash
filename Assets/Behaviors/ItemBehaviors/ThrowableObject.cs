@@ -87,7 +87,8 @@ public class ThrowableObject : PickupableObject {
 	}
 
 	public override void PickUp(){
-		onGround = false;
+        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.PICK_UP_THROWABLE);
+        onGround = false;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
@@ -107,7 +108,6 @@ public class ThrowableObject : PickupableObject {
 
 	IEnumerator PickupDelay(){
 		yield return new WaitForSeconds(1f);
-		player.GetComponent<EightWayMovement>().myLegs.SetActive(false);
 
 		if(livingBody){
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
@@ -117,12 +117,11 @@ public class ThrowableObject : PickupableObject {
         if (myShadow != null)
 		    myShadow.SetActive(true);
 		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
-		player.GetComponent<EightWayMovement>().enabled = true;
 		canThrow = true;
 	}
 
 	void Throw(){
-		var animator = gameObject.GetComponent<Animator>();
+        var animator = gameObject.GetComponent<Animator>();
             if (animator != null) animator.enabled = false;
 
 		SoundManager.instance.PlaySingle(throwObject);
@@ -135,7 +134,6 @@ public class ThrowableObject : PickupableObject {
 		Debug.Log("Thrown");
 
         gameObject.layer = 15; //becomes 'ThrowableObject'
-		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		player.GetComponent<MeleeAttack>().enabled = true;
 		if(gameObject.GetComponent<BoxCollider2D>()!=null){
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
@@ -154,6 +152,9 @@ public class ThrowableObject : PickupableObject {
 		myBody.simulated = true;
 		gameObject.transform.position = new Vector2(transform.position.x,transform.position.y-1); //move more directly in front of player
 		myBody.velocity = new Vector2(22f*(Mathf.Sign(player.transform.lossyScale.x)),2f);
+
+        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.THROW);
+
 		player.GetComponent<EightWayMovement>().myLegs.SetActive(true);
 		myBody.gravityScale = 1f;
 	

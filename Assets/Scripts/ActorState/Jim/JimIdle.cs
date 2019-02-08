@@ -54,7 +54,7 @@ public class JimIdle : IActorState<JimState, JimTrigger>
                 flags = (int)JimFlag.CARRYING_THROWABLE;
                 return new JimPickingUp();
 
-            case JimTrigger.PICK_UP_LARGE_TRASH:
+            case JimTrigger.PICK_UP_DROPPABLE:
                 animator.Play("ani_jimPickUp");
                 flags = (int)JimFlag.CARRYING_DROPABLE;
                 return new JimPickingUp();

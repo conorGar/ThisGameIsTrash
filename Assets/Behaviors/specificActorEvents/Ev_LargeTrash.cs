@@ -80,7 +80,7 @@ public class Ev_LargeTrash : PickupableObject {
 	}// end of Start()
 
 	public override void PickUp(){
-        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.PICK_UP_LARGE_TRASH);
+        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();

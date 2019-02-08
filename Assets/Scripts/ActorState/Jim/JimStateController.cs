@@ -36,11 +36,10 @@ public enum JimTrigger
     SWING_LEFT,
     SWING_UP,
     SWING_DOWN,
-    THROW_RIGHT,
-    THROW_LEFT,
+    THROW,
     SPIN_ATTACK,
     PICK_UP_SMALL,
-    PICK_UP_LARGE_TRASH,
+    PICK_UP_DROPPABLE,
     PICK_UP_THROWABLE,
     DROP_BIG,
     DELIVER_BIG
@@ -91,6 +90,9 @@ public class JimStateController : ActorStateController<JimState, JimTrigger> {
                 } else {
                     currentState = new JimIdle();
                 }
+                break;
+            case JimState.THROWING:
+                currentState = new JimIdle();
                 break;
         }
     }

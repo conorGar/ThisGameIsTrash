@@ -43,19 +43,14 @@ public class JimCarrying : IActorState<JimState, JimTrigger>
                     flags &= (int)~JimFlag.CARRYING_DROPABLE;
                     return new JimIdle();
             }
-        
-        // Jim is carrying something that can be thrown, like enemies!
+
+            // Jim is carrying something that can be thrown, like enemies!
         } else if ((flags & (int)JimFlag.CARRYING_THROWABLE) == (int)JimFlag.CARRYING_THROWABLE) {
             switch (trigger) {
-                case JimTrigger.THROW_RIGHT:
-                    animator.Play("ani_jimThrowR");
-                    flags &= (int)~JimFlag.CARRYING_THROWABLE;
-                    return new JimThrowing();
-
-                case JimTrigger.THROW_LEFT:
-                    animator.Play("ani_jimThrowL");
-                    flags &= (int)~JimFlag.CARRYING_THROWABLE;
-                    return new JimThrowing();
+                case JimTrigger.THROW:
+                animator.Play("ani_jimThrowR");
+                flags &= (int)~JimFlag.CARRYING_THROWABLE;
+                return new JimThrowing();
             }
         }
 

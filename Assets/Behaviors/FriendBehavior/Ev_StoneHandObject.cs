@@ -15,7 +15,8 @@ public class Ev_StoneHandObject : PickupableObject
 
 
 	public override void PickUp(){
-		gameObject.GetComponent<Animator>().enabled = true;
+        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
+        gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
 		stoneFriend.GetComponent<ActivateDialogWhenClose>().enabled = true; // can talk to stone if carrying hand
 		gameObject.GetComponent<BoxCollider2D>().enabled = false;
@@ -26,7 +27,6 @@ public class Ev_StoneHandObject : PickupableObject
 		yield return new WaitForSeconds(1f);
 		PickUpEvent();
 		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
-		player.GetComponent<EightWayMovement>().enabled = true;
 	}
 
 	void OnEnable(){

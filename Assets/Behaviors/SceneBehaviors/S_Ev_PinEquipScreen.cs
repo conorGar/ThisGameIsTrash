@@ -96,7 +96,6 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.CANCEL)) {
                 GameObject pinCase = GameObject.Find("hubWorld_pinCase");
                 pinCase.GetComponent<Ev_PinDisplayOption>().enabled = true;
-                pinCase.GetComponent<Ev_PinDisplayOption>().player.GetComponent<EightWayMovement>().enabled = true;
                 CamManager.Instance.mainCamPostProcessor.profile = null;
 				SoundManager.instance.PlaySingle(openSfx);
                 this.gameObject.SetActive(false);

@@ -92,7 +92,6 @@ public class GUI_DayDisplay : MonoBehaviour
 		Hud.SetActive(true);
 		back.GetComponent<Animator>().enabled = true;
 		back.GetComponent<SpriteRenderer>().enabled = false;
-		//player.GetComponent<EightWayMovement>().enabled = true;
 		playerDummy.SetActive(false);
 		yield return new WaitForSeconds(.5f);
 		CancelInvoke();
