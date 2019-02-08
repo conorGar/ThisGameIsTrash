@@ -8,7 +8,7 @@ public class EightWayMovement : MonoBehaviour {
     public float speed = 8f;
     public float momentum_max = 4f;
     public float momentum_decay = .2f;
-    public float momentum_build = 2f;
+    public float momentum_build = 1f;
     private Vector2 movement;
     private Vector2 momentum;
     public AudioSource myFootstepSource;
@@ -196,10 +196,12 @@ public class EightWayMovement : MonoBehaviour {
             }
 
             //not instant stop.  Decay momentum by shrinking the vectors magnitude.
-            float decayedLength = momentum.magnitude - momentum_decay;
+            float mag = momentum.magnitude;
 
-            // update to the new length.
-            momentum = momentum.normalized * decayedLength;
+            if (mag >= momentum_decay)
+                momentum = momentum.normalized * (momentum.magnitude - momentum_decay);
+            else
+                momentum = Vector2.zero;
 
             if (Input.GetKeyDown(KeyCode.L)) {
                 Debug.Log("JimStateController.GetCurrentState() == " + GetComponent<JimStateController>().GetCurrentState());
