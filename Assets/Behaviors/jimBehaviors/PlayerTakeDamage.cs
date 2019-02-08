@@ -164,6 +164,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		}
 
         if (GlobalVariableManager.Instance.HP_STAT.GetCurrent() <= 0) {
+            GetComponent<JimStateController>().SendTrigger(JimTrigger.DEATH);
             SoundManager.instance.PlaySingle(finalHit);
 
             StartCoroutine("Death");
@@ -273,7 +274,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 		deathDisplay.PlayTruckSfx();
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
 		gameObject.GetComponent<MeshRenderer>().enabled = true;
-		yield return new WaitForSeconds(.3f);
+        GetComponent<JimStateController>().SendTrigger(JimTrigger.IDLE);
+        yield return new WaitForSeconds(.3f);
 		deathDisplay.fader.SetActive(false);
 		/*if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
 				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 0;//reset scrap value
@@ -283,11 +285,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 		}*/
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
         GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 		truck.GetComponent<Ev_SmallTruck>().RespawnEnd();
 		gameObject.GetComponent<BoxCollider2D>().enabled = true;
-
-		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
 		gameObject.GetComponent<EightWayMovement>().myLegs.SetActive(true);
 		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
 

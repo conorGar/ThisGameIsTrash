@@ -16,6 +16,12 @@ public class JimDead : IActorState<JimState, JimTrigger>
 
     public IActorState<JimState, JimTrigger> SendTrigger(JimTrigger trigger, GameObject actor, tk2dSpriteAnimator animator, ref int flags)
     {
+        switch (trigger) {
+            case JimTrigger.IDLE:
+                animator.Play("ani_jimIdle");
+                return new JimIdle();
+        }
+
         return null;
     }
 

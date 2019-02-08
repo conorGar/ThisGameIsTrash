@@ -144,7 +144,7 @@ public class EightWayMovement : MonoBehaviour {
                     }
                     else if (momentum != 4) {
                         momentum = 4f;
-                        if(GlobalVariableManager.Instance.CARRYING_SOMETHING){
+                        if(GetComponent<JimStateController>().GetCurrentState() == JimState.CARRYING) {
 								InvokeRepeating("FootstepSounds", .2f, .4f); //slower footsteps when carrying something
                         }else{
                        			InvokeRepeating("FootstepSounds", .2f, .2f);
@@ -202,8 +202,6 @@ public class EightWayMovement : MonoBehaviour {
                     legAnim.Play(anim.CurrentClip.name);
                     legAnim.PlayFromFrame(anim.CurrentFrame);
                 }*/
-
-
             }
 
             if (Input.GetKeyDown(KeyCode.L)) {
