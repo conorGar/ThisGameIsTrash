@@ -65,22 +65,25 @@ public class MeleeAttack : MonoBehaviour {
                     playerMomentum -= .5f;
                     break;
                 case JimState.IDLE:
-                    if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
-                        playerMomentum = 6f;
-                        this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
-                        StartCoroutine("Swing", 2);
-                    } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
-                        this.gameObject.transform.localScale = startingScale;
-                        playerMomentum = 6f;
-                        StartCoroutine("Swing", 1);
-                    } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
-                        this.gameObject.transform.localScale = startingScale;
-                        playerMomentum = 6f;
-                        StartCoroutine("Swing", 4);
-                    } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
-                        this.gameObject.transform.localScale = startingScale;
-                        playerMomentum = 6f;
-                        StartCoroutine("Swing", 3);
+                    // Can't swing with the cursed pin.
+                    if (!GlobalVariableManager.Instance.IsPinEquipped(PIN.CURSED)) {
+                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
+                            playerMomentum = 6f;
+                            this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
+                            StartCoroutine("Swing", 2);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
+                            this.gameObject.transform.localScale = startingScale;
+                            playerMomentum = 6f;
+                            StartCoroutine("Swing", 1);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                            this.gameObject.transform.localScale = startingScale;
+                            playerMomentum = 6f;
+                            StartCoroutine("Swing", 4);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                            this.gameObject.transform.localScale = startingScale;
+                            playerMomentum = 6f;
+                            StartCoroutine("Swing", 3);
+                        }
                     }
                     break;
             }

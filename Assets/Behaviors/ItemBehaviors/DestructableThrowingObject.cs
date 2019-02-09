@@ -10,7 +10,6 @@ public class DestructableThrowingObject : ThrowableObject {
 		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
 		physicalCollision.enabled = false;
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
 
 		StartCoroutine("PickUpWithDelay");
 
