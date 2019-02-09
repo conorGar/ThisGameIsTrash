@@ -5,10 +5,18 @@ using UnityEngine;
 public class Ev_HUD : MonoBehaviour {
 
 	public GameObject promptText;
+	public GUI_AbilityPinsHUD abilityPinsHUD;
 
     public void Start()
     {
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
+        for(int i = 0; i< GlobalVariableManager.Instance.EquippedAbilityPins.Count;i++){
+        	if(GlobalVariableManager.Instance.EquippedAbilityPins[i] != null){
+        	abilityPinsHUD.gameObject.SetActive(true);
+        	break;
+        	}
+
+        }
     }
 
     public void OnDestroy()

@@ -7,8 +7,8 @@ public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 	int arrowPos;
 	public Ev_PinBehavior selectedPin;
 	public List<GameObject> equippedAbilityPins = new List<GameObject>();
-	public GameObject slectionArrow;
-
+	public GameObject selectionArrow;
+	public List<GameObject> arrowPositions = new List<GameObject>();
 
 	// Use this for initialization
 	void Start ()
@@ -39,19 +39,24 @@ public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 			arrowPos ++;
 		}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 			//TODO: check if slot is filled already
+			/*if(GlobalVariableManager.Instance.EquippedAbilityPins[arrowPos] != null){
+				GlobalVariableManager.Instance.PP_STAT -= GlobalVariableManager.Instance.EquippedAbilityPins[arrowPos].GetData().ppValue; //give back pp from previously equipped pin
+			}*/
 			StartCoroutine("EquipSequence");
 
 		}
+		selectionArrow.transform.position = arrowPositions[arrowPos].transform.position;
 	}
 
 
 	IEnumerator EquipSequence(){
-		GlobalVariableManager.Instance.EquippedAbilityPins[arrowPos] = selectedPin;
-			GameStateManager.Instance.PopState();
+			GlobalVariableManager.Instance.EquippedAbilityPins[arrowPos] = selectedPin;
+
 			equippedAbilityPins[arrowPos].SetActive(true);
 			equippedAbilityPins[arrowPos].GetComponent<tk2dSprite>().SetSprite(selectedPin.GetData().sprite);
 			yield return new WaitForSeconds(.4f);
 			GameStateManager.Instance.PopState();
+	
 			gameObject.SetActive(false);
 	}
 

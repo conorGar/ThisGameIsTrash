@@ -76,6 +76,8 @@ public class HarryFriend : Friend
 
     IEnumerator WakeUpSequence(){
     	yield return new WaitForSeconds(.2f);
+		CamManager.Instance.mainCamPostProcessor.profile = null;//TODO: returns to NO effect, not sure if you want this, future Conor
+
     	gameObject.GetComponent<tk2dSpriteAnimator>().Play("getUp");
     	yield return new WaitForSeconds(.5f);
     	dialogManager.ReturnFromAction();
