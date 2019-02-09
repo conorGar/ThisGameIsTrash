@@ -183,7 +183,6 @@ public class Ev_LargeTrash : PickupableObject {
 		dumpster.GetComponent<Ev_Dumpster>().largeTrashDiscoveredDisplay.GetComponent<GUI_LargeTrashCollectedDisplay>().indexOfCurrentLargeTrash =  garbage.GarbageIndex();
 		dumpster.GetComponent<Ev_Dumpster>().largeTrashDiscoveredDisplay.SetActive(true);
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		player.GetComponent<JimAnimationManager>().StopTweenAnimation();
 		Destroy(gameObject);
 	}
 

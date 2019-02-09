@@ -138,7 +138,6 @@ public class ThrowableObject : PickupableObject {
 		if(gameObject.GetComponent<BoxCollider2D>()!=null){
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 		}
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimThrowR",true);
 		spinning = true;
 		landingY = transform.position.y -3f;
 		if (myShadow != null){

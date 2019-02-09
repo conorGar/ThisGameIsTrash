@@ -8,7 +8,6 @@ public class ThrowTrash : MonoBehaviour {
 	//tk2dSpriteAnimator myAnim;
 	public AudioClip throwSfx;
 
-	JimAnimationManager myAnim;
 	void Start () {
 		if((GlobalVariableManager.Instance.BOSSES_KILLED & GlobalVariableManager.BOSSES.ONE ) != GlobalVariableManager.BOSSES.ONE){
 			this.enabled = false;// cant do if haven't picked up throwing gloves yet.
@@ -31,8 +30,6 @@ public class ThrowTrash : MonoBehaviour {
                 else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
                     StartCoroutine("Throw", "down");
                 }
-
-                myAnim = gameObject.GetComponent<JimAnimationManager>();
             }
         }
 	}
@@ -44,15 +41,11 @@ public class ThrowTrash : MonoBehaviour {
 		thrownTrash.GetComponent<Ev_ThrownTrash>().direction = direction;
 		if(direction == "right"){
 			thrownTrash.GetComponent<Rigidbody2D>().velocity = new Vector2(10f,0f);
-			myAnim.PlayAnimation("ani_jimThrowR",true);
 		}else if(direction == "left"){
 			thrownTrash.GetComponent<Rigidbody2D>().velocity = new Vector2(-10f,0f);
-			myAnim.PlayAnimation("ani_jimThrowR",true);
 		}else if(direction == "down"){
 			thrownTrash.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,-10f);
-			myAnim.PlayAnimation("ani_jimThrowDown",true);
 		}else if(direction == "up"){
-			myAnim.PlayAnimation("ani_jimThrowUp",true);
 			thrownTrash.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,10f);
 		}
 	}

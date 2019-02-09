@@ -209,7 +209,6 @@ public class PlayerTakeDamage : MonoBehaviour {
 		yield return new WaitForSeconds(.3f);
 		Time.timeScale = 1;
 		CamManager.Instance.mainCamEffects.ZoomInOut(1.5f,3f);
-		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		if(currentlyCarriedObject != null){
 			currentlyCarriedObject.GetComponent<PickupableObject>().Drop();
 		}
@@ -218,7 +217,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer04";//bring player to front
         deathDisplay.DeathFade();
 			yield return new WaitForSeconds(.5f); //drop trash and deplete trash collected
-		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
+
 		SoundManager.instance.PlaySingle(deathSound);
 		yield return new WaitForSeconds(.4f);
 		//DeathGhost.SetActive(true);
