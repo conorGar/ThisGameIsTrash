@@ -2556,26 +2556,26 @@ MonoBehaviour:
     spriteCollectionGUID: a2fa2e674ac068b47ab2fe93c89188fe
     spriteCollectionDataGUID: f131928071db35344bcb7202de50b16b
     spriteNames:
-    - jim4_run11
-    - jim4_idle7
-    - jim4_idle3
-    - jim4_idle5
-    - jim4_run12
-    - jim4_run13
-    - jim4_run14
-    - jim4_idle12
-    - jim4_idle2
-    - jim4_run15
-    - jim4_idle9
-    - jim4_idle10
-    - jim4_idle8
+    - jim4_runWlegs5
+    - jim4_idleWlegs1
+    - jim4_idleWlegs2
+    - jim4_idleWlegs3
+    - jim4_runWlegs2
+    - jim4_runWlegs4
+    - jim4_runWlegs3
+    - jim4_idleWlegs4
+    - jim4_idleWlegs5
+    - jim4_runWlegs7
+    - jim4_idleWlegs10
+    - jim4_idleWlegs6
+    - jim4_idleWlegs7
     - jim4_run9
-    - jim4_idle6
-    - jim4_idle4
-    - jim4_idle11
-    - jim4_run10
-    - jim4_idle13
-    - jim4_run16
+    - jim4_idleWlegs8
+    - jim4_idleWlegs9
+    - jim4_idleWlegs11
+    - jim4_runWlegs1
+    - jim4_idleWlegs12
+    - jim4_runWlegs6
     - jim4_idle1
     - jim4_pickUp7
     - jim4_pickUp5
@@ -2714,27 +2714,34 @@ MonoBehaviour:
     - jim4_death23
     - jim4_death22
     - jim4_death19
+    - jim4_swingWlegs4
+    - jim4_swingWlegs5
+    - jim4_swingWlegs6
+    - jim4_swingWlegs1
+    - jim4_swingWlegs2
+    - jim4_swingWlegs3
+    - jim4_runWlegs8
     spriteTextureGUIDs:
-    - c6c486719bb81884cb55b219fd1269f9
-    - 517db9be9d8a2b841ae59a1d6fcfdfc1
-    - 7f961a240771bd64d90f301760707a2c
-    - 4085aab0bfab63f42ab471e6bedfe8af
-    - 38d4a6121177ccf48bf98fbd3e3e9ae1
-    - 9c603b8859d04224d8df1ea5630f9046
-    - b43a7740c12fc3c45872113018aea7b9
-    - daa4ea58ddcb24a46b903fe7181fa50e
-    - 64f48c4de9b7d1a4295fb950de903eae
-    - 4f3db5f935d802f44abced10fc98ab73
-    - d3b961ae12d81ec48b369e6d0bbe0a45
-    - 1b236641bee60a54bb2b7c734df5913c
-    - 5e8eec7fbd0f07047b5ffd4223c73792
+    - c930aaad181731940b9fd87046496be1
+    - 2c9514a5e3afa6240aec2f59cd4ba578
+    - de2f09f8f81175b469c49c030673eb2a
+    - deadde20eef58e942bdb1de9d6201891
+    - 632483eabfc386446ab7fb412a7df086
+    - 8ec15f5e84576454db134cecc2f1bf06
+    - 441e6965c41efbc428f71d5aaa0539c1
+    - 91c1d4c27d1b44c44a0ae97a5f40f813
+    - 23227df52d1b542469e34d8761e935de
+    - c507e53be89d6164d80164a1c7de57e1
+    - 9fd27677cdef2f3409378855ab74352e
+    - 2122c07260807be408db7e333b9d3bbd
+    - c9232cf2517ce7f40bd25d75953fba50
     - 83c0d9c0ad42b8846982edcc1db2d793
-    - 02c71791b68b82c47aa45c111f6938bc
-    - 4ca54304b25bc72488e0365d082c6162
-    - 714a6774289bf5b4f8a327302844f028
-    - a95085963b565954bb1f3256da0e0af2
-    - cbac1c8f99ba25f44b36536a36b48e20
-    - 135c5921abcaced4bb300f620c8d6638
+    - b256e0dd6ae127b4889e9d38107d343c
+    - 3194b18b3a875bd409b18e65d10b0b74
+    - 5e27ba93e8c2d94478f9642e0ce0e51a
+    - a9f21fa1d18fa4a499dc458cb26f9bbf
+    - 9bb12078418353a4abe315d4b1c4b62b
+    - 5c73522c442c6d84abc36ee9778adece
     - e3a863575d5751a4497779c1fbff0a25
     - 19e86ad139289cb4eaaed31ac1b2793b
     - c5ddcd8065e6a024c81ea4b3325be13d
@@ -2873,27 +2880,34 @@ MonoBehaviour:
     - daf909540d691974d826dee45321659a
     - f20f1a7362f50cc47887b3302fdf0c59
     - 34d42f0283427e244a6723bbfe7f93cf
+    - df6102263d4bece4c9ef6af1ca4ec43c
+    - 4122a6cfe9104854191597d99190015a
+    - 914328abedff5ee458a703eb8ef12526
+    - b9be3949267ce644389e6f59be2600d7
+    - 7f0e0ae79b1f8f64fa46f5c1f22e56f0
+    - 4c43ad61cbdf7ac4898af5d3c887502c
+    - 9133ca553505f694697c2faa82bd091c
     spriteTextureTimeStamps:
-    - 1534704154.79348
-    - 1530694814.54134
-    - 1530694751.39655
-    - 1530694788.01753
-    - 1534704154.88055
-    - 1534704154.94557
-    - 1534704155.04064
-    - 1530694893.33524
-    - 1530694738.38632
-    - 1534704155.14672
-    - 1530694842.04786
-    - 1530694866.24802
-    - 1530694828.26908
+    - 1549666414.45407
+    - 1549668632.26766
+    - 1549668641.19412
+    - 1549668651.90743
+    - 1549666383.58072
+    - 1549666404.33919
+    - 1549666393.76224
+    - 1549668660.57579
+    - 1549668669.0825
+    - 1549666433.48362
+    - 1549668721.63834
+    - 1549668677.37298
+    - 1549668686.73469
     - 1534704155.37888
-    - 1530694801.73926
-    - 1530694769.62548
-    - 1530694879.49042
-    - 1534704154.69239
-    - 1530694926.75395
-    - 1534704155.2588
+    - 1549668696.66366
+    - 1549668707.16576
+    - 1549668730.60597
+    - 1549666356.18873
+    - 1549668740.52266
+    - 1549666424.5526
     - 1530694508.82046
     - 1530773541.75786
     - 1530773513.00646
@@ -3010,20 +3024,20 @@ MonoBehaviour:
     - 1540587974.27659
     - 1540587974.30462
     - 1540587974.34964
-    - 1542218413.8823
-    - 1542218413.98738
-    - 1542218414.1565
-    - 1542218413.02469
-    - 1542218413.12075
-    - 1542218413.24583
-    - 1542218412.73348
-    - 1542218413.3509
-    - 1542218413.47499
-    - 1542218413.65412
-    - 1542218414.28357
-    - 1542218414.38466
-    - 1542218412.83154
-    - 1542218412.9216
+    - 1549670554.63074
+    - 1549670554.63574
+    - 1549670554.64975
+    - 1549670554.57572
+    - 1549670554.5807
+    - 1549670554.58571
+    - 1549670554.47162
+    - 1549670554.60372
+    - 1549670554.61074
+    - 1549670554.61573
+    - 1549670554.65476
+    - 1549670554.67979
+    - 1549670554.49566
+    - 1549670554.5487
     - 1545216964.02178
     - 1545216964.13984
     - 1545216964.22691
@@ -3032,6 +3046,13 @@ MonoBehaviour:
     - 1546533947.23524
     - 1546533947.23023
     - 1546533947.20124
+    - 1549669625.49061
+    - 1549669634.48532
+    - 1549669644.10152
+    - 1549669592.18908
+    - 1549669603.6428
+    - 1549669613.68207
+    - 1549666443.39163
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
