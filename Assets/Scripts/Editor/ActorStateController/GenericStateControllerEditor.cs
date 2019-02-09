@@ -5,25 +5,30 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(JimStateController))]
-public class JimStateControllerEditor : GenericStateControllerEditor<JimFlag>
+public class JimStateControllerEditor : GenericStateControllerEditor<JimState, JimTrigger, JimFlag>
 {
 }
 
-public class GenericStateControllerEditor<T> : Editor
+[CustomEditor(typeof(RatStateController))]
+public class RatStateControllerEditor : GenericStateControllerEditor<EnemyState, EnemyTrigger, EnemyFlag>
+{
+}
+
+public class GenericStateControllerEditor<State_Type, Trigger_Type, Flag_Type> : Editor
 {
     public override void OnInspectorGUI()
     {
-        var controller = (JimStateController)target;
+        var controller = (ActorStateController<State_Type, Trigger_Type>)target;
 
         base.OnInspectorGUI();
 
         if (controller.currentState != null) {
             EditorGUILayout.LabelField("Current State: ", controller.GetCurrentState().ToString());
 
-            System.Type genericType = typeof(T);
+            System.Type genericType = typeof(Flag_Type);
             if (genericType.IsEnum) {
-                foreach (T flag in Enum.GetValues(typeof(T))) {
-                    Enum e = Enum.Parse(typeof(T), flag.ToString()) as Enum;
+                foreach (Flag_Type flag in Enum.GetValues(typeof(Flag_Type))) {
+                    Enum e = Enum.Parse(typeof(Flag_Type), flag.ToString()) as Enum;
                     if (Convert.ToInt32(e) == 0)
                         continue;
 

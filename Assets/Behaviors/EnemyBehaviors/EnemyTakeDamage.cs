@@ -37,7 +37,6 @@ public class EnemyTakeDamage : MonoBehaviour {
 
 	public GameObject myShadow;
 	//public BoxCollider2D myCollisionBox;
-	public string returnAniName = "idle";
 	public bool dontSpawnBody;
 	public bool canKnockoffArmor;
 
@@ -296,8 +295,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
-				myAnim.Play("hit");
-				if(moveWhenHit){
+
+                GetComponent<EnemyStateController<EnemyState, EnemyTrigger>>().SendTrigger(EnemyTrigger.HIT);
+                if (moveWhenHit){
                     UpdateFacing();
                 }
 				yield return new WaitForSeconds(.2f);
@@ -315,117 +315,113 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	}
 
 	public void TakeDamage(GameObject melee){ //set public for Stuart
-		//Debug.Log("--------TAKE DAMAGE ACTIVATE ----------");
-		Debug.Log(damageOnce);
-			if(this.enabled && damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
-				if(!takingDamage){
-					takingDamage = true;
-					damageOnce = 1;
-					meleeDmgBonus = 0;
+		if(this.enabled && damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
+			if(!takingDamage){
+				takingDamage = true;
+				damageOnce = 1;
+				meleeDmgBonus = 0;
 
 			
-					if(hitByThrownObject){
-						meleeDmgBonus+=1;
-					}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
-					//bonus dmg with pole
-						meleeDmgBonus++;
+				if(hitByThrownObject){
+					meleeDmgBonus+=1;
+				}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
+				//bonus dmg with pole
+					meleeDmgBonus++;
+				}
+
+
+				meleeDmgBonus = meleeDmgBonus;
+				if(!hitByThrownObject)
+					meleeSwingDirection = melee.GetComponent<tk2dSpriteAnimator>().CurrentClip.name;
+				swingDirectionSide = player.transform.localScale.x;
+				//Debug.Log("MELEE SWING DIRECTION: " + meleeSwingDirection);
+
+				if(secretHider)
+					Destroy(melee.gameObject);
+				if(moveWhenHit || hitByThrownObject){
+					for(int i = 0; i < behaviorsToDeactivate.Count;i++){
+						behaviorsToDeactivate[i].enabled = false;
 					}
+				}
+				if(IAmParentObj){
+					childEnemy.GetComponent<tk2dSprite>().color = Color.red;
+				}else{
+					this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
+				}
+				GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars"); 
+				damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
+				damageCounter.SetActive(true);
+				GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars");
+				damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+				littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+				littleStars.SetActive(true);
+
+				if(gameObject.transform.position.x < player.transform.position.x){
+					//hitStarPS.SetActive(true);
+					//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
+
+					damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
+				}else{
+					//hitStarPS.SetActive(true);
+					//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
+					damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
+
+				}
 
 
-					meleeDmgBonus = meleeDmgBonus;
-					if(!hitByThrownObject)
-						meleeSwingDirection = melee.GetComponent<tk2dSpriteAnimator>().CurrentClip.name;
-					swingDirectionSide = player.transform.localScale.x;
-					//Debug.Log("MELEE SWING DIRECTION: " + meleeSwingDirection);
-
-					if(secretHider)
-						Destroy(melee.gameObject);
-					if(moveWhenHit || hitByThrownObject){
-						for(int i = 0; i < behaviorsToDeactivate.Count;i++){
-							behaviorsToDeactivate[i].enabled = false;
-						}
-					}
-					if(IAmParentObj){
-						childEnemy.GetComponent<tk2dSprite>().color = Color.red;
-					}else{
-						this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
-					}
-					GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars"); 
-					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
-					damageCounter.SetActive(true);
-					GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars");
-					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-					littleStars.SetActive(true);
-
-					if(gameObject.transform.position.x < player.transform.position.x){
-						//hitStarPS.SetActive(true);
-						//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
-
-						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
-					}else{
-						//hitStarPS.SetActive(true);
-						//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
-						damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
-
-					}
-
-
-                    //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
+                //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
 //                   CamManager.Instance.mainCam.ScreenShake(.2f);
 
-					if(hitByThrownObject){
-                        // TODO: Fix the boss battle to use throwable bodies????
-                       /* var body = melee.gameObject.GetComponent<ThrowableBody>();
-                        if (body){
-                         //body.TakeDamage();
-                         body.Death();
-                         }*/
-						meleeSwingDirection = "plankSwing";
-					}
-					if(!moveWhenHit && !dontStopWhenHit && !hitByThrownObject ){
-						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-					}
-
-					currentHp = currentHp - 1 - meleeDmgBonus;
-
-					if(currentHp <= 0){
-					SoundManager.instance.PlaySingle(SFXBANK.HIT7, hitPitch);
-					}else{
-					SoundManager.instance.PlaySingle(SFXBANK.HIT6, hitPitch);
-					if(hitPitch < 1.3f)
-						hitPitch += .1f; // pitch goes up as hit enemy
-					}
-					SoundManager.instance.PlaySingle(hitSqueal);
-
-					//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
-					if(bossEnemy){
-						gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
-						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
-						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
-					}
-					if(!moveWhenHit && currentHp <= 0){
-						moveWhenHit = true; // enemy flies back at final hit
-					}
-
-					if(returnToCurrentAniAfterHit){
-						returnAniName = myAnim.CurrentClip.name;
-					}
-
-					myAnim.Play("hit");
-					if(moveWhenHit){
-                        UpdateFacing();
-                    }
-					//camShake = 1;
-					if(gameObject.GetComponent<FollowPlayer>() != null && moveWhenHit){
-						gameObject.GetComponent<FollowPlayer>().StopSound();
-						gameObject.GetComponent<FollowPlayer>().enabled = false;
-					}
-					StartCoroutine("ContinueHit"); // just needed to seperate here for IEnumerator stuff
-				}else{
-				Debug.Log("taking damange = true?");
+				if(hitByThrownObject){
+                    // TODO: Fix the boss battle to use throwable bodies????
+                    /* var body = melee.gameObject.GetComponent<ThrowableBody>();
+                    if (body){
+                        //body.TakeDamage();
+                        body.Death();
+                        }*/
+					meleeSwingDirection = "plankSwing";
 				}
+				if(!moveWhenHit && !dontStopWhenHit && !hitByThrownObject ){
+					GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+				}
+
+				currentHp = currentHp - 1 - meleeDmgBonus;
+
+				if(currentHp <= 0){
+				    SoundManager.instance.PlaySingle(SFXBANK.HIT7, hitPitch);
+                    GetComponent<EnemyStateController<EnemyState, EnemyTrigger>>().SendTrigger(EnemyTrigger.DEATH);
+                } else{
+				    SoundManager.instance.PlaySingle(SFXBANK.HIT6, hitPitch);
+				    if(hitPitch < 1.3f)
+					    hitPitch += .1f; // pitch goes up as hit enemy
+
+                    GetComponent<EnemyStateController<EnemyState, EnemyTrigger>>().SendTrigger(EnemyTrigger.HIT);
+                }
+				SoundManager.instance.PlaySingle(hitSqueal);
+
+				//Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
+				if(bossEnemy){
+					gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
+					//TODO: make sure all bosses hp global vars are updated properly at the day's end...
+					//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
+				}
+				if(!moveWhenHit && currentHp <= 0){
+					moveWhenHit = true; // enemy flies back at final hit
+				}
+
+                
+                if (moveWhenHit){
+                    UpdateFacing();
+                }
+				//camShake = 1;
+				if(gameObject.GetComponent<FollowPlayer>() != null && moveWhenHit){
+					gameObject.GetComponent<FollowPlayer>().StopSound();
+					gameObject.GetComponent<FollowPlayer>().enabled = false;
+				}
+
+				StartCoroutine("ContinueHit"); // just needed to seperate here for IEnumerator stuff
 			}
+		}
 
 	}
 
@@ -454,10 +450,6 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 		//if(aniToSwitchBackTo != null)
 	
-		if(currentHp >0 && myAnim.GetClipByName(returnAniName) != null)
-			myAnim.Play(returnAniName);
-			//else
-				//myAnim.Play("IdleR");
 		yield return new WaitForSeconds(.1f);
 		takingDamage = false;
 
@@ -544,8 +536,6 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			}
 			damageOnce = 0;
 			takingDamage = false;
-			if(currentHp >0 && myAnim.GetClipByName(returnAniName) != null)
-				myAnim.Play(returnAniName);
 		} // end of movement functions
 		hitByThrownObject = false;
 
@@ -573,7 +563,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
                 //***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
             }
             else if (gameObject.GetComponent<RandomDirectionMovement>()) {
-                gameObject.GetComponent<RandomDirectionMovement>().GoAgain();
+                gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
             }
             damageOnce = 0;
 
@@ -771,9 +761,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			//damageOnce = 0;
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-			if(currentHp >0 && myAnim.GetClipByName("idle") != null)
-				myAnim.Play("idle");
-			takingDamage = false;
+            GetComponent<EnemyStateController<EnemyState, EnemyTrigger>>().SendTrigger(EnemyTrigger.HIT);
+
+            takingDamage = false;
 			if(gameObject.GetComponent<FollowPlayer>()){
 					gameObject.GetComponent<FollowPlayer>().enabled = true;
 					//***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
@@ -809,7 +799,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			body.GetComponent<tk2dSprite>().SetSprite(myDeadBodyName);
 			body.GetComponent<ThrowableBody>().SetSpawnerID(mySpawnerID);
 		}
-		myAnim.Play("idle");//to fix enemies sometimes spawning in hurt animation
+
 		damageOnce = 0;
 		if(startsOffDontMoveWhenHit){
 			moveWhenHit = false;

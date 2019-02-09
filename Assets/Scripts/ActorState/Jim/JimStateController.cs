@@ -16,7 +16,6 @@ public enum JimState
     DEAD
 }
 
-[Serializable]
 public enum JimFlag : int
 {
     NONE = 0,
@@ -26,7 +25,6 @@ public enum JimFlag : int
     CARRYING_DROPABLE = 1 << 3,
 }
 
-[Serializable]
 public enum JimTrigger
 {
     IDLE,
@@ -48,7 +46,7 @@ public enum JimTrigger
 public class JimStateController : ActorStateController<JimState, JimTrigger> {
     protected new void Awake()
     {
-        currentState = new JimIdle();
+        defaultState = new JimIdle();
         base.Awake();
     }
 
@@ -64,9 +62,8 @@ public class JimStateController : ActorStateController<JimState, JimTrigger> {
 
     protected override void AnimationEventCompleted(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip)
     {
-#if DEBUG_ANIMATION
-        Debug.Log("Animation Completed: Clip Name: " + clip.name);
-#endif
+        base.AnimationEventCompleted(animator, clip);
+
         switch (currentState.GetState()) {
             case JimState.ATTACKING:
                 currentState = new JimIdle();

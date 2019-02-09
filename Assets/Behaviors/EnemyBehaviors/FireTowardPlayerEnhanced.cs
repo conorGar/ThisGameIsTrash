@@ -50,7 +50,7 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 		SoundManager.instance.PlaySingle(throwSFX);
 		firing = true;
 		yield return new WaitForSeconds(.4f);
-		gameObject.GetComponent<RandomDirectionMovement>().GoAgain();
+		gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
 		myAnim.Play("idle");
 	}
 }

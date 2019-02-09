@@ -5,6 +5,7 @@ using UnityEngine;
 
 // Controls the abstract state of an actor in the game.  These actors could be Jim, or an enemy, or a friend.  Something that walks around the game
 // and needs to maintain their state.
+
 [RequireComponent(typeof(tk2dSpriteAnimator))]
 public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
 {
@@ -14,12 +15,18 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
 
     [SerializeField]
     public IActorState<State_Type, Trigger_Type> currentState;
+    protected IActorState<State_Type, Trigger_Type> defaultState;
 
     protected void Awake()
     {
         animator = GetComponent<tk2dSpriteAnimator>();
-        //animator.AnimationEventTriggered = AnimationEventCallback;
+        currentState = defaultState;
         animator.AnimationCompleted = AnimationEventCompleted;
+    }
+
+    protected void OnEnable()
+    {
+        currentState = defaultState;
     }
 
     public void Update()
@@ -74,6 +81,8 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
 
     protected virtual void AnimationEventCompleted(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip)
     {
-
+#if DEBUG_ANIMATION
+        Debug.Log("Animation Completed: Clip Name: " + clip.name);
+#endif
     }
 }

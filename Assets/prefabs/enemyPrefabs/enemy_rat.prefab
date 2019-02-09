@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4283517313525662}
   - component: {fileID: 33598435020682208}
   - component: {fileID: 23838511374773580}
+  - component: {fileID: 114400556410055018}
   - component: {fileID: 114076671767681168}
   - component: {fileID: 61302976088640844}
   - component: {fileID: 114061048850949760}
@@ -238,6 +239,7 @@ MonoBehaviour:
   attkPower: 1
   moveWhenHit: 1
   respawningEnemyType: 0
+  toxicEnemy: 0
 --- !u!114 &114033225531502752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,6 +310,17 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
+--- !u!114 &114400556410055018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1098292903033816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a1a6f5b27331f42853f199709dbe74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114403236987013624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,7 +355,6 @@ MonoBehaviour:
   bossEnemy: 0
   IAmParentObj: 0
   childEnemy: {fileID: 0}
-  hitSound: 2
   hitSqueal: 3
   bounce: 4
   tutPopup: {fileID: 0}
@@ -362,10 +374,13 @@ MonoBehaviour:
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   myRespawner: {fileID: 0}
+  otherRespawner: {fileID: 0}
   currentHp: 3
   meleeDmgBonus: 0
+  bossSpawnedEnemy: 0
   dontStopWhenHit: 0
   spinning: 0
+  startsOffDontMoveWhenHit: 0
 --- !u!114 &114711155882897108
 MonoBehaviour:
   m_ObjectHideFlags: 1

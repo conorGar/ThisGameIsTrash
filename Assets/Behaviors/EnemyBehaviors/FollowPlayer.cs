@@ -59,7 +59,7 @@ public class FollowPlayer : MonoBehaviour {
 					//this.gameObject.GetComponent<WanderWithinBounds>().SetNewBounds(); 
 				}
 				else if(this.gameObject.GetComponent<RandomDirectionMovement>() != null){
-					this.gameObject.GetComponent<RandomDirectionMovement>().GoAgain();
+					this.gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
 				}/*else if(this.gameObject.GetComponent<WanderOnPath>() != null){
 						this.gameObject.GetComponent<WanderOnPath>().ReturnToStart();
 				}*/
