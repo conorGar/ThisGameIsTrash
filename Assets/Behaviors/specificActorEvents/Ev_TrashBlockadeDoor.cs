@@ -26,23 +26,26 @@ public class Ev_TrashBlockadeDoor : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D collider){
 		Debug.Log("OnTriggerEnter");
-
-		if(!triggered && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= trashNeeded){
-			GameStateManager.Instance.PushState(typeof(MovieState));
-			SoundManager.instance.PlaySingle(triggerSound);
-			Debug.Log("Tiggered Open Door event");
-			StartCoroutine("OpenEvent");
-			triggered = true;
+		if(collider.gameObject.tag == "Player"){
+			if(!triggered && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= trashNeeded){
+				GameStateManager.Instance.PushState(typeof(MovieState));
+				SoundManager.instance.PlaySingle(triggerSound);
+				Debug.Log("Tiggered Open Door event");
+				StartCoroutine("OpenEvent");
+				triggered = true;
+			}
 		}
 	}
 	void OnCollisionEnter2D(Collision2D collider){
 		Debug.Log("OnCollisionEnter");
+		if(collider.gameObject.tag == "Player"){
 
-		if(!triggered && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= trashNeeded){
-			SoundManager.instance.PlaySingle(triggerSound);
-			Debug.Log("Collision Open Door event");
-			StartCoroutine("OpenEvent");
-			triggered = true;
+			if(!triggered && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= trashNeeded){
+				SoundManager.instance.PlaySingle(triggerSound);
+				Debug.Log("Collision Open Door event");
+				StartCoroutine("OpenEvent");
+				triggered = true;
+			}
 		}
 	}
 

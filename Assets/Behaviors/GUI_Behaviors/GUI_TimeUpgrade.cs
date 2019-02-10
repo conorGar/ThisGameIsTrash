@@ -50,6 +50,8 @@ public class GUI_TimeUpgrade : GUI_MenuBase
                 	}
                 
                 }else{
+					SoundManager.instance.backupMusicSource.Stop();
+					SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 					timeUpgradeHUD.SetActive(false);
                 }
             }

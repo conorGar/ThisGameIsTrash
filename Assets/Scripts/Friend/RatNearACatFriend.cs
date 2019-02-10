@@ -14,7 +14,12 @@ public class RatNearACatFriend : Friend
     {
 		switch (GetFriendState()) {
 			case "INTRO":
+				/*if(transform.parent.name == "Hub" || GlobalVariableManager.Instance.ROOM_NUM != 101){
 				day = CalendarManager.Instance.currentDay;
+				}else{
+				timeStand.gameObject.SetActive(false);
+				day = 99; // makes it not appear at hub until found, but appears in w1 everyday
+				}*/
 				break;
 			case "HUB_INTRO":
 				day = CalendarManager.Instance.currentDay;
@@ -98,7 +103,7 @@ public class RatNearACatFriend : Friend
                 yield return base.OnFinishDialogEnumerator(false);
 
                 // After the shop is open for business it's controlled by the Hub_UpgradeStand!
-               timeStand.enabled = true;
+                timeStand.enabled = true;
 				GameStateManager.Instance.PushState(typeof(ShopState));
                 // First time the shop opens for business it'll go directly into the shop.
                 GUIManager.Instance.GUI_TimeUpgrade.gameObject.SetActive(true);
@@ -118,6 +123,29 @@ public class RatNearACatFriend : Friend
     public override void GiveData(List<GameObject> neededObjs){
     	timeBack = neededObjs[0];
     	timeStand = neededObjs[1].GetComponent<Hub_TimeUpgradeStand>();
+    }
+
+
+    public override SimpleJSON.JSONObject Save()
+    {
+        var json_data = new SimpleJSON.JSONObject();
+
+        json_data["friendState"] = friendState;
+
+        json_data["day"] = day; 
+
+     
+
+        return json_data;
+    }
+
+    public override void Load(SimpleJSON.JSONObject json_data)
+    {
+        friendState = json_data["friendState"].AsInt;
+
+        day = json_data["day"].AsInt;
+
+      
     }
 }
 

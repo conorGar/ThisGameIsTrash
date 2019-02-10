@@ -22,7 +22,7 @@ public class WorldManager : MonoBehaviour
     private void Start()
     {
 
-
+    	GlobalVariableManager.Instance.ROOM_NUM = worldNumber; // TODO: added this only for way to determine if the player is at HUB or in world for friends that switch between the two
         world.type = worldType;
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HUNGRYFORMORE)){
 				//Hungry For More pin

@@ -16,6 +16,7 @@ public class HarryFriend : Friend
 				}
 				break;
 			case "END":
+			gameObject.transform.parent = hubParent.transform;
 				day = CalendarManager.Instance.currentDay;
 				shopBlockade.SetActive(false);
 				//
@@ -34,6 +35,17 @@ public class HarryFriend : Friend
             break;
          }
 	}
+	void OnEnable(){
+		switch (GetFriendState()) {
+		case "INTRO":
+         	break;
+        case "END":
+			gameObject.transform.parent = hubParent.transform;
+			shopBlockade.SetActive(false);
+            break;
+         }
+	}
+
 	private void Update()
     {
         OnUpdate();
@@ -46,7 +58,7 @@ public class HarryFriend : Friend
 				GetComponent<ActivateDialogWhenClose>().autoStart = false;
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
-            case "HUB_INTRO":       
+            case "END":       
                 break;
         }
     }
@@ -85,6 +97,27 @@ public class HarryFriend : Friend
 
 	public override void GiveData(List<GameObject> neededObjs){
     	shopBlockade = neededObjs[0];
+    }
+
+
+    public override SimpleJSON.JSONObject Save()
+    {
+        var json_data = new SimpleJSON.JSONObject();
+
+        json_data["friendState"] = friendState;
+        json_data["day"] = day;
+
+       
+
+        return json_data;
+    }
+
+    public override void Load(SimpleJSON.JSONObject json_data)
+    {
+    	Debug.Log("Harry load activate-*-*-*-*-*-*-*-*-*");
+        friendState = json_data["friendState"].AsInt;
+        day = json_data["day"].AsInt;
+
     }
 
 }

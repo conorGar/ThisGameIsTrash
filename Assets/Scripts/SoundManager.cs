@@ -157,6 +157,19 @@ public class SoundManager : MonoBehaviour {
 		//sfxSource.Play();
 		sfxSource.PlayOneShot(clip);
 	}
+
+	public void SwitchToOtherBGM(AudioClip bgClip){
+		musicSource.volume = 0;
+		backupMusicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+		backupMusicSource.clip = bgClip;
+		SoundManager.instance.backupMusicSource.Play();
+	}
+
+	public void ReturnToMainBGM(){
+		SoundManager.instance.backupMusicSource.Stop();
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+	}
+
 	void Update(){
 		if(musicFading){
 			if(musicSource.volume > 0f){
