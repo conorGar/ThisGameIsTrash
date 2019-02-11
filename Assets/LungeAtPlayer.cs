@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LungeAtPlayer : MonoBehaviour {
 
-	public GameObject player;
 	public float speed = 15;
 	public float distanceTillLunge = 8;
 	public AudioClip  buildUpSound;
@@ -14,16 +13,13 @@ public class LungeAtPlayer : MonoBehaviour {
 	tk2dSpriteAnimator myAnim;
 
 	void Start () {
-		if(player == null){
-			player = GameObject.FindGameObjectWithTag("Player");
-		}
 		myAnim = this.gameObject.GetComponent<tk2dSpriteAnimator>();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceTillLunge && lungeOnce == 0){
+		if(Vector2.Distance(PlayerManager.Instance.player.transform.position,gameObject.transform.position) < distanceTillLunge && lungeOnce == 0){
 			StartCoroutine("Lunge");
 			lungeOnce = 1;
 		}
@@ -39,7 +35,7 @@ public class LungeAtPlayer : MonoBehaviour {
 		SoundManager.instance.PlaySingle(lungeSfx);
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position); //dash clouds
 		myAnim.Play("chase");
-		movementDir = (player.transform.position - gameObject.transform.position).normalized * speed;
+		movementDir = (PlayerManager.Instance.player.transform.position - gameObject.transform.position).normalized * speed;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementDir.x,movementDir.y);
 		yield return new WaitForSeconds(1f);
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

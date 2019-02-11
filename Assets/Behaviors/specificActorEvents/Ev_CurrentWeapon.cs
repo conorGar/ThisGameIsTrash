@@ -9,7 +9,6 @@ public class Ev_CurrentWeapon : MonoBehaviour {
 	float fillAmount = 0;
 
 	public GameObject  meleeDisplay;
-	public GameObject player;
 	public GameObject upgradePS;
 	//public GameObject meleeMeter;
 	public Image meleeMeterDraw;
@@ -43,20 +42,20 @@ public class Ev_CurrentWeapon : MonoBehaviour {
 		if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] <= 6 && meleeDisplay.GetComponent<Image>().sprite != plankSprite ){
 			//Debug.Log("PLANK");
 			meleeDisplay.GetComponent<Image>().sprite = plankSprite;
-			player.GetComponent<MeleeAttack>().UpdateWeapon();
+            PlayerManager.Instance.player.GetComponent<MeleeAttack>().UpdateWeapon();
 		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 6 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] <= 12 && meleeDisplay.GetComponent<Image>().sprite != clawSprite ){
 			meleeDisplay.GetComponent<Image>().sprite = clawSprite;
 			SoundManager.instance.PlaySingle(weaponUnpgradeSfx);
-			player.GetComponent<MeleeAttack>().UpdateWeapon();
+            PlayerManager.Instance.player.GetComponent<MeleeAttack>().UpdateWeapon();
 
 		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12 && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] < 18 && meleeDisplay.GetComponent<Image>().sprite != poleSprite){
 			meleeDisplay.GetComponent<Image>().sprite = poleSprite;
-			player.GetComponent<MeleeAttack>().UpdateWeapon();
+            PlayerManager.Instance.player.GetComponent<MeleeAttack>().UpdateWeapon();
 			SoundManager.instance.PlaySingle(weaponUnpgradeSfx);
 
 		}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] >= 18 && meleeDisplay.GetComponent<Image>().sprite != broomSprite && GlobalVariableManager.Instance.IsPinEquipped(PIN.WASTEWARRIOR)){
 			meleeDisplay.GetComponent<Image>().sprite = broomSprite;
-			player.GetComponent<MeleeAttack>().UpdateWeapon();
+            PlayerManager.Instance.player.GetComponent<MeleeAttack>().UpdateWeapon();
 			SoundManager.instance.PlaySingle(weaponUnpgradeSfx);
 
 		}

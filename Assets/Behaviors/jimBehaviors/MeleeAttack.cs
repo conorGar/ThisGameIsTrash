@@ -160,19 +160,19 @@ public class MeleeAttack : MonoBehaviour {
 			swingDirection = direction;
 
             if (direction == 1){
-                GetComponent<JimStateController>().SendTrigger(JimTrigger.SWING_RIGHT);
+                PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_RIGHT);
                 meleeDirectionEnabled = meleeWeaponRightSwing;
 				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
 			}else if(direction == 2){
-                GetComponent<JimStateController>().SendTrigger(JimTrigger.SWING_LEFT);
+                PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
                 meleeDirectionEnabled = meleeWeaponLeftSwing;
 				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
 			}else if(direction == 3){
-                GetComponent<JimStateController>().SendTrigger(JimTrigger.SWING_UP);
+                PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_UP);
                 meleeDirectionEnabled = meleeWeaponTopSwing;
 				topSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
 			}else if(direction == 4){
-                GetComponent<JimStateController>().SendTrigger(JimTrigger.SWING_DOWN);
+                PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_DOWN);
                 meleeDirectionEnabled = meleeWeaponBotSwing;
                 botSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
 			}

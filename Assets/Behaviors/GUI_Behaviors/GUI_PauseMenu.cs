@@ -19,8 +19,7 @@ public class GUI_PauseMenu : MonoBehaviour {
 
     public AudioClip selectSound;
     public AudioClip paperSlide;
-    [HideInInspector]
-    public GameObject player;//set by player- PauseGame.cs
+
     Sprite optionStartSpr;
     Sprite endDayStartSpr;
     Sprite returnStartSpr;
@@ -41,8 +40,6 @@ public class GUI_PauseMenu : MonoBehaviour {
         // Register Events
         endDayPopup.RegisterCloseEvent(OnPopupCloseEvent);
         endDayPopup.RegisterOptionEvent(OnPopupOptionsEvent);
-
-        player = GameObject.Find("Jim");
 
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }

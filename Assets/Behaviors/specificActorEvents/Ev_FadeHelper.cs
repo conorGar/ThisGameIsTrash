@@ -25,11 +25,9 @@ public class Ev_FadeHelper : MonoBehaviour {
 	public bool fading;
 	public bool fadeBack;
 	GameObject tempFlash;
-	GameObject player;
 	Image faderImage;
 
 	void Start(){
-		player = GameObject.FindGameObjectWithTag("Player");
 		faderImage = fader.GetComponent<Image>();
 		//FadeToScene("IntroCredits");
 	}
@@ -100,7 +98,7 @@ public class Ev_FadeHelper : MonoBehaviour {
 				//GlobalVariableManager.Instance.ROOM_PLAYER_DIED_IN = 99;
 		//	}
 
-			GameObject truckInstance = Instantiate(smallTruck,new Vector2(CamManager.Instance.mainCam.transform.position.x - 5, player.transform.position.y), Quaternion.identity);
+			GameObject truckInstance = Instantiate(smallTruck,new Vector2(CamManager.Instance.mainCam.transform.position.x - 5, PlayerManager.Instance.player.transform.position.y), Quaternion.identity);
 			truckInstance.GetComponent<Ev_SmallTruck>().EndDay();
 	
 		}
@@ -108,7 +106,7 @@ public class Ev_FadeHelper : MonoBehaviour {
 
 	public void ReturnToDumpster(){
 		Debug.Log("Truck- return to dumpster activated");
-		GameObject truckInstance = Instantiate(smallTruck,new Vector2(CamManager.Instance.mainCam.transform.position.x - 5, player.transform.position.y), Quaternion.identity);
+		GameObject truckInstance = Instantiate(smallTruck,new Vector2(CamManager.Instance.mainCam.transform.position.x - 5, PlayerManager.Instance.player.transform.position.y), Quaternion.identity);
 
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DEVILSDEAL)){
 				//'Devil's Deal' Pin equipped

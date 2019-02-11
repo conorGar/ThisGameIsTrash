@@ -27,7 +27,6 @@ public class TransitionTriggersBehavior : MonoBehaviour {
 	//transitioner for all directions since they serve as the room bounds as well
 	/// </summary>
 	public GameObject currentCamera;
-	public GameObject player;
 
 	void Start () {
 	}

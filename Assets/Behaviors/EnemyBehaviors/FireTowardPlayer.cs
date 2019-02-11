@@ -12,7 +12,7 @@ public class FireTowardPlayer : MonoBehaviour {
 	public AudioClip throwSFX;
 
 	[HideInInspector]
-	public GameObject player;
+	public GameObject target;
 
 	private tk2dSpriteAnimator anim;
 
@@ -21,10 +21,12 @@ public class FireTowardPlayer : MonoBehaviour {
 		Debug.Log("Fire toward player on enable activated");
 		anim = GetComponent<tk2dSpriteAnimator>();
 		CancelInvoke();
-		//InvokeRepeating("Fire",2.0f,fireRate);
-		StartCoroutine("Fire");
-		player = GameObject.FindGameObjectWithTag("Player");
-	}
+        //InvokeRepeating("Fire",2.0f,fireRate);
+
+        if (PlayerManager.Instance.player)
+            target = PlayerManager.Instance.player;
+        StartCoroutine("Fire");
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -40,7 +42,7 @@ public class FireTowardPlayer : MonoBehaviour {
 			Debug.Log("fired");
 			if(anim.CurrentClip.name != "hit"){
 				anim.Play("throwL");
-				if(player.transform.position.x < transform.position.x){
+				if(target.transform.position.x < transform.position.x){
 					transform.localScale = new Vector3(1,1,1);
 				} else{
 					transform.localScale = new Vector3(-1,1,1);
@@ -62,7 +64,7 @@ public class FireTowardPlayer : MonoBehaviour {
 		GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag,gameObject.transform.position);
 		bullet.GetComponent<Ev_ProjectileTowrdPlayer>().enabled = true; // starts off disabled only so i didnt have to make another tag for rocks that DONT follow player(like ones that spawn from boulder.) feel free to just do that if tis causes issues
 		if(bullet.GetComponent<Ev_ProjectileTowrdPlayer>() != null){
-			bullet.GetComponent<Ev_ProjectileTowrdPlayer>().player = this.player;
+			bullet.GetComponent<Ev_ProjectileTowrdPlayer>().target = this.target;
 		}
 		bullet.GetComponent<Rigidbody2D>().gravityScale = 0;
 		SoundManager.instance.PlaySingle(throwSFX);

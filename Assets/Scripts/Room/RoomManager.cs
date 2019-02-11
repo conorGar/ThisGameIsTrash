@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour {
     public static RoomManager Instance;
-    public GameObject player;
-    public Collider2D playerCollider2D;
     public bool isTransitioning = false;
     public float lerpCamera = 0.0f;
     public float lerpCameraSpeed = 0.1f;
@@ -23,8 +21,6 @@ public class RoomManager : MonoBehaviour {
     void Awake()
     {
         Instance = this;
-
-        playerCollider2D = player.GetComponent<Collider2D>();
         currentRoom = startRoom;
         previousRoom = null;
     }
@@ -55,15 +51,15 @@ public class RoomManager : MonoBehaviour {
         }
         else
         {
-            if (player != null && currentRoom != null)
+            if (currentRoom != null)
             {
-                Vector3 pos = player.transform.position;
+                Vector3 pos = PlayerManager.Instance.player.transform.position;
 
                 // if the player is out of the bounds of the room, clamp everything down.
                 if (pos.x < currentRoom.roomCollider2D.bounds.min.x || pos.x > currentRoom.roomCollider2D.bounds.max.x ||
                     pos.y < currentRoom.roomCollider2D.bounds.min.y || pos.y > currentRoom.roomCollider2D.bounds.max.y)
 
-                player.transform.position = new Vector3(Mathf.Clamp(pos.x, currentRoom.roomCollider2D.bounds.min.x, currentRoom.roomCollider2D.bounds.max.x),
+                PlayerManager.Instance.player.transform.position = new Vector3(Mathf.Clamp(pos.x, currentRoom.roomCollider2D.bounds.min.x, currentRoom.roomCollider2D.bounds.max.x),
                                                         Mathf.Clamp(pos.y, currentRoom.roomCollider2D.bounds.min.y, currentRoom.roomCollider2D.bounds.max.y),
                                                         pos.z);
             }

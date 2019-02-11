@@ -15,7 +15,7 @@ public class Ev_StoneHandObject : PickupableObject
 
 
 	public override void PickUp(){
-        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
         gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
 		stoneFriend.GetComponent<ActivateDialogWhenClose>().enabled = true; // can talk to stone if carrying hand
@@ -33,7 +33,6 @@ public class Ev_StoneHandObject : PickupableObject
         requiresGrabbyGloves = false;
 		if(rocksGatheringRoom == null)
 		rocksGatheringRoom = GameObject.Find("a4").GetComponent<Room>();
-		player = GameObject.FindGameObjectWithTag("Player");
 
 	}
 

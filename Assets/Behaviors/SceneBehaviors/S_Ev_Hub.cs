@@ -23,7 +23,7 @@ public class S_Ev_Hub : MonoBehaviour {
         GlobalVariableManager.Instance.LARGE_TRASH_LIST.Clear();
 
 		//disable melee swing at hub
-		GameObject.Find("Jim").GetComponent<MeleeAttack>().enabled = false;
+		PlayerManager.Instance.player.GetComponent<MeleeAttack>().enabled = false;
 
         // Start the hub day.  Needed for hub friends if you are loading the game directly in the hub.
         CalendarManager.Instance.StartDay();

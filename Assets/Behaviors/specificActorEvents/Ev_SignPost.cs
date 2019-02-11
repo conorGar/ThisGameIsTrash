@@ -6,8 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.PostProcessing;
 
 public class Ev_SignPost : MonoBehaviour {
-
-	public GameObject player;
 	public float distanceUntilGlow;
 	public GameObject signPostHUD;
 	public TextMeshProUGUI signText;
@@ -32,7 +30,7 @@ public class Ev_SignPost : MonoBehaviour {
     void Update() {
 
         // Only interact with a sign post if you are close!
-        if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < distanceUntilGlow && Mathf.Abs(player.transform.position.y - gameObject.transform.position.y) < distanceUntilGlow) {
+        if (Mathf.Abs(PlayerManager.Instance.player.transform.position.x - gameObject.transform.position.x) < distanceUntilGlow && Mathf.Abs(PlayerManager.Instance.player.transform.position.y - gameObject.transform.position.y) < distanceUntilGlow) {
             if (glowCheck == 0) {
                 myAnim.Play("glow");
                 speechIcon = ObjectPool.Instance.GetPooledObject("speechIcon", new Vector2(gameObject.transform.position.x + 2f, gameObject.transform.position.y + 1f));

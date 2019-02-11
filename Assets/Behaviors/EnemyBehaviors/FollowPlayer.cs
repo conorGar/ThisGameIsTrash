@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour {
 
-	public Transform player;
+	public Transform target;
 	public float walkDistance = 10.0f;
 	public float chaseSpeed = 10.0f;
 	public bool hasSeperateFacingAnimations;
@@ -17,11 +17,12 @@ public class FollowPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<tk2dSpriteAnimator>();
-		player = GameObject.FindGameObjectWithTag("Player").transform;
+        target = PlayerManager.Instance.player.transform;
 	}
 
 	void OnEnable(){
-		player = GameObject.FindGameObjectWithTag("Player").transform; //needs to be in enable because of Dirty Decoy
+        if (PlayerManager.Instance.player != null)
+		    target = PlayerManager.Instance.player.transform; //needs to be in enable because of Dirty Decoy
 
 		if(chasePS != null)
 			chasePS.Play();
@@ -29,19 +30,19 @@ public class FollowPlayer : MonoBehaviour {
 	// Update is called once per frame
 	protected void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            float distance = Vector3.Distance(transform.position, player.position);
+            float distance = Vector3.Distance(transform.position, target.position);
             if (distance < walkDistance) { //TODO: 
                 if (iBeLerpin) {
-                    transform.position = Vector3.SmoothDamp(transform.position, player.position, ref smoothVelocity, chaseSpeed);
+                    transform.position = Vector3.SmoothDamp(transform.position, target.position, ref smoothVelocity, chaseSpeed);
                 }
                 else {
-                    transform.position = Vector3.MoveTowards(transform.position, player.position, chaseSpeed * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, target.position, chaseSpeed * Time.deltaTime);
                 }
                 if (!hasSeperateFacingAnimations) {
                     if ( anim != null && anim.GetClipByName("chase") != null && !anim.IsPlaying("chase"))
                         anim.Play("chase");
 
-                    if (player.transform.position.x < transform.position.x) {
+                    if (target.transform.position.x < transform.position.x) {
                         transform.localScale = new Vector3(-1, 1, 1);
                     }
                     else {

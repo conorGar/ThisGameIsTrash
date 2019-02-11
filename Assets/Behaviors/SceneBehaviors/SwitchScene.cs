@@ -34,7 +34,6 @@ public class SwitchScene : MonoBehaviour {
 	public int worldStartingRoomNum;
 
 	bool stopMusicWhenLeaveRoom;
-	GameObject player;
 	GameObject canvas;
 	string sceneToSwitchTo;
 	int spawnOnce = 0;

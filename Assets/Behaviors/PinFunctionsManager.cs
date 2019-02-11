@@ -38,7 +38,7 @@ public class PinFunctionsManager : MonoBehaviour {
 	INPUTACTION heldKey;
 	bool chargingSpin;
 
-	public void Awake(){
+	public void Start(){
 		if(inWorld){
 			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DIRTYDECOY)){
 				decoyInstance = Instantiate(decoyObject,gameObject.transform.position,Quaternion.identity); //ask if this is better since this object isnt needed unless has the pin?

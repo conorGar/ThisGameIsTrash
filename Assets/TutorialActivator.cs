@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TutorialActivator : MonoBehaviour {
 	public string startingRoom;//for now only needed for tutorial popup proper function.
-	GameObject player;
 	bool activatedAlready;
 	Room currentRoom;
 
@@ -15,12 +14,12 @@ public class TutorialActivator : MonoBehaviour {
 
 	// Use this for initialization
 	void OnEnable() {
-		player = GameObject.FindGameObjectWithTag("Player");
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(player != null && Vector2.Distance(gameObject.transform.position,player.transform.position) < 20f){//only activates tut when on screen (close enough)
+		if(Vector2.Distance(gameObject.transform.position, PlayerManager.Instance.player.transform.position) < 20f){//only activates tut when on screen (close enough)
 			if(largeTrash){
 				if(!activatedAlready && RoomManager.Instance.currentRoom.name == startingRoom && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.LARGETRASH ) != GlobalVariableManager.TUTORIALPOPUPS.LARGETRASH){
 						ActivateTutorial();

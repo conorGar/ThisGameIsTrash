@@ -8,7 +8,6 @@ public class GUI_DayDisplay : MonoBehaviour
 	public GameObject truck;
 	public TextMeshProUGUI dayNumDisplay;
 	public GameObject back;
-	public GameObject player;
 	public GameObject playerDummy;
 	public bool forHub;
 	public AudioClip truckSmokeSfx;

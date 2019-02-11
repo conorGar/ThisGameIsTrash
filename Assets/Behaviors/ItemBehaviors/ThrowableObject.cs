@@ -87,7 +87,7 @@ public class ThrowableObject : PickupableObject {
 	}
 
 	public override void PickUp(){
-        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.PICK_UP_THROWABLE);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_THROWABLE);
         onGround = false;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		gameObject.GetComponent<Animator>().enabled = true;
@@ -125,7 +125,7 @@ public class ThrowableObject : PickupableObject {
             if (animator != null) animator.enabled = false;
 
 		SoundManager.instance.PlaySingle(throwObject);
-		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
+        PlayerManager.Instance.player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
 		if(currentRoom != RoomManager.Instance.currentRoom){
 			gameObject.GetComponent<CannotExitScene>().SetLimits(RoomManager.Instance.currentRoom);
 		}
@@ -134,7 +134,6 @@ public class ThrowableObject : PickupableObject {
 		Debug.Log("Thrown");
 
         gameObject.layer = 15; //becomes 'ThrowableObject'
-		player.GetComponent<MeleeAttack>().enabled = true;
 		if(gameObject.GetComponent<BoxCollider2D>()!=null){
 			gameObject.GetComponent<BoxCollider2D>().enabled = true;
 		}
@@ -150,9 +149,9 @@ public class ThrowableObject : PickupableObject {
 		gameObject.transform.parent = null;
 		myBody.simulated = true;
 		gameObject.transform.position = new Vector2(transform.position.x,transform.position.y-1); //move more directly in front of player
-		myBody.velocity = new Vector2(22f*(Mathf.Sign(player.transform.lossyScale.x)),2f);
+		myBody.velocity = new Vector2(22f*(Mathf.Sign(PlayerManager.Instance.player.transform.lossyScale.x)),2f);
 
-        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.THROW);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.THROW);
 
 		myBody.gravityScale = 1f;
 	
@@ -160,9 +159,6 @@ public class ThrowableObject : PickupableObject {
 
 	public override void PickUpEvent(){
 		Debug.Log("*******Pickup Event activate********");
-
-		player.GetComponent<EightWayMovement>().clipOverride = false;
-		//gameObject.GetComponent<Animator>().enabled = true;
 		canThrow = true;
 
         if (myShadow != null){

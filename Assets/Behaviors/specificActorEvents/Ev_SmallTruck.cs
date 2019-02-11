@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ev_SmallTruck : MonoBehaviour {
-
-	public GameObject player;
 	//public GameObject backPaper;
 	public GameObject oneTimers;
 	//public AudioClip truckStart;
@@ -17,8 +15,6 @@ public class Ev_SmallTruck : MonoBehaviour {
 	// Use this for initialization
 	bool endDayTruck;
 	void Awake(){
-		if(player == null)//if not already set
-			player = GameObject.FindGameObjectWithTag("Player");
 		oneTimers = GameObject.Find("oneTimers");
 	}
 
@@ -51,14 +47,14 @@ public class Ev_SmallTruck : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(phase == 1){
-			if(this.gameObject.transform.position.x > player.transform.position.x){
+			if(this.gameObject.transform.position.x > PlayerManager.Instance.player.transform.position.x){
 				gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 				phase = 2;
 				if(endDayTruck){
 					EndDay();
 				}else{
 					Debug.Log("PLAYER SPRITE DISABLED HERE");
-					player.GetComponent<tk2dSprite>().enabled = false;
+                    PlayerManager.Instance.player.GetComponent<tk2dSprite>().enabled = false;
 					SoundManager.instance.PlaySingle(truckDoor);
                     StartCoroutine("StartMovement");
                     //gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
@@ -72,7 +68,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 		yield return new WaitForSeconds(.7f);
 		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-		Instantiate(player, transform.position, Quaternion.identity);
+		Instantiate(PlayerManager.Instance.player, transform.position, Quaternion.identity);
 
 	
 
@@ -127,7 +123,7 @@ public class Ev_SmallTruck : MonoBehaviour {
                 GameStateManager.Instance.PushState(typeof(EndDayState)); //gets value from ev_fadeHelper
             }
 
-            player.SetActive(false);
+            PlayerManager.Instance.player.SetActive(false);
         }
 
 
@@ -162,7 +158,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 		//sfx play- truck door
 		gameObject.GetComponent<Rigidbody2D>().velocity= new Vector2(0f,0f);
 
-		GameObject tempPlayer = Instantiate(player, transform.position, Quaternion.identity);
+		GameObject tempPlayer = Instantiate(PlayerManager.Instance.player, transform.position, Quaternion.identity);
 
 		yield return new WaitForSeconds(.5f);
 		if(roomNum == 198){

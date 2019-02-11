@@ -6,7 +6,6 @@ public class B_Ev_Questio : MonoBehaviour {
 
 	public GameObject mySlashR;
 	public GameObject mySlashL;
-	public GameObject player;
 	public GameObject grabbyGloves;
 	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
 
@@ -78,7 +77,7 @@ public class B_Ev_Questio : MonoBehaviour {
                 else if (!IsFacingLeft && myAnim.CurrentClip.name != "walkR") {
                     myAnim.Play("walkR");
                 }
-                float distance = Vector3.Distance(transform.position, player.transform.position);
+                float distance = Vector3.Distance(transform.position, PlayerManager.Instance.player.transform.position);
                 if (distance < 12 && !isSwinging) {
                     Debug.Log("QUESTIO SWING ACTIVATE");
                     Swing();
@@ -170,7 +169,7 @@ public class B_Ev_Questio : MonoBehaviour {
     void Leap()
     {
         SoundManager.instance.PlaySingle(leap);
-        targetPosition = new Vector2(player.transform.position.x, player.transform.position.y);
+        targetPosition = new Vector2(PlayerManager.Instance.player.transform.position.x, PlayerManager.Instance.player.transform.position.y);
         hitBox.enabled = false;
         isLeaping = true;
         gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
@@ -186,7 +185,7 @@ public class B_Ev_Questio : MonoBehaviour {
 
     void UpdateFacing()
     {
-        IsFacingLeft = player.transform.position.x < gameObject.transform.position.x;
+        IsFacingLeft = PlayerManager.Instance.player.transform.position.x < gameObject.transform.position.x;
     }
 
     IEnumerator DropGloves()

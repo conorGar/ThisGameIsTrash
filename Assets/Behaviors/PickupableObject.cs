@@ -5,7 +5,6 @@ public class PickupableObject : MonoBehaviour
 {	
 
 	public float distanceUntilPickup =3f;
-	public GameObject player;
 	public AudioClip pickup;
 	public AudioClip drop;
 	public float carryXAdjustment = 3.3f;
@@ -38,11 +37,7 @@ public class PickupableObject : MonoBehaviour
 		myBody  = gameObject.GetComponent<Rigidbody2D>();
 		startRotation = transform.rotation;
 		dumpster = GameObject.Find("Dumpster");
-		if(player == null){
-			player = GameObject.FindGameObjectWithTag("Player");
-			carryMark = player.transform.GetChild(7).gameObject;//TODO: better way to do this...not good
-		}
-
+		carryMark = PlayerManager.Instance.player.transform.GetChild(7).gameObject;//TODO: better way to do this...not good
 	}
 	/*void OnEnable(){
 		if(player == null){
@@ -53,10 +48,10 @@ public class PickupableObject : MonoBehaviour
 	// Update is called once per frame
 	protected virtual void Update ()
 	{
-        if (player != null) {
-            switch (player.GetComponent<JimStateController>().GetCurrentState()) {
+        if (PlayerManager.Instance.player != null) {
+            switch (PlayerManager.Instance.player.GetComponent<JimStateController>().GetCurrentState()) {
                 case JimState.IDLE:
-                    if (player != null && Vector2.Distance(player.transform.position, gameObject.transform.position) < distanceUntilPickup) {
+                    if (PlayerManager.Instance.player != null && Vector2.Distance(PlayerManager.Instance.player.transform.position, gameObject.transform.position) < distanceUntilPickup) {
                         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'                                                                                                                                                                       // Allow this object to be picked up if it doesn't require the grabby gloves, or they have the grabby gloves.
                             if (!requiresGrabbyGloves || GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)) {
                                 Debug.Log("PickUpable object...picked up");
@@ -69,14 +64,14 @@ public class PickupableObject : MonoBehaviour
 
                 case JimState.CARRYING:
                     if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried && !throwableObject) {
-                        if (Vector2.Distance(player.transform.position, dumpster.transform.position) > 15f) //TODO: temp solution for making sure trash isnt dropped before 'Return' is activated
+                        if (Vector2.Distance(PlayerManager.Instance.player.transform.position, dumpster.transform.position) > 15f) //TODO: temp solution for making sure trash isnt dropped before 'Return' is activated
                             Drop();
                     }
                     break;
             }
 
             if (movePlayerToObject) {
-                player.transform.position = Vector2.Lerp(player.transform.position, this.gameObject.transform.position, 2 * Time.deltaTime);
+                PlayerManager.Instance.player.transform.position = Vector2.Lerp(PlayerManager.Instance.player.transform.position, this.gameObject.transform.position, 2 * Time.deltaTime);
             }
         }
 	}
@@ -84,10 +79,10 @@ public class PickupableObject : MonoBehaviour
 	public virtual void PickUp(){
         Debug.Log("Pickup() activated");
         movePlayerToObject = false;
-		gameObject.transform.position = new Vector2(player.transform.position.x,gameObject.transform.position.y);
-		gameObject.transform.parent = player.transform;
-		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
+		gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x,gameObject.transform.position.y);
+		gameObject.transform.parent = PlayerManager.Instance.player.transform;
+        PlayerManager.Instance.player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        PlayerManager.Instance.player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
 		//move and play the particle system
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		SoundManager.instance.PlaySingle(pickup);
@@ -98,8 +93,8 @@ public class PickupableObject : MonoBehaviour
 
 	public void Drop(){
         Debug.Log("ITEM DROPPED");
-        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.DROP_BIG);
-		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.DROP_BIG);
+        PlayerManager.Instance.player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = null;
 		gameObject.transform.parent = null; //detatch from player transform
 		gameObject.transform.position = new Vector2(transform.position.x + 1f * Mathf.Sign(transform.localScale.x), transform.position.y -1f);
 		ObjectPool.Instance.GetPooledObject("effect_enemyLand",gameObject.transform.position);

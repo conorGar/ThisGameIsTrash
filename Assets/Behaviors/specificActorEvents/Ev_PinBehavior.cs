@@ -26,7 +26,6 @@ public class Ev_PinBehavior : MonoBehaviour {
 	bool inShop = false;
 	float startingY;
 	SpecialEffectsBehavior mySFX;
-	GameObject player;
 	GameObject shopLight;
 	List<GameObject> myIcons = new List<GameObject>();
 	GameObject myEquippedBox;
@@ -42,7 +41,6 @@ public class Ev_PinBehavior : MonoBehaviour {
 		}*/
 		myAnimator = sprite.GetComponent<Animator>();
 		mySFX = sprite.GetComponent<SpecialEffectsBehavior>();
-		player = GameObject.Find("Jim");
 
         // Default the new pin to "off".
         newPinIcon.SetActive(false);
@@ -100,7 +98,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 		if(inShop){
 
-			if(Mathf.Abs(transform.position.x - player.transform.position.x) < 2 && Mathf.Abs(startingY - player.transform.position.y) < 3.6 && !bought){
+			if(Mathf.Abs(transform.position.x - PlayerManager.Instance.player.transform.position.x) < 2 && Mathf.Abs(startingY - PlayerManager.Instance.player.transform.position.y) < 3.6 && !bought){
 				if(setArrowPosOnce == 0){
 					mySFX.SmoothMovementToPoint(transform.position.x,startingY + 2,.2f);
 					GlobalVariableManager.Instance.ARROW_POSITION = mySpotInShop;

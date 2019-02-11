@@ -13,7 +13,6 @@ public class BossMoleKing : Boss
 	bool inAir;
 	Vector2 targetPos;
 	bool falling;
-	public GameObject player;
 
 	void Start ()
 	{
@@ -65,7 +64,7 @@ public class BossMoleKing : Boss
 
 		myShadow.transform.parent = null;
 
-		targetPos = player.transform.position;
+		targetPos = PlayerManager.Instance.player.transform.position;
 		inAir = true;
 		Invoke("TossRock",Random.Range(1f,2f));
 		yield return new WaitUntil(() => Vector2.Distance(myShadow.transform.position, targetPos)<1);
@@ -90,7 +89,7 @@ public class BossMoleKing : Boss
 	IEnumerator NewPopup(){
 		Debug.Log("Mole king - new popup activated");
 		yield return new WaitForSeconds(Random.Range(.5f,1.1f));
-		targetPos = player.transform.position;
+		targetPos = PlayerManager.Instance.player.transform.position;
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("Popup");
 		yield return new WaitForSeconds(.4f);
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("RiseFromGround");

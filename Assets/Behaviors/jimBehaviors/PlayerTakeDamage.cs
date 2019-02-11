@@ -144,7 +144,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
 		GlobalVariableManager.Instance.HP_STAT.UpdateCurrent(-damageDealt);
 
-        GetComponent<JimStateController>().SendTrigger(JimTrigger.HIT);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.HIT);
 
 		Debug.Log("reached this end of hp hud change" + GlobalVariableManager.Instance.HP_STAT.GetCurrent());
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
@@ -164,7 +164,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		}
 
         if (GlobalVariableManager.Instance.HP_STAT.GetCurrent() <= 0) {
-            GetComponent<JimStateController>().SendTrigger(JimTrigger.DEATH);
+            PlayerManager.Instance.controller.SendTrigger(JimTrigger.DEATH);
             SoundManager.instance.PlaySingle(finalHit);
 
             StartCoroutine("Death");
@@ -273,7 +273,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		deathDisplay.PlayTruckSfx();
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
 		gameObject.GetComponent<MeshRenderer>().enabled = true;
-        GetComponent<JimStateController>().SendTrigger(JimTrigger.IDLE);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
         yield return new WaitForSeconds(.3f);
 		deathDisplay.fader.SetActive(false);
 		/*if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){

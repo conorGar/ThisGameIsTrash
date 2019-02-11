@@ -16,7 +16,7 @@ public class S_Ev_shop : MonoBehaviour {
     public PinDefinition upgrade3;
 
 	List<PinDefinition> nonShopPins = new List<PinDefinition>();
-	GameObject player;
+
 	GameObject manager;
 
     void Start() {
@@ -30,7 +30,6 @@ public class S_Ev_shop : MonoBehaviour {
 			GlobalVariableManager.Instance.WORLD_SIGNS_READ[0].Replace(GlobalVariableManager.Instance.WORLD_SIGNS_READ[0][9],'o');
 		}*/
 
-        player = GameObject.Find("Jim");
         manager = GameObject.Find("Manager");
 
         // TODO: Maybe move this to a configuration in the PinManager?
@@ -165,14 +164,14 @@ public class S_Ev_shop : MonoBehaviour {
 	void Update () {
 
 		//---------------Player Bounds-----------------//
-		if(player != null){
-			if(player.transform.position.y > 8.9f){
-				player.transform.position = new Vector2(player.transform.position.x,8.9f);
-			}else if(player.transform.position.y < 1.6){
-				player.transform.position = new Vector2(player.transform.position.x,1.6f);
-			}else if(player.transform.position.x > 22f){
-				player.transform.position = new Vector2(22f,player.transform.position.y);
-			}else if(player.transform.position.x < -1f && GlobalVariableManager.Instance.SCENE_IS_TRANSITIONING == false){
+		if(PlayerManager.Instance.player != null){
+			if(PlayerManager.Instance.player.transform.position.y > 8.9f){
+                PlayerManager.Instance.player.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x,8.9f);
+			}else if(PlayerManager.Instance.player.transform.position.y < 1.6){
+                PlayerManager.Instance.player.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x,1.6f);
+			}else if(PlayerManager.Instance.player.transform.position.x > 22f){
+                PlayerManager.Instance.player.transform.position = new Vector2(22f, PlayerManager.Instance.player.transform.position.y);
+			}else if(PlayerManager.Instance.player.transform.position.x < -1f && GlobalVariableManager.Instance.SCENE_IS_TRANSITIONING == false){
 				//Leave room
 
 				GlobalVariableManager.Instance.ROOM_NUM = 101;

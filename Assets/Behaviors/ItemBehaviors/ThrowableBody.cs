@@ -15,7 +15,7 @@ public class ThrowableBody : ThrowableObject
 
 	public override void PickUp(){
         physicalCollision.enabled = false;
-		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
+        PlayerManager.Instance.player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
 		base.PickUp();
 	}
 

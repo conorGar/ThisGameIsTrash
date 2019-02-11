@@ -44,7 +44,6 @@ public class Ev_LargeTrash : PickupableObject {
 	// Use this for initialization
 	void OnEnable () {
 		
-		player = GameObject.FindGameObjectWithTag("Player");
 		dumpster = GameObject.Find("Dumpster");
         requiresGrabbyGloves = false;
 
@@ -80,7 +79,7 @@ public class Ev_LargeTrash : PickupableObject {
 	}// end of Start()
 
 	public override void PickUp(){
-        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
@@ -149,7 +148,7 @@ public class Ev_LargeTrash : PickupableObject {
 	public void Return(){
         //activated by dumpster's 'SE_GlowWhenClose'
         Debug.Log("Return activated - LARGE TRASH");
-        player.GetComponent<JimStateController>().SendTrigger(JimTrigger.DELIVER_BIG);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.DELIVER_BIG);
         gameObject.GetComponent<Animator>().enabled = false;
 		phase = 0;
 
@@ -176,7 +175,7 @@ public class Ev_LargeTrash : PickupableObject {
 
 	IEnumerator ReturnSequence(){
 		GameStateManager.Instance.PushState(typeof(MovieState));
-		CamManager.Instance.mainCamEffects.CameraPan(player.transform.position," ");
+		CamManager.Instance.mainCamEffects.CameraPan(PlayerManager.Instance.player.transform.position," ");
 		CamManager.Instance.mainCamEffects.ZoomInOut(2f,1f);
 		yield return new WaitForSeconds(.5f);
 	

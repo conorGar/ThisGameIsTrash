@@ -9,13 +9,11 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	public bool sleepingEnemy;
 	public GameObject sleepingPS;
 	//public AudioClip noticeSfx;
-	GameObject player;
 
 	public bool noticedPlayer = false;
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag("Player");
 		this.gameObject.GetComponent<FollowPlayer>().enabled = false;
 		if(noticeThresholdY == 0){
 			noticeThresholdY = noticeThreshold; //so doesnt interfere with the given data to all the enemies i coded before adding this for the spear moles
@@ -36,8 +34,8 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	// Update is called once per frame
 	public void Update () {
 		if(!noticedPlayer){
-			if((Mathf.Abs(transform.position.x - player.transform.position.x) < noticeThreshold) && Mathf.Abs(transform.position.y - player.transform.position.y) < noticeThresholdY){
-				if((player.transform.position.x < gameObject.transform.position.x && gameObject.transform.localScale.x < 0) || (player.transform.position.x > gameObject.transform.position.x && gameObject.transform.localScale.x > 0)){//make sure is facing the direction of the player..
+			if((Mathf.Abs(transform.position.x - PlayerManager.Instance.player.transform.position.x) < noticeThreshold) && Mathf.Abs(transform.position.y - PlayerManager.Instance.player.transform.position.y) < noticeThresholdY){
+				if((PlayerManager.Instance.player.transform.position.x < gameObject.transform.position.x && gameObject.transform.localScale.x < 0) || (PlayerManager.Instance.player.transform.position.x > gameObject.transform.position.x && gameObject.transform.localScale.x > 0)){//make sure is facing the direction of the player..
 					if(!GlobalVariableManager.Instance.IS_HIDDEN){
 						if(sleepingEnemy){
 							gameObject.GetComponent<Animator>().enabled = false;

@@ -82,7 +82,7 @@ public class GUI_LargeTrashCollectedDisplay : MonoBehaviour
 		GameStateManager.Instance.PopState();
 
         // Return Jim to Idle
-        GameObject.Find("Jim").GetComponent<JimStateController>().SendTrigger(JimTrigger.IDLE);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
 
 		starDisplay.SetActive(false);
         CamManager.Instance.mainCamPostProcessor.profile = null;

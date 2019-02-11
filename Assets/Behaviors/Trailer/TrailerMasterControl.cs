@@ -7,7 +7,6 @@ public class TrailerMasterControl : MonoBehaviour
 	public GameObject jumboFocus;
 	public GameObject chipFocus;
 	public GameObject lemonFocus;
-	public GameObject player;
 	public GameObject dialogCanvas;
 	// Use this for initialization
 	void Start ()
@@ -35,7 +34,7 @@ public class TrailerMasterControl : MonoBehaviour
 		}
 		if(Input.GetKeyDown(KeyCode.R)){
 			//return to player
-			gameObject.GetComponent<Ev_MainCameraEffects>().CameraPan(player,true);
+			gameObject.GetComponent<Ev_MainCameraEffects>().CameraPan(PlayerManager.Instance.player, true);
 		}
 		if(Input.GetKeyDown(KeyCode.F)){
 			//follow player again

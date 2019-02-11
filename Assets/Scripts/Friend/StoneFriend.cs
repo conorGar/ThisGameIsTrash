@@ -49,11 +49,6 @@ public class StoneFriend : Friend
     	stoneHand.SetActive(true);
     	secondStoneHand.SetActive(true);
 		switch (GetFriendState()) {
-            
-           	case "WANTS_HANDS":
-				stoneHand.GetComponent<Ev_StoneHandObject>().player = GameObject.FindGameObjectWithTag("Player");
-				secondStoneHand.GetComponent<Ev_StoneHandObject>().player = GameObject.FindGameObjectWithTag("Player");
-           		break;
            	case "END":
 	           	blockade.SetActive(false);
 	           	leftHand.SetActive(false);

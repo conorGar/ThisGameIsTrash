@@ -10,15 +10,11 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 	public GameObject projectile;
 	public AudioClip throwSFX;
 	public AudioClip buildupSfx;
-	GameObject player;
 	bool firing;
 	tk2dSpriteAnimator myAnim;
 	// Use this for initialization
 	void Start ()
 	{
-		if(player == null){
-			player = GameObject.FindGameObjectWithTag("Player");
-		}
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
 	}
 
@@ -26,7 +22,7 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 
 		if(firing){
 			GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag,gameObject.transform.position);
-			Vector2 movementDir = (player.transform.position - gameObject.transform.position).normalized * 5;
+			Vector2 movementDir = (PlayerManager.Instance.player.transform.position - gameObject.transform.position).normalized * 5;
 			bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(movementDir.x,movementDir.y);
 			StartCoroutine("Fire");
 			firing = false;

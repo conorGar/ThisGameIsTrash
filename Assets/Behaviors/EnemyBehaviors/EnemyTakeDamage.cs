@@ -79,10 +79,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	int dropsPin = 0;
 	int dropsTrash = 0;
 	int scrapDropped = 0;
-	int roomNum;
 	//Color lerpColor = Color.white;
 	protected bool takingDamage = false;
-	GameObject player;
 	string mySpawnerID;
 
 	Vector2 shadowStartPos;
@@ -100,7 +98,6 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		if(bossSpawnedEnemy){
 			bossSpawnedEnemy = false;
 		}
-		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		if(!bossEnemy)
 			currentHp = gameObject.GetComponent<Enemy>().health;//enemy health reset when enter room again
 		if(myBody == null)
@@ -132,7 +129,6 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 
     void Start () {
-		player = GameObject.FindGameObjectWithTag("Player");
 		if(IAmParentObj){
 			myAnim = childEnemy.GetComponent<tk2dSpriteAnimator>();
 		}else{
@@ -274,7 +270,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.SetActive(true);
 
-						if(gameObject.transform.position.x < player.transform.position.x){
+						if(gameObject.transform.position.x < PlayerManager.Instance.player.transform.position.x){
 							//hitStarPS.SetActive(true);
 							//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
 
@@ -334,7 +330,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				meleeDmgBonus = meleeDmgBonus;
 				if(!hitByThrownObject)
 					meleeSwingDirection = melee.GetComponent<tk2dSpriteAnimator>().CurrentClip.name;
-				swingDirectionSide = player.transform.localScale.x;
+				swingDirectionSide = PlayerManager.Instance.player.transform.localScale.x;
 				//Debug.Log("MELEE SWING DIRECTION: " + meleeSwingDirection);
 
 				if(secretHider)
@@ -357,7 +353,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.SetActive(true);
 
-				if(gameObject.transform.position.x < player.transform.position.x){
+				if(gameObject.transform.position.x < PlayerManager.Instance.player.transform.position.x){
 					//hitStarPS.SetActive(true);
 					//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
 
@@ -428,7 +424,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
     public void UpdateFacing()
     {
-        if (gameObject.transform.position.x < player.transform.position.x)
+        if (gameObject.transform.position.x < PlayerManager.Instance.player.transform.position.x)
             gameObject.transform.localScale = new Vector2(startScale.x, startScale.y);
         else
             gameObject.transform.localScale = new Vector2(startScale.x * -1, startScale.y);
@@ -637,7 +633,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			/*if(gameObject.GetComponent<FollowPlayer>()){
 				gameObject.GetComponent<FollowPlayer>().enabled = false;
 			}*/
-			Vector2 pushBackDir = (gameObject.transform.position- player.transform.position).normalized * 9;
+			Vector2 pushBackDir = (gameObject.transform.position- PlayerManager.Instance.player.transform.position).normalized * 9;
 
 			if(getsPushedBack){
 				for(int i = 0; i < behaviorsToDeactivate.Count;i++){
@@ -651,16 +647,16 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
 				}*/
 				this.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir,ForceMode2D.Impulse);
-				player.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir*-1,ForceMode2D.Impulse);
+                PlayerManager.Instance.player.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir*-1,ForceMode2D.Impulse);
 
 				StartCoroutine("StopKnockback",.5f);
 			}else{
-				/*if(gameObject.transform.position.x < player.transform.position.x){
+                /*if(gameObject.transform.position.x < player.transform.position.x){
 					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
 				}else{
 					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
 				}*/
-				player.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir*-1,ForceMode2D.Impulse);
+                PlayerManager.Instance.player.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir*-1,ForceMode2D.Impulse);
 
 				Invoke("ClankReturnDelay",.2f);
 			}
@@ -731,7 +727,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				scrapDropped = Random.Range(1,4);
 			}else{
 				scrapDropped = Random.Range(2,7);
-				player.GetComponent<PinFunctionsManager>().StartCoroutine("DisplayEffectsHud",PinManager.Instance.GetPin(PIN.SCRAPCITY).sprite);
+                PlayerManager.Instance.player.GetComponent<PinFunctionsManager>().StartCoroutine("DisplayEffectsHud",PinManager.Instance.GetPin(PIN.SCRAPCITY).sprite);
 			}
 			Debug.Log("dropped scrap:" + scrapDropped);
 		    for(int i = 0; i < scrapDropped; i++){

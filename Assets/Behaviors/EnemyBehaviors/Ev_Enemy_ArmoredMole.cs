@@ -8,24 +8,20 @@ public class Ev_Enemy_ArmoredMole : MonoBehaviour {
 
 	int startThrowOnce = 0;
 	int tossRockOnce;
-	GameObject player;
 	GameObject myBoulder;
 	// Use this for initialization
 	void Start () {
 
-		player = GameObject.FindGameObjectWithTag("Player");
-
 	}
 
 	void OnEnable(){
-		player = GameObject.FindGameObjectWithTag("Player");
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (Vector2.Distance(gameObject.transform.position, player.transform.position) < 20f) {
+            if (Vector2.Distance(gameObject.transform.position, PlayerManager.Instance.player.transform.position) < 20f) {
                 if (startThrowOnce == 0) {
                     StartCoroutine("TossRock");
                     startThrowOnce = 1;
