@@ -68,7 +68,7 @@ public class ThrowableObject : PickupableObject {
                     gameObject.GetComponent<CannotExitScene>().enabled = false;
                     if (physicalCollision != null)
                         physicalCollision.enabled = true;
-					player.GetComponent<EightWayMovement>().myLegs.SetActive(true);
+
 					onGround = true;
 					LandingEvent();
                 }else{
@@ -154,14 +154,13 @@ public class ThrowableObject : PickupableObject {
 
         player.GetComponent<JimStateController>().SendTrigger(JimTrigger.THROW);
 
-		player.GetComponent<EightWayMovement>().myLegs.SetActive(true);
 		myBody.gravityScale = 1f;
 	
 	}
 
 	public override void PickUpEvent(){
 		Debug.Log("*******Pickup Event activate********");
-		player.GetComponent<EightWayMovement>().myLegs.SetActive(false);
+
 		player.GetComponent<EightWayMovement>().clipOverride = false;
 		//gameObject.GetComponent<Animator>().enabled = true;
 		canThrow = true;

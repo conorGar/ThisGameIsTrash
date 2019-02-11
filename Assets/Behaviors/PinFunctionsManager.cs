@@ -164,13 +164,12 @@ public class PinFunctionsManager : MonoBehaviour {
 		Debug.Log("Sneaky Scrapper Activated");
 		SoundManager.instance.PlaySingle(SFXBANK.SCRAPPYSNEAK);
 		GlobalVariableManager.Instance.IS_HIDDEN = true;
-		gameObject.GetComponent<EightWayMovement>().myLegs.GetComponent<tk2dSprite>().color = new Color(1,1,1,.5f);
+
 		gameObject.GetComponent<tk2dSprite>().color = new Color(1,1,1,.5f);
 	}
 	public void SneakyScrapperReturn(){
 		Debug.Log("Sneaky Scrapper De-Activated");
 
-		gameObject.GetComponent<EightWayMovement>().myLegs.GetComponent<tk2dSprite>().color = new Color(1,1,1,1);
 		gameObject.GetComponent<tk2dSprite>().color = new Color(1,1,1,1);
 		GlobalVariableManager.Instance.IS_HIDDEN = false;
 	}

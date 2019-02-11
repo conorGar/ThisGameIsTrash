@@ -286,7 +286,7 @@ public class PlayerTakeDamage : MonoBehaviour {
         GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
 		truck.GetComponent<Ev_SmallTruck>().RespawnEnd();
 		gameObject.GetComponent<BoxCollider2D>().enabled = true;
-		gameObject.GetComponent<EightWayMovement>().myLegs.SetActive(true);
+
 		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
 
         // Pop Respawn State

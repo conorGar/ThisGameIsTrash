@@ -19,7 +19,6 @@ public class DestructableThrowingObject : ThrowableObject {
 
 	IEnumerator PickUpWithDelay(){
 		yield return new WaitForSeconds(1f);
-		player.GetComponent<EightWayMovement>().myLegs.SetActive(false);
 
 		if(livingBody){
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 

@@ -58,7 +58,6 @@ public class CutsceneActivator : MonoBehaviour
 		CamManager.Instance.mainCamEffects.CameraPan(new Vector3(78.8f,53.8f,-10.8f),"");
 		CamManager.Instance.mainCamEffects.ZoomInOut(.9f,2f);
 		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
-		player.GetComponent<EightWayMovement>().legAnim.Play("ani_jimIdle");
 		hidingClouds.Stop();
 		yield return new WaitForSeconds(.5f);
 		backHidingClouds.Stop();

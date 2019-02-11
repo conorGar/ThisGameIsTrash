@@ -23,14 +23,11 @@ public class EightWayMovement : MonoBehaviour {
 	//public GameObject shadow;
 	public GameObject walkCloudPS;
 
-	public GameObject myLegs;
+    public TrailRenderer speedyTrailRenderer;
 
 	public AudioClip footsteps1;
 	public AudioClip footsteps2;
 
-
-	[HideInInspector]
-	public tk2dSpriteAnimator legAnim;
 	Vector3 transformScale; // used for facing different directions
 
 	public bool clipOverride; //set by pickUpable object
@@ -38,8 +35,6 @@ public class EightWayMovement : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-
-        legAnim = myLegs.GetComponent<tk2dSpriteAnimator>();
         anim = GetComponent<tk2dSpriteAnimator>();
 
 
@@ -47,7 +42,7 @@ public class EightWayMovement : MonoBehaviour {
 
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SPEEDY)){
 			speed += 1.5f;
-			myLegs.GetComponent<TrailRenderer>().enabled = true;
+            speedyTrailRenderer.enabled = true;
 		}
 
         movement = new Vector2(0f, 0f);
@@ -111,9 +106,6 @@ public class EightWayMovement : MonoBehaviour {
             //Diagonals
 
             if (inputX != 0 && inputY != 0) {
-                if(legAnim.GetClipByName("walk") != null)
-                	legAnim.Play("walk");
-
                 isDiagonal = true;
                
             }
@@ -207,7 +199,7 @@ public class EightWayMovement : MonoBehaviour {
 
         CancelInvoke();
         //StopAllCoroutines();
-        legAnim.Play(anim.CurrentClip.name);
+
     	this.enabled = true;
     }
 
