@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-[RequireComponent(typeof(EnemyStateController<EnemyState, EnemyTrigger>))]
+[RequireComponent(typeof(GenericEnemyStateController))]
 public class RandomDirectionMovement : MonoBehaviour {
 
 	public float movementSpeed = 0;
@@ -20,12 +21,12 @@ public class RandomDirectionMovement : MonoBehaviour {
 	protected Vector3 startingScale;
 	int turnOnce = 0;
 
-    protected EnemyStateController<EnemyState, EnemyTrigger> controller;
+    protected GenericEnemyStateController controller;
 
     // Use this for initialization
     void Awake()
     {
-        controller = GetComponent<EnemyStateController<EnemyState, EnemyTrigger>>();
+        controller = GetComponent<GenericEnemyStateController>();
     }
 
     void Start(){

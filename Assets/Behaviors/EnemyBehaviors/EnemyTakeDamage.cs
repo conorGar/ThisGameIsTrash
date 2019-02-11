@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
 public class EnemyTakeDamage : MonoBehaviour {
 
@@ -296,7 +297,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
 
-                GetComponent<EnemyStateController<EnemyState, EnemyTrigger>>().SendTrigger(EnemyTrigger.HIT);
+                GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.HIT);
                 if (moveWhenHit){
                     UpdateFacing();
                 }
@@ -389,13 +390,13 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 				if(currentHp <= 0){
 				    SoundManager.instance.PlaySingle(SFXBANK.HIT7, hitPitch);
-                    GetComponent<EnemyStateController<EnemyState, EnemyTrigger>>().SendTrigger(EnemyTrigger.DEATH);
+                    GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.DEATH);
                 } else{
 				    SoundManager.instance.PlaySingle(SFXBANK.HIT6, hitPitch);
 				    if(hitPitch < 1.3f)
 					    hitPitch += .1f; // pitch goes up as hit enemy
 
-                    GetComponent<EnemyStateController<EnemyState, EnemyTrigger>>().SendTrigger(EnemyTrigger.HIT);
+                    GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.HIT);
                 }
 				SoundManager.instance.PlaySingle(hitSqueal);
 
@@ -761,7 +762,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			//damageOnce = 0;
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-            GetComponent<EnemyStateController<EnemyState, EnemyTrigger>>().SendTrigger(EnemyTrigger.HIT);
+            GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.HIT);
 
             takingDamage = false;
 			if(gameObject.GetComponent<FollowPlayer>()){
