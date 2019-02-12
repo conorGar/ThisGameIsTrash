@@ -253,6 +253,7 @@ MonoBehaviour:
   attkPower: 1
   moveWhenHit: 0
   respawningEnemyType: 0
+  toxicEnemy: 0
 --- !u!114 &114029351326968710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,10 +279,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  target: {fileID: 0}
   walkDistance: 9.2
   chaseSpeed: 4
-  hasSeperateFacingAnimations: 0
+  hasSeperateFacingAnimations: 1
   iBeLerpin: 0
   chasePS: {fileID: 198419328894692054}
   returnToPreviousWhenFar: 0
@@ -316,7 +317,7 @@ MonoBehaviour:
   noticeThresholdY: 0
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
-  noticeSfx: {fileID: 0}
+  noticedPlayer: 0
 --- !u!114 &114808193333466140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,6 +332,7 @@ MonoBehaviour:
   movementSpeed: 4
   minMoveTime: 1
   maxMoveTime: 2.2
+  stopTime: 2
   walkPS: {fileID: 198419328894692054}
 --- !u!114 &114840077401668922
 MonoBehaviour:
@@ -366,7 +368,6 @@ MonoBehaviour:
   bossEnemy: 0
   IAmParentObj: 0
   childEnemy: {fileID: 0}
-  hitSound: 2
   hitSqueal: 0
   bounce: 4
   tutPopup: {fileID: 0}
@@ -377,16 +378,20 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1572292130659854}
-  returnAniName: idle
   dontSpawnBody: 0
+  canKnockoffArmor: 0
   behaviorsToDeactivate: []
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   myRespawner: {fileID: 0}
+  otherRespawner: {fileID: 0}
   currentHp: 3
   meleeDmgBonus: 0
+  bossSpawnedEnemy: 0
   dontStopWhenHit: 0
+  spinning: 0
+  startsOffDontMoveWhenHit: 0
 --- !u!114 &114897125545691324
 MonoBehaviour:
   m_ObjectHideFlags: 1

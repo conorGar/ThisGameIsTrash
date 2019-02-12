@@ -2,34 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
+public class EnemyChase : IActorState<EnemyState, EnemyTrigger>
 {
     public EnemyState GetState()
     {
-        return EnemyState.IDLE;
+        return EnemyState.CHASE;
     }
 
     public IActorState<EnemyState, EnemyTrigger> OnUpdate(tk2dSpriteAnimator animator, ref int flags)
     {
-        if ((flags & (int)EnemyFlag.WALKING) == (int)EnemyFlag.WALKING) {
-            animator.Play(EnemyAnim.GetName(ENEMY_ANIM.RUN));
-        } else {
-            animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
-        }
-
         return null;
     }
 
     public IActorState<EnemyState, EnemyTrigger> SendTrigger(EnemyTrigger trigger, GameObject actor, tk2dSpriteAnimator animator, ref int flags)
     {
         switch (trigger) {
+            case EnemyTrigger.IDLE: // This can happen if the enemy is chasing and loses range to the player.  It gets confused and goes back to idle.
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
+                flags &= (int)~EnemyFlag.CHASING;
+                return new EnemyIdle();
             case EnemyTrigger.HIT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+                flags &= ~(int)EnemyFlag.CHASING;
                 return new EnemyHit();
-            case EnemyTrigger.NOTICE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
-                flags |= (int)EnemyFlag.CHASING;
-                return new EnemyChase();
         }
 
         return null;

@@ -111,7 +111,7 @@ public class WanderWithinBounds : RandomDirectionMovement
 		Debug.Log("returning to start - activate" + startPosition);
 
 		boundsSet = false;
-        controller.SetFlag((int)EnemyFlag.MOVING);
+        controller.SetFlag((int)EnemyFlag.WALKING);
 		returningToStart = true;
 		StopAllCoroutines();
 	}

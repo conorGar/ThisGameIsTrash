@@ -14,6 +14,11 @@ public class RatStateControllerEditor : GenericStateControllerEditor<EnemyState,
 {
 }
 
+[CustomEditor(typeof(DuckStateController))]
+public class DuckStateControllerEditor : GenericStateControllerEditor<EnemyState, EnemyTrigger, EnemyFlag>
+{
+}
+
 public class GenericStateControllerEditor<State_Type, Trigger_Type, Flag_Type> : Editor
 {
     public override void OnInspectorGUI()

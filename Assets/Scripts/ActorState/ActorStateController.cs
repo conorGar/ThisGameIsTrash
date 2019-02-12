@@ -21,12 +21,14 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
     {
         animator = GetComponent<tk2dSpriteAnimator>();
         currentState = defaultState;
+        flags = 0;
         animator.AnimationCompleted = AnimationEventCompleted;
     }
 
     protected void OnEnable()
     {
         currentState = defaultState;
+        flags = 0;
     }
 
     public void Update()
@@ -54,9 +56,10 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
         return currentState.GetState();
     }
 
+    // returns true if any of the flags passed in match.
     public bool IsFlag(int flag)
     {
-        return (flags & flag) == flag; 
+        return (flags & flag) > 0; 
     }
 
     public void SetFlag(int flag)

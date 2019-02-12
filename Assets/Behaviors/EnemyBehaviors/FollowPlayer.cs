@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
+[RequireComponent(typeof(GenericEnemyStateController))]
 public class FollowPlayer : MonoBehaviour {
 
 	public Transform target;
@@ -14,8 +16,14 @@ public class FollowPlayer : MonoBehaviour {
 	private Vector3 smoothVelocity = Vector3.zero;
 	private tk2dSpriteAnimator anim;
 
-	// Use this for initialization
-	void Start () {
+    protected GenericEnemyStateController controller;
+
+    void Awake()
+    {
+        controller = GetComponent<GenericEnemyStateController>();
+    }
+
+    void Start () {
 		anim = GetComponent<tk2dSpriteAnimator>();
         target = PlayerManager.Instance.player.transform;
 	}
@@ -24,51 +32,43 @@ public class FollowPlayer : MonoBehaviour {
         if (PlayerManager.Instance.player != null)
 		    target = PlayerManager.Instance.player.transform; //needs to be in enable because of Dirty Decoy
 
-		if(chasePS != null)
-			chasePS.Play();
+        controller.RemoveFlag((int)EnemyFlag.CHASING);
 	}
-	// Update is called once per frame
+
 	protected void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            float distance = Vector3.Distance(transform.position, target.position);
-            if (distance < walkDistance) { //TODO: 
-                if (iBeLerpin) {
-                    transform.position = Vector3.SmoothDamp(transform.position, target.position, ref smoothVelocity, chaseSpeed);
-                }
-                else {
-                    transform.position = Vector3.MoveTowards(transform.position, target.position, chaseSpeed * Time.deltaTime);
-                }
-                if (!hasSeperateFacingAnimations) {
-                    if ( anim != null && anim.GetClipByName("chase") != null && !anim.IsPlaying("chase"))
-                        anim.Play("chase");
-
-                    if (target.transform.position.x < transform.position.x) {
-                        transform.localScale = new Vector3(-1, 1, 1);
+            if (controller.IsFlag((int)EnemyFlag.CHASING)) {
+                float distance = Vector3.Distance(transform.position, target.position);
+                if (distance < walkDistance) { //TODO: 
+                    if (iBeLerpin) {
+                        transform.position = Vector3.SmoothDamp(transform.position, target.position, ref smoothVelocity, chaseSpeed);
+                    } else {
+                        transform.position = Vector3.MoveTowards(transform.position, target.position, chaseSpeed * Time.deltaTime);
                     }
-                    else {
-                        //if(!anim.IsPlaying("chaseL"))
-                        //anim.Play("chaseL");
-                        transform.localScale = new Vector3(1, 1, 1);
+                    if (!hasSeperateFacingAnimations) {
+                        if (target.transform.position.x < transform.position.x) {
+                            transform.localScale = new Vector3(-1, 1, 1);
+                        } else {
+                            transform.localScale = new Vector3(1, 1, 1);
+                        }
+                    }//otherwise for now those specific actors handle it(Questio)
+                } else if (returnToPreviousWhenFar) {
+                    gameObject.GetComponent<FollowPlayerAfterNotice>().LostSightOfPlayer();
+                    if (this.gameObject.GetComponent<WanderWithinBounds>() != null) {
+                        this.gameObject.GetComponent<WanderWithinBounds>().ReturnToStart();
+
+                    } else if (this.gameObject.GetComponent<RandomDirectionMovement>() != null) {
+                        this.gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
+
                     }
-                }//otherwise for now those specific actors handle it(Questio)
-            }else if(returnToPreviousWhenFar){
-				//gameObject.GetComponent<FollowPlayerAfterNotice>().enabled = true;
-				gameObject.GetComponent<FollowPlayerAfterNotice>().LostSightOfPlayer();
-				if(this.gameObject.GetComponent<WanderWithinBounds>() != null){
-					//this.gameObject.GetComponent<WanderWithinBounds>().enabled = true;
-					this.gameObject.GetComponent<WanderWithinBounds>().ReturnToStart();
-					//this.gameObject.GetComponent<WanderWithinBounds>().SetNewBounds(); 
-				}
-				else if(this.gameObject.GetComponent<RandomDirectionMovement>() != null){
-					this.gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
-				}/*else if(this.gameObject.GetComponent<WanderOnPath>() != null){
-						this.gameObject.GetComponent<WanderOnPath>().ReturnToStart();
-				}*/
 
 
-				GameObject confused = ObjectPool.Instance.GetPooledObject("effect_confused");
-				confused.transform.parent = this.transform;
-				this.enabled = false;
+                    GameObject confused = ObjectPool.Instance.GetPooledObject("effect_confused");
+                    confused.transform.parent = this.transform;
+
+                    controller.SendTrigger(EnemyTrigger.IDLE);
+                    chasePS.Stop();
+                }
             }
         }
 	}

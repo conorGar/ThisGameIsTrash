@@ -8,19 +8,25 @@ public enum EnemyState
     NONE,
     IDLE,
     HIT,
+    NOTICE,
+    CHASE,
     DEAD
 }
 
 public enum EnemyFlag : int
 {
     NONE = 0,
-    MOVING = 1 << 0
+    WALKING = 1 << 0,
+    CHASING = 2 << 0,
+
+    MOVING = WALKING | CHASING
 }
 
 public enum EnemyTrigger
 {
     IDLE,
     HIT,
+    NOTICE,
     DEATH
 }
 

@@ -56,7 +56,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 
                     if (enemy.gameObject.GetComponent<FollowPlayerAfterNotice>() != null) {
                         if (GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER)) {
-                            if (enemy.gameObject.GetComponent<FollowPlayerAfterNotice>().noticedPlayer || !GlobalVariableManager.Instance.IS_HIDDEN) {
+                            if (enemy.gameObject.GetComponent<FollowPlayerAfterNotice>().IsChasing() || !GlobalVariableManager.Instance.IS_HIDDEN) {
                                 TakeDamage(enemy.gameObject);
                             }
                         } else {

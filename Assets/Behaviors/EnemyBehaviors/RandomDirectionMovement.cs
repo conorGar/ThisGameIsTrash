@@ -44,7 +44,7 @@ public class RandomDirectionMovement : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             switch (controller.GetCurrentState()) {
                 case EnemyState.IDLE:
-                    if (controller.IsFlag((int)EnemyFlag.MOVING)) {
+                    if (controller.IsFlag((int)EnemyFlag.WALKING)) {
                         transform.position += direction * movementSpeed * Time.deltaTime;
                         if (direction.x > 0) {
                             if (gameObject.transform.localScale.x < 0) {
@@ -84,13 +84,13 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 		yield return new WaitForSeconds(Random.Range(minMoveTime,maxMoveTime));
 
-        if (controller.IsFlag((int)EnemyFlag.MOVING)) {
+        if (controller.IsFlag((int)EnemyFlag.WALKING)) {
 		    bounceOffObject = 0;
 
 		    if(walkPS !=null)
 			    walkPS.Stop();
 
-            controller.RemoveFlag((int)EnemyFlag.MOVING);
+            controller.RemoveFlag((int)EnemyFlag.WALKING);
 
 		    yield return new WaitForSeconds(stopTime);
             StartMoving();
@@ -107,7 +107,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 
     // Enemy picks a random direction and starts moving.
 	public virtual void StartMoving(){
-        controller.SetFlag((int)EnemyFlag.MOVING);
+        controller.SetFlag((int)EnemyFlag.WALKING);
 
         if (walkPS != null)
 			walkPS.Play();
@@ -117,7 +117,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	}
 
 	public virtual void StopMoving(){
-        controller.RemoveFlag((int)EnemyFlag.MOVING);
+        controller.RemoveFlag((int)EnemyFlag.WALKING);
         walkPS.Stop();
 		StopAllCoroutines();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
