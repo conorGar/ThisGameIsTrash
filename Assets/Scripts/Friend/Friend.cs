@@ -228,7 +228,9 @@ public class Friend : UserDataItem {
         Debug.LogError("GetVariableText wasn't set up for this friend but it was called!");
         return varKey;
     }
-
+	public virtual void PickUpObject(CoonScavengerHuntItem item){
+		
+	}
     // User Data implementation
     public override string UserDataKey()
     {

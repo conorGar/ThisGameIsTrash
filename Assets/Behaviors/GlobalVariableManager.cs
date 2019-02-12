@@ -36,6 +36,9 @@ public class GlobalVariableManager : UserDataItem {
 
     public List<Ev_PinBehavior> EquippedAbilityPins = new List<Ev_PinBehavior> {null,null};
 
+   // public PIN ACTIVE_ABILITY_PIN_ONE = PIN.NONE;
+
+
     public int DEJAVUCOUNT = 0;
     public int CURSEVALUE = 0;
     public int MOMONEYVALUE = 0;

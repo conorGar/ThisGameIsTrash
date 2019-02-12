@@ -1,0 +1,1475 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: Coonelius
+  m_EditorClassIdentifier: 
+  title: CoondeliusDialog
+  dialogIconID: icon_raccoons
+  nodeStore:
+    keys:
+    - Value: d6a4b0b2-79df-408b-ac06-f69c66a6d85a
+    - Value: 6cf979e8-fa0a-4f2a-8f7e-10ebfcaff4e5
+    - Value: e172ec34-b4cd-4c3f-8b4d-05fa0a069ba1
+    - Value: ef1fda04-302e-41d1-897e-3ab4a4c8160f
+    - Value: 8c88d961-3299-49db-8322-7271f26ff0f3
+    - Value: e42da574-530d-4350-beb5-033ed8a6997e
+    - Value: 47fe510d-2e4f-4a1f-8e83-8ff9e5330664
+    - Value: d8a8a4bd-9c87-4511-8541-8d815013e8df
+    - Value: 2fb8cf08-f22d-4799-9fa5-6458309d7468
+    - Value: 5aff9f2b-0125-46a1-8c80-f25c67436b1c
+    - Value: 239b29e1-8369-4b06-8fa0-18a803b5f2aa
+    - Value: dd86cc7c-1676-4a0d-8651-1de84ea07acd
+    - Value: b991df88-b3e6-40de-8905-294c4559857c
+    - Value: 7ed99462-5b63-4a0e-b77c-7bfef5502611
+    - Value: 7b239a06-0160-415c-90f7-446b3fa728d4
+    - Value: 5a35855d-c899-4706-8632-a75c2e031408
+    - Value: 1d6a4c38-cc7e-49b0-a320-1281cc1146b9
+    - Value: e30636b7-7160-47ee-8826-465e999359f7
+    - Value: 5204bde5-0a0f-4274-85a0-e20b92e33559
+    - Value: beea99c4-2ffd-4ac7-8390-2be5220d0868
+    - Value: 94189584-2b44-4d57-a830-862ada67f8cc
+    - Value: e70d8b25-dc6f-4fc9-be59-2bbc454d7d48
+    - Value: dac22060-fd37-4bf0-8826-198a0a717dad
+    - Value: cc8df2c2-f12c-491a-b061-29de20c756c3
+    - Value: f09f3aed-29d8-421a-ac2d-56a634e4767e
+    - Value: 498fba57-6307-457b-a07d-5bb4b4ac447e
+    - Value: 8cfb0613-d442-4d05-a27e-8e1c0a5c5c97
+    - Value: fad828c3-4f5f-4f6b-a52b-2173cedc5caa
+    - Value: 45089516-57fb-459e-a5f3-6591f22e508d
+    - Value: 14a3685c-48c9-4a0a-b586-5526e2b21539
+    - Value: 8188c10e-7378-4b34-adcb-1464b4e7fdf8
+    - Value: 9860b56d-e857-44c9-8c9e-0cabc0951c0c
+    - Value: c2d18676-82a7-462b-a6c0-ab44d788bd7a
+    - Value: ba6bf5e3-ec8d-4f58-8ae6-85aa8e14a70d
+    - Value: ea44da2a-851c-43fc-99ba-b6a34ed8bf5a
+    - Value: 929df876-9ea9-40d6-adca-350883a2acde
+    - Value: 07cd3ef8-eb7c-4b45-ab18-d34ae6a934c9
+    - Value: 7bd707b4-913e-4be9-9ab6-64eb658e83ce
+    - Value: 68d7c1d9-35e2-44ad-9bdf-b5dea59f3f39
+    - Value: 92c50e2e-0818-4947-9e6a-6035b51cf98d
+    - Value: f5593e62-6ccf-4da1-bacf-b7f9aec947bf
+    - Value: 6c98541d-48a4-47de-a217-781d6b476482
+    - Value: 35235e0e-5bd6-4712-9312-41173d67f1f9
+    - Value: 163fc53f-c5a0-42aa-b488-3b40c1bf9185
+    - Value: 68612877-84ac-4aca-9340-b2696796f371
+    - Value: 2ebc5090-5689-478a-b4a7-e035b7a19794
+    - Value: e204dbc9-ce8f-4678-9008-ffa8945c30ba
+    - Value: a36ff543-e1ff-447b-b941-486a74ed1069
+    - Value: e8e70fa2-7083-492d-99ed-4b59ed81f889
+    - Value: af972b90-72d9-4eaf-91ad-68a28059bd5f
+    - Value: 57442c6c-1b19-4ca5-b6e7-6eb52819c38f
+    - Value: bb2ec4ea-0e08-4951-a475-7eda3e76c4dd
+    - Value: 615482fa-867c-48bf-b727-b4d05f4b55e9
+    - Value: ef2c4c13-51bc-4e04-8763-dc947380ce3b
+    - Value: ed3135e2-4038-4f5a-806b-107e7873653f
+    - Value: ec282ed3-6639-4968-8789-33085e369032
+    - Value: 0a0f7929-15eb-4c0c-b4c8-216cc71f604d
+    values:
+    - window:
+        serializedVersion: 2
+        x: 228
+        y: 204
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro
+      speakerName: ???
+      question: 
+      action: CoonsTurn
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: d6a4b0b2-79df-408b-ac06-f69c66a6d85a
+      x: 228
+      y: 204
+      text: Hey hey boys! Look! Another wanna-be garbageman!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6cf979e8-fa0a-4f2a-8f7e-10ebfcaff4e5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 559
+        y: 241
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro1
+      speakerName: 
+      question: 
+      action: Smug
+      isDialogAction: 1
+      friendState: 
+      id:
+        Value: 6cf979e8-fa0a-4f2a-8f7e-10ebfcaff4e5
+      x: 559
+      y: 241
+      text: Don't think I didn't see you walking by, giving me that look.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e172ec34-b4cd-4c3f-8b4d-05fa0a069ba1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 849
+        y: 261
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonIntro2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e172ec34-b4cd-4c3f-8b4d-05fa0a069ba1
+      x: 849
+      y: 261
+      text: 'Let me guess, you''ve come to bask in the glory of the great garbage
+        hunter: <c=g>Coonelius</c>!'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ef1fda04-302e-41d1-897e-3ab4a4c8160f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1154
+        y: 255
+        width: 270
+        height: 290
+      isCollapsed: 0
+      title: CoonIntro3
+      speakerName: Shintaro
+      question: Have you come to bask in the glory of the great Coonelius?
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ef1fda04-302e-41d1-897e-3ab4a4c8160f
+      x: 1154
+      y: 255
+      text: Heheh, yeah <c=g>Coonelius</c> he's probably just another fanboy!
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Never heard of you.
+        node_id:
+          Value: 8c88d961-3299-49db-8322-7271f26ff0f3
+      - text: Actually I was just wandering around and bumped into you by accident.
+        node_id:
+          Value: af972b90-72d9-4eaf-91ad-68a28059bd5f
+      - text: '...'
+        node_id:
+          Value: e204dbc9-ce8f-4678-9008-ffa8945c30ba
+    - window:
+        serializedVersion: 2
+        x: 1479.4521
+        y: 18
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonIntro4
+      speakerName: Yamagata
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8c88d961-3299-49db-8322-7271f26ff0f3
+      x: 1479.4521
+      y: 18
+      text: Mind your tongue, human! You're talking to the coolest raccoon in raccoon
+        school!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e42da574-530d-4350-beb5-033ed8a6997e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1768.4521
+        y: 47
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonIntro5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e42da574-530d-4350-beb5-033ed8a6997e
+      x: 1768.4521
+      y: 47
+      text: He's all we got, man!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 47fe510d-2e4f-4a1f-8e83-8ff9e5330664
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2043.4521
+        y: 222
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonIntro6
+      speakerName: Coonelius
+      question: 
+      action: Calm
+      isDialogAction: 1
+      friendState: 
+      id:
+        Value: 47fe510d-2e4f-4a1f-8e83-8ff9e5330664
+      x: 2043.4521
+      y: 222
+      text: Now now, <c=g>Yamagata</c>, let's not berate this man for his naive cluelessness.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: d8a8a4bd-9c87-4511-8541-8d815013e8df
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2335.4521
+        y: 254
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro7
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: d8a8a4bd-9c87-4511-8541-8d815013e8df
+      x: 2335.4521
+      y: 254
+      text: First, human, you should know my name is <c=g> Coonelius</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2fb8cf08-f22d-4799-9fa5-6458309d7468
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2654.4521
+        y: 238
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: CoonIntro8
+      speakerName: 
+      question: 
+      action: Smug
+      isDialogAction: 1
+      friendState: 
+      id:
+        Value: 2fb8cf08-f22d-4799-9fa5-6458309d7468
+      x: 2654.4521
+      y: 238
+      text: Now, I'm not one to brag. Not one to boast...but I'm <c=g>basically the
+        greatest living creature on this planet</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5aff9f2b-0125-46a1-8c80-f25c67436b1c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2969.4521
+        y: 279
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonIntro9
+      speakerName: Shintaro
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5aff9f2b-0125-46a1-8c80-f25c67436b1c
+      x: 2969.4521
+      y: 279
+      text: Yeah! He's the coolest!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 239b29e1-8369-4b06-8fa0-18a803b5f2aa
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3265.4521
+        y: 297
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro10
+      speakerName: Takeyama
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 239b29e1-8369-4b06-8fa0-18a803b5f2aa
+      x: 3265.4521
+      y: 297
+      text: I'd like to see athiests try to explain HIM!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: dd86cc7c-1676-4a0d-8651-1de84ea07acd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3555.4521
+        y: 306
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonIntro11
+      speakerName: Coonelius
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: dd86cc7c-1676-4a0d-8651-1de84ea07acd
+      x: 3555.4521
+      y: 306
+      text: It's a blessing and a curse, really. Being this great at something is
+        quite the burden.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b991df88-b3e6-40de-8905-294c4559857c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3837.4521
+        y: 313
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonIntro12
+      speakerName: 
+      question: 
+      action: Calm
+      isDialogAction: 1
+      friendState: 
+      id:
+        Value: b991df88-b3e6-40de-8905-294c4559857c
+      x: 3837.4521
+      y: 313
+      text: '...not that you would understand.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7ed99462-5b63-4a0e-b77c-7bfef5502611
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4127.452
+        y: 324
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonIntro13
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7ed99462-5b63-4a0e-b77c-7bfef5502611
+      x: 4127.452
+      y: 324
+      text: But, listen, I mean, I'm an admirable guy, I'm always willing to help
+        those who are under me.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7b239a06-0160-415c-90f7-446b3fa728d4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4414.452
+        y: 326
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonIntro14
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7b239a06-0160-415c-90f7-446b3fa728d4
+      x: 4414.452
+      y: 326
+      text: And while I DO think it's adorable when guys like you think they can actually
+        acieve their dreams...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5a35855d-c899-4706-8632-a75c2e031408
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4726.452
+        y: 317
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonIntro15
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5a35855d-c899-4706-8632-a75c2e031408
+      x: 4726.452
+      y: 317
+      text: '...I feel it''s my duty to show you the harsh reality of your own inadequacy.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1d6a4c38-cc7e-49b0-a320-1281cc1146b9
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5016.452
+        y: 306
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonIntro16
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1d6a4c38-cc7e-49b0-a320-1281cc1146b9
+      x: 5016.452
+      y: 306
+      text: So how about we hold a little <c=g> Trash Scavenger Hunt competition</c>?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e30636b7-7160-47ee-8826-465e999359f7
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5307.452
+        y: 343
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonIntro17
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e30636b7-7160-47ee-8826-465e999359f7
+      x: 5307.452
+      y: 343
+      text: My three admirers here will <c=g>hide 3 unique pieces of trash close by</c>...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5204bde5-0a0f-4274-85a0-e20b92e33559
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5599.452
+        y: 371
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro18
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5204bde5-0a0f-4274-85a0-e20b92e33559
+      x: 5599.452
+      y: 371
+      text: '...and give us <c=g> a hint about where the trash is hidden</c>.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: beea99c4-2ffd-4ac7-8390-2be5220d0868
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5920.452
+        y: 319
+        width: 270
+        height: 239
+      isCollapsed: 0
+      title: CoonIntro19
+      speakerName: 
+      question: Compete against Coonelius in a trash scavenger hunt?
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: beea99c4-2ffd-4ac7-8390-2be5220d0868
+      x: 5920.452
+      y: 319
+      text: You'll have <c=b>until the end of the day</c> to find the three pieces.
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Sure.
+        node_id:
+          Value: 498fba57-6307-457b-a07d-5bb4b4ac447e
+      - text: Not right now.
+        node_id:
+          Value: 8cfb0613-d442-4d05-a27e-8e1c0a5c5c97
+    - window:
+        serializedVersion: 2
+        x: 229
+        y: 534
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonWon
+      speakerName: Coonelius
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 94189584-2b44-4d57-a830-862ada67f8cc
+      x: 229
+      y: 534
+      text: OOO. Looks like you couldn't do it.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e70d8b25-dc6f-4fc9-be59-2bbc454d7d48
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 534
+        y: 542
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonWon1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e70d8b25-dc6f-4fc9-be59-2bbc454d7d48
+      x: 534
+      y: 542
+      text: '...Who saw that coming.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: dac22060-fd37-4bf0-8826-198a0a717dad
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 820
+        y: 568
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonWon2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: dac22060-fd37-4bf0-8826-198a0a717dad
+      x: 820
+      y: 568
+      text: Don't get too upset. You tried your best. It was pretty cute, actually.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: cc8df2c2-f12c-491a-b061-29de20c756c3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1110
+        y: 614
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonWon3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: cc8df2c2-f12c-491a-b061-29de20c756c3
+      x: 1110
+      y: 614
+      text: 'At least you''ll be able to tell your kids one day that you lost to THE
+        <c=g>Coonelius</c>. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f09f3aed-29d8-421a-ac2d-56a634e4767e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1413
+        y: 644
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonWon4
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f09f3aed-29d8-421a-ac2d-56a634e4767e
+      x: 1413
+      y: 644
+      text: Maybe then they won't see you as such a loser.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6241.9043
+        y: 271
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonIntro20
+      speakerName: 
+      question: 
+      action: RiddleSetup
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 498fba57-6307-457b-a07d-5bb4b4ac447e
+      x: 6241.9043
+      y: 271
+      text: Alright, yeah, let's get going then.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 163fc53f-c5a0-42aa-b488-3b40c1bf9185
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6235.9043
+        y: 457
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro21
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8cfb0613-d442-4d05-a27e-8e1c0a5c5c97
+      x: 6235.9043
+      y: 457
+      text: Alright, yeah, I see. I get man. I'd be scared too.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: fad828c3-4f5f-4f6b-a52b-2173cedc5caa
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6524.9043
+        y: 452
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro22
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fad828c3-4f5f-4f6b-a52b-2173cedc5caa
+      x: 6524.9043
+      y: 452
+      text: Well, listen, we'll be hanging around here if you ever feel like trying.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 45089516-57fb-459e-a5f3-6591f22e508d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6808.9043
+        y: 449
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro23
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 45089516-57fb-459e-a5f3-6591f22e508d
+      x: 6808.9043
+      y: 449
+      text: Until then, I hope you put some thought into a "Plan B" for yourself.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 57442c6c-1b19-4ca5-b6e7-6eb52819c38f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 232.52078
+        y: 814
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonLost
+      speakerName: Shintaro
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 14a3685c-48c9-4a0a-b586-5526e2b21539
+      x: 232.52078
+      y: 814
+      text: 'Oh my god. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8188c10e-7378-4b34-adcb-1464b4e7fdf8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 543.52075
+        y: 829
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonLost1
+      speakerName: Yamagata
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8188c10e-7378-4b34-adcb-1464b4e7fdf8
+      x: 543.52075
+      y: 829
+      text: He actually did it.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9860b56d-e857-44c9-8c9e-0cabc0951c0c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 860.52075
+        y: 853
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonLost2
+      speakerName: Takeyama
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9860b56d-e857-44c9-8c9e-0cabc0951c0c
+      x: 860.52075
+      y: 853
+      text: <s>...and faster than Coonelius too...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: c2d18676-82a7-462b-a6c0-ab44d788bd7a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1188.5208
+        y: 855
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonLost3
+      speakerName: Shintaro
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c2d18676-82a7-462b-a6c0-ab44d788bd7a
+      x: 1188.5208
+      y: 855
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ba6bf5e3-ec8d-4f58-8ae6-85aa8e14a70d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1524.5208
+        y: 833
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonLost4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ba6bf5e3-ec8d-4f58-8ae6-85aa8e14a70d
+      x: 1524.5208
+      y: 833
+      text: '...O-Obviously there''s some mistake. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ea44da2a-851c-43fc-99ba-b6a34ed8bf5a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1823.5208
+        y: 850
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonLost5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ea44da2a-851c-43fc-99ba-b6a34ed8bf5a
+      x: 1823.5208
+      y: 850
+      text: You musta let him win, right <c=g>Coonelius</c>?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 929df876-9ea9-40d6-adca-350883a2acde
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2112.5208
+        y: 839
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonLost6
+      speakerName: Yamagata
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 929df876-9ea9-40d6-adca-350883a2acde
+      x: 2112.5208
+      y: 839
+      text: Yeah <c=g>Coonelius</c>! Tell him how it really is!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 07cd3ef8-eb7c-4b45-ab18-d34ae6a934c9
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2418.5208
+        y: 851
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonLost7
+      speakerName: Coonelius
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 07cd3ef8-eb7c-4b45-ab18-d34ae6a934c9
+      x: 2418.5208
+      y: 851
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7bd707b4-913e-4be9-9ab6-64eb658e83ce
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2731.5208
+        y: 883
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonLost8
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7bd707b4-913e-4be9-9ab6-64eb658e83ce
+      x: 2731.5208
+      y: 883
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 68d7c1d9-35e2-44ad-9bdf-b5dea59f3f39
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3077.5208
+        y: 846
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonLost9
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 68d7c1d9-35e2-44ad-9bdf-b5dea59f3f39
+      x: 3077.5208
+      y: 846
+      text: '...let''s just go guys...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 92c50e2e-0818-4947-9e6a-6035b51cf98d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3399.5208
+        y: 875
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonLost10
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 92c50e2e-0818-4947-9e6a-6035b51cf98d
+      x: 3399.5208
+      y: 875
+      text: '...I don''t wanna hang out in stupid <c=g>Filthy Falls</c> anymore....'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f5593e62-6ccf-4da1-bacf-b7f9aec947bf
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3732.5208
+        y: 875
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonLost11
+      speakerName: Yamagata
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f5593e62-6ccf-4da1-bacf-b7f9aec947bf
+      x: 3732.5208
+      y: 875
+      text: '...Y-Yeah! This place is lame! Let''s get out of here!'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6c98541d-48a4-47de-a217-781d6b476482
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4034.5208
+        y: 923
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CoonLost12
+      speakerName: Shintaro
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6c98541d-48a4-47de-a217-781d6b476482
+      x: 4034.5208
+      y: 923
+      text: Yeah! Don't let this victory get to your head, human! You just got lucky!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 35235e0e-5bd6-4712-9312-41173d67f1f9
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4369.5205
+        y: 934
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonLost13
+      speakerName: Takeyama
+      question: 
+      action: CoonExit
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 35235e0e-5bd6-4712-9312-41173d67f1f9
+      x: 4369.5205
+      y: 934
+      text: '...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 242
+        y: 1055
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: RiddleStart
+      speakerName: Shintaro
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 163fc53f-c5a0-42aa-b488-3b40c1bf9185
+      x: 242
+      y: 1055
+      text: Alright. So the <c=g>three</c> of us each <c=g>hid a piece of trash</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 68612877-84ac-4aca-9340-b2696796f371
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 539
+        y: 1080
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RiddleStart1
+      speakerName: 
+      question: 
+      action: GetRiddle
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 68612877-84ac-4aca-9340-b2696796f371
+      x: 539
+      y: 1080
+      text: Here's my <c=g>hint</c>...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2ebc5090-5689-478a-b4a7-e035b7a19794
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 848
+        y: 1072
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RiddleStart2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2ebc5090-5689-478a-b4a7-e035b7a19794
+      x: 848
+      y: 1072
+      text: <c=g><var='myRiddle'></c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 615482fa-867c-48bf-b727-b4d05f4b55e9
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1479.37
+        y: 220
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro4_2
+      speakerName: Yamagata
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e204dbc9-ce8f-4678-9008-ffa8945c30ba
+      x: 1479.37
+      y: 220
+      text: 'Ah! He''s shocked! Speechless in the presence of <c=g>Coonelius</c>! '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a36ff543-e1ff-447b-b941-486a74ed1069
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2039.37
+        y: 482
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro4_3
+      speakerName: Coonelius
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a36ff543-e1ff-447b-b941-486a74ed1069
+      x: 2039.37
+      y: 482
+      text: Well, human, you haven't had the pleasure of meeting me before.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e8e70fa2-7083-492d-99ed-4b59ed81f889
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2353.37
+        y: 497
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: CoonIntro4_4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e8e70fa2-7083-492d-99ed-4b59ed81f889
+      x: 2353.37
+      y: 497
+      text: First, let me say that, yes, what you heard is true...I am <c=g>the greatest
+        garbage hunter on this planet</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5aff9f2b-0125-46a1-8c80-f25c67436b1c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1513.0962
+        y: 425
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonIntro4_3_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: af972b90-72d9-4eaf-91ad-68a28059bd5f
+      x: 1513.0962
+      y: 425
+      text: Oh. I get it. Trying to play it all cool in front of your hero. Cute.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a36ff543-e1ff-447b-b941-486a74ed1069
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 233
+        y: 1296
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CoonReturn
+      speakerName: Coonelius
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 57442c6c-1b19-4ca5-b6e7-6eb52819c38f
+      x: 233
+      y: 1296
+      text: Ah, well, look who comes crawlin' back!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: bb2ec4ea-0e08-4951-a475-7eda3e76c4dd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 556
+        y: 1328
+        width: 270
+        height: 239
+      isCollapsed: 0
+      title: CoonReturn2
+      speakerName: 
+      question: Ready to face off in a trash scavenger hunt?!
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: bb2ec4ea-0e08-4951-a475-7eda3e76c4dd
+      x: 556
+      y: 1328
+      text: Ready to face off against me in a <c=g>trash scavenger hunt</c>?!?
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Sure.
+        node_id:
+          Value: 498fba57-6307-457b-a07d-5bb4b4ac447e
+      - text: Actually, not right now.
+        node_id:
+          Value: 0a0f7929-15eb-4c0c-b4c8-216cc71f604d
+    - window:
+        serializedVersion: 2
+        x: 1174
+        y: 1126
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RiddleStart3
+      speakerName: Yamagata
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 615482fa-867c-48bf-b727-b4d05f4b55e9
+      x: 1174
+      y: 1126
+      text: <c=g><var='myRiddle'></c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ef2c4c13-51bc-4e04-8763-dc947380ce3b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1489
+        y: 1099
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RiddleStart4
+      speakerName: Takeyama
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ef2c4c13-51bc-4e04-8763-dc947380ce3b
+      x: 1489
+      y: 1099
+      text: <c=g><var='myRiddle'></c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ed3135e2-4038-4f5a-806b-107e7873653f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1798
+        y: 1094
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: RiddleStart5
+      speakerName: Coonelius
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ed3135e2-4038-4f5a-806b-107e7873653f
+      x: 1798
+      y: 1094
+      text: Alright human, we each have until <c=b>the end of the day</b> to find
+        the trash.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ec282ed3-6639-4968-8789-33085e369032
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2105
+        y: 1112
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RiddleStart6
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ec282ed3-6639-4968-8789-33085e369032
+      x: 2105
+      y: 1112
+      text: See ya then, loser!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 926
+        y: 1383
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CoonReturn3
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0a0f7929-15eb-4c0c-b4c8-216cc71f604d
+      x: 926
+      y: 1383
+      text: Alright, well, your loss man.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 57442c6c-1b19-4ca5-b6e7-6eb52819c38f
+      responses: []
+  rootNodeId:
+    Value: d6a4b0b2-79df-408b-ac06-f69c66a6d85a

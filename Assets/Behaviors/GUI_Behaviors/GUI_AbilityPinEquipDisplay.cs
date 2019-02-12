@@ -13,17 +13,18 @@ public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		for (int i = 0; i < GlobalVariableManager.Instance.EquippedAbilityPins.Count; i++) {
-			if(GlobalVariableManager.Instance.EquippedAbilityPins[i] != null){
-				equippedAbilityPins[i].SetActive(true);
-				var definition = GlobalVariableManager.Instance.EquippedAbilityPins[i];
+		//for (int i = 0; i < GlobalVariableManager.Instance.EquippedAbilityPins.Count; i++) {
+			//if(GlobalVariableManager.Instance.EquippedAbilityPins[i] != null){
+			//if(GlobalVariableManager.Instance.ACTIVE_ABILITY_PIN_ONE != PIN.NONE){
+				equippedAbilityPins[0].SetActive(true);
+				//var definition = GlobalVariableManager.Instance.EquippedAbilityPins[i];
 
 
-            	equippedAbilityPins[i].GetComponent<tk2dSprite>().SetSprite(definition.GetData().sprite);
-			}
+			//equippedAbilityPins[i].GetComponent<tk2dSprite>().SetSprite(GlobalVariableManager.Instance.ACTIVE_ABILITY_PIN_ONE);
+			//}
 		
             
-        }
+        //}
 	}
 
 	void OnEnable(){
@@ -51,6 +52,8 @@ public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 
 	IEnumerator EquipSequence(){
 			GlobalVariableManager.Instance.EquippedAbilityPins[arrowPos] = selectedPin;
+
+			//GlobalVariableManager.Instance.ACTIVE_ABILITY_PIN_ONE = selectedPin.GetData().Type;
 
 			equippedAbilityPins[arrowPos].SetActive(true);
 			equippedAbilityPins[arrowPos].GetComponent<tk2dSprite>().SetSprite(selectedPin.GetData().sprite);

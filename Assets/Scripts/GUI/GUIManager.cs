@@ -25,6 +25,7 @@ public class GUIManager : MonoBehaviour {
     public GUI_SlabTrashGiveHUD slabTrashGiveHUD;
 	public GameObject SlabTrashNeededDisplay;
 	public GameObject StoneHandNeededDisplay;
+	public GUI_RockItemHUD coonScavengerHUD;
 
     // Hub related
     public GameObject BaseStatHUD;

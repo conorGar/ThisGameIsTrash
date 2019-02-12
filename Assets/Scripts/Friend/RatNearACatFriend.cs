@@ -14,12 +14,12 @@ public class RatNearACatFriend : Friend
     {
 		switch (GetFriendState()) {
 			case "INTRO":
-				/*if(transform.parent.name == "Hub" || GlobalVariableManager.Instance.ROOM_NUM != 101){
+				if(transform.parent.name == "Hub" || GlobalVariableManager.Instance.ROOM_NUM != 101){
 				day = CalendarManager.Instance.currentDay;
 				}else{
 				timeStand.gameObject.SetActive(false);
 				day = 99; // makes it not appear at hub until found, but appears in w1 everyday
-				}*/
+				}
 				break;
 			case "HUB_INTRO":
 				day = CalendarManager.Instance.currentDay;
@@ -125,7 +125,11 @@ public class RatNearACatFriend : Friend
     	timeStand = neededObjs[1].GetComponent<Hub_TimeUpgradeStand>();
     }
 
-
+	// User Data implementation
+    public override string UserDataKey()
+    {
+        return "RatNearACat";
+    }
     public override SimpleJSON.JSONObject Save()
     {
         var json_data = new SimpleJSON.JSONObject();
