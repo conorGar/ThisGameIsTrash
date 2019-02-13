@@ -34,7 +34,7 @@ public class GlobalVariableManager : UserDataItem {
         get { return (PIN)pinsViewedValue; }
     }
 
-    public List<Ev_PinBehavior> EquippedAbilityPins = new List<Ev_PinBehavior> {null,null};
+    public List<PIN> EquippedAbilityPins = new List<PIN> {PIN.NONE,PIN.NONE};
 
    // public PIN ACTIVE_ABILITY_PIN_ONE = PIN.NONE;
 
@@ -287,6 +287,9 @@ public class GlobalVariableManager : UserDataItem {
         // Gameplay and collectables.
         json_data["DAY_NUMBER"] = DAY_NUMBER;
 
+        json_data["ABILITY_PIN_1"] = (long)EquippedAbilityPins[0];
+		json_data["ABILITY_PIN_2"] = (long)EquippedAbilityPins[1];
+
         json_data["pinsDiscoveredValue"] = pinsDiscoveredValue;
         json_data["pinsEquippedValue"] = pinsEquippedValue;
         json_data["pinsViewedValue"] = pinsViewedValue;
@@ -341,6 +344,9 @@ public class GlobalVariableManager : UserDataItem {
         pinsEquippedValue = json_data["pinsEquippedValue"].AsLong;
         pinsViewedValue = json_data["pinsViewedValue"].AsLong;
 
+
+        EquippedAbilityPins[0] = (PIN)json_data["ABILITY_PIN_1"].AsLong;
+		EquippedAbilityPins[1] = (PIN)json_data["ABILITY_PIN_2"].AsLong;
 
         STANDARD_GARBAGE_DISCOVERED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_DISCOVERED"].AsInt;
         STANDARD_GARBAGE_VIEWED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_VIEWED"].AsInt;

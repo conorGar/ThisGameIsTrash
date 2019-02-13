@@ -20,7 +20,7 @@ public class JimSpecialAbilityManager : MonoBehaviour
 			Debug.Log("Special Button Pressed");
 			//Link To The Trash
 
-			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH) && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= trashCost){
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH)){ //&& GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= trashCost){
 				Debug.Log("Link To The Trash Activate");
 				if(!chargingSpin){
 					chargingSpin = true;

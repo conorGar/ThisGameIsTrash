@@ -9,28 +9,32 @@ public class GUI_AbilityPinsHUD : MonoBehaviour
 	public TextMeshProUGUI pinOneCost;
 	public TextMeshProUGUI pinTwoCost;
 	public PinConfig pinConfig;
+	PinDefinition pinData;
+
+	private Dictionary<PIN, PinDefinition> PINLOOKUP = new Dictionary<PIN, PinDefinition>();
 	// Use this for initialization
-	void Start ()
-	{
-		for (int i = 0; i < GlobalVariableManager.Instance.EquippedAbilityPins.Count; i++) {
-			if(GlobalVariableManager.Instance.EquippedAbilityPins[i] != null){
-				equippedAbilityPins[i].SetActive(true);
-			}
-			var definition = GlobalVariableManager.Instance.EquippedAbilityPins[i];
 
-
-            equippedAbilityPins[i].GetComponent<tk2dSprite>().SetSprite(definition.GetData().sprite);
-            
+	void Awake(){
+		for (int i = 0; i < pinConfig.pinList.Count; ++i)
+        {
+            PINLOOKUP[pinConfig.pinList[i].Type] = pinConfig.pinList[i];
+			
         }
-		/*for (int i = 0; i < pinConfig.pinList.Count; i++) {
-            var definition = pinConfig.pinList[i];
 
-            if (definition.abilityPin == true && GlobalVariableManager.Instance.IsPinEquipped((PIN)definition.pinValue)) {
-                count += definition.ppValue;
-            }
-        }
-        */
+
+
+		if(GlobalVariableManager.Instance.EquippedAbilityPins[0] != PIN.NONE){
+			pinData = PINLOOKUP[GlobalVariableManager.Instance.EquippedAbilityPins[0]];
+			equippedAbilityPins[0].SetActive(true);
+			equippedAbilityPins[0].GetComponent<tk2dSprite>().SetSprite(pinData.sprite);
+		}if(GlobalVariableManager.Instance.EquippedAbilityPins[1] != PIN.NONE){
+			pinData = PINLOOKUP[GlobalVariableManager.Instance.EquippedAbilityPins[1]];
+			equippedAbilityPins[1].SetActive(true);
+			equippedAbilityPins[1].GetComponent<tk2dSprite>().SetSprite(pinData.sprite);
+		}
+
 	}
+
 	
 	// Update is called once per frame
 	void Update ()

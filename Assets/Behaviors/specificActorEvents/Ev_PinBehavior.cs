@@ -235,7 +235,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 				if(GetData().abilityPin == true){
 					PinManager.Instance.abilityPinEquipHUD.gameObject.SetActive(true);
-					PinManager.Instance.abilityPinEquipHUD.selectedPin = this;
+					PinManager.Instance.abilityPinEquipHUD.selectedPin = pinData.Type;
 				}
 
 			}else if(IsPinEquipped()){//Unequip pin

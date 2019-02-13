@@ -5,26 +5,23 @@ using System.Collections.Generic;
 public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 {
 	int arrowPos;
-	public Ev_PinBehavior selectedPin;
+	public PIN selectedPin;
 	public List<GameObject> equippedAbilityPins = new List<GameObject>();
 	public GameObject selectionArrow;
 	public List<GameObject> arrowPositions = new List<GameObject>();
-
+	PinDefinition pinData;
 	// Use this for initialization
 	void Start ()
 	{
-		//for (int i = 0; i < GlobalVariableManager.Instance.EquippedAbilityPins.Count; i++) {
-			//if(GlobalVariableManager.Instance.EquippedAbilityPins[i] != null){
-			//if(GlobalVariableManager.Instance.ACTIVE_ABILITY_PIN_ONE != PIN.NONE){
-				equippedAbilityPins[0].SetActive(true);
-				//var definition = GlobalVariableManager.Instance.EquippedAbilityPins[i];
-
-
-			//equippedAbilityPins[i].GetComponent<tk2dSprite>().SetSprite(GlobalVariableManager.Instance.ACTIVE_ABILITY_PIN_ONE);
-			//}
-		
-            
-        //}
+		if(GlobalVariableManager.Instance.EquippedAbilityPins[0] != null){
+			pinData = PinManager.Instance.GetPin(GlobalVariableManager.Instance.EquippedAbilityPins[0]);
+			equippedAbilityPins[0].SetActive(true);
+			equippedAbilityPins[0].GetComponent<tk2dSprite>().SetSprite(pinData.sprite);
+		}if(GlobalVariableManager.Instance.EquippedAbilityPins[1] != null){
+			pinData = PinManager.Instance.GetPin(GlobalVariableManager.Instance.EquippedAbilityPins[1]);
+			equippedAbilityPins[1].SetActive(true);
+			equippedAbilityPins[1].GetComponent<tk2dSprite>().SetSprite(pinData.sprite);
+		}
 	}
 
 	void OnEnable(){
@@ -43,6 +40,7 @@ public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 			/*if(GlobalVariableManager.Instance.EquippedAbilityPins[arrowPos] != null){
 				GlobalVariableManager.Instance.PP_STAT -= GlobalVariableManager.Instance.EquippedAbilityPins[arrowPos].GetData().ppValue; //give back pp from previously equipped pin
 			}*/
+			pinData = PinManager.Instance.GetPin(selectedPin);
 			StartCoroutine("EquipSequence");
 
 		}
@@ -56,7 +54,7 @@ public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 			//GlobalVariableManager.Instance.ACTIVE_ABILITY_PIN_ONE = selectedPin.GetData().Type;
 
 			equippedAbilityPins[arrowPos].SetActive(true);
-			equippedAbilityPins[arrowPos].GetComponent<tk2dSprite>().SetSprite(selectedPin.GetData().sprite);
+			equippedAbilityPins[arrowPos].GetComponent<tk2dSprite>().SetSprite(pinData.sprite);
 			yield return new WaitForSeconds(.4f);
 			GameStateManager.Instance.PopState();
 	
