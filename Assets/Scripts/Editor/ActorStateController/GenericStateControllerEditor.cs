@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using JimEditor = GenericStateControllerEditor<JimState, JimTrigger, JimFlag>;
+using EnemyEditor = GenericStateControllerEditor<EnemyState, EnemyTrigger, EnemyFlag>;
 
+// Hooks up a nice custom inspector on any state controllers we build.
 [CustomEditor(typeof(JimStateController))]
-public class JimStateControllerEditor : GenericStateControllerEditor<JimState, JimTrigger, JimFlag>
-{
-}
+public class JimStateControllerEditor : JimEditor { }
 
 [CustomEditor(typeof(RatStateController))]
-public class RatStateControllerEditor : GenericStateControllerEditor<EnemyState, EnemyTrigger, EnemyFlag>
-{
-}
+public class RatStateControllerEditor : EnemyEditor { }
 
 [CustomEditor(typeof(DuckStateController))]
-public class DuckStateControllerEditor : GenericStateControllerEditor<EnemyState, EnemyTrigger, EnemyFlag>
-{
-}
+public class DuckStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(DogStateController))]
+public class DogStateControllerEditor : EnemyEditor { }
 
 public class GenericStateControllerEditor<State_Type, Trigger_Type, Flag_Type> : Editor
 {

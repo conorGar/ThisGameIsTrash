@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 33129041071783440}
   - component: {fileID: 23361788767774718}
   - component: {fileID: 114897125545691324}
+  - component: {fileID: 114249686244017498}
   - component: {fileID: 61268702648429060}
   - component: {fileID: 114808193333466140}
   - component: {fileID: 114373584994059236}
@@ -268,13 +269,24 @@ MonoBehaviour:
   library: {fileID: 114010995895570102, guid: 33036ad7c5ae5bf4f9ee04607f3ec062, type: 2}
   defaultClipId: 1
   playAutomatically: 1
+--- !u!114 &114249686244017498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1585751386897454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c774920917ee147a7b4b8198a9e469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114334859528131092
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585751386897454}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
@@ -282,7 +294,7 @@ MonoBehaviour:
   target: {fileID: 0}
   walkDistance: 9.2
   chaseSpeed: 4
-  hasSeperateFacingAnimations: 1
+  hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198419328894692054}
   returnToPreviousWhenFar: 0
@@ -317,7 +329,6 @@ MonoBehaviour:
   noticeThresholdY: 0
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
-  noticedPlayer: 0
 --- !u!114 &114808193333466140
 MonoBehaviour:
   m_ObjectHideFlags: 1

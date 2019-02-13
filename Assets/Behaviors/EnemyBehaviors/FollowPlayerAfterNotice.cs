@@ -26,8 +26,8 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 
 	protected void OnEnable(){
 		if(sleepingEnemy){
-			//gameObject.GetComponent<tk2dSpriteAnimator>().Play("sleep");
-			sleepingPS.SetActive(true);
+            GetComponent<Animator>().enabled = true;
+            sleepingPS.SetActive(true);
 		}
 	}
 
@@ -40,8 +40,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
                     if ((PlayerManager.Instance.player.transform.position.x < gameObject.transform.position.x && gameObject.transform.localScale.x < 0) || (PlayerManager.Instance.player.transform.position.x > gameObject.transform.position.x && gameObject.transform.localScale.x > 0)) {//make sure is facing the direction of the player..
                         if (!GlobalVariableManager.Instance.IS_HIDDEN) {
                             if (sleepingEnemy) {
-                                gameObject.GetComponent<Animator>().enabled = false;
-                                gameObject.transform.localScale = Vector3.one;//set to proper scale from sleeping
+                                GetComponent<Animator>().enabled = false;
                                 sleepingPS.SetActive(false);
                             }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class DuckStateController : GenericEnemyStateController
+public class DogStateController : GenericEnemyStateController
 {
     protected new void Awake()
     {
@@ -32,6 +32,10 @@ public class DuckStateController : GenericEnemyStateController
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
                 SetFlag((int)EnemyFlag.CHASING);
                 currentState = new EnemyChase();
+                break;
+            case EnemyState.PREPARE:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
+                currentState = new EnemyLunge();
                 break;
         }
     }

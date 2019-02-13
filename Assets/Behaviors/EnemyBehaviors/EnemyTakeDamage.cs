@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
+[RequireComponent(typeof(GenericEnemyStateController))]
 public class EnemyTakeDamage : MonoBehaviour {
 
 
@@ -61,8 +62,6 @@ public int currentHp;
 public int meleeDmgBonus = 0;
 	//[HideInInspector]
 public bool bossSpawnedEnemy;
-	[HideInInspector]
-public bool dontStopWhenHit; //usually temporary and set by other behavior, such as 'LungeAtPlayer.cs'
 
 	float swingDirectionSide; // uses scale to see if swinging left or right
 
@@ -94,7 +93,14 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	Vector2 startScale;
 
-	void OnEnable(){
+    protected GenericEnemyStateController controller;
+
+    void Awake()
+    {
+        controller = GetComponent<GenericEnemyStateController>();
+    }
+
+    void OnEnable(){
 		if(bossSpawnedEnemy){
 			bossSpawnedEnemy = false;
 		}
@@ -281,7 +287,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
 						}
-				if(!moveWhenHit && !dontStopWhenHit){
+				if(!moveWhenHit && controller.GetCurrentState() != EnemyState.LUNGE){
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 				}
 
@@ -378,7 +384,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
                         }*/
 					meleeSwingDirection = "plankSwing";
 				}
-				if(!moveWhenHit && !dontStopWhenHit && !hitByThrownObject ){
+				if(!moveWhenHit && !hitByThrownObject && controller.GetCurrentState() != EnemyState.LUNGE) {
 					GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 				}
 

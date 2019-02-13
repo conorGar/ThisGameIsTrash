@@ -10,6 +10,9 @@ public enum EnemyState
     HIT,
     NOTICE,
     CHASE,
+    PREPARE,
+    LUNGE,
+    RECOVER,
     DEAD
 }
 
@@ -27,6 +30,9 @@ public enum EnemyTrigger
     IDLE,
     HIT,
     NOTICE,
+    PREPARE,
+    LUNGE,
+    RECOVER,
     DEATH
 }
 
