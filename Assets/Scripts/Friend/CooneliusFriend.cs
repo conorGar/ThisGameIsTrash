@@ -14,6 +14,8 @@ public class CooneliusFriend : Friend
 	string riddle3Text;// given by CoonItemSpawner
 	int riddleGetCounter;
 
+
+
 	public override void GenerateEventData()
     {
 		switch (GetFriendState()) {
@@ -67,32 +69,82 @@ public class CooneliusFriend : Friend
                 }
                 //GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
-			case "INVITE_TO_THIRD_SCREENING":
-                nextDialog = "Jumbo3";
+			case "INTRO_LOST":
+                nextDialog = "CoonLost";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
-            case "MISSED_SCREENING":
-				nextDialog = "JumboMissed";
+            case "INTRO_WON":
+				nextDialog = "CoonWon";
            	    GetComponent<ActivateDialogWhenClose>().Execute();
             	break;
-           	case "MISSED_SECOND_SCREENING":
-				nextDialog = "JumboMissed2_1";
-                GetComponent<ActivateDialogWhenClose>().Execute();
-           		break;
             case "END":
                 break;
         }
 	}
+	public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
+    {
+        yield return new WaitForSeconds(.3f);
+
+        switch (GetFriendState()) {
+            case "INTRO":
+             
+                SetFriendState("INTRO_NOTPLAYED");
+                break;
+			case "INTRO_LOST":
+             
+                SetFriendState("INTRO_NOTPLAYED");
+                break;
+			case "INTRO_WON":
+             
+                SetFriendState("INTRO_END");
+                break;
+            case "END":
+                break;
+        }
+
+
+        yield return base.OnFinishDialogEnumerator();
+
+
+    }
+    public override bool DayEndEventCheck(){
+		switch (GetFriendState()) {
+            case "IN_COMPETITION":
+            	StartCoroutine("EndDaySetup");
+                return true;
+                break;
+        }
+
+        return false;
+    }
 
 	public void RiddleSetup(){
-		//fade to black and position coons properly, then return to riddleStart Dialog
+		StartCoroutine("RiddleSetupSequence");
 	}
+
+	IEnumerator RiddleSetupSequence(){
+		//fade to black and position coons properly, then return to riddleStart Dialog
+		Ev_FadeHelper.Instance.StartCoroutine("Fade");
+		yield return new WaitForSeconds(1f);
+		Ev_FadeHelper.Instance.FadeIn();
+		dialogManager.JumpToNewNode("RiddleStart");
+		dialogManager.ReturnFromAction();
+	}
+
 
 
 	public void CoonsTurn(){
-
+		StartCoroutine("CoonsTurnSequence");
 
 	}
+
+	IEnumerator CoonsTurnSequence(){
+		//show coons turning around to face player
+		CamManager.Instance.mainCamPostProcessor.profile = null;
+		yield return new WaitForSeconds(1f);
+		dialogManager.ReturnFromAction();
+	}
+
 
 	void ChooseLocations(){
 		int pos1 = Random.Range(0,possibleLocations.Count);
@@ -119,6 +171,33 @@ public class CooneliusFriend : Friend
 
 
 	}
+
+	public IEnumerator EndDaySetup(){
+		//move the player to the raccoon room and initiate either the lost or win dialog
+		Ev_FadeHelper.Instance.StartCoroutine("Fade");
+		yield return new WaitForSeconds(1.5f);
+		//TODO: Move player to d2 pos
+
+		Room myRoom = null;
+
+		//TODO: better way to get coon room value?!?
+		for(int i = 0; i < RoomManager.Instance.rooms.Count; i++){
+			if(RoomManager.Instance.rooms[i].name == "d2"){
+				myRoom = RoomManager.Instance.rooms[i];
+			}
+		}
+	
+		RoomManager.Instance.currentRoom  = myRoom;
+		Ev_FadeHelper.Instance.FadeIn();
+		yield return new WaitForSeconds(1.5f);
+		if(pickedUpItems.Count >2){
+			SetFriendState("INTRO_LOST");
+		}else{
+			SetFriendState("INTRO_WON");
+		}
+	}
+
+
 	public override string GetVariableText(string varKey)
     {
         switch (varKey) {

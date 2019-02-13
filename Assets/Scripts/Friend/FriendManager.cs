@@ -81,6 +81,16 @@ public class FriendManager : MonoBehaviour {
         }
     }
 
+    public bool IsThereDayEndEvent(){
+		for (int i = 0; i < friends.Count; i++) {
+            if(friends[i].DayEndEventCheck()){
+            	return true;
+            };
+        }
+
+        return false;
+    }
+
     public void EnableProperFriends(int worldNum){
     	Debug.Log("World Num:" + worldNum);
     	Debug.Log("World Count: " + worlds.Count);

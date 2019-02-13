@@ -160,6 +160,10 @@ public class Friend : UserDataItem {
 			myMapIcon.gameObject.transform.parent = this.transform;
     }
 
+    public virtual bool DayEndEventCheck(){
+    	return false;
+    }
+
     public virtual void OnFinishDialog()
     {
         //CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
