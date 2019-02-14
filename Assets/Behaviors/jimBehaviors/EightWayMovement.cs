@@ -12,6 +12,10 @@ public class EightWayMovement : MonoBehaviour {
     private Vector2 movement;
     private Vector2 momentum;
     public AudioSource myFootstepSource;
+
+    public float footstepWalkInterval = .2f;
+    public float footstepCarryInterval = .4f;
+    public float nextFootstepTime = 0f;
  
     bool isDiagonal = false;
     bool noDelayStarted = false;
@@ -47,7 +51,9 @@ public class EightWayMovement : MonoBehaviour {
 
         movement = new Vector2(0f, 0f);
         StopMovement();
-        walkCloudPS.GetComponent<ParticleSystem>().Stop();
+
+        if (walkCloudPS.GetComponent<ParticleSystem>().isPlaying)
+            walkCloudPS.GetComponent<ParticleSystem>().Stop();
 
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }
@@ -116,7 +122,8 @@ public class EightWayMovement : MonoBehaviour {
                 } else if (anim != null) {
                     
                     if (movement == Vector2.zero) {
-                        walkCloudPS.GetComponent<ParticleSystem>().Stop();
+                        if (walkCloudPS.GetComponent<ParticleSystem>().isPlaying)
+                            walkCloudPS.GetComponent<ParticleSystem>().Stop();
 
                         jimStateController.RemoveFlag((int)JimFlag.MOVING);
 
@@ -132,8 +139,8 @@ public class EightWayMovement : MonoBehaviour {
             				Debug.Log("got here- sneaky scrapper");
             			}
 
-                        walkCloudPS.SetActive(true); //just have this here so it only happens once
-                        walkCloudPS.GetComponent<ParticleSystem>().Play();
+                        if (!walkCloudPS.GetComponent<ParticleSystem>().isPlaying)
+                            walkCloudPS.GetComponent<ParticleSystem>().Play();
                     }
                 }
             }
@@ -160,17 +167,11 @@ public class EightWayMovement : MonoBehaviour {
                 }
 
                 transform.Translate(movement * speed * Time.deltaTime);
-                /*//show legs and change to current animation of Jim
-                if (!clipOverride && myLegs.activeInHierarchy) {
 
-                    legAnim.Play(anim.CurrentClip.name);
-                    legAnim.PlayFromFrame(anim.CurrentFrame);
-                }*/
+                FootstepSounds();
                      
             // If the player is not inputting a move or is in a state where he is not allowed to move.
             } else {
-                CancelInvoke("FootstepSounds");
-
                 transform.Translate(momentum * Time.deltaTime);
             }
 
@@ -196,35 +197,25 @@ public class EightWayMovement : MonoBehaviour {
 
     public void StopMovement(){
         GetComponent<JimStateController>().RemoveFlag((int)JimFlag.MOVING);
-
-        CancelInvoke();
-        //StopAllCoroutines();
-
-    	this.enabled = true;
     }
 
     void StartMovement()
     {
-        var controller = GetComponent<JimStateController>();
-
-        if (!controller.IsFlag((int)JimFlag.MOVING)) {
-            controller.SetFlag((int)JimFlag.MOVING);
-
-            if (controller.GetCurrentState() == JimState.CARRYING) {
-
-                InvokeRepeating("FootstepSounds", .2f, .4f); //slower footsteps when carrying something
-            } else {
-                InvokeRepeating("FootstepSounds", .2f, .2f);
-            }
-
-        }
+        GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
     }
 
     void FootstepSounds(){
-        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+        if (Time.time > nextFootstepTime) {
             RandomizeSfx(footsteps2, footsteps1);
+
+            if (GetComponent<JimStateController>().GetCurrentState() == JimState.CARRYING) {
+                nextFootstepTime = Time.time + footstepCarryInterval;
+            } else {
+                nextFootstepTime = Time.time + footstepWalkInterval;
+            }
         }
     }
+
 	public void RandomizeSfx(params AudioClip[] clips){
 		myFootstepSource.volume = GlobalVariableManager.Instance.MASTER_SFX_VOL;
 		int randomIndex = Random.Range(0, clips.Length);
@@ -252,7 +243,9 @@ public class EightWayMovement : MonoBehaviour {
             if (stateType != typeof(GameplayState)) {
                 movement = new Vector2(0f, 0f);
                 StopMovement();
-                walkCloudPS.GetComponent<ParticleSystem>().Stop();
+
+                if (walkCloudPS.GetComponent<ParticleSystem>().isPlaying)
+                    walkCloudPS.GetComponent<ParticleSystem>().Stop();
             }
 
             if (stateType == typeof(RespawnState)) {

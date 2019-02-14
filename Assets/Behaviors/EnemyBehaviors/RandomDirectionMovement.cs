@@ -87,7 +87,7 @@ public class RandomDirectionMovement : MonoBehaviour {
         if (controller.IsFlag((int)EnemyFlag.WALKING)) {
 		    bounceOffObject = 0;
 
-		    if(walkPS !=null)
+		    if(walkPS !=null && walkPS.isPlaying)
 			    walkPS.Stop();
 
             controller.RemoveFlag((int)EnemyFlag.WALKING);
@@ -109,7 +109,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 	public virtual void StartMoving(){
         controller.SetFlag((int)EnemyFlag.WALKING);
 
-        if (walkPS != null)
+        if (walkPS != null && !walkPS.isPlaying)
 			walkPS.Play();
 
 		direction = (new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0.0f)).normalized;
@@ -118,7 +118,10 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 	public virtual void StopMoving(){
         controller.RemoveFlag((int)EnemyFlag.WALKING);
-        walkPS.Stop();
+        
+        if (walkPS.isPlaying)
+            walkPS.Stop();
+
 		StopAllCoroutines();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 	}
