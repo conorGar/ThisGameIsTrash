@@ -224,7 +224,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 			//Debug.Log("Collision with weapon: ");
 
-		}else if(melee.tag == "pObj_bullet"){
+		}else if(melee.tag == "pObj_bullet" || melee.tag == "TrashBomb"){
+			Debug.Log("collided with nonmelee weapon!!! :D      -x-x-x-");
 			if(!takingDamage){
 				StartCoroutine("NonMeleeHit");
 				melee.GetComponent<Ev_FallingProjectile>().Fell();

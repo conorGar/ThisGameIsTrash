@@ -65,7 +65,7 @@ public enum PIN : long
     COUNTSCRAPULA =             (long)1 << 56,
     DIRTYDECOY =                (long)1 << 57,
     IRRADIATED =                (long)1 << 58,
-    Test60 =                    (long)1 << 59,
+    A_TRASHBOMB =               (long)1 << 59,
     Test61 =                    (long)1 << 60,
     Test62 =                    (long)1 << 61,
     Test63 =                    (long)1 << 62,

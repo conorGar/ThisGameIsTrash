@@ -7,7 +7,9 @@ public class JimSpecialAbilityManager : MonoBehaviour
 	bool chargingSpin;
 	public GameObject spinAttack;
 
-	public int trashCost = 1;
+
+	int whichAbilityActivated;
+	//public int trashCost = 1;
 
 	 void Start ()
 	{
@@ -16,16 +18,26 @@ public class JimSpecialAbilityManager : MonoBehaviour
 	
 	void Update(){
 
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL)){
+		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL) || ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL2)){
 			Debug.Log("Special Button Pressed");
 			//Link To The Trash
-
-			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH)){ //&& GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= trashCost){
-				Debug.Log("Link To The Trash Activate");
+			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL)){
+				whichAbilityActivated = 0;
+			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL2)){
+				whichAbilityActivated = 1;
+			}
+			if(GlobalVariableManager.Instance.EquippedAbilityPins[whichAbilityActivated] == PIN.LINKTOTRASH){
+							Debug.Log("Link To The Trash Activate");
 				if(!chargingSpin){
 					chargingSpin = true;
 					StartCoroutine("SpinAttack");
 				}
+			}
+
+			//if(GlobalVariableManager.Instance.IsPinEquipped(PIN.A_TRASHBOMB) && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 1){
+			if(GlobalVariableManager.Instance.EquippedAbilityPins[whichAbilityActivated] == PIN.A_TRASHBOMB&& GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 1){
+				Debug.Log("Trash Bomb activate");
+				DropBomb();
 			}
 
 
@@ -52,7 +64,7 @@ public class JimSpecialAbilityManager : MonoBehaviour
 		//givenKey = INPUTACTION.SPECIAL;
 		yield return new WaitForSeconds(.3f);
 		spinAttack.SetActive(true);
-		DepleteTrash();
+		//DepleteTrash();
 		chargingSpin = false;
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		yield return new WaitForSeconds(.5f);
@@ -61,8 +73,14 @@ public class JimSpecialAbilityManager : MonoBehaviour
 		spinAttack.SetActive(false);
 	}
 
+	void DropBomb(){
+		DepleteTrash(1);
+		ObjectPool.Instance.GetPooledObject("TrashBomb", gameObject.transform.position);
+	}
 
-	void DepleteTrash(){
+
+
+	void DepleteTrash(int trashCost){
 		CancelInvoke("LostTrashDeactivate");
 		GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] -= trashCost;
 		GUIManager.Instance.lostTrash.text = "-" + trashCost.ToString();
