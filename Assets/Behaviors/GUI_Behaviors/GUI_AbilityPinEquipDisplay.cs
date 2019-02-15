@@ -13,18 +13,28 @@ public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		if(GlobalVariableManager.Instance.EquippedAbilityPins[0] != null){
-			pinData = PinManager.Instance.GetPin(GlobalVariableManager.Instance.EquippedAbilityPins[0]);
-			equippedAbilityPins[0].SetActive(true);
-			equippedAbilityPins[0].GetComponent<tk2dSprite>().SetSprite(pinData.sprite);
-		}if(GlobalVariableManager.Instance.EquippedAbilityPins[1] != null){
-			pinData = PinManager.Instance.GetPin(GlobalVariableManager.Instance.EquippedAbilityPins[1]);
-			equippedAbilityPins[1].SetActive(true);
-			equippedAbilityPins[1].GetComponent<tk2dSprite>().SetSprite(pinData.sprite);
-		}
+		
 	}
 
 	void OnEnable(){
+
+		if(GlobalVariableManager.Instance.EquippedAbilityPins[0] != PIN.NONE){
+			pinData = PinManager.Instance.GetPin(GlobalVariableManager.Instance.EquippedAbilityPins[0]);
+			equippedAbilityPins[0].SetActive(true);
+			equippedAbilityPins[0].GetComponent<tk2dSprite>().SetSprite(pinData.sprite);
+		}else{
+			equippedAbilityPins[0].SetActive(false);
+		}
+
+
+		if(GlobalVariableManager.Instance.EquippedAbilityPins[1] != PIN.NONE){
+			pinData = PinManager.Instance.GetPin(GlobalVariableManager.Instance.EquippedAbilityPins[1]);
+			equippedAbilityPins[1].SetActive(true);
+			equippedAbilityPins[1].GetComponent<tk2dSprite>().SetSprite(pinData.sprite);
+		}else{
+			equippedAbilityPins[1].SetActive(false);
+		}
+
 		GameStateManager.Instance.PushState(typeof(MovieState));
 	}
 

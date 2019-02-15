@@ -96,6 +96,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	Vector2 startScale;
 
+	bool damagesArmoredEnemy;
+
+
 	void OnEnable(){
 		if(bossSpawnedEnemy){
 			bossSpawnedEnemy = false;
@@ -226,6 +229,11 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 		}else if(melee.tag == "pObj_bullet" || melee.tag == "TrashBomb"){
 			Debug.Log("collided with nonmelee weapon!!! :D      -x-x-x-");
+
+			if(melee.tag == "TrashBomb"){
+				damagesArmoredEnemy = true;
+			}
+
 			if(!takingDamage){
 				StartCoroutine("NonMeleeHit");
 				melee.GetComponent<Ev_FallingProjectile>().Fell();
@@ -263,7 +271,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	}
 
 	IEnumerator NonMeleeHit(){
-		if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
+		if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || damagesArmoredEnemy)){
 			if(!takingDamage){
 				takingDamage = true;
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
@@ -307,6 +315,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				//Debug.Log("**AND HERE!!!!!!!!***");
 				yield return new WaitForSeconds(.4f);
 				StartCoroutine( "StopKnockback",0f);
+				damagesArmoredEnemy = false;
 				StartCoroutine("AfterHit");
 
 			}

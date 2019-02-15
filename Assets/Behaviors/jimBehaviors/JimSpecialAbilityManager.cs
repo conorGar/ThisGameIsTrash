@@ -26,6 +26,8 @@ public class JimSpecialAbilityManager : MonoBehaviour
 			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL2)){
 				whichAbilityActivated = 1;
 			}
+
+			//-------------------- Link To the Trash -------------------
 			if(GlobalVariableManager.Instance.EquippedAbilityPins[whichAbilityActivated] == PIN.LINKTOTRASH){
 							Debug.Log("Link To The Trash Activate");
 				if(!chargingSpin){
@@ -34,10 +36,21 @@ public class JimSpecialAbilityManager : MonoBehaviour
 				}
 			}
 
-			//if(GlobalVariableManager.Instance.IsPinEquipped(PIN.A_TRASHBOMB) && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 1){
-			if(GlobalVariableManager.Instance.EquippedAbilityPins[whichAbilityActivated] == PIN.A_TRASHBOMB&& GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 1){
+			//------------------- Trash Bomb ---------------
+			if(GlobalVariableManager.Instance.EquippedAbilityPins[whichAbilityActivated] == PIN.A_TRASHBOMB && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 1){
 				Debug.Log("Trash Bomb activate");
 				DropBomb();
+			}
+
+			//------------------- Trash Heal ---------------
+			if(GlobalVariableManager.Instance.EquippedAbilityPins[whichAbilityActivated] == PIN.A_HEAL && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] >= 2){
+				if(GlobalVariableManager.Instance.HP_STAT.GetCurrent() < GlobalVariableManager.Instance.HP_STAT.GetMax()){
+					DepleteTrash(2);
+					ObjectPool.Instance.GetPooledObject("effect_heal", gameObject.transform.position);
+					SoundManager.instance.PlaySingle(SFXBANK.HEAL);
+					GlobalVariableManager.Instance.HP_STAT.SetCurrent(GlobalVariableManager.Instance.HP_STAT.GetCurrent()+1);
+					GUIManager.Instance.hpDisplay.UpdateDisplay();
+				}
 			}
 
 

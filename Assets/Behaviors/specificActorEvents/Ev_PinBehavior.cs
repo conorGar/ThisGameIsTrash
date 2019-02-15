@@ -254,6 +254,16 @@ public class Ev_PinBehavior : MonoBehaviour {
 				}
 				Debug.Log("UNEQUIPPED PIN" + myIcons.Count);
 
+
+				if(pinData.abilityPin){ 
+					for(int i = 0; i < GlobalVariableManager.Instance.EquippedAbilityPins.Count; i++){
+						if(GlobalVariableManager.Instance.EquippedAbilityPins[i] == pinData.Type){
+							GlobalVariableManager.Instance.EquippedAbilityPins[i] = PIN.NONE;
+						}
+					}
+				}
+
+
 				for(int i = 0; i < myIcons.Count; i++){ //unshade the little pp icons below pin
 					Debug.Log("Icons should've turned black!!");
 					myIcons[i].GetComponent<SpriteRenderer>().color = Color.black;

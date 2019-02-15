@@ -66,7 +66,7 @@ public enum PIN : long
     DIRTYDECOY =                (long)1 << 57,
     IRRADIATED =                (long)1 << 58,
     A_TRASHBOMB =               (long)1 << 59,
-    Test61 =                    (long)1 << 60,
+    A_HEAL =                    (long)1 << 60,
     Test62 =                    (long)1 << 61,
     Test63 =                    (long)1 << 62,
     Test64 =                    (long)1 << 63,
