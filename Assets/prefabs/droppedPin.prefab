@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 114384467011007262}
   m_Layer: 11
   m_Name: droppedPin
-  m_TagString: Pin
+  m_TagString: DroppedPin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,6 +224,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f64268a852122d42b49e2609475e959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceCounter: 0
+  landingY: 0
+  bouncing: 0
+  canBeGrabbed: 0
+  increaseOnce: 0
 --- !u!212 &212873003198713522
 SpriteRenderer:
   m_ObjectHideFlags: 1

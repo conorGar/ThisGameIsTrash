@@ -49,7 +49,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 
         if (inShop){
 			inShop = true;
-		}else if(GlobalVariableManager.Instance.ROOM_NUM == 101){
+		}else{
             if (!IsPinDiscovered()){
                 sprite.color = new Color(0f,0f,0f,1f);//blacked out if not owned
 			}else{
@@ -70,10 +70,10 @@ public class Ev_PinBehavior : MonoBehaviour {
 			for (int i = 0; i < pinData.ppValue; i++) {
             myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
         	}
-		}
+		
 
         
-
+        }
        /* if (inShop){
 			if(IsPinDiscovered() && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 10 && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 20 && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 30){
 				GameObject myTextDisplay = Instantiate(smallTextDisplay,transform.position,Quaternion.identity);
@@ -89,6 +89,36 @@ public class Ev_PinBehavior : MonoBehaviour {
 
     void OnEnable()
     {
+
+		if (inShop){
+			inShop = true;
+		}else{
+            if (!IsPinDiscovered()){
+                sprite.color = new Color(0f,0f,0f,1f);//blacked out if not owned
+			}else{
+				sprite.color = Color.white;
+
+                for (int i = 0; i < pinData.ppValue; i++) {
+                    smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
+
+                    if (IsPinEquipped()) {
+                        smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                    }
+                }
+                if(pinData.abilityPin == true){
+                	GameObject abilityPS = ObjectPool.Instance.GetPooledObject("effect_AbilityPin",gameObject.transform.position);
+                	abilityPS.transform.parent = this.transform;
+                }
+                if (!IsPinViewed())
+                    newPinIcon.SetActive(true);
+            }
+			for (int i = 0; i < pinData.ppValue; i++) {
+            myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
+        	}
+		
+
+        
+        }
         Unhighlight();
 
     }

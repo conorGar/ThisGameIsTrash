@@ -139,12 +139,17 @@ public class PinFunctionsManager : MonoBehaviour {
 	}
 
 	void DirtyDecoyTimer(){
-		if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
-			decoyTimer++;
-			if(decoyTimer >= 25){
-			DirtyDecoy();
-			decoyTimer = 0;
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DIRTYDECOY)){
+			if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
+				decoyTimer++;
+				if(decoyTimer >= 25){
+				DirtyDecoy();
+				decoyTimer = 0;
+				}
 			}
+		}else{
+			Debug.Log("Dirty Decoy Timer Invoke canceled! (Unequiped pin?)");
+			CancelInvoke("DirtyDecoyTimer");
 		}
 	}
 
