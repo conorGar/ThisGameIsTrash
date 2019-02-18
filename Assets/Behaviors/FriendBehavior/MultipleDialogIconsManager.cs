@@ -7,7 +7,7 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
 {
 
 	public DialogManager dialogManager;
-
+	public bool talkingIconsMoveToFront;
 	public List<MultipleIcon> icons = new List<MultipleIcon>();
     public int currentSpeakerIndex = 0;
 	bool movingIcons;
@@ -36,6 +36,9 @@ public class MultipleDialogIconsManager : DialogIconAnimationManager
 				//enter new character icon
 				if(!icons[i].gameObject.activeInHierarchy){
 					icons[i].gameObject.SetActive(true);
+				}
+				if(talkingIconsMoveToFront){
+					icons[i].transform.SetSiblingIndex(icons.Count);
 				}
 			}else{
 				Debug.Log("ICON FADE SHOULDVE HAPPENED!!!??!" + icons[i].name);

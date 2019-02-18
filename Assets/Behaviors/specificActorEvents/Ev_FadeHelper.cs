@@ -27,6 +27,12 @@ public class Ev_FadeHelper : MonoBehaviour {
 	GameObject tempFlash;
 	GameObject player;
 	Image faderImage;
+	void Awake(){
+		if(Instance == null){
+			Instance = this;
+		}
+	}
+
 
 	void Start(){
 		player = GameObject.FindGameObjectWithTag("Player");

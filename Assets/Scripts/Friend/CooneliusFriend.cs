@@ -9,9 +9,9 @@ public class CooneliusFriend : Friend
 	//public CoonScavengerHuntItem[] items = new CoonScavengerHuntItem[3];
 	List<CoonScavengerHuntItem> pickedUpItems = new List<CoonScavengerHuntItem>();
 
-	string riddle1Text;// given by CoonItemSpawner
-	string riddle2Text;// given by CoonItemSpawner
-	string riddle3Text;// given by CoonItemSpawner
+	string riddle1Text;
+	string riddle2Text;
+	string riddle3Text;
 	int riddleGetCounter;
 
 
@@ -146,7 +146,9 @@ public class CooneliusFriend : Friend
 	}
 
 
-	void ChooseLocations(){
+	public void ChooseLocations(){
+
+		Debug.Log("Choose Locations activated");
 		int pos1 = Random.Range(0,possibleLocations.Count);
 		int pos2 = Random.Range(0,possibleLocations.Count);
 		int pos3 = Random.Range(0,possibleLocations.Count);
@@ -168,6 +170,11 @@ public class CooneliusFriend : Friend
 		possibleLocations[pos3].gameObject.SetActive(true);
 		GameObject item3 = ObjectPool.Instance.GetPooledObject("ScavengerHuntItem");
 		possibleLocations[pos3].SetItem(item3);
+		riddle1Text = possibleLocations[pos1].myRiddleText;
+		riddle2Text = possibleLocations[pos2].myRiddleText;
+		riddle3Text = possibleLocations[pos3].myRiddleText;
+		dialogManager.ReturnFromAction();
+
 
 
 	}
@@ -200,13 +207,18 @@ public class CooneliusFriend : Friend
 
 	public override string GetVariableText(string varKey)
     {
+    	Debug.Log("var key = " +varKey);
         switch (varKey) {
             case "myRiddle":
-            	if(riddleGetCounter == 0)
+            	Debug.Log("Read it as riddle");
+            	if(riddleGetCounter == 0){
+            		Debug.Log("Riddle sending back r1: " +riddle1Text);
                 	return riddle1Text;
-				else if(riddleGetCounter == 0)
+				}else if(riddleGetCounter == 1){
+					Debug.Log("Riddle sending back r2: " +riddle2Text);
+
 					return riddle2Text;
-				else
+				}else
 					return riddle3Text;
 
 				riddleGetCounter++;
