@@ -23,6 +23,7 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
         currentState = defaultState;
         flags = 0;
         animator.AnimationCompleted = AnimationEventCompleted;
+		animator.AnimationEventTriggered = AnimationEventCallback;
     }
 
     protected void OnEnable()

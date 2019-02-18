@@ -18,7 +18,8 @@ public enum ENEMY_ANIM
     SLEEP,
     WAKE,
     POP_UP,
-    THROW
+    THROW,
+    LEAP
 }
 
 public class EnemyAnim
@@ -40,6 +41,7 @@ public class EnemyAnim
             case ENEMY_ANIM.WAKE: return "wake";
             case ENEMY_ANIM.POP_UP: return "popUp";
             case ENEMY_ANIM.THROW: return "throw";
+			case ENEMY_ANIM.LEAP: return "leap";
         }
 
         Debug.LogError("Animation Name for " + anim + " is undefined.  Define it here!");

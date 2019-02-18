@@ -34,7 +34,7 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 	}
 
 
-	IEnumerator Fire(){
+	public IEnumerator Fire(){
 		yield return new WaitForSeconds(fireRate);
 		gameObject.GetComponent<RandomDirectionMovement>().StopMoving();
 		myAnim.Play(fireAniName);
