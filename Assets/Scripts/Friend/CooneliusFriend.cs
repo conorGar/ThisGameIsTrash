@@ -148,7 +148,7 @@ public class CooneliusFriend : Friend
 
 	public void ChooseLocations(){
 
-		Debug.Log("Choose Locations activated");
+		Debug.Log("Choose Locations activated  -c-c-c-c-c-c-c-");
 		int pos1 = Random.Range(0,possibleLocations.Count);
 		int pos2 = Random.Range(0,possibleLocations.Count);
 		int pos3 = Random.Range(0,possibleLocations.Count);
@@ -213,15 +213,16 @@ public class CooneliusFriend : Friend
             	Debug.Log("Read it as riddle");
             	if(riddleGetCounter == 0){
             		Debug.Log("Riddle sending back r1: " +riddle1Text);
+					riddleGetCounter++;
                 	return riddle1Text;
 				}else if(riddleGetCounter == 1){
 					Debug.Log("Riddle sending back r2: " +riddle2Text);
-
+					riddleGetCounter++;
 					return riddle2Text;
 				}else
 					return riddle3Text;
 
-				riddleGetCounter++;
+				
         }
 
         return base.GetVariableText(varKey);

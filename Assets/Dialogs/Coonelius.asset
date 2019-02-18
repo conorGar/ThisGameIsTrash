@@ -72,6 +72,8 @@ MonoBehaviour:
     - Value: ed3135e2-4038-4f5a-806b-107e7873653f
     - Value: ec282ed3-6639-4968-8789-33085e369032
     - Value: 0a0f7929-15eb-4c0c-b4c8-216cc71f604d
+    - Value: 98aa15b2-fbb0-436c-a65a-87032f08b76a
+    - Value: 35f75dbc-ddca-4bd3-89a8-41e3acca5e6f
     values:
     - window:
         serializedVersion: 2
@@ -1161,7 +1163,7 @@ MonoBehaviour:
       title: RiddleStart1
       speakerName: 
       question: 
-      action: 
+      action: ChooseLocations
       isDialogAction: 0
       friendState: 
       id:
@@ -1355,7 +1357,7 @@ MonoBehaviour:
         x: 1174
         y: 1126
         width: 270
-        height: 173
+        height: 186
       isCollapsed: 0
       title: RiddleStart3
       speakerName: Yamagata
@@ -1367,17 +1369,17 @@ MonoBehaviour:
         Value: 615482fa-867c-48bf-b727-b4d05f4b55e9
       x: 1174
       y: 1126
-      text: <c=g><var='myRiddle'></c>.
+      text: Alright. I hid mine too, here's my hint...
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
-        Value: ef2c4c13-51bc-4e04-8763-dc947380ce3b
+        Value: 98aa15b2-fbb0-436c-a65a-87032f08b76a
       responses: []
     - window:
         serializedVersion: 2
-        x: 1489
-        y: 1099
+        x: 1710
+        y: 1096
         width: 270
         height: 173
       isCollapsed: 0
@@ -1389,8 +1391,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: ef2c4c13-51bc-4e04-8763-dc947380ce3b
-      x: 1489
-      y: 1099
+      x: 1710
+      y: 1096
       text: <c=g><var='myRiddle'></c>.
       isThought: 0
       animTrigger: 
@@ -1400,8 +1402,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 1798
-        y: 1094
+        x: 2048
+        y: 1138
         width: 270
         height: 199
       isCollapsed: 0
@@ -1413,8 +1415,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: ed3135e2-4038-4f5a-806b-107e7873653f
-      x: 1798
-      y: 1094
+      x: 2048
+      y: 1138
       text: Alright human, we each have until <c=b>the end of the day</b> to find
         the trash.
       isThought: 0
@@ -1425,8 +1427,8 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 2105
-        y: 1112
+        x: 2347
+        y: 1149
         width: 270
         height: 173
       isCollapsed: 0
@@ -1438,8 +1440,8 @@ MonoBehaviour:
       friendState: 
       id:
         Value: ec282ed3-6639-4968-8789-33085e369032
-      x: 2105
-      y: 1112
+      x: 2347
+      y: 1149
       text: See ya then, loser!
       isThought: 0
       animTrigger: 
@@ -1470,6 +1472,54 @@ MonoBehaviour:
       type: 1
       child_id:
         Value: 57442c6c-1b19-4ca5-b6e7-6eb52819c38f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1408.8494
+        y: 1336
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RiddleStart3_2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 98aa15b2-fbb0-436c-a65a-87032f08b76a
+      x: 1408.8494
+      y: 1336
+      text: <c=g><var='myRiddle'></c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 35f75dbc-ddca-4bd3-89a8-41e3acca5e6f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1735.8494
+        y: 1316
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: RiddleStart4_2
+      speakerName: Takeyama
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 35f75dbc-ddca-4bd3-89a8-41e3acca5e6f
+      x: 1735.8494
+      y: 1316
+      text: And mine...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ef2c4c13-51bc-4e04-8763-dc947380ce3b
       responses: []
   rootNodeId:
     Value: d6a4b0b2-79df-408b-ac06-f69c66a6d85a
