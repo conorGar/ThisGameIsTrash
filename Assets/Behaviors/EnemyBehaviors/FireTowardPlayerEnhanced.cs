@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
+[RequireComponent(typeof(GenericEnemyStateController))]
 public class FireTowardPlayerEnhanced : MonoBehaviour
 {
 	public float projectileSpeed;
@@ -12,6 +14,8 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 	public AudioClip buildupSfx;
 	bool firing;
 	tk2dSpriteAnimator myAnim;
+	protected GenericEnemyStateController controller;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -35,19 +39,31 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 
 
 	public IEnumerator Fire(){
-		yield return new WaitForSeconds(fireRate);
-		gameObject.GetComponent<RandomDirectionMovement>().StopMoving();
-		myAnim.Play(fireAniName);
-		if(buildupSfx != null){
-			SoundManager.instance.PlaySingle(buildupSfx);
+		if (controller.currentState.GetState() == EnemyState.IDLE) {
+			controller.SendTrigger(EnemyTrigger.PREPARE);
+
+			if(buildupSfx != null){
+				SoundManager.instance.PlaySingle(buildupSfx);
+			}
+			while (controller.GetCurrentState() == EnemyState.PREPARE)
+            yield return null;
+
+			// the prepare animation wasn't interrupted, able to throw
+        if (controller.GetCurrentState() == EnemyState.THROW) {
+			gameObject.GetComponent<RandomDirectionMovement>().StopMoving(); //still need?
+			//myAnim.Play(fireAniName);
+			/*if(buildupSfx != null){
+				SoundManager.instance.PlaySingle(buildupSfx);
+			}
+			yield return new WaitForSeconds(.1f);
+			yield return new WaitForSeconds(myAnim.ClipTimeSeconds +.1f);*/
+			SoundManager.instance.PlaySingle(throwSFX);
+			firing = true;
+			yield return new WaitForSeconds(.4f);
+			gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
+
 		}
-		yield return new WaitForSeconds(.1f);
-		yield return new WaitForSeconds(myAnim.ClipTimeSeconds +.1f);
-		SoundManager.instance.PlaySingle(throwSFX);
-		firing = true;
-		yield return new WaitForSeconds(.4f);
-		gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
-		myAnim.Play("idle");
 	}
+}
 }
 

@@ -30,6 +30,10 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
                 flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
+			case EnemyTrigger.THROW:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.THROW));
+               // flags |= (int)EnemyFlag.CHASING;
+                return new EnemyThrow();
         }
 
         return null;

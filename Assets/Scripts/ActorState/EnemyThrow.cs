@@ -10,12 +10,18 @@ public class EnemyThrow : IActorState<EnemyState, EnemyTrigger>
     }
 
     public IActorState<EnemyState, EnemyTrigger> OnUpdate(tk2dSpriteAnimator animator, ref int flags)
-    {
+	{ 
+		animator.Play(EnemyAnim.GetName(ENEMY_ANIM.THROW));
         return null;
     }
 
     public IActorState<EnemyState, EnemyTrigger> SendTrigger(EnemyTrigger trigger, GameObject actor, tk2dSpriteAnimator animator, ref int flags)
     {
+		switch (trigger) {
+            case EnemyTrigger.HIT:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+                return new EnemyHit();
+        }
         return null;
     }
 }

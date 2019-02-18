@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
 public class FireTowardPlayer : MonoBehaviour {
 
@@ -15,6 +16,9 @@ public class FireTowardPlayer : MonoBehaviour {
 	public GameObject target;
 
 	private tk2dSpriteAnimator anim;
+
+	protected GenericEnemyStateController controller;
+
 
 	// Use this for initialization
 	void OnEnable () {
@@ -34,22 +38,29 @@ public class FireTowardPlayer : MonoBehaviour {
 	}
 
 	IEnumerator Fire(){
-		yield return new WaitForSeconds(fireRate);
+		//yield return new WaitForSeconds(fireRate);
 		if(!GlobalVariableManager.Instance.IS_HIDDEN){ //wont fire at player if player is hidden
-			if(gameObject.activeInHierarchy == false){
-				StopCoroutine("Fire");
-			}
-			Debug.Log("fired");
-			if(anim.CurrentClip.name != "hit"){
-				anim.Play("throwL");
-				if(target.transform.position.x < transform.position.x){
-					transform.localScale = new Vector3(1,1,1);
-				} else{
-					transform.localScale = new Vector3(-1,1,1);
-				}
-				if(gameObject.activeInHierarchy)
-					StartCoroutine("AnimationControl");
+			if (controller.currentState.GetState() == EnemyState.IDLE) {
+				if(gameObject.activeInHierarchy == false){
 					StopCoroutine("Fire");
+				}
+				controller.SendTrigger(EnemyTrigger.PREPARE);
+
+			
+				while (controller.GetCurrentState() == EnemyState.PREPARE)
+           			yield return null;
+
+
+				Debug.Log("fired");
+				if (controller.GetCurrentState() == EnemyState.THROW) {
+
+					if(target.transform.position.x < transform.position.x){
+						transform.localScale = new Vector3(1,1,1);
+					} else{
+						transform.localScale = new Vector3(-1,1,1);
+					}
+					StopCoroutine("Fire");
+				}
 			}
 		}
 
