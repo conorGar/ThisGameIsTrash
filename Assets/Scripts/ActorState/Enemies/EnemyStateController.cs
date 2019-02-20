@@ -15,7 +15,9 @@ public enum EnemyState
     RECOVER,
     DEAD,
     THROW,
-    POPOUT
+    POPOUT,
+    PREPARE_LEAP,
+    VULNERABLE
 }
 
 public enum EnemyFlag : int
@@ -36,7 +38,10 @@ public enum EnemyTrigger
     LUNGE,
     RECOVER,
     DEATH,
-    THROW
+    THROW,
+    PREPARE_LEAP,
+    VULNERABLE,
+    POPUP
 }
 
 // Not a whole lot but maybe some common functionality can go here in the future.

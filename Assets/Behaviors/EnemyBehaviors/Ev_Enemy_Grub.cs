@@ -10,7 +10,8 @@ public class Ev_Enemy_Grub : MonoBehaviour
 	Vector2 startingScale = new Vector2();
 	private Vector2 direction;
 
-	int turnOnce;
+	int spitOnceCheck;
+	float nextActionTime;
 	// Use this for initialization
 	void Start ()
 	{
@@ -24,68 +25,67 @@ public class Ev_Enemy_Grub : MonoBehaviour
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             switch (controller.GetCurrentState()) {
                 case EnemyState.IDLE:
-                    if (controller.IsFlag((int)EnemyFlag.WALKING)) {
-                        if (direction.x > 0) {
-                            if (gameObject.transform.localScale.x < 0) {
-                                if (turnOnce == 0) {
-                                    Turn();
-                                }
-                            }
-                        } else {
-                            if (gameObject.transform.localScale.x > 0) {
-                                if (turnOnce == 0) {
-                                    Turn();
-                                }
-                            }
-                        }
-                    }
+					if(Time.time > nextActionTime){
+						if(spitOnceCheck == 0){
+						Debug.Log("Fire rate reached, throw time is now");
+						Spit();
+						spitOnceCheck = 1;
+					}else if(spitOnceCheck == 1){
+						Leap();
+						spitOnceCheck = 2;
+					}
+					nextActionTime = Time.time + 3;
+					}
                     break;
-				if (controller.IsFlag((int)EnemyFlag.CHASING)) {
-					Popout();
-				}
+				
             }
         }
 	}
 
-	void Turn(){
-		turnOnce = 1;
-		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y);
+	void Spit(){
+		//turnOnce = 1;
+		gameObject.GetComponent<FireTowardPlayer>().StartCoroutine("Fire");
 	}
 
 	void Leap(){
-		gameObject.GetComponent<Animator>().Play("leap");
+		//gameObject.GetComponent<Animator>().Play("leap");
 		StartCoroutine("LeapSequence");
 	}
 
 	IEnumerator LeapSequence(){
-		yield return new WaitForSeconds(.2f);//TODO- at certain frame of animation/ end of leap prepare animation...
+
+
+		controller.SendTrigger(EnemyTrigger.PREPARE_LEAP);
+
+		while (controller.GetCurrentState() == EnemyState.PREPARE_LEAP)
+           			yield return null;
 		weakSpot.SetActive(true);
-		yield return new WaitForSeconds(1f); //TODO- switch to end of animation
-		StartCoroutine(GetStuck());
+           			
+		while (controller.GetCurrentState() != EnemyState.VULNERABLE)
+           			yield return null;
+
+        StartCoroutine("GetStuck");
+		
 	}
 
 	IEnumerator GetStuck(){
 		yield return new WaitForSeconds(.3f);
-		StartCoroutine("Dive");
+		controller.SendTrigger(EnemyTrigger.RECOVER); //use recover for when dive in
+		while (controller.GetCurrentState() == EnemyState.RECOVER) //what to do if hit during this time?!?
+           			yield return null;
+        StartCoroutine("Popout");
+        StopCoroutine("GetStuck");
 	}
 
-	public void Spit(){
-		gameObject.GetComponent<FireTowardPlayerEnhanced>().StartCoroutine("Fire");
-		controller.SendTrigger(EnemyTrigger.THROW);
-
-	}
-
-	IEnumerator Dive(){
-		//switch to dive/vanish animation
-		yield return new WaitForSeconds(.4f); //TODO - replace wait with end of animation check
-		StartCoroutine("Popout");
-	}
 
 	IEnumerator Popout(){
+		//underground. After a brief period will pop up at player's postion.
+		yield return new WaitForSeconds(3f);
 		gameObject.transform.position = PlayerManager.Instance.player.transform.position;
-		//switch to ground buldge animation
-		yield return new WaitForSeconds(.5f);
-		//switch to rise animation
+		controller.SendTrigger(EnemyTrigger.POPUP);
+		nextActionTime = Time.time + 3;
+		spitOnceCheck = 0;
+
 
 	}
 }

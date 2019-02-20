@@ -1,34 +1,33 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class EnemyRecover : IActorState<EnemyState, EnemyTrigger>
+public class EnemyVulnerable : IActorState<EnemyState, EnemyTrigger>
 {
-    public EnemyState GetState()
+
+	public EnemyState GetState()
     {
-        return EnemyState.RECOVER;
+        return EnemyState.PREPARE;
     }
 
     public IActorState<EnemyState, EnemyTrigger> OnUpdate(tk2dSpriteAnimator animator, ref int flags)
     {
+		animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
         return null;
     }
 
     public IActorState<EnemyState, EnemyTrigger> SendTrigger(EnemyTrigger trigger, GameObject actor, tk2dSpriteAnimator animator, ref int flags)
     {
-        switch (trigger) {
-            case EnemyTrigger.NOTICE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
+		switch (trigger) {
+            case EnemyTrigger.RECOVER:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.BURROW));
                 flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
             case EnemyTrigger.HIT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
                 return new EnemyHit();
-			case EnemyTrigger.POPUP:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.POP_UP));
-                return new EnemyPopout();
         }
-
         return null;
     }
 }
+

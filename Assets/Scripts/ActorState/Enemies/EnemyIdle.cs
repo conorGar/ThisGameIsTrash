@@ -40,6 +40,9 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
                // flags |= (int)EnemyFlag.CHASING;
                 return new EnemyPrepare();
+			case EnemyTrigger.PREPARE_LEAP:
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LEAP));
+                return new EnemyPrepare_Leap();
         }
 
         return null;

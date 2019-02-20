@@ -5,11 +5,11 @@ using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigge
 
 public class GrubStateController : GenericEnemyStateController {
 
-	public Ev_Enemy_Grub grubBehavior;
+
 
 	protected new void Awake()
     {
-        defaultState = new EnemyIdle();
+        defaultState = new EnemyPopout();
         base.Awake();
     }
 	protected override void AnyStateTrigger(EnemyTrigger trigger)
@@ -34,13 +34,21 @@ public class GrubStateController : GenericEnemyStateController {
                 SetFlag((int)EnemyFlag.CHASING);
                 currentState = new EnemyChase();
                 break;
-            case EnemyState.PREPARE: //prepare for leap
+			case EnemyState.POPOUT: 
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
+                currentState = new EnemyIdle();
+            	break;
+            case EnemyState.PREPARE: //prepare for throw
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.THROW));
+                currentState = new EnemyThrow();
+            	break;
+			case EnemyState.PREPARE_LEAP: //prepare for throw
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
                 currentState = new EnemyLunge();
             	break;
 			case EnemyState.LUNGE: //hit the ground after Jump
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
-                currentState = new EnemyIdle(); //EnemyIdle()? for when stuck in ground??
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.VULNERABLE));
+                currentState = new EnemyVulnerable();
             	break;
             case EnemyState.THROW:
             	break;
@@ -51,7 +59,7 @@ public class GrubStateController : GenericEnemyStateController {
 	// Callbacks
     protected override void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
     {
-        var frame = clip.GetFrame(frameNo);
+       /* var frame = clip.GetFrame(frameNo);
 #if DEBUG_ANIMATION
         Debug.Log("Animation Trigger Check: " + frame.eventInfo + " Clip Name: " + clip.name + " Frame No: " + frameNo);
 #endif
@@ -66,6 +74,6 @@ public class GrubStateController : GenericEnemyStateController {
                 Debug.Log("Animation Trigger Not Found: " + frame.eventInfo);
 #endif
                 break;
-        }
+        }*/
     }
 }

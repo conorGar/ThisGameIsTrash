@@ -20,10 +20,6 @@ public class MeleeAttack : MonoBehaviour {
 	private float playerMomentum; // a little 'bounce' when swing
 	Vector3 startingScale;
 
-
-	bool chargingAttack;
-	INPUTACTION heldKey;
-
 	void Start () {
         startingScale = this.gameObject.transform.localScale;
 
@@ -49,68 +45,6 @@ public class MeleeAttack : MonoBehaviour {
             switch (GetComponent<JimStateController>().GetCurrentState()) {
                 case JimState.ATTACKING:
                     if (swingDirection == 1) {
-                       // transform.Translate(new Vector2(playerMomentum, 0) * Time.deltaTime);
-				        this.gameObject.transform.localScale = startingScale; //always faces proper way
-
-                    }
-                    else if (swingDirection == 2) {
-                       // transform.Translate(new Vector2(playerMomentum * -1, 0) * Time.deltaTime);
-				        this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z); //always faces left
-
-                    }
-                    else if (swingDirection == 3) {//swing up
-                       // transform.Translate(new Vector2(0, playerMomentum) * Time.deltaTime);
-
-                    }
-                    else if (swingDirection == 4) {//swing down
-                       // transform.Translate(new Vector2(0, playerMomentum * -1) * Time.deltaTime);
-
-                    }
-                   // playerMomentum -= .5f;
-                    break;
-                case JimState.IDLE:
-                    // Can't swing with the cursed pin.
-                    if(chargingAttack){
-                    	Debug.Log("ChargingAttack");
-                    }
-
-
-                    if (!GlobalVariableManager.Instance.IsPinEquipped(PIN.CURSED)) {
-						if(chargingAttack && ControllerManager.Instance.GetKeyUp(heldKey)){
-							chargingAttack = false;
-							CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-							StopCoroutine("StrongSwing");
-							StartCoroutine("NormalSwing",swingDirection);
-						}else{
-	                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
-	                           //playerMomentum = 6f;
-	                            this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
-	                            //Swing(2);
-	                            StartCoroutine("Swing", 2);
-	                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
-	                            this.gameObject.transform.localScale = startingScale;
-	                          //  playerMomentum = 6f;
-	                          	//Swing(1);
-	                            StartCoroutine("Swing", 1);
-	                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
-	                            this.gameObject.transform.localScale = startingScale;
-	                           // playerMomentum = 6f;
-	                           //Swing(4);
-	                            StartCoroutine("Swing", 4);
-	                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
-	                            this.gameObject.transform.localScale = startingScale;
-	                          //  playerMomentum = 6f;
-	                          //Swing(3);
-	                            StartCoroutine("Swing", 3);
-	                        }
-                        }
-                    }
-                    break;
-            }
-        }
-
-        if(playerMomentum > 0){ //momentum from strong swing
-			if (swingDirection == 1) {
                         transform.Translate(new Vector2(playerMomentum, 0) * Time.deltaTime);
 				        this.gameObject.transform.localScale = startingScale; //always faces proper way
 
@@ -125,10 +59,34 @@ public class MeleeAttack : MonoBehaviour {
 
                     }
                     else if (swingDirection == 4) {//swing down
-                       transform.Translate(new Vector2(0, playerMomentum * -1) * Time.deltaTime);
+                        transform.Translate(new Vector2(0, playerMomentum * -1) * Time.deltaTime);
 
                     }
-			playerMomentum -= .5f;
+                    playerMomentum -= .5f;
+                    break;
+                case JimState.IDLE:
+                    // Can't swing with the cursed pin.
+                    if (!GlobalVariableManager.Instance.IsPinEquipped(PIN.CURSED)) {
+                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
+                            playerMomentum = 6f;
+                            this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
+                            StartCoroutine("Swing", 2);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
+                            this.gameObject.transform.localScale = startingScale;
+                            playerMomentum = 6f;
+                            StartCoroutine("Swing", 1);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                            this.gameObject.transform.localScale = startingScale;
+                            playerMomentum = 6f;
+                            StartCoroutine("Swing", 4);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                            this.gameObject.transform.localScale = startingScale;
+                            playerMomentum = 6f;
+                            StartCoroutine("Swing", 3);
+                        }
+                    }
+                    break;
+            }
         }
 	}//end of update method
 
@@ -197,38 +155,7 @@ public class MeleeAttack : MonoBehaviour {
 	}
 
 	IEnumerator Swing(int direction){
-			
-
-
-			//if(GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH) && (
-			if((ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT) ||ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN))){
-				INPUTACTION currentKey = INPUTACTION.ATTACKRIGHT;
-				if(direction ==1){
-					currentKey = INPUTACTION.ATTACKRIGHT;
-				}else if(direction == 2){
-					currentKey = INPUTACTION.ATTACKLEFT;
-				}else if(direction == 3){
-					currentKey = INPUTACTION.ATTACKUP;
-				}else if(direction == 4){
-					currentKey = INPUTACTION.ATTACKDOWN;
-				}
-				swingDirection = direction;
-
-				yield return new WaitForSeconds(.05f);
-				if(ControllerManager.Instance.GetKey(currentKey)){
-					StartCoroutine("StrongSwing",currentKey);
-					/*gameObject.GetComponent<JimAnimationManager>().PlayAnimation("spinAttack",true);
-					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("SpinAttack",currentKey);
-					meleeDirectionEnabled.SetActive(false);*/
-				}else{
-					StartCoroutine("NormalSwing", swingDirection);
-
-				}
-			}
-		
-	}
-	IEnumerator NormalSwing(int direction){
-		SoundManager.instance.RandomizeSfx(swing);
+			SoundManager.instance.RandomizeSfx(swing);
 			GameObject meleeDirectionEnabled = null;
 			swingDirection = direction;
 
@@ -261,58 +188,36 @@ public class MeleeAttack : MonoBehaviour {
 			meleeDirectionEnabled.SetActive(true);
 
 			meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
+			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH) && (
+			ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT) ||ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN))){
+				INPUTACTION currentKey = INPUTACTION.ATTACKRIGHT;
+				if(direction ==1){
+					currentKey = INPUTACTION.ATTACKRIGHT;
+				}else if(direction == 2){
+					currentKey = INPUTACTION.ATTACKLEFT;
+				}else if(direction == 3){
+					currentKey = INPUTACTION.ATTACKUP;
+				}else if(direction == 4){
+					currentKey = INPUTACTION.ATTACKDOWN;
+				}
+
+				if(ControllerManager.Instance.GetKey(currentKey)){
+					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("spinAttack",true);
+					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("SpinAttack",currentKey);
+					meleeDirectionEnabled.SetActive(false);
+				}		    		
+                    	
+            }else{
 				if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.SCRAPPYSHINOBI)){
 					//Scrappy Shinobi
 					yield return new WaitForSeconds(.1f);
 					meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
 					yield return new WaitForSeconds(.1f);
 					meleeDirectionEnabled.SetActive(false);
+				}else{
+					meleeDirectionEnabled.SetActive(false);
 				}
-	}
-
-	IEnumerator StrongSwing(INPUTACTION givenKey){
-		CamManager.Instance.mainCamEffects.ZoomInOut(1.3f,1f);
-		Debug.Log("Strong Swing Ienum activated -!-!-!-!-!-!-!-!-!-!");
-		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-		heldKey = givenKey;
-		chargingAttack = true;
-		yield return new WaitForSeconds(.3f);
-		GameObject meleeDirectionEnabled = null;
-
-		if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT)) {
-	    	playerMomentum = 6f;
-			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
-        	meleeDirectionEnabled = meleeWeaponLeftSwing;
-			sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();                        
-	    } else if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT)) {
-			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_RIGHT);
-            meleeDirectionEnabled = meleeWeaponRightSwing;
-			sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
-	        playerMomentum = 6f;
-	                           
-	    } else if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN)) {
-	        playerMomentum = 6f;
-			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_DOWN);
-            meleeDirectionEnabled = meleeWeaponBotSwing;
-            botSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
-	    } else if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP)) {
-	        playerMomentum = 6f;
-			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_UP);
-            meleeDirectionEnabled = meleeWeaponTopSwing;
-			topSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
-	    }
-
-		meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
-
-
-		meleeDirectionEnabled.SetActive(true);
-
-		meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
-		yield return new WaitForSeconds(.1f);
-		meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
-		meleeDirectionEnabled.SetActive(false);
-		chargingAttack = false;
-
+			}
+		
 	}
 }
-

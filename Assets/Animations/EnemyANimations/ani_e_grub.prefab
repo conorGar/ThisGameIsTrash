@@ -88,7 +88,7 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
-  - name: stuck
+  - name: vulnerable
     frames:
     - spriteCollection: {fileID: 114581732712738998, guid: 260b869d97f16364dab5068bc478b6d2,
         type: 2}
@@ -117,6 +117,30 @@ MonoBehaviour:
     - spriteCollection: {fileID: 114581732712738998, guid: 260b869d97f16364dab5068bc478b6d2,
         type: 2}
       spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: prepare_leap
+    frames:
+    - spriteCollection: {fileID: 114581732712738998, guid: 260b869d97f16364dab5068bc478b6d2,
+        type: 2}
+      spriteId: 1
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: burrow
+    frames:
+    - spriteCollection: {fileID: 114581732712738998, guid: 260b869d97f16364dab5068bc478b6d2,
+        type: 2}
+      spriteId: 2
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
