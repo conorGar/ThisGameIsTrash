@@ -12,6 +12,9 @@ public class FireTowardPlayer : MonoBehaviour {
 	public GameObject projectile;
 	public AudioClip throwSFX;
 
+	int throwOnceCheck;
+	float nextThrowTime;
+
 	[HideInInspector]
 	public GameObject target;
 
@@ -21,6 +24,12 @@ public class FireTowardPlayer : MonoBehaviour {
 
 
 	// Use this for initialization
+
+	void Awake()
+    {
+        controller = GetComponent<GenericEnemyStateController>();
+    }
+
 	void OnEnable () {
 		Debug.Log("Fire toward player on enable activated");
 		anim = GetComponent<tk2dSpriteAnimator>();
@@ -34,7 +43,18 @@ public class FireTowardPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+			//Debug.Log(controller.name);
+			switch (controller.GetCurrentState()) {
+				case EnemyState.IDLE:
+					if(Time.time > nextThrowTime && throwOnceCheck == 0){
+						Debug.Log("Fire rate reached, throw time is now");
+						StartCoroutine("Fire");
+						throwOnceCheck = 1;
+					}
+				break;
+			}
+		}
 	}
 
 	IEnumerator Fire(){
@@ -51,14 +71,29 @@ public class FireTowardPlayer : MonoBehaviour {
            			yield return null;
 
 
-				Debug.Log("fired");
+				Debug.Log("fired" + controller.GetCurrentState());
+				while (controller.GetCurrentState() != EnemyState.THROW)
+           			yield return null;
 				if (controller.GetCurrentState() == EnemyState.THROW) {
-
+					Debug.Log("fired2");
 					if(target.transform.position.x < transform.position.x){
 						transform.localScale = new Vector3(1,1,1);
 					} else{
 						transform.localScale = new Vector3(-1,1,1);
 					}
+					GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag,gameObject.transform.position);
+					bullet.GetComponent<Ev_ProjectileTowrdPlayer>().enabled = true; // starts off disabled only so i didnt have to make another tag for rocks that DONT follow player(like ones that spawn from boulder.) feel free to just do that if tis causes issues
+					if(bullet.GetComponent<Ev_ProjectileTowrdPlayer>() != null){
+						bullet.GetComponent<Ev_ProjectileTowrdPlayer>().target = this.target;
+					}
+					bullet.GetComponent<Rigidbody2D>().gravityScale = 0;
+					SoundManager.instance.PlaySingle(throwSFX);
+
+					if(!myProjectileFalls && bullet.GetComponent<Ev_FallingProjectile>() !=null)
+						bullet.GetComponent<Ev_FallingProjectile>().enabled = false;
+
+					nextThrowTime = Time.time + fireRate;
+					throwOnceCheck = 0;
 					StopCoroutine("Fire");
 				}
 			}
@@ -66,7 +101,7 @@ public class FireTowardPlayer : MonoBehaviour {
 
 	}
 
-	IEnumerator AnimationControl(){
+	/*IEnumerator AnimationControl(){
 
 		yield return new WaitForSeconds(0.7f);
 		//Vector3 playerPosition = new Vector3(player.transform.position.x,player.transform.position.y,player.transform.position.z);
@@ -89,5 +124,5 @@ public class FireTowardPlayer : MonoBehaviour {
 		StartCoroutine("Fire");
 		StopCoroutine("AnimationControl");
 
-	}
+	}*/
 }

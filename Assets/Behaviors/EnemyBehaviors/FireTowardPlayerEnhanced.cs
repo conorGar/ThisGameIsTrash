@@ -17,6 +17,12 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 	protected GenericEnemyStateController controller;
 
 	// Use this for initialization
+
+	void Awake()
+    {
+        controller = GetComponent<GenericEnemyStateController>();
+    }
+
 	void Start ()
 	{
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();

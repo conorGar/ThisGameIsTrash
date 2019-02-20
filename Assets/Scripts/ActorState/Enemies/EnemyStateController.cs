@@ -14,7 +14,8 @@ public enum EnemyState
     LUNGE,
     RECOVER,
     DEAD,
-    THROW
+    THROW,
+    POPOUT
 }
 
 public enum EnemyFlag : int

@@ -25,6 +25,8 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
         switch (trigger) {
             case EnemyTrigger.HIT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+				Debug.Log("-x-x-x-x-x-x-x- Enemy Idle Hit trigger activate -x-x-x-x-x-");
+
                 return new EnemyHit();
             case EnemyTrigger.NOTICE:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
@@ -34,6 +36,10 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.THROW));
                // flags |= (int)EnemyFlag.CHASING;
                 return new EnemyThrow();
+            case EnemyTrigger.PREPARE:
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
+               // flags |= (int)EnemyFlag.CHASING;
+                return new EnemyPrepare();
         }
 
         return null;

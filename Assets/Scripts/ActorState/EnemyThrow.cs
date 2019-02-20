@@ -6,7 +6,7 @@ public class EnemyThrow : IActorState<EnemyState, EnemyTrigger>
 {
 	public EnemyState GetState()
     {
-        return EnemyState.HIT;
+        return EnemyState.THROW;
     }
 
     public IActorState<EnemyState, EnemyTrigger> OnUpdate(tk2dSpriteAnimator animator, ref int flags)
@@ -20,7 +20,9 @@ public class EnemyThrow : IActorState<EnemyState, EnemyTrigger>
 		switch (trigger) {
             case EnemyTrigger.HIT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+                Debug.Log("-x-x-x-x-x-x-x- Enemy Throw Hit trigger activate -x-x-x-x-x-");
                 return new EnemyHit();
+
         }
         return null;
     }
