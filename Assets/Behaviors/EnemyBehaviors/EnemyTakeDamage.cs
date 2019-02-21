@@ -227,6 +227,10 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 			//Debug.Log("Collision with weapon: ");
 
+		}else if(melee.tag == "BigSwoosh"){
+			damagesArmoredEnemy = true;
+			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
+			TakeDamage(melee.gameObject);
 		}else if(melee.tag == "pObj_bullet" || melee.tag == "TrashBomb"){
 			Debug.Log("collided with nonmelee weapon!!! :D      -x-x-x-");
 
@@ -340,7 +344,9 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					//bonus dmg with pole
 						meleeDmgBonus++;
 					}
-
+					if(melee.tag == "BigSwoosh" && !armoredEnemy){
+						meleeDmgBonus++; // strong attack does more damage
+					}
 
 					meleeDmgBonus = meleeDmgBonus;
 					if(!hitByThrownObject)
