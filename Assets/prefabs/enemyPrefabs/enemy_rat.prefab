@@ -222,7 +222,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7, y: 1.14}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &114006073405854798
 MonoBehaviour:
@@ -282,10 +282,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 4
-  minMoveTime: 1
-  maxMoveTime: 2.2
   stopTime: 2
+  nextMoveTime: 0
   walkPS: {fileID: 198577134872530542}
+  bodyCollider: {fileID: 61841911532167534}
+  linePrefab: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
+  DebugClickMode: 0
 --- !u!114 &114076671767681168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,7 +367,6 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1903692784849774}
-  returnAniName: idle
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate:
@@ -378,7 +379,6 @@ MonoBehaviour:
   currentHp: 3
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
-  dontStopWhenHit: 0
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114711155882897108

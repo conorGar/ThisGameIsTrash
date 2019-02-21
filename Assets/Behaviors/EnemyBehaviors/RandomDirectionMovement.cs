@@ -7,9 +7,8 @@ using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigge
 public class RandomDirectionMovement : MonoBehaviour {
 
 	public float movementSpeed = 0;
-	public float minMoveTime = 0;
-	public float maxMoveTime = 0;
 	public float stopTime = 2;
+    public float nextMoveTime = 0f;
 	//public GameObject walkCloud;
 	public ParticleSystem walkPS;
 	//public float walkCloudYadjust = 0.8f;
@@ -17,16 +16,28 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 	private Vector3 direction;
 	protected tk2dSpriteAnimator anim;
-	int bounceOffObject;
 	protected Vector3 startingScale;
 	int turnOnce = 0;
 
     protected GenericEnemyStateController controller;
+    public BoxCollider2D bodyCollider;
+    private BreadCrumb path;
+    public GameObject linePrefab;
+    private LineRenderer line;
+    public bool DebugClickMode;
 
     // Use this for initialization
     void Awake()
     {
         controller = GetComponent<GenericEnemyStateController>();
+        var go = GameObject.Instantiate(linePrefab);
+        line = go.GetComponent<LineRenderer>();
+        line.positionCount = 0;
+        line.startWidth = 0.25f;
+        line.endWidth = .25f;
+        line.startColor = Color.red;
+        line.endColor = Color.red;
+        line.transform.parent = transform;
     }
 
     void Start(){
@@ -45,19 +56,31 @@ public class RandomDirectionMovement : MonoBehaviour {
             switch (controller.GetCurrentState()) {
                 case EnemyState.IDLE:
                     if (controller.IsFlag((int)EnemyFlag.WALKING)) {
-                        transform.position += direction * movementSpeed * Time.deltaTime;
-                        if (direction.x > 0) {
-                            if (gameObject.transform.localScale.x < 0) {
-                                if (turnOnce == 0) {
-                                    Turn();
-                                }
+                        // follow the path if there is one.  consume the nodes as the enemy reaches them.
+                        if (path != null) {
+                            // set a new destination (the point on the grid, offset by where the bodyCollider actually is)
+                            Vector2 destination = RoomManager.Instance.currentRoom.pathGrid.GridToWorld(path.Position) - bodyCollider.offset * Mathf.Sign(transform.localScale.x);
+                            transform.position = Vector3.MoveTowards(transform.position, destination, movementSpeed * Time.deltaTime);
+
+                            if (Vector2.Distance(transform.position, destination) < 0.001f) {
+                                transform.position = destination;
+                                path = path.Next;
+
+                                // turn toward the next node.
+                                if (path != null)
+                                    transform.localScale = new Vector3(Mathf.Sign(RoomManager.Instance.currentRoom.pathGrid.GridToWorld(path.Position).x - transform.position.x),
+                                                                                  transform.localScale.y,
+                                                                                  transform.localScale.z);
                             }
                         } else {
-                            if (gameObject.transform.localScale.x > 0) {
-                                if (turnOnce == 0) {
-                                    Turn();
-                                }
-                            }
+                            StopMoving();
+                        }
+                    } else {
+                        // Click debug mode for checking the node grid is good and doesn't generate bad paths.
+                        if (DebugClickMode) {
+                            ProcessDebugClickMode();
+                        } else if (Time.time > nextMoveTime) {
+                            StartMoving();
                         }
                     }
                     break;
@@ -78,43 +101,44 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 	}
 
-    // Enemy will move in a direction for a random amount of time, idle, and go again.
-	IEnumerator Moving(){
-		turnOnce = 0;
-
-		yield return new WaitForSeconds(Random.Range(minMoveTime,maxMoveTime));
-
-        if (controller.IsFlag((int)EnemyFlag.WALKING)) {
-		    bounceOffObject = 0;
-
-		    if(walkPS !=null && walkPS.isPlaying)
-			    walkPS.Stop();
-
-            controller.RemoveFlag((int)EnemyFlag.WALKING);
-
-		    yield return new WaitForSeconds(stopTime);
-            StartMoving();
-		}
-	}
-
-	void OnCollisionEnter2D(Collision2D collision){
-		//go a different direction when bump into something
-		if(bounceOffObject == 0 && controller.IsFlag((int)EnemyFlag.MOVING)){
-            StartMoving();
-			bounceOffObject = 1;
-		}
-	}
-
-    // Enemy picks a random direction and starts moving.
+    // Pick a node on the path grid and move towards it.
 	public virtual void StartMoving(){
-        controller.SetFlag((int)EnemyFlag.WALKING);
+        PathGrid pathGrid = RoomManager.Instance.currentRoom.pathGrid;
+        if (pathGrid != null) {
+            Point startPoint = pathGrid.WorldToGrid(transform.position);
+            if (startPoint != null) {
+                Point destPoint = pathGrid.GetRandomPoint(startPoint, 10);
 
-        if (walkPS != null && !walkPS.isPlaying)
-			walkPS.Play();
+                GeneratePath(pathGrid, startPoint, destPoint);
+                controller.SetFlag((int)EnemyFlag.WALKING);
 
-		direction = (new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0.0f)).normalized;
-		StartCoroutine(Moving());
+                if (walkPS != null && !walkPS.isPlaying)
+                    walkPS.Play();
+            }
+        }
 	}
+
+    private void GeneratePath(PathGrid pathGrid, Point startPoint, Point destPoint)
+    {
+        if (pathGrid != null && startPoint != null && destPoint != null) {
+            // Get the best path to the random point, if it exists....
+            path = Pathfinder.FindPath(pathGrid, startPoint, destPoint);
+
+            BreadCrumb curr = path;
+            int index = 0;
+
+
+#if DEBUG_PATHFINDING
+            // Render the path for debugging
+            while (curr != null) {
+                line.positionCount = index + 1;
+                line.SetPosition(index, pathGrid.GridToWorld(curr.Position));
+                curr = curr.Next;
+                index++;
+            }
+#endif
+        }
+    }
 
 	public virtual void StopMoving(){
         controller.RemoveFlag((int)EnemyFlag.WALKING);
@@ -124,5 +148,29 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 		StopAllCoroutines();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-	}
+        nextMoveTime = Time.time + stopTime;
+    }
+
+    //helpers
+    private void ProcessDebugClickMode()
+    {
+        // left click to path to a point on the grid.
+        if (Input.GetMouseButton(0)) {
+            //Convert mouse click point to grid coordinates
+            Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            PathGrid pathGrid = RoomManager.Instance.currentRoom.pathGrid;
+            if (pathGrid != null) {
+                Point destPos = pathGrid.WorldToGrid(worldPos);
+                if (destPos != null) {
+                    Point startPos = pathGrid.WorldToGrid((Vector2)transform.position + bodyCollider.offset);
+                    GeneratePath(pathGrid, startPos, destPos);
+
+                    controller.SetFlag((int)EnemyFlag.WALKING);
+
+                    if (walkPS != null && !walkPS.isPlaying)
+                        walkPS.Play();
+                }
+            }
+        }
+    }
 }

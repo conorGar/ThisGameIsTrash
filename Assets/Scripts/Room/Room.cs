@@ -20,6 +20,7 @@ public class Room : MonoBehaviour
     public string tutPopUpToActivate;
     public GameObject myMapClouds;
     public GlobalVariableManager.ROOM myRoom;
+    public PathGrid pathGrid;
 
 	int waifuChance;
 	[HideInInspector]
@@ -103,7 +104,18 @@ public class Room : MonoBehaviour
 	            if (spawnedEnemy != null)
 	            {
 	                enemies.Add(spawnedEnemy);
-	                spawnedEnemy.transform.position = enemySpawners[i].transform.position;
+
+                    // Try to spawn on the path finding grid if one is defined.
+                    if (pathGrid != null) {
+                        Point enemyPoint = pathGrid.WorldToGrid(enemySpawners[i].transform.position);
+
+                        if (enemyPoint != null)
+                            spawnedEnemy.transform.position = pathGrid.GridToWorld(enemyPoint);
+                        else
+                            spawnedEnemy.transform.position = enemySpawners[i].transform.position;
+                    } else {
+                        spawnedEnemy.transform.position = enemySpawners[i].transform.position;
+                    }
 					if(spawnedEnemy.GetComponent<EnemyTakeDamage>() != null){
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().SetSpawnerID(enemySpawners[i].name);
 		                if(spawnedEnemy.GetComponent<CannotExitScene>())

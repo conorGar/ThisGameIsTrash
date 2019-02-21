@@ -112,8 +112,6 @@ public bool bossSpawnedEnemy;
 		myBody.gravityScale = 0;
 		takingDamage = false;
 		damageOnce = 0;
-		if(gameObject.GetComponent<RandomDirectionMovement>() != null)
-			gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
 
         // Reset scale and rotations if this enemy has already been initialized.
         if (myAnim != null) {
