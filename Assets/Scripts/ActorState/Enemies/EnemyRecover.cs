@@ -24,6 +24,9 @@ public class EnemyRecover : IActorState<EnemyState, EnemyTrigger>
             case EnemyTrigger.HIT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
                 return new EnemyHit();
+			case EnemyTrigger.POPUP:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.POP_UP));
+                return new EnemyPopout();
         }
 
         return null;
