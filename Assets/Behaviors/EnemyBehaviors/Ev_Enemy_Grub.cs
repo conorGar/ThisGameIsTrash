@@ -2,7 +2,7 @@
 using System.Collections;
 using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class Ev_Enemy_Grub : MonoBehaviour
+public class Ev_Enemy_Grub : FireTowardPlayer
 {
 	public GameObject weakSpot;
 	protected GenericEnemyStateController controller;
@@ -18,7 +18,7 @@ public class Ev_Enemy_Grub : MonoBehaviour
 		startingScale = gameObject.transform.lossyScale;
 	}
 	
-	protected void Update () {
+	protected override void Update () {
 		//if idle - will keep turning back and forth, looking for player.
 		//if "chasing", will keep popping up from ground
 
@@ -44,7 +44,7 @@ public class Ev_Enemy_Grub : MonoBehaviour
 
 	void Spit(){
 		//turnOnce = 1;
-		gameObject.GetComponent<FireTowardPlayer>().StartCoroutine("Fire");
+		StartCoroutine("Fire");
 	}
 
 	void Leap(){
@@ -73,6 +73,7 @@ public class Ev_Enemy_Grub : MonoBehaviour
 		controller.SendTrigger(EnemyTrigger.RECOVER); //use recover for when dive in
 		while (controller.GetCurrentState() == EnemyState.RECOVER) //what to do if hit during this time?!?
            			yield return null;
+        weakSpot.SetActive(false);
         StartCoroutine("Popout");
         StopCoroutine("GetStuck");
 	}

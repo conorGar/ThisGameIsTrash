@@ -8,6 +8,7 @@ public class FireTowardPlayer : MonoBehaviour {
 	public float projectileSpeed;
 	public float fireRate;
 	public bool myProjectileFalls = false;
+	public bool fireAtStart = true;
 
 	public GameObject projectile;
 	public AudioClip throwSFX;
@@ -38,11 +39,12 @@ public class FireTowardPlayer : MonoBehaviour {
 
         if (PlayerManager.Instance.player)
             target = PlayerManager.Instance.player;
-        StartCoroutine("Fire");
+        if(fireAtStart)
+       	 StartCoroutine("Fire");
     }
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
 			//Debug.Log(controller.name);
 			switch (controller.GetCurrentState()) {
@@ -57,7 +59,7 @@ public class FireTowardPlayer : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Fire(){
+	public IEnumerator Fire(){
 		//yield return new WaitForSeconds(fireRate);
 		if(!GlobalVariableManager.Instance.IS_HIDDEN){ //wont fire at player if player is hidden
 			if (controller.currentState.GetState() == EnemyState.IDLE) {
