@@ -13,7 +13,8 @@ public enum JimState
     CARRYING,
     THROWING,
     DELIVERING,
-    DEAD
+    DEAD,
+    CHARGING
 }
 
 public enum JimFlag : int
@@ -34,6 +35,10 @@ public enum JimTrigger
     SWING_LEFT,
     SWING_UP,
     SWING_DOWN,
+    CHARGE_RIGHT,
+    CHARGE_LEFT,
+    CHARGE_UP,
+    CHARGE_DOWN,
     THROW,
     SPIN_ATTACK,
     PICK_UP_SMALL,
@@ -68,6 +73,7 @@ public class JimStateController : ActorStateController<JimState, JimTrigger> {
             case JimState.ATTACKING:
                 currentState = new JimIdle();
                 break;
+           
             case JimState.HURT:
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
                 currentState = new JimIdle();

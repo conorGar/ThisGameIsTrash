@@ -45,6 +45,24 @@ public class JimIdle : IActorState<JimState, JimTrigger>
                 animator.Play("ani_jimSwingDown");
                 return new JimAttacking();
 
+			case JimTrigger.CHARGE_RIGHT:
+                animator.Play("ani_jimChargeR");
+                flags &= ~(int)JimFlag.FACING_LEFT;
+                return new JimCharging();
+
+            case JimTrigger.CHARGE_LEFT:
+                animator.Play("ani_jimChargeR");
+                flags |= (int)JimFlag.FACING_LEFT;
+                return new JimCharging();
+
+            case JimTrigger.CHARGE_UP:
+                animator.Play("ani_jimChargeUp");
+                return new JimCharging();
+
+            case JimTrigger.CHARGE_DOWN:
+                animator.Play("ani_jimChargeDown");
+                return new JimCharging();
+
             case JimTrigger.PICK_UP_SMALL:
                 animator.Play("ani_jimPickUp");
                 return new JimPickingUp();

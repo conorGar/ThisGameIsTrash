@@ -20,6 +20,24 @@ public class JimAttacking : IActorState<JimState, JimTrigger>
             case JimTrigger.HIT:
                 animator.Play("hurt");
                 return new JimHurt();
+			case JimTrigger.CHARGE_RIGHT:
+                animator.Play("ani_jimChargeR");
+                flags &= ~(int)JimFlag.FACING_LEFT;
+                return new JimCharging();
+
+            case JimTrigger.CHARGE_LEFT:
+                animator.Play("ani_jimChargeR");
+                flags |= (int)JimFlag.FACING_LEFT;
+                return new JimCharging();
+
+            case JimTrigger.CHARGE_UP:
+                animator.Play("ani_jimChargeUp");
+                return new JimCharging();
+
+            case JimTrigger.CHARGE_DOWN:
+                animator.Play("ani_jimChargeDown");
+                return new JimCharging();
+
         }
 
         return null;
