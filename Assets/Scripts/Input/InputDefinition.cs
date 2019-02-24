@@ -24,7 +24,8 @@ public enum INPUTACTION
     PAUSE,
     CALENDAR,
     MAP,
-    SPECIAL
+    SPECIAL,
+    SPECIAL2
 }
 
 [System.Serializable]

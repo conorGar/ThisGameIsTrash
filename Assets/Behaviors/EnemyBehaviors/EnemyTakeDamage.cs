@@ -54,9 +54,13 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public GameObject objectPool;
 	[HideInInspector]
 public EnemyRespawner myRespawner; //for use with respawning enemies
+	[HideInInspector]
+public B_Ev_Ex otherRespawner; //for use with other things that spawn enemies, like bosses(see ex behavior for example). SHort term solution. Im a bit drunk when im making this so cant think of anything better for now...
 public int currentHp;
 	[HideInInspector]
 public int meleeDmgBonus = 0;
+	//[HideInInspector]
+public bool bossSpawnedEnemy;
 	[HideInInspector]
 public bool dontStopWhenHit; //usually temporary and set by other behavior, such as 'LungeAtPlayer.cs'
 
@@ -92,8 +96,13 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	Vector2 startScale;
 
+	bool damagesArmoredEnemy;
+
+
 	void OnEnable(){
-		
+		if(bossSpawnedEnemy){
+			bossSpawnedEnemy = false;
+		}
 		roomNum = GlobalVariableManager.Instance.ROOM_NUM;
 		if(!bossEnemy)
 			currentHp = gameObject.GetComponent<Enemy>().health;//enemy health reset when enter room again
@@ -112,8 +121,10 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
             transform.rotation = startRotation;
         }
 
-        if (myShadow != null)
+        if (myShadow != null){
             myShadow.SetActive(true);
+            myShadow.transform.rotation = Quaternion.identity; //keep shadow from rotating.
+        }
     }
 
     private void OnDisable()
@@ -210,12 +221,23 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	public void OnTriggerEnter2D(Collider2D melee){
 
 		if(melee.tag == "Weapon"){
-			
+			if(hitByThrownObject)
+				hitByThrownObject = false;
 			TakeDamage(melee.gameObject);
 
 			//Debug.Log("Collision with weapon: ");
 
-		}else if(melee.tag == "pObj_bullet"){
+		}else if(melee.tag == "BigSwoosh"){
+			damagesArmoredEnemy = true;
+			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
+			TakeDamage(melee.gameObject);
+		}else if(melee.tag == "pObj_bullet" || melee.tag == "TrashBomb"){
+			Debug.Log("collided with nonmelee weapon!!! :D      -x-x-x-");
+
+			if(melee.tag == "TrashBomb"){
+				damagesArmoredEnemy = true;
+			}
+
 			if(!takingDamage){
 				StartCoroutine("NonMeleeHit");
 				melee.GetComponent<Ev_FallingProjectile>().Fell();
@@ -227,24 +249,33 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 			hitByThrownObject = true;
             // TODO: Get the boss battle to use throwable bodies???
             var body = melee.gameObject.GetComponent<ThrowableBody>();
-            if (body)
-                melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
-            else{
+            if (body){
+                //melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
+              	body.StartCoroutine("DeathImpact",this.gameObject);
+            }else{
 				var destructableObj = melee.gameObject.GetComponent<DestructableThrowingObject>();
-				if(destructableObj)
+				if(destructableObj){
 					melee.gameObject.GetComponent<DestructableThrowingObject>().LandingEvent();
+				}
             }
 			Debug.Log("Hit by thrown object!");
-			if(canKnockoffArmor)
+			if(canKnockoffArmor){
 				ArmorKnockoff();
-			TakeDamage(melee.gameObject);
+			}else if(gameObject.GetComponent<InvincibleEnemy>() == null){
+				TakeDamage(melee.gameObject);
+			}else if(gameObject.GetComponent<InvincibleEnemy>().enabled == false){
+				TakeDamage(melee.gameObject);
+			}
 			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
 			SoundManager.instance.PlaySingle(hitSqueal);
+			/*var throwObj = melee.gameObject.GetComponent<ThrowableObject>();
+				if(throwObj)
+					melee.gameObject.layer = 11; //switched to item obj once hit so doesnt hit anything else*/
 		}
 	}
 
 	IEnumerator NonMeleeHit(){
-		if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
+		if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || damagesArmoredEnemy)){
 			if(!takingDamage){
 				takingDamage = true;
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
@@ -288,6 +319,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 				//Debug.Log("**AND HERE!!!!!!!!***");
 				yield return new WaitForSeconds(.4f);
 				StartCoroutine( "StopKnockback",0f);
+				damagesArmoredEnemy = false;
 				StartCoroutine("AfterHit");
 
 			}
@@ -305,17 +337,16 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 					damageOnce = 1;
 					meleeDmgBonus = 0;
 
-				
-					if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
-						//bonus dmg with pole
+			
+					if(hitByThrownObject){
+						meleeDmgBonus+=1;
+					}else if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] > 12){
+					//bonus dmg with pole
 						meleeDmgBonus++;
 					}
-					if(hitByThrownObject)
-						meleeDmgBonus+=2;
-					//if(GlobalVariableManager.Instance.IsPinEquipped(PIN.STAYBACK) && GlobalVariableManager.Instance.CURRENT_HP == 1){
-						//STAY BACK pin
-						//meleeDmgBonus++;
-					//}
+					if(melee.tag == "BigSwoosh" && !armoredEnemy){
+						meleeDmgBonus++; // strong attack does more damage
+					}
 
 					meleeDmgBonus = meleeDmgBonus;
 					if(!hitByThrownObject)
@@ -361,9 +392,11 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 					if(hitByThrownObject){
                         // TODO: Fix the boss battle to use throwable bodies????
-                        var body = melee.gameObject.GetComponent<ThrowableBody>();
-                        if (body)
-                         body.TakeDamage();
+                       /* var body = melee.gameObject.GetComponent<ThrowableBody>();
+                        if (body){
+                         //body.TakeDamage();
+                         body.Death();
+                         }*/
 						meleeSwingDirection = "plankSwing";
 					}
 					if(!moveWhenHit && !dontStopWhenHit && !hitByThrownObject ){
@@ -455,6 +488,8 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 		if(moveWhenHit || hitByThrownObject){
 			takingDamage = true;
 
+			Debug.Log("-----MELEE WEAPON SWING DIRECTION :" + meleeSwingDirection);
+
 			if(meleeSwingDirection.CompareTo("plankSwing") == 0||meleeSwingDirection.CompareTo("clawSwing") == 0||meleeSwingDirection.CompareTo("poleSwing") == 0){
 				Debug.Log(swingDirectionSide);
 
@@ -490,10 +525,12 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 
 
-			}else if(meleeSwingDirection.CompareTo("stickUp") == 0||meleeSwingDirection.CompareTo("clawUp") == 0||meleeSwingDirection.CompareTo("poleUp") == 0){
-				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,-17f), ForceMode2D.Impulse);
-			}else if(meleeSwingDirection.CompareTo("stickDown") == 0||meleeSwingDirection.CompareTo("clawDown") == 0||meleeSwingDirection.CompareTo("poleDown") == 0){
+			}else if(meleeSwingDirection.CompareTo("plankUp") == 0||meleeSwingDirection.CompareTo("clawUp") == 0||meleeSwingDirection.CompareTo("poleUp") == 0){
 				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,17f), ForceMode2D.Impulse);
+				Debug.Log("ENEMY WAS HIT UP!!");
+			}else if(meleeSwingDirection.CompareTo("plankDown") == 0||meleeSwingDirection.CompareTo("clawDown") == 0||meleeSwingDirection.CompareTo("poleDown") == 0){
+				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,-17f), ForceMode2D.Impulse);
+				Debug.Log("ENEMY WAS HIT down!!");
 			}
 				
 
@@ -661,6 +698,7 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 
 	void ArmorKnockoff(){
 		armoredEnemy = false;
+	
 		armorCollisionObj.SetActive(false); //TODO: best way to enable it when the enemy is spawned(for proper reuse with ObjectPool pull)
 		gameObject.GetComponent<tk2dSpriteAnimator>().Library= disarmoredAnimation;
 		GameObject armorPiece =ObjectPool.Instance.GetPooledObject("effect_armorPiece",gameObject.transform.position);
@@ -737,8 +775,12 @@ public bool dontStopWhenHit; //usually temporary and set by other behavior, such
 	void Death(){
 		Debug.Log("Death Activate!!!");
 
-		if(respawnEnemy){
-			myRespawner.currentEnemies.Remove(this.gameObject);
+		if(respawnEnemy || bossSpawnedEnemy){
+			if(myRespawner != null)
+				myRespawner.currentEnemies.Remove(this.gameObject);
+			else{
+				otherRespawner.currentBlobs.Remove(this.gameObject);
+			}
 			//needed to make sure enemy doesnt spawn again functioning as if it was dead
 			spinning = false;
 			//myCollisionBox.enabled = true;

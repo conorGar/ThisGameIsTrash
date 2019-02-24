@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Friend : UserDataItem {
+
+
+	public enum FriendType
+	{
+	GatheringFriend,
+	ScheduleFriend,
+	ConversationFriend
+
+	};
+
+
     public string friendName = "Unknown Friend";
     public int day = 0;
     public bool activateDialogWhenClose = true;
@@ -12,12 +23,17 @@ public class Friend : UserDataItem {
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
 	protected FriendEvent newestAddedEvent;
+	public Sprite calendarIcon;
     [HideInInspector]
 	public string missedDialog;
-	[HideInInspector]
+	//[HideInInspector] commented out for testing
 	public bool IsVisiting = false;
 	[HideInInspector]
 	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
+	public WORLD myWorld;
+	public FriendType myFriendType; //**Steve: Should I change this to Enum?   (ActiveQuestFriend,ScheduleFriend,ConversationFriend)
+	public GUI_WorldMap_FriendIcon myMapIcon;
+
 
     // Use this for initialization
     protected void OnEnable() {
@@ -130,11 +146,22 @@ public class Friend : UserDataItem {
     // Runs when the world starts (hub, world 1, world 2, etc..)  useful for setting friend state quest stuff and making sure everything in the world is set up properly.
     public virtual void OnWorldStart(World world)
     {
-
+    	if(myMapIcon != null){
+	    	myMapIcon.gameObject.SetActive(true);
+	    	myMapIcon.gameObject.transform.parent = null;
+			if(day == GlobalVariableManager.Instance.DAY_NUMBER && (myFriendType == FriendType.ConversationFriend ||myFriendType == FriendType.ScheduleFriend)){
+				myMapIcon.ActivateSpeechIcon();
+			}
+		}
     }
 
     public virtual void OnWorldEnd(){
+    	if(myMapIcon != null)
+			myMapIcon.gameObject.transform.parent = this.transform;
+    }
 
+    public virtual bool DayEndEventCheck(){
+    	return false;
     }
 
     public virtual void OnFinishDialog()
@@ -176,7 +203,7 @@ public class Friend : UserDataItem {
         dialogManager.currentlySpeakingIcon.gameObject.SetActive(false);
 
         GUIManager.Instance.CalendarHUD.gameObject.SetActive(true);
-        GUIManager.Instance.CalendarHUD.NewMarkSequence(newestAddedEvent.day, name);
+        GUIManager.Instance.CalendarHUD.NewMarkSequence(newestAddedEvent.day, newestAddedEvent);
         GUIManager.Instance.CalendarHUD.Invoke("LeaveScreen", 4f);
         dialogManager.Invoke("ReturnFromAction", 5f);
     }
@@ -195,12 +222,19 @@ public class Friend : UserDataItem {
 
     }
 
+    public virtual string GetEventDescription(){
+    	return null;
+    }
+
+
     public virtual string GetVariableText(string varKey)
     {
         Debug.LogError("GetVariableText wasn't set up for this friend but it was called!");
         return varKey;
     }
-
+	public virtual void PickUpObject(CoonScavengerHuntItem item){
+		
+	}
     // User Data implementation
     public override string UserDataKey()
     {

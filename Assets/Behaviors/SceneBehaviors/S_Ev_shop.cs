@@ -1,27 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class S_Ev_shop : MonoBehaviour {
 
-	public GameObject tutorialPopup;
-	public Sprite tutPopupSprite;
+	//public GameObject tutorialPopup;
+	//public Sprite tutPopupSprite;
     Ev_PinBehavior currentPin;
 	public GUI_OptionsPopupBehavior purchasePopup;
 	public GameObject harry;
 	public GameObject priceDisplay;
-	public GameObject costText;
+	public TextMeshProUGUI priceDisplayText;
+	public TextMeshProUGUI pinDescriptionText;
+	public TextMeshProUGUI pinTitleText;
+	public GameObject ppDisplay;
+	public GameObject pinInfoDisplay;
+	public List<GameObject> pedestalSpawnPoints = new List<GameObject>();
+	public GameObject pinShopFront;
+	public GameObject pinShopBack;
+	//public BoxCollider2D enterShopTriggerBox;
+	//public BoxCollider2D exitShopTriggerBox;
+
     public PinDefinition upgrade1;
     public PinDefinition upgrade2;
     public PinDefinition upgrade3;
 
 	List<PinDefinition> nonShopPins = new List<PinDefinition>();
-	GameObject player;
+	public GameObject player;
 	GameObject manager;
+	public List<GameObject> todaysPins = new List<GameObject>(); 
+	//bool enteredShop; //just used for shop outside visual changes
+
 
     void Start() {
 
-
+    	
         /*if(GlobalVariableManager.Instance.WORLD_SIGNS_READ[0][9] != 'o'){
 			if(GlobalVariableManager.Instance.TUT_POPUP_ON){
 				Instantiate(tutorialPopup,transform.position,Quaternion.identity);
@@ -30,7 +44,6 @@ public class S_Ev_shop : MonoBehaviour {
 			GlobalVariableManager.Instance.WORLD_SIGNS_READ[0].Replace(GlobalVariableManager.Instance.WORLD_SIGNS_READ[0][9],'o');
 		}*/
 
-        player = GameObject.Find("Jim");
         manager = GameObject.Find("Manager");
 
         // TODO: Maybe move this to a configuration in the PinManager?
@@ -57,16 +70,13 @@ public class S_Ev_shop : MonoBehaviour {
 
         GlobalVariableManager.Instance.shopPins = new List<PinDefinition> { null, null, null };
 
-        // VV----------just makes it so "dont you wanna check shop shop" dialog doesnt happen
-        GlobalVariableManager.Instance.WORLD_SIGNS_READ[1].Replace(GlobalVariableManager.Instance.WORLD_SIGNS_READ[1][14],'o');
 
 
-		GlobalVariableManager.Instance.ARROW_POSITION = 0;
-		GlobalVariableManager.Instance.MENU_SELECT_STAGE = 9;//needed for proper purchasing action when hit SPACE that doesnt interefere with upgrade behavior
-		GlobalVariableManager.Instance.ROOM_NUM = 97;
+
+	
 
 		//---------------------------------------set pins in today's shop------------------------------------------//
-		if(GlobalVariableManager.Instance.TIME_IN_DAY != GlobalVariableManager.Instance.DAY_NUMBER){
+
             //Uses shopPins list to place values for today's pins
             //Reset when activate "Continue" truck at hub.
             upgrade1 = null;
@@ -103,13 +113,7 @@ public class S_Ev_shop : MonoBehaviour {
                 }
             }
 
-			GlobalVariableManager.Instance.TIME_IN_DAY = GlobalVariableManager.Instance.DAY_NUMBER; //only happens once a day
-		}else{
-			upgrade1 = GlobalVariableManager.Instance.shopPins[0];
-			upgrade2 = GlobalVariableManager.Instance.shopPins[1];
-			upgrade3 = GlobalVariableManager.Instance.shopPins[2];
-		}
-		//-------------------------------------------------------------------------------------------------------//
+	
 
 		SpawnPins();
 
@@ -121,6 +125,33 @@ public class S_Ev_shop : MonoBehaviour {
     void OnDisable()
     {
         PinManager.Instance.RefreshNewPinIcon();
+    }
+
+    /*void OnCollisionEnter2D(Collision2D col){
+    	if(col.gameObject.name = enterShopTriggerBox.gameObject.name && !enteredShop){
+    		pinShopFront.GetComponent<Animator>().Play("shopFrontFade",-1,0f);
+    		pinShopBack.GetComponent<Animator>().Play("FadeOut",-1,0f);
+    		enteredShop = true;
+		}else if(col.gameObject.name = exitShopTriggerBox.gameObject.name && enteredShop){
+			pinShopFront.GetComponent<SpriteRenderer>().color = Color.white;
+			pinShopBack.GetComponent<SpriteRenderer>().color = Color.white;
+			enteredShop = false;
+    	}
+    }*/
+
+    public void EnterShop(){
+		pinShopFront.GetComponent<Animator>().enabled = true;
+		pinShopFront.GetComponent<Animator>().Play("shopFrontFade",-1,0f);
+		pinShopBack.GetComponent<Animator>().enabled = true;
+
+    	pinShopBack.GetComponent<Animator>().Play("FadeOut",-1,0f);
+    }
+
+    public void ExitShop(){
+		pinShopFront.GetComponent<Animator>().enabled = false;
+		pinShopBack.GetComponent<Animator>().enabled = false;
+		pinShopFront.GetComponent<SpriteRenderer>().color = Color.white;
+		pinShopBack.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     void OnDestroy()
@@ -150,89 +181,94 @@ public class S_Ev_shop : MonoBehaviour {
     }
 
     public void SetCurrentPin(Ev_PinBehavior pin)
-    {
+    {//used when purchase pin. Activated by Ev_pinBehavior
         currentPin = pin;
     }
 
     public void TogglePopupEnable(){
 		if(purchasePopup.gameObject.activeInHierarchy){
+			pinInfoDisplay.SetActive(true);
 			purchasePopup.gameObject.SetActive(false);
 		}else{
 			purchasePopup.gameObject.SetActive(true);
+			pinInfoDisplay.SetActive(false);
 		}
 	}
 	
 	void Update () {
-
-		//---------------Player Bounds-----------------//
-		if(player != null){
-			if(player.transform.position.y > 8.9f){
-				player.transform.position = new Vector2(player.transform.position.x,8.9f);
-			}else if(player.transform.position.y < 1.6){
-				player.transform.position = new Vector2(player.transform.position.x,1.6f);
-			}else if(player.transform.position.x > 22f){
-				player.transform.position = new Vector2(22f,player.transform.position.y);
-			}else if(player.transform.position.x < -1f && GlobalVariableManager.Instance.SCENE_IS_TRANSITIONING == false){
-				//Leave room
-
-				GlobalVariableManager.Instance.ROOM_NUM = 101;
-				manager.GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
-
-				GlobalVariableManager.Instance.SCENE_IS_TRANSITIONING = true;
+		if(todaysPins.Count>2 && GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
+			if(Vector2.Distance(todaysPins[0].transform.position,player.transform.position) <4 && todaysPins[0].GetComponent<Ev_PinBehavior>().bought == false){
+				ShowThings(todaysPins[0].GetComponent<Ev_PinBehavior>().GetData());
+			}else if(Vector2.Distance(todaysPins[1].transform.position,player.transform.position) <4 && todaysPins[1].GetComponent<Ev_PinBehavior>().bought == false){
+				ShowThings(todaysPins[1].GetComponent<Ev_PinBehavior>().GetData());
+			}else if(Vector2.Distance(todaysPins[2].transform.position,player.transform.position) <4 && todaysPins[2].GetComponent<Ev_PinBehavior>().bought == false){
+				ShowThings(todaysPins[2].GetComponent<Ev_PinBehavior>().GetData());
+			}else{
+				HideThings();
 			}
 		}
-		//--------------------------------------------//
 	}
 
-	public void ShowThings(int cost){
+	public void ShowThings(PinDefinition pindata){
+		//Debug.Log("Shop is showing things...");
 		harry.GetComponent<tk2dSpriteAnimator>().Play("talk");
-		costText.GetComponent<TextMesh>().text = cost.ToString();
+		priceDisplayText.text = pindata.price.ToString();
+		pinDescriptionText.text = pindata.description;
+		pinTitleText.text = pindata.displayName;
 		priceDisplay.SetActive(true);
+		pinInfoDisplay.SetActive(true);
+		for(int i = 0; i < pindata.ppValue; i++){
+			ppDisplay.transform.GetChild(i).gameObject.SetActive(true);
+		}
 	}
 
 	public void HideThings(){
 		harry.GetComponent<tk2dSpriteAnimator>().Play("idle");
+		for(int i = 0; i < ppDisplay.transform.childCount; i++){
+			ppDisplay.transform.GetChild(i).gameObject.SetActive(true);
+		}
 		priceDisplay.SetActive(false);
+		pinInfoDisplay.SetActive(false);
 	}
 
 	void SpawnPins(){
 		PinDefinition currentPin = null;
-		float xPos = 0f;
-		float yPos = 0f;
+
 		tk2dSprite pinsSprite;
 		GameObject spawnedPin;
-
-        for (int i = 0; i < GlobalVariableManager.Instance.shopPins.Count; ++i)
+		Vector2 spawnPos = new Vector2();
+        for (int i = 0; i < 3; i++)
         {
+			Debug.Log("**PIN SPAWN** - Got here - Pin Spawn for shop x*x*x*x*x*x*x*x*" + GlobalVariableManager.Instance.shopPins.Count);
 			if(i == 0){
 				currentPin = upgrade1;
-				xPos = 8.89f;
-				yPos = 10f;
+				spawnPos = pedestalSpawnPoints[0].transform.position;
 			}else if(i == 1){
                 currentPin = upgrade2;
-				xPos = 14f;
-				yPos = 10.6f;
+				spawnPos = pedestalSpawnPoints[1].transform.position;
+
 			}else if(i == 2){
                 currentPin = upgrade3;
-				xPos = 18.6f;
-				yPos = 10f;
+				spawnPos = pedestalSpawnPoints[2].transform.position;
+
 			}
 
-            spawnedPin = ObjectPool.Instance.GetPooledObject("Pin", new Vector2(xPos,yPos));
+            spawnedPin = ObjectPool.Instance.GetPooledObject("ShopPin", spawnPos);
 
             // populate the pin data
             spawnedPin.name = currentPin.displayName;
-
-            var sprite = spawnedPin.GetComponent<tk2dSprite>();
-            sprite.SetSprite(currentPin.sprite);
+            Debug.Log("**PIN SPAWN** - spawned pin with name:" + spawnedPin.name +currentPin.sprite);
+          //  var sprite = spawnedPin.GetComponent<tk2dSprite>();
+          // sprite.SetSprite(currentPin.sprite);
 
             var behavior = spawnedPin.GetComponent<Ev_PinBehavior>();
             behavior.SetPinData(currentPin);
+            behavior.SetSprite(currentPin.sprite);
 
             spawnedPin.SetActive(true);
-
+            todaysPins.Add(spawnedPin);
             //spawnedPin.GetComponent<Ev_PinBehavior>().SetPinData(currentUpgradeCheck);
-            behavior.SetMySpot(i+1);
+            //behavior.SetMySpot(i+1);
 		}
 	}
 }

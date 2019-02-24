@@ -96,11 +96,12 @@ public class RandomDirectionMovement : MonoBehaviour {
 		if(moving){
 		bounceOffObject = 0;
 		//CancelInvoke("SpawnClouds");
-		walkPS.Stop();
+		if(walkPS !=null)
+			walkPS.Stop();
 		moving = false;
 		if(anim.GetClipByName("idle") != null){
 			anim.Play("idle");
-			Debug.Log("RDM sets animation" + anim.CurrentClip.name);
+//			Debug.Log("RDM sets animation" + anim.CurrentClip.name);
 
 		}
 		//if(anim.IsPlaying("run")){
@@ -138,10 +139,11 @@ public class RandomDirectionMovement : MonoBehaviour {
 	}
 
 	public virtual void GoAgain(){
-		Debug.Log("Go again activated");
+	//	Debug.Log("Go again activated");
 		moving = true;
 		//InvokeRepeating("SpawnClouds",.2f, .2f);
-		walkPS.Play();
+		if(walkPS != null)
+			walkPS.Play();
 		direction = (new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0.0f)).normalized;
 		StartCoroutine("Pause");
 	}

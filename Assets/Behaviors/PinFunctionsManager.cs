@@ -139,12 +139,17 @@ public class PinFunctionsManager : MonoBehaviour {
 	}
 
 	void DirtyDecoyTimer(){
-		if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
-			decoyTimer++;
-			if(decoyTimer >= 25){
-			DirtyDecoy();
-			decoyTimer = 0;
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DIRTYDECOY)){
+			if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
+				decoyTimer++;
+				if(decoyTimer >= 25){
+				DirtyDecoy();
+				decoyTimer = 0;
+				}
 			}
+		}else{
+			Debug.Log("Dirty Decoy Timer Invoke canceled! (Unequiped pin?)");
+			CancelInvoke("DirtyDecoyTimer");
 		}
 	}
 
@@ -174,7 +179,6 @@ public class PinFunctionsManager : MonoBehaviour {
 		Debug.Log("Sneaky Scrapper De-Activated");
 
 		gameObject.GetComponent<EightWayMovement>().myLegs.GetComponent<tk2dSprite>().color = new Color(1,1,1,1);
-
 		gameObject.GetComponent<tk2dSprite>().color = new Color(1,1,1,1);
 		GlobalVariableManager.Instance.IS_HIDDEN = false;
 	}

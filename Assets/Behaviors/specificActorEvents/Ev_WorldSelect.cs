@@ -20,6 +20,9 @@ public class Ev_WorldSelect : MonoBehaviour {
 	public WORLD myWorld;
 	public AudioClip selectSFX;
 	public SpriteRenderer myUnlockDisplay;
+	public List<GameObject> friendIconPositions = new List<GameObject>();
+	int shownFriendIconsNum;
+
 	bool canSelect = false;
 
 	GameObject[] worldIcons;
@@ -45,6 +48,7 @@ public class Ev_WorldSelect : MonoBehaviour {
 
 		Navigate("right",0);
 		StartCoroutine("SelectDelay");
+		IconSpawn();
 		//Debug.Log(GlobalVariableManager.Instance.MENU_SELECT_STAGE);
 	}
 	
@@ -136,10 +140,14 @@ public class Ev_WorldSelect : MonoBehaviour {
 
 			if(position == 0){
 				gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(3.4f,0f,0.2f);
+				if(gameObject.GetComponent<Animator>()!=null)
+					gameObject.GetComponent<Animator>().enabled = true;
 				layer = "Layer04";
 				StartCoroutine("ChangeLayer");
 			}else if(position == 1){
 				gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(10.35f,0f,0.2f);
+			if(gameObject.GetComponent<Animator>()!=null)
+					gameObject.GetComponent<Animator>().enabled = false;
 				layer = "Layer03";
 				StartCoroutine("ChangeLayer");
 			}else if(position == 2){
@@ -149,6 +157,8 @@ public class Ev_WorldSelect : MonoBehaviour {
 			}else{
 				gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-4.76f,0f,0.2f);
 				layer = "Layer03";
+				if(gameObject.GetComponent<Animator>()!=null)
+					gameObject.GetComponent<Animator>().enabled = false;
 				StartCoroutine("ChangeLayer");
 			}
 			if(myUnlockDisplay != null){
@@ -209,4 +219,18 @@ public class Ev_WorldSelect : MonoBehaviour {
 		yield return new WaitForSeconds(2f);
 		canSelect = true;
 	}
+
+	void IconSpawn(){
+		for(int i = 0; i < CalendarManager.Instance.friendEvents.Count; i++){
+			if(CalendarManager.Instance.friendEvents[i].friend.day == GlobalVariableManager.Instance.DAY_NUMBER && CalendarManager.Instance.friendEvents[i].friend.myWorld == myWorld){
+
+				
+				//switch icon to the proper image:
+				friendIconPositions[shownFriendIconsNum].GetComponent<SpriteRenderer>().sprite = CalendarManager.Instance.friendEvents[i].friend.calendarIcon;
+
+				shownFriendIconsNum++;
+			}
+		}
+	}
+
 }

@@ -17,7 +17,9 @@ public enum SFXBANK
     CLANK,
     VOICE_TICK,
     NOTICE, 
-    TRUCK_APPEAR
+    TRUCK_APPEAR,
+    MENU_NAV1,
+    MENU_NAV2,
 }
 
 public enum MUSICBANK
@@ -155,6 +157,19 @@ public class SoundManager : MonoBehaviour {
 		//sfxSource.Play();
 		sfxSource.PlayOneShot(clip);
 	}
+
+	public void SwitchToOtherBGM(AudioClip bgClip){
+		musicSource.volume = 0;
+		backupMusicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+		backupMusicSource.clip = bgClip;
+		SoundManager.instance.backupMusicSource.Play();
+	}
+
+	public void ReturnToMainBGM(){
+		SoundManager.instance.backupMusicSource.Stop();
+		SoundManager.instance.musicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
+	}
+
 	void Update(){
 		if(musicFading){
 			if(musicSource.volume > 0f){

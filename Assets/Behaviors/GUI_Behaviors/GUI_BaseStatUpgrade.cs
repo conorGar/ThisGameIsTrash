@@ -73,7 +73,7 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
 			}else if(arrowPos == 1){
 				GlobalVariableManager.Instance.HP_STAT.UpdateMax(+1);
 			}else if(arrowPos == 2){
-				GlobalVariableManager.Instance.PP_STAT.UpdateMax(+3);	
+				GlobalVariableManager.Instance.PP_STAT.UpdateMax(+2);	
 			}
 			GlobalVariableManager.Instance.STAR_POINTS_STAT.UpdateCurrent(-1);
             starsAvailableHUD.UpdateDisplay();

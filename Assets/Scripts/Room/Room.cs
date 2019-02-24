@@ -19,6 +19,8 @@ public class Room : MonoBehaviour
     public Transform miniMapPosition;
     public bool activateTutpopWhenEnter;
     public string tutPopUpToActivate;
+    public GameObject myMapClouds;
+    public GlobalVariableManager.ROOM myRoom;
 
 	int waifuChance;
 	[HideInInspector]
@@ -34,6 +36,18 @@ public class Room : MonoBehaviour
     public void ActivateRoom()
     {
     	Debug.Log("ActivateRoom....activated");
+
+
+    	//Set room as visited
+    	if((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) != myRoom){
+    		Debug.Log("Room has not been discovered previously:" + gameObject.name);
+    		GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED |= myRoom;
+			if(myMapClouds != null){
+    			myMapClouds.SetActive(false);
+    		}else{
+    			Debug.Log("Room:" +gameObject.name + "has No map clouds assigned to it! ***");
+    		}
+    	}
         CamManager.Instance.tk2dMainCam.ScreenCamera.ViewportToWorldPoint(transform.position);
         roomManager.SetCamFollowBounds(this);
 
@@ -67,7 +81,7 @@ public class Room : MonoBehaviour
 				int deathDate = enemySpawners[i].GetDeathDate();
 				if(deathDate != 0){//if body has not yet been spawned
 					
-	             	if(deathDate == 2){
+	             	if(deathDate == 2 && enemySpawners[i].myEnemyHasNoDeadBody != true){
 						GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",enemySpawners[i].transform.position);
 						body.GetComponent<ThrowableBody>().SetSpawnerID(enemySpawners[i].name);
 						body.GetComponent<tk2dSprite>().SetSprite(enemySpawners[i].enemyBodyName);
@@ -112,10 +126,14 @@ public class Room : MonoBehaviour
         for (int i=0; i < friendSpawners.Count; ++i)
         {
             var spawnedFriend = FriendManager.Instance.GetFriend(friendSpawners[i].friend);
+			Debug.Log("Friend Spawn got here *0*- " + friendSpawners[i].friend.name + spawnedFriend.IsVisiting);
             if (spawnedFriend != null && spawnedFriend.IsVisiting)
             {
+            	Debug.Log("Friend Spawn got here *1* - " + friendSpawners[i].friend.name);
                 if (spawnedFriend.IsCurrentRoom(this))
                 {
+					Debug.Log("Friend Spawn got here *2*- " + friendSpawners[i].friend.name);
+
                     spawnedFriend.gameObject.transform.position = friendSpawners[i].transform.position;
                     spawnedFriend.gameObject.SetActive(true);
                     spawnedFriend.OnActivateRoom();
@@ -139,8 +157,13 @@ public class Room : MonoBehaviour
     public void DeactivateRoom()
     {	
     	if(bossRoom){
+    		Debug.Log("Deactivate Room activated for boss room");
 			for(int i = 0; i< bosses.Count;i++){
-        			
+        			if(bosses[i].GetComponent<Boss>() != null){
+						Debug.Log("Boss Deactivate event should be activated...?" + bosses[i].name);
+
+        				bosses[i].GetComponent<Boss>().BossDeactivateEvent();
+        			}
         			bosses[i].gameObject.SetActive(false);
 					
         	}
@@ -170,6 +193,14 @@ public class Room : MonoBehaviour
     {
         enemies = new List<GameObject>();
         friends = new List<GameObject>();
+
+		if((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) == myRoom){
+			if(myMapClouds != null){
+    			myMapClouds.SetActive(false);
+    		}else{
+    			Debug.Log("Room:" +gameObject.name + "has No map clouds assigned to it! ***");
+    		}
+    	}
     }
 	
 	// Update is called once per frame

@@ -201,7 +201,6 @@ public class S_Ev_TitleScreen : MonoBehaviour {
     {
         // Once the Title pops up the player can interact with stuff!
         Debug.Log("Title Tween Complete.");
-        GameStateManager.Instance.PopState(); // Pop Movie State.
         GameStateManager.Instance.PushState(typeof(TitleState));
     }
 

@@ -22,6 +22,9 @@ public class Ev_Results : MonoBehaviour {
     public ParticleSystem clouds;
     public AudioClip resultsMusic;
     public AudioClip closeSfx;
+    public GameObject starDisplay;
+    public int startIndexOfLargeTrash;
+    public Sprite filledStarSprite;
 
 
 	int trashCollectedValue;
@@ -73,7 +76,7 @@ public class Ev_Results : MonoBehaviour {
             GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(5);
         }*/
 
-       
+	
 
     }
 
@@ -87,12 +90,18 @@ public class Ev_Results : MonoBehaviour {
         if (isEntering) {
             if (stateType == typeof(EndDayState)) {
                 gameObject.SetActive(true);
+				for(int i = 0; i < starDisplay.transform.childCount;i++){
+					LARGEGARBAGE largeGarbageType = LargeGarbage.ByIndex(i);
+            		Debug.Log(LargeGarbage.ByIndex(i).ToString());
+           			if ((GlobalVariableManager.Instance.LARGE_GARBAGE_DISCOVERED & largeGarbageType) == largeGarbageType || (GlobalVariableManager.Instance.LARGE_GARBAGE_VIEWED & largeGarbageType) == largeGarbageType) {
+            			starDisplay.transform.GetChild(i).gameObject.GetComponent<Image>().sprite = filledStarSprite;
+					}
+			}
+                CamManager.Instance.mainCamEffects.ZoomInOut(.7f,.5f);
 				SoundManager.instance.backupMusicSource.clip = resultsMusic;
 				SoundManager.instance.backupMusicSource.volume = GlobalVariableManager.Instance.MASTER_MUSIC_VOL;
 				SoundManager.instance.backupMusicSource.Play();
 				SoundManager.instance.musicSource.Stop();
-				clouds.gameObject.SetActive(true);
-        		clouds.Play();
                 StartCoroutine("InteractDelay"); // wait for the truck to get a bit up the road.
             }
         }
@@ -113,8 +122,7 @@ public class Ev_Results : MonoBehaviour {
                             GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[i] = 0;
                         }
                         //GlobalVariableManager.Instance.CURRENT_HP = 0;
-                        if (GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.Count > 4)
-                            GlobalVariableManager.Instance.WORLD_ROOM_DISCOVER.RemoveAt(4); // remove temporary room discover string
+                 
                         GlobalVariableManager.Instance.MENU_SELECT_STAGE = 1;
                         if (GlobalVariableManager.Instance.DEJAVUCOUNT - 3 <= 0) {
                             //Deja Vu pin
@@ -142,16 +150,20 @@ public class Ev_Results : MonoBehaviour {
                         UserDataManager.Instance.SetDirty();
                         GameStateManager.Instance.PopAllStates();
 
-                        if (GlobalVariableManager.Instance.DAY_NUMBER == 2) {
+						if (GlobalVariableManager.Instance.DAY_NUMBER == 2) { // was 2
                             GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");//supposed to be intro credits scene, changed for testing
                         }
-                        else if (GlobalVariableManager.Instance.DAY_NUMBER == 3) {
-                            //StartCoroutine("HomelessHarry"); TODO
-                            GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
+                        else if (GlobalVariableManager.Instance.DAY_NUMBER >= 10) {
+							if(GlobalVariableManager.Instance.LARGE_TRASH_COLLECTED < 3){
+                           		 GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("DemoEndRoom"); //if havent collected enough large trash by the demos end, game ends
+                           	}else{
+								GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
+                           	}
                         }
                         else {
                             GameObject.Find("fadeHelper").GetComponent<Ev_FadeHelper>().FadeToScene("Hub");
                         }
+
                         SoundManager.instance.PlaySingle(closeSfx);
                         // Fading needs time to pass.
                         Time.timeScale = 1f;
@@ -162,6 +174,9 @@ public class Ev_Results : MonoBehaviour {
 	}//end of update
 
 	IEnumerator InteractDelay(){
+		yield return new WaitForSeconds(.3f);
+		clouds.gameObject.SetActive(true);
+        clouds.Play();
 		yield return new WaitForSeconds(1f);
         //Time.timeScale = 0f;  //took this out because large trash display wasnt working well with it, needed?
 		phase = 2;

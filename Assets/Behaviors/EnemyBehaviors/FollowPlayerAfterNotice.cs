@@ -11,7 +11,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	//public AudioClip noticeSfx;
 	GameObject player;
 
-	bool noticedPlayer = false;
+	public bool noticedPlayer = false;
 
 	// Use this for initialization
 	void Start () {

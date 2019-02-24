@@ -26,7 +26,7 @@ public class GUI_PauseMenu : MonoBehaviour {
     Sprite returnStartSpr;
     Vector3 startPos;
     // Use this for initialization
-    void Start() {
+    void Awake() {
         startPos = gameObject.transform.localPosition;
         endDayStartSpr = enddayOption.GetComponent<Image>().sprite;
         optionStartSpr = optionsOption.GetComponent<Image>().sprite;
@@ -45,6 +45,14 @@ public class GUI_PauseMenu : MonoBehaviour {
         player = GameObject.Find("Jim");
 
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
+    }
+
+    void OnEnable(){
+    	
+		optionsOption.GetComponent<Image>().sprite = optionsHLspr;
+		enddayOption.GetComponent<Image>().sprite = endDayStartSpr;
+		arrowpos = 1;
+
     }
 
     private void OnDestroy()
@@ -124,7 +132,7 @@ public class GUI_PauseMenu : MonoBehaviour {
                    
                 }
                 else if (arrowpos == 2) {//end day
-					GameStateManager.Instance.PushState(typeof(PopupState));
+					//GameStateManager.Instance.PushState(typeof(PopupState));
                     endDayPopup.gameObject.SetActive(true);
                 }
             }

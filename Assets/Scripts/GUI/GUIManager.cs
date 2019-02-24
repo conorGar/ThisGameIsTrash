@@ -13,19 +13,27 @@ public class GUIManager : MonoBehaviour {
     public GUI_DeathDisplay DeathDisplay;
     public GUI_TrashCollectedDisplay TrashCollectedDisplayGameplay; // At the top left of the screen during gameplay
     public GUI_TrashCollectedDisplay TrashCollectedDisplayDeath; // On the death display
+    public GUI_HPdisplay hpDisplay;
+
+
+  	public GUI_TutPopup tutorialPopup;
+  	public Camera miniMapCam;
+
    	public TextMeshProUGUI lostTrash;
+
 
     // Friend related
     public GUI_RockItemHUD rockItemHUD;
     public GUI_SlabTrashGiveHUD slabTrashGiveHUD;
 	public GameObject SlabTrashNeededDisplay;
 	public GameObject StoneHandNeededDisplay;
+	public GUI_RockItemHUD coonScavengerHUD;
 
     // Hub related
     public GameObject BaseStatHUD;
     public GUI_BaseStatUpgrade GUI_BaseStatUpgrade;
     public Hub_UpgradeStand Hub_UpgradeStand;
-
+    public GUI_TimeUpgrade GUI_TimeUpgrade;
 
 	void Awake () {
         Instance = this;

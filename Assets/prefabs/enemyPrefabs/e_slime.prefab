@@ -80,11 +80,11 @@ GameObject:
   - component: {fileID: 114941821428685480}
   - component: {fileID: 61144755623047700}
   - component: {fileID: 114979055053057202}
-  - component: {fileID: 114538648885460122}
-  - component: {fileID: 114195865222555384}
+  - component: {fileID: 114867986009869928}
+  - component: {fileID: 114967996206745342}
   m_Layer: 9
   m_Name: e_slime
-  m_TagString: enemy_duck
+  m_TagString: enemy_slime
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,13 +95,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1332030190873508}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -0.38, z: 0}
-  m_LocalScale: {x: 0.8045, y: 0.5969, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.031454057, w: 0.9995052}
+  m_LocalPosition: {x: -0.343, y: -0.353, z: 0}
+  m_LocalScale: {x: 1.8246139, y: 0.9520153, z: 1}
   m_Children: []
   m_Father: {fileID: 4693132554380106}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 3.6050003}
 --- !u!4 &4691899398919878
 Transform:
   m_ObjectHideFlags: 1
@@ -122,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541179326353172}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32.201775, y: 14.392358, z: 0.2109375}
+  m_LocalPosition: {x: 5.4485493, y: 106.7962, z: 0.2109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4368200626233618}
@@ -158,7 +158,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c00c025533d330347a3dccd4e72283c7, type: 2}
+  - {fileID: 2100000, guid: 10a7c8df891c3b84eb124330956d76b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -266,44 +266,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 2
   attkPower: 2
   moveWhenHit: 0
   respawningEnemyType: 0
---- !u!114 &114195865222555384
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1541179326353172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90732f15953ee234992e7e9f73c74d7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  noticeThreshold: 5
-  noticeThresholdY: 0
-  sleepingEnemy: 0
-  sleepingPS: {fileID: 0}
-  noticedPlayer: 0
---- !u!114 &114538648885460122
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1541179326353172}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  walkDistance: 9.2
-  chaseSpeed: 4
-  hasSeperateFacingAnimations: 0
-  iBeLerpin: 0
-  chasePS: {fileID: 0}
-  returnToPreviousWhenFar: 0
+  toxicEnemy: 1
 --- !u!114 &114627010204717500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -315,10 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fac570381f34f647b768dc5a5aa1364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collection: {fileID: 114015143036772998, guid: b606f3dc4469e7f48a4870a8ae78f943,
+  collection: {fileID: 114598855037829586, guid: 66f1caa88c98d0d42bb512bc3f7d34f3,
     type: 2}
   _color: {r: 1, g: 1, b: 1, a: 1}
-  _scale: {x: 0.5, y: 0.5, z: 1}
+  _scale: {x: 0.4, y: 0.4, z: 1}
   _spriteId: 0
   boxCollider2D: {fileID: 0}
   polygonCollider2D: []
@@ -334,7 +301,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1541179326353172}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87e66f397c6ae134782c4022379cbba6, type: 3}
   m_Name: 
@@ -355,8 +322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e54113e5604435b8ae87c7754f2725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  library: {fileID: 114010995895570102, guid: 33036ad7c5ae5bf4f9ee04607f3ec062, type: 2}
-  defaultClipId: 1
+  library: {fileID: 114841389497517134, guid: 19fb3cd4d983c7445ae3c549254021d8, type: 2}
+  defaultClipId: 0
   playAutomatically: 1
 --- !u!114 &114863122598235998
 MonoBehaviour:
@@ -369,11 +336,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7465d3cf6dc723459be3e518ac51b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
+  movementSpeed: 1
   minMoveTime: 1
   maxMoveTime: 2.2
   stopTime: 2
-  walkPS: {fileID: 0}
+  walkPS: {fileID: 198043862303114716}
+--- !u!114 &114867986009869928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541179326353172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5790b12e5a2abf442b57fef345b8038d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpeed: 5
+  fireRate: 5
+  myProjectileFalls: 0
+  fireAniName: spit
+  projectile: {fileID: 1198749803060142, guid: 49710af3938ce26498467d762cfbcd4e, type: 2}
+  throwSFX: {fileID: 8300000, guid: b97d40794840e804a90a02b0085b904d, type: 3}
+  buildupSfx: {fileID: 8300000, guid: d225a9aac21c5a54e95b80affa971a31, type: 3}
 --- !u!114 &114941821428685480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -419,18 +404,32 @@ MonoBehaviour:
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1332030190873508}
   returnAniName: idle
-  dontSpawnBody: 0
+  dontSpawnBody: 1
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   myRespawner: {fileID: 0}
-  currentHp: 3
+  otherRespawner: {fileID: 0}
+  currentHp: 2
   meleeDmgBonus: 0
   dontStopWhenHit: 0
   spinning: 0
   startsOffDontMoveWhenHit: 0
+--- !u!114 &114967996206745342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541179326353172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7696de589f6cfb34f8ffd62354c32012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailPiece: {fileID: 1044980122286516, guid: b6d66f6a1930e284f88bb9d4fb919f7c, type: 2}
+  spawnRate: 1
 --- !u!114 &114979055053057202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,7 +503,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -198897633
+  randomSeed: -2133526713
   InitialModule:
     serializedVersion: 3
     enabled: 1

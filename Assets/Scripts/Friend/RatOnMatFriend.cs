@@ -6,6 +6,7 @@ public class RatOnMatFriend : Friend
 {
 	public ParticleSystem vanishPS;
 	GameObject openMapPrompt;
+	public S_Ev_DemoEnd demoEndManager;
 
 	bool actionCheck_moleTown;
 	bool actionCheck_dog;
@@ -126,6 +127,9 @@ public class RatOnMatFriend : Friend
 				StartCoroutine("ReturnCam");
 
                 break;
+            case "DEMO_END":
+            	demoEndManager.StartCoroutine("End");
+            	break;
         }
 
         yield return base.OnFinishDialogEnumerator();

@@ -31,7 +31,7 @@ public class S_Ev_PinEquipScreen : MonoBehaviour {
 	void Start () {
         GlobalVariableManager.Instance.MENU_SELECT_STAGE = 10;
 
-		if(GlobalVariableManager.Instance.ROOM_NUM != 112){
+		/*if(GlobalVariableManager.Instance.ROOM_NUM != 112){
 			GlobalVariableManager.Instance.ROOM_NUM = 101;
 		}
 
