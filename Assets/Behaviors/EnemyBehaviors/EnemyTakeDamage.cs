@@ -563,11 +563,7 @@ public bool bossSpawnedEnemy;
                 gameObject.GetComponent<FollowPlayer>().enabled = true;
                 //***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
             }
-            else if (gameObject.GetComponent<RandomDirectionMovement>()) {
-                gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
-            }
             damageOnce = 0;
-
         }
         else { //if hp is NOT > 0
             Debug.Log("CURRENT HP IS NOT GREATER THAN ZEROOOOOOO!");

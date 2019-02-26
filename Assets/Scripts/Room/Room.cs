@@ -93,29 +93,32 @@ public class Room : MonoBehaviour
              }else{
             	Debug.Log("*** MY ENEMY IS NOT DEAD ***");
             	GameObject spawnedEnemy;
-				if(waifuChance == 2){
-					spawnedEnemy = ObjectPool.Instance.GetPooledObject("pObj_Waifu");
+                Vector3 spawnPos = new Vector3();
+
+                // Try to spawn on the path finding grid if one is defined.  If not, spawn on the spawner position.
+                if (pathGrid != null) {
+                    Point enemyPoint = pathGrid.WorldToClosestGridPoint(enemySpawners[i].transform.position);
+
+                    if (enemyPoint != null) {
+                        spawnPos = pathGrid.GridToWorld(enemyPoint);
+                    } else {
+                        spawnPos = enemySpawners[i].transform.position;
+                    }
+                } else {
+                    spawnPos = enemySpawners[i].transform.position;
+                }
+
+                if (waifuChance == 2){
+					spawnedEnemy = ObjectPool.Instance.GetPooledObject("pObj_Waifu", spawnPos);
 
 				}else{
-					spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
+					spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag, spawnPos);
 				}
-				spawnedEnemy.SetActive(true);
             
 	            if (spawnedEnemy != null)
 	            {
 	                enemies.Add(spawnedEnemy);
 
-                    // Try to spawn on the path finding grid if one is defined.
-                    if (pathGrid != null) {
-                        Point enemyPoint = pathGrid.WorldToGrid(enemySpawners[i].transform.position);
-
-                        if (enemyPoint != null)
-                            spawnedEnemy.transform.position = pathGrid.GridToWorld(enemyPoint);
-                        else
-                            spawnedEnemy.transform.position = enemySpawners[i].transform.position;
-                    } else {
-                        spawnedEnemy.transform.position = enemySpawners[i].transform.position;
-                    }
 					if(spawnedEnemy.GetComponent<EnemyTakeDamage>() != null){
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().SetSpawnerID(enemySpawners[i].name);
 		                if(spawnedEnemy.GetComponent<CannotExitScene>())

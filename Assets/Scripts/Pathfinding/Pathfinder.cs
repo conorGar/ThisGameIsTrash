@@ -51,6 +51,12 @@ public static class Pathfinder {
         return null;
     }
 
+    // Straight path to the provided end point without using pathfinding.
+    public static BreadCrumb FindQuickPath(Point end)
+    {
+        return new BreadCrumb(end);
+    }
+
     // A* pathfinding search.
     private static BreadCrumb FindPathReversed(PathGrid grid, Point start, Point end)
     {

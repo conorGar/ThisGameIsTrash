@@ -70,6 +70,7 @@ public class PathGrid : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
     }
 
+    // Returns the position on the grid closest to the world position provided.  Returns null if the point is not on the grid.
     public Point WorldToGrid(Vector2 worldPos)
     {
         Vector2 gridPosition = new Vector2(worldPos.x - offset.x, -(worldPos.y - offset.y)) / UnitSize;
@@ -83,11 +84,60 @@ public class PathGrid : MonoBehaviour
 
         PathNode node = nodes[x, y];
 
-        if (node != null) {
+        if (node != null && node.traversable) {
             return new Point(node.x, node.y);
         }
 
         return null;
+    }
+
+    // Returns the position on the grid closest to the world position provided.  Returns the position closest to the grid if the point is not on the grid.
+    public Point WorldToClosestGridPoint(Vector2 worldPos)
+    {
+        Vector2 gridPosition = new Vector2(worldPos.x - offset.x, -(worldPos.y - offset.y)) / UnitSize;
+
+        // round to nearest int
+        int x = Mathf.RoundToInt(gridPosition.x);
+        int y = Mathf.RoundToInt(gridPosition.y);
+
+        Point point;
+
+        if (x < 0) { // left of the grid
+            if (y < 0) { // above the grid
+                point = new Point(0, 0);
+            } else if (y > height) { // below the grid
+                return new Point(0, height);
+            } else { // in grid y-axis
+                point = new Point(0, y);
+            }
+        } else if (x > width) { // right of the grid
+            if (y < 0) { // above the grid
+                point = new Point(width, 0);
+            } else if (y > height) { // below the grid
+                point = new Point(width, height);
+            } else { // in grid y-axis
+                point = new Point(width, y);
+            }
+        } else { // in grid x-axis
+            if (y < 0) { // above the grid
+                point = new Point(x, 0);
+            } else if (y > height) { // below the grid
+                point = new Point(x, height);
+            } else { // in grid y-axis
+                point = new Point(x, y);
+            }
+        }
+
+        PathNode node = nodes[point.X, point.Y];
+
+        if (node != null) {
+            // If the node found isn't traversable, pick one near it randomly to go to.
+            if (!node.traversable) {
+                point = GetRandomPoint(point, 3);
+            }
+        }
+
+        return point;
     }
 
     public Vector2 GridToWorld(Point point)

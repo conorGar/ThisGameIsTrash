@@ -172,7 +172,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &61302976088640844
 BoxCollider2D:
@@ -283,7 +283,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4
   stopTime: 2
-  nextMoveTime: 0
+  afterHitStopTime: 0.5
+  nextMoveTime: 2
+  moveMaxTime: 0
   walkPS: {fileID: 198577134872530542}
   bodyCollider: {fileID: 61841911532167534}
   linePrefab: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
@@ -369,8 +371,7 @@ MonoBehaviour:
   myShadow: {fileID: 1903692784849774}
   dontSpawnBody: 0
   canKnockoffArmor: 0
-  behaviorsToDeactivate:
-  - {fileID: 114061048850949760}
+  behaviorsToDeactivate: []
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
@@ -393,6 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
 --- !u!198 &198577134872530542
 ParticleSystem:

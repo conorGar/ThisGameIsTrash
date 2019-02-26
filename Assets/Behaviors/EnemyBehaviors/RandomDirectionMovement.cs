@@ -8,9 +8,11 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 	public float movementSpeed = 0;
 	public float stopTime = 2;
+    public float afterHitStopTime = 0f;
     public float nextMoveTime = 0f;
-	//public GameObject walkCloud;
-	public ParticleSystem walkPS;
+    public float moveMaxTime = 0f;
+    //public GameObject walkCloud;
+    public ParticleSystem walkPS;
 	//public float walkCloudYadjust = 0.8f;
 
 
@@ -84,6 +86,10 @@ public class RandomDirectionMovement : MonoBehaviour {
                         }
                     }
                     break;
+                case EnemyState.HIT:
+                    // Keep updating nextMoveTime until the hit animation ends.
+                    nextMoveTime = Time.time + afterHitStopTime;
+                    break;
             }
         }
 	}
@@ -108,37 +114,35 @@ public class RandomDirectionMovement : MonoBehaviour {
             Point startPoint = pathGrid.WorldToGrid(transform.position);
             if (startPoint != null) {
                 Point destPoint = pathGrid.GetRandomPoint(startPoint, 10);
-
                 GeneratePath(pathGrid, startPoint, destPoint);
-                controller.SetFlag((int)EnemyFlag.WALKING);
-
-                if (walkPS != null && !walkPS.isPlaying)
-                    walkPS.Play();
+            } else {
+                // If no start point was found, the ememy is off the grid.  Try to get them back on the closest point on the grid to where they are.
+                startPoint = pathGrid.WorldToClosestGridPoint(transform.position);
+                GenerateQuickPath(pathGrid, startPoint);
             }
+
+            if (path != null) {
+                transform.localScale = new Vector3(Mathf.Sign(RoomManager.Instance.currentRoom.pathGrid.GridToWorld(path.Position).x - transform.position.x),
+                                                  transform.localScale.y,
+                                                  transform.localScale.z);
+            }
+
+            controller.SetFlag((int)EnemyFlag.WALKING);
+            if (walkPS != null && !walkPS.isPlaying)
+                walkPS.Play();
+
+            var curr = path;
+            int nodeCount = 0;
+
+            // estimate how long it should take the enemy to finish their path.  That way if they get stuck on something for too long they can stop moving if they need to.
+            while (curr != null) {
+                nodeCount++;
+                curr = curr.Next;
+            }
+
+            moveMaxTime = nodeCount * pathGrid.width / movementSpeed + 1f;
         }
 	}
-
-    private void GeneratePath(PathGrid pathGrid, Point startPoint, Point destPoint)
-    {
-        if (pathGrid != null && startPoint != null && destPoint != null) {
-            // Get the best path to the random point, if it exists....
-            path = Pathfinder.FindPath(pathGrid, startPoint, destPoint);
-
-            BreadCrumb curr = path;
-            int index = 0;
-
-
-#if DEBUG_PATHFINDING
-            // Render the path for debugging
-            while (curr != null) {
-                line.positionCount = index + 1;
-                line.SetPosition(index, pathGrid.GridToWorld(curr.Position));
-                curr = curr.Next;
-                index++;
-            }
-#endif
-        }
-    }
 
 	public virtual void StopMoving(){
         controller.RemoveFlag((int)EnemyFlag.WALKING);
@@ -146,12 +150,59 @@ public class RandomDirectionMovement : MonoBehaviour {
         if (walkPS.isPlaying)
             walkPS.Stop();
 
+        path = null;
+
 		StopAllCoroutines();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         nextMoveTime = Time.time + stopTime;
+
+        ClearDebugPath();
     }
 
     //helpers
+    private void GeneratePath(PathGrid pathGrid, Point startPoint, Point destPoint)
+    {
+        if (pathGrid != null && startPoint != null && destPoint != null) {
+            // Get the best path to the random point, if it exists....
+            path = Pathfinder.FindPath(pathGrid, startPoint, destPoint);
+
+            DrawDebugPath(pathGrid);
+        }
+    }
+
+    // Generates a straight line to a point on the grid, ignoring any pathing logic.
+    private void GenerateQuickPath(PathGrid pathGrid, Point destPoint)
+    {
+        if (pathGrid != null && destPoint != null) {
+            path = Pathfinder.FindQuickPath(destPoint);
+
+            DrawDebugPath(pathGrid);
+        }
+    }
+
+    private void DrawDebugPath(PathGrid pathGrid)
+    {
+#if DEBUG_PATHFINDING
+        BreadCrumb curr = path;
+        int index = 0;
+
+        // Render the path for debugging
+        while (curr != null) {
+            line.positionCount = index + 1;
+            line.SetPosition(index, pathGrid.GridToWorld(curr.Position));
+            curr = curr.Next;
+            index++;
+        }
+#endif
+    }
+
+    private void ClearDebugPath()
+    {
+#if DEBUG_PATHFINDING
+        line.positionCount = 0;
+#endif
+    }
+
     private void ProcessDebugClickMode()
     {
         // left click to path to a point on the grid.
@@ -171,6 +222,23 @@ public class RandomDirectionMovement : MonoBehaviour {
                         walkPS.Play();
                 }
             }
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 8) { // tiles
+            if (controller.IsFlag((int)EnemyFlag.WALKING))
+                StopMoving();
+        }
+    }
+
+    // Stop moving if a collision with another enemy happens
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 9) { // enemy
+            if (controller.IsFlag((int)EnemyFlag.WALKING))
+                StopMoving();
         }
     }
 }
