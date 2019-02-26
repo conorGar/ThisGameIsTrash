@@ -7,10 +7,11 @@ using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigge
 public class RandomDirectionMovement : MonoBehaviour {
 
 	public float movementSpeed = 0;
-	public float stopTime = 2;
-    public float afterHitStopTime = 0f;
-    public float nextMoveTime = 0f;
-    public float moveMaxTime = 0f;
+    public int maxRandomNodeDistance = 10; // how far the enemy can travel when picking random nodes
+	public float stopTime = 2; // how long the enemy will stop after they move
+    public float afterHitStopTime = 0f; // how long the enemy will stop after they are hit
+    private float nextMoveTime = 0f;
+    private float moveMaxTime = 0f; // how long the enemy will wait to pick a new destination if they get stuck on something.
     //public GameObject walkCloud;
     public ParticleSystem walkPS;
 	//public float walkCloudYadjust = 0.8f;
@@ -113,8 +114,9 @@ public class RandomDirectionMovement : MonoBehaviour {
         if (pathGrid != null) {
             Point startPoint = pathGrid.WorldToGrid(transform.position);
             if (startPoint != null) {
-                Point destPoint = pathGrid.GetRandomPoint(startPoint, 10);
-                GeneratePath(pathGrid, startPoint, destPoint);
+                Point destPoint = pathGrid.GetRandomPoint(startPoint, maxRandomNodeDistance);
+                if (destPoint != null)
+                    GeneratePath(pathGrid, startPoint, destPoint);
             } else {
                 // If no start point was found, the ememy is off the grid.  Try to get them back on the closest point on the grid to where they are.
                 startPoint = pathGrid.WorldToClosestGridPoint(transform.position);
@@ -125,22 +127,22 @@ public class RandomDirectionMovement : MonoBehaviour {
                 transform.localScale = new Vector3(Mathf.Sign(RoomManager.Instance.currentRoom.pathGrid.GridToWorld(path.Position).x - transform.position.x),
                                                   transform.localScale.y,
                                                   transform.localScale.z);
+
+                controller.SetFlag((int)EnemyFlag.WALKING);
+                if (walkPS != null && !walkPS.isPlaying)
+                    walkPS.Play();
+
+                var curr = path;
+                int nodeCount = 0;
+
+                // estimate how long it should take the enemy to finish their path.  That way if they get stuck on something for too long they can stop moving if they need to.
+                while (curr != null) {
+                    nodeCount++;
+                    curr = curr.Next;
+                }
+
+                moveMaxTime = nodeCount * pathGrid.width / movementSpeed + 1f;
             }
-
-            controller.SetFlag((int)EnemyFlag.WALKING);
-            if (walkPS != null && !walkPS.isPlaying)
-                walkPS.Play();
-
-            var curr = path;
-            int nodeCount = 0;
-
-            // estimate how long it should take the enemy to finish their path.  That way if they get stuck on something for too long they can stop moving if they need to.
-            while (curr != null) {
-                nodeCount++;
-                curr = curr.Next;
-            }
-
-            moveMaxTime = nodeCount * pathGrid.width / movementSpeed + 1f;
         }
 	}
 

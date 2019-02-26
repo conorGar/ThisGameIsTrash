@@ -17,6 +17,8 @@ public class PathGrid : MonoBehaviour
     public float UnitSize = 1f; // TODO: make this handle now square sizes.
     public Vector2 UnitVector;
 
+    private List<Point> points = new List<Point>();
+
     void Awake()
     {
         // set up grid from an enemy collider size;
@@ -148,23 +150,36 @@ public class PathGrid : MonoBehaviour
     // returns a random node point node distance from the point provided.
     public Point GetRandomPoint(Point point, int nodeDist)
     {
-        int x = 0;
-        int y = 0;
-        int attempt = 0;
-        const int MAX_ATTEMPTS = 10;
-        do {
-            // clamp the values to fit inside the grid.
-            x = Random.Range(Mathf.Max(point.X - nodeDist, 0), Mathf.Min(point.X + nodeDist, width - 1));
+        points.Clear();
 
-            // find the y, knowing how much of the dist is used up already.
-            nodeDist -= Mathf.Abs(x - point.X);
+        for (int x = point.X - nodeDist; x < point.X + nodeDist; x++) {
+            for (int y = point.Y - nodeDist; y < point.Y + nodeDist; y++) {
+                // ignore the point itself
+                if (point.X == x && point.Y == y)
+                    continue;
 
-            // clamp the values to fit inside the grid.
-            y = Random.Range(Mathf.Max(point.Y - nodeDist, 0), Mathf.Min(point.Y + nodeDist, height - 1));
-            attempt++;
-        } while (attempt < MAX_ATTEMPTS && (x != point.X &&y != point.Y) && !nodes[x, y].traversable);  // Find another point if the one picked is not traversable or we ran out of attempts to avoid infinite loops.
+                // ignore points that are too far away.
+                if (Mathf.Abs(point.X - x) + Mathf.Abs(point.Y - y) > nodeDist)
+                    continue;
 
-        return new Point(x, y);
+                // ignore points off the grid.
+                if (x < 0 || x >= width || y < 0 || y >= height)
+                    continue;
+
+                // assuming the node exists and is traversable, add it to the list.
+                if (nodes[x, y] != null && nodes[x, y].traversable) {
+                    points.Add(new Point(x, y));
+                }
+            }
+        }
+
+        // return a random, valid point.
+        if (points.Count > 0) {
+            points.Shuffle();
+            return points[0];
+        }
+
+        return null;
     }
 
     public bool IsEdgeValid(Point p1, Point p2, neighbor_direction dir)
