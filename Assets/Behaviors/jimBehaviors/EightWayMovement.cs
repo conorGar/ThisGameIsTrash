@@ -334,6 +334,13 @@ public class EightWayMovement : MonoBehaviour {
     	}
     }
 
+    public void SlowdownSpeed(){ //For now, things that slowdown player just halve the speed, might have to change set up if this isn't the case forever.
+    	speed = speed/2;
+    }
+
+    public void SpeedReturn(){
+    	speed = speed*2;
+    }
 
 	IEnumerator TurnDelay() {
         yield return new WaitForSeconds (.1f);

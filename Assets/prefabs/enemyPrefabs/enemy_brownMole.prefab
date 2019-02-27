@@ -218,8 +218,10 @@ MonoBehaviour:
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
+  otherRespawner: {fileID: 0}
   currentHp: 2
   meleeDmgBonus: 0
+  bossSpawnedEnemy: 0
   dontStopWhenHit: 0
   spinning: 0
   startsOffDontMoveWhenHit: 0
@@ -303,10 +305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 1
   attkPower: 1
   moveWhenHit: 0
   respawningEnemyType: 1
+  toxicEnemy: 0
 --- !u!114 &114833213622145292
 MonoBehaviour:
   m_ObjectHideFlags: 1

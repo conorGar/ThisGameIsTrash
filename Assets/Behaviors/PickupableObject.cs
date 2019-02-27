@@ -32,7 +32,7 @@ public class PickupableObject : MonoBehaviour
 	protected bool pickUpSpin;
 	public bool spinning;
 	float t;
-	Quaternion startRotation;
+	protected Quaternion startRotation;
 
 	// Use this for initialization
 	public void Start ()
@@ -129,14 +129,15 @@ public class PickupableObject : MonoBehaviour
 		gameObject.transform.parent = player.transform;
 		Debug.Log("Pickup() activated");
 		GlobalVariableManager.Instance.CARRYING_SOMETHING = true;
-		player.GetComponent<EightWayMovement>().enabled = false;
+		//player.GetComponent<EightWayMovement>().enabled = false;
 		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
 		//move and play the particle system
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		SoundManager.instance.PlaySingle(pickup);
 		//set object to follow player and push up in the sky
-		gameObject.GetComponent<Animator>().SetTrigger("PickUp");
+		if(gameObject.GetComponent<Animator>() != null)
+			gameObject.GetComponent<Animator>().SetTrigger("PickUp");
 		if(!throwableObject){
 			
 			//myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
