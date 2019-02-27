@@ -6,7 +6,6 @@ public class GUI_WorldMap : MonoBehaviour
 	public float maxZoom = -30f;
 	public float minZoom = -3f;
 	public Camera miniMapCam;
-	public GameObject player;
 
 	float currentZoom = -11f;
 
@@ -29,7 +28,9 @@ public class GUI_WorldMap : MonoBehaviour
 			}
 		}
 
-		miniMapCam.gameObject.transform.position = new Vector3(player.transform.position.x,player.transform.position.y,currentZoom);
+		miniMapCam.gameObject.transform.position = new Vector3(PlayerManager.Instance.player.transform.position.x,
+                                                               PlayerManager.Instance.player.transform.position.y,
+                                                               currentZoom);
 	}
 }
 

@@ -8,7 +8,6 @@ public class B_Ev_Ex : Boss {
 
 	public GameObject myProjectile;
 	public GameObject myParticles;
-	public GameObject player;
 	public AudioClip cast;
 	public AudioClip teleport;
 	public AudioClip teleportTrail;
@@ -97,7 +96,7 @@ public class B_Ev_Ex : Boss {
 		if(!initialTeleport){
 		teleportDestination = new Vector2(Random.Range(-55f,-4f),Random.Range(134f,149f)); 
 		}else{
-			if(player.transform.position.x < -25f){//player on left side
+			if(PlayerManager.Instance.player.transform.position.x < -25f){//player on left side
 				teleportDestination = new Vector2(-9f,144f); 
 			}else{
 				teleportDestination = new Vector2(-40f,144f); 
@@ -156,7 +155,7 @@ public class B_Ev_Ex : Boss {
         // Spawn and home in on the player
         myProjectile.transform.position = gameObject.transform.position;
         myProjectile.GetComponent<KillSelfAfterTime>().CancelInvoke();//prevents projectile from dying shortly after spawn
-        playerPosition = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        playerPosition = new Vector3(PlayerManager.Instance.player.transform.position.x, PlayerManager.Instance.player.transform.position.y, PlayerManager.Instance.player.transform.position.z);
         myProjectile.SetActive(true);
         SoundManager.instance.PlaySingle(cast);
         Vector2 moveDirection = (playerPosition - myProjectile.transform.position).normalized * 10;

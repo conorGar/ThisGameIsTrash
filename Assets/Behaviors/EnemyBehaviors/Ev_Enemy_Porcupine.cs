@@ -25,7 +25,7 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 	{
 		if(!leaping){
 				base.Update();
-			if(Vector2.Distance(gameObject.transform.position,player.transform.position) < 7){
+			if(Vector2.Distance(gameObject.transform.position,PlayerManager.Instance.player.transform.position) < 7){
 				leaping = true;
 				Leap();
 			}
@@ -83,7 +83,7 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 		gameObject.GetComponent<EnemyTakeDamage>().moveWhenHit = false;
 		myShadow.transform.parent = null;
 
-		landingPos = player.transform.position;
+		landingPos = PlayerManager.Instance.player.transform.position;
 		inAir = true;
 		yield return new WaitUntil(() => Vector2.Distance(myShadow.transform.position, landingPos)<1);
 		Debug.Log("Got here leap sequence - 3");
@@ -99,7 +99,7 @@ public class Ev_Enemy_Porcupine : FollowPlayer
 		yield return new WaitForSeconds(1f);
 
 		gameObject.GetComponent<FollowPlayerAfterNotice>().enabled = true;
-		gameObject.GetComponent<RandomDirectionMovement>().GoAgain();
+		gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
 		gameObject.GetComponent<EnemyTakeDamage>().moveWhenHit = true;
 		leaping = false;
 		gameObject.GetComponent<tk2dSpriteAnimator>().Play("run");

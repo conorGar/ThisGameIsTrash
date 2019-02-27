@@ -14,32 +14,27 @@ public class MeleeAttack : MonoBehaviour {
 	public GameObject sideSwoosh;
 	public GameObject topSwoosh;
 	public GameObject botSwoosh;
-	public GameObject sideBigSwoosh;
 	public GameObject topBigSwoosh;
 	public GameObject botBigSwoosh;
+	public GameObject sideBigSwoosh;
+	public ParticleSystem chargePS;
+	public ParticleSystem chargeReadyPS;
 
-	public bool cantAttack = false;
-	bool isSwinging = false;
 	int swingDirection;
 	float turningSpeed;
 	private float playerMomentum; // a little 'bounce' when swing
 	Vector3 startingScale;
 
 
-	bool chargingAttack;
 	INPUTACTION heldKey;
+	bool chargeReady;
 
 	void Start () {
         startingScale = this.gameObject.transform.localScale;
-		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.CURSED) || GlobalVariableManager.Instance.CARRYING_SOMETHING == true){
-            //Cursed pin- can't attack || carrying large trash- can't attack
-            Debug.Log("Cant attack because of here");
-			cantAttack = true;
-		}
+
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUCKSFX)){
 			//duck sfx pin
 			swing = (AudioClip)Resources.Load("sfx_duckSwing", typeof(AudioClip));
-			Debug.Log("Cant attack because of HHHHEEEERRREE");
 		}
 
 		//reset values
@@ -55,78 +50,10 @@ public class MeleeAttack : MonoBehaviour {
     }
 
     void Update () {
-        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) && !GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-            if (isSwinging) {
-                if (swingDirection == 1) {
-                    //weapon.transform.position = new Vector2(gameObject.transform.position.x + 4f,gameObject.transform.position.y+ 1.4f);
-                    transform.Translate(new Vector2(playerMomentum, 0) * Time.deltaTime);
-					this.gameObject.transform.localScale = startingScale; //always faces proper way
-
-                }
-                else if (swingDirection == 2) {
-                    //weapon.transform.position = new Vector2(gameObject.transform.position.x,gameObject.transform.position.y + 1.4f);
-                    transform.Translate(new Vector2(playerMomentum * -1, 0) * Time.deltaTime);
-					this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z); //always faces left
-
-                }
-                else if (swingDirection == 3) {//swing up
-                    transform.Translate(new Vector2(0, playerMomentum) * Time.deltaTime);
-                    //weapon.transform.position = new Vector2(gameObject.transform.position.x -.5f,gameObject.transform.position.y + 2f);
-                }
-                else if (swingDirection == 4) {//swing down
-                    transform.Translate(new Vector2(0, playerMomentum * -1) * Time.deltaTime);
-                    //weapon.transform.position = new Vector2(gameObject.transform.position.x + 2f,gameObject.transform.position.y + 2f);
-                }
-                //playerMomentum -= .5f;
-            }
-            if (!cantAttack && Time.timeScale != 0f) {
-                //timescale part = if game isnt paused
-                if (GlobalVariableManager.Instance.TRASH_TYPE_SELECTED == 3 && !isSwinging  && GlobalVariableManager.Instance.PLAYER_CAN_MOVE &&
-                 !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtL") && !gameObject.GetComponent<tk2dSpriteAnimator>().IsPlaying("hurtR")) {
-
-                    if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
-                      //  playerMomentum = 6f;
-                        this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
-                        StartCoroutine("Swing", 2);
-                    }
-                    else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
-                        this.gameObject.transform.localScale = startingScale;
-                      // playerMomentum = 6f;
-                        StartCoroutine("Swing", 1);
-                    }
-                    else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
-                        this.gameObject.transform.localScale = startingScale;
-                      //  playerMomentum = 6f;
-                        StartCoroutine("Swing", 4);
-                    }
-                    else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
-                        this.gameObject.transform.localScale = startingScale;
-                        //playerMomentum = 6f;
-                        StartCoroutine("Swing", 3);
-                    }
-
-                  
-                }
-                else {
-                    //Debug.Log("something wrong with global var checks");
-                    //Debug.Log(GlobalVariableManager.Instance.TRASH_TYPE_SELECTED);
-                    //Debug.Log(GlobalVariableManager.Instance.PLAYER_CAN_MOVE);
-                    //Debug.Log(GlobalVariableManager.Instance.MENU_SELECT_STAGE);
-                }
-            }
-            else {
-                //Debug.Log("Something wrong at MeleeAttack script, prob with pausing");
-            }
-        }
-		if(chargingAttack && ControllerManager.Instance.GetKeyUp(heldKey)){
-                    	Debug.Log("ChargingAttack cancel");
-                    	StopCoroutine("StrongSwing");
-						CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-						ReturnFromSwing();
-                    	chargingAttack = false;
-        }
-		if(playerMomentum > 0){ //momentum from strong swing
-			if (swingDirection == 1) {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            switch (GetComponent<JimStateController>().GetCurrentState()) {
+                case JimState.ATTACKING:
+                    if (swingDirection == 1) {
                         transform.Translate(new Vector2(playerMomentum, 0) * Time.deltaTime);
 				        this.gameObject.transform.localScale = startingScale; //always faces proper way
 
@@ -141,11 +68,55 @@ public class MeleeAttack : MonoBehaviour {
 
                     }
                     else if (swingDirection == 4) {//swing down
-                       transform.Translate(new Vector2(0, playerMomentum * -1) * Time.deltaTime);
+                        transform.Translate(new Vector2(0, playerMomentum * -1) * Time.deltaTime);
 
                     }
-			playerMomentum -= .5f;
+                   
+                    break;
+                case JimState.IDLE:
+                    
+                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
+                            //playerMomentum = 6f;
+                            this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
+                            StartCoroutine("Swing", 2);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
+                            this.gameObject.transform.localScale = startingScale;
+                            //playerMomentum = 6f;
+                            StartCoroutine("Swing", 1);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                            this.gameObject.transform.localScale = startingScale;
+                            //playerMomentum = 6f;
+                            StartCoroutine("Swing", 4);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                            this.gameObject.transform.localScale = startingScale;
+                            //playerMomentum = 6f;
+                            StartCoroutine("Swing", 3);
+                        }
+                    
+                    break;
+                case JimState.CHARGING:
+					if(ControllerManager.Instance.GetKeyUp(heldKey)){
+						// charge attack unleashed at release of key
+						chargePS.gameObject.SetActive(false);
+
+						if(chargeReady){
+							StartCoroutine("StrongSwing");
+						}else{
+                    		Debug.Log("ChargingAttack cancel");
+                    		StopCoroutine("StrongSwingCharge");
+							CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+							PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
+						}
+                    }
+                	break;
+            }
         }
+        if(playerMomentum >0){
+			playerMomentum -= .5f;
+        }else{
+			playerMomentum  = 0f;
+        }
+
 	}//end of update method
 
 	public void UpdateWeapon(){//activated by Ev_currentWeapon
@@ -178,18 +149,7 @@ public class MeleeAttack : MonoBehaviour {
 				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
 				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,.94f);
 
-		}/*else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "poleSwing"){
-				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("broomSwing");
-				meleeWeaponRightSwing.transform.localPosition = new Vector2(6.73f,-2.68f);
-
-				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("broomDown");
-				meleeWeaponBotSwing.transform.localPosition = new Vector2(.85f,-3.83f);
-
-				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("broomUp");
-				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,3.31f);
-
-		}*/
-
+		}
 	}
 	public void DemoteWeapon(){//activated by PlayerTakeDamage
 		meleeWeaponRightSwing.transform.localPosition = new Vector2(meleeWeaponRightSwing.transform.localPosition.x-1.1f,meleeWeaponRightSwing.transform.localPosition.y);
@@ -220,60 +180,33 @@ public class MeleeAttack : MonoBehaviour {
 				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("plankUp");
 				meleeWeaponTopSwing.transform.localPosition = new Vector2(-.13f,.94f);
 
-		}/*else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "broomSwing"){
-				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("poleSwing");
-				meleeWeaponRightSwing.transform.localPosition = new Vector2(4.8f,-2.01f);
-
-				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("poleDown");
-				meleeWeaponBotSwing.transform.localPosition = new Vector2(.6f,-2.9f);
-
-				meleeWeaponTopSwing.GetComponent<tk2dSpriteAnimator>().Play("poleUp");
-				meleeWeaponBotSwing.transform.localPosition = new Vector2(-.13f,2.56f);
-
-		}*/
-
+		}
 	}
 
 	IEnumerator Swing(int direction){
 			SoundManager.instance.RandomizeSfx(swing);
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 			GameObject meleeDirectionEnabled = null;
 			swingDirection = direction;
-			if(direction == 1){
-				meleeDirectionEnabled = meleeWeaponRightSwing;
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingR",true);
+
+            if (direction == 1){
+                PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_RIGHT);
+                meleeDirectionEnabled = meleeWeaponRightSwing;
 				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
-				//sideSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFrom(0);
-				//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
 			}else if(direction == 2){
-				meleeDirectionEnabled = meleeWeaponLeftSwing;
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingR",true);
+                PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
+                meleeDirectionEnabled = meleeWeaponLeftSwing;
 				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
-				//sideSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFrom(0);
-				//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingR");
 			}else if(direction == 3){
-				//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingUp");
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingUp",true);
-				meleeDirectionEnabled = meleeWeaponTopSwing;
-			
+                PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_UP);
+                meleeDirectionEnabled = meleeWeaponTopSwing;
 				topSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
-				//topSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFrom(0);
 			}else if(direction == 4){
-				//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimSwingDown");
-				botSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
-				//botSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFrom(0);
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimSwingDown",true);
-				meleeDirectionEnabled = meleeWeaponBotSwing;
-
+                PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_DOWN);
+                meleeDirectionEnabled = meleeWeaponBotSwing;
+                botSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
 			}
+
 			meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
-
-			//meleeDirectionEnabled.SetActive(true);
-
-
-			//meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
-
-			isSwinging = true;
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
 		    if(GlobalVariableManager.Instance.IsPinEquipped(PIN.HEROOFGRIME) && GlobalVariableManager.Instance.HP_STAT.GetCurrent() == GlobalVariableManager.Instance.HP_STAT.GetMax()){
@@ -284,32 +217,9 @@ public class MeleeAttack : MonoBehaviour {
 			meleeDirectionEnabled.SetActive(true);
 
 			meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
-			/*if(GlobalVariableManager.Instance.IsPinEquipped(PIN.LINKTOTRASH) && (
-			ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT) ||ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP) || ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN))){
-				INPUTACTION currentKey = INPUTACTION.ATTACKRIGHT;
-				if(direction ==1){
-					currentKey = INPUTACTION.ATTACKRIGHT;
-				}else if(direction == 2){
-					currentKey = INPUTACTION.ATTACKLEFT;
-				}else if(direction == 3){
-					currentKey = INPUTACTION.ATTACKUP;
-				}else if(direction == 4){
-					currentKey = INPUTACTION.ATTACKDOWN;
-				}
 
 
-				//yield return new WaitForSeconds(.3f);
-				isSwinging = false; //prevents momentum from pushin player while twisting
-				cantAttack = true;
-
-				if(ControllerManager.Instance.GetKey(currentKey)){
-					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("spinAttack",true);
-					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("SpinAttack",currentKey);
-					meleeDirectionEnabled.SetActive(false);
-				}		    		
-                    	
-            }else{*/
-				INPUTACTION currentKey = INPUTACTION.ATTACKRIGHT;
+			INPUTACTION currentKey = INPUTACTION.ATTACKRIGHT;
 				if(direction ==1){
 					currentKey = INPUTACTION.ATTACKRIGHT;
 				}else if(direction == 2){
@@ -321,7 +231,7 @@ public class MeleeAttack : MonoBehaviour {
 				}
 				yield return new WaitForSeconds(.1f);
 				if(ControllerManager.Instance.GetKey(currentKey)){
-					StartCoroutine("StrongSwing",currentKey);
+					StartCoroutine("StrongSwingCharge",currentKey);
 					meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
 					yield return new WaitForSeconds(.1f);
 					meleeDirectionEnabled.SetActive(false);
@@ -330,83 +240,93 @@ public class MeleeAttack : MonoBehaviour {
 					meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
 					yield return new WaitForSeconds(.1f);
 
-					ReturnFromSwing();
 					meleeDirectionEnabled.SetActive(false);
 				}
-			//}
+				
+			
 		
 	}
 
-
-	public void SetCanAttack(bool val){
-		cantAttack = val;
-	}
-
-	public void ReturnFromSwing(){
-
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-		//gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
-		//GetComponent<EightWayMovement>().clipOverride = false;
-		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
-
-		//gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
-		isSwinging = false;
-
-	}
-
-	IEnumerator StrongSwing(INPUTACTION givenKey){
+	IEnumerator StrongSwingCharge(INPUTACTION givenKey){
 		CamManager.Instance.mainCamEffects.ZoomInOut(1.3f,1f);
-		Debug.Log("Strong Swing Ienum activated -!-!-!-!-!-!-!-!-!-!");
+
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		heldKey = givenKey;
-		chargingAttack = true;
-		yield return new WaitForSeconds(.5f);
+		//chargingAttack = true;
+		if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT)) {
+	
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.CHARGE_LEFT);
+                       
+	    } else if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT)) {
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.CHARGE_RIGHT);
+                 
+	    } else if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN)) {
+
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.CHARGE_DOWN);
+
+	    } else if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP)) {
+
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.CHARGE_UP);
+
+	    }
+	    chargePS.gameObject.SetActive(true);
+		yield return new WaitForSeconds(.4f);
+		chargeReady = true;
+		chargeReadyPS.Play();
+		Debug.Log("chargeReady");
+		//ReturnFromSwing();
+	
+	}
+
+	IEnumerator StrongSwing(){
+		Debug.Log("Strong Swing Ienum activated -!-!-!-!-!-!-!-!-!-!");
 		GameObject meleeDirectionEnabled = null;
 		GameObject bigSwooshDirection = null;
 
-		if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKLEFT)) {
+		if (heldKey == INPUTACTION.ATTACKLEFT) {
 	    	playerMomentum = 6f;
-			//PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
         	meleeDirectionEnabled = meleeWeaponLeftSwing;
         	sideBigSwoosh.SetActive(true);
         	bigSwooshDirection = sideBigSwoosh;
-			sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();                        
-	    } else if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKRIGHT)) {
-			//PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_RIGHT);
+		                  
+	    } else if (heldKey == INPUTACTION.ATTACKRIGHT) {
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_RIGHT);
             meleeDirectionEnabled = meleeWeaponRightSwing;
-			sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+		
 	        playerMomentum = 6f;
 	        bigSwooshDirection = sideBigSwoosh;
 	        sideBigSwoosh.SetActive(true);                   
-	    } else if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKDOWN)) {
+	    } else if (heldKey == INPUTACTION.ATTACKDOWN) {
 	        playerMomentum = 6f;
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_DOWN);
 	        botBigSwoosh.SetActive(true);
 	        bigSwooshDirection = botBigSwoosh;
-			//PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_DOWN);
             meleeDirectionEnabled = meleeWeaponBotSwing;
-            botSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
-	    } else if (ControllerManager.Instance.GetKey(INPUTACTION.ATTACKUP)) {
+	    } else if (heldKey == INPUTACTION.ATTACKUP) {
 	        playerMomentum = 6f;
 	        topBigSwoosh.SetActive(true);
-			//PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_UP);
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_UP);
 			bigSwooshDirection = topBigSwoosh;
             meleeDirectionEnabled = meleeWeaponTopSwing;
-			topSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+		
 	    }
 
 		meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
-
+		bigSwooshDirection.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
 
 		meleeDirectionEnabled.SetActive(true);
 
 		//meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
-		yield return new WaitForSeconds(.1f);
+		yield return new WaitForSeconds(.2f);
 		meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
 		meleeDirectionEnabled.SetActive(false);
-		chargingAttack = false;
+		//chargingAttack = false;
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+		chargeReady = false;
+		PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
 		bigSwooshDirection.SetActive(false);
-		ReturnFromSwing();
-	
 	}
+
+
 }

@@ -8,7 +8,6 @@ public class GUI_DayDisplay : MonoBehaviour
 	public GameObject truck;
 	public TextMeshProUGUI dayNumDisplay;
 	public GameObject back;
-	public GameObject player;
 	public GameObject playerDummy;
 	public bool forHub;
 	public AudioClip truckSmokeSfx;
@@ -43,7 +42,6 @@ public class GUI_DayDisplay : MonoBehaviour
 			StartCoroutine("DisplaySequence");
 			//SoundManager.instance.PlaySingle(truckSfx);
 		}
-		//player.GetComponent<EightWayMovement>().enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -93,7 +91,6 @@ public class GUI_DayDisplay : MonoBehaviour
 		Hud.SetActive(true);
 		back.GetComponent<Animator>().enabled = true;
 		back.GetComponent<SpriteRenderer>().enabled = false;
-		//player.GetComponent<EightWayMovement>().enabled = true;
 		playerDummy.SetActive(false);
 		yield return new WaitForSeconds(.5f);
 		CancelInvoke();

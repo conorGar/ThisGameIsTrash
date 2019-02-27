@@ -12,15 +12,15 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 	[HideInInspector]
 	public float speed = 5;
 	[HideInInspector]
-	public GameObject player; //given usually by whatever is spawning this.
+	public GameObject target; //given usually by whatever is spawning this.
 	// Use this for initialization
 	void Start () {
 		if(throwPS != null)
 			throwPS.Play();
-		if(player == null){
-			player = GameObject.FindGameObjectWithTag("Player");
+		if(target == null){
+            target = PlayerManager.Instance.player;
 		}
-		movementDir = (player.transform.position - gameObject.transform.position).normalized * 5;
+		movementDir = (target.transform.position - gameObject.transform.position).normalized * 5;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementDir.x,movementDir.y);
 	}
 
@@ -28,7 +28,7 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 	void OnEnable(){
 		if(throwPS != null)
 			throwPS.Play();
-		if(player == null){
+		if(target == null){
 
 		//player = GameObject.FindGameObjectWithTag("Player");
 		}
@@ -41,7 +41,7 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 	}
 	IEnumerator Delay(){
 		yield return new WaitForSeconds(.1f);
-		movementDir = (player.transform.position - gameObject.transform.position).normalized * 5;
+		movementDir = (target.transform.position - gameObject.transform.position).normalized * 5;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementDir.x,movementDir.y);
 	}
 }

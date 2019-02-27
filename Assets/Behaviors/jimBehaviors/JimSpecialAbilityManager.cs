@@ -61,8 +61,8 @@ public class JimSpecialAbilityManager : MonoBehaviour
 		if(chargingSpin && ControllerManager.Instance.GetKeyUp(INPUTACTION.SPECIAL)){
 			chargingSpin = false;
 			StopCoroutine("SpinAttack");
-			gameObject.GetComponent<MeleeAttack>().cantAttack = false;
-			gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
+			//gameObject.GetComponent<MeleeAttack>().cantAttack = false;
+			//gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
 
 		}
 
@@ -81,8 +81,8 @@ public class JimSpecialAbilityManager : MonoBehaviour
 		chargingSpin = false;
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		yield return new WaitForSeconds(.5f);
-		gameObject.GetComponent<MeleeAttack>().cantAttack = false;
-		gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
+		//gameObject.GetComponent<MeleeAttack>().cantAttack = false;
+		//gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
 		spinAttack.SetActive(false);
 	}
 

@@ -7,46 +7,20 @@ public class ThrowableBody : ThrowableObject
 	public GameObject fliesPS;
 
 	[HideInInspector]
-	public bool poisioned;
+	public bool poisoned;
 
 	string mySpawnerID;
 
 	Vector2 impactForce = new Vector2(3f,5f);
 
 	public override void PickUp(){
-		physicalCollision.enabled = false;
-		player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
+        physicalCollision.enabled = false;
+        PlayerManager.Instance.player.GetComponent<PlayerTakeDamage>().currentlyCarriedObject = this.gameObject;
 		base.PickUp();
 	}
 
-	/*void PickUpWithDelay(){
-		movePlayerToObject = false;
-	
-		physicalCollision.enabled = false;
-
-		//move and play the particle system
-		beingCarried = true;
-		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
-		SoundManager.instance.PlaySingle(pickup);
-		//set object to follow player and push up in the sky
-		gameObject.transform.parent = player.transform;
-		if(!throwableObject){
-		myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
-			player.GetComponent<EightWayMovement>().carryingAbove = false;
-
-		}else{
-			player.GetComponent<EightWayMovement>().carryingAbove = true;
-			myBody.AddForce(new Vector2(0,14),ForceMode2D.Impulse);
-
-		}
-		myBody.gravityScale = 2;
-
-		pickUpSpin = true;
-		spinning = true;
-	}*/
-
 	public void Poison(){
-		poisioned = true;
+		poisoned = true;
 		gameObject.GetComponent<tk2dSprite>().color = new Color(.17f,1f,.25f);//green color to toxic 
 		fliesPS.SetActive(true);
 	}
@@ -81,7 +55,6 @@ public class ThrowableBody : ThrowableObject
 		GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].bodyDestroyed = true;
 		myBody.gravityScale = 0f;
 		myBody.velocity = new Vector2(0,0f);
-		beingCarried= false;
 		canThrow = false;
 		myShadow.SetActive(false);
 		gameObject.layer = 11; //switch to item layer.
@@ -94,10 +67,9 @@ public class ThrowableBody : ThrowableObject
         beingThrown = false;
         myBody.gravityScale = 0f;
        	myBody.velocity = new Vector2(0, 0f);
-        beingCarried = false;
         spinning = false;
         canThrow = false;
-        pickUpcheck = 0;
+
         if (myShadow != null) {
                         myShadow.transform.parent = this.gameObject.transform;
                         myShadow.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .75f);

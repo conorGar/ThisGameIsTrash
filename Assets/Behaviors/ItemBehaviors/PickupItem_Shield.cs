@@ -13,28 +13,38 @@ public class PickupItem_Shield : PickupableObject
 	}
 	protected override void Update ()
 	{	
-		if(player != null && Vector2.Distance(player.transform.position,gameObject.transform.position) < distanceUntilPickup){
-			//Debug.Log("within distance" + GlobalVariableManager.Instance.CARRYING_SOMETHING);
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && !GlobalVariableManager.Instance.CARRYING_SOMETHING && GlobalVariableManager.Instance.PLAYER_CAN_MOVE){//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'
-                // Allow this object to be picked up if it doesn't require the grabby gloves, or they have the grabby gloves.
-                if ( !requiresGrabbyGloves || GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)) {
-                    Debug.Log("PickUpable object...picked up");
-					if(pickUpcheck == 0){
-	                    movePlayerToObject = true;
-	                    PickUp();
-	                    pickUpcheck = 1;
+		if (PlayerManager.Instance.player != null) {
+            switch (PlayerManager.Instance.player.GetComponent<JimStateController>().GetCurrentState()) {
+                case JimState.IDLE:
+                    if (PlayerManager.Instance.player != null && Vector2.Distance(PlayerManager.Instance.player.transform.position, gameObject.transform.position) < distanceUntilPickup) {
+                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'                                                                                                                                                                       // Allow this object to be picked up if it doesn't require the grabby gloves, or they have the grabby gloves.
+                            if (!requiresGrabbyGloves || GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)) {
+                                Debug.Log("PickUpable object...picked up");
+                                movePlayerToObject = true;
+                                PickUp();
+                            }
+                        }
                     }
-                }
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried){
-					Drop();
-			}
-		}
+                    break;
+
+                case JimState.CARRYING:
+                    if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried && !throwableObject) {
+                        if (Vector2.Distance(PlayerManager.Instance.player.transform.position, dumpster.transform.position) > 15f) //TODO: temp solution for making sure trash isnt dropped before 'Return' is activated
+                            Drop();
+                    }
+                    break;
+            }
+
+            if (movePlayerToObject) {
+                PlayerManager.Instance.player.transform.position = Vector2.Lerp(PlayerManager.Instance.player.transform.position, this.gameObject.transform.position, 2 * Time.deltaTime);
+            }
+        }
 
 
 
 	}
 	public override void PickUp(){
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
+		PlayerManager.Instance.player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		//gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
@@ -42,13 +52,13 @@ public class PickupItem_Shield : PickupableObject
 		beingCarried = true;
 		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
 		//player.GetComponent<EightWayMovement>().enabled = false;
-		gameObject.transform.position = new Vector2(player.transform.position.x,player.transform.position.y);
+		gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x,PlayerManager.Instance.player.transform.position.y);
 	
 
 	}
 
 	public override void DropEvent(){
-		transform.rotation = startRotation;
+		//transform.rotation = startRotation;
 		gameObject.transform.localScale = startScale;
 	}
 

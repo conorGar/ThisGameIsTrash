@@ -4,8 +4,6 @@ using System.IO;
 
 public class CutsceneActivator : MonoBehaviour
 {
-	
-	public GameObject player;
 	//public IEnumerator coroutine;
 	public ParticleSystem hidingClouds;
 	public ParticleSystem backHidingClouds;
@@ -30,8 +28,8 @@ public class CutsceneActivator : MonoBehaviour
 	void Update ()
 	{
 		if(movePlayer){
-			if(Vector2.Distance(player.transform.position,playerDestination) > 2f)
-				player.transform.position = Vector2.MoveTowards(player.transform.position,playerDestination,4*Time.deltaTime);
+			if(Vector2.Distance(PlayerManager.Instance.player.transform.position,playerDestination) > 2f)
+                PlayerManager.Instance.player.transform.position = Vector2.MoveTowards(PlayerManager.Instance.player.transform.position,playerDestination,4*Time.deltaTime);
 			else{
 				StartCoroutine("PollutedPeakView");
 				movePlayer = false;
@@ -40,11 +38,11 @@ public class CutsceneActivator : MonoBehaviour
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if(collider.gameObject == player && !movePlayer){
+		if(collider.gameObject == PlayerManager.Instance.player && !movePlayer){
 		GameStateManager.Instance.PushState(typeof(DialogState));
 		SoundManager.instance.backupMusicSource.clip = musicToPlay;
 		SoundManager.instance.backupMusicSource.Play();
-		CamManager.Instance.mainCamEffects.CameraPan(player,true);
+		CamManager.Instance.mainCamEffects.CameraPan(PlayerManager.Instance.player, true);
 		playerDestination = new Vector2(67.9f,47.7f);
 
 		movePlayer = true;
@@ -57,8 +55,7 @@ public class CutsceneActivator : MonoBehaviour
 		yield return new WaitForSeconds(.2f);
 		CamManager.Instance.mainCamEffects.CameraPan(new Vector3(78.8f,53.8f,-10.8f),"");
 		CamManager.Instance.mainCamEffects.ZoomInOut(.9f,2f);
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
-		player.GetComponent<EightWayMovement>().legAnim.Play("ani_jimIdle");
+        PlayerManager.Instance.player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
 		hidingClouds.Stop();
 		yield return new WaitForSeconds(.5f);
 		backHidingClouds.Stop();

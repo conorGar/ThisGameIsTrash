@@ -6,37 +6,39 @@ public class EightWayMovement : MonoBehaviour {
 
 	private tk2dSpriteAnimator anim;
     public float speed = 8f;
+    public float momentum_max = 4f;
+    public float momentum_decay = .2f;
+    public float momentum_build = 1f;
     private Vector2 movement;
+    private Vector2 momentum;
     public AudioSource myFootstepSource;
+
+    public float footstepWalkInterval = .2f;
+    public float footstepCarryInterval = .4f;
+    public float nextFootstepTime = 0f;
  
     bool isDiagonal = false;
     bool noDelayStarted = false;
     public float delay = 0.05f;
     private int directionFacing = 1; //1 = right, 2 = left, 3 = up, 4 = down
-    private float momentum = 0f;
+
  
 	//public GameObject legs;
 	//public GameObject shadow;
 	public GameObject walkCloudPS;
 
-	public GameObject myLegs;
+    public TrailRenderer speedyTrailRenderer;
 
 	public AudioClip footsteps1;
 	public AudioClip footsteps2;
 
-
-	[HideInInspector]
-	public tk2dSpriteAnimator legAnim;
 	Vector3 transformScale; // used for facing different directions
 
 	public bool clipOverride; //set by pickUpable object
-	[HideInInspector]
-	public bool carryingAbove;
+
     // Use this for initialization
     void Start () {
 
-
-        legAnim = myLegs.GetComponent<tk2dSpriteAnimator>();
         anim = GetComponent<tk2dSpriteAnimator>();
 
 
@@ -44,12 +46,14 @@ public class EightWayMovement : MonoBehaviour {
 
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SPEEDY)){
 			speed += 1.5f;
-			myLegs.GetComponent<TrailRenderer>().enabled = true;
+            speedyTrailRenderer.enabled = true;
 		}
 
         movement = new Vector2(0f, 0f);
         StopMovement();
-        walkCloudPS.GetComponent<ParticleSystem>().Stop();
+
+        if (walkCloudPS.GetComponent<ParticleSystem>().isPlaying)
+            walkCloudPS.GetComponent<ParticleSystem>().Stop();
 
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
     }
@@ -65,25 +69,12 @@ public class EightWayMovement : MonoBehaviour {
 
             float inputX = ControllerManager.Instance.GetAxis(INPUTACTION.MOVELEFT);
             float inputY = ControllerManager.Instance.GetAxis(INPUTACTION.MOVEUP);
+            var jimStateController = GetComponent<JimStateController>();
             movement = new Vector2(inputX, inputY);
-            //Debug.Log(inputX);
+
             if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)) {
-                if (directionFacing != 2) {
-                    gameObject.transform.localScale = new Vector2(transformScale.x * -1, transformScale.y);
-                    //walkCloudPS.transform.localPosition = new Vector3(0f,-1.75f,0f);
-                    //walkCloudPS.transform.localScale = new Vector3(walkCloudPS.transform.localScale.x*-1,walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
-                }
-                if (anim.CurrentClip.name != "ani_jimWalk" && !clipOverride) {
-                    if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
-                    }
-                    else {
-                        if (carryingAbove)
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove", false);
-                        else
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
-                    }
-                }
+                StartMovement();
+                jimStateController.SetFlag((int)JimFlag.FACING_LEFT);
 
                 if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVELEFT);
@@ -92,61 +83,27 @@ public class EightWayMovement : MonoBehaviour {
                 directionFacing = 2;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT)) {
-                if (directionFacing != 1) {
-                    gameObject.transform.localScale = new Vector2(transformScale.x, transformScale.y);
-                    //walkCloudPS.transform.localPosition = new Vector3(0,-1.75f,0f);
-                    //walkCloudPS.transform.localScale = new Vector3(Mathf.Abs(walkCloudPS.transform.localScale.x),walkCloudPS.transform.localScale.y,walkCloudPS.transform.localScale.z);
-                }
-                if (anim.CurrentClip.name != "ani_jimWalk" && !clipOverride) {
+                StartMovement();
+                jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
 
-                    if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
-                    }
-                    else {
-                        if (carryingAbove)
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove", false);
-                        else
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
-                    }
-
-                }
-				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVERIGHT);
                 }
 
                 directionFacing = 1;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)) {
-                //legAnim.Play("walk");
-                if (anim.CurrentClip.name != "ani_jimWalk" && !clipOverride) {
-                    if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
-                    }
-                    else {
-                        if (carryingAbove)
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove", false);
-                        else
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
-                    }
-                }
-				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+                StartMovement();
+
+                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEUP);
                 }
                 directionFacing = 3;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)) {
-                if (anim.CurrentClip.name != "ani_jimWalk" && !clipOverride) {
-                    if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                        gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk", false);
-                    }
-                    else {
-                        if (carryingAbove)
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove", false);
-                        else
-                            gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryWalk", false);
-                    }
-                }
-				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+                StartMovement();
+
+                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEDOWN);
                 }
                 directionFacing = 4;
@@ -155,130 +112,76 @@ public class EightWayMovement : MonoBehaviour {
             //Diagonals
 
             if (inputX != 0 && inputY != 0) {
-            	
-                if (momentum != 4) {
-                    momentum = 4f;
-              
-                    InvokeRepeating("FootstepSounds", .2f, .2f); //just have this here so it only happens once
-                }
-                if(legAnim.GetClipByName("walk") != null)
-                	legAnim.Play("walk");
-
                 isDiagonal = true;
-                if (movement.y == 1 && movement.x == -1) {
-                    if (directionFacing == 1) {
-                        /*gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimTurn",false);
-                        StartCoroutine ("TurnDelay");*/
-                    }
-                    else {
-                        //if(setAniOnce == 0){
-                        //setAniOnce = 1;
-                        //gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimWalk",false);
-                        //}
-                    }
-                }
-
                
             }
             else {
                 if (isDiagonal && !noDelayStarted) {
                     StartCoroutine(NoMoreDiagonal());
                     noDelayStarted = true;
-                }
-                else if (anim != null) {
+                } else if (anim != null) {
                     
-                    if (movement.x == 0 && movement.y == 0) {
-                        walkCloudPS.GetComponent<ParticleSystem>().Stop();
-                        //legAnim.Play("stop");
+                    if (movement == Vector2.zero) {
+                        if (walkCloudPS.GetComponent<ParticleSystem>().isPlaying)
+                            walkCloudPS.GetComponent<ParticleSystem>().Stop();
 
-                        if (!clipOverride) {
-                            if (!GlobalVariableManager.Instance.CARRYING_SOMETHING) {
-                                if (anim.CurrentClip.name == "ani_jimWalk") {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle", false);
-                                }
-                                else if (anim.CurrentClip.name == "ani_jimWalkDown") {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle", false);
-                                }
-                                else if (anim.CurrentClip.name == "ani_jimWalkUp") {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle", false);
-                                }
-                                else if (anim.CurrentClip.name != "ani_jimIdle") {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle", false);//set to normal idle when return from override clip(hurt, pickup,etc)
-                                }
-                            }
-                            else {
-                                Debug.Log("carrying something and carrying above = " + carryingAbove);
-                                if (carryingAbove) {
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAboveIdle", false);
-                                    //clipOverride = true;
+                        jimStateController.RemoveFlag((int)JimFlag.MOVING);
 
-                                }
-                                else
-                                    gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle", false);
-                            }
-                        }
-
-                        //not instant stop
-                        if (momentum > 0){
-                            momentum = momentum - .2f;
-                        }else{
+                        // if all the momentum is expanded, reactivate Sneaky Scrapper.
+                        if (momentum.magnitude == 0) {
 							if(GlobalVariableManager.Instance.IS_HIDDEN == false && GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER)){
 								gameObject.GetComponent<PinFunctionsManager>().SneakyScrapper();
 							}
-
                         }
-                    }
-                    else if (momentum != 4) {
-                        momentum = 4f;
-                        if(GlobalVariableManager.Instance.CARRYING_SOMETHING){
-								InvokeRepeating("FootstepSounds", .2f, .4f); //slower footsteps when carrying something
-                        }else{
-                       			InvokeRepeating("FootstepSounds", .2f, .2f);
-                        }
+                    } else {
 						if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER) && GlobalVariableManager.Instance.IS_HIDDEN){ //put here for function with 'Sneaky Scrapper' function, not sure if this will work with later sneaking functions...
             				gameObject.GetComponent<PinFunctionsManager>().SneakyScrapperReturn();
             				Debug.Log("got here- sneaky scrapper");
             			}
-                        walkCloudPS.SetActive(true); //just have this here so it only happens once
-                        walkCloudPS.GetComponent<ParticleSystem>().Play();
+
+                        if (!walkCloudPS.GetComponent<ParticleSystem>().isPlaying)
+                            walkCloudPS.GetComponent<ParticleSystem>().Play();
                     }
                 }
             }
-            if (movement.x == 0 && movement.y == 0) {
 
-                CancelInvoke("FootstepSounds");
+            // If the player is inputting a move and in a valid movement state.
+            if (movement != Vector2.zero &&
+               (jimStateController.GetCurrentState() == JimState.IDLE ||
+                jimStateController.GetCurrentState() == JimState.CARRYING)) {
 
+                // update stored momentum values.
+                momentum = Vector2.ClampMagnitude(momentum + movement * momentum_build, momentum_max);
 
-
-
-                //not instant stop
-                if (directionFacing == 3) {//anim.CurrentClip.name == "ani_jimIdleUp"){
-                    transform.Translate(new Vector2(0, momentum) * Time.deltaTime);
+                // correct the facing.
+                if (inputX < 0) { // The player is holding left.
+                    if (transform.localScale.x > 0) {
+                        gameObject.transform.localScale = new Vector2(transformScale.x * -1, transformScale.y);
+                        jimStateController.SetFlag((int)JimFlag.FACING_LEFT);
+                    }
+                } else if (inputX > 0) { // The player is holding right.
+                    if (transform.localScale.x < 0) {
+                        gameObject.transform.localScale = new Vector2(transformScale.x, transformScale.y);
+                        jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
+                    }
                 }
-                else if (directionFacing == 4) {
-                    transform.Translate(new Vector2(0, momentum * -1) * Time.deltaTime);
-                }
-                else if (gameObject.transform.localScale.x > 0) {
-                    transform.Translate(new Vector2(momentum, 0) * Time.deltaTime);
-                }
-                else if (gameObject.transform.localScale.x < 0) {
-                    transform.Translate(new Vector2(momentum * -1, 0) * Time.deltaTime);
-                }
-            }
-            if (GlobalVariableManager.Instance.PLAYER_CAN_MOVE) {
 
                 transform.Translate(movement * speed * Time.deltaTime);
-                //show legs and change to current animation of Jim
-                if (!clipOverride && myLegs.activeInHierarchy) {
 
-                    legAnim.Play(anim.CurrentClip.name);
-                    legAnim.PlayFromFrame(anim.CurrentFrame);
-                }
-
-
+                FootstepSounds();
+                     
+            // If the player is not inputting a move or is in a state where he is not allowed to move.
+            } else {
+                transform.Translate(momentum * Time.deltaTime);
             }
 
+            //not instant stop.  Decay momentum by shrinking the vectors magnitude.
+            float mag = momentum.magnitude;
 
+            if (mag >= momentum_decay)
+                momentum = momentum.normalized * (momentum.magnitude - momentum_decay);
+            else
+                momentum = Vector2.zero;
 
             if (Input.GetKeyDown(KeyCode.V)) {
                 Debug.Log(GlobalVariableManager.Instance.BASIC_ENEMY_LIST["enemy_spawner 2"].dayOfRevival);
@@ -293,27 +196,34 @@ public class EightWayMovement : MonoBehaviour {
     }
 
     public void StopMovement(){
-			if(!GlobalVariableManager.Instance.CARRYING_SOMETHING){
-						
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);//set to normal idle when return from override clip(hurt, pickup,etc)
-							
-			}else{
-				if(carryingAbove){
-				gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAboveIdle",false);
-				}
-				else
-					gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryIdle",false);
-			}
-		CancelInvoke();
-		//StopAllCoroutines();
-		legAnim.Play(anim.CurrentClip.name);
-    	this.enabled = true;
+        GetComponent<JimStateController>().RemoveFlag((int)JimFlag.MOVING);
     }
+
+    void StartMovement()
+    {
+        GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
+    }
+
+    public void SlowdownSpeed(){
+    	speed = speed/2;
+    }
+    public void SpeedReturn(){
+    	speed = speed*2;
+    }
+
+
     void FootstepSounds(){
-        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+        if (Time.time > nextFootstepTime) {
             RandomizeSfx(footsteps2, footsteps1);
+
+            if (GetComponent<JimStateController>().GetCurrentState() == JimState.CARRYING) {
+                nextFootstepTime = Time.time + footstepCarryInterval;
+            } else {
+                nextFootstepTime = Time.time + footstepWalkInterval;
+            }
         }
     }
+
 	public void RandomizeSfx(params AudioClip[] clips){
 		myFootstepSource.volume = GlobalVariableManager.Instance.MASTER_SFX_VOL;
 		int randomIndex = Random.Range(0, clips.Length);
@@ -334,34 +244,6 @@ public class EightWayMovement : MonoBehaviour {
     	}
     }
 
-    public void SlowdownSpeed(){ //For now, things that slowdown player just halve the speed, might have to change set up if this isn't the case forever.
-    	speed = speed/2;
-    }
-
-    public void SpeedReturn(){
-    	speed = speed*2;
-    }
-
-	IEnumerator TurnDelay() {
-        yield return new WaitForSeconds (.1f);
-		if(directionFacing == 1 || directionFacing == 2){
-			anim.Play("ani_jimWalk");
-			gameObject.transform.localScale = new Vector3(transformScale.x*-1,transformScale.y,transformScale.z);
-				if(directionFacing == 1){
-					directionFacing = 2;
-				}else{
-					directionFacing = 1;
-				}
-		}else if(directionFacing == 3){
-			anim.Play("ani_jimWalk");
-			directionFacing = 4;
-        }else{
-			anim.Play("ani_jimWalk");
-			directionFacing = 3;
-        }
-	
-    }
-
     void OnChangeState(System.Type stateType, bool isEntering)
     {
         if (isEntering) {
@@ -369,7 +251,13 @@ public class EightWayMovement : MonoBehaviour {
             if (stateType != typeof(GameplayState)) {
                 movement = new Vector2(0f, 0f);
                 StopMovement();
-                walkCloudPS.GetComponent<ParticleSystem>().Stop();
+
+                if (walkCloudPS.GetComponent<ParticleSystem>().isPlaying)
+                    walkCloudPS.GetComponent<ParticleSystem>().Stop();
+            }
+
+            if (stateType == typeof(RespawnState)) {
+                momentum = Vector2.zero;
             }
         }
     }

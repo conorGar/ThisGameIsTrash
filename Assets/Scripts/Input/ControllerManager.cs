@@ -52,7 +52,8 @@ public class ControllerManager : MonoBehaviour {
         }
     }
 
-    void Update()
+    // Inputs are updated in the late update so other gameObjects don't have differing inputs.
+    void LateUpdate()
     {
         // store the last frame
         // TODO: dictionary copy every frame.  Is this too slow?

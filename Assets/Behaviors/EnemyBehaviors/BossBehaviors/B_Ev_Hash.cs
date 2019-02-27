@@ -9,7 +9,6 @@ public class B_Ev_Hash : MonoBehaviour {
 	public GameObject stuartShield;
 	public AudioClip teleportSound;
 	public AudioClip shieldSound;
-	public GameObject player;
 	public ParticleSystem smokePuff;
 
 

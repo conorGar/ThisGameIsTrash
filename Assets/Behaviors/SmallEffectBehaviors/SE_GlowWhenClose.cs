@@ -17,22 +17,19 @@ public class SE_GlowWhenClose : MonoBehaviour {
 	public AudioClip highlightSound;
 
 	Sprite startSprite;
-	[HideInInspector]
-	public GameObject player;
 	//GameObject tempSpawnedObject;
 
 	int glowCheck = 0;
 
 	void Start(){
-		player = GameObject.FindGameObjectWithTag("Player");
 		if(glowSprite != null)
 			startSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 	}
 
 	protected void Update(){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (player != null) {
-                if (Mathf.Abs(player.transform.position.x - gameObject.transform.position.x) < distanceUntilGlow && Mathf.Abs(player.transform.position.y - gameObject.transform.position.y) < distanceUntilGlow) {
+            if (PlayerManager.Instance.player != null) {
+                if (Mathf.Abs(PlayerManager.Instance.player.transform.position.x - gameObject.transform.position.x) < distanceUntilGlow && Mathf.Abs(PlayerManager.Instance.player.transform.position.y - gameObject.transform.position.y) < distanceUntilGlow) {
                 	//Debug.Log("Close enough to glow");
                     if (glowCheck == 0) {
                         if (glowSprite != null) {

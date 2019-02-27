@@ -22,7 +22,6 @@ public class PlayerTakeDamage : MonoBehaviour {
 	public GameObject currentlyCarriedObject; // set by pickupableObject.cs for use when dropping at death
 	int damageDealt;
 
-	bool currentlyTakingDamage = false;
 	// Use this for initialization
 	void Start () {
 
@@ -41,49 +40,50 @@ public class PlayerTakeDamage : MonoBehaviour {
     // two objects collide
 	void OnCollisionEnter2D(Collision2D enemy){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (enemy.gameObject.layer == 9 && !currentlyTakingDamage) { //layer 9 = enemies
+            if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT ||
+                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD) {
+                if (enemy.gameObject.layer == 9) { //layer 9 = enemies
 
-                if (enemy.gameObject.tag == "Boss") {
-                    damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
-                }
-                else {
-                    var enemyComp = enemy.gameObject.GetComponent<Enemy>();
+                    if (enemy.gameObject.tag == "Boss") {
+                        damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
+                    } else {
+                        var enemyComp = enemy.gameObject.GetComponent<Enemy>();
 
-                    // Fixing a bug where colliding with toxic slime would cause an error.
-                    if (enemyComp != null)
-                        damageDealt = enemyComp.attkPower;
-                }
+                        // Fixing a bug where colliding with toxic slime would cause an error.
+                        if (enemyComp != null)
+                            damageDealt = enemyComp.attkPower;
+                    }
 
-				if(enemy.gameObject.GetComponent<FollowPlayerAfterNotice>() != null){
-					if(GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER)){
-						if(enemy.gameObject.GetComponent<FollowPlayerAfterNotice>().noticedPlayer || !GlobalVariableManager.Instance.IS_HIDDEN){
-							TakeDamage(enemy.gameObject);
-                		}
-                	}else{
-							TakeDamage(enemy.gameObject);
-                	}
-                	
-                }else{
-					if(!GlobalVariableManager.Instance.IS_HIDDEN){
-               	 		TakeDamage(enemy.gameObject);
-               	 	}
-                }
-			} else if (enemy.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
-                if (enemy.gameObject.tag == "Boss") {
-                    damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
-                }
-                else {
-                    damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
-                }
-                TakeDamage(enemy.gameObject);
-			}else if (enemy.gameObject.layer == 19 && !currentlyTakingDamage) { //layer 19 = hazards
-                var hazardComp = enemy.gameObject.GetComponent<Hazard>();
+                    if (enemy.gameObject.GetComponent<FollowPlayerAfterNotice>() != null) {
+                        if (GlobalVariableManager.Instance.IsPinEquipped(PIN.SNEAKINGSCRAPPER)) {
+                            if (enemy.gameObject.GetComponent<FollowPlayerAfterNotice>().IsChasing() || !GlobalVariableManager.Instance.IS_HIDDEN) {
+                                TakeDamage(enemy.gameObject);
+                            }
+                        } else {
+                            TakeDamage(enemy.gameObject);
+                        }
 
-                // Fixing a null reference error where the player keeps colliding with his own weapon.
-                if (hazardComp != null) {
-                    damageDealt = hazardComp.damageToPlayer;
-                    if(damageDealt > 0)
-                    	TakeDamage(enemy.gameObject);
+                    } else {
+                        if (!GlobalVariableManager.Instance.IS_HIDDEN) {
+                            TakeDamage(enemy.gameObject);
+                        }
+                    }
+                } else if (enemy.gameObject.layer == 16) {//enemy with non-solid collision(flying enemy)
+                    if (enemy.gameObject.tag == "Boss") {
+                        damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
+                    } else {
+                        damageDealt = enemy.gameObject.GetComponent<Enemy>().attkPower;
+                    }
+                    TakeDamage(enemy.gameObject);
+                } else if (enemy.gameObject.layer == 19) { //layer 19 = hazards
+                    var hazardComp = enemy.gameObject.GetComponent<Hazard>();
+
+                    // Fixing a null reference error where the player keeps colliding with his own weapon.
+                    if (hazardComp != null) {
+                        damageDealt = hazardComp.damageToPlayer;
+                        if (damageDealt > 0)
+                            TakeDamage(enemy.gameObject);
+                    }
                 }
             }
         }
@@ -92,33 +92,37 @@ public class PlayerTakeDamage : MonoBehaviour {
     // something entered this collider
 	void OnTriggerEnter2D(Collider2D projectile){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (projectile.gameObject.layer == 10 && !currentlyTakingDamage) { //layer 10 = projectiles
-                var projectileComp = projectile.gameObject.GetComponent<Projectile>();
+            if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT ||
+                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD) {
+                if (projectile.gameObject.layer == 10) { //layer 10 = projectiles
+                    var projectileComp = projectile.gameObject.GetComponent<Projectile>();
 
-                // Fixing a null reference error where the player keeps colliding with his own weapon.
-                if (projectileComp != null) {
-                    damageDealt = projectileComp.damageToPlayer;
+                    // Fixing a null reference error where the player keeps colliding with his own weapon.
+                    if (projectileComp != null) {
+                        damageDealt = projectileComp.damageToPlayer;
+                        TakeDamage(projectile.gameObject);
+                    }
+                }
+                if (projectile.gameObject.layer == 19) { //layer 19 = hazards
+                    var hazardComp = projectile.gameObject.GetComponent<Hazard>();
+
+                    // Fixing a null reference error where the player keeps colliding with his own weapon.
+                    if (hazardComp != null) {
+                        damageDealt = hazardComp.damageToPlayer;
+                        if (damageDealt > 0)
+                            TakeDamage(projectile.gameObject);
+                    }
+                }
+                /*else if (projectile.gameObject.layer == 16) {//enemy with non-solid collision(flying enemy)
+                    if (projectile.gameObject.tag == "Boss") {
+                        damageDealt = projectile.gameObject.GetComponent<Boss>().attkDmg;
+                    }
+                    else {
+                        damageDealt = projectile.gameObject.GetComponent<Enemy>().attkPower;
+                    }
                     TakeDamage(projectile.gameObject);
-                }
-			} if (projectile.gameObject.layer == 19 && !currentlyTakingDamage) { //layer 19 = hazards
-                var hazardComp = projectile.gameObject.GetComponent<Hazard>();
-
-                // Fixing a null reference error where the player keeps colliding with his own weapon.
-                if (hazardComp != null) {
-                    damageDealt = hazardComp.damageToPlayer;
-                    if(damageDealt > 0)
-                    	TakeDamage(projectile.gameObject);
-                }
+                }*/
             }
-            /*else if (projectile.gameObject.layer == 16 && !currentlyTakingDamage) {//enemy with non-solid collision(flying enemy)
-                if (projectile.gameObject.tag == "Boss") {
-                    damageDealt = projectile.gameObject.GetComponent<Boss>().attkDmg;
-                }
-                else {
-                    damageDealt = projectile.gameObject.GetComponent<Enemy>().attkPower;
-                }
-                TakeDamage(projectile.gameObject);
-            }*/
         }
 	}
 
@@ -132,57 +136,40 @@ public class PlayerTakeDamage : MonoBehaviour {
 		SoundManager.instance.PlaySingle(hurt);
 
 		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.QUENPINTARANTINO)){
-				gameObject.GetComponent<PinFunctionsManager>().QuenpinTarantino();
-			}
-			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
-				gameObject.GetComponent<PinFunctionsManager>().PassivePillage(false);
-			}
-
-			currentlyTakingDamage = true;
-			GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
-			GlobalVariableManager.Instance.HP_STAT.UpdateCurrent(-damageDealt);
-			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("hurt",true);
-			Debug.Log("reached this end of hp hud change" + GlobalVariableManager.Instance.HP_STAT.GetCurrent());
-			HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
-			GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars_player",this.gameObject.transform.position);
-			damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(damageDealt);
-			damageCounter.SetActive(true);
-			GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars",this.gameObject.transform.position);
-			littleStars.SetActive(true);
-            CamManager.Instance.mainCam.ScreenShake(.2f);
-
-			if(enemy.transform.position.x < gameObject.transform.position.x){
-				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,0f), ForceMode2D.Impulse);
-				damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
-			}else{
-				gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-17f,0f), ForceMode2D.Impulse);
-				damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
-			}
-
-			if(GlobalVariableManager.Instance.HP_STAT.GetCurrent() <= 0){
-				SoundManager.instance.PlaySingle(finalHit);
-
-				StartCoroutine("Death");
-			
-			}else{
-				StartCoroutine("RegainControl");
-			}
-	}
-
-	IEnumerator RegainControl(){
-		yield return new WaitForSeconds(.2f);
-		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
-		if(GlobalVariableManager.Instance.CARRYING_SOMETHING){
-			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimCarryAbove",true);
-		}else{
-			gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
+			gameObject.GetComponent<PinFunctionsManager>().QuenpinTarantino();
 		}
-		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
-		yield return new WaitForSeconds(.5f); //brief period of invincibility
-		currentlyTakingDamage = false;
-		Debug.Log("Regained Control");
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.PASSIVEPILLAGE)){
+			gameObject.GetComponent<PinFunctionsManager>().PassivePillage(false);
+		}
 
+		GlobalVariableManager.Instance.HP_STAT.UpdateCurrent(-damageDealt);
+
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.HIT);
+
+		Debug.Log("reached this end of hp hud change" + GlobalVariableManager.Instance.HP_STAT.GetCurrent());
+		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
+		GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars_player",this.gameObject.transform.position);
+		damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(damageDealt);
+		damageCounter.SetActive(true);
+		GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars",this.gameObject.transform.position);
+		littleStars.SetActive(true);
+        CamManager.Instance.mainCam.ScreenShake(.2f);
+
+		if(enemy.transform.position.x < gameObject.transform.position.x){
+			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(17f,0f), ForceMode2D.Impulse);
+			damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
+		}else{
+			gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-17f,0f), ForceMode2D.Impulse);
+			damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
+		}
+
+        if (GlobalVariableManager.Instance.HP_STAT.GetCurrent() <= 0) {
+            PlayerManager.Instance.controller.SendTrigger(JimTrigger.DEATH);
+            SoundManager.instance.PlaySingle(finalHit);
+
+            StartCoroutine("Death");
+
+        }
 	}
 
 	public IEnumerator DropTrash(){
@@ -222,7 +209,6 @@ public class PlayerTakeDamage : MonoBehaviour {
 		yield return new WaitForSeconds(.3f);
 		Time.timeScale = 1;
 		CamManager.Instance.mainCamEffects.ZoomInOut(1.5f,3f);
-		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 		if(currentlyCarriedObject != null){
 			currentlyCarriedObject.GetComponent<PickupableObject>().Drop();
 		}
@@ -231,7 +217,7 @@ public class PlayerTakeDamage : MonoBehaviour {
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer04";//bring player to front
         deathDisplay.DeathFade();
 			yield return new WaitForSeconds(.5f); //drop trash and deplete trash collected
-		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("death",true);
+
 		SoundManager.instance.PlaySingle(deathSound);
 		yield return new WaitForSeconds(.4f);
 		//DeathGhost.SetActive(true);
@@ -279,7 +265,6 @@ public class PlayerTakeDamage : MonoBehaviour {
 		roomManager.GetComponent<RoomManager>().Restart();
 		yield return new WaitForSeconds(.2f);
 		GlobalVariableManager.Instance.HP_STAT.ResetCurrent();
-		currentlyTakingDamage = false;
 		GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] = 0;
 		yield return new WaitForSeconds(.1f);
 		deathDisplay.FadeHUD();
@@ -288,7 +273,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 		deathDisplay.PlayTruckSfx();
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
 		gameObject.GetComponent<MeshRenderer>().enabled = true;
-		yield return new WaitForSeconds(.3f);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
+        yield return new WaitForSeconds(.3f);
 		deathDisplay.fader.SetActive(false);
 		/*if(!GlobalVariableManager.Instance.IsPinEquipped(PIN.FAITHFULWEAPON)){
 				GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[1] = 0;//reset scrap value
@@ -298,13 +284,9 @@ public class PlayerTakeDamage : MonoBehaviour {
 		}*/
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
         GUIManager.Instance.TrashCollectedDisplayGameplay.UpdateDisplay(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0]);
-		GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
 		truck.GetComponent<Ev_SmallTruck>().RespawnEnd();
 		gameObject.GetComponent<BoxCollider2D>().enabled = true;
 
-		gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",true);
-		gameObject.GetComponent<EightWayMovement>().myLegs.SetActive(true);
-		gameObject.GetComponent<EightWayMovement>().enabled = true;
 		gameObject.GetComponent<EightWayMovement>().clipOverride = false;
 
         // Pop Respawn State

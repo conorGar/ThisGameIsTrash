@@ -123,7 +123,8 @@ public class Ev_GenericGarbage : MonoBehaviour {
 						GlobalVariableManager.Instance.STANDARD_GARBAGE_DISCOVERED |= garbage.type;
 						SoundManager.instance.PlaySingle(newDiscovery);
 					}//end of new discover code
-				collider.gameObject.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
+
+                collider.gameObject.GetComponent<JimStateController>().SendTrigger(JimTrigger.PICK_UP_SMALL);
 
 				if(GlobalVariableManager.Instance.IsPinEquipped(PIN.MOGARBAGEMOPROBLEMS)){
                     //Mo Garbage Mo' Problems - changes max HP bac if collect more than 5 trash

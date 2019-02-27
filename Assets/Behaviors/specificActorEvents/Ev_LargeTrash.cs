@@ -38,16 +38,12 @@ public class Ev_LargeTrash : PickupableObject {
 	//loat pickUpYSpeed;
 	//int currentRoomNumber;
 
-	bool returning = false;
-
-
 	//look up - find object in view
 
 
 	// Use this for initialization
 	void OnEnable () {
 		
-		player = GameObject.FindGameObjectWithTag("Player");
 		dumpster = GameObject.Find("Dumpster");
         requiresGrabbyGloves = false;
 
@@ -83,7 +79,7 @@ public class Ev_LargeTrash : PickupableObject {
 	}// end of Start()
 
 	public override void PickUp(){
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		gameObject.GetComponent<Animator>().enabled = true;
 		base.PickUp();
@@ -93,17 +89,13 @@ public class Ev_LargeTrash : PickupableObject {
 
 	IEnumerator PickupDelay(){
 		yield return new WaitForSeconds(1f);
-		beingCarried = true;
 		PickUpEvent();
 		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
-		player.GetComponent<EightWayMovement>().enabled = true;
 	}
 
 	public override void PickUpEvent(){
 		gameObject.tag = "ActiveLargeTrash";
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
 		sparkle.SetActive(false);
-		//gameObject.GetComponent<Animator>().enabled = true;
 	}
 
 	public override void DropEvent(){
@@ -115,15 +107,12 @@ public class Ev_LargeTrash : PickupableObject {
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		gameObject.GetComponent<Animator>().enabled = false;
 		myCurrentRoom = RoomManager.Instance.currentRoom;
-		player.GetComponent<MeleeAttack>().enabled = true;
-
 	}
 
 	public void Kill(){
 		//activated when player dies
 		if(phase == 3){
 			phase = 0;
-			GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 			//add mychar value and room number to large trash locations?!?
 		}
 	}
@@ -131,23 +120,6 @@ public class Ev_LargeTrash : PickupableObject {
 	void MyCollectionSetUp(){
 
 	}
-
-
-	/*void Drop(){
-		gameObject.transform.position = new Vector2(transform.position.x + 1f, transform.position.y -1f);
-		GlobalVariableManager.Instance.LARGE_TRASH_LOCATIONS[myPositionInList+1] = transform.position;
-		myShadow = Instantiate(largeShadow,new Vector2(transform.position.x - .1f,transform.position.y -.8f),Quaternion.identity);
-		Debug.Log("DROPPED LARGE TRASH");
-		myCollision = Instantiate(collisionBox,transform.position, Quaternion.identity);
-		mySparkles = Instantiate(sparkle,transform.position,Quaternion.identity);
-		phase = 0;
-		gameObject.tag = "LargeTrash";
-		gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Layer02";
-	}*/
-
-
-
-
 
 	IEnumerator Fall(){
 
@@ -158,25 +130,6 @@ public class Ev_LargeTrash : PickupableObject {
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
 	}
-
-	/*void Bounce(){
-		bounce++;
-		if(bounce == 1){
-			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,-15f);
-			if(GlobalVariableManager.Instance.MASTER_SFX_VOL >0){
-				//play drop trash3 on channel 2
-			}
-		}else if (bounce == 2){
-			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
-			if(GlobalVariableManager.Instance.MASTER_SFX_VOL >0){
-				//play drop trash3 on channel 2
-			}
-		}
-	}//end of Bouce()*/
-
-
-
-
 
 	void ReturnArc(){
 		
@@ -193,11 +146,11 @@ public class Ev_LargeTrash : PickupableObject {
 			
 	}
 	public void Return(){
-		//activated by dumpster's 'SE_GlowWhenClose'
-		gameObject.GetComponent<Animator>().enabled = false;
-		Debug.Log("Return activated - LARGE TRASH");
+        //activated by dumpster's 'SE_GlowWhenClose'
+        Debug.Log("Return activated - LARGE TRASH");
+        PlayerManager.Instance.controller.SendTrigger(JimTrigger.DELIVER_BIG);
+        gameObject.GetComponent<Animator>().enabled = false;
 		phase = 0;
-		GlobalVariableManager.Instance.CARRYING_SOMETHING = false;
 
 		SoundManager.instance.PlaySingle(returnSound);
         // Add this trash item to the large trash list.
@@ -215,28 +168,21 @@ public class Ev_LargeTrash : PickupableObject {
 		myBody.AddForce(new Vector2(0,10),ForceMode2D.Impulse);
 		myBody.gravityScale = 2;
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
-		returning = true;
-		player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimIdle",false);
-		player.GetComponent<MeleeAttack>().enabled = true;
 		dumpster.GetComponent<SE_GlowWhenClose>().enabled = true;
-		//ReturnArc();
 		StartCoroutine("ReturnSequence");
 		
 	}// end of Return()
 
 	IEnumerator ReturnSequence(){
 		GameStateManager.Instance.PushState(typeof(MovieState));
-		player.GetComponent<JimAnimationManager>().PlayExcitedJump();
-		CamManager.Instance.mainCamEffects.CameraPan(player.transform.position," ");
+		CamManager.Instance.mainCamEffects.CameraPan(PlayerManager.Instance.player.transform.position," ");
 		CamManager.Instance.mainCamEffects.ZoomInOut(2f,1f);
 		yield return new WaitForSeconds(.5f);
 	
 		dumpster.GetComponent<Ev_Dumpster>().largeTrashDiscoveredDisplay.GetComponent<GUI_LargeTrashCollectedDisplay>().indexOfCurrentLargeTrash =  garbage.GarbageIndex();
 		dumpster.GetComponent<Ev_Dumpster>().largeTrashDiscoveredDisplay.SetActive(true);
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
-		player.GetComponent<JimAnimationManager>().StopTweenAnimation();
 		Destroy(gameObject);
-
 	}
 
 

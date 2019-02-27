@@ -8,7 +8,6 @@ public class BossFriendEx : Friend
     //*** For now using for all 3 of the trio, change if needed at any point
     public List<ParticleSystem> trioParticleSystems;
 	public BossStuart stuart;
-	public GameObject player;
     public GameObject ex;
 	public GameObject hash;
 	public GameObject questio;
@@ -36,7 +35,6 @@ public class BossFriendEx : Friend
     private void OnEnable()
     {
         base.OnEnable();
-        player = GameObject.Find("Jim");
 
         ex.SetActive(true);
         hash.SetActive(true);

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class BossStuart : Boss
 {
-	public GameObject player;
     public Vector3 spawnPosition;
     public Vector3 exSpawnPosition, hashSpawnPosition, questioSpawnPosition;
 
@@ -128,7 +127,7 @@ public class BossStuart : Boss
 
 	public override void BossEvent(){
         //activate boss 1 middle dialog
-        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        PlayerManager.Instance.player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
         /*for(int i = 0; i<bossTrio.transform.childCount;i++){//add ex and questio to bosses. This is done by BossFriendEx at start if in middle of fight

@@ -9,8 +9,6 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	//-Black Bars
 	//Tut popup for armored enemy
 
-
-	public GameObject player;
 	public GameObject tutPopup;
 	public GameObject roomManager;//needed for proper camera panning
 	public AudioClip zoomSound;

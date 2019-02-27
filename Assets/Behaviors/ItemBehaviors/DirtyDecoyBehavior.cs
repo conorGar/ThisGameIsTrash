@@ -10,7 +10,7 @@ public class DirtyDecoyBehavior : MonoBehaviour
 
 	bool changedEnemyBehavior;
 	Room roomDecoyIsIn;
-	GameObject returnPlayer;
+	GameObject returnTarget;
 
 	void OnEnable(){
 		currentHP = 3;
@@ -23,7 +23,7 @@ public class DirtyDecoyBehavior : MonoBehaviour
 
 	void Start ()
 	{
-		returnPlayer = GameObject.FindGameObjectWithTag("Player");
+        returnTarget = PlayerManager.Instance.player;
 	}
 	
 	// Update is called once per frame
@@ -45,10 +45,7 @@ public class DirtyDecoyBehavior : MonoBehaviour
 		for(int i = 0; i < RoomManager.Instance.currentRoom.enemies.Count;i++){
 			GameObject enemy = RoomManager.Instance.currentRoom.enemies[i];
 			if(enemy.GetComponent<FollowPlayer>() != null){
-				enemy.GetComponent<FollowPlayer>().player = this.gameObject.transform;
-			}
-			if(enemy.GetComponent<FireTowardPlayer>() != null){
-				enemy.GetComponent<FireTowardPlayer>().player = this.gameObject;
+				enemy.GetComponent<FollowPlayer>().target = this.gameObject.transform;
 			}
 		}
 	}
@@ -108,10 +105,10 @@ public class DirtyDecoyBehavior : MonoBehaviour
 		for(int i = 0; i < RoomManager.Instance.currentRoom.enemies.Count;i++){
 			GameObject enemy = RoomManager.Instance.currentRoom.enemies[i];
 			if(enemy.GetComponent<FollowPlayer>() != null){
-				enemy.GetComponent<FollowPlayer>().player = returnPlayer.transform;
+				enemy.GetComponent<FollowPlayer>().target = returnTarget.transform;
 			}
 			if(enemy.GetComponent<FireTowardPlayer>() != null){
-				enemy.GetComponent<FireTowardPlayer>().player = returnPlayer;
+				enemy.GetComponent<FireTowardPlayer>().target = returnTarget;
 			}
 		}
 		ObjectPool.Instance.ReturnPooledObject(this.gameObject);

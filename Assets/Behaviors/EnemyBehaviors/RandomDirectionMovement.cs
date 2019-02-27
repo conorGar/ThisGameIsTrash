@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
+[RequireComponent(typeof(GenericEnemyStateController))]
 public class RandomDirectionMovement : MonoBehaviour {
 
 	public float movementSpeed = 0;
@@ -14,71 +16,57 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 
 	private Vector3 direction;
-	protected bool moving = false;
 	protected tk2dSpriteAnimator anim;
 	int bounceOffObject;
 	protected Vector3 startingScale;
 	int turnOnce = 0;
 
-	// Use this for initialization
+    protected GenericEnemyStateController controller;
 
-	void Start(){
+    // Use this for initialization
+    void Awake()
+    {
+        controller = GetComponent<GenericEnemyStateController>();
+    }
+
+    void Start(){
 		startingScale = gameObject.transform.localScale;
 
 	}
 
 	protected void OnEnable () {
-		//walkCloud  = GameObject.Find("effect_WalkCloud");
-		anim = GetComponent<tk2dSpriteAnimator>();
-		GoAgain();
+        anim = GetComponent<tk2dSpriteAnimator>();
+        StartMoving();
 	}
 	
 	// Update is called once per frame
 	protected void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (moving && !anim.IsPlaying("hit")) {
-                transform.position += direction * movementSpeed * Time.deltaTime;
-                if (direction.x > 0) {
-                    if (gameObject.transform.localScale.x < 0) {
-                        if (turnOnce == 0) {
-                            Turn();
+            switch (controller.GetCurrentState()) {
+                case EnemyState.IDLE:
+                    if (controller.IsFlag((int)EnemyFlag.WALKING)) {
+                        transform.position += direction * movementSpeed * Time.deltaTime;
+                        if (direction.x > 0) {
+                            if (gameObject.transform.localScale.x < 0) {
+                                if (turnOnce == 0) {
+                                    Turn();
+                                }
+                            }
+                        } else {
+                            if (gameObject.transform.localScale.x > 0) {
+                                if (turnOnce == 0) {
+                                    Turn();
+                                }
+                            }
                         }
                     }
-                    else if (!anim.IsPlaying("run")) {
-                        anim.Play("run");
-						Debug.Log("RDM sets animation" + anim.CurrentClip.name);
-
-                    }
-                }
-                else {
-                    if (gameObject.transform.localScale.x > 0) {
-                        if (turnOnce == 0) {
-                            Turn();
-                        }
-                    }
-                    else {
-                        if (!anim.IsPlaying("run")) {
-                            anim.Play("run");
-							Debug.Log("RDM sets animation" + anim.CurrentClip.name);
-
-                        }
-                    }
-                }
+                    break;
             }
         }
 	}
 	void Turn(){
-		Debug.Log("Turn activated:" + gameObject.name);
 		turnOnce = 1;
-		/*if(anim.GetClipByName("turn") != null && !anim.IsPlaying("turn")){
-			anim.Play("turn");
-		}
-
-		yield return new WaitForSeconds(.2f);
-		anim.Play("run");
-		*/
 		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
-		//Debug.Log("Turn activated");
 	}
 
 	public void TurnToNewDirection(){
@@ -89,71 +77,52 @@ public class RandomDirectionMovement : MonoBehaviour {
 		direction = (new Vector3(direction.x*-1, direction.y*-1, 0.0f)).normalized;
 
 	}
-	IEnumerator Pause(){
+
+    // Enemy will move in a direction for a random amount of time, idle, and go again.
+	IEnumerator Moving(){
 		turnOnce = 0;
 
 		yield return new WaitForSeconds(Random.Range(minMoveTime,maxMoveTime));
-		if(moving){
-		bounceOffObject = 0;
-		//CancelInvoke("SpawnClouds");
-		if(walkPS !=null)
-			walkPS.Stop();
-		moving = false;
-		if(anim.GetClipByName("idle") != null){
-			anim.Play("idle");
-//			Debug.Log("RDM sets animation" + anim.CurrentClip.name);
 
-		}
-		//if(anim.IsPlaying("run")){
-			//anim.Play("idleR");
-		//} else if(anim.IsPlaying("runL"))
-			//anim.Play("idleL");
-		yield return new WaitForSeconds(stopTime);
-		GoAgain();
+        if (controller.IsFlag((int)EnemyFlag.WALKING)) {
+		    bounceOffObject = 0;
+
+		    if(walkPS !=null && walkPS.isPlaying)
+			    walkPS.Stop();
+
+            controller.RemoveFlag((int)EnemyFlag.WALKING);
+
+		    yield return new WaitForSeconds(stopTime);
+            StartMoving();
 		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision){
 		//go a different direction when bump into something
-		//if(collision.gameObject.transform.position.y> this.gameObject.transform.position.y);
-		if(bounceOffObject == 0 && moving){
-			Debug.Log("Collided with something and GoAgain() called");
-
-			GoAgain();
+		if(bounceOffObject == 0 && controller.IsFlag((int)EnemyFlag.MOVING)){
+            StartMoving();
 			bounceOffObject = 1;
 		}
-		//print("Collided");
-	}
-	void SpawnClouds(){
-		/*if(this.gameObject.activeInHierarchy == true){
-			GameObject newestCloud;
-			newestCloud = Instantiate(walkCloud, new Vector3(transform.position.x,transform.position.y - walkCloudYadjust, transform.position.z), Quaternion.identity) as GameObject;
-			if(direction.x <0){
-				newestCloud.GetComponent<Ev_WalkCloud>().MoveRight();
-			}else {
-				newestCloud.GetComponent<Ev_WalkCloud>().MoveLeft();
-				}
-		}else{
-			CancelInvoke();
-		}*/
 	}
 
-	public virtual void GoAgain(){
-	//	Debug.Log("Go again activated");
-		moving = true;
-		//InvokeRepeating("SpawnClouds",.2f, .2f);
-		if(walkPS != null)
+    // Enemy picks a random direction and starts moving.
+	public virtual void StartMoving(){
+        controller.SetFlag((int)EnemyFlag.WALKING);
+
+        if (walkPS != null && !walkPS.isPlaying)
 			walkPS.Play();
+
 		direction = (new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0.0f)).normalized;
-		StartCoroutine("Pause");
+		StartCoroutine(Moving());
 	}
 
 	public virtual void StopMoving(){
-		walkPS.Stop();
+        controller.RemoveFlag((int)EnemyFlag.WALKING);
+        
+        if (walkPS.isPlaying)
+            walkPS.Stop();
+
 		StopAllCoroutines();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-		moving = false;
 	}
-
-
 }

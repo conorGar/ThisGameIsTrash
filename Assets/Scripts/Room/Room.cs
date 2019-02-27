@@ -11,7 +11,6 @@ public class Room : MonoBehaviour
     public List<EnemySpawner> enemySpawners;
     public List<FriendSpawner> friendSpawners;
     public List<GarbageSpawner> garbageSpawners;
-    public GameObject player;
     public BoxCollider2D roomCollider2D;
     public GameObject objectPool; //given to enemy, who needs it for EnemyTakeDamage hitStar spawn
     public GameObject cam; // used for cam zoom when enter boss room, can probably find a better way
@@ -193,18 +192,21 @@ public class Room : MonoBehaviour
     {
         enemies = new List<GameObject>();
         friends = new List<GameObject>();
-
-		if((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) == myRoom){
-			if(myMapClouds != null){
-    			myMapClouds.SetActive(false);
-    		}else{
-    			Debug.Log("Room:" +gameObject.name + "has No map clouds assigned to it! ***");
-    		}
-    	}
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    private void Start()
+    {
+        if ((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) == myRoom) {
+            if (myMapClouds != null) {
+                myMapClouds.SetActive(false);
+            } else {
+                Debug.Log("Room:" + gameObject.name + "has No map clouds assigned to it! ***");
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
 		
 	}

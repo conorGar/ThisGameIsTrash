@@ -30,18 +30,11 @@ public class ActivateDialogWhenClose : MonoBehaviour {
     public bool hideDialogIconsOnStart = false;
 //	public bool tempBoolForActionManager;
 
-	GameObject player;
 	int spawnSpeechBubble = 0;
 	int activatePanOnce = 0;
 
 
-	void Awake(){
-		player = GameObject.FindGameObjectWithTag("Player");
-
-
-	}
 	void OnEnable(){
-		player = GameObject.FindGameObjectWithTag("Player");
         startNodeName = friend.nextDialog;
         canTalkTo = true;
 
@@ -52,21 +45,21 @@ public class ActivateDialogWhenClose : MonoBehaviour {
     public void Execute(string firstIcon = "", string secondIcon = "", string thirdIcon = "")
     {
 		//Debug.Log("Dialog execute activate");
-        if (GlobalVariableManager.Instance.CARRYING_SOMETHING == false)
+        if (PlayerManager.Instance.controller.currentState.GetState() != JimState.CARRYING)
         {
-			//Debug.Log("Criteria met - 0");
-            if (startNodeName.Length > 0 && player != null)
+//			Debug.Log("Criteria met - 0");
+            if (startNodeName.Length > 0)
             {
 
-                //Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
-                if (Vector2.Distance(player.transform.position, gameObject.transform.position) <  distanceThreshold)
+//                Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
+                if (Vector2.Distance(PlayerManager.Instance.player.transform.position, gameObject.transform.position) <  distanceThreshold)
                 {
 
-                    //Debug.Log("Criteria met - 2");
+                    Debug.Log("Criteria met - 2");
                     if (autoStart && canTalkTo)
                     {
 
-                       //Debug.Log("Criteria met - 3");
+                       Debug.Log("Criteria met - 3");
                         startNodeName = friend.nextDialog;
                         ActivateDialog(firstIcon, secondIcon, thirdIcon);
                     }
@@ -135,8 +128,8 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 				if(cameraPanToFriendAtStart && activatePanOnce == 0){
 						Debug.Log("Camera Pan to friend activated");
 		                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position, "");
-						player.GetComponent<EightWayMovement>().StopMovement();
-						player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+                        PlayerManager.Instance.player.GetComponent<EightWayMovement>().StopMovement();
+                        PlayerManager.Instance.player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 						GameStateManager.Instance.PushState(typeof(MovieState));
 		                StartCoroutine(WaitUntilCamPan(firstIcon,secondIcon,thirdIcon));
 		                activatePanOnce = 1;
@@ -161,10 +154,10 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 		Debug.Log("Start Dialog Activated");
 		DialogManager.Instance.gameObject.SetActive(true);
 				friend.OnActivateDialog();
-				if(player.GetComponent<EightWayMovement>()!=null)
-					player.GetComponent<EightWayMovement>().StopMovement();
-				if(player.GetComponent<Rigidbody2D>()!=null)
-					player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
+				if(PlayerManager.Instance.player.GetComponent<EightWayMovement>()!=null)
+                    PlayerManager.Instance.player.GetComponent<EightWayMovement>().StopMovement();
+				if(PlayerManager.Instance.player.GetComponent<Rigidbody2D>()!=null)
+                    PlayerManager.Instance.player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 
 				if(DialogManager.Instance.dialogCanvas.activeInHierarchy == false){
 					

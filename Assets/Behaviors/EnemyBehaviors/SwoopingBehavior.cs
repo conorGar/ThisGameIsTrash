@@ -9,11 +9,9 @@ public class SwoopingBehavior : MonoBehaviour {
 	string swoopingDirection;
 	public float distanceTilSwoop;
 
-	GameObject player;
-
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag("Player");
+
 	}
 	
 	// Update is called once per frame
@@ -33,7 +31,7 @@ public class SwoopingBehavior : MonoBehaviour {
 				gameObject.GetComponent<FollowPlayer>().enabled = true;
 
 			}
-		}else if((Mathf.Abs(transform.position.x - player.transform.position.x) < distanceTilSwoop) && Mathf.Abs(transform.position.y - player.transform.position.y) < distanceTilSwoop){
+		}else if((Mathf.Abs(transform.position.x - PlayerManager.Instance.player.transform.position.x) < distanceTilSwoop) && Mathf.Abs(transform.position.y - PlayerManager.Instance.player.transform.position.y) < distanceTilSwoop){
 			Swoop();
 		}
 	}
@@ -41,7 +39,7 @@ public class SwoopingBehavior : MonoBehaviour {
 	void Swoop(){
 		swoopin = true;
 		gameObject.GetComponent<FollowPlayer>().enabled = false;
-		if(player.transform.position.x < gameObject.transform.position.x){
+		if(PlayerManager.Instance.player.transform.position.x < gameObject.transform.position.x){
 			swoopingDirection = "left";
 		}else{
 			swoopingDirection = "right";

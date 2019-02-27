@@ -26,7 +26,6 @@ public class PopulateSelf : MonoBehaviour {
 	public GameObject enemy2;
 	public GameObject enemy3;
 	public GameObject armoredEnemy = null;
-	public GameObject player;
 
 	void Start(){
 		GlobalVariableManager.Instance.ROOM_NUM = myRoomNum;

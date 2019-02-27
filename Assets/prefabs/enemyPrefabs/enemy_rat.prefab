@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4283517313525662}
   - component: {fileID: 33598435020682208}
   - component: {fileID: 23838511374773580}
+  - component: {fileID: 114400556410055018}
   - component: {fileID: 114076671767681168}
   - component: {fileID: 61302976088640844}
   - component: {fileID: 114061048850949760}
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 3
   attkPower: 1
   moveWhenHit: 1
   respawningEnemyType: 0
@@ -309,6 +310,17 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
+--- !u!114 &114400556410055018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1098292903033816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a1a6f5b27331f42853f199709dbe74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114403236987013624
 MonoBehaviour:
   m_ObjectHideFlags: 1

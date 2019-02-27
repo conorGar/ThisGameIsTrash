@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour {
 
-
-	public GameObject player;
 	// Use this for initialization
 	void Start () {
 		

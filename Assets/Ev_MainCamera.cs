@@ -24,7 +24,6 @@ public class Ev_MainCamera : MonoBehaviour {
 	float startShakeX;
 	float startShakeY;
 	//int hitbounds = 0;
-	GameObject player;
 	Vector3 offset;
 
     void Awake()
@@ -33,9 +32,8 @@ public class Ev_MainCamera : MonoBehaviour {
     }
 
     void Start(){
-		player = GameObject.Find("Jim");
-        if (player != null)
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+        if (PlayerManager.Instance.player != null)
+            transform.position = new Vector3(PlayerManager.Instance.player.transform.position.x, PlayerManager.Instance.player.transform.position.y, transform.position.z);
     }
 
 	void Update () {
@@ -43,8 +41,8 @@ public class Ev_MainCamera : MonoBehaviour {
 			    if(!transitioning){
 				    if(screenShake == 0){
 					    if(stableCamera == false){
-						    transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, player.transform.position.x, Time.deltaTime * currentCameraSpeed),
-                                                             Mathf.SmoothStep(transform.position.y, player.transform.position.y, Time.deltaTime * currentCameraSpeed),
+						    transform.position = new Vector3(Mathf.SmoothStep(transform.position.x, PlayerManager.Instance.player.transform.position.x, Time.deltaTime * currentCameraSpeed),
+                                                             Mathf.SmoothStep(transform.position.y, PlayerManager.Instance.player.transform.position.y, Time.deltaTime * currentCameraSpeed),
                                                              -10f); // follows only when player is in center of screen
 
 						    transform.position = new Vector3(
@@ -193,7 +191,6 @@ public class Ev_MainCamera : MonoBehaviour {
 		gameObject.transform.parent = null;//unattach from player
 		yield return new WaitForSeconds(time);
 		//if(!transitioning && !stableCamera)//stable camera check - no jim on stable camera scenes.
-		//	gameObject.transform.parent = GameObject.Find("Jim").transform; // attatch back
 		screenShake = 0;
 	}
 }

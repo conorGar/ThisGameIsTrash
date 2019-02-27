@@ -5,7 +5,6 @@ using UnityEngine;
 public class Ev_SpecialItem : MonoBehaviour {
 
 	// Use this for initialization
-	public GameObject player;
 	public GameObject upgradeUnlockDisplay;
 	public Sprite unlockSprite;
 	public bool playerAutoMoveToward;
@@ -35,9 +34,9 @@ public class Ev_SpecialItem : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(playerIsMovingToward){
-			player.transform.position = Vector3.SmoothDamp(player.transform.position,gameObject.transform.position, ref smoothVelocity, 4f);
+            PlayerManager.Instance.player.transform.position = Vector3.SmoothDamp(PlayerManager.Instance.player.transform.position,gameObject.transform.position, ref smoothVelocity, 4f);
 
-				if(player.transform.position.x < transform.position.x){
+				if(PlayerManager.Instance.player.transform.position.x < transform.position.x){
 					transform.localScale = new Vector3(-1,1,1);
 				} else{
 					//if(!anim.IsPlaying("chaseL"))
@@ -61,8 +60,8 @@ public class Ev_SpecialItem : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collider){
 		if(collider.tag == "Player" && canPickUp){
 			gameObject.GetComponent<BoxCollider2D>().enabled = false;
-			player.GetComponent<tk2dSpriteAnimator>().Play("ani_jimPickUp");
-			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x, player.transform.position.y,2f);
+            PlayerManager.Instance.player.GetComponent<tk2dSpriteAnimator>().Play("ani_jimPickUp");
+			gameObject.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(transform.position.x, PlayerManager.Instance.player.transform.position.y,2f);
 			PickUp();
 
 		}
@@ -77,14 +76,13 @@ public class Ev_SpecialItem : MonoBehaviour {
 	}
 
 	void PlayerMoveToward(){
-		player.GetComponent<EightWayMovement>().enabled = false;
-		player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        PlayerManager.Instance.player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,null);
-		player.GetComponent<tk2dSpriteAnimator>().Play("ani_jimWalk");
-			if(player.transform.position.x < transform.position.x){
-					player.transform.localScale = new Vector3(1,1,1);
+        PlayerManager.Instance.player.GetComponent<tk2dSpriteAnimator>().Play("ani_jimWalk");
+			if(PlayerManager.Instance.player.transform.position.x < transform.position.x){
+                PlayerManager.Instance.player.transform.localScale = new Vector3(1,1,1);
 			} else{
-				player.transform.localScale = new Vector3(-1,1,1);
+                PlayerManager.Instance.player.transform.localScale = new Vector3(-1,1,1);
 			}
 		playerIsMovingToward = true;
 
@@ -98,7 +96,7 @@ public class Ev_SpecialItem : MonoBehaviour {
         startTossPosition = transform.position;
 
         // Toss away from the player on the x-axis.
-        endTossPosition = new Vector3(transform.position.x + TossVector.x * Mathf.Sign(transform.position.x - player.transform.position.x), transform.position.y + TossVector.y, transform.position.z);
+        endTossPosition = new Vector3(transform.position.x + TossVector.x * Mathf.Sign(transform.position.x - PlayerManager.Instance.player.transform.position.x), transform.position.y + TossVector.y, transform.position.z);
 
         if (itemDropArea != null)
             endTossPosition = itemDropArea.GetDropPosition(endTossPosition);

@@ -6,7 +6,6 @@ public class DecreaseMusicAsApproach : MonoBehaviour
 
 	public float distanceTillStartDecreasing;
 	public float decreaseVolTo;
-	public GameObject player;
 	public AudioSource musicAudioSource;
 
 	float currentMusicVol;
@@ -20,8 +19,8 @@ public class DecreaseMusicAsApproach : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if(Vector2.Distance(gameObject.transform.position,player.transform.position) < distanceTillStartDecreasing){
-			float distance = Vector2.Distance(gameObject.transform.position,player.transform.position);
+		if(Vector2.Distance(gameObject.transform.position, PlayerManager.Instance.player.transform.position) < distanceTillStartDecreasing){
+			float distance = Vector2.Distance(gameObject.transform.position, PlayerManager.Instance.player.transform.position);
 			if(distance <1){//music stops when distance = 1 based on algorithm
 				distance = 1;
 			}

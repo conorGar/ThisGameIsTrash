@@ -8,13 +8,11 @@ public class Ev_Projectile_Boulder : MonoBehaviour {
 
 	public GameObject myBoulder;
 	public ParticleSystem landingPS;
-	GameObject player;
 	Vector2 targetPos;
 	bool falling;
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindGameObjectWithTag("Player");
 		myBoulder.GetComponent<CircleCollider2D>().enabled = false;//boulder cant damage player while in the sky
 		myBoulder.transform.localPosition = new Vector2(0f,4f);
 		myBoulder.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -26,13 +24,13 @@ public class Ev_Projectile_Boulder : MonoBehaviour {
 	void OnEnable(){
 		falling = false;
 		myBoulder.GetComponent<CircleCollider2D>().enabled = false;//boulder cant damage player while in the sky
-		player = GameObject.FindGameObjectWithTag("Player");
 		myBoulder.transform.localPosition = new Vector2(0f,4f);
 		myBoulder.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		myBoulder.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,8f),ForceMode2D.Impulse);
 		Debug.Log("added force!");
 
-		targetPos = player.transform.position;
+        if (PlayerManager.Instance.player != null)
+		    targetPos = PlayerManager.Instance.player.transform.position;
 	}
 	void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {

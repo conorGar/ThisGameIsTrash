@@ -57,7 +57,7 @@ public class Ev_Enemy_Porcupine2 : MonoBehaviour
 
 		yield return new WaitForSeconds(1f);
 
-		gameObject.GetComponent<WanderWithinBounds>().GoAgain();
+		gameObject.GetComponent<WanderWithinBounds>().StartMoving();
 
 		yield return new WaitForSeconds(Random.Range(1.5f, 3f));
 		StartCoroutine("FireQuills");

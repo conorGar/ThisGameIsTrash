@@ -38,7 +38,7 @@ public class PinFunctionsManager : MonoBehaviour {
 	INPUTACTION heldKey;
 	bool chargingSpin;
 
-	public void Awake(){
+	public void Start(){
 		if(inWorld){
 			if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DIRTYDECOY)){
 				decoyInstance = Instantiate(decoyObject,gameObject.transform.position,Quaternion.identity); //ask if this is better since this object isnt needed unless has the pin?
@@ -54,9 +54,6 @@ public class PinFunctionsManager : MonoBehaviour {
 		if(chargingSpin && ControllerManager.Instance.GetKeyUp(heldKey)){
 			chargingSpin = false;
 			StopCoroutine("SpinAttack");
-			gameObject.GetComponent<MeleeAttack>().cantAttack = false;
-			gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
-
 		}
 
 
@@ -172,13 +169,12 @@ public class PinFunctionsManager : MonoBehaviour {
 		Debug.Log("Sneaky Scrapper Activated");
 		SoundManager.instance.PlaySingle(SFXBANK.SCRAPPYSNEAK);
 		GlobalVariableManager.Instance.IS_HIDDEN = true;
-		gameObject.GetComponent<EightWayMovement>().myLegs.GetComponent<tk2dSprite>().color = new Color(1,1,1,.5f);
+
 		gameObject.GetComponent<tk2dSprite>().color = new Color(1,1,1,.5f);
 	}
 	public void SneakyScrapperReturn(){
 		Debug.Log("Sneaky Scrapper De-Activated");
 
-		gameObject.GetComponent<EightWayMovement>().myLegs.GetComponent<tk2dSprite>().color = new Color(1,1,1,1);
 		gameObject.GetComponent<tk2dSprite>().color = new Color(1,1,1,1);
 		GlobalVariableManager.Instance.IS_HIDDEN = false;
 	}
@@ -192,8 +188,6 @@ public class PinFunctionsManager : MonoBehaviour {
 		spinAttack.SetActive(true);
 		chargingSpin = false;
 		yield return new WaitForSeconds(.5f);
-		gameObject.GetComponent<MeleeAttack>().cantAttack = false;
-		gameObject.GetComponent<MeleeAttack>().ReturnFromSwing();
 		spinAttack.SetActive(false);
 	}
 

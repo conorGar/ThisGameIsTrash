@@ -38,7 +38,7 @@ public class WanderWithinBounds : RandomDirectionMovement
 	{
 		//Debug.Log(startPosition);
 
-		if(boundsSet && moving){
+		if(boundsSet && controller.IsFlag((int)EnemyFlag.MOVING)){
 			if(transform.position.x < MIN_X || transform.position.x > MAX_X ||
             	transform.position.y < MIN_Y || transform.position.y > MAX_Y){
 
@@ -50,7 +50,7 @@ public class WanderWithinBounds : RandomDirectionMovement
 
 			}
 			base.Update();
-		}else if(returningToStart && moving){ //walk back to original position when lose sight of player
+		}else if(returningToStart && controller.IsFlag((int)EnemyFlag.MOVING)){ //walk back to original position when lose sight of player
 			Debug.Log("returning to start");
 			if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
 				if (!anim.IsPlaying("hit")) {
@@ -75,7 +75,7 @@ public class WanderWithinBounds : RandomDirectionMovement
 		  
 		            	returningToStart =false;
 		            	boundsSet = true;
-						GoAgain();
+						StartMoving();
 		            }
 	            }
             }
@@ -111,14 +111,14 @@ public class WanderWithinBounds : RandomDirectionMovement
 		Debug.Log("returning to start - activate" + startPosition);
 
 		boundsSet = false;
-		moving = true;
+        controller.SetFlag((int)EnemyFlag.WALKING);
 		returningToStart = true;
 		StopAllCoroutines();
 	}
 
-	public override void GoAgain(){
+	public override void StartMoving(){
 		if(!returningToStart){
-			base.GoAgain();
+			base.StartMoving();
 		}
 	}
 
