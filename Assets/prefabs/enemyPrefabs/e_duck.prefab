@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 114249686244017498}
   - component: {fileID: 61268702648429060}
   - component: {fileID: 114808193333466140}
+  - component: {fileID: 114224147677081426}
   - component: {fileID: 114373584994059236}
   - component: {fileID: 114029351326968710}
   - component: {fileID: 50974681233089598}
@@ -270,6 +271,21 @@ MonoBehaviour:
   library: {fileID: 114010995895570102, guid: 33036ad7c5ae5bf4f9ee04607f3ec062, type: 2}
   defaultClipId: 1
   playAutomatically: 1
+--- !u!114 &114224147677081426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1585751386897454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f384d93fee72b4cb0b65fe702459a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugClickMode: 0
+  hasSeperateFacingAnimations: 0
+  bodyCollider: {fileID: 61787944317269882}
+  DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
 --- !u!114 &114249686244017498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -292,13 +308,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  targetCollider: {fileID: 0}
   walkDistance: 9.2
   chaseSpeed: 4
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198419328894692054}
   returnToPreviousWhenFar: 0
+  pathRefreshTime: 0.5
 --- !u!114 &114373584994059236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,9 +363,6 @@ MonoBehaviour:
   stopTime: 2
   afterHitStopTime: 0.5
   walkPS: {fileID: 198419328894692054}
-  bodyCollider: {fileID: 61787944317269882}
-  linePrefab: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
-  DebugClickMode: 0
 --- !u!114 &114840077401668922
 MonoBehaviour:
   m_ObjectHideFlags: 1

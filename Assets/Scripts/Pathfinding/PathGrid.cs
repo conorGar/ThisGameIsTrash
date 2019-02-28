@@ -86,8 +86,26 @@ public class PathGrid : MonoBehaviour
 
         PathNode node = nodes[x, y];
 
-        if (node != null && node.traversable) {
-            return new Point(node.x, node.y);
+        if (node != null) {
+            if (node.traversable) {
+                return new Point(node.x, node.y);
+            }
+        }
+
+        // If we still haven't found a node, try to find a neighboring traversable node by following a vector from the bad node to the actual target and picking the next node in that direction.
+        // TODO: This isn't the greatest but it'll do for now.
+        int offsetX = Mathf.RoundToInt(Mathf.Sign(gridPosition.x - x));
+        int offsetY = Mathf.RoundToInt(Mathf.Sign(-(gridPosition.y - y)));
+
+        Debug.Log("offsetX: " + offsetX + " offsetY: " + offsetY);
+        if (x + offsetX < 0 || y + offsetY < 0 || x + offsetX > width || y + offsetY > height)
+            return null;
+
+        node = nodes[x + offsetX, y + offsetY];
+        if (node != null) {
+            if (node.traversable) {
+                return new Point(node.x, node.y);
+            }
         }
 
         return null;
@@ -107,24 +125,24 @@ public class PathGrid : MonoBehaviour
         if (x < 0) { // left of the grid
             if (y < 0) { // above the grid
                 point = new Point(0, 0);
-            } else if (y > height) { // below the grid
-                return new Point(0, height);
+            } else if (y > height - 1) { // below the grid
+                return new Point(0, height - 1);
             } else { // in grid y-axis
                 point = new Point(0, y);
             }
-        } else if (x > width) { // right of the grid
+        } else if (x > width - 1) { // right of the grid
             if (y < 0) { // above the grid
-                point = new Point(width, 0);
-            } else if (y > height) { // below the grid
-                point = new Point(width, height);
+                point = new Point(width - 1, 0);
+            } else if (y > height - 1) { // below the grid
+                point = new Point(width - 1, height - 1);
             } else { // in grid y-axis
-                point = new Point(width, y);
+                point = new Point(width - 1, y);
             }
         } else { // in grid x-axis
             if (y < 0) { // above the grid
                 point = new Point(x, 0);
-            } else if (y > height) { // below the grid
-                point = new Point(x, height);
+            } else if (y > height - 1) { // below the grid
+                point = new Point(x, height - 1);
             } else { // in grid y-axis
                 point = new Point(x, y);
             }

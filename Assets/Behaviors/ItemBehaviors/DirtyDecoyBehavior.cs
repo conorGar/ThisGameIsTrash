@@ -45,7 +45,7 @@ public class DirtyDecoyBehavior : MonoBehaviour
 		for(int i = 0; i < RoomManager.Instance.currentRoom.enemies.Count;i++){
 			GameObject enemy = RoomManager.Instance.currentRoom.enemies[i];
 			if(enemy.GetComponent<FollowPlayer>() != null){
-				enemy.GetComponent<FollowPlayer>().target = this.gameObject.transform;
+				enemy.GetComponent<FollowPlayer>().targetCollider = this.gameObject.GetComponent<BoxCollider2D>();
 			}
 		}
 	}
@@ -105,7 +105,7 @@ public class DirtyDecoyBehavior : MonoBehaviour
 		for(int i = 0; i < RoomManager.Instance.currentRoom.enemies.Count;i++){
 			GameObject enemy = RoomManager.Instance.currentRoom.enemies[i];
 			if(enemy.GetComponent<FollowPlayer>() != null){
-				enemy.GetComponent<FollowPlayer>().target = returnTarget.transform;
+				enemy.GetComponent<FollowPlayer>().targetCollider = returnTarget.GetComponent<BoxCollider2D>();
 			}
 			if(enemy.GetComponent<FireTowardPlayer>() != null){
 				enemy.GetComponent<FireTowardPlayer>().target = returnTarget;
