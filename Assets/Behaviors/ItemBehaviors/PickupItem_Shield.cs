@@ -29,7 +29,6 @@ public class PickupItem_Shield : PickupableObject
 
                 case JimState.CARRYING:
                     if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried && !throwableObject) {
-                        if (Vector2.Distance(PlayerManager.Instance.player.transform.position, dumpster.transform.position) > 15f) //TODO: temp solution for making sure trash isnt dropped before 'Return' is activated
                             Drop();
                     }
                     break;
@@ -47,12 +46,15 @@ public class PickupItem_Shield : PickupableObject
 		PlayerManager.Instance.player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		//gameObject.GetComponent<Animator>().enabled = true;
+
 		base.PickUp();
 		myCollisionBox.enabled = false; //doesnt collide with player
 		beingCarried = true;
+		PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
+		gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x+.5f,PlayerManager.Instance.player.transform.position.y);
+
 		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
 		//player.GetComponent<EightWayMovement>().enabled = false;
-		gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x,PlayerManager.Instance.player.transform.position.y);
 	
 
 	}

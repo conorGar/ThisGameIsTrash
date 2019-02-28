@@ -87,7 +87,8 @@ public class PickupableObject : MonoBehaviour
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		SoundManager.instance.PlaySingle(pickup);
 		//set object to follow player and push up in the sky
-		gameObject.GetComponent<Animator>().SetTrigger("PickUp");
+		if(gameObject.GetComponent<Animator>()!=null)
+			gameObject.GetComponent<Animator>().SetTrigger("PickUp");
         beingCarried = true;
 	}
 

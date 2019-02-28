@@ -18,7 +18,7 @@ public class JimSpecialAbilityManager : MonoBehaviour
 	
 	void Update(){
 
-		if(ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL) || ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL2)){
+		/*if(ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL) || ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL2)){
 			Debug.Log("Special Button Pressed");
 			//Link To The Trash
 			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.SPECIAL)){
@@ -54,7 +54,7 @@ public class JimSpecialAbilityManager : MonoBehaviour
 			}
 
 
-		}
+		}*/
 	
 
 

@@ -6,7 +6,7 @@ public class EightWayMovement : MonoBehaviour {
 
 	private tk2dSpriteAnimator anim;
     public float speed = 8f;
-    public float momentum_max = 4f;
+    public float momentum_max = 2f;
     public float momentum_decay = .2f;
     public float momentum_build = 1f;
     private Vector2 movement;
@@ -76,9 +76,9 @@ public class EightWayMovement : MonoBehaviour {
                 StartMovement();
                 jimStateController.SetFlag((int)JimFlag.FACING_LEFT);
 
-                if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+               // if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVELEFT);
-                }
+               // }
 
                 directionFacing = 2;
             }
@@ -86,26 +86,26 @@ public class EightWayMovement : MonoBehaviour {
                 StartMovement();
                 jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
 
-                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+              // if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVERIGHT);
-                }
+               // }
 
                 directionFacing = 1;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)) {
                 StartMovement();
 
-                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+               // if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEUP);
-                }
+               // }
                 directionFacing = 3;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)) {
                 StartMovement();
 
-                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+                //if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEDOWN);
-                }
+               // }
                 directionFacing = 4;
             }
 
