@@ -81,7 +81,7 @@ public class PathGrid : MonoBehaviour
         int x = Mathf.RoundToInt(gridPosition.x);
         int y = Mathf.RoundToInt(gridPosition.y);
 
-        if (x < 0 || y < 0 || x > width || y > height)
+        if (x < 0 || y < 0 || x > width - 1 || y > height - 1)
             return null;
 
         PathNode node = nodes[x, y];
@@ -97,8 +97,7 @@ public class PathGrid : MonoBehaviour
         int offsetX = Mathf.RoundToInt(Mathf.Sign(gridPosition.x - x));
         int offsetY = Mathf.RoundToInt(Mathf.Sign(-(gridPosition.y - y)));
 
-        Debug.Log("offsetX: " + offsetX + " offsetY: " + offsetY);
-        if (x + offsetX < 0 || y + offsetY < 0 || x + offsetX > width || y + offsetY > height)
+        if (x + offsetX < 0 || y + offsetY < 0 || x + offsetX > width - 1 || y + offsetY > height - 1)
             return null;
 
         node = nodes[x + offsetX, y + offsetY];

@@ -77,7 +77,7 @@ public class FollowPlayer : MonoBehaviour {
                     // follow the path until it's consumed.  update the path in intervals to chase the player.
                     if (Time.time > nextPathRefreshTime || !enemyPath.MoveAlongPath(chaseSpeed * Time.deltaTime)) {
                         GenerateChasePath();
-                        nextPathRefreshTime = Time.time + pathRefreshTime;
+                        ResetPathRefreshTime();
                     }
 
                 // If the player gets far enough away from the enemy, put them into idle and show a confused symbol.
@@ -104,6 +104,11 @@ public class FollowPlayer : MonoBehaviour {
         }
 	}
 
+    public void ResetPathRefreshTime()
+    {
+        nextPathRefreshTime = Time.time + pathRefreshTime;
+    }
+
 	public void StopSound(){
 
 	}
@@ -112,5 +117,35 @@ public class FollowPlayer : MonoBehaviour {
     private Vector3 GetTargetsClosestPoint()
     {
         return targetCollider.bounds.ClosestPoint(transform.position);
+    }
+
+    // if two chasing enemies collide they can get stuck trying to get through narrow passages.
+    // Have the closest enemy to it's target go while the other waits until another path is made.
+    private void OnCollisionStay2D (Collision2D collision)
+    {
+        if (collision.gameObject.layer == 9) {
+            var otherFollowPlayer = collision.gameObject.GetComponent<FollowPlayer>();
+            if (otherFollowPlayer != null) { // enemy
+                float myDist = float.MaxValue, otherDist = float.MaxValue;
+                if (controller.IsFlag((int)EnemyFlag.CHASING)) {
+                    Debug.Log("this is chasing");
+                    myDist = Vector3.SqrMagnitude(GetTargetsClosestPoint() - transform.position);
+                }
+
+                if (otherFollowPlayer.controller.IsFlag((int)EnemyFlag.CHASING)) {
+                    Debug.Log("other is chasing");
+                    otherDist = Vector3.SqrMagnitude(GetTargetsClosestPoint() - otherFollowPlayer.transform.position);
+                }
+
+                // The larger distance must wait.
+                if (myDist > otherDist) {
+                    enemyPath.ClearPath();
+                    ResetPathRefreshTime();
+                } else {
+                    otherFollowPlayer.enemyPath.ClearPath();
+                    otherFollowPlayer.ResetPathRefreshTime();
+                }
+            }
+        }
     }
 }
