@@ -12,6 +12,7 @@ public class EightWayMovement : MonoBehaviour {
     private Vector2 movement;
     private Vector2 momentum;
     public AudioSource myFootstepSource;
+    public ParticleSystem waterSplash;
 
     public float footstepWalkInterval = .2f;
     public float footstepCarryInterval = .4f;
@@ -36,6 +37,8 @@ public class EightWayMovement : MonoBehaviour {
 
 	public bool clipOverride; //set by pickUpable object
 
+	float currentBaseSpeed; //set when speed is temporary changed by environment to return to when done.
+
     // Use this for initialization
     void Start () {
 
@@ -56,6 +59,7 @@ public class EightWayMovement : MonoBehaviour {
             walkCloudPS.GetComponent<ParticleSystem>().Stop();
 
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
+        currentBaseSpeed = speed;
     }
 
     void OnDestroy()
@@ -148,7 +152,12 @@ public class EightWayMovement : MonoBehaviour {
             // If the player is inputting a move and in a valid movement state.
             if (movement != Vector2.zero &&
                (jimStateController.GetCurrentState() == JimState.IDLE ||
-                jimStateController.GetCurrentState() == JimState.CARRYING)) {
+				jimStateController.GetCurrentState() == JimState.CARRYING || jimStateController.GetCurrentState() ==  JimState.CHARGING)) {
+
+				if(jimStateController.GetCurrentState() ==  JimState.CHARGING){
+					speed = 1;
+				}else{
+					speed = currentBaseSpeed;
 
                 // update stored momentum values.
                 momentum = Vector2.ClampMagnitude(momentum + movement * momentum_build, momentum_max);
@@ -165,7 +174,7 @@ public class EightWayMovement : MonoBehaviour {
                         jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
                     }
                 }
-
+                }
                 transform.Translate(movement * speed * Time.deltaTime);
 
                 FootstepSounds();
@@ -205,12 +214,15 @@ public class EightWayMovement : MonoBehaviour {
     }
 
     public void SlowdownSpeed(){
-    	speed = speed/2;
+    	currentBaseSpeed = currentBaseSpeed/2;
+    	waterSplash.Play();
     }
     public void SpeedReturn(){
-    	speed = speed*2;
-    }
+    	currentBaseSpeed = currentBaseSpeed*2;
+		waterSplash.Stop();
 
+    }
+   
 
     void FootstepSounds(){
         if (Time.time > nextFootstepTime) {
@@ -236,6 +248,7 @@ public class EightWayMovement : MonoBehaviour {
 
     public void UpdateSpeed(float updatedSpeed){
     	speed += updatedSpeed;
+    	currentBaseSpeed  = speed;
     }
 
     public void Dash(){ //activated in Pin Functions Manager

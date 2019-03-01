@@ -57,17 +57,17 @@ MonoBehaviour:
   spriteDefinitions:
   - name: frog_idle
     boundsData:
-    - {x: 0.00000011920929, y: 0.000000059604645, z: 0}
+    - {x: -0.00000011920929, y: 0.000000059604645, z: 0}
     - {x: 4.666667, y: 3.8974361, z: 0}
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 6.5128207, y: 5.74359, z: 0}
-    texelSize: {x: 0.025641026, y: 0.025641026}
+    texelSize: {x: -0.025641026, y: 0.025641026}
     positions:
-    - {x: -2.3333333, y: -1.948718, z: 0}
-    - {x: 2.3333335, y: -1.948718, z: 0}
-    - {x: -2.3333333, y: 1.9487181, z: 0}
-    - {x: 2.3333335, y: 1.9487181, z: 0}
+    - {x: 2.3333333, y: -1.948718, z: 0}
+    - {x: -2.3333335, y: -1.948718, z: 0}
+    - {x: 2.3333333, y: 1.9487181, z: 0}
+    - {x: -2.3333335, y: 1.9487181, z: 0}
     normals: []
     tangents: []
     uvs:
@@ -110,12 +110,12 @@ MonoBehaviour:
     untrimmedBoundsData:
     - {x: 0, y: 0, z: 0}
     - {x: 6.5128207, y: 5.74359, z: 0}
-    texelSize: {x: 0.025641026, y: 0.025641026}
+    texelSize: {x: -0.025641026, y: 0.025641026}
     positions:
-    - {x: -2.2820513, y: -1.7692308, z: 0}
     - {x: 2.2820513, y: -1.7692308, z: 0}
-    - {x: -2.2820513, y: 1.769231, z: 0}
+    - {x: -2.2820513, y: -1.7692308, z: 0}
     - {x: 2.2820513, y: 1.769231, z: 0}
+    - {x: -2.2820513, y: 1.769231, z: 0}
     normals: []
     tangents: []
     uvs:
@@ -168,7 +168,7 @@ MonoBehaviour:
   loadable: 0
   invOrthoSize: 2
   halfTargetHeight: 19.5
-  buildKey: 729849379
+  buildKey: 1638054963
   dataGuid: 64264848ac10f7449baa6e77fc751e28
   managedSpriteCollection: 0
   hasPlatformData: 0

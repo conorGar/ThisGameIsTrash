@@ -10,6 +10,7 @@ public class PickupItem_Shield : PickupableObject
 	void OnEnable(){
 		requiresGrabbyGloves = false;
 		startScale = gameObject.transform.lossyScale;
+		movePlayerToObject = true;
 	}
 	protected override void Update ()
 	{	
@@ -31,12 +32,13 @@ public class PickupItem_Shield : PickupableObject
                     if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried && !throwableObject) {
                             Drop();
                     }
+					gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x+.8f,PlayerManager.Instance.player.transform.position.y);
+					gameObject.transform.localScale = new Vector2(startScale.x*Mathf.Sign(PlayerManager.Instance.player.transform.localScale.x),startScale.y);
                     break;
             }
 
-            if (movePlayerToObject) {
-                PlayerManager.Instance.player.transform.position = Vector2.Lerp(PlayerManager.Instance.player.transform.position, this.gameObject.transform.position, 2 * Time.deltaTime);
-            }
+           
+
         }
 
 
@@ -52,7 +54,7 @@ public class PickupItem_Shield : PickupableObject
 		beingCarried = true;
 		PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
 		gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x+.5f,PlayerManager.Instance.player.transform.position.y);
-
+		gameObject.transform.parent = null; // no parent otherwise collision with this will damage Jim
 		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);
 		//player.GetComponent<EightWayMovement>().enabled = false;
 	

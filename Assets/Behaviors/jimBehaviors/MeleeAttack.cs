@@ -39,7 +39,7 @@ public class MeleeAttack : MonoBehaviour {
 
 		//reset values
 		meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("plankSwing");
-		meleeWeaponRightSwing.transform.localPosition = new Vector2(2.3f,-1.28f);
+		meleeWeaponRightSwing.transform.localPosition = new Vector2(3.5f,-1.28f);
 
 		meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("plankDown");
 		meleeWeaponBotSwing.transform.localPosition = new Vector2(-1.28f,.2f);
@@ -172,7 +172,7 @@ public class MeleeAttack : MonoBehaviour {
 
 		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "clawSwing"){
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("plankSwing");
-				meleeWeaponRightSwing.transform.localPosition = new Vector2(2.3f,-1.28f);
+				meleeWeaponRightSwing.transform.localPosition = new Vector2(3.5f,-1.28f);
 
 				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("plankDown");
 				meleeWeaponBotSwing.transform.localPosition = new Vector2(-1.28f,.2f);

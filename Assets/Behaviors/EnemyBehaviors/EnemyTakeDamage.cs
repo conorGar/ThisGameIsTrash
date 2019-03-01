@@ -478,8 +478,8 @@ public bool bossSpawnedEnemy;
 					if(currentHp <= 0 && !bossEnemy){
 						spinning = true;
 						myBody.mass = 1;
-						myBody.AddForce(new Vector2(-11f,8f), ForceMode2D.Impulse);
-						myBody.gravityScale = 3;
+						myBody.AddForce(new Vector2(-11f,10f), ForceMode2D.Impulse);
+						myBody.gravityScale = 3.3f;
 						if(myShadow != null)
 							myShadow.transform.parent = null; //shadow doesnt follow Y pos
 					}else{
@@ -490,8 +490,8 @@ public bool bossSpawnedEnemy;
 					if(currentHp <= 0 && !bossEnemy){
 						spinning = true;
 						myBody.mass = 1;
-						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11f,8f), ForceMode2D.Impulse);
-						myBody.gravityScale = 3;
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11f,10f), ForceMode2D.Impulse);
+						myBody.gravityScale = 3.3f;
 						if(myShadow != null)
 							myShadow.transform.parent = null; //shadow doesnt follow Y pos	
 					}else{
