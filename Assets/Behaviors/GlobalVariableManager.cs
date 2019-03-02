@@ -59,6 +59,7 @@ public class GlobalVariableManager : UserDataItem {
     public PlayerStat BAG_SIZE_STAT = new PlayerStat(PLAYERSTATTYPE.BAG_SIZE, 10);
     public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
     public PlayerStat STAR_POINTS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_POINTS, 0);
+    public PlayerStat STAR_BITS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_BITS,3);
 
 
 	public int DAY_NUMBER = 1;

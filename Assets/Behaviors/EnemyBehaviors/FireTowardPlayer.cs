@@ -9,6 +9,7 @@ public class FireTowardPlayer : MonoBehaviour {
 	public float fireRate;
 	public bool myProjectileFalls = false;
 	public bool fireAtStart = true;
+	public float randomRateChanger;
 
 	public GameObject projectile;
 	public AudioClip throwSFX;
@@ -61,6 +62,7 @@ public class FireTowardPlayer : MonoBehaviour {
 
 	public IEnumerator Fire(){
 		//yield return new WaitForSeconds(fireRate);
+		Debug.Log("Fire Enum Activated");
 		if(!GlobalVariableManager.Instance.IS_HIDDEN){ //wont fire at player if player is hidden
 			if (controller.currentState.GetState() == EnemyState.IDLE) {
 				if(gameObject.activeInHierarchy == false){
@@ -85,7 +87,9 @@ public class FireTowardPlayer : MonoBehaviour {
 					}
 					GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag,gameObject.transform.position);
 					bullet.GetComponent<Ev_ProjectileTowrdPlayer>().enabled = true; // starts off disabled only so i didnt have to make another tag for rocks that DONT follow player(like ones that spawn from boulder.) feel free to just do that if tis causes issues
+
 					if(bullet.GetComponent<Ev_ProjectileTowrdPlayer>() != null){
+						bullet.GetComponent<Ev_ProjectileTowrdPlayer>().speed = projectileSpeed;
 						bullet.GetComponent<Ev_ProjectileTowrdPlayer>().target = this.target;
 					}
 					bullet.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -94,7 +98,7 @@ public class FireTowardPlayer : MonoBehaviour {
 					if(!myProjectileFalls && bullet.GetComponent<Ev_FallingProjectile>() !=null)
 						bullet.GetComponent<Ev_FallingProjectile>().enabled = false;
 
-					nextThrowTime = Time.time + fireRate;
+					nextThrowTime = Time.time + fireRate + Random.Range(0,randomRateChanger);
 					throwOnceCheck = 0;
 					StopCoroutine("Fire");
 				}

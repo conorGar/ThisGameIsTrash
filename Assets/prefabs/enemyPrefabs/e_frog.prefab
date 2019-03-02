@@ -290,10 +290,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 713fadc5b132fca4a81a9e0f2aecb0a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 7
-  fireRate: 2.5
+  projectileSpeed: 9
+  fireRate: 3.5
   myProjectileFalls: 0
   fireAtStart: 1
+  randomRateChanger: 1
   projectile: {fileID: 1245335482067604, guid: 4974a6397afe35640969fde99841ffed, type: 2}
   throwSFX: {fileID: 0}
   target: {fileID: 0}
@@ -378,7 +379,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1780242901
   m_SortingLayer: 1
-  m_SortingOrder: 6
+  m_SortingOrder: 13
   m_Sprite: {fileID: 21300000, guid: ddf06374b9fa89e45bdf7a69037f7220, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.809}
   m_FlipX: 0

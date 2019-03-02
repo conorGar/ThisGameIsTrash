@@ -34,6 +34,8 @@ public class GUIManager : MonoBehaviour {
     public GUI_BaseStatUpgrade GUI_BaseStatUpgrade;
     public Hub_UpgradeStand Hub_UpgradeStand;
     public GUI_TimeUpgrade GUI_TimeUpgrade;
+    public GameObject areaTitle;
+
 
 	void Awake () {
         Instance = this;

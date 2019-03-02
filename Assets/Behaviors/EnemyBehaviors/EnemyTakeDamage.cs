@@ -226,10 +226,17 @@ public bool bossSpawnedEnemy;
 
 			//Debug.Log("Collision with weapon: ");
 
-		}else if(melee.tag == "pObj_bullet"){
+		}else if(melee.tag == "pObj_bullet" || melee.tag == "BigSwoosh"){
 			if(!takingDamage){
-				StartCoroutine("NonMeleeHit");
-				melee.GetComponent<Ev_FallingProjectile>().Fell();
+				if(melee.tag == "BigSwoosh"){
+					meleeDmgBonus++;
+					StartCoroutine("NonMeleeHit",true);
+					Debug.Log("BIG SWOOSH HITS ENEMY");
+				}else{
+					melee.GetComponent<Ev_FallingProjectile>().Fell();
+					StartCoroutine("NonMeleeHit",false);
+
+				}
 			}
 			//Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
             SoundManager.instance.RandomizeSfx(SFXBANK.HIT6, .8f, 1.1f);
@@ -263,7 +270,7 @@ public bool bossSpawnedEnemy;
 		}
 	}
 
-	IEnumerator NonMeleeHit(){
+	IEnumerator NonMeleeHit(bool knockback){
 		if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
 			if(!takingDamage){
 				takingDamage = true;
@@ -303,6 +310,13 @@ public bool bossSpawnedEnemy;
                 if (moveWhenHit){
                     UpdateFacing();
                 }
+
+                if(knockback){
+					swingDirectionSide = PlayerManager.Instance.player.transform.localScale.x;
+					StartCoroutine("ContinueHit"); 
+					yield return null;
+                }else{
+
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
@@ -310,7 +324,7 @@ public bool bossSpawnedEnemy;
 				yield return new WaitForSeconds(.4f);
 				StartCoroutine( "StopKnockback",0f);
 				StartCoroutine("AfterHit");
-
+				}
 			}
 		}else if(armoredEnemy){
 			SoundManager.instance.PlaySingle(armoredEnemyHitSfx);

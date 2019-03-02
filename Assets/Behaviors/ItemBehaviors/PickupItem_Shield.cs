@@ -5,7 +5,7 @@ public class PickupItem_Shield : PickupableObject
 {
 	public BoxCollider2D myCollisionBox;
 	Vector3 startScale;
-
+	public GameObject pointerArrow;
 
 	void OnEnable(){
 		requiresGrabbyGloves = false;
@@ -22,6 +22,7 @@ public class PickupItem_Shield : PickupableObject
                             if (!requiresGrabbyGloves || GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)) {
                                 Debug.Log("PickUpable object...picked up");
                                 movePlayerToObject = true;
+                           
                                 PickUp();
                             }
                         }
@@ -31,10 +32,16 @@ public class PickupItem_Shield : PickupableObject
                 case JimState.CARRYING:
                     if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && beingCarried && !throwableObject) {
                             Drop();
+                    }else if(beingCarried){
+	                    if(gameObject.transform.localScale.x > 0)
+							gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x+.8f,PlayerManager.Instance.player.transform.position.y);
+						else
+							gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x-.8f,PlayerManager.Instance.player.transform.position.y);
+
+						gameObject.transform.localScale = new Vector2(startScale.x*Mathf.Sign(PlayerManager.Instance.player.transform.localScale.x),startScale.y);
+	                 
                     }
-					gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x+.8f,PlayerManager.Instance.player.transform.position.y);
-					gameObject.transform.localScale = new Vector2(startScale.x*Mathf.Sign(PlayerManager.Instance.player.transform.localScale.x),startScale.y);
-                    break;
+					break;
             }
 
            
@@ -45,6 +52,7 @@ public class PickupItem_Shield : PickupableObject
 
 	}
 	public override void PickUp(){
+		pointerArrow.SetActive(false);
 		PlayerManager.Instance.player.GetComponent<JimAnimationManager>().PlayAnimation("ani_jimPickUp",true);
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
 		//gameObject.GetComponent<Animator>().enabled = true;

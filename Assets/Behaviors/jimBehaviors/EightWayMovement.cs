@@ -38,6 +38,7 @@ public class EightWayMovement : MonoBehaviour {
 	public bool clipOverride; //set by pickUpable object
 
 	float currentBaseSpeed; //set when speed is temporary changed by environment to return to when done.
+	bool alreadySlowed;
 
     // Use this for initialization
     void Start () {
@@ -81,6 +82,7 @@ public class EightWayMovement : MonoBehaviour {
                 jimStateController.SetFlag((int)JimFlag.FACING_LEFT);
 
                // if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+				if(jimStateController.GetCurrentState() != JimState.CARRYING)
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVELEFT);
                // }
 
@@ -91,6 +93,7 @@ public class EightWayMovement : MonoBehaviour {
                 jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
 
               // if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+				if(jimStateController.GetCurrentState() != JimState.CARRYING)
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVERIGHT);
                // }
 
@@ -100,6 +103,7 @@ public class EightWayMovement : MonoBehaviour {
                 StartMovement();
 
                // if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+				if(jimStateController.GetCurrentState() != JimState.CARRYING)
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEUP);
                // }
                 directionFacing = 3;
@@ -108,6 +112,7 @@ public class EightWayMovement : MonoBehaviour {
                 StartMovement();
 
                 //if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+				if(jimStateController.GetCurrentState() != JimState.CARRYING)
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEDOWN);
                // }
                 directionFacing = 4;
@@ -214,12 +219,16 @@ public class EightWayMovement : MonoBehaviour {
     }
 
     public void SlowdownSpeed(){
+    	if(!alreadySlowed){
     	currentBaseSpeed = currentBaseSpeed/2;
     	waterSplash.Play();
+    	alreadySlowed = true;
+    	}
     }
     public void SpeedReturn(){
     	currentBaseSpeed = currentBaseSpeed*2;
 		waterSplash.Stop();
+		alreadySlowed = false;
 
     }
    

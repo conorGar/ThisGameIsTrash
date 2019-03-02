@@ -20,7 +20,7 @@ public class Room : MonoBehaviour
     public string tutPopUpToActivate;
     public GameObject myMapClouds;
     public GlobalVariableManager.ROOM myRoom;
-
+   
 	int waifuChance;
 	[HideInInspector]
     public List<GameObject> enemies; //needs to be public to be accessible for things that change the behavior of enemies(Dirty Decoy, for example)

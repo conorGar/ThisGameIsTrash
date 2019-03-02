@@ -19,7 +19,7 @@ public class Friend : UserDataItem {
     public bool activateDialogWhenClose = true;
     // Is the friend visiting the level on this day.
    
-    public string nextDialog;
+    public string nextDialog = "defaultIntro";
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
 	protected FriendEvent newestAddedEvent;
