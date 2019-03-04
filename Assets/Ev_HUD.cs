@@ -10,13 +10,13 @@ public class Ev_HUD : MonoBehaviour {
     public void Start()
     {
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
-        for(int i = 0; i< GlobalVariableManager.Instance.EquippedAbilityPins.Count;i++){
+       /* for(int i = 0; i< GlobalVariableManager.Instance.EquippedAbilityPins.Count;i++){
         	if(GlobalVariableManager.Instance.EquippedAbilityPins[i] != PIN.NONE){
         	abilityPinsHUD.gameObject.SetActive(true);
         	break;
         	}
 
-        }
+        }*/
     }
 
     public void OnDestroy()

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 {
-	int arrowPos;
+	/*int arrowPos;
 	public PIN selectedPin;
 	public List<GameObject> equippedAbilityPins = new List<GameObject>();
 	public GameObject selectionArrow;
@@ -50,7 +50,7 @@ public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 			/*if(GlobalVariableManager.Instance.EquippedAbilityPins[arrowPos] != null){
 				GlobalVariableManager.Instance.PP_STAT -= GlobalVariableManager.Instance.EquippedAbilityPins[arrowPos].GetData().ppValue; //give back pp from previously equipped pin
 			}*/
-			pinData = PinManager.Instance.GetPin(selectedPin);
+			/*pinData = PinManager.Instance.GetPin(selectedPin);
 			StartCoroutine("EquipSequence");
 
 		}
@@ -74,6 +74,6 @@ public class GUI_AbilityPinEquipDisplay : MonoBehaviour
 
 	void RemoveEquippedPin(){
 
-	}
+	}*/
 }
 

@@ -261,10 +261,10 @@ public class Ev_PinBehavior : MonoBehaviour {
 					GlobalVariableManager.Instance.characterUpgradeArray[6] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[6]) + 1).ToString();
 				}*/
 
-				if(GetData().abilityPin == true){
+				/*if(GetData().abilityPin == true){
 					PinManager.Instance.abilityPinEquipHUD.gameObject.SetActive(true);
 					PinManager.Instance.abilityPinEquipHUD.selectedPin = pinData.Type;
-				}
+				}*/
 
 			}else if(IsPinEquipped()){//Unequip pin
                 GlobalVariableManager.Instance.PP_STAT.UpdateCurrent(+pinData.ppValue);
@@ -285,9 +285,9 @@ public class Ev_PinBehavior : MonoBehaviour {
 
 				if(pinData.abilityPin){ 
 					for(int i = 0; i < GlobalVariableManager.Instance.EquippedAbilityPins.Count; i++){
-						if(GlobalVariableManager.Instance.EquippedAbilityPins[i] == pinData.Type){
+						/*if(GlobalVariableManager.Instance.EquippedAbilityPins[i] == pinData.Type){
 							GlobalVariableManager.Instance.EquippedAbilityPins[i] = PIN.NONE;
-						}
+						}*/
 					}
 				}
 

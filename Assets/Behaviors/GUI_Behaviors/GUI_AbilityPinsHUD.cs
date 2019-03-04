@@ -5,7 +5,7 @@ using TMPro;
 
 public class GUI_AbilityPinsHUD : MonoBehaviour
 {
-	public List<GameObject> equippedAbilityPins = new List<GameObject>();
+	/*public List<GameObject> equippedAbilityPins = new List<GameObject>();
 	public TextMeshProUGUI pinOneCost;
 	public TextMeshProUGUI pinTwoCost;
 	public PinConfig pinConfig;
@@ -40,6 +40,6 @@ public class GUI_AbilityPinsHUD : MonoBehaviour
 	void Update ()
 	{
 	
-	}
+	}*/
 }
 
