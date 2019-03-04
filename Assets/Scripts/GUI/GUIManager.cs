@@ -14,7 +14,7 @@ public class GUIManager : MonoBehaviour {
     public GUI_TrashCollectedDisplay TrashCollectedDisplayGameplay; // At the top left of the screen during gameplay
     public GUI_TrashCollectedDisplay TrashCollectedDisplayDeath; // On the death display
     public GUI_HPdisplay hpDisplay;
-
+    public GameObject checkPointDisplay;
 
   	public GUI_TutPopup tutorialPopup;
   	public Camera miniMapCam;

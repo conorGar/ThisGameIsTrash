@@ -229,7 +229,9 @@ public bool bossSpawnedEnemy;
 		}else if(melee.tag == "pObj_bullet" || melee.tag == "BigSwoosh"){
 			if(!takingDamage){
 				if(melee.tag == "BigSwoosh"){
+					meleeDmgBonus = 0;
 					meleeDmgBonus++;
+					meleeSwingDirection = melee.name;
 					StartCoroutine("NonMeleeHit",true);
 					Debug.Log("BIG SWOOSH HITS ENEMY");
 				}else{
@@ -312,9 +314,20 @@ public bool bossSpawnedEnemy;
                 }
 
                 if(knockback){
+                	Debug.Log("****----- GOT HERE BIG HIT ---------****");
+                	if(meleeSwingDirection == "bigShooshR"){
+						meleeSwingDirection = "plankSwing";
+					}else if(meleeSwingDirection == "bigShooshDown"){
+						meleeSwingDirection = "plankDown";
+
+					}else if(meleeSwingDirection == "bigShooshUp"){
+						meleeSwingDirection = "plankUp";
+
+                	}
 					swingDirectionSide = PlayerManager.Instance.player.transform.localScale.x;
+					moveWhenHit = true;
 					StartCoroutine("ContinueHit"); 
-					yield return null;
+					yield return new WaitForSeconds(.1f);
                 }else{
 
 				yield return new WaitForSeconds(.2f);

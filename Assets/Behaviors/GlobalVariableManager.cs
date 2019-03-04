@@ -55,7 +55,7 @@ public class GlobalVariableManager : UserDataItem {
 	public int ARROW_POSITION = 1;
 
 	//base stats
-	public PlayerStat HP_STAT = new PlayerStat(PLAYERSTATTYPE.HP, 5);
+	public PlayerStat HP_STAT = new PlayerStat(PLAYERSTATTYPE.HP, 7);
     public PlayerStat BAG_SIZE_STAT = new PlayerStat(PLAYERSTATTYPE.BAG_SIZE, 10);
     public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
     public PlayerStat STAR_POINTS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_POINTS, 0);

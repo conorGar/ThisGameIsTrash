@@ -21,13 +21,16 @@ public class ItemSwitchManager : MonoBehaviour
 	}
 
 	IEnumerator OpenDoor(){
+		GameStateManager.Instance.PushState(typeof(MovieState));
+
 		CamManager.Instance.mainCamEffects.CameraPan(doorGate.transform.position,"");
-		yield return new WaitUntil(() => (Vector2.Distance( CamManager.Instance.transform.position,doorGate.transform.position) <5f));
+		yield return new WaitUntil(() => (Vector2.Distance( CamManager.Instance.mainCam.transform.position,doorGate.transform.position) <5f));
 		yield return new WaitForSeconds(.5f);
 
 		ObjectPool.Instance.GetPooledObject("effect_smokeBurst",doorGate.transform.position);
 		doorGate.SetActive(false);
 		yield return new WaitForSeconds(.5f);
+		GameStateManager.Instance.PopState();
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 	}
 

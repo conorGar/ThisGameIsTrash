@@ -14,7 +14,7 @@ public class FireTowardPlayer : MonoBehaviour {
 	public GameObject projectile;
 	public AudioClip throwSFX;
 
-	int throwOnceCheck;
+	int throwOnceCheck = 1;
 	float nextThrowTime;
 
 	[HideInInspector]
@@ -40,8 +40,12 @@ public class FireTowardPlayer : MonoBehaviour {
 
         if (PlayerManager.Instance.player)
             target = PlayerManager.Instance.player;
-        if(fireAtStart)
-       	 StartCoroutine("Fire");
+        if(fireAtStart){
+       	 //StartCoroutine("Fire");
+       	 throwOnceCheck = 0;
+       	 }else{
+       	 throwOnceCheck = 1;
+       	 }
     }
 	
 	// Update is called once per frame

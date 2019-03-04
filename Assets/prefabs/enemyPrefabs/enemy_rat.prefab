@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 2
   attkPower: 1
   moveWhenHit: 1
   respawningEnemyType: 0
@@ -365,7 +365,6 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1903692784849774}
-  returnAniName: idle
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate:
@@ -378,7 +377,6 @@ MonoBehaviour:
   currentHp: 3
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
-  dontStopWhenHit: 0
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114711155882897108

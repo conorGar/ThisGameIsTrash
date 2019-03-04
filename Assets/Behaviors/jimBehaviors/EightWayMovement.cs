@@ -220,13 +220,13 @@ public class EightWayMovement : MonoBehaviour {
 
     public void SlowdownSpeed(){
     	if(!alreadySlowed){
-    	currentBaseSpeed = currentBaseSpeed/2;
+    	currentBaseSpeed = 4;//currentBaseSpeed/2;
     	waterSplash.Play();
     	alreadySlowed = true;
     	}
     }
     public void SpeedReturn(){
-    	currentBaseSpeed = currentBaseSpeed*2;
+    	currentBaseSpeed = 8;//currentBaseSpeed*2;
 		waterSplash.Stop();
 		alreadySlowed = false;
 

@@ -79,6 +79,9 @@ public class PickupableObject : MonoBehaviour
 	public virtual void PickUp(){
         Debug.Log("Pickup() activated");
         movePlayerToObject = false;
+        if(!throwableObject){
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
+        }
 		gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x,gameObject.transform.position.y);
 		gameObject.transform.parent = PlayerManager.Instance.player.transform;
         PlayerManager.Instance.player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

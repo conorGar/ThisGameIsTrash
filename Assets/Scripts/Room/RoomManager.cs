@@ -25,8 +25,8 @@ public class RoomManager : MonoBehaviour {
         previousRoom = null;
     }
 
-	public void Restart(){//called at player death in PlayerTakedamage
-		currentRoom = startRoom;
+	public void Restart(Room respawnRoom){//called at player death in PlayerTakedamage
+		currentRoom = respawnRoom;
         previousRoom = null;
         currentRoom.ActivateRoom();
 	}

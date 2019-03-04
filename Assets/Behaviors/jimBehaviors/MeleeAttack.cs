@@ -19,6 +19,7 @@ public class MeleeAttack : MonoBehaviour {
 	public GameObject sideBigSwoosh;
 	public ParticleSystem chargePS;
 	public ParticleSystem chargeReadyPS;
+	public GameObject chargeReadyGlow;
 
 	int swingDirection;
 	float turningSpeed;
@@ -273,6 +274,7 @@ public class MeleeAttack : MonoBehaviour {
 		yield return new WaitForSeconds(.4f);
 		chargeReady = true;
 		chargeReadyPS.Play();
+		chargeReadyGlow.SetActive(true);
 		Debug.Log("chargeReady");
 		//ReturnFromSwing();
 	
@@ -282,6 +284,7 @@ public class MeleeAttack : MonoBehaviour {
 		Debug.Log("Strong Swing Ienum activated -!-!-!-!-!-!-!-!-!-!");
 		GameObject meleeDirectionEnabled = null;
 		GameObject bigSwooshDirection = null;
+		chargeReadyGlow.SetActive(false);
 
 		if (heldKey == INPUTACTION.ATTACKLEFT) {
 	    	playerMomentum = 6f;

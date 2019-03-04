@@ -86,7 +86,11 @@ public class RoomPortal : EditorMonoBehaviour {
             {
                 if (roomManager.currentRoom == positiveRoom)
                 {
-                	
+					if(areaTitleActivator){
+                		GUIManager.Instance.areaTitle.SetActive(true);
+                		GUIManager.Instance.areaTitle.GetComponent<SpriteRenderer>().sprite = areaTitleSprite;
+                		GUIManager.Instance.areaTitle.GetComponent<Animator>().Play("areaTitleAni",0,-1f);
+                	}
                     roomManager.currentRoom = negativeRoom;
                     roomManager.previousRoom = positiveRoom;
                     player = collider.gameObject;
@@ -110,11 +114,7 @@ public class RoomPortal : EditorMonoBehaviour {
                 }
                 else if (roomManager.currentRoom == negativeRoom)
                 {
-					if(areaTitleActivator){
-                		GUIManager.Instance.areaTitle.SetActive(true);
-                		GUIManager.Instance.areaTitle.GetComponent<SpriteRenderer>().sprite = areaTitleSprite;
-                		GUIManager.Instance.areaTitle.GetComponent<Animator>().Play("areaTitleAni",0,-1f);
-                	}
+					
                     roomManager.currentRoom = positiveRoom;
                     roomManager.previousRoom = negativeRoom;
                     player = collider.gameObject;

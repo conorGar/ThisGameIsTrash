@@ -60,7 +60,7 @@ public class PickupItem_Shield : PickupableObject
 		base.PickUp();
 		myCollisionBox.enabled = false; //doesnt collide with player
 		beingCarried = true;
-		PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
+		//PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
 		gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x+.5f,PlayerManager.Instance.player.transform.position.y);
 		gameObject.transform.parent = null; // no parent otherwise collision with this will damage Jim
 		SoundManager.instance.PlaySingle(SFXBANK.ITEM_CATCH);

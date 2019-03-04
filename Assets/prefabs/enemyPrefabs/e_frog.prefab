@@ -31,6 +31,7 @@ GameObject:
   - component: {fileID: 50288033216244494}
   - component: {fileID: 114665054676897472}
   - component: {fileID: 114497391617491006}
+  - component: {fileID: 114159733858171760}
   m_Layer: 9
   m_Name: e_frog
   m_TagString: enemy_frog
@@ -249,6 +250,21 @@ MonoBehaviour:
   bossSpawnedEnemy: 0
   spinning: 0
   startsOffDontMoveWhenHit: 0
+--- !u!114 &114159733858171760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465294658433506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f207374e6425214eb8804596a32ded1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noticeThreshold: 5
+  noticeThresholdY: 6
+  sleepingEnemy: 0
+  sleepingPS: {fileID: 0}
 --- !u!114 &114167003272045330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,7 +309,7 @@ MonoBehaviour:
   projectileSpeed: 9
   fireRate: 3.5
   myProjectileFalls: 0
-  fireAtStart: 1
+  fireAtStart: 0
   randomRateChanger: 1
   projectile: {fileID: 1245335482067604, guid: 4974a6397afe35640969fde99841ffed, type: 2}
   throwSFX: {fileID: 0}
