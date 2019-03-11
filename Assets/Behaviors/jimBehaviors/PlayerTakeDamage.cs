@@ -41,7 +41,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D enemy){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT ||
-                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD) {
+                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD ||
+				GetComponent<JimStateController>().GetCurrentState() != JimState.DASHING ) {
                 if (enemy.gameObject.layer == 9) { //layer 9 = enemies
 
                     if (enemy.gameObject.tag == "Boss") {

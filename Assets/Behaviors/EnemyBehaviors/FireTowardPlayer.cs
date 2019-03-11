@@ -21,7 +21,7 @@ public class FireTowardPlayer : MonoBehaviour {
 	public GameObject target;
 
 	private tk2dSpriteAnimator anim;
-
+	Vector2 startScale;
 	protected GenericEnemyStateController controller;
 
 
@@ -36,9 +36,10 @@ public class FireTowardPlayer : MonoBehaviour {
 		Debug.Log("Fire toward player on enable activated");
 		anim = GetComponent<tk2dSpriteAnimator>();
 		CancelInvoke();
+		startScale = gameObject.transform.localScale;
         //InvokeRepeating("Fire",2.0f,fireRate);
 
-        if (PlayerManager.Instance.player)
+        if (PlayerManager.Instance != null && PlayerManager.Instance.player)
             target = PlayerManager.Instance.player;
         if(fireAtStart){
        	 //StartCoroutine("Fire");
@@ -66,6 +67,9 @@ public class FireTowardPlayer : MonoBehaviour {
 
 	public IEnumerator Fire(){
 		//yield return new WaitForSeconds(fireRate);
+		if(target == null){
+			target = PlayerManager.Instance.player;
+		}
 		Debug.Log("Fire Enum Activated");
 		if(!GlobalVariableManager.Instance.IS_HIDDEN){ //wont fire at player if player is hidden
 			if (controller.currentState.GetState() == EnemyState.IDLE) {
@@ -85,9 +89,9 @@ public class FireTowardPlayer : MonoBehaviour {
 				if (controller.GetCurrentState() == EnemyState.THROW) {
 					Debug.Log("fired2");
 					if(target.transform.position.x < transform.position.x){
-						transform.localScale = new Vector3(1,1,1);
+						transform.localScale = startScale;
 					} else{
-						transform.localScale = new Vector3(-1,1,1);
+						transform.localScale = new Vector3(startScale.x*-1,startScale.y,1);
 					}
 					GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag,gameObject.transform.position);
 					bullet.GetComponent<Ev_ProjectileTowrdPlayer>().enabled = true; // starts off disabled only so i didnt have to make another tag for rocks that DONT follow player(like ones that spawn from boulder.) feel free to just do that if tis causes issues

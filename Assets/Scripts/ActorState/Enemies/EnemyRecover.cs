@@ -21,12 +21,16 @@ public class EnemyRecover : IActorState<EnemyState, EnemyTrigger>
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
                 flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
-            case EnemyTrigger.HIT:
+            /*case EnemyTrigger.HIT: //took out because grub
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
-                return new EnemyHit();
+                return new EnemyHit();*/
 			case EnemyTrigger.POPUP:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.POP_UP));
                 return new EnemyPopout();
+			case EnemyTrigger.CHASE:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
+				flags |= (int)EnemyFlag.CHASING;
+                return new EnemyChase();
         }
 
         return null;

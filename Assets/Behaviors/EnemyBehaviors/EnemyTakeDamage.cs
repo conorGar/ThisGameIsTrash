@@ -43,7 +43,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public bool canKnockoffArmor;
 
 	public List<MonoBehaviour> behaviorsToDeactivate = new List<MonoBehaviour>();
-
+	public bool hasPowerHitEffect;
 
 
 	//armor knockoff stuff
@@ -134,7 +134,7 @@ public bool bossSpawnedEnemy;
     }
 
 
-    void Start () {
+    protected void Start () {
 		if(IAmParentObj){
 			myAnim = childEnemy.GetComponent<tk2dSpriteAnimator>();
 		}else{
@@ -191,7 +191,7 @@ public bool bossSpawnedEnemy;
 	}
 	
 
-	void Update () {
+	protected void Update () {
 		//for when camera shake is activated
 		/*if(camShake >0){
 			currentCamera.transform.localPosition = Random.insideUnitSphere * 0.7f;
@@ -230,6 +230,9 @@ public bool bossSpawnedEnemy;
 			if(!takingDamage){
 				if(melee.tag == "BigSwoosh"){
 					meleeDmgBonus = 0;
+					if(hasPowerHitEffect){
+						PowerHitEffect();
+					}
 					meleeDmgBonus++;
 					meleeSwingDirection = melee.name;
 					StartCoroutine("NonMeleeHit",true);
@@ -277,10 +280,10 @@ public bool bossSpawnedEnemy;
 			if(!takingDamage){
 				takingDamage = true;
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
-					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
+					GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars");
 					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
 					damageCounter.SetActive(true);
-					GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
+					GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars");
 					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.SetActive(true);
@@ -836,5 +839,9 @@ public bool bossSpawnedEnemy;
 		}
 		this.gameObject.SetActive(false);
 
+	}
+
+	public virtual void PowerHitEffect(){
+		//nothing for base
 	}
 }

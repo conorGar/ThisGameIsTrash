@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JimAttacking : IActorState<JimState, JimTrigger>
 {
+
     public JimState GetState()
     {
         return JimState.ATTACKING;

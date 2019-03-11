@@ -125,7 +125,15 @@ public class GlobalVariableManager : UserDataItem {
 
     public ROOM WORLD_ROOMS_DISCOVERED = ROOM.W1C3;
 
+    public enum WEAPONS{
+    NONE =		0,
+    DUSTER = 	1<<0,
+    MOP = 		1<<1,
+    }
 
+    public WEAPONS WEAPONS_AVAILABLE = WEAPONS.DUSTER;
+
+    public WEAPONS WEAPON_EQUIPPED = WEAPONS.DUSTER;
 
     public enum TUTORIALPOPUPS{
 
@@ -410,5 +418,13 @@ public class GlobalVariableManager : UserDataItem {
     public bool IsLargeTrashDiscovered(LARGEGARBAGE large_garbage_type)
     {
         return (LARGE_GARBAGE_DISCOVERED & large_garbage_type) == large_garbage_type;
+    }
+
+    public bool IsWeaponAvailable(WEAPONS weapon_type){
+    	return (WEAPONS_AVAILABLE & weapon_type) == weapon_type;
+    }
+
+    public bool IsWeaponEquipped(WEAPONS weapon){
+    	return((WEAPON_EQUIPPED & weapon) == weapon);
     }
 }

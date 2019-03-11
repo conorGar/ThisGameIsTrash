@@ -21,13 +21,24 @@ public class EnemyChase : IActorState<EnemyState, EnemyTrigger>
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
                 flags &= (int)~EnemyFlag.CHASING;
                 return new EnemyIdle();
-            case EnemyTrigger.HIT:
+            /*case EnemyTrigger.HIT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
                 flags &= ~(int)EnemyFlag.CHASING;
-                return new EnemyHit();
+                return new EnemyHit();*/
             case EnemyTrigger.PREPARE:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
+				flags &= ~(int)EnemyFlag.CHASING;
+            
                 return new EnemyPrepare();
+			case EnemyTrigger.PREPARE_LEAP:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LEAP));
+				flags &= ~(int)EnemyFlag.CHASING;
+            
+                return new EnemyPrepare_Leap();
+			case EnemyTrigger.LUNGE:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
+				flags &= ~(int)EnemyFlag.CHASING;
+                return new EnemyLunge();
 
         }
 

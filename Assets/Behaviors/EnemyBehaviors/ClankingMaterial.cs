@@ -28,7 +28,10 @@ public class ClankingMaterial : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D collider){
 		if(collider.tag == "Weapon"){
 			parentsETD.Clank(clankSound,gameObject.transform.position, pushBack);
-		} 
+		}else if (collider.tag == "BigSwoosh"){
+			parentsETD.PowerHitEffect();
+			parentsETD.StartCoroutine("NonMeleeHit",true);
+		}
 	}
 
 

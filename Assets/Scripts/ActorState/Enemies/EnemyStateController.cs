@@ -41,7 +41,8 @@ public enum EnemyTrigger
     THROW,
     PREPARE_LEAP,
     VULNERABLE,
-    POPUP
+    POPUP,
+    CHASE // chase for use when need to chase again after already noticed player
 }
 
 // Not a whole lot but maybe some common functionality can go here in the future.

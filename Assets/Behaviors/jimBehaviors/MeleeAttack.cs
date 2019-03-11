@@ -21,14 +21,21 @@ public class MeleeAttack : MonoBehaviour {
 	public ParticleSystem chargeReadyPS;
 	public GameObject chargeReadyGlow;
 
-	int swingDirection;
+	protected int swingDirection;
 	float turningSpeed;
-	private float playerMomentum; // a little 'bounce' when swing
-	Vector3 startingScale;
+	protected float playerMomentum; // a little 'bounce' when swing
+	protected Vector3 startingScale;
 
 
-	INPUTACTION heldKey;
-	bool chargeReady;
+	protected INPUTACTION heldKey;
+	protected bool chargeReady;
+
+	int whichSwingAni;
+	tk2dSpriteAnimator animator;
+
+	void Awake(){
+		animator = gameObject.GetComponent<tk2dSpriteAnimator>();
+	}
 
 	void Start () {
         startingScale = this.gameObject.transform.localScale;
@@ -184,15 +191,24 @@ public class MeleeAttack : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Swing(int direction){
+	protected virtual IEnumerator Swing(int direction){
 			SoundManager.instance.RandomizeSfx(swing);
 			GameObject meleeDirectionEnabled = null;
 			swingDirection = direction;
 
             if (direction == 1){
+				if(whichSwingAni == 0){
+				whichSwingAni = 1;
+                animator.Play("ani_jimSwingR2");
+
+                }else{
+				whichSwingAni = 0;
+				animator.Play("ani_jimSwingR3");
+                
+                }
                 PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_RIGHT);
                 meleeDirectionEnabled = meleeWeaponRightSwing;
-				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+				sideSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
 			}else if(direction == 2){
                 PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
                 meleeDirectionEnabled = meleeWeaponLeftSwing;
@@ -200,11 +216,11 @@ public class MeleeAttack : MonoBehaviour {
 			}else if(direction == 3){
                 PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_UP);
                 meleeDirectionEnabled = meleeWeaponTopSwing;
-				topSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+				topSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
 			}else if(direction == 4){
                 PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_DOWN);
                 meleeDirectionEnabled = meleeWeaponBotSwing;
-                botSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+                botSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
 			}
 
 			meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();

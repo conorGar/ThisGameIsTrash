@@ -12,14 +12,15 @@ public class RandomDirectionMovement : MonoBehaviour {
 	public float stopTime = 2;
 	//public GameObject walkCloud;
 	public ParticleSystem walkPS;
-	//public float walkCloudYadjust = 0.8f;
-
 
 	private Vector3 direction;
 	protected tk2dSpriteAnimator anim;
 	int bounceOffObject;
 	protected Vector3 startingScale;
 	int turnOnce = 0;
+	[HideInInspector]
+	public bool mopSlow;
+
 
     protected GenericEnemyStateController controller;
 
@@ -31,7 +32,6 @@ public class RandomDirectionMovement : MonoBehaviour {
 
     void Start(){
 		startingScale = gameObject.transform.localScale;
-
 	}
 
 	protected void OnEnable () {
@@ -105,6 +105,12 @@ public class RandomDirectionMovement : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnter2D(Collider2D collider){
+		if(collider.tag == "mopTrail"){
+			collider.GetComponent<MopPuddle>().SlowDownEnemy(this);
+		}
+	}
+
     // Enemy picks a random direction and starts moving.
 	public virtual void StartMoving(){
         controller.SetFlag((int)EnemyFlag.WALKING);
@@ -125,4 +131,13 @@ public class RandomDirectionMovement : MonoBehaviour {
 		StopAllCoroutines();
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 	}
+
+	public void SlowDown(float slowdownSpeedDecrement){
+		movementSpeed -= slowdownSpeedDecrement;
+	}
+
+	public void SpeedUp(float speedUpIncrement){
+		movementSpeed += speedUpIncrement;
+	}
+
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JimIdle : IActorState<JimState, JimTrigger>
 {
+
+	int whichSwingAni;
     public JimState GetState()
     {
         return JimState.IDLE;
@@ -28,12 +30,20 @@ public class JimIdle : IActorState<JimState, JimTrigger>
                 return new JimHurt();
 
             case JimTrigger.SWING_RIGHT:
-                animator.Play("ani_jimSwingR");
+            	Debug.Log("which swing ani:" + whichSwingAni);
+
                 flags &= ~(int)JimFlag.FACING_LEFT;
                 return new JimAttacking();
 
             case JimTrigger.SWING_LEFT:
-                animator.Play("ani_jimSwingR");
+                //animator.Play("ani_jimSwingR");
+				if(whichSwingAni == 0){
+                	animator.Play("ani_jimSwingR2");
+                	whichSwingAni = 1;
+                }else{
+					animator.Play("ani_jimSwingR3");
+                	whichSwingAni = 0;
+                }
                 flags |= (int)JimFlag.FACING_LEFT;
                 return new JimAttacking();
 

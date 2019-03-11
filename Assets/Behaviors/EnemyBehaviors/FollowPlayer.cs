@@ -15,12 +15,15 @@ public class FollowPlayer : MonoBehaviour {
 	public bool returnToPreviousWhenFar;
 	private Vector3 smoothVelocity = Vector3.zero;
 	private tk2dSpriteAnimator anim;
-
+	public float maxWalkDistance; //how close the enemy will get
     protected GenericEnemyStateController controller;
+
+    Vector3 startScale;
 
     void Awake()
     {
         controller = GetComponent<GenericEnemyStateController>();
+        startScale = transform.localScale;
     }
 
     void Start () {
@@ -39,7 +42,7 @@ public class FollowPlayer : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (controller.IsFlag((int)EnemyFlag.CHASING)) {
                 float distance = Vector3.Distance(transform.position, target.position);
-                if (distance < walkDistance) { //TODO: 
+                if (distance < walkDistance && distance > maxWalkDistance) { //TODO: 
                     if (iBeLerpin) {
                         transform.position = Vector3.SmoothDamp(transform.position, target.position, ref smoothVelocity, chaseSpeed);
                     } else {
@@ -47,9 +50,9 @@ public class FollowPlayer : MonoBehaviour {
                     }
                     if (!hasSeperateFacingAnimations) {
                         if (target.transform.position.x < transform.position.x) {
-                            transform.localScale = new Vector3(-1, 1, 1);
+                            transform.localScale = new Vector3(startScale.x*-1, startScale.y, 1);
                         } else {
-                            transform.localScale = new Vector3(1, 1, 1);
+                            transform.localScale = new Vector3(startScale.x, startScale.y, 1);
                         }
                     }//otherwise for now those specific actors handle it(Questio)
                 } else if (returnToPreviousWhenFar) {

@@ -19,6 +19,16 @@ public class DuckStateControllerEditor : EnemyEditor { }
 [CustomEditor(typeof(DogStateController))]
 public class DogStateControllerEditor : EnemyEditor { }
 
+
+[CustomEditor(typeof(GrubStateController))]
+public class GrubStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(RhinoBeetleStateController))]
+public class RhinoBeetleStateControllerEditor : EnemyEditor { }
+[CustomEditor(typeof(OpossumStateController))]
+public class OpossumStateControllerEditor : EnemyEditor { }
+
+
 public class GenericStateControllerEditor<State_Type, Trigger_Type, Flag_Type> : Editor
 {
     public override void OnInspectorGUI()

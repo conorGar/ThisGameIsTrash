@@ -43,6 +43,12 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
 			case EnemyTrigger.PREPARE_LEAP:
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LEAP));
                 return new EnemyPrepare_Leap();
+			case EnemyTrigger.LUNGE:
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
+                return new EnemyLunge();
+			case EnemyTrigger.VULNERABLE: //added for Grub Enemy
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.VULNERABLE));
+                return new EnemyVulnerable();
         }
 
         return null;

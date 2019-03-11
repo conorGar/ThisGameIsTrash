@@ -12,7 +12,7 @@ public class EnemyVulnerable : IActorState<EnemyState, EnemyTrigger>
 
     public IActorState<EnemyState, EnemyTrigger> OnUpdate(tk2dSpriteAnimator animator, ref int flags)
     {
-		animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
+		animator.Play(EnemyAnim.GetName(ENEMY_ANIM.VULNERABLE));
         return null;
     }
 
@@ -21,11 +21,11 @@ public class EnemyVulnerable : IActorState<EnemyState, EnemyTrigger>
 		switch (trigger) {
             case EnemyTrigger.RECOVER:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.BURROW));
-                flags |= (int)EnemyFlag.CHASING;
-                return new EnemyChase();
-            case EnemyTrigger.HIT:
+                //flags |= (int)EnemyFlag.CHASING;
+                return new EnemyRecover();
+            /*case EnemyTrigger.HIT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
-                return new EnemyHit();
+                return new EnemyHit();*/
         }
         return null;
     }
