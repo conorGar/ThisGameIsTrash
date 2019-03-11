@@ -74,6 +74,7 @@ public class PinFunctionsManager : MonoBehaviour {
 			if(givenKey == dashKey){
 				//-------------Dash-----------------//
 				dashCounter = 2;
+				PlayerManager.Instance.controller.SendTrigger(JimTrigger.DASH);
 				Debug.Log("Dumpster Dash - 2");
 
 				gameObject.GetComponent<EightWayMovement>().enabled = false; // I know we dont wanna do stuff like this, just felt like for this instance it was more appropriate doing this than creating a gamestate...?
@@ -89,6 +90,8 @@ public class PinFunctionsManager : MonoBehaviour {
 				}
 				SoundManager.instance.PlaySingle(SFXBANK.DUMPSTERDASH);
 				yield return new WaitForSeconds(.1f);
+				PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
+
 				dashCounter = 0;
 				gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 				gameObject.GetComponent<EightWayMovement>().enabled = true;

@@ -14,7 +14,8 @@ public enum JimState
     THROWING,
     DELIVERING,
     DEAD,
-    CHARGING
+    CHARGING,
+    DASHING
 }
 
 public enum JimFlag : int
@@ -45,7 +46,8 @@ public enum JimTrigger
     PICK_UP_DROPPABLE,
     PICK_UP_THROWABLE,
     DROP_BIG,
-    DELIVER_BIG
+    DELIVER_BIG, 
+    DASH
 }
 
 public class JimStateController : ActorStateController<JimState, JimTrigger> {

@@ -28,7 +28,8 @@ public class JimIdle : IActorState<JimState, JimTrigger>
             case JimTrigger.HIT:
                 animator.Play("hurt");
                 return new JimHurt();
-
+			case JimTrigger.DASH:
+                return new JimDash();
             case JimTrigger.SWING_RIGHT:
             	Debug.Log("which swing ani:" + whichSwingAni);
 

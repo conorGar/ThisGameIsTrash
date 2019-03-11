@@ -94,7 +94,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D projectile){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT ||
-                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD) {
+                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD ||
+				GetComponent<JimStateController>().GetCurrentState() != JimState.DASHING ) {
                 if (projectile.gameObject.layer == 10) { //layer 10 = projectiles
                     var projectileComp = projectile.gameObject.GetComponent<Projectile>();
 
