@@ -738,7 +738,6 @@ MonoBehaviour:
   vanishAtDeath: 0
   myBossScript: {fileID: 0}
   objectToPanTo: {fileID: 0}
-  dazeAtDeath: 1
   hpDisplayStartSfx: {fileID: 0}
   currentRoom: {fileID: 0}
   myProjectile: {fileID: 1963677878078342}
@@ -750,8 +749,21 @@ MonoBehaviour:
   teleportTrailParticle: {fileID: 1884323565428384}
   slimeSpawnPS: {fileID: 198402289255244292}
   currentBlobs: []
+  blobMax: 6
   initialTeleport: 1
+  teleportSpeed: 10
   nextCastTime: 0
+  recoverDazeTime: 10
+  nextRecoverDazeTime: 0
+  slimeSpotsRight:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  slimeSpotsLeft:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  slimeCenter: {fileID: 0}
   pathGrid: {fileID: 0}
 --- !u!114 &114909078477676010
 MonoBehaviour:

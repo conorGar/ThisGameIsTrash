@@ -141,6 +141,15 @@ public class Room : MonoBehaviour
             }   
         }
 
+        if (bossRoom) {
+            for (int i = 0; i < bosses.Count; i++) {
+                bosses[i].GetComponent<Boss>().ActivateBoss();
+                bosses[i].GetComponent<Boss>().currentRoom = this;
+
+            }
+            CamManager.Instance.mainCamEffects.ZoomInOut(1f, 5f); //for debug testing
+        }
+
         for (int i=0; i < friendSpawners.Count; ++i)
         {
             var spawnedFriend = FriendManager.Instance.GetFriend(friendSpawners[i].friend);
@@ -155,17 +164,7 @@ public class Room : MonoBehaviour
                     friends.Add(spawnedFriend.gameObject);
                 }
             }
-        }
-
-        if(bossRoom){
-        	for(int i = 0; i< bosses.Count;i++){
-					bosses[i].GetComponent<Boss>().ActivateBoss();
-					bosses[i].GetComponent<Boss>().currentRoom = this;
-        		
-        	}
-            CamManager.Instance.mainCamEffects.ZoomInOut(1f,5f); //for debug testing
-        }
- 
+        } 
     }
 
     public void DeactivateRoom()

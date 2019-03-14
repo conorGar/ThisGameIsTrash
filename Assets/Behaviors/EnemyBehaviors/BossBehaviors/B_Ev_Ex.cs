@@ -23,13 +23,18 @@ public class B_Ev_Ex : Boss {
     public ParticleSystem slimeSpawnPS;
 	[HideInInspector]
     public List<GameObject> currentBlobs = new List<GameObject>();
+    public int blobMax = 3;
 	[HideInInspector]
     public bool initialTeleport = true;
+    public float teleportSpeed = 5f;
     float randomCastTime = 0f;
     CAST_TYPE nextCastType = CAST_TYPE.TELEPORT;
     public float nextCastTime = 0f;
     public float recoverDazeTime = 10f;
     public float nextRecoverDazeTime = 0f;
+    public List<SlimeSpot> slimeSpotsRight;
+    public List<SlimeSpot> slimeSpotsLeft;
+    public GameObject slimeCenter;
     GameObject dazedStars;
     public PathGrid pathGrid;
 
@@ -75,7 +80,7 @@ public class B_Ev_Ex : Boss {
                     }
                     break;
                 case EnemyState.TELEPORT:
-                    gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, teleportDestination, 5 * Time.deltaTime);
+                    gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, teleportDestination, teleportSpeed * Time.deltaTime);
                     break;
                 case EnemyState.DAZED:
                     // Undaze and teleport.
@@ -108,23 +113,20 @@ public class B_Ev_Ex : Boss {
 
 		teleportTrailParticle.SetActive(true);
 		teleportTrailParticle.GetComponent<ParticleSystem>().Play();
-		if(!initialTeleport){
-		    teleportDestination = new Vector2(Random.Range(-55f,-4f),Random.Range(134f,149f)); 
-		}else{
-			if(PlayerManager.Instance.player.transform.position.x < -25f){//player on left side
-				teleportDestination = new Vector2(-9f,144f); 
-			}else{
-				teleportDestination = new Vector2(-40f,144f); 
-			}
-		}
-		//gameObject.transform.localPosition = new Vector2(Random.Range(-36f,17f),Random.Range(-14f,10f));
+
+        // Try to teleport to an open slime spot.  If there are none on that side, go to one randomly on that side anyway.
+        var slimeSpot = GetRandomSlimeSpot();
+        if (slimeSpot == null)
+            slimeSpot = GetRandomSlimeSpot(false);
+
+        teleportDestination = slimeSpot.transform.position;
+
 		yield return new WaitUntil(() => (Vector2.Distance(gameObject.transform.position, teleportDestination) < 1));
 		SoundManager.instance.PlaySingle(teleport);
 
         Reappear();
 
         if (initialTeleport) { // specifically create a blob after 1 second after the initial teleport.
-            initialTeleport = false;
             GenerateCast(CAST_TYPE.SPAWN_ADD);
             nextCastTime = Time.time + 1f;
         } else {
@@ -158,7 +160,7 @@ public class B_Ev_Ex : Boss {
 
     public void SpawnBlob()
     {
-        if (currentBlobs.Count < 3) {
+        if (currentBlobs.Count < blobMax) {
             SoundManager.instance.PlaySingle(blobSpawnSFX);
             GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject("enemy_slime", gameObject.transform.position);
             if (spawnedEnemy != null) {
@@ -167,6 +169,9 @@ public class B_Ev_Ex : Boss {
                 spawnedEnemy.GetComponent<EnemyPath>().pathGrid = pathGrid;
                 slimeSpawnPS.Play();
                 currentBlobs.Add(spawnedEnemy);
+
+                var spot = GetSlimeSpot(spawnedEnemy.transform.position);
+                spot.slime = spawnedEnemy.GetComponent<SlimeStateController>();
             }
         }
 
@@ -174,6 +179,9 @@ public class B_Ev_Ex : Boss {
         GenerateCast(CAST_TYPE.TELEPORT);
         nextCastTime = Time.time;
         controller.SendTrigger(EnemyTrigger.IDLE);
+
+        if (initialTeleport)
+            initialTeleport = false;
     }
 
     // Helpers
@@ -209,7 +217,7 @@ public class B_Ev_Ex : Boss {
         nextCastType = type;
 
         // Teleport if there are already 3 blobs.
-        if (currentBlobs.Count > 3) {
+        if (currentBlobs.Count > blobMax) {
             nextCastType = CAST_TYPE.TELEPORT;
         }
 
@@ -255,6 +263,14 @@ public class B_Ev_Ex : Boss {
     	}
 
         currentBlobs.Clear();
+
+        for (int i = 0; i < slimeSpotsLeft.Count; i++) {
+            slimeSpotsLeft[i].slime = null;
+        }
+
+        for (int i = 0; i < slimeSpotsRight.Count; i++) {
+            slimeSpotsRight[i].slime = null;
+        }
     }
 
     void StartDazedStars()
@@ -272,5 +288,57 @@ public class B_Ev_Ex : Boss {
             ObjectPool.Instance.ReturnPooledObject(dazedStars);
             dazedStars = null;
         }
+    }
+
+    SlimeSpot GetRandomSlimeSpot(bool returnOnlyUnusedSpots = true)
+    {
+        // 1. Figure out which side of the room Ex is on.
+        // 2. Get a shuffled list of unused slime spots on that side.
+        // 3. Pick the spot off the top.
+        // 4. Can return no spot if returnOnlyUnusedSpots is true.
+        List<SlimeSpot> tempList = null;
+        if (transform.position.x > slimeCenter.transform.position.x) { // on right side, go left
+            tempList = new List<SlimeSpot>(slimeSpotsLeft);
+        } else { // on left side, go right
+            tempList = new List<SlimeSpot>(slimeSpotsRight);
+        }
+        
+        if (returnOnlyUnusedSpots)
+            tempList.RemoveAll((x) => x.slime != null);
+
+        tempList.Shuffle();
+
+        if (tempList.Count > 0)
+            return tempList[0];
+        else
+            return null;
+    }
+
+    // returns the nearest slime spot to the provided position.
+    SlimeSpot GetSlimeSpot(Vector3 pos)
+    {
+        SlimeSpot spot = null;
+        float shortestDist = float.MaxValue;
+
+        // Figure out which side is closer.
+        if (pos.x > slimeCenter.transform.position.x) { // right side
+            for (int i = 0; i < slimeSpotsRight.Count; i++) {
+                var dist = Vector2.Distance(slimeSpotsRight[i].transform.position, pos);
+                if (dist < shortestDist) {
+                    shortestDist = dist;
+                    spot = slimeSpotsRight[i];
+                }
+            }
+        } else { // left side
+            for (int i = 0; i < slimeSpotsLeft.Count; i++) {
+                var dist = Vector2.Distance(slimeSpotsLeft[i].transform.position, pos);
+                if (dist < shortestDist) {
+                    shortestDist = dist;
+                    spot = slimeSpotsLeft[i];
+                }
+            }
+        }
+
+        return spot;
     }
 }

@@ -41,19 +41,14 @@ public class BossStuart : Boss
 	{
         ex = FriendManager.Instance.GetFriend("Ex") as BossFriendEx;
         ex.stuart = this;
-        controller.SendTrigger(EnemyTrigger.NOTICE);
+
+        Debug.Log("ON ENABLE STUART!");
     }
 	
 	// Update is called once per frame
 	void Update ()
 	{
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            switch (controller.GetCurrentState()) {
-                case EnemyState.IDLE:
-                    controller.SendTrigger(EnemyTrigger.NOTICE);
-                    break;
-            }
-
             switch (ex.GetFriendState()) {
                 // In phase one, the trio will come back when Stuart's HP dips below 7.
                 case "FIGHT_PHASE_1":
@@ -106,6 +101,7 @@ public class BossStuart : Boss
         bossHash.SetActive(false);
         bossQuestio.SetActive(false);
         ActivateHpDisplay();
+        controller.SendTrigger(EnemyTrigger.NOTICE);
     }
 
     public void PrepPhase2()
@@ -118,6 +114,7 @@ public class BossStuart : Boss
        	bossHash.SetActive(true);
         bossQuestio.SetActive(true);
         ActivateHpDisplay();
+        controller.SendTrigger(EnemyTrigger.NOTICE);
     }
 
 	public override void BossEvent(){

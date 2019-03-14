@@ -335,7 +335,7 @@ public class BossFriendEx : Friend
         stuart.bossEx.SetActive(true);
 		CamManager.Instance.mainCamEffects.CameraPan(stuart.bossEx, true);
 		yield return new WaitUntil(() => !stuart.bossEx.GetComponent<B_Ev_Ex>().initialTeleport);
-		yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f);
         stuart.PrepPhase2();
     }
 

@@ -33,7 +33,8 @@ public class StuartStateController : EnemyStateController
         switch (currentState.GetState()) {
             case EnemyState.HIT:
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-                currentState = new EnemyIdle();
+                SetFlag((int)EnemyFlag.CHASING);
+                currentState = new EnemyChase();
                 break;
         }
     }

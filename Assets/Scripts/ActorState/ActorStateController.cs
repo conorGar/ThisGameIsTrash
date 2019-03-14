@@ -51,16 +51,19 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
 
     public virtual void SendTrigger(Trigger_Type trigger)
     {
-        Debug.Log("SendTrigger: " + trigger + " current State: " + currentState.GetState() + " for object [" + name + "]");
+        // Ignore triggers if not state has been set up yet.
+        if (currentState != null) {
+            Debug.Log("SendTrigger: " + trigger + " current State: " + currentState.GetState() + " for object [" + name + "]");
 
-        // Resolve triggers that don't care about states and just do stuff.
-        AnyStateTrigger(trigger);
+            // Resolve triggers that don't care about states and just do stuff.
+            AnyStateTrigger(trigger);
 
-        // Resolve triggers based on the current state.
-        var newState = currentState.SendTrigger(trigger, gameObject, animator, ref flags);
+            // Resolve triggers based on the current state.
+            var newState = currentState.SendTrigger(trigger, gameObject, animator, ref flags);
 
-        if (newState != null)
-            currentState = newState;
+            if (newState != null)
+                currentState = newState;
+        }
     }
 
     public State_Type GetCurrentState()
