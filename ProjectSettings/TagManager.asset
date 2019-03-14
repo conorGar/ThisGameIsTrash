@@ -71,6 +71,7 @@ TagManager:
   - trail_toxic
   - enemy_slime
   - calendarIcon
+  - effect_dazed
   layers:
   - Default
   - TransparentFX
@@ -93,11 +94,11 @@ TagManager:
   - Decoy
   - Hazard
   - MiniMap
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Level Portals
+  - UpperTiles
+  - UpperEnemies
+  - UpperItems
+  - UpperPlayer
   - 
   - 
   - 
@@ -122,4 +123,19 @@ TagManager:
     locked: 0
   - name: Layer04
     uniqueID: 237963859
+    locked: 0
+  - name: UpperBackground
+    uniqueID: 2673535259
+    locked: 0
+  - name: UpperLayer01
+    uniqueID: 3972878713
+    locked: 0
+  - name: UpperLayer02
+    uniqueID: 799517965
+    locked: 0
+  - name: UpperLayer03
+    uniqueID: 532738661
+    locked: 0
+  - name: UpperLayer04
+    uniqueID: 1879654749
     locked: 0

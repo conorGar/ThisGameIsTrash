@@ -19,6 +19,25 @@ public class DuckStateControllerEditor : EnemyEditor { }
 [CustomEditor(typeof(DogStateController))]
 public class DogStateControllerEditor : EnemyEditor { }
 
+[CustomEditor(typeof(BlackMoleStateController))]
+public class BlackMoleStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(SlimeStateController))]
+public class SlimeStateControllerEditor : EnemyEditor { }
+
+// Bosses
+[CustomEditor(typeof(StuartStateController))]
+public class StuartStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(ExStateController))]
+public class ExStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(QuestioStateController))]
+public class QuestioStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(HashStateController))]
+public class HashStateControllerEditor : EnemyEditor { }
+
 public class GenericStateControllerEditor<State_Type, Trigger_Type, Flag_Type> : Editor
 {
     public override void OnInspectorGUI()

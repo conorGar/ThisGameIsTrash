@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-[RequireComponent(typeof(GenericEnemyStateController))]
-[RequireComponent(typeof(EnemyPath))]
+[RequireComponent(typeof(EnemyStateController))]
 public class FollowPlayer : MonoBehaviour {
 
 	public BoxCollider2D targetCollider;
@@ -16,15 +14,16 @@ public class FollowPlayer : MonoBehaviour {
 	public bool returnToPreviousWhenFar;
 	private Vector3 smoothVelocity = Vector3.zero;
 	private tk2dSpriteAnimator anim;
+    public bool usePathGrid;
     private EnemyPath enemyPath;
     public float pathRefreshTime = 1f;
     private float nextPathRefreshTime = 0f;
 
-    protected GenericEnemyStateController controller;
+    protected EnemyStateController controller;
 
     void Awake()
     {
-        controller = GetComponent<GenericEnemyStateController>();
+        controller = GetComponent<EnemyStateController>();
         enemyPath = GetComponent<EnemyPath>();
     }
 
@@ -36,35 +35,35 @@ public class FollowPlayer : MonoBehaviour {
 	void OnEnable(){
         if (PlayerManager.Instance.player != null)
             targetCollider = PlayerManager.Instance.player.GetComponent<BoxCollider2D>(); //needs to be in enable because of Dirty Decoy
-
-        controller.RemoveFlag((int)EnemyFlag.CHASING);
 	}
 
     // generates a path from the enemies current position to the player.
     private void GenerateChasePath()
     {
-        PathGrid pathGrid = RoomManager.Instance.currentRoom.pathGrid;
-        if (pathGrid != null) {
-            Point startPoint;
+        if (enemyPath != null) {
+            PathGrid pathGrid = enemyPath.pathGrid;
+            if (pathGrid != null) {
+                Point startPoint;
 
-            // if there was a path node the enemy was moving toward let that be the start position so the enemy doesn't go backwards with bad estimates.
-            if (enemyPath.path != null)
-                startPoint = enemyPath.path.Position;
-            else
-                startPoint = pathGrid.WorldToGrid(transform.position);
+                // if there was a path node the enemy was moving toward let that be the start position so the enemy doesn't go backwards with bad estimates.
+                if (enemyPath.path != null)
+                    startPoint = enemyPath.path.Position;
+                else
+                    startPoint = pathGrid.WorldToGrid(GetMyClosestPoint());
 
-            if (startPoint != null) {
-                Point destPoint = pathGrid.WorldToGrid(GetTargetsClosestPoint());
-                if (destPoint != null)
-                    enemyPath.GeneratePath(pathGrid, startPoint, destPoint);
-            } else {
-                // If no start point was found, the ememy is off the grid.  Try to get them back on the closest point on the grid to where they are.
-                startPoint = pathGrid.WorldToClosestGridPoint(transform.position);
-                enemyPath.GenerateQuickPath(pathGrid, startPoint);
-            }
+                if (startPoint != null) {
+                    Point destPoint = pathGrid.WorldToGrid(GetTargetsClosestPoint());
+                    if (destPoint != null)
+                        enemyPath.GeneratePath(pathGrid, startPoint, destPoint);
+                } else {
+                    // If no start point was found, the enemy is off the grid.  Try to get them back on the closest point on the grid to where they are.
+                    startPoint = pathGrid.WorldToClosestGridPoint(transform.position);
+                    enemyPath.GenerateQuickPath(pathGrid, startPoint);
+                }
 
-            if (enemyPath.path != null) {
-                enemyPath.FaceNextPathNode();
+                if (enemyPath.path != null) {
+                    enemyPath.FaceNextPathNode();
+                }
             }
         }
     }
@@ -74,10 +73,20 @@ public class FollowPlayer : MonoBehaviour {
             if (controller.IsFlag((int)EnemyFlag.CHASING)) {
                 float distance = Vector3.Distance(transform.position, GetTargetsClosestPoint());
                 if (distance < walkDistance) { //TODO: 
-                    // follow the path until it's consumed.  update the path in intervals to chase the player.
-                    if (Time.time > nextPathRefreshTime || !enemyPath.MoveAlongPath(chaseSpeed * Time.deltaTime)) {
-                        GenerateChasePath();
-                        ResetPathRefreshTime();
+                    if (usePathGrid) {
+                        if (enemyPath != null) {
+                            // follow the path until it's consumed.  update the path in intervals to chase the player.
+                            if (Time.time > nextPathRefreshTime || !enemyPath.MoveAlongPath(chaseSpeed * Time.deltaTime)) {
+                                GenerateChasePath();
+                                ResetPathRefreshTime();
+                            }
+                        }
+                    } else {
+                        transform.position = Vector3.MoveTowards(transform.position, GetTargetsClosestPoint(), chaseSpeed * Time.deltaTime);
+                        if (!hasSeperateFacingAnimations)
+                            transform.localScale = new Vector3(Mathf.Sign(targetCollider.transform.position.x - transform.position.x),
+                                                      transform.localScale.y,
+                                                      transform.localScale.z);
                     }
 
                 // If the player gets far enough away from the enemy, put them into idle and show a confused symbol.
@@ -96,7 +105,9 @@ public class FollowPlayer : MonoBehaviour {
                     GameObject confused = ObjectPool.Instance.GetPooledObject("effect_confused");
                     confused.transform.parent = this.transform;
 
-                    enemyPath.ClearPath();
+                    if (enemyPath != null)
+                        enemyPath.ClearPath();
+
                     controller.SendTrigger(EnemyTrigger.IDLE);
                     chasePS.Stop();
                 }
@@ -113,7 +124,13 @@ public class FollowPlayer : MonoBehaviour {
 
 	}
 
-    // get the closest point to the targets collider from this transform.
+    // get the closest point to on my collider to the target's transform
+    private Vector3 GetMyClosestPoint()
+    {
+        return enemyPath.bodyCollider.bounds.ClosestPoint(targetCollider.transform.position);
+    }
+
+    // get the closest point on the target's collider from this transform.
     private Vector3 GetTargetsClosestPoint()
     {
         return targetCollider.bounds.ClosestPoint(transform.position);
@@ -123,27 +140,27 @@ public class FollowPlayer : MonoBehaviour {
     // Have the closest enemy to it's target go while the other waits until another path is made.
     private void OnCollisionStay2D (Collision2D collision)
     {
-        if (collision.gameObject.layer == 9) {
-            var otherFollowPlayer = collision.gameObject.GetComponent<FollowPlayer>();
-            if (otherFollowPlayer != null) { // enemy
-                float myDist = float.MaxValue, otherDist = float.MaxValue;
-                if (controller.IsFlag((int)EnemyFlag.CHASING)) {
-                    Debug.Log("this is chasing");
-                    myDist = Vector3.SqrMagnitude(GetTargetsClosestPoint() - transform.position);
-                }
+        if (usePathGrid) {
+            if (collision.gameObject.layer == 9) {
+                var otherFollowPlayer = collision.gameObject.GetComponent<FollowPlayer>();
+                if (otherFollowPlayer != null && otherFollowPlayer.usePathGrid) { // enemy... that uses a pathgrid too
+                    float myDist = float.MaxValue, otherDist = float.MaxValue;
+                    if (controller.IsFlag((int)EnemyFlag.CHASING)) {
+                        myDist = Vector3.SqrMagnitude(GetTargetsClosestPoint() - transform.position);
+                    }
 
-                if (otherFollowPlayer.controller.IsFlag((int)EnemyFlag.CHASING)) {
-                    Debug.Log("other is chasing");
-                    otherDist = Vector3.SqrMagnitude(GetTargetsClosestPoint() - otherFollowPlayer.transform.position);
-                }
+                    if (otherFollowPlayer.controller.IsFlag((int)EnemyFlag.CHASING)) {
+                        otherDist = Vector3.SqrMagnitude(GetTargetsClosestPoint() - otherFollowPlayer.transform.position);
+                    }
 
-                // The larger distance must wait.
-                if (myDist > otherDist) {
-                    enemyPath.ClearPath();
-                    ResetPathRefreshTime();
-                } else {
-                    otherFollowPlayer.enemyPath.ClearPath();
-                    otherFollowPlayer.ResetPathRefreshTime();
+                    // The larger distance must wait.
+                    if (myDist > otherDist) {
+                        enemyPath.ClearPath();
+                        ResetPathRefreshTime();
+                    } else {
+                        otherFollowPlayer.enemyPath.ClearPath();
+                        otherFollowPlayer.ResetPathRefreshTime();
+                    }
                 }
             }
         }

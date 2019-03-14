@@ -7,6 +7,7 @@ public class EnemyPath : MonoBehaviour {
     public bool DebugClickMode;
     public bool hasSeperateFacingAnimations = false;
     public BoxCollider2D bodyCollider;
+    public PathGrid pathGrid;
     public BreadCrumb path;
     public GameObject DebugPathEdge;
     private LineRenderer line;
@@ -21,7 +22,12 @@ public class EnemyPath : MonoBehaviour {
         line.startColor = Color.red;
         line.endColor = Color.red;
         line.transform.parent = transform;
-    }	
+    }
+
+    void OnDisable()
+    {
+        path = null;
+    }
 
     // Pass this a distance (speed * Time.deltaTime) each frame to smoothly move through the path nodes.
     // Returns false if the path is null.
@@ -29,7 +35,7 @@ public class EnemyPath : MonoBehaviour {
     {
         if (path != null) {
             // set a new destination (the point on the grid, offset by where the bodyCollider actually is)
-            Vector2 destination = RoomManager.Instance.currentRoom.pathGrid.GridToWorld(path.Position) - bodyCollider.offset * Mathf.Sign(transform.localScale.x);
+            Vector2 destination = pathGrid.GridToWorld(path.Position) - bodyCollider.offset * Mathf.Sign(transform.localScale.x);
             transform.position = Vector3.MoveTowards(transform.position, destination, distance);
 
             if (Vector2.Distance(transform.position, destination) < 0.001f) {
@@ -50,10 +56,15 @@ public class EnemyPath : MonoBehaviour {
     public void GeneratePath(PathGrid pathGrid, Point startPoint, Point destPoint)
     {
         if (pathGrid != null && startPoint != null && destPoint != null) {
-            // Get the best path to the random point, if it exists....
-            path = Pathfinder.FindPath(pathGrid, startPoint, destPoint);
+            // if they are the same points, path is just the destPoint
+            if (startPoint.X == destPoint.X && startPoint.Y == destPoint.Y) {
+                GenerateQuickPath(pathGrid, destPoint);
 
-            DrawDebugPath(pathGrid);
+            // Get the best path to the random point, if it exists....
+            } else {
+                path = Pathfinder.FindPath(pathGrid, startPoint, destPoint);
+                DrawDebugPath(pathGrid);
+            }
         }
     }
 
@@ -62,7 +73,6 @@ public class EnemyPath : MonoBehaviour {
     {
         if (pathGrid != null && destPoint != null) {
             path = Pathfinder.FindQuickPath(destPoint);
-
             DrawDebugPath(pathGrid);
         }
     }
@@ -71,7 +81,7 @@ public class EnemyPath : MonoBehaviour {
     public void FaceNextPathNode()
     {
         if (!hasSeperateFacingAnimations)
-            transform.localScale = new Vector3(Mathf.Sign(RoomManager.Instance.currentRoom.pathGrid.GridToWorld(path.Position).x - transform.position.x),
+            transform.localScale = new Vector3(Mathf.Sign(pathGrid.GridToWorld(path.Position).x - transform.position.x),
                                       transform.localScale.y,
                                       transform.localScale.z);
     }
@@ -124,7 +134,6 @@ public class EnemyPath : MonoBehaviour {
             if (Input.GetMouseButton(0)) {
                 //Convert mouse click point to grid coordinates
                 Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                PathGrid pathGrid = RoomManager.Instance.currentRoom.pathGrid;
                 if (pathGrid != null) {
                     Point destPos = pathGrid.WorldToGrid(worldPos);
                     if (destPos != null) {

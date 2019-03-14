@@ -156,12 +156,12 @@ public class EightWayMovement : MonoBehaviour {
                 // correct the facing.
                 if (inputX < 0) { // The player is holding left.
                     if (transform.localScale.x > 0) {
-                        gameObject.transform.localScale = new Vector2(transformScale.x * -1, transformScale.y);
+                        gameObject.transform.localScale = new Vector3(transformScale.x * -1, transformScale.y, transformScale.z);
                         jimStateController.SetFlag((int)JimFlag.FACING_LEFT);
                     }
                 } else if (inputX > 0) { // The player is holding right.
                     if (transform.localScale.x < 0) {
-                        gameObject.transform.localScale = new Vector2(transformScale.x, transformScale.y);
+                        gameObject.transform.localScale = new Vector3(transformScale.x, transformScale.y, transformScale.z);
                         jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
                     }
                 }

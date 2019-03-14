@@ -24,23 +24,24 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
     {
         switch (trigger) {
             case EnemyTrigger.HIT:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
                 return new EnemyHit();
             case EnemyTrigger.NOTICE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
                 flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
 			case EnemyTrigger.THROW:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.THROW));
-               // flags |= (int)EnemyFlag.CHASING;
                 return new EnemyThrow();
             case EnemyTrigger.PREPARE:
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
-               // flags |= (int)EnemyFlag.CHASING;
                 return new EnemyPrepare();
 			case EnemyTrigger.PREPARE_LEAP:
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LEAP));
                 return new EnemyPrepare_Leap();
+            case EnemyTrigger.CAST_TELEPORT: // Cast -> Teleport
+                return new EnemyCast(CAST_TYPE.TELEPORT);
+            case EnemyTrigger.CAST_SPAWN_BLOB:
+                return new EnemyCast(CAST_TYPE.SPAWN_ADD, "enemy_slime");
+            case EnemyTrigger.CAST_SHIELD:
+                return new EnemyCast(CAST_TYPE.SHIELD);
         }
 
         return null;

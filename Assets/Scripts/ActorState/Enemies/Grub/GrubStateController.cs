@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class GrubStateController : GenericEnemyStateController {
+public class GrubStateController : EnemyStateController
+{
 
 
 
@@ -43,7 +43,7 @@ public class GrubStateController : GenericEnemyStateController {
                 currentState = new EnemyThrow();
             	break;
 			case EnemyState.PREPARE_LEAP: //prepare for throw
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
                 currentState = new EnemyLunge();
             	break;
 			case EnemyState.LUNGE: //hit the ground after Jump

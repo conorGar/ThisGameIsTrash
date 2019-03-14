@@ -20,7 +20,6 @@ public class Room : MonoBehaviour
     public string tutPopUpToActivate;
     public GameObject myMapClouds;
     public GlobalVariableManager.ROOM myRoom;
-    public PathGrid pathGrid;
 
 	int waifuChance;
 	[HideInInspector]
@@ -96,11 +95,12 @@ public class Room : MonoBehaviour
                 Vector3 spawnPos = new Vector3();
 
                 // Try to spawn on the path finding grid if one is defined.  If not, spawn on the spawner position.
-                if (pathGrid != null) {
-                    Point enemyPoint = pathGrid.WorldToClosestGridPoint(enemySpawners[i].transform.position);
+                var spawnerPathGrid = enemySpawners[i].pathGrid;
+                if (spawnerPathGrid != null) {
+                    Point enemyPoint = spawnerPathGrid.WorldToClosestGridPoint(enemySpawners[i].transform.position);
 
                     if (enemyPoint != null) {
-                        spawnPos = pathGrid.GridToWorld(enemyPoint);
+                        spawnPos = spawnerPathGrid.GridToWorld(enemyPoint);
                     } else {
                         spawnPos = enemySpawners[i].transform.position;
                     }
@@ -117,7 +117,15 @@ public class Room : MonoBehaviour
             
 	            if (spawnedEnemy != null)
 	            {
-	                enemies.Add(spawnedEnemy);
+                    // Give the enemy get the path grid reference if it needs it.
+                    if (spawnerPathGrid != null) {
+                        var enemyPath = spawnedEnemy.GetComponent<EnemyPath>();
+                        if (enemyPath != null) {
+                            enemyPath.pathGrid = spawnerPathGrid;
+                        }
+                    }
+
+                    enemies.Add(spawnedEnemy);
 
 					if(spawnedEnemy.GetComponent<EnemyTakeDamage>() != null){
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().SetSpawnerID(enemySpawners[i].name);

@@ -11,7 +11,7 @@ public class PathGrid : MonoBehaviour
 
     public PathNode[,] nodes;
 
-    public GameObject smallEnemyPrefab;
+    public GameObject EnemyPrefab;
     public GameObject debugNodePrefab;
     public GameObject debugEdgePrefab;
     public float UnitSize = 1f; // TODO: make this handle now square sizes.
@@ -22,10 +22,9 @@ public class PathGrid : MonoBehaviour
     void Awake()
     {
         // set up grid from an enemy collider size;
-        BoxCollider2D smallCollider = smallEnemyPrefab.GetComponents<BoxCollider2D>()[1];
-        UnitSize = smallCollider.size.x; // TODO: this seems so dangerous....
+        BoxCollider2D collider = EnemyPrefab.GetComponents<BoxCollider2D>()[1];
+        UnitSize = collider.size.x; // TODO: this seems so dangerous....
         UnitVector = new Vector2(UnitSize, UnitSize);
-        Debug.Log("UNIT SIZE: " + UnitSize); // Should be about 1.5 (150 pixels)
 
         // set up grid based on the sprite transform
         offset = this.transform.position;

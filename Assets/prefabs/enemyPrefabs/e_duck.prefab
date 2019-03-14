@@ -210,7 +210,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1585751386897454}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: eb556e4f4e874d540863f33dcab7234b, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   DebugClickMode: 0
   hasSeperateFacingAnimations: 0
   bodyCollider: {fileID: 61787944317269882}
+  pathGrid: {fileID: 0}
   DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
 --- !u!114 &114249686244017498
 MonoBehaviour:

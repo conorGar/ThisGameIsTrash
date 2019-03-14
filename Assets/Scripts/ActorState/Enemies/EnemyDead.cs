@@ -11,6 +11,7 @@ public class EnemyDead : IActorState<EnemyState, EnemyTrigger>
 
     public IActorState<EnemyState, EnemyTrigger> OnUpdate(tk2dSpriteAnimator animator, ref int flags)
     {
+        animator.Play(EnemyAnim.GetName(ENEMY_ANIM.DEAD));
         return null;
     }
 

@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 33559334716228826}
   - component: {fileID: 23158367821896006}
   - component: {fileID: 114634680738801002}
+  - component: {fileID: 114924849902148538}
   - component: {fileID: 114774756219794334}
   - component: {fileID: 114189567298918146}
   - component: {fileID: 61841964278801576}
@@ -63,10 +64,10 @@ GameObject:
   - component: {fileID: 114864909417702004}
   - component: {fileID: 114978381845133056}
   - component: {fileID: 114138537195016298}
-  - component: {fileID: 114518230360412452}
+  - component: {fileID: 114535952364615244}
   - component: {fileID: 114405307267494612}
   - component: {fileID: 95903806369194796}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: boss_hash
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -254,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
 --- !u!114 &114189567298918146
 MonoBehaviour:
@@ -299,7 +301,6 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1278065675859846}
-  returnAniName: idle
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
@@ -311,7 +312,6 @@ MonoBehaviour:
   currentHp: 0
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
-  dontStopWhenHit: 0
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114405307267494612
@@ -330,19 +330,18 @@ MonoBehaviour:
   topLimit: 0
   botLimit: 0
   globalPos: 0
---- !u!114 &114518230360412452
+--- !u!114 &114535952364615244
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1730439891425584}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd53d1546e6eca348979b1a227f6d6bd, type: 3}
+  m_Script: {fileID: 11500000, guid: f6a12b7f900c62d46b01669b6fc25f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   distanceUntilPickup: 3
-  player: {fileID: 0}
   pickup: {fileID: 0}
   drop: {fileID: 0}
   carryXAdjustment: 3.3
@@ -358,10 +357,9 @@ MonoBehaviour:
   throwObject: {fileID: 8300000, guid: 8dd8ea02ba0eab847b69885a8b765e20, type: 3}
   landSfx: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
   behaviorsToStop: []
-  livingBody: 0
+  livingBody: 1
   roomToReattatchTo: {fileID: 0}
   onGround: 1
-  groundedClip: dazed
 --- !u!114 &114634680738801002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -419,9 +417,19 @@ MonoBehaviour:
   vanishAtDeath: 0
   myBossScript: {fileID: 114978381845133056}
   objectToPanTo: {fileID: 0}
-  dazeAtDeath: 0
   hpDisplayStartSfx: {fileID: 0}
   currentRoom: {fileID: 0}
+--- !u!114 &114924849902148538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1730439891425584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ac5da26057d0247ab62f92e0fe8766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114978381845133056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -436,9 +444,10 @@ MonoBehaviour:
   stuart: {fileID: 0}
   stuartShield: {fileID: 0}
   teleportSound: {fileID: 8300000, guid: 885c2d5df5a8ca74faa8b6e120d89b26, type: 3}
-  shieldSound: {fileID: 8300000, guid: 00f92b0df6d03aa418dc15475287d10f, type: 3}
-  player: {fileID: 0}
+  shieldSound: {fileID: 0}
   smokePuff: {fileID: 198114166859794222}
+  recoverDazeTime: 10
+  nextRecoverDazeTime: 0
 --- !u!198 &198114166859794222
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class EnemyLunge : IActorState<EnemyState, EnemyTrigger>
 {
+    public bool hasMultipleAnimations;
+    public bool facingLeft;
+
+    public EnemyLunge(bool p_hasMultipleAnimAtions = false, bool p_facingLeft = false)
+    {
+        hasMultipleAnimations = p_hasMultipleAnimAtions;
+        facingLeft = p_facingLeft;
+    }
+
     public EnemyState GetState()
     {
         return EnemyState.LUNGE;
@@ -11,6 +20,11 @@ public class EnemyLunge : IActorState<EnemyState, EnemyTrigger>
 
     public IActorState<EnemyState, EnemyTrigger> OnUpdate(tk2dSpriteAnimator animator, ref int flags)
     {
+        if (hasMultipleAnimations) {
+            animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE) + (facingLeft ? "L" : "R"));
+        } else {
+            animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
+        }
         return null;
     }
 
@@ -18,12 +32,9 @@ public class EnemyLunge : IActorState<EnemyState, EnemyTrigger>
     {
         switch (trigger) {
             case EnemyTrigger.HIT:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
                 return new EnemyHit();
             case EnemyTrigger.RECOVER:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.WAKE)); // TODO: I just picked this one because I thought it would look nice.  Please change!
                 return new EnemyRecover();
-                break;
         }
 
         return null;

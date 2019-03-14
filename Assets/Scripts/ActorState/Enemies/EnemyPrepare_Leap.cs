@@ -5,6 +5,14 @@ using System.Collections.Generic;
 
 public class EnemyPrepare_Leap : IActorState<EnemyState, EnemyTrigger>
 {
+    public bool hasMultipleAnimations;
+    public bool facingLeft;
+
+    public EnemyPrepare_Leap(bool p_hasMultipleAnimAtions = false, bool p_facingLeft = false)
+    {
+        hasMultipleAnimations = p_hasMultipleAnimAtions;
+        facingLeft = p_facingLeft;
+    }
 
 	public EnemyState GetState()
     {
@@ -13,7 +21,11 @@ public class EnemyPrepare_Leap : IActorState<EnemyState, EnemyTrigger>
 
     public IActorState<EnemyState, EnemyTrigger> OnUpdate(tk2dSpriteAnimator animator, ref int flags)
     {
-		animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LEAP));
+        if (hasMultipleAnimations) {
+            animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LEAP) + (facingLeft ? "L" : "R"));
+        } else {
+            animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LEAP));
+        }
         return null;
     }
 

@@ -39,14 +39,15 @@ public class PickupableObject : MonoBehaviour
 		dumpster = GameObject.Find("Dumpster");
 		carryMark = PlayerManager.Instance.player.transform.GetChild(7).gameObject;//TODO: better way to do this...not good
 	}
-	/*void OnEnable(){
+    /*void OnEnable(){
 		if(player == null){
 			player = GameObject.FindGameObjectWithTag("Player");
 
 		}
 	}*/
-	// Update is called once per frame
-	protected virtual void Update ()
+
+    // Update is called once per frame
+    protected virtual void Update ()
 	{
         if (PlayerManager.Instance.player != null) {
             switch (PlayerManager.Instance.player.GetComponent<JimStateController>().GetCurrentState()) {
@@ -54,7 +55,6 @@ public class PickupableObject : MonoBehaviour
                     if (PlayerManager.Instance.player != null && Vector2.Distance(PlayerManager.Instance.player.transform.position, gameObject.transform.position) < distanceUntilPickup) {
                         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {//player can move check for fixing glitch where player would pick up dropped object when hit space at 'results'                                                                                                                                                                       // Allow this object to be picked up if it doesn't require the grabby gloves, or they have the grabby gloves.
                             if (!requiresGrabbyGloves || GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES)) {
-                                Debug.Log("PickUpable object...picked up");
                                 movePlayerToObject = true;
                                 PickUp();
                             }

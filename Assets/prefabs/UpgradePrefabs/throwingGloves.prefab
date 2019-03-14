@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114059723366052356}
   - component: {fileID: 50845392953597566}
   - component: {fileID: 61505213904938794}
+  - component: {fileID: 114231721531197906}
   m_Layer: 11
   m_Name: throwingGloves
   m_TagString: Untagged
@@ -137,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7a5a26f12192e46a86604c2139e9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   upgradeUnlockDisplay: {fileID: 0}
   unlockSprite: {fileID: 21300000, guid: 40f2a83de454aad40b9c8d7a5b2f4b93, type: 3}
   playerAutoMoveToward: 0
@@ -145,6 +145,20 @@ MonoBehaviour:
   TossVector: {x: 6, y: -1}
   TossHeight: 3
   itemDropArea: {fileID: 0}
+--- !u!114 &114231721531197906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234887410251132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 1
+  topSorted: 0
+  sortBuddies: []
 --- !u!212 &212758832656538498
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -176,8 +190,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -542038307
-  m_SortingLayer: 3
+  m_SortingLayerID: 962927795
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9e09f260a7433b348b6b16ec763abb60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

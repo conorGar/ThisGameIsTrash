@@ -16,17 +16,20 @@ public class BossStuart : Boss
     public GameObject bossHash;
     public GameObject bossQuestio;
     public B_Ev_Hash hash;
+    public EnemyPath enemyPath;
 	EnemyTakeDamage myETD;
 
-	[HideInInspector]
-	public bool canDamage;
+    void Awake()
+    {
+        controller = GetComponent<StuartStateController>();
+        myETD = gameObject.GetComponent<EnemyTakeDamage>();
+    }
 
     // Use this for initialization
     protected void Start()
     {
         base.Start();
 
-        canDamage = true;
         spawnPosition = gameObject.transform.position;
         exSpawnPosition = bossEx.transform.position;
         hashSpawnPosition = bossHash.transform.position;
@@ -36,15 +39,21 @@ public class BossStuart : Boss
     }
     void OnEnable ()
 	{
-		myETD = gameObject.GetComponent<EnemyTakeDamage>();
         ex = FriendManager.Instance.GetFriend("Ex") as BossFriendEx;
         ex.stuart = this;
+        controller.SendTrigger(EnemyTrigger.NOTICE);
     }
 	
 	// Update is called once per frame
 	void Update ()
 	{
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            switch (controller.GetCurrentState()) {
+                case EnemyState.IDLE:
+                    controller.SendTrigger(EnemyTrigger.NOTICE);
+                    break;
+            }
+
             switch (ex.GetFriendState()) {
                 // In phase one, the trio will come back when Stuart's HP dips below 7.
                 case "FIGHT_PHASE_1":
@@ -69,25 +78,19 @@ public class BossStuart : Boss
     {
         gameObject.transform.position = spawnPosition;
         bossEx.transform.position = exSpawnPosition;
+        bossHash.transform.parent = null; // unmerge hash from stuart before resetting his position to avoid weirdness
         bossHash.transform.position = hashSpawnPosition;
         bossQuestio.transform.position = questioSpawnPosition;
     }
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if(collider.gameObject.layer == 15 && !canDamage){ //throwable object hit
+		if(collider.gameObject.layer == 15){ //throwable object hit
 
 			collider.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
-
 			hash.KnockOff();
-			GetComponent<InvincibleEnemy>().enabled = false;
-			canDamage = true;
-			collider.gameObject.layer = 11; //switched to item obj once hit so doesnt hit anything else
-			if(collider.GetComponent<B_Ev_Questio>() != null)
-				collider.GetComponent<B_Ev_Questio>().StartCoroutine("UndazeCheck");
-			myETD.enabled = true;
-
-		}
+            controller.SendTrigger(EnemyTrigger.HIT);
+            controller.SendTrigger(EnemyTrigger.VULNERABLE);
+        }
 
 	}
 
@@ -102,10 +105,6 @@ public class BossStuart : Boss
         bossEx.SetActive(false);
         bossHash.SetActive(false);
         bossQuestio.SetActive(false);
-        GetComponent<InvincibleEnemy>().enabled = false;
-        GetComponent<EnemyTakeDamage>().enabled = true;
-        canDamage = true;
-        GetComponent<FollowPlayer>().enabled = true;
         ActivateHpDisplay();
     }
 
@@ -118,10 +117,6 @@ public class BossStuart : Boss
        	bossEx.SetActive(true);
        	bossHash.SetActive(true);
         bossQuestio.SetActive(true);
-        GetComponent<InvincibleEnemy>().enabled = true;
-        GetComponent<EnemyTakeDamage>().enabled = false;
-        canDamage = false;
-        GetComponent<FollowPlayer>().enabled = true;
         ActivateHpDisplay();
     }
 
@@ -167,14 +162,14 @@ public class BossStuart : Boss
 		Debug.Log("Stuart Boss Deactivate Event activated");
 
 		//return bosses that are being carried properly when player leaves a room while carrying them
-		if(bossQuestio.GetComponent<ThrowableObject>().enabled && bossQuestio.GetComponent<ThrowableObject>().onGround == false){
-			bossQuestio.GetComponent<ThrowableObject>().Drop();
+		if(bossQuestio.GetComponent<EnemyStateController>().GetCurrentState() == EnemyState.CARRIED){
+			bossQuestio.GetComponent<ThrowableEnemy>().Drop();
 		}
-		if(bossHash.GetComponent<ThrowableObject>().enabled && bossHash.GetComponent<ThrowableObject>().onGround == false){
-			bossHash.GetComponent<ThrowableObject>().Drop();
+		if(bossHash.GetComponent<EnemyStateController>().GetCurrentState() == EnemyState.CARRIED) {
+			bossHash.GetComponent<ThrowableEnemy>().Drop();
 		}
-		if(bossEx.GetComponent<ThrowableObject>().enabled&& bossEx.GetComponent<ThrowableObject>().onGround == false){
-			bossEx.GetComponent<ThrowableObject>().Drop();
+		if(bossEx.GetComponent<EnemyStateController>().GetCurrentState() == EnemyState.CARRIED) {
+			bossEx.GetComponent<ThrowableEnemy>().Drop();
 		}
 		bossEx.GetComponent<B_Ev_Ex>().KillSlimes();
 

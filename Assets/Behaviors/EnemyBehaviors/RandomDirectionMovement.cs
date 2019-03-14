@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-[RequireComponent(typeof(GenericEnemyStateController))]
+[RequireComponent(typeof(EnemyStateController))]
 [RequireComponent(typeof(EnemyPath))]
 public class RandomDirectionMovement : MonoBehaviour {
 
@@ -23,13 +22,13 @@ public class RandomDirectionMovement : MonoBehaviour {
 	protected Vector3 startingScale;
 	int turnOnce = 0;
 
-    protected GenericEnemyStateController controller;
+    protected EnemyStateController controller;
     private EnemyPath enemyPath;
 
     // Use this for initialization
     void Awake()
     {
-        controller = GetComponent<GenericEnemyStateController>();
+        controller = GetComponent<EnemyStateController>();
         enemyPath = GetComponent<EnemyPath>();
     }
 
@@ -88,7 +87,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 
     // Pick a node on the path grid and move towards it.
 	public virtual void StartMoving(){
-        PathGrid pathGrid = RoomManager.Instance.currentRoom.pathGrid;
+        PathGrid pathGrid = enemyPath.pathGrid;
         if (pathGrid != null) {
             Point startPoint = pathGrid.WorldToGrid(transform.position);
             if (startPoint != null) {

@@ -12,6 +12,7 @@ public class IsometricSorting : MonoBehaviour {
     }
 
 	public bool movingObject;
+    public bool topSorted;
     public List<SortBuddy> sortBuddies;
 
 	Renderer myRenderer;
@@ -68,11 +69,23 @@ public class IsometricSorting : MonoBehaviour {
     // * Multiply by -1 so it's projected away from the camera.
     int GetSortOrder(Renderer renderer)
     {
-        return (Mathf.RoundToInt((renderer.bounds.min.y) * 100f) + SOMELARGEOFFSET) * -1;
+        float yPoint;
+        if (topSorted)
+            yPoint = renderer.bounds.max.y;
+        else
+            yPoint = renderer.bounds.min.y;
+
+        return (int)(yPoint * 100f) * -1;
     }
 
     int GetSortOrder(BoxCollider2D collider2D)
     {
-        return (Mathf.RoundToInt(collider2D.bounds.min.y * 100f) + SOMELARGEOFFSET) * -1;
+        float yPoint;
+        if (topSorted)
+            yPoint = collider2D.bounds.max.y;
+        else
+            yPoint = collider2D.bounds.min.y;
+
+        return (int)(yPoint * 100f) * -1;
     }
 }

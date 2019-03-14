@@ -57,7 +57,7 @@ public class Ev_Enemy_Beetle : MonoBehaviour
 		speedBuildUp = true;
 		negateValue *= -1;
 		float xChange = Random.Range(11,27) + roomEdgeMultiplier;
-		gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x*-1,gameObject.transform.localScale.y);
+		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,gameObject.transform.localScale.y, gameObject.transform.localScale.z);
 		destinationPosition = new Vector2((gameObject.transform.position.x + xChange) * negateValue,Random.Range(gameObject.transform.position.y -10f,gameObject.transform.position.y + 11f));
 		roomEdgeMultiplier =0;
 
