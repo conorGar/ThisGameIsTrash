@@ -40,7 +40,7 @@ public class FollowPlayer : MonoBehaviour {
 
 	protected void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (controller.IsFlag((int)EnemyFlag.CHASING)) {
+			if (controller.IsFlag((int)EnemyFlag.CHASING) && !controller.IsFlag((int)EnemyFlag.CHASING_OBJECT)) {
                 float distance = Vector3.Distance(transform.position, target.position);
                 if (distance < walkDistance && distance > maxWalkDistance) { //TODO: 
                     if (iBeLerpin) {

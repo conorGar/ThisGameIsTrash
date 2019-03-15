@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
 public class Ev_Enemy_RhinoBeetle : FollowPlayerAfterNotice
 {
+	public List<GameObject> dungBallTargets = new List<GameObject>(); // I guess given by spawner?
 	public float projectileSpeed;
 	public GameObject projectile;
 	public BoxCollider2D jumpBounds;
@@ -14,6 +16,9 @@ public class Ev_Enemy_RhinoBeetle : FollowPlayerAfterNotice
 	float MAX_Y;
 	float nextActionTime;
 	int throwOnceCheck;
+	public GameObject currentBallTarget;
+	public bool hasBall;
+
 	// Use this for initialization
 	void OnEnable(){
 		base.OnEnable();
@@ -25,25 +30,47 @@ public class Ev_Enemy_RhinoBeetle : FollowPlayerAfterNotice
 	{
 		base.Update();
 		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-			if(controller.IsFlag((int)EnemyFlag.CHASING)){
-				if(Vector2.Distance(gameObject.transform.position,PlayerManager.Instance.player.transform.position) < 5){
-					//Jumps away if player gets close
-					StartCoroutine("LeapAway");
+			if(controller.IsFlag((int)EnemyFlag.CHASING) && !controller.IsFlag((int)EnemyFlag.CHASING_OBJECT) ){
+				if(!hasBall){
+					//TargetBall();
 				}else{
-				if(Time.time > nextActionTime){
-						if(throwOnceCheck == 0){
-							Debug.Log("Fire rate reached, throw time is now");
-							//StartCoroutine("MakeBall");
-							throwOnceCheck = 1;
+					Debug.Log("Got here- Rhino Beetle");
+					if(Vector2.Distance(gameObject.transform.position,PlayerManager.Instance.player.transform.position) < 5){
+						//Jumps away if player gets close
+						StartCoroutine("LeapAway",false);
+					}else{
+						if(Vector2.Distance(gameObject.transform.position,PlayerManager.Instance.player.transform.position) < 15){
+							//throw carried ball when close enough
+							ThrowBall();
 						}
+					/*if(Time.time > nextActionTime){
+							if(throwOnceCheck == 0){
+								Debug.Log("Fire rate reached, throw time is now");
+								//StartCoroutine("MakeBall");
+								throwOnceCheck = 1;
+							}
 
+						}*/
 					}
 				}
+			} else if(controller.IsFlag((int)EnemyFlag.CHASING_OBJECT)){
+				if(currentBallTarget!= null && Vector2.Distance(gameObject.transform.position,currentBallTarget.transform.position) > 2f){
+					transform.position = Vector3.MoveTowards(transform.position, currentBallTarget.transform.position, 5 * Time.deltaTime);
+				}else{
+					if(currentBallTarget!= null){
+						PickupBall();
+					}
+				}
+				if(Vector2.Distance(gameObject.transform.position,PlayerManager.Instance.player.transform.position) < 5){
+					//Jumps away if player gets close
+					StartCoroutine("LeapAway",true);
+				}
+
 			}
         }
 	}
 
-	IEnumerator LeapAway(){
+	IEnumerator LeapAway(bool returnToChaseObjAfterLeap){
 		Debug.Log("Leapaway started");
 		//checks if near one of the bounds, if so jump in a direction away from player but not past bounds
 		controller.SendTrigger(EnemyTrigger.LUNGE); //should stop chasing flag as well...
@@ -111,21 +138,45 @@ public class Ev_Enemy_RhinoBeetle : FollowPlayerAfterNotice
 		controller.SendTrigger(EnemyTrigger.RECOVER);
 		while (controller.GetCurrentState() == EnemyState.RECOVER)
            			yield return null;
-		
+		if(returnToChaseObjAfterLeap){
+			controller.SendTrigger(EnemyTrigger.CHASE_OBJECT);
+		}
 
 
 
 	}
 
+	void TargetBall(){
+		float shortestDistance = 50f;
 
+		for(int i = 0; i < dungBallTargets.Count; i++){
+			if(Vector2.Distance(dungBallTargets[i].transform.position,gameObject.transform.position) < shortestDistance){
+				shortestDistance = Vector2.Distance(dungBallTargets[i].transform.position,gameObject.transform.position);
+				currentBallTarget = dungBallTargets[i];
+			}
+		}
 
-	IEnumerator MakeBall(){
+		controller.SendTrigger(EnemyTrigger.CHASE_OBJECT); //should stop chasing flag as well...
+		Debug.Log("Target Ball activated");
+
+	}
+
+	void PickupBall(){
+
+		currentBallTarget.transform.position = gameObject.transform.position;
+		currentBallTarget.transform.parent = this.transform.parent;
+		hasBall = true;
+		controller.SendTrigger(EnemyTrigger.CHASE); //should stop chasing flag as well...
+		//controller.SetFlag((int)EnemyFlag.CHASING);
+	}
+
+	/*IEnumerator MakeBall(){
 		controller.SendTrigger(EnemyTrigger.PREPARE); //should stop chasing flag as well...
 		while (controller.GetCurrentState() == EnemyState.PREPARE)
            			yield return null;
         ThrowBall();
 
-	}
+	}*/
 
 	void ThrowBall(){
 		controller.SendTrigger(EnemyTrigger.THROW);
@@ -136,11 +187,13 @@ public class Ev_Enemy_RhinoBeetle : FollowPlayerAfterNotice
 				bullet.GetComponent<Ev_ProjectileTowrdPlayer>().speed = projectileSpeed;
 				bullet.GetComponent<Ev_ProjectileTowrdPlayer>().target = this.target;
 			}
+		Destroy(currentBallTarget);
 		bullet.GetComponent<Rigidbody2D>().gravityScale = 0;
 		//SoundManager.instance.PlaySingle(throwSFX);
 		nextActionTime = Time.time + 3;
 		throwOnceCheck = 0;
-		controller.SendTrigger(EnemyTrigger.CHASE); //should stop chasing flag as well...
+		TargetBall();
+		//controller.SendTrigger(EnemyTrigger.CHASE); //should stop chasing flag as well...
 
 
 	}
@@ -153,5 +206,9 @@ public class Ev_Enemy_RhinoBeetle : FollowPlayerAfterNotice
 
        
 	}
+	protected override void NoticePlayerEvent(){
+		TargetBall();
+	}
+
 }
 

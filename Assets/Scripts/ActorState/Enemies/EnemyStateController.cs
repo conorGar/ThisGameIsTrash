@@ -17,7 +17,8 @@ public enum EnemyState
     THROW,
     POPOUT,
     PREPARE_LEAP,
-    VULNERABLE
+    VULNERABLE,
+    CHASE_OBJECT,
 }
 
 public enum EnemyFlag : int
@@ -25,8 +26,9 @@ public enum EnemyFlag : int
     NONE = 0,
     WALKING = 1 << 0,
     CHASING = 2 << 0,
+    CHASING_OBJECT = 3<<0,
 
-    MOVING = WALKING | CHASING
+    MOVING = WALKING | CHASING | CHASING_OBJECT
 }
 
 public enum EnemyTrigger
@@ -42,7 +44,8 @@ public enum EnemyTrigger
     PREPARE_LEAP,
     VULNERABLE,
     POPUP,
-    CHASE // chase for use when need to chase again after already noticed player
+    CHASE, // chase for use when need to chase again after already noticed player
+    CHASE_OBJECT
 }
 
 // Not a whole lot but maybe some common functionality can go here in the future.

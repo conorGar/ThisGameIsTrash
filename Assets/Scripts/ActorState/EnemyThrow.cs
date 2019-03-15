@@ -33,6 +33,10 @@ public class EnemyThrow : IActorState<EnemyState, EnemyTrigger>
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
 				flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
+			case EnemyTrigger.CHASE_OBJECT:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
+				flags |= (int)EnemyFlag.CHASING_OBJECT;
+                return new EnemyChaseObject();
 
         }
         return null;
