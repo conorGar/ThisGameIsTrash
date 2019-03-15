@@ -2,49 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class B_Ev_Questio : MonoBehaviour {
+[RequireComponent(typeof(QuestioStateController))]
+[RequireComponent(typeof(ThrowableEnemy))]
+[RequireComponent(typeof(EnemyPath))]
+public class B_Ev_Questio : MonoBehaviour
+{
+    public GameObject mySlashR;
+    public GameObject mySlashL;
+    public GameObject grabbyGloves;
 
-	public GameObject mySlashR;
-	public GameObject mySlashL;
-	public GameObject grabbyGloves;
-	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
+    public GameObject baseShadow;
+    public GameObject dazedShadow;
+    public GameObject pickupableGlow;
+    bool IsPickedUpOnce = false; // Throwable body will glow before the first pick up.
 
-	public GameObject baseShadow;
-	public GameObject dazedShadow;
-	public GameObject pickupableGlow;
+    public AudioClip land;
+    public AudioClip leap;
+    public AudioClip swing;
 
-	public BoxCollider2D hitBox; // disabled during leap
-
-
-	public AudioClip land;
-	public AudioClip leap;
-	public AudioClip swing;
-
-	EnemyTakeDamage myETD;
-	tk2dSpriteAnimator myAnim;
-	FollowPlayer fp;
-    bool IsFacingLeft = true;
-	public bool isSwinging;
-    public bool isLeaping;
-    public bool isDazed;
+    EnemyTakeDamage myETD;
     Vector2 targetPosition;
-	int dropItemOnce;
-	GameObject dazedStars;
-	//bool firstKnockDown;
+    int dropItemOnce;
+    GameObject dazedStars;
+    protected QuestioStateController controller;
+    public float recoverDazeTime = 10f;
+    public float nextRecoverDazeTime = 0f;
 
+    private int transparentLayer;
+    private int enemyLayer;
 
+    void Awake()
+    {
+        myETD = gameObject.GetComponent<EnemyTakeDamage>();
+        controller = GetComponent<QuestioStateController>();
+        transparentLayer = LayerMask.NameToLayer("TransparentFX");
+        enemyLayer = LayerMask.NameToLayer("enemies");
 
-	void Awake () {
-		myETD = gameObject.GetComponent<EnemyTakeDamage>();
-		fp = gameObject.GetComponent<FollowPlayer>();
-		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
-        myAnim.AnimationEventTriggered = AnimationEventCallback;
-	}
+        
+    }
 
-	void OnEnable(){
+    void OnEnable()
+    {
         StopAllCoroutines();
         myETD.moveWhenHit = true;
-        hitBox.enabled = true;
         // Reset gloves
         dropItemOnce = 0;
         grabbyGloves.SetActive(false);
@@ -54,138 +54,133 @@ public class B_Ev_Questio : MonoBehaviour {
         // Reset Questio
         UnDazed();
         baseShadow.transform.parent = gameObject.transform;
-        baseShadow.transform.localPosition = new Vector2(-.38f,-1.27f);
-        fp.enabled = true; //when returning to room without this Q will just stand there
+        baseShadow.transform.localPosition = new Vector2(-.38f, -1.27f);
         pickupableGlow.SetActive(false);
         myETD.currentHp = 4;
-
-        isSwinging = false;
-        isLeaping = false;
-        isDazed = false;
     }
 
-	void Update () {
+    private void OnDisable()
+    {
+        GetComponent<Animator>().enabled = false; // Animator won't allow translations if it's active.  It's the worst.
+    }
+
+    void Update()
+    {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (!isSwinging)
-                UpdateFacing();
+            switch (controller.GetCurrentState()) {
+                case EnemyState.IDLE:
+                    controller.SendTrigger(EnemyTrigger.NOTICE); // Questio is always chasing the player.
+                    break;
+                case EnemyState.HIT:
+                    if (mySlashL.activeInHierarchy) mySlashL.SetActive(false);
+                    if (mySlashR.activeInHierarchy) mySlashR.SetActive(false);
+                    break;
+                case EnemyState.CHASE: // When Questio is near the player, start the leap and swing.
+                    float distance = Vector3.Distance(transform.position, PlayerManager.Instance.player.transform.position);
+                    if (distance < 12) {
+                        PrepareLeap();
+                    }
+                    break;
+                case EnemyState.DAZED:
+                    if (mySlashL.activeInHierarchy) mySlashL.SetActive(false);
+                    if (mySlashR.activeInHierarchy) mySlashR.SetActive(false);
+                    if (dropItemOnce == 0) { // On the first dazed, drop the gloves.
+                        if (!GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES))
+                            StartCoroutine(DropGloves());
+                        dropItemOnce = 1;
+                    }
 
-            if (fp.enabled == true && !isDazed) {
-            	Debug.Log("anis should be working...");
-                if (IsFacingLeft && myAnim.CurrentClip.name != "walkL") {
-                    myAnim.Play("walkL");
-                }
-                else if (!IsFacingLeft && myAnim.CurrentClip.name != "walkR") {
-                    myAnim.Play("walkR");
-                }
-                float distance = Vector3.Distance(transform.position, PlayerManager.Instance.player.transform.position);
-                if (distance < 12 && !isSwinging) {
-                    Debug.Log("QUESTIO SWING ACTIVATE");
-                    Swing();
-                }
+                    if (nextRecoverDazeTime < Time.time) {
+                        UnDazed();
+                        controller.SendTrigger(EnemyTrigger.IDLE);
+                    }
+
+                    break;
+                case EnemyState.LUNGE: // leaping through the air
+                    baseShadow.transform.position = Vector2.MoveTowards(baseShadow.transform.position, targetPosition, 14 * Time.deltaTime);
+                    if (Vector2.Distance(baseShadow.transform.position, targetPosition) < 3) {
+                        if (gameObject.GetComponent<Rigidbody2D>().gravityScale != 3) {
+                            gameObject.GetComponent<Rigidbody2D>().gravityScale = 3; // questio falls back down
+                            SoundManager.instance.PlaySingle(swing);
+                        }
+                        gameObject.transform.position = new Vector2(baseShadow.transform.position.x, gameObject.transform.position.y);
+
+                        // Landing recover
+                        if (gameObject.transform.position.y < baseShadow.transform.position.y + 1f) {
+                            Recover();
+                        }
+                    } else {
+                        gameObject.transform.position = new Vector2(baseShadow.transform.position.x, Mathf.Lerp(gameObject.transform.position.y, baseShadow.transform.position.y + 3f, 9 * Time.deltaTime));
+                    }
+
+                    break;
+                case EnemyState.CARRIED:
+                    // When Questio is picked up for the first time, disable the glow and never allow it to glow again in this game instance.
+                    if (pickupableGlow.activeInHierarchy) {
+                        pickupableGlow.SetActive(false);
+                        IsPickedUpOnce = true;
+                    }
+                    StopDazedStars();
+                    break;
             }
 
-            if (myETD.currentHp < 1 && !isDazed) {
-                StopAllCoroutines();
-				if(dropItemOnce == 0){
-                if (!GlobalVariableManager.Instance.IsUpgradeUnlocked(GlobalVariableManager.UPGRADES.GLOVES))
-                    StartCoroutine(DropGloves());
-					dropItemOnce = 1;
-                }
-                Dazed();
-               
-            }
-
-            if (gameObject.layer == 11 && grabbyGloves.activeInHierarchy == false && pickupableGlow.activeInHierarchy == false) {
+            // Glow when questio is throwable, the gloves have been picked up.
+            if (!IsPickedUpOnce && gameObject.layer == 11 && grabbyGloves.activeInHierarchy == false && pickupableGlow.activeInHierarchy == false) {
                 pickupableGlow.SetActive(true);
             }
-
-            if(isLeaping){
-            	baseShadow.transform.position = Vector2.MoveTowards(baseShadow.transform.position, targetPosition,14*Time.deltaTime);
-            	if(Vector2.Distance(baseShadow.transform.position, targetPosition) < 3){
-            		if(gameObject.GetComponent<Rigidbody2D>().gravityScale != 3){
-            			gameObject.GetComponent<Rigidbody2D>().gravityScale = 3; // questio falls back down
-						SoundManager.instance.PlaySingle(swing);
-            		}
-					gameObject.transform.position = new Vector2(baseShadow.transform.position.x, gameObject.transform.position.y);
-
-                    // LANDING
-					if(gameObject.transform.position.y < baseShadow.transform.position.y+1f){
-						Debug.Log("Landed from fall" + gameObject.transform.position.y + targetPosition.y);
-						hitBox.enabled = true;
-						switch (myAnim.CurrentClip.name)
-                        {
-                            case "swingL":
-                    		    mySlashL.SetActive(true);
-                                mySlashL.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
-                                myAnim.Play("swingFinishL");
-                                SoundManager.instance.PlaySingle(swing);
-                                break;
-                            case "swingR":
-                  		        mySlashR.SetActive(true);
-                                mySlashR.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
-                                myAnim.Play("swingFinishR");
-                                SoundManager.instance.PlaySingle(swing);
-                                break;
-               			}
-
-						gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
-
-                        isLeaping = false;
-						SoundManager.instance.PlaySingle(land);
-						ObjectPool.Instance.GetPooledObject("effect_enemyLand", new Vector2(gameObject.transform.position.x, gameObject.transform.position.y-2f));
-						gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-						gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-						baseShadow.transform.parent = gameObject.transform;
-					}
-
-            	}else{
-					gameObject.transform.position = new Vector2(baseShadow.transform.position.x, Mathf.Lerp(gameObject.transform.position.y, baseShadow.transform.position.y+3f, 9*Time.deltaTime));
-
-            	}
-            }
-
-            // Band aid to keep a dazed Questio from following the player.  TODO: Remove this when developing EnemyStates.
-            if (fp.enabled == true && isDazed) {
-                fp.enabled = false;
-                myAnim.Play("dazed");
-            }
-        }
-	}
-
-    // Helpers
-    void Swing()
-    {
-    	myETD.moveWhenHit = false;
-    	baseShadow.transform.parent = null;
-        fp.enabled = false;
-        if (IsFacingLeft) {
-            myAnim.Play("swingL");
-        }
-        else {
-            myAnim.Play("swingR");
         }
     }
 
-    void Leap()
+    // Helpers
+    void PrepareLeap()
+    {
+        myETD.moveWhenHit = false;
+        baseShadow.transform.parent = null;
+
+        GetComponent<EnemyPath>().ClearPath();
+        controller.SendTrigger(EnemyTrigger.PREPARE_LEAP);
+    }
+
+    public void Leap()
     {
         SoundManager.instance.PlaySingle(leap);
         targetPosition = new Vector2(PlayerManager.Instance.player.transform.position.x, PlayerManager.Instance.player.transform.position.y);
-        hitBox.enabled = false;
-        isLeaping = true;
         gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+        gameObject.layer = transparentLayer;
     }
 
-    void SwingFinished()
+    // Questio begins recovering from the leap, swinging his hook
+    public void Recover()
     {
-        gameObject.GetComponent<FollowPlayer>().enabled = true;
+        Debug.Log("Landed from fall" + gameObject.transform.position.y + targetPosition.y);
+        SoundManager.instance.PlaySingle(swing);
+        var state = controller.GetCurrentState();
+        if (state == EnemyState.LUNGE) {
+            if (((EnemyLunge)controller.currentState).facingLeft) {
+                mySlashL.SetActive(true);
+                mySlashL.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
+            } else {
+                mySlashR.SetActive(true);
+                mySlashR.GetComponent<Animator>().Play("slashAnimation", -1, 0f);
+            }
+        }
+
+        gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
+        gameObject.layer = enemyLayer;
+
+        SoundManager.instance.PlaySingle(land);
+        ObjectPool.Instance.GetPooledObject("effect_enemyLand", new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 2f));
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+        baseShadow.transform.parent = gameObject.transform;
+
+        controller.SendTrigger(EnemyTrigger.RECOVER);
+    }
+
+    // Questio recovers completely, puts the hook away.
+    public void Recovered()
+    {
         gameObject.GetComponent<EnemyTakeDamage>().moveWhenHit = true;
-        isSwinging = false;
-    }
-
-
-    void UpdateFacing()
-    {
-        IsFacingLeft = PlayerManager.Instance.player.transform.position.x < gameObject.transform.position.x;
     }
 
     IEnumerator DropGloves()
@@ -201,93 +196,44 @@ public class B_Ev_Questio : MonoBehaviour {
         GameStateManager.Instance.PopState();
     }
 
-	void Dazed(){
-		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
-		Debug.Log("Questio Dazed Activated -x-x-x-x-x--x-x-x-x-x-");
-		for(int i = 0; i < dazeDisables.Count; i++){
-			dazeDisables[i].enabled = false;
-		}
-		dazedShadow.SetActive(true);
-		baseShadow.SetActive(false);
-		gameObject.layer = 11;
-		gameObject.GetComponent<ThrowableObject>().enabled = true;
-		gameObject.GetComponent<FollowPlayer>().chasePS.Stop();
-		isDazed = true;
-		myAnim.Play("dazed");
-		gameObject.GetComponent<FollowPlayer>().enabled = false;
-		dazedStars = ObjectPool.Instance.GetPooledObject("effect_stars",new Vector3(transform.position.x,transform.position.y+2,0));
-		dazedStars.transform.parent = gameObject.transform;
+    public void Dazed()
+    {
+        gameObject.layer = 11;
+        nextRecoverDazeTime = recoverDazeTime + Time.time;
 
-		//Invoke("UnDazed",5f);
-		//this.enabled = false;
-	}
+        dazedShadow.SetActive(true);
+        baseShadow.SetActive(false);
 
-    void UnDazed()
-    { //activated by BossStuart after Q hits stuart
-        for (int i = 0; i < dazeDisables.Count; i++) {
-            dazeDisables[i].enabled = true;
-        }
+        StartDazedStars();
+        gameObject.GetComponent<ThrowableEnemy>().StopSweat();
+    }
+
+    public void UnDazed()
+    {
         myETD.currentHp = 3;
         dazedShadow.SetActive(false);
         baseShadow.SetActive(true);
-        isDazed = false;
         gameObject.layer = 9;
-		gameObject.GetComponent<ThrowableObject>().StopSweat();
-        gameObject.GetComponent<ThrowableObject>().enabled = false;
-        myAnim.Play("idle");
-        ObjectPool.Instance.ReturnPooledObject(dazedStars);
-    }
-    public IEnumerator UndazeCheck(){
-    	yield return new WaitForSeconds(5f);
-		yield return new WaitUntil(() => gameObject.GetComponent<ThrowableObject>().onGround == true);
-		UnDazed();
+        pickupableGlow.SetActive(false);
+
+        StopDazedStars();
+        gameObject.GetComponent<ThrowableEnemy>().StopSweat();
     }
 
-    // Callbacks
-    void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
+    void StartDazedStars()
     {
-        var frame = clip.GetFrame(frameNo);
-#if DEBUG_ANIMATION
-        Debug.Log("Animation Trigger Check: " + frame.eventInfo + " Clip Name: " + clip.name + " Frame No: " + frameNo);
-#endif
+        if (dazedStars != null)
+            ObjectPool.Instance.ReturnPooledObject(dazedStars);
 
-        switch (frame.eventInfo) {
-            case "SWING_SET":
-                isSwinging = true;
-                break;
-            case "SWING_UNSET":
-                isSwinging = false;
-                mySlashL.SetActive(false);
-                mySlashR.SetActive(false);
-                break;
-            case "LEAP":
-                // At the start of the leap, Allow Questio to switch animations (mid frame) if the player got to his other side.
-                UpdateFacing();
-                if (IsFacingLeft) {
-                    if (clip.name != "swingL")
-                        myAnim.PlayFromFrame("swingL", frameNo + 1);
-                } else {
-                    if (clip.name != "swingR")
-                        myAnim.PlayFromFrame("swingR", frameNo + 1);
-                }
+        dazedStars = ObjectPool.Instance.GetPooledObject("effect_dazed", new Vector3(transform.position.x, transform.position.y + 2, 0));
+        dazedStars.transform.parent = gameObject.transform;
+    }
 
-                Leap();
-                break;
-            case "SWING_FINISHED":
-                mySlashL.SetActive(false);
-                mySlashR.SetActive(false);
-               	if(!isDazed){
-	                myAnim.Play("idle");
-	                fp.enabled = true;
-                }
-                SwingFinished();
-                UpdateFacing();
-                break;
-            default:
-#if DEBUG_ANIMATION
-                Debug.Log("Animation Trigger Not Found: " + frame.eventInfo);
-#endif
-                break;
+    void StopDazedStars()
+    {
+        if (dazedStars != null) {
+            ObjectPool.Instance.ReturnPooledObject(dazedStars);
+            dazedStars = null;
         }
     }
 }

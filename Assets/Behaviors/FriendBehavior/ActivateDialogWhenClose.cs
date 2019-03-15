@@ -54,12 +54,8 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 //                Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
                 if (Vector2.Distance(PlayerManager.Instance.player.transform.position, gameObject.transform.position) <  distanceThreshold)
                 {
-
-                    Debug.Log("Criteria met - 2");
                     if (autoStart && canTalkTo)
                     {
-
-                       Debug.Log("Criteria met - 3");
                         startNodeName = friend.nextDialog;
                         ActivateDialog(firstIcon, secondIcon, thirdIcon);
                     }

@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-[RequireComponent(typeof(GenericEnemyStateController))]
+[RequireComponent(typeof(EnemyStateController))]
 public class LungeAtPlayer : MonoBehaviour {
 
 	public float speed = 15;
@@ -12,11 +11,11 @@ public class LungeAtPlayer : MonoBehaviour {
 	public AudioClip lungeSfx;
 	Vector2 movementDir;
 
-    protected GenericEnemyStateController controller;
+    protected EnemyStateController controller;
 
     void Awake()
     {
-        controller = GetComponent<GenericEnemyStateController>();
+        controller = GetComponent<EnemyStateController>();
     }
 
     void Update () {

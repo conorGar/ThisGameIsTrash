@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114076671767681168}
   - component: {fileID: 61302976088640844}
   - component: {fileID: 114061048850949760}
+  - component: {fileID: 114763721163272026}
   - component: {fileID: 114051663132886186}
   - component: {fileID: 114033225531502752}
   - component: {fileID: 50025277033186906}
@@ -172,7 +173,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &61302976088640844
 BoxCollider2D:
@@ -222,7 +223,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7, y: 1.14}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &114006073405854798
 MonoBehaviour:
@@ -282,10 +283,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 4
-  minMoveTime: 1
-  maxMoveTime: 2.2
+  maxRandomNodeDistance: 5
   stopTime: 2
+  afterHitStopTime: 0.5
   walkPS: {fileID: 198577134872530542}
+  DebugClickMode: 0
 --- !u!114 &114076671767681168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,11 +367,9 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1903692784849774}
-  returnAniName: idle
   dontSpawnBody: 0
   canKnockoffArmor: 0
-  behaviorsToDeactivate:
-  - {fileID: 114061048850949760}
+  behaviorsToDeactivate: []
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
@@ -378,7 +378,6 @@ MonoBehaviour:
   currentHp: 3
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
-  dontStopWhenHit: 0
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114711155882897108
@@ -393,7 +392,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
+--- !u!114 &114763721163272026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1098292903033816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f384d93fee72b4cb0b65fe702459a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyCollider: {fileID: 61841911532167534}
+  DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
 --- !u!198 &198577134872530542
 ParticleSystem:
   m_ObjectHideFlags: 1

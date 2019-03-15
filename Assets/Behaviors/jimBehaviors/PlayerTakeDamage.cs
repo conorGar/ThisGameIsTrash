@@ -40,9 +40,11 @@ public class PlayerTakeDamage : MonoBehaviour {
     // two objects collide
 	void OnCollisionEnter2D(Collision2D enemy){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT ||
-                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD) {
+            if (GetComponent<JimStateController>().IsHittable()) {
                 if (enemy.gameObject.layer == 9) { //layer 9 = enemies
+                    var enemyController = enemy.gameObject.GetComponent<EnemyStateController>();
+                    if (enemyController != null && !enemyController.IsHitting()) // If this is a state where the enemy isn't actively hitting, ignore it.
+                        return;
 
                     if (enemy.gameObject.tag == "Boss") {
                         damageDealt = enemy.gameObject.GetComponent<Boss>().attkDmg;
@@ -92,8 +94,7 @@ public class PlayerTakeDamage : MonoBehaviour {
     // something entered this collider
 	void OnTriggerEnter2D(Collider2D projectile){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT ||
-                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD) {
+            if (GetComponent<JimStateController>().IsHittable()) {
                 if (projectile.gameObject.layer == 10) { //layer 10 = projectiles
                     var projectileComp = projectile.gameObject.GetComponent<Projectile>();
 

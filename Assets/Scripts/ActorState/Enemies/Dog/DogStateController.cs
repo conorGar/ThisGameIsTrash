@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class DogStateController : GenericEnemyStateController
+public class DogStateController : EnemyStateController
 {
     protected new void Awake()
     {

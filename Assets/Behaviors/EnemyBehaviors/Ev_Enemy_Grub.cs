@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
 public class Ev_Enemy_Grub : FireTowardPlayer
 {
 	public GameObject weakSpot;
-	protected GenericEnemyStateController controller;
+	protected EnemyStateController controller;
 
 	Vector2 startingScale = new Vector2();
 	private Vector2 direction;

@@ -24,7 +24,6 @@ public class EnemyVulnerable : IActorState<EnemyState, EnemyTrigger>
                 flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
             case EnemyTrigger.HIT:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
                 return new EnemyHit();
         }
         return null;

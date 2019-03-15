@@ -18,7 +18,6 @@ public class EnemyNotice : IActorState<EnemyState, EnemyTrigger>
     {
         switch (trigger) {
             case EnemyTrigger.HIT:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
                 return new EnemyHit();
         }
 

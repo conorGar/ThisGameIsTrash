@@ -26,4 +26,9 @@ public class Projectile : MonoBehaviour {
 	}
 
 
+    // animation event called from mecanim (see swoosh and swooshL)
+    void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
 }

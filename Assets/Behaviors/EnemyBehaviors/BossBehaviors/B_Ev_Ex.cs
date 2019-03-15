@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ExStateController))]
 public class B_Ev_Ex : Boss {
 
 	
@@ -12,251 +13,332 @@ public class B_Ev_Ex : Boss {
 	public AudioClip teleport;
 	public AudioClip teleportTrail;
 	public AudioClip blobSpawnSFX;
-	public List<MonoBehaviour> dazeDisables = new List<MonoBehaviour>();
 
 	Vector3 playerPosition;
 
 	Color myColor;//needed for fade in/fadeOut
 	tk2dSpriteAnimator myAnim;
-    bool isActing = true;
-    string action = "Teleport";
     Vector2 teleportDestination;
-    bool isTeleporting;
     public GameObject teleportTrailParticle;
     public ParticleSystem slimeSpawnPS;
-	public Room myRoom;
 	[HideInInspector]
     public List<GameObject> currentBlobs = new List<GameObject>();
+    public int blobMax = 3;
 	[HideInInspector]
     public bool initialTeleport = true;
-
+    public float teleportSpeed = 5f;
+    float randomCastTime = 0f;
+    CAST_TYPE nextCastType = CAST_TYPE.TELEPORT;
+    public float nextCastTime = 0f;
+    public float recoverDazeTime = 10f;
+    public float nextRecoverDazeTime = 0f;
+    public List<SlimeSpot> slimeSpotsRight;
+    public List<SlimeSpot> slimeSpotsLeft;
+    public GameObject slimeCenter;
+    GameObject dazedStars;
+    public PathGrid pathGrid;
 
 	// Use this for initialization
 	void Awake () {
 		myColor = gameObject.GetComponent<tk2dSprite>().color;
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
-        myAnim.AnimationEventTriggered = AnimationEventCallback;
+        controller = GetComponent<ExStateController>();
     }
 
-    // Update is called once per frame
-    void Update () {
-        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (!isActing) {
-                StartCoroutine(action);
-                isActing = true;
-            }
-            if(isTeleporting){
-            	gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position,teleportDestination,5*Time.deltaTime);
-            }
-        }
-        if(initialTeleport == true && isTeleporting){
-			gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position,teleportDestination,5*Time.deltaTime);
-
-        }
-
-		if(RoomManager.Instance.currentRoom != myRoom){//TODO: probably not the best way to keep this from going when player isnt in room but whatever
-			CancelInvoke();
-			for(int i = 0; i < currentBlobs.Count;i++){
-				currentBlobs[i].SetActive(false);
-			}
-			currentBlobs.Clear();
-		}
-	}
-
-	//for debug
-	void OnEnable(){
+    //for debug
+    void OnEnable()
+    {  
         StopAllCoroutines();
+
+        Reappear();
 
         // Reset Questio
         UnDazed();
 
-        action = "Teleport";
-        isActing = false;
+        GenerateCast(CAST_TYPE.TELEPORT);
+        nextCastTime = Time.time + 2f;
+        GetComponent<EnemyTakeDamage>().currentHp = 4;
     }
 
-	IEnumerator Teleport(){
-		Debug.Log("Teleport Activated ----------- !");
+    private void OnDisable()
+    {
+        CancelInvoke();
+        KillSlimes();
+        GetComponent<Animator>().enabled = false; // Animator won't allow translations if it's active.  It's the worst.
+    }
+
+
+
+    // Update is called once per frame
+    void Update () {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) || initialTeleport) {
+            switch (controller.currentState.GetState()) {
+                case EnemyState.IDLE:
+                    // ready to cast
+                    if (nextCastTime < Time.time) {
+                        Cast();
+                    }
+                    break;
+                case EnemyState.TELEPORT:
+                    gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, teleportDestination, teleportSpeed * Time.deltaTime);
+                    break;
+                case EnemyState.DAZED:
+                    // Undaze and teleport.
+                    if (nextRecoverDazeTime < Time.time) {
+                        UnDazed();
+                        GenerateCast(CAST_TYPE.TELEPORT);
+                        nextCastTime = Time.time + 2f;
+                        controller.SendTrigger(EnemyTrigger.IDLE);
+                    }
+                    break;
+                case EnemyState.CARRIED:
+                    StopDazedStars();
+                    break;
+            }
+        }
+	}
+
+    public void Teleport()
+    {
+        StartCoroutine(TeleportEnumerator());
+    }
+
+	IEnumerator TeleportEnumerator(){
 		SoundManager.instance.PlaySingle(teleport);
 
-		//turn invisible
-		gameObject.GetComponent<MeshRenderer>().enabled = false;
-		gameObject.layer = 1; //transparent layer, wont collide with anything
-		this.gameObject.GetComponent<SpecialEffectsBehavior>().SetFadeVariables(.1f,.3f);
-		this.gameObject.GetComponent<SpecialEffectsBehavior>().FadeOut();
-		myParticles.SetActive(true);
-		myParticles.GetComponent<ParticleSystem>().Play();
+        Vanish();
+
 		yield return new WaitForSeconds(.3f);
 		SoundManager.instance.PlaySingle(teleportTrail);
-		isTeleporting = true;
-
-
 
 		teleportTrailParticle.SetActive(true);
 		teleportTrailParticle.GetComponent<ParticleSystem>().Play();
-		if(!initialTeleport){
-		teleportDestination = new Vector2(Random.Range(-55f,-4f),Random.Range(134f,149f)); 
-		}else{
-			if(PlayerManager.Instance.player.transform.position.x < -25f){//player on left side
-				teleportDestination = new Vector2(-9f,144f); 
-			}else{
-				teleportDestination = new Vector2(-40f,144f); 
-			}
-		}
-		//gameObject.transform.localPosition = new Vector2(Random.Range(-36f,17f),Random.Range(-14f,10f));
+
+        // Try to teleport to an open slime spot.  If there are none on that side, go to one randomly on that side anyway.
+        var slimeSpot = GetRandomSlimeSpot();
+        if (slimeSpot == null)
+            slimeSpot = GetRandomSlimeSpot(false);
+
+        teleportDestination = slimeSpot.transform.position;
+
 		yield return new WaitUntil(() => (Vector2.Distance(gameObject.transform.position, teleportDestination) < 1));
-		isTeleporting = false;
 		SoundManager.instance.PlaySingle(teleport);
 
-		//reappear
-		gameObject.GetComponent<MeshRenderer>().enabled = true;
-		gameObject.layer = 9; //enemy layer again
+        Reappear();
 
-		gameObject.GetComponent<tk2dSprite>().color = new Color(myColor.r,myColor.g,myColor.b,1); //fade back
-		myParticles.GetComponent<ParticleSystem>().Play();
-		teleportTrailParticle.SetActive(false);
+        if (initialTeleport) { // specifically create a blob after 1 second after the initial teleport.
+            GenerateCast(CAST_TYPE.SPAWN_ADD);
+            nextCastTime = Time.time + 1f;
+        } else {
+            GenerateCast();
+            nextCastTime = randomCastTime;
+        }
 
-		if(initialTeleport){
+        controller.SendTrigger(EnemyTrigger.IDLE);
+    }
 
-            //action = "SpawnBlob";
-            yield return new WaitForSeconds(1f);
-            StartCoroutine("SpawnBlob");
+    void Vanish()
+    {
+        //turn invisible
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.layer = 1; //transparent layer, wont collide with anything
+        this.gameObject.GetComponent<SpecialEffectsBehavior>().SetFadeVariables(.1f, .3f);
+        this.gameObject.GetComponent<SpecialEffectsBehavior>().FadeOut();
+        myParticles.SetActive(true);
+        myParticles.GetComponent<ParticleSystem>().Play();
+    }
+
+    void Reappear()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.layer = 9; //enemy layer again
+
+        gameObject.GetComponent<tk2dSprite>().color = new Color(myColor.r, myColor.g, myColor.b, 1); //fade back
+        myParticles.GetComponent<ParticleSystem>().Play();
+        teleportTrailParticle.SetActive(false);
+    }
+
+    public void SpawnBlob()
+    {
+        if (currentBlobs.Count < blobMax) {
+            SoundManager.instance.PlaySingle(blobSpawnSFX);
+            GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject("enemy_slime", gameObject.transform.position);
+            if (spawnedEnemy != null) {
+                spawnedEnemy.GetComponent<EnemyTakeDamage>().otherRespawner = this;
+                spawnedEnemy.GetComponent<EnemyTakeDamage>().bossSpawnedEnemy = true;//null spawner ID, fixes glitch where killing Ex's slimes would kill slimes in hall
+                spawnedEnemy.GetComponent<EnemyPath>().pathGrid = pathGrid;
+                slimeSpawnPS.Play();
+                currentBlobs.Add(spawnedEnemy);
+
+                var spot = GetSlimeSpot(spawnedEnemy.transform.position);
+                spot.slime = spawnedEnemy.GetComponent<SlimeStateController>();
+            }
+        }
+
+        // immediately teleport after spawning a blob or not.
+        GenerateCast(CAST_TYPE.TELEPORT);
+        nextCastTime = Time.time;
+        controller.SendTrigger(EnemyTrigger.IDLE);
+
+        if (initialTeleport)
             initialTeleport = false;
-		}else{
-			yield return new WaitForSeconds(Random.Range(1f,3f));
-			int randomNextAction = Random.Range(0, 4);
-			if (randomNextAction == 1) {
-				yield return new WaitForSeconds(Random.Range(1f, 3f));
-	            action = "SpawnBlob";//"Fire";
-
-	        }
-	        else {
-				yield return new WaitForSeconds(Random.Range(2f, 3f));
-				action = "Teleport";
-	        }
-       }
-		//yield return PrepareNextAction();
-        isActing = false;
-    }
-
-    IEnumerator Fire()
-    {
-        Debug.Log("FIRE ACTIVATED-----------!");
-        if (myAnim.CurrentClip.name != "hurt") {
-            myAnim.Play("cast"); // Triggers CAST_FINISHED on the last frame to go back to idle.
-            StartCoroutine(FireballControl());
-        }
-        else {
-            yield return PrepareNextAction();
-        }
-    }
-
-    IEnumerator FireballControl()
-    {
-        // Spawn and home in on the player
-        myProjectile.transform.position = gameObject.transform.position;
-        myProjectile.GetComponent<KillSelfAfterTime>().CancelInvoke();//prevents projectile from dying shortly after spawn
-        playerPosition = new Vector3(PlayerManager.Instance.player.transform.position.x, PlayerManager.Instance.player.transform.position.y, PlayerManager.Instance.player.transform.position.z);
-        myProjectile.SetActive(true);
-        SoundManager.instance.PlaySingle(cast);
-        Vector2 moveDirection = (playerPosition - myProjectile.transform.position).normalized * 10;
-        myProjectile.GetComponent<FollowPlayer>().enabled = true;
-        myProjectile.GetComponent<Rigidbody2D>().velocity = new Vector2(moveDirection.x, moveDirection.y);
-        yield return new WaitForSeconds(2f);
-
-        // Hovering in place
-        myProjectile.GetComponent<FollowPlayer>().enabled = false;
-        yield return new WaitForSeconds(3f);
-
-        // Destroy Fireball
-        if (myProjectile.activeInHierarchy == true) {
-            myProjectile.SetActive(false);
-            myProjectile.transform.localPosition = Vector3.zero;
-        }
-
-        yield return PrepareNextAction();
     }
 
     // Helpers
-    IEnumerator PrepareNextAction()
+    void Cast()
     {
-        // Figure out the next action
-        int randomNextAction = Random.Range(0, 4);
-        if (randomNextAction == 0) {
-			yield return new WaitForSeconds(Random.Range(1f, 3f));
-            action = "SpawnBlob";//"Fire";
-
+        // Cast based on type.
+        switch (nextCastType) {
+            case CAST_TYPE.SPAWN_ADD:
+                controller.SendTrigger(EnemyTrigger.CAST_SPAWN_BLOB);
+                break;
+            case CAST_TYPE.TELEPORT:
+                controller.SendTrigger(EnemyTrigger.CAST_TELEPORT);
+                break;
         }
-        else {
-			action = "Teleport";
-        }
-        isActing = false;
     }
 
-	protected override void Dazed(){
-		//gameObject.GetComponent<EnemyTakeDamage>().StopAllCoroutines();//so follow player isn't enabled again
-		Debug.Log("Dazed activated - Ex");
-		gameObject.layer = 11;
-		gameObject.GetComponent<ThrowableObject>().enabled = true;
-		myAnim.Play("dazed");
-		StopAllCoroutines();
-		for(int i = 0; i < dazeDisables.Count; i++){
-			dazeDisables[i].enabled = false;
-		}
+    // Generates the next cast time and what will get cast.
+    void GenerateCast(CAST_TYPE type = CAST_TYPE.NONE)
+    {
+        // Randomize cast type if none is defined
+        if (type == CAST_TYPE.NONE) {
+            int randomNextAction = Random.Range(1, 2);
+            Debug.Log("RANDOM NEXT ACTION " + randomNextAction);
+            if (randomNextAction == 1) { // Spawn a Blob
+                Debug.Log("CAST SPAWN ADD");
+                type = CAST_TYPE.SPAWN_ADD;
+            } else { // Teleport
+                Debug.Log("CAST TELEPORT");
+                type = CAST_TYPE.TELEPORT;
+            }
+        }
 
-		//this.enabled = false;
+        nextCastType = type;
+
+        // Teleport if there are already 3 blobs.
+        if (currentBlobs.Count > blobMax) {
+            nextCastType = CAST_TYPE.TELEPORT;
+        }
+
+        // Generate cast time based on type.
+        switch (type) {
+            case CAST_TYPE.SPAWN_ADD:
+                GenerateCastTime(CAST_TYPE.SPAWN_ADD);
+                break;
+            case CAST_TYPE.TELEPORT:
+                GenerateCastTime(CAST_TYPE.TELEPORT);
+                break;
+        }
+    }
+
+    // generates a random cast time.  It's won't take effect unto nextCastTime is set though.
+    void GenerateCastTime(CAST_TYPE type)
+    {
+        switch (type) {
+            case CAST_TYPE.SPAWN_ADD:
+                randomCastTime = Time.time + Random.Range(2f, 6f);
+                break;
+            case CAST_TYPE.TELEPORT:
+                randomCastTime = Time.time + Random.Range(3f, 6f);
+                break;
+        }
+    }
+
+    public override void Dazed(){
+		gameObject.layer = 11;
+        nextRecoverDazeTime = recoverDazeTime + Time.time;
+		StopAllCoroutines();
+        StartDazedStars();
 	}
 
     void UnDazed(){
-        for (int i = 0; i < dazeDisables.Count; i++) {
-            dazeDisables[i].enabled = true;
-        }
-
         gameObject.layer = 9;
-        gameObject.GetComponent<ThrowableObject>().enabled = false;
-
-        myAnim.Play("idle");
-    }
-
-    // Callbacks
-    void AnimationEventCallback(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip, int frameNo)
-    {
-        var frame = clip.GetFrame(frameNo);
-        Debug.Log("Animation Trigger Check: " + frame.eventInfo);
-        switch (frame.eventInfo) {
-            case "CAST_FINISHED":
-                myAnim.Play("idle");
-                break;
-            default:
-                Debug.Log("Animation Trigger Not Found: " + frame.eventInfo);
-                break;
-        }
-    }
-
-
-    IEnumerator SpawnBlob(){
-		if(currentBlobs.Count < 3){
-			SoundManager.instance.PlaySingle(blobSpawnSFX);
-			GameObject spawnedEnemy = ObjectPool.Instance.GetPooledObject("enemy_slime",gameObject.transform.position);
-			spawnedEnemy.GetComponent<EnemyTakeDamage>().otherRespawner = this;
-			spawnedEnemy.GetComponent<EnemyTakeDamage>().bossSpawnedEnemy = true;//null spawner ID, fixes glitch where killing Ex's slimes would kill slimes in hall
-			slimeSpawnPS.Play();
-			currentBlobs.Add(spawnedEnemy);
-			Debug.Log("ENEMY SHOULDVE BEEN SPAWNED");
-			yield return new WaitForSeconds(1f); 
-			StartCoroutine("Teleport");
-		}else{
-			yield return new WaitForSeconds(1f); 
-    		StartCoroutine("Teleport");
-    	}
+        StopDazedStars();
     }
 
     public void KillSlimes(){
     	for(int i = 0; i <currentBlobs.Count;i++){
     		currentBlobs[i].SetActive(false);
     	}
+
+        currentBlobs.Clear();
+
+        for (int i = 0; i < slimeSpotsLeft.Count; i++) {
+            slimeSpotsLeft[i].slime = null;
+        }
+
+        for (int i = 0; i < slimeSpotsRight.Count; i++) {
+            slimeSpotsRight[i].slime = null;
+        }
     }
 
-	
+    void StartDazedStars()
+    {
+        if (dazedStars != null)
+            ObjectPool.Instance.ReturnPooledObject(dazedStars);
 
+        dazedStars = ObjectPool.Instance.GetPooledObject("effect_dazed", new Vector3(transform.position.x, transform.position.y + 2, 0));
+        dazedStars.transform.parent = gameObject.transform;
+    }
 
+    void StopDazedStars()
+    {
+        if (dazedStars != null) {
+            ObjectPool.Instance.ReturnPooledObject(dazedStars);
+            dazedStars = null;
+        }
+    }
+
+    SlimeSpot GetRandomSlimeSpot(bool returnOnlyUnusedSpots = true)
+    {
+        // 1. Figure out which side of the room Ex is on.
+        // 2. Get a shuffled list of unused slime spots on that side.
+        // 3. Pick the spot off the top.
+        // 4. Can return no spot if returnOnlyUnusedSpots is true.
+        List<SlimeSpot> tempList = null;
+        if (transform.position.x > slimeCenter.transform.position.x) { // on right side, go left
+            tempList = new List<SlimeSpot>(slimeSpotsLeft);
+        } else { // on left side, go right
+            tempList = new List<SlimeSpot>(slimeSpotsRight);
+        }
+        
+        if (returnOnlyUnusedSpots)
+            tempList.RemoveAll((x) => x.slime != null);
+
+        tempList.Shuffle();
+
+        if (tempList.Count > 0)
+            return tempList[0];
+        else
+            return null;
+    }
+
+    // returns the nearest slime spot to the provided position.
+    SlimeSpot GetSlimeSpot(Vector3 pos)
+    {
+        SlimeSpot spot = null;
+        float shortestDist = float.MaxValue;
+
+        // Figure out which side is closer.
+        if (pos.x > slimeCenter.transform.position.x) { // right side
+            for (int i = 0; i < slimeSpotsRight.Count; i++) {
+                var dist = Vector2.Distance(slimeSpotsRight[i].transform.position, pos);
+                if (dist < shortestDist) {
+                    shortestDist = dist;
+                    spot = slimeSpotsRight[i];
+                }
+            }
+        } else { // left side
+            for (int i = 0; i < slimeSpotsLeft.Count; i++) {
+                var dist = Vector2.Distance(slimeSpotsLeft[i].transform.position, pos);
+                if (dist < shortestDist) {
+                    shortestDist = dist;
+                    spot = slimeSpotsLeft[i];
+                }
+            }
+        }
+
+        return spot;
+    }
 }

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23493513992971898}
   - component: {fileID: 114943100725364064}
   - component: {fileID: 114321307869832470}
+  - component: {fileID: 114570089555014804}
   - component: {fileID: 114003901013027920}
   - component: {fileID: 114173800861190400}
   - component: {fileID: 114903259198518216}
@@ -94,7 +95,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1315280198334754}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.0227337, y: 2.84, z: 0}
+  m_LocalPosition: {x: -5.0227337, y: 0.5763855, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4266061326027406}
@@ -188,7 +189,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14, y: -0.17}
+  m_Offset: {x: -0.29, y: -0.17}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -199,7 +200,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.32, y: 3.73}
+  m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
 --- !u!61 &61486193342249206
 BoxCollider2D:
@@ -257,18 +258,20 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1315280198334754}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  targetCollider: {fileID: 0}
   walkDistance: 30
   chaseSpeed: 2
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 0}
   returnToPreviousWhenFar: 0
+  usePathGrid: 0
+  pathRefreshTime: 1
 --- !u!114 &114173800861190400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -322,6 +325,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e40c0f0095311f428637f9cf571dfd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114570089555014804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1315280198334754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052de2d6c4f6871489004e0b4c1c7e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114630445851728706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -334,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
 --- !u!114 &114903259198518216
 MonoBehaviour:
@@ -379,7 +394,6 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1962480165772134}
-  returnAniName: walk
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate:
@@ -392,7 +406,6 @@ MonoBehaviour:
   currentHp: 0
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
-  dontStopWhenHit: 0
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114903820897259688
@@ -414,10 +427,8 @@ MonoBehaviour:
   vanishAtDeath: 1
   myBossScript: {fileID: 0}
   objectToPanTo: {fileID: 0}
-  dazeAtDeath: 0
   hpDisplayStartSfx: {fileID: 0}
   currentRoom: {fileID: 0}
-  player: {fileID: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
   exSpawnPosition: {x: 0, y: 0, z: 0}
   hashSpawnPosition: {x: 0, y: 0, z: 0}
@@ -429,7 +440,7 @@ MonoBehaviour:
   bossHash: {fileID: 0}
   bossQuestio: {fileID: 0}
   hash: {fileID: 0}
-  canDamage: 0
+  enemyPath: {fileID: 0}
 --- !u!114 &114943089576103756
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : EditorMonoBehaviour {
     public List<Enemy> enemies;
+    public PathGrid pathGrid;
     public bool isMyEnemyDead = false;
     public EnemyInstance myEnemyInstance;
     public string enemyBodyName;

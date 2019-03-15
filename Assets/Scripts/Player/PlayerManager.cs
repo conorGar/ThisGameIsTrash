@@ -21,4 +21,20 @@ public class PlayerManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         controller = player.GetComponent<JimStateController>();
     }
+
+    // Makes a gameobject face the player on the x-axis.
+    // TODO: add any logic to face the dummy if it's in play.
+    public void Face(GameObject go)
+    {
+        go.transform.localScale = new Vector3(Mathf.Sign(player.transform.position.x - go.transform.position.x),
+                                                      go.transform.localScale.y,
+                                                      go.transform.localScale.z);
+    }
+
+    // Returns true if the player is to the left of the gameObject.
+    // TODO: add any dummy logic.
+    public bool IsLeft(GameObject go)
+    {
+        return player.transform.position.x < go.transform.position.x;
+    }
 }

@@ -254,11 +254,11 @@ MonoBehaviour:
     fps: 20
     loopStart: 0
     wrapMode: 0
-  - name: death
+  - name: dead
     frames:
     - spriteCollection: {fileID: 114836925475477022, guid: 06f56661c592e234096ba43082b90989,
         type: 2}
-      spriteId: 29
+      spriteId: 25
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
@@ -320,7 +320,7 @@ MonoBehaviour:
     fps: 9.859156
     loopStart: 0
     wrapMode: 0
-  - name: carry
+  - name: carried
     frames:
     - spriteCollection: {fileID: 114836925475477022, guid: 06f56661c592e234096ba43082b90989,
         type: 2}
@@ -372,5 +372,29 @@ MonoBehaviour:
       eventInt: 0
       eventFloat: 0
     fps: 20
+    loopStart: 0
+    wrapMode: 0
+  - name: merged
+    frames:
+    - spriteCollection: {fileID: 114836925475477022, guid: 06f56661c592e234096ba43082b90989,
+        type: 2}
+      spriteId: 23
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: hit
+    frames:
+    - spriteCollection: {fileID: 114836925475477022, guid: 06f56661c592e234096ba43082b90989,
+        type: 2}
+      spriteId: 58
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
     loopStart: 0
     wrapMode: 0

@@ -39,7 +39,6 @@ public class JimCarrying : IActorState<JimState, JimTrigger>
                     return new JimDelivering();
 
                 case JimTrigger.DROP_BIG:
-                    animator.Play("ani_jimIdle");
                     flags &= (int)~JimFlag.CARRYING_DROPABLE;
                     return new JimIdle();
             }
@@ -51,6 +50,10 @@ public class JimCarrying : IActorState<JimState, JimTrigger>
                 animator.Play("ani_jimThrowR");
                 flags &= (int)~JimFlag.CARRYING_THROWABLE;
                 return new JimThrowing();
+
+                case JimTrigger.DROP_BIG: // Covers the case where certain bosses need to be dropped even though they are throwable.
+                    flags &= (int)~JimFlag.CARRYING_DROPABLE;
+                    return new JimIdle();
             }
         }
 

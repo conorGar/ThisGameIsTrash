@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-[RequireComponent(typeof(GenericEnemyStateController))]
 public class EnemyTakeDamage : MonoBehaviour {
 
 
@@ -91,13 +89,13 @@ public bool bossSpawnedEnemy;
 
 	public bool startsOffDontMoveWhenHit; // needed for returning proper value when enemy dies(otherwise spawned enemies after starting obj pool amount will always have 'movewhenhit' enabled)
 
-	Vector2 startScale;
+	Vector3 startScale;
 
-    protected GenericEnemyStateController controller;
+    protected EnemyStateController controller;
 
     void Awake()
     {
-        controller = GetComponent<GenericEnemyStateController>();
+        controller = GetComponent<EnemyStateController>();
     }
 
     void OnEnable(){
@@ -112,8 +110,6 @@ public bool bossSpawnedEnemy;
 		myBody.gravityScale = 0;
 		takingDamage = false;
 		damageOnce = 0;
-		if(gameObject.GetComponent<RandomDirectionMovement>() != null)
-			gameObject.GetComponent<RandomDirectionMovement>().enabled = true;
 
         // Reset scale and rotations if this enemy has already been initialized.
         if (myAnim != null) {
@@ -218,49 +214,53 @@ public bool bossSpawnedEnemy;
 	}
 
 	public void OnTriggerEnter2D(Collider2D melee){
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+            if (controller != null && !controller.IsHittable()) // ignore enemies in an un hittable state
+                return;
 
-		if(melee.tag == "Weapon"){
-			if(hitByThrownObject)
-				hitByThrownObject = false;
-			TakeDamage(melee.gameObject);
+            if (melee.tag == "Weapon") {
+                if (hitByThrownObject)
+                    hitByThrownObject = false;
+                TakeDamage(melee.gameObject);
 
-			//Debug.Log("Collision with weapon: ");
+                //Debug.Log("Collision with weapon: ");
 
-		}else if(melee.tag == "pObj_bullet"){
-			if(!takingDamage){
-				StartCoroutine("NonMeleeHit");
-				melee.GetComponent<Ev_FallingProjectile>().Fell();
-			}
-			//Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
-            SoundManager.instance.RandomizeSfx(SFXBANK.HIT6, .8f, 1.1f);
-			SoundManager.instance.PlaySingle(hitSqueal);
-		}else if(melee.gameObject.layer == 15){//throwable object
-			hitByThrownObject = true;
-            // TODO: Get the boss battle to use throwable bodies???
-            var body = melee.gameObject.GetComponent<ThrowableBody>();
-            if (body){
-                //melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
-              	body.StartCoroutine("DeathImpact",this.gameObject);
-            }else{
-				var destructableObj = melee.gameObject.GetComponent<DestructableThrowingObject>();
-				if(destructableObj){
-					melee.gameObject.GetComponent<DestructableThrowingObject>().LandingEvent();
-				}
+            } else if (melee.tag == "pObj_bullet") {
+                if (!takingDamage) {
+                    StartCoroutine("NonMeleeHit");
+                    melee.GetComponent<Ev_FallingProjectile>().Fell();
+                }
+                //Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
+                SoundManager.instance.RandomizeSfx(SFXBANK.HIT6, .8f, 1.1f);
+                SoundManager.instance.PlaySingle(hitSqueal);
+            } else if (melee.gameObject.layer == 15) {//throwable object
+                hitByThrownObject = true;
+                // TODO: Get the boss battle to use throwable bodies???
+                var body = melee.gameObject.GetComponent<ThrowableBody>();
+                if (body) {
+                    //melee.gameObject.GetComponent<ThrowableBody>().StartCoroutine("Impact",this.gameObject);
+                    body.StartCoroutine("DeathImpact", this.gameObject);
+                } else {
+                    var destructableObj = melee.gameObject.GetComponent<DestructableThrowingObject>();
+                    if (destructableObj) {
+                        melee.gameObject.GetComponent<DestructableThrowingObject>().LandingEvent();
+                    }
+                }
+                Debug.Log("Hit by thrown object!");
+                if (canKnockoffArmor) {
+                    ArmorKnockoff();
+                } else if (gameObject.GetComponent<InvincibleEnemy>() == null) { // no invincible component
+                    TakeDamage(melee.gameObject);
+                } else if (!gameObject.GetComponent<InvincibleEnemy>().IsInvulnerable()) { // has an invincible component but they aren't currently invincible
+                    TakeDamage(melee.gameObject);
+                }
+                SoundManager.instance.PlaySingle(SFXBANK.HIT7);
+                SoundManager.instance.PlaySingle(hitSqueal);
+                /*var throwObj = melee.gameObject.GetComponent<ThrowableObject>();
+                    if(throwObj)
+                        melee.gameObject.layer = 11; //switched to item obj once hit so doesnt hit anything else*/
             }
-			Debug.Log("Hit by thrown object!");
-			if(canKnockoffArmor){
-				ArmorKnockoff();
-			}else if(gameObject.GetComponent<InvincibleEnemy>() == null){
-				TakeDamage(melee.gameObject);
-			}else if(gameObject.GetComponent<InvincibleEnemy>().enabled == false){
-				TakeDamage(melee.gameObject);
-			}
-			SoundManager.instance.PlaySingle(SFXBANK.HIT7);
-			SoundManager.instance.PlaySingle(hitSqueal);
-			/*var throwObj = melee.gameObject.GetComponent<ThrowableObject>();
-				if(throwObj)
-					melee.gameObject.layer = 11; //switched to item obj once hit so doesnt hit anything else*/
-		}
+        }
 	}
 
 	IEnumerator NonMeleeHit(){
@@ -287,7 +287,8 @@ public bool bossSpawnedEnemy;
 							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
 						}
-				if(!moveWhenHit && controller.GetCurrentState() != EnemyState.LUNGE){
+                // no moving on hit if requested or this is an enemy that is lunging.
+				if(!moveWhenHit || (controller != null && controller.GetCurrentState() == EnemyState.LUNGE)){
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 				}
 
@@ -299,7 +300,8 @@ public bool bossSpawnedEnemy;
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
 
-                GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.HIT);
+                if (controller != null)
+                    controller.SendTrigger(EnemyTrigger.HIT);
                 if (moveWhenHit){
                     UpdateFacing();
                 }
@@ -388,17 +390,24 @@ public bool bossSpawnedEnemy;
 					GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 				}
 
-				currentHp = currentHp - 1 - meleeDmgBonus;
+                // no moving on hit if requested, it's not hit by a thrown object or this is an enemy that is lunging.
+                if (!moveWhenHit && !hitByThrownObject || (controller != null && controller.GetCurrentState() == EnemyState.LUNGE)) {
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                }
+
+                currentHp = currentHp - 1 - meleeDmgBonus;
 
 				if(currentHp <= 0){
 				    SoundManager.instance.PlaySingle(SFXBANK.HIT7, hitPitch);
-                    GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.DEATH);
+                    if (controller != null)
+                        controller.SendTrigger(EnemyTrigger.DEATH);
                 } else{
 				    SoundManager.instance.PlaySingle(SFXBANK.HIT6, hitPitch);
 				    if(hitPitch < 1.3f)
 					    hitPitch += .1f; // pitch goes up as hit enemy
 
-                    GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.HIT);
+                    if (controller != null)
+                        controller.SendTrigger(EnemyTrigger.HIT);
                 }
 				SoundManager.instance.PlaySingle(hitSqueal);
 
@@ -416,11 +425,6 @@ public bool bossSpawnedEnemy;
                 if (moveWhenHit){
                     UpdateFacing();
                 }
-				//camShake = 1;
-				if(gameObject.GetComponent<FollowPlayer>() != null && moveWhenHit){
-					gameObject.GetComponent<FollowPlayer>().StopSound();
-					gameObject.GetComponent<FollowPlayer>().enabled = false;
-				}
 
 				StartCoroutine("ContinueHit"); // just needed to seperate here for IEnumerator stuff
 			}
@@ -431,9 +435,9 @@ public bool bossSpawnedEnemy;
     public void UpdateFacing()
     {
         if (gameObject.transform.position.x < PlayerManager.Instance.player.transform.position.x)
-            gameObject.transform.localScale = new Vector2(startScale.x, startScale.y);
+            gameObject.transform.localScale = new Vector3(startScale.x, startScale.y, startScale.z);
         else
-            gameObject.transform.localScale = new Vector2(startScale.x * -1, startScale.y);
+            gameObject.transform.localScale = new Vector3(startScale.x * -1, startScale.y, startScale.z);
     }
 
 	IEnumerator StopKnockback(float delay = 0f){
@@ -561,15 +565,7 @@ public bool bossSpawnedEnemy;
             yield return new WaitForSeconds(.4f);
             //***grow/shrink scale back to normal on all fronts
 
-            if (gameObject.GetComponent<FollowPlayer>() && this.enabled) { //enabled check for if other things disable follow player for whatever reason
-                gameObject.GetComponent<FollowPlayer>().enabled = true;
-                //***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
-            }
-            else if (gameObject.GetComponent<RandomDirectionMovement>()) {
-                gameObject.GetComponent<RandomDirectionMovement>().StartMoving();
-            }
             damageOnce = 0;
-
         }
         else { //if hp is NOT > 0
             Debug.Log("CURRENT HP IS NOT GREATER THAN ZEROOOOOOO!");
@@ -634,11 +630,9 @@ public bool bossSpawnedEnemy;
 		if(!takingDamage){
 			Debug.Log("Clanking material got here----x-x-x-x--- 2");
 			takingDamage = true;
-			GameObject clankSpark = ObjectPool.Instance.GetPooledObject("effect_clank",clankPosition);
+			ObjectPool.Instance.GetPooledObject("effect_clank",clankPosition);
 			SoundManager.instance.PlaySingle(clankSfx);
-			/*if(gameObject.GetComponent<FollowPlayer>()){
-				gameObject.GetComponent<FollowPlayer>().enabled = false;
-			}*/
+
 			Vector2 pushBackDir = (gameObject.transform.position- PlayerManager.Instance.player.transform.position).normalized * 9;
 
 			if(getsPushedBack){
@@ -764,13 +758,10 @@ public bool bossSpawnedEnemy;
 			//damageOnce = 0;
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-            GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.HIT);
+            GetComponent<EnemyStateController>().SendTrigger(EnemyTrigger.HIT);
 
             takingDamage = false;
-			if(gameObject.GetComponent<FollowPlayer>()){
-					gameObject.GetComponent<FollowPlayer>().enabled = true;
-					//***enable 'follow target after notice' here(ALSO TRIGGER 'notice' method in that script
-			}
+
 			currentHp = 2; //TODO: this is just for brownmole, maybe get it from 'Enemy.cs"?
 
 		}else{
@@ -778,10 +769,6 @@ public bool bossSpawnedEnemy;
 			GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival = GlobalVariableManager.Instance.DAY_NUMBER +3;
 			Debug.Log("Day of revival: "+ GlobalVariableManager.Instance.BASIC_ENEMY_LIST[this.mySpawnerID].dayOfRevival);
 
-		}
-
-		if(gameObject.GetComponent<FollowPlayerAfterNotice>()){
-			gameObject.GetComponent<FollowPlayer>().enabled = true;
 		}
 
 		if(gameObject.GetComponent<Animator>()){
