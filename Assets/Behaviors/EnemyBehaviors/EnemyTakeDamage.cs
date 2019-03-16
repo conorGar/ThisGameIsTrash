@@ -74,7 +74,7 @@ public bool bossSpawnedEnemy;
 
 	tk2dSpriteAnimator myAnim;
 	int camShake = 0;
-	string meleeSwingDirection;
+	public string meleeSwingDirection;
 	int dropsPin = 0;
 	int dropsTrash = 0;
 	int scrapDropped = 0;
@@ -238,9 +238,15 @@ public bool bossSpawnedEnemy;
 					StartCoroutine("NonMeleeHit",true);
 					Debug.Log("BIG SWOOSH HITS ENEMY");
 				}else{
-					melee.GetComponent<Ev_FallingProjectile>().Fell();
-					StartCoroutine("NonMeleeHit",false);
+					if(melee.GetComponent<Ev_FallingProjectile>() != null)
+						melee.GetComponent<Ev_FallingProjectile>().Fell();
+					if(melee.GetComponent<Ev_ProjectileChargable>() != null && melee.GetComponent<Ev_ProjectileChargable>().charged){
+						meleeSwingDirection = "plankSwing";
 
+						StartCoroutine("NonMeleeHit",true);
+					}/*else{
+						StartCoroutine("NonMeleeHit",false);
+					}*/
 				}
 			}
 			//Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
@@ -302,9 +308,9 @@ public bool bossSpawnedEnemy;
 				if(!moveWhenHit && controller.GetCurrentState() != EnemyState.LUNGE){
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 				}
+				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2....." + meleeDmgBonus);
 
 				currentHp = currentHp - 1 - meleeDmgBonus;
-				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
                     gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...

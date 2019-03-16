@@ -5,6 +5,8 @@ public class Ev_ProjectileBasic : MonoBehaviour
 {
 	public float speedX;
 	public float speedY;
+
+
 	// Use this for initialization
 	void Update ()
 	{

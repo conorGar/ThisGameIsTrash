@@ -31,10 +31,21 @@ public class ClankingMaterial : MonoBehaviour
 		}else if (collider.tag == "BigSwoosh"){
 			parentsETD.PowerHitEffect();
 			parentsETD.StartCoroutine("NonMeleeHit",true);
+		}else if (collider.tag == "pObj_bullet"){
+			if(collider.GetComponent<Ev_ProjectileChargable>() != null){
+				 if(collider.GetComponent<Ev_ProjectileChargable>().charged){
+					parentsETD.PowerHitEffect();
+					parentsETD.meleeSwingDirection = "plankSwing";
+					parentsETD.meleeDmgBonus = 2;
+					parentsETD.StartCoroutine("NonMeleeHit",true);
+					}
+				else{
+						ObjectPool.Instance.ReturnPooledObject(collider.gameObject); //TODO: for now, if player projectile isn't charged, it's just destroyed
+					}
+			}
 		}
+
 	}
-
-
 
 
 }

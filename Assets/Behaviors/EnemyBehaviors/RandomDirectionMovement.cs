@@ -13,11 +13,11 @@ public class RandomDirectionMovement : MonoBehaviour {
 	//public GameObject walkCloud;
 	public ParticleSystem walkPS;
 
-	private Vector3 direction;
+	protected Vector3 direction;
 	protected tk2dSpriteAnimator anim;
 	int bounceOffObject;
 	protected Vector3 startingScale;
-	int turnOnce = 0;
+	protected int turnOnce = 0;
 	[HideInInspector]
 	public bool mopSlow;
 
@@ -25,7 +25,7 @@ public class RandomDirectionMovement : MonoBehaviour {
     protected GenericEnemyStateController controller;
 
     // Use this for initialization
-    void Awake()
+    protected void Awake()
     {
         controller = GetComponent<GenericEnemyStateController>();
     }
@@ -64,8 +64,9 @@ public class RandomDirectionMovement : MonoBehaviour {
             }
         }
 	}
-	void Turn(){
+	protected void Turn(){
 		turnOnce = 1;
+		Debug.Log("Turn() activate for:" + gameObject.name);
 		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
 	}
 
