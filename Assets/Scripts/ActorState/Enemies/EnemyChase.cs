@@ -39,11 +39,11 @@ public class EnemyChase : IActorState<EnemyState, EnemyTrigger>
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
 				flags &= ~(int)EnemyFlag.CHASING;
                 return new EnemyLunge();
-			case EnemyTrigger.CHASE_OBJECT:
+			/*case EnemyTrigger.CHASE_OBJECT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
 				flags &= ~(int)EnemyFlag.CHASING;
 				flags |= (int)EnemyFlag.CHASING_OBJECT;
-                return new EnemyChaseObject();
+                return new EnemyChaseObject();*/
 
         }
 

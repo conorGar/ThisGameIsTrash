@@ -35,12 +35,12 @@ public class FollowPlayer : MonoBehaviour {
         if (PlayerManager.Instance.player != null)
 		    target = PlayerManager.Instance.player.transform; //needs to be in enable because of Dirty Decoy
 
-        controller.RemoveFlag((int)EnemyFlag.CHASING);
+        //controller.RemoveFlag((int)EnemyFlag.CHASING);
 	}
 
 	protected void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-			if (controller.IsFlag((int)EnemyFlag.CHASING) && !controller.IsFlag((int)EnemyFlag.CHASING_OBJECT)) {
+			if (controller.IsFlag((int)EnemyFlag.CHASING) ){//&& !controller.IsFlag((int)EnemyFlag.CHASING_OBJECT)) {
                 float distance = Vector3.Distance(transform.position, target.position);
                 if (distance < walkDistance && distance > maxWalkDistance) { //TODO: 
                     if (iBeLerpin) {

@@ -20,6 +20,8 @@ public class PinFunctionsManager : MonoBehaviour {
 	public Ev_CurrentWeapon currentWeaponDisplay;
 	public GameObject spinAttack;
 	public GameObject decoyObject;
+	public ParticleSystem dashTrail;
+
 	//public PinManager pinManager;
 	public Sprite[] displaySprites;
 	Sprite displaySprite;
@@ -74,6 +76,7 @@ public class PinFunctionsManager : MonoBehaviour {
 			if(givenKey == dashKey){
 				//-------------Dash-----------------//
 				dashCounter = 2;
+				dashTrail.Play();
 				PlayerManager.Instance.controller.SendTrigger(JimTrigger.DASH);
 				Debug.Log("Dumpster Dash - 2");
 
@@ -89,7 +92,7 @@ public class PinFunctionsManager : MonoBehaviour {
 					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,30f),ForceMode2D.Impulse);
 				}
 				SoundManager.instance.PlaySingle(SFXBANK.DUMPSTERDASH);
-				yield return new WaitForSeconds(.1f);
+				yield return new WaitForSeconds(.2f);
 				PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
 
 				dashCounter = 0;

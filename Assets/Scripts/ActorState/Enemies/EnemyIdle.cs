@@ -28,6 +28,11 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
 				Debug.Log("-x-x-x-x-x-x-x- Enemy Idle Hit trigger activate -x-x-x-x-x-");
 
                 return new EnemyHit();
+			case EnemyTrigger.POWER_HIT:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+				Debug.Log("-x-x-x-x-x-x-x- Enemy Idle Hit trigger activate -x-x-x-x-x-");
+
+                return new EnemyPowerHit();
             case EnemyTrigger.NOTICE:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
                 flags |= (int)EnemyFlag.CHASING;

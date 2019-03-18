@@ -21,6 +21,11 @@ public class EnemyRecover : IActorState<EnemyState, EnemyTrigger>
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
                 flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
+			case EnemyTrigger.POWER_HIT:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+				Debug.Log("-x-x-x-x-x-x-x- Enemy Idle Hit trigger activate -x-x-x-x-x-");
+
+                return new EnemyPowerHit();
             /*case EnemyTrigger.HIT: //took out because grub
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
                 return new EnemyHit();*/

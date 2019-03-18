@@ -31,7 +31,7 @@ public class WanderOnPath : MonoBehaviour
 
 	void OnEnable(){
 		anim = GetComponent<tk2dSpriteAnimator>();
-		StartCoroutine("NextMark"); //added for debug, remove if causing issues
+		//StartCoroutine("NextMark"); //added for debug, remove if causing issues
 	}
 
 	public void SetPathMarks(List<GameObject> marks){ //Given by Room.cs from enemySpawner's 'PathingMarks.cs'

@@ -38,13 +38,7 @@ public class JimIdle : IActorState<JimState, JimTrigger>
 
             case JimTrigger.SWING_LEFT:
                 //animator.Play("ani_jimSwingR");
-				if(whichSwingAni == 0){
-                	animator.Play("ani_jimSwingR2");
-                	whichSwingAni = 1;
-                }else{
-					animator.Play("ani_jimSwingR3");
-                	whichSwingAni = 0;
-                }
+				
                 flags |= (int)JimFlag.FACING_LEFT;
                 return new JimAttacking();
 

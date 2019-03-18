@@ -31,6 +31,10 @@ public class RatStateController : GenericEnemyStateController {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
                 currentState = new EnemyIdle();
                 break;
+			case EnemyState.POWER_HIT:
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                currentState = new EnemyIdle();
+                break;
         }
     }
 }

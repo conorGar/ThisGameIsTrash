@@ -30,14 +30,31 @@ public class OpossumStateController : GenericEnemyStateController
             case EnemyState.PREPARE_LEAP:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
                 currentState = new EnemyLunge();
+				Debug.Log("Opossum ani event complete: LUNGE -> RECOVER");
+
                 break;
 			case EnemyState.LUNGE:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.WAKE));
                 currentState = new EnemyRecover();
+				Debug.Log("Opossum ani event complete: LUNGE -> RECOVER");
+
+                break;
+			case EnemyState.HIT:
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
+				flags |= (int)EnemyFlag.CHASING;
+				Debug.Log("Opossum ani event complete: RECOVER -> CHASE");
+                currentState = new EnemyChase();
+                break;
+			case EnemyState.POWER_HIT:
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
+				flags |= (int)EnemyFlag.CHASING;
+				Debug.Log("Opossum ani event complete: RECOVER -> CHASE");
+                currentState = new EnemyChase();
                 break;
 			case EnemyState.RECOVER:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
 				flags |= (int)EnemyFlag.CHASING;
+				Debug.Log("Opossum ani event complete: RECOVER -> CHASE");
                 currentState = new EnemyChase();
                 break;
         }

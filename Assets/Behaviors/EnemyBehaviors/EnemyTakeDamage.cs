@@ -317,12 +317,13 @@ public bool bossSpawnedEnemy;
 						//GlobalVariableManager.Instance.BOSS_HP_LIST[bossesListPosition] = currentHp;
 					}
 
-                GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.HIT);
                 if (moveWhenHit){
                     UpdateFacing();
                 }
 
                 if(knockback){
+					GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.POWER_HIT);
+
                 	Debug.Log("****----- GOT HERE BIG HIT ---------****");
                 	if(meleeSwingDirection == "bigShooshR"){
 						meleeSwingDirection = "plankSwing";
@@ -338,6 +339,7 @@ public bool bossSpawnedEnemy;
 					StartCoroutine("ContinueHit"); 
 					yield return new WaitForSeconds(.1f);
                 }else{
+					GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.HIT);
 
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
@@ -409,7 +411,6 @@ public bool bossSpawnedEnemy;
 
 
                 //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
-//                   CamManager.Instance.mainCam.ScreenShake(.2f);
 
 				if(hitByThrownObject){
                     // TODO: Fix the boss battle to use throwable bodies????
@@ -427,9 +428,13 @@ public bool bossSpawnedEnemy;
 				currentHp = currentHp - 1 - meleeDmgBonus;
 
 				if(currentHp <= 0){
+					CamManager.Instance.mainCam.ScreenShake(.2f,.4f);
+					ObjectPool.Instance.GetPooledObject("effect_landingSmoke",gameObject.transform.position);
 				    SoundManager.instance.PlaySingle(SFXBANK.HIT7, hitPitch);
                     GetComponent<GenericEnemyStateController>().SendTrigger(EnemyTrigger.DEATH);
                 } else{
+					CamManager.Instance.mainCam.ScreenShake(.2f,.2f);
+			
 				    SoundManager.instance.PlaySingle(SFXBANK.HIT6, hitPitch);
 				    if(hitPitch < 1.3f)
 					    hitPitch += .1f; // pitch goes up as hit enemy

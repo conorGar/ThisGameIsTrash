@@ -20,6 +20,7 @@ public class MeleeAttack : MonoBehaviour {
 	public ParticleSystem chargePS;
 	public ParticleSystem chargeReadyPS;
 	public GameObject chargeReadyGlow;
+	public float swingMomentumForce;
 
 	protected int swingDirection;
 	float turningSpeed;
@@ -84,20 +85,20 @@ public class MeleeAttack : MonoBehaviour {
                 case JimState.IDLE:
                     
                         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
-                            //playerMomentum = 6f;
+                            playerMomentum = swingMomentumForce;
                             this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
                             StartCoroutine("Swing", 2);
                         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
                             this.gameObject.transform.localScale = startingScale;
-                            //playerMomentum = 6f;
+							playerMomentum = swingMomentumForce;
                             StartCoroutine("Swing", 1);
                         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
                             this.gameObject.transform.localScale = startingScale;
-                            //playerMomentum = 6f;
+							playerMomentum = swingMomentumForce;
                             StartCoroutine("Swing", 4);
                         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
                             this.gameObject.transform.localScale = startingScale;
-                            //playerMomentum = 6f;
+							playerMomentum = swingMomentumForce;
                             StartCoroutine("Swing", 3);
                         }
                     
@@ -210,6 +211,15 @@ public class MeleeAttack : MonoBehaviour {
                 meleeDirectionEnabled = meleeWeaponRightSwing;
 				sideSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
 			}else if(direction == 2){
+				if(whichSwingAni == 0){
+					whichSwingAni = 1;
+	                animator.Play("ani_jimSwingR2");
+
+                }else{
+					whichSwingAni = 0;
+					animator.Play("ani_jimSwingR3");
+	                
+                }
                 PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
                 meleeDirectionEnabled = meleeWeaponLeftSwing;
 				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
@@ -303,7 +313,7 @@ public class MeleeAttack : MonoBehaviour {
 		chargeReadyGlow.SetActive(false);
 
 		if (heldKey == INPUTACTION.ATTACKLEFT) {
-	    	playerMomentum = 6f;
+	    	playerMomentum = 8f;
 			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
         	meleeDirectionEnabled = meleeWeaponLeftSwing;
         	sideBigSwoosh.SetActive(true);
@@ -313,17 +323,17 @@ public class MeleeAttack : MonoBehaviour {
 			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_RIGHT);
             meleeDirectionEnabled = meleeWeaponRightSwing;
 		
-	        playerMomentum = 6f;
+	        playerMomentum = 8f;
 	        bigSwooshDirection = sideBigSwoosh;
 	        sideBigSwoosh.SetActive(true);                   
 	    } else if (heldKey == INPUTACTION.ATTACKDOWN) {
-	        playerMomentum = 6f;
+	        playerMomentum = 8f;
 			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_DOWN);
 	        botBigSwoosh.SetActive(true);
 	        bigSwooshDirection = botBigSwoosh;
             meleeDirectionEnabled = meleeWeaponBotSwing;
 	    } else if (heldKey == INPUTACTION.ATTACKUP) {
-	        playerMomentum = 6f;
+	        playerMomentum = 8f;
 	        topBigSwoosh.SetActive(true);
 			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_UP);
 			bigSwooshDirection = topBigSwoosh;
@@ -333,13 +343,15 @@ public class MeleeAttack : MonoBehaviour {
 
 		meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
 		bigSwooshDirection.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
-
+		meleeDirectionEnabled.GetComponent<BoxCollider2D>().enabled = false; //otherwise will sometimes be hit by normal swing even if it's a big swing. Probably a better way to do this
 		meleeDirectionEnabled.SetActive(true);
 
 		//meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
 		yield return new WaitForSeconds(.2f);
 		meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
 		meleeDirectionEnabled.SetActive(false);
+		meleeDirectionEnabled.GetComponent<BoxCollider2D>().enabled = true;
+
 		//chargingAttack = false;
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		chargeReady = false;

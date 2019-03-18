@@ -19,6 +19,7 @@ public enum EnemyState
     PREPARE_LEAP,
     VULNERABLE,
     CHASE_OBJECT,
+    POWER_HIT,
 }
 
 public enum EnemyFlag : int
@@ -45,7 +46,8 @@ public enum EnemyTrigger
     VULNERABLE,
     POPUP,
     CHASE, // chase for use when need to chase again after already noticed player
-    CHASE_OBJECT
+    CHASE_OBJECT,
+    POWER_HIT
 }
 
 // Not a whole lot but maybe some common functionality can go here in the future.
