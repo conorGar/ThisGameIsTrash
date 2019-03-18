@@ -44,8 +44,8 @@ public class GrubStateController : GenericEnemyStateController {
                 currentState = new EnemyThrow();
             	break;
 			
-			case EnemyState.PREPARE_LEAP: //prepare for leap
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
+			case EnemyState.PREPARE_LUNGE: //prepare for leap
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
                 currentState = new EnemyLunge();
             	break;
 			/*case EnemyState.LUNGE: //hit the ground after Jump

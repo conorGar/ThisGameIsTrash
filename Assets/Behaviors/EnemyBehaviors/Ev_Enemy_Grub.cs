@@ -79,9 +79,9 @@ public class Ev_Enemy_Grub : FireTowardPlayer
 	IEnumerator LeapSequence(){
 
 
-		controller.SendTrigger(EnemyTrigger.PREPARE_LEAP);
+		controller.SendTrigger(EnemyTrigger.PREPARE_LUNGE);
 
-		while (controller.GetCurrentState() == EnemyState.PREPARE_LEAP)
+		while (controller.GetCurrentState() == EnemyState.PREPARE_LUNGE)
            			yield return null;
 		weakSpot.SetActive(true);
 		gameObject.GetComponent<Animator>().SetTrigger("Leap");

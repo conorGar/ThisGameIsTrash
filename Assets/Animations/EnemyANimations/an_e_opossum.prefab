@@ -230,7 +230,7 @@ MonoBehaviour:
     fps: 24.489796
     loopStart: 0
     wrapMode: 0
-  - name: prepare_leap
+  - name: prepare_lunge
     frames:
     - spriteCollection: {fileID: 114322827995402222, guid: 715606a1bcb198f4e8e9f4374952af9e,
         type: 2}
@@ -316,10 +316,10 @@ MonoBehaviour:
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    fps: 14.999999
+    fps: 21.818182
     loopStart: 0
     wrapMode: 2
-  - name: leap
+  - name: lunge
     frames:
     - spriteCollection: {fileID: 114322827995402222, guid: 715606a1bcb198f4e8e9f4374952af9e,
         type: 2}
@@ -612,3 +612,15 @@ MonoBehaviour:
     fps: 3.030303
     loopStart: 0
     wrapMode: 2
+  - name: leap
+    frames:
+    - spriteCollection: {fileID: 114322827995402222, guid: 715606a1bcb198f4e8e9f4374952af9e,
+        type: 2}
+      spriteId: 8
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 76.92308
+    loopStart: 0
+    wrapMode: 0
