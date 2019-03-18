@@ -30,20 +30,23 @@ public class EnemyChase : IActorState<EnemyState, EnemyTrigger>
 				flags &= ~(int)EnemyFlag.CHASING;
             
                 return new EnemyPrepare();
-			case EnemyTrigger.PREPARE_LEAP:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LEAP));
+			case EnemyTrigger.PREPARE_LUNGE:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LUNGE));
 				flags &= ~(int)EnemyFlag.CHASING;
             
-                return new EnemyPrepare_Leap();
+                return new EnemyPrepare_Lunge();
 			case EnemyTrigger.LUNGE:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
 				flags &= ~(int)EnemyFlag.CHASING;
                 return new EnemyLunge();
-			/*case EnemyTrigger.CHASE_OBJECT:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
-				flags &= ~(int)EnemyFlag.CHASING;
-				flags |= (int)EnemyFlag.CHASING_OBJECT;
-                return new EnemyChaseObject();*/
+            case EnemyTrigger.LEAP:
+                flags &= ~(int)EnemyFlag.CHASING;
+                return new EnemyLeap();
+                /*case EnemyTrigger.CHASE_OBJECT:
+                    animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
+                    flags &= ~(int)EnemyFlag.CHASING;
+                    flags |= (int)EnemyFlag.CHASING_OBJECT;
+                    return new EnemyChaseObject();*/
 
         }
 

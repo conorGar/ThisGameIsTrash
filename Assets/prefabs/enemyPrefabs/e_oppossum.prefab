@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 114579660802664810}
   - component: {fileID: 114511271905986270}
   - component: {fileID: 114873879557401160}
+  - component: {fileID: 114371437393580034}
   - component: {fileID: 114457274660849120}
   m_Layer: 9
   m_Name: e_oppossum
@@ -112,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758106880808234}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.347105, y: 107.26353, z: 0.2109375}
+  m_LocalPosition: {x: -9.714947, y: 2.797174, z: 0.2109375}
   m_LocalScale: {x: 0.73750025, y: 0.77500033, z: 1}
   m_Children:
   - {fileID: 4725802371464300}
@@ -311,6 +312,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingObject: 1
   sortBuddies: []
+--- !u!114 &114371437393580034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1758106880808234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea9c2374453fa34db510ce45c159308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alignedObject: {fileID: 0}
+  alignedAxis: 1
+  threshhold: 4
 --- !u!114 &114410466137058820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -339,7 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  walkDistance: 10
+  walkDistance: 19
   chaseSpeed: 7
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
@@ -359,7 +374,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 4
   stopTime: 1
-  pathMarks: []
+  pathMarks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114561754159433154
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -395,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90732f15953ee234992e7e9f73c74d7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noticeThreshold: 5
+  noticeThreshold: 9
   noticeThresholdY: 5
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
@@ -410,8 +429,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7edfa88dcebeb4e8c318ecee630878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slashSpeed: 8
-  lungeThreshold: 6
+  slashSpeed: 9
+  leapSpeed: 18
+  lungeThreshold: 9
+  leapThreshold: 6
   mySlash: {fileID: 1399123632520780}
 --- !u!114 &114744051862825214
 MonoBehaviour:

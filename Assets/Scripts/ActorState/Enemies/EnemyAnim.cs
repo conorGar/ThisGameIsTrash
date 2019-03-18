@@ -19,8 +19,9 @@ public enum ENEMY_ANIM
     WAKE,
     POP_UP,
     THROW,
+    LUNGE,
+    PREPARE_LUNGE,
     LEAP,
-    PREPARE_LEAP,
     VULNERABLE,
     BURROW
 }
@@ -44,8 +45,9 @@ public class EnemyAnim
             case ENEMY_ANIM.WAKE: return "wake";
             case ENEMY_ANIM.POP_UP: return "popUp";
             case ENEMY_ANIM.THROW: return "throw";
-			case ENEMY_ANIM.LEAP: return "leap";
-			case ENEMY_ANIM.PREPARE_LEAP: return "prepare_leap";
+            case ENEMY_ANIM.LUNGE: return "lunge";
+            case ENEMY_ANIM.LEAP: return "leap";
+			case ENEMY_ANIM.PREPARE_LUNGE: return "prepare_lunge";
 			case ENEMY_ANIM.VULNERABLE: return "vulnerable";
 			case ENEMY_ANIM.BURROW: return "burrow";
         }

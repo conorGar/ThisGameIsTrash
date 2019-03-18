@@ -45,9 +45,9 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
                // flags |= (int)EnemyFlag.CHASING;
                 return new EnemyPrepare();
-			case EnemyTrigger.PREPARE_LEAP:
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LEAP));
-                return new EnemyPrepare_Leap();
+			case EnemyTrigger.PREPARE_LUNGE:
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LUNGE));
+                return new EnemyPrepare_Lunge();
 			case EnemyTrigger.LUNGE:
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
                 return new EnemyLunge();

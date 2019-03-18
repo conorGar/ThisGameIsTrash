@@ -27,8 +27,8 @@ public class OpossumStateController : GenericEnemyStateController
 
         switch (currentState.GetState()) {
             
-            case EnemyState.PREPARE_LEAP:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
+            case EnemyState.PREPARE_LUNGE:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
                 currentState = new EnemyLunge();
 				Debug.Log("Opossum ani event complete: LUNGE -> RECOVER");
 
