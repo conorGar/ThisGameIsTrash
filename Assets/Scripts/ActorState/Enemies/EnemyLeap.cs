@@ -20,6 +20,9 @@ public class EnemyLeap : IActorState<EnemyState, EnemyTrigger>
         switch (trigger) {
             case EnemyTrigger.IDLE:
                 return new EnemyIdle();
+			case EnemyTrigger.RECOVER:
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.WAKE));
+                return new EnemyRecover();
         }
 
         return null;
