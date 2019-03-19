@@ -27,6 +27,8 @@ public class GrubStateControllerEditor : EnemyEditor { }
 public class RhinoBeetleStateControllerEditor : EnemyEditor { }
 [CustomEditor(typeof(OpossumStateController))]
 public class OpossumStateControllerEditor : EnemyEditor { }
+[CustomEditor(typeof(HeronStateController))]
+public class HeronStateControllerEditor : EnemyEditor { }
 
 
 public class GenericStateControllerEditor<State_Type, Trigger_Type, Flag_Type> : Editor
