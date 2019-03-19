@@ -4,22 +4,27 @@ using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigge
 
 public class Ev_Enemy_Slasher : MonoBehaviour
 {
+    public GameObject shadow;
 	public float slashSpeed;
-    public float leapSpeed;
 	public float lungeThreshold;
     public float leapThreshold;
+
+    Leapifier leapifier;
+    public float leapHeight;
+    public float leapSpeed;
+    public AnimationCurve leapCurve;
+
 	protected GenericEnemyStateController controller;
 	public GameObject mySlash;
 	protected Vector3 startScale;
 	bool leapBack;
 	Vector2 leapDir;
-    Vector2 leapDestination;
+
 
     void Awake()
     {
         controller = GetComponent<GenericEnemyStateController>();
 		startScale = gameObject.transform.localScale;
-
     }
 
 	// Use this for initialization
@@ -38,6 +43,7 @@ public class Ev_Enemy_Slasher : MonoBehaviour
                     // If the enemy has an aligner and they aren't aligned, leapback to get a better angle before preparing the slash.
                     // Point to leap to should be parallel to the player on the opposite axis at the closest lunge threshold.
                     if (aligner && !aligner.IsAligned()) {
+                        Vector3 leapDestination = new Vector3();
                         switch (aligner.alignedAxis) {
                             case ALIGNED_AXIS.X_AXIS:
                                 if (transform.position.y < PlayerManager.Instance.player.transform.position.y) { // leap to below the player
@@ -54,6 +60,10 @@ public class Ev_Enemy_Slasher : MonoBehaviour
                                 }
                                 break;
                         }
+                        if (leapifier != null)
+                            leapifier.Reset();
+
+                        leapifier = new Leapifier(gameObject, shadow, leapHeight, leapSpeed, leapDestination, leapCurve);
                         gameObject.layer = 1; // transparentFX;
                         controller.SendTrigger(EnemyTrigger.LEAP);
                     }
@@ -80,9 +90,8 @@ public class Ev_Enemy_Slasher : MonoBehaviour
 	                }
                 break;
                 case EnemyState.LEAP:
-                    if (Vector2.Distance(transform.position, leapDestination) > 0.1f) {
-                        transform.position = Vector2.MoveTowards(gameObject.transform.position, leapDestination, leapSpeed * Time.deltaTime);
-                    } else { // landing spot
+                    if (leapifier.OnUpdate()) {
+                        // Reached the leap destination.
                         gameObject.layer = 9; // Enemy;
                         controller.SendTrigger(EnemyTrigger.IDLE);
                     }
