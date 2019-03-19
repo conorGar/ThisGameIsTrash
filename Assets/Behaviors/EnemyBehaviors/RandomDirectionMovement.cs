@@ -114,6 +114,7 @@ public class RandomDirectionMovement : MonoBehaviour {
 
     // Enemy picks a random direction and starts moving.
 	public virtual void StartMoving(){
+		Debug.Log("Start moving activated: RDM");
         controller.SetFlag((int)EnemyFlag.WALKING);
 
         if (walkPS != null && !walkPS.isPlaying)

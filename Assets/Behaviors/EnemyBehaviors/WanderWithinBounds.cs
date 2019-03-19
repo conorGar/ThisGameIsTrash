@@ -18,7 +18,7 @@ public class WanderWithinBounds : RandomDirectionMovement
 	void OnEnable ()
 	{
 		Debug.Log("Wander in bounds OnEnable() activate -q-q-q-q-q-q-q-q-q");
-		boundsSet = false;
+		//boundsSet = false;
 
 		Debug.Log("wander start position:" + startPosition);
 		base.OnEnable();

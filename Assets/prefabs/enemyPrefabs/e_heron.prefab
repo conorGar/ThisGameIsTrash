@@ -31,6 +31,7 @@ GameObject:
   - component: {fileID: 114637953889736180}
   - component: {fileID: 114676781642520680}
   - component: {fileID: 114110168198965418}
+  - component: {fileID: 114122821579723196}
   m_Layer: 9
   m_Name: e_heron
   m_TagString: Untagged
@@ -45,7 +46,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1869737680388406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8981128, y: -3.6255136, z: 0}
+  m_LocalPosition: {x: -8.143088, y: -2.4906764, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -178,6 +179,23 @@ MonoBehaviour:
   moveWhenHit: 0
   respawningEnemyType: 0
   toxicEnemy: 0
+--- !u!114 &114122821579723196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1869737680388406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7465d3cf6dc723459be3e518ac51b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 1
+  minMoveTime: 2
+  maxMoveTime: 4
+  stopTime: 2
+  walkPS: {fileID: 0}
+  mopSlow: 0
 --- !u!114 &114279526870538800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,7 +239,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1869737680388406}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7145ca8301081f84b8f5d9a7a1663aeb, type: 3}
   m_Name: 
@@ -233,7 +251,7 @@ MonoBehaviour:
   walkPS: {fileID: 0}
   mopSlow: 0
   myWanderZone: {fileID: 0}
-  boundsSet: 0
+  boundsSet: 1
 --- !u!114 &114637953889736180
 MonoBehaviour:
   m_ObjectHideFlags: 1
