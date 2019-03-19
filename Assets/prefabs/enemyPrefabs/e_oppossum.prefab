@@ -114,7 +114,7 @@ Transform:
   m_GameObject: {fileID: 1758106880808234}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.714947, y: 2.797174, z: 0.2109375}
-  m_LocalScale: {x: 0.73750025, y: 0.77500033, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4725802371464300}
   - {fileID: 4762279719366050}
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alignedObject: {fileID: 0}
   alignedAxis: 1
-  threshhold: 4
+  threshold: 4
 --- !u!114 &114410466137058820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -429,10 +429,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7edfa88dcebeb4e8c318ecee630878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadow: {fileID: 1496155243970660}
   slashSpeed: 9
-  leapSpeed: 18
   lungeThreshold: 9
   leapThreshold: 6
+  leapHeight: 1.5
+  leapSpeed: 18
+  leapCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 1.9979107
+      tangentMode: 69
+    - serializedVersion: 2
+      time: 0.50062966
+      value: 1.0002134
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0007324
+      value: -0.002445221
+      inSlope: -2.0049052
+      outSlope: 0
+      tangentMode: 69
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   mySlash: {fileID: 1399123632520780}
 --- !u!114 &114744051862825214
 MonoBehaviour:

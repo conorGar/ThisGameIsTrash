@@ -90412,11 +90412,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c53e2eee9581dc34fb499af47ac2ded2, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1762067391 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1496155243970660, guid: db47bafc826f45b40a3e245ab9c51588,
-    type: 2}
-  m_PrefabInternal: {fileID: 1970378187}
 --- !u!1 &1769327899
 GameObject:
   m_ObjectHideFlags: 0
@@ -99637,11 +99632,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4147513946720728, guid: db47bafc826f45b40a3e245ab9c51588, type: 2}
       propertyPath: m_LocalPosition.x
       value: -9.714947
@@ -99674,102 +99664,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 1758106880808234, guid: db47bafc826f45b40a3e245ab9c51588, type: 2}
-      propertyPath: m_Name
-      value: e_oppossum
-      objectReference: {fileID: 0}
-    - target: {fileID: 4147513946720728, guid: db47bafc826f45b40a3e245ab9c51588, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4147513946720728, guid: db47bafc826f45b40a3e245ab9c51588, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapHeight
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: shadow
-      value: 
-      objectReference: {fileID: 1762067391}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[0].inSlope
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[0].outSlope
-      value: 1.9979107
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[1].time
-      value: 0.50062966
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[1].value
-      value: 1.0002134
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_RotationOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[1].inSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[1].outSlope
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[2].time
-      value: 1.0007324
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[2].value
-      value: -0.002445221
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[2].inSlope
-      value: -2.0049052
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[2].tangentMode
-      value: 69
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapCurve.m_Curve.Array.data[0].tangentMode
-      value: 69
-      objectReference: {fileID: 0}
     - target: {fileID: 33310733716214222, guid: db47bafc826f45b40a3e245ab9c51588,
         type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114654820393110686, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: leapSpeed
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 114371437393580034, guid: db47bafc826f45b40a3e245ab9c51588,
-        type: 2}
-      propertyPath: threshold
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db47bafc826f45b40a3e245ab9c51588, type: 2}
