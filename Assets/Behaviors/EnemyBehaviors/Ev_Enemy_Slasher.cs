@@ -54,7 +54,7 @@ public class Ev_Enemy_Slasher : MonoBehaviour
                                 break;
                             case ALIGNED_AXIS.Y_AXIS:
                                 if (transform.position.x < PlayerManager.Instance.player.transform.position.x) { // leap to left of the player
-                                    leapDestination = PlayerManager.Instance.player.transform.position + leapThreshold * Vector3.left;             
+                                    leapDestination = PlayerManager.Instance.player.transform.position + leapThreshold * Vector3.left;
                                 } else { // leap to right of the player
                                     leapDestination = PlayerManager.Instance.player.transform.position + leapThreshold * Vector3.right;
                                 }
@@ -66,9 +66,9 @@ public class Ev_Enemy_Slasher : MonoBehaviour
                         leapifier = new Leapifier(gameObject, shadow, leapHeight, leapSpeed, leapDestination, leapCurve);
                         gameObject.layer = 1; // transparentFX;
                         controller.SendTrigger(EnemyTrigger.LEAP);
+                    } else {
+                        StartCoroutine("PrepareSlash");
                     }
-
-					StartCoroutine("PrepareSlash");
 				}
 			}switch (controller.GetCurrentState()) {
                 case EnemyState.HIT:

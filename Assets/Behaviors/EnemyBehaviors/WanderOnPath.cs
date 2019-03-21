@@ -10,6 +10,8 @@ public class WanderOnPath : MonoBehaviour
 	public float stopTime = 0f;
 
 	int currentMark;
+	public ParticleSystem walkPS;
+
 	GameObject destinationMark;
 	bool returningToStart;
 	public List<GameObject> pathMarks = new List<GameObject>(); //public for debugging, otherwise should be given by enemy spawner
@@ -86,7 +88,8 @@ public class WanderOnPath : MonoBehaviour
 
 	IEnumerator NextMark(){
 		controller.RemoveFlag((int)EnemyFlag.WALKING);
-
+		if (walkPS.isPlaying)
+            walkPS.Stop();
 		yield return new WaitForSeconds(stopTime);
 		if(currentMark < (pathMarks.Count-1)){
 			currentMark++;
@@ -95,6 +98,14 @@ public class WanderOnPath : MonoBehaviour
 		}
 		controller.SetFlag((int)EnemyFlag.WALKING);
 
+		//Turn
+		if(gameObject.transform.localScale.x < 0 && pathMarks[currentMark].transform.position.x > gameObject.transform.position.x){
+			gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
+		}if(gameObject.transform.localScale.x > 0 && pathMarks[currentMark].transform.position.x < gameObject.transform.position.x){
+			gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
+		}
+		if (walkPS != null && !walkPS.isPlaying)
+			walkPS.Play();
 		destinationMark = pathMarks[currentMark];
 	}
 

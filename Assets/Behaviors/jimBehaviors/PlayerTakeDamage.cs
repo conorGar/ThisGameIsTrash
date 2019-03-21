@@ -40,8 +40,8 @@ public class PlayerTakeDamage : MonoBehaviour {
     // two objects collide
 	void OnCollisionEnter2D(Collision2D enemy){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT ||
-                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD ||
+            if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT &&
+                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD &&
 				GetComponent<JimStateController>().GetCurrentState() != JimState.DASHING ) {
                 if (enemy.gameObject.layer == 9) { //layer 9 = enemies
 
@@ -93,8 +93,8 @@ public class PlayerTakeDamage : MonoBehaviour {
     // something entered this collider
 	void OnTriggerEnter2D(Collider2D projectile){
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT ||
-                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD ||
+            if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT &&
+                GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD &&
 				GetComponent<JimStateController>().GetCurrentState() != JimState.DASHING ) {
                 if (projectile.gameObject.layer == 10) { //layer 10 = projectiles
                     var projectileComp = projectile.gameObject.GetComponent<Projectile>();
@@ -171,6 +171,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 
             StartCoroutine("Death");
 
+        }else{
+        	StartCoroutine("InvulTimer");
         }
 	}
 
