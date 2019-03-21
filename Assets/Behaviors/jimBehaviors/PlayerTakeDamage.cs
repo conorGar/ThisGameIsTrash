@@ -170,6 +170,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 
             StartCoroutine("Death");
 
+        }else{
+        	StartCoroutine("InvulTimer");
         }
 	}
 
@@ -198,7 +200,10 @@ public class PlayerTakeDamage : MonoBehaviour {
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
 
 	}
-
+	IEnumerator InvulTimer(){
+		yield return new WaitForSeconds(1f);
+		GetComponent<JimStateController>().RemoveFlag((int)JimFlag.INVULNERABLE);
+	}
 
 	IEnumerator Death(){
         // Trigger Respawn State.

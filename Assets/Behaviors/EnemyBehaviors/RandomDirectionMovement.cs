@@ -109,7 +109,6 @@ public class RandomDirectionMovement : MonoBehaviour {
 
             if (enemyPath.path != null) {
                 enemyPath.FaceNextPathNode();
-
                 controller.SetFlag((int)EnemyFlag.WALKING);
                 if (walkPS != null && !walkPS.isPlaying)
                     walkPS.Play();

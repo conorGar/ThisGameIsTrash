@@ -11,14 +11,17 @@ public class BossFriendEx : Friend
     public GameObject ex;
 	public GameObject hash;
 	public GameObject questio;
+	public GameObject friendStuart;
 	public GameObject slideTrash;
     public int FieldRoomNum;
+	public int StuartIntroRoomNum;
     public AudioClip trioTheme;
     public AudioClip shieldSound;
     public GameObject toxicBarrier;
     public ParticleSystem toxicBarrierPS;
     public GameObject goWithItDisplay;
     public ParticleSystem toxicPipeFountain;
+    public GameObject rockPanDestination;
 
     public int ToxicFieldRoomNum;
 	//public GameObject stuartIcon;
@@ -65,6 +68,8 @@ public class BossFriendEx : Friend
         {
             case "IN_FIELD":
                 return room.roomNum == FieldRoomNum;
+			case "ON_TRAIL":
+                return room.roomNum == StuartIntroRoomNum;
             case "END":
                 return false;
         }
@@ -84,6 +89,10 @@ public class BossFriendEx : Friend
                 break;
             case "IN_TOXIC_FIELD":
                 nextDialog = "Boss1Start";
+				GetComponent<ActivateDialogWhenClose>().Execute("Stuart");
+                break;
+			case "ON_TRAIL":
+                nextDialog = "StuartIntro";
 				GetComponent<ActivateDialogWhenClose>().Execute("Stuart");
                 break;
             case "STUART_PEP":
@@ -228,6 +237,13 @@ public class BossFriendEx : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 22;
                 break;
+			case "ON_TRAIL":
+				Debug.Log("EX FRIEND ROOM ACTIVATE READ FOR ON TRAIL VALUE");
+				ex.SetActive(false);
+                hash.SetActive(false);
+                questio.SetActive(false);
+                friendStuart.SetActive(true);
+				break;
             case "FIGHT_PHASE_1":
             case "LEFT_FIGHT_PHASE_1":
                 ex.SetActive(false);
@@ -339,11 +355,44 @@ public class BossFriendEx : Friend
         stuart.PrepPhase2();
     }
 
+    public void RockPan(){
+    	StartCoroutine("RockPanSequence");
+    }
+
+    public IEnumerator RockPanSequence(){
+    	CamManager.Instance.mainCamPostProcessor.profile = null;
+		CamManager.Instance.mainCamEffects.CameraPan(rockPanDestination.gameObject,true);
+		yield return new WaitForSeconds(2.5f);
+		DialogManager.Instance.ReturnFromAction();
+
+    }
+    public void TrioAppear(){
+    	StartCoroutine("TrioAppearSequence");
+    }
+
+    public IEnumerator TrioAppearSequence(){
+		CamManager.Instance.mainCamEffects.CameraPan(ex,true);
+		yield return new WaitForSeconds(1f);
+    	ex.SetActive(true);
+		yield return new WaitForSeconds(1.5f);
+		DialogManager.Instance.ReturnFromAction();
+    }
+    public void WarpStuart(){
+    	StartCoroutine("StuartTeleport");
+    }
+
+    public IEnumerator StuartTeleport(){
+    	friendStuart.SetActive(false);
+		yield return new WaitForSeconds(1.5f);
+		DialogManager.Instance.ReturnFromAction();
+    }
+
 	public override void GiveData(List<GameObject> neededObjs){
     	toxicBarrier = neededObjs[0];
     	toxicBarrierPS = neededObjs[1].GetComponent<ParticleSystem>();
     	toxicPipeFountain = neededObjs[2].GetComponent<ParticleSystem>();
     	goWithItDisplay = neededObjs[3];
+    	rockPanDestination = neededObjs[4];
     }
 
 
