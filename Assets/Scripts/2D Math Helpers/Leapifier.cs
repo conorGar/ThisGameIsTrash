@@ -5,8 +5,7 @@ using UnityEngine;
 // Little helper class that takes in a body, shadow, leap height, leap speed, animationCurve, and end positions and translates over the two points with a nice little animation and shadow morph.
 // Should work great for enemies, items, projectiles, anything with an arcing trajectory.
 // Caveats: shadow most be a child gameObject of the body!
-public class Leapifier
-{
+public class Leapifier {
     GameObject _body;
     GameObject _shadow;
     float _leapHeight;

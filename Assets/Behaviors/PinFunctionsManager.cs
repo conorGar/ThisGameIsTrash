@@ -20,6 +20,8 @@ public class PinFunctionsManager : MonoBehaviour {
 	public Ev_CurrentWeapon currentWeaponDisplay;
 	public GameObject spinAttack;
 	public GameObject decoyObject;
+	public ParticleSystem dashTrail;
+
 	//public PinManager pinManager;
 	public Sprite[] displaySprites;
 	Sprite displaySprite;
@@ -74,6 +76,8 @@ public class PinFunctionsManager : MonoBehaviour {
 			if(givenKey == dashKey){
 				//-------------Dash-----------------//
 				dashCounter = 2;
+				dashTrail.Play();
+				PlayerManager.Instance.controller.SendTrigger(JimTrigger.DASH);
 				Debug.Log("Dumpster Dash - 2");
 
 				gameObject.GetComponent<EightWayMovement>().enabled = false; // I know we dont wanna do stuff like this, just felt like for this instance it was more appropriate doing this than creating a gamestate...?
@@ -88,7 +92,9 @@ public class PinFunctionsManager : MonoBehaviour {
 					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,30f),ForceMode2D.Impulse);
 				}
 				SoundManager.instance.PlaySingle(SFXBANK.DUMPSTERDASH);
-				yield return new WaitForSeconds(.1f);
+				yield return new WaitForSeconds(.2f);
+				PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
+
 				dashCounter = 0;
 				gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 				gameObject.GetComponent<EightWayMovement>().enabled = true;
@@ -136,12 +142,17 @@ public class PinFunctionsManager : MonoBehaviour {
 	}
 
 	void DirtyDecoyTimer(){
-		if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
-			decoyTimer++;
-			if(decoyTimer >= 25){
-			DirtyDecoy();
-			decoyTimer = 0;
+		if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DIRTYDECOY)){
+			if(GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
+				decoyTimer++;
+				if(decoyTimer >= 25){
+				DirtyDecoy();
+				decoyTimer = 0;
+				}
 			}
+		}else{
+			Debug.Log("Dirty Decoy Timer Invoke canceled! (Unequiped pin?)");
+			CancelInvoke("DirtyDecoyTimer");
 		}
 	}
 

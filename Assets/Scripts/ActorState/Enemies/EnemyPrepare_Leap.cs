@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class EnemyPrepare_Leap : IActorState<EnemyState, EnemyTrigger>
 {
     public bool hasMultipleAnimations;
@@ -14,7 +13,7 @@ public class EnemyPrepare_Leap : IActorState<EnemyState, EnemyTrigger>
         facingLeft = p_facingLeft;
     }
 
-	public EnemyState GetState()
+    public EnemyState GetState()
     {
         return EnemyState.PREPARE_LEAP;
     }

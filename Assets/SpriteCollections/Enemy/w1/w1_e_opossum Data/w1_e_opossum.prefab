@@ -1,0 +1,1568 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1100005497812206}
+  m_IsPrefabParent: 1
+--- !u!1 &1100005497812206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4212834223455800}
+  - component: {fileID: 114322827995402222}
+  m_Layer: 0
+  m_Name: w1_e_opossum
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4212834223455800
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1100005497812206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114322827995402222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1100005497812206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: opossum_swing6
+    boundsData:
+    - {x: 0.8461535, y: 0.42307675, z: 0}
+    - {x: 8.666666, y: 6.7948713, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.4871798, y: -2.974359, z: 0}
+    - {x: 5.1794868, y: -2.974359, z: 0}
+    - {x: -3.4871798, y: 3.8205125, z: 0}
+    - {x: 5.1794868, y: 3.8205125, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.8642583, y: 0.0009770507}
+    - {x: 0.8642583, y: 0.16601513}
+    - {x: 0.99365187, y: 0.0009770507}
+    - {x: 0.99365187, y: 0.16601513}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: a1f716f59357f574ebed4b4c58a8ba0b
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing4
+    boundsData:
+    - {x: 0.8461535, y: 0.24358952, z: 0}
+    - {x: 8.666666, y: 7.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.4871798, y: -3.6153848, z: 0}
+    - {x: 5.1794868, y: -3.6153848, z: 0}
+    - {x: -3.4871798, y: 4.102564, z: 0}
+    - {x: 5.1794868, y: 4.102564, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.848145, y: 0.16796924}
+    - {x: 0.848145, y: 0.33300734}
+    - {x: 0.9951167, y: 0.16796924}
+    - {x: 0.9951167, y: 0.33300734}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: b551b20342f231149b6e4cb35058bbc3
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_walk1
+    boundsData:
+    - {x: 0.34615362, y: 0.3589741, z: 0}
+    - {x: 8.0256405, y: 7.948718, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.6666667, y: -3.6153848, z: 0}
+    - {x: 4.358974, y: -3.6153848, z: 0}
+    - {x: -3.6666667, y: 4.333333, z: 0}
+    - {x: 4.358974, y: 4.333333, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5039067, y: 0.31591845}
+    - {x: 0.6567378, y: 0.31591845}
+    - {x: 0.5039067, y: 0.46728468}
+    - {x: 0.6567378, y: 0.46728468}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 1fb725303769d8a4a80413730fe7ca95
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing3
+    boundsData:
+    - {x: 0.833333, y: 0.39743567, z: 0}
+    - {x: 8.692307, y: 7.820513, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5128207, y: -3.5128207, z: 0}
+    - {x: 5.1794868, y: -3.5128207, z: 0}
+    - {x: -3.5128207, y: 4.307692, z: 0}
+    - {x: 5.1794868, y: 4.307692, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6972661, y: 0.1533208}
+    - {x: 0.6972661, y: 0.31884718}
+    - {x: 0.8461909, y: 0.1533208}
+    - {x: 0.8461909, y: 0.31884718}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: a2f682a1948a7e843882016717a1f152
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing8
+    boundsData:
+    - {x: 1.1282048, y: -0.28205132, z: 0}
+    - {x: 8.051282, y: 8.615385, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.8974361, y: -4.5897436, z: 0}
+    - {x: 5.153846, y: -4.5897436, z: 0}
+    - {x: -2.8974361, y: 4.025641, z: 0}
+    - {x: 5.153846, y: 4.025641, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3642583, y: 0.15283252}
+    - {x: 0.3642583, y: 0.30615187}
+    - {x: 0.52831984, y: 0.15283252}
+    - {x: 0.52831984, y: 0.30615187}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ec923a1538283b847b0237eea9aa825f
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_walk2
+    boundsData:
+    - {x: 0.26923048, y: 0.25641012, z: 0}
+    - {x: 7.769231, y: 7.897436, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.6153848, y: -3.692308, z: 0}
+    - {x: 4.153846, y: -3.692308, z: 0}
+    - {x: -3.6153848, y: 4.205128, z: 0}
+    - {x: 4.153846, y: 4.205128, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.46142626, y: 0.6196294}
+    - {x: 0.46142626, y: 0.76757765}
+    - {x: 0.6118159, y: 0.6196294}
+    - {x: 0.6118159, y: 0.76757765}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: addf630cb981b4a44a17b95db791aa39
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing1
+    boundsData:
+    - {x: 0.61538434, y: 0.26923048, z: 0}
+    - {x: 9.128204, y: 8.282051, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.948718, y: -3.871795, z: 0}
+    - {x: 5.1794868, y: -3.871795, z: 0}
+    - {x: -3.948718, y: 4.410256, z: 0}
+    - {x: 5.1794868, y: 4.410256, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.18847705, y: 0.0009770507}
+    - {x: 0.3623042, y: 0.0009770507}
+    - {x: 0.18847705, y: 0.15869091}
+    - {x: 0.3623042, y: 0.15869091}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 4fd6d3288e9c8bb46a72b3facc33f4ec
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_chase3
+    boundsData:
+    - {x: 0.05128169, y: -0.30769265, z: 0}
+    - {x: 8.666666, y: 7.897436, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.2820516, y: -4.2564106, z: 0}
+    - {x: 4.384615, y: -4.2564106, z: 0}
+    - {x: -4.2820516, y: 3.6410253, z: 0}
+    - {x: 4.384615, y: 3.6410253, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6972661, y: 0.0009770507}
+    - {x: 0.8623042, y: 0.0009770507}
+    - {x: 0.6972661, y: 0.1513667}
+    - {x: 0.8623042, y: 0.1513667}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: b8a2e87f52d8ee245afb8aa38072e86b
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing7
+    boundsData:
+    - {x: 0.57692266, y: -0.051282406, z: 0}
+    - {x: 8.538462, y: 7.333333, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.692308, y: -3.717949, z: 0}
+    - {x: 4.8461533, y: -3.717949, z: 0}
+    - {x: -3.692308, y: 3.615384, z: 0}
+    - {x: 4.8461533, y: 3.615384, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.14599659, y: 0.6162114}
+    - {x: 0.14599659, y: 0.7788081}
+    - {x: 0.28564405, y: 0.6162114}
+    - {x: 0.28564405, y: 0.7788081}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: de436204b38aa5e47b5136651823fadf
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_walk4
+    boundsData:
+    - {x: 0.5384611, y: 0.2307688, z: 0}
+    - {x: 8.3589735, y: 8.051282, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.6410258, y: -3.794872, z: 0}
+    - {x: 4.717948, y: -3.794872, z: 0}
+    - {x: -3.6410258, y: 4.2564096, z: 0}
+    - {x: 4.717948, y: 4.2564096, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5302739, y: 0.16064502}
+    - {x: 0.68945265, y: 0.16064502}
+    - {x: 0.5302739, y: 0.31396437}
+    - {x: 0.68945265, y: 0.31396437}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 2fa924dbd9de1904ba5eb674d99b3ae2
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_chase2
+    boundsData:
+    - {x: 0.10256386, y: -0.19230795, z: 0}
+    - {x: 9.333333, y: 7.9743586, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.5641026, y: -4.179487, z: 0}
+    - {x: 4.7692304, y: -4.179487, z: 0}
+    - {x: -4.5641026, y: 3.7948713, z: 0}
+    - {x: 4.7692304, y: 3.7948713, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.15185596}
+    - {x: 0.17871045, y: 0.15185596}
+    - {x: 0.0009770507, y: 0.30371046}
+    - {x: 0.17871045, y: 0.30371046}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 65d7053b611903f45a128eae3382b500
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_walk5
+    boundsData:
+    - {x: 0.46153796, y: 0.43589723, z: 0}
+    - {x: 8.51282, y: 8.102564, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.794872, y: -3.6153848, z: 0}
+    - {x: 4.717948, y: -3.6153848, z: 0}
+    - {x: -3.794872, y: 4.4871793, z: 0}
+    - {x: 4.717948, y: 4.4871793, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.18066455, y: 0.16064502}
+    - {x: 0.34277296, y: 0.16064502}
+    - {x: 0.18066455, y: 0.31494093}
+    - {x: 0.34277296, y: 0.31494093}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: a995bd8bce99f0b438466c745fc1dfaf
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing2
+    boundsData:
+    - {x: 0.7307689, y: 0.3717947, z: 0}
+    - {x: 8.897436, y: 7.8717947, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.717949, y: -3.5641026, z: 0}
+    - {x: 5.1794868, y: -3.5641026, z: 0}
+    - {x: -3.717949, y: 4.307692, z: 0}
+    - {x: 5.1794868, y: 4.307692, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3642583, y: 0.0009770507}
+    - {x: 0.5336909, y: 0.0009770507}
+    - {x: 0.3642583, y: 0.15087841}
+    - {x: 0.5336909, y: 0.15087841}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 199f2d45f803b7d4180de473710d1f91
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing5
+    boundsData:
+    - {x: 0.88461506, y: 0.21794844, z: 0}
+    - {x: 8.589744, y: 7.5128202, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.4102566, y: -3.5384617, z: 0}
+    - {x: 5.1794868, y: -3.5384617, z: 0}
+    - {x: -3.4102566, y: 3.9743586, z: 0}
+    - {x: 5.1794868, y: 3.9743586, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.46386766}
+    - {x: 0.0009770507, y: 0.6274409}
+    - {x: 0.14404248, y: 0.46386766}
+    - {x: 0.14404248, y: 0.6274409}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: cd3196bc0568202449aac09a6757266c
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_walk3
+    boundsData:
+    - {x: 0.21794844, y: 0.012820482, z: 0}
+    - {x: 8.282051, y: 8.384615, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.923077, y: -4.179487, z: 0}
+    - {x: 4.358974, y: -4.179487, z: 0}
+    - {x: -3.923077, y: 4.205128, z: 0}
+    - {x: 4.358974, y: 4.205128, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.535645, y: 0.0009770507}
+    - {x: 0.535645, y: 0.15869091}
+    - {x: 0.695312, y: 0.0009770507}
+    - {x: 0.695312, y: 0.15869091}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 9bc7f38e2205d824e9654ff071d00fce
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing12
+    boundsData:
+    - {x: 0.99999976, y: 0.25640988, z: 0}
+    - {x: 7.1794868, y: 7.9999995, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.5897436, y: -3.7435899, z: 0}
+    - {x: 4.589743, y: -3.7435899, z: 0}
+    - {x: -2.5897436, y: 4.2564096, z: 0}
+    - {x: 4.589743, y: 4.2564096, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.7851567}
+    - {x: 0.13769482, y: 0.7851567}
+    - {x: 0.0009770507, y: 0.9374995}
+    - {x: 0.13769482, y: 0.9374995}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: d6e2d18c966070f428e4851ed7824a29
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing9
+    boundsData:
+    - {x: 1.0641025, y: -0.06410289, z: 0}
+    - {x: 7.5128202, y: 8.076923, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.6923077, y: -4.1025643, z: 0}
+    - {x: 4.820513, y: -4.1025643, z: 0}
+    - {x: -2.6923077, y: 3.9743586, z: 0}
+    - {x: 4.820513, y: 3.9743586, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.629395}
+    - {x: 0.14404248, y: 0.629395}
+    - {x: 0.0009770507, y: 0.78320265}
+    - {x: 0.14404248, y: 0.78320265}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 9163269f725fa2d488f426e83a11f3ed
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing11
+    boundsData:
+    - {x: 0.98717916, y: 0.17948675, z: 0}
+    - {x: 7.2051277, y: 8.153846, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.6153848, y: -3.8974361, z: 0}
+    - {x: 4.589743, y: -3.8974361, z: 0}
+    - {x: -2.6153848, y: 4.2564096, z: 0}
+    - {x: 4.589743, y: 4.2564096, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.14599659, y: 0.7807622}
+    - {x: 0.28320265, y: 0.7807622}
+    - {x: 0.14599659, y: 0.9360347}
+    - {x: 0.28320265, y: 0.9360347}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ad78bd22311b67b4caceaf3e88b41379
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_swing10
+    boundsData:
+    - {x: 1.2692305, y: 0.23076904, z: 0}
+    - {x: 7.820513, y: 7.6923075, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.6410258, y: -3.6153848, z: 0}
+    - {x: 5.1794868, y: -3.6153848, z: 0}
+    - {x: -2.6410258, y: 4.076923, z: 0}
+    - {x: 5.1794868, y: 4.076923, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.7934575, y: 0.48681688}
+    - {x: 0.94238234, y: 0.48681688}
+    - {x: 0.7934575, y: 0.6333003}
+    - {x: 0.94238234, y: 0.6333003}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: b65b9407e90e64845a928419f402f67e
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_chase1
+    boundsData:
+    - {x: 0.30769205, y: 0.21794844, z: 0}
+    - {x: 9.743589, y: 7.820513, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.5641026, y: -3.692308, z: 0}
+    - {x: 5.1794868, y: -3.692308, z: 0}
+    - {x: -4.5641026, y: 4.128205, z: 0}
+    - {x: 5.1794868, y: 4.128205, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.0009770507}
+    - {x: 0.18652295, y: 0.0009770507}
+    - {x: 0.0009770507, y: 0.14990185}
+    - {x: 0.18652295, y: 0.14990185}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f760f0a5b5d51ce45acdb356018937df
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_chase4
+    boundsData:
+    - {x: 0.05128169, y: -0.38461578, z: 0}
+    - {x: 8.358974, y: 8.205128, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.1282053, y: -4.4871798, z: 0}
+    - {x: 4.2307687, y: -4.4871798, z: 0}
+    - {x: -4.1282053, y: 3.7179482, z: 0}
+    - {x: 4.2307687, y: 3.7179482, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.30566454}
+    - {x: 0.16015576, y: 0.30566454}
+    - {x: 0.0009770507, y: 0.4619136}
+    - {x: 0.16015576, y: 0.4619136}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 3a36471494a8f3e4cb75541f1bb2701f
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_chase5
+    boundsData:
+    - {x: 0.051281452, y: 0.20512795, z: 0}
+    - {x: 8.25641, y: 7.9487176, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -4.0769234, y: -3.7692308, z: 0}
+    - {x: 4.1794863, y: -3.7692308, z: 0}
+    - {x: -4.0769234, y: 4.1794868, z: 0}
+    - {x: 4.1794863, y: 4.1794868, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.34472704, y: 0.30810595}
+    - {x: 0.50195265, y: 0.30810595}
+    - {x: 0.34472704, y: 0.45947218}
+    - {x: 0.50195265, y: 0.45947218}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 7df3a6667578e8f44a71a9bda015fa02
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_dead
+    boundsData:
+    - {x: 0.35897398, y: 0.17948723, z: 0}
+    - {x: 7.6923075, y: 8.410256, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.4871798, y: -4.025641, z: 0}
+    - {x: 4.2051277, y: -4.025641, z: 0}
+    - {x: -3.4871798, y: 4.3846154, z: 0}
+    - {x: 4.2051277, y: 4.3846154, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.16210987, y: 0.316895}
+    - {x: 0.16210987, y: 0.46337843}
+    - {x: 0.32226515, y: 0.316895}
+    - {x: 0.32226515, y: 0.46337843}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: d79953b8ebf9d1e4c91defab553e15a1
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_idle8
+    boundsData:
+    - {x: 0.6025636, y: 0.025640845, z: 0}
+    - {x: 8.230768, y: 7.6410255, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5128207, y: -3.794872, z: 0}
+    - {x: 4.717948, y: -3.794872, z: 0}
+    - {x: -3.5128207, y: 3.8461537, z: 0}
+    - {x: 4.717948, y: 3.8461537, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.30273485, y: 0.61279345}
+    - {x: 0.45947218, y: 0.61279345}
+    - {x: 0.30273485, y: 0.7583003}
+    - {x: 0.45947218, y: 0.7583003}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 2411c98f140906f4097cd32dcdb3ba81
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_idle3
+    boundsData:
+    - {x: 0.26923025, y: -0.16666687, z: 0}
+    - {x: 7.820512, y: 8.128204, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.6410258, y: -4.230769, z: 0}
+    - {x: 4.1794863, y: -4.230769, z: 0}
+    - {x: -3.6410258, y: 3.8974354, z: 0}
+    - {x: 4.1794863, y: 3.8974354, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.14599659, y: 0.4653325}
+    - {x: 0.14599659, y: 0.61425734}
+    - {x: 0.30078077, y: 0.4653325}
+    - {x: 0.30078077, y: 0.61425734}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 594a3fe94d3eb2f46b84f9290b298c78
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_idle4
+    boundsData:
+    - {x: 0.3846153, y: -0.12820554, z: 0}
+    - {x: 8.102564, y: 7.8461537, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.6666667, y: -4.0512824, z: 0}
+    - {x: 4.4358974, y: -4.0512824, z: 0}
+    - {x: -3.6666667, y: 3.7948713, z: 0}
+    - {x: 4.4358974, y: 3.7948713, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.32421923, y: 0.46142626}
+    - {x: 0.47851515, y: 0.46142626}
+    - {x: 0.32421923, y: 0.61083937}
+    - {x: 0.47851515, y: 0.61083937}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 6aa916056bae8c0448896a914c4791bc
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_idle5
+    boundsData:
+    - {x: 0.44871747, y: -0.102564216, z: 0}
+    - {x: 8.076922, y: 7.8461533, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5897439, y: -4.025641, z: 0}
+    - {x: 4.487179, y: -4.025641, z: 0}
+    - {x: -3.5897439, y: 3.8205125, z: 0}
+    - {x: 4.487179, y: 3.8205125, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6586919, y: 0.32080126}
+    - {x: 0.8124995, y: 0.32080126}
+    - {x: 0.6586919, y: 0.47021437}
+    - {x: 0.8124995, y: 0.47021437}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 5b86a1d8a0b19644da471626eedac4c3
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_idle1
+    boundsData:
+    - {x: 0.41025615, y: -0.102564335, z: 0}
+    - {x: 7.8974357, y: 7.6923075, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5384617, y: -3.948718, z: 0}
+    - {x: 4.358974, y: -3.948718, z: 0}
+    - {x: -3.5384617, y: 3.7435894, z: 0}
+    - {x: 4.358974, y: 3.7435894, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.28759813, y: 0.7602544}
+    - {x: 0.4379878, y: 0.7602544}
+    - {x: 0.28759813, y: 0.9067378}
+    - {x: 0.4379878, y: 0.9067378}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 0f9c38f72dade7a4db05bbb95a4df371
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_idle2
+    boundsData:
+    - {x: 0.37179446, y: -0.1410259, z: 0}
+    - {x: 7.871794, y: 7.9230766, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5641026, y: -4.1025643, z: 0}
+    - {x: 4.3076916, y: -4.1025643, z: 0}
+    - {x: -3.5641026, y: 3.8205125, z: 0}
+    - {x: 4.3076916, y: 3.8205125, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.8144536, y: 0.3349614}
+    - {x: 0.8144536, y: 0.4848628}
+    - {x: 0.96533155, y: 0.3349614}
+    - {x: 0.96533155, y: 0.4848628}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: b637945a233525446ab9317a6b4d6962
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_idle6
+    boundsData:
+    - {x: 0.5256407, y: -0.07692325, z: 0}
+    - {x: 8.128204, y: 7.7948713, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5384617, y: -3.974359, z: 0}
+    - {x: 4.589743, y: -3.974359, z: 0}
+    - {x: -3.5384617, y: 3.8205125, z: 0}
+    - {x: 4.589743, y: 3.8205125, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.48046923, y: 0.46923876}
+    - {x: 0.6352534, y: 0.46923876}
+    - {x: 0.48046923, y: 0.6176753}
+    - {x: 0.6352534, y: 0.6176753}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: e390d721d490c6c4087acf1673fd177b
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: opossum_idle7
+    boundsData:
+    - {x: 0.6410254, y: -0.025641203, z: 0}
+    - {x: 8.102564, y: 7.6923075, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.012820244, y: -0.012820721, z: 0}
+    - {x: 10.333333, y: 9.461538, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.4102566, y: -3.871795, z: 0}
+    - {x: 4.6923075, y: -3.871795, z: 0}
+    - {x: -3.4102566, y: 3.8205125, z: 0}
+    - {x: 4.6923075, y: 3.8205125, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6372075, y: 0.47216845}
+    - {x: 0.7915034, y: 0.47216845}
+    - {x: 0.6372075, y: 0.61865187}
+    - {x: 0.7915034, y: 0.61865187}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 46be9da51ea19ed45bb3ffdf1139a0d4
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: 0bc02d3692aab5c458d291a9fb9e2d03, type: 2}
+  textures:
+  - {fileID: 2800000, guid: 07a31790d6f9e514bb329fa24f1ab151, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: 96ead2c09b3a1b8418d57f518b9c1cd9
+  spriteCollectionName: w1_e_opossum
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 1392960992
+  dataGuid: 715606a1bcb198f4e8e9f4374952af9e
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

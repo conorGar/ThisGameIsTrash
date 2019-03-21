@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 // Something simple to contain GUI elements in the scene so references aren't passed all over the place.
 // TODO: Maybe break this up into a manager for each world since they each have specific GUIs.
 public class GUIManager : MonoBehaviour {
@@ -13,19 +13,28 @@ public class GUIManager : MonoBehaviour {
     public GUI_DeathDisplay DeathDisplay;
     public GUI_TrashCollectedDisplay TrashCollectedDisplayGameplay; // At the top left of the screen during gameplay
     public GUI_TrashCollectedDisplay TrashCollectedDisplayDeath; // On the death display
+    public GUI_HPdisplay hpDisplay;
+    public GameObject checkPointDisplay;
+
   	public GUI_TutPopup tutorialPopup;
   	public Camera miniMapCam;
+
+   	public TextMeshProUGUI lostTrash;
+
 
     // Friend related
     public GUI_RockItemHUD rockItemHUD;
     public GUI_SlabTrashGiveHUD slabTrashGiveHUD;
 	public GameObject SlabTrashNeededDisplay;
 	public GameObject StoneHandNeededDisplay;
+	public GUI_RockItemHUD coonScavengerHUD;
 
     // Hub related
     public GameObject BaseStatHUD;
     public GUI_BaseStatUpgrade GUI_BaseStatUpgrade;
     public Hub_UpgradeStand Hub_UpgradeStand;
+    public GUI_TimeUpgrade GUI_TimeUpgrade;
+    public GameObject areaTitle;
 
 
 	void Awake () {

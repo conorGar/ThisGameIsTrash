@@ -40,8 +40,11 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 		
 	}
 	IEnumerator Delay(){
+		if(target == null){
+            target = PlayerManager.Instance.player;
+		}
 		yield return new WaitForSeconds(.1f);
-		movementDir = (target.transform.position - gameObject.transform.position).normalized * 5;
+		movementDir = (target.transform.position - gameObject.transform.position).normalized * speed;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementDir.x,movementDir.y);
 	}
 }

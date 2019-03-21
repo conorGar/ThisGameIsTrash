@@ -7,19 +7,21 @@ public class FireTowardPlayer : MonoBehaviour {
 	public float projectileSpeed;
 	public float fireRate;
 	public bool myProjectileFalls = false;
+	public bool fireAtStart = true;
+	public float randomRateChanger;
 
 	public GameObject projectile;
 	public AudioClip throwSFX;
 
-	int throwOnceCheck;
+	int throwOnceCheck = 1;
 	float nextThrowTime;
 
 	[HideInInspector]
 	public GameObject target;
 
 	private tk2dSpriteAnimator anim;
-
 	protected EnemyStateController controller;
+	Vector2 startScale;
 
 
 	// Use this for initialization
@@ -33,15 +35,21 @@ public class FireTowardPlayer : MonoBehaviour {
 		Debug.Log("Fire toward player on enable activated");
 		anim = GetComponent<tk2dSpriteAnimator>();
 		CancelInvoke();
+		startScale = gameObject.transform.localScale;
         //InvokeRepeating("Fire",2.0f,fireRate);
 
-        if (PlayerManager.Instance.player)
+        if (PlayerManager.Instance != null && PlayerManager.Instance.player)
             target = PlayerManager.Instance.player;
-        StartCoroutine("Fire");
+        if(fireAtStart){
+       	 //StartCoroutine("Fire");
+       	 throwOnceCheck = 0;
+       	 }else{
+       	 throwOnceCheck = 1;
+       	 }
     }
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
 			//Debug.Log(controller.name);
 			switch (controller.GetCurrentState()) {
@@ -56,8 +64,12 @@ public class FireTowardPlayer : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Fire(){
+	public IEnumerator Fire(){
 		//yield return new WaitForSeconds(fireRate);
+		if(target == null){
+			target = PlayerManager.Instance.player;
+		}
+		Debug.Log("Fire Enum Activated");
 		if(!GlobalVariableManager.Instance.IS_HIDDEN){ //wont fire at player if player is hidden
 			if (controller.currentState.GetState() == EnemyState.IDLE) {
 				if(gameObject.activeInHierarchy == false){
@@ -76,13 +88,15 @@ public class FireTowardPlayer : MonoBehaviour {
 				if (controller.GetCurrentState() == EnemyState.THROW) {
 					Debug.Log("fired2");
 					if(target.transform.position.x < transform.position.x){
-						transform.localScale = new Vector3(1,1,1);
+						transform.localScale = startScale;
 					} else{
-						transform.localScale = new Vector3(-1,1,1);
+						transform.localScale = new Vector3(startScale.x*-1,startScale.y,1);
 					}
 					GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag,gameObject.transform.position);
 					bullet.GetComponent<Ev_ProjectileTowrdPlayer>().enabled = true; // starts off disabled only so i didnt have to make another tag for rocks that DONT follow player(like ones that spawn from boulder.) feel free to just do that if tis causes issues
+
 					if(bullet.GetComponent<Ev_ProjectileTowrdPlayer>() != null){
+						bullet.GetComponent<Ev_ProjectileTowrdPlayer>().speed = projectileSpeed;
 						bullet.GetComponent<Ev_ProjectileTowrdPlayer>().target = this.target;
 					}
 					bullet.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -91,7 +105,7 @@ public class FireTowardPlayer : MonoBehaviour {
 					if(!myProjectileFalls && bullet.GetComponent<Ev_FallingProjectile>() !=null)
 						bullet.GetComponent<Ev_FallingProjectile>().enabled = false;
 
-					nextThrowTime = Time.time + fireRate;
+					nextThrowTime = Time.time + fireRate + Random.Range(0,randomRateChanger);
 					throwOnceCheck = 0;
 					StopCoroutine("Fire");
 				}

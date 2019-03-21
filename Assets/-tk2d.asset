@@ -193,6 +193,18 @@ MonoBehaviour:
     dataGUID: 
     managed: 0
     loadable: 0
+  - assetGUID: 0a8f8363ecec3574fb70f6055eee2579
+    dataGUID: 
+    managed: 0
+    loadable: 0
+  - assetGUID: e80f822cc644ece4d8fede329133eaf7
+    dataGUID: 
+    managed: 0
+    loadable: 0
+  - assetGUID: 73d8cd7b61b916c4dab25e6549bbdc05
+    dataGUID: 
+    managed: 0
+    loadable: 0
   fontIndex:
   - assetGUID: 063b15d80dbb4604d890600a64c79cf8
     dataGUID: e7a6b09a73c6b2b4f8060096ddbd3b5e
@@ -2713,20 +2725,20 @@ MonoBehaviour:
     - jim4_throw6
     - jim4_throw7
     - jim4_throw8
-    - jim4_spinAttack5
-    - jim4_spinAttack6
-    - jim4_spinAttack7
-    - jim4_spinAttack12
-    - jim4_spinAttack13
-    - jim4_spinAttack14
-    - jim4_spinAttack1
-    - jim4_spinAttack2
-    - jim4_spinAttack3
-    - jim4_spinAttack4
-    - jim4_spinAttack8
-    - jim4_spinAttack9
-    - jim4_spinAttack10
-    - jim4_spinAttack11
+    - jim4_newSwing6
+    - jim4_newSwing7
+    - jim4_newSwing8
+    - jim4_newSwing4
+    - jim4_newSwing2
+    - jim4_newSwing3
+    - jim4_newSwing9
+    - jim4_newSwing10
+    - jim4_newSwing11
+    - jim4_newSwing12
+    - jim4_newSwing13
+    - jim4_newSwing14
+    - jim4_newSwing15
+    - jim4_newSwing16
     - jim4_excitedJump1
     - jim4_excitedJump2
     - jim4_excitedJump3
@@ -2742,6 +2754,10 @@ MonoBehaviour:
     - jim4_swingWlegs2
     - jim4_swingWlegs3
     - jim4_runWlegs8
+    - jim4_newSwing17
+    - jim4_newSwing18
+    - jim4_newSwing5
+    - jim4_newSwing1
     spriteTextureGUIDs:
     - c930aaad181731940b9fd87046496be1
     - 2c9514a5e3afa6240aec2f59cd4ba578
@@ -2879,20 +2895,20 @@ MonoBehaviour:
     - 97410551a2e961142894f28637681253
     - fdd6a895f762eac49a429c2b631c661f
     - b6911fe50ba08e448bcefce20977cba3
-    - 4eedc6d96aea0344faaf8cd7b657e14c
-    - 6ea2d88fd50825548bbf59014fa156e3
-    - 5f30e2e7d3c360c4b9b9946000d5a95a
-    - 11a884469a80d064dabe9a2dba4d426f
-    - cb6a37436c8bc8144b7917fe0754c1ea
-    - 7a1711536fadadc47992579ec4369d83
-    - 7d7d0d581647d2c4fa980392a413f3c1
-    - 3a36ca947d75bce4489358c41354f989
-    - cd6825038394a4b49911afdab0ab9181
-    - 92b51ff7cbb78ef44914b5e7fc21a35f
-    - 6d4a266a6f2edf24fbe2480ea3835928
-    - d865818e478a12b428e4e1af0fb4988d
-    - feb8b96581a82b14f9160365bbda11f5
-    - 0fcadae78155b8b4791c56b8f539c84e
+    - 67191d8f83d18eb4290f60fbb4d8e982
+    - a34ed98e16784bf49aebc216610dcee1
+    - 79f15afede94bd549974be02ab808b0d
+    - 224e4b5da88ddc541b0ec1c013e9ce98
+    - 5e793b96683f13c4bbcc1d7e2076934f
+    - c8c0605601f454f4fb1ff1a820d24953
+    - 07e22fad52ce9534985c00ed3652d1a8
+    - b103dc4a53cc3ac41882b09ab8616680
+    - cdd53d491f4e84d4294131c899211f15
+    - 0975d313336339a418681930fbe82100
+    - 6a70c6e7199c1f64b829e7710a128544
+    - 21246443c98470b439ccdd362e312358
+    - f4cdee02c2adc524b8248d8c0ffbb043
+    - 0057bf1a7d868d64490d470279169082
     - 85d4d97f02c24724b91989b78b82f6da
     - cf025cba4d2bb7441b9cc5862a186612
     - 8fc2d9f3ed24d2e4a835db6ae363d9b1
@@ -2908,27 +2924,31 @@ MonoBehaviour:
     - 7f0e0ae79b1f8f64fa46f5c1f22e56f0
     - 4c43ad61cbdf7ac4898af5d3c887502c
     - 9133ca553505f694697c2faa82bd091c
+    - 8245ea6609d5faa42afb463a7700d88d
+    - f5755c4c2b56bd44ca9179da484b16f5
+    - 4628ef217c7dee24c89152b861839b30
+    - 142a1b5378901b04ab9db8bf1f316d79
     spriteTextureTimeStamps:
-    - 1549666414.45407
-    - 1550265102.93017
-    - 1550265104.9676
-    - 1550265105.3749
-    - 1549666383.58072
-    - 1549666404.33919
-    - 1549666393.76224
-    - 1550265105.55202
-    - 1550265106.70183
-    - 1549666433.48362
-    - 1550265103.16532
-    - 1550265107.07309
-    - 1550265107.32729
+    - 1551027853.8237
+    - 1551282434.34968
+    - 1551282434.91208
+    - 1551282435.11022
+    - 1551027853.62456
+    - 1551027853.76566
+    - 1551027853.68661
+    - 1551282435.22431
+    - 1551282435.34839
+    - 1551027853.94979
+    - 1551282434.49879
+    - 1551282435.50851
+    - 1551282435.65061
     - 1534704155.37888
-    - 1550265107.57246
-    - 1550265107.73657
-    - 1550265104.35117
-    - 1549666356.18873
-    - 1550265104.5463
-    - 1549666424.5526
+    - 1551282435.75168
+    - 1551282435.89378
+    - 1551282434.61987
+    - 1551027853.50648
+    - 1551282434.72495
+    - 1551027853.88375
     - 1530694508.82046
     - 1530773541.75786
     - 1530773513.00646
@@ -3045,20 +3065,20 @@ MonoBehaviour:
     - 1540587974.27659
     - 1540587974.30462
     - 1540587974.34964
-    - 1550265110.28738
-    - 1550265110.38445
-    - 1550265110.42649
-    - 1550265109.80904
-    - 1550265109.87508
-    - 1550265109.92114
-    - 1550265109.26867
-    - 1550265110.02419
-    - 1550265110.12528
-    - 1550265110.26136
-    - 1550265110.4545
-    - 1550265110.4615
-    - 1550265109.58089
-    - 1550265109.71599
+    - 1551966540.68888
+    - 1551966551.7548
+    - 1551966563.92834
+    - 1551966516.56344
+    - 1551966498.47632
+    - 1551966508.17551
+    - 1551966575.05472
+    - 1551966584.64279
+    - 1551966596.95535
+    - 1551966608.41203
+    - 1551966619.42948
+    - 1551966635.18403
+    - 1551966651.8882
+    - 1551966664.86337
     - 1545216964.02178
     - 1545216964.13984
     - 1545216964.22691
@@ -3067,13 +3087,17 @@ MonoBehaviour:
     - 1546533947.23524
     - 1546533947.23023
     - 1546533947.20124
-    - 1550265111.32113
-    - 1550265111.4412
-    - 1550265111.5853
-    - 1550265110.61761
-    - 1550265110.86381
-    - 1550265111.08294
-    - 1549666443.39163
+    - 1551282436.58327
+    - 1551282436.7544
+    - 1551282436.98356
+    - 1551282436.03388
+    - 1551282436.17498
+    - 1551282436.38713
+    - 1551027854.00183
+    - 1551966678.81331
+    - 1551966692.63131
+    - 1551966526.92612
+    - 1551966486.27901
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
@@ -4863,14 +4887,266 @@ MonoBehaviour:
     - grub_idle
     - grub_jump
     - grub_buttStuck
+    - grub_hit
+    - grub_idle10
+    - grub_idle11
+    - grub_idle4
+    - grub_idle2
+    - grub_idle5
+    - grub_idle6
+    - grub_idle7
+    - grub_idle8
+    - grub_idle9
+    - grub_idle3
+    - grub_idle1
+    - grub_leap1
+    - grub_prepareLeap2
+    - grub_prepareLeap3
+    - grub_prepareLeap4
+    - grub_spit3
+    - grub_spit5
+    - grub_spit4
+    - grub_spit
+    - grub_spit2
+    - grub_popUp3
+    - grub_prepareLeap1
+    - grub_leap2
+    - grub_leap3
+    - grub_popUp1
+    - grub_popUp2
+    - grub2_struggle4
+    - grub2_struggle3
+    - grub2_struggle2
+    - grub2_struggle1
+    - grub2_idle7
+    - grub2_idle5
+    - grub2_idle6
+    - grub2_struggle5
+    - grub2_idle4
+    - grub2_idle3
+    - grub2_idle2
+    - grub2_idle1
     spriteTextureGUIDs:
     - 11e7666d482b5a34b8cabe1948e9942f
     - 241fa48d022bda44ca7b7765871c1234
     - b7d89cc020fec0542be0eb891fe88843
+    - 4a6b1ff99613f8e45b97ee97cf918405
+    - 93946070ca858c6409a0451ba7eb382d
+    - 58a22e0aae6f1e74a8662fbe0397eac7
+    - 6297d3633f55d3743a592f77da688b13
+    - 9069d9d2ab681bc48a90d287c6f2a865
+    - 5dd25e76741897d4eb94620c379720fc
+    - 402512f529ce4a646b1f0e27d9386e40
+    - 3e7e5863885419f41872284a58409bba
+    - 261824c2c09d1ac4689762c5fb05d99a
+    - 1c8d998c55d4f0b488638e742510dab2
+    - 3271d834b41377f40ab338b4be44e8f2
+    - 8a6f18b1521d80f45a298c70219d197e
+    - 3f8de8ad94cb2274f90e8192456ecb35
+    - c27879f61a0c570459009c8394355e72
+    - 2b45371a3b29d694d894e624ccd29bba
+    - a5515891ade2a4b4ea90f99194129355
+    - 5b2ade7c1c8abfa4ab293cfe8567ff65
+    - 1d80c2af44377f041aac873606883e4a
+    - 06053331a52b6c744883736f262506ec
+    - 4ee3595f181ee2a46b71dc9aed3f324b
+    - 41a7f9dc272270e4cb1441477a079fcd
+    - b6d6d4b84e2c96941ae03f26737bfbeb
+    - 86d64772e9802aa46944f57831e683bc
+    - d6c2cc1171737d3439a761cbc4425435
+    - 82603b7297b7d0a4e8da4fa653b0743d
+    - 2bc9ac7b7eb9965458b517e6d13eb2bc
+    - 832b5e7a4774f934aa606cd5c81e500c
+    - 748bf5904d272254ca88da479381f648
+    - 8b0eb4c0e15b2a043be5a56f4448ba60
+    - 104f90543a6daee499e1bb1d6b721018
+    - 603fce0f1ce37aa4693241e9a5760b56
+    - e6073d23d6e3a724a8e8a1311c4bfc0b
+    - edcb52c9ea2362344bc2b5d4b91b54a6
+    - 3600466a25c5e8f48bf8459bf0770b31
+    - 5c7da360dea68f7409de2af0455c9be5
+    - dffd27e2106409e4da937222de017fd0
+    - 5de1208b4e977694c8c5f1ec79e9646b
+    - 760ffabcbe66988419b14e80e12a34b9
+    - 4695ad81619ca6345bcf5e3a529abb63
     spriteTextureTimeStamps:
-    - 1550185930.06508
-    - 1550185943.35568
-    - 1550185964.55201
+    - 1551027850.62142
+    - 1551027850.70748
+    - 1551027850.53436
+    - 1551992017.07064
+    - 1551991396.90782
+    - 1551991406.56619
+    - 1551991331.29729
+    - 1551991285.6458
+    - 1551991342.56477
+    - 1551991351.71278
+    - 1551991361.91782
+    - 1551991371.98241
+    - 1551991382.64004
+    - 1551991320.13919
+    - 1551991276.76916
+    - 1551991792.47879
+    - 1551991928.47419
+    - 1551991938.0849
+    - 1551991950.36921
+    - 1551991506.63375
+    - 1551991590.94399
+    - 1551991537.31221
+    - 1551991442.44735
+    - 1551991474.53289
+    - 1551991648.7241
+    - 1551991918.33196
+    - 1551991826.87282
+    - 1551991845.84675
+    - 1551991627.74971
+    - 1551991637.61273
+    - 1552263030.05915
+    - 1552263020.30802
+    - 1552263009.96383
+    - 1552263000.24392
+    - 1552262976.91497
+    - 1552262940.999
+    - 1552262952.2478
+    - 1552263041.77888
+    - 1552262920.1797
+    - 1552262908.19374
+    - 1552262891.38098
+    - 1552262881.22603
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
+  - name: w1_e_frog
+    spriteCollectionGUID: 33c586f552960f146866a2c486cf7f08
+    spriteCollectionDataGUID: 64264848ac10f7449baa6e77fc751e28
+    spriteNames:
+    - frog_idle
+    - frog_spit
+    spriteTextureGUIDs:
+    - 17b91ff5639aa9c40b10cdb9fadc82c4
+    - 02eedd10601daa149932c516ef815142
+    spriteTextureTimeStamps:
+    - 1551282381.72507
+    - 1551282381.84716
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
+  - name: w1_e_opossum
+    spriteCollectionGUID: 96ead2c09b3a1b8418d57f518b9c1cd9
+    spriteCollectionDataGUID: 715606a1bcb198f4e8e9f4374952af9e
+    spriteNames:
+    - opossum_swing6
+    - opossum_swing4
+    - opossum_walk1
+    - opossum_swing3
+    - opossum_swing8
+    - opossum_walk2
+    - opossum_swing1
+    - opossum_chase3
+    - opossum_swing7
+    - opossum_walk4
+    - opossum_chase2
+    - opossum_walk5
+    - opossum_swing2
+    - opossum_swing5
+    - opossum_walk3
+    - opossum_swing12
+    - opossum_swing9
+    - opossum_swing11
+    - opossum_swing10
+    - opossum_chase1
+    - opossum_chase4
+    - opossum_chase5
+    - opossum_dead
+    - opossum_idle8
+    - opossum_idle3
+    - opossum_idle4
+    - opossum_idle5
+    - opossum_idle1
+    - opossum_idle2
+    - opossum_idle6
+    - opossum_idle7
+    spriteTextureGUIDs:
+    - a1f716f59357f574ebed4b4c58a8ba0b
+    - b551b20342f231149b6e4cb35058bbc3
+    - 1fb725303769d8a4a80413730fe7ca95
+    - a2f682a1948a7e843882016717a1f152
+    - ec923a1538283b847b0237eea9aa825f
+    - addf630cb981b4a44a17b95db791aa39
+    - 4fd6d3288e9c8bb46a72b3facc33f4ec
+    - b8a2e87f52d8ee245afb8aa38072e86b
+    - de436204b38aa5e47b5136651823fadf
+    - 2fa924dbd9de1904ba5eb674d99b3ae2
+    - 65d7053b611903f45a128eae3382b500
+    - a995bd8bce99f0b438466c745fc1dfaf
+    - 199f2d45f803b7d4180de473710d1f91
+    - cd3196bc0568202449aac09a6757266c
+    - 9bc7f38e2205d824e9654ff071d00fce
+    - d6e2d18c966070f428e4851ed7824a29
+    - 9163269f725fa2d488f426e83a11f3ed
+    - ad78bd22311b67b4caceaf3e88b41379
+    - b65b9407e90e64845a928419f402f67e
+    - f760f0a5b5d51ce45acdb356018937df
+    - 3a36471494a8f3e4cb75541f1bb2701f
+    - 7df3a6667578e8f44a71a9bda015fa02
+    - d79953b8ebf9d1e4c91defab553e15a1
+    - 2411c98f140906f4097cd32dcdb3ba81
+    - 594a3fe94d3eb2f46b84f9290b298c78
+    - 6aa916056bae8c0448896a914c4791bc
+    - 5b86a1d8a0b19644da471626eedac4c3
+    - 0f9c38f72dade7a4db05bbb95a4df371
+    - b637945a233525446ab9317a6b4d6962
+    - e390d721d490c6c4087acf1673fd177b
+    - 46be9da51ea19ed45bb3ffdf1139a0d4
+    spriteTextureTimeStamps:
+    - 1552232907.44624
+    - 1552232885.87277
+    - 1552232695.22004
+    - 1552232876.28692
+    - 1552232929.63714
+    - 1552232705.86028
+    - 1552232853.98442
+    - 1552232785.55452
+    - 1552232918.2595
+    - 1552232726.90988
+    - 1552232774.79071
+    - 1552232740.02875
+    - 1552232864.80967
+    - 1552232896.70404
+    - 1552232716.85615
+    - 1552232973.55466
+    - 1552232940.40536
+    - 1552232963.48843
+    - 1552232953.074
+    - 1552232764.98521
+    - 1552232797.95838
+    - 1552232813.32137
+    - 1552299199.48623
+    - 1552299340.16635
+    - 1552299241.88774
+    - 1552299285.73264
+    - 1552299296.49849
+    - 1552299221.99752
+    - 1552299231.99263
+    - 1552299309.06769
+    - 1552299322.35348
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
+  - name: w1_e_heron
+    spriteCollectionGUID: 88641dcc65227d747b3a9e87a9ffb1a9
+    spriteCollectionDataGUID: a08d746c4d496f4459dd642b775e4edb
+    spriteNames:
+    - heron_idle
+    - heron_leap
+    spriteTextureGUIDs:
+    - 27758a4c8bf834f4b98a77016079f923
+    - a7c679777b188b043a925ccabc1e3d7a
+    spriteTextureTimeStamps:
+    - 1552933749.01014
+    - 1552933761.25838
     managedSpriteCollection: 0
     loadable: 0
     assetName: 

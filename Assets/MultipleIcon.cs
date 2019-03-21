@@ -6,6 +6,7 @@ public class MultipleIcon : MonoBehaviour {
 
 
 	//public ActivateDialogWhenClose myFriend;
+	public bool movePositionOnScreen = true;
 	public string myIconAniTrigger;
     public Animator animator;
     public bool isTalking;
@@ -25,12 +26,14 @@ public class MultipleIcon : MonoBehaviour {
 
     //mnEnable() here that postions icon properly based on 'positionOnScreen' value
     void OnEnable(){
-		if(positionOnScreen == 0){
-			gameObject.transform.localPosition = new Vector2(-48f,6.5f);
-		}else if(positionOnScreen == 1){
-			gameObject.transform.localPosition = new Vector2(0f,13f);
-		}else if(positionOnScreen == 2){
-			gameObject.transform.localPosition = new Vector2(39f,6.5f);
+    	if(movePositionOnScreen){
+			if(positionOnScreen == 0){
+				gameObject.transform.localPosition = new Vector2(-48f,6.5f);
+			}else if(positionOnScreen == 1){
+				gameObject.transform.localPosition = new Vector2(0f,13f);
+			}else if(positionOnScreen == 2){
+				gameObject.transform.localPosition = new Vector2(39f,6.5f);
+			}
 		}
 	}
 

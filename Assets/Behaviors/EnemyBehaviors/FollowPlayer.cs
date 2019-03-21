@@ -20,11 +20,15 @@ public class FollowPlayer : MonoBehaviour {
     private float nextPathRefreshTime = 0f;
 
     protected EnemyStateController controller;
+	public float maxWalkDistance; //how close the enemy will get
+
+    Vector3 startScale;
 
     void Awake()
     {
         controller = GetComponent<EnemyStateController>();
         enemyPath = GetComponent<EnemyPath>();
+        startScale = transform.localScale;
     }
 
     void Start () {
@@ -72,7 +76,7 @@ public class FollowPlayer : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (controller.IsFlag((int)EnemyFlag.CHASING)) {
                 float distance = Vector3.Distance(transform.position, GetTargetsClosestPoint());
-                if (distance < walkDistance) { //TODO: 
+                if (distance < walkDistance && distance > maxWalkDistance) { //TODO: 
                     if (usePathGrid) {
                         if (enemyPath != null) {
                             // follow the path until it's consumed.  update the path in intervals to chase the player.

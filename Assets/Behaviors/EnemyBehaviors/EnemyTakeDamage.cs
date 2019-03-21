@@ -41,7 +41,7 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public bool canKnockoffArmor;
 
 	public List<MonoBehaviour> behaviorsToDeactivate = new List<MonoBehaviour>();
-
+	public bool hasPowerHitEffect;
 
 
 	//armor knockoff stuff
@@ -72,7 +72,7 @@ public bool bossSpawnedEnemy;
 
 	tk2dSpriteAnimator myAnim;
 	int camShake = 0;
-	string meleeSwingDirection;
+	public string meleeSwingDirection;
 	int dropsPin = 0;
 	int dropsTrash = 0;
 	int scrapDropped = 0;
@@ -130,7 +130,7 @@ public bool bossSpawnedEnemy;
     }
 
 
-    void Start () {
+    protected void Start () {
 		if(IAmParentObj){
 			myAnim = childEnemy.GetComponent<tk2dSpriteAnimator>();
 		}else{
@@ -187,7 +187,7 @@ public bool bossSpawnedEnemy;
 	}
 	
 
-	void Update () {
+	protected void Update () {
 		//for when camera shake is activated
 		/*if(camShake >0){
 			currentCamera.transform.localPosition = Random.insideUnitSphere * 0.7f;
@@ -224,11 +224,28 @@ public bool bossSpawnedEnemy;
                 TakeDamage(melee.gameObject);
 
                 //Debug.Log("Collision with weapon: ");
-
-            } else if (melee.tag == "pObj_bullet") {
+            } else if (melee.tag == "pObj_bullet" || melee.tag == "BigSwoosh") {
                 if (!takingDamage) {
-                    StartCoroutine("NonMeleeHit");
-                    melee.GetComponent<Ev_FallingProjectile>().Fell();
+                    if (melee.tag == "BigSwoosh") {
+                        meleeDmgBonus = 0;
+                        if (hasPowerHitEffect) {
+                            PowerHitEffect();
+                        }
+                        meleeDmgBonus++;
+                        meleeSwingDirection = melee.name;
+                        StartCoroutine("NonMeleeHit", true);
+                        Debug.Log("BIG SWOOSH HITS ENEMY");
+                    } else {
+                        if (melee.GetComponent<Ev_FallingProjectile>() != null)
+                            melee.GetComponent<Ev_FallingProjectile>().Fell();
+                        if (melee.GetComponent<Ev_ProjectileChargable>() != null && melee.GetComponent<Ev_ProjectileChargable>().charged) {
+                            meleeSwingDirection = "plankSwing";
+
+                            StartCoroutine("NonMeleeHit", true);
+                        }/*else{
+						StartCoroutine("NonMeleeHit",false);
+					}*/
+                    }
                 }
                 //Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
                 SoundManager.instance.RandomizeSfx(SFXBANK.HIT6, .8f, 1.1f);
@@ -256,22 +273,19 @@ public bool bossSpawnedEnemy;
                 }
                 SoundManager.instance.PlaySingle(SFXBANK.HIT7);
                 SoundManager.instance.PlaySingle(hitSqueal);
-                /*var throwObj = melee.gameObject.GetComponent<ThrowableObject>();
-                    if(throwObj)
-                        melee.gameObject.layer = 11; //switched to item obj once hit so doesnt hit anything else*/
             }
         }
 	}
 
-	IEnumerator NonMeleeHit(){
+	IEnumerator NonMeleeHit(bool knockback){
 		if(damageOnce == 0 && myAnim.CurrentClip!= invincibleAni &&( armoredEnemy != true || (armoredEnemy && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED.Count == 4)|| piercingPin)){
 			if(!takingDamage){
 				takingDamage = true;
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.red;
-					GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
+					GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars");
 					damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1 + meleeDmgBonus);
 					damageCounter.SetActive(true);
-					GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
+					GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars");
 					damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 					littleStars.SetActive(true);
@@ -291,9 +305,9 @@ public bool bossSpawnedEnemy;
 				if(!moveWhenHit || (controller != null && controller.GetCurrentState() == EnemyState.LUNGE)){
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 				}
+				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2....." + meleeDmgBonus);
 
 				currentHp = currentHp - 1 - meleeDmgBonus;
-				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2");
 					if(bossEnemy){
                     gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
 						//TODO: make sure all bosses hp global vars are updated properly at the day's end...
@@ -302,9 +316,31 @@ public bool bossSpawnedEnemy;
 
                 if (controller != null)
                     controller.SendTrigger(EnemyTrigger.HIT);
+
                 if (moveWhenHit){
                     UpdateFacing();
                 }
+
+                if(knockback){
+					controller.SendTrigger(EnemyTrigger.POWER_HIT);
+
+                	Debug.Log("****----- GOT HERE BIG HIT ---------****");
+                	if(meleeSwingDirection == "bigShooshR"){
+						meleeSwingDirection = "plankSwing";
+					}else if(meleeSwingDirection == "bigShooshDown"){
+						meleeSwingDirection = "plankDown";
+
+					}else if(meleeSwingDirection == "bigShooshUp"){
+						meleeSwingDirection = "plankUp";
+
+                	}
+					swingDirectionSide = PlayerManager.Instance.player.transform.localScale.x;
+					moveWhenHit = true;
+					StartCoroutine("ContinueHit"); 
+					yield return new WaitForSeconds(.1f);
+                }else{
+					controller.SendTrigger(EnemyTrigger.HIT);
+
 				yield return new WaitForSeconds(.2f);
 				this.gameObject.GetComponent<tk2dSprite>().color = Color.white;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
@@ -312,7 +348,7 @@ public bool bossSpawnedEnemy;
 				yield return new WaitForSeconds(.4f);
 				StartCoroutine( "StopKnockback",0f);
 				StartCoroutine("AfterHit");
-
+				}
 			}
 		}else if(armoredEnemy){
 			SoundManager.instance.PlaySingle(armoredEnemyHitSfx);
@@ -375,7 +411,6 @@ public bool bossSpawnedEnemy;
 
 
                 //Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE ----- 1");
-//                   CamManager.Instance.mainCam.ScreenShake(.2f);
 
 				if(hitByThrownObject){
                     // TODO: Fix the boss battle to use throwable bodies????
@@ -398,10 +433,14 @@ public bool bossSpawnedEnemy;
                 currentHp = currentHp - 1 - meleeDmgBonus;
 
 				if(currentHp <= 0){
+					CamManager.Instance.mainCam.ScreenShake(.2f,.4f);
+					ObjectPool.Instance.GetPooledObject("effect_landingSmoke",gameObject.transform.position);
 				    SoundManager.instance.PlaySingle(SFXBANK.HIT7, hitPitch);
                     if (controller != null)
                         controller.SendTrigger(EnemyTrigger.DEATH);
                 } else{
+					CamManager.Instance.mainCam.ScreenShake(.2f,.2f);
+			
 				    SoundManager.instance.PlaySingle(SFXBANK.HIT6, hitPitch);
 				    if(hitPitch < 1.3f)
 					    hitPitch += .1f; // pitch goes up as hit enemy
@@ -482,8 +521,8 @@ public bool bossSpawnedEnemy;
 					if(currentHp <= 0 && !bossEnemy){
 						spinning = true;
 						myBody.mass = 1;
-						myBody.AddForce(new Vector2(-11f,8f), ForceMode2D.Impulse);
-						myBody.gravityScale = 3;
+						myBody.AddForce(new Vector2(-11f,10f), ForceMode2D.Impulse);
+						myBody.gravityScale = 3.3f;
 						if(myShadow != null)
 							myShadow.transform.parent = null; //shadow doesnt follow Y pos
 					}else{
@@ -494,8 +533,8 @@ public bool bossSpawnedEnemy;
 					if(currentHp <= 0 && !bossEnemy){
 						spinning = true;
 						myBody.mass = 1;
-						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11f,8f), ForceMode2D.Impulse);
-						myBody.gravityScale = 3;
+						gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11f,10f), ForceMode2D.Impulse);
+						myBody.gravityScale = 3.3f;
 						if(myShadow != null)
 							myShadow.transform.parent = null; //shadow doesnt follow Y pos	
 					}else{
@@ -796,5 +835,9 @@ public bool bossSpawnedEnemy;
 		}
 		this.gameObject.SetActive(false);
 
+	}
+
+	public virtual void PowerHitEffect(){
+		//nothing for base
 	}
 }

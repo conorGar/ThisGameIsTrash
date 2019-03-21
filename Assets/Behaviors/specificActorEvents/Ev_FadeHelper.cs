@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; //needed for white flash
 public class Ev_FadeHelper : MonoBehaviour {
-
+	public static Ev_FadeHelper Instance;
 	public GameObject smallTruck;
 	public GameObject upgradeActorTempEffects;
 	public GameObject fader;
@@ -26,6 +26,11 @@ public class Ev_FadeHelper : MonoBehaviour {
 	public bool fadeBack;
 	GameObject tempFlash;
 	Image faderImage;
+
+	void Awake(){
+		Instance = this;
+	}
+
 
 	void Start(){
 		faderImage = fader.GetComponent<Image>();

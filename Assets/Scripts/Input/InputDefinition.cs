@@ -23,7 +23,9 @@ public enum INPUTACTION
     SWITCHWEAPON,
     PAUSE,
     CALENDAR,
-    MAP
+    MAP,
+    SPECIAL,
+    SPECIAL2
 }
 
 [System.Serializable]

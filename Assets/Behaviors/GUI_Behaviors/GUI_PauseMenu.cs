@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GUI_PauseMenu : MonoBehaviour {
 
-    int arrowpos = 1;
+    protected int arrowpos = 1;
     public GameObject optionsOption;
     public GameObject enddayOption;
     public GameObject optionsMenu;
@@ -20,10 +20,10 @@ public class GUI_PauseMenu : MonoBehaviour {
     public AudioClip selectSound;
     public AudioClip paperSlide;
 
-    Sprite optionStartSpr;
-    Sprite endDayStartSpr;
-    Sprite returnStartSpr;
-    Vector3 startPos;
+    protected Sprite optionStartSpr;
+    protected Sprite endDayStartSpr;
+    protected Sprite returnStartSpr;
+    protected Vector3 startPos;
     // Use this for initialization
     void Awake() {
         startPos = gameObject.transform.localPosition;

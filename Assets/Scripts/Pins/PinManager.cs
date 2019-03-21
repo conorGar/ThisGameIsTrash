@@ -17,11 +17,13 @@ public class PinManager : MonoBehaviour {
     public GameObject PageRoot;
     public TextMeshProUGUI DescriptionText;
     public TextMeshProUGUI PinTitle;
+	public TextMeshProUGUI AbilityPinText;
     public Ev_PPDisplay PPDisplay;
     public tk2dSprite PinDisplaySprite;
     public PinConfig pinConfig;
     public ParticleSystem equipSpark;
     public GameObject newPinIcon;
+    public GUI_AbilityPinEquipDisplay abilityPinEquipHUD;
     private Dictionary<PIN, PinDefinition> PINLOOKUP = new Dictionary<PIN, PinDefinition>();
 
 	void Awake () {

@@ -1,0 +1,351 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: DuckKing
+  m_EditorClassIdentifier: 
+  title: DuckKing
+  dialogIconID: icon_ducks
+  nodeStore:
+    keys:
+    - Value: 4a6f7962-ebca-40c4-b7c8-9e250033c4bb
+    - Value: 740d7f1d-63ac-495f-b6b2-c05d59b1ac67
+    - Value: e3f2ea38-1fe8-44a7-82a7-d94d09f64b21
+    - Value: fa6e7abb-0b5e-4825-95a8-a6e34052b209
+    - Value: bbbfdac2-cb5c-47c4-8b15-b34d696efe0e
+    - Value: 815b83d2-a50d-487d-a8fb-13b66c145ac8
+    - Value: 1c0342b9-f36d-4b72-872c-2bd1c1fba052
+    - Value: ebf3ca1d-b71b-4855-b701-3129a376f171
+    - Value: 3e17b422-b82c-4f80-aa59-2819b7ffd1bf
+    - Value: ac61ca81-64c4-4c1a-a445-88ebca7a624d
+    - Value: 28305e81-dd23-4900-8103-09b7dc63880d
+    - Value: 72b7764d-dc36-4cee-a817-b4d69a9de578
+    - Value: 1554d267-f217-4409-b579-ec3eef774e0c
+    values:
+    - window:
+        serializedVersion: 2
+        x: 170
+        y: 188
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: Duck1
+      speakerName: Duck Jerry
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4a6f7962-ebca-40c4-b7c8-9e250033c4bb
+      x: 170
+      y: 188
+      text: Nah, that's it, man. I just can't take it anymore. The fear is just too
+        much to bear.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 740d7f1d-63ac-495f-b6b2-c05d59b1ac67
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 458
+        y: 226
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: Duck2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 740d7f1d-63ac-495f-b6b2-c05d59b1ac67
+      x: 458
+      y: 226
+      text: You know me, I've loved <c=g>The Duck King</c> from the start...but this
+        is too much.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e3f2ea38-1fe8-44a7-82a7-d94d09f64b21
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 750
+        y: 215
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: Duck3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e3f2ea38-1fe8-44a7-82a7-d94d09f64b21
+      x: 750
+      y: 215
+      text: No creature should have the power to kill any individual with a SINGLE.
+        DEADLY. QUACK.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: fa6e7abb-0b5e-4825-95a8-a6e34052b209
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1041
+        y: 245
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: Duck4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fa6e7abb-0b5e-4825-95a8-a6e34052b209
+      x: 1041
+      y: 245
+      text: 'He''s always watching. Always listening. I can''t live like this. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: bbbfdac2-cb5c-47c4-8b15-b34d696efe0e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1339
+        y: 217
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: Duck5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: bbbfdac2-cb5c-47c4-8b15-b34d696efe0e
+      x: 1339
+      y: 217
+      text: I must escape. Even if it means my death.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 815b83d2-a50d-487d-a8fb-13b66c145ac8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1663
+        y: 231
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: Duck5
+      speakerName: Duck Bradley
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 815b83d2-a50d-487d-a8fb-13b66c145ac8
+      x: 1663
+      y: 231
+      text: No, <c=g>Duck Jerry</c>! Stay strong! If you <c=g> kill a human</c>, <c=g>
+        The Duck King</c> will give you great fortune!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1c0342b9-f36d-4b72-872c-2bd1c1fba052
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1957
+        y: 206
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: Duck6
+      speakerName: Duck Jerry
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1c0342b9-f36d-4b72-872c-2bd1c1fba052
+      x: 1957
+      y: 206
+      text: I'm sorry, but I can't. Just do me a favor and don't tell any of the other
+        ducks.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ebf3ca1d-b71b-4855-b701-3129a376f171
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2246
+        y: 248
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: Duck7
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ebf3ca1d-b71b-4855-b701-3129a376f171
+      x: 2246
+      y: 248
+      text: 'You''re the only one I trust, <c=g>Duck Bradley</c>. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 3e17b422-b82c-4f80-aa59-2819b7ffd1bf
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2580
+        y: 236
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: Duck8
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 3e17b422-b82c-4f80-aa59-2819b7ffd1bf
+      x: 2580
+      y: 236
+      text: 'You''ll see. One day, we can leave this all behind us. Me and you. We
+        shall meet again. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ac61ca81-64c4-4c1a-a445-88ebca7a624d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2897
+        y: 277
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: Duck9
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ac61ca81-64c4-4c1a-a445-88ebca7a624d
+      x: 2897
+      y: 277
+      text: '...I promise.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 28305e81-dd23-4900-8103-09b7dc63880d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3189
+        y: 272
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: Duck10
+      speakerName: 
+      question: 
+      action: Quack
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 28305e81-dd23-4900-8103-09b7dc63880d
+      x: 3189
+      y: 272
+      text: Now, I must be off!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 72b7764d-dc36-4cee-a817-b4d69a9de578
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3538
+        y: 248
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: Duck11
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 72b7764d-dc36-4cee-a817-b4d69a9de578
+      x: 3538
+      y: 248
+      text: ..no...NO! it can't be!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1554d267-f217-4409-b579-ec3eef774e0c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3878
+        y: 255
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: Duck12
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1554d267-f217-4409-b579-ec3eef774e0c
+      x: 3878
+      y: 255
+      text: NOT NOW! I HAD SO MUCH LEFT TO DO!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 4a6f7962-ebca-40c4-b7c8-9e250033c4bb

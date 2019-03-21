@@ -79,6 +79,9 @@ public class PickupableObject : MonoBehaviour
 	public virtual void PickUp(){
         Debug.Log("Pickup() activated");
         movePlayerToObject = false;
+        if(!throwableObject){
+			PlayerManager.Instance.controller.SendTrigger(JimTrigger.PICK_UP_DROPPABLE);
+        }
 		gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x,gameObject.transform.position.y);
 		gameObject.transform.parent = PlayerManager.Instance.player.transform;
         PlayerManager.Instance.player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -87,7 +90,8 @@ public class PickupableObject : MonoBehaviour
 		ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 		SoundManager.instance.PlaySingle(pickup);
 		//set object to follow player and push up in the sky
-		gameObject.GetComponent<Animator>().SetTrigger("PickUp");
+		if(gameObject.GetComponent<Animator>()!=null)
+			gameObject.GetComponent<Animator>().SetTrigger("PickUp");
         beingCarried = true;
 	}
 

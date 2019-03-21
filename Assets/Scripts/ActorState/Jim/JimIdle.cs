@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JimIdle : IActorState<JimState, JimTrigger>
 {
+
+	int whichSwingAni;
     public JimState GetState()
     {
         return JimState.IDLE;
@@ -26,14 +28,17 @@ public class JimIdle : IActorState<JimState, JimTrigger>
             case JimTrigger.HIT:
                 animator.Play("hurt");
                 return new JimHurt();
-
+			case JimTrigger.DASH:
+                return new JimDash();
             case JimTrigger.SWING_RIGHT:
-                animator.Play("ani_jimSwingR");
+            	Debug.Log("which swing ani:" + whichSwingAni);
+
                 flags &= ~(int)JimFlag.FACING_LEFT;
                 return new JimAttacking();
 
             case JimTrigger.SWING_LEFT:
-                animator.Play("ani_jimSwingR");
+                //animator.Play("ani_jimSwingR");
+				
                 flags |= (int)JimFlag.FACING_LEFT;
                 return new JimAttacking();
 
@@ -44,6 +49,24 @@ public class JimIdle : IActorState<JimState, JimTrigger>
             case JimTrigger.SWING_DOWN:
                 animator.Play("ani_jimSwingDown");
                 return new JimAttacking();
+
+			case JimTrigger.CHARGE_RIGHT:
+                animator.Play("ani_jimChargeR");
+                flags &= ~(int)JimFlag.FACING_LEFT;
+                return new JimCharging();
+
+            case JimTrigger.CHARGE_LEFT:
+                animator.Play("ani_jimChargeR");
+                flags |= (int)JimFlag.FACING_LEFT;
+                return new JimCharging();
+
+            case JimTrigger.CHARGE_UP:
+                animator.Play("ani_jimChargeUp");
+                return new JimCharging();
+
+            case JimTrigger.CHARGE_DOWN:
+                animator.Play("ani_jimChargeDown");
+                return new JimCharging();
 
             case JimTrigger.PICK_UP_SMALL:
                 animator.Play("ani_jimPickUp");

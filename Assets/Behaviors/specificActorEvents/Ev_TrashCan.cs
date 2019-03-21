@@ -69,7 +69,7 @@ public class Ev_TrashCan : MonoBehaviour {
 			yield return new WaitForSeconds(.2f);
 			myAnim.Stop();
 		}else if(spawnOnce == 0){
-			spawnedPin = objectPool.GetComponent<ObjectPool>().GetPooledObject("Pin",gameObject.transform.position);
+			spawnedPin = objectPool.GetComponent<ObjectPool>().GetPooledObject("DroppedPin",gameObject.transform.position);
 			spawnedPin.name = myPin.name;
 			spawnedPin.GetComponent<tk2dSprite>().SetSprite(myPin.sprite);
 			spawnedPin.GetComponent<Ev_DroppedPin>().SetPinData(myPin,pinUnlockHud, pinSprite);

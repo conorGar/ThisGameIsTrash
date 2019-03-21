@@ -1,0 +1,598 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: HarryDialog
+  m_EditorClassIdentifier: 
+  title: HarryDialog
+  dialogIconID: icon_homelessHarry
+  nodeStore:
+    keys:
+    - Value: fe2fa49c-c86e-4d50-a6b6-1eb23a3be83e
+    - Value: 05064c0d-5792-40f9-b66d-aff1abcd2324
+    - Value: 24d4dae6-8194-4b64-8b8b-8e38ced0fef8
+    - Value: b5d3a808-58bd-4aee-b7fc-63f72b9f15f5
+    - Value: 3275f8c4-e5a2-4bb8-a6d7-d280fa3b4679
+    - Value: 15401ffa-8c36-46a2-ae98-2f40751a7fb5
+    - Value: 2c5a4546-feea-4dce-9453-bc1ac975b8bb
+    - Value: 4e2e41fb-4173-4795-b5a0-89a63d1aa54a
+    - Value: 889144b5-b982-4cfb-a4e6-200b684da0a8
+    - Value: 19061f01-6e3b-4463-9cba-c9ac932d1c6a
+    - Value: 0e9da7c5-2159-4f89-85af-38c34ea0b5bb
+    - Value: 6694c562-57ea-47b8-9fc7-f02a10438ac5
+    - Value: 214af031-3656-452b-9b58-cc43e60edbe2
+    - Value: f5dc34ff-37da-4245-bf82-9f7b9d3b646e
+    - Value: 5b023fae-491e-4aa3-b368-65f48c239782
+    - Value: a1bdb729-1b3d-4be9-83f8-68a598cd222b
+    - Value: 34cb4536-9484-468c-90ca-4ff2c91904bd
+    - Value: 56159817-2ae8-44b7-aa0e-15a91de47b12
+    - Value: 64c6f017-02dd-4b44-9d37-d30a73d58d3f
+    - Value: 138feb5c-89c6-45e7-ae98-095f1628c512
+    - Value: ec69b95e-1a03-431d-af5c-af049cf6d4e4
+    - Value: 23dbbd42-8b79-4dac-8cb0-589cec1d3e87
+    values:
+    - window:
+        serializedVersion: 2
+        x: 182
+        y: 212
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: HarryIntro
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fe2fa49c-c86e-4d50-a6b6-1eb23a3be83e
+      x: 182
+      y: 212
+      text: (There appears to be a body on the ground. It shows no visable signs of
+        life.)
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 05064c0d-5792-40f9-b66d-aff1abcd2324
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 557
+        y: 246
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: HarryIntro2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 05064c0d-5792-40f9-b66d-aff1abcd2324
+      x: 557
+      y: 246
+      text: (He might need help. But also, you got your own things to do.)
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 24d4dae6-8194-4b64-8b8b-8e38ced0fef8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 857
+        y: 229
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: HarryIntro3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 24d4dae6-8194-4b64-8b8b-8e38ced0fef8
+      x: 857
+      y: 229
+      text: (You don't wanna get tangled up in additional problems.)
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b5d3a808-58bd-4aee-b7fc-63f72b9f15f5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1141
+        y: 263
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: HarryIntro4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b5d3a808-58bd-4aee-b7fc-63f72b9f15f5
+      x: 1141
+      y: 263
+      text: (You can't help but think that nobody is around.... nobody will see if
+        you don't help him.)
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 3275f8c4-e5a2-4bb8-a6d7-d280fa3b4679
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1429
+        y: 255
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: HarryIntro5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 3275f8c4-e5a2-4bb8-a6d7-d280fa3b4679
+      x: 1429
+      y: 255
+      text: (He might be alive and can only survive with assistance...)
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 15401ffa-8c36-46a2-ae98-2f40751a7fb5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1719
+        y: 227
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: HarryIntro6
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 15401ffa-8c36-46a2-ae98-2f40751a7fb5
+      x: 1719
+      y: 227
+      text: (..but you can probably convive yourself that there was nothing you could
+        do.)
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2c5a4546-feea-4dce-9453-bc1ac975b8bb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2008
+        y: 140
+        width: 270
+        height: 354
+      isCollapsed: 0
+      title: HarryIntro7
+      speakerName: 
+      question: There is a body on the ground...
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2c5a4546-feea-4dce-9453-bc1ac975b8bb
+      x: 2008
+      y: 140
+      text: (So you won't feel guilty about it later. Probably. Just saying.)
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: '*Be a commendable member of society. Ask the man if he''s ok!'
+        node_id:
+          Value: 4e2e41fb-4173-4795-b5a0-89a63d1aa54a
+      - text: '*Attempt to poke the body with a long stick.'
+        node_id:
+          Value: 0e9da7c5-2159-4f89-85af-38c34ea0b5bb
+      - text: '*Leave the scene. Nobody will know you saw him.'
+        node_id:
+          Value: 0e9da7c5-2159-4f89-85af-38c34ea0b5bb
+      - text: '*Attempt to find a large rock to hit the body with just to make sure
+          he''s out of his misery.'
+        node_id:
+          Value: 0e9da7c5-2159-4f89-85af-38c34ea0b5bb
+    - window:
+        serializedVersion: 2
+        x: 2336.041
+        y: 139
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: HarryIntro8
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4e2e41fb-4173-4795-b5a0-89a63d1aa54a
+      x: 2336.041
+      y: 139
+      text: (...Hm. I should also mention that this isn't one of those decisions that
+        will come back to haunt you.)
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 889144b5-b982-4cfb-a4e6-200b684da0a8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2634.041
+        y: 166
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: HarryIntro9
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 889144b5-b982-4cfb-a4e6-200b684da0a8
+      x: 2634.041
+      y: 166
+      text: (There will be ZERO reprecussions for your choice here. None.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 19061f01-6e3b-4463-9cba-c9ac932d1c6a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2924.041
+        y: 150
+        width: 270
+        height: 277
+      isCollapsed: 0
+      title: HarryIntro10
+      speakerName: 
+      question: There is a body on the ground...
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 19061f01-6e3b-4463-9cba-c9ac932d1c6a
+      x: 2924.041
+      y: 150
+      text: (...just so you know...)
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: '*Do what''s right! Help the man out!'
+        node_id:
+          Value: 0e9da7c5-2159-4f89-85af-38c34ea0b5bb
+      - text: '*Just pretend you didn''t see him.'
+        node_id:
+          Value: 0e9da7c5-2159-4f89-85af-38c34ea0b5bb
+      - text: '*Totally understand the situation and that you could''ve helped, but
+          do nothing anyway.'
+        node_id:
+          Value: 0e9da7c5-2159-4f89-85af-38c34ea0b5bb
+    - window:
+        serializedVersion: 2
+        x: 3255.8357
+        y: 273
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: HarryIntro11
+      speakerName: 
+      question: 
+      action: HarryWakeUp
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0e9da7c5-2159-4f89-85af-38c34ea0b5bb
+      x: 3255.8357
+      y: 273
+      text: '...buh...buh..'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6694c562-57ea-47b8-9fc7-f02a10438ac5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3547.8357
+        y: 213
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: HarryIntro12
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6694c562-57ea-47b8-9fc7-f02a10438ac5
+      x: 3547.8357
+      y: 213
+      text: '...ah..h-how long was I out...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 214af031-3656-452b-9b58-cc43e60edbe2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3838.8357
+        y: 236
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: HarryIntro13
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 214af031-3656-452b-9b58-cc43e60edbe2
+      x: 3838.8357
+      y: 236
+      text: Oh! A garbageman! What an honor!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f5dc34ff-37da-4245-bf82-9f7b9d3b646e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4127.836
+        y: 218
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: HarryIntro14
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f5dc34ff-37da-4245-bf82-9f7b9d3b646e
+      x: 4127.836
+      y: 218
+      text: Name's <c=g>Homeless Harry</c>. It's nice to meet cha.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5b023fae-491e-4aa3-b368-65f48c239782
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4417.836
+        y: 229
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: HarryIntro15
+      speakerName: Homeless Harry
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5b023fae-491e-4aa3-b368-65f48c239782
+      x: 4417.836
+      y: 229
+      text: You know, I wanted to be a garbageman too, when I was younger.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a1bdb729-1b3d-4be9-83f8-68a598cd222b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4706.836
+        y: 235
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: HarryIntro16
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a1bdb729-1b3d-4be9-83f8-68a598cd222b
+      x: 4706.836
+      y: 235
+      text: '...just wasn''t in the cards, I guess.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 34cb4536-9484-468c-90ca-4ff2c91904bd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5003.836
+        y: 268
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: HarryIntro17
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 34cb4536-9484-468c-90ca-4ff2c91904bd
+      x: 5003.836
+      y: 268
+      text: Now I run the <c=g> Pin Shop</c> over at <c=g>The Dump</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 56159817-2ae8-44b7-aa0e-15a91de47b12
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5295.836
+        y: 290
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: HarryIntro18
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 56159817-2ae8-44b7-aa0e-15a91de47b12
+      x: 5295.836
+      y: 290
+      text: 'Should probably get back there, actually. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 64c6f017-02dd-4b44-9d37-d30a73d58d3f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5584.836
+        y: 308
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: HarryIntro19
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 64c6f017-02dd-4b44-9d37-d30a73d58d3f
+      x: 5584.836
+      y: 308
+      text: Stop by when you can. Might find it worth your while.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 138feb5c-89c6-45e7-ae98-095f1628c512
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5871.836
+        y: 308
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: HarryIntro20
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 138feb5c-89c6-45e7-ae98-095f1628c512
+      x: 5871.836
+      y: 308
+      text: I wasn't capable of making my dreams come true, but if I can help you
+        achieve yours...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ec69b95e-1a03-431d-af5c-af049cf6d4e4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6167.836
+        y: 334
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: HarryIntro21
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ec69b95e-1a03-431d-af5c-af049cf6d4e4
+      x: 6167.836
+      y: 334
+      text: '...well..that''d be nice.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 23dbbd42-8b79-4dac-8cb0-589cec1d3e87
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 6661.836
+        y: 320
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: HarryIntro22
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 23dbbd42-8b79-4dac-8cb0-589cec1d3e87
+      x: 6661.836
+      y: 320
+      text: end
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: fe2fa49c-c86e-4d50-a6b6-1eb23a3be83e

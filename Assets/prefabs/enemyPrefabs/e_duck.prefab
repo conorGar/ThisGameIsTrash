@@ -58,7 +58,6 @@ GameObject:
   - component: {fileID: 114249686244017498}
   - component: {fileID: 61268702648429060}
   - component: {fileID: 114808193333466140}
-  - component: {fileID: 114224147677081426}
   - component: {fileID: 114373584994059236}
   - component: {fileID: 114029351326968710}
   - component: {fileID: 50974681233089598}
@@ -108,7 +107,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585751386897454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 55.81511, y: -35.820023, z: 0.2109375}
+  m_LocalPosition: {x: -137.37886, y: -59.12935, z: 0.2109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4073793924853896}
@@ -214,7 +213,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11, y: -0.04}
+  m_Offset: {x: 0.11, y: 0.05}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -225,7 +224,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 1.43, y: 1.32}
   m_EdgeRadius: 0
 --- !u!114 &114016116769498130
 MonoBehaviour:
@@ -239,7 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
-  topSorted: 0
   sortBuddies: []
 --- !u!114 &114020907024328940
 MonoBehaviour:
@@ -252,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
+  health: 2
   attkPower: 1
   moveWhenHit: 0
   respawningEnemyType: 0
@@ -271,22 +269,6 @@ MonoBehaviour:
   library: {fileID: 114010995895570102, guid: 33036ad7c5ae5bf4f9ee04607f3ec062, type: 2}
   defaultClipId: 1
   playAutomatically: 1
---- !u!114 &114224147677081426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1585751386897454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f384d93fee72b4cb0b65fe702459a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DebugClickMode: 0
-  hasSeperateFacingAnimations: 0
-  bodyCollider: {fileID: 61787944317269882}
-  pathGrid: {fileID: 0}
-  DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
 --- !u!114 &114249686244017498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -309,14 +291,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCollider: {fileID: 0}
+  target: {fileID: 0}
   walkDistance: 9.2
-  chaseSpeed: 4
+  chaseSpeed: 5
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198419328894692054}
   returnToPreviousWhenFar: 0
-  pathRefreshTime: 0.5
 --- !u!114 &114373584994059236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -360,9 +341,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 4
-  maxRandomNodeDistance: 2
+  minMoveTime: 1
+  maxMoveTime: 2.2
   stopTime: 2
-  afterHitStopTime: 0.5
   walkPS: {fileID: 198419328894692054}
 --- !u!114 &114840077401668922
 MonoBehaviour:

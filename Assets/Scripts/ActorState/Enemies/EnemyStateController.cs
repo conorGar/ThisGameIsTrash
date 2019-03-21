@@ -12,6 +12,7 @@ public enum EnemyState
     CHASE,
     PREPARE,
     LUNGE,
+    LEAP,
     RECOVER,
     DEAD,
     DAZED,
@@ -24,17 +25,20 @@ public enum EnemyState
     TELEPORT,
     SPAWN_ADD,
     VULNERABLE,
-    MERGED
+    MERGED,
+    CHASE_OBJECT,
+    POWER_HIT
 }
 
 public enum EnemyFlag : int
 {
-    NONE = 0,
-    WALKING = 1 << 0,
-    CHASING = 1 << 1,
-    THROWABLE = 1 << 2,
-    INVULNERABLE = 1 << 3,
-    MOVING = WALKING | CHASING
+    NONE =                   0,
+    WALKING =           1 << 0,
+    CHASING =           1 << 1,
+    CHASING_OBJECT =    1 << 2,
+    THROWABLE =         1 << 3,
+    INVULNERABLE =      1 << 4,
+    MOVING = WALKING | CHASING | CHASING_OBJECT
 }
 
 public enum EnemyTrigger
@@ -44,6 +48,7 @@ public enum EnemyTrigger
     NOTICE,
     PREPARE,
     LUNGE,
+    LEAP,
     RECOVER,
     DEATH,
     THROW,
@@ -56,7 +61,10 @@ public enum EnemyTrigger
     CAST_SPAWN_BLOB,
     CAST_SHIELD,
     POPUP,
-    MERGE
+    MERGE,
+    CHASE, // chase for use when need to chase again after already noticed player
+    CHASE_OBJECT,
+    POWER_HIT
 }
 
 // Not a whole lot but maybe some common functionality can go here in the future.
