@@ -14,6 +14,7 @@ public class BossFriendEx : Friend
 	public GameObject friendStuart;
 	public GameObject slideTrash;
     public int FieldRoomNum;
+	public int StuartIntroRoomNum;
     public AudioClip trioTheme;
     public AudioClip shieldSound;
     public GameObject toxicBarrier;
@@ -67,6 +68,8 @@ public class BossFriendEx : Friend
         {
             case "IN_FIELD":
                 return room.roomNum == FieldRoomNum;
+			case "ON_TRAIL":
+                return room.roomNum == StuartIntroRoomNum;
             case "END":
                 return false;
         }
@@ -237,6 +240,7 @@ public class BossFriendEx : Friend
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 22;
                 break;
 			case "ON_TRAIL":
+				Debug.Log("EX FRIEND ROOM ACTIVATE READ FOR ON TRAIL VALUE");
 				ex.SetActive(false);
                 hash.SetActive(false);
                 questio.SetActive(false);
@@ -355,19 +359,32 @@ public class BossFriendEx : Friend
         stuart.PrepPhase2();
     }
 
-    public IEnumerator RockPan(){
+    public void RockPan(){
+    	StartCoroutine("RockPanSequence");
+    }
+
+    public IEnumerator RockPanSequence(){
+    	CamManager.Instance.mainCamPostProcessor.profile = null;
 		CamManager.Instance.mainCamEffects.CameraPan(rockPanDestination.gameObject,true);
 		yield return new WaitForSeconds(2.5f);
 		DialogManager.Instance.ReturnFromAction();
 
     }
-    public IEnumerator TrioAppear(){
+    public void TrioAppear(){
+    	StartCoroutine("TrioAppearSequence");
+    }
+
+    public IEnumerator TrioAppearSequence(){
 		CamManager.Instance.mainCamEffects.CameraPan(ex,true);
 		yield return new WaitForSeconds(1f);
     	ex.SetActive(true);
 		yield return new WaitForSeconds(1.5f);
 		DialogManager.Instance.ReturnFromAction();
     }
+    public void WarpStuart(){
+    	StartCoroutine("StuartTeleport");
+    }
+
     public IEnumerator StuartTeleport(){
     	friendStuart.SetActive(false);
 		yield return new WaitForSeconds(1.5f);

@@ -42,7 +42,8 @@ public class PlayerTakeDamage : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT &&
                 GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD &&
-				GetComponent<JimStateController>().GetCurrentState() != JimState.DASHING ) {
+				GetComponent<JimStateController>().GetCurrentState() != JimState.DASHING &&
+				!GetComponent<JimStateController>().IsFlag((int)JimFlag.INVULNERABLE) ) {
                 if (enemy.gameObject.layer == 9) { //layer 9 = enemies
 
                     if (enemy.gameObject.tag == "Boss") {
@@ -95,7 +96,8 @@ public class PlayerTakeDamage : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (GetComponent<JimStateController>().GetCurrentState() != JimState.HURT &&
                 GetComponent<JimStateController>().GetCurrentState() != JimState.DEAD &&
-				GetComponent<JimStateController>().GetCurrentState() != JimState.DASHING ) {
+				GetComponent<JimStateController>().GetCurrentState() != JimState.DASHING &&
+				!GetComponent<JimStateController>().IsFlag((int)JimFlag.INVULNERABLE) ) {
                 if (projectile.gameObject.layer == 10) { //layer 10 = projectiles
                     var projectileComp = projectile.gameObject.GetComponent<Projectile>();
 
@@ -201,7 +203,10 @@ public class PlayerTakeDamage : MonoBehaviour {
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
 
 	}
-
+	IEnumerator InvulTimer(){
+		yield return new WaitForSeconds(1f);
+		GetComponent<JimStateController>().RemoveFlag((int)JimFlag.INVULNERABLE);
+	}
 
 	IEnumerator Death(){
         // Trigger Respawn State.

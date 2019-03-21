@@ -21,7 +21,7 @@ public class JimDash : IActorState<JimState, JimTrigger>
 				animator.Play("ani_jimIdle");
                 return new JimIdle();
 		case JimTrigger.SWING_RIGHT:
-            	Debug.Log("which swing ani:" + whichSwingAni);
+            	//Debug.Log("which swing ani:" + whichSwingAni);
 
                 flags &= ~(int)JimFlag.FACING_LEFT;
                 return new JimAttacking();

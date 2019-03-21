@@ -34,6 +34,8 @@ public class MeleeAttack : MonoBehaviour {
 	int whichSwingAni;
 	tk2dSpriteAnimator animator;
 
+	float currentCamZoomVal; // for charge zoom in
+
 	void Awake(){
 		animator = gameObject.GetComponent<tk2dSpriteAnimator>();
 	}
@@ -85,20 +87,55 @@ public class MeleeAttack : MonoBehaviour {
                 case JimState.IDLE:
                     
                         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
-                            playerMomentum = swingMomentumForce;
+							if (ControllerManager.Instance.GetKey(INPUTACTION.MOVELEFT)){
+								playerMomentum = swingMomentumForce*2;
+							}else{
+                            	playerMomentum = swingMomentumForce;
+                            }
                             this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
                             StartCoroutine("Swing", 2);
                         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
                             this.gameObject.transform.localScale = startingScale;
-							playerMomentum = swingMomentumForce;
-                            StartCoroutine("Swing", 1);
+							if (ControllerManager.Instance.GetKey(INPUTACTION.MOVERIGHT)){
+								playerMomentum = swingMomentumForce*2;
+							}else{
+                            	playerMomentum = swingMomentumForce;
+                            }                            StartCoroutine("Swing", 1);
                         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
                             this.gameObject.transform.localScale = startingScale;
-							playerMomentum = swingMomentumForce;
+							if (ControllerManager.Instance.GetKey(INPUTACTION.MOVEDOWN)){
+								playerMomentum = swingMomentumForce*2;
+							}else{
+                            	playerMomentum = swingMomentumForce;
+                            }
                             StartCoroutine("Swing", 4);
                         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
                             this.gameObject.transform.localScale = startingScale;
-							playerMomentum = swingMomentumForce;
+							if (ControllerManager.Instance.GetKey(INPUTACTION.MOVEUP)){
+								playerMomentum = swingMomentumForce*2;
+							}else{
+                            	playerMomentum = swingMomentumForce;
+                            }                            StartCoroutine("Swing", 3);
+                        }
+                    
+                    break;
+				case JimState.DASHING:
+                    
+                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
+                            //playerMomentum = swingMomentumForce;
+                            this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
+                            StartCoroutine("Swing", 2);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
+                            this.gameObject.transform.localScale = startingScale;
+							//playerMomentum = swingMomentumForce;
+                            StartCoroutine("Swing", 1);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                            this.gameObject.transform.localScale = startingScale;
+							//playerMomentum = swingMomentumForce;
+                            StartCoroutine("Swing", 4);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                            this.gameObject.transform.localScale = startingScale;
+							//playerMomentum = swingMomentumForce;
                             StartCoroutine("Swing", 3);
                         }
                     
@@ -113,6 +150,8 @@ public class MeleeAttack : MonoBehaviour {
 						}else{
                     		Debug.Log("ChargingAttack cancel");
                     		StopCoroutine("StrongSwingCharge");
+							chargeReadyGlow.SetActive(false);
+
 							CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 							PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
 						}
@@ -275,7 +314,8 @@ public class MeleeAttack : MonoBehaviour {
 	}
 
 	IEnumerator StrongSwingCharge(INPUTACTION givenKey){
-		CamManager.Instance.mainCamEffects.ZoomInOut(1.3f,1f);
+		currentCamZoomVal = CamManager.Instance.mainCamEffects.GetCurrentCamZoom();
+		CamManager.Instance.mainCamEffects.ZoomInOut((currentCamZoomVal +.15f),1f);
 
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		heldKey = givenKey;
