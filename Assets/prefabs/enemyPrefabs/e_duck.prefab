@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 23361788767774718}
   - component: {fileID: 114897125545691324}
   - component: {fileID: 114249686244017498}
+  - component: {fileID: 114691245349545292}
   - component: {fileID: 61268702648429060}
   - component: {fileID: 114808193333466140}
   - component: {fileID: 114373584994059236}
@@ -224,7 +225,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.43, y: 1.32}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &114016116769498130
 MonoBehaviour:
@@ -238,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
 --- !u!114 &114020907024328940
 MonoBehaviour:
@@ -291,13 +293,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  targetCollider: {fileID: 0}
   walkDistance: 9.2
   chaseSpeed: 5
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198419328894692054}
   returnToPreviousWhenFar: 0
+  usePathGrid: 1
+  pathRefreshTime: 1
+  maxWalkDistance: 0
 --- !u!114 &114373584994059236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,6 +319,22 @@ MonoBehaviour:
   topLimit: 0
   botLimit: 0
   globalPos: 0
+--- !u!114 &114691245349545292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1585751386897454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f384d93fee72b4cb0b65fe702459a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugClickMode: 0
+  hasSeperateFacingAnimations: 0
+  bodyCollider: {fileID: 61787944317269882}
+  pathGrid: {fileID: 0}
+  DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
 --- !u!114 &114806496429286330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,10 +362,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 4
-  minMoveTime: 1
-  maxMoveTime: 2.2
+  maxRandomNodeDistance: 10
   stopTime: 2
+  afterHitStopTime: 0
   walkPS: {fileID: 198419328894692054}
+  mopSlow: 0
 --- !u!114 &114840077401668922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -392,6 +414,7 @@ MonoBehaviour:
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
@@ -400,6 +423,7 @@ MonoBehaviour:
   currentHp: 3
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114897125545691324

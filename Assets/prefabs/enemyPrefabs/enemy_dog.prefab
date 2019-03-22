@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 23545168762840886}
   - component: {fileID: 114311374415071366}
   - component: {fileID: 114559605688557012}
+  - component: {fileID: 114550212697743546}
   - component: {fileID: 114732958232410470}
   - component: {fileID: 114773077512966568}
   - component: {fileID: 114631716582775152}
@@ -108,7 +109,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1950723656096496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.818638, y: 10.143393, z: 0}
+  m_LocalPosition: {x: 32.112663, y: -5.2535, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4483404530793702}
@@ -214,7 +215,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.08499998, y: -0.05}
+  m_Offset: {x: 0.16, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -225,7 +226,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.19, y: 1.54}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
 --- !u!95 &95215378861971086
 Animator:
@@ -330,6 +331,7 @@ MonoBehaviour:
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
@@ -338,8 +340,25 @@ MonoBehaviour:
   currentHp: 3
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
+--- !u!114 &114550212697743546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1950723656096496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f384d93fee72b4cb0b65fe702459a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugClickMode: 0
+  hasSeperateFacingAnimations: 0
+  bodyCollider: {fileID: 61403232785860964}
+  pathGrid: {fileID: 0}
+  DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
 --- !u!114 &114559605688557012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -410,6 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 0
+  topSorted: 0
   sortBuddies: []
 --- !u!114 &114773077512966568
 MonoBehaviour:
@@ -436,13 +456,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  targetCollider: {fileID: 0}
   walkDistance: 15
   chaseSpeed: 5
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 0}
   returnToPreviousWhenFar: 0
+  usePathGrid: 1
+  pathRefreshTime: 1
+  maxWalkDistance: 0
 --- !u!198 &198994715302118384
 ParticleSystem:
   m_ObjectHideFlags: 1

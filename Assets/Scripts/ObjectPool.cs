@@ -85,7 +85,7 @@ public class ObjectPool : MonoBehaviour {
             }
         }
 
-        Debug.Log("Requested a pooled object [" + tag + "] but could not retrieve it.");
+        Debug.LogError("Requested a pooled object [" + tag + "] but could not retrieve it.");
         return null;
     }
 

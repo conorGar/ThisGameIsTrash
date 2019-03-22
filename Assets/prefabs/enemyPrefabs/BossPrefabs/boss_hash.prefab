@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4381461613250836}
   - component: {fileID: 212388718574280890}
   m_Layer: 9
-  m_Name: shadow (1)
+  m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,6 +304,7 @@ MonoBehaviour:
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
@@ -312,6 +313,7 @@ MonoBehaviour:
   currentHp: 0
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114405307267494612
@@ -415,7 +417,7 @@ MonoBehaviour:
   hpDisplay: {fileID: 0}
   objectPool: {fileID: 0}
   vanishAtDeath: 0
-  myBossScript: {fileID: 114978381845133056}
+  myBossScript: {fileID: 0}
   objectToPanTo: {fileID: 0}
   hpDisplayStartSfx: {fileID: 0}
   currentRoom: {fileID: 0}

@@ -344,7 +344,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1900699491210992}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.42617, y: -6.857666, z: 0}
+  m_LocalPosition: {x: -9.058334, y: -6.9347687, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1.2465518}
   m_Children:
   - {fileID: 4655492604839720}
@@ -708,6 +708,7 @@ MonoBehaviour:
   returnToPreviousWhenFar: 0
   usePathGrid: 0
   pathRefreshTime: 1
+  maxWalkDistance: 0
 --- !u!114 &114741802695955324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -828,6 +829,7 @@ MonoBehaviour:
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
@@ -836,6 +838,7 @@ MonoBehaviour:
   currentHp: 0
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114939319680174138

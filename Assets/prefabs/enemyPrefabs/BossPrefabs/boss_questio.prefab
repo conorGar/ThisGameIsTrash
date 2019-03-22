@@ -779,6 +779,7 @@ MonoBehaviour:
   returnToPreviousWhenFar: 0
   usePathGrid: 1
   pathRefreshTime: 1
+  maxWalkDistance: 0
 --- !u!114 &114595452660975414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -884,7 +885,7 @@ MonoBehaviour:
   hpDisplay: {fileID: 0}
   objectPool: {fileID: 0}
   vanishAtDeath: 0
-  myBossScript: {fileID: 114442276299790040}
+  myBossScript: {fileID: 0}
   objectToPanTo: {fileID: 0}
   hpDisplayStartSfx: {fileID: 0}
   currentRoom: {fileID: 0}
@@ -935,6 +936,7 @@ MonoBehaviour:
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
@@ -943,6 +945,7 @@ MonoBehaviour:
   currentHp: 0
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!198 &198149518425584194

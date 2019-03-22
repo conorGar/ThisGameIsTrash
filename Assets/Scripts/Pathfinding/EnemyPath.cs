@@ -24,6 +24,11 @@ public class EnemyPath : MonoBehaviour {
         line.transform.parent = transform;
     }
 
+    private void OnEnable()
+    {
+        path = null;
+    }
+
     void OnDisable()
     {
         path = null;

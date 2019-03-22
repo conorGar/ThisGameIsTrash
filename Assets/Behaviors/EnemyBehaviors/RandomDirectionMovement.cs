@@ -39,8 +39,8 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 	protected void OnEnable () {
         anim = GetComponent<tk2dSpriteAnimator>();
-        StartMoving();
-	}
+        nextMoveTime = 0f;
+    }
 	
 	// Update is called once per frame
 	protected void Update () {
@@ -102,7 +102,7 @@ public class RandomDirectionMovement : MonoBehaviour {
                 if (destPoint != null)
                     enemyPath.GeneratePath(pathGrid, startPoint, destPoint);
             } else {
-                // If no start point was found, the ememy is off the grid.  Try to get them back on the closest point on the grid to where they are.
+                // If no start point was found, the enemy is off the grid.  Try to get them back on the closest point on the grid to where they are.
                 startPoint = pathGrid.WorldToClosestGridPoint(transform.position);
                 enemyPath.GenerateQuickPath(pathGrid, startPoint);
             }
