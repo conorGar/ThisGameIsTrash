@@ -71,15 +71,15 @@ MonoBehaviour:
     normals: []
     tangents: []
     uvs:
-    - {x: 0.0019541015, y: 0.0019541015}
-    - {x: 0.5800772, y: 0.0019541015}
-    - {x: 0.0019541015, y: 0.35058495}
-    - {x: 0.5800772, y: 0.35058495}
+    - {x: 0.30322313, y: 0.0009770507}
+    - {x: 0.5922847, y: 0.0009770507}
+    - {x: 0.30322313, y: 0.17529248}
+    - {x: 0.5922847, y: 0.17529248}
     normalizedUvs:
     - {x: 0, y: 0}
-    - {x: 0.99999994, y: 0}
+    - {x: 1, y: 0}
     - {x: 0, y: 1}
-    - {x: 0.99999994, y: 1}
+    - {x: 1, y: 1}
     indices: 000000000300000001000000020000000300000000000000
     material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
     materialId: 0
@@ -119,15 +119,15 @@ MonoBehaviour:
     normals: []
     tangents: []
     uvs:
-    - {x: 0.5839853, y: 0.0019541015}
-    - {x: 0.5839853, y: 0.56249905}
-    - {x: 0.91113186, y: 0.0019541015}
-    - {x: 0.91113186, y: 0.56249905}
+    - {x: 0.5820317, y: 0.49804735}
+    - {x: 0.8623042, y: 0.49804735}
+    - {x: 0.5820317, y: 0.6616206}
+    - {x: 0.8623042, y: 0.6616206}
     normalizedUvs:
     - {x: 0, y: 0}
-    - {x: 0, y: 0.99999994}
     - {x: 1, y: 0}
-    - {x: 1, y: 0.99999994}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
     indices: 000000000300000001000000020000000300000000000000
     material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
     materialId: 0
@@ -138,7 +138,439 @@ MonoBehaviour:
     regionY: 0
     regionW: 0
     regionH: 0
-    flipped: 1
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: 
+    boundsData:
+    - {x: 0.79487175, y: -0.79487175, z: 0}
+    - {x: 1.6410257, y: 1.6410257, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.79487175, y: -0.79487175, z: 0}
+    - {x: 1.6410257, y: 1.6410257, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -0.025641026, y: -1.6153846, z: 0}
+    - {x: 1.6153846, y: -1.6153846, z: 0}
+    - {x: -0.025641026, y: 0.025641084, z: 0}
+    - {x: 1.6153846, y: 0.025641084, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.2988286, y: 0.17187549}
+    - {x: 0.2998042, y: 0.17187549}
+    - {x: 0.2988286, y: 0.17285107}
+    - {x: 0.2998042, y: 0.17285107}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: heron_idle3
+    boundsData:
+    - {x: 0.28205132, y: 0.30769205, z: 0}
+    - {x: 15.282051, y: 8.769231, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 18.461538, y: 10.256411, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -7.3589745, y: -4.0769234, z: 0}
+    - {x: 7.923077, y: -4.0769234, z: 0}
+    - {x: -7.3589745, y: 4.6923075, z: 0}
+    - {x: 7.923077, y: 4.6923075, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.59423876, y: 0.0009770507}
+    - {x: 0.8852534, y: 0.0009770507}
+    - {x: 0.59423876, y: 0.16796826}
+    - {x: 0.8852534, y: 0.16796826}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: a4bb3321d95b9454696b24556078a2e6
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: heron_idle1
+    boundsData:
+    - {x: 0.44871783, y: 0.33333325, z: 0}
+    - {x: 15.76923, y: 8.871796, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 18.461538, y: 10.256411, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -7.4358974, y: -4.1025643, z: 0}
+    - {x: 8.333333, y: -4.1025643, z: 0}
+    - {x: -7.4358974, y: 4.769231, z: 0}
+    - {x: 8.333333, y: 4.769231, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.0009770507}
+    - {x: 0.30126905, y: 0.0009770507}
+    - {x: 0.0009770507, y: 0.16992138}
+    - {x: 0.30126905, y: 0.16992138}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 0e7962ee86f97ab4cb17d2c7324c27a6
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: heron_idle4
+    boundsData:
+    - {x: 0.06410241, y: 0.2692306, z: 0}
+    - {x: 14.846153, y: 8.692308, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 18.461538, y: 10.256411, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -7.3589745, y: -4.0769234, z: 0}
+    - {x: 7.4871793, y: -4.0769234, z: 0}
+    - {x: -7.3589745, y: 4.6153846, z: 0}
+    - {x: 7.4871793, y: 4.6153846, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.2988286, y: 0.17724659}
+    - {x: 0.5815425, y: 0.17724659}
+    - {x: 0.2988286, y: 0.34277296}
+    - {x: 0.5815425, y: 0.34277296}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f3789cdcbd4039d449e4b3b1f6319993
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: heron_idle8
+    boundsData:
+    - {x: 0.25641012, y: 0.1282053, z: 0}
+    - {x: 15.282051, y: 8.307693, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 18.461538, y: 10.256411, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -7.3846154, y: -4.025641, z: 0}
+    - {x: 7.8974357, y: -4.025641, z: 0}
+    - {x: -7.3846154, y: 4.2820516, z: 0}
+    - {x: 7.8974357, y: 4.2820516, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.28906298, y: 0.34472704}
+    - {x: 0.58007765, y: 0.34472704}
+    - {x: 0.28906298, y: 0.5029292}
+    - {x: 0.58007765, y: 0.5029292}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 6968edd966726ce48a8490d274892a63
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: heron_idle5
+    boundsData:
+    - {x: 0.17948747, y: 0.19230771, z: 0}
+    - {x: 15.0256405, y: 8.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 18.461538, y: 10.256411, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -7.333333, y: -4.1282053, z: 0}
+    - {x: 7.692308, y: -4.1282053, z: 0}
+    - {x: -7.333333, y: 4.5128207, z: 0}
+    - {x: 7.692308, y: 4.5128207, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.59423876, y: 0.16992237}
+    - {x: 0.8803706, y: 0.16992237}
+    - {x: 0.59423876, y: 0.33447218}
+    - {x: 0.8803706, y: 0.33447218}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f010229938c66814d8019c68b329b8b9
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: heron_idle2
+    boundsData:
+    - {x: 0.33333373, y: 0.32051277, z: 0}
+    - {x: 15.538462, y: 8.846154, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 18.461538, y: 10.256411, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -7.4358974, y: -4.1025643, z: 0}
+    - {x: 8.102565, y: -4.1025643, z: 0}
+    - {x: -7.4358974, y: 4.74359, z: 0}
+    - {x: 8.102565, y: 4.74359, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.17187549}
+    - {x: 0.29687452, y: 0.17187549}
+    - {x: 0.0009770507, y: 0.34033155}
+    - {x: 0.29687452, y: 0.34033155}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 3de32c4dcc70cc2488b262b1d913030d
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: heron_idle6
+    boundsData:
+    - {x: 0.12820482, y: 0.16666675, z: 0}
+    - {x: 15.0256405, y: 8.487181, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 18.461538, y: 10.256411, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -7.3846154, y: -4.0769234, z: 0}
+    - {x: 7.641025, y: -4.0769234, z: 0}
+    - {x: -7.3846154, y: 4.410257, z: 0}
+    - {x: 7.641025, y: 4.410257, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.34228563}
+    - {x: 0.2871089, y: 0.34228563}
+    - {x: 0.0009770507, y: 0.5039058}
+    - {x: 0.2871089, y: 0.5039058}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 9f5005b252a79b44aa411e4bdbac061f
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: heron_idle7
+    boundsData:
+    - {x: 0.20512795, y: 0.14102554, z: 0}
+    - {x: 15.179487, y: 8.384616, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 18.461538, y: 10.256411, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -7.3846154, y: -4.0512824, z: 0}
+    - {x: 7.7948713, y: -4.0512824, z: 0}
+    - {x: -7.3846154, y: 4.3333335, z: 0}
+    - {x: 7.7948713, y: 4.3333335, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5834966, y: 0.33642626}
+    - {x: 0.8725581, y: 0.33642626}
+    - {x: 0.5834966, y: 0.49609327}
+    - {x: 0.8725581, y: 0.49609327}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: a5e47b94f04ac584595a95e226a8ee8f, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f98eca32afa03064eb04a7fb664672b4
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
     complexGeometry: 0
     physicsEngine: 0
     colliderType: 0
@@ -168,7 +600,7 @@ MonoBehaviour:
   loadable: 0
   invOrthoSize: 2
   halfTargetHeight: 19.5
-  buildKey: 1130568799
+  buildKey: 1288223875
   dataGuid: a08d746c4d496f4459dd642b775e4edb
   managedSpriteCollection: 0
   hasPlatformData: 0
