@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour {
     public static RoomManager Instance;
@@ -25,7 +26,26 @@ public class RoomManager : MonoBehaviour {
         previousRoom = null;
     }
 
-	public void Restart(Room respawnRoom){//called at player death in PlayerTakedamage
+    void Start()
+    {
+        // check for the checkpoint debug config if a spawncheckpoint was configured.
+        var configs = Resources.FindObjectsOfTypeAll<CheckpointDebugConfig>();
+        if (configs.Length > 0) {
+            CheckpointDebugConfig config = configs[0];
+            if (config.isOn) {
+                Checkpoint checkpoint = GameObject.Find(config.checkpointLookup.dictionary[SceneManager.GetActiveScene().path]).GetComponent<Checkpoint>();
+                if (checkpoint != null) {
+                    CheckpointManager.Instance.lastCheckpoint = checkpoint;
+                    currentRoom = checkpoint.myRoom;
+
+                    PlayerManager.Instance.player.transform.position = CheckpointManager.Instance.lastCheckpoint.transform.position; //Start at debug checkpoint
+                    CamManager.Instance.mainCam.transform.position = new Vector3(CheckpointManager.Instance.lastCheckpoint.transform.position.x, CheckpointManager.Instance.lastCheckpoint.transform.position.y, -10f);
+                }
+            }
+        }
+    }
+
+    public void Restart(Room respawnRoom){//called at player death in PlayerTakedamage
 		currentRoom = respawnRoom;
         previousRoom = null;
         currentRoom.ActivateRoom();
