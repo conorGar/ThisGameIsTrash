@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ev_Enemy_ArmoredMole : MonoBehaviour {
 
 	tk2dSpriteAnimator myAnim;
+	public GameObject landMark;
 
 	int startThrowOnce = 0;
 	int tossRockOnce;
@@ -45,6 +46,8 @@ public class Ev_Enemy_ArmoredMole : MonoBehaviour {
 	        myAnim.Play("throw");
 	        yield return new WaitForSeconds(.5f);
 	        myBoulder = ObjectPool.Instance.GetPooledObject("projectile_boulder", gameObject.transform.position,true);
+			landMark.transform.position = PlayerManager.Instance.player.transform.position;
+
 	        //myBoulder.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,8f),ForceMode2D.Impulse);
 	        yield return new WaitForSeconds(.2f);
 	        myAnim.Play("idle");

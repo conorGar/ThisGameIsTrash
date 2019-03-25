@@ -92,18 +92,41 @@ public class Room : MonoBehaviour
              }else{
             	Debug.Log("*** MY ENEMY IS NOT DEAD ***");
             	GameObject spawnedEnemy;
-				if(waifuChance == 2){
-					spawnedEnemy = ObjectPool.Instance.GetPooledObject("pObj_Waifu");
+                Vector3 spawnPos = new Vector3();
+
+                // Try to spawn on the path finding grid if one is defined.  If not, spawn on the spawner position.
+                var spawnerPathGrid = enemySpawners[i].pathGrid;
+                if (spawnerPathGrid != null) {
+                    Point enemyPoint = spawnerPathGrid.WorldToClosestGridPoint(enemySpawners[i].transform.position);
+
+                    if (enemyPoint != null) {
+                        spawnPos = spawnerPathGrid.GridToWorld(enemyPoint);
+                    } else {
+                        spawnPos = enemySpawners[i].transform.position;
+                    }
+                } else {
+                    spawnPos = enemySpawners[i].transform.position;
+                }
+
+                if (waifuChance == 2){
+					spawnedEnemy = ObjectPool.Instance.GetPooledObject("pObj_Waifu", spawnPos);
 
 				}else{
-					spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag);
+					spawnedEnemy = ObjectPool.Instance.GetPooledObject(enemy.tag, spawnPos);
 				}
-				spawnedEnemy.SetActive(true);
             
 	            if (spawnedEnemy != null)
 	            {
-	                enemies.Add(spawnedEnemy);
-	                spawnedEnemy.transform.position = enemySpawners[i].transform.position;
+                    // Give the enemy get the path grid reference if it needs it.
+                    if (spawnerPathGrid != null) {
+                        var enemyPath = spawnedEnemy.GetComponent<EnemyPath>();
+                        if (enemyPath != null) {
+                            enemyPath.pathGrid = spawnerPathGrid;
+                        }
+                    }
+
+                    enemies.Add(spawnedEnemy);
+
 					if(spawnedEnemy.GetComponent<EnemyTakeDamage>() != null){
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().SetSpawnerID(enemySpawners[i].name);
 		                if(spawnedEnemy.GetComponent<CannotExitScene>())
@@ -120,6 +143,15 @@ public class Room : MonoBehaviour
 					}
 	            }
             }   
+        }
+
+        if (bossRoom) {
+            for (int i = 0; i < bosses.Count; i++) {
+                bosses[i].GetComponent<Boss>().ActivateBoss();
+                bosses[i].GetComponent<Boss>().currentRoom = this;
+
+            }
+            CamManager.Instance.mainCamEffects.ZoomInOut(1f, 5f); //for debug testing
         }
 
         for (int i=0; i < friendSpawners.Count; ++i)
@@ -140,17 +172,7 @@ public class Room : MonoBehaviour
                     friends.Add(spawnedFriend.gameObject);
                 }
             }
-        }
-
-        if(bossRoom){
-        	for(int i = 0; i< bosses.Count;i++){
-					bosses[i].GetComponent<Boss>().ActivateBoss();
-					bosses[i].GetComponent<Boss>().currentRoom = this;
-        		
-        	}
-            CamManager.Instance.mainCamEffects.ZoomInOut(1f,5f); //for debug testing
-        }
- 
+        } 
     }
 
     public void DeactivateRoom()

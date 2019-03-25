@@ -51,7 +51,7 @@ public class WanderWithinBounds : RandomDirectionMovement
 				TurnToNewDirection();
 
 			}
-			base.Update();
+
 		}else if(returningToStart && controller.IsFlag((int)EnemyFlag.MOVING)){ //walk back to original position when lose sight of player
 			Debug.Log("returning to start");
 			if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
@@ -84,6 +84,9 @@ public class WanderWithinBounds : RandomDirectionMovement
 
 
 
+		}else{
+			Debug.Log("Got here - WanderWithinBounds");
+			base.Update();
 		}
 
 

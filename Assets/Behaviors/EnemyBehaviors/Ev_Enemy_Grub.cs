@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
 public class Ev_Enemy_Grub : FireTowardPlayer
 {
 	public GameObject weakSpot;
 	public GameObject parent;
 	public GameObject armor;
-	//protected GenericEnemyStateController controller;
 	public GameObject burrowingPS;
-
 
 	Vector2 startingScale = new Vector2();
 	private Vector2 direction;
@@ -23,7 +20,7 @@ public class Ev_Enemy_Grub : FireTowardPlayer
 
 	void Awake()
     {
-        controller = GetComponent<GenericEnemyStateController>();
+        controller = GetComponent<EnemyStateController>();
     }
 
 
@@ -79,9 +76,9 @@ public class Ev_Enemy_Grub : FireTowardPlayer
 	IEnumerator LeapSequence(){
 
 
-		controller.SendTrigger(EnemyTrigger.PREPARE_LUNGE);
+		controller.SendTrigger(EnemyTrigger.PREPARE_LEAP);
 
-		while (controller.GetCurrentState() == EnemyState.PREPARE_LUNGE)
+		while (controller.GetCurrentState() == EnemyState.PREPARE_LEAP)
            			yield return null;
 		weakSpot.SetActive(true);
 		gameObject.GetComponent<Animator>().SetTrigger("Leap");

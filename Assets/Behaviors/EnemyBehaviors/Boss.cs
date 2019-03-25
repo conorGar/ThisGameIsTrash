@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyStateController))]
 public class Boss : MonoBehaviour {
 
 	public int bossNumber;
@@ -12,15 +13,19 @@ public class Boss : MonoBehaviour {
 	public bool vanishAtDeath;
 	public MonoBehaviour myBossScript;
 	public GameObject objectToPanTo;
-	public bool dazeAtDeath;
 	public AudioClip hpDisplayStartSfx;
+    protected EnemyStateController controller;
 
-	[HideInInspector]
+    [HideInInspector]
 	public Room currentRoom; //used to diable other bosses at main bosses' death
 	int deathSmokeNumber;
 
+    private void Awake()
+    {
+        controller = GetComponent<EnemyStateController>();
+    }
 
-	protected void Start () {
+    protected void Start () {
 
 
 		if(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] > hp){
@@ -81,10 +86,6 @@ public class Boss : MonoBehaviour {
 			yield return new WaitForSeconds(1f);
 			GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
 			deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
-			if(gameObject.GetComponent<FollowPlayer>() != null){
-				gameObject.GetComponent<FollowPlayer>().StopSound();
-				gameObject.GetComponent<FollowPlayer>().enabled = false;
-			}
 	
             //CamManager.Instance.mainCamEffects.CameraPan(objectToPanTo.transform.position,"BossItem");
             //CamManager.Instance.mainCamEffects.objectToSpawn = objectToPanTo;
@@ -94,18 +95,8 @@ public class Boss : MonoBehaviour {
 			}
             GameStateManager.Instance.PopState();
             BossDeathEvent();
-        }
-        else{
-        	Debug.Log("Got here- boss death - 1");
-			if(dazeAtDeath){
-				Debug.Log("Got here- boss death - 2");
-
-				Dazed();
-			}else{
-                gameObject.GetComponent<tk2dSpriteAnimator>().Play("death");
-                myBossScript.StopAllCoroutines();
-				myBossScript.enabled = false;
-			}
+        } else {
+            controller.SendTrigger(EnemyTrigger.DEATH);
 		}
 	}
 
@@ -115,7 +106,7 @@ public class Boss : MonoBehaviour {
 
 	}
 
-	protected virtual void Dazed(){
+	public virtual void Dazed(){
 		//nothing for basic boss
 	}
 

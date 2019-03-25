@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(HashStateController))]
 public class B_Ev_Hash : MonoBehaviour {
 
 	tk2dSpriteAnimator myAnim;
@@ -11,13 +12,14 @@ public class B_Ev_Hash : MonoBehaviour {
 	public AudioClip shieldSound;
 	public ParticleSystem smokePuff;
 
-
-	//bool isRunningAway;
 	float landY;
 	Rigidbody2D myBody;
-	bool falling;
-	bool onStuart;
-	bool returnAfterThrow;
+    HashStateController controller;
+    float direction = 1f;
+    public float recoverDazeTime = 10f;
+    public float nextRecoverDazeTime = 0f;
+    GameObject dazedStars;
+
     //Protects Stuart Until Hash is hit
     //^Then Hash runs away
 
@@ -26,125 +28,102 @@ public class B_Ev_Hash : MonoBehaviour {
     {
         myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
         myBody = gameObject.GetComponent<Rigidbody2D>();
-        onStuart = true;
+        controller = GetComponent<HashStateController>();
     }
 
-    void Start () {
-		gameObject.transform.parent = stuart.transform;
-		gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
-		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+    void OnEnable()
+    {
+        GetComponent<Renderer>().sortingLayerName = "Layer01";
+        gameObject.layer = 9; //switch to enemy layer.
+    }
 
-		Shield();
-	}
+    private void OnDisable()
+    {
+        GetComponent<Animator>().enabled = false; // Animator won't allow translations if it's active.  It's the worst.
+    }
 
-	void OnEnable(){
-		if(returnAfterThrow){
-			Revive();
-		}
-	}
-
-	void Update () {
+    void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            /*float distance = Vector3.Distance(transform.position, player.transform.position);
-
-            if(stuartShield.activeInHierarchy == true){//if hit while shielding Stuart, stops shield and starts runaway
-                if(myAnim.CurrentClip.name == "hurt"){
-                    stuartShield.SetActive(false);
-                    isRunningAway = true;
-                }
-            }else if(!isRunningAway && distance <10){ //if not shielding stuart, will start running away if the player gets close
-                isRunningAway = true;
-            }
-            if(isRunningAway){
-                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, -1*8*Time.deltaTime);
-                if(myAnim.CurrentClip.name != "walk"){
-                    myAnim.Play("walk");
-                }
-                if(distance > 10){
-                    isRunningAway = false;
-                    StartCoroutine("Shield");
-                }
-            }*/
-            if (onStuart) {
-                gameObject.transform.localPosition = new Vector2(0f, 3f);//place hash on top of stuart
-            }
-
-            if (falling) {
-                if (gameObject.transform.position.y < landY) {
-                    Dazed();
-                    myBody.gravityScale = 0f;
-                    myBody.velocity = new Vector2(0, 0f);
-                    myBody.AddForce(new Vector2(4f * (Mathf.Sign(gameObject.transform.lossyScale.x)), 0f), ForceMode2D.Impulse);//slide
-                    falling = false;
-                }
+            switch (controller.GetCurrentState()) {
+                case EnemyState.IDLE:
+                    controller.SendTrigger(EnemyTrigger.CAST_SHIELD); // merge hash with stuart (hops on top of his head shielding him)
+                    break;
+                case EnemyState.MERGED:
+                    gameObject.transform.localPosition = new Vector2(0f, 3f); //place hash on top of stuart TODO: Why do these drift apart if you don't set the local position every frame?
+                    break;
+                case EnemyState.HIT:
+                    if (gameObject.transform.position.y < landY) {
+                        myBody.gravityScale = 0f;
+                        myBody.velocity = new Vector2(0, 0f);
+                        myBody.AddForce(new Vector2(4f * direction, 0f), ForceMode2D.Impulse);//slide
+                        controller.SendTrigger(EnemyTrigger.DEATH); // triggers dazed when hash hits the ground.
+                    }
+                    break;
+                case EnemyState.DAZED:
+                    // Undaze and cast shield.
+                    if (nextRecoverDazeTime < Time.time) {
+                        UnDazed();
+                        controller.SendTrigger(EnemyTrigger.IDLE);
+                    }
+                    break;
+                case EnemyState.CARRIED:
+                    StopDazedStars();
+                    break;
             }
         }
 	}
 
-
-
-
 	public void Shield(){
-	Debug.Log("HASH SHIELD ACTIVATED");
-		//myAnim.Play("idle");
-		//yield return new WaitForSeconds(Random.Range(3f,6f));
-		if(!falling){ //if runningAway wasn't activated in the time between coroutine activate and wait till cast....
-			myAnim.Play("cast");
-
-			//yield return new WaitForSeconds(1f);
-			SoundManager.instance.PlaySingle(shieldSound);
-			stuartShield.SetActive(true);
-			stuart.GetComponent<BossStuart>().canDamage = false;
-			stuart.GetComponent<InvincibleEnemy>().enabled = true;
-			stuart.GetComponent<EnemyTakeDamage>().enabled = false;
-			//stuart.GetComponent<FollowPlayer>().enabled = false;
-		}
+        smokePuff.Play();
+        gameObject.transform.parent = stuart.transform;
+        gameObject.transform.localPosition = new Vector2(0f, 3f);//place hash on top of stuart
+        SoundManager.instance.PlaySingle(shieldSound);
+		stuartShield.SetActive(true);
+        myBody.gravityScale = 0f;
+        myBody.velocity = new Vector2(0, 0f);
+        UnDazed();
+        gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
+        stuart.GetComponent<StuartStateController>().SendTrigger(EnemyTrigger.INVULNERABLE); // Make stuart invulnerable to damage
 	}
 
 	public void KnockOff(){
-		Debug.Log("HASH KNOCKOFF ACTIVATE*****");
 		stuartShield.SetActive(false);
-		onStuart = false;
 		gameObject.transform.parent = null;
 		landY = gameObject.transform.position.y - 4;
-		myBody.AddForce(new Vector2(7f*(Mathf.Sign(gameObject.transform.lossyScale.x)),4f),ForceMode2D.Impulse);//slide
+        direction = Mathf.Sign(transform.position.x - PlayerManager.Instance.player.transform.position.x); // face away from the player
+		myBody.AddForce(new Vector2(7f * direction, 4f),ForceMode2D.Impulse); // slide
 		myBody.gravityScale = 1;
 		gameObject.GetComponent<Renderer>().sortingLayerName = "Layer01";
-		falling = true;
-		stuart.GetComponent<EnemyTakeDamage>().enabled = true;
+        gameObject.layer = 11; //switch to item layer.
+        controller.SendTrigger(EnemyTrigger.HIT); // hash gets "hit" off stuart and lands on the ground, dazed.
 	}
 
-	void Dazed(){
-		//gameObject.GetComponent<EnemyTakeDamage>().enabled = true;
-		gameObject.layer = 11; //switch to ite layer.
-		gameObject.GetComponent<ThrowableObject>().enabled = true;
-		myAnim.Play("dazed");
-		StartCoroutine("ReviveCheck");
+	public void Dazed(){
+        gameObject.layer = 11; //switch to item layer.
+        nextRecoverDazeTime = recoverDazeTime + Time.time;
+        StartDazedStars();
 	}
 
-	void Revive(){
-		if(this.enabled){
-			smokePuff.Play();
-			SoundManager.instance.PlaySingle(teleportSound);
-			gameObject.GetComponent<EnemyTakeDamage>().enabled = false;//cant attack while he is riding Stuart
-			gameObject.transform.parent = stuart.transform;
-			gameObject.GetComponent<Animator>().enabled = false;
-			gameObject.transform.localScale = Vector2.one;
-			gameObject.transform.localPosition = new Vector2(0f,3f);//place hash on top of stuart
-			onStuart = true;
-			gameObject.layer = 1; //switch to tile layer.
-			gameObject.GetComponent<ThrowableObject>().enabled = false;
-			Shield();
-		}else{
-			returnAfterThrow = true;
-		}
-	}
+    public void UnDazed()
+    {
+        gameObject.layer = 1; //switch to transparent layer.
+        StopDazedStars();
+    }
 
-	IEnumerator ReviveCheck(){
-		yield return new WaitForSeconds(5f);// delay until can revive
-		yield return new WaitUntil(() => gameObject.GetComponent<ThrowableObject>().onGround == true);
-		Revive();
-	}
+    void StartDazedStars()
+    {
+        if (dazedStars != null)
+            ObjectPool.Instance.ReturnPooledObject(dazedStars);
 
+        dazedStars = ObjectPool.Instance.GetPooledObject("effect_dazed", new Vector3(transform.position.x, transform.position.y + 2, 0));
+        dazedStars.transform.parent = gameObject.transform;
+    }
 
+    void StopDazedStars()
+    {
+        if (dazedStars != null) {
+            ObjectPool.Instance.ReturnPooledObject(dazedStars);
+            dazedStars = null;
+        }
+    }
 }

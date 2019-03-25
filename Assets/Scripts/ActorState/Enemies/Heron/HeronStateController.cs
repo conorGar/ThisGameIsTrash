@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class HeronStateController : GenericEnemyStateController
+public class HeronStateController : EnemyStateController
 {
     protected new void Awake()
     {

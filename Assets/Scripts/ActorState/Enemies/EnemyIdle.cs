@@ -24,36 +24,33 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
     {
         switch (trigger) {
             case EnemyTrigger.HIT:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
-				Debug.Log("-x-x-x-x-x-x-x- Enemy Idle Hit trigger activate -x-x-x-x-x-");
-
                 return new EnemyHit();
 			case EnemyTrigger.POWER_HIT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
-				Debug.Log("-x-x-x-x-x-x-x- Enemy Idle Hit trigger activate -x-x-x-x-x-");
-
                 return new EnemyPowerHit();
             case EnemyTrigger.NOTICE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
                 flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
 			case EnemyTrigger.THROW:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.THROW));
-               // flags |= (int)EnemyFlag.CHASING;
                 return new EnemyThrow();
             case EnemyTrigger.PREPARE:
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
-               // flags |= (int)EnemyFlag.CHASING;
                 return new EnemyPrepare();
-			case EnemyTrigger.PREPARE_LUNGE:
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LUNGE));
-                return new EnemyPrepare_Lunge();
-			case EnemyTrigger.LUNGE:
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
-                return new EnemyLunge();
-			case EnemyTrigger.VULNERABLE: //added for Grub Enemy
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.VULNERABLE));
+			case EnemyTrigger.PREPARE_LEAP:
+                return new EnemyPrepare_Leap();
+            case EnemyTrigger.CAST_TELEPORT: // Cast -> Teleport
+                return new EnemyCast(CAST_TYPE.TELEPORT);
+            case EnemyTrigger.CAST_SPAWN_BLOB:
+                return new EnemyCast(CAST_TYPE.SPAWN_ADD, "enemy_slime");
+            case EnemyTrigger.CAST_SHIELD:
+                return new EnemyCast(CAST_TYPE.SHIELD);
+            case EnemyTrigger.VULNERABLE: //added for Grub Enemy
                 return new EnemyVulnerable();
+			case EnemyTrigger.LUNGE:
+                return new EnemyLunge();
+			case EnemyTrigger.LEAP:
+                return new EnemyLeap();
         }
 
         return null;

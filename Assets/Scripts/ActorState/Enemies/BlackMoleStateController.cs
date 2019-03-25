@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class BlackMoleStateController : GenericEnemyStateController
+public class BlackMoleStateController : EnemyStateController
 {
 	protected new void Awake()
     {

@@ -19,8 +19,6 @@ public class EnemyThrow : IActorState<EnemyState, EnemyTrigger>
     {
 		switch (trigger) {
             case EnemyTrigger.HIT:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
-                Debug.Log("-x-x-x-x-x-x-x- Enemy Throw Hit trigger activate -x-x-x-x-x-");
                 return new EnemyHit();
 			case EnemyTrigger.LUNGE: //added because of grub, if causes isses change Ev_Enmy_grub2
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));

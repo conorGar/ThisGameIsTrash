@@ -12,6 +12,7 @@ public class GUI_PauseMenu2 : GUI_PauseMenu
 	//public GameObject mopBox;
 	public GameObject highlightBox;
 	public GameObject selectArrow;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -99,7 +100,7 @@ public class GUI_PauseMenu2 : GUI_PauseMenu
         }
 
 
-		gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition,Vector3.zero,.1f*(Time.realtimeSinceStartup - Time.deltaTime));
+		//gameObject.transform.localPosition = Vector2.Lerp(gameObject.transform.localPosition,Vector2.zero,.1f*(Time.realtimeSinceStartup - Time.deltaTime));
 	}
 }
 

@@ -9,6 +9,7 @@ public class EnemyPowerHit : IActorState<EnemyState, EnemyTrigger> {
 
     public IActorState<EnemyState, EnemyTrigger> OnUpdate(tk2dSpriteAnimator animator, ref int flags)
     {
+        animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
         return null;
     }
 

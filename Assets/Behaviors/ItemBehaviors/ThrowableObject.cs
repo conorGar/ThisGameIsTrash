@@ -19,8 +19,6 @@ public class ThrowableObject : PickupableObject {
 	public Transform roomToReattatchTo;
 	public bool onGround = true; //used for living bodies that revive after a bit, to make sure they dont do so while being carried
 	GameObject panicSweat;
-    [Tooltip("TK2D Animation Clip to play after the object lands and settles on the ground.")]
-    public string groundedClip;
 	// Use this for initialization
 	void Start(){
 		base.Start();
@@ -75,12 +73,6 @@ public class ThrowableObject : PickupableObject {
                 	if(myShadow !=null){
                 		myShadow.transform.position = new Vector2(gameObject.transform.position.x,landingY); // shadow follows body
                 	}
-
-
-                    /*if (groundedClip != null) {  -- not sure what this was suppossed to be....?
-                        GetComponent<tk2dSpriteAnimator>().Play(groundedClip);
-                    }*/
-
                 }
             }
         }
@@ -97,11 +89,6 @@ public class ThrowableObject : PickupableObject {
 
 		StartCoroutine("PickupDelay");
 
-		if(livingBody){
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
-			panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
-			panicSweat.transform.parent = gameObject.transform;
-		}
         if (myShadow != null)
 		    myShadow.SetActive(false);
 	}
@@ -110,9 +97,7 @@ public class ThrowableObject : PickupableObject {
 		yield return new WaitForSeconds(1f);
 
 		if(livingBody){
-			gameObject.GetComponent<tk2dSpriteAnimator>().Play("carry"); 
-			panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat",gameObject.transform.position);
-			panicSweat.transform.parent = gameObject.transform;
+            StartSweat();
 		}
         if (myShadow != null)
 		    myShadow.SetActive(true);
@@ -120,7 +105,7 @@ public class ThrowableObject : PickupableObject {
 		canThrow = true;
 	}
 
-	void Throw(){
+	protected virtual void Throw(){
         var animator = gameObject.GetComponent<Animator>();
             if (animator != null) animator.enabled = false;
 
@@ -150,6 +135,9 @@ public class ThrowableObject : PickupableObject {
 		myBody.simulated = true;
 		gameObject.transform.position = new Vector2(transform.position.x,transform.position.y-1); //move more directly in front of player
 		myBody.velocity = new Vector2(22f*(Mathf.Sign(PlayerManager.Instance.player.transform.lossyScale.x)),2f);
+
+        if (livingBody)
+            StopSweat();
 
         PlayerManager.Instance.controller.SendTrigger(JimTrigger.THROW);
 
@@ -206,9 +194,19 @@ public class ThrowableObject : PickupableObject {
 		//nothing for base
 	}
 
+    public void StartSweat()
+    {
+        if (panicSweat != null)
+            ObjectPool.Instance.ReturnPooledObject(panicSweat);
+
+        panicSweat = ObjectPool.Instance.GetPooledObject("effect_carrySweat", gameObject.transform.position);
+        panicSweat.transform.parent = gameObject.transform;
+    }
+
 	public void StopSweat(){
 		if(panicSweat != null){
 			ObjectPool.Instance.ReturnPooledObject(panicSweat);
+            panicSweat = null;
 		}
 	}
 

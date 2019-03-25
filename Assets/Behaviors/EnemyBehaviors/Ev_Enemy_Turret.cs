@@ -8,6 +8,7 @@ public class Ev_Enemy_Turret : MonoBehaviour
 	public float fireRate;
 	public AudioClip throwSFX;
 	public GameObject projectile;
+	public float timeUntilProjDeath = 7f;
 
 	int throwOnceCheck;
 	float nextThrowTime;
@@ -45,6 +46,10 @@ public class Ev_Enemy_Turret : MonoBehaviour
 		if(bullet.GetComponent<Ev_ProjectileBasic>() != null){
 			bullet.GetComponent<Ev_ProjectileBasic>().speedX = projectileSpeedX;
 			bullet.GetComponent<Ev_ProjectileBasic>().speedY = projectileSpeedY;
+		}
+		if(bullet.GetComponent<KillSelfAfterTime>() != null){
+			bullet.GetComponent<KillSelfAfterTime>().timeUntilDeath = timeUntilProjDeath;
+			bullet.GetComponent<KillSelfAfterTime>().StartCoroutine("Kill");
 		}
 		bullet.GetComponent<Rigidbody2D>().gravityScale = 0;
 		SoundManager.instance.PlaySingle(throwSFX);

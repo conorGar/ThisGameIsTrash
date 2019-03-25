@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class BrownBeetleStateController : GenericEnemyStateController {
+public class BrownBeetleStateController : EnemyStateController
+{
     // Use this for initialization
     public GameObject myChild;
 

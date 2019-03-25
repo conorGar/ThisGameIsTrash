@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class RhinoBeetleStateController : GenericEnemyStateController
+public class RhinoBeetleStateController : EnemyStateController
 {
 	protected new void Awake()
     {
@@ -29,17 +28,13 @@ public class RhinoBeetleStateController : GenericEnemyStateController
 			
             case EnemyState.HIT:
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-                //animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
-                //SetFlag((int)EnemyFlag.CHASING);
                 currentState = new EnemyIdle();
                 break;
-			case EnemyState.PREPARE:
-                
+			case EnemyState.PREPARE: 
                 currentState = new EnemyThrow();
                 break;
 			case EnemyState.RECOVER:
 				flags |= (int)EnemyFlag.CHASING;
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
                 currentState = new EnemyChase();
                 break;
 			

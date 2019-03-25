@@ -224,18 +224,16 @@ public class BossFriendEx : Friend
         switch (GetFriendState())
         {
             case "IN_TOXIC_FIELD":
-                stuart.GetComponent<FollowPlayer>().enabled = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 22;
-                stuart.GetComponent<FollowPlayer>().enabled = false;
                 break;
+            case "PREP_FIGHT_PHASE_2":
             case "STUART_PEP":
-                stuart.GetComponent<FollowPlayer>().enabled = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 22;
+                SetFriendState("STUART_PEP");
                 break;
             case "STUART_DEFEATED":
-                stuart.GetComponent<FollowPlayer>().enabled = false;
                 gameObject.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 22;
                 break;
@@ -309,8 +307,6 @@ public class BossFriendEx : Friend
                 SetFriendState("LEFT_FIGHT_PHASE_2");
                 break;
         }
-
-        stuart.GetComponent<FollowPlayer>().enabled = false;
     }
 
     IEnumerator HashShieldShow(){
@@ -335,7 +331,6 @@ public class BossFriendEx : Friend
 		stuart.transform.Find("shield").gameObject.SetActive(true);
 		hash.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		yield return new WaitForSeconds(1f);
-		ex.GetComponent<MeshRenderer>().enabled = false; // friend ex version vanishes
 		GameObject healIcon = ObjectPool.Instance.GetPooledObject("effect_HealMarker",hash.transform.position);
 		healIcon.transform.GetChild(0).GetComponent<tk2dTextMesh>().text = "10";
 		healIcon.GetComponent<Rigidbody2D>().velocity = Vector2.up;
@@ -350,12 +345,13 @@ public class BossFriendEx : Friend
 		yield return new WaitForSeconds(2f);
 		questio.transform.Find("throwingGloves").gameObject.SetActive(false);
 
-		//Ex teleports and spawns blob
-		stuart.bossEx.SetActive(true);
-		stuart.bossEx.GetComponent<B_Ev_Ex>().StartCoroutine("Teleport");
+        ex.GetComponent<MeshRenderer>().enabled = false; // friend ex version vanishes
+
+        //Ex teleports and spawns blob
+        stuart.bossEx.SetActive(true);
 		CamManager.Instance.mainCamEffects.CameraPan(stuart.bossEx, true);
-		yield return new WaitUntil(() => stuart.bossEx.GetComponent<B_Ev_Ex>().initialTeleport == false);
-		yield return new WaitForSeconds(2.5f);
+		yield return new WaitUntil(() => !stuart.bossEx.GetComponent<B_Ev_Ex>().initialTeleport);
+        yield return new WaitForSeconds(2.5f);
         stuart.PrepPhase2();
     }
 
@@ -375,6 +371,7 @@ public class BossFriendEx : Friend
     }
 
     public IEnumerator TrioAppearSequence(){
+		CamManager.Instance.mainCamPostProcessor.profile = null;
 		CamManager.Instance.mainCamEffects.CameraPan(ex,true);
 		yield return new WaitForSeconds(1f);
     	ex.SetActive(true);

@@ -104,4 +104,14 @@ public class JimStateController : ActorStateController<JimState, JimTrigger> {
                 break;
         }
     }
+
+    // Whether jim is in a state that allows hitting or not.
+    public bool IsHittable()
+    {
+        var state = currentState.GetState();
+        return state != JimState.HURT &&
+               state != JimState.DEAD &&
+               state != JimState.DASHING &&
+               !IsFlag((int)JimFlag.INVULNERABLE);
+    }
 }

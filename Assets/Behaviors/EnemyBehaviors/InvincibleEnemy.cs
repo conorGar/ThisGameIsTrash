@@ -1,24 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(EnemyStateController))]
 public class InvincibleEnemy : MonoBehaviour
 {
 
 	public AudioClip nullHitSfx;
 
 
-	Rigidbody2D player;
+    public bool IsInvulnerable()
+    {
+        return GetComponent<EnemyStateController>().IsFlag((int)EnemyFlag.INVULNERABLE);
+    }
 
-	void Start(){
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-
-	}
-
-	void OnTriggerEnter2D(Collider2D melee){
-		if(isActiveAndEnabled && melee.tag == "Weapon"){
+    void OnTriggerEnter2D(Collider2D melee){
+		if(IsInvulnerable() && melee.tag == "Weapon"){
 			Deflect();
-			//Debug.Log("Collision with weapon: ");
-
 		}
 	}
 
@@ -28,10 +25,10 @@ public class InvincibleEnemy : MonoBehaviour
 		littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		littleStars.SetActive(true);
 
-		if(gameObject.transform.position.x < player.transform.position.x){
-			player.AddForce(new Vector2(2,0),ForceMode2D.Impulse);
+		if(gameObject.transform.position.x < PlayerManager.Instance.player.transform.position.x){
+			PlayerManager.Instance.player.GetComponent<Rigidbody2D>().AddForce(new Vector2(2,0),ForceMode2D.Impulse);
 		}else{
-			player.AddForce(new Vector2(-2,0),ForceMode2D.Impulse);	
+            PlayerManager.Instance.player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-2,0),ForceMode2D.Impulse);	
 		}
 	}
 }

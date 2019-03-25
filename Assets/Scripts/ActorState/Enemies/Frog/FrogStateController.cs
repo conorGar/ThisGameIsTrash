@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class FrogStateController : GenericEnemyStateController
+public class FrogStateController : EnemyStateController
 {
 	protected new void Awake()
     {

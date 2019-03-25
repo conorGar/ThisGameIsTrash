@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
-
 public class Ev_Enemy_Grub2 : EnemyTakeDamage
 {
 	//shoots 3 times then pauses briefly, can be knocked out of ground by a heavy attack, will follow player if far enough
@@ -9,6 +7,7 @@ public class Ev_Enemy_Grub2 : EnemyTakeDamage
 	public GameObject burrowingPS;
 	public float projectileSpeed;
 	public GameObject projectile;
+	public bool chaseAfterPlayer;
 
 	Vector2 startingScale = new Vector2();
 
@@ -36,10 +35,11 @@ public class Ev_Enemy_Grub2 : EnemyTakeDamage
             switch (controller.GetCurrentState()) {
                 case EnemyState.IDLE:
 				//Debug.Log("Here - Grub");
-					if(Vector2.Distance(gameObject.transform.position,PlayerManager.Instance.player.transform.position) > 10f){
-						StartCoroutine("Dive");
+					if(chaseAfterPlayer){
+						if(Vector2.Distance(gameObject.transform.position,PlayerManager.Instance.player.transform.position) > 10f){
+							StartCoroutine("Dive");
+						}
 					}
-
 					if(Time.time > nextActionTime){
 						//Debug.Log("TIme is > grub action time: " + spitOnceCheck);
 						if(spitOnceCheck < 3){

@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class OpossumStateController : GenericEnemyStateController
+public class OpossumStateController : EnemyStateController
 {
     protected new void Awake()
     {
@@ -27,34 +26,26 @@ public class OpossumStateController : GenericEnemyStateController
 
         switch (currentState.GetState()) {
             
-            case EnemyState.PREPARE_LUNGE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
+            case EnemyState.PREPARE_LEAP:
                 currentState = new EnemyLunge();
 				Debug.Log("Opossum ani event complete: LUNGE -> RECOVER");
 
                 break;
 			case EnemyState.LUNGE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.WAKE));
                 currentState = new EnemyRecover();
 				Debug.Log("Opossum ani event complete: LUNGE -> RECOVER");
 
                 break;
 			case EnemyState.HIT:
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
 				flags |= (int)EnemyFlag.CHASING;
-				Debug.Log("Opossum ani event complete: RECOVER -> CHASE");
                 currentState = new EnemyChase();
                 break;
 			case EnemyState.POWER_HIT:
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
 				flags |= (int)EnemyFlag.CHASING;
-				Debug.Log("Opossum ani event complete: RECOVER -> CHASE");
                 currentState = new EnemyChase();
                 break;
 			case EnemyState.RECOVER:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
 				flags |= (int)EnemyFlag.CHASING;
-				Debug.Log("Opossum ani event complete: RECOVER -> CHASE");
                 currentState = new EnemyChase();
                 break;
         }

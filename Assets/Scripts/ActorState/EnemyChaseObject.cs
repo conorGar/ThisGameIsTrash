@@ -17,21 +17,16 @@ public class EnemyChaseObject : IActorState<EnemyState, EnemyTrigger>
     {
         switch (trigger) {
       
-			case EnemyTrigger.PREPARE_LUNGE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE_LUNGE));
+			case EnemyTrigger.PREPARE_LEAP:
 				flags &= ~(int)EnemyFlag.CHASING_OBJECT;
-            
-                return new EnemyPrepare_Lunge();
+                return new EnemyPrepare_Leap();
 			case EnemyTrigger.LUNGE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
 				flags &= ~(int)EnemyFlag.CHASING_OBJECT;
                 return new EnemyLunge();
 			case EnemyTrigger.CHASE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
 				flags &= ~(int)EnemyFlag.CHASING_OBJECT;
 				flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
-
         }
 
         return null;

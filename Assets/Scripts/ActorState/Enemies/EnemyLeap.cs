@@ -21,7 +21,7 @@ public class EnemyLeap : IActorState<EnemyState, EnemyTrigger>
             case EnemyTrigger.IDLE:
                 return new EnemyIdle();
 			case EnemyTrigger.RECOVER:
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.WAKE));
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.RECOVER));
                 return new EnemyRecover();
         }
 

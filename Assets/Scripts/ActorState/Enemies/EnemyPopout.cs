@@ -20,9 +20,6 @@ public class EnemyPopout : IActorState<EnemyState, EnemyTrigger>
     {
 		switch (trigger) {
             case EnemyTrigger.HIT:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
-				Debug.Log("-x-x-x-x-x-x-x- Enemy Popout Hit trigger activate -x-x-x-x-x-");
-
                 return new EnemyHit();
         }
         return null;

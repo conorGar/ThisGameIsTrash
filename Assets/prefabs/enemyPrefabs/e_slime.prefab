@@ -70,12 +70,14 @@ GameObject:
   - component: {fileID: 4693132554380106}
   - component: {fileID: 33643920428015316}
   - component: {fileID: 23050233018751020}
+  - component: {fileID: 114396887952428158}
   - component: {fileID: 114627010204717500}
-  - component: {fileID: 61438884144196736}
   - component: {fileID: 114863122598235998}
+  - component: {fileID: 61438884144196736}
   - component: {fileID: 114709868544477710}
   - component: {fileID: 114813030209662820}
   - component: {fileID: 50777729888385352}
+  - component: {fileID: 114208455903015518}
   - component: {fileID: 114100920816620620}
   - component: {fileID: 114941821428685480}
   - component: {fileID: 61144755623047700}
@@ -217,7 +219,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11, y: 0.05}
+  m_Offset: {x: -0.09, y: -0.3}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -228,7 +230,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.43, y: 1.32}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
 --- !u!61 &61438884144196736
 BoxCollider2D:
@@ -266,11 +268,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
+  health: 1
   attkPower: 2
   moveWhenHit: 0
   respawningEnemyType: 0
   toxicEnemy: 1
+--- !u!114 &114208455903015518
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541179326353172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f384d93fee72b4cb0b65fe702459a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugClickMode: 0
+  hasSeperateFacingAnimations: 0
+  bodyCollider: {fileID: 61144755623047700}
+  pathGrid: {fileID: 0}
+  DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
+--- !u!114 &114396887952428158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541179326353172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d60e0a6256bbbda4ea76520fd7b4bda8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114627010204717500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,10 +366,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
-  minMoveTime: 1
-  maxMoveTime: 2.2
+  maxRandomNodeDistance: 1
   stopTime: 2
+  afterHitStopTime: 0
   walkPS: {fileID: 198043862303114716}
+  mopSlow: 0
 --- !u!114 &114867986009869928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -355,10 +385,11 @@ MonoBehaviour:
   projectileSpeed: 5
   fireRate: 5
   myProjectileFalls: 0
-  fireAniName: spit
   projectile: {fileID: 1198749803060142, guid: 49710af3938ce26498467d762cfbcd4e, type: 2}
   throwSFX: {fileID: 8300000, guid: b97d40794840e804a90a02b0085b904d, type: 3}
   buildupSfx: {fileID: 8300000, guid: d225a9aac21c5a54e95b80affa971a31, type: 3}
+  nextFireTime: 2
+  randomRateChanger: 1
 --- !u!114 &114941821428685480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -403,10 +434,10 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1332030190873508}
-  returnAniName: idle
   dontSpawnBody: 1
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
@@ -414,7 +445,8 @@ MonoBehaviour:
   otherRespawner: {fileID: 0}
   currentHp: 2
   meleeDmgBonus: 0
-  dontStopWhenHit: 0
+  bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114967996206745342
@@ -442,6 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
 --- !u!198 &198043862303114716
 ParticleSystem:

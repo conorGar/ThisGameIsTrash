@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
 public class Ev_Enemy_Slasher : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class Ev_Enemy_Slasher : MonoBehaviour
     public float leapSpeed;
     public AnimationCurve leapCurve;
 
-	protected GenericEnemyStateController controller;
+	protected EnemyStateController controller;
 	public GameObject mySlash;
 	protected Vector3 startScale;
 	bool leapBack;
@@ -23,7 +22,7 @@ public class Ev_Enemy_Slasher : MonoBehaviour
 
     void Awake()
     {
-        controller = GetComponent<GenericEnemyStateController>();
+        controller = GetComponent<EnemyStateController>();
 		startScale = gameObject.transform.localScale;
     }
 
@@ -107,8 +106,8 @@ public class Ev_Enemy_Slasher : MonoBehaviour
         } else {
                transform.localScale = new Vector3(startScale.x, startScale.y, 1);
         }
-		controller.SendTrigger(EnemyTrigger.PREPARE_LUNGE);
-		while (controller.GetCurrentState() == EnemyState.PREPARE_LUNGE)
+		controller.SendTrigger(EnemyTrigger.PREPARE_LEAP);
+		while (controller.GetCurrentState() == EnemyState.PREPARE_LEAP)
            			yield return null;
         StartCoroutine("Slash");
 	}

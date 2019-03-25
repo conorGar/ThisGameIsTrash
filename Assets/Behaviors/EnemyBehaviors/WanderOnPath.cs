@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-[RequireComponent(typeof(GenericEnemyStateController))]
+[RequireComponent(typeof(EnemyStateController))]
 public class WanderOnPath : MonoBehaviour
 {
 	public float walkSpeed = 4;
@@ -17,13 +16,13 @@ public class WanderOnPath : MonoBehaviour
 	public List<GameObject> pathMarks = new List<GameObject>(); //public for debugging, otherwise should be given by enemy spawner
 	Vector3 startingScale;
 	protected tk2dSpriteAnimator anim;
-	protected GenericEnemyStateController controller;
+	protected EnemyStateController controller;
 
 	//TODO: Switch direction facing based on direction of next mark
 
 	void Awake()
     {
-        controller = GetComponent<GenericEnemyStateController>();
+        controller = GetComponent<EnemyStateController>();
     }
 	// Use this for initialization
 	void Start ()

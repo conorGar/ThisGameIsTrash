@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
 public class FireTowardPlayer : MonoBehaviour {
 
@@ -21,15 +20,15 @@ public class FireTowardPlayer : MonoBehaviour {
 	public GameObject target;
 
 	private tk2dSpriteAnimator anim;
+	protected EnemyStateController controller;
 	Vector2 startScale;
-	protected GenericEnemyStateController controller;
 
 
 	// Use this for initialization
 
 	void Awake()
     {
-        controller = GetComponent<GenericEnemyStateController>();
+        controller = GetComponent<EnemyStateController>();
     }
 
 	void OnEnable () {

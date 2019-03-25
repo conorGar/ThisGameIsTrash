@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-public class GrubStateController : GenericEnemyStateController {
+public class GrubStateController : EnemyStateController
+{
 
 
 
@@ -28,12 +28,6 @@ public class GrubStateController : GenericEnemyStateController {
         base.AnimationEventCompleted(animator, clip);
         Debug.Log("ani event completed" + currentState);
         switch (currentState.GetState()) {
-            /*case EnemyState.HIT:
-                //GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
-                SetFlag((int)EnemyFlag.CHASING);
-                currentState = new EnemyChase();
-                break;*/
 			case EnemyState.POPOUT: 
 				Debug.Log("Grub changes from popout to idle");
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
@@ -43,15 +37,10 @@ public class GrubStateController : GenericEnemyStateController {
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.THROW));
                 currentState = new EnemyThrow();
             	break;
-			
-			case EnemyState.PREPARE_LUNGE: //prepare for leap
+			case EnemyState.PREPARE_LEAP: //prepare for leap
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
                 currentState = new EnemyLunge();
             	break;
-			/*case EnemyState.LUNGE: //hit the ground after Jump
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.VULNERABLE));
-                currentState = new EnemyVulnerable();
-            	break;*/
             case EnemyState.THROW:
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
                 currentState = new EnemyIdle();
@@ -60,8 +49,6 @@ public class GrubStateController : GenericEnemyStateController {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
                 currentState = new EnemyIdle();
                 break;
-			Debug.Log("ani event completed finish with: " + currentState);
-
         }
     }
 

@@ -8,6 +8,7 @@ public enum ENEMY_ANIM
     IDLE,
     HIT,
     DEAD,
+    DAZED,
     WALK,
     RUN,
     CHASE,
@@ -19,11 +20,15 @@ public enum ENEMY_ANIM
     WAKE,
     POP_UP,
     THROW,
+    CARRIED,
     LUNGE,
-    PREPARE_LUNGE,
     LEAP,
+    RECOVER,
+    PREPARE_LEAP,
     VULNERABLE,
-    BURROW
+    BURROW,
+    CAST,
+    MERGED
 }
 
 public class EnemyAnim
@@ -34,6 +39,7 @@ public class EnemyAnim
             case ENEMY_ANIM.IDLE: return "idle";
             case ENEMY_ANIM.HIT: return "hit";
             case ENEMY_ANIM.DEAD: return "dead";
+            case ENEMY_ANIM.DAZED: return "dazed";
             case ENEMY_ANIM.WALK: return "walk";
             case ENEMY_ANIM.RUN: return "run";
             case ENEMY_ANIM.CHASE: return "chase";
@@ -45,11 +51,15 @@ public class EnemyAnim
             case ENEMY_ANIM.WAKE: return "wake";
             case ENEMY_ANIM.POP_UP: return "popUp";
             case ENEMY_ANIM.THROW: return "throw";
+            case ENEMY_ANIM.CARRIED: return "carried";
             case ENEMY_ANIM.LUNGE: return "lunge";
             case ENEMY_ANIM.LEAP: return "leap";
-			case ENEMY_ANIM.PREPARE_LUNGE: return "prepare_lunge";
+            case ENEMY_ANIM.RECOVER: return "recover";
+            case ENEMY_ANIM.PREPARE_LEAP: return "prepare_leap";
 			case ENEMY_ANIM.VULNERABLE: return "vulnerable";
 			case ENEMY_ANIM.BURROW: return "burrow";
+            case ENEMY_ANIM.CAST: return "cast";
+            case ENEMY_ANIM.MERGED: return "merged";
         }
 
         Debug.LogError("Animation Name for " + anim + " is undefined.  Define it here!");

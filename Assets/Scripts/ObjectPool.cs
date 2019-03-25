@@ -42,36 +42,37 @@ public class ObjectPool : MonoBehaviour {
         }
 	}
 
-    public GameObject GetPooledObject (string tag)
+    public GameObject GetPooledObject(string tag, Vector3 pos = new Vector3(), bool setActive = true)
+    {
+        GameObject obj = GetInternalPooledObject(tag);
+        if (obj != null) {
+            obj.transform.SetPositionAndRotation(pos, Quaternion.identity);
+            obj.SetActive(setActive);
+        }
+
+        return obj;
+    }
+
+    private GameObject GetInternalPooledObject(string tag)
     {
         ObjectPoolDefinition poolDefinition = null;
-        for (int i=0; i < itemsToPool.Count; ++i)
-        {
-            if (itemsToPool[i].poolObject.tag == tag)
-            {
+        for (int i = 0; i < itemsToPool.Count; ++i) {
+            if (itemsToPool[i].poolObject.tag == tag) {
                 poolDefinition = itemsToPool[i];
                 break;
             }
         }
 
-        if (poolDefinition != null)
-        {
+        if (poolDefinition != null) {
             var objects = pooledObjects[poolDefinition];
-            if (objects != null)
-            {
-                for (int i = 0; i < objects.Count; ++i)
-                {
-                    if (!objects[i].activeInHierarchy)
-                    {
-                    	objects[i].SetActive(true);
-                    	if(objects[i].GetComponent<tk2dSpriteAnimator>() != null)
-                    		objects[i].GetComponent<tk2dSpriteAnimator>().Play();
+            if (objects != null) {
+                for (int i = 0; i < objects.Count; ++i) {
+                    if (!objects[i].activeInHierarchy) {
                         return objects[i];
                     }
                 }
 
-                if (poolDefinition.IsExpandable)
-                {
+                if (poolDefinition.IsExpandable) {
                     GameObject obj = Instantiate(poolDefinition.poolObject) as GameObject;
                     pooledObjects[poolDefinition].Add(obj);
 
@@ -84,28 +85,8 @@ public class ObjectPool : MonoBehaviour {
             }
         }
 
-        Debug.Log("Requested a pooled object [" + tag + "] but could not retrieve it.");
+        Debug.LogError("Requested a pooled object [" + tag + "] but could not retrieve it.");
         return null;
-    }
-
-    public GameObject GetPooledObject(string tag, Vector3 pos, bool setActive = false)
-    {
-        GameObject obj = GetPooledObject(tag, pos);
-        if (obj != null && setActive)
-            obj.SetActive(true);
-
-        return obj;
-    }
-
-    public GameObject GetPooledObject (string tag, Vector3 pos)
-    {
-        GameObject go = null;
-        if (go = GetPooledObject(tag))
-        {
-            go.transform.SetPositionAndRotation(pos, Quaternion.identity);
-        }
-
-        return go;
     }
 
     public void ClearPooledObjects (GameObject go)

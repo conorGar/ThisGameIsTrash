@@ -196,7 +196,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72f797a1bc2de384fa586fc8ed00f08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 2
+  damageToPlayer: 1
+  destroyOnTileCollision: 0
+  myShadow: {fileID: 0}
+  toxicProjectile: 0
 --- !u!114 &114296282029279162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwPS: {fileID: 198621566163105396}
   speed: 0
+  target: {fileID: 0}
 --- !u!114 &114656313952872358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -261,6 +265,7 @@ MonoBehaviour:
   timeUntilDeath: 10
   deactivateInsteadOfKill: 1
   playSoundAtStart: 0
+  smokePuffAtEnd: 0
   mySound: {fileID: 0}
 --- !u!198 &198621566163105396
 ParticleSystem:

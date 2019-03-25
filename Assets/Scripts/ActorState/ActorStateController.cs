@@ -30,6 +30,17 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
     {
         currentState = defaultState;
         flags = 0;
+
+#if DEBUG_ACTORS
+        Debug.Log("Actor Enabled: " + name);
+#endif
+    }
+
+    protected void OnDisable()
+    {
+#if DEBUG_ACTORS
+        Debug.Log("Actor Disabled: " + name);
+#endif
     }
 
     public void Update()
@@ -40,16 +51,19 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
 
     public virtual void SendTrigger(Trigger_Type trigger)
     {
-        Debug.Log("SendTrigger: " + trigger + " current State: " + currentState.GetState());
+        // Ignore triggers if not state has been set up yet.
+        if (currentState != null) {
+            Debug.Log("SendTrigger: " + trigger + " current State: " + currentState.GetState() + " for object [" + name + "]");
 
-        // Resolve triggers that don't care about states and just do stuff.
-        AnyStateTrigger(trigger);
+            // Resolve triggers that don't care about states and just do stuff.
+            AnyStateTrigger(trigger);
 
-        // Resolve triggers based on the current state.
-        var newState = currentState.SendTrigger(trigger, gameObject, animator, ref flags);
+            // Resolve triggers based on the current state.
+            var newState = currentState.SendTrigger(trigger, gameObject, animator, ref flags);
 
-        if (newState != null)
-            currentState = newState;
+            if (newState != null)
+                currentState = newState;
+        }
     }
 
     public State_Type GetCurrentState()
@@ -73,6 +87,11 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
         flags &= ~flag;
     }
 
+    public void ClearFlags()
+    {
+        flags = 0;
+    }
+
     protected virtual void AnyStateTrigger(Trigger_Type trigger)
     {
         // nothing for base class
@@ -86,7 +105,7 @@ public class ActorStateController<State_Type, Trigger_Type> : MonoBehaviour
     protected virtual void AnimationEventCompleted(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip)
     {
 #if DEBUG_ANIMATION
-        Debug.Log("Animation Completed: Clip Name: " + clip.name);
+        Debug.Log("Animation Completed: Clip Name: " + clip.name + " for object [" + name + "]");
 #endif
     }
 }

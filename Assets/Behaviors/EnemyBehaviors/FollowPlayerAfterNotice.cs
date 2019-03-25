@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
-[RequireComponent(typeof(GenericEnemyStateController))]
+[RequireComponent(typeof(EnemyStateController))]
 public class FollowPlayerAfterNotice : MonoBehaviour {
 
 	public float noticeThreshold;
@@ -11,11 +10,11 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	public bool sleepingEnemy;
 	public GameObject sleepingPS;
 
-    protected GenericEnemyStateController controller;
+    protected EnemyStateController controller;
 
     void Awake()
     {
-        controller = GetComponent<GenericEnemyStateController>();
+        controller = GetComponent<EnemyStateController>();
     }
 
     void Start () {

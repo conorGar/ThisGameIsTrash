@@ -19,9 +19,10 @@ public class EnemyPrepare : IActorState<EnemyState, EnemyTrigger>
 	{
 		switch (trigger) {
             case EnemyTrigger.LUNGE: //added because of Rhino Beetle
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LEAP));
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
 				Debug.Log("-x-x-x-x-x-x-x- Enemy Prepare Leap trigger activate -x-x-x-x-x-");
                 return new EnemyLunge();
+			
         }
         return null;
 

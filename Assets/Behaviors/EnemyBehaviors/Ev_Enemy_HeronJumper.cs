@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
-using GenericEnemyStateController = EnemyStateController<EnemyState, EnemyTrigger>;
 
 public class Ev_Enemy_HeronJumper : MonoBehaviour
 {
 	public float leapSpeed;
 	public float lungeThreshold;
+	public GameObject shadow;
 
 	Vector2 leapDir;
 	Vector2 leapDestination;
-	protected GenericEnemyStateController controller;
+	protected EnemyStateController controller;
 
+	Leapifier leapifier;
+    public float leapHeight;
+    public AnimationCurve leapCurve;
 	// Use this for initialization
 	void Awake(){
-		controller = GetComponent<GenericEnemyStateController>();
+		controller = GetComponent<EnemyStateController>();
 
 	}
 
@@ -32,20 +35,22 @@ public class Ev_Enemy_HeronJumper : MonoBehaviour
 
 					if(controller.GetCurrentState() != EnemyState.LEAP){
 						//Debug.Log("Got here - Heron 3");
+						if (leapifier != null)
+                            leapifier.Reset();
+
+						leapifier = new Leapifier(gameObject, shadow, leapHeight, leapSpeed, leapDestination, leapCurve);
 
 						gameObject.layer = 1; // transparentFX;
-	                    controller.SendTrigger(EnemyTrigger.LEAP);
 						StartCoroutine("LeapBack");
 					}
 				}
 		switch (controller.GetCurrentState()) {
 				
                 case EnemyState.LEAP:
-                    if (Vector2.Distance(transform.position, leapDestination) > 0.1f) {
-                        transform.position = Vector2.MoveTowards(gameObject.transform.position, leapDestination, leapSpeed * Time.deltaTime);
-                    } else { // landing spot
+				if (leapifier.OnUpdate()) {
+                        // Reached the leap destination.
                         gameObject.layer = 9; // Enemy;
-                        controller.SendTrigger(EnemyTrigger.RECOVER);
+                        controller.SendTrigger(EnemyTrigger.IDLE);
                     }
 
                     break;
@@ -56,11 +61,12 @@ public class Ev_Enemy_HeronJumper : MonoBehaviour
 		Debug.Log("Leap Back Activated");
 		leapDestination = (gameObject.transform.position - PlayerManager.Instance.player.transform.position ).normalized*leapSpeed;
 
+		controller.SendTrigger(EnemyTrigger.LEAP);
 
 		//gameObject.GetComponent<Rigidbody2D>().AddForce(slashDir*slashSpeed,ForceMode2D.Impulse);
 		while (controller.GetCurrentState() == EnemyState.HIT ||controller.GetCurrentState() == EnemyState.POWER_HIT )
            			yield return null;
-		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		//gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 	}
 }
 
