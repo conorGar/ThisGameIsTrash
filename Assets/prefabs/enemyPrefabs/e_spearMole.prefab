@@ -55,9 +55,11 @@ GameObject:
   - component: {fileID: 33632322919353590}
   - component: {fileID: 23864085601682956}
   - component: {fileID: 114134347591424222}
+  - component: {fileID: 114865976289376428}
   - component: {fileID: 114766353726826246}
   - component: {fileID: 61110314396677700}
   - component: {fileID: 61747323131722756}
+  - component: {fileID: 114242462760898338}
   - component: {fileID: 114636667801948816}
   - component: {fileID: 114924733267092366}
   - component: {fileID: 114194065566079508}
@@ -127,7 +129,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1715004810931272}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 127.780594, y: 74.98768, z: 0}
+  m_LocalPosition: {x: 93.19562, y: 74.805115, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4204505055763710}
@@ -335,7 +337,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.39, y: 1.6}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &114134347591424222
 MonoBehaviour:
@@ -377,6 +379,22 @@ MonoBehaviour:
   topLimit: 0
   botLimit: 0
   globalPos: 0
+--- !u!114 &114242462760898338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1715004810931272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f384d93fee72b4cb0b65fe702459a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugClickMode: 0
+  hasSeperateFacingAnimations: 0
+  bodyCollider: {fileID: 61747323131722756}
+  pathGrid: {fileID: 0}
+  DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
 --- !u!114 &114256065011109510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,6 +409,7 @@ MonoBehaviour:
   damageToPlayer: 1
   destroyOnTileCollision: 0
   myShadow: {fileID: 0}
+  toxicProjectile: 0
 --- !u!114 &114317049081646286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -417,6 +436,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
 --- !u!114 &114636667801948816
 MonoBehaviour:
@@ -424,18 +444,21 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1715004810931272}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  targetCollider: {fileID: 0}
   walkDistance: 10
+  maxWalkDistance: 0
   chaseSpeed: 5
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198037785932892104}
   returnToPreviousWhenFar: 0
+  usePathGrid: 0
+  pathRefreshTime: 1
 --- !u!114 &114707988734180988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -451,6 +474,7 @@ MonoBehaviour:
   attkPower: 1
   moveWhenHit: 1
   respawningEnemyType: 0
+  toxicEnemy: 0
 --- !u!114 &114745645828691684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -495,17 +519,19 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1743829772922610}
-  returnAniName: idle
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
+  otherRespawner: {fileID: 0}
   currentHp: 0
   meleeDmgBonus: 0
-  dontStopWhenHit: 0
+  bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114766353726826246
@@ -535,6 +561,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 4
   stopTime: 1
+  walkPS: {fileID: 0}
+  pathMarks: []
+--- !u!114 &114865976289376428
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1715004810931272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a36e7b641a86ed44bc0089cab383d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114924733267092366
 MonoBehaviour:
   m_ObjectHideFlags: 1
