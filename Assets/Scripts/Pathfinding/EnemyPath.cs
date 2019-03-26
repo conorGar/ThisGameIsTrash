@@ -40,12 +40,14 @@ public class EnemyPath : MonoBehaviour {
     {
         if (path != null) {
             // set a new destination (the point on the grid, offset by where the bodyCollider actually is)
-            Vector2 destination = pathGrid.GridToWorld(path.Position) - bodyCollider.offset * Mathf.Sign(transform.localScale.x);
+            Vector2 destination = pathGrid.GridToWorld(path.Position) - new Vector2(bodyCollider.offset.x * Mathf.Sign(transform.localScale.x), bodyCollider.offset.y);
             transform.position = Vector3.MoveTowards(transform.position, destination, distance);
 
             if (Vector2.Distance(transform.position, destination) < 0.001f) {
                 transform.position = destination;
                 path = path.Next;
+
+                DrawDebugPath(pathGrid);
 
                 // turn toward the next node.
                 if (path != null)
