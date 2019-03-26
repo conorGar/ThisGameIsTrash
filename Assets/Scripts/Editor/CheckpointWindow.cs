@@ -57,7 +57,7 @@ public class CheckpointWindow : EditorWindow
 
         if (EditorGUI.EndChangeCheck()) {
             Debug.Log("Setting Debug Checkpoint for the active scene: " + sceneName + " to: " + checkpointList[checkpointIndex].name);
-            config.checkpointLookup.dictionary[sceneName] = checkpointList[checkpointIndex].name;
+            config.lookUp[sceneName] = checkpointList[checkpointIndex].name;
             EditorUtility.SetDirty(config);
             AssetDatabase.SaveAssets();
         }

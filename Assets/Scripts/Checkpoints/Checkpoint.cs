@@ -15,10 +15,11 @@ public class Checkpoint : MonoBehaviour
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		Debug.Log("Checkpoint Activated");
-		CheckpointManager.Instance.lastCheckpoint = this;
-		GUIManager.Instance.checkPointDisplay.SetActive(true);
-		StartCoroutine("DisplayStop");
+        if (CheckpointManager.Instance.lastCheckpoint != this) {
+            CheckpointManager.Instance.lastCheckpoint = this;
+            GUIManager.Instance.checkPointDisplay.SetActive(true);
+            StartCoroutine("DisplayStop");
+        }
 	}
 
 	IEnumerator DisplayStop(){

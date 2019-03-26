@@ -13,5 +13,8 @@ public class CheckpointDebugConfig : ScriptableObject
     // Scene path -> checkpoint name
     public bool isOn = false;
     [SerializeField]
-    public CheckpointDictionary checkpointLookup = new CheckpointDictionary();
+    public CheckpointDictionary checkpointLookup = CheckpointDictionary.New<CheckpointDictionary>();
+    public Dictionary<string, string> lookUp {
+        get { return checkpointLookup.dictionary; }
+    }
 }
