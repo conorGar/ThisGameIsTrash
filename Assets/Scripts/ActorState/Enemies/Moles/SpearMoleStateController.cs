@@ -6,7 +6,7 @@ public class SpearMoleStateController : EnemyStateController
 {
     protected new void Awake()
     {
-        defaultState = new EnemyPopout();
+        defaultState = new EnemyIdle();
         base.Awake();
     }
 

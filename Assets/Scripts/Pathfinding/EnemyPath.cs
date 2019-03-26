@@ -11,6 +11,7 @@ public class EnemyPath : MonoBehaviour {
     public BreadCrumb path;
     public GameObject DebugPathEdge;
     private LineRenderer line;
+    private float facingThreshold = .2f;
 
     // Use this for initialization
     void Awake () {
@@ -87,10 +88,22 @@ public class EnemyPath : MonoBehaviour {
     // Makes sure this transform faces the next path node.
     public void FaceNextPathNode()
     {
+        var posDiff = pathGrid.GridToWorld(path.Position).x - transform.position.x;
+
+        // only switch facing if the x difference is more than a certain threshold.  This is so enemies walking down don't flip flop directions when they don't need to.
+        if (Mathf.Abs(posDiff) < facingThreshold)
+            return;
+
         if (!hasSeperateFacingAnimations)
-            transform.localScale = new Vector3(Mathf.Sign(pathGrid.GridToWorld(path.Position).x - transform.position.x),
+            transform.localScale = new Vector3(Mathf.Sign(posDiff),
                                       transform.localScale.y,
                                       transform.localScale.z);
+    }
+
+    // returns the enemies collider center
+    public Vector2 GetColliderCenter()
+    {
+        return (Vector2)transform.position + bodyCollider.offset;
     }
 
     // Crappy estimate of how long in seconds it will take to traverse the path.

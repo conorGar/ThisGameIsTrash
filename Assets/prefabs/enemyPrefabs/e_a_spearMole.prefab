@@ -39,8 +39,10 @@ GameObject:
   - component: {fileID: 33616464214440522}
   - component: {fileID: 23301342415444508}
   - component: {fileID: 114351243890378076}
+  - component: {fileID: 114073891635696650}
   - component: {fileID: 114924262334039512}
   - component: {fileID: 61085258698728486}
+  - component: {fileID: 114235381431905072}
   - component: {fileID: 114823792153802328}
   - component: {fileID: 114404446273759330}
   - component: {fileID: 114843033388432866}
@@ -48,7 +50,7 @@ GameObject:
   - component: {fileID: 50843239995917258}
   - component: {fileID: 114789237316039340}
   - component: {fileID: 114155921973959784}
-  - component: {fileID: 114494172571047146}
+  - component: {fileID: 114222051190617754}
   m_Layer: 9
   m_Name: e_a_spearMole
   m_TagString: enemy_armoredSpearMole
@@ -84,22 +86,6 @@ GameObject:
   - component: {fileID: 199720640834641010}
   m_Layer: 0
   m_Name: enemyWalkTrail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1886813148817060
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4546235936817974}
-  - component: {fileID: 61281329975881570}
-  m_Layer: 0
-  m_Name: wanderBounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,19 +135,6 @@ Transform:
   m_Father: {fileID: 4671191594251802}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4546235936817974
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1886813148817060}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.51, y: -0.44, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4671191594251802}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4671191594251802
 Transform:
   m_ObjectHideFlags: 1
@@ -169,14 +142,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1355490609600872}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 28.344995, y: -8.235175, z: 0}
+  m_LocalPosition: {x: 186.53484, y: 81.6979, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4546182400038260}
   - {fileID: 4208442766029598}
   - {fileID: 4808668736196076}
   - {fileID: 4906160836712270}
-  - {fileID: 4546235936817974}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -279,7 +251,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.84, y: -0.42}
+  m_Offset: {x: -0.9, y: -0.38}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -290,32 +262,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.34, y: 1.31}
-  m_EdgeRadius: 0
---- !u!61 &61281329975881570
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1886813148817060}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 19.25, y: 3.65}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
 --- !u!61 &61385949047048344
 BoxCollider2D:
@@ -367,24 +314,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.09, y: 2.69}
   m_EdgeRadius: 0
+--- !u!114 &114073891635696650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355490609600872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a36e7b641a86ed44bc0089cab383d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114155921973959784
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1355490609600872}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  targetCollider: {fileID: 0}
   walkDistance: 10
+  maxWalkDistance: 0
   chaseSpeed: 3
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198059248471040828}
-  returnToPreviousWhenFar: 1
+  returnToPreviousWhenFar: 0
+  usePathGrid: 1
+  pathRefreshTime: 1
 --- !u!114 &114162712783748792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +360,37 @@ MonoBehaviour:
   clankSound: {fileID: 8300000, guid: 1073f68275895f6429798e5be44021af, type: 3}
   parentsETD: {fileID: 114539248192695394}
   pushBack: 1
+--- !u!114 &114222051190617754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355490609600872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224fb8ff78c2e8849b1dc96dc47ce4d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 4
+  stopTime: 1
+  walkPS: {fileID: 0}
+  pathMarks: []
+--- !u!114 &114235381431905072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355490609600872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f384d93fee72b4cb0b65fe702459a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugClickMode: 0
+  hasSeperateFacingAnimations: 0
+  bodyCollider: {fileID: 61085258698728486}
+  pathGrid: {fileID: 0}
+  DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
 --- !u!114 &114278261270486922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -453,23 +445,6 @@ MonoBehaviour:
   topLimit: 0
   botLimit: 0
   globalPos: 0
---- !u!114 &114494172571047146
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1355490609600872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7145ca8301081f84b8f5d9a7a1663aeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 2
-  minMoveTime: 0.6
-  maxMoveTime: 1.6
-  stopTime: 2
-  walkPS: {fileID: 198059248471040828}
-  myWanderZone: {fileID: 0}
 --- !u!114 &114539248192695394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,18 +489,20 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 0}
-  returnAniName: idle
   dontSpawnBody: 0
   canKnockoffArmor: 1
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 1249466919941720}
   disarmoredAnimation: {fileID: 114356930639783786, guid: 3c711b45769ffb44abeb5545af2815a8,
     type: 2}
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
+  otherRespawner: {fileID: 0}
   currentHp: 0
   meleeDmgBonus: 0
-  dontStopWhenHit: 0
+  bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114789237316039340
@@ -540,6 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
 --- !u!114 &114823792153802328
 MonoBehaviour:
@@ -573,6 +551,7 @@ MonoBehaviour:
   attkPower: 1
   moveWhenHit: 1
   respawningEnemyType: 0
+  toxicEnemy: 0
 --- !u!114 &114924262334039512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -601,6 +580,7 @@ MonoBehaviour:
   damageToPlayer: 1
   destroyOnTileCollision: 0
   myShadow: {fileID: 0}
+  toxicProjectile: 0
 --- !u!198 &198059248471040828
 ParticleSystem:
   m_ObjectHideFlags: 1

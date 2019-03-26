@@ -133,7 +133,7 @@ public class Room : MonoBehaviour
 		                	spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
 	                }
-					if(enemySpawners[i].gameObject.GetComponent<WanderZone>() != null){	
+					if(enemySpawners[i].gameObject.GetComponent<WanderZone>() != null && spawnedEnemy.GetComponent<WanderWithinBounds>() != null) {	
 						Rect wanderZone = enemySpawners[i].gameObject.GetComponent<WanderZone>().GetWanderBounds();
 						spawnedEnemy.GetComponent<WanderWithinBounds>().SetWalkBounds(wanderZone);
 					}else if(enemySpawners[i].gameObject.GetComponent<PathingMarks>() != null){
