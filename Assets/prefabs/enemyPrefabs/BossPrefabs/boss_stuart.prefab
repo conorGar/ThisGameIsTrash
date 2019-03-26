@@ -272,6 +272,7 @@ MonoBehaviour:
   returnToPreviousWhenFar: 0
   usePathGrid: 0
   pathRefreshTime: 1
+  maxWalkDistance: 0
 --- !u!114 &114173800861190400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -398,6 +399,7 @@ MonoBehaviour:
   canKnockoffArmor: 0
   behaviorsToDeactivate:
   - {fileID: 114003901013027920}
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
@@ -406,6 +408,7 @@ MonoBehaviour:
   currentHp: 0
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114903820897259688

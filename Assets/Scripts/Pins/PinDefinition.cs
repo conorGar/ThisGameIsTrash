@@ -65,8 +65,8 @@ public enum PIN : long
     COUNTSCRAPULA =             (long)1 << 56,
     DIRTYDECOY =                (long)1 << 57,
     IRRADIATED =                (long)1 << 58,
-    Test60 =                    (long)1 << 59,
-    Test61 =                    (long)1 << 60,
+    A_TRASHBOMB =               (long)1 << 59,
+    A_HEAL =                    (long)1 << 60,
     Test62 =                    (long)1 << 61,
     Test63 =                    (long)1 << 62,
     Test64 =                    (long)1 << 63,
@@ -96,5 +96,5 @@ public class PinDefinition : ScriptableObject
     public int ppValue = 1;
     public int price = 1;
     public int displayPriority = 1;
-
+    public bool abilityPin = false;
 }

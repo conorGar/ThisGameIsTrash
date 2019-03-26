@@ -14,19 +14,20 @@ public class RandomDirectionMovement : MonoBehaviour {
     private float moveMaxTime = 0f; // how long the enemy will wait to pick a new destination if they get stuck on something.
     //public GameObject walkCloud;
     public ParticleSystem walkPS;
-	//public float walkCloudYadjust = 0.8f;
 
-
-	private Vector3 direction;
+	protected Vector3 direction;
 	protected tk2dSpriteAnimator anim;
 	protected Vector3 startingScale;
-	int turnOnce = 0;
+	protected int turnOnce = 0;
+	[HideInInspector]
+	public bool mopSlow;
+
 
     protected EnemyStateController controller;
     private EnemyPath enemyPath;
 
     // Use this for initialization
-    void Awake()
+    protected void Awake()
     {
         controller = GetComponent<EnemyStateController>();
         enemyPath = GetComponent<EnemyPath>();
@@ -34,13 +35,12 @@ public class RandomDirectionMovement : MonoBehaviour {
 
     void Start(){
 		startingScale = gameObject.transform.localScale;
-
 	}
 
 	protected void OnEnable () {
         anim = GetComponent<tk2dSpriteAnimator>();
-        StartMoving();
-	}
+        nextMoveTime = 0f;
+    }
 	
 	// Update is called once per frame
 	protected void Update () {
@@ -71,8 +71,9 @@ public class RandomDirectionMovement : MonoBehaviour {
             }
         }
 	}
-	void Turn(){
+	protected void Turn(){
 		turnOnce = 1;
+		Debug.Log("Turn() activate for:" + gameObject.name);
 		gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
 	}
 
@@ -85,7 +86,13 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 	}
 
-    // Pick a node on the path grid and move towards it.
+	void OnTriggerEnter2D(Collider2D collider){
+		if(collider.tag == "mopTrail"){
+			collider.GetComponent<MopPuddle>().SlowDownEnemy(this);
+		}
+	}
+
+    // Enemy picks a random direction and starts moving.
 	public virtual void StartMoving(){
         PathGrid pathGrid = enemyPath.pathGrid;
         if (pathGrid != null) {
@@ -95,14 +102,13 @@ public class RandomDirectionMovement : MonoBehaviour {
                 if (destPoint != null)
                     enemyPath.GeneratePath(pathGrid, startPoint, destPoint);
             } else {
-                // If no start point was found, the ememy is off the grid.  Try to get them back on the closest point on the grid to where they are.
+                // If no start point was found, the enemy is off the grid.  Try to get them back on the closest point on the grid to where they are.
                 startPoint = pathGrid.WorldToClosestGridPoint(transform.position);
                 enemyPath.GenerateQuickPath(pathGrid, startPoint);
             }
 
             if (enemyPath.path != null) {
                 enemyPath.FaceNextPathNode();
-
                 controller.SetFlag((int)EnemyFlag.WALKING);
                 if (walkPS != null && !walkPS.isPlaying)
                     walkPS.Play();
@@ -140,5 +146,14 @@ public class RandomDirectionMovement : MonoBehaviour {
             if (controller.IsFlag((int)EnemyFlag.WALKING))
                 StopMoving();
         }
-    }
+	}
+
+	public void SlowDown(float slowdownSpeedDecrement){
+		movementSpeed -= slowdownSpeedDecrement;
+	}
+
+	public void SpeedUp(float speedUpIncrement){
+		movementSpeed += speedUpIncrement;
+	}
+
 }

@@ -11,25 +11,34 @@ public class GlobalVariableManager : UserDataItem {
 
 	public int value;
 
-    private long pinsDiscoveredValue = (long)(PIN.BULKYBAG); //| PIN.TREASURETRACKER | PIN.COUNTSCRAPULA | PIN.PROJECTILEPROTECTOR);
+    private long pinsDiscoveredValue = (long)(PIN.BULKYBAG | PIN.LINKTOTRASH | PIN.A_TRASHBOMB | PIN.A_HEAL);//| PIN.COUNTSCRAPULA | PIN.PROJECTILEPROTECTOR);
     public PIN PINS_DISCOVERED
     {
         set { pinsDiscoveredValue = (long)value; }
         get { return (PIN)pinsDiscoveredValue; }
     }
 
-	private long pinsEquippedValue = (long)(PIN.NONE);
+    private long pinsEquippedValue = (long)(PIN.LINKTOTRASH);//PIN.NONE);
     public PIN PINS_EQUIPPED
     {
         set { pinsEquippedValue = (long)value; }
         get { return (PIN)pinsEquippedValue; }
     }
+
+ 
+
 	private long pinsViewedValue = (long)(PIN.NONE);
     public PIN PINS_VIEWED
     {
         set { pinsViewedValue = (long)value; }
         get { return (PIN)pinsViewedValue; }
     }
+
+    //public List<PIN> EquippedAbilityPins = new List<PIN> {PIN.NONE,PIN.NONE};
+	public List<GameObject> EquippedAbilityPins = new List<GameObject>();
+
+   // public PIN ACTIVE_ABILITY_PIN_ONE = PIN.NONE;
+
 
     public int DEJAVUCOUNT = 0;
     public int CURSEVALUE = 0;
@@ -47,10 +56,11 @@ public class GlobalVariableManager : UserDataItem {
 	public int ARROW_POSITION = 1;
 
 	//base stats
-	public PlayerStat HP_STAT = new PlayerStat(PLAYERSTATTYPE.HP, 5);
+	public PlayerStat HP_STAT = new PlayerStat(PLAYERSTATTYPE.HP, 10);
     public PlayerStat BAG_SIZE_STAT = new PlayerStat(PLAYERSTATTYPE.BAG_SIZE, 10);
-    public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 3);
+    public PlayerStat PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
     public PlayerStat STAR_POINTS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_POINTS, 0);
+    public PlayerStat STAR_BITS_STAT = new PlayerStat(PLAYERSTATTYPE.STAR_BITS,3);
 
 
 	public int DAY_NUMBER = 1;
@@ -115,6 +125,15 @@ public class GlobalVariableManager : UserDataItem {
 
     public ROOM WORLD_ROOMS_DISCOVERED = ROOM.W1C3;
 
+    public enum WEAPONS{
+    NONE =		0,
+    DUSTER = 	1<<0,
+    MOP = 		1<<1,
+    }
+
+    public WEAPONS WEAPONS_AVAILABLE = WEAPONS.DUSTER;
+
+    public WEAPONS WEAPON_EQUIPPED = WEAPONS.DUSTER;
 
     public enum TUTORIALPOPUPS{
 
@@ -123,11 +142,18 @@ public class GlobalVariableManager : UserDataItem {
 	ARMOREDENEMIES = 	1<<1,
 	DAYNIGHT = 			1<<2,
 	PINS = 				1<<3,
-	TOXICENEMIES =      1<<4,
+	TOXICENEMIES = 		1<<4,
 
 	}
 
 	public TUTORIALPOPUPS TUT_POPUPS_SHOWN = TUTORIALPOPUPS.NONE;
+
+	public enum TRASHDOORS{
+		NONE =	0,
+		W1_11TRASH =	1<<0,
+	}
+
+	public TRASHDOORS BROKEN_TRASH_DOORS = TRASHDOORS.NONE;
 
     //-------------Enemy Global Variables------------//
     public enum BOSSES : int
@@ -220,7 +246,8 @@ public class GlobalVariableManager : UserDataItem {
 	public bool SCENE_IS_TRANSITIONING = false;
 
 	//------World-Related Global Vars ---------------//
-
+	public int TOTAL_DAYTIME_INSECONDS = 240;
+	public int TIME_UPGRADE_LEVEL = 1;
 	public int AMOUNT_TRASH_IN_WORLD = 0;
 	public List<string> CALENDAR = new List<string>(); //put as string for now, not sure if it can be int
 	public List<string> FRIEND_LIST = new List<string>();
@@ -245,7 +272,7 @@ public class GlobalVariableManager : UserDataItem {
     private void Awake(){
 		if(Instance == null){
 			Instance = this;
-            Instance.PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 3);
+            Instance.PP_STAT = new PlayerStat(PLAYERSTATTYPE.PP, 5);
 			DontDestroyOnLoad(gameObject);
 		}else{
 			Destroy(gameObject);
@@ -270,9 +297,14 @@ public class GlobalVariableManager : UserDataItem {
         // Gameplay and collectables.
         json_data["DAY_NUMBER"] = DAY_NUMBER;
 
+       // json_data["ABILITY_PIN_1"] = (long)EquippedAbilityPins[0];
+		//json_data["ABILITY_PIN_2"] = (long)EquippedAbilityPins[1];
+
         json_data["pinsDiscoveredValue"] = pinsDiscoveredValue;
         json_data["pinsEquippedValue"] = pinsEquippedValue;
         json_data["pinsViewedValue"] = pinsViewedValue;
+
+		json_data["WORLD_ROOMS_DISCOVERED"] = (uint)WORLD_ROOMS_DISCOVERED;
 
         json_data["STANDARD_GARBAGE_DISCOVERED"] = (uint)STANDARD_GARBAGE_DISCOVERED;
         json_data["STANDARD_GARBAGE_VIEWED"] = (uint)STANDARD_GARBAGE_VIEWED;
@@ -283,13 +315,11 @@ public class GlobalVariableManager : UserDataItem {
         json_data["LARGE_GARBAGE_DISCOVERED"] = (uint)LARGE_GARBAGE_DISCOVERED;
         json_data["LARGE_GARBAGE_VIEWED"] = (uint)LARGE_GARBAGE_VIEWED;
 
-
-        json_data["WORLD_ROOMS_DISCOVERED"] = (uint)WORLD_ROOMS_DISCOVERED;
-
         // Stats and things
         json_data["STAR_POINTS"] = STAR_POINTS_STAT.GetMaxRaw();
         json_data["CURRENT_STAR_POINTS"] = STAR_POINTS_STAT.GetCurrent();
-
+		json_data["TOTAL_DAYTIME_INSECONDS"] = TOTAL_DAYTIME_INSECONDS;
+        json_data["TIME_UPGRADE_LEVEL"] = TIME_UPGRADE_LEVEL;
         json_data["Max_HP"] = HP_STAT.GetMaxRaw();
         json_data["BAG_SIZE"] = BAG_SIZE_STAT.GetMaxRaw();
         json_data["PPVALUE"] = PP_STAT.GetMaxRaw();
@@ -300,6 +330,7 @@ public class GlobalVariableManager : UserDataItem {
         json_data["UPGRADES"] = (uint)UPGRADES_UNLOCKED;
 
         json_data["TUT_POPUPS_SHOWN"] = (uint)TUT_POPUPS_SHOWN;
+		json_data["BROKEN_TRASH_DOORS"] = (uint)BROKEN_TRASH_DOORS; //steve did I do this right?
 
         return json_data;
     }
@@ -318,13 +349,14 @@ public class GlobalVariableManager : UserDataItem {
         MASTER_SFX_VOL = json_data["MASTER_SFX_VOL"].AsFloat;
 
         DAY_NUMBER = json_data["DAY_NUMBER"].AsInt;
-
+		WORLD_ROOMS_DISCOVERED = (ROOM)json_data["WORLD_ROOMS_DISCOVERED"].AsInt;
         pinsDiscoveredValue = json_data["pinsDiscoveredValue"].AsLong;
         pinsEquippedValue = json_data["pinsEquippedValue"].AsLong;
         pinsViewedValue = json_data["pinsViewedValue"].AsLong;
 
 
-        WORLD_ROOMS_DISCOVERED = (ROOM)json_data["WORLD_ROOMS_DISCOVERED"].AsInt;
+       // EquippedAbilityPins[0] = (PIN)json_data["ABILITY_PIN_1"].AsLong;
+		//EquippedAbilityPins[1] = (PIN)json_data["ABILITY_PIN_2"].AsLong;
 
         STANDARD_GARBAGE_DISCOVERED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_DISCOVERED"].AsInt;
         STANDARD_GARBAGE_VIEWED = (STANDARDGARBAGE)json_data["STANDARD_GARBAGE_VIEWED"].AsInt;
@@ -351,8 +383,11 @@ public class GlobalVariableManager : UserDataItem {
         MOMONEYVALUE = json_data["MOMONEYVALUE"].AsInt;
         PROGRESS_LV = json_data["PROGRESS_LV"].AsInt;
         UPGRADES_UNLOCKED = (UPGRADES)json_data["UPGRADES"].AsInt;
-
+		TOTAL_DAYTIME_INSECONDS = json_data["TOTAL_DAYTIME_INSECONDS"].AsInt;
+        TIME_UPGRADE_LEVEL = json_data["TIME_UPGRADE_LEVEL"].AsInt;
         TUT_POPUPS_SHOWN = (TUTORIALPOPUPS)json_data["TUT_POPUPS_SHOWN"].AsInt;
+		BROKEN_TRASH_DOORS = (TRASHDOORS)json_data["BROKEN_TRASH_DOORS"].AsInt; //Steve did I do this right?
+
     }
 
     // helpers
@@ -383,5 +418,13 @@ public class GlobalVariableManager : UserDataItem {
     public bool IsLargeTrashDiscovered(LARGEGARBAGE large_garbage_type)
     {
         return (LARGE_GARBAGE_DISCOVERED & large_garbage_type) == large_garbage_type;
+    }
+
+    public bool IsWeaponAvailable(WEAPONS weapon_type){
+    	return (WEAPONS_AVAILABLE & weapon_type) == weapon_type;
+    }
+
+    public bool IsWeaponEquipped(WEAPONS weapon){
+    	return((WEAPON_EQUIPPED & weapon) == weapon);
     }
 }

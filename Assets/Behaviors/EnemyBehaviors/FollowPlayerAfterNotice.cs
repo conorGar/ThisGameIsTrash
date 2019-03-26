@@ -36,8 +36,11 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (controller.currentState.GetState() == EnemyState.IDLE) {
                 if ((Mathf.Abs(transform.position.x - PlayerManager.Instance.player.transform.position.x) < noticeThreshold) && Mathf.Abs(transform.position.y - PlayerManager.Instance.player.transform.position.y) < noticeThresholdY) {
+                	Debug.Log("got here enemy notice : " + gameObject.name);
                     if ((PlayerManager.Instance.player.transform.position.x < gameObject.transform.position.x && gameObject.transform.localScale.x < 0) || (PlayerManager.Instance.player.transform.position.x > gameObject.transform.position.x && gameObject.transform.localScale.x > 0)) {//make sure is facing the direction of the player..
-                        if (!GlobalVariableManager.Instance.IS_HIDDEN) {
+						Debug.Log("got here enemy notice 2 : " + gameObject.name);
+
+                         if (!GlobalVariableManager.Instance.IS_HIDDEN) {
                             if (sleepingEnemy) {
                                 GetComponent<Animator>().enabled = false;
                                 sleepingPS.SetActive(false);

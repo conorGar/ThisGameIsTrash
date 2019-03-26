@@ -28,10 +28,24 @@ public class ClankingMaterial : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D collider){
 		if(collider.tag == "Weapon"){
 			parentsETD.Clank(clankSound,gameObject.transform.position, pushBack);
-		} 
+		}else if (collider.tag == "BigSwoosh"){
+			parentsETD.PowerHitEffect();
+			parentsETD.StartCoroutine("NonMeleeHit",true);
+		}else if (collider.tag == "pObj_bullet"){
+			if(collider.GetComponent<Ev_ProjectileChargable>() != null){
+				 if(collider.GetComponent<Ev_ProjectileChargable>().charged){
+					parentsETD.PowerHitEffect();
+					parentsETD.meleeSwingDirection = "plankSwing";
+					parentsETD.meleeDmgBonus = 2;
+					parentsETD.StartCoroutine("NonMeleeHit",true);
+					}
+				else{
+						ObjectPool.Instance.ReturnPooledObject(collider.gameObject); //TODO: for now, if player projectile isn't charged, it's just destroyed
+					}
+			}
+		}
+
 	}
-
-
 
 
 }

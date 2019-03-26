@@ -22,8 +22,8 @@ public class Ev_PinBehavior : MonoBehaviour {
 	int setArrowPosOnce = 0;
 	int popupOnce;
 	int mySpotInShop;
-	bool bought = false;
-	bool inShop = false;
+	public bool bought = false;
+	public bool inShop = false;
 	float startingY;
 	SpecialEffectsBehavior mySFX;
 	GameObject shopLight;
@@ -45,11 +45,9 @@ public class Ev_PinBehavior : MonoBehaviour {
         // Default the new pin to "off".
         newPinIcon.SetActive(false);
 
-        if (GlobalVariableManager.Instance.ROOM_NUM == 97){
+        if (inShop){
 			inShop = true;
-			shopLight = GameObject.Find("shopLight");
-			descriptionBox = GameObject.Find("description").GetComponent<Image>();
-		}else if(GlobalVariableManager.Instance.ROOM_NUM == 101){
+		}else{
             if (!IsPinDiscovered()){
                 sprite.color = new Color(0f,0f,0f,1f);//blacked out if not owned
 			}else{
@@ -60,17 +58,21 @@ public class Ev_PinBehavior : MonoBehaviour {
                         smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                     }
                 }
-
+                if(pinData.abilityPin == true){
+                	GameObject abilityPS = ObjectPool.Instance.GetPooledObject("effect_AbilityPin",gameObject.transform.position);
+                	abilityPS.transform.parent = this.transform;
+                }
                 if (!IsPinViewed())
                     newPinIcon.SetActive(true);
             }
-		}
-
-        for (int i = 0; i < pinData.ppValue; i++) {
+			for (int i = 0; i < pinData.ppValue; i++) {
             myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
-        }
+        	}
+		
 
-        if (inShop){
+        
+        }
+       /* if (inShop){
 			if(IsPinDiscovered() && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 10 && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 20 && GlobalVariableManager.Instance.MENU_SELECT_STAGE != 30){
 				GameObject myTextDisplay = Instantiate(smallTextDisplay,transform.position,Quaternion.identity);
 				Color currentColor = sprite.color;
@@ -80,12 +82,43 @@ public class Ev_PinBehavior : MonoBehaviour {
 			}
 
 			startingY = gameObject.transform.position.y;
-		}//end of inShop Check
+		}//end of inShop Check*/
 	}
 
     void OnEnable()
     {
-        Unhighlight();
+        if (pinData != null) {
+            if (inShop) {
+                inShop = true;
+            } else {
+                if (!IsPinDiscovered()) {
+                    sprite.color = new Color(0f, 0f, 0f, 1f);//blacked out if not owned
+                } else {
+                    sprite.color = Color.white;
+
+                    for (int i = 0; i < pinData.ppValue; i++) {
+                        smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
+
+                        if (IsPinEquipped()) {
+                            smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                        }
+                    }
+                    if (pinData.abilityPin == true) {
+                        GameObject abilityPS = ObjectPool.Instance.GetPooledObject("effect_AbilityPin", gameObject.transform.position);
+                        abilityPS.transform.parent = this.transform;
+                    }
+                    if (!IsPinViewed())
+                        newPinIcon.SetActive(true);
+                }
+                for (int i = 0; i < pinData.ppValue; i++) {
+                    myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
+                }
+
+
+
+            }
+            Unhighlight();
+        }
     }
 
     void OnDisable()
@@ -96,7 +129,7 @@ public class Ev_PinBehavior : MonoBehaviour {
     void Update () {
 
 
-		if(inShop){
+		/*if(inShop){
 
 			if(Mathf.Abs(transform.position.x - PlayerManager.Instance.player.transform.position.x) < 2 && Mathf.Abs(startingY - PlayerManager.Instance.player.transform.position.y) < 3.6 && !bought){
 				if(setArrowPosOnce == 0){
@@ -144,6 +177,13 @@ public class Ev_PinBehavior : MonoBehaviour {
 			//-----------------------------------------------------------------//
 
 
+		}*/
+
+		if(inShop){
+
+				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT) && GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
+					ShopPurchase();
+				}
 		}
 	}
 
@@ -153,6 +193,11 @@ public class Ev_PinBehavior : MonoBehaviour {
 				highlightBox.SetActive(true);
 			}
             PinManager.Instance.DescriptionText.text = pinData.description;
+            if(pinData.abilityPin){
+           	 	PinManager.Instance.AbilityPinText.gameObject.SetActive(true);
+            }else{
+				PinManager.Instance.AbilityPinText.gameObject.SetActive(false);
+            }
             PinManager.Instance.PinTitle.text = pinData.displayName;
             PinManager.Instance.PPDisplay.SetDisplayedIcons(pinData.ppValue);
             PinManager.Instance.PinDisplaySprite.GetComponent<Renderer>().enabled = true;
@@ -166,6 +211,7 @@ public class Ev_PinBehavior : MonoBehaviour {
 				GlobalVariableManager.Instance.PINS_VIEWED |= pinData.Type; //set pin as viewed
                 newPinIcon.SetActive(false);
             }
+
         }
         else{
             PinManager.Instance.DescriptionText.text = "Buy or find this Pin to learn what powers it holds!";
@@ -214,6 +260,12 @@ public class Ev_PinBehavior : MonoBehaviour {
 				//Defense Pin
 					GlobalVariableManager.Instance.characterUpgradeArray[6] = (int.Parse(GlobalVariableManager.Instance.characterUpgradeArray[6]) + 1).ToString();
 				}*/
+
+				/*if(GetData().abilityPin == true){
+					PinManager.Instance.abilityPinEquipHUD.gameObject.SetActive(true);
+					PinManager.Instance.abilityPinEquipHUD.selectedPin = pinData.Type;
+				}*/
+
 			}else if(IsPinEquipped()){//Unequip pin
                 GlobalVariableManager.Instance.PP_STAT.UpdateCurrent(+pinData.ppValue);
                 GlobalVariableManager.Instance.PINS_EQUIPPED &= ~pinData.Type;
@@ -229,6 +281,16 @@ public class Ev_PinBehavior : MonoBehaviour {
 					}
 				}
 				Debug.Log("UNEQUIPPED PIN" + myIcons.Count);
+
+
+				if(pinData.abilityPin){ 
+					for(int i = 0; i < GlobalVariableManager.Instance.EquippedAbilityPins.Count; i++){
+						/*if(GlobalVariableManager.Instance.EquippedAbilityPins[i] == pinData.Type){
+							GlobalVariableManager.Instance.EquippedAbilityPins[i] = PIN.NONE;
+						}*/
+					}
+				}
+
 
 				for(int i = 0; i < myIcons.Count; i++){ //unshade the little pp icons below pin
 					Debug.Log("Icons should've turned black!!");
@@ -247,24 +309,20 @@ public class Ev_PinBehavior : MonoBehaviour {
 		Debug.Log("Shop Purchase activated");
 		if(GlobalVariableManager.Instance.TOTAL_TRASH >= pinData.price){
 			if(!bought && popupOnce == 0){
+				Debug.Log("-!-!-!  Got here 1 - Shop Pin Purchase -! -! -! -! -!");
                 PinManager.Instance.Shop.TogglePopupEnable();
-				Image purchasePopup = GameObject.Find("purchasePopup").GetComponent<Image>();
                 PinManager.Instance.Shop.SetCurrentPin(this);
-				GlobalVariableManager.Instance.PLAYER_CAN_MOVE = false;
 				popupOnce = 1;
 			}else if(popupOnce == 1){
 				//activated by GUI_optionsPopupBehavior
-				GlobalVariableManager.Instance.PLAYER_CAN_MOVE = true;
+
                 GlobalVariableManager.Instance.PINS_DISCOVERED |= pinData.Type;
                 sprite.color = new Color(255f,255f,255f,.1f); //fade
 				GlobalVariableManager.Instance.TOTAL_TRASH -= pinData.price;
-				Instantiate(smallTextDisplay,transform.position,Quaternion.identity);
-                sprite.SetSprite(soldTextSprite);
 
-				Image totalTrashDisplay = GameObject.Find("totalTrashDisplay").GetComponent<Image>();
-				totalTrashDisplay.GetComponent<SpecialEffectsBehavior>().StartCoroutine("Shake",1f);
 				bought = true;
 				popupOnce = 0;
+				PinManager.Instance.Shop.TogglePopupEnable();
 			}
 		}
 
@@ -310,5 +368,13 @@ public class Ev_PinBehavior : MonoBehaviour {
     {
         return (GlobalVariableManager.Instance.PINS_EQUIPPED & pinData.Type) == pinData.Type;
     }
+
+    public PinDefinition GetData(){
+    	return pinData;
+    }
+    public void SetSprite(string spriteName){ //used by S_ev_shop
+    	sprite.SetSprite(spriteName);
+    }
+
 }
 

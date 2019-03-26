@@ -34,11 +34,14 @@ public class EnemyRecover : IActorState<EnemyState, EnemyTrigger>
             case EnemyTrigger.NOTICE:
                 flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
-            case EnemyTrigger.HIT:
-                return new EnemyHit();
+			case EnemyTrigger.POWER_HIT:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+                return new EnemyPowerHit();
 			case EnemyTrigger.POPUP:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.POP_UP));
                 return new EnemyPopout();
+			case EnemyTrigger.CHASE:
+				flags |= (int)EnemyFlag.CHASING;
+                return new EnemyChase();
         }
 
         return null;

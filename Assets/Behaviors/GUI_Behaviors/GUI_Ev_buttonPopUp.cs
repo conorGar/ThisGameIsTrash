@@ -20,7 +20,10 @@ public class GUI_Ev_buttonPopUp : MonoBehaviour {
 		startSprite = GetComponent<Image>().sprite;
 
 	}
-	
+	void OnEnable(){
+		if(myPosition != 0)
+			UnhighlightButton();
+	}
 	// Update is called once per frame
 	void Update () {
 		/*if(GlobalVariableManager.Instance.MENU_SELECT_STAGE == myPosition && myImage.sprite != highlightSprite){

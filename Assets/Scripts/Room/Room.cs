@@ -20,7 +20,7 @@ public class Room : MonoBehaviour
     public string tutPopUpToActivate;
     public GameObject myMapClouds;
     public GlobalVariableManager.ROOM myRoom;
-
+   
 	int waifuChance;
 	[HideInInspector]
     public List<GameObject> enemies; //needs to be public to be accessible for things that change the behavior of enemies(Dirty Decoy, for example)
@@ -133,9 +133,13 @@ public class Room : MonoBehaviour
 		                	spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
 	                }
-					if(enemySpawners[i].gameObject.GetComponent<WanderZone>() != null){	
+					if(enemySpawners[i].gameObject.GetComponent<WanderZone>() != null && spawnedEnemy.GetComponent<WanderWithinBounds>() != null) {	
 						Rect wanderZone = enemySpawners[i].gameObject.GetComponent<WanderZone>().GetWanderBounds();
 						spawnedEnemy.GetComponent<WanderWithinBounds>().SetWalkBounds(wanderZone);
+					}else if(enemySpawners[i].gameObject.GetComponent<PathingMarks>() != null){
+						List<GameObject> pathMarks = enemySpawners[i].gameObject.GetComponent<PathingMarks>().wanderpoints;
+						spawnedEnemy.GetComponent<WanderOnPath>().SetPathMarks(pathMarks);
+						spawnedEnemy.transform.position = enemySpawners[i].gameObject.GetComponent<PathingMarks>().startingPoint.transform.position;
 					}
 	            }
             }   
@@ -153,10 +157,14 @@ public class Room : MonoBehaviour
         for (int i=0; i < friendSpawners.Count; ++i)
         {
             var spawnedFriend = FriendManager.Instance.GetFriend(friendSpawners[i].friend);
+			Debug.Log("Friend Spawn got here *0*- " + friendSpawners[i].friend.name + spawnedFriend.IsVisiting);
             if (spawnedFriend != null && spawnedFriend.IsVisiting)
             {
+            	Debug.Log("Friend Spawn got here *1* - " + friendSpawners[i].friend.name);
                 if (spawnedFriend.IsCurrentRoom(this))
                 {
+					Debug.Log("Friend Spawn got here *2*- " + friendSpawners[i].friend.name);
+
                     spawnedFriend.gameObject.transform.position = friendSpawners[i].transform.position;
                     spawnedFriend.gameObject.SetActive(true);
                     spawnedFriend.OnActivateRoom();

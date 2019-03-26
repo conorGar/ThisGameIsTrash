@@ -170,6 +170,8 @@ public class PlayerTakeDamage : MonoBehaviour {
 
             StartCoroutine("Death");
 
+        }else{
+        	StartCoroutine("InvulTimer");
         }
 	}
 
@@ -198,7 +200,10 @@ public class PlayerTakeDamage : MonoBehaviour {
 		HPdisplay.GetComponent<GUI_HPdisplay>().UpdateDisplay();
 
 	}
-
+	IEnumerator InvulTimer(){
+		yield return new WaitForSeconds(1f);
+		GetComponent<JimStateController>().RemoveFlag((int)JimFlag.INVULNERABLE);
+	}
 
 	IEnumerator Death(){
         // Trigger Respawn State.
@@ -258,12 +263,23 @@ public class PlayerTakeDamage : MonoBehaviour {
 
         SoundManager.instance.TransitionMusic(SoundManager.instance.worldMusic, fadeOut:false);
 
+
+        if(CheckpointManager.Instance.lastCheckpoint == null){
         gameObject.transform.position = new Vector3(0f,-3f,0f); //Start at Beginning of world
 		truck.transform.position = new Vector3(-15f,-3f,0f);
+			roomManager.GetComponent<RoomManager>().Restart(RoomManager.Instance.startRoom);
+			CamManager.Instance.mainCam.transform.position = new Vector3(0f,0f,-10f);
+		}else{
+
+			gameObject.transform.position = CheckpointManager.Instance.lastCheckpoint.transform.position; //Start at Beginning of world
+			truck.transform.position = new Vector3(transform.position.x -15f,transform.position.y,0f);
+			roomManager.GetComponent<RoomManager>().Restart(CheckpointManager.Instance.lastCheckpoint.myRoom);
+			CamManager.Instance.mainCam.transform.position = new Vector3(CheckpointManager.Instance.lastCheckpoint.transform.position.x,CheckpointManager.Instance.lastCheckpoint.transform.position.y,-10f);
+		}
 		deathDisplay.PlayTruckSfx();
 		truck.GetComponent<Rigidbody2D>().velocity = new Vector2(50f,0f);
-        CamManager.Instance.mainCam.transform.position = new Vector3(0f,0f,-10f);
-		roomManager.GetComponent<RoomManager>().Restart();
+       
+	
 		yield return new WaitForSeconds(.2f);
 		GlobalVariableManager.Instance.HP_STAT.ResetCurrent();
 		GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] = 0;

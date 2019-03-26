@@ -63,7 +63,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1033402762086370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5378842, y: 17.333515, z: 0.2109375}
+  m_LocalPosition: {x: -145.45752, y: -64.52791, z: 0.2109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4795972526875586}
@@ -167,7 +167,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.43, y: 1.32}
+  m_Size: {x: 1.22, y: 1.08}
   m_EdgeRadius: 0
 --- !u!61 &61584658230430462
 BoxCollider2D:
@@ -181,7 +181,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04, y: 0.18}
+  m_Offset: {x: 0.04, y: 0.02}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -192,7 +192,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.13, y: 2.49}
+  m_Size: {x: 1.79, y: 1.81}
   m_EdgeRadius: 0
 --- !u!114 &114016192718266126
 MonoBehaviour:
@@ -206,9 +206,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noticeThreshold: 4
+  noticeThresholdY: 0
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
-  noticeSfx: {fileID: 0}
 --- !u!114 &114108039266120802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,11 +220,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  target: {fileID: 0}
   walkDistance: 10
   chaseSpeed: 0.95
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
+  chasePS: {fileID: 0}
+  returnToPreviousWhenFar: 0
 --- !u!114 &114458905907132094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,7 +241,7 @@ MonoBehaviour:
   collection: {fileID: 114707067206574538, guid: 6385e2df30de156448465864d72126d4,
     type: 2}
   _color: {r: 1, g: 1, b: 1, a: 1}
-  _scale: {x: 1, y: 1, z: 1}
+  _scale: {x: 0.7, y: 0.7, z: 1}
   _spriteId: 20
   boxCollider2D: {fileID: 0}
   polygonCollider2D: []
@@ -278,6 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armoredEnemy: 0
   moveWhenHit: 0
+  resetFacingAfterHit: 0
   secretHider: 0
   returnToCurrentAniAfterHit: 0
   invincibleAni:
@@ -294,10 +297,12 @@ MonoBehaviour:
     wrapMode: 0
   myDeadBodyName: 
   respawnEnemy: 0
-  hitSound: {fileID: 8300000, guid: 89f0652faf9b2094d9902b1c114f765e, type: 3}
-  hitSqueal: {fileID: 0}
-  bounce: {fileID: 8300000, guid: cd967c5e181e5d4498842463abb7501e, type: 3}
+  armoredEnemyHitSfx: {fileID: 0}
   bossEnemy: 0
+  IAmParentObj: 0
+  childEnemy: {fileID: 0}
+  hitSqueal: 0
+  bounce: 0
   tutPopup: {fileID: 0}
   gar_trash: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
   gar_rec: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
@@ -306,14 +311,19 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1170939172725382}
-  myCollisionBox: {fileID: 61374833343893834}
-  returnAniName: idle
+  dontSpawnBody: 0
+  canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  armorCollisionObj: {fileID: 0}
+  disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   myRespawner: {fileID: 0}
+  otherRespawner: {fileID: 0}
   currentHp: 4
   meleeDmgBonus: 0
-  dontStopWhenHit: 0
+  bossSpawnedEnemy: 0
+  spinning: 0
+  startsOffDontMoveWhenHit: 0
 --- !u!114 &114740205839798866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,10 +335,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 1
   attkPower: 1
   moveWhenHit: 0
   respawningEnemyType: 0
+  toxicEnemy: 0
 --- !u!114 &114762427506534602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,8 +380,8 @@ MonoBehaviour:
   movementSpeed: 4
   minMoveTime: 1
   maxMoveTime: 2.2
-  walkCloud: {fileID: 1309290074767292, guid: 5980c00b310786a4ba63ed94f12e7a00, type: 2}
-  walkCloudYadjust: 0.8
+  stopTime: 2
+  walkPS: {fileID: 0}
 --- !u!212 &212579139224350348
 SpriteRenderer:
   m_ObjectHideFlags: 1

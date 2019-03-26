@@ -7,7 +7,8 @@ public class FollowPlayer : MonoBehaviour {
 
 	public BoxCollider2D targetCollider;
 	public float walkDistance = 10.0f;
-	public float chaseSpeed = 10.0f;
+    public float maxWalkDistance; //how close the enemy will get
+    public float chaseSpeed = 10.0f;
 	public bool hasSeperateFacingAnimations;
 	public bool iBeLerpin;
 	public ParticleSystem chasePS;
@@ -21,10 +22,13 @@ public class FollowPlayer : MonoBehaviour {
 
     protected EnemyStateController controller;
 
+    Vector3 startScale;
+
     void Awake()
     {
         controller = GetComponent<EnemyStateController>();
         enemyPath = GetComponent<EnemyPath>();
+        startScale = transform.localScale;
     }
 
     void Start () {
@@ -72,7 +76,7 @@ public class FollowPlayer : MonoBehaviour {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (controller.IsFlag((int)EnemyFlag.CHASING)) {
                 float distance = Vector3.Distance(transform.position, GetTargetsClosestPoint());
-                if (distance < walkDistance) { //TODO: 
+                if (distance < walkDistance && distance > maxWalkDistance) { //TODO: 
                     if (usePathGrid) {
                         if (enemyPath != null) {
                             // follow the path until it's consumed.  update the path in intervals to chase the player.

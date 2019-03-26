@@ -24,10 +24,9 @@ GameObject:
   - component: {fileID: 23200833696867054}
   - component: {fileID: 114670515527745238}
   - component: {fileID: 50766929243263446}
-  - component: {fileID: 114792160817723536}
   - component: {fileID: 114188830731903684}
-  - component: {fileID: 114052483752604988}
   - component: {fileID: 114406311632949286}
+  - component: {fileID: 114110870646564970}
   m_Layer: 10
   m_Name: projectile_largeRock
   m_TagString: projectile_largeRock
@@ -216,7 +215,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.305
---- !u!114 &114052483752604988
+--- !u!114 &114110870646564970
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -224,12 +223,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1245335482067604}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64058a4de277a9f4d92fbe1247cf85e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 540ccbc7391c34642b1ce44ce4b828d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myShadow: {fileID: 1259982954955268}
-  gravityScaleDelay: 3
-  falling: 0
+  throwPS: {fileID: 0}
+  speed: 5
+  target: {fileID: 0}
 --- !u!114 &114188830731903684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,6 +259,7 @@ MonoBehaviour:
   damageToPlayer: 1
   destroyOnTileCollision: 0
   myShadow: {fileID: 0}
+  toxicProjectile: 0
 --- !u!114 &114670515527745238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,20 +284,6 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 1
---- !u!114 &114792160817723536
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1245335482067604}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540ccbc7391c34642b1ce44ce4b828d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  throwPS: {fileID: 198411252380365548}
-  speed: 0
-  player: {fileID: 0}
 --- !u!198 &198205520827027290
 ParticleSystem:
   m_ObjectHideFlags: 1

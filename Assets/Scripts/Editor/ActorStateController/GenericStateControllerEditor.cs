@@ -38,6 +38,21 @@ public class QuestioStateControllerEditor : EnemyEditor { }
 [CustomEditor(typeof(HashStateController))]
 public class HashStateControllerEditor : EnemyEditor { }
 
+[CustomEditor(typeof(GrubStateController))]
+public class GrubStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(RhinoBeetleStateController))]
+public class RhinoBeetleStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(OpossumStateController))]
+public class OpossumStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(HeronStateController))]
+public class HeronStateControllerEditor : EnemyEditor { }
+
+[CustomEditor(typeof(SpearMoleStateController))]
+public class SpearMoleStateControllerEditor : EnemyEditor { }
+
 public class GenericStateControllerEditor<State_Type, Trigger_Type, Flag_Type> : Editor
 {
     public override void OnInspectorGUI()

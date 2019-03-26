@@ -31,10 +31,17 @@ public class EnemyLunge : IActorState<EnemyState, EnemyTrigger>
     public IActorState<EnemyState, EnemyTrigger> SendTrigger(EnemyTrigger trigger, GameObject actor, tk2dSpriteAnimator animator, ref int flags)
     {
         switch (trigger) {
-            case EnemyTrigger.HIT:
-                return new EnemyHit();
+			case EnemyTrigger.POWER_HIT:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+                return new EnemyPowerHit();
             case EnemyTrigger.RECOVER:
                 return new EnemyRecover();
+			case EnemyTrigger.VULNERABLE:
+                return new EnemyVulnerable();
+			case EnemyTrigger.POPUP:
+                return new EnemyPopout();
+			case EnemyTrigger.THROW: //added because of Rhino Beetle's ability to throw while leaping
+                return new EnemyThrow();
         }
 
         return null;

@@ -26,15 +26,10 @@ public class GrubStateController : EnemyStateController
     protected override void AnimationEventCompleted(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip)
     {
         base.AnimationEventCompleted(animator, clip);
-
+        Debug.Log("ani event completed" + currentState);
         switch (currentState.GetState()) {
-            case EnemyState.HIT:
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
-                SetFlag((int)EnemyFlag.CHASING);
-                currentState = new EnemyChase();
-                break;
 			case EnemyState.POPOUT: 
+				Debug.Log("Grub changes from popout to idle");
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
                 currentState = new EnemyIdle();
             	break;
@@ -42,16 +37,18 @@ public class GrubStateController : EnemyStateController
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.THROW));
                 currentState = new EnemyThrow();
             	break;
-			case EnemyState.PREPARE_LEAP: //prepare for throw
+			case EnemyState.PREPARE_LEAP: //prepare for leap
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
                 currentState = new EnemyLunge();
             	break;
-			case EnemyState.LUNGE: //hit the ground after Jump
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.VULNERABLE));
-                currentState = new EnemyVulnerable();
-            	break;
             case EnemyState.THROW:
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
+                currentState = new EnemyIdle();
             	break;
+            case EnemyState.HIT:
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                currentState = new EnemyIdle();
+                break;
         }
     }
 

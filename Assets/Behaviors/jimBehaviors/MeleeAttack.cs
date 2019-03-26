@@ -19,15 +19,26 @@ public class MeleeAttack : MonoBehaviour {
 	public GameObject sideBigSwoosh;
 	public ParticleSystem chargePS;
 	public ParticleSystem chargeReadyPS;
+	public GameObject chargeReadyGlow;
+	public float swingMomentumForce;
 
-	int swingDirection;
+	protected int swingDirection;
 	float turningSpeed;
-	private float playerMomentum; // a little 'bounce' when swing
-	Vector3 startingScale;
+	protected float playerMomentum; // a little 'bounce' when swing
+	protected Vector3 startingScale;
 
 
-	INPUTACTION heldKey;
-	bool chargeReady;
+	protected INPUTACTION heldKey;
+	protected bool chargeReady;
+
+	int whichSwingAni;
+	tk2dSpriteAnimator animator;
+
+	float currentCamZoomVal; // for charge zoom in
+
+	void Awake(){
+		animator = gameObject.GetComponent<tk2dSpriteAnimator>();
+	}
 
 	void Start () {
         startingScale = this.gameObject.transform.localScale;
@@ -39,7 +50,7 @@ public class MeleeAttack : MonoBehaviour {
 
 		//reset values
 		meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("plankSwing");
-		meleeWeaponRightSwing.transform.localPosition = new Vector2(2.3f,-1.28f);
+		meleeWeaponRightSwing.transform.localPosition = new Vector2(3.5f,-1.28f);
 
 		meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("plankDown");
 		meleeWeaponBotSwing.transform.localPosition = new Vector2(-1.28f,.2f);
@@ -76,20 +87,55 @@ public class MeleeAttack : MonoBehaviour {
                 case JimState.IDLE:
                     
                         if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
-                            //playerMomentum = 6f;
+							if (ControllerManager.Instance.GetKey(INPUTACTION.MOVELEFT)){
+								playerMomentum = swingMomentumForce*2;
+							}else{
+                            	playerMomentum = swingMomentumForce;
+                            }
                             this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
                             StartCoroutine("Swing", 2);
                         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
                             this.gameObject.transform.localScale = startingScale;
-                            //playerMomentum = 6f;
-                            StartCoroutine("Swing", 1);
+							if (ControllerManager.Instance.GetKey(INPUTACTION.MOVERIGHT)){
+								playerMomentum = swingMomentumForce*2;
+							}else{
+                            	playerMomentum = swingMomentumForce;
+                            }                            StartCoroutine("Swing", 1);
                         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
                             this.gameObject.transform.localScale = startingScale;
-                            //playerMomentum = 6f;
+							if (ControllerManager.Instance.GetKey(INPUTACTION.MOVEDOWN)){
+								playerMomentum = swingMomentumForce*2;
+							}else{
+                            	playerMomentum = swingMomentumForce;
+                            }
                             StartCoroutine("Swing", 4);
                         } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
                             this.gameObject.transform.localScale = startingScale;
-                            //playerMomentum = 6f;
+							if (ControllerManager.Instance.GetKey(INPUTACTION.MOVEUP)){
+								playerMomentum = swingMomentumForce*2;
+							}else{
+                            	playerMomentum = swingMomentumForce;
+                            }                            StartCoroutine("Swing", 3);
+                        }
+                    
+                    break;
+				case JimState.DASHING:
+                    
+                        if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
+                            //playerMomentum = swingMomentumForce;
+                            this.gameObject.transform.localScale = new Vector3(startingScale.x * -1, startingScale.y, startingScale.z);
+                            StartCoroutine("Swing", 2);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
+                            this.gameObject.transform.localScale = startingScale;
+							//playerMomentum = swingMomentumForce;
+                            StartCoroutine("Swing", 1);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) {
+                            this.gameObject.transform.localScale = startingScale;
+							//playerMomentum = swingMomentumForce;
+                            StartCoroutine("Swing", 4);
+                        } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) {
+                            this.gameObject.transform.localScale = startingScale;
+							//playerMomentum = swingMomentumForce;
                             StartCoroutine("Swing", 3);
                         }
                     
@@ -104,6 +150,8 @@ public class MeleeAttack : MonoBehaviour {
 						}else{
                     		Debug.Log("ChargingAttack cancel");
                     		StopCoroutine("StrongSwingCharge");
+							chargeReadyGlow.SetActive(false);
+
 							CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 							PlayerManager.Instance.controller.SendTrigger(JimTrigger.IDLE);
 						}
@@ -172,7 +220,7 @@ public class MeleeAttack : MonoBehaviour {
 
 		}else if(meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().CurrentClip.name == "clawSwing"){
 				meleeWeaponRightSwing.GetComponent<tk2dSpriteAnimator>().Play("plankSwing");
-				meleeWeaponRightSwing.transform.localPosition = new Vector2(2.3f,-1.28f);
+				meleeWeaponRightSwing.transform.localPosition = new Vector2(3.5f,-1.28f);
 
 				meleeWeaponBotSwing.GetComponent<tk2dSpriteAnimator>().Play("plankDown");
 				meleeWeaponBotSwing.transform.localPosition = new Vector2(-1.28f,.2f);
@@ -183,27 +231,45 @@ public class MeleeAttack : MonoBehaviour {
 		}
 	}
 
-	IEnumerator Swing(int direction){
+	protected virtual IEnumerator Swing(int direction){
 			SoundManager.instance.RandomizeSfx(swing);
 			GameObject meleeDirectionEnabled = null;
 			swingDirection = direction;
 
             if (direction == 1){
+				if(whichSwingAni == 0){
+				whichSwingAni = 1;
+                animator.Play("ani_jimSwingR2");
+
+                }else{
+				whichSwingAni = 0;
+				animator.Play("ani_jimSwingR3");
+                
+                }
                 PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_RIGHT);
                 meleeDirectionEnabled = meleeWeaponRightSwing;
-				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+				sideSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
 			}else if(direction == 2){
+				if(whichSwingAni == 0){
+					whichSwingAni = 1;
+	                animator.Play("ani_jimSwingR2");
+
+                }else{
+					whichSwingAni = 0;
+					animator.Play("ani_jimSwingR3");
+	                
+                }
                 PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
                 meleeDirectionEnabled = meleeWeaponLeftSwing;
 				sideSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
 			}else if(direction == 3){
                 PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_UP);
                 meleeDirectionEnabled = meleeWeaponTopSwing;
-				topSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+				topSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
 			}else if(direction == 4){
                 PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_DOWN);
                 meleeDirectionEnabled = meleeWeaponBotSwing;
-                botSwoosh.GetComponent<tk2dSpriteAnimator>().Play();
+                botSwoosh.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
 			}
 
 			meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
@@ -248,7 +314,8 @@ public class MeleeAttack : MonoBehaviour {
 	}
 
 	IEnumerator StrongSwingCharge(INPUTACTION givenKey){
-		CamManager.Instance.mainCamEffects.ZoomInOut(1.3f,1f);
+		currentCamZoomVal = CamManager.Instance.mainCamEffects.GetCurrentCamZoom();
+		CamManager.Instance.mainCamEffects.ZoomInOut((currentCamZoomVal +.15f),1f);
 
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		heldKey = givenKey;
@@ -273,6 +340,7 @@ public class MeleeAttack : MonoBehaviour {
 		yield return new WaitForSeconds(.4f);
 		chargeReady = true;
 		chargeReadyPS.Play();
+		chargeReadyGlow.SetActive(true);
 		Debug.Log("chargeReady");
 		//ReturnFromSwing();
 	
@@ -282,9 +350,10 @@ public class MeleeAttack : MonoBehaviour {
 		Debug.Log("Strong Swing Ienum activated -!-!-!-!-!-!-!-!-!-!");
 		GameObject meleeDirectionEnabled = null;
 		GameObject bigSwooshDirection = null;
+		chargeReadyGlow.SetActive(false);
 
 		if (heldKey == INPUTACTION.ATTACKLEFT) {
-	    	playerMomentum = 6f;
+	    	playerMomentum = 8f;
 			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_LEFT);
         	meleeDirectionEnabled = meleeWeaponLeftSwing;
         	sideBigSwoosh.SetActive(true);
@@ -294,17 +363,17 @@ public class MeleeAttack : MonoBehaviour {
 			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_RIGHT);
             meleeDirectionEnabled = meleeWeaponRightSwing;
 		
-	        playerMomentum = 6f;
+	        playerMomentum = 8f;
 	        bigSwooshDirection = sideBigSwoosh;
 	        sideBigSwoosh.SetActive(true);                   
 	    } else if (heldKey == INPUTACTION.ATTACKDOWN) {
-	        playerMomentum = 6f;
+	        playerMomentum = 8f;
 			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_DOWN);
 	        botBigSwoosh.SetActive(true);
 	        bigSwooshDirection = botBigSwoosh;
             meleeDirectionEnabled = meleeWeaponBotSwing;
 	    } else if (heldKey == INPUTACTION.ATTACKUP) {
-	        playerMomentum = 6f;
+	        playerMomentum = 8f;
 	        topBigSwoosh.SetActive(true);
 			PlayerManager.Instance.controller.SendTrigger(JimTrigger.SWING_UP);
 			bigSwooshDirection = topBigSwoosh;
@@ -314,13 +383,15 @@ public class MeleeAttack : MonoBehaviour {
 
 		meleeDirectionEnabled.GetComponent<tk2dSpriteAnimator>().Play();
 		bigSwooshDirection.GetComponent<tk2dSpriteAnimator>().PlayFromFrame(0);
-
+		meleeDirectionEnabled.GetComponent<BoxCollider2D>().enabled = false; //otherwise will sometimes be hit by normal swing even if it's a big swing. Probably a better way to do this
 		meleeDirectionEnabled.SetActive(true);
 
 		//meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(true);//swoosh
 		yield return new WaitForSeconds(.2f);
 		meleeDirectionEnabled.transform.GetChild(0).gameObject.SetActive(false);
 		meleeDirectionEnabled.SetActive(false);
+		meleeDirectionEnabled.GetComponent<BoxCollider2D>().enabled = true;
+
 		//chargingAttack = false;
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		chargeReady = false;

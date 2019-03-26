@@ -52,6 +52,7 @@ public class FriendManager : MonoBehaviour {
                 return friends[i];
         }
 
+		Debug.LogError("GetFriend was called for a friend with no tag setup! Friend: " + friend.name);
         return null;
     }
 
@@ -78,6 +79,16 @@ public class FriendManager : MonoBehaviour {
 		for (int i = 0; i < friends.Count; i++) {
             friends[i].OnWorldEnd();
         }
+    }
+
+    public bool IsThereDayEndEvent(){
+		for (int i = 0; i < friends.Count; i++) {
+            if(friends[i].DayEndEventCheck()){
+            	return true;
+            };
+        }
+
+        return false;
     }
 
     public void EnableProperFriends(int worldNum){

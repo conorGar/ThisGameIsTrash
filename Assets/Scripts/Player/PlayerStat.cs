@@ -9,7 +9,8 @@ public enum PLAYERSTATTYPE
     HP,
     PP,
     BAG_SIZE,
-    STAR_POINTS
+    STAR_POINTS,
+    STAR_BITS
 }
 
 [Serializable]
@@ -66,7 +67,8 @@ public class PlayerStat {
 
             case PLAYERSTATTYPE.STAR_POINTS:
                 return MAX_VALUE;
-
+            case PLAYERSTATTYPE.STAR_BITS:
+            	return MAX_VALUE;
             default:
                 return MAX_VALUE;
         }

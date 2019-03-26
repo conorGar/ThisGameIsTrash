@@ -180,12 +180,18 @@ public class Ev_MainCamera : MonoBehaviour {
 
     public void ScreenShake(float time)
     {
+		screenShake = .2f;
+        StartCoroutine(ScreenShakeEnumerator(time));
+    }
+	public void ScreenShake(float time, float intensity)
+    {
+		screenShake = intensity;
         StartCoroutine(ScreenShakeEnumerator(time));
     }
 
 	public IEnumerator ScreenShakeEnumerator(float time){
 		Debug.Log("SCREEN SHAKE ACTIVATE----------");
-		screenShake = .2f;
+
 		startShakeX = transform.position.x;
 		startShakeY = transform.position.y;
 		gameObject.transform.parent = null;//unattach from player

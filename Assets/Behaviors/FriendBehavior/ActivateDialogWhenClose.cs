@@ -47,11 +47,11 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 		//Debug.Log("Dialog execute activate");
         if (PlayerManager.Instance.controller.currentState.GetState() != JimState.CARRYING)
         {
-//			Debug.Log("Criteria met - 0");
+			Debug.Log("Criteria met - 0");
             if (startNodeName.Length > 0)
             {
 
-//                Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - player.transform.position.y));
+				Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - PlayerManager.Instance.player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - PlayerManager.Instance.player.transform.position.y));
                 if (Vector2.Distance(PlayerManager.Instance.player.transform.position, gameObject.transform.position) <  distanceThreshold)
                 {
                     if (autoStart && canTalkTo)

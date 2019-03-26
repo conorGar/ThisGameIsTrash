@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GUI_OptionsPopupBehavior : MonoBehaviour {
 
 
 	public int howManyOptions = 2;
-    public Text option1;
-	public Text option2;
+    public TextMeshProUGUI option1;
+	public TextMeshProUGUI option2;
 	public int closeOptionNumber;
 
 	[HideInInspector]
@@ -22,7 +23,7 @@ public class GUI_OptionsPopupBehavior : MonoBehaviour {
     public Action<int> OnOptionEvent;
 
 	void Start () {
-		startColor = option1.GetComponent<Text>().color;
+		startColor = option1.color;
 	}
 
 	void OnEnable(){
@@ -72,16 +73,16 @@ public class GUI_OptionsPopupBehavior : MonoBehaviour {
             || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKRIGHT)) {
                 if (arrowPos < howManyOptions) {
                     arrowPos++;
-                    option1.GetComponent<Text>().color = new Color(startColor.r, startColor.b, startColor.g, .3f);
-                    option2.GetComponent<Text>().color = new Color(startColor.r, startColor.b, startColor.g, 1f);
+                    option1.color = new Color(startColor.r, startColor.b, startColor.g, .3f);
+                    option2.color = new Color(startColor.r, startColor.b, startColor.g, 1f);
 
                 }
             } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)
                    || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
                 if (1 < arrowPos) {
                     arrowPos--;
-                    option1.GetComponent<Text>().color = new Color(startColor.r, startColor.b, startColor.g, 1f); ;
-                    option2.GetComponent<Text>().color = new Color(startColor.r, startColor.b, startColor.g, .3f);
+                    option1.color = new Color(startColor.r, startColor.b, startColor.g, 1f); ;
+                    option2.color = new Color(startColor.r, startColor.b, startColor.g, .3f);
 
                 }
             } else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {

@@ -19,14 +19,14 @@ public class Friend : UserDataItem {
     public bool activateDialogWhenClose = true;
     // Is the friend visiting the level on this day.
    
-    public string nextDialog;
+    public string nextDialog = "defaultIntro";
 	public DialogDefinition myDialogDefiniton;
 	public bool tempFriend; //used for guys who arent really friends, but have dialogs(ex;bosses)
 	protected FriendEvent newestAddedEvent;
 	public Sprite calendarIcon;
     [HideInInspector]
 	public string missedDialog;
-	[HideInInspector]
+	//[HideInInspector] commented out for testing
 	public bool IsVisiting = false;
 	[HideInInspector]
 	public DialogManager dialogManager;// needed for returning from events. Given by dialogManager when activate friend event.
@@ -146,15 +146,22 @@ public class Friend : UserDataItem {
     // Runs when the world starts (hub, world 1, world 2, etc..)  useful for setting friend state quest stuff and making sure everything in the world is set up properly.
     public virtual void OnWorldStart(World world)
     {
-    	myMapIcon.gameObject.SetActive(true);
-    	myMapIcon.gameObject.transform.parent = null;
-		if(day == GlobalVariableManager.Instance.DAY_NUMBER && (myFriendType == FriendType.ConversationFriend ||myFriendType == FriendType.ScheduleFriend)){
-			myMapIcon.ActivateSpeechIcon();
+    	if(myMapIcon != null){
+	    	myMapIcon.gameObject.SetActive(true);
+	    	myMapIcon.gameObject.transform.parent = null;
+			if(day == GlobalVariableManager.Instance.DAY_NUMBER && (myFriendType == FriendType.ConversationFriend ||myFriendType == FriendType.ScheduleFriend)){
+				myMapIcon.ActivateSpeechIcon();
+			}
 		}
     }
 
     public virtual void OnWorldEnd(){
-		myMapIcon.gameObject.transform.parent = this.transform;
+    	if(myMapIcon != null)
+			myMapIcon.gameObject.transform.parent = this.transform;
+    }
+
+    public virtual bool DayEndEventCheck(){
+    	return false;
     }
 
     public virtual void OnFinishDialog()
@@ -225,7 +232,9 @@ public class Friend : UserDataItem {
         Debug.LogError("GetVariableText wasn't set up for this friend but it was called!");
         return varKey;
     }
-
+	public virtual void PickUpObject(CoonScavengerHuntItem item){
+		
+	}
     // User Data implementation
     public override string UserDataKey()
     {

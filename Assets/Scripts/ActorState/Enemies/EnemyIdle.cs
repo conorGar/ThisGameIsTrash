@@ -25,6 +25,9 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
         switch (trigger) {
             case EnemyTrigger.HIT:
                 return new EnemyHit();
+			case EnemyTrigger.POWER_HIT:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+                return new EnemyPowerHit();
             case EnemyTrigger.NOTICE:
                 flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
@@ -42,6 +45,10 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
                 return new EnemyCast(CAST_TYPE.SPAWN_ADD, "enemy_slime");
             case EnemyTrigger.CAST_SHIELD:
                 return new EnemyCast(CAST_TYPE.SHIELD);
+            case EnemyTrigger.VULNERABLE: //added for Grub Enemy
+                return new EnemyVulnerable();
+			case EnemyTrigger.LUNGE:
+                return new EnemyLunge();
         }
 
         return null;

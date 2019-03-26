@@ -16,7 +16,14 @@ public class EnemyPrepare : IActorState<EnemyState, EnemyTrigger>
     }
 
     public IActorState<EnemyState, EnemyTrigger> SendTrigger(EnemyTrigger trigger, GameObject actor, tk2dSpriteAnimator animator, ref int flags)
-    {
+	{
+		switch (trigger) {
+            case EnemyTrigger.LUNGE: //added because of Rhino Beetle
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
+				Debug.Log("-x-x-x-x-x-x-x- Enemy Prepare Leap trigger activate -x-x-x-x-x-");
+                return new EnemyLunge();
+        }
         return null;
+
     }
 }

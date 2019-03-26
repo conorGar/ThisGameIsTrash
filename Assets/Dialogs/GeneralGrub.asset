@@ -1,0 +1,1532 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: GeneralGrub
+  m_EditorClassIdentifier: 
+  title: GeneralGrub
+  dialogIconID: dialog_icon_ID
+  nodeStore:
+    keys:
+    - Value: 9b445240-66e9-452e-9cee-f83cccbf8334
+    - Value: 201b97cd-1344-44d8-a9bf-e1aae69fd89b
+    - Value: 7dfc2db1-fda9-4b9d-9bbe-18d3f1c1f1eb
+    - Value: 94149e43-d2f2-4830-a704-90d83d2c7647
+    - Value: 1d5df10e-20b0-463a-83da-0b799dcda640
+    - Value: b3d1ac6d-6302-4996-8b61-2b2d567b10b3
+    - Value: 578d9718-6ca1-47dc-b62b-caa3fb5c0840
+    - Value: b9130787-9833-4d70-b605-f878b8e7c561
+    - Value: 77251604-47c4-4522-9a68-9ec702b21b73
+    - Value: 6a7df3b8-08e8-49f8-b400-dbe1f9786572
+    - Value: e69c4a79-18c2-41c0-a17c-2a1ed007a94f
+    - Value: 699ad944-c5d8-4d7a-890f-551ed6a2bb97
+    - Value: 65872a74-b8a0-4f18-8cde-b4b5d91e42d0
+    - Value: b540bbe3-9d45-4e95-9968-8e8d43cff2c1
+    - Value: 46b80342-c623-46cd-a57d-63ecefd992d4
+    - Value: 67fadc7e-0df4-44a2-94d0-733afccacc59
+    - Value: 7b5d7ef8-a1d5-4c39-8f26-812bf1b99ed8
+    - Value: 2c179153-2a26-4d77-9b16-c14aa152246f
+    - Value: 1c0ac797-12b9-49e1-bcad-afbfdd33d6b8
+    - Value: 12221d4c-5106-4996-add6-a8437f7dbd27
+    - Value: b806956f-d5f2-41ed-b4d3-25e267639831
+    - Value: 109b0585-2477-4e74-bc20-285fd7f239fe
+    - Value: 3923452c-5aa0-4112-ae82-705e96bca188
+    - Value: 9c2440ff-e814-4d92-8868-03a4a6795868
+    - Value: 01f005a1-4bb0-491f-8983-4bc266d78fcf
+    - Value: a2db1df2-8ac7-4fb0-a8ab-0fd1585c84f5
+    - Value: 8ef94bdb-ce24-4546-a76f-2d0cfa51b669
+    - Value: 405aafa1-48e0-4364-836b-9fe579a865a9
+    - Value: 6942f70a-9f63-4d9a-b43b-f5e82dff8df2
+    - Value: b6b3d33e-8e95-4023-b5cf-7408fe474e49
+    - Value: 43b93e9d-cd1b-4088-9c7f-9407837faf1c
+    - Value: abd0febf-a347-40f5-8e57-234e8c6afd0e
+    - Value: 0cbeeedb-3fef-4c74-9011-c5e9155e00f5
+    - Value: 1c76fea8-4e8a-4c34-a2f0-74d713a945b1
+    - Value: 99f67ff6-f902-4de6-8895-5ab787251e3a
+    - Value: 88067cd7-4cb2-412a-af98-afd2b0410848
+    - Value: c6b95781-a897-41d0-b3c4-73ba21d570f8
+    - Value: 35a2188c-21b4-4884-b508-0daa08241336
+    - Value: 17d745bc-c4a6-4e56-8d0a-b3312e809fea
+    - Value: 21016f09-0743-4c9e-a02b-524747232fb1
+    - Value: dc25ab0d-21ed-45a6-ba54-f8343b964400
+    - Value: b07fde6a-246e-4411-8bcc-cb1096432460
+    - Value: 4776d0be-4f11-4f22-8b9a-973d821834a2
+    - Value: 386156b1-d04d-4694-9301-781bd5a266cd
+    - Value: a9a3115c-f70b-4ab2-b31d-a263f8aeee91
+    - Value: fcabf991-cf91-48d3-bf9a-c2236f66ba87
+    - Value: 39c07b7e-246f-4e8f-a00a-7b043fb122bd
+    - Value: 8887f375-ae42-454c-905e-06efedf3b0ab
+    - Value: 08670665-61ce-4495-a75c-363e1b7cc39f
+    - Value: f5504ca1-3677-4a65-ae7f-582c6174ac26
+    - Value: 1db6d731-6307-4245-8b0d-427c68c06aad
+    - Value: 0e3edb52-72c9-4152-8a39-d42e0e021538
+    - Value: 72ac7761-ce2b-4112-8e18-30cc8d00dd5e
+    - Value: be9b58b1-18ea-4398-815a-7c3b55bfcb05
+    - Value: 7da8983f-e654-4765-a95f-83f11cc5b126
+    - Value: 69fe3dde-4b97-459a-99b5-a33117502df3
+    - Value: 5dc4428e-c4db-4e00-852c-3538272fc3e5
+    - Value: 30ecc31d-1053-4bf7-926f-f51ed482853f
+    - Value: 605c8cca-59a3-49bc-932c-c6e551c7620c
+    - Value: 14e37122-100f-4391-af79-09578dae60e7
+    values:
+    - window:
+        serializedVersion: 2
+        x: 173
+        y: 189
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9b445240-66e9-452e-9cee-f83cccbf8334
+      x: 173
+      y: 189
+      text: General Grub! We have aquired intel that a <c=g>human warrior</c> has
+        entered our <c=g>Bug Domain</c>!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 201b97cd-1344-44d8-a9bf-e1aae69fd89b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 465
+        y: 181
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 201b97cd-1344-44d8-a9bf-e1aae69fd89b
+      x: 465
+      y: 181
+      text: We think he might've been sent by <c=g>The Mole King</c>! I hate that
+        guy!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7dfc2db1-fda9-4b9d-9bbe-18d3f1c1f1eb
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 759
+        y: 198
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7dfc2db1-fda9-4b9d-9bbe-18d3f1c1f1eb
+      x: 759
+      y: 198
+      text: God, General! What're we gonna do! AM I GOING TO DIE?!?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 94149e43-d2f2-4830-a704-90d83d2c7647
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 892
+        y: 13
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 94149e43-d2f2-4830-a704-90d83d2c7647
+      x: 892
+      y: 13
+      text: 'No no. Fret not, bug soldier, we''ll hold him back. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1d5df10e-20b0-463a-83da-0b799dcda640
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1374
+        y: 195
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1d5df10e-20b0-463a-83da-0b799dcda640
+      x: 1374
+      y: 195
+      text: Just to be sure, I'm making <c=g> Beetle Steve</c> himself guard the gates.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b3d1ac6d-6302-4996-8b61-2b2d567b10b3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1660
+        y: 214
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b3d1ac6d-6302-4996-8b61-2b2d567b10b3
+      x: 1660
+      y: 214
+      text: Oh God. What a relief. <c=g>Beetle Steve</c>'s the best we got, man.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 578d9718-6ca1-47dc-b62b-caa3fb5c0840
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1960
+        y: 193
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 578d9718-6ca1-47dc-b62b-caa3fb5c0840
+      x: 1960
+      y: 193
+      text: How foolish of me to worry. Sorry, General.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b9130787-9833-4d70-b605-f878b8e7c561
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2257
+        y: 237
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b9130787-9833-4d70-b605-f878b8e7c561
+      x: 2257
+      y: 237
+      text: 'No need to apoligize, soldier. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 77251604-47c4-4522-9a68-9ec702b21b73
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2554
+        y: 253
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 77251604-47c4-4522-9a68-9ec702b21b73
+      x: 2554
+      y: 253
+      text: Do not worry. The great bug empire will not fall this day.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 183
+        y: 432
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: GeneralGrub2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6a7df3b8-08e8-49f8-b400-dbe1f9786572
+      x: 183
+      y: 432
+      text: General! General! The <c=g> trash man</c>! ....he's coming!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e69c4a79-18c2-41c0-a17c-2a1ed007a94f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 481
+        y: 435
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e69c4a79-18c2-41c0-a17c-2a1ed007a94f
+      x: 481
+      y: 435
+      text: No, no. I told you, I got <c=g> Beetle Steve</c> on the job. No worries.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 699ad944-c5d8-4d7a-890f-551ed6a2bb97
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 773
+        y: 455
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 699ad944-c5d8-4d7a-890f-551ed6a2bb97
+      x: 773
+      y: 455
+      text: BUT SIR! BEETLE STEVE IS DOWN! KILLED AT THE HANDS OF THE HUMAN!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 65872a74-b8a0-4f18-8cde-b4b5d91e42d0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1071
+        y: 447
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 65872a74-b8a0-4f18-8cde-b4b5d91e42d0
+      x: 1071
+      y: 447
+      text: WHAT!? He killed <c=g> Beetle Steve</c>?!? But he was, like, our best
+        guy!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b540bbe3-9d45-4e95-9968-8e8d43cff2c1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1364
+        y: 492
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b540bbe3-9d45-4e95-9968-8e8d43cff2c1
+      x: 1364
+      y: 492
+      text: Oh god. Oh god. What kind of monster are we dealing with, here?!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 46b80342-c623-46cd-a57d-63ecefd992d4
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1656
+        y: 473
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 46b80342-c623-46cd-a57d-63ecefd992d4
+      x: 1656
+      y: 473
+      text: Ok. Ok. It's fine. We still got a lot of bug troops he's gotta get passed.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 67fadc7e-0df4-44a2-94d0-733afccacc59
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1943
+        y: 445
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 67fadc7e-0df4-44a2-94d0-733afccacc59
+      x: 1943
+      y: 445
+      text: Plus we always got <c=g> Flaming Phil</c>...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7b5d7ef8-a1d5-4c39-8f26-812bf1b99ed8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2234
+        y: 481
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7b5d7ef8-a1d5-4c39-8f26-812bf1b99ed8
+      x: 2234
+      y: 481
+      text: '...<c=g>Flaming Phil</c>!? But that guy''s a maniac!'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2c179153-2a26-4d77-9b16-c14aa152246f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2526
+        y: 467
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2c179153-2a26-4d77-9b16-c14aa152246f
+      x: 2526
+      y: 467
+      text: It matters not. Sometimes you gotta unleash one monster to stop another.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1c0ac797-12b9-49e1-bcad-afbfdd33d6b8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2816
+        y: 461
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1c0ac797-12b9-49e1-bcad-afbfdd33d6b8
+      x: 2816
+      y: 461
+      text: Ok. Yeah. You're right, General.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 12221d4c-5106-4996-add6-a8437f7dbd27
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3102
+        y: 478
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 12221d4c-5106-4996-add6-a8437f7dbd27
+      x: 3102
+      y: 478
+      text: Once again, you've got it covered. Silly of me to worry so much with you
+        around.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b806956f-d5f2-41ed-b4d3-25e267639831
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3419
+        y: 490
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: GeneralGrub2_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b806956f-d5f2-41ed-b4d3-25e267639831
+      x: 3419
+      y: 490
+      text: Show a little faith, soldier. I've gotten us bugs through worse times.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 174.0275
+        y: 672
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 109b0585-2477-4e74-bc20-285fd7f239fe
+      x: 174.0275
+      y: 672
+      text: Sir...Sir...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 3923452c-5aa0-4112-ae82-705e96bca188
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 477.0275
+        y: 678
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 3923452c-5aa0-4112-ae82-705e96bca188
+      x: 477.0275
+      y: 678
+      text: '...you''re not gonna believe this....the human...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9c2440ff-e814-4d92-8868-03a4a6795868
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 775.02747
+        y: 704
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9c2440ff-e814-4d92-8868-03a4a6795868
+      x: 775.02747
+      y: 704
+      text: '...he''s entered the town center. He got past <c=g> Flaming Phil </c>!'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 01f005a1-4bb0-491f-8983-4bc266d78fcf
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1059.0275
+        y: 747
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 01f005a1-4bb0-491f-8983-4bc266d78fcf
+      x: 1059.0275
+      y: 747
+      text: '...General....what do we do...is this the end?'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a2db1df2-8ac7-4fb0-a8ab-0fd1585c84f5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1370.0275
+        y: 727
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a2db1df2-8ac7-4fb0-a8ab-0fd1585c84f5
+      x: 1370.0275
+      y: 727
+      text: <s>...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8ef94bdb-ce24-4546-a76f-2d0cfa51b669
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1681.0275
+        y: 729
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8ef94bdb-ce24-4546-a76f-2d0cfa51b669
+      x: 1681.0275
+      y: 729
+      text: <s>...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 405aafa1-48e0-4364-836b-9fe579a865a9
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1981.0275
+        y: 722
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 405aafa1-48e0-4364-836b-9fe579a865a9
+      x: 1981.0275
+      y: 722
+      text: '..no. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6942f70a-9f63-4d9a-b43b-f5e82dff8df2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2288.0273
+        y: 745
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6942f70a-9f63-4d9a-b43b-f5e82dff8df2
+      x: 2288.0273
+      y: 745
+      text: ..there's still one option...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b6b3d33e-8e95-4023-b5cf-7408fe474e49
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2587.0273
+        y: 772
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b6b3d33e-8e95-4023-b5cf-7408fe474e49
+      x: 2587.0273
+      y: 772
+      text: '...General...surely you don''t mean...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 43b93e9d-cd1b-4088-9c7f-9407837faf1c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2880.0273
+        y: 795
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 43b93e9d-cd1b-4088-9c7f-9407837faf1c
+      x: 2880.0273
+      y: 795
+      text: '...I do. We must send...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: abd0febf-a347-40f5-8e57-234e8c6afd0e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3179.0273
+        y: 780
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: abd0febf-a347-40f5-8e57-234e8c6afd0e
+      x: 3179.0273
+      y: 780
+      text: '...<c=g> Cicada Sam</c>.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 0cbeeedb-3fef-4c74-9011-c5e9155e00f5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3470.0273
+        y: 762
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0cbeeedb-3fef-4c74-9011-c5e9155e00f5
+      x: 3470.0273
+      y: 762
+      text: No! General! You can't!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1c76fea8-4e8a-4c34-a2f0-74d713a945b1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3769.0273
+        y: 782
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1c76fea8-4e8a-4c34-a2f0-74d713a945b1
+      x: 3769.0273
+      y: 782
+      text: Sorry if this is out of line, but with all due respect...he'll tear that
+        human apart!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 99f67ff6-f902-4de6-8895-5ab787251e3a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4079.0273
+        y: 792
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 99f67ff6-f902-4de6-8895-5ab787251e3a
+      x: 4079.0273
+      y: 792
+      text: There must be some other way!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 88067cd7-4cb2-412a-af98-afd2b0410848
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4401.0273
+        y: 772
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 88067cd7-4cb2-412a-af98-afd2b0410848
+      x: 4401.0273
+      y: 772
+      text: '...I''m afraid not. In times like these, we soldiers must be as cold
+        as ice. Must show no mercy.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: c6b95781-a897-41d0-b3c4-73ba21d570f8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4697.0273
+        y: 807
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c6b95781-a897-41d0-b3c4-73ba21d570f8
+      x: 4697.0273
+      y: 807
+      text: It will be bloody. But I alone will carry the weight of the blood on my
+        hands.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 35a2188c-21b4-4884-b508-0daa08241336
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5016.0273
+        y: 811
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 35a2188c-21b4-4884-b508-0daa08241336
+      x: 5016.0273
+      y: 811
+      text: '...so is my duty as your appointed general.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 237
+        y: 986
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 17d745bc-c4a6-4e56-8d0a-b3312e809fea
+      x: 237
+      y: 986
+      text: The great Bug Empire...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 21016f09-0743-4c9e-a02b-524747232fb1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 533
+        y: 968
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 21016f09-0743-4c9e-a02b-524747232fb1
+      x: 533
+      y: 968
+      text: '...all the generations of progress and reformation... '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: dc25ab0d-21ed-45a6-ba54-f8343b964400
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 823
+        y: 991
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: dc25ab0d-21ed-45a6-ba54-f8343b964400
+      x: 823
+      y: 991
+      text: '...destoyed by a lone human.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b07fde6a-246e-4411-8bcc-cb1096432460
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1114
+        y: 969
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b07fde6a-246e-4411-8bcc-cb1096432460
+      x: 1114
+      y: 969
+      text: You are truely a worthy advisary.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 4776d0be-4f11-4f22-8b9a-973d821834a2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1403
+        y: 954
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4776d0be-4f11-4f22-8b9a-973d821834a2
+      x: 1403
+      y: 954
+      text: ..but I am <c=g>General Grub</c>. Appointed leader of our great race.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 386156b1-d04d-4694-9301-781bd5a266cd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1695
+        y: 974
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 386156b1-d04d-4694-9301-781bd5a266cd
+      x: 1695
+      y: 974
+      text: ..I may be no match for you. But if you think I will give up to you easy...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a9a3115c-f70b-4ab2-b31d-a263f8aeee91
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1986
+        y: 961
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a9a3115c-f70b-4ab2-b31d-a263f8aeee91
+      x: 1986
+      y: 961
+      text: '...you are dead wrong.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1202.5481
+        y: 27
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fcabf991-cf91-48d3-bf9a-c2236f66ba87
+      x: 1202.5481
+      y: 27
+      text: 'You know our policy with humans: they are the enemy. We must eradicate
+        them.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 39c07b7e-246f-4e8f-a00a-7b043fb122bd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1519.5481
+        y: 31
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 39c07b7e-246f-4e8f-a00a-7b043fb122bd
+      x: 1519.5481
+      y: 31
+      text: ..and we will not fail to do so!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 20
+        y: 1218
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CorporalIntro
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8887f375-ae42-454c-905e-06efedf3b0ab
+      x: 20
+      y: 1218
+      text: Human. I have prayed for your arrival.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 08670665-61ce-4495-a75c-363e1b7cc39f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 307
+        y: 1217
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CorporalIntro2
+      speakerName: Corporal Borporal
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 08670665-61ce-4495-a75c-363e1b7cc39f
+      x: 307
+      y: 1217
+      text: 'I am <c=g>Corporal Borporal</c>. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f5504ca1-3677-4a65-ae7f-582c6174ac26
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 803
+        y: 1228
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: CorporalIntro4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f5504ca1-3677-4a65-ae7f-582c6174ac26
+      x: 803
+      y: 1228
+      text: I need you. Our once-great <c=g> bug kindom</c> has become corrupted by
+        the dictatorship of <c=g> General Grub</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1db6d731-6307-4245-8b0d-427c68c06aad
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1099
+        y: 1219
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CorporalIntro5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1db6d731-6307-4245-8b0d-427c68c06aad
+      x: 1099
+      y: 1219
+      text: The poor grub youth has it the worst. So much promise. So much potential...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 0e3edb52-72c9-4152-8a39-d42e0e021538
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1376
+        y: 1243
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CorporalIntro6
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 0e3edb52-72c9-4152-8a39-d42e0e021538
+      x: 1376
+      y: 1243
+      text: '...all turned to waste at the hands of the General''s militaristic ideology.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 72ac7761-ce2b-4112-8e18-30cc8d00dd5e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1653
+        y: 1205
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: CorporalIntro7
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 72ac7761-ce2b-4112-8e18-30cc8d00dd5e
+      x: 1653
+      y: 1205
+      text: It...brings tears to my eyes, human.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7da8983f-e654-4765-a95f-83f11cc5b126
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 533
+        y: 1369
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: CorporalIntro3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: be9b58b1-18ea-4398-815a-7c3b55bfcb05
+      x: 533
+      y: 1369
+      text: I'm aware that my appearence as well as my title and name is sorta adorable,
+        but please take me seriously.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1930
+        y: 1225
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CorporalIntro8
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7da8983f-e654-4765-a95f-83f11cc5b126
+      x: 1930
+      y: 1225
+      text: Every able grub is forced to join his regime, and stay until death!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 69fe3dde-4b97-459a-99b5-a33117502df3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2269
+        y: 1245
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CorporalIntro10
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 69fe3dde-4b97-459a-99b5-a33117502df3
+      x: 2269
+      y: 1245
+      text: None of us have seen our grub families in months, human!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5dc4428e-c4db-4e00-852c-3538272fc3e5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2554
+        y: 1231
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CorporalIntro11
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5dc4428e-c4db-4e00-852c-3538272fc3e5
+      x: 2554
+      y: 1231
+      text: You must help me, Corporal Borporal, in my coup against the General!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 30ecc31d-1053-4bf7-926f-f51ed482853f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2843
+        y: 1257
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CorporalIntro12
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 30ecc31d-1053-4bf7-926f-f51ed482853f
+      x: 2843
+      y: 1257
+      text: Pick me up, and use me as a weapon against his ideologically hypnotized
+        army!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 14e37122-100f-4391-af79-09578dae60e7
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1963.4796
+        y: 1436
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: CorporalIntro9
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 605c8cca-59a3-49bc-932c-c6e551c7620c
+      x: 1963.4796
+      y: 1436
+      text: They are taught that their duty as a soldier is all that matters in their
+        lives!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3138
+        y: 1254
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: CorporalIntro13
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 14e37122-100f-4391-af79-09578dae60e7
+      x: 3138
+      y: 1254
+      text: Together, we must save them from themselves!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 9b445240-66e9-452e-9cee-f83cccbf8334

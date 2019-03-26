@@ -32,14 +32,27 @@ public class EnemyChase : IActorState<EnemyState, EnemyTrigger>
             case EnemyTrigger.IDLE: // This can happen if the enemy is chasing and loses range to the player.  It gets confused and goes back to idle.
                 flags &= (int)~EnemyFlag.CHASING;
                 return new EnemyIdle();
-            case EnemyTrigger.HIT:
+            /*case EnemyTrigger.HIT:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
                 flags &= ~(int)EnemyFlag.CHASING;
-                return new EnemyHit();
+                return new EnemyHit();*/
             case EnemyTrigger.PREPARE:
+				flags &= ~(int)EnemyFlag.CHASING;
                 return new EnemyPrepare();
-            case EnemyTrigger.PREPARE_LEAP:
-                flags &= ~(int)EnemyFlag.CHASING;
+			case EnemyTrigger.PREPARE_LEAP:
+				flags &= ~(int)EnemyFlag.CHASING;
                 return new EnemyPrepare_Leap();
+			case EnemyTrigger.LUNGE:
+				flags &= ~(int)EnemyFlag.CHASING;
+                return new EnemyLunge();
+            case EnemyTrigger.LEAP:
+                flags &= ~(int)EnemyFlag.CHASING;
+                return new EnemyLeap();
+                /*case EnemyTrigger.CHASE_OBJECT:
+                    animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
+                    flags &= ~(int)EnemyFlag.CHASING;
+                    flags |= (int)EnemyFlag.CHASING_OBJECT;
+                    return new EnemyChaseObject();*/
         }
 
         return null;

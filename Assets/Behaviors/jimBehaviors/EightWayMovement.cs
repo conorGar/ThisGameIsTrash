@@ -6,12 +6,13 @@ public class EightWayMovement : MonoBehaviour {
 
 	private tk2dSpriteAnimator anim;
     public float speed = 8f;
-    public float momentum_max = 4f;
+    public float momentum_max = 2f;
     public float momentum_decay = .2f;
     public float momentum_build = 1f;
     private Vector2 movement;
     private Vector2 momentum;
     public AudioSource myFootstepSource;
+    public ParticleSystem waterSplash;
 
     public float footstepWalkInterval = .2f;
     public float footstepCarryInterval = .4f;
@@ -36,6 +37,9 @@ public class EightWayMovement : MonoBehaviour {
 
 	public bool clipOverride; //set by pickUpable object
 
+	float currentBaseSpeed; //set when speed is temporary changed by environment to return to when done.
+	bool alreadySlowed;
+
     // Use this for initialization
     void Start () {
 
@@ -56,6 +60,7 @@ public class EightWayMovement : MonoBehaviour {
             walkCloudPS.GetComponent<ParticleSystem>().Stop();
 
         GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
+        currentBaseSpeed = speed;
     }
 
     void OnDestroy()
@@ -76,9 +81,10 @@ public class EightWayMovement : MonoBehaviour {
                 StartMovement();
                 jimStateController.SetFlag((int)JimFlag.FACING_LEFT);
 
-                if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+               // if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+				if(jimStateController.GetCurrentState() != JimState.CARRYING)
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVELEFT);
-                }
+               // }
 
                 directionFacing = 2;
             }
@@ -86,26 +92,29 @@ public class EightWayMovement : MonoBehaviour {
                 StartMovement();
                 jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
 
-                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+              // if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+				if(jimStateController.GetCurrentState() != JimState.CARRYING)
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVERIGHT);
-                }
+               // }
 
                 directionFacing = 1;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)) {
                 StartMovement();
 
-                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+               // if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+				if(jimStateController.GetCurrentState() != JimState.CARRYING)
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEUP);
-                }
+               // }
                 directionFacing = 3;
             }
             else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)) {
                 StartMovement();
 
-                if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+                //if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
+				if(jimStateController.GetCurrentState() != JimState.CARRYING)
 					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEDOWN);
-                }
+               // }
                 directionFacing = 4;
             }
 
@@ -148,7 +157,12 @@ public class EightWayMovement : MonoBehaviour {
             // If the player is inputting a move and in a valid movement state.
             if (movement != Vector2.zero &&
                (jimStateController.GetCurrentState() == JimState.IDLE ||
-                jimStateController.GetCurrentState() == JimState.CARRYING)) {
+				jimStateController.GetCurrentState() == JimState.CARRYING || jimStateController.GetCurrentState() ==  JimState.CHARGING)) {
+
+				if(jimStateController.GetCurrentState() ==  JimState.CHARGING){
+					speed = 1;
+				}else{
+					speed = currentBaseSpeed;
 
                 // update stored momentum values.
                 momentum = Vector2.ClampMagnitude(momentum + movement * momentum_build, momentum_max);
@@ -165,7 +179,7 @@ public class EightWayMovement : MonoBehaviour {
                         jimStateController.RemoveFlag((int)JimFlag.FACING_LEFT);
                     }
                 }
-
+                }
                 transform.Translate(movement * speed * Time.deltaTime);
 
                 FootstepSounds();
@@ -204,6 +218,21 @@ public class EightWayMovement : MonoBehaviour {
         GetComponent<JimStateController>().SetFlag((int)JimFlag.MOVING);
     }
 
+    public void SlowdownSpeed(){
+    	if(!alreadySlowed){
+    	currentBaseSpeed = 4;//currentBaseSpeed/2;
+    	waterSplash.Play();
+    	alreadySlowed = true;
+    	}
+    }
+    public void SpeedReturn(){
+    	currentBaseSpeed = 8;//currentBaseSpeed*2;
+		waterSplash.Stop();
+		alreadySlowed = false;
+
+    }
+   
+
     void FootstepSounds(){
         if (Time.time > nextFootstepTime) {
             RandomizeSfx(footsteps2, footsteps1);
@@ -228,6 +257,7 @@ public class EightWayMovement : MonoBehaviour {
 
     public void UpdateSpeed(float updatedSpeed){
     	speed += updatedSpeed;
+    	currentBaseSpeed  = speed;
     }
 
     public void Dash(){ //activated in Pin Functions Manager

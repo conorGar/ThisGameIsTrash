@@ -12,7 +12,7 @@ public class B_Ev_Questio : MonoBehaviour
     public GameObject grabbyGloves;
 
     public GameObject baseShadow;
-    public GameObject dazedShadow;
+    public GameObject dazeShadow;
     public GameObject pickupableGlow;
     bool IsPickedUpOnce = false; // Throwable body will glow before the first pick up.
 
@@ -30,6 +30,12 @@ public class B_Ev_Questio : MonoBehaviour
 
     private int transparentLayer;
     private int enemyLayer;
+
+    Leapifier leapifier;
+    public float leapHeight;
+    public float leapSpeed;
+    public AnimationCurve leapCurve;
+
 
     void Awake()
     {
@@ -53,8 +59,6 @@ public class B_Ev_Questio : MonoBehaviour
 
         // Reset Questio
         UnDazed();
-        baseShadow.transform.parent = gameObject.transform;
-        baseShadow.transform.localPosition = new Vector2(-.38f, -1.27f);
         pickupableGlow.SetActive(false);
         myETD.currentHp = 4;
     }
@@ -97,22 +101,10 @@ public class B_Ev_Questio : MonoBehaviour
 
                     break;
                 case EnemyState.LUNGE: // leaping through the air
-                    baseShadow.transform.position = Vector2.MoveTowards(baseShadow.transform.position, targetPosition, 14 * Time.deltaTime);
-                    if (Vector2.Distance(baseShadow.transform.position, targetPosition) < 3) {
-                        if (gameObject.GetComponent<Rigidbody2D>().gravityScale != 3) {
-                            gameObject.GetComponent<Rigidbody2D>().gravityScale = 3; // questio falls back down
-                            SoundManager.instance.PlaySingle(swing);
-                        }
-                        gameObject.transform.position = new Vector2(baseShadow.transform.position.x, gameObject.transform.position.y);
-
+                    if (leapifier.OnUpdate()) {
                         // Landing recover
-                        if (gameObject.transform.position.y < baseShadow.transform.position.y + 1f) {
-                            Recover();
-                        }
-                    } else {
-                        gameObject.transform.position = new Vector2(baseShadow.transform.position.x, Mathf.Lerp(gameObject.transform.position.y, baseShadow.transform.position.y + 3f, 9 * Time.deltaTime));
+                        Recover();
                     }
-
                     break;
                 case EnemyState.CARRIED:
                     // When Questio is picked up for the first time, disable the glow and never allow it to glow again in this game instance.
@@ -121,6 +113,10 @@ public class B_Ev_Questio : MonoBehaviour
                         IsPickedUpOnce = true;
                     }
                     StopDazedStars();
+
+                    if (dazeShadow.activeInHierarchy) {
+                        dazeShadow.SetActive(false);
+                    }
                     break;
             }
 
@@ -135,7 +131,6 @@ public class B_Ev_Questio : MonoBehaviour
     void PrepareLeap()
     {
         myETD.moveWhenHit = false;
-        baseShadow.transform.parent = null;
 
         GetComponent<EnemyPath>().ClearPath();
         controller.SendTrigger(EnemyTrigger.PREPARE_LEAP);
@@ -147,12 +142,13 @@ public class B_Ev_Questio : MonoBehaviour
         targetPosition = new Vector2(PlayerManager.Instance.player.transform.position.x, PlayerManager.Instance.player.transform.position.y);
         gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02";
         gameObject.layer = transparentLayer;
+
+        leapifier = new Leapifier(gameObject, baseShadow, leapHeight, leapSpeed, targetPosition, leapCurve);
     }
 
     // Questio begins recovering from the leap, swinging his hook
     public void Recover()
     {
-        Debug.Log("Landed from fall" + gameObject.transform.position.y + targetPosition.y);
         SoundManager.instance.PlaySingle(swing);
         var state = controller.GetCurrentState();
         if (state == EnemyState.LUNGE) {
@@ -170,9 +166,6 @@ public class B_Ev_Questio : MonoBehaviour
 
         SoundManager.instance.PlaySingle(land);
         ObjectPool.Instance.GetPooledObject("effect_enemyLand", new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 2f));
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-        baseShadow.transform.parent = gameObject.transform;
 
         controller.SendTrigger(EnemyTrigger.RECOVER);
     }
@@ -201,22 +194,21 @@ public class B_Ev_Questio : MonoBehaviour
         gameObject.layer = 11;
         nextRecoverDazeTime = recoverDazeTime + Time.time;
 
-        dazedShadow.SetActive(true);
-        baseShadow.SetActive(false);
-
         StartDazedStars();
+        baseShadow.SetActive(false);
+        dazeShadow.SetActive(true);
         gameObject.GetComponent<ThrowableEnemy>().StopSweat();
     }
 
     public void UnDazed()
     {
         myETD.currentHp = 3;
-        dazedShadow.SetActive(false);
-        baseShadow.SetActive(true);
         gameObject.layer = 9;
         pickupableGlow.SetActive(false);
 
         StopDazedStars();
+        baseShadow.SetActive(true);
+        dazeShadow.SetActive(false);
         gameObject.GetComponent<ThrowableEnemy>().StopSweat();
     }
 

@@ -96,10 +96,7 @@ public class Ev_SmallTruck : MonoBehaviour {
 		if(phase == 0){
 			//player = GameObject.FindGameObjectWithTag("Player");
 			SoundManager.instance.PlaySingle(SFXBANK.TRUCK_APPEAR);
-			if(GlobalVariableManager.Instance.WORLD_NUM == 4){
-				// Empty evidence spawn list here
-				GlobalVariableManager.Instance.STATUE_LIST.Clear();
-			}
+
 
 			if(GlobalVariableManager.Instance.CARRYING_SOMETHING == true){
 				/*GameObject[] largeTrash = GameObject.FindGameObjectsWithTag("LargeTrash");

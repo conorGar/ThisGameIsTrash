@@ -119,7 +119,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	   	zooming = false;
 	   	camPan = false;
 	   	continuousPanning = false;
-	   	thisCam.ZoomFactor = 1.15f;
+	   	thisCam.ZoomFactor = currentCamZoom;
 	   	//gameObject.transform.position = new Vector3(player.transform.position.x, player.transform.position.y,-10f);
 
 	   	if(roomManager != null){
@@ -132,6 +132,10 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    		objectToSpawn.SetActive(true);
    		yield return new WaitForSeconds(.5f);
 		ReturnFromCamEffect();
+   }
+
+   public float GetCurrentCamZoom(){
+		return thisCam.ZoomFactor;
    }
 
 }

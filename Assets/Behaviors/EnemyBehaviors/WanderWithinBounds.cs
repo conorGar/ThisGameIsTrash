@@ -5,18 +5,20 @@ public class WanderWithinBounds : RandomDirectionMovement
 {
 	public BoxCollider2D myWanderZone; // for when lose sight of player, maybe just have enemies walk back to their location...?
 
-	float MIN_X;
-	float MIN_Y;
-	float MAX_X;
-	float MAX_Y;
+	protected float MIN_X;
+	protected float MIN_Y;
+	protected float MAX_X;
+	protected float MAX_Y;
 	Vector2 startPosition;
-	bool boundsSet;
+	public bool boundsSet;
 	bool returningToStart;
 	// Use this for initialization
+
+
 	void OnEnable ()
 	{
 		Debug.Log("Wander in bounds OnEnable() activate -q-q-q-q-q-q-q-q-q");
-		boundsSet = false;
+		//boundsSet = false;
 
 		Debug.Log("wander start position:" + startPosition);
 		base.OnEnable();
