@@ -10,8 +10,8 @@ public class Ev_Enemy_Turret : MonoBehaviour
 	public GameObject projectile;
 	public float timeUntilProjDeath = 7f;
 
-	int throwOnceCheck;
-	float nextThrowTime;
+	protected int throwOnceCheck;
+	protected float nextThrowTime;
 
 
 
@@ -37,7 +37,7 @@ public class Ev_Enemy_Turret : MonoBehaviour
 		}
 	}
 
-	public void Fire(){
+	public virtual void Fire(){
 		//yield return new WaitForSeconds(fireRate);
 		//Debug.Log("Fire Enum Activated");
 
