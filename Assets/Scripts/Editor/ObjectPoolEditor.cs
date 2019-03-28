@@ -18,6 +18,8 @@ public class ObjectPoolEditor : Editor {
         List<string> duptags = new List<string>();
         serializedObject.Update();
 
+        var pool = target as ObjectPool;
+
         var property = serializedObject.FindProperty("itemsToPool");
         if (property.isExpanded) {
             EditorGUILayout.PropertyField(property.FindPropertyRelative("Array.size"));
@@ -39,15 +41,56 @@ public class ObjectPoolEditor : Editor {
                             GUILayout.Label(obj.tag, tagStyle);
                             duptags.Add(obj.tag);
                         }
+                    } else {
+                        GUILayout.Label("NULL", dupTagStyle);
                     }
-                }
+                } 
                 EditorGUILayout.PropertyField(poolDef.FindPropertyRelative("poolObject"), GUIContent.none);
                 EditorGUILayout.PropertyField(poolDef.FindPropertyRelative("parentObject"), new GUIContent("Parent:"));
+                if (GUILayout.Button(new GUIContent("Delete"))) {
+                    if (pool != null) {
+                        Undo.RecordObject(target, "Delete Pool Item");
+                        pool.itemsToPool.RemoveAt(i);
+                    }
+                }
                 GUILayout.EndHorizontal();
             }
             EditorGUIUtility.labelWidth = 0f;
             EditorGUIUtility.fieldWidth = 0f;
         }
+
+        if (GUILayout.Button(new GUIContent("Add Pool Item"))) {
+            
+            if (pool != null) {
+                Undo.RecordObject(target, "Add Pool Item");
+                pool.itemsToPool.Add(new ObjectPoolDefinition());
+            }
+        }
+
+        if (GUILayout.Button(new GUIContent("Sort Alphabetically"))) {
+            if (pool != null) {
+                Undo.RecordObject(target, "Sorting Pool");
+                pool.itemsToPool.Sort(SortAlphabetically);                
+            }
+        }
+
         serializedObject.ApplyModifiedProperties();
+    }
+
+    int SortAlphabetically(ObjectPoolDefinition x, ObjectPoolDefinition y)
+    {
+        if (x.poolObject == null) {
+            if (y.poolObject == null) {
+                return 0;
+            } else {
+                return -1;
+            }
+        } else {
+            if (y.poolObject == null) {
+                return 1;
+            } else {
+                return x.poolObject.tag.CompareTo(y.poolObject.tag);
+            }
+        }
     }
 }
