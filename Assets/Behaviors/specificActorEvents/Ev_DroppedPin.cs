@@ -23,12 +23,20 @@ public class Ev_DroppedPin : MonoBehaviour {
         canBeGrabbed = false;
         Bounce();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnDisable()
+    {
+        if (timedLeapifier != null) {
+            timedLeapifier.Reset();
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (timedLeapifier != null) {
                 if (timedLeapifier.OnUpdate()) {
+                    timedLeapifier.Reset();
                     timedLeapifier = null;
                     canBeGrabbed = true;
                 }
