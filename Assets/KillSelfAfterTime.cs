@@ -30,7 +30,9 @@ public class KillSelfAfterTime : MonoBehaviour {
 	void OnEnable(){
 		//Invoke("Kill",timeUntilDeath);
 		StopAllCoroutines();
+		if(startCountdownImmediately){
 		StartCoroutine("Kill");
+		}
 		if(playSoundAtStart){
 			SoundManager.instance.PlaySingle(mySound);
 		}
