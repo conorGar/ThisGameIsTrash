@@ -188,7 +188,6 @@ public class DialogManager : MonoBehaviour {
                 FinishDialog();
                 return;
             }
-			Debug.Log("Got here - next node");
             //currentlySpeakingIcon.GetComponent<Animator>().Play("JumboAnimation");
             currentNode = myDialogDefiniton.nodes[currentNode.child_id];
 
@@ -261,7 +260,6 @@ public class DialogManager : MonoBehaviour {
     {
         displayedText.text = currentNode.text;
         if (displayedText.text.Contains("<c")) {
-            Debug.Log("HIGHLIGHT TEXT() ACTIVATE");
             HighLightText();
         }
         if (displayedText.text.Contains("<w")) {
@@ -306,7 +304,6 @@ public class DialogManager : MonoBehaviour {
     // End of the teext scrolling
 	public void FinishedDisplay(){
 		if(finishedDisplayingText == false){
-			Debug.Log("Finished Display activated");
 			if(currentlySpeakingIcon != null)
 				currentlySpeakingIcon.SetTalking(false);
 

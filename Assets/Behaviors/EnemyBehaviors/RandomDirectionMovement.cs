@@ -54,16 +54,12 @@ public class RandomDirectionMovement : MonoBehaviour {
                         }
                     } else {
                         // Click debug mode for checking the node grid is good and doesn't generate bad paths.
-                        	Debug.Log("Got here- RDM 1");
                         if (enemyPath.ProcessDebugClickMode()) {
-						Debug.Log("Got here- RDM 2");
-
                             controller.SetFlag((int)EnemyFlag.WALKING);
 
                             if (walkPS != null && !walkPS.isPlaying)
                                 walkPS.Play();
                         } else if (Time.time > nextMoveTime) {
-						Debug.Log("Got here- RDM 3");
 
                             StartMoving();
                         }
@@ -99,7 +95,6 @@ public class RandomDirectionMovement : MonoBehaviour {
 
     // Enemy picks a random direction and starts moving.
 	public virtual void StartMoving(){
-		Debug.Log("Start moving activated");
         PathGrid pathGrid = enemyPath.pathGrid;
         if (pathGrid != null) {
             Point startPoint = pathGrid.WorldToGrid(transform.position);

@@ -19,7 +19,8 @@ public class PlayerManager : MonoBehaviour {
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        controller = player.GetComponent<JimStateController>();
+        if (player != null)
+            controller = player.GetComponent<JimStateController>();
     }
 
     // Makes a gameobject face the player on the x-axis.
