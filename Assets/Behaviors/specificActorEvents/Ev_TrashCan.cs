@@ -12,7 +12,6 @@ public class Ev_TrashCan : MonoBehaviour {
 	public AudioClip hit;
 	public AudioClip finalHit;
 	public GameObject pinUnlockHud;
-	public GameObject objectPool;
 	public AudioClip hitSound;
 	public PinDefinition myPin;
 	public Sprite pinSprite;//given to dropped pin, which gives it to pin unlock display
@@ -42,12 +41,12 @@ public class Ev_TrashCan : MonoBehaviour {
 			if(hp>0){
 				myAnim.Play("hit");
 				SoundManager.instance.PlaySingle(hitSound);
-				GameObject damageCounter = objectPool.GetComponent<ObjectPool>().GetPooledObject("HitStars");
+				GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars");
 				damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(1);
 				damageCounter.SetActive(true);
 				damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
 
-				GameObject littleStars = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_LittleStars");
+				GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars");
 				damageCounter.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 				littleStars.SetActive(true);
@@ -69,7 +68,7 @@ public class Ev_TrashCan : MonoBehaviour {
 			yield return new WaitForSeconds(.2f);
 			myAnim.Stop();
 		}else if(spawnOnce == 0){
-			spawnedPin = objectPool.GetComponent<ObjectPool>().GetPooledObject("DroppedPin",gameObject.transform.position);
+			spawnedPin = ObjectPool.Instance.GetPooledObject("DroppedPin",gameObject.transform.position);
 			spawnedPin.name = myPin.name;
 			spawnedPin.GetComponent<tk2dSprite>().SetSprite(myPin.sprite);
 			spawnedPin.GetComponent<Ev_DroppedPin>().SetPinData(myPin,pinUnlockHud, pinSprite);
