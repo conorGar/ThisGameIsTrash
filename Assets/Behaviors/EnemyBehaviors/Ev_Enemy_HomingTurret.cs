@@ -18,6 +18,8 @@ public class Ev_Enemy_HomingTurret : Ev_Enemy_Turret
 	}
 
 	IEnumerator FireSequence(){
+		gameObject.GetComponent<tk2dSpriteAnimator>().Play("throw");
+		yield return new WaitForSeconds(.3f);
 		for(int i = 0; i < bulletBurstNum; i++){
 			GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag,gameObject.transform.position);
 			bullet.GetComponent<Ev_ProjectileTowrdPlayer>().continuous = true;
@@ -34,7 +36,10 @@ public class Ev_Enemy_HomingTurret : Ev_Enemy_Turret
 			SoundManager.instance.PlaySingle(throwSFX);
 			bullet.GetComponent<Ev_ProjectileTowrdPlayer>().StartCoroutine("StopFollowAfterTime",timeUntilStopFollow);
 			yield return new WaitForSeconds(.2f);
+
 		}
+		gameObject.GetComponent<tk2dSpriteAnimator>().Play("idle");
+
 		throwOnceCheck = 0;
 		nextThrowTime = Time.time + fireRate;
 	}

@@ -1,0 +1,752 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1712475950180286}
+  m_IsPrefabParent: 1
+--- !u!1 &1712475950180286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4724701917887324}
+  - component: {fileID: 114071175380917764}
+  m_Layer: 0
+  m_Name: e_slimeTurretSC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4724701917887324
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1712475950180286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114071175380917764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1712475950180286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: slimeTurret_idle1
+    boundsData:
+    - {x: -0.07692313, y: -0.05128205, z: 0}
+    - {x: 7.384615, y: 6.9743586, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7692306, y: -3.5384614, z: 0}
+    - {x: 3.6153843, y: -3.5384614, z: 0}
+    - {x: -3.7692306, y: 3.4358974, z: 0}
+    - {x: 3.6153843, y: 3.4358974, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5693369, y: 0.5434575}
+    - {x: 0.850585, y: 0.5434575}
+    - {x: 0.5693369, y: 0.67626905}
+    - {x: 0.850585, y: 0.67626905}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ae305e0d7cbd13b4ea5870183a5997bf
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_spit2
+    boundsData:
+    - {x: 0.00000011920929, y: 0.05128205, z: 0}
+    - {x: 7.384615, y: 7.0256414, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.6923075, y: -3.4615386, z: 0}
+    - {x: 3.6923077, y: -3.4615386, z: 0}
+    - {x: -3.6923075, y: 3.5641026, z: 0}
+    - {x: 3.6923077, y: 3.5641026, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.2724614}
+    - {x: 0.28320214, y: 0.2724614}
+    - {x: 0.0019541015, y: 0.40624952}
+    - {x: 0.28320214, y: 0.40624952}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 0d4dddaf82736d443aa3171bd6aeafea
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_spit3
+    boundsData:
+    - {x: -0.025641084, y: 0.06410265, z: 0}
+    - {x: 7.384615, y: 7, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7179487, y: -3.4358974, z: 0}
+    - {x: 3.6666665, y: -3.4358974, z: 0}
+    - {x: -3.7179487, y: 3.5641026, z: 0}
+    - {x: 3.6666665, y: 3.5641026, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.4082036}
+    - {x: 0.28320214, y: 0.4082036}
+    - {x: 0.0019541015, y: 0.5415034}
+    - {x: 0.28320214, y: 0.5415034}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 153674d917c422f428f76a7e40483d7f
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_idle5
+    boundsData:
+    - {x: -0.06410253, y: -0.012820363, z: 0}
+    - {x: 7.3076925, y: 7.051282, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7179487, y: -3.5384614, z: 0}
+    - {x: 3.5897436, y: -3.5384614, z: 0}
+    - {x: -3.7179487, y: 3.5128207, z: 0}
+    - {x: 3.5897436, y: 3.5128207, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.28711036, y: 0.41015673}
+    - {x: 0.56542873, y: 0.41015673}
+    - {x: 0.28711036, y: 0.5444331}
+    - {x: 0.56542873, y: 0.5444331}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 25545c1b792b8f049b2b8c5152e643b5
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_idle6
+    boundsData:
+    - {x: -0.06410253, y: 0.00000011920929, z: 0}
+    - {x: 7.3076925, y: 7.0769234, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7179487, y: -3.5384614, z: 0}
+    - {x: 3.5897436, y: -3.5384614, z: 0}
+    - {x: -3.7179487, y: 3.5384617, z: 0}
+    - {x: 3.5897436, y: 3.5384617, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.28711036, y: 0.27343798}
+    - {x: 0.56542873, y: 0.27343798}
+    - {x: 0.28711036, y: 0.40820265}
+    - {x: 0.56542873, y: 0.40820265}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 205a29972d8fb1c4790fa448dc4d0291
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_spit1
+    boundsData:
+    - {x: -0.025641084, y: 0.06410241, z: 0}
+    - {x: 7.384615, y: 7.051282, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7179487, y: -3.4615386, z: 0}
+    - {x: 3.6666665, y: -3.4615386, z: 0}
+    - {x: -3.7179487, y: 3.5897434, z: 0}
+    - {x: 3.6666665, y: 3.5897434, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5761728, y: 0.0009770507}
+    - {x: 0.8574209, y: 0.0009770507}
+    - {x: 0.5761728, y: 0.13525341}
+    - {x: 0.8574209, y: 0.13525341}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 2418c0af1be9ec345afbe916b308fa1b
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_spit7
+    boundsData:
+    - {x: -0.102564216, y: 0.00000011920929, z: 0}
+    - {x: 7.435897, y: 7.0256414, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.8205128, y: -3.5128205, z: 0}
+    - {x: 3.6153843, y: -3.5128205, z: 0}
+    - {x: -3.8205128, y: 3.5128207, z: 0}
+    - {x: 3.6153843, y: 3.5128207, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.0009770507}
+    - {x: 0.28515527, y: 0.0009770507}
+    - {x: 0.0019541015, y: 0.13476513}
+    - {x: 0.28515527, y: 0.13476513}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: a9cc0d1172c9ea9439030dc960163709
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_spit8
+    boundsData:
+    - {x: -0.14102578, y: 0.06410265, z: 0}
+    - {x: 7.410256, y: 7, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.8461537, y: -3.4358974, z: 0}
+    - {x: 3.5641022, y: -3.4358974, z: 0}
+    - {x: -3.8461537, y: 3.5641026, z: 0}
+    - {x: 3.5641022, y: 3.5641026, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.57129, y: 0.2729497}
+    - {x: 0.8535147, y: 0.2729497}
+    - {x: 0.57129, y: 0.40624952}
+    - {x: 0.8535147, y: 0.40624952}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 6b28811e6e7725d4b822af65753cbc4c
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_spit4
+    boundsData:
+    - {x: -0.038461566, y: 0.07692301, z: 0}
+    - {x: 7.4102564, y: 7.0256405, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7435896, y: -3.4358974, z: 0}
+    - {x: 3.6666665, y: -3.4358974, z: 0}
+    - {x: -3.7435896, y: 3.5897434, z: 0}
+    - {x: 3.6666665, y: 3.5897434, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.13671924}
+    - {x: 0.2841787, y: 0.13671924}
+    - {x: 0.0019541015, y: 0.27050734}
+    - {x: 0.2841787, y: 0.27050734}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 8fbc469f65a246f4eb4653661def9ae3
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_spit5
+    boundsData:
+    - {x: -0.10256398, y: -0.012820363, z: 0}
+    - {x: 7.384615, y: 7, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7948716, y: -3.5128205, z: 0}
+    - {x: 3.5897436, y: -3.5128205, z: 0}
+    - {x: -3.7948716, y: 3.4871798, z: 0}
+    - {x: 3.5897436, y: 3.4871798, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5693369, y: 0.4082036}
+    - {x: 0.850585, y: 0.4082036}
+    - {x: 0.5693369, y: 0.5415034}
+    - {x: 0.850585, y: 0.5415034}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 51f5100996ad5e74ebca155860f50b53
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_idle2
+    boundsData:
+    - {x: -0.07692313, y: -0.025640845, z: 0}
+    - {x: 7.384615, y: 7.0256414, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7692306, y: -3.5384614, z: 0}
+    - {x: 3.6153843, y: -3.5384614, z: 0}
+    - {x: -3.7692306, y: 3.4871798, z: 0}
+    - {x: 3.6153843, y: 3.4871798, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.57129, y: 0.13720752}
+    - {x: 0.8525381, y: 0.13720752}
+    - {x: 0.57129, y: 0.27099562}
+    - {x: 0.8525381, y: 0.27099562}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 9067694ffb4fb1a4b8a88e08a552919e
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_idle3
+    boundsData:
+    - {x: -0.06410265, y: -0.012820363, z: 0}
+    - {x: 7.358974, y: 7, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7435896, y: -3.5128205, z: 0}
+    - {x: 3.6153843, y: -3.5128205, z: 0}
+    - {x: -3.7435896, y: 3.4871798, z: 0}
+    - {x: 3.6153843, y: 3.4871798, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.5434575}
+    - {x: 0.28222558, y: 0.5434575}
+    - {x: 0.0019541015, y: 0.67675734}
+    - {x: 0.28222558, y: 0.67675734}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 764a26fd6c394e64ca9e132ed198b318
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_idle4
+    boundsData:
+    - {x: -0.07692301, y: 0.025641084, z: 0}
+    - {x: 7.333333, y: 7.0769234, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7435896, y: -3.5128205, z: 0}
+    - {x: 3.5897436, y: -3.5128205, z: 0}
+    - {x: -3.7435896, y: 3.5641026, z: 0}
+    - {x: 3.5897436, y: 3.5641026, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.28808692, y: 0.13671924}
+    - {x: 0.56738186, y: 0.13671924}
+    - {x: 0.28808692, y: 0.2714839}
+    - {x: 0.56738186, y: 0.2714839}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 4b54f0bc2c6b10b449a4d025e417fd96
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: slimeTurret_spit6
+    boundsData:
+    - {x: -0.07692289, y: -0.025640845, z: 0}
+    - {x: 7.4358974, y: 7.0256414, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820482, z: 0}
+    - {x: 8.102564, y: 7.3589745, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.7948716, y: -3.5384614, z: 0}
+    - {x: 3.6410258, y: -3.5384614, z: 0}
+    - {x: -3.7948716, y: 3.4871798, z: 0}
+    - {x: 3.6410258, y: 3.4871798, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.28906348, y: 0.0009770507}
+    - {x: 0.5722647, y: 0.0009770507}
+    - {x: 0.28906348, y: 0.13476513}
+    - {x: 0.5722647, y: 0.13476513}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 816f56b8ea210c84da9c87e10e0a0af2
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: d63e0478c8b044b4dbc68f812cb8a119, type: 2}
+  textures:
+  - {fileID: 2800000, guid: e7295936ada79f941ab8e59e97832941, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: 69e2abe729aff384e9293e47fae979b4
+  spriteCollectionName: e_slimeTurretSC
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 898844826
+  dataGuid: fae24c3198c162045a0ef5f6c89c5934
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []
