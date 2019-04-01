@@ -9,9 +9,11 @@ public class CleanableItem : MonoBehaviour
 	public int spawnChance = 0; // out of 10
 	public List<GameObject> possibleSpawnableItems = new List<GameObject>();
 	public GameObject dirtyLookingObject;
-	bool isClean;
+	public bool isClean;
 	public ParticleSystem dirtyPS;
 
+
+	public AreaGarbageManager myAreaManager;
 
 
 	void OnTriggerEnter2D(Collider2D collider){
@@ -30,6 +32,7 @@ public class CleanableItem : MonoBehaviour
 
 
 	void SpawnItem(){
+		myAreaManager.CleanedFilty();
 		int spawnsItem = Random.Range(spawnChance,11);
 		ObjectPool.Instance.GetPooledObject("effect_dirtyHit",gameObject.transform.position);
 

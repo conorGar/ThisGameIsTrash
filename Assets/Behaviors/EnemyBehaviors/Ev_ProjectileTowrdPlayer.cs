@@ -12,6 +12,7 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 	public float delayTime = .1f;
 	public bool continuous;
 	public float speed = 5;
+
 	[HideInInspector]
 	public GameObject target; //given usually by whatever is spawning this.
 	bool moving;
@@ -22,8 +23,10 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 		if(target == null){
             target = PlayerManager.Instance.player;
 		}
+		if(delayTime <= .1f){
 		movementDir = (target.transform.position - gameObject.transform.position).normalized * speed;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementDir.x,movementDir.y);
+		}
 	}
 
 

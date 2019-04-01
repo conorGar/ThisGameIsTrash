@@ -235,6 +235,9 @@ public class Friend : UserDataItem {
 	public virtual void PickUpObject(CoonScavengerHuntItem item){
 		
 	}
+	public virtual void PickUpObject(CollectableFriendObject item){
+		
+	}
     // User Data implementation
     public override string UserDataKey()
     {

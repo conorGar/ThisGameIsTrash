@@ -21,7 +21,7 @@ public class Ev_DroppedTrash : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
-		if(collider.gameObject.tag == "Player"){
+		if(collider.gameObject.tag == "Player" && GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] <= GlobalVariableManager.Instance.BAG_SIZE_STAT.GetMax()){
 			/*droppedTrashCollectedDisplay.SetActive(true);
 			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(droppedTrashCollectedDisplay.transform.position.x, droppedTrashCollectedDisplay.transform.position.y+3,2);
 			droppedTrashCollectedDisplay.GetComponent<SpecialEffectsBehavior>().SetFadeVariables(.4f,1f);
@@ -40,6 +40,8 @@ public class Ev_DroppedTrash : MonoBehaviour {
 		yield return new WaitForSeconds(timeTillLand);
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-		gameObject.transform.GetChild(0).gameObject.SetActive(true);
+		if(gameObject.GetComponent<Ev_ProjectileTowrdPlayer>() == null){ // homing trash no have shadow
+			gameObject.transform.GetChild(0).gameObject.SetActive(true);
+		}
 	}
 }

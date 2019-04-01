@@ -9,6 +9,7 @@ public class ItemPluckableGarbage : MonoBehaviour
 	public GameObject childPickupObj; // used for objects that need a parent, but whose spriterender cant be on the parent object(like for an intro animation)
 	public int trashAmnt;
 	public int hp;
+	public ItemSecretButton revealButton;
 	float myY;
 
 
@@ -47,7 +48,10 @@ public class ItemPluckableGarbage : MonoBehaviour
             }
 
             if (movePlayerToObject) {
+            	myCollision.enabled = false;
                 PlayerManager.Instance.player.transform.position = Vector2.Lerp(PlayerManager.Instance.player.transform.position, this.gameObject.transform.position, 2 * Time.deltaTime);
+            }else{
+            	myCollision.enabled = true;
             }
         }
 	}
@@ -56,11 +60,15 @@ public class ItemPluckableGarbage : MonoBehaviour
 		hp--;
 		if(hp > 0){
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("pull");
+			gameObject.GetComponent<Renderer>().sortingLayerName = "Layer02"; // in front of player
 			gameObject.transform.position = new Vector2(PlayerManager.Instance.player.transform.position.x,gameObject.transform.position.y);
+			PlayerManager.Instance.player.GetComponent<JimStateController>().SendTrigger(JimTrigger.PICK_UP_SMALL);
 	        PlayerManager.Instance.player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		}else{
 			gameObject.GetComponent<tk2dSpriteAnimator>().Play("pluck");
-
+			if(revealButton != null){
+				revealButton.gameObject.SetActive(true);
+			}
 			myCollision.enabled = false;
 	        Debug.Log("Pickup() activated");
 	        movePlayerToObject = false;
@@ -87,8 +95,10 @@ public class ItemPluckableGarbage : MonoBehaviour
 
 		yield return new WaitForSeconds(1f);
 		for(int i = 0; i < trashAmnt; i++){
-			GameObject trash = ObjectPool.Instance.GetPooledObject("DroppedTrashHoming",gameObject.transform.position);
-			trash.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f,1f),Random.Range(2f,4f)),ForceMode2D.Impulse);
+			if(GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0] <= GlobalVariableManager.Instance.BAG_SIZE_STAT.GetMax()){
+				GameObject trash = ObjectPool.Instance.GetPooledObject("DroppedTrashHoming",gameObject.transform.position);
+				trash.GetComponent<Rigidbody2D>().AddForce(new Vector2(Random.Range(-1f,1f),Random.Range(2f,4f)),ForceMode2D.Impulse);
+			}
 		}
 		ObjectPool.Instance.GetPooledObject("effect_landingSmoke",gameObject.transform.position);
         ObjectPool.Instance.ReturnPooledObject(gameObject);

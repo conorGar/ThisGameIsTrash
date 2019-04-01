@@ -24,7 +24,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 	string triggerEventName;
 	bool zooming;
 	float panSpeed = .6f;
-	float currentCamZoom;
+	float currentCamZoom = 1.15f;
 	float targetCamZoom;
 	float zoomSpeed;
 

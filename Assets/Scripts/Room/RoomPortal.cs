@@ -21,6 +21,7 @@ public class RoomPortal : EditorMonoBehaviour {
 	public Sprite areaTitleSprite;
 	public bool camZoomer;
 	public float newCamZoomVal;
+	public AreaGarbageManager areaManager;
 	// Use this for initialization
 	void Start () {
         player = null;
@@ -91,6 +92,8 @@ public class RoomPortal : EditorMonoBehaviour {
 					
 					if(camZoomer){
                 		CamManager.Instance.mainCamEffects.ZoomInOut(1.15f,1f);
+					}if(areaTitleActivator){
+						areaManager.myHUD.gameObject.SetActive(false);
                 	}
                     roomManager.currentRoom = negativeRoom;
                     roomManager.previousRoom = positiveRoom;
@@ -116,6 +119,7 @@ public class RoomPortal : EditorMonoBehaviour {
                 else if (roomManager.currentRoom == negativeRoom)
                 {
 					if(areaTitleActivator){
+						areaManager.myHUD.gameObject.SetActive(true);
                 		GUIManager.Instance.areaTitle.SetActive(true);
                 		GUIManager.Instance.areaTitle.GetComponent<SpriteRenderer>().sprite = areaTitleSprite;
                 		GUIManager.Instance.areaTitle.GetComponent<Animator>().Play("areaTitleAni",0,-1f);
