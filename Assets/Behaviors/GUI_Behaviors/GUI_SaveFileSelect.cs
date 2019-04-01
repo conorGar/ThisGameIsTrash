@@ -20,8 +20,12 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 	}
 	void Update ()
 	{
+#if DEBUG_QUICKLOAD
+        LoadSave();
+#else
         if (GameStateManager.Instance.GetCurrentState() == typeof(TitleState)) {
-            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
+             || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
             	SoundManager.instance.PlaySingle(selectSfx);
             	selectStarsPS.transform.position = optionIcons[arrowPos].transform.position;
             	selectStarsPS.SetActive(true);
@@ -56,6 +60,7 @@ public class GUI_SaveFileSelect : GUI_MenuBase
 
             selectionArrow.transform.position = new Vector2(optionIcons[arrowPos].transform.position.x - 5f, optionIcons[arrowPos].transform.position.y);
         }
+#endif
 	}
 	
 	public override void NavigateEffect(){

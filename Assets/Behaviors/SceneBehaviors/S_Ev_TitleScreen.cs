@@ -78,6 +78,11 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+#if DEBUG_QUICKLOAD
+        // Immediately load the first slot.
+        saveFileSelectHUD.SetActive(true);
+        this.enabled = false;
+#else
         if (GameStateManager.Instance.GetCurrentState() == typeof(TitleState)) {
             if (isInteractable && !optionHud.activeInHierarchy) {
                 if (phase == 1) {
@@ -97,7 +102,6 @@ public class S_Ev_TitleScreen : MonoBehaviour {
 
                             saveFileSelectHUD.SetActive(true);
                             this.enabled = false;
-                            //StartCoroutine(LoadUserData());
 
                         } else if (navigationPosition == 2) {
                             GameStateManager.Instance.PushState(typeof(OptionsState));
@@ -110,18 +114,9 @@ public class S_Ev_TitleScreen : MonoBehaviour {
                 } else if (phase == 0) {
                     if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
                      || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
-                        Debug.Log(title.GetComponent<SpecialEffectsBehavior>() == null);
-                        //Vector3 topLimit = GUIcam.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(title.transform.position.x, Screen.height * -1, 0));
-
-                        //Debug.Log(topLimit);
-                        //Debug.Log(topLimit * -1);
-
-                        //title.transform.localPosition = topLimit * -1;
                         SoundManager.instance.PlaySingle(selectSFX);
 
                         title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(-.1f, .6f, .5f, true);
-                        //title.GetComponent<SpecialEffectsBehavior>().SmoothMovementToPoint(title.transform.position.x,title.transform.localPosition.y + topLimit.y,.2f);
-
 
                         phase = 1;
                         // Tweens the title into view and then calls a callback to allow the player to use the menus.
@@ -137,13 +132,14 @@ public class S_Ev_TitleScreen : MonoBehaviour {
                     }
                 }
             } else if (optionHud.activeInHierarchy) {
-                if (ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
+                  if (ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)
+                   || ControllerManager.Instance.GetKeyDown(INPUTACTION.PAUSE)) {
                     GameStateManager.Instance.PopState();
                     optionHud.SetActive(false);
                 }
             }
         }
-
+#endif
 
 
 		//----------------------Camera pan over world----------------------------//

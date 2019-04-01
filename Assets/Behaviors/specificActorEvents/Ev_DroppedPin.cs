@@ -7,56 +7,38 @@ public class Ev_DroppedPin : MonoBehaviour {
 
 	PinDefinition pinData = null; //usually given by trash can
 
-    [SerializeField] int bounceCounter = 0;
 	GameObject pinUnlockHud; //given by trash can
-
-    [SerializeField] float landingY;
-    [SerializeField] bool bouncing;
+    public GameObject shadow;
     [SerializeField] bool canBeGrabbed = false;
 	Sprite mySprite; //given by trash can, used by unlock hud
-	[SerializeField] int increaseOnce;
-
-    void Start()
-    {
-        GameStateManager.Instance.RegisterChangeStateEvent(OnChangeState);
-    }
-
-    void OnDestroy()
-    {
-        GameStateManager.Instance.UnregisterChangeStateEvent(OnChangeState);
-    }
+    
+    TimedLeapifier timedLeapifier;  // leaping, in a bouncy manner
+    public float maxBounceHeight; // maximum bounce height
+    public float totalBounceTime; // how long the whole bounce animation will run
+    public GameObject bounceDest; // where the pin will be after it stops bouncing
+    public AnimationCurve bounceCurve; // bouncy y-value curve
 
     // Use this for initialization
     void OnEnable () {
-		gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(1,5),ForceMode2D.Impulse);
-        bounceCounter = 0;
-        bouncing = false;
         canBeGrabbed = false;
-        increaseOnce = 0;
-        landingY = 0;
-        gameObject.GetComponent<Rigidbody2D>().gravityScale = 2;
-        StartCoroutine("WaitForGrab");
-
+        Bounce();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void OnDisable()
+    {
+        if (timedLeapifier != null) {
+            timedLeapifier.Reset();
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-            if (bouncing) {
-                if (gameObject.transform.position.y < landingY) {
-                    if (bounceCounter < 3) {
-                        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, (5 - bounceCounter)), ForceMode2D.Impulse);
-                        if (increaseOnce == 0) {
-                            bounceCounter++;
-                            increaseOnce++;
-                            StartCoroutine("BounceIncreaseDelay");
-                        }
-                    } else {
-                        bouncing = false;
-                        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-                        gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                        canBeGrabbed = true;
-                    }
+            if (timedLeapifier != null) {
+                if (timedLeapifier.OnUpdate()) {
+                    timedLeapifier.Reset();
+                    timedLeapifier = null;
+                    canBeGrabbed = true;
                 }
             }
         }
@@ -81,28 +63,7 @@ public class Ev_DroppedPin : MonoBehaviour {
 	}//end of pin data set
 
 
-	IEnumerator WaitForGrab(){
-		yield return new WaitForSeconds(.8f);
-		landingY = gameObject.transform.position.y;
-		Debug.Log("Dropped Pin force added >>>>>>>>>>>>>>>>");
-		gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,5),ForceMode2D.Impulse);
-		bounceCounter = 1;
-		bouncing = true;
-
+	void Bounce(){
+        timedLeapifier = new TimedLeapifier(gameObject, shadow, maxBounceHeight, totalBounceTime, bounceDest.transform.position, bounceCurve);
 	}
-	IEnumerator BounceIncreaseDelay(){
-		//needed for bounce counter to not increase all at once
-		yield return new WaitForSeconds(.1f);
-		bounceCounter++;
-	}
-
-    void OnChangeState(System.Type stateType, bool isEntering)
-    {
-        // Only simulate physics during gameplay.
-        if (GameStateManager.Instance.GetCurrentState() != typeof(GameplayState)) {
-            gameObject.GetComponent<Rigidbody2D>().simulated = false;
-        } else {
-            gameObject.GetComponent<Rigidbody2D>().simulated = true;
-        }
-    }
 }

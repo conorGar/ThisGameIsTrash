@@ -34,8 +34,7 @@ public class Room : MonoBehaviour
 
     public void ActivateRoom()
     {
-    	Debug.Log("ActivateRoom....activated");
-
+    	Debug.Log("ActivateRoom: " + gameObject.name);
 
     	//Set room as visited
     	if((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) != myRoom){
