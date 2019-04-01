@@ -150,6 +150,8 @@ public class RoomPortal : EditorMonoBehaviour {
                     Debug.Log("This portal isn't even for the current room.  How did you get here!?");
                 }
             }
+
+            roomManager.previousRoom.DeactivateRoom();
         }
     }
 }

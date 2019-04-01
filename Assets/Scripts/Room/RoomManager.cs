@@ -19,6 +19,8 @@ public class RoomManager : MonoBehaviour {
     public Vector3 previousCameraPosition;
     public Vector3 targetCameraPosition;
 
+    public CheckpointDebugConfig checkpointConfig;
+
     void Awake()
     {
         Instance = this;
@@ -29,12 +31,12 @@ public class RoomManager : MonoBehaviour {
     void Start()
     {
         // check for the checkpoint debug config if a spawncheckpoint was configured.
-        var configs = Resources.FindObjectsOfTypeAll<CheckpointDebugConfig>();
-        if (configs.Length > 0) {
-            CheckpointDebugConfig config = configs[0];
-            if (config.isOn) {
-                Checkpoint checkpoint = GameObject.Find(config.checkpointLookup.dictionary[SceneManager.GetActiveScene().path]).GetComponent<Checkpoint>();
+        if (checkpointConfig != null) {
+            if (checkpointConfig.isOn) {
+                Debug.Log("3");
+                Checkpoint checkpoint = GameObject.Find(checkpointConfig.checkpointLookup.dictionary[SceneManager.GetActiveScene().path]).GetComponent<Checkpoint>();
                 if (checkpoint != null) {
+                    Debug.Log("Warping to Checkpoint: " + checkpoint.name + " in room: " + checkpoint.myRoom.name);
                     CheckpointManager.Instance.lastCheckpoint = checkpoint;
                     currentRoom = checkpoint.myRoom;
 
@@ -42,7 +44,10 @@ public class RoomManager : MonoBehaviour {
                     CamManager.Instance.mainCam.transform.position = new Vector3(CheckpointManager.Instance.lastCheckpoint.transform.position.x, CheckpointManager.Instance.lastCheckpoint.transform.position.y, -10f);
                 }
             }
+        } else {
+            Debug.LogError("CheckpointConfig scriptable object isn't defined.  Please reference it on the RoomManager!!!", gameObject);
         }
+
     }
 
     public void Restart(Room respawnRoom){//called at player death in PlayerTakedamage
@@ -61,7 +66,6 @@ public class RoomManager : MonoBehaviour {
 
             if (lerpCamera >= 1.0f)
             {        
-                previousRoom.DeactivateRoom();
                 currentRoom.ActivateRoom();
                 Debug.Log("Enabled ActivateRoom() Here");
                 isTransitioning = false;
