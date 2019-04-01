@@ -87,38 +87,38 @@ public class Ev_PinBehavior : MonoBehaviour {
 
     void OnEnable()
     {
+        if (pinData != null) {
+            if (inShop) {
+                inShop = true;
+            } else {
+                if (!IsPinDiscovered()) {
+                    sprite.color = new Color(0f, 0f, 0f, 1f);//blacked out if not owned
+                } else {
+                    sprite.color = Color.white;
 
-		if (inShop){
-			inShop = true;
-		}else{
-            if (!IsPinDiscovered()){
-                sprite.color = new Color(0f,0f,0f,1f);//blacked out if not owned
-			}else{
-				sprite.color = Color.white;
+                    for (int i = 0; i < pinData.ppValue; i++) {
+                        smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
 
-                for (int i = 0; i < pinData.ppValue; i++) {
-                    smallPPIcons.transform.GetChild(i).gameObject.SetActive(true);
-
-                    if (IsPinEquipped()) {
-                        smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                        if (IsPinEquipped()) {
+                            smallPPIcons.transform.GetChild(i).gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                        }
                     }
+                    if (pinData.abilityPin == true) {
+                        GameObject abilityPS = ObjectPool.Instance.GetPooledObject("effect_AbilityPin", gameObject.transform.position);
+                        abilityPS.transform.parent = this.transform;
+                    }
+                    if (!IsPinViewed())
+                        newPinIcon.SetActive(true);
                 }
-                if(pinData.abilityPin == true){
-                	GameObject abilityPS = ObjectPool.Instance.GetPooledObject("effect_AbilityPin",gameObject.transform.position);
-                	abilityPS.transform.parent = this.transform;
+                for (int i = 0; i < pinData.ppValue; i++) {
+                    myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
                 }
-                if (!IsPinViewed())
-                    newPinIcon.SetActive(true);
+
+
+
             }
-			for (int i = 0; i < pinData.ppValue; i++) {
-            myIcons.Add(smallPPIcons.transform.GetChild(i).gameObject);
-        	}
-		
-
-        
+            Unhighlight();
         }
-        Unhighlight();
-
     }
 
     void OnDisable()

@@ -22,18 +22,20 @@ public class Enemy : MonoBehaviour {
 	}
 	void OnEnable(){
 		if(toxicEnemy && (GlobalVariableManager.Instance.TUT_POPUPS_SHOWN & GlobalVariableManager.TUTORIALPOPUPS.TOXICENEMIES) != GlobalVariableManager.TUTORIALPOPUPS.TOXICENEMIES){
-			GUIManager.Instance.tutorialPopup.gameObject.SetActive(true);
-			GameStateManager.Instance.PushState(typeof(DialogState));
-			GUIManager.Instance.tutorialPopup.SetData("RadioactiveEnemy");
+            if (GUIManager.Instance != null) {
+                GUIManager.Instance.tutorialPopup.gameObject.SetActive(true);
+                GameStateManager.Instance.PushState(typeof(DialogState));
+                GUIManager.Instance.tutorialPopup.SetData("RadioactiveEnemy");
+            }
 		}
 	}
 
 	// Update is called once per frame
 	void Update () {
         if (GameStateManager.Instance.GetCurrentState() != typeof(GameplayState)) {
-            if (gameObject.GetComponent<Rigidbody2D>()!=null){
-				gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-			}
-		}
+            if (gameObject.GetComponent<Rigidbody2D>() != null) {
+                gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            }
+        }
 	}
 }

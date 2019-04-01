@@ -44,14 +44,10 @@ public class ActivateDialogWhenClose : MonoBehaviour {
     // Moved this out of Update so it can be controlled better by the friend and what state they are in.
     public void Execute(string firstIcon = "", string secondIcon = "", string thirdIcon = "")
     {
-		//Debug.Log("Dialog execute activate");
         if (PlayerManager.Instance.controller.currentState.GetState() != JimState.CARRYING)
         {
-			Debug.Log("Criteria met - 0");
             if (startNodeName.Length > 0)
             {
-
-				Debug.Log("Criteria met - 1" + Mathf.Abs(transform.position.x - PlayerManager.Instance.player.transform.position.x) +"   " + Mathf.Abs(transform.position.y - PlayerManager.Instance.player.transform.position.y));
                 if (Vector2.Distance(PlayerManager.Instance.player.transform.position, gameObject.transform.position) <  distanceThreshold)
                 {
                     if (autoStart && canTalkTo)
@@ -61,10 +57,6 @@ public class ActivateDialogWhenClose : MonoBehaviour {
                     }
                     else if (canTalkTo)
                     {
-                        //Debug.Log("Autostart val:" + autoStart);
-                        //Debug.Log("canTalkTo val:" + canTalkTo);
-
-                      
                             if (spawnSpeechBubble == 0)
                             {
                                 speechBubbleIcon = ObjectPool.Instance.GetPooledObject("speechIcon", new Vector2(gameObject.transform.position.x+2f,gameObject.transform.position.y));
@@ -85,13 +77,10 @@ public class ActivateDialogWhenClose : MonoBehaviour {
                 }
                 else
                 {
-                    //Debug.Log("Far away from: " + gameObject.name);
                     if (spawnSpeechBubble == 1)
                     {
-                        //Debug.Log("Speech Bubble should've died");
                         ObjectPool.Instance.ReturnPooledObject(speechBubbleIcon);
                         spawnSpeechBubble = 0;
-                        //speechBubbleIcon.SetActive(false);//disable speech bubble icon when far away
                     }
                 }
 

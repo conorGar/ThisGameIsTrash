@@ -22,12 +22,15 @@ public class GUI_OptionsPopupBehavior : MonoBehaviour {
     public Action OnCloseEvent;
     public Action<int> OnOptionEvent;
 
-	void Start () {
+	void Awake () {
 		startColor = option1.color;
 	}
 
 	void OnEnable(){
         GameStateManager.Instance.PushState(typeof(PopupState));
+        arrowPos = 1;
+        option1.color = new Color(startColor.r, startColor.b, startColor.g, 1f);
+        option2.color = new Color(startColor.r, startColor.b, startColor.g, .3f);
         OnOpenEvent();
 	}
 
@@ -81,7 +84,7 @@ public class GUI_OptionsPopupBehavior : MonoBehaviour {
                    || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKLEFT)) {
                 if (1 < arrowPos) {
                     arrowPos--;
-                    option1.color = new Color(startColor.r, startColor.b, startColor.g, 1f); ;
+                    option1.color = new Color(startColor.r, startColor.b, startColor.g, 1f);
                     option2.color = new Color(startColor.r, startColor.b, startColor.g, .3f);
 
                 }

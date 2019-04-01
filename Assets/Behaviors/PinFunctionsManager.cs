@@ -63,7 +63,6 @@ public class PinFunctionsManager : MonoBehaviour {
 
 	public IEnumerator DumpsterDash(INPUTACTION givenKey){
 		if(dashCounter == 0){
-			Debug.Log("Dumpster Dash - 0");
 			dashCounter = 1;
 			dashKey = givenKey;
 			yield return new WaitForSeconds(.2f);

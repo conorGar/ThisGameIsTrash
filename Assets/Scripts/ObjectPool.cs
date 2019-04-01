@@ -10,6 +10,14 @@ public class ObjectPoolDefinition
     public GameObject poolObject;
     public GameObject parentObject;
     public int poolSize;
+
+    public ObjectPoolDefinition()
+    {
+        IsExpandable = true;
+        poolObject = null;
+        parentObject = null;
+        poolSize = 0;
+    }
 }
 
 // Pool of objects organized by key -> value pair of Object definition -> Instanced Object List.

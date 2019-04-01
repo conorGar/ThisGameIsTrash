@@ -30,16 +30,14 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 
 	void Start () {
 		thisCam = gameObject.GetComponent<tk2dCamera>();
-
-	}
+        currentCamZoom = GetCurrentCamZoom();
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		if(zooming){
 				
 			thisCam.ZoomFactor = Mathf.Lerp(thisCam.ZoomFactor,targetCamZoom,zoomSpeed*(Time.deltaTime));
-				//thisCam.ZoomFactor = 1;
-				//Debug.Log("zooming" + currentCamZoom + "   " + targetCamZoom);
 				if(thisCam.ZoomFactor == targetCamZoom){
 					zooming = false;
 					Debug.Log("Zoom stopped");
@@ -69,7 +67,6 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    		targetCamZoom = zoomAmount;
    		zoomSpeed = zs;
    		zooming = true;
-   		//thisCam.ZoomFactor = 1.5f; //Debug
    }
 
 	public void CameraPan(Vector3 positionToPanTo,string triggerName){
@@ -115,7 +112,7 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    }
 
    public void ReturnFromCamEffect(){
-  	 	Debug.Log("return from cam effect");
+  	 	Debug.Log("return from cam effect. currentCamZoom: " + currentCamZoom + " previous ZoomFactor: " + thisCam.ZoomFactor);
 	   	zooming = false;
 	   	camPan = false;
 	   	continuousPanning = false;
