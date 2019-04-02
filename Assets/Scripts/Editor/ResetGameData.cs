@@ -9,20 +9,17 @@ using UnityEditor;
 
 public class ResetGameData : MonoBehaviour {
     [MenuItem("TGIT/Reset Slot One Data")]
-    // Use this for initialization
     static void ResetSlotOneData () {
         ResetData(0);
 	}
 
     [MenuItem("TGIT/Reset Slot Two Data")]
-    // Use this for initialization
     static void ResetSlotTwoData()
     {
         ResetData(1);
     }
 
     [MenuItem("TGIT/Reset Slot Three Data")]
-    // Use this for initialization
     static void ResetSlotThreeData()
     {
         ResetData(2);

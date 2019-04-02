@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 0
+  topSorted: 0
   sortBuddies: []
 --- !u!114 &114649413622570872
 MonoBehaviour:
@@ -171,6 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d7e72ce52489634983de07544225503, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cleanable: {fileID: 0}
+  cleanableBitValue: 0
   hp: 2
   spawnChance: 7
   possibleSpawnableItems:
