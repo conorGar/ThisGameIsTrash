@@ -117,10 +117,12 @@ public class CleanableManager : UserDataItem
             Debug.Log("Initializing Cleanables for World: " + world);
             for (int i = 0; i < cleanableItems.Length; i++) {
                 var item = cleanableItems[i];
-                for (int j = 0; j < cleanables.Count; j++) {
-                    if (cleanables[j].CleanableType() == item.cleanable.CleanableType()) {
-                        item.InitClean(cleanableLookUp[item.cleanable.CleanableType()]);
-                        break;
+                if (item.cleanable != null) {
+                    for (int j = 0; j < cleanables.Count; j++) {
+                        if (cleanables[j].CleanableType() == item.cleanable.CleanableType()) {
+                            item.InitClean(cleanableLookUp[item.cleanable.CleanableType()]);
+                            break;
+                        }
                     }
                 }
             }

@@ -9,6 +9,7 @@ public class EightWayMovement : MonoBehaviour {
     public float momentum_max = 2f;
     public float momentum_decay = .2f;
     public float momentum_build = 1f;
+    public float dashAngleThreshold = 40f; // flub angle when using the dash button
     private Vector2 movement;
     private Vector2 momentum;
     public AudioSource myFootstepSource;
@@ -77,13 +78,35 @@ public class EightWayMovement : MonoBehaviour {
             var jimStateController = GetComponent<JimStateController>();
             movement = new Vector2(inputX, inputY);
 
-            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)) {
+            if (ControllerManager.Instance.GetKeyDown(INPUTACTION.DASH)) {
+                if (jimStateController.GetCurrentState() != JimState.CARRYING) {
+                    // Get an angle from the input axis.
+                    var rad = Mathf.Atan2(inputY, inputX);
+                    var degree = rad * Mathf.Rad2Deg;
+                    Debug.Log("DashDegree: " + degree);
+                    // immediately dash in a direction if the movement axis is close to that cardinal direction.
+                    if (degree > 90f - dashAngleThreshold && degree < 90f + dashAngleThreshold) { // up
+                        gameObject.GetComponent<PinFunctionsManager>().StartDumpsterDash(INPUTACTION.MOVEUP, true);
+                        Debug.Log("DASHING UP");
+                    } else if (degree > 0 - dashAngleThreshold && degree < 0 + dashAngleThreshold) { // right
+                        gameObject.GetComponent<PinFunctionsManager>().StartDumpsterDash(INPUTACTION.MOVERIGHT, true);
+                        Debug.Log("DASHING RIGHT");
+                    } else if (degree > -90f - dashAngleThreshold && degree < -90f + dashAngleThreshold) { // down
+                        gameObject.GetComponent<PinFunctionsManager>().StartDumpsterDash(INPUTACTION.MOVEDOWN, true);
+                        Debug.Log("DASHING DOWN");
+                    } else if (Mathf.Abs(degree) > 180f - dashAngleThreshold && Mathf.Abs(degree) <= 180f) { // left
+                        gameObject.GetComponent<PinFunctionsManager>().StartDumpsterDash(INPUTACTION.MOVELEFT, true);
+                        Debug.Log("DASHING LEFT");
+                    }
+                }
+            }
+            else if (ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT)) {
                 StartMovement();
                 jimStateController.SetFlag((int)JimFlag.FACING_LEFT);
 
                // if(GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 				if(jimStateController.GetCurrentState() != JimState.CARRYING)
-					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVELEFT);
+					gameObject.GetComponent<PinFunctionsManager>().StartDumpsterDash(INPUTACTION.MOVELEFT);
                // }
 
                 directionFacing = 2;
@@ -94,7 +117,7 @@ public class EightWayMovement : MonoBehaviour {
 
               // if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 				if(jimStateController.GetCurrentState() != JimState.CARRYING)
-					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVERIGHT);
+					gameObject.GetComponent<PinFunctionsManager>().StartDumpsterDash(INPUTACTION.MOVERIGHT);
                // }
 
                 directionFacing = 1;
@@ -104,7 +127,7 @@ public class EightWayMovement : MonoBehaviour {
 
                // if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 				if(jimStateController.GetCurrentState() != JimState.CARRYING)
-					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEUP);
+					gameObject.GetComponent<PinFunctionsManager>().StartDumpsterDash(INPUTACTION.MOVEUP);
                // }
                 directionFacing = 3;
             }
@@ -113,7 +136,7 @@ public class EightWayMovement : MonoBehaviour {
 
                 //if (GlobalVariableManager.Instance.IsPinEquipped(PIN.DUMPSTERDASH)){
 				if(jimStateController.GetCurrentState() != JimState.CARRYING)
-					gameObject.GetComponent<PinFunctionsManager>().StartCoroutine("DumpsterDash",INPUTACTION.MOVEDOWN);
+					gameObject.GetComponent<PinFunctionsManager>().StartDumpsterDash(INPUTACTION.MOVEDOWN);
                // }
                 directionFacing = 4;
             }

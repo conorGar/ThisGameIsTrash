@@ -61,9 +61,20 @@ public class PinFunctionsManager : MonoBehaviour {
 
 	}
 
-	public IEnumerator DumpsterDash(INPUTACTION givenKey){
+    public void StartDumpsterDash(INPUTACTION givenKey, bool isImmediate = false)
+    {
+        StartCoroutine(DumpsterDash(givenKey, isImmediate));
+    }
+
+
+    public IEnumerator DumpsterDash(INPUTACTION givenKey, bool isImmediate = false){
+        // Shortcut to dashing
+        if (isImmediate) {
+            dashCounter = 1;
+            dashKey = givenKey;
+        }
+
 		if(dashCounter == 0){
-			Debug.Log("Dumpster Dash - 0");
 			dashCounter = 1;
 			dashKey = givenKey;
 			yield return new WaitForSeconds(.2f);
@@ -71,17 +82,15 @@ public class PinFunctionsManager : MonoBehaviour {
 				dashCounter = 0;
 			}
 		}else if(dashCounter == 1){
-			Debug.Log("Dumpster Dash - 1");
-
 			if(givenKey == dashKey){
 				//-------------Dash-----------------//
 				dashCounter = 2;
 				dashTrail.Play();
 				PlayerManager.Instance.controller.SendTrigger(JimTrigger.DASH);
-				Debug.Log("Dumpster Dash - 2");
 
 				gameObject.GetComponent<EightWayMovement>().enabled = false; // I know we dont wanna do stuff like this, just felt like for this instance it was more appropriate doing this than creating a gamestate...?
 				ObjectPool.Instance.GetPooledObject("effect_enemyLand",new Vector2(gameObject.transform.position.x,gameObject.transform.position.y-1));
+
 				if(dashKey == INPUTACTION.MOVELEFT){
 					gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-30f,0f),ForceMode2D.Impulse);
 				}else if(dashKey == INPUTACTION.MOVERIGHT){
