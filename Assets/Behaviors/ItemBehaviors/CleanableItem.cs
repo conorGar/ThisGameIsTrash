@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -79,22 +78,24 @@ public class CleanableItem : MonoBehaviour
     // gizmos
     void OnDrawGizmos()
     {
+#if UNITY_EDITOR
         GUIStyle style = new GUIStyle();
         style.alignment = TextAnchor.MiddleCenter;
         style.fontStyle = FontStyle.Bold;
         style.normal.background = Texture2D.whiteTexture;
         if (cleanable != null) {
             style.normal.textColor = cleanable.gizmoColor;
-            Handles.Label(transform.position + (Vector3.up * 1f), cleanable.CleanableType().ToString(), style);
+            UnityEditor.Handles.Label(transform.position + (Vector3.up * 1f), cleanable.CleanableType().ToString(), style);
             if (cleanableBit == CLEANABLE_BIT.NONE) {
                 style.normal.textColor = Color.red;
             }
 
-            Handles.Label(transform.position, cleanableBit.ToString(), style);
+            UnityEditor.Handles.Label(transform.position, cleanableBit.ToString(), style);
         } else {
             style.normal.textColor = Color.red;
-            Handles.Label(transform.position + (Vector3.up * 1f), "ASSIGN CLEANABLE!", style);
+            UnityEditor.Handles.Label(transform.position + (Vector3.up * 1f), "ASSIGN CLEANABLE!", style);
         }
+#endif
     }
 }
 
