@@ -34,8 +34,7 @@ public class Room : MonoBehaviour
 
     public void ActivateRoom()
     {
-    	Debug.Log("ActivateRoom....activated");
-
+    	Debug.Log("ActivateRoom: " + gameObject.name);
 
     	//Set room as visited
     	if((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) != myRoom){
@@ -133,7 +132,7 @@ public class Room : MonoBehaviour
 		                	spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
 	                }
-					if(enemySpawners[i].gameObject.GetComponent<WanderZone>() != null){	
+					if(enemySpawners[i].gameObject.GetComponent<WanderZone>() != null && spawnedEnemy.GetComponent<WanderWithinBounds>() != null) {	
 						Rect wanderZone = enemySpawners[i].gameObject.GetComponent<WanderZone>().GetWanderBounds();
 						spawnedEnemy.GetComponent<WanderWithinBounds>().SetWalkBounds(wanderZone);
 					}else if(enemySpawners[i].gameObject.GetComponent<PathingMarks>() != null){

@@ -7,7 +7,8 @@ public class FollowPlayer : MonoBehaviour {
 
 	public BoxCollider2D targetCollider;
 	public float walkDistance = 10.0f;
-	public float chaseSpeed = 10.0f;
+    public float maxWalkDistance; //how close the enemy will get
+    public float chaseSpeed = 10.0f;
 	public bool hasSeperateFacingAnimations;
 	public bool iBeLerpin;
 	public ParticleSystem chasePS;
@@ -20,7 +21,6 @@ public class FollowPlayer : MonoBehaviour {
     private float nextPathRefreshTime = 0f;
 
     protected EnemyStateController controller;
-	public float maxWalkDistance; //how close the enemy will get
 
     Vector3 startScale;
 

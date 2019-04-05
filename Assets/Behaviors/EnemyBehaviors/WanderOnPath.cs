@@ -11,18 +11,20 @@ public class WanderOnPath : MonoBehaviour
 	int currentMark;
 	public ParticleSystem walkPS;
 
-	GameObject destinationMark;
+	Vector3 destinationPos;
 	bool returningToStart;
 	public List<GameObject> pathMarks = new List<GameObject>(); //public for debugging, otherwise should be given by enemy spawner
 	Vector3 startingScale;
 	protected tk2dSpriteAnimator anim;
 	protected EnemyStateController controller;
+    protected EnemyPath enemyPath;
 
 	//TODO: Switch direction facing based on direction of next mark
 
 	void Awake()
     {
         controller = GetComponent<EnemyStateController>();
+        enemyPath = GetComponent<EnemyPath>();
     }
 	// Use this for initialization
 	void Start ()
@@ -71,13 +73,19 @@ public class WanderOnPath : MonoBehaviour
 				            	returningToStart =false;
 				            }
 
-                    }else{
-							if(Vector2.Distance(gameObject.transform.position,destinationMark.transform.position) > 1){
-								gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position,destinationMark.transform.position,walkSpeed*Time.deltaTime);
-							}else{
-								StartCoroutine("NextMark");
-							}
-						}
+                    } else {
+                        if (enemyPath != null) {
+                                if (!enemyPath.MoveAlongPath(walkSpeed * Time.deltaTime)) {
+                                    StartCoroutine("NextMark");
+                                }
+                            } else {
+                            if (Vector2.Distance(gameObject.transform.position, destinationPos) > 1) {
+                                gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, destinationPos, walkSpeed * Time.deltaTime);
+                            } else {
+                                StartCoroutine("NextMark");
+                            }
+                        }
+					}
                }
                     break;
             }
@@ -87,7 +95,7 @@ public class WanderOnPath : MonoBehaviour
 
 	IEnumerator NextMark(){
 		controller.RemoveFlag((int)EnemyFlag.WALKING);
-		if (walkPS.isPlaying)
+		if (walkPS != null && walkPS.isPlaying)
             walkPS.Stop();
 		yield return new WaitForSeconds(stopTime);
 		if(currentMark < (pathMarks.Count-1)){
@@ -97,16 +105,28 @@ public class WanderOnPath : MonoBehaviour
 		}
 		controller.SetFlag((int)EnemyFlag.WALKING);
 
-		//Turn
-		if(gameObject.transform.localScale.x < 0 && pathMarks[currentMark].transform.position.x > gameObject.transform.position.x){
-			gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
-		}if(gameObject.transform.localScale.x > 0 && pathMarks[currentMark].transform.position.x < gameObject.transform.position.x){
-			gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,startingScale.y,startingScale.z);
-		}
 		if (walkPS != null && !walkPS.isPlaying)
 			walkPS.Play();
-		destinationMark = pathMarks[currentMark];
-	}
+
+        // use the enemy path grid if they have one.  Tries to find a close position to the pathMark if it can.
+        if (enemyPath != null) {
+            Point startPoint = enemyPath.pathGrid.WorldToClosestGridPoint(enemyPath.GetColliderCenter());
+            Point destPoint = enemyPath.pathGrid.WorldToGrid(pathMarks[currentMark].transform.position);
+            enemyPath.GeneratePath(enemyPath.pathGrid, startPoint, destPoint);
+
+            if (destPoint == null) {
+                Debug.LogError("Couldn't find a suitable grid point for pathMark: " + pathMarks[currentMark].name + ".  Consider moving it!");
+            }
+        } else {
+            //Turn
+            if (gameObject.transform.localScale.x < 0 && pathMarks[currentMark].transform.position.x > gameObject.transform.position.x) {
+                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, startingScale.y, startingScale.z);
+            }
+            if (gameObject.transform.localScale.x > 0 && pathMarks[currentMark].transform.position.x < gameObject.transform.position.x) {
+                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, startingScale.y, startingScale.z);
+            }
+        }
+    }
 
 	public void StopMoving(){
 		Debug.Log("Wander on Path - StopMoving() activated");

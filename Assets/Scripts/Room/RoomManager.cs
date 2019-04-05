@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviour {
     public static RoomManager Instance;
@@ -18,6 +19,8 @@ public class RoomManager : MonoBehaviour {
     public Vector3 previousCameraPosition;
     public Vector3 targetCameraPosition;
 
+    public CheckpointDebugConfig checkpointConfig;
+
     void Awake()
     {
         Instance = this;
@@ -25,7 +28,29 @@ public class RoomManager : MonoBehaviour {
         previousRoom = null;
     }
 
-	public void Restart(Room respawnRoom){//called at player death in PlayerTakedamage
+    void Start()
+    {
+        // check for the checkpoint debug config if a spawncheckpoint was configured.
+        if (checkpointConfig != null) {
+            if (checkpointConfig.isOn) {
+                Debug.Log("3");
+                Checkpoint checkpoint = GameObject.Find(checkpointConfig.checkpointLookup.dictionary[SceneManager.GetActiveScene().path]).GetComponent<Checkpoint>();
+                if (checkpoint != null) {
+                    Debug.Log("Warping to Checkpoint: " + checkpoint.name + " in room: " + checkpoint.myRoom.name);
+                    CheckpointManager.Instance.lastCheckpoint = checkpoint;
+                    currentRoom = checkpoint.myRoom;
+
+                    PlayerManager.Instance.player.transform.position = CheckpointManager.Instance.lastCheckpoint.transform.position; //Start at debug checkpoint
+                    CamManager.Instance.mainCam.transform.position = new Vector3(CheckpointManager.Instance.lastCheckpoint.transform.position.x, CheckpointManager.Instance.lastCheckpoint.transform.position.y, -10f);
+                }
+            }
+        } else {
+            Debug.LogError("CheckpointConfig scriptable object isn't defined.  Please reference it on the RoomManager!!!", gameObject);
+        }
+
+    }
+
+    public void Restart(Room respawnRoom){//called at player death in PlayerTakedamage
 		currentRoom = respawnRoom;
         previousRoom = null;
         currentRoom.ActivateRoom();
@@ -41,7 +66,6 @@ public class RoomManager : MonoBehaviour {
 
             if (lerpCamera >= 1.0f)
             {        
-                previousRoom.DeactivateRoom();
                 currentRoom.ActivateRoom();
                 Debug.Log("Enabled ActivateRoom() Here");
                 isTransitioning = false;
