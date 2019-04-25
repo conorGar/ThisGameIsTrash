@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 114292614906169912}
   - component: {fileID: 50485041799781274}
   - component: {fileID: 111495950880370970}
+  - component: {fileID: 114369885845851264}
   m_Layer: 9
   m_Name: e_rhinoBeetle
   m_TagString: enemy_rhinoBeetle
@@ -503,7 +504,6 @@ MonoBehaviour:
   noticeThresholdY: 0
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
-  noticeSfx: {fileID: 0}
 --- !u!114 &114179946484310874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -548,17 +548,19 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1969858982647216}
-  returnAniName: idle
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
+  otherRespawner: {fileID: 0}
   currentHp: 0
   meleeDmgBonus: 0
-  dontStopWhenHit: 0
+  bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114191224085972858
@@ -587,10 +589,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
-  minMoveTime: 0.5
-  maxMoveTime: 2.5
+  maxRandomNodeDistance: 10
   stopTime: 2
+  afterHitStopTime: 0
   walkPS: {fileID: 198824269282263632}
+  mopSlow: 0
 --- !u!114 &114341579544824238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -606,6 +609,18 @@ MonoBehaviour:
   attkPower: 2
   moveWhenHit: 0
   respawningEnemyType: 0
+  toxicEnemy: 0
+--- !u!114 &114369885845851264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197735560171940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96e7ba60eea9f2499593acefcde7e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114576416968152502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -631,13 +646,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1231926b56b09d41a0f5da6751f527f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  targetCollider: {fileID: 0}
   walkDistance: 10
+  maxWalkDistance: 0
   chaseSpeed: 4
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198824269282263632}
   returnToPreviousWhenFar: 0
+  usePathGrid: 0
+  pathRefreshTime: 1
   myShadow: {fileID: 1969858982647216}
   shellShield: {fileID: 1268451313919332}
   myHitBox: {fileID: 61974250020516836}
@@ -661,6 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
 --- !u!114 &114654425477365584
 MonoBehaviour:
@@ -700,6 +719,7 @@ MonoBehaviour:
   damageToPlayer: 1
   destroyOnTileCollision: 0
   myShadow: {fileID: 0}
+  toxicProjectile: 0
 --- !u!198 &198824269282263632
 ParticleSystem:
   m_ObjectHideFlags: 1

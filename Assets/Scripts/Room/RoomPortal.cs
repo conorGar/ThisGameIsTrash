@@ -92,7 +92,7 @@ public class RoomPortal : EditorMonoBehaviour {
 					
 					if(camZoomer){
                 		CamManager.Instance.mainCamEffects.ZoomInOut(1.15f,1f);
-					}if(areaTitleActivator){
+					}if(areaTitleActivator && areaManager!=null){
 						areaManager.myHUD.gameObject.SetActive(false);
                 	}
                     roomManager.currentRoom = negativeRoom;
@@ -118,7 +118,7 @@ public class RoomPortal : EditorMonoBehaviour {
                 }
                 else if (roomManager.currentRoom == negativeRoom)
                 {
-					if(areaTitleActivator){
+					if(areaTitleActivator && areaManager !=null){
 						areaManager.myHUD.gameObject.SetActive(true);
                 		GUIManager.Instance.areaTitle.SetActive(true);
                 		GUIManager.Instance.areaTitle.GetComponent<SpriteRenderer>().sprite = areaTitleSprite;

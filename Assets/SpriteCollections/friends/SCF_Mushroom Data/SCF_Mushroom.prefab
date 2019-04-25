@@ -1,0 +1,368 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1477543113101392}
+  m_IsPrefabParent: 1
+--- !u!1 &1477543113101392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4365454561951098}
+  - component: {fileID: 114172090364113984}
+  m_Layer: 0
+  m_Name: SCF_Mushroom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4365454561951098
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477543113101392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114172090364113984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477543113101392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: mrMush_idle1
+    boundsData:
+    - {x: -0.5384612, y: 0.39743614, z: 0}
+    - {x: 19.897434, y: 17.153847, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.0128211975, y: -0.012820244, z: 0}
+    - {x: 27.871796, y: 20.435898, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -10.487179, y: -8.179487, z: 0}
+    - {x: 9.410256, y: -8.179487, z: 0}
+    - {x: -10.487179, y: 8.9743595, z: 0}
+    - {x: 9.410256, y: 8.9743595, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.65722704}
+    - {x: 0.37988234, y: 0.65722704}
+    - {x: 0.0009770507, y: 0.98388624}
+    - {x: 0.37988234, y: 0.98388624}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5e298d22b9a40a1448845040d278813a, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: d5a3881655ef3264182cb1c4018935b4
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: mrMush_idle2
+    boundsData:
+    - {x: -0.692307, y: 0.3461542, z: 0}
+    - {x: 19.948719, y: 17.153847, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.0128211975, y: -0.012820244, z: 0}
+    - {x: 27.871796, y: 20.435898, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -10.666666, y: -8.230769, z: 0}
+    - {x: 9.282052, y: -8.230769, z: 0}
+    - {x: -10.666666, y: 8.923078, z: 0}
+    - {x: 9.282052, y: 8.923078, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.0009770507}
+    - {x: 0.3808589, y: 0.0009770507}
+    - {x: 0.0009770507, y: 0.32763624}
+    - {x: 0.3808589, y: 0.32763624}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 0.99999994}
+    - {x: 0.99999994, y: 0.99999994}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5e298d22b9a40a1448845040d278813a, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ccaee1eda50680f4abe362d7e20a193d
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: mrMush_idle3
+    boundsData:
+    - {x: -0.8076916, y: 0.33333397, z: 0}
+    - {x: 19.923077, y: 17.128206, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.0128211975, y: -0.012820244, z: 0}
+    - {x: 27.871796, y: 20.435898, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -10.76923, y: -8.230769, z: 0}
+    - {x: 9.153847, y: -8.230769, z: 0}
+    - {x: -10.76923, y: 8.897437, z: 0}
+    - {x: 9.153847, y: 8.897437, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.38281298, y: 0.32861376}
+    - {x: 0.76220655, y: 0.32861376}
+    - {x: 0.38281298, y: 0.6547847}
+    - {x: 0.76220655, y: 0.6547847}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5e298d22b9a40a1448845040d278813a, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: a0fdab3f41a7a054f8320045e655c8be
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: mrMush_idle4
+    boundsData:
+    - {x: -0.858974, y: 0.32051277, z: 0}
+    - {x: 19.923077, y: 17.102564, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.0128211975, y: -0.012820244, z: 0}
+    - {x: 27.871796, y: 20.435898, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -10.820513, y: -8.230769, z: 0}
+    - {x: 9.102565, y: -8.230769, z: 0}
+    - {x: -10.820513, y: 8.871795, z: 0}
+    - {x: 9.102565, y: 8.871795, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0009770507, y: 0.32959032}
+    - {x: 0.38037062, y: 0.32959032}
+    - {x: 0.0009770507, y: 0.65527296}
+    - {x: 0.38037062, y: 0.65527296}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5e298d22b9a40a1448845040d278813a, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 05505e9fe45cd464fbb5f8c7e0424d39
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: mrMush_idle5
+    boundsData:
+    - {x: -0.8717942, y: 0.3461547, z: 0}
+    - {x: 19.948719, y: 17.102566, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.0128211975, y: -0.012820244, z: 0}
+    - {x: 27.871796, y: 20.435898, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -10.846153, y: -8.205128, z: 0}
+    - {x: 9.102565, y: -8.205128, z: 0}
+    - {x: -10.846153, y: 8.897437, z: 0}
+    - {x: 9.102565, y: 8.897437, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.38281298, y: 0.0009770507}
+    - {x: 0.76269484, y: 0.0009770507}
+    - {x: 0.38281298, y: 0.32665968}
+    - {x: 0.76269484, y: 0.32665968}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 0.99999994}
+    - {x: 1, y: 0.99999994}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5e298d22b9a40a1448845040d278813a, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: b224a53bb16e0674daf454b498511eed
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: mrMush_idle6
+    boundsData:
+    - {x: -0.94871664, y: 0.34615374, z: 0}
+    - {x: 19.897438, y: 17.051281, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.0128211975, y: -0.012820244, z: 0}
+    - {x: 27.871796, y: 20.435898, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -10.897435, y: -8.179487, z: 0}
+    - {x: 9.000002, y: -8.179487, z: 0}
+    - {x: -10.897435, y: 8.871795, z: 0}
+    - {x: 9.000002, y: 8.871795, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3818364, y: 0.65722704}
+    - {x: 0.7607417, y: 0.65722704}
+    - {x: 0.3818364, y: 0.9819331}
+    - {x: 0.7607417, y: 0.9819331}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 5e298d22b9a40a1448845040d278813a, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ed955f2d7d69e044f8981f096b1e4b52
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: 5e298d22b9a40a1448845040d278813a, type: 2}
+  textures:
+  - {fileID: 2800000, guid: 4b0d9e95d8672984a84163298b951dfb, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: 8c392aed89e7a084d9d8efe4e5496f4e
+  spriteCollectionName: SCF_Mushroom
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 1049738989
+  dataGuid: 5a0f3a5b7ca7e8847a7fe4780b778c37
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

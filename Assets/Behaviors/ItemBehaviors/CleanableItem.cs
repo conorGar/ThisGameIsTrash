@@ -28,7 +28,7 @@ public class CleanableItem : MonoBehaviour
 					SpawnItem();
 					GameObject numberDisplay = ObjectPool.Instance.GetPooledObject("display_pollutedCleanNum",gameObject.transform.position);
 					numberDisplay.transform.parent = this.transform;
-					numberDisplay.GetComponent<tk2dTextMesh>().text = myAreaManager; // number of clean bushes in manager
+					//numberDisplay.GetComponent<tk2dTextMesh>().text = myAreaManager; // number of clean bushes in manager
 					numberDisplay.GetComponent<Animator>().Play("pollutedCleanNumDisplayAni",0,-1f);
 				}
 			}

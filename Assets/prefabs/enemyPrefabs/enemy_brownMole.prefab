@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 114022559911531030}
   - component: {fileID: 114504623324861724}
   - component: {fileID: 50131913774042380}
+  - component: {fileID: 114832122089397346}
   m_Layer: 9
   m_Name: enemy_brownMole
   m_TagString: enemy_brownMole
@@ -210,10 +211,10 @@ MonoBehaviour:
   healthDrop: {fileID: 0}
   pinDrop: {fileID: 0}
   myShadow: {fileID: 1317794643366104}
-  returnAniName: idle
   dontSpawnBody: 0
   canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
   objectPool: {fileID: 0}
@@ -222,7 +223,7 @@ MonoBehaviour:
   currentHp: 2
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
-  dontStopWhenHit: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114298551362366922
@@ -236,13 +237,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  targetCollider: {fileID: 0}
   walkDistance: 30
+  maxWalkDistance: 0
   chaseSpeed: 4
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 0}
   returnToPreviousWhenFar: 0
+  usePathGrid: 0
+  pathRefreshTime: 1
 --- !u!114 &114380913922092040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 1
+  topSorted: 0
   sortBuddies: []
 --- !u!114 &114679211738969614
 MonoBehaviour:
@@ -310,6 +315,17 @@ MonoBehaviour:
   moveWhenHit: 0
   respawningEnemyType: 1
   toxicEnemy: 0
+--- !u!114 &114832122089397346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1092592193999108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 607e0e377b9c916448c1eca3f344918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114833213622145292
 MonoBehaviour:
   m_ObjectHideFlags: 1
