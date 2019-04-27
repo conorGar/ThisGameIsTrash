@@ -25,7 +25,8 @@ public enum INPUTACTION
     CALENDAR,
     MAP,
     SPECIAL,
-    SPECIAL2
+    SPECIAL2,
+    DASH
 }
 
 [System.Serializable]

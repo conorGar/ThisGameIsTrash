@@ -33,7 +33,6 @@ public class RoomManager : MonoBehaviour {
         // check for the checkpoint debug config if a spawncheckpoint was configured.
         if (checkpointConfig != null) {
             if (checkpointConfig.isOn) {
-                Debug.Log("3");
                 Checkpoint checkpoint = GameObject.Find(checkpointConfig.checkpointLookup.dictionary[SceneManager.GetActiveScene().path]).GetComponent<Checkpoint>();
                 if (checkpoint != null) {
                     Debug.Log("Warping to Checkpoint: " + checkpoint.name + " in room: " + checkpoint.myRoom.name);

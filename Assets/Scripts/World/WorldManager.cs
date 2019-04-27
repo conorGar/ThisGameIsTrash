@@ -42,6 +42,9 @@ public class WorldManager : MonoBehaviour
 
         // Activate the first room!
         RoomManager.Instance.ActivateCurrentRoom();
+
+        // Clean cleanables
+        CleanableManager.Instance.InitCleanables(world.type);
     }
 
     void Update()
