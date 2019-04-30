@@ -1,0 +1,197 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: TwoStarGarbagemen
+  m_EditorClassIdentifier: 
+  title: TwoStarGarbagemen
+  dialogIconID: dialog_icon_ID
+  nodeStore:
+    keys:
+    - Value: cd5cc714-683a-4d10-949f-d8d8b4455f7d
+    - Value: 6bb2af62-a86c-47b2-94aa-cf8711404fe1
+    - Value: 46e0376b-5473-4908-9701-d2c0871eb899
+    - Value: 7f5d047d-7973-4293-9be7-6fcdb7b7dd37
+    - Value: fd576494-4e59-47bc-b93b-0704426abbb5
+    - Value: ce89cae9-ab4e-47f1-be73-602f0a1af0a7
+    - Value: 50ff2b1c-43dc-417e-8c2f-1c4fbaf1e180
+    values:
+    - window:
+        serializedVersion: 2
+        x: 119
+        y: 251
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: BenIntro
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: cd5cc714-683a-4d10-949f-d8d8b4455f7d
+      x: 119
+      y: 251
+      text: Hey. You there.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6bb2af62-a86c-47b2-94aa-cf8711404fe1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 446
+        y: 243
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6bb2af62-a86c-47b2-94aa-cf8711404fe1
+      x: 446
+      y: 243
+      text: 'You''re <c=g>Jim</c>, right? '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 46e0376b-5473-4908-9701-d2c0871eb899
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 738
+        y: 264
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 46e0376b-5473-4908-9701-d2c0871eb899
+      x: 738
+      y: 264
+      text: I'm <c=g>Bohemian Ben</c>, part of the <c=g>Trash Association</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7f5d047d-7973-4293-9be7-6fcdb7b7dd37
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1034
+        y: 255
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7f5d047d-7973-4293-9be7-6fcdb7b7dd37
+      x: 1034
+      y: 255
+      text: Just wanted to let you know we've been noticing the great work you've
+        been doing cleaning up <c=g>Filthy Falls</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: fd576494-4e59-47bc-b93b-0704426abbb5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1328
+        y: 253
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fd576494-4e59-47bc-b93b-0704426abbb5
+      x: 1328
+      y: 253
+      text: Keep up the good work, I'm sure it's only a matter on time till The Association
+        awards you a <c=b>One Star Rank</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ce89cae9-ab4e-47f1-be73-602f0a1af0a7
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1623
+        y: 248
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ce89cae9-ab4e-47f1-be73-602f0a1af0a7
+      x: 1623
+      y: 248
+      text: For now, though, here's a little something...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 50ff2b1c-43dc-417e-8c2f-1c4fbaf1e180
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1981
+        y: 281
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: DialogRoot
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 50ff2b1c-43dc-417e-8c2f-1c4fbaf1e180
+      x: 1981
+      y: 281
+      text: I'll be seeing you again, adios.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: cd5cc714-683a-4d10-949f-d8d8b4455f7d

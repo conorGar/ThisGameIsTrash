@@ -1,0 +1,509 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: RatOnAMat
+  m_EditorClassIdentifier: 
+  title: RatOnAMat
+  dialogIconID: dialog_icon_ID
+  nodeStore:
+    keys:
+    - Value: 955cf335-ee7d-436b-a2a7-9c34a5215ca5
+    - Value: de034555-12ab-4a32-bcf7-8a07254fdd7f
+    - Value: ac3f3de6-b0ed-4126-88bb-dc50b2c05251
+    - Value: 7940f43c-3b18-4e2c-8cd3-32d6e7315ce8
+    - Value: 7f3dcd25-c39c-4df0-bbe9-308307f827d8
+    - Value: c796f043-2776-4749-8fd0-1e4791a44118
+    - Value: 18463e74-5257-445b-9444-449f6a63d688
+    - Value: 631497c6-d4bd-4974-b776-d5a98cc92986
+    - Value: 8b64b298-e22f-47d1-8d74-fb53b5076f4a
+    - Value: b766a7af-e4ff-4c04-990e-400fbed31f1a
+    - Value: fa3fdb11-49cb-4f11-a366-57178aeeb8b0
+    - Value: 93df3e28-2ad6-4ea0-a599-d8b89158fc0a
+    - Value: 5aa980e7-5077-4c43-89b4-bf4fee4e5401
+    - Value: 718c90cf-8cef-4fc1-9914-0620b459ec39
+    - Value: b8aecd92-d50b-43f8-a67f-6e5ea898c4d5
+    - Value: 067ed05c-8d05-4721-a880-f748e21ddabc
+    - Value: 2ec63732-6c2b-4089-b92b-efdf9f437d5c
+    - Value: a09e3ae0-ecd6-4be1-9178-6389051607fc
+    - Value: b8e46598-ddac-437b-8233-f2b2dc11a838
+    values:
+    - window:
+        serializedVersion: 2
+        x: 155
+        y: 148
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: StuartTrailIntro1
+      speakerName: Rat On A Mat
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 955cf335-ee7d-436b-a2a7-9c34a5215ca5
+      x: 155
+      y: 148
+      text: 'Hello again. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: de034555-12ab-4a32-bcf7-8a07254fdd7f
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 465
+        y: 165
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: StuartTrailIntro1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: de034555-12ab-4a32-bcf7-8a07254fdd7f
+      x: 465
+      y: 165
+      text: I don't pop up like this often, I promise.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ac3f3de6-b0ed-4126-88bb-dc50b2c05251
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 755
+        y: 141
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: StuartTrailIntro1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ac3f3de6-b0ed-4126-88bb-dc50b2c05251
+      x: 755
+      y: 141
+      text: Just wanted to warn you...our <c=g>design team</c> isn't....the strongest.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7940f43c-3b18-4e2c-8cd3-32d6e7315ce8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1043
+        y: 161
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: StuartTrailIntro1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7940f43c-3b18-4e2c-8cd3-32d6e7315ce8
+      x: 1043
+      y: 161
+      text: Maybe rats just don't have the brain for game design.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7f3dcd25-c39c-4df0-bbe9-308307f827d8
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1332
+        y: 147
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: StuartTrailIntro1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7f3dcd25-c39c-4df0-bbe9-308307f827d8
+      x: 1332
+      y: 147
+      text: So, uh, try not to be too judgemental. We're learning as we go here.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: c796f043-2776-4749-8fd0-1e4791a44118
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1628
+        y: 190
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: StuartTrailIntro1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c796f043-2776-4749-8fd0-1e4791a44118
+      x: 1628
+      y: 190
+      text: Maybe it's not that bad and I'm overthinking it...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 18463e74-5257-445b-9444-449f6a63d688
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1905
+        y: 174
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: StuartTrailIntro1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 18463e74-5257-445b-9444-449f6a63d688
+      x: 1905
+      y: 174
+      text: Whatever the case...please...please don't leave. You're doing great.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 631497c6-d4bd-4974-b776-d5a98cc92986
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2201
+        y: 206
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: StuartTrailIntro1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 631497c6-d4bd-4974-b776-d5a98cc92986
+      x: 2201
+      y: 206
+      text: I'LL KEEP COMPLIMENTING YOU IF YOU STAY.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 63
+        y: 410
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: PlayerFirstDeath
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8b64b298-e22f-47d1-8d74-fb53b5076f4a
+      x: 63
+      y: 410
+      text: .
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b766a7af-e4ff-4c04-990e-400fbed31f1a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 351
+        y: 426
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: PlayerFirstDeath
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b766a7af-e4ff-4c04-990e-400fbed31f1a
+      x: 351
+      y: 426
+      text: '..really didn''t take too long either. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: fa3fdb11-49cb-4f11-a366-57178aeeb8b0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 649
+        y: 406
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: PlayerFirstDeath
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fa3fdb11-49cb-4f11-a366-57178aeeb8b0
+      x: 649
+      y: 406
+      text: 'You really blew it. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 93df3e28-2ad6-4ea0-a599-d8b89158fc0a
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 938
+        y: 424
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: PlayerFirstDeath
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 93df3e28-2ad6-4ea0-a599-d8b89158fc0a
+      x: 938
+      y: 424
+      text: Now, if players quit a game, they do it most often after their first death.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5aa980e7-5077-4c43-89b4-bf4fee4e5401
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1232
+        y: 416
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: PlayerFirstDeath
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5aa980e7-5077-4c43-89b4-bf4fee4e5401
+      x: 1232
+      y: 416
+      text: Now, I'm just here to make sure that you're not planning on doing that.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 718c90cf-8cef-4fc1-9914-0620b459ec39
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1525
+        y: 406
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: PlayerFirstDeath
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 718c90cf-8cef-4fc1-9914-0620b459ec39
+      x: 1525
+      y: 406
+      text: I know you really suck now, but believe me, I see big things in your future.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b8aecd92-d50b-43f8-a67f-6e5ea898c4d5
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1826
+        y: 432
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: PlayerFirstDeath
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b8aecd92-d50b-43f8-a67f-6e5ea898c4d5
+      x: 1826
+      y: 432
+      text: You're gonna get so good at this game by the end you'll hardly believe
+        it.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 067ed05c-8d05-4721-a880-f748e21ddabc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2115
+        y: 425
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: PlayerFirstDeath
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 067ed05c-8d05-4721-a880-f748e21ddabc
+      x: 2115
+      y: 425
+      text: I hope you see in yourself what I see in you.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2ec63732-6c2b-4089-b92b-efdf9f437d5c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2435
+        y: 381
+        width: 270
+        height: 289
+      isCollapsed: 0
+      title: PlayerFirstDeath
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2ec63732-6c2b-4089-b92b-efdf9f437d5c
+      x: 2435
+      y: 381
+      text: 
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Oh yeah! Of course I'm gonna keep playing!
+        node_id:
+          Value: 
+      - text: Oh yeah! Of course I'm gonna keep playing!
+        node_id:
+          Value: 
+      - text: Oh yeah! Of course I'm gonna keep playing!
+        node_id:
+          Value: 
+      - text: Oh yeah! Of course I'm gonna keep playing!
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 2801
+        y: 312
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a09e3ae0-ecd6-4be1-9178-6389051607fc
+      x: 2801
+      y: 312
+      text: Whew. Good. I was worried there for a sec, to be honest.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b8e46598-ddac-437b-8233-f2b2dc11a838
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3104
+        y: 336
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: NewDialog
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b8e46598-ddac-437b-8233-f2b2dc11a838
+      x: 3104
+      y: 336
+      text: There's a lot of untrustworthy people in this world. I'm glad to know
+        I can count on you.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 955cf335-ee7d-436b-a2a7-9c34a5215ca5

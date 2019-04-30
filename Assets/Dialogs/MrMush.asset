@@ -1,0 +1,324 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: MrMush
+  m_EditorClassIdentifier: 
+  title: MrMush
+  dialogIconID: icon_mrMush
+  nodeStore:
+    keys:
+    - Value: 8329942f-1fb4-42a4-86c8-1de61d90c387
+    - Value: 926d5433-d9db-4e0b-b3fc-7f78c32d8b3c
+    - Value: 50ae1980-48ab-4e2f-bf73-80ebb09fd4aa
+    - Value: b7294102-e4fd-4e6c-95ea-be4fc8eb8109
+    - Value: 6a068299-5121-4bf3-af53-a47cf56d7426
+    - Value: ad4edfbe-6a68-4f8c-a280-1c084bf7195c
+    - Value: deaa04dc-8ce9-47a5-bb16-71619f373d5b
+    - Value: 60141100-466d-452e-9a2f-6e35e2ac3f86
+    - Value: 356f61d3-30b5-4d4d-9f4a-ba2b3f600f42
+    - Value: 9e92097e-4910-44cc-aa8e-0de679029645
+    - Value: 1c8f944d-45e1-4101-979d-deedec15f34c
+    - Value: 454012ac-8b9f-4404-b1eb-280ab9745cf9
+    values:
+    - window:
+        serializedVersion: 2
+        x: 15
+        y: 160
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: intro1
+      speakerName: Mr. Mushroom
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8329942f-1fb4-42a4-86c8-1de61d90c387
+      x: 15
+      y: 160
+      text: A human! My prayers have been answered!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 60141100-466d-452e-9a2f-6e35e2ac3f86
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 658
+        y: 180
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: intro7
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 926d5433-d9db-4e0b-b3fc-7f78c32d8b3c
+      x: 658
+      y: 180
+      text: We poor mushrooms can't survive in this cruel world alone.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 50ae1980-48ab-4e2f-bf73-80ebb09fd4aa
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 967
+        y: 123
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: intro8
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 50ae1980-48ab-4e2f-bf73-80ebb09fd4aa
+      x: 967
+      y: 123
+      text: We're weak creatures. We are sentient, but we have no feet...and are arms
+        are <c=g>stubby and useless</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b7294102-e4fd-4e6c-95ea-be4fc8eb8109
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1280
+        y: 237
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: intro9
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b7294102-e4fd-4e6c-95ea-be4fc8eb8109
+      x: 1280
+      y: 237
+      text: How did natural selection produce something as pathetic as me?!?
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6a068299-5121-4bf3-af53-a47cf56d7426
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1554
+        y: 133
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: intro10
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6a068299-5121-4bf3-af53-a47cf56d7426
+      x: 1554
+      y: 133
+      text: You are blessed with your human body. Please. We need a strong human hero.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ad4edfbe-6a68-4f8c-a280-1c084bf7195c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1800
+        y: 359
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: intro11
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ad4edfbe-6a68-4f8c-a280-1c084bf7195c
+      x: 1800
+      y: 359
+      text: They're out there...scared and alone. Probably surrounded by a bunch of
+        bad influences.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: deaa04dc-8ce9-47a5-bb16-71619f373d5b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2086
+        y: 219
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: intro12
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: deaa04dc-8ce9-47a5-bb16-71619f373d5b
+      x: 2086
+      y: 219
+      text: What if they are offered drugs?! Oh! Oh Jeez! My poor, wholesome mushroom
+        kin!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 25
+        y: 391
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: intro2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 60141100-466d-452e-9a2f-6e35e2ac3f86
+      x: 25
+      y: 391
+      text: Wait, a garbage man too! What a blessing, just when I needed a hero most.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 356f61d3-30b5-4d4d-9f4a-ba2b3f600f42
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 322
+        y: 442
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: intro3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 356f61d3-30b5-4d4d-9f4a-ba2b3f600f42
+      x: 322
+      y: 442
+      text: This is it, man. I'm at rock bottom.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 9e92097e-4910-44cc-aa8e-0de679029645
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 616
+        y: 449
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: intro4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 9e92097e-4910-44cc-aa8e-0de679029645
+      x: 616
+      y: 449
+      text: All my poor, poor fellow mushrooms have gone off on a rebelious adventure.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 1c8f944d-45e1-4101-979d-deedec15f34c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 903
+        y: 454
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: intro5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1c8f944d-45e1-4101-979d-deedec15f34c
+      x: 903
+      y: 454
+      text: They are young mushrooms, and seek challenge, spritual growth, and better
+        understanding of their world...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 454012ac-8b9f-4404-b1eb-280ab9745cf9
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1247
+        y: 464
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: intro6
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 454012ac-8b9f-4404-b1eb-280ab9745cf9
+      x: 1247
+      y: 464
+      text: '...but that''s a terrible idea.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 926d5433-d9db-4e0b-b3fc-7f78c32d8b3c
+      responses: []
+  rootNodeId:
+    Value: 8329942f-1fb4-42a4-86c8-1de61d90c387
