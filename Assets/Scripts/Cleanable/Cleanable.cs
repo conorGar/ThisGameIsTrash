@@ -8,7 +8,7 @@ public enum CLEANABLE_TYPE
     // World One
     W1_CENTER_BUSHES,
     W1_TRAIL_BUSHES,
-
+    W1_TRAIL_BAGS,
     // World Two
     W2_CENTER_BEACH_BUSHES,
     W2_INSIDE_A_WHALE_BUSHES,

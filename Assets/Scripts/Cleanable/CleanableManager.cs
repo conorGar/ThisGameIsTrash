@@ -99,6 +99,11 @@ public class CleanableManager : UserDataItem
     void Awake()
     {
         Instance = this;
+
+		for (int i = 0; i < (int)CLEANABLE_TYPE.SIZE; i++) {
+           CLEANABLE_TYPE type = (CLEANABLE_TYPE)i;
+           cleanableLookUp[type] = CLEANABLE_BIT.NONE;
+       }
     }
 
     // Finds all the cleanables in the currentScene and marks those that are already clean.

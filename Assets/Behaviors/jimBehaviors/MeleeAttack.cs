@@ -346,7 +346,7 @@ public class MeleeAttack : MonoBehaviour {
 	
 	}
 
-	IEnumerator StrongSwing(){
+	protected virtual IEnumerator StrongSwing(){
 		Debug.Log("Strong Swing Ienum activated -!-!-!-!-!-!-!-!-!-!");
 		GameObject meleeDirectionEnabled = null;
 		GameObject bigSwooshDirection = null;

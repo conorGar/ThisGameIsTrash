@@ -21,10 +21,10 @@ public class CleanableItem : MonoBehaviour
 	public GameObject dirtyLookingObject;
 	bool isClean;
 	public ParticleSystem dirtyPS;
+	public AreaTrashHUD myHUD;
 
 
-
-	void OnTriggerEnter2D(Collider2D collider){
+	protected virtual void OnTriggerEnter2D(Collider2D collider){
 		if(collider.tag == "Weapon"){
 			if(hp > 0){
 				hp--;
@@ -72,6 +72,7 @@ public class CleanableItem : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         dirtyPS.Stop();
         dirtyLookingObject.SetActive(false);
+		myHUD.AddCleanedFilty();
         isClean = true;
     }
 

@@ -1,0 +1,657 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1630833744058642}
+  m_IsPrefabParent: 1
+--- !u!1 &1630833744058642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4686257627658358}
+  - component: {fileID: 114966003580250660}
+  m_Layer: 0
+  m_Name: hazmatANi
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4686257627658358
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1630833744058642}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114966003580250660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1630833744058642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecaffc43a5d2b1d47858e3fb687e7271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clips:
+  - name: ani_jimIdle
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 15
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimWalk
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 24.390244
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimThrowR
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 16.438356
+    loopStart: 0
+    wrapMode: 2
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimThrowDown
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimSwingR2
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 115.15151
+    loopStart: 0
+    wrapMode: 2
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimSwingDown
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 47.596157
+    loopStart: 0
+    wrapMode: 2
+  - name: ani_jimSwingUp
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 2
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimPickUp
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 2
+  - name: hurt
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 29.729729
+    loopStart: 0
+    wrapMode: 2
+  - name: death
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 38.826187
+    loopStart: 0
+    wrapMode: 2
+  - name: ani_jimWalkDown
+    frames:
+    - spriteCollection: {fileID: 114552260920756420, guid: f131928071db35344bcb7202de50b16b,
+        type: 2}
+      spriteId: 56
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 18.571428
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimThrowUp
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 40
+    loopStart: 0
+    wrapMode: 2
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_pickUpBig
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 20.289856
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimCarryAboveWalk
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 17.777779
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimCarryAboveIdle
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 6.7415733
+    loopStart: 0
+    wrapMode: 0
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: 
+    frames: []
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: ani_jimChargeR
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 25
+    loopStart: 0
+    wrapMode: 2
+  - name: ani_jimChargeDown
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 47.596157
+    loopStart: 0
+    wrapMode: 2
+  - name: ani_jimChargeUp
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 2
+  - name: ani_jimChargeR_release
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 2
+  - name: ani_jimSwingR3
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 165
+    loopStart: 0
+    wrapMode: 2
+  - name: ani_jimSwingR
+    frames:
+    - spriteCollection: {fileID: 114718709282168454, guid: ca764a8d97af6154d9da79de7900c138,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 41.666668
+    loopStart: 0
+    wrapMode: 2

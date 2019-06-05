@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1706339273351664}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.80085, y: -2.7470384, z: 0}
+  m_LocalPosition: {x: 13.27, y: -5.68, z: 0}
   m_LocalScale: {x: 2.8574877, y: 2.8574867, z: 2.8574867}
   m_Children:
   - {fileID: 4359931793282316}
@@ -214,11 +214,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd9ef00df43a1e46bc551149f300891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cleanable: {fileID: 114258217904880496, guid: d0c318d198cb199469d1bd14f1c06346,
+    type: 2}
+  cleanableBitValue: 0
+  hp: 3
+  spawnChance: 0
+  possibleSpawnableItems: []
+  dirtyLookingObject: {fileID: 0}
+  dirtyPS: {fileID: 0}
+  myHUD: {fileID: 0}
   distanceUntilPickup: 3
   pickup: {fileID: 0}
   childPickupObj: {fileID: 0}
-  trashAmnt: 3
-  hp: 3
+  trashAmnt: 2
+  revealButton: {fileID: 0}
   myCollision: {fileID: 61739454572202286}
   spinning: 0
 --- !u!114 &114529233518941522

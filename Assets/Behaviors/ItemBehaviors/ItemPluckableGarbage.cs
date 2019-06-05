@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ItemPluckableGarbage : MonoBehaviour
+public class ItemPluckableGarbage : CleanableItem
 {
 
 	public float distanceUntilPickup =3f;
 	public AudioClip pickup;
 	public GameObject childPickupObj; // used for objects that need a parent, but whose spriterender cant be on the parent object(like for an intro animation)
 	public int trashAmnt;
-	public int hp;
+
 	public ItemSecretButton revealButton;
 	float myY;
 
@@ -83,6 +83,11 @@ public class ItemPluckableGarbage : MonoBehaviour
 
 			ObjectPool.Instance.GetPooledObject("effect_pickUpSmoke",gameObject.transform.position);
 			SoundManager.instance.PlaySingle(pickup);
+
+
+			CleanableManager.Instance.Clean(cleanable, cleanableBit);
+			myHUD.AddCleanedFilty();
+
 			//set object to follow player and push up in the sky
 			if(gameObject.GetComponent<Animator>()!=null)
 				gameObject.GetComponent<Animator>().SetTrigger("PickUp");
@@ -103,6 +108,10 @@ public class ItemPluckableGarbage : MonoBehaviour
 		ObjectPool.Instance.GetPooledObject("effect_landingSmoke",gameObject.transform.position);
         ObjectPool.Instance.ReturnPooledObject(gameObject);
 
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D collider){
+    	//just overrides hit by weapon function
     }
 }
 

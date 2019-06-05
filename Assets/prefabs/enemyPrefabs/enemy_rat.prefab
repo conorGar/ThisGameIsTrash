@@ -80,8 +80,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1903692784849774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.05, y: -0.28, z: 0}
+  m_LocalScale: {x: 1.3103958, y: 1.0492936, z: 1}
   m_Children: []
   m_Father: {fileID: 4283517313525662}
   m_RootOrder: 0
@@ -93,7 +93,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1098292903033816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.655825, y: -4.1299453, z: 0.2109375}
+  m_LocalPosition: {x: -4.697674, y: -4.000799, z: 0.2109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4220051420016582}
@@ -252,9 +252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e54113e5604435b8ae87c7754f2725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  library: {fileID: 114435095270276122, guid: 70b9ab3d67c117e489190b300138c808, type: 2}
-  defaultClipId: 0
-  playAutomatically: 0
+  library: {fileID: 114687181259029338, guid: 6ef2c0d9988b70c4eb636d231a04317a, type: 2}
+  defaultClipId: 2
+  playAutomatically: 1
 --- !u!114 &114051663132886186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -315,11 +315,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fac570381f34f647b768dc5a5aa1364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collection: {fileID: 114052127822594246, guid: 089fc0866cea7564788b472353f1f892,
+  collection: {fileID: 114845474871495650, guid: a3dfc328c2673504e8ed82e1f3d1d38b,
     type: 2}
   _color: {r: 1, g: 1, b: 1, a: 1}
-  _scale: {x: 1, y: 1, z: 1}
-  _spriteId: 1
+  _scale: {x: 0.4, y: 0.4, z: 1}
+  _spriteId: 7
   boxCollider2D: {fileID: 0}
   polygonCollider2D: []
   edgeCollider2D: []
