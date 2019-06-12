@@ -34,7 +34,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4192469704795616}
-  - component: {fileID: 114621940091652072}
   - component: {fileID: 61974250020516836}
   - component: {fileID: 61563710853219774}
   - component: {fileID: 114016051438760040}
@@ -45,11 +44,11 @@ GameObject:
   - component: {fileID: 114191224085972858}
   - component: {fileID: 114341579544824238}
   - component: {fileID: 114179946484310874}
-  - component: {fileID: 95951551574255862}
   - component: {fileID: 114292614906169912}
   - component: {fileID: 50485041799781274}
-  - component: {fileID: 111495950880370970}
   - component: {fileID: 114369885845851264}
+  - component: {fileID: 114355594326370616}
+  - component: {fileID: 114335333896497334}
   m_Layer: 9
   m_Name: e_rhinoBeetle
   m_TagString: enemy_rhinoBeetle
@@ -216,7 +215,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1197735560171940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -29.880636, y: 51.54538, z: 0}
+  m_LocalPosition: {x: -18.255398, y: -4.343321, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4184677057963326}
@@ -458,37 +457,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.43, y: 2.2}
   m_EdgeRadius: 0
---- !u!95 &95951551574255862
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1197735560171940}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 318707792f7d7af4db62e395814477de, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!111 &111495950880370970
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1197735560171940}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &114016051438760040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -515,23 +483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289acecd8c5dec64dbebc899bcdcf860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armoredEnemy: 0
+  armorRating: 0
   moveWhenHit: 1
-  resetFacingAfterHit: 0
-  secretHider: 0
-  returnToCurrentAniAfterHit: 0
-  invincibleAni:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
-  aniToSwitchBackTo:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
   myDeadBodyName: rhinoBeetle
   respawnEnemy: 0
   armoredEnemyHitSfx: {fileID: 0}
@@ -541,19 +494,13 @@ MonoBehaviour:
   hitSqueal: 0
   bounce: 0
   tutPopup: {fileID: 0}
-  gar_trash: {fileID: 0}
-  gar_rec: {fileID: 0}
-  gar_comp: {fileID: 0}
-  timeDrop: {fileID: 0}
-  healthDrop: {fileID: 0}
-  pinDrop: {fileID: 0}
   myShadow: {fileID: 1969858982647216}
   dontSpawnBody: 0
-  canKnockoffArmor: 0
   behaviorsToDeactivate: []
   hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
+  knockbackForce: 0
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
   otherRespawner: {fileID: 0}
@@ -583,7 +530,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1197735560171940}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7465d3cf6dc723459be3e518ac51b0a, type: 3}
   m_Name: 
@@ -594,6 +541,27 @@ MonoBehaviour:
   afterHitStopTime: 0
   walkPS: {fileID: 198824269282263632}
   mopSlow: 0
+--- !u!114 &114335333896497334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197735560171940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3f68ff2ef91b44ab7ae52b870be715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetCollider: {fileID: 0}
+  walkDistance: 25
+  maxWalkDistance: 0
+  chaseSpeed: 7
+  hasSeperateFacingAnimations: 0
+  iBeLerpin: 0
+  chasePS: {fileID: 0}
+  returnToPreviousWhenFar: 0
+  usePathGrid: 0
+  pathRefreshTime: 1
 --- !u!114 &114341579544824238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -606,10 +574,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5
-  attkPower: 2
+  attkPower: 1
   moveWhenHit: 0
   respawningEnemyType: 0
   toxicEnemy: 0
+--- !u!114 &114355594326370616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197735560171940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ad09fc3a62fa240b23be2153db1ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leapSpeed: 16
+  lungeThreshold: 9
+  shadow: {fileID: 1969858982647216}
+  leapHeight: 1
+  leapCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.506531
+      value: 1.4932153
+      inSlope: 0.018328428
+      outSlope: 0.018328428
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.99803764
+      value: 0.0000016093254
+      inSlope: -0.6730188
+      outSlope: -0.6730188
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114369885845851264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -635,38 +642,6 @@ MonoBehaviour:
   clankSound: {fileID: 0}
   parentsETD: {fileID: 114179946484310874}
   pushBack: 0
---- !u!114 &114621940091652072
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1197735560171940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1231926b56b09d41a0f5da6751f527f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetCollider: {fileID: 0}
-  walkDistance: 10
-  maxWalkDistance: 0
-  chaseSpeed: 4
-  hasSeperateFacingAnimations: 0
-  iBeLerpin: 0
-  chasePS: {fileID: 198824269282263632}
-  returnToPreviousWhenFar: 0
-  usePathGrid: 0
-  pathRefreshTime: 1
-  myShadow: {fileID: 1969858982647216}
-  shellShield: {fileID: 1268451313919332}
-  myHitBox: {fileID: 61974250020516836}
-  land: {fileID: 0}
-  dirtBallSpawnPoints:
-  - {fileID: 1979979220010694}
-  - {fileID: 1457321306562416}
-  - {fileID: 1491396392213220}
-  - {fileID: 1059826343811876}
-  - {fileID: 1301119546028452}
-  - {fileID: 1937928234124542}
 --- !u!114 &114635497439261944
 MonoBehaviour:
   m_ObjectHideFlags: 1

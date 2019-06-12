@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114690179292353472}
   m_Layer: 10
   m_Name: pObj_bullet
-  m_TagString: pObj_bullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myShadow: {fileID: 1163879455035654}
   gravityScaleDelay: 1
+  falling: 0
 --- !u!212 &212492484960539976
 SpriteRenderer:
   m_ObjectHideFlags: 1

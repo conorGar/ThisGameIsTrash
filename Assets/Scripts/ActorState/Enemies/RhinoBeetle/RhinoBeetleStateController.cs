@@ -25,7 +25,16 @@ public class RhinoBeetleStateController : EnemyStateController
     {
         base.AnimationEventCompleted(animator, clip);
         switch (currentState.GetState()) {
-			
+			case EnemyState.PREPARE_LEAP:
+                currentState = new EnemyLunge();
+				Debug.Log("Opossum ani event complete: LUNGE -> RECOVER");
+
+                break;
+			case EnemyState.LUNGE:
+                currentState = new EnemyRecover();
+				Debug.Log("Opossum ani event complete: LUNGE -> RECOVER");
+
+                break;
             case EnemyState.HIT:
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
                 currentState = new EnemyIdle();
