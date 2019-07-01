@@ -51,6 +51,7 @@ public class EnemyIdle : IActorState<EnemyState, EnemyTrigger>
                 return new EnemyLunge();
 			case EnemyTrigger.LEAP:
                 return new EnemyLeap();
+		
         }
 
         return null;

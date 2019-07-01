@@ -39,9 +39,14 @@ public class EnemyRecover : IActorState<EnemyState, EnemyTrigger>
                 return new EnemyPowerHit();
 			case EnemyTrigger.POPUP:
                 return new EnemyPopout();
+			case EnemyTrigger.VULNERABLE: //added for Grub Enemy
+                return new EnemyVulnerable();
 			case EnemyTrigger.CHASE:
 				flags |= (int)EnemyFlag.CHASING;
                 return new EnemyChase();
+			case EnemyTrigger.PREPARE://added for Grub Enemy
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
+                return new EnemyPrepare();
         }
 
         return null;

@@ -61,6 +61,7 @@ public class Ev_Enemy_Grub2 : EnemyTakeDamage
 					Debug.Log("grub in lunge state...");
                  	gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position,destinationMark,5*Time.deltaTime);
                  break;
+
 				
             }
         }

@@ -42,10 +42,14 @@ public class GrubStateController : EnemyStateController
                 currentState = new EnemyLunge();
             	break;
             case EnemyState.THROW:
-				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.RECOVER));
                 currentState = new EnemyIdle();
             	break;
             case EnemyState.HIT:
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                currentState = new EnemyVulnerable();
+                break;
+			case EnemyState.CHASE:
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
                 currentState = new EnemyIdle();
                 break;
