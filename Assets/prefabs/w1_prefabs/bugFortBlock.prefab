@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4295624458059332}
   - component: {fileID: 212436770971670138}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: New Sprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4777090690261824}
   - component: {fileID: 212651448410951942}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: New Sprite (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4372085923765162}
   - component: {fileID: 212179983844920612}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: New Sprite (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4279079557019320}
   - component: {fileID: 212951706070208708}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,6 +242,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4404521330846172}
+  - component: {fileID: 61432353073019592}
   m_Layer: 8
   m_Name: bugFortBlock
   m_TagString: Untagged
@@ -306,7 +307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4408613959477146}
   - component: {fileID: 212009047150534682}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: New Sprite (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4163029147277426}
   - component: {fileID: 212866369784691256}
-  m_Layer: 8
+  m_Layer: 21
   m_Name: New Sprite (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +354,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4166005366137700}
-  m_Layer: 8
+  - component: {fileID: 61936642803213738}
+  - component: {fileID: 61775242883389166}
+  m_Layer: 21
   m_Name: fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,8 +522,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1750757190186188}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -238.3816, y: 77.09365, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.3154574}
+  m_LocalPosition: {x: -10.360001, y: -14.809998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0.16749997}
   m_Children:
   - {fileID: 4512276937294438}
   - {fileID: 4166005366137700}
@@ -697,6 +700,81 @@ Transform:
   m_Father: {fileID: 4512276937294438}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: -24.484001, y: 0.061000004, z: 4.5420003}
+--- !u!61 &61432353073019592
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1750757190186188}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.67, y: -0.2}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.65, y: 12.98}
+  m_EdgeRadius: 0
+--- !u!61 &61775242883389166
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1895470032279732}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.94, y: -0.62}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.52, y: 1}
+  m_EdgeRadius: 0
+--- !u!61 &61936642803213738
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1895470032279732}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.92, y: 7.3}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.52, y: 1}
+  m_EdgeRadius: 0
 --- !u!212 &212009047150534682
 SpriteRenderer:
   m_ObjectHideFlags: 1

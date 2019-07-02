@@ -181,7 +181,7 @@ public bool bossSpawnedEnemy;
               
                 TakeDamage(melee.gameObject);
 
-                //Debug.Log("Collision with weapon: ");
+                Debug.Log("Collision with weapon: ");
             } else if (melee.GetComponent<Ev_ProjectileBasic>() !=null || melee.tag == "BigSwoosh") { //player-created projectiles or big swoosh
                 if (!takingDamage) {
                     if (melee.tag == "BigSwoosh") {
@@ -197,6 +197,7 @@ public bool bossSpawnedEnemy;
 						meleeDmgBonus = 0;
 
                     	meleeDmgBonus += melee.GetComponent<Ev_ProjectileBasic>().additionalDamage;
+						Debug.Log("HIT ENEMY");
 
                         if (melee.GetComponent<Ev_FallingProjectile>() != null)
                             melee.GetComponent<Ev_FallingProjectile>().Fell();
@@ -211,7 +212,7 @@ public bool bossSpawnedEnemy;
 						}
                     }
                 }
-                //Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
+                Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
                 SoundManager.instance.RandomizeSfx(SFXBANK.HIT6, .8f, 1.1f);
                 SoundManager.instance.PlaySingle(hitSqueal);
             } else if (melee.gameObject.layer == 15) {//throwable object

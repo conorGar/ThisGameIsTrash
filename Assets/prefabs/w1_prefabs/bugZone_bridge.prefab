@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4818036064372110}
   - component: {fileID: 212601817711363058}
   - component: {fileID: 61816067660484472}
-  m_Layer: 8
+  - component: {fileID: 114154314371541792}
+  m_Layer: 21
   m_Name: w1_bugZone_bridgeRail (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +39,8 @@ GameObject:
   - component: {fileID: 4914969487495454}
   - component: {fileID: 212530012573483692}
   - component: {fileID: 61625488562519762}
-  m_Layer: 8
+  - component: {fileID: 114416916405202730}
+  m_Layer: 21
   m_Name: w1_bugZone_bridgeRail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +57,8 @@ GameObject:
   - component: {fileID: 4099950140155216}
   - component: {fileID: 212679442336661318}
   - component: {fileID: 61990955366208422}
-  m_Layer: 0
+  - component: {fileID: 114438241539289458}
+  m_Layer: 21
   m_Name: w1_bugZone_bridgeRail (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +75,8 @@ GameObject:
   - component: {fileID: 4781470472696690}
   - component: {fileID: 212585845916769554}
   - component: {fileID: 61522250539264676}
-  m_Layer: 8
+  - component: {fileID: 114029821589993034}
+  m_Layer: 21
   m_Name: w1_bugZone_bridgeRail (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +93,8 @@ GameObject:
   - component: {fileID: 4324473005501612}
   - component: {fileID: 212241315079473886}
   - component: {fileID: 61758933927694922}
-  m_Layer: 0
+  - component: {fileID: 114147714555439042}
+  m_Layer: 21
   m_Name: w1_bugZone_bridgeRail (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +109,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4950907865315852}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: bugZone_bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +125,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4317320644505842}
   - component: {fileID: 212441344363483504}
-  m_Layer: 0
+  - component: {fileID: 114943081853393224}
+  m_Layer: 21
   m_Name: w1_bugZone_bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +142,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4736191801550352}
   - component: {fileID: 212706392162446286}
-  m_Layer: 0
+  - component: {fileID: 114216448101164578}
+  m_Layer: 21
   m_Name: w1_bugZone_bridge (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +159,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4338267499421390}
   - component: {fileID: 212834120641460288}
-  m_Layer: 0
+  - component: {fileID: 114151116203542402}
+  m_Layer: 21
   m_Name: w1_bugZone_bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -169,7 +177,8 @@ GameObject:
   - component: {fileID: 4679794943945652}
   - component: {fileID: 212291620832955820}
   - component: {fileID: 61064138374891194}
-  m_Layer: 8
+  - component: {fileID: 114730927248283674}
+  m_Layer: 21
   m_Name: w1_bugZone_bridgeRail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +315,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1273790203908740}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -148.74326, y: 59.74949, z: 0}
+  m_LocalPosition: {x: -21.85, y: 1.33, z: 0}
   m_LocalScale: {x: 1.0077224, y: 0.8993258, z: 1}
   m_Children:
   - {fileID: 4317320644505842}
@@ -465,6 +474,132 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.35, y: 0.85}
   m_EdgeRadius: 0
+--- !u!114 &114029821589993034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265612244836376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  topSorted: 0
+  sortBuddies: []
+--- !u!114 &114147714555439042
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1267503410714142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  topSorted: 0
+  sortBuddies: []
+--- !u!114 &114151116203542402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1600765624633186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  topSorted: 0
+  sortBuddies: []
+--- !u!114 &114154314371541792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000247019308860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  topSorted: 0
+  sortBuddies: []
+--- !u!114 &114216448101164578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1358738768934032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  topSorted: 0
+  sortBuddies: []
+--- !u!114 &114416916405202730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1210817520822004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  topSorted: 0
+  sortBuddies: []
+--- !u!114 &114438241539289458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1261904109206688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  topSorted: 0
+  sortBuddies: []
+--- !u!114 &114730927248283674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1971025752057088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  topSorted: 0
+  sortBuddies: []
+--- !u!114 &114943081853393224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1331200309761504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a71b64254c411c4b8cdd8d433a2b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movingObject: 0
+  topSorted: 0
+  sortBuddies: []
 --- !u!212 &212241315079473886
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -584,8 +719,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 962927795
-  m_SortingLayer: 2
+  m_SortingLayerID: -542038307
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6c00149fdd74032449b0be15a4de05c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -804,8 +939,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 962927795
-  m_SortingLayer: 2
+  m_SortingLayerID: -542038307
+  m_SortingLayer: 3
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 6c00149fdd74032449b0be15a4de05c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -848,8 +983,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 962927795
-  m_SortingLayer: 2
+  m_SortingLayerID: -542038307
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6c00149fdd74032449b0be15a4de05c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

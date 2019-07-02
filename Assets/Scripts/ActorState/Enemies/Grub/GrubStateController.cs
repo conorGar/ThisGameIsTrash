@@ -34,22 +34,32 @@ public class GrubStateController : EnemyStateController
                 currentState = new EnemyIdle();
             	break;
             case EnemyState.PREPARE: //prepare for throw
+			Debug.Log("Grub got here -2");
+
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.THROW));
                 currentState = new EnemyThrow();
             	break;
 			case EnemyState.PREPARE_LEAP: //prepare for leap
+			Debug.Log("Grub got here -3");
+
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
                 currentState = new EnemyLunge();
             	break;
             case EnemyState.THROW:
+			Debug.Log("Grub got here -4");
+
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.RECOVER));
                 currentState = new EnemyIdle();
             	break;
             case EnemyState.HIT:
+			Debug.Log("Grub changes from hit to idle");
+
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
                 currentState = new EnemyVulnerable();
                 break;
 			case EnemyState.CHASE:
+			Debug.Log("Grub got here -5");
+
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
                 currentState = new EnemyIdle();
                 break;

@@ -9,7 +9,8 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
 	public float noticeThresholdY;
 	public bool sleepingEnemy;
 	public GameObject sleepingPS;
-
+	[HideInInspector]
+	public bool upperLayerEnemy; //set by enemySpawner
     protected EnemyStateController controller;
 
     void Awake()
@@ -35,6 +36,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
         // An idling enemy, when in range of a player or target, will go into notice and then chase!
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (controller.currentState.GetState() == EnemyState.IDLE) {
+            	if((upperLayerEnemy && PlayerManager.Instance.player.layer == 24) || (!upperLayerEnemy && PlayerManager.Instance.player.layer == 12)){ //make sure enemy is on same 'layer' as player
                 if ((Mathf.Abs(transform.position.x - PlayerManager.Instance.player.transform.position.x) < noticeThreshold) && Mathf.Abs(transform.position.y - PlayerManager.Instance.player.transform.position.y) < noticeThresholdY) {
                 	Debug.Log("got here enemy notice : " + gameObject.name);
                     if ((PlayerManager.Instance.player.transform.position.x < gameObject.transform.position.x && gameObject.transform.localScale.x < 0) || (PlayerManager.Instance.player.transform.position.x > gameObject.transform.position.x && gameObject.transform.localScale.x > 0)) {//make sure is facing the direction of the player..
@@ -54,6 +56,7 @@ public class FollowPlayerAfterNotice : MonoBehaviour {
                             controller.SendTrigger(EnemyTrigger.NOTICE);
                         }
                     }
+                }
                 }
             }
         }

@@ -20,6 +20,7 @@ public class EnemyPopout : IActorState<EnemyState, EnemyTrigger>
     {
 		switch (trigger) {
             case EnemyTrigger.HIT:
+            	Debug.Log("Popup hit trigger...triggered.");
                 return new EnemyHit();
         }
         return null;
