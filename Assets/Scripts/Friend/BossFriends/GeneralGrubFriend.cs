@@ -4,6 +4,8 @@ using System.Collections;
 public class GeneralGrubFriend : Friend
 {
 
+	public GameObject beetleSteve;
+
 	public override void GenerateEventData()
     {
 		
@@ -29,6 +31,10 @@ public class GeneralGrubFriend : Friend
                 nextDialog = "Grub1";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
+			case "BEETLE_STEVE_INTRO":
+                nextDialog = "BeetleSteve";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
         }
 	}
 	public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
@@ -36,10 +42,16 @@ public class GeneralGrubFriend : Friend
         yield return new WaitForSeconds(.3f);
 
         switch (GetFriendState()) {
-            case "DUCK_INTRO":
-				StartCoroutine("QuackSequence");
+            case "GRUB_INTRO":
 				yield return new WaitForSeconds(.5f);
-                SetFriendState("KING_INTRO");
+                SetFriendState("BEETLE_STEVE_INTRO");
+                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 15; // smaller start radius for beetle steve dialog
+                break;
+			case "BEETLE_STEVE_INTRO":
+				yield return new WaitForSeconds(.5f);
+                SetFriendState("BEETLE_STEVE_FIGHT");
+                BossPool.Instance.GetPooledBoss("boss_beetleSteve",gameObject.transform.position);
+                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 15; // smaller start radius for beetle steve dialog
                 break;
 			case "KING_INTRO":
              

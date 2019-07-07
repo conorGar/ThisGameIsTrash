@@ -37,7 +37,8 @@ public class EnemyTakeDamage : MonoBehaviour {
 	public tk2dSpriteAnimation disarmoredAnimation;
 
 	[HideInInspector]
-	public float knockbackForce = 0; //given by whatever object is hitting it.  11 for basic melee weapon
+	public float knockbackForce = 11; 
+	bool powerHit;
 	[HideInInspector]
 	public GameObject objectPool;
 	[HideInInspector]
@@ -182,16 +183,18 @@ public bool bossSpawnedEnemy;
                 TakeDamage(melee.gameObject);
 
                 Debug.Log("Collision with weapon: ");
-            } else if (melee.GetComponent<Ev_ProjectileBasic>() !=null || melee.tag == "BigSwoosh") { //player-created projectiles or big swoosh
+			} else if (melee.GetComponent<Ev_ProjectileBasic>() !=null || melee.tag == "pObj_bullet_large" || melee.tag == "BigSwoosh") { //player-created projectiles or big swoosh
                 if (!takingDamage) {
-                    if (melee.tag == "BigSwoosh") {
+					if (melee.tag == "BigSwoosh" || melee.tag == "pObj_bullet_large") {
                         meleeDmgBonus = 0;
-                        if (hasPowerHitEffect) {
-                            PowerHitEffect();
-                        }
+                       powerHit = true;
                         meleeDmgBonus++;
                         meleeSwingDirection = melee.name;
                         StartCoroutine("NonMeleeHit");
+                     
+						if (hasPowerHitEffect) {
+                            PowerHitEffect();
+                        }
                         Debug.Log("BIG SWOOSH HITS ENEMY");
                     } else {
 						meleeDmgBonus = 0;
@@ -281,11 +284,11 @@ public bool bossSpawnedEnemy;
                     UpdateFacing();
                 }
 
-                if(knockbackForce > 0){
+                if(powerHit){
 					controller.SendTrigger(EnemyTrigger.POWER_HIT);
 
                 	Debug.Log("****----- GOT HERE BIG HIT ---------****");
-                	if(meleeSwingDirection == "bigShooshR"){
+					if(meleeSwingDirection == "bigShooshR" || meleeSwingDirection == "Proj_hazmat_big(Clone)"|| meleeSwingDirection == "Proj_hazmat_big"){
 						meleeSwingDirection = "plankSwing";
 					}else if(meleeSwingDirection == "bigShooshDown"){
 						meleeSwingDirection = "plankDown";
@@ -306,7 +309,7 @@ public bool bossSpawnedEnemy;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				//Debug.Log("**AND HERE!!!!!!!!***");
 				yield return new WaitForSeconds(.4f);
-				StartCoroutine( "StopKnockback",knockbackForce);
+				StartCoroutine( "StopKnockback");
 				StartCoroutine("AfterHit");
 				}
 			}
@@ -428,8 +431,11 @@ public bool bossSpawnedEnemy;
 		gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 		//if(aniToSwitchBackTo != null)
-	
+		if(powerHit){
+			powerHit = false;
+		}
 		yield return new WaitForSeconds(.1f);
+
 		takingDamage = false;
 
 	}
@@ -440,7 +446,7 @@ public bool bossSpawnedEnemy;
 
 
 
-		if(moveWhenHit || knockbackForce >0){
+		if(moveWhenHit || powerHit){
 			takingDamage = true;
 
 			Debug.Log("-----MELEE WEAPON SWING DIRECTION :" + meleeSwingDirection);

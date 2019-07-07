@@ -22,6 +22,11 @@ public class Ev_Enemy_Grub3 : EnemyTakeDamage
 	//RECOVER - Period after firing tripple shot. If player is far enough will start to chase.
 	//VULNERABLE - After being knocked out of ground/ hemlet is off.
 
+	void OnEnable(){
+		armorRating = 1; //makes sure the armor rating is reset from previous 
+
+	}
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -101,8 +106,9 @@ public class Ev_Enemy_Grub3 : EnemyTakeDamage
 	public override void PowerHitEffect(){
 		Debug.Log("GRUB POWER HIT EFFECT ACTIVATE!!! WOOOOO!");
 		armor.SetActive(false);
+		armorRating = 0;
 		controller.SendTrigger(EnemyTrigger.VULNERABLE); //use recover for when dive in
-	
+
 
 	}
 

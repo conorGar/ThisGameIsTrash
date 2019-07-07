@@ -9,7 +9,7 @@ public class GrubStateController : EnemyStateController
 
 	protected new void Awake()
     {
-        defaultState = new EnemyPopout();
+        defaultState = new EnemyIdle();
         base.Awake();
     }
 	protected override void AnyStateTrigger(EnemyTrigger trigger)
@@ -26,8 +26,10 @@ public class GrubStateController : EnemyStateController
     protected override void AnimationEventCompleted(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip)
     {
         base.AnimationEventCompleted(animator, clip);
-        Debug.Log("ani event completed" + currentState);
+        Debug.Log("ani event completed" + currentState.GetState());
         switch (currentState.GetState()) {
+		
+
 			case EnemyState.POPOUT: 
 				Debug.Log("Grub changes from popout to idle");
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));

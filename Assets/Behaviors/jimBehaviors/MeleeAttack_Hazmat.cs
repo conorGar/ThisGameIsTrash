@@ -7,13 +7,17 @@ public class MeleeAttack_Hazmat : MeleeAttack
 	public GameObject bigProjectile;
 	public Vector2 projectileBaseSpeed;
 	public tk2dSpriteCollectionData hazmatSpriteCollection;
-
+	public tk2dSpriteAnimation hazmatSpriteAnimation;
 
 	Vector2 projectileSpeed;
 	// Use this for initialization
 	void Start ()
 	{
 		startingScale = this.gameObject.transform.localScale;
+		//change visuals
+		gameObject.GetComponent<tk2dBaseSprite>().SetSprite(hazmatSpriteCollection,0);
+		gameObject.GetComponent<tk2dSpriteAnimator>().Library = hazmatSpriteAnimation;
+		gameObject.GetComponent<tk2dSpriteAnimator>().Play("ani_jimIdle");
 
 	}
 	

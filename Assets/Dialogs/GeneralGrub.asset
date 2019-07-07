@@ -75,6 +75,13 @@ MonoBehaviour:
     - Value: 30ecc31d-1053-4bf7-926f-f51ed482853f
     - Value: 605c8cca-59a3-49bc-932c-c6e551c7620c
     - Value: 14e37122-100f-4391-af79-09578dae60e7
+    - Value: 496f1f6d-5e80-4388-88dd-19727815f58e
+    - Value: 7d08a39b-e6de-460b-9f4c-aa65a1daf4fc
+    - Value: 6b8aa554-c0e0-4218-92ef-11b4ea924ada
+    - Value: 4aab4f08-d9bf-4852-99d8-52d11d3fa80e
+    - Value: b8e22a22-850b-42c6-b7e9-79b10e1453a9
+    - Value: 2d1d0ef7-d623-46df-b712-0c6548c5bb02
+    - Value: 8a7c88ee-1103-4c36-b2c6-21317fe719e1
     values:
     - window:
         serializedVersion: 2
@@ -1522,6 +1529,176 @@ MonoBehaviour:
       x: 3138
       y: 1254
       text: Together, we must save them from themselves!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 103
+        y: 1636
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: BeetleSteve
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 496f1f6d-5e80-4388-88dd-19727815f58e
+      x: 103
+      y: 1636
+      text: Alright, alright. Enough of this nonsense!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7d08a39b-e6de-460b-9f4c-aa65a1daf4fc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 397
+        y: 1663
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: BeetleSteve1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7d08a39b-e6de-460b-9f4c-aa65a1daf4fc
+      x: 397
+      y: 1663
+      text: Tremble! Tremble before the mighty bug warrior, <c=g>Beetle Steve</c>!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 6b8aa554-c0e0-4218-92ef-11b4ea924ada
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 690
+        y: 1695
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: BeetleSteve2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6b8aa554-c0e0-4218-92ef-11b4ea924ada
+      x: 690
+      y: 1695
+      text: <s>..that's me...in case that isn't clear
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 4aab4f08-d9bf-4852-99d8-52d11d3fa80e
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 974
+        y: 1677
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: BeetleSteve3
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4aab4f08-d9bf-4852-99d8-52d11d3fa80e
+      x: 974
+      y: 1677
+      text: Today is the day you die, human! I am the most powerful bug of all, behind
+        <c=g>General Grub</c> himself!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: b8e22a22-850b-42c6-b7e9-79b10e1453a9
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1258
+        y: 1713
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: BeetleSteve4
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: b8e22a22-850b-42c6-b7e9-79b10e1453a9
+      x: 1258
+      y: 1713
+      text: ..And if you think I'm the same as the other beetles because we look exactly
+        alike, you're wrong!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2d1d0ef7-d623-46df-b712-0c6548c5bb02
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1550
+        y: 1695
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: BeetleSteve5
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2d1d0ef7-d623-46df-b712-0c6548c5bb02
+      x: 1550
+      y: 1695
+      text: I have a name! I'm SOMEBODY in this bug world!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8a7c88ee-1103-4c36-b2c6-21317fe719e1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1842
+        y: 1734
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: BeetleSteve6
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8a7c88ee-1103-4c36-b2c6-21317fe719e1
+      x: 1842
+      y: 1734
+      text: Remember that, human, and prepare to meet your end!
       isThought: 0
       animTrigger: 
       type: 1

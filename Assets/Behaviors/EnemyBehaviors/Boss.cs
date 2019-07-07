@@ -34,7 +34,6 @@ public class Boss : MonoBehaviour {
 			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]++; //regain hp each day
 		}
 
-		//gameObject.SetActive(false);
 		ActivateBoss();
 
 	}

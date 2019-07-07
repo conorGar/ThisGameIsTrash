@@ -60,8 +60,8 @@ GameObject:
   - component: {fileID: 114332534966414490}
   - component: {fileID: 50635654408307320}
   - component: {fileID: 61501252689861644}
-  - component: {fileID: 114134300553220576}
   - component: {fileID: 114348642672386136}
+  - component: {fileID: 114500848270063646}
   m_Layer: 9
   m_Name: e_grub2
   m_TagString: enemy_grub
@@ -106,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1329497290096832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.494639, y: -3.4753184, z: 0}
+  m_LocalPosition: {x: -17.061127, y: -5.1519732, z: 0}
   m_LocalScale: {x: 0.46706998, y: 0.46706998, z: 0.46706995}
   m_Children:
   - {fileID: 4188023408846174}
@@ -196,7 +196,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -277,68 +277,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.32, y: 2.68}
   m_EdgeRadius: 0
---- !u!114 &114134300553220576
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1329497290096832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a0a37030b74264faff7bfc20342a78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  armoredEnemy: 0
-  moveWhenHit: 1
-  resetFacingAfterHit: 0
-  secretHider: 0
-  returnToCurrentAniAfterHit: 0
-  invincibleAni:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
-  aniToSwitchBackTo:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
-  myDeadBodyName: 
-  respawnEnemy: 0
-  armoredEnemyHitSfx: {fileID: 0}
-  bossEnemy: 0
-  IAmParentObj: 0
-  childEnemy: {fileID: 0}
-  hitSqueal: 0
-  bounce: 0
-  tutPopup: {fileID: 0}
-  gar_trash: {fileID: 0}
-  gar_rec: {fileID: 0}
-  gar_comp: {fileID: 0}
-  timeDrop: {fileID: 0}
-  healthDrop: {fileID: 0}
-  pinDrop: {fileID: 0}
-  myShadow: {fileID: 0}
-  dontSpawnBody: 0
-  canKnockoffArmor: 1
-  behaviorsToDeactivate: []
-  hasPowerHitEffect: 1
-  armorCollisionObj: {fileID: 1138427384114790}
-  disarmoredAnimation: {fileID: 0}
-  objectPool: {fileID: 0}
-  myRespawner: {fileID: 0}
-  otherRespawner: {fileID: 0}
-  currentHp: 0
-  meleeDmgBonus: 0
-  bossSpawnedEnemy: 0
-  spinning: 0
-  startsOffDontMoveWhenHit: 0
-  armor: {fileID: 1138427384114790}
-  burrowingPS: {fileID: 1516961915591380}
-  projectileSpeed: 7
-  projectile: {fileID: 1245335482067604, guid: 4974a6397afe35640969fde99841ffed, type: 2}
 --- !u!114 &114142813825132992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -375,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clankSound: {fileID: 8300000, guid: 1073f68275895f6429798e5be44021af, type: 3}
-  parentsETD: {fileID: 114134300553220576}
+  parentsETD: {fileID: 0}
   pushBack: 1
 --- !u!114 &114332534966414490
 MonoBehaviour:
@@ -399,11 +337,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bbe1e75c59a85549acbd9da932eee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 2
   attkPower: 1
   moveWhenHit: 0
   respawningEnemyType: 0
   toxicEnemy: 0
+--- !u!114 &114500848270063646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329497290096832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f52e2af2577884a85cc8440b33a280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armorRating: 1
+  moveWhenHit: 1
+  myDeadBodyName: 
+  respawnEnemy: 0
+  armoredEnemyHitSfx: {fileID: 0}
+  bossEnemy: 0
+  IAmParentObj: 0
+  childEnemy: {fileID: 0}
+  hitSqueal: 0
+  bounce: 0
+  tutPopup: {fileID: 0}
+  myShadow: {fileID: 0}
+  dontSpawnBody: 0
+  behaviorsToDeactivate: []
+  hasPowerHitEffect: 1
+  armorCollisionObj: {fileID: 1138427384114790}
+  disarmoredAnimation: {fileID: 0}
+  knockbackForce: 0
+  objectPool: {fileID: 0}
+  myRespawner: {fileID: 0}
+  otherRespawner: {fileID: 0}
+  currentHp: 2
+  meleeDmgBonus: 0
+  bossSpawnedEnemy: 0
+  meleeSwingDirection: 
+  spinning: 0
+  startsOffDontMoveWhenHit: 0
+  armor: {fileID: 1138427384114790}
+  burrowingPS: {fileID: 1516961915591380}
+  projectileSpeed: 0
+  projectile: {fileID: 1245335482067604, guid: 4974a6397afe35640969fde99841ffed, type: 2}
+  chaseAfterPlayer: 0
 --- !u!114 &114911065128119242
 MonoBehaviour:
   m_ObjectHideFlags: 1
