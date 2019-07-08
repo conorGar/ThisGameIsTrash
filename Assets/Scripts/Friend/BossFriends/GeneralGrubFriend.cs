@@ -46,11 +46,15 @@ public class GeneralGrubFriend : Friend
 				yield return new WaitForSeconds(.5f);
                 SetFriendState("BEETLE_STEVE_INTRO");
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 15; // smaller start radius for beetle steve dialog
+               
                 break;
 			case "BEETLE_STEVE_INTRO":
 				yield return new WaitForSeconds(.5f);
                 SetFriendState("BEETLE_STEVE_FIGHT");
-                BossPool.Instance.GetPooledBoss("boss_beetleSteve",gameObject.transform.position);
+                GameObject beetleSteve = BossPool.Instance.GetPooledBoss("boss_beetleSteve",gameObject.transform.position);
+                beetleSteve.GetComponent<BossBeetleSteve>().ActivateBoss();
+				beetleSteve.GetComponent<BossBeetleSteve>().friend = this;
+
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 15; // smaller start radius for beetle steve dialog
                 break;
 			case "KING_INTRO":
@@ -63,8 +67,21 @@ public class GeneralGrubFriend : Friend
 
 
         yield return base.OnFinishDialogEnumerator();
+        gameObject.SetActive(false);
+
+    }
 
 
+    public override void OnActivateRoom(){
+		switch (GetFriendState())
+        {
+            case "BEETLE_STEVE_FIGHT":
+				GameObject beetleSteve = BossPool.Instance.GetPooledBoss("boss_beetleSteve",gameObject.transform.position);
+                beetleSteve.GetComponent<BossBeetleSteve>().ActivateBoss();
+                beetleSteve.GetComponent<BossBeetleSteve>().friend = this;
+				gameObject.SetActive(false);
+                break;
+        }
     }
 }
 

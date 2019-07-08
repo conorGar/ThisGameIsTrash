@@ -9,9 +9,8 @@ public class Boss : MonoBehaviour {
 	public int hp;
 	public int attkDmg;
 	public GameObject hpDisplay;
-	public GameObject objectPool;
 	public bool vanishAtDeath;
-	public MonoBehaviour myBossScript;
+	//public MonoBehaviour myBossScript;
 	public GameObject objectToPanTo;
 	public AudioClip hpDisplayStartSfx;
     protected EnemyStateController controller;
@@ -40,6 +39,7 @@ public class Boss : MonoBehaviour {
 
 	public virtual void ActivateBoss(){
         gameObject.SetActive(true);
+        currentRoom = RoomManager.Instance.currentRoom;
         gameObject.GetComponent<EnemyTakeDamage>().currentHp = GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber];
 		gameObject.GetComponent<EnemyTakeDamage>().bossEnemy = true;
 
@@ -83,16 +83,19 @@ public class Boss : MonoBehaviour {
 			Time.timeScale = 1;
 			InvokeRepeating("DeathSmoke",.1f,.2f);
 			yield return new WaitForSeconds(1f);
-			GameObject deathGhost = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_DeathGhost");
+			GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost");
 			deathGhost.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 	
             //CamManager.Instance.mainCamEffects.CameraPan(objectToPanTo.transform.position,"BossItem");
             //CamManager.Instance.mainCamEffects.objectToSpawn = objectToPanTo;
             GlobalVariableManager.Instance.BOSSES_KILLED |= GlobalVariableManager.BOSSES.ONE; //use this as way to tell if player has upgrade
-			for(int i = 0; i < currentRoom.bosses.Count; i++){//disable all other bosses at death
-				currentRoom.bosses[i].SetActive(false);
+            if(currentRoom != null){
+				for(int i = 0; i < currentRoom.bosses.Count; i++){//disable all other bosses at death
+					currentRoom.bosses[i].SetActive(false);
+				}
 			}
             GameStateManager.Instance.PopState();
+            DeactivateHpDisplay();
             BossDeathEvent();
         } else {
             controller.SendTrigger(EnemyTrigger.DEATH);
@@ -125,7 +128,7 @@ public class Boss : MonoBehaviour {
 
 	void DeathSmoke(){
 		if(deathSmokeNumber < 15){
-			GameObject deathSmoke = objectPool.GetComponent<ObjectPool>().GetPooledObject("effect_SmokePuff");
+			GameObject deathSmoke = ObjectPool.Instance.GetPooledObject("effect_SmokePuff");
 			deathSmoke.transform.position = new Vector3((transform.position.x+ Random.Range(-4,4)), transform.position.y+ Random.Range(-4,4), transform.position.z);
 			deathSmokeNumber++;
 		}else{

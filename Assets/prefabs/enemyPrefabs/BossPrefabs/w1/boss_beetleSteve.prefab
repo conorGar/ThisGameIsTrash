@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4145762985579892}
   - component: {fileID: 212377529031849092}
-  m_Layer: 10
+  m_Layer: 23
   m_Name: shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4793065547406278}
   - component: {fileID: 198619336072379422}
   - component: {fileID: 199410573996340944}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: enemyWalkTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4915111819758702}
-  m_Layer: 9
+  m_Layer: 23
   m_Name: spawnPos6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 61098288210670872}
   - component: {fileID: 114713161231967816}
   - component: {fileID: 114706145367368676}
-  m_Layer: 10
+  m_Layer: 23
   m_Name: shellShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,8 @@ GameObject:
   - component: {fileID: 114328653085485160}
   - component: {fileID: 114282588138039652}
   - component: {fileID: 114896122459349922}
-  m_Layer: 9
+  - component: {fileID: 114868302784368742}
+  m_Layer: 23
   m_Name: boss_beetleSteve
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -115,7 +116,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4317385241342282}
-  m_Layer: 9
+  m_Layer: 23
   m_Name: spawnPos4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +131,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4570425391535518}
-  m_Layer: 9
+  m_Layer: 23
   m_Name: spawnPos2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +146,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4082223279789962}
-  m_Layer: 9
+  m_Layer: 23
   m_Name: spawnPos5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +161,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4151373837765082}
-  m_Layer: 9
+  m_Layer: 23
   m_Name: spawnPos1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +176,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4521909184327572}
-  m_Layer: 9
+  m_Layer: 23
   m_Name: spawnPos3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +513,7 @@ MonoBehaviour:
   myDeadBodyName: rhinoBeetle
   respawnEnemy: 0
   armoredEnemyHitSfx: {fileID: 0}
-  bossEnemy: 0
+  bossEnemy: 1
   IAmParentObj: 0
   childEnemy: {fileID: 0}
   hitSqueal: 0
@@ -661,6 +662,26 @@ MonoBehaviour:
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
   upperLayerEnemy: 0
+--- !u!114 &114868302784368742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1447887375490158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b8fc6fce3c0c849b8727d19a943991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossNumber: 0
+  hp: 0
+  attkDmg: 1
+  hpDisplay: {fileID: 0}
+  objectPool: {fileID: 0}
+  vanishAtDeath: 1
+  objectToPanTo: {fileID: 0}
+  hpDisplayStartSfx: {fileID: 0}
+  currentRoom: {fileID: 0}
 --- !u!114 &114896122459349922
 MonoBehaviour:
   m_ObjectHideFlags: 1

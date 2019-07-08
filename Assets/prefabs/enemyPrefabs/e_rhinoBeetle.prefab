@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 114369885845851264}
   - component: {fileID: 114355594326370616}
   - component: {fileID: 114335333896497334}
+  - component: {fileID: 114938610157151970}
   m_Layer: 9
   m_Name: e_rhinoBeetle
   m_TagString: enemy_rhinoBeetle
@@ -472,6 +473,7 @@ MonoBehaviour:
   noticeThresholdY: 0
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
+  upperLayerEnemy: 0
 --- !u!114 &114179946484310874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -530,7 +532,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1197735560171940}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7465d3cf6dc723459be3e518ac51b0a, type: 3}
   m_Name: 
@@ -680,6 +682,22 @@ MonoBehaviour:
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
   renderLayer: 0
+--- !u!114 &114938610157151970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1197735560171940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52f384d93fee72b4cb0b65fe702459a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebugClickMode: 0
+  hasSeperateFacingAnimations: 0
+  bodyCollider: {fileID: 61974250020516836}
+  pathGrid: {fileID: 0}
+  DebugPathEdge: {fileID: 105236, guid: f6080763e4fbb114ba777d137d63807c, type: 2}
 --- !u!114 &114960315007237348
 MonoBehaviour:
   m_ObjectHideFlags: 1

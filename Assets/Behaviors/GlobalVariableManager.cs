@@ -155,6 +155,16 @@ public class GlobalVariableManager : UserDataItem {
 
 	public TRASHDOORS BROKEN_TRASH_DOORS = TRASHDOORS.NONE;
 
+
+	public enum UPGRADE_CRYSTALS{
+		NONE = 0,
+		W1_BZ_R2 =	1<<0,
+	}
+
+	public UPGRADE_CRYSTALS AQUIRED_CRYSTALS = UPGRADE_CRYSTALS.NONE;
+
+
+
     //-------------Enemy Global Variables------------//
     public enum BOSSES : int
     {

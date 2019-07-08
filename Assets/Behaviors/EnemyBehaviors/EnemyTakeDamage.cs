@@ -309,7 +309,7 @@ public bool bossSpawnedEnemy;
 				//gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
 				//Debug.Log("**AND HERE!!!!!!!!***");
 				yield return new WaitForSeconds(.4f);
-				StartCoroutine( "StopKnockback");
+				StartCoroutine( "StopKnockback",0f);
 				StartCoroutine("AfterHit");
 				}
 			}

@@ -15,14 +15,18 @@ public class BossPool : MonoBehaviour
 		}
 	}
 
-	public void GetPooledBoss(string name, Vector2 spawnPos){
+	public GameObject GetPooledBoss(string name, Vector2 spawnPos){
 		for(int i = 0; i <bossList.Count; i++){
 			if(bossList[i].name.ToLower() == name.ToLower()){
 				bossList[i].transform.position = spawnPos;
 				bossList[i].SetActive(true);
+				return bossList[i];
 				break;
 			}
 		}
+
+		Debug.Log(name + " boss not in boss pool!");
+		return null;
 	}
 }
 

@@ -16,9 +16,15 @@ public class Ev_Enemy_RhinoBeetleJumper : MonoBehaviour
     public AnimationCurve leapCurve;
 
 
+    int startingLayerID; //added so the enemy knows to switch back to "upperEnemy" or just "enemy"
+
 	void Awake(){
 		controller = GetComponent<EnemyStateController>();
 
+	}
+
+	void OnEnable(){
+		startingLayerID = gameObject.layer;
 	}
 
 	
@@ -45,7 +51,7 @@ public class Ev_Enemy_RhinoBeetleJumper : MonoBehaviour
                 case EnemyState.LEAP:
 				if (leapifier.OnUpdate()) {
                         // Reached the leap destination.
-                        gameObject.layer = 9; // Enemy;
+                        gameObject.layer = startingLayerID; // Enemy;
                         controller.SendTrigger(EnemyTrigger.RECOVER);
                     }
 
