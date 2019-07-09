@@ -82,6 +82,7 @@ MonoBehaviour:
     - Value: b8e22a22-850b-42c6-b7e9-79b10e1453a9
     - Value: 2d1d0ef7-d623-46df-b712-0c6548c5bb02
     - Value: 8a7c88ee-1103-4c36-b2c6-21317fe719e1
+    - Value: eaaf4a25-cbb6-4296-8577-2dc71095f544
     values:
     - window:
         serializedVersion: 2
@@ -439,7 +440,7 @@ MonoBehaviour:
         Value: 46b80342-c623-46cd-a57d-63ecefd992d4
       x: 1656
       y: 473
-      text: Ok. Ok. It's fine. We still got a lot of bug troops he's gotta get passed.
+      text: Ok. Ok. It's fine. We still got a lot of bug troops he's gotta get through.
       isThought: 0
       animTrigger: 
       type: 1
@@ -577,7 +578,7 @@ MonoBehaviour:
       title: GeneralGrub2_1
       speakerName: 
       question: 
-      action: 
+      action: finish
       isDialogAction: 0
       friendState: 
       id:
@@ -988,7 +989,7 @@ MonoBehaviour:
       title: NewDialog
       speakerName: 
       question: 
-      action: 
+      action: finish
       isDialogAction: 0
       friendState: 
       id:
@@ -1699,6 +1700,30 @@ MonoBehaviour:
       x: 1842
       y: 1734
       text: Remember that, human, and prepare to meet your end!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 107
+        y: 1934
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: FlamingPhil
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: eaaf4a25-cbb6-4296-8577-2dc71095f544
+      x: 107
+      y: 1934
+      text: Child Dialog
       isThought: 0
       animTrigger: 
       type: 1

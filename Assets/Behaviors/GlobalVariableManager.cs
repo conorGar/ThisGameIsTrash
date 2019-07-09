@@ -341,6 +341,8 @@ public class GlobalVariableManager : UserDataItem {
 
         json_data["TUT_POPUPS_SHOWN"] = (uint)TUT_POPUPS_SHOWN;
 		json_data["BROKEN_TRASH_DOORS"] = (uint)BROKEN_TRASH_DOORS; //steve did I do this right?
+		json_data["AQUIRED_CRYSTALS"] = (uint)AQUIRED_CRYSTALS; //steve did I do this right?
+
 
         return json_data;
     }
@@ -397,7 +399,7 @@ public class GlobalVariableManager : UserDataItem {
         TIME_UPGRADE_LEVEL = json_data["TIME_UPGRADE_LEVEL"].AsInt;
         TUT_POPUPS_SHOWN = (TUTORIALPOPUPS)json_data["TUT_POPUPS_SHOWN"].AsInt;
 		BROKEN_TRASH_DOORS = (TRASHDOORS)json_data["BROKEN_TRASH_DOORS"].AsInt; //Steve did I do this right?
-
+		AQUIRED_CRYSTALS = (UPGRADE_CRYSTALS)json_data["AQUIRED_CRYSTALS"].AsInt;
     }
 
     // helpers

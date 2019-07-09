@@ -9,6 +9,7 @@ public class EnemySpawner : EditorMonoBehaviour {
     public EnemyInstance myEnemyInstance;
     public string enemyBodyName;
     public bool myEnemyHasNoDeadBody;
+    public bool isUpperEnemy;
     [HideInInspector]
     public bool bodyDestroyed;// set true by 'ThrowableBody.cs - Death()'
     string spawnerID;
@@ -67,5 +68,14 @@ public class EnemySpawner : EditorMonoBehaviour {
 		//1 = skeleton
 		//2= rotting body
 		//3 = body
+	}
+
+	//check if this is an UpperEnemy or just 'Enemy' layer. Called in 'Room.cs'
+	public int GetEnemyLayer(){
+		if(isUpperEnemy){
+			return 23; //UpperEnemy value
+		}else{
+			return 9;
+		}
 	}
 }

@@ -35,6 +35,14 @@ public class GeneralGrubFriend : Friend
                 nextDialog = "BeetleSteve";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
+			case "CICADA_SAM":
+                nextDialog = "GeneralGrub2";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
+			case "CICADA_INTRO":
+                nextDialog = "FlamingPhil";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
         }
 	}
 	public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
@@ -55,7 +63,7 @@ public class GeneralGrubFriend : Friend
                 beetleSteve.GetComponent<BossBeetleSteve>().ActivateBoss();
 				beetleSteve.GetComponent<BossBeetleSteve>().friend = this;
 
-                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 15; // smaller start radius for beetle steve dialog
+                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 45; 
                 break;
 			case "KING_INTRO":
              
