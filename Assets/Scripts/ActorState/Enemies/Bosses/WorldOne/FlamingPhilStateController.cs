@@ -1,17 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class RatStateController : EnemyStateController
+public class FlamingPhilStateController : EnemyStateController
 {
-    // Use this for initialization
-    protected new void Awake()
+
+	//moving flag - bounce around screen
+	//PREPARE - charge up shot
+	//THROW - fire projectiles in four directions
+
+	protected new void Awake()
     {
         defaultState = new EnemyIdle();
         base.Awake();
     }
-
-    protected override void AnyStateTrigger(EnemyTrigger trigger)
+	protected override void AnyStateTrigger(EnemyTrigger trigger)
     {
         switch (trigger) {
             case EnemyTrigger.DEATH:
@@ -21,8 +23,7 @@ public class RatStateController : EnemyStateController
         }
     }
 
-
-    protected override void AnimationEventCompleted(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip)
+	protected override void AnimationEventCompleted(tk2dSpriteAnimator animator, tk2dSpriteAnimationClip clip)
     {
         base.AnimationEventCompleted(animator, clip);
 
@@ -35,7 +36,11 @@ public class RatStateController : EnemyStateController
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
                 currentState = new EnemyIdle();
                 break;
-		
+			case EnemyState.THROW:
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+                currentState = new EnemyIdle();
+                break;
         }
     }
 }
+
