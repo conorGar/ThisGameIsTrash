@@ -13,6 +13,7 @@ public class FlamingPhilStateController : EnemyStateController
         defaultState = new EnemyIdle();
         base.Awake();
     }
+
 	protected override void AnyStateTrigger(EnemyTrigger trigger)
     {
         switch (trigger) {

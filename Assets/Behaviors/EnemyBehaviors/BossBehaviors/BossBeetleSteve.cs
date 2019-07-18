@@ -4,10 +4,17 @@ using System.Collections;
 public class BossBeetleSteve : Boss
 {
 	public GeneralGrubFriend friend; // set by "GeneralGrubFriend"
+	public GameObject bossBlockades;
+
+
 	// Use this for initialization
 	void Start ()
 	{
 	
+	}
+
+	void OnEnable(){
+		bossBlockades.SetActive(true);
 	}
 	
 	// Update is called once per frame
@@ -24,6 +31,7 @@ public class BossBeetleSteve : Boss
 
 	public override void BossDeathEvent(){
 		friend.SetFriendState("CICADA_SAM");
+		bossBlockades.SetActive(false);
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		gameObject.SetActive(false);
 	}

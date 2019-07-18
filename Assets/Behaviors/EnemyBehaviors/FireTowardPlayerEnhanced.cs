@@ -47,6 +47,7 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 	}
 
     public void Fire() {
+    	Debug.Log("Fire Activated");
         SoundManager.instance.PlaySingle(throwSFX);
         GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag, gameObject.transform.position);
         Vector2 movementDir = (PlayerManager.Instance.player.transform.position - gameObject.transform.position).normalized * 5;
