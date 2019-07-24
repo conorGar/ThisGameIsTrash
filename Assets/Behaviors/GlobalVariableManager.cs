@@ -129,11 +129,22 @@ public class GlobalVariableManager : UserDataItem {
     NONE =		0,
     DUSTER = 	1<<0,
     MOP = 		1<<1,
+    HAZMAT = 	1<<2,
     }
 
-    public WEAPONS WEAPONS_AVAILABLE = WEAPONS.DUSTER;
+    //public WEAPONS WEAPONS_AVAILABLE = (WEAPONS.DUSTER);
 
     public WEAPONS WEAPON_EQUIPPED = WEAPONS.DUSTER;
+
+    public WEAPONS SUITS_DISCOVERED = WEAPONS.HAZMAT;
+
+	//private long suitsDiscoveredValue = (long)(WEAPONS.HAZMAT);
+   // public WEAPONS SUITS_DISCOVERED
+   // {
+     //   set { suitsDiscoveredValue = (long)value; }
+     //   get { return (WEAPONS)suitsDiscoveredValue; }
+    //}
+
 
     public enum TUTORIALPOPUPS{
 
@@ -432,11 +443,11 @@ public class GlobalVariableManager : UserDataItem {
         return (LARGE_GARBAGE_DISCOVERED & large_garbage_type) == large_garbage_type;
     }
 
-    public bool IsWeaponAvailable(WEAPONS weapon_type){
-    	return (WEAPONS_AVAILABLE & weapon_type) == weapon_type;
+    public bool IsSuitAvailable(WEAPONS weapon_type){
+    	return (SUITS_DISCOVERED & weapon_type) == weapon_type;
     }
 
-    public bool IsWeaponEquipped(WEAPONS weapon){
+    public bool IsSuitEquipped(WEAPONS weapon){
     	return((WEAPON_EQUIPPED & weapon) == weapon);
     }
 }
