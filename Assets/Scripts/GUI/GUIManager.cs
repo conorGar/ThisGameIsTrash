@@ -18,6 +18,7 @@ public class GUIManager : MonoBehaviour {
     public GameObject checkPointDisplay;
     public GUI_BossHpDisplay bossHPDisplay;
   	public GUI_TutPopup tutorialPopup;
+  	public GUI_LargeTrashCollectedDisplay largeTrashCollectDisplay;
   	public Camera miniMapCam;
 
    	public TextMeshProUGUI lostTrash;

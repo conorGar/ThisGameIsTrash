@@ -71,7 +71,6 @@ public class SE_GlowWhenClose : MonoBehaviour {
 		if(gameObject.name == "Dumpster"){
 			GameObject largeTrash = GameObject.FindGameObjectWithTag("ActiveLargeTrash");
 			if(largeTrash != null){
-				largeTrash.GetComponent<Ev_LargeTrash>().dumpster = this.gameObject;
 				largeTrash.GetComponent<Ev_LargeTrash>().Return();
 				gameObject.GetComponent<Animator>().Play("dumpsterLargeTrashTake",-1,0f);
 				Debug.Log("Large trash return activated here");

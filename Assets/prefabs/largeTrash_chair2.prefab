@@ -20,10 +20,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4711462657645448}
   - component: {fileID: 212004212098329112}
-  - component: {fileID: 114945675712837876}
   - component: {fileID: 50679807916840308}
   - component: {fileID: 111095379191885820}
   - component: {fileID: 95634304949808062}
+  - component: {fileID: 114293227758109952}
   m_Layer: 0
   m_Name: largeTrash_chair2
   m_TagString: LargeTrash
@@ -96,7 +96,7 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114945675712837876
+--- !u!114 &114293227758109952
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -104,25 +104,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1027202827954816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca88a61368a3d9445b07fcf477e617e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a77e205a03969848b9ebd23ae657c1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceUntilPickup: 3
-  player: {fileID: 0}
-  pickup: {fileID: 0}
-  drop: {fileID: 0}
-  carryXAdjustment: 3.3
-  myBody: {fileID: 0}
-  dumpster: {fileID: 0}
-  spinning: 0
-  myPositionInList: 2
   isRewardForBoss: 0
+  garbage:
+    type: 1
   collectedDisplaySprite: {fileID: 0}
+  myCollisionBox: {fileID: 0}
   sparkle: {fileID: 1995515920980104, guid: 92df80640633c2d45a95e3cf88147b55, type: 2}
   smokePuff: {fileID: 1283276921881662, guid: db528b844f179cd44b47a18627d12908, type: 2}
-  mainCamera: {fileID: 0}
-  ltmManager: {fileID: 0}
   returnSound: {fileID: 0}
+  distanceUntilPickup: 3
+  trashTitle: 
+  myCurrentRoom: {fileID: 0}
+  myBody: {fileID: 0}
 --- !u!212 &212004212098329112
 SpriteRenderer:
   m_ObjectHideFlags: 1
