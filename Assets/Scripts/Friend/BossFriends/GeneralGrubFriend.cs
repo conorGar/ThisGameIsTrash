@@ -8,7 +8,7 @@ public class GeneralGrubFriend : Friend
 	public int beetleSteveRoom;
 	public int trailRoom;
 	public int flamingPhilRoom;
-
+	public int generalRoom = 206;
 
 	public override void GenerateEventData()
     {
@@ -31,9 +31,11 @@ public class GeneralGrubFriend : Friend
 			case "BEETLE_STEVE_FIGHT":
                 return room.roomNum == beetleSteveRoom;
 			case "CICADA_SAM":
-                return room.roomNum == trailRoom;
+                return room.roomNum == flamingPhilRoom;
             case "CICADA_SAM_INTRO":
-				return room.roomNum == flamingPhilRoom;
+				return room.roomNum == trailRoom;
+			case "GENERAL_FIGHT_INTRO":
+				return room.roomNum == generalRoom;
         }
 
 		return room.roomNum == startRoom;
@@ -59,12 +61,16 @@ public class GeneralGrubFriend : Friend
                 nextDialog = "BeetleSteve";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
-			case "CICADA_SAM":
+			case "CICADA_SAM_INTRO":
                 nextDialog = "GeneralGrub2";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
-			case "CICADA_INTRO":
+			case "CICADA_SAM":
                 nextDialog = "FlamingPhil";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
+			case "GENERAL_FIGHT_INTRO":
+                nextDialog = "GeneralFightIntro";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
         }
@@ -91,15 +97,31 @@ public class GeneralGrubFriend : Friend
                 break;
 			case "CICADA_SAM_INTRO":
 				yield return new WaitForSeconds(.5f);
-                SetFriendState("CICADA_SAM_FIGHT");
-                GameObject flamingPhil = BossPool.Instance.GetPooledBoss("boss_flamingPhil",gameObject.transform.position);
-                flamingPhil.GetComponent<BossBeetleSteve>().ActivateBoss();
-				flamingPhil.GetComponent<BossBeetleSteve>().friend = this;
+                SetFriendState("CICADA_SAM");
 
-                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 45; 
+                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 15; 
                 break;
-			case "KING_INTRO":
-             
+			case "CICADA_SAM":
+				yield return new WaitForSeconds(.5f);
+                SetFriendState("CICADA_SAM_FIGHT");
+				GameObject flamingPhilBounds = BossPool.Instance.GetPooledBoss("boss_flamingPhil_bounds",gameObject.transform.position);
+				flamingPhilBounds.SetActive(true);
+                GameObject flamingPhil = BossPool.Instance.GetPooledBoss("boss_flamingPhil",gameObject.transform.position);
+	
+
+                flamingPhil.GetComponent<BossFlamingPhil>().ActivateBoss();
+				flamingPhil.GetComponent<BossFlamingPhil>().friend = this;
+
+                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 15; 
+                break;
+			case "GENERAL_FIGHT_INTRO":
+				yield return new WaitForSeconds(.5f);
+                SetFriendState("GENERAL_FIGHT");
+				GameObject generalGrubTank = BossPool.Instance.GetPooledBoss("boss_generalGrubTank",gameObject.transform.position);
+
+                GameObject generalGrub = BossPool.Instance.GetPooledBoss("boss_generalGrub");
+				generalGrub.GetComponent<Boss>().ActivateBoss();
+                gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 45; 
                 SetFriendState("END");
                 break;
             case "END":

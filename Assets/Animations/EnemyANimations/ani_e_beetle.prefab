@@ -129,9 +129,9 @@ MonoBehaviour:
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    fps: 30
+    fps: 11.111111
     loopStart: 0
-    wrapMode: 0
+    wrapMode: 2
   - name: swoop
     frames:
     - spriteCollection: {fileID: 114707067206574538, guid: 6385e2df30de156448465864d72126d4,
@@ -224,3 +224,15 @@ MonoBehaviour:
     fps: 4.166667
     loopStart: 0
     wrapMode: 2
+  - name: dead
+    frames:
+    - spriteCollection: {fileID: 114707067206574538, guid: 6385e2df30de156448465864d72126d4,
+        type: 2}
+      spriteId: 17
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 0

@@ -61,4 +61,11 @@ public class Ev_ProjectileTowrdPlayer : MonoBehaviour {
 		yield return new WaitForSeconds(time);
 		continuous = false;
 	}
+
+	void OnTriggerEnter2D(Collider2D collider){
+		if(collider.gameObject.layer == 8){ //kill self when collide with tile
+			ObjectPool.Instance.ReturnPooledObject(this.gameObject);
+		}
+	}
+
 }

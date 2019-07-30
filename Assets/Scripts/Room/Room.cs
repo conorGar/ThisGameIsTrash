@@ -127,9 +127,10 @@ public class Room : MonoBehaviour
                     enemies.Add(spawnedEnemy);
 
                     //------check if spawned as an UpperEnemy or just an Enemy Layer based on given EnemySpawner value
-                   	spawnedEnemy.layer = enemySpawners[i].GetEnemyLayer();
+					spawnedEnemy.layer = enemySpawners[i].GetEnemyLayer();
+					spawnedEnemy.GetComponent<Renderer>().sortingLayerName = enemySpawners[i].GetEnemySortingLayer();
                     //---------------
-
+                    Debug.Log("Current enemy spawned at layer: " + enemySpawners[i].GetEnemyLayer()); 
 
 					if(spawnedEnemy.GetComponent<EnemyTakeDamage>() != null){
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().SetSpawnerID(enemySpawners[i].name);

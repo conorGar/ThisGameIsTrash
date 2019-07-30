@@ -13,7 +13,7 @@ public class BossGeneralGrubTank : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	
+		destinationPos = (pathMarks[0].transform.position);
 	}
 	
 	// Update is called once per frame

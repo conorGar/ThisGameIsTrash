@@ -78,4 +78,11 @@ public class EnemySpawner : EditorMonoBehaviour {
 			return 9;
 		}
 	}
+	public string GetEnemySortingLayer(){
+		if(isUpperEnemy){
+			return "Layer02"; //UpperEnemy value
+		}else{
+			return "Layer01";
+		}
+	}
 }

@@ -23,9 +23,7 @@ public class Ev_Enemy_RhinoBeetleJumper : MonoBehaviour
 
 	}
 
-	void OnEnable(){
-		startingLayerID = gameObject.layer;
-	}
+
 
 	
 	void Update ()
@@ -34,9 +32,11 @@ public class Ev_Enemy_RhinoBeetleJumper : MonoBehaviour
 			//Debug.Log("Got here - Heron 1");
 			if(Vector2.Distance(PlayerManager.Instance.player.transform.position, gameObject.transform.position) < lungeThreshold){
 				//Debug.Log("Got here - Heron 2");
+	
 
 					if(controller.GetCurrentState() == EnemyState.IDLE || controller.GetCurrentState() == EnemyState.CHASE){
 						//Debug.Log("Got here - Heron 3");
+						startingLayerID = gameObject.layer; // set here because OnEnable doesnt happen fast enough for EnemySpawner to change layer properly
 						if (leapifier != null)
                             leapifier.Reset();
 						leapDestination = PlayerManager.Instance.player.transform.position ;

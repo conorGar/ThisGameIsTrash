@@ -6,7 +6,8 @@ public class DresserBehavior : SE_GlowWhenClose
 
 	public GUI_SuitSelect suitSelectHud;
 
-	void onAwake(){
+	void Start(){
+		base.Start();
 		if(suitSelectHud == null){
 			suitSelectHud = GUIManager.Instance.suitSelectDisplay;
 		}

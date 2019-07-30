@@ -16,7 +16,7 @@ public class GUIManager : MonoBehaviour {
     public GUI_HPdisplay hpDisplay;
     public GUI_SuitSelect suitSelectDisplay;
     public GameObject checkPointDisplay;
-
+    public GUI_BossHpDisplay bossHPDisplay;
   	public GUI_TutPopup tutorialPopup;
   	public Camera miniMapCam;
 

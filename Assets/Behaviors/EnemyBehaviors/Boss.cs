@@ -22,17 +22,24 @@ public class Boss : MonoBehaviour {
     private void Awake()
     {
         controller = GetComponent<EnemyStateController>();
+       
     }
 
     protected void Start () {
 
 
-		if(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] > hp){
-			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = hp;
-		}else if(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] < hp && GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] != 0 ){
-			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]++; //regain hp each day
-		}
+//		if(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] > hp){
+//			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = hp;
+//		}else if(GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] < hp && GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] != 0 ){
+//			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber]++; //regain hp each day
+//		}
 
+		gameObject.GetComponent<EnemyTakeDamage>().currentHp = gameObject.GetComponent<Enemy>().health; //GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber];
+
+//
+		if(hpDisplay == null){
+			hpDisplay = GUIManager.Instance.bossHPDisplay.gameObject;
+		}
 		ActivateBoss();
 
 	}
@@ -40,7 +47,6 @@ public class Boss : MonoBehaviour {
 	public virtual void ActivateBoss(){
         gameObject.SetActive(true);
         currentRoom = RoomManager.Instance.currentRoom;
-        gameObject.GetComponent<EnemyTakeDamage>().currentHp = GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber];
 		gameObject.GetComponent<EnemyTakeDamage>().bossEnemy = true;
 
 	}
@@ -73,7 +79,7 @@ public class Boss : MonoBehaviour {
 		if(vanishAtDeath){
             GameStateManager.Instance.PushState(typeof(MovieState));
             CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position,"zoom");
-			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = 0;
+//			GlobalVariableManager.Instance.BOSS_HP_LIST[bossNumber] = 0;
 			//yield return new WaitForSeconds(1.5f);
 
 			GameObject player = GameObject.FindGameObjectWithTag("Player");

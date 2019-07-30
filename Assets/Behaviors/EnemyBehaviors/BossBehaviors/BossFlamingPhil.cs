@@ -7,11 +7,14 @@ public class BossFlamingPhil : Boss
 	public GameObject projectile;
 	public float fireRate;
 	public float randomRateChanger;
+	public GameObject bossBlockades;
 
 	public float nextFireTime = 0f;
 
 	void OnEnable(){
 		nextFireTime = fireRate + Time.time + + Random.Range(0,randomRateChanger);
+		bossBlockades.SetActive(true);
+
 	}
 	
 	// Update is called once per frame
@@ -35,6 +38,8 @@ public class BossFlamingPhil : Boss
 	public override void BossDeathEvent(){
 		friend.SetFriendState("GENERAL_FIGHT_INTRO");
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+		bossBlockades.SetActive(false);
+
 		gameObject.SetActive(false);
 	}
 

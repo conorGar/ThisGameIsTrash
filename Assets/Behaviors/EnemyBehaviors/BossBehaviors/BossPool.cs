@@ -28,5 +28,18 @@ public class BossPool : MonoBehaviour
 		Debug.Log(name + " boss not in boss pool!");
 		return null;
 	}
+
+	public GameObject GetPooledBoss(string name){
+		for(int i = 0; i <bossList.Count; i++){
+			if(bossList[i].name.ToLower() == name.ToLower()){
+				bossList[i].SetActive(true);
+				return bossList[i];
+				break;
+			}
+		}
+
+		Debug.Log(name + " boss not in boss pool!");
+		return null;
+	}
 }
 

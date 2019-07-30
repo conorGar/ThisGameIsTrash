@@ -214,6 +214,10 @@ public bool bossSpawnedEnemy;
 						StartCoroutine("NonMeleeHit");
 						}
                     }
+
+                    if(meleeDmgBonus + 1 <= armorRating){ // Show clank if does no damage
+						ObjectPool.Instance.GetPooledObject("effect_clank",gameObject.transform.position);
+                    }
                 }
                 Debug.Log("Collision with nen melee weapon: >>>>>>>>>>> ");
                 SoundManager.instance.RandomizeSfx(SFXBANK.HIT6, .8f, 1.1f);
@@ -283,8 +287,8 @@ public bool bossSpawnedEnemy;
                 if (moveWhenHit){
                     UpdateFacing();
                 }
-
-                if(powerHit){
+				
+				if(powerHit || currentHp <= 0){
 					controller.SendTrigger(EnemyTrigger.POWER_HIT);
 
                 	Debug.Log("****----- GOT HERE BIG HIT ---------****");
@@ -364,7 +368,9 @@ public bool bossSpawnedEnemy;
                 if (!moveWhenHit || (controller != null && controller.GetCurrentState() == EnemyState.LUNGE)) {
                     GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 }
-
+				if(meleeDmgBonus + 1 <= armorRating){ // Show clank if does no damage
+						ObjectPool.Instance.GetPooledObject("effect_clank",gameObject.transform.position);
+                }
                 currentHp = currentHp - 1 - meleeDmgBonus  +armorRating;
 
 				if(currentHp <= 0){

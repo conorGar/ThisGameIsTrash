@@ -21,7 +21,7 @@ public class SE_GlowWhenClose : MonoBehaviour {
 
 	int glowCheck = 0;
 
-	void Start(){
+	protected void Start(){
 		if(glowSprite != null)
 			startSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
 	}

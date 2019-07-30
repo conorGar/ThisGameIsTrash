@@ -8,10 +8,6 @@ public class BossBeetleSteve : Boss
 
 
 	// Use this for initialization
-	void Start ()
-	{
-	
-	}
 
 	void OnEnable(){
 		bossBlockades.SetActive(true);
@@ -30,7 +26,7 @@ public class BossBeetleSteve : Boss
 	}
 
 	public override void BossDeathEvent(){
-		friend.SetFriendState("CICADA_SAM");
+		friend.SetFriendState("CICADA_SAM_INTRO");
 		bossBlockades.SetActive(false);
 		CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		gameObject.SetActive(false);
