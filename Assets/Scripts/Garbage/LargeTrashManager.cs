@@ -41,5 +41,18 @@ public class LargeTrashManager : MonoBehaviour
 			worlds[currentWorld -1].SetActive(false);
 	
 	}
+
+	public void EnableSpecificTrash(string trashName, int world){
+		Debug.Log("Enable Specific Trash CALL");
+
+		foreach (Transform child in worlds[world -1].transform){
+			Debug.Log("Enable Specific Trash check" + child.name +" " + trashName);
+			if(child.name == trashName){
+				
+				child.gameObject.SetActive(true);
+				break;
+			}
+		}
+	}
 }
 

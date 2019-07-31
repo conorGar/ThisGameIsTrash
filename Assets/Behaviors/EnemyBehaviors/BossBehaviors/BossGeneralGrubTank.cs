@@ -10,6 +10,20 @@ public class BossGeneralGrubTank : MonoBehaviour
 	Vector3 startingScale;
 	protected tk2dSpriteAnimator anim;
 
+
+	tk2dSpriteAnimator myAnim;
+	public GameObject myBoulder;
+	public float projectileSpeed;
+	public float fireRate;
+	public AudioClip throwSFX;
+	public AudioClip buildupSfx;
+	public float nextFireTime = 0f;
+
+	void OnEnable(){
+		nextFireTime = fireRate + Time.time;
+		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
+
+	}
 	// Use this for initialization
 	void Start ()
 	{
@@ -24,6 +38,17 @@ public class BossGeneralGrubTank : MonoBehaviour
         } else {
             NextMark();
         }
+
+
+		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
+                if (nextFireTime < Time.time) {
+                    if (buildupSfx != null) {
+                        SoundManager.instance.PlaySingle(buildupSfx);
+                    }
+					LaunchRocket();
+
+                }
+            }
 	}
 
 
@@ -42,5 +67,18 @@ public class BossGeneralGrubTank : MonoBehaviour
             destinationPos = (pathMarks[currentMark].transform.position);
 
     }
+
+
+
+	void LaunchRocket(){
+			Debug.Log("TossedRock");
+	        myAnim.Play("throw");
+
+	        myBoulder = ObjectPool.Instance.GetPooledObject("projectile_boulder", gameObject.transform.position,true);
+	        myAnim.Play("idle");
+			nextFireTime = fireRate + Time.time;
+
+		
+	}
 }
 

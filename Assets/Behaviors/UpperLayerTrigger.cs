@@ -13,7 +13,7 @@ public class UpperLayerTrigger : MonoBehaviour
 				Debug.Log("Set player layer to 'upperPlayer'");
 			}else if(collider.gameObject.layer == 24){//switch back to 'Player' layer from 'UpperPlayer'
 				collider.gameObject.layer = 12;
-				gameObject.layer =21; //change this to 'UpperTiles' so it collides with player again
+				gameObject.layer =8; //change this to 'tiles' so it collides with player again
 				collider.GetComponent<Renderer>().sortingLayerName ="Layer01";
 				Debug.Log("Set player layer back to base Player layer");
 			}

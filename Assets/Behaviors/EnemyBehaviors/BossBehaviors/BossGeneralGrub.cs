@@ -1,51 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossGeneralGrub : MonoBehaviour
+public class BossGeneralGrub : Boss
 {
-	tk2dSpriteAnimator myAnim;
-	public GameObject myBoulder;
-	public float projectileSpeed;
-	public float fireRate;
-	public AudioClip throwSFX;
-	public AudioClip buildupSfx;
-	public float nextFireTime = 0f;
+	public GameObject tankParent;
+	[HideInInspector]
+	public GeneralGrubFriend grubFriend; //given at .Only used for final death dialog
 
 
 	// Use this for initialization
-	void OnEnable(){
-		nextFireTime = fireRate + Time.time;
-		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
-
-	}
-
-	
-	// Update is called once per frame
-	void Update ()
-	{
-		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-                if (nextFireTime < Time.time) {
-                    if (buildupSfx != null) {
-                        SoundManager.instance.PlaySingle(buildupSfx);
-                    }
-					LaunchRocket();
-
-                }
-            }
-        
-	}
 
 
+	public override void BossDeathEvent(){
+		Debug.Log("General Grub Death Event Activated");
+		grubFriend.SetFriendState("GENERAL_FIGHT_END");
+		grubFriend.GetComponent<ActivateDialogWhenClose>().canTalkTo = true;
+		grubFriend.GetComponent<ActivateDialogWhenClose>().distanceThreshold =42;
+		grubFriend.gameObject.SetActive(true);
 
-	void LaunchRocket(){
-			Debug.Log("TossedRock");
-	        myAnim.Play("throw");
-
-	        myBoulder = ObjectPool.Instance.GetPooledObject("projectile_boulder", gameObject.transform.position,true);
-	        myAnim.Play("idle");
-			nextFireTime = fireRate + Time.time;
-
-		
-	}
+        DeactivateHpDisplay();
+        SoundManager.instance.musicSource.Stop();
+        tankParent.SetActive(false);
+    }
 }
 

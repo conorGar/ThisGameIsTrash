@@ -36,6 +36,8 @@ public class GeneralGrubFriend : Friend
 				return room.roomNum == trailRoom;
 			case "GENERAL_FIGHT_INTRO":
 				return room.roomNum == generalRoom;
+			case "GENERAL_FIGHT":
+				return room.roomNum == generalRoom;
         }
 
 		return room.roomNum == startRoom;
@@ -73,6 +75,10 @@ public class GeneralGrubFriend : Friend
                 nextDialog = "GeneralFightIntro";
                 GetComponent<ActivateDialogWhenClose>().Execute();
                 break;
+			case "GENERAL_FIGHT_END":
+                nextDialog = "GrubFightEnd";
+                GetComponent<ActivateDialogWhenClose>().Execute();
+                break;
         }
 	}
 	public override IEnumerator OnFinishDialogEnumerator(bool panToPlayer = true)
@@ -83,6 +89,7 @@ public class GeneralGrubFriend : Friend
             case "GRUB_INTRO":
 				yield return new WaitForSeconds(.5f);
                 SetFriendState("BEETLE_STEVE_INTRO");
+
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 15; // smaller start radius for beetle steve dialog
                
                 break;
@@ -121,10 +128,13 @@ public class GeneralGrubFriend : Friend
 
                 GameObject generalGrub = BossPool.Instance.GetPooledBoss("boss_generalGrub");
 				generalGrub.GetComponent<Boss>().ActivateBoss();
+				generalGrub.GetComponent<BossGeneralGrub>().grubFriend = this;
                 gameObject.GetComponent<ActivateDialogWhenClose>().distanceThreshold = 45; 
-                SetFriendState("END");
                 break;
-            case "END":
+            case "GENERAL_FIGHT_END":
+            	LargeTrashManager.Instance.EnableSpecificTrash("testChair",1);
+				SetFriendState("END");
+
                 break;
         }
 
@@ -144,6 +154,15 @@ public class GeneralGrubFriend : Friend
                 beetleSteve.GetComponent<BossBeetleSteve>().friend = this;
 				gameObject.SetActive(false);
                 break;
+           case "GENERAL_FIGHT":
+				GameObject generalGrubTank = BossPool.Instance.GetPooledBoss("boss_generalGrubTank",gameObject.transform.position);
+                GameObject generalGrub = BossPool.Instance.GetPooledBoss("boss_generalGrub");
+				generalGrub.GetComponent<BossGeneralGrub>().grubFriend = this;
+
+				generalGrub.GetComponent<Boss>().ActivateBoss();
+				gameObject.SetActive(false);
+
+           	break;
         }
     }
 }

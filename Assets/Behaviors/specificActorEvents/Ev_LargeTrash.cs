@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Ev_LargeTrash : MonoBehaviour
 {
-	public bool isRewardForBoss;
+//	public bool isRewardForBoss;
 
 
 
