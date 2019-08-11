@@ -13,6 +13,9 @@ public class JimStateControllerEditor : JimEditor { }
 [CustomEditor(typeof(RatStateController))]
 public class RatStateControllerEditor : EnemyEditor { }
 
+[CustomEditor(typeof(BoomerangSlimeStateController))]
+public class BoomerangSlimeStateControllerEditor : EnemyEditor { }
+
 [CustomEditor(typeof(DuckStateController))]
 public class DuckStateControllerEditor : EnemyEditor { }
 
@@ -50,8 +53,7 @@ public class OpossumStateControllerEditor : EnemyEditor { }
 [CustomEditor(typeof(HeronStateController))]
 public class HeronStateControllerEditor : EnemyEditor { }
 
-[CustomEditor(typeof(SpearMoleStateController))]
-public class SpearMoleStateControllerEditor : EnemyEditor { }
+
 
 public class GenericStateControllerEditor<State_Type, Trigger_Type, Flag_Type> : Editor
 {

@@ -82,6 +82,8 @@ public bool bossSpawnedEnemy;
 	Vector3 startScale;
 
     protected EnemyStateController controller;
+    [HideInInspector]
+    public EnemyKillBlockManager killBlockManager;
 
     void Awake()
     {
@@ -683,6 +685,10 @@ public bool bossSpawnedEnemy;
 		deathSmoke.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		AudioClip smokeSFX = deathSmoke.GetComponent<KillSelfAfterTime>().mySound;
 		SoundManager.instance.PlaySingle(smokeSFX);
+
+		if(killBlockManager){
+			killBlockManager.IncrementActivatedCount();
+		}
 
 		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost",new Vector3((transform.position.x), transform.position.y, transform.position.z));
 		deathGhost.GetComponent<Ev_DeathGhost>().OnSpawn();

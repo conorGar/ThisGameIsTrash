@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - name: idle2
+  - name: recover
     frames:
     - spriteCollection: {fileID: 114965611997905322, guid: a08d746c4d496f4459dd642b775e4edb,
         type: 2}
@@ -222,9 +222,9 @@ MonoBehaviour:
       eventInfo: 
       eventInt: 0
       eventFloat: 0
-    fps: 15.584416
+    fps: 24.742268
     loopStart: 0
-    wrapMode: 0
+    wrapMode: 2
   - name: leap
     frames:
     - spriteCollection: {fileID: 114965611997905322, guid: a08d746c4d496f4459dd642b775e4edb,
@@ -285,7 +285,7 @@ MonoBehaviour:
     fps: 8.333334
     loopStart: 0
     wrapMode: 2
-  - name: recover
+  - name: recover2
     frames:
     - spriteCollection: {fileID: 114965611997905322, guid: a08d746c4d496f4459dd642b775e4edb,
         type: 2}

@@ -75,7 +75,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1465294658433506}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.272417, y: -1.8398962, z: 0}
+  m_LocalPosition: {x: -66.7, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4113816606089830}
@@ -204,23 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289acecd8c5dec64dbebc899bcdcf860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armoredEnemy: 0
+  armorRating: 0
   moveWhenHit: 1
-  resetFacingAfterHit: 0
-  secretHider: 0
-  returnToCurrentAniAfterHit: 0
-  invincibleAni:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
-  aniToSwitchBackTo:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
   myDeadBodyName: 
   respawnEnemy: 0
   armoredEnemyHitSfx: {fileID: 0}
@@ -230,24 +215,20 @@ MonoBehaviour:
   hitSqueal: 0
   bounce: 0
   tutPopup: {fileID: 0}
-  gar_trash: {fileID: 0}
-  gar_rec: {fileID: 0}
-  gar_comp: {fileID: 0}
-  timeDrop: {fileID: 0}
-  healthDrop: {fileID: 0}
-  pinDrop: {fileID: 0}
   myShadow: {fileID: 0}
   dontSpawnBody: 0
-  canKnockoffArmor: 0
   behaviorsToDeactivate: []
+  hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
+  knockbackForce: 11
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
   otherRespawner: {fileID: 0}
   currentHp: 0
   meleeDmgBonus: 0
   bossSpawnedEnemy: 0
+  meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
 --- !u!114 &114159733858171760
@@ -261,10 +242,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f207374e6425214eb8804596a32ded1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noticeThreshold: 5
-  noticeThresholdY: 6
+  noticeThreshold: 12
+  noticeThresholdY: 10
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
+  upperLayerEnemy: 0
 --- !u!114 &114167003272045330
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -307,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpeed: 9
-  fireRate: 3.5
+  fireRate: 0.3
   myProjectileFalls: 0
   fireAtStart: 0
   randomRateChanger: 1
@@ -361,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movingObject: 0
+  topSorted: 0
   sortBuddies: []
 --- !u!212 &212162191857351970
 SpriteRenderer:

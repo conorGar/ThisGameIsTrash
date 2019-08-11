@@ -28,7 +28,7 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 		myAnim = gameObject.GetComponent<tk2dSpriteAnimator>();
 	}
 
-    void Update()
+    protected virtual void Update()
     {
         if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
             if (controller.GetCurrentState() == EnemyState.IDLE) {
@@ -46,12 +46,13 @@ public class FireTowardPlayerEnhanced : MonoBehaviour
 		nextFireTime = fireRate + Time.time + + Random.Range(0,randomRateChanger);
 	}
 
-    public void Fire() {
+    public virtual void Fire() {
     	Debug.Log("Fire Activated");
         SoundManager.instance.PlaySingle(throwSFX);
         GameObject bullet = ObjectPool.Instance.GetPooledObject(projectile.tag, gameObject.transform.position);
         Vector2 movementDir = (PlayerManager.Instance.player.transform.position - gameObject.transform.position).normalized * 5;
         bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(movementDir.x, movementDir.y);
+
         nextFireTime = fireRate + Time.time + Random.Range(0,randomRateChanger);
     }
 }

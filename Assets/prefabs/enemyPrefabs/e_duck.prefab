@@ -108,7 +108,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585751386897454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -137.37886, y: -59.12935, z: 0.2109375}
+  m_LocalPosition: {x: -107.421844, y: 10.827684, z: 0.2109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4073793924853896}
@@ -295,21 +295,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCollider: {fileID: 0}
   walkDistance: 9.2
-  chaseSpeed: 5
+  maxWalkDistance: 0
+  chaseSpeed: 8
   hasSeperateFacingAnimations: 0
   iBeLerpin: 0
   chasePS: {fileID: 198419328894692054}
   returnToPreviousWhenFar: 0
   usePathGrid: 1
   pathRefreshTime: 1
-  maxWalkDistance: 0
 --- !u!114 &114373584994059236
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585751386897454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87e66f397c6ae134782c4022379cbba6, type: 3}
   m_Name: 
@@ -350,6 +350,7 @@ MonoBehaviour:
   noticeThresholdY: 0
   sleepingEnemy: 0
   sleepingPS: {fileID: 0}
+  upperLayerEnemy: 0
 --- !u!114 &114808193333466140
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -378,23 +379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289acecd8c5dec64dbebc899bcdcf860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armoredEnemy: 0
+  armorRating: 0
   moveWhenHit: 0
-  resetFacingAfterHit: 0
-  secretHider: 0
-  returnToCurrentAniAfterHit: 0
-  invincibleAni:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
-  aniToSwitchBackTo:
-    name: idleR
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
   myDeadBodyName: duck
   respawnEnemy: 0
   armoredEnemyHitSfx: {fileID: 0}
@@ -404,19 +390,13 @@ MonoBehaviour:
   hitSqueal: 0
   bounce: 4
   tutPopup: {fileID: 0}
-  gar_trash: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
-  gar_rec: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
-  gar_comp: {fileID: 1040010733403402, guid: f4a09c652d734c34fbaf95ef37827e39, type: 2}
-  timeDrop: {fileID: 0}
-  healthDrop: {fileID: 0}
-  pinDrop: {fileID: 0}
   myShadow: {fileID: 1572292130659854}
   dontSpawnBody: 0
-  canKnockoffArmor: 0
   behaviorsToDeactivate: []
   hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
+  knockbackForce: 11
   objectPool: {fileID: 1065235061817632, guid: 237c690aca21ad543a60e267a83b98c7, type: 2}
   myRespawner: {fileID: 0}
   otherRespawner: {fileID: 0}

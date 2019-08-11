@@ -37,7 +37,8 @@ public class FollowPlayer : MonoBehaviour {
 	}
 
 	void OnEnable(){
-        if (PlayerManager.Instance.player != null)
+		Debug.Log(PlayerManager.Instance);
+        if (targetCollider == null && PlayerManager.Instance.player != null)
             targetCollider = PlayerManager.Instance.player.GetComponent<BoxCollider2D>(); //needs to be in enable because of Dirty Decoy
 	}
 

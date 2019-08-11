@@ -20,7 +20,8 @@ public class Room : MonoBehaviour
     public string tutPopUpToActivate;
     public GameObject myMapClouds;
     public GlobalVariableManager.ROOM myRoom;
-   
+    public EnemyKillBlockManager roomKillBlockManager;
+
 	int waifuChance;
 	[HideInInspector]
     public List<GameObject> enemies; //needs to be public to be accessible for things that change the behavior of enemies(Dirty Decoy, for example)
@@ -53,7 +54,9 @@ public class Room : MonoBehaviour
         bool allowArmoredEnemies = false;
         if (GlobalVariableManager.Instance.DAY_NUMBER < 2)
             allowArmoredEnemies = true;
-
+		if(roomKillBlockManager){
+		    roomKillBlockManager.neededKillCount = 0; //reset kill blocker counter(so it doesnt keep incrementing every time you enter room...)
+		}
         for (int i=0; i < enemySpawners.Count; ++i)
         {
             // get a random enemy from the enemy spawn list
@@ -130,6 +133,8 @@ public class Room : MonoBehaviour
 					spawnedEnemy.layer = enemySpawners[i].GetEnemyLayer();
 					spawnedEnemy.GetComponent<Renderer>().sortingLayerName = enemySpawners[i].GetEnemySortingLayer();
                     //---------------
+
+
                     Debug.Log("Current enemy spawned at layer: " + enemySpawners[i].GetEnemyLayer()); 
 
 					if(spawnedEnemy.GetComponent<EnemyTakeDamage>() != null){
@@ -137,6 +142,13 @@ public class Room : MonoBehaviour
 		                if(spawnedEnemy.GetComponent<CannotExitScene>())
 		                	spawnedEnemy.GetComponent<CannotExitScene>().SetLimits(this);
 		                spawnedEnemy.GetComponent<EnemyTakeDamage>().objectPool = objectPool;
+
+
+		                //tell it to increase the kill counter if in a room with a kill count blocker
+		                if(roomKillBlockManager){
+		               	 spawnedEnemy.GetComponent<EnemyTakeDamage>().killBlockManager = roomKillBlockManager;
+		                	roomKillBlockManager.neededKillCount++;
+		                }
 	                }
 					if(enemySpawners[i].gameObject.GetComponent<WanderZone>() != null && spawnedEnemy.GetComponent<WanderWithinBounds>() != null) {	
 						Rect wanderZone = enemySpawners[i].gameObject.GetComponent<WanderZone>().GetWanderBounds();
