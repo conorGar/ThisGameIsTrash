@@ -47,9 +47,6 @@ public class Ev_Enemy_HeronJumper : MonoBehaviour
 	void Update ()
 	{
 		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)) {
-			//Debug.Log("Got here - Heron 1");
-			//if(Vector2.Distance(PlayerManager.Instance.player.transform.position, gameObject.transform.position) < lungeThreshold){
-				//Debug.Log("Got here - Heron 2");
 
 					if(controller.GetCurrentState() == EnemyState.IDLE){
 						//Debug.Log("Got here - Heron 3");
@@ -61,7 +58,7 @@ public class Ev_Enemy_HeronJumper : MonoBehaviour
 						gameObject.layer = 1; // transparentFX;
 						StartCoroutine("LeapBack");
 					}
-				//}
+
 		switch (controller.GetCurrentState()) {
 				
                 case EnemyState.LEAP:

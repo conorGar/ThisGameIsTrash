@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   armorRating: 0
-  moveWhenHit: 0
+  moveWhenHit: 1
   myDeadBodyName: duck
   respawnEnemy: 0
   armoredEnemyHitSfx: {fileID: 0}
@@ -406,6 +406,7 @@ MonoBehaviour:
   meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
+  killBlockManager: {fileID: 0}
 --- !u!114 &114897125545691324
 MonoBehaviour:
   m_ObjectHideFlags: 1

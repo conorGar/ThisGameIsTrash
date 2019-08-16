@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 114122821579723196}
   m_Layer: 9
   m_Name: e_heron
-  m_TagString: Untagged
+  m_TagString: enemy_heron
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,6 +283,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+  maxDistanceFromStart: 5
 --- !u!114 &114465559596263014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -327,23 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 289acecd8c5dec64dbebc899bcdcf860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armoredEnemy: 0
+  armorRating: 0
   moveWhenHit: 1
-  resetFacingAfterHit: 0
-  secretHider: 0
-  returnToCurrentAniAfterHit: 0
-  invincibleAni:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
-  aniToSwitchBackTo:
-    name: Default
-    frames: []
-    fps: 30
-    loopStart: 0
-    wrapMode: 0
   myDeadBodyName: 
   respawnEnemy: 0
   armoredEnemyHitSfx: {fileID: 0}
@@ -353,19 +339,13 @@ MonoBehaviour:
   hitSqueal: 0
   bounce: 0
   tutPopup: {fileID: 0}
-  gar_trash: {fileID: 0}
-  gar_rec: {fileID: 0}
-  gar_comp: {fileID: 0}
-  timeDrop: {fileID: 0}
-  healthDrop: {fileID: 0}
-  pinDrop: {fileID: 0}
   myShadow: {fileID: 0}
   dontSpawnBody: 0
-  canKnockoffArmor: 0
   behaviorsToDeactivate: []
   hasPowerHitEffect: 0
   armorCollisionObj: {fileID: 0}
   disarmoredAnimation: {fileID: 0}
+  knockbackForce: 11
   objectPool: {fileID: 0}
   myRespawner: {fileID: 0}
   otherRespawner: {fileID: 0}
@@ -375,6 +355,7 @@ MonoBehaviour:
   meleeSwingDirection: 
   spinning: 0
   startsOffDontMoveWhenHit: 0
+  killBlockManager: {fileID: 0}
 --- !u!114 &114924046346559268
 MonoBehaviour:
   m_ObjectHideFlags: 1

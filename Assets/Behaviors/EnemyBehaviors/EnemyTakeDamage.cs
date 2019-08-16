@@ -428,7 +428,6 @@ public bool bossSpawnedEnemy;
 			SoundManager.instance.PlaySingle(bounce);
 		}
 		spinning = false;
-		//myCollisionBox.enabled = true;
 		for(int i = 0; i < behaviorsToDeactivate.Count;i++){
 						behaviorsToDeactivate[i].enabled = true;
 		}
@@ -456,6 +455,9 @@ public bool bossSpawnedEnemy;
 
 		if(moveWhenHit || powerHit){
 			takingDamage = true;
+			if(currentHp > 0){
+				GetComponent<EnemyStateController>().SendTrigger(EnemyTrigger.HIT);
+			}
 
 			Debug.Log("-----MELEE WEAPON SWING DIRECTION :" + meleeSwingDirection);
 
@@ -594,23 +596,13 @@ public bool bossSpawnedEnemy;
 				for(int i = 0; i < behaviorsToDeactivate.Count;i++){
 							behaviorsToDeactivate[i].enabled = false;
 				}
-				/*if(gameObject.transform.position.x < player.transform.position.x){
-					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
-					this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);
-				}else{
-					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
-					this.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
-				}*/
+			
 				this.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir,ForceMode2D.Impulse);
                 PlayerManager.Instance.player.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir*-1,ForceMode2D.Impulse);
 
 				StartCoroutine("StopKnockback",.5f);
 			}else{
-                /*if(gameObject.transform.position.x < player.transform.position.x){
-					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(11,0),ForceMode2D.Impulse);
-				}else{
-					player.GetComponent<Rigidbody2D>().AddForce(new Vector2(-11,0),ForceMode2D.Impulse);	
-				}*/
+     
                 PlayerManager.Instance.player.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir*-1,ForceMode2D.Impulse);
 
 				Invoke("ClankReturnDelay",.2f);
@@ -664,7 +656,7 @@ public bool bossSpawnedEnemy;
 		
 			gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
 			gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-            GetComponent<EnemyStateController>().SendTrigger(EnemyTrigger.HIT);
+            GetComponent<EnemyStateController>().SendTrigger(EnemyTrigger.DEATH);
 
             takingDamage = false;
 

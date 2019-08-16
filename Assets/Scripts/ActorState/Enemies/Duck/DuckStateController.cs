@@ -18,6 +18,11 @@ public class DuckStateController : EnemyStateController
                 RemoveFlag((int)EnemyFlag.CHASING);
                 currentState = new EnemyDead();
                 break;
+			case EnemyTrigger.HIT:
+                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
+                RemoveFlag((int)EnemyFlag.CHASING);
+                currentState = new EnemyHit();
+                break;
         }
     }
 

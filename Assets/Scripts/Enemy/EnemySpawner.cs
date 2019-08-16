@@ -18,20 +18,7 @@ public class EnemySpawner : EditorMonoBehaviour {
     // Use this for initialization
     void Start () {
     	spawnerID = gameObject.name;
-		/*if(!GlobalVariableManager.Instance.BASIC_ENEMY_LIST.TryGetValue(spawnerID,out myEnemyInstance)){
-			
-			//myEnemyInstance = GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID];
-			/
-			GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID] = myEnemyInstance;
-			Debug.Log(myEnemyInstance.dayOfRevival);
-			Debug.Log("DIDNT FIND VALUE" + GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID]);
-		}else{
-			myEnemyInstance = GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID];
-			Debug.Log("Found value?");
-		}
-		if(GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID].dayOfRevival > GlobalVariableManager.Instance.DAY_NUMBER){
-			isMyEnemyDead = true;
-		}*/
+	
 
 		if(!GlobalVariableManager.Instance.BASIC_ENEMY_LIST.ContainsKey(spawnerID)){
 			GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID] = myEnemyInstance;
@@ -46,6 +33,7 @@ public class EnemySpawner : EditorMonoBehaviour {
 
 	}
 	public bool CheckIfEnemyDead(){
+		Debug.Log(spawnerID);
 		if(GlobalVariableManager.Instance.BASIC_ENEMY_LIST[spawnerID].dayOfRevival > GlobalVariableManager.Instance.DAY_NUMBER){
 			isMyEnemyDead = true;
 
