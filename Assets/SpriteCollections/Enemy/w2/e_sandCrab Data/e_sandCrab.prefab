@@ -1,0 +1,512 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1217121792230500}
+  m_IsPrefabParent: 1
+--- !u!1 &1217121792230500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4953412748982216}
+  - component: {fileID: 114506660445032986}
+  m_Layer: 0
+  m_Name: e_sandCrab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4953412748982216
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217121792230500}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114506660445032986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217121792230500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: moleCrab_popUp2
+    boundsData:
+    - {x: 0.24358988, y: -0.55128205, z: 0}
+    - {x: 6.846154, y: 6.1282053, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 10.256411, y: 7.230769, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.1794872, y: -3.6153846, z: 0}
+    - {x: 3.666667, y: -3.6153846, z: 0}
+    - {x: -3.1794872, y: 2.5128205, z: 0}
+    - {x: 3.666667, y: 2.5128205, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.27246192, y: 0.0019541015}
+    - {x: 0.27246192, y: 0.26269433}
+    - {x: 0.5058584, y: 0.0019541015}
+    - {x: 0.5058584, y: 0.26269433}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: a56679638a9463f45a4436b2235a72b9
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleCrab_idle4
+    boundsData:
+    - {x: 0.9102566, y: -0.2948718, z: 0}
+    - {x: 7.0000005, y: 6.538461, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 10.256411, y: 7.230769, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.5897436, y: -3.5641024, z: 0}
+    - {x: 4.410257, y: -3.5641024, z: 0}
+    - {x: -2.5897436, y: 2.9743588, z: 0}
+    - {x: 4.410257, y: 2.9743588, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.2675791, y: 0.27246192}
+    - {x: 0.2675791, y: 0.53906155}
+    - {x: 0.5166006, y: 0.27246192}
+    - {x: 0.5166006, y: 0.53906155}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 9c2dae6b7f3494f48b79d376451119f9
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleCrab_popUp1
+    boundsData:
+    - {x: 0.15384626, y: -1.2307693, z: 0}
+    - {x: 7.0256414, y: 4.769231, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 10.256411, y: 7.230769, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.3589745, y: -3.6153846, z: 0}
+    - {x: 3.666667, y: -3.6153846, z: 0}
+    - {x: -3.3589745, y: 1.153846, z: 0}
+    - {x: 3.666667, y: 1.153846, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.8134775}
+    - {x: 0.26953027, y: 0.8134775}
+    - {x: 0.0019541015, y: 0.99511623}
+    - {x: 0.26953027, y: 0.99511623}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 0537211937f9cf745b4b48ffb80aa4a4
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleCrab_popUp3
+    boundsData:
+    - {x: 0.2307694, y: -0.038461447, z: 0}
+    - {x: 6.871795, y: 7, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 10.256411, y: 7.230769, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.2051282, y: -3.5384614, z: 0}
+    - {x: 3.666667, y: -3.5384614, z: 0}
+    - {x: -3.2051282, y: 3.4615386, z: 0}
+    - {x: 3.666667, y: 3.4615386, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.27246192}
+    - {x: 0.2636709, y: 0.27246192}
+    - {x: 0.0019541015, y: 0.53906155}
+    - {x: 0.2636709, y: 0.53906155}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: a169cd2ec7e0b684b9dc0fbd13ac290e
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleCrab_hit
+    boundsData:
+    - {x: -0.576923, y: 0.012820482, z: 0}
+    - {x: 5.769231, y: 6.8461537, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 10.256411, y: 7.230769, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.4615386, y: -3.4102564, z: 0}
+    - {x: 2.3076925, y: -3.4102564, z: 0}
+    - {x: -3.4615386, y: 3.4358974, z: 0}
+    - {x: 2.3076925, y: 3.4358974, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.52050877, y: 0.26562598}
+    - {x: 0.7402334, y: 0.26562598}
+    - {x: 0.52050877, y: 0.52636623}
+    - {x: 0.7402334, y: 0.52636623}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 569add3f1cc51cf47af51dd2c4b36bc9
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleCrab_idle1
+    boundsData:
+    - {x: 0.9102566, y: -0.06410253, z: 0}
+    - {x: 7.0000005, y: 7, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 10.256411, y: 7.230769, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.5897436, y: -3.5641024, z: 0}
+    - {x: 4.410257, y: -3.5641024, z: 0}
+    - {x: -2.5897436, y: 3.4358974, z: 0}
+    - {x: 4.410257, y: 3.4358974, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.0019541015}
+    - {x: 0.2685537, y: 0.0019541015}
+    - {x: 0.0019541015, y: 0.2685537}
+    - {x: 0.2685537, y: 0.2685537}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: e174dea33526b3646b386daf824d278a
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleCrab_fire1
+    boundsData:
+    - {x: 1.0000001, y: -0.5, z: 0}
+    - {x: 6.8205137, y: 6.128205, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 10.256411, y: 7.230769, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.4102566, y: -3.5641024, z: 0}
+    - {x: 4.410257, y: -3.5641024, z: 0}
+    - {x: -2.4102566, y: 2.5641024, z: 0}
+    - {x: 4.410257, y: 2.5641024, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5097666, y: 0.0019541015}
+    - {x: 0.5097666, y: 0.26171777}
+    - {x: 0.7431631, y: 0.0019541015}
+    - {x: 0.7431631, y: 0.26171777}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 50cfe00d8d0b2da47bffe7b24f766267
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleCrab_idle2
+    boundsData:
+    - {x: 0.9102566, y: -0.16666663, z: 0}
+    - {x: 7.0000005, y: 6.7948713, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 10.256411, y: 7.230769, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.5897436, y: -3.5641024, z: 0}
+    - {x: 4.410257, y: -3.5641024, z: 0}
+    - {x: -2.5897436, y: 3.2307692, z: 0}
+    - {x: 4.410257, y: 3.2307692, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.5429697}
+    - {x: 0.0019541015, y: 0.80956936}
+    - {x: 0.2607412, y: 0.5429697}
+    - {x: 0.2607412, y: 0.80956936}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 26942c9b2762aae47aba5749012fa84b
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: moleCrab_idle3
+    boundsData:
+    - {x: 0.9102566, y: -0.24358964, z: 0}
+    - {x: 7.0000005, y: 6.6410255, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 10.256411, y: 7.230769, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.5897436, y: -3.5641024, z: 0}
+    - {x: 4.410257, y: -3.5641024, z: 0}
+    - {x: -2.5897436, y: 3.0769231, z: 0}
+    - {x: 4.410257, y: 3.0769231, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.26464942, y: 0.5429697}
+    - {x: 0.26464942, y: 0.80956936}
+    - {x: 0.5175772, y: 0.5429697}
+    - {x: 0.5175772, y: 0.80956936}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 83ceca35658e32349bc18beacb6c72dd
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: 3a9c5c652e2ede2449ba0a889534db79, type: 2}
+  textures:
+  - {fileID: 2800000, guid: cf3b913113481e74f9ca95765453ecc1, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: a919d67f180fd9e458c01c8cfa240849
+  spriteCollectionName: e_sandCrab
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 1958297353
+  dataGuid: 1f00bb6a5914f614bbc829b178f83466
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

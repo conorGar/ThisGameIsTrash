@@ -58,7 +58,8 @@ public class GUI_BaseStatUpgrade : GUI_MenuBase {
             }
 
             //selectionArrow.transform.position = Vector3.Lerp(currentSelectArrowPos,optionIcons[arrowPos].transform.position,2*Time.deltaTime);
-            selectionArrow.transform.position = optionIcons[arrowPos].transform.position;
+            if(selectionArrow != null)
+            	selectionArrow.transform.position = optionIcons[arrowPos].transform.position;
         }
 	}
 

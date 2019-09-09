@@ -22,7 +22,8 @@ public class GUI_MenuBase : MonoBehaviour {
 
 	public void Navigate(string dir){
 		Debug.Log("Arrow Pos = " + arrowPos);
-		currentSelectArrowPos = selectionArrow.transform.position;
+		if(selectionArrow)
+			currentSelectArrowPos = selectionArrow.transform.position;
         if (dir == "left") {
             arrowPos--;
         }
