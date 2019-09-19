@@ -60,6 +60,7 @@ public class EnemyAnim
 			case ENEMY_ANIM.BURROW: return "burrow";
             case ENEMY_ANIM.CAST: return "cast";
             case ENEMY_ANIM.MERGED: return "merged";
+
         }
 
         Debug.LogError("Animation Name for " + anim + " is undefined.  Define it here!");

@@ -134,14 +134,14 @@ public class ThrowableObject : PickupableObject {
 		gameObject.transform.parent = null;
 		myBody.simulated = true;
 		gameObject.transform.position = new Vector2(transform.position.x,transform.position.y-1); //move more directly in front of player
-		myBody.velocity = new Vector2(22f*(Mathf.Sign(PlayerManager.Instance.player.transform.lossyScale.x)),2f);
+		myBody.velocity = new Vector2(32f*(Mathf.Sign(PlayerManager.Instance.player.transform.lossyScale.x)),2f);
 
         if (livingBody)
             StopSweat();
 
         PlayerManager.Instance.controller.SendTrigger(JimTrigger.THROW);
 
-		myBody.gravityScale = 1f;
+		myBody.gravityScale = 1.5f;
 	
 	}
 

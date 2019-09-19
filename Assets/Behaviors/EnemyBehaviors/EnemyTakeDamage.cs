@@ -237,8 +237,11 @@ public bool bossSpawnedEnemy;
                     }
                 }
                 Debug.Log("Hit by thrown object!");
+				meleeDmgBonus = 0;
+                powerHit = true;
+                meleeDmgBonus+=2;
                 if (gameObject.GetComponent<InvincibleEnemy>() == null) { // no invincible component
-                    TakeDamage(melee.gameObject);
+					StartCoroutine("NonMeleeHit");
                 } else if (!gameObject.GetComponent<InvincibleEnemy>().IsInvulnerable()) { // has an invincible component but they aren't currently invincible
                     TakeDamage(melee.gameObject);
                 }
@@ -262,13 +265,8 @@ public bool bossSpawnedEnemy;
 					littleStars.SetActive(true);
 
 						if(gameObject.transform.position.x < PlayerManager.Instance.player.transform.position.x){
-							//hitStarPS.SetActive(true);
-							//hitStarPS.transform.localScale = new Vector3(1f,1f,1f);//makes stars burst in right direction
-
 							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
 						}else{
-							//hitStarPS.SetActive(true);
-							//hitStarPS.transform.localScale = new Vector3(-1f,1f,1f);//makes stars burst in right direction
 							damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(-4f,10f), ForceMode2D.Impulse);
 
 						}
@@ -277,8 +275,11 @@ public bool bossSpawnedEnemy;
 						GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 				}
 				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 2....." + meleeDmgBonus);
+				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 3....." + currentHp);
 
 				currentHp = currentHp - 1 - meleeDmgBonus + armorRating;
+				Debug.Log("GOT THIS FAR- ENEMY TAKE DAMGE 4....." + currentHp);
+
 					if(bossEnemy){
                     gameObject.GetComponent<Boss>().UpdateBossHp(currentHp);
 					}
@@ -324,7 +325,10 @@ public bool bossSpawnedEnemy;
 
 	public void TakeDamage(GameObject melee){ //set public for Stuart
 		if(this.enabled && damageOnce == 0 && armorRating <= meleeDmgBonus){
+			Debug.Log("Got here - take damage 1" + meleeDmgBonus);
 			if(!takingDamage){
+				Debug.Log("Got here - take damage 2");
+
 				takingDamage = true;
 				damageOnce = 1;
 
@@ -409,6 +413,8 @@ public bool bossSpawnedEnemy;
 
 				StartCoroutine("ContinueHit"); // just needed to seperate here for IEnumerator stuff
 			}
+		}else if(armorRating >= meleeDmgBonus){ //push back player if armor is high
+			Clank();
 		}
 
 	}
@@ -583,6 +589,25 @@ public bool bossSpawnedEnemy;
 
     }
 
+
+
+	public void Clank(){
+		if(!takingDamage){
+			Debug.Log("Clanking material got here----x-x-x-x--- 2");
+			takingDamage = true;
+			ObjectPool.Instance.GetPooledObject("effect_clank",gameObject.transform.position);
+
+			Vector2 pushBackDir = (gameObject.transform.position- PlayerManager.Instance.player.transform.position).normalized * 9;
+
+			//push back
+				
+			this.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir,ForceMode2D.Impulse);
+            PlayerManager.Instance.player.gameObject.GetComponent<Rigidbody2D>().AddForce(pushBackDir*-1,ForceMode2D.Impulse);
+
+			StartCoroutine("StopKnockback",.5f);
+			
+		}
+	}
 	public void Clank(AudioClip clankSfx,Vector2 clankPosition, bool getsPushedBack){
 		if(!takingDamage){
 			Debug.Log("Clanking material got here----x-x-x-x--- 2");

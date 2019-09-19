@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - name: popout
+  - name: popUp
     frames:
     - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
         type: 2}
@@ -139,7 +139,7 @@ MonoBehaviour:
     fps: 12.5
     loopStart: 0
     wrapMode: 0
-  - name: run
+  - name: lunge
     frames:
     - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
         type: 2}
@@ -170,3 +170,90 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
+  - name: recover
+    frames:
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 1
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 1
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 8
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 7
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 5
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 3
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 2
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 11.290322
+    loopStart: 0
+    wrapMode: 2
+  - name: prepare_leap
+    frames:
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 2
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 0
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 114506660445032986, guid: 1f00bb6a5914f614bbc829b178f83466,
+        type: 2}
+      spriteId: 3
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 10.714286
+    loopStart: 0
+    wrapMode: 2

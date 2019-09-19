@@ -27,7 +27,8 @@ public enum EnemyState
     VULNERABLE,
     MERGED,
     CHASE_OBJECT,
-    POWER_HIT
+    POWER_HIT,
+
 }
 
 public enum EnemyFlag : int

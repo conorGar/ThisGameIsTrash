@@ -53,6 +53,10 @@ public class OpossumStateControllerEditor : EnemyEditor { }
 [CustomEditor(typeof(HeronStateController))]
 public class HeronStateControllerEditor : EnemyEditor { }
 
+[CustomEditor(typeof(SandCrabStateController))]
+public class SandCrabStateControllerEditor : EnemyEditor { }
+
+
 
 
 public class GenericStateControllerEditor<State_Type, Trigger_Type, Flag_Type> : Editor
