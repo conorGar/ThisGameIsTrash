@@ -56,6 +56,10 @@ public class HeronStateControllerEditor : EnemyEditor { }
 [CustomEditor(typeof(SandCrabStateController))]
 public class SandCrabStateControllerEditor : EnemyEditor { }
 
+[CustomEditor(typeof(CrabStateController))]
+public class CrabStateControllerEditor : EnemyEditor { }
+
+
 
 
 
