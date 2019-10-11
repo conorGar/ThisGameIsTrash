@@ -47,6 +47,12 @@ public class EnemyRecover : IActorState<EnemyState, EnemyTrigger>
 			case EnemyTrigger.PREPARE://added for Grub Enemy
 				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.PREPARE));
                 return new EnemyPrepare();
+			case EnemyTrigger.LUNGE://added for Crab Enemy
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
+                return new EnemyLunge();
+			case EnemyTrigger.IDLE://added for Crab Enemy
+				animator.Play(EnemyAnim.GetName(ENEMY_ANIM.IDLE));
+                return new EnemyIdle();
         }
 
         return null;

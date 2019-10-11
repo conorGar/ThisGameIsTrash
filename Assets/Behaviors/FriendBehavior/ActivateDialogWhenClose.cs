@@ -28,6 +28,7 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 	public DialogDefinition dialogDefiniton;
 	public bool canTalkTo = true;
     public bool hideDialogIconsOnStart = false;
+    public bool noIcon = false;
 //	public bool tempBoolForActionManager;
 
 	int spawnSpeechBubble = 0;
@@ -93,7 +94,11 @@ public class ActivateDialogWhenClose : MonoBehaviour {
         autoStart = true;
         ObjectPool.Instance.ReturnPooledObject(speechBubbleIcon);
         spawnSpeechBubble = 0;
+        if(!noIcon){ //if town NPC can talk to repeatedly
         GetComponent<ActivateDialogWhenClose>().canTalkTo = false;
+        }else{
+        canTalkTo= true; //can talk to NPC townfolk again after speaking
+        }
     }
 
     void Update () {
@@ -113,6 +118,9 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 				if(cameraPanToFriendAtStart && activatePanOnce == 0){
 						Debug.Log("Camera Pan to friend activated");
 		                CamManager.Instance.mainCamEffects.CameraPan(gameObject.transform.position, "");
+		                if(noIcon){
+		                	CamManager.Instance.mainCamEffects.ZoomInOut(1.9f,1f);
+		                }
                         PlayerManager.Instance.player.GetComponent<EightWayMovement>().StopMovement();
                         PlayerManager.Instance.player.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
 						GameStateManager.Instance.PushState(typeof(MovieState));
@@ -155,12 +163,9 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 		                DialogManager.Instance.dialogActionManager.friend = friend;
 		                DialogManager.Instance.characterName.text = friend.friendName;
 					}
-
-		            DialogManager.Instance.SetDialogIconByID(dialogDefiniton.dialogIconID);
-		            DialogManager.Instance.SetFriend(friend);
-
-		            
-		            if (DialogManager.Instance.currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager)) {
+					if(!noIcon){
+		            	DialogManager.Instance.SetDialogIconByID(dialogDefiniton.dialogIconID);
+						if (DialogManager.Instance.currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager)) {
 		                // A flag to check if all dialogIcons should be hidden initially (Rocks) or visable initially (white trash army)
 		                var multiIcon = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
 		                for (int i = 0; i < multiIcon.icons.Count; i++) {
@@ -169,11 +174,19 @@ public class ActivateDialogWhenClose : MonoBehaviour {
 
 		                var multiDialog = (MultipleDialogIconsManager)DialogManager.Instance.currentlySpeakingIcon;
 		                multiDialog.SetStartingIcons(firstIcon, secondIcon, thirdIcon);
+		           		 }
+		            }else{
+		            	DialogManager.Instance.SetDialogIconAsModel(this.gameObject);
 		            }
+		            DialogManager.Instance.SetFriend(friend);
 
+		            
+
+		            if(!noIcon){
 		            DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(true);
 		            DialogManager.Instance.currentlySpeakingIcon.SetTalking(true);
-
+		            }
+		            Debug.Log("Can talk to deactivated here....");
 		            canTalkTo = false;
 
 		            DialogManager.Instance.dialogCanvas.SetActive(true);

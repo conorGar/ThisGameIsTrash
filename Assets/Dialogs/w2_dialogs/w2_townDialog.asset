@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbc56ef93900cf4f846dcc646cb1985, type: 3}
+  m_Name: w2_townDialog
+  m_EditorClassIdentifier: 
+  title: w2_town
+  dialogIconID: dialog_icon_ID
+  nodeStore:
+    keys:
+    - Value: 79d54877-ea47-43a9-b115-714cccb4adad
+    - Value: 26a5c72f-f7d8-42fd-a272-9ff82427e4f2
+    values:
+    - window:
+        serializedVersion: 2
+        x: 110
+        y: 110
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_townfolk1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 79d54877-ea47-43a9-b115-714cccb4adad
+      x: 110
+      y: 110
+      text: <c=r>All my friends are dead</c>, but hey, I'm doing alright.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 122
+        y: 340
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_townfolk2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 26a5c72f-f7d8-42fd-a272-9ff82427e4f2
+      x: 122
+      y: 340
+      text: Sorry, can't talk right now. Too busy having a panic attack. Come back
+        later please.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+  rootNodeId:
+    Value: 79d54877-ea47-43a9-b115-714cccb4adad

@@ -40,7 +40,7 @@ public class Friend : UserDataItem {
     	Debug.Log("Next Dialog: " + nextDialog);
         gameObject.GetComponent<ActivateDialogWhenClose>().SetDialog(myDialogDefiniton);
         gameObject.GetComponent<ActivateDialogWhenClose>().startNodeName = nextDialog;
-        gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
+       // gameObject.GetComponent<ActivateDialogWhenClose>().autoStart = true;
 
 		StartingEvents();
     }
@@ -167,8 +167,10 @@ public class Friend : UserDataItem {
     public virtual void OnFinishDialog()
     {
         //CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+        if(!gameObject.GetComponent<ActivateDialogWhenClose>().noIcon){
         DialogManager.Instance.currentlySpeakingIcon.ResetIconPositionsOnScreen();
         DialogManager.Instance.currentlySpeakingIcon.gameObject.SetActive(false);
+        }
         //nothing to do for basic friend
 
         StartCoroutine(OnFinishDialogEnumerator());

@@ -30,6 +30,7 @@ public class DialogManager : MonoBehaviour {
 	[HideInInspector]
 	public string animationName;
     public DialogIconAnimationManager currentlySpeakingIcon;
+    private GameObject currentlySpeakingModel; //NPC is using model, not icon
 	//------------Screen Blur stuff---------------//
 	public PostProcessingProfile dialogBlur;
 	//------------------------------------------//
@@ -294,8 +295,13 @@ public class DialogManager : MonoBehaviour {
         }
 
         if (!string.IsNullOrEmpty(currentNode.animTrigger)) {
-            Debug.Log("Firing Animation Trigger: " + currentNode.animTrigger);
-            currentlySpeakingIcon.SetAnimTrigger(currentNode.animTrigger);
+        	if(currentlySpeakingIcon){
+            	Debug.Log("Firing Animation Trigger: " + currentNode.animTrigger);
+            	currentlySpeakingIcon.SetAnimTrigger(currentNode.animTrigger);
+            }else if(currentlySpeakingModel){
+				Debug.Log("Firing Animation Trigger For Model: " + currentNode.animTrigger);
+				currentlySpeakingModel.GetComponent<tk2dSpriteAnimator>().Play(currentNode.animTrigger);
+            }
         }
 
         PlayTalkSounds();
@@ -404,6 +410,10 @@ public class DialogManager : MonoBehaviour {
 
         Debug.LogError("Could not find Dialog Icon ID: " + p_dialogIconID + "!  Make sure it's defined on the friend icon!");
         currentlySpeakingIcon = null;
+    }
+
+    public void SetDialogIconAsModel(GameObject model){
+    	currentlySpeakingModel = model;
     }
 
 	public void SetFriend(Friend thisFriend){//set by activateDialogWhenClose
