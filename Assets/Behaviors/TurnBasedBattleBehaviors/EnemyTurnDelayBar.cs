@@ -14,7 +14,7 @@ public class EnemyTurnDelayBar : TurnDelayBar
 		int randomTarget = Random.Range(0, BattleManager.Instance.heroList.Count);
 		targetedHero = BattleManager.Instance.heroList[randomTarget];
 
-		BattleManager.Instance.EnemyAttack(targetedHero, gameObject.GetComponent<EnemyAttacker>().damageStr); //TODO: Choose random hero to attack?
+		BattleManager.Instance.EnemyAttack(targetedHero, this.gameObject.GetComponent<EnemyAttacker>(), gameObject.GetComponent<EnemyAttacker>().damageStr); //TODO: Choose random hero to attack?
 	}
 
 	public void RestartCount(){ //Activated by EnemyAttacker.cs

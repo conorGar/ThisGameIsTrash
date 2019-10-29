@@ -8,7 +8,13 @@ public class BattleManager : MonoBehaviour
 	public List<TurnDelayBar> turnDelayBars = new List<TurnDelayBar>();
 	public List<EnemyAttacker> enemyList = new List<EnemyAttacker>();
 	public List<HeroAttacker> heroList = new List<HeroAttacker>();
-	public string currentState = "NOTHINGATTACKING"; //PLAYERATTACK or ENEMYATTACK or PLAYERSELECT
+	public enum BattleState{
+
+		NOTHINGATTAKING,
+		ENEMYATTACK,
+		PLAYERATTACK
+	} 
+	public BattleState currentState;
 	public PlayerAttackHandler currentlyAttackingPlayer; //Set by PlayerAttackHandler
 	public GameObject targetSelectArrow;
 	// Use this for initialization
@@ -40,8 +46,8 @@ public class BattleManager : MonoBehaviour
 
 
 	public void PlayerAttack(PlayerAttackHandler pah, int selectedEnemyNum){
-		if(currentState == "NOTHINGATTACKING"){
-			currentState = "PLAYERATTACKING";
+		if(currentState == BattleState.NOTHINGATTAKING){
+			ChangeState(BattleState.PLAYERATTACK);
 			targetedEnemy = enemyList[selectedEnemyNum];
 			currentlyAttackingPlayer = pah;
 			pah.attackPhase = "ATTACKING";
@@ -53,8 +59,9 @@ public class BattleManager : MonoBehaviour
 
 	public void EnemyAttack(HeroAttacker targetedHero, EnemyAttacker thisEnemy, int dmg){
 		Debug.Log("EnemyAttack activate");
-		if(currentState != "ENEMYATTACKING" && currentState != "PLAYERATTACKING"){
-			currentState = "ENEMYATTACKING";
+		if(currentState == BattleState.NOTHINGATTAKING){
+			ChangeState(BattleState.ENEMYATTACK);
+			Debug.Log(currentState);
 			PauseBars();
 			targetedHero.TakeDamage(dmg);
 			thisEnemy.StartCoroutine("MoveToAttack");
@@ -62,12 +69,12 @@ public class BattleManager : MonoBehaviour
 	}
 
 	public void ReturnFromAttack(){
-		if(currentState == "PLAYERATTACKING"){
+		if(currentState == BattleState.PLAYERATTACK){
 			currentlyAttackingPlayer.gameObject.GetComponent<TurnDelayBar>().StartCount();
-		}else if(currentState == "ENEMYATTACKING"){
+		}else if(currentState == BattleState.ENEMYATTACK){
 			//TODO: restart currently attacking enemy counter
 		}
-		currentState = "NOTHINGATTACKING";
+		ChangeState(BattleState.NOTHINGATTAKING);
 		ResumeBars();
 	}
 
@@ -84,6 +91,11 @@ public class BattleManager : MonoBehaviour
 		foreach (TurnDelayBar delayBar in turnDelayBars){
 			delayBar.Pause();
 		}
+	}
+
+	void ChangeState(BattleState newState){
+		Debug.Log("BattleState changed from" + currentState + " to " + newState);
+		currentState = newState;
 	}
 }
 

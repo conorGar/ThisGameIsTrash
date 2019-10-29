@@ -21,7 +21,6 @@ public class HeroAttacker : MonoBehaviour
 		Debug.Log(gameObject.name + "Took" + damage + "damage!");
 		currentHP -= damage;
 		//TODO:Check for death
-		BattleManager.Instance.ReturnFromAttack();
 	}
 }
 

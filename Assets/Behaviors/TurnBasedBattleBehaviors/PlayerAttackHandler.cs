@@ -20,40 +20,48 @@ public class PlayerAttackHandler : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
-		if(attackPhase == "CHOOSE_ATTACK"){
-			//select through the various options
-			if(!myWeaponOptionHolder.activeInHierarchy){
-				myWeaponOptionHolder.SetActive(true);
+		if(BattleManager.Instance.currentState == BattleManager.BattleState.NOTHINGATTAKING){
+			if(attackPhase == "CHOOSE_ATTACK"){
+				//select through the various options
+				if(!myWeaponOptionHolder.activeInHierarchy){
+					myWeaponOptionHolder.SetActive(true);
+				}
+				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && arrowPos > 0){
+					weaponChoiceList[arrowPos].Unhighlight();
+					arrowPos--;
+					weaponChoiceList[arrowPos].Highlight();
+				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && arrowPos < weaponChoiceList.Count -1){
+					weaponChoiceList[arrowPos].Unhighlight();
+					arrowPos++;
+					weaponChoiceList[arrowPos].Highlight();
+				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
+					weaponDamage = weaponChoiceList[arrowPos].Damage;
+					arrowPos = 0;
+					attackPhase = "SELECT_ENEMY";
+				}
+			}else if(attackPhase == "SELECT_ENEMY"){
+				if(myWeaponOptionHolder.activeInHierarchy){
+					myWeaponOptionHolder.SetActive(false);
+				}
+				if(!BattleManager.Instance.targetSelectArrow.activeInHierarchy){
+					BattleManager.Instance.targetSelectArrow.SetActive(true);
+				}
+				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && arrowPos > 0){
+					arrowPos--;
+					BattleManager.Instance.targetSelectArrow.transform.position = BattleManager.Instance.enemyList[arrowPos].transform.position;
+				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && arrowPos < BattleManager.Instance.enemyList.Count-1){
+					arrowPos++;
+					BattleManager.Instance.targetSelectArrow.transform.position = BattleManager.Instance.enemyList[arrowPos].transform.position;
+				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
+					BattleManager.Instance.PlayerAttack(this, arrowPos); //< This sets this behavior's phase to 'Attacking' to avoid this setting itself but not actually being allowed to attack in battleManager(edge case)
+				}
 			}
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && arrowPos > 0){
-				weaponChoiceList[arrowPos].Unhighlight();
-				arrowPos--;
-				weaponChoiceList[arrowPos].Highlight();
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && arrowPos < weaponChoiceList.Count -1){
-				weaponChoiceList[arrowPos].Unhighlight();
-				arrowPos++;
-				weaponChoiceList[arrowPos].Highlight();
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
-				weaponDamage = weaponChoiceList[arrowPos].Damage;
-				arrowPos = 0;
-				attackPhase = "SELECT_ENEMY";
-			}
-		}else if(attackPhase == "SELECT_ENEMY"){
+		}else{
 			if(myWeaponOptionHolder.activeInHierarchy){
-				myWeaponOptionHolder.SetActive(false);
+					myWeaponOptionHolder.SetActive(false);
 			}
-			if(!BattleManager.Instance.targetSelectArrow.activeInHierarchy){
-				BattleManager.Instance.targetSelectArrow.SetActive(true);
-			}
-			if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && arrowPos > 0){
-				arrowPos--;
-				BattleManager.Instance.targetSelectArrow.transform.position = BattleManager.Instance.enemyList[arrowPos].transform.position;
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && arrowPos < BattleManager.Instance.enemyList.Count-1){
-				arrowPos++;
-				BattleManager.Instance.targetSelectArrow.transform.position = BattleManager.Instance.enemyList[arrowPos].transform.position;
-			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
-				BattleManager.Instance.PlayerAttack(this, arrowPos); //< This sets this behavior's phase to 'Attacking' to avoid this setting itself but not actually being allowed to attack in battleManager(edge case)
+			if(BattleManager.Instance.targetSelectArrow.activeInHierarchy){
+				BattleManager.Instance.targetSelectArrow.SetActive(false);
 			}
 		}
 	}

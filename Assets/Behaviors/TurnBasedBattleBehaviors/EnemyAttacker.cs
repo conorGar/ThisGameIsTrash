@@ -18,7 +18,10 @@ public class EnemyAttacker : MonoBehaviour
 
 	public IEnumerator MoveToAttack(){ //Handles Enemy Attack Animations/Movement to selected enemy
 		//TODO:Once reach enemy gameObj...
-		yield return new WaitForSeconds(.5f);
+		Debug.Log("Enemy Move To Attack Activate" + BattleManager.Instance.currentState);
+		yield return new WaitForSeconds(1.5f);
+		Debug.Log("Enemy Move To Attack Finish" +  BattleManager.Instance.currentState);
+
 		BattleManager.Instance.ReturnFromAttack();
 		gameObject.GetComponent<EnemyTurnDelayBar>().RestartCount();
 		//TODO: Return to start pos
