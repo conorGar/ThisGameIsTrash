@@ -201,7 +201,6 @@ public class GlobalVariableManager : UserDataItem {
 													99
 
 												 };
-	public List<int> STATUE_LIST = new List<int>(); //for w2 statue spawning
                                                     
                                                    
              //-----------Garbage-related variables------------//
@@ -278,13 +277,7 @@ public class GlobalVariableManager : UserDataItem {
 	public int WORLD_NUM = 1;
 
 
-	public List<string> WORLD_SIGNS_READ = new List<string>{
-												"abcdefghijklmnpqrstuvwxyz12{}",
-												"abcdefghijklmn/:rstuv}xy1234567",
-												"abcdefghilm",
-												"",
-												"abcdefghijklmn",
-												};		
+
 
     public WORLD WORLDS_UNLOCKED = WORLD.ONE;
 

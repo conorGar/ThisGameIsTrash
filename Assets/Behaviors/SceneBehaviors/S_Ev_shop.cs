@@ -56,9 +56,7 @@ public class S_Ev_shop : MonoBehaviour {
 
         GlobalVariableManager.Instance.shopPins = new List<PinDefinition> { null, null, null };
 
-        // VV----------just makes it so "dont you wanna check shop shop" dialog doesnt happen
-        GlobalVariableManager.Instance.WORLD_SIGNS_READ[1].Replace(GlobalVariableManager.Instance.WORLD_SIGNS_READ[1][14],'o');
-
+      
 
 		GlobalVariableManager.Instance.ARROW_POSITION = 0;
 		GlobalVariableManager.Instance.MENU_SELECT_STAGE = 9;//needed for proper purchasing action when hit SPACE that doesnt interefere with upgrade behavior
