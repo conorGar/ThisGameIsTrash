@@ -12,7 +12,8 @@ public class PlayerTurnDelayBar : TurnDelayBar
 		speed = playerSpeed;
 	}
 	protected override void BarFilledEvent(){
-		gameObject.GetComponent<PlayerAttackHandler>().attackPhase = "CHOOSE_ATTACK";
+		base.BarFilledEvent();
+		BattleManager.Instance.AddHeroToQueue(gameObject.GetComponent<PlayerAttackHandler>());
 	}
 
 	void Count(){

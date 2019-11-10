@@ -37,22 +37,13 @@ public class GlobalVariableManager : UserDataItem {
     //public List<PIN> EquippedAbilityPins = new List<PIN> {PIN.NONE,PIN.NONE};
 	public List<GameObject> EquippedAbilityPins = new List<GameObject>();
 
-   // public PIN ACTIVE_ABILITY_PIN_ONE = PIN.NONE;
 
 
     public int DEJAVUCOUNT = 0;
     public int CURSEVALUE = 0;
     public int MOMONEYVALUE = 0;
 
-	/*public string[] characterUpgradeArray = new string[7]{
-											"abcdefghijolmnpqrstuvwxy1234567890,./;'*[]-<>?:(){}!^",
-											"abcdefghijklmnpqrstuvwxy1234567890,./;'",
-											"0",
-											//"5",
-											"0",
-											"0",
-											"0",
-											"0"};*/
+	public List<HeroAttacker> partners = new List<HeroAttacker>();
 	public int ARROW_POSITION = 1;
 
 	//base stats

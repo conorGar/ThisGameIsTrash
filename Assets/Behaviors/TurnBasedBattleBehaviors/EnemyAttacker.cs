@@ -11,9 +11,11 @@ public class EnemyAttacker : MonoBehaviour
 
 
 	public void TakeDamage(int damage){
-		currentHP -= damage;
-		//TODO:Check for death
-		BattleManager.Instance.ReturnFromAttack();
+		if(GameStateManager.Instance.GetCurrentState() == typeof(BattleState)){
+			currentHP -= damage;
+			//TODO:Check for death
+			BattleManager.Instance.ReturnFromAttack();
+		}
 	}
 
 	public IEnumerator MoveToAttack(){ //Handles Enemy Attack Animations/Movement to selected enemy
@@ -23,7 +25,7 @@ public class EnemyAttacker : MonoBehaviour
 		Debug.Log("Enemy Move To Attack Finish" +  BattleManager.Instance.currentState);
 
 		BattleManager.Instance.ReturnFromAttack();
-		gameObject.GetComponent<EnemyTurnDelayBar>().RestartCount();
+		gameObject.GetComponent<EnemyTurnDelayBar>().StartCount();
 		//TODO: Return to start pos
 
 	}

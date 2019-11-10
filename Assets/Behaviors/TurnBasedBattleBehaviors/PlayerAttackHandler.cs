@@ -20,8 +20,9 @@ public class PlayerAttackHandler : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if(BattleManager.Instance.currentState == BattleManager.BattleState.NOTHINGATTAKING){
+		if(BattleManager.Instance.currentState == BattleManager.CurrentBattleState.NOTHINGATTAKING){
 			if(attackPhase == "CHOOSE_ATTACK"){
+				CamManager.Instance.mainCamEffects.CameraPan(this.gameObject.transform.position,"");
 				//select through the various options
 				if(!myWeaponOptionHolder.activeInHierarchy){
 					myWeaponOptionHolder.SetActive(true);
@@ -35,6 +36,7 @@ public class PlayerAttackHandler : MonoBehaviour
 					arrowPos++;
 					weaponChoiceList[arrowPos].Highlight();
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
+					Debug.Log("Weapon selected");
 					weaponDamage = weaponChoiceList[arrowPos].Damage;
 					arrowPos = 0;
 					attackPhase = "SELECT_ENEMY";
@@ -46,12 +48,13 @@ public class PlayerAttackHandler : MonoBehaviour
 				if(!BattleManager.Instance.targetSelectArrow.activeInHierarchy){
 					BattleManager.Instance.targetSelectArrow.SetActive(true);
 				}
+				Vector2 attackArrowPos = new Vector2(BattleManager.Instance.enemyList[arrowPos].transform.position.x, BattleManager.Instance.enemyList[arrowPos].transform.position.y - BattleManager.Instance.enemyList[arrowPos].GetComponent<tk2dSprite>().scale.y); //Place arrow above enemy
 				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && arrowPos > 0){
 					arrowPos--;
-					BattleManager.Instance.targetSelectArrow.transform.position = BattleManager.Instance.enemyList[arrowPos].transform.position;
+					BattleManager.Instance.targetSelectArrow.transform.position = attackArrowPos ;
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && arrowPos < BattleManager.Instance.enemyList.Count-1){
 					arrowPos++;
-					BattleManager.Instance.targetSelectArrow.transform.position = BattleManager.Instance.enemyList[arrowPos].transform.position;
+					BattleManager.Instance.targetSelectArrow.transform.position = attackArrowPos;
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 					BattleManager.Instance.PlayerAttack(this, arrowPos); //< This sets this behavior's phase to 'Attacking' to avoid this setting itself but not actually being allowed to attack in battleManager(edge case)
 				}
@@ -66,8 +69,9 @@ public class PlayerAttackHandler : MonoBehaviour
 		}
 	}
 
-	public void MoveToAttack(GameObject enemyTarget){ //Handles Player Attack Animations/Movement to selected enemy
+	public IEnumerator MoveToAttack(GameObject enemyTarget){ //Handles Player Attack Animations/Movement to selected enemy
 		//TODO:Once reach enemy gameObj...
+		yield return new WaitForSeconds(.5f);
 		BattleManager.Instance.DamageTargetedEnemy(weaponDamage);
 		BattleManager.Instance.ReturnFromAttack();
 		//TODO: Return to start pos
