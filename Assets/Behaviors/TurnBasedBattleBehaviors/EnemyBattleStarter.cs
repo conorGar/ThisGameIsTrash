@@ -22,9 +22,7 @@ public class EnemyBattleStarter : MonoBehaviour
 	void Update ()
 	{
 		if (leaping) {
-			Debug.Log("Got here Leapback -1");
 			if(controller.IsFlag((int)EnemyFlag.CHASING)){
-				Debug.Log("Got here Leapback -2");
 
 
 
@@ -49,7 +47,6 @@ public class EnemyBattleStarter : MonoBehaviour
                                 }
                                 break;
                         }
-						Debug.Log("Got here Leapback - 2" + leapDestination);
 
                         if (leapifier != null)
                             leapifier.Reset();
