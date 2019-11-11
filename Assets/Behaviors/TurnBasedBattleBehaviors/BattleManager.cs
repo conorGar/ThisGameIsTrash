@@ -23,6 +23,7 @@ public class BattleManager : MonoBehaviour
 	public List<PlayerAttackHandler> heroTurnQueue = new List<PlayerAttackHandler>(); //only public for debugging
 	int arrowPos;
 	EnemyAttacker targetedEnemy;
+	public List<Point> occupiedGridPoints = new List<Point>(); // Used to make sure that no two enemies in battle jump to the same node point
 
     void Awake () {
         Instance = this;
@@ -51,6 +52,7 @@ public class BattleManager : MonoBehaviour
 	public void AddVisibleEnemies(){
 		foreach(GameObject enemy in RoomManager.Instance.currentRoom.enemies){
 			if(enemy.GetComponent<Renderer>().isVisible){ //all enemies on the screen enter the battle
+				enemy.gameObject.GetComponent<EnemyBattleStarter>().LeapBack();
 				enemyList.Add(enemy.GetComponent<EnemyAttacker>());
 				turnDelayBars.Add(enemy.GetComponent<TurnDelayBar>());
 			}
@@ -134,6 +136,14 @@ public class BattleManager : MonoBehaviour
 
 	public void AddHeroToQueue(PlayerAttackHandler hero){
 		heroTurnQueue.Add(hero);
+	}
+
+	public void AddOccupiedPointToGrid(Point newPoint){
+		occupiedGridPoints.Add(newPoint);
+	}
+
+	void EndBattle(){
+		occupiedGridPoints.Clear();
 	}
 }
 

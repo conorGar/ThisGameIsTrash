@@ -190,7 +190,6 @@ public class Ev_MainCamera : MonoBehaviour {
     }
 
 	public IEnumerator ScreenShakeEnumerator(float time){
-		Debug.Log("SCREEN SHAKE ACTIVATE----------");
 
 		startShakeX = transform.position.x;
 		startShakeY = transform.position.y;

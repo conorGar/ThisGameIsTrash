@@ -27,7 +27,7 @@ public class PlayerBattleStarter : MonoBehaviour
 							BattleManager.Instance.AddHero(hero);
 						}
 					}
-					enemy.gameObject.GetComponent<EnemyBattleStarter>().LeapBack();
+
 					BattleManager.Instance.StartBattle();
 				}
 			}

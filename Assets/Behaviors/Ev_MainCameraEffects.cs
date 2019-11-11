@@ -50,7 +50,6 @@ public class Ev_MainCameraEffects : MonoBehaviour {
 			}else{
 				gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,targetPanPosition, 3*(Time.deltaTime));
 				if(Vector2.Distance(gameObject.transform.position,targetPanPosition) < 1){
-					Debug.Log("In target position!!" + triggerEventName);
 					if(triggerEventName != null && triggerEventName.Length > 2){ //length check to make sure it's not just "" or something
 						CamPanTriggerEvent();
 					}

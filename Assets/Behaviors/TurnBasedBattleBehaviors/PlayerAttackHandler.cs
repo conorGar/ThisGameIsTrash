@@ -48,12 +48,14 @@ public class PlayerAttackHandler : MonoBehaviour
 				if(!BattleManager.Instance.targetSelectArrow.activeInHierarchy){
 					BattleManager.Instance.targetSelectArrow.SetActive(true);
 				}
-				Vector2 attackArrowPos = new Vector2(BattleManager.Instance.enemyList[arrowPos].transform.position.x, BattleManager.Instance.enemyList[arrowPos].transform.position.y - BattleManager.Instance.enemyList[arrowPos].GetComponent<tk2dSprite>().scale.y); //Place arrow above enemy
 				if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVELEFT) && arrowPos > 0){
+
 					arrowPos--;
+					Vector2 attackArrowPos = new Vector2(BattleManager.Instance.enemyList[arrowPos].transform.position.x, BattleManager.Instance.enemyList[arrowPos].transform.position.y + BattleManager.Instance.enemyList[arrowPos].GetComponent<tk2dSprite>().scale.y + 2f); //Place arrow above enemy 2f is for size of arrow itself
 					BattleManager.Instance.targetSelectArrow.transform.position = attackArrowPos ;
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVERIGHT) && arrowPos < BattleManager.Instance.enemyList.Count-1){
 					arrowPos++;
+					Vector2 attackArrowPos = new Vector2(BattleManager.Instance.enemyList[arrowPos].transform.position.x, BattleManager.Instance.enemyList[arrowPos].transform.position.y + BattleManager.Instance.enemyList[arrowPos].GetComponent<tk2dSprite>().scale.y + 2f); //Place arrow above enemy 2f is for size of arrow itself
 					BattleManager.Instance.targetSelectArrow.transform.position = attackArrowPos;
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 					BattleManager.Instance.PlayerAttack(this, arrowPos); //< This sets this behavior's phase to 'Attacking' to avoid this setting itself but not actually being allowed to attack in battleManager(edge case)

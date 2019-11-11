@@ -42,16 +42,13 @@ public class SpecialEffectsBehavior : MonoBehaviour
 		}
 
 		if(shake){
-			Debug.Log("shaking");
 			transform.position = new Vector2(transform.position.x,startYShake + Random.Range(shakeIntensity*-1,shakeIntensity));
 		}
 		if(growing){
 			//currentScale += amountToAdd;
 			if(Vector3.Distance(currentScale,targetSize) < 1.5f){//TODO: 1.5 pretty specific number needed for title screen
-				Debug.Log("GROWING STOPPED");
 				growing = false;
 			}
-			Debug.Log("distance:" + Vector3.Distance(currentScale,targetSize));
 			//gameObject.transform.localScale = Vector3.one * currentScale;*/
 			gameObject.transform.localScale = Vector3.Lerp(currentScale,targetSize,growDuration*Time.deltaTime);
 		}
