@@ -9,6 +9,7 @@ public class EnemyAttacker : MonoBehaviour
 	public int speed;
 	protected EnemyStateController controller;
 
+	public string myDeadBodyName;
 
 	void Awake()
     {
@@ -22,8 +23,12 @@ public class EnemyAttacker : MonoBehaviour
 			SpawnDamageStars(damage);
 			controller.SendTrigger(EnemyTrigger.HIT);
 
-			//TODO:Check for death
-			BattleManager.Instance.ReturnFromAttack();
+			//Check for death
+			if(currentHP <= 0){
+				Death();
+			}else{
+				BattleManager.Instance.ReturnFromAttack();
+			}
 		}
 	}
 
@@ -48,6 +53,21 @@ public class EnemyAttacker : MonoBehaviour
 		littleStars.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		littleStars.SetActive(true);
 		damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
+	}
+
+	void Death(){
+		BattleManager.Instance.RemoveEnemy(this);
+		GetComponent<EnemyStateController>().SendTrigger(EnemyTrigger.DEATH);
+		GameObject deathSmoke = ObjectPool.Instance.GetPooledObject("effect_SmokePuff"); 
+		deathSmoke.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
+		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost",new Vector3((transform.position.x), transform.position.y, transform.position.z));
+		deathGhost.GetComponent<Ev_DeathGhost>().OnSpawn();
+
+		GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",gameObject.transform.position);
+		body.GetComponent<tk2dSprite>().SetSprite(myDeadBodyName);
+
+		this.gameObject.SetActive(false);
+
 	}
 
 }

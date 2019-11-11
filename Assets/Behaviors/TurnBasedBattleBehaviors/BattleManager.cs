@@ -142,8 +142,33 @@ public class BattleManager : MonoBehaviour
 		occupiedGridPoints.Add(newPoint);
 	}
 
+	public void RemoveEnemy(EnemyAttacker deadEnemy){
+		enemyList.Remove(deadEnemy);
+		turnDelayBars.Remove(deadEnemy.gameObject.GetComponent<TurnDelayBar>());
+		Debug.Log("Enemy removed from battle. Remaining enemies=" + enemyList.Count);
+		if(enemyList.Count <= 0){
+			EndBattle();
+		}else{
+			ReturnFromAttack();
+		}
+	}
+
 	void EndBattle(){
-		occupiedGridPoints.Clear();
+		Debug.Log("End Battle Activated");
+		if (GameStateManager.Instance.GetCurrentState() == typeof(BattleState)) {
+			occupiedGridPoints.Clear();
+			turnDelayBars.Clear();
+			heroList.Clear();
+			enemyList.Clear();
+			GameStateManager.Instance.PopState();
+			battleGUI.gameObject.SetActive(false);
+			if(GlobalVariableManager.Instance.partners.Count > 0){
+				foreach(HeroAttacker hero in GlobalVariableManager.Instance.partners){
+					hero.gameObject.SetActive(false);
+				}
+			}
+			CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
+		}
 	}
 }
 
