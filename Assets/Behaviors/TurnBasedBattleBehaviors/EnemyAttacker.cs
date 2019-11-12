@@ -34,8 +34,10 @@ public class EnemyAttacker : MonoBehaviour
 
 	public IEnumerator MoveToAttack(){ //Handles Enemy Attack Animations/Movement to selected enemy
 		//TODO:Once reach enemy gameObj...
+		controller.SendTrigger(EnemyTrigger.LUNGE);
 		Debug.Log("Enemy Move To Attack Activate" + BattleManager.Instance.currentState);
-		yield return new WaitForSeconds(1.5f);
+		while (controller.GetCurrentState() == EnemyState.LUNGE) //wait until end of lunge animation
+           			yield return null;
 		Debug.Log("Enemy Move To Attack Finish" +  BattleManager.Instance.currentState);
 
 		BattleManager.Instance.ReturnFromAttack();

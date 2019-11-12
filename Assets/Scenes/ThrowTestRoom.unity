@@ -17004,6 +17004,7 @@ MonoBehaviour:
   currentHP: 5
   damageStr: 1
   speed: 1
+  myDeadBodyName: 
 --- !u!212 &410530108
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -99357,6 +99358,7 @@ GameObject:
   - component: {fileID: 1465311397}
   - component: {fileID: 1465311396}
   - component: {fileID: 1465311395}
+  - component: {fileID: 1465311399}
   m_Layer: 12
   m_Name: BattleRat
   m_TagString: Player
@@ -99375,7 +99377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9931ef1c634499c4898d014f2379d7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 10
+  currentHP: 2
 --- !u!114 &1465311396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99434,6 +99436,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.52, y: 4.62}
   m_EdgeRadius: 0
+--- !u!114 &1465311399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1465311394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721ab1eab1003684294896466e732526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &1465311400
 Rigidbody2D:
   serializedVersion: 4

@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class DuckStateController : EnemyStateController
+public class HeroStateController : EnemyStateController
 {
-    protected new void Awake()
+
+	protected new void Awake()
     {
         defaultState = new EnemyIdle();
         base.Awake();
@@ -15,18 +15,11 @@ public class DuckStateController : EnemyStateController
         switch (trigger) {
             case EnemyTrigger.DEATH:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.DEAD));
-                RemoveFlag((int)EnemyFlag.CHASING);
                 currentState = new EnemyDead();
                 break;
 			case EnemyTrigger.HIT:
                 animator.Play(EnemyAnim.GetName(ENEMY_ANIM.HIT));
-                RemoveFlag((int)EnemyFlag.CHASING);
                 currentState = new EnemyHit();
-                break;
-			case EnemyTrigger.LUNGE:
-                animator.Play(EnemyAnim.GetName(ENEMY_ANIM.LUNGE));
-				RemoveFlag((int)EnemyFlag.MOVING);
-                currentState = new EnemyLunge();
                 break;
         }
     }
@@ -37,15 +30,9 @@ public class DuckStateController : EnemyStateController
 
         switch (currentState.GetState()) {
             case EnemyState.HIT:
-                //GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
-                //animator.Play(EnemyAnim.GetName(ENEMY_ANIM.CHASE));
-                //SetFlag((int)EnemyFlag.CHASING);
                 currentState = new EnemyIdle();
-                break;
-			case EnemyState.LUNGE:
-                currentState = new EnemyIdle();
-
                 break;
         }
     }
 }
+

@@ -153,6 +153,18 @@ public class BattleManager : MonoBehaviour
 		}
 	}
 
+	public void RemoveHero(HeroAttacker deadHero){
+		heroList.Remove(deadHero);
+		turnDelayBars.Remove(deadHero.gameObject.GetComponent<TurnDelayBar>());
+		PauseBars();
+		Debug.Log("Hero removed from battle. Remaining heroes=" + heroList.Count);
+		if(heroList.Count <= 0){
+			AllPlayersDead();
+		}else{
+			ReturnFromAttack();
+		}
+	}
+
 	void EndBattle(){
 		Debug.Log("End Battle Activated");
 		if (GameStateManager.Instance.GetCurrentState() == typeof(BattleState)) {
@@ -169,6 +181,11 @@ public class BattleManager : MonoBehaviour
 			}
 			CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		}
+	}
+
+	void AllPlayersDead(){
+		//TODO: Death Sequence
+
 	}
 }
 
