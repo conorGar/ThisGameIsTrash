@@ -9,12 +9,21 @@ public class PlayerAttackHandler : MonoBehaviour
 	public List<WeaponChoice> weaponChoiceList = new List<WeaponChoice>();
 	public GameObject myWeaponOptionHolder;
 
+
+	public enum ThisHero {
+		JIM,
+		ROBOT,
+		ICE_CREAM
+	}
+
+	public ThisHero heroType;
+
 	public int arrowPos;
 	int weaponDamage;
 	// Use this for initialization
 	void Start ()
 	{
-		
+		SpawnWeaponOptions();
 	}
 	
 	// Update is called once per frame
@@ -37,7 +46,7 @@ public class PlayerAttackHandler : MonoBehaviour
 					weaponChoiceList[arrowPos].Highlight();
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 					Debug.Log("Weapon selected");
-					weaponDamage = weaponChoiceList[arrowPos].Damage;
+					weaponDamage = weaponChoiceList[arrowPos].damage;
 					arrowPos = 0;
 					attackPhase = "SELECT_ENEMY";
 				}
@@ -78,6 +87,26 @@ public class PlayerAttackHandler : MonoBehaviour
 		BattleManager.Instance.ReturnFromAttack();
 		//TODO: Return to start pos
 
+	}
+
+	void SpawnWeaponOptions(){
+		if(heroType == ThisHero.JIM){
+			foreach(WeaponDefinition weapon in GlobalVariableManager.Instance.JimEquippedWeapons){
+				AddWeaponChoice(weapon);
+			}
+		}
+
+		myWeaponOptionHolder.SetActive(false);
+	}
+
+	public void AddWeaponChoice(WeaponDefinition weapon){
+		Debug.Log("Add Weapon Choice activated" + weapon.displayName);
+		Vector2 optionSpawnPos = new Vector2(myWeaponOptionHolder.transform.position.x +(3f*weaponChoiceList.Count), myWeaponOptionHolder.transform.position.y);
+		GameObject weaponChoice = ObjectPool.Instance.GetPooledObject("weapon_option", optionSpawnPos); //TODO: change 'gameobject.transform.position' to position of WeaponOptionHolder
+		weaponChoice.GetComponent<WeaponChoice>().DefineValues(weapon);
+		weaponChoice.transform.parent = myWeaponOptionHolder.transform;
+		weaponChoice.transform.localScale = new Vector2(3.5f,6); //Set box to proper size
+		weaponChoiceList.Add(weaponChoice.GetComponent<WeaponChoice>());
 	}
 
 

@@ -21,13 +21,13 @@ public class GUI_PauseMenu2 : GUI_PauseMenu
 
 	void OnEnable(){
 		weaponsAvailable = 1;
-		if(GlobalVariableManager.Instance.IsSuitAvailable(GlobalVariableManager.WEAPONS.MOP)){
+		/*if(GlobalVariableManager.Instance.IsSuitAvailable(GlobalVariableManager.WEAPONS.MOP)){
 			weaponsAvailable++;
 			weaponBoxes[1].SetActive(true);
 			if(GlobalVariableManager.Instance.IsSuitEquipped(GlobalVariableManager.WEAPONS.MOP)){
 				highlightBox.transform.position = weaponBoxes[1].transform.position;
 			}
-		}
+		}*/
 	}
 	
 	void Update () {

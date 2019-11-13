@@ -13,6 +13,7 @@ public class EnemyBattleStarter : MonoBehaviour
 	protected EnemyStateController controller;
 	private EnemyPath enemyPath;
 	int maxRandomNodeDistance = 7; // how far the enemy can travel when picking random nodes
+	protected Vector3 startScale;
 
 	bool leaping;
 	// Use this for initialization
@@ -21,6 +22,8 @@ public class EnemyBattleStarter : MonoBehaviour
     {
 		enemyPath = GetComponent<EnemyPath>();
         controller = GetComponent<EnemyStateController>();
+		startScale = gameObject.transform.localScale;
+
     }
 
 	void Update ()
@@ -70,6 +73,11 @@ public class EnemyBattleStarter : MonoBehaviour
 
 	void StopLeap(){
 		Debug.Log("Stop Leap Activate");
+		if (PlayerManager.Instance.player.transform.position.x < transform.position.x) {
+               transform.localScale = new Vector3(startScale.x, startScale.y, 1);
+        } else {
+			transform.localScale = new Vector3(startScale.x*-1, startScale.y, 1);
+        }
 		leaping = false;
 	}
 

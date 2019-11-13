@@ -38,6 +38,9 @@ public class GlobalVariableManager : UserDataItem {
 	public List<GameObject> EquippedAbilityPins = new List<GameObject>();
 
 
+	public List<WeaponDefinition> JimEquippedWeapons = new List<WeaponDefinition>();
+	public List<WeaponDefinition> RatEquippedWeapons = new List<WeaponDefinition>();
+
 
     public int DEJAVUCOUNT = 0;
     public int CURSEVALUE = 0;
@@ -116,18 +119,18 @@ public class GlobalVariableManager : UserDataItem {
 
     public ROOM WORLD_ROOMS_DISCOVERED = ROOM.W1C3;
 
-    public enum WEAPONS{
+ /*   public enum WEAPONS{
     NONE =		0,
     DUSTER = 	1<<0,
     MOP = 		1<<1,
     HAZMAT = 	1<<2,
-    }
+    }*/
 
     //public WEAPONS WEAPONS_AVAILABLE = (WEAPONS.DUSTER);
 
-    public WEAPONS WEAPON_EQUIPPED = WEAPONS.DUSTER;
+    //public WEAPONS WEAPON_EQUIPPED = WEAPONS.DUSTER;
 
-    public WEAPONS SUITS_DISCOVERED = WEAPONS.HAZMAT;
+    //public WEAPONS SUITS_DISCOVERED = WEAPONS.HAZMAT;
 
 	//private long suitsDiscoveredValue = (long)(WEAPONS.HAZMAT);
    // public WEAPONS SUITS_DISCOVERED
@@ -427,11 +430,11 @@ public class GlobalVariableManager : UserDataItem {
         return (LARGE_GARBAGE_DISCOVERED & large_garbage_type) == large_garbage_type;
     }
 
-    public bool IsSuitAvailable(WEAPONS weapon_type){
-    	return (SUITS_DISCOVERED & weapon_type) == weapon_type;
-    }
+   // public bool IsSuitAvailable(WEAPONS weapon_type){
+    	//return (SUITS_DISCOVERED & weapon_type) == weapon_type;
+   // }
 
-    public bool IsSuitEquipped(WEAPONS weapon){
-    	return((WEAPON_EQUIPPED & weapon) == weapon);
-    }
+   // public bool IsSuitEquipped(WEAPONS weapon){
+    	//return((WEAPON_EQUIPPED & weapon) == weapon);
+  //  }
 }

@@ -22,7 +22,7 @@ public class MeleeAttack_Hazmat : MeleeAttack
 	}
 	
 	void Update () {
-        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) && GlobalVariableManager.Instance.WEAPON_EQUIPPED == GlobalVariableManager.WEAPONS.HAZMAT) {
+        if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) ) {
             switch (GetComponent<JimStateController>().GetCurrentState()) {
                 case JimState.ATTACKING:
                     if (swingDirection == 1) {

@@ -20,7 +20,6 @@ public class DresserBehavior : SE_GlowWhenClose
 	public override void Activate ()
 	{
 
-		Debug.Log(GlobalVariableManager.Instance.IsSuitAvailable(GlobalVariableManager.WEAPONS.HAZMAT));
 		suitSelectHud.gameObject.SetActive(true);
 		GameStateManager.Instance.PushState(typeof(PauseMenuState));
 	}

@@ -5,6 +5,8 @@ public class HeroAttacker : MonoBehaviour
 {
 	public int currentHP;
 	private EnemyStateController controller;
+
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -65,5 +67,7 @@ public class HeroAttacker : MonoBehaviour
 
 		this.gameObject.SetActive(false);
 	}
+
+
 }
 

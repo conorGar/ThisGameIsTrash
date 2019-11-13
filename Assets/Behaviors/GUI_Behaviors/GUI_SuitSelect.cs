@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GUI_SuitSelect : MonoBehaviour
 {
-	int weaponsAvailable = 1;
+	/*int weaponsAvailable = 1;
 	protected int arrowpos = 1;
 
 	public List<GUI_SuitOption> weaponBoxes = new List<GUI_SuitOption>();
@@ -143,5 +143,7 @@ public class GUI_SuitSelect : MonoBehaviour
             }
         }
     }
+
+    */
 }
 

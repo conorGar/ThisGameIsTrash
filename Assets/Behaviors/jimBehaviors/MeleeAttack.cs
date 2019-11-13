@@ -61,7 +61,7 @@ public class MeleeAttack : MonoBehaviour {
     }
 
     void Update () {
-		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) && GlobalVariableManager.Instance.WEAPON_EQUIPPED == GlobalVariableManager.WEAPONS.DUSTER) {
+		if (GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) ) {
             switch (GetComponent<JimStateController>().GetCurrentState()) {
                 case JimState.ATTACKING:
                     if (swingDirection == 1) {
