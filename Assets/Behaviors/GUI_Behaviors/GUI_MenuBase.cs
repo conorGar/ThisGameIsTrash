@@ -31,14 +31,19 @@ public class GUI_MenuBase : MonoBehaviour {
             arrowPos++;
         }
         else if (dir == "up") {
-            arrowPos--;
+			if (valToIncreaseWhenDown == 0) {
+                arrowPos--;
+            }
+            else {
+                arrowPos -= valToIncreaseWhenDown; //varies sometimes
+            }
         }
         else if (dir == "down") {
             if (valToIncreaseWhenDown == 0) {
                 arrowPos++;
             }
             else {
-                arrowPos = valToIncreaseWhenDown; //varies sometimes
+                arrowPos += valToIncreaseWhenDown; //varies sometimes
             }
         }
         else {

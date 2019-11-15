@@ -36,6 +36,7 @@ public class WeaponDefinition : ScriptableObject
     }
 
 	public string sprite = "sprite_name";
+	public Sprite displaySprite;
 
     public string displayName = "New Weapon";
     public string description = "New Weapon Description";

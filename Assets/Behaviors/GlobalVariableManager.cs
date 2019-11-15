@@ -34,10 +34,11 @@ public class GlobalVariableManager : UserDataItem {
         get { return (PIN)pinsViewedValue; }
     }
 
-    //public List<PIN> EquippedAbilityPins = new List<PIN> {PIN.NONE,PIN.NONE};
 	public List<GameObject> EquippedAbilityPins = new List<GameObject>();
 
+	public List<WeaponDefinition> WeaponInventory = new List<WeaponDefinition>();
 
+	public List<Hero> HeroData = new List<Hero>();
 	public List<WeaponDefinition> JimEquippedWeapons = new List<WeaponDefinition>();
 	public List<WeaponDefinition> RatEquippedWeapons = new List<WeaponDefinition>();
 
