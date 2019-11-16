@@ -20,8 +20,9 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 	public GameObject equippedSectionHolder;
 	public List<GameObject> inventoryWeapons = new List<GameObject>();
 	public List<GameObject> currentlyEquipped = new List<GameObject>();
+	public GUI_WeaponEquipPopupMenu popupMenu;
 
-	NavigationState currentNavigationArea = NavigationState.TRASH_BAG;
+	public NavigationState currentNavigationArea = NavigationState.TRASH_BAG;
 	Hero currentlySelectedHero;
 
 	int previouslyHighlightedArrowPos;
@@ -104,26 +105,20 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 
 	        	}
 	        }else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
-	        Debug.Log("InteractRead");
-	        	if(currentNavigationArea == NavigationState.TRASH_BAG){
-					Debug.Log("current state is trash bag" + currentlySelectedHero.strength);
+	        	Debug.Log("InteractRead");
+				Debug.Log("current state is trash bag" + currentlySelectedHero.strength);
 
-	        		//equip currently highlighted weapon if this hero has the strength required
-	        		if(currentlySelectedHero.strength >= GlobalVariableManager.Instance.WeaponInventory[arrowPos].weight){
-						Debug.Log("Proper Weight available");
+					//POPUP MENU APPEAR
+				
+				if(currentlySelectedHero.strength < GlobalVariableManager.Instance.WeaponInventory[arrowPos].weight){
+					popupMenu.GreyOutEquip();
+				}else{
+					popupMenu.arrowPos = 0;
+				}
+				popupMenu.gameObject.SetActive(true);
 
-						currentlySelectedHero.myEquippedWeapons.Add(GlobalVariableManager.Instance.WeaponInventory[arrowPos]);
-						currentlySelectedHero.strength -= GlobalVariableManager.Instance.WeaponInventory[arrowPos].weight;
-						currentlyEquipped.Add(inventoryWeapons[arrowPos]);
-						inventoryWeapons.RemoveAt(arrowPos);
-						GlobalVariableManager.Instance.WeaponInventory.RemoveAt(arrowPos);
-						if(arrowPos > 0){
-							arrowPos--;
-						}
-						UpdateInventoryDisplay();
-						UpdateEquippedDisplay();
-	        		}
-	        	}
+				GameStateManager.Instance.PushState(typeof(OptionsState));
+	        	
 	        }
 
 		}
@@ -148,6 +143,10 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 
 		for(int i = 0; i < inventoryWeapons.Count; i++){
 			Debug.Log(i%5);
+			if(inventoryWeapons[i].transform.parent != trashBagDisplayHolder.transform){
+				inventoryWeapons[i].transform.parent = trashBagDisplayHolder.transform;
+				inventoryWeapons[i].transform.localScale = new Vector2(1f,1f);
+			}
 			inventoryWeapons[i].transform.localPosition = new Vector2(-12 +(3*(i%5)), 5.2f - (3* Mathf.Floor(i/5)));
 		}
 		inventoryWeapons[arrowPos].GetComponent<GUI_WeaponDisplayBox>().Highlight();
@@ -166,6 +165,51 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 
 		currentlyEquipped[arrowPos].GetComponent<GUI_WeaponDisplayBox>().Highlight();
 
+	}
+
+	public void Equip(){ //Activated by GUI_WeaponPopup
+		if(currentlySelectedHero.strength >= GlobalVariableManager.Instance.WeaponInventory[arrowPos].weight){
+			Debug.Log("Proper Weight available");
+
+			currentlySelectedHero.myEquippedWeapons.Add(GlobalVariableManager.Instance.WeaponInventory[arrowPos]);
+			currentlySelectedHero.strength -= GlobalVariableManager.Instance.WeaponInventory[arrowPos].weight;
+			currentlyEquipped.Add(inventoryWeapons[arrowPos]);
+			inventoryWeapons.RemoveAt(arrowPos);
+			GlobalVariableManager.Instance.WeaponInventory.RemoveAt(arrowPos);
+			if(arrowPos > 0){
+				arrowPos--;
+			}
+			UpdateInventoryDisplay();
+			UpdateEquippedDisplay();
+	    }
+	}
+
+	public void Unequip(){
+		GlobalVariableManager.Instance.WeaponInventory.Add(currentlySelectedHero.myEquippedWeapons[arrowPos]);
+		currentlySelectedHero.myEquippedWeapons.RemoveAt(arrowPos);
+		inventoryWeapons.Add(currentlyEquipped[arrowPos]);
+		currentlyEquipped.RemoveAt(arrowPos);
+		if(arrowPos > 0){
+				arrowPos--;
+		}
+		maxArrowPos = currentlyEquipped.Count;
+
+		UpdateInventoryDisplay();
+		UpdateEquippedDisplay();
+	}
+
+	public void Drop(){
+		//TODO: Are you sure? Popup
+		if(currentNavigationArea == NavigationState.TRASH_BAG){
+			inventoryWeapons.RemoveAt(arrowPos);
+			GlobalVariableManager.Instance.WeaponInventory.RemoveAt(arrowPos);
+			UpdateInventoryDisplay();
+
+		}else{
+			currentlyEquipped.RemoveAt(arrowPos);
+			currentlySelectedHero.myEquippedWeapons.RemoveAt(arrowPos);
+			UpdateEquippedDisplay();
+		}
 	}
 
 }
