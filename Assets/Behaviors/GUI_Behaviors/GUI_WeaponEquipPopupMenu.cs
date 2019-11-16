@@ -20,12 +20,15 @@ public class GUI_WeaponEquipPopupMenu : MonoBehaviour
 					options[i].text = "Equip";
 				}
 			}
+			gameObject.transform.localPosition = new Vector2(-2.54f,1.49f);
+
 		}else{
 			for(int i = 0; i < options.Count; i++){
 				if(options[i].gameObject.name == "equip"){
 					options[i].text = "Unequip";
 				}
 			}
+			gameObject.transform.localPosition = new Vector2(2.85f,-3.65f);
 		}
 		options[arrowPos].color = new Color(255,255,255,1f); // unhighlight current option
 
