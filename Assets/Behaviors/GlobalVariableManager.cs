@@ -37,6 +37,7 @@ public class GlobalVariableManager : UserDataItem {
 	public List<GameObject> EquippedAbilityPins = new List<GameObject>();
 
 	public List<WeaponDefinition> WeaponInventory = new List<WeaponDefinition>();
+	public int MaxInventorySize = 20;
 
 	public List<Hero> HeroData = new List<Hero>();
 

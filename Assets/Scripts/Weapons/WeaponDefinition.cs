@@ -36,7 +36,7 @@ public class WeaponDefinition : ScriptableObject
     }
 
 	public string sprite = "sprite_name";
-	public Sprite displaySprite;
+	public Sprite displaySprite; //Needed a seperate Sprite value for using it as Image for Equip display
 
     public string displayName = "New Weapon";
     public string description = "New Weapon Description";
@@ -44,6 +44,7 @@ public class WeaponDefinition : ScriptableObject
     public int health = 99;
     public int weaponPrice = 0;
     public int weight = 1;
+    public int dropChance = 100;
     public SpecialWeapon specialWeapon = SpecialWeapon.NONE; //is this weapon only for a specific character
 
 }

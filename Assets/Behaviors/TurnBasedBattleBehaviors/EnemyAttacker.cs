@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyAttacker : MonoBehaviour
 {
@@ -8,7 +9,8 @@ public class EnemyAttacker : MonoBehaviour
 	public int damageStr; //TODO: Replace with bank of different weapons?
 	public int speed;
 	protected EnemyStateController controller;
-
+	public List<WeaponDefinition> myPossibleDrops = new List<WeaponDefinition>();
+	public int[] dropChanceTable; //Corresponds to each position in 'myPossibleDrops'. Should add up to 100
 	public string myDeadBodyName;
 
 	void Awake()
@@ -60,6 +62,7 @@ public class EnemyAttacker : MonoBehaviour
 	void Death(){
 		BattleManager.Instance.RemoveEnemy(this);
 		GetComponent<EnemyStateController>().SendTrigger(EnemyTrigger.DEATH);
+		Drop();
 		GameObject deathSmoke = ObjectPool.Instance.GetPooledObject("effect_SmokePuff"); 
 		deathSmoke.transform.position = new Vector3((transform.position.x), transform.position.y, transform.position.z);
 		GameObject deathGhost = ObjectPool.Instance.GetPooledObject("effect_DeathGhost",new Vector3((transform.position.x), transform.position.y, transform.position.z));
@@ -70,6 +73,30 @@ public class EnemyAttacker : MonoBehaviour
 
 		this.gameObject.SetActive(false);
 
+	}
+
+	void Drop(){
+
+		//total of all chances, should just be 100 but just in case
+		int total = 0;
+		foreach(int chance in dropChanceTable){
+			total += chance;
+		}
+
+		int dropChance = Random.Range(0,total);
+
+		for(int i = 0; i < myPossibleDrops.Count; i++){
+			//compare is my random number < the current chance
+			if(dropChanceTable[i] >= dropChance){
+				//Drop the current weapon
+				GameObject droppedWeapon = ObjectPool.Instance.GetPooledObject("WeaponDrop",gameObject.transform.position);
+				droppedWeapon.GetComponent<Ev_DroppedWeapon>().setWeaponData(myPossibleDrops[i]);
+				break;
+			}else{
+				dropChance -= dropChanceTable[i];
+			}
+		}
+		
 	}
 
 }

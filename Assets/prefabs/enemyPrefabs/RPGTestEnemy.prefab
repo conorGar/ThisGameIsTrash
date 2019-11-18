@@ -77,7 +77,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1015819666061286}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -27.369884, y: -10.8645, z: 0}
+  m_LocalPosition: {x: -32.33939, y: -13.532912, z: 0}
   m_LocalScale: {x: -1.060827, y: 1.0608267, z: 1.0608267}
   m_Children:
   - {fileID: 4626884958562008}
@@ -248,9 +248,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c030048e1750b4418410bd4a12447de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 5
+  currentHP: 2
   damageStr: 1
   speed: 1
+  myPossibleDrops:
+  - {fileID: 11400000, guid: de70e4038022d90438eeb548b3efef50, type: 2}
+  - {fileID: 11400000, guid: 00a0a919e42b0ba47b2443d0ba000619, type: 2}
+  dropChanceTable: 5a0000000a000000
+  myDeadBodyName: 
 --- !u!114 &114445473152319742
 MonoBehaviour:
   m_ObjectHideFlags: 1
