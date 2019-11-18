@@ -5,7 +5,29 @@ public class HeroAttacker : MonoBehaviour
 {
 	public int currentHP;
 	private EnemyStateController controller;
+	public string myHeroName;
 
+	public enum HERO_STATE{
+		NORMAL,
+		BLOCKING
+	}
+
+	public HERO_STATE myCurrentState;
+
+	public Hero thisHero; //public for debuggin'
+
+	void Awake(){
+		//Search through Heroes and find one with the same name to get stats
+		for(int i = 0; i < GlobalVariableManager.Instance.HeroData.Count; i++){
+			Debug.Log("This Hero name:" + GlobalVariableManager.Instance.HeroData[i].heroName);
+			if(myHeroName == GlobalVariableManager.Instance.HeroData[i].heroName){
+				Debug.Log("Found Hero - HeroAttacker");
+				thisHero = GlobalVariableManager.Instance.HeroData[i];
+				Debug.Log("Defense:" + thisHero.defense);
+				break;
+			}
+		}
+	}
 
 	// Use this for initialization
 	void Start ()
@@ -21,7 +43,20 @@ public class HeroAttacker : MonoBehaviour
 
 	public void TakeDamage(int damage){
 		Debug.Log(gameObject.name + "Took" + damage + "damage!");
+		Debug.Log(thisHero);
+		damage -= thisHero.defense;
+
+		if(myCurrentState == HERO_STATE.BLOCKING){
+			damage--;
+		}
+
+		if(damage < 0){
+			damage = 0;
+		}
+
 		currentHP -= damage;
+
+
 		GlobalVariableManager.Instance.HP_STAT.UpdateCurrent(currentHP);
 		if(controller){ //use the prescence of a HeroStateController to determine if this is Jim or not
 			controller.SendTrigger(EnemyTrigger.HIT);
@@ -39,13 +74,15 @@ public class HeroAttacker : MonoBehaviour
 	}
 
 	void SpawnDamageStars(int damageDealt){
-		GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars_player",this.gameObject.transform.position);
-		damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(damageDealt);
-		damageCounter.SetActive(true);
+		if(damageDealt > 0){ //only show damage star if take more than 0 damage
+			GameObject damageCounter = ObjectPool.Instance.GetPooledObject("HitStars_player",this.gameObject.transform.position);
+			damageCounter.GetComponent<Ev_HitStars>().ShowProperDamage(damageDealt);
+			damageCounter.SetActive(true);
+			damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
+		}
 		GameObject littleStars = ObjectPool.Instance.GetPooledObject("effect_LittleStars",this.gameObject.transform.position);
 		littleStars.SetActive(true);
         CamManager.Instance.mainCam.ScreenShake(.2f);
-		damageCounter.GetComponent<Rigidbody2D>().AddForce(new Vector2(4f,10f), ForceMode2D.Impulse);
 		
 	}
 

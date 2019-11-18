@@ -77,10 +77,22 @@ public class BattleManager : MonoBehaviour
 	}
 
 
+	public void PlayerBlock(HeroAttacker thisHero, PlayerAttackHandler pah){
+		Debug.Log("Player Block activated");
+		if(currentState == CurrentBattleState.NOTHINGATTAKING){
+				currentlyAttackingPlayer = pah;
+				ChangeState(CurrentBattleState.PLAYERATTACK);
+				thisHero.myCurrentState = HeroAttacker.HERO_STATE.BLOCKING;
+				ReturnFromAttack();
+		}
+	}
+
 	public void PlayerAttack(PlayerAttackHandler pah, int selectedEnemyNum){
 		if(currentState == CurrentBattleState.NOTHINGATTAKING){
 			ChangeState(CurrentBattleState.PLAYERATTACK);
 			targetedEnemy = enemyList[selectedEnemyNum];
+			pah.thisHeroAttacker.myCurrentState = HeroAttacker.HERO_STATE.NORMAL;
+
 			currentlyAttackingPlayer = pah;
 			pah.attackPhase = "ATTACKING";
 			targetSelectArrow.SetActive(false);

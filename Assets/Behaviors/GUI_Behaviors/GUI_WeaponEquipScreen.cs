@@ -174,6 +174,7 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 			currentlySelectedHero.myEquippedWeapons.Add(GlobalVariableManager.Instance.WeaponInventory[arrowPos]);
 			currentlySelectedHero.strength -= GlobalVariableManager.Instance.WeaponInventory[arrowPos].weight;
 			currentlyEquipped.Add(inventoryWeapons[arrowPos]);
+			currentlyEquipped[currentlyEquipped.Count-1].GetComponent<GUI_WeaponDisplayBox>().UnHighlight();
 			inventoryWeapons.RemoveAt(arrowPos);
 			GlobalVariableManager.Instance.WeaponInventory.RemoveAt(arrowPos);
 			if(arrowPos > 0){
@@ -188,6 +189,8 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 		GlobalVariableManager.Instance.WeaponInventory.Add(currentlySelectedHero.myEquippedWeapons[arrowPos]);
 		currentlySelectedHero.myEquippedWeapons.RemoveAt(arrowPos);
 		inventoryWeapons.Add(currentlyEquipped[arrowPos]);
+		inventoryWeapons[inventoryWeapons.Count-1].GetComponent<GUI_WeaponDisplayBox>().UnHighlight();
+
 		currentlyEquipped.RemoveAt(arrowPos);
 		if(arrowPos > 0){
 				arrowPos--;

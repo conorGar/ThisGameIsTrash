@@ -9,14 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb339e1a751c936458f3043325908ae5, type: 3}
-  m_Name: HeroJim
+  m_Name: HeroRat
   m_EditorClassIdentifier: 
-  heroName: Jim
+  heroName: BattleRat
   maxStrength: 10
-  strength: 1
-  maxHP: 10
+  strength: 10
+  maxHP: 4
   defense: 0
   myEquippedWeapons:
   - {fileID: 11400000, guid: de70e4038022d90438eeb548b3efef50, type: 2}
   - {fileID: 11400000, guid: 00a0a919e42b0ba47b2443d0ba000619, type: 2}
-  - {fileID: 11400000, guid: de70e4038022d90438eeb548b3efef50, type: 2}

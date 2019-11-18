@@ -6,15 +6,20 @@ public class WeaponChoice : MonoBehaviour
 
 	public tk2dSprite weaponSprite;
 	public tk2dTextMesh damageNumDisplay;
+	public enum WEAPON_TYPE {
+		BASIC,
+		HEAL,
+		BLOCK
+	}
+
+	public WEAPON_TYPE myWeaponType = WEAPON_TYPE.BASIC;
 
 	[HideInInspector]
 	public int damage;
 
-	void Awake(){
-		
-	}
 
-	public void DefineValues(WeaponDefinition weapontype){
+
+	public virtual void DefineValues(WeaponDefinition weapontype){
 		
 		weaponSprite.SetSprite(weapontype.sprite);
 		damage = weapontype.damage;

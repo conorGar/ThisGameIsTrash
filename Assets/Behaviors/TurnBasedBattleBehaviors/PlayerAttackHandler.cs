@@ -5,22 +5,51 @@ using System.Collections.Generic;
 public class PlayerAttackHandler : MonoBehaviour
 {
 	public bool canAttack = false; //set true by PlayerTurnDelayBar
+
+	public enum ATTACK_PHASES{
+		CANNOT_ATTACK,
+		CHOOSE_ATTACK,
+		SELECT_ENEMY,
+		SELECT_HERO, //for healing and stuff
+		ATTACKING
+	}
+
 	public string attackPhase = "CANNOT_ATTACK"; //CHOOSE_ATTACK \ SELECT_ENEMY \ ATTACKING
 	public List<WeaponChoice> weaponChoiceList = new List<WeaponChoice>();
 	public GameObject myWeaponOptionHolder;
 
 
-	public enum ThisHero {
-		JIM,
-		ROBOT,
-		ICE_CREAM
-	}
 
-	public ThisHero heroType;
+
+	public Hero heroType;
+	int heroTypeLocation;
+
+	[HideInInspector]
+	public HeroAttacker thisHeroAttacker;
 
 	public int arrowPos;
 	int weaponDamage;
 	// Use this for initialization
+	void Awake(){
+
+		if(!myWeaponOptionHolder.activeInHierarchy){ //Weapon Holder needs to start ACTIVE so that weapon options are drawn from pool properly
+			myWeaponOptionHolder.SetActive(true);
+		}
+
+		//find the location of this hero in the global hero list(for spawning weapon options)
+		for(int i = 0; i < GlobalVariableManager.Instance.HeroData.Count; i++){
+			Debug.Log(heroType.heroName + " " + GlobalVariableManager.Instance.HeroData[i].heroName );
+
+			if(heroType.heroName == GlobalVariableManager.Instance.HeroData[i].heroName){
+				Debug.Log("****Found hero match: " + heroType.heroName);
+				heroTypeLocation = i;
+				break;
+			}
+		}
+
+		thisHeroAttacker = gameObject.GetComponent<HeroAttacker>();
+	}
+
 	void Start ()
 	{
 		SpawnWeaponOptions();
@@ -45,10 +74,16 @@ public class PlayerAttackHandler : MonoBehaviour
 					arrowPos++;
 					weaponChoiceList[arrowPos].Highlight();
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
-					Debug.Log("Weapon selected");
-					weaponDamage = weaponChoiceList[arrowPos].damage;
-					arrowPos = 0;
-					attackPhase = "SELECT_ENEMY";
+					Debug.Log("Weapon selected" + weaponChoiceList[arrowPos].name);
+					if(weaponChoiceList[arrowPos].myWeaponType == WeaponChoice.WEAPON_TYPE.BASIC){
+						weaponDamage = weaponChoiceList[arrowPos].damage;
+						arrowPos = 0;
+						attackPhase = "SELECT_ENEMY";
+					}else if(weaponChoiceList[arrowPos].myWeaponType == WeaponChoice.WEAPON_TYPE.BLOCK){
+						Debug.Log("Read block weapon properly");
+						BattleManager.Instance.PlayerBlock(gameObject.GetComponent<HeroAttacker>(),this);
+
+					}
 				}
 			}else if(attackPhase == "SELECT_ENEMY"){
 				if(myWeaponOptionHolder.activeInHierarchy){
@@ -90,11 +125,12 @@ public class PlayerAttackHandler : MonoBehaviour
 	}
 
 	void SpawnWeaponOptions(){
-		if(heroType == ThisHero.JIM){
-			foreach(WeaponDefinition weapon in GlobalVariableManager.Instance.JimEquippedWeapons){
-				AddWeaponChoice(weapon);
-			}
+		Debug.Log("Spawn weapon options activated for " + gameObject.name);
+		foreach(WeaponDefinition weapon in GlobalVariableManager.Instance.HeroData[heroTypeLocation].myEquippedWeapons){
+			Debug.Log(weapon.displayName);
+			AddWeaponChoice(weapon);
 		}
+
 
 		myWeaponOptionHolder.SetActive(false);
 	}
@@ -102,7 +138,7 @@ public class PlayerAttackHandler : MonoBehaviour
 	public void AddWeaponChoice(WeaponDefinition weapon){
 		Debug.Log("Add Weapon Choice activated" + weapon.displayName);
 		Vector2 optionSpawnPos = new Vector2(myWeaponOptionHolder.transform.position.x +(3f*weaponChoiceList.Count), myWeaponOptionHolder.transform.position.y);
-		GameObject weaponChoice = ObjectPool.Instance.GetPooledObject("weapon_option", optionSpawnPos); //TODO: change 'gameobject.transform.position' to position of WeaponOptionHolder
+		GameObject weaponChoice = ObjectPool.Instance.GetPooledObject("weapon_option", optionSpawnPos); 
 		weaponChoice.GetComponent<WeaponChoice>().DefineValues(weapon);
 		weaponChoice.transform.parent = myWeaponOptionHolder.transform;
 		weaponChoice.transform.localScale = new Vector2(3.5f,6); //Set box to proper size

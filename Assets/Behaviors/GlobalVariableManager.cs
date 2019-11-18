@@ -39,8 +39,6 @@ public class GlobalVariableManager : UserDataItem {
 	public List<WeaponDefinition> WeaponInventory = new List<WeaponDefinition>();
 
 	public List<Hero> HeroData = new List<Hero>();
-	public List<WeaponDefinition> JimEquippedWeapons = new List<WeaponDefinition>();
-	public List<WeaponDefinition> RatEquippedWeapons = new List<WeaponDefinition>();
 
 
     public int DEJAVUCOUNT = 0;
