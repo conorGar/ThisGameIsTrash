@@ -38,7 +38,7 @@ public class BattleManager : MonoBehaviour
 		if(currentState == CurrentBattleState.NOTHINGATTAKING){
 			if(heroTurnQueue.Count > 0){ //If there's any heroes in the queue
 				if(heroTurnQueue[0].attackPhase == "CANNOT_ATTACK"){
-					heroTurnQueue[0].attackPhase = "CHOOSE_ATTACK";
+					heroTurnQueue[0].ChooseAttackActivate();
 				}
 			}
 		}

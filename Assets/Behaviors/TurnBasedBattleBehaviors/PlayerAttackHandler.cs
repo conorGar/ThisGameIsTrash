@@ -28,6 +28,7 @@ public class PlayerAttackHandler : MonoBehaviour
 	public HeroAttacker thisHeroAttacker;
 
 	public int arrowPos;
+	int prevArrowPos;
 	int weaponDamage;
 	// Use this for initialization
 	void Awake(){
@@ -75,10 +76,16 @@ public class PlayerAttackHandler : MonoBehaviour
 					weaponChoiceList[arrowPos].Highlight();
 				}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 					Debug.Log("Weapon selected" + weaponChoiceList[arrowPos].name);
+
+					prevArrowPos = arrowPos;
+
 					if(weaponChoiceList[arrowPos].myWeaponType == WeaponChoice.WEAPON_TYPE.BASIC){
 						weaponDamage = weaponChoiceList[arrowPos].damage;
 						arrowPos = 0;
 						attackPhase = "SELECT_ENEMY";
+						Vector2 attackArrowPos = new Vector2(BattleManager.Instance.enemyList[arrowPos].transform.position.x, BattleManager.Instance.enemyList[arrowPos].transform.position.y + BattleManager.Instance.enemyList[arrowPos].GetComponent<tk2dSprite>().scale.y + 2f); //Place arrow above enemy 2f is for size of arrow itself
+						BattleManager.Instance.targetSelectArrow.transform.position = attackArrowPos ;
+
 					}else if(weaponChoiceList[arrowPos].myWeaponType == WeaponChoice.WEAPON_TYPE.BLOCK){
 						Debug.Log("Read block weapon properly");
 						BattleManager.Instance.PlayerBlock(gameObject.GetComponent<HeroAttacker>(),this);
@@ -113,6 +120,13 @@ public class PlayerAttackHandler : MonoBehaviour
 				BattleManager.Instance.targetSelectArrow.SetActive(false);
 			}
 		}
+
+		//Make the weapon options not be backward when player is facing left
+		if(gameObject.transform.localScale.x < 0){
+			myWeaponOptionHolder.transform.localScale = new Vector2(-1.79f,1);
+		}else{
+			myWeaponOptionHolder.transform.localScale = new Vector2(1.79f,1);
+		}
 	}
 
 	public IEnumerator MoveToAttack(GameObject enemyTarget){ //Handles Player Attack Animations/Movement to selected enemy
@@ -135,11 +149,19 @@ public class PlayerAttackHandler : MonoBehaviour
 		myWeaponOptionHolder.SetActive(false);
 	}
 
+
+	public void ChooseAttackActivate(){ //Activated by BattleManager based on Hero Queue
+		arrowPos = prevArrowPos;
+		attackPhase = "CHOOSE_ATTACK";
+
+	}
+
 	public void AddWeaponChoice(WeaponDefinition weapon){
 		Debug.Log("Add Weapon Choice activated" + weapon.displayName);
 		Vector2 optionSpawnPos = new Vector2(myWeaponOptionHolder.transform.position.x +(3f*weaponChoiceList.Count), myWeaponOptionHolder.transform.position.y);
 		GameObject weaponChoice = ObjectPool.Instance.GetPooledObject("weapon_option", optionSpawnPos); 
 		weaponChoice.GetComponent<WeaponChoice>().DefineValues(weapon);
+		weaponChoice.GetComponent<WeaponChoice>().Unhighlight();
 		weaponChoice.transform.parent = myWeaponOptionHolder.transform;
 		weaponChoice.transform.localScale = new Vector2(3.5f,6); //Set box to proper size
 		weaponChoiceList.Add(weaponChoice.GetComponent<WeaponChoice>());
