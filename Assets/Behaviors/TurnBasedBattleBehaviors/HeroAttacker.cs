@@ -3,7 +3,6 @@ using System.Collections;
 
 public class HeroAttacker : MonoBehaviour
 {
-	public int currentHP;
 	private EnemyStateController controller;
 	public string myHeroName;
 
@@ -38,7 +37,12 @@ public class HeroAttacker : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		//cant go over maxHP
+		if(thisHero){
+			if (thisHero.currentHP > thisHero.maxHP) {
+				 thisHero.currentHP = thisHero.maxHP;
+			}
+		}
 	}
 
 	public void TakeDamage(int damage){
@@ -54,10 +58,9 @@ public class HeroAttacker : MonoBehaviour
 			damage = 0;
 		}
 
-		currentHP -= damage;
+		thisHero.currentHP -= damage;
 
 
-		GlobalVariableManager.Instance.HP_STAT.UpdateCurrent(currentHP);
 		if(controller){ //use the prescence of a HeroStateController to determine if this is Jim or not
 			controller.SendTrigger(EnemyTrigger.HIT);
 		}else{
@@ -66,7 +69,7 @@ public class HeroAttacker : MonoBehaviour
         SpawnDamageStars(damage);
 		Debug.Log("reached this end of hp hud change" + GlobalVariableManager.Instance.HP_STAT.GetCurrent());
 
-		if(currentHP <= 0){
+		if(thisHero.currentHP <= 0){
 			
 			StartCoroutine("Death");
 		}

@@ -6,6 +6,7 @@ public class ConsumableItemOption : MonoBehaviour
 
 	public CONSUMABLE thisItem;
 
+	protected int myIndexInInventory; // for removing
 	// Use this for initialization
 	void Start ()
 	{
@@ -19,7 +20,7 @@ public class ConsumableItemOption : MonoBehaviour
 
 	}
 
-	protected virtual void Use(){
+	protected virtual void Use(Hero hero){
 		//Nothing for base item option
 	}
 }

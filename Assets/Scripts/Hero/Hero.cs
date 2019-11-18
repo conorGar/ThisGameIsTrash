@@ -10,6 +10,7 @@ public class Hero : ScriptableObject
 	public int maxStrength;
 	public int strength;
 	public int maxHP;
+	public int currentHP;
 	public int defense;
 	public List<WeaponDefinition> myEquippedWeapons = new List<WeaponDefinition>();
 
