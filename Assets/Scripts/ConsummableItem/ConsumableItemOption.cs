@@ -4,8 +4,7 @@ using System.Collections;
 public class ConsumableItemOption : MonoBehaviour
 {
 
-	public CONSUMABLE thisItem;
-
+	public ConsumableItem myItemDefinition;
 	protected int myIndexInInventory; // for removing
 	// Use this for initialization
 	void Start ()
@@ -20,7 +19,9 @@ public class ConsumableItemOption : MonoBehaviour
 
 	}
 
-	protected virtual void Use(Hero hero){
+
+
+	public virtual void Use(Hero hero){ //Activated by menu behavior(s), ie GUI_WeaponEquipScreen
 		//Nothing for base item option
 	}
 }

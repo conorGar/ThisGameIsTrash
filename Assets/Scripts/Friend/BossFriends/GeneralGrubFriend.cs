@@ -25,7 +25,7 @@ public class GeneralGrubFriend : Friend
             	Debug.Log(room.roomNum + "< current room| start room >" + startRoom);
                 return room.roomNum == startRoom;
 			case "BEETLE_STEVE_INTRO":
-				Debug.Log(room.roomNum + "< current room| beetleSteve room >" + beetleSteveRoom);
+				//Debug.Log(room.roomNum + "< current room| beetleSteve roG=|���:5�NleSteveRoom);
 
                 return room.roomNum == beetleSteveRoom;
 			case "BEETLE_STEVE_FIGHT":

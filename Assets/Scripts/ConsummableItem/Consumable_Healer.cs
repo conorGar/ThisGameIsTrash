@@ -18,7 +18,7 @@ public class Consumable_Healer : ConsumableItemOption
 	
 	}
 
-	protected override void Use(Hero hero){
+	public override void Use(Hero hero){
 		if(hero.currentHP < hero.maxHP){
 			hero.currentHP += healAmnt;
 			Remove();

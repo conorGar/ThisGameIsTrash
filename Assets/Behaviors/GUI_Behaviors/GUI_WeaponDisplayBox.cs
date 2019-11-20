@@ -3,6 +3,13 @@ using System.Collections;
 using UnityEngine.UI;
 public class GUI_WeaponDisplayBox : MonoBehaviour
 {
+
+	public enum Type {
+		WEAPON,
+		CONSUMABLE
+	}
+
+	public Type type;
 	public Image weaponIcon;
 	// Use this for initialization
 	public void Highlight(){

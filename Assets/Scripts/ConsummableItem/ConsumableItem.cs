@@ -22,6 +22,7 @@ public class ConsumableItem : ScriptableObject
 
 	[HideInInspector]
     public long itemValue;
+	public Sprite displaySprite; //Needed a seperate Sprite value for using it as Image for Equip display
 
 	public string displayName = "New Pin";
     public string description = "New Pin Description";
