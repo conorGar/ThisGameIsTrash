@@ -22,11 +22,15 @@ public class ConsumableItemOption : MonoBehaviour
 
 
 	public virtual void Use(Hero hero){ //Activated by menu behavior(s), ie GUI_WeaponEquipScreen
-		Debug.Log("Got here- Item use");
 
-		//maybe try calling a seperate methos here to heal and see if THAT overrides properly?!?
 
 		//Nothing for base item option
+	}
+
+
+	public virtual bool CanUseCheck(Hero hero){
+		//Check to make the conditions this item must be used in are met(For example, cant use heal item in targetHero's hp is already max)
+		return true;
 	}
 }
 

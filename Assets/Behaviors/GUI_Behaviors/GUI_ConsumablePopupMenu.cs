@@ -50,13 +50,13 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 				}else{ //If item
 					//TODO: cannot use if healer item and player is at max hp
 					UseItem();
-					weaponEquipScreen.DropConsumable();
 					Close();
 				}
 			}
 
 		}
 	}
+
 
 
 

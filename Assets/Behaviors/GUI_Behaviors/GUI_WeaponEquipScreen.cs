@@ -229,8 +229,10 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 
 	public void UseItem(Hero targetHero){
 		int numOfWeapons = GlobalVariableManager.Instance.WeaponInventory.Count;
-
-		GlobalVariableManager.Instance.CONSUMABLE_INVENTORY[arrowPos - numOfWeapons].Use(targetHero);
+		if(GlobalVariableManager.Instance.CONSUMABLE_INVENTORY[arrowPos-numOfWeapons].CanUseCheck(targetHero)){
+			GlobalVariableManager.Instance.CONSUMABLE_INVENTORY[arrowPos - numOfWeapons].Use(targetHero);
+			DropConsumable();
+		}
 	}
 
 	public void Drop(){

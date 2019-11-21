@@ -14,5 +14,14 @@ public class Item_Healer : ConsumableItemOption
 			hero.currentHP = hero.maxHP;
 		}
 	}
+
+	public override bool CanUseCheck(Hero hero){
+		if(hero.currentHP < hero.maxHP){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
 }
 
