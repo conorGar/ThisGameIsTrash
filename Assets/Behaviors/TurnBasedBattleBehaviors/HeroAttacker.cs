@@ -4,6 +4,7 @@ using System.Collections;
 public class HeroAttacker : MonoBehaviour
 {
 	private EnemyStateController controller;
+	[HideInInspector]
 	public string myHeroName;
 
 	public enum HERO_STATE{
@@ -26,6 +27,8 @@ public class HeroAttacker : MonoBehaviour
 				break;
 			}
 		}
+		myHeroName = thisHero.heroName;
+
 	}
 
 	// Use this for initialization

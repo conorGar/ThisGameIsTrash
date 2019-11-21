@@ -4466,7 +4466,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &47115124
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4581,11 +4581,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -6773,7 +6773,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4278190241
   m_fontColor: {r: 0.63235295, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_fontColorGradient:
@@ -6840,7 +6840,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -14032,7 +14032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &337729998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14150,7 +14150,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -37274,7 +37274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &777087272
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37392,7 +37392,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -66533,7 +66533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1164821921
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66648,11 +66648,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -103839,9 +103839,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9931ef1c634499c4898d014f2379d7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myHeroName: 
+  myHeroName: BattleRat
   myCurrentState: 0
-  thisHero: {fileID: 0}
+  thisHero: {fileID: 11400000, guid: 45094a6d88236f543a06bab3f54d834e, type: 2}
 --- !u!114 &1465311396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135858,7 +135858,7 @@ Prefab:
     - target: {fileID: 114421117000630938, guid: 2537f00968f36d040917b2f57419231d,
         type: 2}
       propertyPath: partners.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114421117000630938, guid: 2537f00968f36d040917b2f57419231d,
         type: 2}

@@ -19,7 +19,8 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	
+		AddOptions();
+
 	}
 
 	void OnEnable(){
@@ -35,12 +36,18 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 			|| ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) && arrowPos < options.Count-1) {
 				options[arrowPos].color = new Color(255,255,255,.2f); // unhighlight current option
 				arrowPos++;
+				while(!options[arrowPos].IsActive()){ //keep going if this option isnt available(dont have 3 partners with you)
+					arrowPos++;
+				}
 				options[arrowPos].color = new Color(255,255,255,1f); // unhighlight current option
 
 			}else if((ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEUP)
 		    || ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKUP)) && arrowPos > 0){
 				options[arrowPos].color = new Color(255,255,255,.2f); // unhighlight current option
 				arrowPos--;
+				while(!options[arrowPos].IsActive()){//keep going if this option isnt available(dont have 3 partners with you)
+					arrowPos--;
+				}
 				options[arrowPos].color = new Color(255,255,255,1f); // highlight current option
 			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
 				if(options[arrowPos].gameObject.name == "drop"){
@@ -89,11 +96,13 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 
 	void AddOptions(){
 		//Add all hero options 
-		//TODO: only amount of options as there are partners
+
 
 		for(int i = 0; i < GlobalVariableManager.Instance.partners.Count;i++){
+			options[i+1].gameObject.SetActive(true);
+			Debug.Log("FOUND PARTNER WITH NAME:" + GlobalVariableManager.Instance.partners[i].myHeroName);
 			options[i+1].text = GlobalVariableManager.Instance.partners[i].myHeroName;
-
+			healthDisplays[i+1].gameObject.SetActive(true);
 		}
 
 
