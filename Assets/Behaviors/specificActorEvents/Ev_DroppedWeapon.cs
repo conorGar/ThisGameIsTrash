@@ -43,7 +43,7 @@ public class Ev_DroppedWeapon : MonoBehaviour
 	void OnTriggerStay2D(Collider2D collider){
 		//TODO: only pick up if press button
 		if(collider.gameObject.tag == "Player" && GameStateManager.Instance.GetCurrentState() == typeof(GameplayState)){
-			if(GlobalVariableManager.Instance.WeaponInventory.Count < GlobalVariableManager.Instance.MaxInventorySize){
+			if((GlobalVariableManager.Instance.WeaponInventory.Count + GlobalVariableManager.Instance.CONSUMABLE_INVENTORY.Count ) < GlobalVariableManager.Instance.MaxInventorySize){
 				GlobalVariableManager.Instance.WeaponInventory.Add(myWeapon);
 				ObjectPool.Instance.ReturnPooledObject(this.gameObject);
 			}
@@ -59,6 +59,6 @@ public class Ev_DroppedWeapon : MonoBehaviour
 		gameObject.GetComponent<tk2dSprite>().SetSprite(data.sprite);
 
 
-	}//end of pin data set
+	}
 }
 
