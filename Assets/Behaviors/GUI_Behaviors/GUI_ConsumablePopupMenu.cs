@@ -7,6 +7,8 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 {
 	public GUI_WeaponEquipScreen weaponEquipScreen;
 	public List<TextMeshProUGUI> options = new List<TextMeshProUGUI>();
+	public List<TextMeshProUGUI> healthDisplays = new List<TextMeshProUGUI>();
+
 	public int arrowPos;
 
 	ConsumableItemOption thisItem;
@@ -22,6 +24,7 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 
 	void OnEnable(){
 		AddOptions();
+		ShowHealth();
 	}
 	
 	// Update is called once per frame
@@ -93,6 +96,31 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 
 		}
 
+
+	}
+
+	void ShowHealth(){
+		for(int i = 0; i < healthDisplays.Count;i++){
+			Hero targetHero;
+			targetHero = FindHero(options[i].text);
+			healthDisplays[i].text =  targetHero.currentHP + "/" + targetHero.maxHP;
+			ChangeHealthColor(healthDisplays[i], targetHero.currentHP, targetHero.maxHP);
+		}
+	}
+
+	void ChangeHealthColor(TextMeshProUGUI thisText, int currentHP, int maxHP){
+		//Change color of text depending on the percentage of the current HP compared to the hero's max HP
+		if(currentHP/maxHP > .7f){
+			Debug.Log("Got here - change health color" + thisText.color);
+			thisText.color =  new Color(144/255,1,156/255);
+			Debug.Log("Got here 2 - change health color"  + thisText.color);
+
+		}else if(currentHP/maxHP > .45f){
+			thisText.color =  new Color(1,240/255,158/255);
+		}else{
+			thisText.color =  new Color(1,109/255,109/255);
+
+		}
 	}
 }
 

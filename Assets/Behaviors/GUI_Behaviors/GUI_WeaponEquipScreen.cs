@@ -228,7 +228,6 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 	}
 
 	public void UseItem(Hero targetHero){
-		Debug.Log("TargetHero: " + targetHero);
 		int numOfWeapons = GlobalVariableManager.Instance.WeaponInventory.Count;
 
 		GlobalVariableManager.Instance.CONSUMABLE_INVENTORY[arrowPos - numOfWeapons].Use(targetHero);
