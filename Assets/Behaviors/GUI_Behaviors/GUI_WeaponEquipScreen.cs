@@ -128,8 +128,8 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 					}
 					popupMenu.gameObject.SetActive(true);
 				}else if(inventory[arrowPos].GetComponent<GUI_WeaponDisplayBox>().type == GUI_WeaponDisplayBox.Type.CONSUMABLE){
-					itemPopupMenu.SetItem(inventory[arrowPos].GetComponent<ConsumableItemOption>());
 					itemPopupMenu.gameObject.SetActive(true);
+
 
 				}
 
@@ -151,7 +151,6 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 			descriptionText.text = GlobalVariableManager.Instance.WeaponInventory[arrowPos].description;
 		}else{ //because there are two seperate global vars for each type on inventory, need to check seperate var in globalVarManager
 			int numOfWeapons = GlobalVariableManager.Instance.WeaponInventory.Count;
-			Debug.Log("Num of weapon options:" + numOfWeapons);
 			weaponImage.sprite = GlobalVariableManager.Instance.CONSUMABLE_INVENTORY[arrowPos - numOfWeapons].myItemDefinition.displaySprite;
 			weaponStrTextDisplay.text = " ";
 			weaponDmgTextDisplay.text = " ";
@@ -176,6 +175,7 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 			inventory[i].transform.localPosition = new Vector2(-12 +(3*(i%5)), 5.2f - (3* Mathf.Floor(i/5)));
 		}
 		inventory[arrowPos].GetComponent<GUI_WeaponDisplayBox>().Highlight();
+		maxArrowPos = inventory.Count;
 
 	}
 
@@ -227,6 +227,13 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 		UpdateEquippedDisplay();
 	}
 
+	public void UseItem(Hero targetHero){
+		Debug.Log("TargetHero: " + targetHero);
+		int numOfWeapons = GlobalVariableManager.Instance.WeaponInventory.Count;
+
+		GlobalVariableManager.Instance.CONSUMABLE_INVENTORY[arrowPos - numOfWeapons].Use(targetHero);
+	}
+
 	public void Drop(){
 		//TODO: Are you sure? Popup
 		if(currentNavigationArea == NavigationState.TRASH_BAG){
@@ -238,6 +245,16 @@ public class GUI_WeaponEquipScreen : GUI_MenuBase
 			currentlyEquipped.RemoveAt(arrowPos);
 			currentlySelectedHero.myEquippedWeapons.RemoveAt(arrowPos);
 			UpdateEquippedDisplay();
+		}
+	}
+
+	public void DropConsumable(){
+		if(currentNavigationArea == NavigationState.TRASH_BAG){
+			inventory.RemoveAt(arrowPos);
+			int numOfWeapons = GlobalVariableManager.Instance.WeaponInventory.Count;
+			GlobalVariableManager.Instance.CONSUMABLE_INVENTORY.RemoveAt(arrowPos-numOfWeapons);
+			UpdateInventoryDisplay();
+
 		}
 	}
 

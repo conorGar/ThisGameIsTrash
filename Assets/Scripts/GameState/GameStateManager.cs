@@ -68,7 +68,6 @@ public class GameStateManager : MonoBehaviour {
     	Debug.Log("Push state to " + type);
         for (int i = 0; i < gameStates.Count; i++) {
             GameState state = gameStates[i];
-			Debug.Log(state + " " + state.GetType() + " " + (type == state.GetType()) );
             if (type == state.GetType()) {
                 EnterState(state);
                 return;

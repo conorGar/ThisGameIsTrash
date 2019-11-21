@@ -10,9 +10,7 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 	public int arrowPos;
 
 	ConsumableItemOption thisItem;
-	//Need a list of current heroes so it sends the proper hero 
 
-	//THis actually uses the item
 
 
 
@@ -31,7 +29,7 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 	{
 		if(GameStateManager.Instance.GetCurrentState() == typeof(OptionsState)){
 			if ((ControllerManager.Instance.GetKeyDown(INPUTACTION.MOVEDOWN)
-			|| ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) && arrowPos < options.Count) {
+			|| ControllerManager.Instance.GetKeyDown(INPUTACTION.ATTACKDOWN)) && arrowPos < options.Count-1) {
 				options[arrowPos].color = new Color(255,255,255,.2f); // unhighlight current option
 				arrowPos++;
 				options[arrowPos].color = new Color(255,255,255,1f); // unhighlight current option
@@ -42,12 +40,14 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 				arrowPos--;
 				options[arrowPos].color = new Color(255,255,255,1f); // highlight current option
 			}else if(ControllerManager.Instance.GetKeyDown(INPUTACTION.INTERACT)){
-				if(options[arrowPos].gameObject.name == "equip"){
-					UseItem();
-					Close();
-				}else if(options[arrowPos].gameObject.name == "drop"){
+				if(options[arrowPos].gameObject.name == "drop"){
 					weaponEquipScreen.Drop();
 				}else if(options[arrowPos].gameObject.name == "back"){
+					Close();
+				}else{ //If item
+					//TODO: cannot use if healer item and player is at max hp
+					UseItem();
+					weaponEquipScreen.DropConsumable();
 					Close();
 				}
 			}
@@ -55,17 +55,15 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 		}
 	}
 
-	public void SetItem(ConsumableItemOption item){ //Called by GUI_WeaponEquipScreen
-		thisItem = item;
-	}
+
 
 	void UseItem(){
+		Debug.Log("Use item activated");
 		Hero targetHero;
 
 		targetHero = FindHero(options[arrowPos].text);
 		
-
-		thisItem.Use(targetHero);
+		weaponEquipScreen.UseItem(targetHero);
 	}
 
 	Hero FindHero(string heroName){
@@ -92,6 +90,7 @@ public class GUI_ConsumablePopupMenu : MonoBehaviour
 
 		for(int i = 0; i < GlobalVariableManager.Instance.partners.Count;i++){
 			options[i+1].text = GlobalVariableManager.Instance.partners[i].myHeroName;
+
 		}
 
 	}
