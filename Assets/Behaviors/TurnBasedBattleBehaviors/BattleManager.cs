@@ -21,6 +21,9 @@ public class BattleManager : MonoBehaviour
 	// Use this for initialization
 
 	public List<PlayerAttackHandler> heroTurnQueue = new List<PlayerAttackHandler>(); //only public for debugging
+	public GUI_LevelUpDisplay levelUpDisplay;
+
+
 	int arrowPos;
 	EnemyAttacker targetedEnemy;
 	public List<Point> occupiedGridPoints = new List<Point>(); // Used to make sure that no two enemies in battle jump to the same node point
@@ -177,22 +180,40 @@ public class BattleManager : MonoBehaviour
 		}
 	}
 
-	void EndBattle(){
+	public void EndBattle(){ //public for LevelUpDisplay
 		Debug.Log("End Battle Activated");
 		if (GameStateManager.Instance.GetCurrentState() == typeof(BattleState)) {
-			occupiedGridPoints.Clear();
-			turnDelayBars.Clear();
-			heroList.Clear();
-			enemyList.Clear();
-			GameStateManager.Instance.PopState();
-			battleGUI.gameObject.SetActive(false);
-			if(GlobalVariableManager.Instance.partners.Count > 0){
-				foreach(HeroAttacker hero in GlobalVariableManager.Instance.partners){
-					hero.gameObject.SetActive(false);
+			if(CheckXP()){
+				levelUpDisplay.gameObject.SetActive(true);
+			}else{
+				occupiedGridPoints.Clear();
+				turnDelayBars.Clear();
+				heroList.Clear();
+				enemyList.Clear();
+				GameStateManager.Instance.PopState();
+				battleGUI.gameObject.SetActive(false);
+				if(GlobalVariableManager.Instance.partners.Count > 0){
+					foreach(HeroAttacker hero in GlobalVariableManager.Instance.partners){
+						hero.gameObject.SetActive(false);
+					}
 				}
+				CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 			}
-			CamManager.Instance.mainCamEffects.ReturnFromCamEffect();
 		}
+	}
+
+	bool CheckXP(){
+		//check to see if
+
+		foreach(HeroAttacker hero in heroList){
+			if(hero.LevelUpCheck()){
+				levelUpDisplay.SetHero(hero.GetHero());
+				levelUpDisplay.SetSpawnPosition(hero.transform.position);
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	void AllPlayersDead(){

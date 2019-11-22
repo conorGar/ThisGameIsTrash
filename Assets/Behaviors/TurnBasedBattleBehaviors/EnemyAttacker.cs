@@ -61,6 +61,7 @@ public class EnemyAttacker : MonoBehaviour
 	}
 
 	void Death(){
+		GiveXP();
 		BattleManager.Instance.RemoveEnemy(this);
 		GetComponent<EnemyStateController>().SendTrigger(EnemyTrigger.DEATH);
 		Drop();
@@ -72,7 +73,6 @@ public class EnemyAttacker : MonoBehaviour
 		GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",gameObject.transform.position);
 		body.GetComponent<tk2dSprite>().SetSprite(myDeadBodyName);
 
-		GiveXP();
 
 
 		this.gameObject.SetActive(false);
@@ -85,12 +85,15 @@ public class EnemyAttacker : MonoBehaviour
 			For Jim and then each Partner, gain xp by calling either the data directly(Jim) or by calling the GainXP() method in 
 			HeroAttacker.cs(Partners) , amount depending on current partner count
 		*/
+
+		//TODO: only if hero is alive!
 		int xp = Random.Range(xpGiven-5,xpGiven+5);
 
-		GlobalVariableManager.Instance.HeroData[0].xp += xp;
 
-		foreach(HeroAttacker partner in GlobalVariableManager.Instance.partners){
-			partner.GainXP(xp);
+
+
+		foreach(HeroAttacker hero in BattleManager.Instance.heroList){
+			hero.GainXP(xp);
 		}
 
 	}

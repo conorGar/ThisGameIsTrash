@@ -49,14 +49,26 @@ public class HeroAttacker : MonoBehaviour
 	}
 
 	public void GainXP(int xp){
+		Debug.Log("GainXP activate");
 		if(thisHero){
-			if (thisHero.currentHP > thisHero.maxHP) {
-				 thisHero.currentHP = thisHero.maxHP;
+			if (thisHero.xp < 100) {
+				 thisHero.xp += xp;
+				 Debug.Log(thisHero + " gained " + xp + "XP!!!!!");
 			}
 		}else{
 			Debug.LogError("Hero not defined for xp gain for hero:" + this.gameObject.name);
 		}
 	}
+
+	public bool LevelUpCheck(){
+		if(thisHero.xp >= 100){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+
 
 	public void TakeDamage(int damage){
 		Debug.Log(gameObject.name + "Took" + damage + "damage!");
@@ -100,6 +112,10 @@ public class HeroAttacker : MonoBehaviour
 		littleStars.SetActive(true);
         CamManager.Instance.mainCam.ScreenShake(.2f);
 		
+	}
+
+	public Hero GetHero(){ //Used by BattleManager for a few things, like levelingUp
+		return thisHero;
 	}
 
 	IEnumerator Death(){

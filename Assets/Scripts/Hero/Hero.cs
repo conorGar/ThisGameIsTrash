@@ -14,6 +14,7 @@ public class Hero : ScriptableObject
 	public int defense;
 	public int level;
 	public int xp;
+	public int speed = 10;
 	public List<WeaponDefinition> myEquippedWeapons = new List<WeaponDefinition>();
 
 }
