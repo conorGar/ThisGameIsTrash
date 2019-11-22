@@ -14,7 +14,7 @@ public class HeroAttacker : MonoBehaviour
 
 	public HERO_STATE myCurrentState;
 
-	public Hero thisHero; //public for debuggin'
+	Hero thisHero; 
 
 	void Awake(){
 		//Search through Heroes and find one with the same name to get stats
@@ -45,6 +45,16 @@ public class HeroAttacker : MonoBehaviour
 			if (thisHero.currentHP > thisHero.maxHP) {
 				 thisHero.currentHP = thisHero.maxHP;
 			}
+		}
+	}
+
+	public void GainXP(int xp){
+		if(thisHero){
+			if (thisHero.currentHP > thisHero.maxHP) {
+				 thisHero.currentHP = thisHero.maxHP;
+			}
+		}else{
+			Debug.LogError("Hero not defined for xp gain for hero:" + this.gameObject.name);
 		}
 	}
 

@@ -6,8 +6,9 @@ public class EnemyAttacker : MonoBehaviour
 {
 
 	public int currentHP;
-	public int damageStr; //TODO: Replace with bank of different weapons?
+	public int damageStr; 
 	public int speed;
+	public int xpGiven;
 	protected EnemyStateController controller;
 	public List<WeaponDefinition> myPossibleDrops = new List<WeaponDefinition>();
 	public int[] dropChanceTable; //Corresponds to each position in 'myPossibleDrops'. Should add up to 100
@@ -71,7 +72,26 @@ public class EnemyAttacker : MonoBehaviour
 		GameObject body = ObjectPool.Instance.GetPooledObject("enemyBody",gameObject.transform.position);
 		body.GetComponent<tk2dSprite>().SetSprite(myDeadBodyName);
 
+		GiveXP();
+
+
 		this.gameObject.SetActive(false);
+
+	}
+
+
+	void GiveXP(){
+		/* 
+			For Jim and then each Partner, gain xp by calling either the data directly(Jim) or by calling the GainXP() method in 
+			HeroAttacker.cs(Partners) , amount depending on current partner count
+		*/
+		int xp = Random.Range(xpGiven-5,xpGiven+5);
+
+		GlobalVariableManager.Instance.HeroData[0].xp += xp;
+
+		foreach(HeroAttacker partner in GlobalVariableManager.Instance.partners){
+			partner.GainXP(xp);
+		}
 
 	}
 
