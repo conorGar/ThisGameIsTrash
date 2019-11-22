@@ -6,10 +6,11 @@ public class PlayerTurnDelayBar : TurnDelayBar
 {
 
 	public Image myBarDisplay;
-	public int playerSpeed;
+	//public int playerSpeed;
 
 	void Awake(){
-		speed = playerSpeed;
+
+		speed = gameObject.GetComponent<PlayerAttackHandler>().heroType.speed;
 	}
 	protected override void BarFilledEvent(){
 		base.BarFilledEvent();
