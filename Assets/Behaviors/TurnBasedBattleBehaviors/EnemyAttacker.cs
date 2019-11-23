@@ -13,10 +13,27 @@ public class EnemyAttacker : MonoBehaviour
 	public List<WeaponDefinition> myPossibleDrops = new List<WeaponDefinition>();
 	public int[] dropChanceTable; //Corresponds to each position in 'myPossibleDrops'. Should add up to 100
 	public string myDeadBodyName;
+	Vector2 attackTargetPosition;
+	Vector2 attackStartingPosition;
+	float attackDisFromEnemy; //distance between hero and enemy needed until hero switches to 'hitting' ani varies based on enemy size
+	bool returnToStartPositon;
 
 	void Awake()
     {
         controller = GetComponent<EnemyStateController>();
+    }
+
+    void Update(){
+		if(GameStateManager.Instance.GetCurrentState() == typeof(BattleState)){
+	    	if(controller.GetCurrentState() == EnemyState.CHASE){
+				if(Vector2.Distance(gameObject.transform.position,attackTargetPosition) > attackDisFromEnemy){
+					gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, attackTargetPosition, 10*Time.deltaTime);
+					Debug.Log(Vector2.Distance(gameObject.transform.position,attackTargetPosition));
+				}else{
+					StartCoroutine("Attack");
+				}
+	    	}
+	    }
     }
 
 	public void TakeDamage(int damage){
@@ -35,8 +52,21 @@ public class EnemyAttacker : MonoBehaviour
 		}
 	}
 
-	public IEnumerator MoveToAttack(){ //Handles Enemy Attack Animations/Movement to selected enemy
-		//TODO:Once reach enemy gameObj...
+	public void MoveToAttack(GameObject heroTarget){ //Handles Enemy Attack Animations/Movement to selected enemy
+
+
+		attackDisFromEnemy = this.gameObject.GetComponent<tk2dSprite>().GetBounds().max.x +.5f; //+.5f to account for player size
+		controller.SendTrigger(EnemyTrigger.CHASE);
+		Debug.Log("*****Attack Distance From HERO:" + attackDisFromEnemy);
+
+		attackTargetPosition = heroTarget.transform.position;
+		attackStartingPosition = gameObject.transform.position;
+
+	}
+
+	public IEnumerator Attack(){
+
+
 		controller.SendTrigger(EnemyTrigger.LUNGE);
 		Debug.Log("Enemy Move To Attack Activate" + BattleManager.Instance.currentState);
 		while (controller.GetCurrentState() == EnemyState.LUNGE) //wait until end of lunge animation
@@ -45,8 +75,6 @@ public class EnemyAttacker : MonoBehaviour
 
 		BattleManager.Instance.ReturnFromAttack();
 		gameObject.GetComponent<EnemyTurnDelayBar>().StartCount();
-		//TODO: Return to start pos
-
 	}
 
 	void SpawnDamageStars(int damageDealt){

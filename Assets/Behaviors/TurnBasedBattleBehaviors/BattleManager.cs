@@ -40,7 +40,7 @@ public class BattleManager : MonoBehaviour
 	void Update(){
 		if(currentState == CurrentBattleState.NOTHINGATTAKING){
 			if(heroTurnQueue.Count > 0){ //If there's any heroes in the queue
-				if(heroTurnQueue[0].attackPhase == "CANNOT_ATTACK"){
+				if(heroTurnQueue[0].currentAttackPhase == PlayerAttackHandler.ATTACK_PHASES.CANNOT_ATTACK){
 					heroTurnQueue[0].ChooseAttackActivate();
 				}
 			}
@@ -97,10 +97,10 @@ public class BattleManager : MonoBehaviour
 			pah.thisHeroAttacker.myCurrentState = HeroAttacker.HERO_STATE.NORMAL;
 
 			currentlyAttackingPlayer = pah;
-			pah.attackPhase = "ATTACKING";
+			pah.currentAttackPhase = PlayerAttackHandler.ATTACK_PHASES.ATTACKING;
 			targetSelectArrow.SetActive(false);
 			PauseBars();
-			pah.StartCoroutine("MoveToAttack", targetedEnemy.gameObject);
+			pah.MoveToAttack(targetedEnemy.gameObject);
 		}
 	}
 
@@ -111,7 +111,7 @@ public class BattleManager : MonoBehaviour
 			Debug.Log(currentState);
 			PauseBars();
 			targetedHero.TakeDamage(dmg);
-			thisEnemy.StartCoroutine("MoveToAttack");
+			thisEnemy.MoveToAttack(targetedHero.gameObject);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class BattleManager : MonoBehaviour
 			currentlyAttackingPlayer.gameObject.GetComponent<TurnDelayBar>().StartCount();
 			heroTurnQueue.RemoveAt(0); //go to next hero, if any
 			Debug.Log("Got here: ReturnFromAttack from" + currentlyAttackingPlayer );
-			currentlyAttackingPlayer.attackPhase = "CANNOT_ATTACK";
+			currentlyAttackingPlayer.currentAttackPhase =   PlayerAttackHandler.ATTACK_PHASES.CANNOT_ATTACK;
 
 		}else if(currentState == CurrentBattleState.ENEMYATTACK){
 			//TODO: restart currently attacking enemy counter
