@@ -5328,7 +5328,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -6151,7 +6151,7 @@ MonoBehaviour:
     lineCount: 4
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -28472,7 +28472,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -42075,11 +42075,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4588907229504544, guid: 293a43ee64d584447a8bf20c07068dce, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.123623
+      value: -1.6
       objectReference: {fileID: 0}
     - target: {fileID: 4588907229504544, guid: 293a43ee64d584447a8bf20c07068dce, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10.075647
+      value: -4.6
       objectReference: {fileID: 0}
     - target: {fileID: 4588907229504544, guid: 293a43ee64d584447a8bf20c07068dce, type: 2}
       propertyPath: m_LocalPosition.z
@@ -42325,7 +42325,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -64281,7 +64281,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -66389,7 +66389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canAttack: 0
-  attackPhase: CANNOT_ATTACK
+  currentAttackPhase: 0
   weaponChoiceList:
   - {fileID: 1085371551}
   myWeaponOptionHolder: {fileID: 1661407775}
@@ -103854,7 +103854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canAttack: 0
-  attackPhase: CANNOT_ATTACK
+  currentAttackPhase: 0
   weaponChoiceList:
   - {fileID: 428852273}
   myWeaponOptionHolder: {fileID: 1286071600}
@@ -115653,7 +115653,6 @@ MonoBehaviour:
   roomNum: 0
   enemySpawners:
   - {fileID: 858354781}
-  - {fileID: 1973936560}
   friendSpawners: []
   garbageSpawners: []
   roomCollider2D: {fileID: 1730803704}
@@ -115700,7 +115699,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1730803702}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -60.2, y: -2.32, z: 0}
+  m_LocalPosition: {x: -59.5, y: -4.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.4131538}
   m_Children:
   - {fileID: 858354780}
@@ -131542,15 +131541,13 @@ Prefab:
       propertyPath: pathGrid
       value: 
       objectReference: {fileID: 1622237090}
+    - target: {fileID: 1053900122411524, guid: 293a43ee64d584447a8bf20c07068dce, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 293a43ee64d584447a8bf20c07068dce, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1973936560 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114930916381765832, guid: 293a43ee64d584447a8bf20c07068dce,
-    type: 2}
-  m_PrefabInternal: {fileID: 1973936559}
-  m_Script: {fileID: 11500000, guid: 90f287a1b739c2a48845b883bd35a66d, type: 3}
 --- !u!4 &1973936561 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4588907229504544, guid: 293a43ee64d584447a8bf20c07068dce,

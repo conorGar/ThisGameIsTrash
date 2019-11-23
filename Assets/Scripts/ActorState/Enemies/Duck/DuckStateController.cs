@@ -28,6 +28,10 @@ public class DuckStateController : EnemyStateController
 				RemoveFlag((int)EnemyFlag.MOVING);
                 currentState = new EnemyLunge();
                 break;
+			case EnemyTrigger.CHASE:
+				flags |= (int)EnemyFlag.CHASING;
+                currentState = new EnemyChase();
+                break;
         }
     }
 

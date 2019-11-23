@@ -110,8 +110,7 @@ public class BattleManager : MonoBehaviour
 			ChangeState(CurrentBattleState.ENEMYATTACK);
 			Debug.Log(currentState);
 			PauseBars();
-			targetedHero.TakeDamage(dmg);
-			thisEnemy.MoveToAttack(targetedHero.gameObject);
+			thisEnemy.MoveToAttack(targetedHero, targetedHero.gameObject,dmg);
 		}
 	}
 

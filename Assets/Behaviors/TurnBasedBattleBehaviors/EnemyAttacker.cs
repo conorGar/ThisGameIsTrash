@@ -14,9 +14,11 @@ public class EnemyAttacker : MonoBehaviour
 	public int[] dropChanceTable; //Corresponds to each position in 'myPossibleDrops'. Should add up to 100
 	public string myDeadBodyName;
 	Vector2 attackTargetPosition;
-	Vector2 attackStartingPosition;
+	Vector2 attackStartingPosition = Vector2.zero;
 	float attackDisFromEnemy; //distance between hero and enemy needed until hero switches to 'hitting' ani varies based on enemy size
 	bool returnToStartPositon;
+	HeroAttacker currentHeroTarget;
+
 
 	void Awake()
     {
@@ -31,6 +33,13 @@ public class EnemyAttacker : MonoBehaviour
 					Debug.Log(Vector2.Distance(gameObject.transform.position,attackTargetPosition));
 				}else{
 					StartCoroutine("Attack");
+				}
+			}else if(controller.GetCurrentState() != EnemyState.LUNGE){
+			 	if(Vector2.Distance(gameObject.transform.position,attackStartingPosition) > .5f && attackStartingPosition != Vector2.zero){
+					gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, attackStartingPosition, 10*Time.deltaTime);
+				}else if(attackStartingPosition != Vector2.zero){
+					gameObject.transform.position = attackStartingPosition;
+					attackStartingPosition = Vector2.zero;
 				}
 	    	}
 	    }
@@ -52,13 +61,13 @@ public class EnemyAttacker : MonoBehaviour
 		}
 	}
 
-	public void MoveToAttack(GameObject heroTarget){ //Handles Enemy Attack Animations/Movement to selected enemy
+	public void MoveToAttack(HeroAttacker hero, GameObject heroTarget, int damage){ //Handles Enemy Attack Animations/Movement to selected enemy
 
 
 		attackDisFromEnemy = this.gameObject.GetComponent<tk2dSprite>().GetBounds().max.x +.5f; //+.5f to account for player size
 		controller.SendTrigger(EnemyTrigger.CHASE);
 		Debug.Log("*****Attack Distance From HERO:" + attackDisFromEnemy);
-
+		currentHeroTarget = hero;
 		attackTargetPosition = heroTarget.transform.position;
 		attackStartingPosition = gameObject.transform.position;
 
@@ -69,6 +78,8 @@ public class EnemyAttacker : MonoBehaviour
 
 		controller.SendTrigger(EnemyTrigger.LUNGE);
 		Debug.Log("Enemy Move To Attack Activate" + BattleManager.Instance.currentState);
+		currentHeroTarget.TakeDamage(damageStr);
+
 		while (controller.GetCurrentState() == EnemyState.LUNGE) //wait until end of lunge animation
            			yield return null;
 		Debug.Log("Enemy Move To Attack Finish" +  BattleManager.Instance.currentState);
