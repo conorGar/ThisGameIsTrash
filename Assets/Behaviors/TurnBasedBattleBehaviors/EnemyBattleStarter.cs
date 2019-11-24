@@ -86,8 +86,13 @@ public class EnemyBattleStarter : MonoBehaviour
 		PathGrid pathGrid = enemyPath.pathGrid;
 		if (pathGrid != null) {
             Point startPoint = pathGrid.WorldToGrid(transform.position);
+
+            Vector2 referencePlayerPos = PlayerManager.Instance.player.transform.position;
+
+            float whichSide = Random.Range(0,2)*2-1; //jumps random to either left or right side of player
+			Vector2 jumpPosition = new Vector2(Random.Range(referencePlayerPos.x-6f,referencePlayerPos.x-4f)*whichSide, Random.Range(referencePlayerPos.y -5f, referencePlayerPos.y +5));
          
-			Point destPoint = pathGrid.GetRandomPoint(startPoint, maxRandomNodeDistance);
+			Point destPoint = pathGrid.WorldToClosestGridPoint(jumpPosition);
 
 			Debug.Log("enemy jump destination point:" + pathGrid.GridToWorld(destPoint));
 
