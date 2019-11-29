@@ -91,6 +91,8 @@ public class Ev_MainCameraEffects : MonoBehaviour {
    }
 
 
+
+
    void CamPanTriggerEvent(){ //TODO: adjust for different events besaides those needed for large trash tut popup
    		ZoomInOut(1.5f,10f);
   		//yield return new WaitForSeconds(.5f);

@@ -241,16 +241,17 @@ public class DialogManager : MonoBehaviour {
         if (useNextNode)
 			currentNode = myDialogDefiniton.nodes[currentNode.child_id];
             
-        if(currentlySpeakingIcon != null)
+        if(currentlySpeakingIcon != null){
 			currentlySpeakingIcon.gameObject.SetActive(true);
 
-		textBox.SetActive(true);
-        if (currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager) &&
-            characterName.text != currentNode.speakerName && currentNode.speakerName.Length > 1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
-        {
-            Debug.Log("NAMES DONT MATCHx-x-x-x--x-x-x-x-x-x-");
-            ((MultipleDialogIconsManager)currentlySpeakingIcon).ChangeSpeaker(currentNode.speakerName);
-            characterName.text = currentNode.speakerName;
+			textBox.SetActive(true);
+	        if (currentlySpeakingIcon.GetType() == typeof(MultipleDialogIconsManager) &&
+	            characterName.text != currentNode.speakerName && currentNode.speakerName.Length > 1)//>2 check os for if the field is blank, which it is if the speaker is the same as previous
+	        {
+	            Debug.Log("NAMES DONT MATCHx-x-x-x--x-x-x-x-x-x-");
+	            ((MultipleDialogIconsManager)currentlySpeakingIcon).ChangeSpeaker(currentNode.speakerName);
+	            characterName.text = currentNode.speakerName;
+	        }
         }
 
         StartDisplay();
@@ -290,7 +291,7 @@ public class DialogManager : MonoBehaviour {
         displayedText.GetComponent<TextAnimation>().StartAgain();
         finishedDisplayingText = false;
 
-        if (!currentNode.isThought) {
+        if (!currentNode.isThought && currentlySpeakingIcon != null) {
             currentlySpeakingIcon.SetTalking(true);
         }
 

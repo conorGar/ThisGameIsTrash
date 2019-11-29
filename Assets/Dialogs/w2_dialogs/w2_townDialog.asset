@@ -17,6 +17,27 @@ MonoBehaviour:
     keys:
     - Value: 79d54877-ea47-43a9-b115-714cccb4adad
     - Value: 26a5c72f-f7d8-42fd-a272-9ff82427e4f2
+    - Value: c9a924c4-d53b-4a8b-860b-3f0a3b98b81c
+    - Value: d3504668-a1b8-49ce-a2b4-f290c279689d
+    - Value: d6c172e3-2e3a-4ba6-9455-b51be69d9a0d
+    - Value: e92e2e43-c8cb-43da-952d-3ee81689f420
+    - Value: f04f4317-3f12-4916-8c63-e3d725fe70ab
+    - Value: 7ad8c5d1-4190-41e1-819b-ee4729d8c910
+    - Value: 087107b7-f471-49ca-86ef-9b248de093fc
+    - Value: ba424ecb-e6ca-4921-ab2c-f49400bd9772
+    - Value: dc75b2dc-ce75-464b-adf4-f4a3ccb4531b
+    - Value: 8ca200bd-fb00-4b70-98bf-80f3570a92e1
+    - Value: c854f7f0-0f76-4d7d-8ea3-e0fee3001d7d
+    - Value: 7b52ced4-f2c4-4c2b-a56e-f9c6e1713a4d
+    - Value: 7cd98841-2339-42ac-9a3c-49ba265cd2d0
+    - Value: f34cdccb-64e0-4264-bb12-cfa647622af1
+    - Value: 552c3429-50b8-4003-803d-fad8abe8b3bd
+    - Value: 8da7c685-0fac-434e-9bc4-645ba19f2b26
+    - Value: 2420f6cd-a598-47dc-be13-4eeb20a8c535
+    - Value: 382c759f-d43a-4f3f-a1d9-8d4bd3be96a3
+    - Value: 4ad80cc1-9fea-4ef6-b8e3-59deba80e96c
+    - Value: a8889f58-6d0a-446b-b8c5-83e5e5932d88
+    - Value: ed81c645-b887-4580-acc7-87a8789c2393
     values:
     - window:
         serializedVersion: 2
@@ -40,7 +61,7 @@ MonoBehaviour:
       animTrigger: 
       type: 1
       child_id:
-        Value: 
+        Value: c9a924c4-d53b-4a8b-860b-3f0a3b98b81c
       responses: []
     - window:
         serializedVersion: 2
@@ -61,6 +82,527 @@ MonoBehaviour:
       y: 340
       text: Sorry, can't talk right now. Too busy having a panic attack. Come back
         later please.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 435
+        y: 137
+        width: 270
+        height: 251
+      isCollapsed: 0
+      title: ic_townfolk1
+      speakerName: 
+      question: How Do You Feel?
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c9a924c4-d53b-4a8b-860b-3f0a3b98b81c
+      x: 435
+      y: 137
+      text: How do you feel about that?
+      isThought: 0
+      animTrigger: 
+      type: 2
+      child_id:
+        Value: 
+      responses:
+      - text: Okay
+        node_id:
+          Value: 
+      - text: Not Okay
+        node_id:
+          Value: 
+      - text: '...'
+        node_id:
+          Value: 
+    - window:
+        serializedVersion: 2
+        x: 130
+        y: 589
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: Ice Cream Mayor
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: d3504668-a1b8-49ce-a2b4-f290c279689d
+      x: 130
+      y: 589
+      text: Welcome, Garbage Man, to <c=g>Ice Cream Town</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: d6c172e3-2e3a-4ba6-9455-b51be69d9a0d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 422
+        y: 577
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: d6c172e3-2e3a-4ba6-9455-b51be69d9a0d
+      x: 422
+      y: 577
+      text: 'It is a...sad place. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: e92e2e43-c8cb-43da-952d-3ee81689f420
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 713
+        y: 551
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: TownFolkPan
+      isDialogAction: 1
+      friendState: 
+      id:
+        Value: e92e2e43-c8cb-43da-952d-3ee81689f420
+      x: 713
+      y: 551
+      text: You see all these cute, loveable characters skipping around? Look at them.
+        All cute and wholesome.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f04f4317-3f12-4916-8c63-e3d725fe70ab
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 997
+        y: 598
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: f04f4317-3f12-4916-8c63-e3d725fe70ab
+      x: 997
+      y: 598
+      text: '...<c=r>none of them will live</c>...more than <c=b>3 days</c>.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7ad8c5d1-4190-41e1-819b-ee4729d8c910
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1290
+        y: 585
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7ad8c5d1-4190-41e1-819b-ee4729d8c910
+      x: 1290
+      y: 585
+      text: By then, they will all melt away under the hot sun...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 087107b7-f471-49ca-86ef-9b248de093fc
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1581
+        y: 544
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 087107b7-f471-49ca-86ef-9b248de093fc
+      x: 1581
+      y: 544
+      text: '...and make way for the next generation of pitiful ice cream folk..,'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ba424ecb-e6ca-4921-ab2c-f49400bd9772
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1873
+        y: 618
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ba424ecb-e6ca-4921-ab2c-f49400bd9772
+      x: 1873
+      y: 618
+      text: ..Who will, in turn, also <c=r>die 3 days after they are born</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: dc75b2dc-ce75-464b-adf4-f4a3ccb4531b
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2161
+        y: 595
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: dc75b2dc-ce75-464b-adf4-f4a3ccb4531b
+      x: 2161
+      y: 595
+      text: Our miserable life is a living hell of anxiety, meaninglessness and existential
+        angst.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8ca200bd-fb00-4b70-98bf-80f3570a92e1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2456
+        y: 589
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: SquiddyPan
+      isDialogAction: 1
+      friendState: 
+      id:
+        Value: 8ca200bd-fb00-4b70-98bf-80f3570a92e1
+      x: 2456
+      y: 589
+      text: All of this, is at the hands of this beach's resident chef, <c=r> Chef
+        Squiddy Squiddy</c>.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: c854f7f0-0f76-4d7d-8ea3-e0fee3001d7d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 2747
+        y: 578
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: c854f7f0-0f76-4d7d-8ea3-e0fee3001d7d
+      x: 2747
+      y: 578
+      text: There at his seafood restuarant, he fries all sorts of food...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7b52ced4-f2c4-4c2b-a56e-f9c6e1713a4d
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3039
+        y: 618
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7b52ced4-f2c4-4c2b-a56e-f9c6e1713a4d
+      x: 3039
+      y: 618
+      text: '...but he <c=r>doesn''t dispose his used oil in the proper, designated
+        containers</c>...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 7cd98841-2339-42ac-9a3c-49ba265cd2d0
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3337
+        y: 600
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 7cd98841-2339-42ac-9a3c-49ba265cd2d0
+      x: 3337
+      y: 600
+      text: '...like some sort of monster...'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: f34cdccb-64e0-4264-bb12-cfa647622af1
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3625
+        y: 571
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: SeaPan
+      isDialogAction: 1
+      friendState: 
+      id:
+        Value: f34cdccb-64e0-4264-bb12-cfa647622af1
+      x: 3625
+      y: 571
+      text: ..because of this, the oil ends up in the sea, which causes a rise in
+        the sun's temperature.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 552c3429-50b8-4003-803d-fad8abe8b3bd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 3908
+        y: 627
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 552c3429-50b8-4003-803d-fad8abe8b3bd
+      x: 3908
+      y: 627
+      text: I'm not really sure how that works, like, scientifically...but I'm willing
+        to bet you're not either.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 8da7c685-0fac-434e-9bc4-645ba19f2b26
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4197
+        y: 538
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 8da7c685-0fac-434e-9bc4-645ba19f2b26
+      x: 4197
+      y: 538
+      text: Anyway, it is only that slight rise in temperature that causes us all
+        to melt away so quickly.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2420f6cd-a598-47dc-be13-4eeb20a8c535
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4513
+        y: 586
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2420f6cd-a598-47dc-be13-4eeb20a8c535
+      x: 4513
+      y: 586
+      text: 'Yeah, so, that''s basically the jist of this place. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 382c759f-d43a-4f3f-a1d9-8d4bd3be96a3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 4782
+        y: 607
+        width: 270
+        height: 212
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 382c759f-d43a-4f3f-a1d9-8d4bd3be96a3
+      x: 4782
+      y: 607
+      text: Not that you asked, but, usually I can just get away with talking a lot
+        because people feel bad since I'm gonna die soon.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 4ad80cc1-9fea-4ef6-b8e3-59deba80e96c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5067
+        y: 602
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 4ad80cc1-9fea-4ef6-b8e3-59deba80e96c
+      x: 5067
+      y: 602
+      text: Let me know if you have any more questions. It was great meeting you.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: a8889f58-6d0a-446b-b8c5-83e5e5932d88
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5357
+        y: 584
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: a8889f58-6d0a-446b-b8c5-83e5e5932d88
+      x: 5357
+      y: 584
+      text: 'I hope I''ve been an interesting and memorable character. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ed81c645-b887-4580-acc7-87a8789c2393
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 5651
+        y: 630
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_vanillaMayor
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ed81c645-b887-4580-acc7-87a8789c2393
+      x: 5651
+      y: 630
+      text: Don't get too attatched though, cause I'll be dead tomorrow. So.
       isThought: 0
       animTrigger: 
       type: 1
