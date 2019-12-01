@@ -121,12 +121,13 @@ public class RandomDirectionMovement : MonoBehaviour {
 
 	public virtual void StopMoving(){
         controller.RemoveFlag((int)EnemyFlag.WALKING);
-        
-        if (walkPS.isPlaying)
+
+
+        if (walkPS != null && walkPS.isPlaying)
             walkPS.Stop();
 
 		StopAllCoroutines();
-		gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+		//gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         nextMoveTime = Time.time + stopTime;
 
         enemyPath.ClearPath();

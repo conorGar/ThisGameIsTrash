@@ -22,6 +22,7 @@ public class RoomPortal : EditorMonoBehaviour {
 	public bool camZoomer;
 	public float newCamZoomVal;
 	public AreaGarbageManager areaManager;
+	public bool interiorRoomPortal;
 	// Use this for initialization
 	void Start () {
         player = null;
@@ -95,6 +96,15 @@ public class RoomPortal : EditorMonoBehaviour {
 					}if(areaTitleActivator && areaManager!=null){
 						areaManager.myHUD.gameObject.SetActive(false);
                 	}
+                	if(interiorRoomPortal){
+                		//turn off the interior layer culling mask on the camera when leave the room
+                		CamManager.Instance.tk2dMainCam.ScreenCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("InteriorTiles"));
+						CamManager.Instance.tk2dMainCam.ScreenCamera.cullingMask |= 1 << LayerMask.NameToLayer("tiles");
+
+						//change back player layer to collide with exterior tiles
+						PlayerManager.Instance.player.layer = 12;
+                	}
+
                     roomManager.currentRoom = negativeRoom;
                     roomManager.previousRoom = positiveRoom;
                     player = collider.gameObject;
@@ -126,6 +136,16 @@ public class RoomPortal : EditorMonoBehaviour {
                 	}
                 	if(camZoomer){
                 		CamManager.Instance.mainCamEffects.ZoomInOut(newCamZoomVal,1f);
+                	}
+					if(interiorRoomPortal){
+                		//turn on the interior layer culling mask on the camera
+                		CamManager.Instance.tk2dMainCam.ScreenCamera.cullingMask |= 1 << LayerMask.NameToLayer("InteriorTiles");
+                		//turn off regular tiles from camera view
+						CamManager.Instance.tk2dMainCam.ScreenCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("tiles"));
+
+						//change player's layer so doesn't collide with exterior, invisible tiles
+						PlayerManager.Instance.player.layer = 26;
+
                 	}
 					
                     roomManager.currentRoom = positiveRoom;
