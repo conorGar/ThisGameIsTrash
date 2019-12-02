@@ -17,7 +17,7 @@ MonoBehaviour:
     keys:
     - Value: 79d54877-ea47-43a9-b115-714cccb4adad
     - Value: 26a5c72f-f7d8-42fd-a272-9ff82427e4f2
-    - Value: c9a924c4-d53b-4a8b-860b-3f0a3b98b81c
+    - Value: d4a3c60b-c0a3-49b5-973e-0eb40d1fa3ff
     - Value: d3504668-a1b8-49ce-a2b4-f290c279689d
     - Value: d6c172e3-2e3a-4ba6-9455-b51be69d9a0d
     - Value: e92e2e43-c8cb-43da-952d-3ee81689f420
@@ -38,30 +38,46 @@ MonoBehaviour:
     - Value: 4ad80cc1-9fea-4ef6-b8e3-59deba80e96c
     - Value: a8889f58-6d0a-446b-b8c5-83e5e5932d88
     - Value: ed81c645-b887-4580-acc7-87a8789c2393
+    - Value: 6ca1f906-469f-4161-9bc6-48060a111aa0
+    - Value: dc03b603-bf13-40f4-a260-021f15273097
+    - Value: ad21e6e5-a827-4fd4-8c9b-e025161553d6
+    - Value: 21f61eb5-f5d3-45d7-8a21-1e62c8e433c1
+    - Value: 84453b44-7ec8-46c0-bc51-49dcaa3b4622
+    - Value: 2d073076-bac0-4dee-a713-cd20bf6518aa
+    - Value: 66c58110-cdba-404f-85b6-94b609d4fbcf
+    - Value: 484196af-ab66-4fd6-9a44-edcfb65f8383
+    - Value: 77b22fec-070d-467c-82d9-a6532fc871fd
+    - Value: 1c0451f1-519b-4496-aaa6-adca702f727f
+    - Value: dffa270f-34a7-4896-82bd-df3bbc3bc15c
+    - Value: 84533726-085e-42e6-93dd-1f3bc8a57764
+    - Value: e1a888d6-2224-4c1a-be49-1015422af7fa
+    - Value: fbc93d3d-201d-41da-9f99-50d4ef8956a2
+    - Value: 89f2b330-1d96-4820-93b6-1cd212043bf6
+    - Value: 5cdb422b-2ea9-472c-a65c-db0f44b5ccb3
     values:
     - window:
         serializedVersion: 2
-        x: 110
-        y: 110
+        x: 122
+        y: 101
         width: 270
         height: 186
       isCollapsed: 0
       title: ic_townfolk1
-      speakerName: 
+      speakerName: Talking Ice Cream Guy
       question: 
       action: 
       isDialogAction: 0
       friendState: 
       id:
         Value: 79d54877-ea47-43a9-b115-714cccb4adad
-      x: 110
-      y: 110
+      x: 122
+      y: 101
       text: <c=r>All my friends are dead</c>, but hey, I'm doing alright.
       isThought: 0
       animTrigger: 
       type: 1
       child_id:
-        Value: c9a924c4-d53b-4a8b-860b-3f0a3b98b81c
+        Value: 
       responses: []
     - window:
         serializedVersion: 2
@@ -71,7 +87,7 @@ MonoBehaviour:
         height: 199
       isCollapsed: 0
       title: ic_townfolk2
-      speakerName: 
+      speakerName: Talking Ice Cream Guy
       question: 
       action: 
       isDialogAction: 0
@@ -90,37 +106,28 @@ MonoBehaviour:
       responses: []
     - window:
         serializedVersion: 2
-        x: 435
-        y: 137
+        x: 140
+        y: 805
         width: 270
-        height: 251
+        height: 173
       isCollapsed: 0
-      title: ic_townfolk1
-      speakerName: 
-      question: How Do You Feel?
+      title: ic_townfolk3
+      speakerName: Talking Ice Cream Guy
+      question: 
       action: 
       isDialogAction: 0
       friendState: 
       id:
-        Value: c9a924c4-d53b-4a8b-860b-3f0a3b98b81c
-      x: 435
-      y: 137
-      text: How do you feel about that?
+        Value: d4a3c60b-c0a3-49b5-973e-0eb40d1fa3ff
+      x: 140
+      y: 805
+      text: How am I doing?
       isThought: 0
       animTrigger: 
-      type: 2
+      type: 1
       child_id:
-        Value: 
-      responses:
-      - text: Okay
-        node_id:
-          Value: 
-      - text: Not Okay
-        node_id:
-          Value: 
-      - text: '...'
-        node_id:
-          Value: 
+        Value: 6ca1f906-469f-4161-9bc6-48060a111aa0
+      responses: []
     - window:
         serializedVersion: 2
         x: 130
@@ -603,6 +610,393 @@ MonoBehaviour:
       x: 5651
       y: 630
       text: Don't get too attatched though, cause I'll be dead tomorrow. So.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 432
+        y: 797
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_townfolk3_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 6ca1f906-469f-4161-9bc6-48060a111aa0
+      x: 432
+      y: 797
+      text: Well, you know, my whole life has just been one, long existential crisis...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: dc03b603-bf13-40f4-a260-021f15273097
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 722
+        y: 830
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: ic_townfolk3_2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: dc03b603-bf13-40f4-a260-021f15273097
+      x: 722
+      y: 830
+      text: '...and tomorrow I''ll die.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: ad21e6e5-a827-4fd4-8c9b-e025161553d6
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 1018
+        y: 869
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_townfolk3_3
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: ad21e6e5-a827-4fd4-8c9b-e025161553d6
+      x: 1018
+      y: 869
+      text: 'So that''s, you know, where I''M at. In my life. '
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 139
+        y: 1048
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: ic_townfolk4
+      speakerName: Talking Ice Cream Guy
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 21f61eb5-f5d3-45d7-8a21-1e62c8e433c1
+      x: 139
+      y: 1048
+      text: Anxiety is my new favorite hobby.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 138
+        y: 1250
+        width: 270
+        height: 173
+      isCollapsed: 0
+      title: ic_townfolk5
+      speakerName: Talking Ice Cream Guy
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 84453b44-7ec8-46c0-bc51-49dcaa3b4622
+      x: 138
+      y: 1250
+      text: What do you think would be worse...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 2d073076-bac0-4dee-a713-cd20bf6518aa
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 435
+        y: 1263
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_townfolk5_1
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 2d073076-bac0-4dee-a713-cd20bf6518aa
+      x: 435
+      y: 1263
+      text: ..Dying shortly, only to discover that there is no God, or anything, after...
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 66c58110-cdba-404f-85b6-94b609d4fbcf
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 747
+        y: 1249
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_townfolk5_2
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 66c58110-cdba-404f-85b6-94b609d4fbcf
+      x: 747
+      y: 1249
+      text: '...or dying and discovering that there IS a God cruel enough to give
+        me this miserable existence.'
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 149
+        y: 1482
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_townfolk6
+      speakerName: Talking Ice Cream Guy
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 484196af-ab66-4fd6-9a44-edcfb65f8383
+      x: 149
+      y: 1482
+      text: Well, at least I won't have to figure out what to do with my life.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 77b22fec-070d-467c-82d9-a6532fc871fd
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 460
+        y: 1519
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_townfolk6
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 77b22fec-070d-467c-82d9-a6532fc871fd
+      x: 460
+      y: 1519
+      text: It'll be over far before I could do anything meaningful!
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 148
+        y: 1739
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_townfolk7
+      speakerName: Talking Ice Cream Guy
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 1c0451f1-519b-4496-aaa6-adca702f727f
+      x: 148
+      y: 1739
+      text: I don't even understand how our forefathers had the time to build this
+        town.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: dffa270f-34a7-4896-82bd-df3bbc3bc15c
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 462
+        y: 1778
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_townfolk7
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: dffa270f-34a7-4896-82bd-df3bbc3bc15c
+      x: 462
+      y: 1778
+      text: Before they would begin even the first planning steps they'd be dead.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 84533726-085e-42e6-93dd-1f3bc8a57764
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 792
+        y: 1765
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_townfolk7
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 84533726-085e-42e6-93dd-1f3bc8a57764
+      x: 792
+      y: 1765
+      text: Hm. I guess I shouldn't ask too many questions and just play the game.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 172
+        y: 2016
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_townfolk8
+      speakerName: Talking Ice Cream Guy
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: e1a888d6-2224-4c1a-be49-1015422af7fa
+      x: 172
+      y: 2016
+      text: You know, I'm actually the KING of ice cream town.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: fbc93d3d-201d-41da-9f99-50d4ef8956a2
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 525
+        y: 2008
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_townfolk8
+      speakerName: 
+      question: 
+      action: finish
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: fbc93d3d-201d-41da-9f99-50d4ef8956a2
+      x: 525
+      y: 2008
+      text: I have absolutely no credentials...but nobody wastes their time disputing
+        me. So.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 181
+        y: 2241
+        width: 270
+        height: 186
+      isCollapsed: 0
+      title: ic_townfolk9
+      speakerName: Talking Ice Cream Guy
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 89f2b330-1d96-4820-93b6-1cd212043bf6
+      x: 181
+      y: 2241
+      text: Sorry sir. I hope my palpable angst doesn't disturb you.
+      isThought: 0
+      animTrigger: 
+      type: 1
+      child_id:
+        Value: 5cdb422b-2ea9-472c-a65c-db0f44b5ccb3
+      responses: []
+    - window:
+        serializedVersion: 2
+        x: 500
+        y: 2238
+        width: 270
+        height: 199
+      isCollapsed: 0
+      title: ic_townfolk9
+      speakerName: 
+      question: 
+      action: 
+      isDialogAction: 0
+      friendState: 
+      id:
+        Value: 5cdb422b-2ea9-472c-a65c-db0f44b5ccb3
+      x: 500
+      y: 2238
+      text: Please don't allow my overwhelming and apparent suffering ruin your day.
       isThought: 0
       animTrigger: 
       type: 1
