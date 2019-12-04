@@ -19,6 +19,8 @@ public class GUI_TrashCollectedDisplay : MonoBehaviour {
         GlobalVariableManager.Instance.BAG_SIZE_STAT.ResetCurrent();
         trashCollected.text = GlobalVariableManager.Instance.TODAYS_TRASH_AQUIRED[0].ToString();
 
+		gameObject.SetActive(false);// Set active in GUI_Manager after player leaves initial room
+
 	}
 	
 	// Update is called once per frame

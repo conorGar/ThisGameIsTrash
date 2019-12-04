@@ -48,6 +48,8 @@ public class Ev_DayMeter : MonoBehaviour {
 
         if (dayColorTint != null)
             startColor = dayColorTint.color;
+
+        gameObject.SetActive(false);// Set active in GUI_Manager after player leaves initial room
     }
 
     void OnDestroy()
@@ -58,12 +60,12 @@ public class Ev_DayMeter : MonoBehaviour {
     void Update()
     {
         Type state = GameStateManager.Instance.GetCurrentState();
-        if (state == typeof(GameplayState) || state == typeof(DethKlokState)) {
+		if (state == typeof(GameplayState) || state == typeof(DethKlokState) || state == typeof(BattleState)) {
 #if !DEBUG_STOP_TIME
             // Add the change in time but only in the states that are allowed to pass time.
             // If it's the deathclock state, time moves at an accelerated rate.
-            secondsPassed += GameStateManager.Instance.GetCurrentState() == typeof(GameplayState) ? Time.deltaTime
-                : Time.deltaTime * timeDeathIncrease;
+			secondsPassed += GameStateManager.Instance.GetCurrentState() == typeof(DethKlokState) ? Time.deltaTime * timeDeathIncrease 
+				: Time.deltaTime;
             secondsPassed = Mathf.Min(secondsPassed, secondsInTheDay * delayBonus);
 
             // Update day icon position

@@ -11,6 +11,7 @@ public class GUIManager : MonoBehaviour {
     public HUD_Calendar CalendarHUD;
     public GUI_DayDisplay DayDisplay;
     public GUI_DeathDisplay DeathDisplay;
+    public Ev_DayMeter DayMeterDisplay;
     public GUI_TrashCollectedDisplay TrashCollectedDisplayGameplay; // At the top left of the screen during gameplay
     public GUI_TrashCollectedDisplay TrashCollectedDisplayDeath; // On the death display
     public GUI_HPdisplay hpDisplay;
@@ -48,5 +49,10 @@ public class GUIManager : MonoBehaviour {
         if (BaseStatHUD != null) {
             BaseStatHUD.SetActive(false);
         }
+    }
+
+    public void LeaveTownHUDSpawns(){
+    	DayMeterDisplay.gameObject.SetActive(true);
+    	TrashCollectedDisplayGameplay.gameObject.SetActive(true);
     }
 }

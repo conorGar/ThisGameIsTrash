@@ -187,7 +187,7 @@ public class Friend : UserDataItem {
         // Slower pan back to the player.  This is probably a sucky way to do this. (Turns out it is!  Like transitioning into stuff after a dialog)
         if (panToPlayer) {
             CamManager.Instance.mainCam.SetSlowCameraSpeed();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(.5f);
             CamManager.Instance.mainCam.SetNormalCameraSpeed();
         }
     }

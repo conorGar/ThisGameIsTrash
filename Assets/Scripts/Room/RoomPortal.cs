@@ -105,6 +105,10 @@ public class RoomPortal : EditorMonoBehaviour {
 						PlayerManager.Instance.player.layer = 12;
                 	}
 
+                	if(roomManager.startRoom == roomManager.currentRoom){
+                		GUIManager.Instance.LeaveTownHUDSpawns();
+                	}
+
                     roomManager.currentRoom = negativeRoom;
                     roomManager.previousRoom = positiveRoom;
                     player = collider.gameObject;
@@ -146,6 +150,10 @@ public class RoomPortal : EditorMonoBehaviour {
 						//change player's layer so doesn't collide with exterior, invisible tiles
 						PlayerManager.Instance.player.layer = 26;
 
+                	}
+
+					if(roomManager.startRoom == roomManager.currentRoom){
+                		GUIManager.Instance.LeaveTownHUDSpawns();
                 	}
 					
                     roomManager.currentRoom = positiveRoom;

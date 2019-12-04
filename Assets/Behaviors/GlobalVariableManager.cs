@@ -249,6 +249,18 @@ public class GlobalVariableManager : UserDataItem {
         }
     }
 
+
+    //----------------Time Trackers--------------------//
+
+    public int ICECREAM_COUNTDOWN_START_DAY = 99;
+    public int[] CURRENT_ICE_CREAM = new int[3];
+
+
+    //--------------------------------------------//
+
+
+
+
     public int GARBAGE_HAD = 0;
 	public int LARGE_TRASH_COLLECTED = 0;
 	//public List<Vector2> LARGE_TRASH_LOCATIONS = new List<Vector2>();
