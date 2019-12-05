@@ -55,6 +55,7 @@ public class IceCreamTownManager : MonoBehaviour
 	}
 
 
+
 	void SpawnPreviousIceCream(){
 		//check an array of integers, saved in GlobalVarManager, that represents the position of which ice cream to spawn within the 
 		//iceCreamFolk[] array.
@@ -73,6 +74,10 @@ public class IceCreamTownManager : MonoBehaviour
 		}
 
 
+	}
+
+	public void DebugDayChange(){// Activated by DayDebugManager
+		Start();
 	}
 }
 
