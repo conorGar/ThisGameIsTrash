@@ -13,7 +13,9 @@ public class IceCreamTownManager : MonoBehaviour
 	//Switch up their dialog every day, certain dialog is only assigned on first or final day.
 
 	public GameObject[] iceCreamFolk;
+	public GameObject[] iceCreamMayors;
 	public GameObject[] spawnPositions = new GameObject[3];
+	public PathGrid[] paths = new PathGrid[3];
 	public int totalDialogPossibilities;
 
 	// Use this for initialization
@@ -60,8 +62,8 @@ public class IceCreamTownManager : MonoBehaviour
 		//check an array of integers, saved in GlobalVarManager, that represents the position of which ice cream to spawn within the 
 		//iceCreamFolk[] array.
 		for(int i = 0; i < spawnPositions.Length; i++){
-			Instantiate(iceCreamFolk[GlobalVariableManager.Instance.CURRENT_ICE_CREAM[i]],spawnPositions[i].transform.position, Quaternion.identity);
-
+			GameObject iceCreamGuy = Instantiate(iceCreamFolk[GlobalVariableManager.Instance.CURRENT_ICE_CREAM[i]],spawnPositions[i].transform.position, Quaternion.identity);
+			iceCreamGuy.GetComponent<EnemyPath>().pathGrid = paths[i];
 		}
 	}
 
@@ -69,8 +71,10 @@ public class IceCreamTownManager : MonoBehaviour
 
 		for(int i = 0; i < spawnPositions.Length; i++){
 			int randomGuy = Random.Range(0,iceCreamFolk.Length);
-			Instantiate(iceCreamFolk[randomGuy],spawnPositions[i].transform.position, Quaternion.identity);
+			GameObject iceCreamGuy = Instantiate(iceCreamFolk[randomGuy],spawnPositions[i].transform.position, Quaternion.identity);
 			GlobalVariableManager.Instance.CURRENT_ICE_CREAM[i] = randomGuy;
+			iceCreamGuy.GetComponent<EnemyPath>().pathGrid = paths[i];
+
 		}
 
 

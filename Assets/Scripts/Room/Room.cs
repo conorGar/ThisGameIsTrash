@@ -235,6 +235,12 @@ public class Room : MonoBehaviour
 
     private void Start()
     {
+    	if(roomCollider2D != this.gameObject.GetComponent<BoxCollider2D>()){
+    		//default in case i forgot to assign proper box collider in Inspector
+    		roomCollider2D = this.gameObject.GetComponent<BoxCollider2D>();
+    	}
+
+
         if ((GlobalVariableManager.Instance.WORLD_ROOMS_DISCOVERED & myRoom) == myRoom) {
             if (myMapClouds != null) {
                 myMapClouds.SetActive(false);

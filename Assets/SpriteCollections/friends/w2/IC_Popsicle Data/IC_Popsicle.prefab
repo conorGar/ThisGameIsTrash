@@ -1,0 +1,1184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1939129583397114}
+  m_IsPrefabParent: 1
+--- !u!1 &1939129583397114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4163814282215210}
+  - component: {fileID: 114919615768353362}
+  m_Layer: 0
+  m_Name: IC_Popsicle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4163814282215210
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939129583397114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114919615768353362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1939129583397114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: iceCreamFolk7_idle5
+    boundsData:
+    - {x: -0.576923, y: 0.48718, z: 0}
+    - {x: 5.9743586, y: 8.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5641024, y: -3.8717947, z: 0}
+    - {x: 2.4102564, y: -3.8717947, z: 0}
+    - {x: -3.5641024, y: 4.8461547, z: 0}
+    - {x: 2.4102564, y: 4.8461547, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.51074266}
+    - {x: 0.0019541015, y: 0.62451124}
+    - {x: 0.3339834, y: 0.51074266}
+    - {x: 0.3339834, y: 0.62451124}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 2be3ae2ccf5e3964f93705686019c95c
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_walk1
+    boundsData:
+    - {x: 0.038461566, y: 0.82051325, z: 0}
+    - {x: 5.5128202, y: 8.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.7179487, y: -3.5384612, z: 0}
+    - {x: 2.7948718, y: -3.5384612, z: 0}
+    - {x: -2.7179487, y: 5.1794877, z: 0}
+    - {x: 2.7948718, y: 5.1794877, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5429697, y: 0.11669971}
+    - {x: 0.5429697, y: 0.2216792}
+    - {x: 0.87499905, y: 0.11669971}
+    - {x: 0.87499905, y: 0.2216792}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 852f5d85edfaf284aaa7426055ec51e8
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_idle1
+    boundsData:
+    - {x: -0.025640965, y: 0.60256445, z: 0}
+    - {x: 5.3333335, y: 8.692308, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.6923077, y: -3.7435896, z: 0}
+    - {x: 2.6410258, y: -3.7435896, z: 0}
+    - {x: -2.6923077, y: 4.9487185, z: 0}
+    - {x: 2.6410258, y: 4.9487185, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.555665, y: 0.32812548}
+    - {x: 0.555665, y: 0.42968702}
+    - {x: 0.8867178, y: 0.32812548}
+    - {x: 0.8867178, y: 0.42968702}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: fd918ab2fde457846a55aa079809debf
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_walk5
+    boundsData:
+    - {x: 0.44871795, y: 0.2820518, z: 0}
+    - {x: 5.2051287, y: 8.358974, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.1538463, y: -3.8974357, z: 0}
+    - {x: 3.0512822, y: -3.8974357, z: 0}
+    - {x: -2.1538463, y: 4.4615393, z: 0}
+    - {x: 3.0512822, y: 4.4615393, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.76074314, y: 0.5444341}
+    - {x: 0.9589834, y: 0.5444341}
+    - {x: 0.76074314, y: 0.7036128}
+    - {x: 0.9589834, y: 0.7036128}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 24e7784540809434386dac9deecdc397
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_walk4
+    boundsData:
+    - {x: 0.4102565, y: 0.7307694, z: 0}
+    - {x: 5.230769, y: 8.846153, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.2051282, y: -3.6923075, z: 0}
+    - {x: 3.0256412, y: -3.6923075, z: 0}
+    - {x: -2.2051282, y: 5.1538463, z: 0}
+    - {x: 3.0256412, y: 5.1538463, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.0009770507}
+    - {x: 0.20117089, y: 0.0009770507}
+    - {x: 0.0019541015, y: 0.1694331}
+    - {x: 0.20117089, y: 0.1694331}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: b166cd05575794645a8286bb5eb6c45e
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_walk7
+    boundsData:
+    - {x: 0.19230759, y: 0.9615389, z: 0}
+    - {x: 5.4615383, y: 8.74359, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.5384614, y: -3.4102561, z: 0}
+    - {x: 2.9230766, y: -3.4102561, z: 0}
+    - {x: -2.5384614, y: 5.333334, z: 0}
+    - {x: 2.9230766, y: 5.333334, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.20507911, y: 0.22509815}
+    - {x: 0.20507911, y: 0.3291011}
+    - {x: 0.538085, y: 0.22509815}
+    - {x: 0.538085, y: 0.3291011}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: b805e1e825d93a34b866518a8758634f
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_walk6
+    boundsData:
+    - {x: -0.12820506, y: 0.79487216, z: 0}
+    - {x: 5.5897436, y: 8.769231, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.9230769, y: -3.5897434, z: 0}
+    - {x: 2.6666667, y: -3.5897434, z: 0}
+    - {x: -2.9230769, y: 5.1794877, z: 0}
+    - {x: 2.6666667, y: 5.1794877, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.34179735}
+    - {x: 0.21484277, y: 0.34179735}
+    - {x: 0.0019541015, y: 0.5087886}
+    - {x: 0.21484277, y: 0.5087886}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 4582b02180d56c44eb9c64b970378fd0
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_walk2
+    boundsData:
+    - {x: 0.2948717, y: 1.0641026, z: 0}
+    - {x: 5.3589745, y: 8.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.3846154, y: -3.2564101, z: 0}
+    - {x: 2.9743588, y: -3.2564101, z: 0}
+    - {x: -2.3846154, y: 5.3846154, z: 0}
+    - {x: 2.9743588, y: 5.3846154, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5527353, y: 0.5444341}
+    - {x: 0.756835, y: 0.5444341}
+    - {x: 0.5527353, y: 0.7089839}
+    - {x: 0.756835, y: 0.7089839}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 4f46865bd1e19914481f7b564593fea2
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_walk3
+    boundsData:
+    - {x: 0.2948718, y: 0.8717954, z: 0}
+    - {x: 5.307692, y: 8.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.3589742, y: -3.4871793, z: 0}
+    - {x: 2.9487178, y: -3.4871793, z: 0}
+    - {x: -2.3589742, y: 5.23077, z: 0}
+    - {x: 2.9487178, y: 5.23077, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.54199314, y: 0.22509815}
+    - {x: 0.54199314, y: 0.3261714}
+    - {x: 0.8740225, y: 0.22509815}
+    - {x: 0.8740225, y: 0.3261714}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ffee8dbeb8aacdb46891bded84bab4cf
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_idle3
+    boundsData:
+    - {x: -0.5, y: 0.5128207, z: 0}
+    - {x: 5.8717947, y: 8.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.4358974, y: -3.8461537, z: 0}
+    - {x: 2.4358974, y: -3.8461537, z: 0}
+    - {x: -3.4358974, y: 4.871795, z: 0}
+    - {x: 2.4358974, y: 4.871795, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.742188}
+    - {x: 0.0019541015, y: 0.8540034}
+    - {x: 0.3339834, y: 0.742188}
+    - {x: 0.3339834, y: 0.8540034}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: c75086104a066a24e9975aa97e643aca
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_idle4
+    boundsData:
+    - {x: -0.55128205, y: 0.50000024, z: 0}
+    - {x: 5.9743586, y: 8.743589, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5384614, y: -3.8717947, z: 0}
+    - {x: 2.4358974, y: -3.8717947, z: 0}
+    - {x: -3.5384614, y: 4.871795, z: 0}
+    - {x: 2.4358974, y: 4.871795, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.20507911, y: 0.0009770507}
+    - {x: 0.20507911, y: 0.1147456}
+    - {x: 0.538085, y: 0.0009770507}
+    - {x: 0.538085, y: 0.1147456}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 4737dee0e772e1a438f6dc7a13dfc50a
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk7_idle2
+    boundsData:
+    - {x: -0.20512831, y: 0.6282054, z: 0}
+    - {x: 5.5384617, y: 8.692308, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.974359, y: -3.7179487, z: 0}
+    - {x: 2.5641024, y: -3.7179487, z: 0}
+    - {x: -2.974359, y: 4.9743595, z: 0}
+    - {x: 2.5641024, y: 4.9743595, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3378916, y: 0.60498095}
+    - {x: 0.5488272, y: 0.60498095}
+    - {x: 0.3378916, y: 0.77050734}
+    - {x: 0.5488272, y: 0.77050734}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: a90a5ad4e01da364c91fd4b8f6b2e930
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_idle2
+    boundsData:
+    - {x: -0.20512831, y: 0.6282054, z: 0}
+    - {x: 5.5384617, y: 8.692308, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.974359, y: -3.7179487, z: 0}
+    - {x: 2.5641024, y: -3.7179487, z: 0}
+    - {x: -2.974359, y: 4.9743595, z: 0}
+    - {x: 2.5641024, y: 4.9743595, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.55175877, y: 0.4370122}
+    - {x: 0.55175877, y: 0.54248}
+    - {x: 0.88281155, y: 0.4370122}
+    - {x: 0.88281155, y: 0.54248}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 56c5ce149f41cee449c0ec8436deeb52
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_walk7
+    boundsData:
+    - {x: 0.19230759, y: 0.9615389, z: 0}
+    - {x: 5.4615383, y: 8.74359, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.5384614, y: -3.4102561, z: 0}
+    - {x: 2.9230766, y: -3.4102561, z: 0}
+    - {x: -2.5384614, y: 5.333334, z: 0}
+    - {x: 2.9230766, y: 5.333334, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.21875098, y: 0.33105516}
+    - {x: 0.21875098, y: 0.43505812}
+    - {x: 0.55175686, y: 0.33105516}
+    - {x: 0.55175686, y: 0.43505812}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 576b8f00e601df84480125a4fe458f31
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_walk4
+    boundsData:
+    - {x: 0.4102565, y: 0.7307694, z: 0}
+    - {x: 5.230769, y: 8.846153, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.2051282, y: -3.6923075, z: 0}
+    - {x: 3.0256412, y: -3.6923075, z: 0}
+    - {x: -2.2051282, y: 5.1538463, z: 0}
+    - {x: 3.0256412, y: 5.1538463, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.17138721}
+    - {x: 0.20117089, y: 0.17138721}
+    - {x: 0.0019541015, y: 0.33984327}
+    - {x: 0.20117089, y: 0.33984327}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: b00224bbf94cbf747a3f8de296a4e17a
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_walk5
+    boundsData:
+    - {x: 0.44871795, y: 0.2820518, z: 0}
+    - {x: 5.2051287, y: 8.358974, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.1538463, y: -3.8974357, z: 0}
+    - {x: 3.0512822, y: -3.8974357, z: 0}
+    - {x: -2.1538463, y: 4.4615393, z: 0}
+    - {x: 3.0512822, y: 4.4615393, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3378916, y: 0.87597704}
+    - {x: 0.3378916, y: 0.9750972}
+    - {x: 0.65624905, y: 0.87597704}
+    - {x: 0.65624905, y: 0.9750972}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 717908805d011da4b8304410f30582e0
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_idle1
+    boundsData:
+    - {x: -0.025640965, y: 0.60256445, z: 0}
+    - {x: 5.3333335, y: 8.692308, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.6923077, y: -3.7435896, z: 0}
+    - {x: 2.6410258, y: -3.7435896, z: 0}
+    - {x: -2.6923077, y: 4.9487185, z: 0}
+    - {x: 2.6410258, y: 4.9487185, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3378916, y: 0.7724614}
+    - {x: 0.3378916, y: 0.87402296}
+    - {x: 0.66894436, y: 0.7724614}
+    - {x: 0.66894436, y: 0.87402296}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: f27f9700b3e86a84b86fa873667194f5
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_idle5
+    boundsData:
+    - {x: -0.576923, y: 0.48718, z: 0}
+    - {x: 5.9743586, y: 8.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5641024, y: -3.8717947, z: 0}
+    - {x: 2.4102564, y: -3.8717947, z: 0}
+    - {x: -3.5641024, y: 4.8461547, z: 0}
+    - {x: 2.4102564, y: 4.8461547, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.6264653}
+    - {x: 0.0019541015, y: 0.7402339}
+    - {x: 0.3339834, y: 0.6264653}
+    - {x: 0.3339834, y: 0.7402339}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: ea6605d93ad02e84597414214505d1e3
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_walk2
+    boundsData:
+    - {x: 0.2948717, y: 1.0641026, z: 0}
+    - {x: 5.3589745, y: 8.641026, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.3846154, y: -3.2564101, z: 0}
+    - {x: 2.9743588, y: -3.2564101, z: 0}
+    - {x: -2.3846154, y: 5.3846154, z: 0}
+    - {x: 2.9743588, y: 5.3846154, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.6728525, y: 0.710938}
+    - {x: 0.8769522, y: 0.710938}
+    - {x: 0.6728525, y: 0.8754878}
+    - {x: 0.8769522, y: 0.8754878}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 3d3a06d3434b53543b6ab185210edf6b
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_idle3
+    boundsData:
+    - {x: -0.5, y: 0.5128207, z: 0}
+    - {x: 5.8717947, y: 8.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.4358974, y: -3.8461537, z: 0}
+    - {x: 2.4358974, y: -3.8461537, z: 0}
+    - {x: -3.4358974, y: 4.871795, z: 0}
+    - {x: 2.4358974, y: 4.871795, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0019541015, y: 0.8559575}
+    - {x: 0.0019541015, y: 0.96777296}
+    - {x: 0.3339834, y: 0.8559575}
+    - {x: 0.3339834, y: 0.96777296}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: d2af883216f5a014bb547f8a4eacfdd4
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_idle4
+    boundsData:
+    - {x: -0.55128205, y: 0.50000024, z: 0}
+    - {x: 5.9743586, y: 8.743589, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -3.5384614, y: -3.8717947, z: 0}
+    - {x: 2.4358974, y: -3.8717947, z: 0}
+    - {x: -3.5384614, y: 4.871795, z: 0}
+    - {x: 2.4358974, y: 4.871795, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.54199314, y: 0.0009770507}
+    - {x: 0.54199314, y: 0.1147456}
+    - {x: 0.87499905, y: 0.0009770507}
+    - {x: 0.87499905, y: 0.1147456}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 3a2513e506e7fdd42b02d5a4036a8694
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_walk6
+    boundsData:
+    - {x: -0.12820506, y: 0.79487216, z: 0}
+    - {x: 5.5897436, y: 8.769231, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.9230769, y: -3.5897434, z: 0}
+    - {x: 2.6666667, y: -3.5897434, z: 0}
+    - {x: -2.9230769, y: 5.1794877, z: 0}
+    - {x: 2.6666667, y: 5.1794877, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.20507911, y: 0.11669971}
+    - {x: 0.20507911, y: 0.22314404}
+    - {x: 0.53906155, y: 0.11669971}
+    - {x: 0.53906155, y: 0.22314404}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 34931ec88a155fe4f9ba1d350942c9c1
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: iceCreamFolk6_walk1
+    boundsData:
+    - {x: 0.038461566, y: 0.82051325, z: 0}
+    - {x: 5.5128202, y: 8.717949, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: -0.012820244, z: 0}
+    - {x: 8.871795, y: 10.897436, z: 0}
+    texelSize: {x: 0.025641026, y: 0.025641026}
+    positions:
+    - {x: -2.7179487, y: -3.5384612, z: 0}
+    - {x: 2.7948718, y: -3.5384612, z: 0}
+    - {x: -2.7179487, y: 5.1794877, z: 0}
+    - {x: 2.7948718, y: 5.1794877, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3378916, y: 0.4370122}
+    - {x: 0.5478506, y: 0.4370122}
+    - {x: 0.3378916, y: 0.60302687}
+    - {x: 0.5478506, y: 0.60302687}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+    materialId: 0
+    materialIndexData: 000000000000000006000000
+    sourceTextureGUID: 0269d8322f5b4c049aad8b959e03b3b8
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 0
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: c20350c10f6300a4eb39deb36d4b66f0, type: 2}
+  textures:
+  - {fileID: 2800000, guid: ae2955d096a20554790e3e5a494526ea, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: 1a9c82e6216b7cf4592bb2428ccbd7b7
+  spriteCollectionName: IC_Popsicle
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 19.5
+  buildKey: 1535710861
+  dataGuid: 2a69b7a415d4d8447a352b77d0e7fb62
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []
